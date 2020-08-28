@@ -4,7 +4,6 @@ package com.willfp.ecoenchants.nms;
 import com.willfp.ecoenchants.API.CooldownWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.codehaus.plexus.util.reflection.ReflectionManager;
 
 public class Cooldown {
     private static CooldownWrapper cooldown;
@@ -13,7 +12,6 @@ public class Cooldown {
 
     public static boolean init() {
         try {
-            ReflectionManager.accessClass("com.willfp.ecoenchants." + version + ".Cooldown");
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".Cooldown");
             if (CooldownWrapper.class.isAssignableFrom(class2)) {
                 cooldown = (CooldownWrapper) class2.getConstructor().newInstance();

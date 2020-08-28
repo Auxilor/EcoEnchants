@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: fr.neatmonster:nocheatplus:3.16.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/fr/neatmonster/nocheatplus/3.16.1-SNAPSHOT/nocheatplus-3.16.1-20180826.094139-19.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/fr/neatmonster/nocheatplus/3.16.1-SNAPSHOT/nocheatplus-3.16.1-20180826.094139-19-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/fr/neatmonster/nocheatplus/3.16.1-SNAPSHOT/nocheatplus-3.16.1-20180826.094139-19-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

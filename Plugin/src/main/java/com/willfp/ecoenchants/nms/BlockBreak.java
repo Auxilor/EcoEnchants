@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.API.BlockBreakWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.codehaus.plexus.util.reflection.ReflectionManager;
 
 public class BlockBreak {
     private static BlockBreakWrapper blockBreakWrapper;
@@ -14,7 +13,6 @@ public class BlockBreak {
 
     public static boolean init() {
         try {
-            ReflectionManager.accessClass("com.willfp.ecoenchants." + version + ".BlockBreak");
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".BlockBreak");
             if (BlockBreakWrapper.class.isAssignableFrom(class2)) {
                 blockBreakWrapper = (BlockBreakWrapper) class2.getConstructor().newInstance();

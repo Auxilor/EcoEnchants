@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.jiangdashao:matrix-api-repo:317d4635fd">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/jiangdashao/matrix-api-repo/317d4635fd/matrix-api-repo-317d4635fd.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/jiangdashao/matrix-api-repo/317d4635fd/matrix-api-repo-317d4635fd-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/jiangdashao/matrix-api-repo/317d4635fd/matrix-api-repo-317d4635fd-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

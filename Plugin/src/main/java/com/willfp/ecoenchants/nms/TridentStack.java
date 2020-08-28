@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.API.TridentStackWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Trident;
 import org.bukkit.inventory.ItemStack;
-import org.codehaus.plexus.util.reflection.ReflectionManager;
 
 public class TridentStack {
     private static TridentStackWrapper tridentStackWrapper;
@@ -14,7 +13,6 @@ public class TridentStack {
 
     public static boolean init() {
         try {
-            ReflectionManager.accessClass("com.willfp.ecoenchants." + version + ".TridentStack");
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".TridentStack");
             if (TridentStackWrapper.class.isAssignableFrom(class2)) {
                 tridentStackWrapper = (TridentStackWrapper) class2.getConstructor().newInstance();

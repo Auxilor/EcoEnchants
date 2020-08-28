@@ -4,18 +4,15 @@ package com.willfp.ecoenchants.nms;
 import com.willfp.ecoenchants.API.TargetWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.codehaus.plexus.util.reflection.ReflectionManager;
 
 import java.util.Set;
 
-@SuppressWarnings("unchecked")
 public class Target {
     private static TargetWrapper target;
 
     static {
         String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         try {
-            ReflectionManager.accessClass("com.willfp.ecoenchants." + version + ".Target");
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".Target");
             if (TargetWrapper.class.isAssignableFrom(class2)) {
                 target = (TargetWrapper) class2.getConstructor().newInstance();

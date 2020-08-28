@@ -17,7 +17,6 @@ import java.util.Set;
  */
 public class EnchantmentConfig extends EnchantmentYamlConfig {
     private final String name;
-    public static String userId = "%%__USER__%%";
 
     public EnchantmentConfig(String name, double version, Class<?> plugin, EcoEnchant.EnchantmentType type) {
         super(name, version, plugin, type);

@@ -4,7 +4,6 @@ package com.willfp.ecoenchants.nms;
 import com.willfp.ecoenchants.API.NMSEnchantManagerWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
-import org.codehaus.plexus.util.reflection.ReflectionManager;
 
 public class NMSEnchantManager {
     private static NMSEnchantManagerWrapper nmsEnchantManagerWrapper;
@@ -13,7 +12,6 @@ public class NMSEnchantManager {
 
     public static boolean init() {
         try {
-            ReflectionManager.accessClass("com.willfp.ecoenchants." + version + ".NMSEnchantManager");
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".NMSEnchantManager");
             if (NMSEnchantManagerWrapper.class.isAssignableFrom(class2)) {
                 nmsEnchantManagerWrapper = (NMSEnchantManagerWrapper) class2.getConstructor().newInstance();

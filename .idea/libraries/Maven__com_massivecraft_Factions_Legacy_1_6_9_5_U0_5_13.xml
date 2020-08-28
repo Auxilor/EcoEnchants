@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.massivecraft:Factions-Legacy:1.6.9.5-U0.5.13">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/massivecraft/Factions-Legacy/1.6.9.5-U0.5.13/Factions-Legacy-1.6.9.5-U0.5.13.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/massivecraft/Factions-Legacy/1.6.9.5-U0.5.13/Factions-Legacy-1.6.9.5-U0.5.13-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/massivecraft/Factions-Legacy/1.6.9.5-U0.5.13/Factions-Legacy-1.6.9.5-U0.5.13-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

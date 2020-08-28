@@ -33,7 +33,6 @@ import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.generator.BlockPopulator;
-import org.codehaus.plexus.util.UserUtils;
 
 import java.util.ArrayList;
 import java.util.List;
