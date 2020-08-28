@@ -14,8 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-
-@SuppressWarnings("deprecation")
 public class BlastMining extends EcoEnchant {
     public BlastMining() {
         super(

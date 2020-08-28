@@ -12,8 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.Collection;
-
-@SuppressWarnings("deprecation")
 public class Tectonic extends EcoEnchant {
     public Tectonic() {
         super(

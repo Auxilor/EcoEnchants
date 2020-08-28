@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.*;
 import org.bukkit.Location;
@@ -14,8 +15,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class Farmhand extends EcoEnchant {
     public Farmhand() {
         super(
@@ -45,7 +44,7 @@ public class Farmhand extends EcoEnchant {
         if (!(Target.Applicable.HOE.getMaterials().contains(item.getType())))
             return;
 
-        if(!AntiGrief.canBreakBlock(player, event.getClickedBlock())) return;
+        if(!AntigriefManager.canBreakBlock(player, event.getClickedBlock())) return;
 
         event.getClickedBlock().setType(Material.FARMLAND);
         int initial = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius");
@@ -68,7 +67,7 @@ public class Farmhand extends EcoEnchant {
             Location loc = event.getClickedBlock().getLocation().add(vec);
             Block block = event.getClickedBlock().getWorld().getBlockAt(loc);
 
-            if(!AntiGrief.canBreakBlock(player, block)) continue;
+            if(!AntigriefManager.canBreakBlock(player, block)) continue;
 
             if (!(block.getType().equals(Material.DIRT) || block.getType().equals(Material.GRASS_BLOCK)))
                 continue;

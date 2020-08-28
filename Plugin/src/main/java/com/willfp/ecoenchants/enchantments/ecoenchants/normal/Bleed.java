@@ -17,8 +17,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
-@SuppressWarnings("deprecation")
 public class Bleed extends EcoEnchant {
     public Bleed() {
         super(

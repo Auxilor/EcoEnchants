@@ -10,8 +10,6 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-@SuppressWarnings("deprecation")
 public class Optics extends EcoEnchant {
     public Optics() {
         super(

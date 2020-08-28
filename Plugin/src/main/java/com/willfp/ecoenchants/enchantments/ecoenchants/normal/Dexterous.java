@@ -10,8 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
-
-@SuppressWarnings("deprecation")
 public class Dexterous extends EcoEnchant {
     public Dexterous() {
         super(

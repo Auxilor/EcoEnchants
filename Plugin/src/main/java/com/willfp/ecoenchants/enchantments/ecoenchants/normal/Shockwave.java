@@ -17,8 +17,6 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
-
-@SuppressWarnings("deprecation")
 public class Shockwave extends EcoEnchant {
     public Shockwave() {
         super(

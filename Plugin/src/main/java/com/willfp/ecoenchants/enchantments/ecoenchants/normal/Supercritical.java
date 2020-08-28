@@ -12,8 +12,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-@SuppressWarnings("deprecation")
 public class Supercritical extends EcoEnchant {
     public Supercritical() {
         super(

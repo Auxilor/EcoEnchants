@@ -15,8 +15,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
-
-@SuppressWarnings("deprecation")
 public class Ignite extends EcoEnchant {
     public Ignite() {
         super(

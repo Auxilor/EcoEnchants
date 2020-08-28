@@ -8,8 +8,6 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-@SuppressWarnings("deprecation")
 public class WaterAspect extends EcoEnchant {
     public WaterAspect() {
         super(

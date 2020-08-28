@@ -13,8 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class Tornado extends EcoEnchant {
     public Tornado() {
         super(

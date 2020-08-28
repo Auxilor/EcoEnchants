@@ -11,8 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class Reel extends EcoEnchant {
     public Reel() {
         super(

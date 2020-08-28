@@ -8,8 +8,6 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
-
-@SuppressWarnings("deprecation")
 public class Kinetic extends EcoEnchant {
     public Kinetic() {
         super(

@@ -11,8 +11,6 @@ import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-@SuppressWarnings("deprecation")
 public class BossHunter extends EcoEnchant {
     public BossHunter() {
         super(

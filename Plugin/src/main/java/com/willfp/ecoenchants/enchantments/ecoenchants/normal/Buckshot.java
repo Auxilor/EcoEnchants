@@ -16,8 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class Buckshot extends EcoEnchant {
     public Buckshot() {
         super(

@@ -15,8 +15,6 @@ import org.bukkit.potion.PotionEffectType;
 import java.text.DecimalFormat;
 import java.util.Set;
 import java.util.UUID;
-
-@SuppressWarnings("deprecation")
 public class Spring extends EcoEnchant {
     public Spring() {
         super(

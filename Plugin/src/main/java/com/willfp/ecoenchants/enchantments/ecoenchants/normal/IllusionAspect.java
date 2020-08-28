@@ -13,8 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-@SuppressWarnings("deprecation")
 public class IllusionAspect extends EcoEnchant {
     public IllusionAspect() {
         super(

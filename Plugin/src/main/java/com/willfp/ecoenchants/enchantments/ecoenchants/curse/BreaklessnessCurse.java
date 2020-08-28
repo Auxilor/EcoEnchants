@@ -9,8 +9,6 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockDamageEvent;
-
-@SuppressWarnings("deprecation")
 public class BreaklessnessCurse extends EcoEnchant {
     public BreaklessnessCurse() {
         super(

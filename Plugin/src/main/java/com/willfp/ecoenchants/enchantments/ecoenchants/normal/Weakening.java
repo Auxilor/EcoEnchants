@@ -15,8 +15,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.HashSet;
 import java.util.Set;
-
-@SuppressWarnings("deprecation")
 public class Weakening extends EcoEnchant {
     public Weakening() {
         super(

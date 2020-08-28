@@ -15,8 +15,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class IceShot extends EcoEnchant {
     public IceShot() {
         super(

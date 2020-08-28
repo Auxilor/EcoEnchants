@@ -14,8 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-
-@SuppressWarnings("deprecation")
 public class Cleave extends EcoEnchant {
     public Cleave() {
         super(

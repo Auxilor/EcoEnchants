@@ -3,8 +3,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.artifact;
 import com.willfp.ecoenchants.enchantments.Artifact;
 import org.bukkit.Color;
 import org.bukkit.Particle;
-
-@SuppressWarnings("deprecation")
 public class CloudsArtifact extends Artifact {
     public CloudsArtifact() {
         super(

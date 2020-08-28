@@ -12,8 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
 
 import java.util.Arrays;
-
-@SuppressWarnings("deprecation")
 public class Repairing extends EcoEnchant implements EcoRunnable {
     public Repairing() {
         super(

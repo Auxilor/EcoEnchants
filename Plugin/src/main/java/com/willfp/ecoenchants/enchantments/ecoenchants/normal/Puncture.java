@@ -10,8 +10,6 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-
-@SuppressWarnings("deprecation")
 public class Puncture extends EcoEnchant {
     public Puncture() {
         super(

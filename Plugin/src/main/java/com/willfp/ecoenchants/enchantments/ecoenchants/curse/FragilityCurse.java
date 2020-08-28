@@ -9,8 +9,6 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
-
-@SuppressWarnings("deprecation")
 public class FragilityCurse extends EcoEnchant {
     public FragilityCurse() {
         super(

@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-@SuppressWarnings("deprecation")
 public class InfernalTouch extends EcoEnchant {
     public InfernalTouch() {
         super(

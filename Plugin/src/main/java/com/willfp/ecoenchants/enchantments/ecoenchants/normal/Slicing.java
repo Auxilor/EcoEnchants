@@ -15,8 +15,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
-
-@SuppressWarnings("deprecation")
 public class Slicing extends EcoEnchant {
     public Slicing() {
         super(

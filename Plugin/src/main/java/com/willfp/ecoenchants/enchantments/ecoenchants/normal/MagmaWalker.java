@@ -20,8 +20,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class MagmaWalker extends EcoEnchant {
     public MagmaWalker() {
         super(

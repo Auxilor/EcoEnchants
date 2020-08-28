@@ -11,8 +11,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
-
-@SuppressWarnings("deprecation")
 public class Instability extends EcoEnchant {
     public Instability() {
         super(

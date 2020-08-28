@@ -16,8 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-@SuppressWarnings("deprecation")
 public class Confusion extends EcoEnchant {
     public Confusion() {
         super(

@@ -12,8 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
-
-@SuppressWarnings("deprecation")
 public class Inferno extends EcoEnchant {
     public Inferno() {
         super(

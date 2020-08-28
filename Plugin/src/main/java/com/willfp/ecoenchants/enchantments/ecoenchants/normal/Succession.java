@@ -15,8 +15,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
-
-@SuppressWarnings("deprecation")
 public class Succession extends EcoEnchant {
     public Succession() {
         super(

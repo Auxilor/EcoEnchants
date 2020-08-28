@@ -9,8 +9,6 @@ import com.willfp.ecoenchants.task.EcoRunnable;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
-
-@SuppressWarnings("deprecation")
 public class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(

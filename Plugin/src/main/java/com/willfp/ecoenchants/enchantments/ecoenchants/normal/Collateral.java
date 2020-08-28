@@ -9,8 +9,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-
-@SuppressWarnings("deprecation")
 public class Collateral extends EcoEnchant {
     public Collateral() {
         super(

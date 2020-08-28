@@ -12,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-@SuppressWarnings("deprecation")
 public class Launch extends EcoEnchant {
     public Launch() {
         super(

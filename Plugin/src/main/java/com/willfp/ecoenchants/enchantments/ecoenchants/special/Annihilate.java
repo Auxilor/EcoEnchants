@@ -11,8 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class Annihilate extends EcoEnchant {
     public Annihilate() {
         super(

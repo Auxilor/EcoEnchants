@@ -13,8 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-@SuppressWarnings("deprecation")
 public class Radiance extends EcoEnchant {
     public Radiance() {
         super(

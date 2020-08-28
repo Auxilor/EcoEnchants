@@ -16,8 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-
-@SuppressWarnings("deprecation")
 public class StoneSwitcher extends EcoEnchant {
     public StoneSwitcher() {
         super(

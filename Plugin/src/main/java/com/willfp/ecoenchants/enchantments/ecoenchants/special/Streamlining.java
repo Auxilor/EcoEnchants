@@ -10,8 +10,6 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.scheduler.BukkitRunnable;
-
-@SuppressWarnings("deprecation")
 public class Streamlining extends EcoEnchant {
     public Streamlining() {
         super(

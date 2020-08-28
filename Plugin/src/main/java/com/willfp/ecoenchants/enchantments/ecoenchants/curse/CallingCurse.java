@@ -12,8 +12,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class CallingCurse extends EcoEnchant implements EcoRunnable {
     public CallingCurse() {
         super(

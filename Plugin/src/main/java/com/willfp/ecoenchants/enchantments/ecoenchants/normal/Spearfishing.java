@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-@SuppressWarnings("deprecation")
 public class Spearfishing extends EcoEnchant {
     public Spearfishing() {
         super(

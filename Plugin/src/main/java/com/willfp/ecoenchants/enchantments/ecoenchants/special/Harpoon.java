@@ -10,8 +10,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
-
-@SuppressWarnings("deprecation")
 public class Harpoon extends EcoEnchant {
     public Harpoon() {
         super(

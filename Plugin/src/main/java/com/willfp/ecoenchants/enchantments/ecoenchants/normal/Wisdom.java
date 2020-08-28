@@ -8,8 +8,6 @@ import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-
-@SuppressWarnings("deprecation")
 public class Wisdom extends EcoEnchant {
     public Wisdom() {
         super(

@@ -12,8 +12,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
-
-@SuppressWarnings("deprecation")
 public class Magnetic extends EcoEnchant implements EcoRunnable {
     public Magnetic() {
         super(

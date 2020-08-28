@@ -12,8 +12,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.HashSet;
 import java.util.Set;
-
-@SuppressWarnings("deprecation")
 public class EnderSlayer extends EcoEnchant {
     public EnderSlayer() {
         super(

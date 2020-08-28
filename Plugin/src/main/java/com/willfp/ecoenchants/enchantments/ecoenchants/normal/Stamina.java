@@ -9,8 +9,6 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-
-@SuppressWarnings("deprecation")
 public class Stamina extends EcoEnchant {
     public Stamina() {
         super(

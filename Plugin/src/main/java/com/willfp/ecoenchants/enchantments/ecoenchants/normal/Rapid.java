@@ -9,8 +9,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
-
-@SuppressWarnings("deprecation")
 public class Rapid extends EcoEnchant {
     public Rapid() {
         super(

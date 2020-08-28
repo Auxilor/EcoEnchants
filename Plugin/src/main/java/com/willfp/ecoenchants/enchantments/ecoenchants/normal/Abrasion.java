@@ -15,8 +15,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-@SuppressWarnings("deprecation")
 public class Abrasion extends EcoEnchant {
     public Abrasion() {
         super(

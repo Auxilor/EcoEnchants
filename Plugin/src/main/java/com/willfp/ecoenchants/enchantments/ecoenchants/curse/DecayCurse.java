@@ -12,8 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
 
 import java.util.Arrays;
-
-@SuppressWarnings("deprecation")
 public class DecayCurse extends EcoEnchant implements EcoRunnable {
     public DecayCurse() {
         super(
