@@ -33,7 +33,7 @@ import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.task.EcoRunnable;
+import com.willfp.ecoenchants.enchantments.EcoRunnable;
 import com.willfp.ecoenchants.util.UpdateChecker;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bukkit.Bukkit;
