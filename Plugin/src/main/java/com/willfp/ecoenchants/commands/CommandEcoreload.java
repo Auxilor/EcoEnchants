@@ -21,23 +21,27 @@ public class CommandEcoreload implements CommandExecutor {
                     return true;
                 }
             }
-            ConfigManager.updateConfigs();
-            EnchantmentRarity.update();
-            EcoEnchants.update();
-            EnchantDisplay.update();
-
-            EcoEnchants.getAll().forEach((ecoEnchant -> {
-                HandlerList.unregisterAll(ecoEnchant);
-
-                Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                    if(!ecoEnchant.isDisabled()) {
-                        Bukkit.getPluginManager().registerEvents(ecoEnchant, Main.getInstance());
-                    }
-                }, 1);
-            }));
+            reload();
             sender.sendMessage(ConfigManager.getLang().getMessage("reloaded"));
         }
 
         return false;
+    }
+
+    public static void reload() {
+        ConfigManager.updateConfigs();
+        EnchantmentRarity.update();
+        EcoEnchants.update();
+        EnchantDisplay.update();
+
+        EcoEnchants.getAll().forEach((ecoEnchant -> {
+            HandlerList.unregisterAll(ecoEnchant);
+
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                if(!ecoEnchant.isDisabled()) {
+                    Bukkit.getPluginManager().registerEvents(ecoEnchant, Main.getInstance());
+                }
+            }, 1);
+        }));
     }
 }

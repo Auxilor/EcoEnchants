@@ -367,6 +367,7 @@ public class Loader {
         }));
         Bukkit.getLogger().info("");
 
+
         /*
         Load Commands
          */
@@ -413,6 +414,15 @@ public class Loader {
             Bukkit.getLogger().info("");
             Bukkit.getLogger().info("----------------------------");
         });
+
+        /*
+        Reload Data
+         */
+
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            Bukkit.getLogger().info("Reloading...");
+            CommandEcoreload.reload();
+        }, 2);
 
         /*
         Finish
