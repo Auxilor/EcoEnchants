@@ -30,13 +30,11 @@ public abstract class Artifact extends EcoEnchant {
     private final Particle particle;
     private final Particle.DustOptions extra;
 
-    public Artifact(String key, double version, Particle particle) {
-        super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT, new Target.Applicable[]{Target.Applicable.ELYTRA, Target.Applicable.SWORD, Target.Applicable.AXE, Target.Applicable.PICKAXE}, version));
-        this.particle = particle;
-        extra = null;
+    protected Artifact(String key, double version, Particle particle) {
+        this(key, version, particle, null);
     }
 
-    public Artifact(String key, double version, Particle particle, Particle.DustOptions extra) {
+    protected Artifact(String key, double version, Particle particle, Particle.DustOptions extra) {
         super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT, new Target.Applicable[]{Target.Applicable.ELYTRA, Target.Applicable.SWORD, Target.Applicable.AXE, Target.Applicable.PICKAXE}, version));
         this.particle = particle;
         this.extra = extra;
