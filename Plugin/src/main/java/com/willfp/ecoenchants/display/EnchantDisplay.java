@@ -140,9 +140,6 @@ public class EnchantDisplay {
         List<String> itemLore = new ArrayList<>();
 
         int loreStart = 0;
-        if(Main.hasAE) {
-            loreStart = AEAPI.getEnchantmentsOnItem(item).size();
-        }
 
         if(meta == null) return oldItem;
 
