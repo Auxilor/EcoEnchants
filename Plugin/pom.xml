@@ -10,7 +10,6 @@
         <version>4.1.0-pre11</version>
     </parent>
 
-
     <artifactId>plugin</artifactId>
     <packaging>jar</packaging>
 

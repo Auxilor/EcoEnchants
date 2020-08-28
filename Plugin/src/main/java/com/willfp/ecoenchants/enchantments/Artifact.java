@@ -131,11 +131,19 @@ public abstract class Artifact extends EcoEnchant {
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 
+        int noteColor = 0;
+        AtomicDouble color = new AtomicDouble(0);
+        if(particle.equals(Particle.NOTE)) {
+            noteColor = Rand.randInt(0, 24);
+            color.set((double) noteColor/24);
+        }
+        final double finalColor = color.get();
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 if(entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
-                entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, 0, extra, true);
+                entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
             }
         }.runTaskTimer(Main.getInstance(), 4, ticks);
     }
