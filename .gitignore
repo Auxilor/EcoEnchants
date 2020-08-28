@@ -1,8 +1,19 @@
-# Project exclude paths
-/API/target/
-/Plugin/target/
-/v1_15_R1/target/
-/v1_16_R1/target/
-/v1_16_R2/target/
-/Plugin/src/main/java/com/willfp/ecoenchants/task/
-/.idea/
+# Java
+*.class
+
+# Eclipse IDE
+.settings/
+bin/
+.classpath
+.project
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven
+target/
+dependency-reduced-pom.xml
+
+# Mac OSX
+.DS_Store
