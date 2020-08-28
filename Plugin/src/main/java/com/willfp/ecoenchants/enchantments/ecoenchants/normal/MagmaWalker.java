@@ -1,12 +1,12 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.Main;
-import com.willfp.ecoenchants.anticheat.AnticheatManager;
+import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.Circle;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Bukkit;
@@ -50,7 +50,7 @@ public class MagmaWalker extends EcoEnchant {
 
             Block block = player.getWorld().getBlockAt(loc);
 
-            if (!AntiGrief.canPlaceBlock(player, player.getWorld().getBlockAt(loc))) continue;
+            if (!AntigriefManager.canPlaceBlock(player, player.getWorld().getBlockAt(loc))) continue;
 
             if(!block.getType().equals(Material.LAVA)) continue;
 

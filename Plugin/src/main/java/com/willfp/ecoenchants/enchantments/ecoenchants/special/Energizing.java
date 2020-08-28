@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +24,7 @@ public class Energizing extends EcoEnchant {
     public void onEnergizingBreak(BlockBreakEvent event) {
         if(event.isCancelled()) return;
         Player player = event.getPlayer();
-        if(!AntiGrief.canBreakBlock(player, event.getBlock())) return;
+        if(!AntigriefManager.canBreakBlock(player, event.getBlock())) return;
         if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);

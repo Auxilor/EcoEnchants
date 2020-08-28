@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.LivingEntity;
@@ -36,9 +36,7 @@ public class StrayAspect extends EcoEnchant {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if(event.getEntity() instanceof Player) {
-            if(!AntiGrief.canInjurePlayer(player, (Player) event.getEntity())) return;
-        }
+        if(!AntigriefManager.canInjure(player, victim)) return;
 
         if (!HasEnchant.playerHeld(player, this)) return;
 

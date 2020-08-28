@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.Location;
@@ -35,9 +35,7 @@ public class Volatile extends EcoEnchant {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if(event.getEntity() instanceof Player) {
-            if(!AntiGrief.canInjurePlayer(player, (Player) event.getEntity())) return;
-        }
+        if(!AntigriefManager.canInjure(player, victim)) return;
 
         if (!HasEnchant.playerHeld(player, this)) return;
 
@@ -54,9 +52,9 @@ public class Volatile extends EcoEnchant {
 
         float power = (float) (0.5 + (level * 0.5));
 
-        if (!AntiGrief.canCreateExplosion(player, event.getEntity().getLocation())) return;
+        if (!AntigriefManager.canCreateExplosion(player, event.getEntity().getLocation())) return;
         if (breakblocks) {
-            if (!AntiGrief.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
+            if (!AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
                 return;
         }
 

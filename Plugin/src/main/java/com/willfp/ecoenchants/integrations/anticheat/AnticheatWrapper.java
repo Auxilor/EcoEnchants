@@ -1,14 +1,9 @@
-package com.willfp.ecoenchants.anticheat;
+package com.willfp.ecoenchants.integrations.anticheat;
 
+import com.willfp.ecoenchants.integrations.Integration;
 import org.bukkit.entity.Player;
 
-public interface AnticheatWrapper {
-    /**
-     * Get the name of anticheat
-     * @return The name
-     */
-    String getPluginName();
-
+public interface AnticheatWrapper extends Integration {
     /**
      * Exempt a player from checks
      * @param player The player to exempt

@@ -4,10 +4,10 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEvent;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -45,7 +45,7 @@ public class Telekinesis extends EcoEnchant {
 
         Block block = event.getBlock();
 
-        if (!AntiGrief.canBreakBlock(player, block)) return;
+        if (!AntigriefManager.canBreakBlock(player, block)) return;
 
         List<ItemStack> drops = new ArrayList<>();
         event.getItems().forEach((item -> {
@@ -75,7 +75,7 @@ public class Telekinesis extends EcoEnchant {
         if (event.isCancelled())
             return;
 
-        if (!AntiGrief.canBreakBlock(player, block)) return;
+        if (!AntigriefManager.canBreakBlock(player, block)) return;
 
         if(block.getType().equals(Material.SPAWNER)) event.setExpToDrop(0);
 

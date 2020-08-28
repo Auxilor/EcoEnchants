@@ -2,8 +2,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.AntiGrief;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -29,8 +29,6 @@ public class Soulbound extends EcoEnchant {
     @EventHandler(priority = EventPriority.HIGH)
     public void onSoulboundDeath(PlayerDeathEvent event) {
         if(event.getKeepInventory()) return;
-
-        if(AntiGrief.hasKeepInv(event.getEntity())) return;
 
         Player player = event.getEntity();
         List<ItemStack> soulboundItems = new ArrayList<>(); // Stored as list to preserve duplicates

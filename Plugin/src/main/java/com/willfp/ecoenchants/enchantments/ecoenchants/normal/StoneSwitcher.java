@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.EqualIfOver;
 import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
@@ -42,7 +42,7 @@ public class StoneSwitcher extends EcoEnchant {
         if (event.isCancelled())
             return;
 
-        if (!AntiGrief.canBreakBlock(player, block)) return;
+        if (!AntigriefManager.canBreakBlock(player, block)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");

@@ -1,6 +1,6 @@
-package com.willfp.ecoenchants.anticheat.anticheats;
+package com.willfp.ecoenchants.integrations.anticheat.plugins;
 
-import com.willfp.ecoenchants.anticheat.AnticheatWrapper;
+import com.willfp.ecoenchants.integrations.anticheat.AnticheatWrapper;
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
 import org.bukkit.entity.Player;

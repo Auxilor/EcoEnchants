@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
@@ -43,9 +43,7 @@ public class Extract extends EcoEnchant {
         Trident trident = (Trident) event.getDamager();
         ItemStack item = TridentStack.getTridentStack(trident);
 
-        if(event.getEntity() instanceof Player) {
-            if(!AntiGrief.canInjurePlayer(player, (Player) event.getEntity())) return;
-        }
+        if(!AntigriefManager.canInjure(player, (LivingEntity) event.getEntity())) return;
 
         if (!HasEnchant.item(item, this)) return;
 

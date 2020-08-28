@@ -1,7 +1,7 @@
-package com.willfp.ecoenchants.anticheat.anticheats;
+package com.willfp.ecoenchants.integrations.anticheat.plugins;
 
-import com.willfp.ecoenchants.anticheat.AnticheatWrapper;
-import me.rerere.matrix.api.events.PlayerViolationEvent;
+import com.willfp.ecoenchants.integrations.anticheat.AnticheatWrapper;
+import me.vagdedes.spartan.api.PlayerViolationEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,12 +11,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public final class AnticheatMatrix implements AnticheatWrapper, Listener {
+public final class AnticheatSpartan implements AnticheatWrapper, Listener {
     private final Set<UUID> exempt = new HashSet<>();
 
     @Override
     public String getPluginName() {
-        return "Matrix";
+        return "Spartan";
     }
 
     @Override

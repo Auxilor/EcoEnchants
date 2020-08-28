@@ -31,31 +31,6 @@ public class Main extends JavaPlugin {
     public static String newVersion;
 
     /**
-     * Has worldguard?
-     */
-    public static boolean hasWG;
-
-    /**
-     * Has GriefPrevention?
-     */
-    public static boolean hasGP;
-
-    /**
-     * Has FactionsUUID?
-     */
-    public static boolean hasFactionsUUID;
-
-    /**
-     * Has Towny?
-     */
-    public static boolean hasTowny;
-
-    /**
-     * Has Lands?
-     */
-    public static boolean hasLands;
-
-    /**
      * Has AdvancedEnchantments?
      */
     public static boolean hasAE;

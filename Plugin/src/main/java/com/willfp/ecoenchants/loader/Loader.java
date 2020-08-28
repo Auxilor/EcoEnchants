@@ -2,8 +2,9 @@ package com.willfp.ecoenchants.loader;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.willfp.ecoenchants.Main;
-import com.willfp.ecoenchants.anticheat.anticheats.AnticheatAAC;
-import com.willfp.ecoenchants.anticheat.anticheats.AnticheatMatrix;
+import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
+import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatAAC;
+import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
 import com.willfp.ecoenchants.anvil.AnvilListeners;
 import com.willfp.ecoenchants.bstats.Metrics;
 import com.willfp.ecoenchants.commands.*;
@@ -17,6 +18,8 @@ import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityList
 import com.willfp.ecoenchants.events.naturalexpgainevent.NaturalExpGainListeners;
 import com.willfp.ecoenchants.extensions.ExtensionManager;
 import com.willfp.ecoenchants.grindstone.GrindstoneListeners;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
 import com.willfp.ecoenchants.listeners.EnchantingListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.listeners.VillagerListeners;
@@ -103,25 +106,40 @@ public class Loader {
 
             Bukkit.getLogger().info("Loading Integrations...");
 
-            Main.hasWG = Bukkit.getPluginManager().isPluginEnabled("WorldGuard");
-            if(Main.hasWG) Bukkit.getLogger().info("WorldGuard: §aENABLED");
-            else Bukkit.getLogger().info("WorldGuard: §9DISABLED");
+            if(Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
+                AntigriefManager.registerAntigrief(new AntigriefWorldGuard());
+                Bukkit.getLogger().info("WorldGuard: §aENABLED");
+            } else {
+                Bukkit.getLogger().info("WorldGuard: §9DISABLED");
+            }
 
-            Main.hasGP = Bukkit.getPluginManager().isPluginEnabled("GriefPrevention");
-            if(Main.hasGP) Bukkit.getLogger().info("GriefPrevention: §aENABLED");
-            else Bukkit.getLogger().info("GriefPrevention: §9DISABLED");
+            if(Bukkit.getPluginManager().isPluginEnabled("GriefPrevention")) {
+                AntigriefManager.registerAntigrief(new AntigriefGriefPrevention());
+                Bukkit.getLogger().info("GriefPrevention: §aENABLED");
+            } else {
+                Bukkit.getLogger().info("GriefPrevention: §9DISABLED");
+            }
 
-            Main.hasFactionsUUID = Bukkit.getPluginManager().isPluginEnabled("FactionsUUID");
-            if(Main.hasFactionsUUID) Bukkit.getLogger().info("FactionsUUID: §aENABLED");
-            else Bukkit.getLogger().info("FactionsUUID: §9DISABLED");
+            if(Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")) {
+                AntigriefManager.registerAntigrief(new AntigriefFactionsUUID());
+                Bukkit.getLogger().info("FactionsUUID: §aENABLED");
+            } else {
+                Bukkit.getLogger().info("FactionsUUID: §9DISABLED");
+            }
 
-            Main.hasTowny = Bukkit.getPluginManager().isPluginEnabled("Towny");
-            if(Main.hasTowny) Bukkit.getLogger().info("Towny: §aENABLED");
-            else Bukkit.getLogger().info("Towny: §9DISABLED");
+            if(Bukkit.getPluginManager().isPluginEnabled("Towny")) {
+                AntigriefManager.registerAntigrief(new AntigriefTowny());
+                Bukkit.getLogger().info("Towny: §aENABLED");
+            } else {
+                Bukkit.getLogger().info("Towny: §9DISABLED");
+            }
 
-            Main.hasLands = Bukkit.getPluginManager().isPluginEnabled("Lands");
-            if(Main.hasLands) Bukkit.getLogger().info("Lands: §aENABLED");
-            else Bukkit.getLogger().info("Lands: §9DISABLED");
+            if(Bukkit.getPluginManager().isPluginEnabled("Lands")) {
+                AntigriefManager.registerAntigrief(new AntigriefLands());
+                Bukkit.getLogger().info("Lands: §aENABLED");
+            } else {
+                Bukkit.getLogger().info("Lands: §9DISABLED");
+            }
 
             Main.hasAE = Bukkit.getPluginManager().isPluginEnabled("AdvancedEnchantments");
             if(Main.hasAE) Bukkit.getLogger().info("AdvancedEnchantments: §aENABLED");
@@ -131,28 +149,28 @@ public class Loader {
             Bukkit.getLogger().info("Loading Anticheat Integrations...");
 
             if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
-                com.willfp.ecoenchants.anticheat.AnticheatManager.registerAnticheat(new AnticheatAAC());
+                AnticheatManager.registerAnticheat(new AnticheatAAC());
                 Bukkit.getLogger().info("AAC: §aENABLED");
             } else {
                 Bukkit.getLogger().info("AAC: §9DISABLED");
             }
 
             if(Bukkit.getPluginManager().isPluginEnabled("Matrix")) {
-                com.willfp.ecoenchants.anticheat.AnticheatManager.registerAnticheat(new AnticheatMatrix());
+                AnticheatManager.registerAnticheat(new AnticheatMatrix());
                 Bukkit.getLogger().info("Matrix: §aENABLED");
             } else {
                 Bukkit.getLogger().info("Matrix: §9DISABLED");
             }
 
             if(Bukkit.getPluginManager().isPluginEnabled("NoCheatPlus")) {
-                com.willfp.ecoenchants.anticheat.AnticheatManager.registerAnticheat(new AnticheatAAC());
+                AnticheatManager.registerAnticheat(new AnticheatAAC());
                 Bukkit.getLogger().info("NCP: §aENABLED");
             } else {
                 Bukkit.getLogger().info("NCP: §9DISABLED");
             }
 
             if(Bukkit.getPluginManager().isPluginEnabled("Spartan")) {
-                com.willfp.ecoenchants.anticheat.AnticheatManager.registerAnticheat(new AnticheatAAC());
+                AnticheatManager.registerAnticheat(new AnticheatAAC());
                 Bukkit.getLogger().info("Spartan: §aENABLED");
             } else {
                 Bukkit.getLogger().info("Spartan: §9DISABLED");

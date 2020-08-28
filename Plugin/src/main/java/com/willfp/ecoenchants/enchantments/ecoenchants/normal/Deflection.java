@@ -3,8 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefGriefPrevention;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -35,9 +36,7 @@ public class Deflection extends EcoEnchant {
 
         if(!player.isBlocking()) return;
 
-        if(victim instanceof Player) {
-            if(!AntiGrief.canInjurePlayer(player, (Player) event.getEntity())) return;
-        }
+        if(!AntigriefManager.canInjure(player, victim)) return;
 
         int level;
         if (!HasEnchant.playerOffhand(player, this) && !HasEnchant.playerHeld(player, this)) return;

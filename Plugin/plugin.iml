@@ -36,7 +36,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:21.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.13-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.25" level="project" />
-    <orderEntry type="library" name="Maven: com.willfp.ecoenchants:API:4.1.0-pre10" level="project" />
+    <orderEntry type="library" name="Maven: com.willfp.ecoenchants:API:4.1.0-pre11" level="project" />
     <orderEntry type="module" module-name="v1_15_R1" />
     <orderEntry type="module" module-name="v1_16_R1" />
     <orderEntry type="module" module-name="v1_16_R2" />

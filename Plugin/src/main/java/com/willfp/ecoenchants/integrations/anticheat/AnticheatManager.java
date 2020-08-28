@@ -1,11 +1,10 @@
-package com.willfp.ecoenchants.anticheat;
+package com.willfp.ecoenchants.integrations.anticheat;
 
 import com.willfp.ecoenchants.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

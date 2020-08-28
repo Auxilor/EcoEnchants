@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.AntiGrief;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -51,7 +51,7 @@ public class InfernalTouch extends EcoEnchant {
         if (event.isCancelled())
             return;
 
-        if (!AntiGrief.canBreakBlock(player, block)) return;
+        if (!AntigriefManager.canBreakBlock(player, block)) return;
 
 
         Collection<ItemStack> drops = new ArrayList<>();
