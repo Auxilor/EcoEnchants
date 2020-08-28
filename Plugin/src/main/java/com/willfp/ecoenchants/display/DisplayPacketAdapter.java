@@ -44,7 +44,7 @@ public class DisplayPacketAdapter extends PacketAdapter {
         if(!event.getPacketType().equals(PacketType.Play.Client.SET_CREATIVE_SLOT)) return;
 
         event.getPacket().getItemModifier().modify(0, (item) -> {
-            item = EnchantDisplay.displayEnchantments(item);
+            item = EnchantDisplay.revertDisplay(item);
             return item;
         });
     }

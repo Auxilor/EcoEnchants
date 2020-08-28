@@ -34,12 +34,7 @@ public class EnchantDisplay {
     private static final NamespacedKey key = new NamespacedKey(Main.getInstance(), "ecoenchantlore-len");
 
     /**
-     * The meta key of the length of advancedenchantments enchantments in lore
-     */
-    private static final NamespacedKey keyAE = new NamespacedKey(Main.getInstance(), "ecoenchantlore-aelen");
-
-    /**
-     * The meta key to function like {@link ItemFlag#HIDE_ENCHANTS}
+     * The meta key to hide enchantments in lore
      */
     public static final NamespacedKey keySkip = new NamespacedKey(Main.getInstance(), "ecoenchantlore-skip");
 
@@ -82,6 +77,51 @@ public class EnchantDisplay {
     }
 
     /**
+     * Revert display
+     * @param item The item to revert
+     * @return The item, updated
+     */
+    public static ItemStack revertDisplay(ItemStack item) {
+        if(item == null) return null;
+
+        if(!Target.Applicable.ALL.getMaterials().contains(item.getType()))
+            return item;
+
+        ItemMeta meta = item.getItemMeta();
+        List<String> itemLore = new ArrayList<>();
+
+        if(meta == null) return item;
+
+        if(meta.hasLore())
+            itemLore = meta.getLore();
+
+        try {
+            if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
+                int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
+                if(itemLore.size() >= enchantLoreLength) {
+                    itemLore.subList(0, enchantLoreLength).clear();
+                }
+            }
+        } catch (NullPointerException ignored) {}
+
+
+
+        if (meta instanceof EnchantmentStorageMeta) {
+            EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;
+            metaBook.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
+            metaBook.removeItemFlags(ItemFlag.HIDE_ENCHANTS); // Here just in case
+            metaBook.setLore(itemLore);
+            item.setItemMeta(metaBook);
+        } else {
+            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.setLore(itemLore);
+            item.setItemMeta(meta);
+        }
+
+        return item;
+    }
+
+    /**
      * Show all enchantments in item lore
      * @param item The item to update
      * @return The item, updated
@@ -94,6 +134,8 @@ public class EnchantDisplay {
         if(!Target.Applicable.ALL.getMaterials().contains(item.getType()))
             return oldItem;
 
+        item = revertDisplay(item);
+
         ItemMeta meta = item.getItemMeta();
         List<String> itemLore = new ArrayList<>();
 
@@ -105,7 +147,7 @@ public class EnchantDisplay {
         if(meta == null) return oldItem;
 
         if(meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER))
-            return item;
+            return oldItem;
 
         if(meta.hasLore())
             itemLore = meta.getLore();
@@ -114,25 +156,6 @@ public class EnchantDisplay {
         List<String> curseLore = new ArrayList<>();
 
         List<String> enchantLore = new ArrayList<>();
-
-        try {
-            if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
-                int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
-                int loreEnd = loreStart;
-                if (meta.getPersistentDataContainer().has(keyAE, PersistentDataType.INTEGER)) {
-                    int oldAEenchantLoreLength = meta.getPersistentDataContainer().get(keyAE, PersistentDataType.INTEGER);
-                    loreEnd += oldAEenchantLoreLength;
-                }
-                if(itemLore.size() >= loreStart + enchantLoreLength + loreEnd) {
-                    itemLore.subList(loreStart, enchantLoreLength + loreEnd).clear();
-                }
-            }
-        } catch (NullPointerException ignored) {}
-
-        if(Main.hasAE) {
-            int totalAE = AEAPI.getEnchantmentsOnItem(item).size();
-            meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, totalAE);
-        }
 
         Map<Enchantment, Integer> enchantments;
         List<Enchantment> forRemoval = new ArrayList<>();
@@ -143,6 +166,7 @@ public class EnchantDisplay {
             enchantments = meta.getEnchants();
         }
 
+        final ItemStack finalItem = item;
         enchantments.forEach(((enchantment, integer) -> {
             boolean isEcoEnchant = EcoEnchants.getFromEnchantment(enchantment) != null;
 
@@ -189,7 +213,7 @@ public class EnchantDisplay {
             }
 
             if(!(isMaxLevelOne || type == EcoEnchant.EnchantmentType.CURSE)) {
-                if (useNumerals && item.getEnchantmentLevel(enchantment) < numbersThreshold) {
+                if (useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
                     name += " " + Numeral.getNumeral(integer);
                 } else {
                     name += " " + integer;

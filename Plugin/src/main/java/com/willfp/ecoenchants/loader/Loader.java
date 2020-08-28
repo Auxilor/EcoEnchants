@@ -374,8 +374,8 @@ public class Loader {
         Bukkit.getLogger().info("Loading Commands...");
         Bukkit.getPluginCommand("ecoreload").setExecutor(new CommandEcoreload());
         Bukkit.getPluginCommand("ecodebug").setExecutor(new CommandEcodebug());
-        Bukkit.getPluginCommand("ecoskip").setExecutor(new CommandEcoskip());
         Bukkit.getPluginCommand("enchantinfo").setExecutor(new CommandEnchantinfo());
+        Bukkit.getPluginCommand("ecoskip").setExecutor(new CommandEcoskip());
         Bukkit.getLogger().info("");
         
         /*
