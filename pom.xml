@@ -62,10 +62,9 @@
         </repository>
     </repositories>
 
-
     <build>
         <finalName>${project.name} v${project.version}</finalName>
-        <defaultGoal>clean install</defaultGoal>
+        <defaultGoal>clean package install</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

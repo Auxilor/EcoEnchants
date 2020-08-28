@@ -6,7 +6,6 @@
         <artifactId>parent</artifactId>
         <groupId>com.willfp.ecoenchants</groupId>
         <version>4.1.0-pre11</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
