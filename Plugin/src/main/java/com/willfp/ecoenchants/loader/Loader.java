@@ -88,7 +88,6 @@ public class Loader {
         Bukkit.getLogger().info("Loading Configs...");
         ConfigManager.updateConfigs();
         EnchantDisplay.update();
-        Main.getInstance().saveResource("README.txt", true);
         Bukkit.getLogger().info("");
 
         /*
