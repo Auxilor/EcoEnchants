@@ -25,6 +25,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot-api:1.15-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.13-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.25" level="project" />
     <orderEntry type="library" name="Maven: com.willfp.ecoenchants:API:4.1.0-pre11" level="project" />
@@ -112,7 +113,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: de.janmm14:aac-api:4.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.jiangdashao:matrix-api-repo:317d4635fd" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: me.vagdedes:SpartanAPI:1.0.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib:4.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cglib:cglib-nodep:3.2.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.executors:BukkitExecutors:1.1-SNAPSHOT" level="project" />
