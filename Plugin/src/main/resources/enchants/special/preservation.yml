@@ -1,0 +1,27 @@
+#
+# Preservation EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Preservation"
+
+description: Massively reduces incoming damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - protection
+    - fire_protection
+    - projectile_protection
+    - blast_protection
+  maximum-level: 4
+
+config:
+  percent-less-per-level: 5 # Points * Percent less / 100 * damage = damage taken

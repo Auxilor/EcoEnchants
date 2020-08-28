@@ -1,0 +1,30 @@
+#
+# Drill EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Drill"
+
+description: Mines blocks behind other blocks.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - lumberjack
+    - blast_mining
+    - vein
+  maximum-level: 5
+
+config:
+  blocks-per-level: 1
+  disable-on-sneak: true
+  hardness-check: true # Only break blocks with hardness less than or equal to first block
+  blacklisted-blocks:
+    - bedrock

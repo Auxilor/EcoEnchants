@@ -1,0 +1,23 @@
+#
+# Rapid EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Rapid"
+
+description: Increases bow pull speed.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: uncommon
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  percent-faster-per-level: 10

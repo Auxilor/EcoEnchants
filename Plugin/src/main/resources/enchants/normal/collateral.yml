@@ -1,0 +1,23 @@
+#
+# Collateral EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Collateral"
+
+description: Arrows can go through entities.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  # No config is available for this enchantment

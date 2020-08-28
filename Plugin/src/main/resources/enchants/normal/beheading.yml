@@ -1,0 +1,23 @@
+#
+# Beheading EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Beheading"
+
+description: Chance of getting player or mob head.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: uncommon
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  chance-per-level: 10 #chance of dropping skull per level

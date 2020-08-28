@@ -1,0 +1,25 @@
+#
+# Splash EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Splash"
+
+description: Damages entities near where trident lands but does not drop experience.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - wisdom
+  maximum-level: 4
+
+config:
+  radius-multiplier: 2 # Radius Multiplier * level = Radius of which to damage entities
+  damage-per-level: 1 # Damage to give to nearby entities

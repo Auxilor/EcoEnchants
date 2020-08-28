@@ -1,0 +1,24 @@
+#
+# Prosperity EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Prosperity"
+
+description: Massively increases maximum health.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: veryspecial
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - thrive
+  maximum-level: 3
+
+config:
+  health-per-point: 2

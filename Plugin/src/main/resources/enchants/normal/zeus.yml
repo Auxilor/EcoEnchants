@@ -1,0 +1,24 @@
+#
+# Zeus EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Zeus"
+
+description: Chance to strike lightning on your opponent.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  chance-per-level: 1
+  lightning-damage: 2.5

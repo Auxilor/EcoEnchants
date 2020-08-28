@@ -1,0 +1,23 @@
+#
+# Deflection EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Deflection"
+
+description: Rebounds some incoming damage back to your attacker.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: uncommon
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  percent-deflected-per-level: 10 # Percent of damage to deal to attacker per level (can go above 100)

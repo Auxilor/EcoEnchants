@@ -1,0 +1,24 @@
+#
+# Spiked EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Spiked"
+
+description: Hooking onto an entity will damage it.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: common
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - harpoon
+  maximum-level: 3
+
+config:
+  damage-per-level: 1

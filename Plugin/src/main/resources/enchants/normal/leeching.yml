@@ -1,0 +1,24 @@
+#
+# Leeching EcoEnchant
+#
+
+config-version: 4.01 # Don't edit this.
+
+name: "Leeching"
+
+description: Heals a portion of damage dealt.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - life_steal
+  maximum-level: 3
+
+config:
+  damage-multiplier-per-level: 0.04 # Damage * Level * Multiplier is used to calculate how much health to heal

@@ -1,0 +1,24 @@
+#
+# Levitate EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Levitate"
+
+description: Chance of applying levitation to your opponent.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 2
+
+config:
+  chance-per-level: 3 #chance of levitation per level
+  duration-per-level: 30

@@ -1,0 +1,22 @@
+#
+# Marksman EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Marksman"
+
+description: Removes arrow drop.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+
+config:
+  remove-arrow-after-ticks: 80 #to prevent server lag, as arrows shot into the sky will not land. there are 20 ticks in a second.

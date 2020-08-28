@@ -1,0 +1,25 @@
+#
+# Thor EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Thor"
+
+description: Chance of striking lightning on your opponent.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-level: 2.5
+  allow-not-fully-charged: false # dont require sword attack to be at full charge
+  lightning-damage: 2.5

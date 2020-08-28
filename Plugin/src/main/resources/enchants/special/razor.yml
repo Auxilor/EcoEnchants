@@ -1,0 +1,31 @@
+#
+# Razor EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Razor"
+
+description: Massively increases damage dealt.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: veryspecial
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - sharpness
+    - smite
+    - bane_of_arthropods
+    - defusion
+    - butchering
+    - ender_slayer
+  maximum-level: 5
+
+config:
+  per-level-multiplier: 1.0 # Vanilla sharpness is 0.5*level + 0.5 extra damage. Razor formula is multiplier*level + base extra damage.
+  base-damage: 12.5 # Vanilla Smite 5/BOA 5 extra damage is 12.5
+  decrease-if-cooldown: true

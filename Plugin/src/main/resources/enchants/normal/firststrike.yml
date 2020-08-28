@@ -1,0 +1,23 @@
+#
+# First Strike EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "First Strike"
+
+description: Increases damage dealt when entity is on max health.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  damage-multiplier-per-level: 0.2

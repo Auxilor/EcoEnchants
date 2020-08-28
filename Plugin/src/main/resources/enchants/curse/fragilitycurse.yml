@@ -1,0 +1,24 @@
+#
+# Curse of Fragility EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Curse of Fragility"
+
+description: Decreases item durability.
+
+obtaining:
+  table: false
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: false
+  conflicts:
+    - unbreaking
+
+config:
+  minimum-extra-durability: 2 #minimum extra durability lost on each usage
+  maximum-extra-durability: 8 #maximum extra durability lost on each usage

@@ -1,0 +1,112 @@
+#
+# EcoEnchants
+# by Auxilor
+#
+
+config-version: 4.1 # Don't edit this.
+
+anvil:
+  allow-unsafe-levels: false # Allow unsafe enchantments like Sharpness 6 by combining 2 Sharp 5.
+  allow-combining-unsafe: true # Allow further combining unsafe levels, eg Sharp 6 + Sharp 6 = Sharp 7.
+  allow-existing-unsafe-levels: true # Allow combining existing unsafe enchantments like Sharpness 6
+
+  cost-exponent: # Increase value of each extra level by the exponent^levels
+    enabled: true # Use exponent
+    exponent: 0.95 # Exponent. Beware that slight changes to this value may cause huge changes in cost.
+
+lore:
+  use-numerals: true
+  use-numbers-above-threshold: 10 #After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
+
+  describe: # Describe enchantments in lore
+    enabled: true
+    before-lines: 5 # Describe before or equal to number of enchantments
+    wrap: 30 # Word wrap after number of characters
+
+  # Ensure that describe and shrink have no overlap as this may cause errors
+
+  shrink: # Collapse large amount of enchantments
+    enabled: true
+    after-lines: 9 # Collapse after number of enchantments
+    maximum-per-line: 2 # Maximum number of enchantments to have in 1 line
+
+enchanting-table:
+  enabled: true #Enable EcoEnchants through an enchanting table
+  book-times-less-likely: 2 #Times less likely to get an EcoEnchant on a book to balance them out. Don't recommend editing.
+  maximum-obtainable-level: 30 #Max level for enchanting table. Vanilla default is 30, change if you have a plugin that edits this.
+  special-bias: 0.7 # Value between 0-1 dictating rarity of high-level special enchantments. 0 is no extra bias, 1 is only level 1.
+  notify-on-special: true # Tell player in chat when they get a special enchantment
+
+  cap-amount: # Prevent getting above a certain amount of enchantments
+    enabled: true # Enable capping
+    limit: 5 # Cap at amount
+
+  reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added
+    enabled: true # Enable reduction
+    factor: 2.2 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
+
+villager:
+  enabled: true #Enable EcoEnchants through villagers
+  book-times-less-likely: 7 # Times less likely to get an enchantment from a book with a villager. Recommended to be higher as books can only have one enchantment on them.
+
+  reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added. Does not apply to books as they only ever contain one enchantment.
+    enabled: true # Enable reduction
+    factor: 5 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
+
+loot:
+  enabled: true #Enable EcoEnchants through loot chests
+  book-times-less-likely: 2
+
+  reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added. Does not apply to books as they only ever contain one enchantment.
+    enabled: true # Enable reduction
+    factor: 7.5 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
+
+obtaining:
+  rarities:
+    # Table Probability is the chance of getting enchantment as a percentage from an enchanting table
+    # Minimum Level is the minimum xp level you have to be to get the enchantment
+    # You can add more rarities by following the pattern.
+    # Remember, enchantments are more likely to be high-level the closer they are to maximum-obtainable-level
+    # Villager probability is the chance of a villager having this trade as a percentage. Vanilla default for all enchantments is 2.7%, however you can choose this per-rarity.
+    # Loot probability is the chance of an item in a loot chest having this enchantment as a percentage
+
+    common:
+      table-probability: 30
+      minimum-level: 1
+      villager-probability: 10.5
+      loot-probability: 12
+    uncommon:
+      table-probability: 20
+      minimum-level: 5
+      villager-probability: 9
+      loot-probability: 16
+    rare:
+      table-probability: 20
+      minimum-level: 15
+      villager-probability: 7.5
+      loot-probability: 18
+    epic:
+      table-probability: 10
+      minimum-level: 16
+      villager-probability: 6
+      loot-probability: 20
+    legendary:
+      table-probability: 8
+      minimum-level: 20
+      villager-probability: 4.5
+      loot-probability: 15
+    special:
+      table-probability: 2
+      minimum-level: 30
+      villager-probability: 3
+      loot-probability: 5
+    veryspecial:
+      table-probability: 1
+      minimum-level: 30
+      villager-probability: 1.5
+      loot-probability: 2
+
+#
+# Enchantment-specific config has now been moved to their own files.
+# Check the /enchants directory.
+#

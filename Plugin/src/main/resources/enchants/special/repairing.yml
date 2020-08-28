@@ -1,0 +1,26 @@
+#
+# Repairing EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Repairing"
+
+description: Automatically repairs items when not held.
+
+obtaining:
+  table: false
+  villager: true
+  loot: true
+  rarity: veryspecial
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - mending
+    - decay_curse
+  maximum-level: 3
+
+config:
+  repeat-ticks: 100 # How often (in ticks) to repair items
+  multiplier: 1 # Amount to repair = multiplier * level. Does not accept decimals

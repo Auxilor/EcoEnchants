@@ -1,0 +1,24 @@
+#
+# Evasion EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Evasion"
+
+description: Chance to ignore incoming damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  # Each level of evasion on each piece of armor counts as a point, so if a player is wearing 4 pieces of armor all with Evasion 3, then that would be 12 points
+  chance-per-point: 0.5

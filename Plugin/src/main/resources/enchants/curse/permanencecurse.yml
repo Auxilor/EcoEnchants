@@ -1,0 +1,23 @@
+#
+# Curse of Permanence EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Curse of Permanence"
+
+description: Prevents item from being modified in an anvil.
+
+obtaining:
+  table: false
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: false
+  conflicts:
+    - mending
+
+config:
+  # No config is available for this enchantment

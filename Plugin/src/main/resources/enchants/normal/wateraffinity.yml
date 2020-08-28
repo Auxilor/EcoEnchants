@@ -1,0 +1,24 @@
+#
+# Water Affinity EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Water Affinity"
+
+description: Increases damage dealt when in water.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - fire_affinity
+  maximum-level: 5
+
+config:
+  percent-more-per-level: 5 # percent more damage to deal per level when on fire

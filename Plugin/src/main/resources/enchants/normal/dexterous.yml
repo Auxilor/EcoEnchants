@@ -1,0 +1,23 @@
+#
+# Dexterous EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Dexterous"
+
+description: Increases attack speed.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 2
+
+config:
+  add-speed-per-level: 0.2 #Bonus to attack speed, default 4.0

@@ -1,0 +1,24 @@
+#
+# Frozen EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Frozen"
+
+description: Chance to give your attacker slowness.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-point: 5
+  points-per-level: 4 # Points of frozen required to increment slowness level by 1

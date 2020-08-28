@@ -1,0 +1,25 @@
+#
+# Magnetic EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Magnetic"
+
+description: Items and XP go towards you.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  initial-distance: 2.5 # Initial item pickup range
+  bonus-per-level: 0.6 # Bonus range per level (Level 1 also includes bonus)
+  repeat-ticks: 3 # Check magnetic every few ticks. Lower values give smoother animations and feels better to the end user, however may cause lag on lower-end hardware.

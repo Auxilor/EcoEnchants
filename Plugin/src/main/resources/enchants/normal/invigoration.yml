@@ -1,0 +1,26 @@
+#
+# Invigoration EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Invigoration"
+
+description: Increases outgoing damage and reduces incoming damage when low on health.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  # Each level of invigoration on each piece of armor counts as a point, so if a player is wearing 4 pieces of armor all with Invigoration 3, then that would be 12 points
+  reduction-multiplier: 5 # In percent, so default is take 5% less damage per point
+  damage-multiplier: 5 # In percent, so default is deal 5% more damage per point
+  below-health: 5 # Activates below specified health

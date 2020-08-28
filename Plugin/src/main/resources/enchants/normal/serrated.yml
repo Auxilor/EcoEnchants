@@ -1,0 +1,28 @@
+#
+# Serrated EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Serrated"
+
+description: Trident deals additional damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: common
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - impaling
+    - bladed
+  maximum-level: 5
+
+config:
+  percent-more-base: 25 # Percent more damage to do as base
+  percent-more-per-level: 25 # Percent more damage to do per level
+  # To explain, Serrated V would be 150% more damage: 25 + (5*25)
+  # Default values are taken from the power enchantment

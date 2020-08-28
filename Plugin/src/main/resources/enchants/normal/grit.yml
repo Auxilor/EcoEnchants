@@ -1,0 +1,23 @@
+#
+# Grit EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Grit"
+
+description: Damages your opponents weapon.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  damage-per-level: 0.3 # Damage * points (0.3 * 12 points = 3.6) Rounded up.

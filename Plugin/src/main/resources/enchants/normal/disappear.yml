@@ -1,0 +1,24 @@
+#
+# Disappear EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Disappear"
+
+description: Go invisble if damaged on low health.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  ticks-per-level: 6
+  threshold: 5 # If health is below threshold after being damaged, go invisble

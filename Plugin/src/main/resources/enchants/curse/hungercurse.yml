@@ -1,0 +1,24 @@
+#
+# Curse of Hunger EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Curse of Hunger"
+
+description: Increases hunger loss.
+
+obtaining:
+  table: false
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: false
+  conflicts:
+    - sating
+
+config:
+  repeat-ticks: 20 # How often (in ticks) to call entities
+  distance: 20 # Entity Range

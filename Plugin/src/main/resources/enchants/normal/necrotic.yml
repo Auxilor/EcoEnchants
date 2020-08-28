@@ -1,0 +1,24 @@
+#
+# Necrotic EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Necrotic"
+
+description: Wither skeletons have a higher chance to drop skulls.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - looting
+  maximum-level: 2
+
+config:
+  chance-per-level: 10 #Chance of dropping a wither skull per level

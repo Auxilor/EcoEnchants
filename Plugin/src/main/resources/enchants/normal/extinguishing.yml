@@ -1,0 +1,23 @@
+#
+# Extinguishing EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Extinguishing"
+
+description: Chance to remove fire when taking fire damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  chance-per-point: 4 #Chance of being extinguished = Total points (12 points * 4 chance = 48% chance)

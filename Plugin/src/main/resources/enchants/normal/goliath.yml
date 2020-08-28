@@ -1,0 +1,23 @@
+#
+# Goliath EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Goliath"
+
+description: Increases damage against entities with more health than you.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  damage-multiplier-per-level: 0.02 # If enemy has 200 health, and you have 20 w/ goliath 5 then your damage is multiplied by: ((200/10)*5*0.02) + 1 = 3

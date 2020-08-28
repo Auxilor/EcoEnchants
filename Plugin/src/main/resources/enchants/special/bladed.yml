@@ -1,0 +1,28 @@
+#
+# Bladed EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Bladed"
+
+description: Trident deals extreme additional damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: veryspecial
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - impaling
+    - serrated
+  maximum-level: 5
+
+config:
+  percent-more-base: 150 # Percent more damage to do as base
+  percent-more-per-level: 25 # Percent more damage to do per level
+  # To explain, Bladed V would be 275% more damage: 150 + (5*25)
+  # By default, Bladed I acts like Serrated VI

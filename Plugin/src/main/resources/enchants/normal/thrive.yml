@@ -1,0 +1,24 @@
+#
+# Thrive EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Thrive"
+
+description: Increases maximum health.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - prosperity
+  maximum-level: 2
+
+config:
+  health-per-point: 1

@@ -1,0 +1,25 @@
+#
+# Bolt EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Bolt"
+
+description: Chance of striking powerful lightning on your opponent.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-level: 5
+  allow-not-fully-charged: false # dont require sword attack to be at full charge
+  lightning-damage: 8

@@ -1,0 +1,27 @@
+#
+# Tectonic EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Tectonic"
+
+description: Damages nearby entities when taking fall damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - feather_falling
+  maximum-level: 2
+
+config:
+  initial-radius: 3
+  per-level-radius: 2
+  initial-damage: 1
+  per-level-damage: 1

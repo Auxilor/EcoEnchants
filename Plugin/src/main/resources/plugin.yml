@@ -1,0 +1,699 @@
+name: EcoEnchants
+version: ${project.parent.version}
+main: com.willfp.ecoenchants.Main
+api-version: 1.15
+authors: [Auxilor]
+website: willfp.com
+load: STARTUP
+depend:
+  - ProtocolLib
+softdepend:
+  - WorldGuard
+  - GriefPrevention
+  - Towny
+  - FactionsUUID
+  - Lands
+  - AdvancedEnchantments
+  - NoCheatPlus
+  - AAC
+  - Matrix
+  - Spartan
+
+commands:
+  ecoreload:
+    description: Reloads config
+    permission: ecoenchants.reload
+  ecodebug:
+    description: Debug information
+    permission: ecoenchants.ecodebug
+  ecoskip:
+    description: Toggle hiding enchantments on item
+    permission: ecoenchants.skip
+  enchantinfo:
+    description: Show information about an enchantment
+    permission: ecoenchants.enchantinfo
+
+permissions:
+  ecoenchants.*:
+    description: All ecoenchants permissions
+    default: op
+    children:
+      ecoenchants.fromtable.*: true
+      ecoenchants.reload: true
+      ecoenchants.updateannounce: true
+      ecoenchants.enchantinfo: true
+      ecoenchants.ecodebug: true
+      ecoenchants.skip: true
+  ecoenchants.fromtable.*:
+    description: Allows getting all enchantments from an enchanting table
+    default: true
+    children:
+      ecoenchants.fromtable.beheading: true
+      ecoenchants.fromtable.dexterous: true
+      ecoenchants.fromtable.evasion: true
+      ecoenchants.fromtable.farmhand: true
+      ecoenchants.fromtable.fragilitycurse: true
+      ecoenchants.fromtable.illusionaspect: true
+      ecoenchants.fromtable.infernaltouch: true
+      ecoenchants.fromtable.instability: true
+      ecoenchants.fromtable.leeching: true
+      ecoenchants.fromtable.magmawalker: true
+      ecoenchants.fromtable.marksman: true
+      ecoenchants.fromtable.necrotic: true
+      ecoenchants.fromtable.slicing: true
+      ecoenchants.fromtable.spring: true
+      ecoenchants.fromtable.strayaspect: true
+      ecoenchants.fromtable.succession: true
+      ecoenchants.fromtable.tectonic: true
+      ecoenchants.fromtable.telekinesis: true
+      ecoenchants.fromtable.vampireaspect: true
+      ecoenchants.fromtable.wisdom: true
+      ecoenchants.fromtable.thor: true
+      ecoenchants.fromtable.streamlining: true
+      ecoenchants.fromtable.firststrike: true
+      ecoenchants.fromtable.finishing: true
+      ecoenchants.fromtable.criticals: true
+      ecoenchants.fromtable.supercritical: true
+      ecoenchants.fromtable.incandescence: true
+      ecoenchants.fromtable.abrasion: true
+      ecoenchants.fromtable.splash: true
+      ecoenchants.fromtable.extinguishing: true
+      ecoenchants.fromtable.goliath: true
+      ecoenchants.fromtable.optics: true
+      ecoenchants.fromtable.defusion: true
+      ecoenchants.fromtable.cerebral: true
+      ecoenchants.fromtable.grit: true
+      ecoenchants.fromtable.bosshunter: true
+      ecoenchants.fromtable.invigoration: true
+      ecoenchants.fromtable.rejuvenation: true
+      ecoenchants.fromtable.tripleshot: true
+      ecoenchants.fromtable.rapid: true
+      ecoenchants.fromtable.sating: true
+      ecoenchants.fromtable.reinforcement: true
+      ecoenchants.fromtable.soulbound: true
+      ecoenchants.fromtable.razor: true
+      ecoenchants.fromtable.prosperity: true
+      ecoenchants.fromtable.preservation: true
+      ecoenchants.fromtable.frenzy: true
+      ecoenchants.fromtable.butchering: true
+      ecoenchants.fromtable.proximity: true
+      ecoenchants.fromtable.enderslayer: true
+      ecoenchants.fromtable.protector: true
+      ecoenchants.fromtable.indestructibility: true
+      ecoenchants.fromtable.energizing: true
+      ecoenchants.fromtable.intellect: true
+      ecoenchants.fromtable.deflection: true
+      ecoenchants.fromtable.launch: true
+      ecoenchants.fromtable.permanencecurse: true
+      ecoenchants.fromtable.spearfishing: true
+      ecoenchants.fromtable.netherinfusion: true
+      ecoenchants.fromtable.replenish: true
+      ecoenchants.fromtable.flinch: true
+      ecoenchants.fromtable.electroshock: true
+      ecoenchants.fromtable.nocturnal: true
+      ecoenchants.fromtable.confusion: true
+      ecoenchants.fromtable.arcanic: true
+      ecoenchants.fromtable.pentashot: true
+      ecoenchants.fromtable.lumberjack: true
+      ecoenchants.fromtable.magnetic: true
+      ecoenchants.fromtable.repairing: true
+      ecoenchants.fromtable.callingcurse: true
+      ecoenchants.fromtable.blastmining: true
+      ecoenchants.fromtable.liquidshot: true
+      ecoenchants.fromtable.grapple: true
+      ecoenchants.fromtable.heartartifact: true
+      ecoenchants.fromtable.sparkleartifact: true
+      ecoenchants.fromtable.lavaartifact: true
+      ecoenchants.fromtable.dragonartifact: true
+      ecoenchants.fromtable.enchantmentartifact: true
+      ecoenchants.fromtable.smokeartifact: true
+      ecoenchants.fromtable.fireartifact: true
+      ecoenchants.fromtable.emeraldartifact: true
+      ecoenchants.fromtable.netherartifact: true
+      ecoenchants.fromtable.endartifact: true
+      ecoenchants.fromtable.waterartifact: true
+      ecoenchants.fromtable.totemartifact: true
+      ecoenchants.fromtable.redstoneartifact: true
+      ecoenchants.fromtable.zapartifact: true
+      ecoenchants.fromtable.musicartifact: true
+      ecoenchants.fromtable.snowartifact: true
+      ecoenchants.fromtable.witchartifact: true
+      ecoenchants.fromtable.honeyartifact: true
+      ecoenchants.fromtable.damageartifact: true
+      ecoenchants.fromtable.cloudsartifact: true
+      ecoenchants.fromtable.magicartifact: true
+      ecoenchants.fromtable.dustartifact: true
+      ecoenchants.fromtable.magmaartifact: true
+      ecoenchants.fromtable.inkartifact: true
+      ecoenchants.fromtable.zeus: true
+      ecoenchants.fromtable.kinetic: true
+      ecoenchants.fromtable.fireaffinity: true
+      ecoenchants.fromtable.parasitic: true
+      ecoenchants.fromtable.parry: true
+      ecoenchants.fromtable.hook: true
+      ecoenchants.fromtable.bleed: true
+      ecoenchants.fromtable.weakening: true
+      ecoenchants.fromtable.oxygenate: true
+      ecoenchants.fromtable.wateraspect: true
+      ecoenchants.fromtable.stamina: true
+      ecoenchants.fromtable.collateral: true
+      ecoenchants.fromtable.paladin: true
+      ecoenchants.fromtable.hungercurse: true
+      ecoenchants.fromtable.serrated: true
+      ecoenchants.fromtable.bladed: true
+      ecoenchants.fromtable.inferno: true
+      ecoenchants.fromtable.stab: true
+      ecoenchants.fromtable.tornado: true
+      ecoenchants.fromtable.extract: true
+      ecoenchants.fromtable.aerial: true
+      ecoenchants.fromtable.famine: true
+      ecoenchants.fromtable.annihilate: true
+      ecoenchants.fromtable.radiance: true
+      ecoenchants.fromtable.horde: true
+      ecoenchants.fromtable.vein: true
+      ecoenchants.fromtable.iceshot: true
+      ecoenchants.fromtable.puncture: true
+      ecoenchants.fromtable.shockwave: true
+      ecoenchants.fromtable.volatile: true
+      ecoenchants.fromtable.instantaneous: true
+      ecoenchants.fromtable.freerunner: true
+      ecoenchants.fromtable.bolt: true
+      ecoenchants.fromtable.dullness: true
+      ecoenchants.fromtable.ignite: true
+      ecoenchants.fromtable.cleave: true
+      ecoenchants.fromtable.carve: true
+      ecoenchants.fromtable.toxic: true
+      ecoenchants.fromtable.wateraffinity: true
+      ecoenchants.fromtable.forcefield: true
+      ecoenchants.fromtable.sycophant: true
+      ecoenchants.fromtable.chopless: true
+      ecoenchants.fromtable.greenthumb: true
+      ecoenchants.fromtable.spiked: true
+      ecoenchants.fromtable.harpoon: true
+      ecoenchants.fromtable.reel: true
+      ecoenchants.fromtable.shotassist: true
+      ecoenchants.fromtable.frozen: true
+      ecoenchants.fromtable.disappear: true
+      ecoenchants.fromtable.harmlessnesscurse: true
+      ecoenchants.fromtable.fury: true
+      ecoenchants.fromtable.levitate: true
+      ecoenchants.fromtable.breaklessnesscurse: true
+      ecoenchants.fromtable.decaycurse: true
+      ecoenchants.fromtable.misfortunecurse: true
+      ecoenchants.fromtable.venom: true
+      ecoenchants.fromtable.cranial: true
+      ecoenchants.fromtable.aquatic: true
+      ecoenchants.fromtable.buckshot: true
+      ecoenchants.fromtable.diverse: true
+      ecoenchants.fromtable.lifesteal: true
+
+  ecoenchants.updateannounce:
+    description: Informs admins of a new update
+    default: op
+  ecoenchants.reload:
+    description: Allows reloading the config
+    default: op
+  ecoenchants.ecodebug:
+    description: Allows the use of /ecodebug to print verbose debug information to console
+    default: true
+  ecoenchants.skip:
+    description: Allows the use of /ecoskip to toggle hiding enchantments on an item
+    default: op
+  ecoenchants.enchantinfo:
+    description: Allows the use of /enchantinfo to show enchant info
+    default: true
+
+  ecoenchants.fromtable.beheading:
+    description: Allows getting beheading from an enchanting table
+    default: true
+  ecoenchants.fromtable.dexterous:
+    description: Allows getting dexterous from an enchanting table
+    default: true
+  ecoenchants.fromtable.evasion:
+    description: Allows getting evasion from an enchanting table
+    default: true
+  ecoenchants.fromtable.farmhand:
+    description: Allows getting farmhand from an enchanting table
+    default: true
+  ecoenchants.fromtable.fragilitycurse:
+    description: Allows getting fragility curse from an enchanting table
+    default: true
+  ecoenchants.fromtable.illusionaspect:
+    description: Allows getting illusion aspect from an enchanting table
+    default: true
+  ecoenchants.fromtable.infernaltouch:
+    description: Allows getting infernal touch from an enchanting table
+    default: true
+  ecoenchants.fromtable.instability:
+    description: Allows getting instability from an enchanting table
+    default: true
+  ecoenchants.fromtable.leeching:
+    description: Allows getting leeching from an enchanting table
+    default: true
+  ecoenchants.fromtable.magmawalker:
+    description: Allows getting magma walker from an enchanting table
+    default: true
+  ecoenchants.fromtable.marksman:
+    description: Allows getting marksman from an enchanting table
+    default: true
+  ecoenchants.fromtable.necrotic:
+    description: Allows getting necrotic from an enchanting table
+    default: true
+  ecoenchants.fromtable.slicing:
+    description: Allows getting slicing from an enchanting table
+    default: true
+  ecoenchants.fromtable.spring:
+    description: Allows getting spring from an enchanting table
+    default: true
+  ecoenchants.fromtable.strayaspect:
+    description: Allows getting stray aspect from an enchanting table
+    default: true
+  ecoenchants.fromtable.succession:
+    description: Allows getting succession.yml from an enchanting table
+    default: true
+  ecoenchants.fromtable.tectonic:
+    description: Allows getting tectonic from an enchanting table
+    default: true
+  ecoenchants.fromtable.telekinesis:
+    description: Allows getting telekinesis from an enchanting table
+    default: true
+  ecoenchants.fromtable.vampireaspect:
+    description: Allows getting vampireaspect from an enchanting table
+    default: true
+  ecoenchants.fromtable.wisdom:
+    description: Allows getting wisdom from an enchanting table
+    default: true
+  ecoenchants.fromtable.thor:
+    description: Allows getting thor from an enchanting table
+    default: true
+  ecoenchants.fromtable.streamlining:
+    description: Allows getting streamlining from an enchanting table
+    default: true
+  ecoenchants.fromtable.firststrike:
+    description: Allows getting first strike from an enchanting table
+    default: true
+  ecoenchants.fromtable.finishing:
+    description: Allows getting finishing from an enchanting table
+    default: true
+  ecoenchants.fromtable.criticals:
+    description: Allows getting criticals from an enchanting table
+    default: true
+  ecoenchants.fromtable.incandescence:
+    description: Allows getting incandescence from an enchanting table
+    default: true
+  ecoenchants.fromtable.supercritical:
+    description: Allows getting supercritical from an enchanting table
+    default: true
+  ecoenchants.fromtable.abrasion:
+    description: Allows getting abrasion from an enchanting table
+    default: true
+  ecoenchants.fromtable.splash:
+    description: Allows getting splash from an enchanting table
+    default: true
+  ecoenchants.fromtable.extinguishing:
+    description: Allows getting extinguishing from an enchanting table
+    default: true
+  ecoenchants.fromtable.goliath:
+    description: Allows getting goliath from an enchanting table
+    default: true
+  ecoenchants.fromtable.optics:
+    description: Allows getting optics from an enchanting table
+    default: true
+  ecoenchants.fromtable.defusion:
+    description: Allows getting defusion from an enchanting table
+    default: true
+  ecoenchants.fromtable.cerebral:
+    description: Allows getting cerebral from an enchanting table
+    default: true
+  ecoenchants.fromtable.grit:
+    description: Allows getting grit from an enchanting table
+    default: true
+  ecoenchants.fromtable.bosshunter:
+    description: Allows getting boss hunter from an enchanting table
+    default: true
+  ecoenchants.fromtable.invigoration:
+    description: Allows getting invigoration from an enchanting table
+    default: true
+  ecoenchants.fromtable.rejuvenation:
+    description: Allows getting rejuvenation from an enchanting table
+    default: true
+  ecoenchants.fromtable.tripleshot:
+    description: Allows getting tripleshot from an enchanting table
+    default: true
+  ecoenchants.fromtable.rapid:
+    description: Allows getting rapid from an enchanting table
+    default: true
+  ecoenchants.fromtable.sating:
+    description: Allows getting sating from an enchanting table
+    default: true
+  ecoenchants.fromtable.reinforcement:
+    description: Allows getting reinforcement from an enchanting table
+    default: true
+  ecoenchants.fromtable.soulbound:
+    description: Allows getting soulbound from an enchanting table
+    default: true
+  ecoenchants.fromtable.razor:
+    description: Allows getting razor from an enchanting table
+    default: true
+  ecoenchants.fromtable.prosperity:
+    description: Allows getting prosperity from an enchanting table
+    default: true
+  ecoenchants.fromtable.preservation:
+    description: Allows getting preservation from an enchanting table
+    default: true
+  ecoenchants.fromtable.frenzy:
+    description: Allows getting frenzy from an enchanting table
+    default: true
+  ecoenchants.fromtable.butchering:
+    description: Allows getting butchering from an enchanting table
+    default: true
+  ecoenchants.fromtable.proximity:
+    description: Allows getting proximity from an enchanting table
+    default: true
+  ecoenchants.fromtable.enderslayer:
+    description: Allows getting ender slayer from an enchanting table
+    default: true
+  ecoenchants.fromtable.protector:
+    description: Allows getting protector from an enchanting table
+    default: true
+  ecoenchants.fromtable.indestructibility:
+    description: Allows getting indestructibility from an enchanting table
+    default: true
+  ecoenchants.fromtable.energizing:
+    description: Allows getting energizing from an enchanting table
+    default: true
+  ecoenchants.fromtable.intellect:
+    description: Allows getting intellect from an enchanting table
+    default: true
+  ecoenchants.fromtable.deflection:
+    description: Allows getting deflection from an enchanting table
+    default: true
+  ecoenchants.fromtable.launch:
+    description: Allows getting launch from an enchanting table
+    default: true
+  ecoenchants.fromtable.permanencecurse:
+    description: Allows getting curse of permanence from an enchanting table
+    default: true
+  ecoenchants.fromtable.spearfishing:
+    description: Allows getting spearfishing from an enchanting table
+    default: true
+  ecoenchants.fromtable.netherinfusion:
+    description: Allows getting nether infusion from an enchanting table
+    default: true
+  ecoenchants.fromtable.replenish:
+    description: Allows getting replenish from an enchanting table
+    default: true
+  ecoenchants.fromtable.flinch:
+    description: Allows getting flinch from an enchanting table
+    default: true
+  ecoenchants.fromtable.electroshock:
+    description: Allows getting electroshock from an enchanting table
+    default: true
+  ecoenchants.fromtable.nocturnal:
+    description: Allows getting nocturnal from an enchanting table
+    default: true
+  ecoenchants.fromtable.confusion:
+    description: Allows getting confusion from an enchanting table
+    default: true
+  ecoenchants.fromtable.arcanic:
+    description: Allows getting arcanic from an enchanting table
+    default: true
+  ecoenchants.fromtable.pentashot:
+    description: Allows getting pentashot from an enchanting table
+    default: true
+  ecoenchants.fromtable.lumberjack:
+    description: Allows getting lumberjack from an enchanting table
+    default: true
+  ecoenchants.fromtable.magnetic:
+    description: Allows getting magnetic from an enchanting table
+    default: true
+  ecoenchants.fromtable.repairing:
+    description: Allows getting repairing from an enchanting table
+    default: true
+  ecoenchants.fromtable.callingcurse:
+    description: Allows getting curse of calling from an enchanting table
+    default: true
+  ecoenchants.fromtable.blastmining:
+    description: Allows getting blast mining from an enchanting table
+    default: true
+  ecoenchants.fromtable.liquidshot:
+    description: Allows getting liquid shot from an enchanting table
+    default: true
+  ecoenchants.fromtable.grapple:
+    description: Allows getting grapple from an enchanting table
+    default: true
+  ecoenchants.fromtable.heartartifact:
+    description: Allows getting heart artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.sparkleartifact:
+    description: Allows getting sparkle artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.lavaartifact:
+    description: Allows getting lava artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.dragonartifact:
+    description: Allows getting dragon artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.enchantmentartifact:
+    description: Allows getting enchantment artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.smokeartifact:
+    description: Allows getting smoke artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.fireartifact:
+    description: Allows getting fire artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.emeraldartifact:
+    description: Allows getting emerald artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.netherartifact:
+    description: Allows getting nether artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.endartifact:
+    description: Allows getting end artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.waterartifact:
+    description: Allows getting water artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.totemartifact:
+    description: Allows getting totem artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.redstoneartifact:
+    description: Allows getting redstone artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.zapartifact:
+    description: Allows getting zap artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.musicartifact:
+    description: Allows getting music artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.snowartifact:
+    description: Allows getting snow artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.witchartifact:
+    description: Allows getting witch artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.honeyartifact:
+    description: Allows getting honey artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.damageartifact:
+    description: Allows getting damage artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.cloudsartifact:
+    description: Allows getting clouds artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.magicartifact:
+    description: Allows getting magic artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.zeus:
+    description: Allows getting zeus from an enchanting table
+    default: true
+  ecoenchants.fromtable.kinetic:
+    description: Allows getting kinetic from an enchanting table
+    default: true
+  ecoenchants.fromtable.fireaffinity:
+    description: Allows getting fire affinity from an enchanting table
+    default: true
+  ecoenchants.fromtable.parasitic:
+    description: Allows getting parasitic from an enchanting table
+    default: true
+  ecoenchants.fromtable.parry:
+    description: Allows getting parry from an enchanting table
+    default: true
+  ecoenchants.fromtable.hook:
+    description: Allows getting hook from an enchanting table
+    default: true
+  ecoenchants.fromtable.bleed:
+    description: Allows getting bleed from an enchanting table
+    default: true
+  ecoenchants.fromtable.weakening:
+    description: Allows getting weakening from an enchanting table
+    default: true
+  ecoenchants.fromtable.oxygenate:
+    description: Allows getting oxygenate from an enchanting table
+    default: true
+  ecoenchants.fromtable.wateraspect:
+    description: Allows getting water aspect from an enchanting table
+    default: true
+  ecoenchants.fromtable.stamina:
+    description: Allows getting stamina from an enchanting table
+    default: true
+  ecoenchants.fromtable.collateral:
+    description: Allows getting collateral from an enchanting table
+    default: true
+  ecoenchants.fromtable.paladin:
+    description: Allows getting paladin from an enchanting table
+    default: true
+  ecoenchants.fromtable.hungercurse:
+    description: Allows getting curse of hunger from an enchanting table
+    default: true
+  ecoenchants.fromtable.serrated:
+    description: Allows getting serrated from an enchanting table
+    default: true
+  ecoenchants.fromtable.bladed:
+    description: Allows getting bladed from an enchanting table
+    default: true
+  ecoenchants.fromtable.inferno:
+    description: Allows getting inferno from an enchanting table
+    default: true
+  ecoenchants.fromtable.stab:
+    description: Allows getting stab from an enchanting table
+    default: true
+  ecoenchants.fromtable.tornado:
+    description: Allows getting tornado from an enchanting table
+    default: true
+  ecoenchants.fromtable.extract:
+    description: Allows getting extract from an enchanting table
+    default: true
+  ecoenchants.fromtable.dustartifact:
+    description: Allows getting dust artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.magmaartifact:
+    description: Allows getting magma artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.inkartifact:
+    description: Allows getting ink artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.aerial:
+    description: Allows getting aerial from an enchanting table
+    default: true
+  ecoenchants.fromtable.famine:
+    description: Allows getting famine from an enchanting table
+    default: true
+  ecoenchants.fromtable.annihilate:
+    description: Allows getting annihilate from an enchanting table
+    default: true
+  ecoenchants.fromtable.radiance:
+    description: Allows getting radiance from an enchanting table
+    default: true
+  ecoenchants.fromtable.horde:
+    description: Allows getting horde from an enchanting table
+    default: true
+  ecoenchants.fromtable.vein:
+    description: Allows getting vein from an enchanting table
+    default: true
+  ecoenchants.fromtable.iceshot:
+    description: Allows getting iceshot from an enchanting table
+    default: true
+  ecoenchants.fromtable.puncture:
+    description: Allows getting puncture from an enchanting table
+    default: true
+  ecoenchants.fromtable.shockwave:
+    description: Allows getting shockwave from an enchanting table
+    default: true
+  ecoenchants.fromtable.volatile:
+    description: Allows getting volatile from an enchanting table
+    default: true
+  ecoenchants.fromtable.instantaneous:
+    description: Allows getting instantaneous from an enchanting table
+    default: true
+  ecoenchants.fromtable.freerunner:
+    description: Allows getting freerunner from an enchanting table
+    default: true
+  ecoenchants.fromtable.bolt:
+    description: Allows getting bolt from an enchanting table
+    default: true
+  ecoenchants.fromtable.dullness:
+    description: Allows getting dullness from an enchanting table
+    default: true
+  ecoenchants.fromtable.ignite:
+    description: Allows getting ignite from an enchanting table
+    default: true
+  ecoenchants.fromtable.cleave:
+    description: Allows getting cleave from an enchanting table
+    default: true
+  ecoenchants.fromtable.carve:
+    description: Allows getting carve from an enchanting table
+    default: true
+  ecoenchants.fromtable.toxic:
+    description: Allows getting toxic from an enchanting table
+    default: true
+  ecoenchants.fromtable.wateraffinity:
+    description: Allows getting water affinity from an enchanting table
+    default: true
+  ecoenchants.fromtable.forcefield:
+    description: Allows getting forcefield from an enchanting table
+    default: true
+  ecoenchants.fromtable.sycophant:
+    description: Allows getting sycophant from an enchanting table
+    default: true
+  ecoenchants.fromtable.chopless:
+    description: Allows getting chopless from an enchanting table
+    default: true
+  ecoenchants.fromtable.greenthumb:
+    description: Allows getting green thumb from an enchanting table
+    default: true
+  ecoenchants.fromtable.spiked:
+    description: Allows getting spiked from an enchanting table
+    default: true
+  ecoenchants.fromtable.harpoon:
+    description: Allows getting harpoon from an enchanting table
+    default: true
+  ecoenchants.fromtable.reel:
+    description: Allows getting reel from an enchanting table
+    default: true
+  ecoenchants.fromtable.shotassist:
+    description: Allows getting shot assist from an enchanting table
+    default: true
+  ecoenchants.fromtable.frozen:
+    description: Allows getting frozen from an enchanting table
+    default: true
+  ecoenchants.fromtable.disappear:
+    description: Allows getting disappear from an enchanting table
+    default: true
+  ecoenchants.fromtable.harmlessnesscurse:
+    description: Allows getting curse of harmlessness from an enchanting table
+    default: true
+  ecoenchants.fromtable.fury:
+    description: Allows getting fury from an enchanting table
+    default: true
+  ecoenchants.fromtable.levitate:
+    description: Allows getting levitate from an enchanting table
+    default: true
+  ecoenchants.fromtable.breaklessnesscurse:
+    description: Allows getting curse of breaklessness from an enchanting table
+    default: true
+  ecoenchants.fromtable.decaycurse:
+    description: Allows getting curse of decay from an enchanting table
+    default: true
+  ecoenchants.fromtable.misfortunecurse:
+    description: Allows getting curse of misfortune from an enchanting table
+    default: true
+  ecoenchants.fromtable.venom:
+    description: Allows getting venom from an enchanting table
+    default: true
+  ecoenchants.fromtable.cranial:
+    description: Allows getting cranial from an enchanting table
+    default: true
+  ecoenchants.fromtable.aquatic:
+    description: Allows getting aquatic from an enchanting table
+    default: true
+  ecoenchants.fromtable.buckshot:
+    description: Allows getting buckshot from an enchanting table
+    default: true
+  ecoenchants.fromtable.diverse:
+    description: Allows getting diverse from an enchanting table
+    default: true
+  ecoenchants.fromtable.lifesteal:
+    description: Allows getting life steal from an enchanting table
+    default: true

@@ -1,0 +1,24 @@
+#
+# Proximity EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Proximity"
+
+description: Increases damage when closer to opponent.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  when-closer-than-blocks: 1.5
+  percent-more-per-level: 10 # percent more damage to deal per level when close

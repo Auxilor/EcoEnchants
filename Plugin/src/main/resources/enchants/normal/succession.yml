@@ -1,0 +1,26 @@
+#
+# Succession EcoEnchant
+#
+
+config-version: 4.01 # Don't edit this.
+
+name: "Succession"
+
+description: Shoots multiple arrows in a burst.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - tripleshot
+    - pentashot
+    - buckshot
+
+config:
+  extra-arrows: 2
+  per-arrow-damage: true #If set to false, then it will only take 1 durability

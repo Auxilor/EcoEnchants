@@ -1,0 +1,22 @@
+#
+# Curse of Harmlessness EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Curse of Harmlessness"
+
+description: Chance for attacks to do nothing.
+
+obtaining:
+  table: false
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: false
+  conflicts: []
+
+config:
+  chance: 30

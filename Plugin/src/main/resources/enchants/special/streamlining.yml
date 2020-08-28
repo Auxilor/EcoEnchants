@@ -1,0 +1,23 @@
+#
+# Streamlining EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Streamlining"
+
+description: Increases movement speed.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  speed-per-level: 0.02 # Base is 0.2

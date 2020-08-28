@@ -1,0 +1,24 @@
+#
+# Infernal Touch EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Infernal Touch"
+
+description: Automatically smelt mined blocks.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - silk_touch
+    - stone_switcher
+
+config:
+  smelt-cobblestone: true #Smelt cobblestone into stone

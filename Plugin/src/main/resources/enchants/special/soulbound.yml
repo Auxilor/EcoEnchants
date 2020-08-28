@@ -1,0 +1,22 @@
+#
+# Soulbound EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Soulbound"
+
+description: Keep this item on death.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+
+config:
+  # No config is available for this enchantment

@@ -1,0 +1,25 @@
+#
+# Pentashot EcoEnchant
+#
+
+config-version: 4.01 # Don't edit this.
+
+name: "Pentashot"
+
+description: Shoots 5 arrows.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - succession
+    - tripleshot
+    - buckshot
+
+config:
+  angle: 11

@@ -1,0 +1,6 @@
+# Project exclude paths
+/API/target/
+/Plugin/target/
+/v1_15_R1/target/
+/v1_16_R1/target/
+/v1_16_R2/target/

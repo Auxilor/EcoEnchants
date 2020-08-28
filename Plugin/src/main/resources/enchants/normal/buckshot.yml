@@ -1,0 +1,27 @@
+#
+# Buckshot EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Buckshot"
+
+description: Shoots multiple arrows spread out.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - succession
+    - pentashot
+    - tripleshot
+  maximum-level: 2
+
+config:
+  amount-per-level: 3 # Arrows to shoot per level
+  spread-per-level: 0.2 # Spread randomness per level

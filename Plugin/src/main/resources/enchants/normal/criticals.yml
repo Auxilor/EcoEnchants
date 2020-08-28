@@ -1,0 +1,23 @@
+#
+# Criticals EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Criticals"
+
+description: Increases critical damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  damage-multiplier-per-level: 0.15

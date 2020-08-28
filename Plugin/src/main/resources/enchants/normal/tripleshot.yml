@@ -1,0 +1,25 @@
+#
+# Tripleshot EcoEnchant
+#
+
+config-version: 4.01 # Don't edit this.
+
+name: "Tripleshot"
+
+description: Shoots 3 arrows.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - succession
+    - pentashot
+    - buckshot
+
+config:
+  angle: 11

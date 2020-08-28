@@ -1,0 +1,25 @@
+#
+# Wisdom EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Wisdom"
+
+description: Increases dropped experience.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: uncommon
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - splash
+    - intellect
+  maximum-level: 3
+
+config:
+  bonus-per-point: 0.2 #Increase per level relative to base

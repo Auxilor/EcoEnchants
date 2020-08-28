@@ -1,0 +1,23 @@
+#
+# Curse of Misfortune EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Curse of Misfortune"
+
+description: Chance for blocks to not drop items.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - fortune
+
+config:
+  chance: 15

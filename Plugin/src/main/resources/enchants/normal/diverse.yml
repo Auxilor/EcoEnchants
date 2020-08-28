@@ -1,0 +1,23 @@
+#
+# Diverse EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Diverse"
+
+description: Increases damage dealt against players holding swords.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  per-level-multiplier: 0.05 # Multiplier per level for damage. Calculated as damage * (1 + level * multiplier)

@@ -1,0 +1,24 @@
+#
+# Fire Affinity EcoEnchant
+#
+
+config-version: 4.01 # Don't edit this.
+
+name: "Fire Affinity"
+
+description: Increases damage dealt when on fire.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - water_affinity
+  maximum-level: 5
+
+config:
+  percent-more-per-level: 5 # percent more damage to deal per level when on fire

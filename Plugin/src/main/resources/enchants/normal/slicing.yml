@@ -1,0 +1,25 @@
+#
+# Slicing EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Slicing"
+
+description: Damages entities when flown through.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: common
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  damage-per-level: 0.8 #Damage given to opponent per level
+  cooldown: 20 #Cooldown in ticks until player can attack another entity with slicing
+  damage-elytra: true

@@ -1,0 +1,23 @@
+#
+# Stamina EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Stamina"
+
+description: Decreases hunger loss while sprinting.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-level: 18 # Chance to "ignore" food loss (in percent) every time you lose food while sprinting

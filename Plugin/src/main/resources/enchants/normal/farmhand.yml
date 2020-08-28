@@ -1,0 +1,26 @@
+#
+# Farmhand EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Farmhand"
+
+description: Till blocks around initial block.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 2
+
+config:
+  initial-radius: 1
+  per-level-radius: 1
+  use-cube: true #If set to false, then it will use a square, and so will not go up/down edges
+  per-block-damage: true #If set to false, then it will only take 1 durability

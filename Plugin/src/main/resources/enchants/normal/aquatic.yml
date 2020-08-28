@@ -1,0 +1,23 @@
+#
+# Aquatic EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Aquatic"
+
+description: Trident deals additional damage when shot from water.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  percent-more-per-level: 10 # Percent more damage to do per level

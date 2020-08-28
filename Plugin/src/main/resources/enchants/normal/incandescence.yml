@@ -1,0 +1,24 @@
+#
+# Incandescence EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Incandescence"
+
+description: Chance to light your attacker on fire.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 2
+
+config:
+  initial-ticks: 20
+  ticks-per-point: 2 # Ticks victim will be alight for multiplied by each enchantment point, eg: All armor with incandescence 3 = 4*3 = 12 points.

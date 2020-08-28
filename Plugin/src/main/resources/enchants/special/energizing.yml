@@ -1,0 +1,24 @@
+#
+# Energizing EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Energizing"
+
+description: Receive a short burst of haste after breaking a block.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  ticks-per-level: 8
+  initial-level: 2

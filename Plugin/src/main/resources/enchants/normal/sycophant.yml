@@ -1,0 +1,23 @@
+#
+# Sycophant EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Sycophant"
+
+description: Heals a portion of damage blocked.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  damage-multiplier-per-level: 0.08 # Damage * Level * Multiplier is used to calculate how much health to heal

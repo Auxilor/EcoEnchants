@@ -1,0 +1,25 @@
+#
+# Aiming EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Aiming"
+
+description: Arrows hone in on your target.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  distance-per-level: 4 # Distance to scan per aiming level
+  scale-on-force: true # Scale distance based on bow pull
+  require-full-force: true # Require full bow pull (works with rapid) If true, then scale-on-force is irrelevant.

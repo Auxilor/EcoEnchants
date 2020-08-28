@@ -1,0 +1,23 @@
+#
+# Paladin EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Paladin"
+
+description: Increases damage dealt when riding a horse.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  damage-multiplier-per-level: 0.2 # This number can be relatively high as it is rare for a player to be riding a horse, therefore rewarding that.

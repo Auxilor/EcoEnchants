@@ -1,0 +1,23 @@
+#
+# Telekinesis EcoEnchant
+#
+
+config-version: 4.11 # Don't edit this.
+
+name: "Telekinesis"
+
+description: Drops and xp go directly into your inventory.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: uncommon
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+
+config:
+  use-orb: false # Use experience orb above player to give xp. Use if you need mending interaction.
+  not-on-players: false # Disallow getting drops from players

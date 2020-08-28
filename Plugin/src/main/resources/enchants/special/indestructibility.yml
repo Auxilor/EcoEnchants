@@ -1,0 +1,24 @@
+#
+# Indestructibility EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Indestructibility"
+
+description: Massively increases item durability.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - unbreaking
+  maximum-level: 3
+
+config:
+  level-bonus: 4 # Indestructiblity 1 is the same as unbreaking <bonus>+level, ie: indestructibility 3 with bonus 4 is the same as unbreaking 7

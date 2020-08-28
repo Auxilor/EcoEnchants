@@ -1,0 +1,24 @@
+#
+# Confusion EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Confusion"
+
+description: Chance to shuffle your opponents hotbar.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-level: 2.5 #chance of shuffling opponents hotbar per level
+  allow-not-fully-charged: false #dont require sword attack to be at full charge
