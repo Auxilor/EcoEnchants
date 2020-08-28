@@ -6,21 +6,18 @@
         <artifactId>parent</artifactId>
         <groupId>com.willfp.ecoenchants</groupId>
         <version>4.1.0-pre11</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>v1_15_R1</artifactId>
-
-    <properties>
-        <main.basedir>${project.parent.basedir}</main.basedir>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.willfp.ecoenchants</groupId>
             <artifactId>API</artifactId>
             <version>${project.parent.version}</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>

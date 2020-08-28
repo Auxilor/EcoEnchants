@@ -10,15 +10,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <artifactId>API</artifactId>
     <name>EcoEnchants API</name>
-    <packaging>jar</packaging>
 
-    <version>${project.parent.version}</version>
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>

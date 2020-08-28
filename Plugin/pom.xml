@@ -22,7 +22,6 @@
     </properties>
 
     <build>
-        <defaultGoal>clean package install</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -36,7 +35,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -44,6 +43,28 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <artifactSet>
+                                <excludes>org.codehaus.plexus:plexus-utils</excludes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.jetbrains.annotations</pattern>
+                                    <shadedPattern>com.willfp.ecoenchants.shaded.annotations</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.maven</pattern>
+                                    <shadedPattern>com.willfp.ecoenchants.shaded.maven</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <minimizeJar>true</minimizeJar>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                         </configuration>
                     </execution>
@@ -71,7 +92,7 @@
                 <executions>
                     <execution>
                         <id>install-external-non-maven1-jar</id>
-                        <phase>clean</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>n3kas.ae</groupId>
@@ -87,7 +108,7 @@
                     </execution>
                     <execution>
                         <id>install-external-non-maven2-jar</id>
-                        <phase>clean</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>me.vagdedes</groupId>
@@ -153,12 +174,14 @@
             <artifactId>worldguard-bukkit</artifactId>
             <version>7.0.4-SNAPSHOT</version>
             <scope>provided</scope>
+            <!--
             <exclusions>
                 <exclusion>
                     <groupId>com.destroystokyo.paper</groupId>
                     <artifactId>paper-api</artifactId>
                 </exclusion>
             </exclusions>
+            -->
         </dependency>
         <dependency>
             <groupId>com.github.TechFortress</groupId>
