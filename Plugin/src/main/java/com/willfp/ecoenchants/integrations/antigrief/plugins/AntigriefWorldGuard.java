@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.integrations.antigrief.plugins;
 
-import com.comphenix.protocol.PacketType;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;

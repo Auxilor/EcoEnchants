@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AntigriefManager {
     private static final Set<AntigriefWrapper> antigriefs = new HashSet<>();

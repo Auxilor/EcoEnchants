@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.integrations.antigrief.plugins;
 
-import com.comphenix.protocol.PacketType;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefWrapper;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
