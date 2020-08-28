@@ -63,7 +63,6 @@
                                     <shadedPattern>com.willfp.ecoenchants.shaded.maven</shadedPattern>
                                 </relocation>
                             </relocations>
-                            <minimizeJar>true</minimizeJar>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                         </configuration>
                     </execution>
