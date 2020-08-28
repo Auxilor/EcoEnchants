@@ -1,12 +1,10 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.earth2me.essentials.Enchantments;
-import com.earth2me.essentials.Essentials;
 import com.willfp.ecoenchants.Main;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.EssentialsUtils;
 import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.Material;
@@ -104,12 +102,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
             Enchantment.registerEnchantment(this);
 
             if(Main.hasEssentials) {
-                Map<String, Enchantment> essentialsMap = EssentialsUtils.getEnchantmentsMap();
-                if (essentialsMap != null) {
-                    String key = this.getKey().getKey();
-                    essentialsMap.remove(key);
-                    essentialsMap.put(key, this);
-                }
+                ((Map<String, Enchantment>) FieldUtils.readDeclaredStaticField(Enchantments.class, "ENCHANTMENTS", true)).put(this.getKey().getKey(), this);
             }
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
     }

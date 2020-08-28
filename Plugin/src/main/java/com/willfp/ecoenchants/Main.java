@@ -31,9 +31,9 @@ public class Main extends JavaPlugin {
     public static String newVersion;
 
     /**
-     * Has AdvancedEnchantments?
+     * Has Essentials?
      */
-    public static boolean hasAE;
+    public static boolean hasEssentials;
 
     /**
      * ProtocolLib
