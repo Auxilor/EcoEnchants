@@ -6,7 +6,7 @@
 
     <groupId>com.willfp.ecoenchants</groupId>
     <artifactId>parent</artifactId>
-    <version>4.1.0-pre11</version>
+    <version>4.1.0-pre12</version>
     <packaging>pom</packaging>
     <name>EcoEnchants Parent</name>
 
