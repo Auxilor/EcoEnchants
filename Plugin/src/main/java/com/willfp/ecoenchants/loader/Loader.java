@@ -23,8 +23,8 @@ import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
 import com.willfp.ecoenchants.listeners.EnchantingListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.listeners.VillagerListeners;
-import com.willfp.ecoenchants.lore.DisplayPacketAdapter;
-import com.willfp.ecoenchants.lore.EnchantLore;
+import com.willfp.ecoenchants.display.DisplayPacketAdapter;
+import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.naturalloot.LootPopulator;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
@@ -84,7 +84,7 @@ public class Loader {
 
         Bukkit.getLogger().info("Loading Configs...");
         ConfigManager.updateConfigs();
-        EnchantLore.update();
+        EnchantDisplay.update();
         Main.getInstance().saveResource("README.txt", true);
         Bukkit.getLogger().info("");
 

@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.commands;
 
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.lore.EnchantLore;
+import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,11 +29,11 @@ public class CommandEcoskip implements CommandExecutor {
             if(meta == null) {
                 return true;
             }
-            if(meta.getPersistentDataContainer().has(EnchantLore.keySkip, PersistentDataType.INTEGER)) {
-                meta.getPersistentDataContainer().remove(EnchantLore.keySkip);
+            if(meta.getPersistentDataContainer().has(EnchantDisplay.keySkip, PersistentDataType.INTEGER)) {
+                meta.getPersistentDataContainer().remove(EnchantDisplay.keySkip);
                 player.sendMessage(ConfigManager.getLang().getMessage("skip-removed"));
             } else {
-                meta.getPersistentDataContainer().set(EnchantLore.keySkip, PersistentDataType.INTEGER, 1);
+                meta.getPersistentDataContainer().set(EnchantDisplay.keySkip, PersistentDataType.INTEGER, 1);
                 player.sendMessage(ConfigManager.getLang().getMessage("skip-added"));
             }
             item.setItemMeta(meta);

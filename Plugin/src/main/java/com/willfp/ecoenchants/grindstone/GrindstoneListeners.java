@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.grindstone;
 
 import com.willfp.ecoenchants.Main;
-import com.willfp.ecoenchants.lore.EnchantLore;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;

@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.Main;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
-import com.willfp.ecoenchants.lore.EnchantLore;
+import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +24,7 @@ public class CommandEcoreload implements CommandExecutor {
             ConfigManager.updateConfigs();
             EnchantmentRarity.update();
             EcoEnchants.update();
-            EnchantLore.update();
+            EnchantDisplay.update();
 
             EcoEnchants.getAll().forEach((ecoEnchant -> {
                 HandlerList.unregisterAll(ecoEnchant);

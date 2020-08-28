@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.lore;
+package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
 import com.willfp.ecoenchants.Main;
@@ -10,16 +10,13 @@ import com.willfp.ecoenchants.util.Numeral;
 import n3kas.ae.api.AEAPI;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +26,7 @@ import java.util.Map;
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
-public class EnchantLore {
+public class EnchantDisplay {
 
     /**
      * The meta key of the length of enchantments in lore
@@ -89,7 +86,7 @@ public class EnchantLore {
      * @param item The item to update
      * @return The item, updated
      */
-    public static ItemStack convertEnchantsToLore(ItemStack item) {
+    public static ItemStack displayEnchantments(ItemStack item) {
         if(item == null) return null;
 
         ItemStack oldItem = item.clone();

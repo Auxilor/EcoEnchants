@@ -1,14 +1,10 @@
-package com.willfp.ecoenchants.lore;
+package com.willfp.ecoenchants.display;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.events.PacketListener;
 import com.willfp.ecoenchants.Main;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,12 +26,12 @@ public class DisplayPacketAdapter extends PacketAdapter {
         PacketType packetType = event.getPacketType();
         if (PacketType.Play.Server.WINDOW_ITEMS.equals(packetType)) {
             event.getPacket().getItemListModifier().modify(0, (itemStacks) -> {
-                itemStacks.forEach(EnchantLore::convertEnchantsToLore);
+                itemStacks.forEach(EnchantDisplay::displayEnchantments);
                 return itemStacks;
             });
         } else if (PacketType.Play.Server.SET_SLOT.equals(packetType)) {
             event.getPacket().getItemModifier().modify(0, (item) -> {
-                item = EnchantLore.convertEnchantsToLore(item);
+                item = EnchantDisplay.displayEnchantments(item);
                 return item;
             });
         }
@@ -48,7 +44,7 @@ public class DisplayPacketAdapter extends PacketAdapter {
         if(!event.getPacketType().equals(PacketType.Play.Client.SET_CREATIVE_SLOT)) return;
 
         event.getPacket().getItemModifier().modify(0, (item) -> {
-            item = EnchantLore.convertEnchantsToLore(item);
+            item = EnchantDisplay.displayEnchantments(item);
             return item;
         });
     }

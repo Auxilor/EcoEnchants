@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.Main;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.lore.EnchantLore;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.Bias;
 import com.willfp.ecoenchants.util.EqualIfOver;
