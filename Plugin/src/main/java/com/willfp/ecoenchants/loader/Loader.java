@@ -147,10 +147,6 @@ public class Loader {
             if(Main.hasAE) Bukkit.getLogger().info("AdvancedEnchantments: §aENABLED");
             else Bukkit.getLogger().info("AdvancedEnchantments: §9DISABLED");
 
-            Main.hasEssentials = Bukkit.getPluginManager().isPluginEnabled("Essentials");
-            if(Main.hasEssentials) Bukkit.getLogger().info("Essentials: §aENABLED");
-            else Bukkit.getLogger().info("Essentials: §9DISABLED");
-
             Bukkit.getLogger().info("");
             Bukkit.getLogger().info("Loading Anticheat Integrations...");
 

@@ -36,11 +36,6 @@ public class Main extends JavaPlugin {
     public static boolean hasAE;
 
     /**
-     * Has Essentials?
-     */
-    public static boolean hasEssentials;
-
-    /**
      * ProtocolLib
      */
     public ProtocolManager protocolManager;

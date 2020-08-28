@@ -100,12 +100,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
             f.setAccessible(false);
 
             Enchantment.registerEnchantment(this);
-
-            if(Main.hasEssentials) {
-                Map<String, Enchantment> essentialsMap = (Map<String, Enchantment>) FieldUtils.readDeclaredStaticField(Enchantments.class, "ENCHANTMENTS", true);
-                essentialsMap.remove(this.getName());
-                essentialsMap.put(this.getName(), this);
-            }
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
     }
 
