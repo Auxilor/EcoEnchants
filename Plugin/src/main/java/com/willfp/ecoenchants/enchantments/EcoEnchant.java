@@ -1,9 +1,12 @@
 package com.willfp.ecoenchants.enchantments;
 
+import com.earth2me.essentials.Enchantments;
+import com.willfp.ecoenchants.Main;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.nms.Target;
 import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -14,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import java.lang.reflect.Field;
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 public abstract class EcoEnchant extends Enchantment implements Listener {
     private String name;
     private String description;
@@ -96,6 +100,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
             f.setAccessible(false);
 
             Enchantment.registerEnchantment(this);
+
+            if(Main.hasEssentials) {
+                Map<String, Enchantment> essentialsMap = (Map<String, Enchantment>) FieldUtils.readDeclaredStaticField(Enchantments.class, "ENCHANTMENTS", true);
+                essentialsMap.remove(this.getName());
+                essentialsMap.put(this.getName(), this);
+            }
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
     }
 

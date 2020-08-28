@@ -18,6 +18,7 @@ softdepend:
   - AAC
   - Matrix
   - Spartan
+  - Essentials
 
 commands:
   ecoreload:

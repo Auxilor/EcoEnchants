@@ -116,5 +116,10 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib:4.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cglib:cglib-nodep:3.2.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.executors:BukkitExecutors:1.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:EssentialsX:2.18.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:BaseProviders:2.18.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:NMSReflectionProvider:2.18.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:PaperProvider:2.18.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:1_8Provider:2.18.1" level="project" />
   </component>
 </module>
