@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.sun.javaws.Main;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
@@ -13,6 +14,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,14 +29,12 @@ public class Marking extends EcoEnchant {
 
     // START OF LISTENERS
 
-    Set<LivingEntity> weakened = new HashSet<>();
-
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Arrow))
             return;
 
-        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
+        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
 
         if (!(event.getEntity() instanceof LivingEntity))
@@ -43,13 +44,7 @@ public class Marking extends EcoEnchant {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if(weakened.contains(victim)) {
-            double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier-while-weak");
-
-            event.setDamage(event.getDamage() * multiplier);
-        }
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
+        if (!AntigriefManager.canInjure(player, victim)) return;
 
         if (!HasEnchant.playerHeld(player, this)) return;
 
@@ -58,10 +53,23 @@ public class Marking extends EcoEnchant {
         int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
         int ticks = ticksPerLevel * level;
 
-        weakened.add(victim);
+        victim.setMetadata("marked", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            weakened.remove(victim);
+            victim.removeMetadata("marked", EcoEnchantsPlugin.getInstance());
         }, ticks);
+    }
+
+    @EventHandler
+    public void onHitWhileMarked(EntityDamageEvent event) {
+        if(!(event.getEntity() instanceof LivingEntity))
+            return;
+
+        LivingEntity victim = (LivingEntity) event.getEntity();
+
+        if(!victim.hasMetadata("marked"))
+            return;
+
+        event.setDamage(event.getDamage() * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier-while-weak"));
     }
 }
