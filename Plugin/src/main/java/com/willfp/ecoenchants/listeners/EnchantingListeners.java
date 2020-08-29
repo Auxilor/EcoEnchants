@@ -83,6 +83,8 @@ public class EnchantingListeners implements Listener {
                 continue;
             if (enchantment.getRarity().getMinimumLevel() > cost)
                 continue;
+            if(enchantment.isDisabled())
+                continue;
             if (!enchantment.canGetFromTable())
                 continue;
             if (!player.hasPermission("ecoenchants.fromtable." + enchantment.getPermissionName()))
