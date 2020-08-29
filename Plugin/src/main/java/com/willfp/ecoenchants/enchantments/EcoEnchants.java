@@ -200,6 +200,7 @@ public class EcoEnchants {
     public static final EcoEnchant DEFENDER = new Defender();
     public static final EcoEnchant NETHERIC = new Netheric();
     public static final EcoEnchant ENDERISM = new Enderism();
+    public static final EcoEnchant RAGE = new Rage();
 
     /**
      * Get all registered {@link EcoEnchant}s
