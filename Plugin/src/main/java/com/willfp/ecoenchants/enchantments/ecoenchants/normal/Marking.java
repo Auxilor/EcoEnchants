@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.sun.javaws.Main;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
@@ -16,9 +15,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class Marking extends EcoEnchant {
     public Marking() {
