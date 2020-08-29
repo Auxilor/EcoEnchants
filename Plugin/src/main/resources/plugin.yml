@@ -210,6 +210,7 @@ permissions:
       ecoenchants.fromtable.force: true
       ecoenchants.fromtable.endinfusion: true
       ecoenchants.fromtable.diurnal: true
+      ecoenchants.fromtable.marking: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -712,4 +713,7 @@ permissions:
     default: true
   ecoenchants.fromtable.diurnal:
     description: Allows getting diurnal from an enchanting table
+    default: true
+  ecoenchants.fromtable.marking:
+    description: Allows getting marking from an enchanting table
     default: true

@@ -191,6 +191,7 @@ public class EcoEnchants {
     public static final EcoEnchant FORCE = new Force();
     public static final EcoEnchant END_INFUSION = new EndInfusion();
     public static final EcoEnchant DIURNAL = new Diurnal();
+    public static final EcoEnchant MARKING = new Marking();
 
     /**
      * Get all registered {@link EcoEnchant}s
