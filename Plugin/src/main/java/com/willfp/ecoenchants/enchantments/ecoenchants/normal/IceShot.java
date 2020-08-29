@@ -37,7 +37,7 @@ public class IceShot extends EcoEnchant {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if(!AntigriefManager.canInjure(player, (Player) event.getEntity())) return;
+        if(!AntigriefManager.canInjure(player, victim)) return;
 
         if(event.isCancelled()) return;
 

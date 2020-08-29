@@ -147,9 +147,6 @@ public class Loader {
             if(EcoEnchantsPlugin.hasEssentials) Bukkit.getLogger().info("Essentials: §aENABLED");
             else Bukkit.getLogger().info("Essentials: §9DISABLED");
 
-            Bukkit.getLogger().info("");
-            Bukkit.getLogger().info("Loading Anticheat Integrations...");
-
             if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
                 AnticheatManager.registerAnticheat(new AnticheatAAC());
                 Bukkit.getLogger().info("AAC: §aENABLED");
