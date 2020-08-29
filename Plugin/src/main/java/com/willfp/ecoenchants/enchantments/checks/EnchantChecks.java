@@ -9,7 +9,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
-import sun.nio.cs.ArrayEncoder;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,18 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 public class Aerial extends EcoEnchant {
     public Aerial() {
         super(

@@ -1,12 +1,9 @@
 package com.willfp.ecoenchants.enchantments;
 
-import com.earth2me.essentials.Enchantments;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.nms.Target;
 import org.apache.commons.lang.WordUtils;
-import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
