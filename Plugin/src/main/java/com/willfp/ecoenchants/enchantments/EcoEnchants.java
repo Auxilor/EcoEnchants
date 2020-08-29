@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.curse.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.*;
+import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -289,6 +290,7 @@ public class EcoEnchants {
         for (EcoEnchant ecoEnchant : new HashSet<>(getAll())) {
             ecoEnchant.update();
         }
+        EssentialsManager.registerEnchantments();
     }
 
     /**

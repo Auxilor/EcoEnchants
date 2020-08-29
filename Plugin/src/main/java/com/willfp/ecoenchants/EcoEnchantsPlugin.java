@@ -31,11 +31,6 @@ public class EcoEnchantsPlugin extends JavaPlugin {
     public static String newVersion;
 
     /**
-     * Has Essentials?
-     */
-    public static boolean hasEssentials;
-
-    /**
      * ProtocolLib
      */
     public ProtocolManager protocolManager;

@@ -25,6 +25,8 @@ import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatAAC;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
+import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
+import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.listeners.EnchantingListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.listeners.VillagerListeners;
@@ -143,9 +145,12 @@ public class Loader {
                 Bukkit.getLogger().info("Lands: §9DISABLED");
             }
 
-            EcoEnchantsPlugin.hasEssentials = Bukkit.getPluginManager().isPluginEnabled("Essentials");
-            if(EcoEnchantsPlugin.hasEssentials) Bukkit.getLogger().info("Essentials: §aENABLED");
-            else Bukkit.getLogger().info("Essentials: §9DISABLED");
+            if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
+                EssentialsManager.registerAntigrief(new IntegrationEssentials());
+                Bukkit.getLogger().info("Essentials: §aENABLED");
+            } else {
+                Bukkit.getLogger().info("Essentials: §9DISABLED");
+            }
 
             if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
                 AnticheatManager.registerAnticheat(new AnticheatAAC());
