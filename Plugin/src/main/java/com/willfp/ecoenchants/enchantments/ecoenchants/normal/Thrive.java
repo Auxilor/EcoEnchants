@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -51,8 +51,8 @@ public class Thrive extends EcoEnchant {
                             player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 255, false, false, false));
                         }
                     }
-                }.runTaskLater(Main.getInstance(), 1);
+                }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
             }
-        }.runTaskLater(Main.getInstance(), 1);
+        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
     }
 }

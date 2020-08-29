@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.events.entitydeathbyentity;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -38,7 +38,7 @@ public class EntityDeathByEntityListeners implements Listener {
                 if(events.contains(builtEvent))
                     events.remove(builtEvent);
             }
-        }.runTaskLater(Main.getInstance(), 1);
+        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
     }
 
     @EventHandler

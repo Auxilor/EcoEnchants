@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.commands;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Bukkit;
@@ -29,7 +29,7 @@ public class CommandEcodebug implements CommandExecutor {
 
             Bukkit.getLogger().info("--------------- BEGIN DEBUG ----------------");
             Player player = (Player) sender;
-            Bukkit.getLogger().info("Running Version: " + Main.getInstance().getDescription().getVersion());
+            Bukkit.getLogger().info("Running Version: " + EcoEnchantsPlugin.getInstance().getDescription().getVersion());
             Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
             Bukkit.getLogger().info("EcoEnchants.getAll(): " + EcoEnchants.getAll().toString());
             Bukkit.getLogger().info("Enchantment.values(): " + Arrays.toString(Enchantment.values()));

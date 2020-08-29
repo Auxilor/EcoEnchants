@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.events.naturalexpgainevent;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ExpBottleEvent;
@@ -43,7 +43,7 @@ public class NaturalExpGainListeners implements Listener {
             public void run() {
                 events.remove(builtEvent);
             }
-        }.runTaskLater(Main.getInstance(), 1);
+        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
     }
 
     @EventHandler

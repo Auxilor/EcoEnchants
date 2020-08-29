@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -58,7 +58,7 @@ public class MagmaWalker extends EcoEnchant {
 
             block.setType(Material.OBSIDIAN);
 
-            block.setMetadata("byMagmaWalker", new FixedMetadataValue(Main.getInstance(), true));
+            block.setMetadata("byMagmaWalker", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
 
             long afterTicks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "remove-after-ticks");
 
@@ -68,20 +68,20 @@ public class MagmaWalker extends EcoEnchant {
                     if (block.getType().equals(Material.OBSIDIAN)) {
                         if(!player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
                             block.setType(Material.LAVA);
-                            block.removeMetadata("byMagmaWalker", Main.getInstance());
+                            block.removeMetadata("byMagmaWalker", EcoEnchantsPlugin.getInstance());
                             this.cancel();
                         }
                     }
                 }
             };
 
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
                 if (block.getType().equals(Material.OBSIDIAN)) {
                     if(!player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
                         block.setType(Material.LAVA);
-                        block.removeMetadata("byMagmaWalker", Main.getInstance());
+                        block.removeMetadata("byMagmaWalker", EcoEnchantsPlugin.getInstance());
                     } else {
-                        replace.runTaskTimer(Main.getInstance(), afterTicks, afterTicks);
+                        replace.runTaskTimer(EcoEnchantsPlugin.getInstance(), afterTicks, afterTicks);
                     }
                 }
             }, afterTicks);

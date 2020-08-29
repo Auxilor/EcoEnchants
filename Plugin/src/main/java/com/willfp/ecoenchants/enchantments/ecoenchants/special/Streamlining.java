@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -35,7 +35,7 @@ public class Streamlining extends EcoEnchant {
                 player.setWalkSpeed((float) (0.2 + (level * EcoEnchants.STREAMLINING.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "speed-per-level"))));
 
             }
-        }.runTaskLater(Main.getInstance(), 1);
+        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
     }
 
 }

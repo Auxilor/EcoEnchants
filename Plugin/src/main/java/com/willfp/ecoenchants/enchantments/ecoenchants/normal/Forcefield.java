@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -18,7 +18,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
 
     @Override
     public void run() {
-        Main.getInstance().getServer().getOnlinePlayers().stream().filter(player -> HasEnchant.getArmorPoints(player, EcoEnchants.FORCEFIELD, false) > 0).forEach((player -> {
+        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> HasEnchant.getArmorPoints(player, EcoEnchants.FORCEFIELD, false) > 0).forEach((player -> {
             int level = HasEnchant.getArmorPoints(player, EcoEnchants.FORCEFIELD, false);
 
             double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");

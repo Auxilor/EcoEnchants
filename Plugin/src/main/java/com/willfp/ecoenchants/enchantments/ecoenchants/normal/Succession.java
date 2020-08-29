@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -42,7 +42,7 @@ public class Succession extends EcoEnchant {
 
 
         for (int i = 1; i <= number; i++) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(EcoEnchantsPlugin.getInstance(), () -> {
                 Arrow arrow = player.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
                 arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
                 if(fire) arrow.setFireTicks(Integer.MAX_VALUE);

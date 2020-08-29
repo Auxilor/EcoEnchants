@@ -9,8 +9,8 @@ import java.util.HashMap;
 /**
  * The Main class for EcoEnchants
  */
-public class Main extends JavaPlugin {
-    private static Main instance;
+public class EcoEnchantsPlugin extends JavaPlugin {
+    private static EcoEnchantsPlugin instance;
 
     /**
      * Config versions for config.yml and lang.yml
@@ -65,7 +65,7 @@ public class Main extends JavaPlugin {
      * Get plugin instance
      * @return Plugin instance
      */
-    public static Main getInstance() {
+    public static EcoEnchantsPlugin getInstance() {
         return instance;
     }
 }

@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -21,7 +21,7 @@ public abstract class EnchantmentYamlConfig {
     private File configFile;
     private final File directory;
     private final double latestVersion;
-    private final JavaPlugin plugin = Main.getInstance();
+    private final JavaPlugin plugin = EcoEnchantsPlugin.getInstance();
     private final Class<?> plugin2;
     private final EcoEnchant.EnchantmentType type;
     private File basedir = new File(this.plugin.getDataFolder(), "enchants/");
@@ -67,9 +67,9 @@ public abstract class EnchantmentYamlConfig {
 
         InputStream in =  plugin2.getResourceAsStream(resourcePath);
 
-        File outFile = new File(Main.getInstance().getDataFolder(), resourcePath);
+        File outFile = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath);
         int lastIndex = resourcePath.lastIndexOf('/');
-        File outDir = new File(Main.getInstance().getDataFolder(), resourcePath.substring(0, Math.max(lastIndex, 0)));
+        File outDir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath.substring(0, Math.max(lastIndex, 0)));
 
         if (!outDir.exists()) {
             outDir.mkdirs();

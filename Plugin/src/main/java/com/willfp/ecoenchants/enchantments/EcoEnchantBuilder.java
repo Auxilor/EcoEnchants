@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.nms.Target;
@@ -58,7 +58,7 @@ public class EcoEnchantBuilder {
      * @param version The config version
      */
     public EcoEnchantBuilder(String key, EcoEnchant.EnchantmentType type, Target.Applicable[] applicable, double version) {
-        this(key, type, applicable, version, Main.class);
+        this(key, type, applicable, version, EcoEnchantsPlugin.class);
     }
 
     /**

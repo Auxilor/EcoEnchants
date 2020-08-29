@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.listeners;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -49,7 +49,7 @@ public class EnchantingListeners implements Listener {
                     ItemStack item = event.getInventory().getItem(0);
                     event.getInventory().setItem(0, item);
                 }
-            }.runTaskLater(Main.getInstance(), 1);
+            }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
             return;
         }
 
@@ -164,7 +164,7 @@ public class EnchantingListeners implements Listener {
                 }
                 event.getInventory().setItem(0, item);
             }
-        }.runTaskLater(Main.getInstance(), 1);
+        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
     }
 
     @EventHandler

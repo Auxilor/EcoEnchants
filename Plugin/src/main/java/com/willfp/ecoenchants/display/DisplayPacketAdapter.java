@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.display;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.inventory.MerchantRecipe;
 
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class DisplayPacketAdapter extends PacketAdapter {
     );
 
     public DisplayPacketAdapter() {
-        super(Main.getInstance(), packets);
+        super(EcoEnchantsPlugin.getInstance(), packets);
     }
 
     @Override

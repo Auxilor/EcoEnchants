@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -24,22 +24,22 @@ public abstract class YamlConfig {
     }
 
     private void init() {
-        if (!new File(Main.getInstance().getDataFolder(), name + ".yml").exists()) {
+        if (!new File(EcoEnchantsPlugin.getInstance().getDataFolder(), name + ".yml").exists()) {
             createFile();
         }
 
-        this.configFile = new File(Main.getInstance().getDataFolder(), name + ".yml");
+        this.configFile = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), name + ".yml");
         this.config = YamlConfiguration.loadConfiguration(configFile);
 
         checkVersion();
     }
 
     private void createFile() {
-        Main.getInstance().saveResource(name + ".yml", false);
+        EcoEnchantsPlugin.getInstance().saveResource(name + ".yml", false);
     }
 
     private void replaceFile() {
-        Main.getInstance().saveResource(name + ".yml", true);
+        EcoEnchantsPlugin.getInstance().saveResource(name + ".yml", true);
     }
 
     public void reload() {
@@ -52,7 +52,7 @@ public abstract class YamlConfig {
     }
 
     private void checkVersion() {
-        double latestVersion = Main.configVersions.get(this.name);
+        double latestVersion = EcoEnchantsPlugin.configVersions.get(this.name);
         if (latestVersion != config.getDouble("config-version")) {
             Bukkit.getLogger().warning("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
             Bukkit.getLogger().warning("If you've edited the config, copy over your changes!");
@@ -66,11 +66,11 @@ public abstract class YamlConfig {
         LocalDateTime now = LocalDateTime.now();
         String dateTime = dtf.format(now);
         try {
-            File backupDir = new File(Main.getInstance().getDataFolder(), "backup/");
+            File backupDir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "backup/");
             if(!backupDir.exists()) backupDir.mkdirs();
             File oldConf = new File(backupDir, name + "_" + dateTime + ".yml");
             oldConf.createNewFile();
-            FileInputStream fis = new FileInputStream(Main.getInstance().getDataFolder() + "/" + name + ".yml");
+            FileInputStream fis = new FileInputStream(EcoEnchantsPlugin.getInstance().getDataFolder() + "/" + name + ".yml");
             FileOutputStream fos = new FileOutputStream(oldConf);
             byte[] buffer = new byte[1024];
             int length;

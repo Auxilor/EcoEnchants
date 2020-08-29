@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.loader;
 
 import com.comphenix.protocol.ProtocolLibrary;
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.anvil.AnvilListeners;
 import com.willfp.ecoenchants.bstats.Metrics;
 import com.willfp.ecoenchants.commands.CommandEcodebug;
@@ -49,7 +49,7 @@ import java.util.List;
 public class Loader {
 
     /**
-     * Called by {@link Main#onEnable()}
+     * Called by {@link EcoEnchantsPlugin#onEnable()}
      */
     public static void load() {
         Bukkit.getLogger().info("==========================================");
@@ -95,8 +95,8 @@ public class Loader {
          */
 
         Bukkit.getLogger().info("Loading ProtocolLib...");
-        Main.getInstance().protocolManager = ProtocolLibrary.getProtocolManager();
-        Main.getInstance().protocolManager.addPacketListener(new DisplayPacketAdapter());
+        EcoEnchantsPlugin.getInstance().protocolManager = ProtocolLibrary.getProtocolManager();
+        EcoEnchantsPlugin.getInstance().protocolManager.addPacketListener(new DisplayPacketAdapter());
 
         /*
         Load land management support
@@ -104,7 +104,7 @@ public class Loader {
 
         Bukkit.getLogger().info("Scheduling Integration Loading...");
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
 
             Bukkit.getLogger().info("Loading Integrations...");
 
@@ -143,8 +143,8 @@ public class Loader {
                 Bukkit.getLogger().info("Lands: §9DISABLED");
             }
 
-            Main.hasEssentials = Bukkit.getPluginManager().isPluginEnabled("Essentials");
-            if(Main.hasEssentials) Bukkit.getLogger().info("Essentials: §aENABLED");
+            EcoEnchantsPlugin.hasEssentials = Bukkit.getPluginManager().isPluginEnabled("Essentials");
+            if(EcoEnchantsPlugin.hasEssentials) Bukkit.getLogger().info("Essentials: §aENABLED");
             else Bukkit.getLogger().info("Essentials: §9DISABLED");
 
             Bukkit.getLogger().info("");
@@ -195,7 +195,7 @@ public class Loader {
         } else {
             Bukkit.getLogger().info("Targets: §cFAILURE");
             Bukkit.getLogger().severe("§cAborting...");
-            Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
         if(Cooldown.init()) {
@@ -203,7 +203,7 @@ public class Loader {
         } else {
             Bukkit.getLogger().info("Cooldown: §cFAILURE");
             Bukkit.getLogger().severe("§cAborting...");
-            Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
         if(TridentStack.init()) {
@@ -211,7 +211,7 @@ public class Loader {
         } else {
             Bukkit.getLogger().info("Trident API: §cFAILURE");
             Bukkit.getLogger().severe("§cAborting...");
-            Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
         if(BlockBreak.init()) {
@@ -219,7 +219,7 @@ public class Loader {
         } else {
             Bukkit.getLogger().info("Block Break: §cFAILURE");
             Bukkit.getLogger().severe("§cAborting...");
-            Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
         
         Bukkit.getLogger().info("");
@@ -229,15 +229,15 @@ public class Loader {
          */
 
         Bukkit.getLogger().info("Registering Events...");
-        Bukkit.getPluginManager().registerEvents(new ArmorListener(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new DispenserArmorListener(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new EnchantingListeners(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new GrindstoneListeners(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new AnvilListeners(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new EntityDeathByEntityListeners(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new NaturalExpGainListeners(), Main.getInstance());
-        Bukkit.getPluginManager().registerEvents(new VillagerListeners(), Main.getInstance());
+        Bukkit.getPluginManager().registerEvents(new ArmorListener(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new DispenserArmorListener(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new EnchantingListeners(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new GrindstoneListeners(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new AnvilListeners(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new EntityDeathByEntityListeners(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new NaturalExpGainListeners(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new VillagerListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getLogger().info("");
 
         /*
@@ -245,7 +245,7 @@ public class Loader {
          */
 
         Bukkit.getLogger().info("Scheduling Adding Block Populators...");
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
             Bukkit.getServer().getWorlds().forEach((world -> {
                 world.getPopulators().add(new LootPopulator());
             }));
@@ -285,7 +285,7 @@ public class Loader {
         EnchantmentRarity.update();
         if(EnchantmentRarity.getAll().size() == 0) {
             Bukkit.getLogger().severe("§cError loading rarities! Aborting...");
-            Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
             Bukkit.getLogger().info(EnchantmentRarity.getAll().size() + " Rarities Loaded:");
@@ -297,7 +297,7 @@ public class Loader {
 
         if (EcoEnchants.getAll().size() == 0) {
             Bukkit.getLogger().severe("§cError adding enchantments! Aborting...");
-            Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
             Bukkit.getLogger().info(EcoEnchants.getAll().size() + " Enchantments Loaded:");
@@ -350,7 +350,7 @@ public class Loader {
         Bukkit.getLogger().info("Registering Enchantment Listeners...");
         EcoEnchants.getAll().forEach((ecoEnchant -> {
             if(!ecoEnchant.isDisabled()) {
-                Bukkit.getPluginManager().registerEvents(ecoEnchant, Main.getInstance());
+                Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
             }
         }));
         Bukkit.getLogger().info("");
@@ -362,7 +362,7 @@ public class Loader {
         Bukkit.getLogger().info("Registering Enchantment Tasks...");
         EcoEnchants.getAll().forEach((ecoEnchant -> {
             if(ecoEnchant instanceof EcoRunnable) {
-                Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), (Runnable) ecoEnchant, 5, ((EcoRunnable) ecoEnchant).getTime());
+                Bukkit.getScheduler().scheduleSyncRepeatingTask(EcoEnchantsPlugin.getInstance(), (Runnable) ecoEnchant, 5, ((EcoRunnable) ecoEnchant).getTime());
             }
         }));
         Bukkit.getLogger().info("");
@@ -384,7 +384,7 @@ public class Loader {
          */
 
         Bukkit.getLogger().info("Hooking into bStats...");
-        new Metrics(Main.getInstance(), 7666);
+        new Metrics(EcoEnchantsPlugin.getInstance(), 7666);
         Bukkit.getLogger().info("");
 
         /*
@@ -392,21 +392,21 @@ public class Loader {
          */
 
 
-        new UpdateChecker(Main.getInstance(), 79573).getVersion((version) -> {
-            DefaultArtifactVersion currentVersion = new DefaultArtifactVersion(Main.getInstance().getDescription().getVersion());
+        new UpdateChecker(EcoEnchantsPlugin.getInstance(), 79573).getVersion((version) -> {
+            DefaultArtifactVersion currentVersion = new DefaultArtifactVersion(EcoEnchantsPlugin.getInstance().getDescription().getVersion());
             DefaultArtifactVersion mostRecentVersion = new DefaultArtifactVersion(version);
             Bukkit.getLogger().info("----------------------------");
             Bukkit.getLogger().info("");
             Bukkit.getLogger().info("EcoEnchants Updater");
             Bukkit.getLogger().info("");
             if (currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion)) {
-                Bukkit.getLogger().info("§aEcoEnchants is up to date! (Version " + Main.getInstance().getDescription().getVersion() + ")");
+                Bukkit.getLogger().info("§aEcoEnchants is up to date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
             } else {
-                Main.outdated = true;
-                Main.newVersion = version;
+                EcoEnchantsPlugin.outdated = true;
+                EcoEnchantsPlugin.newVersion = version;
 
-                Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
-                    Bukkit.getLogger().info("§6EcoEnchants is out of date! (Version " + Main.getInstance().getDescription().getVersion() + ")");
+                Bukkit.getScheduler().runTaskTimer(EcoEnchantsPlugin.getInstance(), () -> {
+                    Bukkit.getLogger().info("§6EcoEnchants is out of date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
                     Bukkit.getLogger().info("§6The newest version is §f" + version);
                     Bukkit.getLogger().info("§6Download the new version here: §fhttps://www.spigotmc.org/resources/ecoenchants.79573/");
                 }, 0, 36000);
@@ -419,7 +419,7 @@ public class Loader {
         Reload Data
          */
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
             Bukkit.getLogger().info("Reloading...");
             CommandEcoreload.reload();
         }, 2);
@@ -432,7 +432,7 @@ public class Loader {
     }
 
     /**
-     * Called by {@link Main#onDisable()}
+     * Called by {@link EcoEnchantsPlugin#onDisable()}
      */
     public static void unload() {
         Bukkit.getLogger().info("§cDisabling EcoEnchants...");

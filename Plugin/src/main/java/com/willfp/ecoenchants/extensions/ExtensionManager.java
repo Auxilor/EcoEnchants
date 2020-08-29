@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.extensions;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -23,7 +23,7 @@ public class ExtensionManager {
      * Load all extensions
      */
     public static void loadExtensions() {
-        File dir = new File(Main.getInstance().getDataFolder(), "/extensions");
+        File dir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "/extensions");
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -37,7 +37,7 @@ public class ExtensionManager {
                             URL url = extensionJar.toURI().toURL();
                             URL[] urls = {url};
 
-                            ClassLoader cl = new URLClassLoader(urls, Main.class.getClassLoader());
+                            ClassLoader cl = new URLClassLoader(urls, EcoEnchantsPlugin.class.getClassLoader());
 
                             InputStream ymlIn = cl.getResourceAsStream("extension.yml");
                             URL extensionYmlUrl = cl.getResource("extension.yml");

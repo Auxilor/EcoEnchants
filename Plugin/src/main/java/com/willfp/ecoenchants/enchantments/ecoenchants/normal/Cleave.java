@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -55,9 +55,9 @@ public class Cleave extends EcoEnchant {
                 .filter(entity -> entity instanceof LivingEntity)
                 .filter(entity -> !entity.equals(player))
                 .forEach(entity -> {
-                    entity.setMetadata("cleaved", new FixedMetadataValue(Main.getInstance(), true));
+                    entity.setMetadata("cleaved", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
                     ((LivingEntity) entity).damage(damage, player);
-                    Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> entity.removeMetadata("cleaved", Main.getInstance()), 5);
+                    Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> entity.removeMetadata("cleaved", EcoEnchantsPlugin.getInstance()), 5);
                 });
     }
 }

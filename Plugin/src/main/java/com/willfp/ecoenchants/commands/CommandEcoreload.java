@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.commands;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -37,9 +37,9 @@ public class CommandEcoreload implements CommandExecutor {
         EcoEnchants.getAll().forEach((ecoEnchant -> {
             HandlerList.unregisterAll(ecoEnchant);
 
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
                 if(!ecoEnchant.isDisabled()) {
-                    Bukkit.getPluginManager().registerEvents(ecoEnchant, Main.getInstance());
+                    Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
                 }
             }, 1);
         }));

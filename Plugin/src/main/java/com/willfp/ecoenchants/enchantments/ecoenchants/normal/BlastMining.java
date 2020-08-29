@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -50,7 +50,7 @@ public class BlastMining extends EcoEnchant {
                 for (int z = -1; z <= 1; z++) {
                     if(x == 0 && y == 0 && z == 0) continue;
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
-                    block1.setMetadata("from-blastmining", new FixedMetadataValue(Main.getInstance(), true));
+                    block1.setMetadata("from-blastmining", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
 
                     if(this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                         continue;
@@ -65,7 +65,7 @@ public class BlastMining extends EcoEnchant {
                         block.getWorld().createExplosion(block.getLocation().clone().add(0.5, 0.5, 0.5), 0, false);
                         hasExploded = true;
                     }
-                    block1.removeMetadata("from-blastmining", Main.getInstance());
+                    block1.removeMetadata("from-blastmining", EcoEnchantsPlugin.getInstance());
                 }
             }
         }

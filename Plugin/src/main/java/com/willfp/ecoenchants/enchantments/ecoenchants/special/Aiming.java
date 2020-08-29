@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -97,8 +97,8 @@ public class Aiming extends EcoEnchant {
             @Override
             public void run() {
                 if(arrow.isDead() || arrow.isInBlock() || arrow.isOnGround()) this.cancel();
-                Bukkit.getScheduler().runTask(Main.getInstance(), runnable);
+                Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), runnable);
             }
-        }.runTaskTimer(Main.getInstance(), 3, 5);
+        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 3, 5);
     }
 }

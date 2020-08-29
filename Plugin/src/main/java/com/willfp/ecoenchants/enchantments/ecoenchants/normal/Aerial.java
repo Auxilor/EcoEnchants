@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -40,7 +40,7 @@ public class Aerial extends EcoEnchant {
 
         if (!(event.getEntity() instanceof Arrow)) return;
         Arrow a = (Arrow) event.getEntity();
-        a.setMetadata("from-aerial", new FixedMetadataValue(Main.getInstance(), level));
+        a.setMetadata("from-aerial", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), level));
     }
 
     @EventHandler

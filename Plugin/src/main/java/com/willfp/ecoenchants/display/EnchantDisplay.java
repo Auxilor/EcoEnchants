@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -30,12 +30,12 @@ public class EnchantDisplay {
     /**
      * The meta key of the length of enchantments in lore
      */
-    private static final NamespacedKey key = new NamespacedKey(Main.getInstance(), "ecoenchantlore-len");
+    private static final NamespacedKey key = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
 
     /**
      * The meta key to hide enchantments in lore
      */
-    public static final NamespacedKey keySkip = new NamespacedKey(Main.getInstance(), "ecoenchantlore-skip");
+    public static final NamespacedKey keySkip = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
 
     private static String normalColor;

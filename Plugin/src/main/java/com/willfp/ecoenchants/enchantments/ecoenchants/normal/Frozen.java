@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -45,7 +45,7 @@ public class Frozen extends EcoEnchant {
         int divisor = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "points-per-level");
         final int level = (int) Math.ceil((double) points / divisor);
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
             victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, points * 5, level));
             victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, points * 5, level));
         }, 1);

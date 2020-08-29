@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -59,13 +59,13 @@ public class Shockwave extends EcoEnchant {
                         .filter(entity1 -> !entity1.hasMetadata("shockwaved"))
                         .forEach((mob -> {
                             ((LivingEntity) mob).damage(finalDamage, player);
-                            mob.setMetadata("shockwaved", new FixedMetadataValue(Main.getInstance(), true));
-                            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                                mob.removeMetadata("shockwaved", Main.getInstance());
+                            mob.setMetadata("shockwaved", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+                            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+                                mob.removeMetadata("shockwaved", EcoEnchantsPlugin.getInstance());
                             }, 10);
                         }
                 ));
             }
-        }.runTaskTimer(Main.getInstance(), 4, ticks);
+        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 4, ticks);
     }
 }

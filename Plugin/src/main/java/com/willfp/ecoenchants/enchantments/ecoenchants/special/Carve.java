@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -55,9 +55,9 @@ public class Carve extends EcoEnchant {
                 .filter(entity -> entity instanceof LivingEntity)
                 .filter(entity -> !entity.equals(player))
                 .forEach(entity -> {
-                    entity.setMetadata("carved", new FixedMetadataValue(Main.getInstance(), true));
+                    entity.setMetadata("carved", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
                     ((LivingEntity) entity).damage(damage, player);
-                    Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> entity.removeMetadata("carved", Main.getInstance()), 5);
+                    Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> entity.removeMetadata("carved", EcoEnchantsPlugin.getInstance()), 5);
                 });
     }
 }

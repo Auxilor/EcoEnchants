@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -21,7 +21,7 @@ public class Repairing extends EcoEnchant implements EcoRunnable {
 
     @Override
     public void run() {
-        Main.getInstance().getServer().getOnlinePlayers().parallelStream().forEach((player -> {
+        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().parallelStream().forEach((player -> {
             if(Arrays.stream(player.getInventory().getContents()).parallel().noneMatch(item2 -> HasEnchant.item(item2, EcoEnchants.REPAIRING)))
                 return;
 

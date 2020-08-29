@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -64,12 +64,12 @@ public class Vein extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for(Block veinBlock : blockSet) {
-            veinBlock.setMetadata("from-vein", new FixedMetadataValue(Main.getInstance(), true));
+            veinBlock.setMetadata("from-vein", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
             if(!AntigriefManager.canBreakBlock(player, veinBlock)) continue;
 
             BlockBreak.breakBlock(player, veinBlock);
 
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> veinBlock.removeMetadata("from-vein", Main.getInstance()),1);
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> veinBlock.removeMetadata("from-vein", EcoEnchantsPlugin.getInstance()),1);
         }
 
         AnticheatManager.unexemptPlayer(player);

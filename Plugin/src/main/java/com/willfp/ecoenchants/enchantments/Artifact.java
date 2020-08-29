@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.google.common.util.concurrent.AtomicDouble;
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.HasEnchant;
@@ -110,7 +110,7 @@ public abstract class Artifact extends EcoEnchant {
                     entity.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0, 1);
+        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 0, 1);
     }
 
     @EventHandler
@@ -145,6 +145,6 @@ public abstract class Artifact extends EcoEnchant {
                 if(entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
                 entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
             }
-        }.runTaskTimer(Main.getInstance(), 4, ticks);
+        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 4, ticks);
     }
 }

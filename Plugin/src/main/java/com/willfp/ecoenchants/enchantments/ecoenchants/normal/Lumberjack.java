@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -64,12 +64,12 @@ public class Lumberjack extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for(Block treeBlock : treeBlocks) {
-            treeBlock.setMetadata("from-lumberjack", new FixedMetadataValue(Main.getInstance(), true));
+            treeBlock.setMetadata("from-lumberjack", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
             if(!AntigriefManager.canBreakBlock(player, treeBlock)) continue;
 
             BlockBreak.breakBlock(player, treeBlock);
 
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> treeBlock.removeMetadata("from-lumberjack", Main.getInstance()),1);
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> treeBlock.removeMetadata("from-lumberjack", EcoEnchantsPlugin.getInstance()),1);
         }
 
         AnticheatManager.unexemptPlayer(player);

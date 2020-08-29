@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.grindstone;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -28,7 +28,7 @@ public class GrindstoneListeners implements Listener {
 
         GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
 
             ItemStack top = inventory.getItem(0);
             ItemStack bottom = inventory.getItem(1);
@@ -58,13 +58,13 @@ public class GrindstoneListeners implements Listener {
 
             final ItemStack finalOut = newOut;
 
-            Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+            Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
                 inventory.setItem(2, finalOut);
             });
 
         }, 1);
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
             for(Entity entity : player.getNearbyEntities(8, 8, 8)) {
                 if(entity.getType().equals(EntityType.EXPERIENCE_ORB))
                     ((ExperienceOrb) entity).setExperience(2);

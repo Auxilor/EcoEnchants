@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -21,7 +21,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
 
     @Override
     public void run() {
-        Main.getInstance().getServer().getOnlinePlayers().stream().filter(player -> HasEnchant.getArmorPoints(player, EcoEnchants.CALLING_CURSE, false) > 0).forEach((player -> {
+        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> HasEnchant.getArmorPoints(player, EcoEnchants.CALLING_CURSE, false) > 0).forEach((player -> {
             double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, distance, distance)) {

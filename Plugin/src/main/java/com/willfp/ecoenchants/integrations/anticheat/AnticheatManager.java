@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.integrations.anticheat;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -13,7 +13,7 @@ public class AnticheatManager {
 
     public static void registerAnticheat(AnticheatWrapper anticheat) {
         if(anticheat instanceof Listener) {
-            Bukkit.getPluginManager().registerEvents((Listener) anticheat, Main.getInstance());
+            Bukkit.getPluginManager().registerEvents((Listener) anticheat, EcoEnchantsPlugin.getInstance());
         }
 
         anticheats.add(anticheat);

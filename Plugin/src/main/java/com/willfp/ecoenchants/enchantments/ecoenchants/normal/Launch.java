@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -41,6 +41,6 @@ public class Launch extends EcoEnchant {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double boost = 1 + (multiplier * level);
 
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> player.setVelocity(player.getVelocity().multiply(boost)), 1);
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> player.setVelocity(player.getVelocity().multiply(boost)), 1);
     }
 }

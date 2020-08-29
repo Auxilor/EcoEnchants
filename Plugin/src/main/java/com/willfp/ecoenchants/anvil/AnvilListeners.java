@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.anvil;
 
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.util.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -42,7 +42,7 @@ public class AnvilListeners implements Listener {
 
         final int cost = modCost + event.getInventory().getRepairCost();
 
-        Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
             event.getInventory().setRepairCost(cost);
             event.setResult(newOut.getKey());
             event.getInventory().setItem(2, newOut.getKey());

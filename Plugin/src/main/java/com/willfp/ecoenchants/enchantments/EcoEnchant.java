@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.earth2me.essentials.Enchantments;
-import com.willfp.ecoenchants.Main;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.nms.Target;
@@ -101,7 +101,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
             Enchantment.registerEnchantment(this);
 
-            if(Main.hasEssentials) {
+            if(EcoEnchantsPlugin.hasEssentials) {
                 ((Map<String, Enchantment>) FieldUtils.readDeclaredStaticField(Enchantments.class, "ENCHANTMENTS", true)).put(this.getKey().getKey(), this);
             }
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
