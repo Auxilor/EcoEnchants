@@ -197,6 +197,7 @@ public class EcoEnchants {
     public static final EcoEnchant FINALITY = new Finality();
     public static final EcoEnchant BLIND = new Blind();
     public static final EcoEnchant SICKENING = new Sickening();
+    public static final EcoEnchant DEFENDER = new Defender();
 
     /**
      * Get all registered {@link EcoEnchant}s

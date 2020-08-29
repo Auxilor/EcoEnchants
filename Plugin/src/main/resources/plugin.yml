@@ -216,6 +216,7 @@ permissions:
       ecoenchants.fromtable.finality: true
       ecoenchants.fromtable.sickening: true
       ecoenchants.fromtable.blind: true
+      ecoenchants.fromtable.defender: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -736,4 +737,7 @@ permissions:
     default: true
   ecoenchants.fromtable.sickening:
     description: Allows getting sickening from an enchanting table
+    default: true
+  ecoenchants.fromtable.defender:
+    description: Allows getting defender from an enchanting table
     default: true
