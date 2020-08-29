@@ -201,7 +201,7 @@ public class EcoEnchants {
     public static final EcoEnchant NETHERIC = new Netheric();
     public static final EcoEnchant ENDERISM = new Enderism();
     public static final EcoEnchant RAGE = new Rage();
-    public static final EcoEnchant IMPACT = new Impact();
+    //public static final EcoEnchant IMPACT = new Impact();
 
     /**
      * Get all registered {@link EcoEnchant}s
