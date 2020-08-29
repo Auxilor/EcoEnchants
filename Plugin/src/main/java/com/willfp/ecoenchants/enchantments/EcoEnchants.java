@@ -187,6 +187,7 @@ public class EcoEnchants {
     public static final EcoEnchant BUCKSHOT = new Buckshot();
     public static final EcoEnchant DIVERSE = new Diverse();
     public static final EcoEnchant LIFE_STEAL = new LifeSteal();
+    public static final EcoEnchant LIME_ARTIFACT = new LimeArtifact();
 
     /**
      * Get all registered {@link EcoEnchant}s

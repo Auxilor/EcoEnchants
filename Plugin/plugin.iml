@@ -98,14 +98,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.TownyAdvanced:Towny:0.96.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.angeschossen:LandsAPI:4.7.3" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:19.0.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: n3kas.ae:aeapi:1.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: fr.neatmonster:nocheatplus:3.16.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: de.janmm14:aac-api:4.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.jiangdashao:matrix-api-repo:317d4635fd" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: me.vagdedes:SpartanAPI:1.0.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib:4.5.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib:4.6.0-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cglib:cglib-nodep:3.2.5" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.executors:BukkitExecutors:1.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:EssentialsX:2.18.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:BaseProviders:2.18.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.ess3:NMSReflectionProvider:2.18.1" level="project" />

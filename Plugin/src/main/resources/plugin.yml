@@ -206,6 +206,7 @@ permissions:
       ecoenchants.fromtable.buckshot: true
       ecoenchants.fromtable.diverse: true
       ecoenchants.fromtable.lifesteal: true
+      ecoenchants.fromtable.limeartifact: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -696,4 +697,7 @@ permissions:
     default: true
   ecoenchants.fromtable.lifesteal:
     description: Allows getting life steal from an enchanting table
+    default: true
+  ecoenchants.fromtable.limeartifact:
+    description: Allows getting lime artifact from an enchanting table
     default: true
