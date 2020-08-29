@@ -217,6 +217,8 @@ permissions:
       ecoenchants.fromtable.sickening: true
       ecoenchants.fromtable.blind: true
       ecoenchants.fromtable.defender: true
+      ecoenchants.fromtable.netheric: true
+      ecoenchants.fromtable.enderism: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -740,4 +742,10 @@ permissions:
     default: true
   ecoenchants.fromtable.defender:
     description: Allows getting defender from an enchanting table
+    default: true
+  ecoenchants.fromtable.netheric:
+    description: Allows getting netheric from an enchanting table
+    default: true
+  ecoenchants.fromtable.enderism:
+    description: Allows getting enderism from an enchanting table
     default: true

@@ -1,0 +1,24 @@
+#
+# Netheric EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Netheric"
+
+description: Increases damage dealt in the nether.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - enderism
+  maximum-level: 5
+
+config:
+  per-level-multiplier: 0.05 # Multiplier per level for damage. Calculated as damage * (1 + level * multiplier)

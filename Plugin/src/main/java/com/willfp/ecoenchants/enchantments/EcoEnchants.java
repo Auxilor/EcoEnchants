@@ -198,6 +198,8 @@ public class EcoEnchants {
     public static final EcoEnchant BLIND = new Blind();
     public static final EcoEnchant SICKENING = new Sickening();
     public static final EcoEnchant DEFENDER = new Defender();
+    public static final EcoEnchant NETHERIC = new Netheric();
+    public static final EcoEnchant ENDERISM = new Enderism();
 
     /**
      * Get all registered {@link EcoEnchant}s
