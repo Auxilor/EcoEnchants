@@ -214,6 +214,8 @@ permissions:
       ecoenchants.fromtable.corrosive: true
       ecoenchants.fromtable.wound: true
       ecoenchants.fromtable.finality: true
+      ecoenchants.fromtable.sickening: true
+      ecoenchants.fromtable.blind: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -728,4 +730,10 @@ permissions:
     default: true
   ecoenchants.fromtable.finality:
     description: Allows getting finality from an enchanting table
+    default: true
+  ecoenchants.fromtable.blind:
+    description: Allows getting blind from an enchanting table
+    default: true
+  ecoenchants.fromtable.sickening:
+    description: Allows getting sickening from an enchanting table
     default: true

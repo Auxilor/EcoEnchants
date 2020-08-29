@@ -195,6 +195,8 @@ public class EcoEnchants {
     public static final EcoEnchant CORROSIVE = new Corrosive();
     public static final EcoEnchant WOUND = new Wound();
     public static final EcoEnchant FINALITY = new Finality();
+    public static final EcoEnchant BLIND = new Blind();
+    public static final EcoEnchant SICKENING = new Sickening();
 
     /**
      * Get all registered {@link EcoEnchant}s
