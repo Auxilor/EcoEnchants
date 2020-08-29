@@ -208,6 +208,7 @@ permissions:
       ecoenchants.fromtable.lifesteal: true
       ecoenchants.fromtable.limeartifact: true
       ecoenchants.fromtable.force: true
+      ecoenchants.fromtable.endinfusion: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -704,4 +705,7 @@ permissions:
     default: true
   ecoenchants.fromtable.force:
     description: Allows getting force from an enchanting table
+    default: true
+  ecoenchants.fromtable.endinfusion:
+    description: Allows getting end infusion from an enchanting table
     default: true

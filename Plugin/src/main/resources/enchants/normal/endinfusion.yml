@@ -1,12 +1,12 @@
 #
-# Nether Infusion EcoEnchant
+# End Infusion EcoEnchant
 #
 
-config-version: 4.01 # Don't edit this.
+config-version: 4.0 # Don't edit this.
 
-name: "Nether Infusion"
+name: "End Infusion"
 
-description: Increases damage dealt in the nether.
+description: Increases damage dealt in the end.
 
 obtaining:
   table: true
@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts:
-    - end_infusion
+    - nether_infusion
   maximum-level: 5
 
 config:

@@ -189,6 +189,7 @@ public class EcoEnchants {
     public static final EcoEnchant LIFE_STEAL = new LifeSteal();
     public static final EcoEnchant LIME_ARTIFACT = new LimeArtifact();
     public static final EcoEnchant FORCE = new Force();
+    public static final EcoEnchant END_INFUSION = new EndInfusion();
 
     /**
      * Get all registered {@link EcoEnchant}s

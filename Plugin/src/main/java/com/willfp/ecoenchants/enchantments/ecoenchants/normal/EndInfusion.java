@@ -9,23 +9,24 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class NetherInfusion extends EcoEnchant {
-    public NetherInfusion() {
+
+public class EndInfusion extends EcoEnchant {
+    public EndInfusion() {
         super(
-                new EcoEnchantBuilder("nether_infusion", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.01)
+                new EcoEnchantBuilder("end_infusion", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
         );
     }
 
     // START OF LISTENERS
 
     @EventHandler
-    public void netherInfusionHit(EntityDamageByEntityEvent event) {
+    public void onHit(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player))
             return;
 
         Player player = (Player) event.getDamager();
 
-        if(!player.getWorld().getEnvironment().equals(World.Environment.NETHER))
+        if(!player.getWorld().getEnvironment().equals(World.Environment.THE_END))
             return;
 
         if (!HasEnchant.playerHeld(player, this)) return;
