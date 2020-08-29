@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.queue;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.util.HasEnchant;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
@@ -102,7 +102,7 @@ public class DropQueue {
      * Push the queue
      */
     public void push() {
-        if(!hasTelekinesis) hasTelekinesis = HasEnchant.item(item, EcoEnchants.TELEKINESIS);
+        if(!hasTelekinesis) hasTelekinesis = EnchantChecks.item(item, EcoEnchants.TELEKINESIS);
 
 
         World world = loc.getWorld();

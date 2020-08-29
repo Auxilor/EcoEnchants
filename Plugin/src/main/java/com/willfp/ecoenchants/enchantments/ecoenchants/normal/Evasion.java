@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +25,7 @@ public class Evasion extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        int totalEvasionPoints = HasEnchant.getArmorPoints(player, this, true);
+        int totalEvasionPoints = EnchantChecks.getArmorPoints(player, this, 1);
 
         if (totalEvasionPoints == 0)
             return;

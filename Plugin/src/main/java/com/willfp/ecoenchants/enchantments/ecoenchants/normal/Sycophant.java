@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,9 +28,9 @@ public class Sycophant extends EcoEnchant {
         if(!player.isBlocking()) return;
 
         int level;
-        if (!HasEnchant.playerOffhand(player, this) && !HasEnchant.playerHeld(player, this)) return;
-        if(HasEnchant.playerOffhand(player, this)) level = HasEnchant.getPlayerOffhandLevel(player, this);
-        else level = HasEnchant.getPlayerLevel(player, this);
+        if (!EnchantChecks.offhand(player, this) && !EnchantChecks.mainhand(player, this)) return;
+        if(EnchantChecks.offhand(player, this)) level = EnchantChecks.getOffhandLevel(player, this);
+        else level = EnchantChecks.getMainhandLevel(player, this);
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");

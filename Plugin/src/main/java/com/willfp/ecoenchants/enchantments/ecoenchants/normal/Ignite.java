@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -26,7 +26,7 @@ public class Ignite extends EcoEnchant {
 
     @EventHandler
     public void onLand(ProjectileHitEvent event) {
-        if (event.getEntityType() != EntityType.ARROW)
+        if (!(event.getEntity() instanceof Arrow))
             return;
 
         if (!(event.getEntity().getShooter() instanceof Player))
@@ -36,14 +36,12 @@ public class Ignite extends EcoEnchant {
             return;
 
         Block block = event.getHitBlock();
-
+        Arrow arrow = (Arrow) event.getEntity();
         Player player = (Player) event.getEntity().getShooter();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.arrow(arrow, this)) return;
 
-        if (!(event.getEntity() instanceof Arrow)) return;
-
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         float power = (float) (0.5 + (level * 0.5));
 

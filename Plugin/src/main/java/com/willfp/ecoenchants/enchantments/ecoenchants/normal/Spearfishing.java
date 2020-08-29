@@ -3,10 +3,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -48,9 +48,9 @@ public class Spearfishing extends EcoEnchant {
 
         ItemStack item = TridentStack.getTridentStack(trident);
 
-        if (!HasEnchant.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) return;
 
-        int level = HasEnchant.getItemLevel(item, this);
+        int level = EnchantChecks.getItemLevel(item, this);
 
         double chance = level * (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level")/100);
         if(Rand.randFloat(0, 1) > chance) return;

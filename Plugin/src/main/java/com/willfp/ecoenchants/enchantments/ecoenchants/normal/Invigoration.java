@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -28,7 +28,7 @@ public class Invigoration extends EcoEnchant {
         if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
             return;
 
-        int totalInvigorationPoints = HasEnchant.getArmorPoints(player, this, false);
+        int totalInvigorationPoints = EnchantChecks.getArmorPoints(player, this, 0);
 
         if (totalInvigorationPoints == 0)
             return;
@@ -47,7 +47,7 @@ public class Invigoration extends EcoEnchant {
         if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
             return;
 
-        int totalInvigorationPoints = HasEnchant.getArmorPoints(player, this, false);
+        int totalInvigorationPoints = EnchantChecks.getArmorPoints(player, this, 0);
 
         if (totalInvigorationPoints == 0)
             return;

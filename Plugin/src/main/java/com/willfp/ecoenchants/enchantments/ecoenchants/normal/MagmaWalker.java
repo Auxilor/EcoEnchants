@@ -4,11 +4,11 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.Circle;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -36,10 +36,10 @@ public class MagmaWalker extends EcoEnchant {
         if(event.getTo() == null) return;
         if(event.getFrom().getBlock().equals(event.getTo().getBlock())) return;
 
-        if (!HasEnchant.playerBoots(player, this)) return;
+        if (!EnchantChecks.boots(player, this)) return;
 
         Vector[] circle = Circle.getCircle(this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius")
-                + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius") * HasEnchant.getPlayerBootsLevel(player, this) - 1));
+                + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius") * EnchantChecks.getBootsLevel(player, this) - 1));
 
         AnticheatManager.exemptPlayer(player);
 

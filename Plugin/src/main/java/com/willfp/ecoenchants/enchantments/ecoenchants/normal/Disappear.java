@@ -4,8 +4,8 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,7 +32,7 @@ public class Disappear extends EcoEnchant {
             if(player.getHealth() > EcoEnchants.DISAPPEAR.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "threshold"))
                 return;
 
-            final int points = HasEnchant.getArmorPoints(player, this, true);
+            final int points = EnchantChecks.getArmorPoints(player, this, 1);
 
             if (points == 0)
                 return;

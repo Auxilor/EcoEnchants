@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -31,7 +31,7 @@ public class Chopless extends EcoEnchant {
         if(!Target.Applicable.AXE.getMaterials().contains(damager.getInventory().getItemInMainHand().getType()))
             return;
 
-        int totalChoplessPoints = HasEnchant.getArmorPoints(player, this, true);
+        int totalChoplessPoints = EnchantChecks.getArmorPoints(player, this, 1);
 
         if (totalChoplessPoints == 0)
             return;

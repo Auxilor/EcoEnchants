@@ -3,11 +3,11 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.queue.DropQueue;
 import com.willfp.ecoenchants.util.EqualIfOver;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -30,7 +30,7 @@ public class StoneSwitcher extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
@@ -42,7 +42,7 @@ public class StoneSwitcher extends EcoEnchant {
 
         if (!AntigriefManager.canBreakBlock(player, block)) return;
 
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getMainhandLevel(player, this);
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
 
         if(Rand.randFloat(0, 1) > level * chance * 0.01)

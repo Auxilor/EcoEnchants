@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
@@ -33,7 +33,7 @@ public class Inferno extends EcoEnchant {
         Trident trident = (Trident) event.getEntity();
         ItemStack item = TridentStack.getTridentStack(trident);
 
-        if (!HasEnchant.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) return;
 
         trident.setFireTicks(Integer.MAX_VALUE);
     }
@@ -49,7 +49,7 @@ public class Inferno extends EcoEnchant {
         ItemStack item = TridentStack.getTridentStack(trident);
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) return;
         if(trident.getFireTicks() <= 0) return;
 
         victim.setFireTicks(100);

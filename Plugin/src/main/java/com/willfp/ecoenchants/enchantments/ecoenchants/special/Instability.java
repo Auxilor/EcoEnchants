@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -30,11 +30,11 @@ public class Instability extends EcoEnchant {
 
         Player player = (Player) event.getEntity().getShooter();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         if (!(event.getEntity() instanceof Arrow)) return;
 
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getMainhandLevel(player, this);
 
         boolean fire = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "fire");
         boolean breakblocks = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "break-blocks");

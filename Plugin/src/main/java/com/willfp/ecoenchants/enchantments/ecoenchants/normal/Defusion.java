@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,9 +29,9 @@ public class Defusion extends EcoEnchant {
 
         Creeper victim = (Creeper) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getMainhandLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
 
         event.setDamage(event.getDamage() + (level * multiplier));

@@ -4,8 +4,8 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
@@ -34,11 +34,11 @@ public class Succession extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows");
 
-        boolean fire = HasEnchant.playerHeld(player, Enchantment.ARROW_FIRE);
+        boolean fire = EnchantChecks.mainhand(player, Enchantment.ARROW_FIRE);
 
 
         for (int i = 1; i <= number; i++) {

@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.google.common.collect.Sets;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,7 +29,7 @@ public class Spring extends EcoEnchant {
         if (!(event.getEntity() instanceof Player))
             return;
         Player player = (Player) event.getEntity();
-        if (!HasEnchant.playerBoots(player, this)) return;
+        if (!EnchantChecks.boots(player, this)) return;
 
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
             event.setCancelled(true);
@@ -50,9 +50,9 @@ public class Spring extends EcoEnchant {
             jumpVelocity = Float.parseFloat(df.format(jumpVelocity).replace(',', '.'));
             if (e.getPlayer().getLocation().getBlock().getType() != Material.LADDER && prevPlayersOnGround.contains(player.getUniqueId())) {
                 if (!player.isOnGround() && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
-                    if (!HasEnchant.playerBoots(player, this)) return;
+                    if (!EnchantChecks.boots(player, this)) return;
 
-                    double multiplier = 0.5 + (double) ((HasEnchant.getPlayerBootsLevel(player, this) * HasEnchant.getPlayerBootsLevel(player, this)) / 4 - 0.2) / 3;
+                    double multiplier = 0.5 + (double) ((EnchantChecks.getBootsLevel(player, this) * EnchantChecks.getBootsLevel(player, this)) / 4 - 0.2) / 3;
                     player.setVelocity(player.getLocation().getDirection().multiply(multiplier).setY(multiplier));
                 }
             }

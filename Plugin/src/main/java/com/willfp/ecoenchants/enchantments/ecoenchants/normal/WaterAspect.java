@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -29,8 +29,8 @@ public class WaterAspect extends EcoEnchant {
         if(!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
-        int level = HasEnchant.getPlayerLevel(player, this);
+        if (!EnchantChecks.mainhand(player, this)) return;
+        int level = EnchantChecks.getMainhandLevel(player, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

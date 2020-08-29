@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -28,14 +28,14 @@ public class Optics extends EcoEnchant {
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
         Arrow arrow = (Arrow) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.arrow(arrow, this)) return;
 
         Location land = arrow.getLocation();
         Location source = player.getLocation();
 
         double distance = land.distance(source);
 
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "block-multiplier");
 

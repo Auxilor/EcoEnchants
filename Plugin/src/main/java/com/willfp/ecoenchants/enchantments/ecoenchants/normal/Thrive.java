@@ -4,9 +4,9 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,8 +28,8 @@ public class Thrive extends EcoEnchant {
 
         new BukkitRunnable() {
             public void run() {
-                int totalProsperityPoints = HasEnchant.getArmorPoints(player, EcoEnchants.PROSPERITY, false);
-                int totalThrivePoints = HasEnchant.getArmorPoints(player, EcoEnchants.THRIVE, false);
+                int totalProsperityPoints = EnchantChecks.getArmorPoints(player, EcoEnchants.PROSPERITY, 0);
+                int totalThrivePoints = EnchantChecks.getArmorPoints(player, EcoEnchants.THRIVE, 0);
                 if (totalThrivePoints == 0 && totalProsperityPoints == 0) {
                     player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
                     return;

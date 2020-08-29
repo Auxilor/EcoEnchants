@@ -4,9 +4,9 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -25,12 +25,12 @@ public class Streamlining extends EcoEnchant {
 
         new BukkitRunnable() {
             public void run() {
-                if (!HasEnchant.playerBoots(player, EcoEnchants.STREAMLINING)) {
+                if (!EnchantChecks.boots(player, EcoEnchants.STREAMLINING)) {
                     player.setWalkSpeed(0.2f);
                     return;
                 }
 
-                int level = HasEnchant.getPlayerBootsLevel(player, EcoEnchants.STREAMLINING);
+                int level = EnchantChecks.getBootsLevel(player, EcoEnchants.STREAMLINING);
                 double speed;
                 player.setWalkSpeed((float) (0.2 + (level * EcoEnchants.STREAMLINING.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "speed-per-level"))));
 

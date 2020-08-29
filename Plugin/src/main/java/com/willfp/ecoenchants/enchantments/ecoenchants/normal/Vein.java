@@ -4,11 +4,11 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.RecursiveBlock;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -40,7 +40,7 @@ public class Vein extends EcoEnchant {
             return;
         }
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         if (event.isCancelled())
             return;
@@ -56,7 +56,7 @@ public class Vein extends EcoEnchant {
             return;
 
         int blocksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "blocks-per-level");
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getMainhandLevel(player, this);
         int limit = level * blocksPerLevel;
 
         Set<Block> blockSet = RecursiveBlock.getVein(block, materials, limit);

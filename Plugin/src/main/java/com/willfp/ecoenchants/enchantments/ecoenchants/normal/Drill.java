@@ -4,11 +4,11 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.SimplifyVector;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -35,7 +35,7 @@ public class Drill extends EcoEnchant {
             return;
         }
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         if (event.isCancelled())
             return;
@@ -44,7 +44,7 @@ public class Drill extends EcoEnchant {
 
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 
-        int level = HasEnchant.getPlayerLevel(player, this) * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "blocks-per-level");
+        int level = EnchantChecks.getMainhandLevel(player, this) * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "blocks-per-level");
 
         AnticheatManager.exemptPlayer(player);
 

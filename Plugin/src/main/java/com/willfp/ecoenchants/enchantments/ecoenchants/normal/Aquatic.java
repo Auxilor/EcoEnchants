@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -43,9 +43,9 @@ public class Aquatic extends EcoEnchant {
         if(!player.getLocation().getBlock().getType().equals(Material.WATER))
             return;
 
-        if (!HasEnchant.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) return;
 
-        int level = HasEnchant.getItemLevel(item, this);
+        int level = EnchantChecks.getItemLevel(item, this);
 
         double perLevelDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 

@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
@@ -32,7 +32,7 @@ public class Tripleshot extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         for (int i = -1; i < 2; i += 2) {
 
@@ -42,7 +42,7 @@ public class Tripleshot extends EcoEnchant {
             velocity.rotateAroundY(radians);
 
             Arrow arrow = player.launchProjectile(Arrow.class, velocity);
-            if(HasEnchant.playerHeld(player, Enchantment.ARROW_FIRE)) arrow.setFireTicks(Integer.MAX_VALUE);
+            if(EnchantChecks.mainhand(player, Enchantment.ARROW_FIRE)) arrow.setFireTicks(Integer.MAX_VALUE);
             arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         }
     }

@@ -4,8 +4,8 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
@@ -33,7 +33,7 @@ public class Slicing extends EcoEnchant {
         if (!player.isGliding())
             return;
 
-        if (!HasEnchant.playerElytra(player, this)) return;
+        if (!EnchantChecks.chestplate(player, this)) return;
 
         for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
             LivingEntity victim;
@@ -47,7 +47,7 @@ public class Slicing extends EcoEnchant {
                 continue;
 
             double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
-            int level = HasEnchant.getPlayerLevel(player, this);
+            int level = EnchantChecks.getMainhandLevel(player, this);
             victim.damage(level * damage, player);
             entities.add(victim);
 

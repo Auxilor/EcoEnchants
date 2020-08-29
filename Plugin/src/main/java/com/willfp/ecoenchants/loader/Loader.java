@@ -14,6 +14,7 @@ import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.checks.ArrowListeners;
 import com.willfp.ecoenchants.events.armorequip.ArmorListener;
 import com.willfp.ecoenchants.events.armorequip.DispenserArmorListener;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityListeners;
@@ -240,6 +241,7 @@ public class Loader {
         Bukkit.getPluginManager().registerEvents(new EntityDeathByEntityListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getPluginManager().registerEvents(new NaturalExpGainListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getPluginManager().registerEvents(new VillagerListeners(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new ArrowListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getLogger().info("");
 
         /*

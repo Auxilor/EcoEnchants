@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -35,8 +35,8 @@ public class Buckshot extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
-        int level = HasEnchant.getPlayerLevel(player, this);
+        if (!EnchantChecks.mainhand(player, this)) return;
+        int level = EnchantChecks.getMainhandLevel(player, this);
 
         event.getProjectile().remove();
         player.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
@@ -53,7 +53,7 @@ public class Buckshot extends EcoEnchant {
             velocity.add(new Vector(Rand.randFloat(-spread, spread), Rand.randFloat(-spread, spread), Rand.randFloat(-spread, spread)));
 
             Arrow arrow = player.launchProjectile(Arrow.class, velocity);
-            if(HasEnchant.playerHeld(player, Enchantment.ARROW_FIRE)) arrow.setFireTicks(Integer.MAX_VALUE);
+            if(EnchantChecks.mainhand(player, Enchantment.ARROW_FIRE)) arrow.setFireTicks(Integer.MAX_VALUE);
             arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         }
     }

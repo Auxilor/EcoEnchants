@@ -3,10 +3,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.Cube;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.ItemDurability;
 import com.willfp.ecoenchants.util.Square;
 import org.bukkit.Location;
@@ -42,7 +42,7 @@ public class Farmhand extends EcoEnchant {
 
         ItemStack item = event.getItem();
 
-        if (!HasEnchant.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) return;
 
         if (!(Target.Applicable.HOE.getMaterials().contains(item.getType())))
             return;
@@ -52,7 +52,7 @@ public class Farmhand extends EcoEnchant {
         event.getClickedBlock().setType(Material.FARMLAND);
         int initial = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius");
         int levelrad = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius");
-        int radius = initial + (HasEnchant.getItemLevel(item, this) - 1) * levelrad;
+        int radius = initial + (EnchantChecks.getItemLevel(item, this) - 1) * levelrad;
         Vector[] vecs;
 
         if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-cube")) {

@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
@@ -28,7 +28,7 @@ public class Replenish extends EcoEnchant {
         Block block = event.getBlock();
         Material type = block.getType();
 
-        if(!HasEnchant.playerHeld(player, this)) return;
+        if(!EnchantChecks.mainhand(player, this)) return;
 
         if(!AntigriefManager.canBreakBlock(player, block)) return;
         if(event.isCancelled()) return;

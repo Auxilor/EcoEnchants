@@ -4,8 +4,8 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -31,7 +31,7 @@ public class Incandescence extends EcoEnchant {
         Player player = (Player) event.getEntity();
         LivingEntity victim = (LivingEntity) event.getDamager();
 
-        int totalIncandescencePoints = HasEnchant.getArmorPoints(player, this, true);
+        int totalIncandescencePoints = EnchantChecks.getArmorPoints(player, this, 1);
 
         if (totalIncandescencePoints == 0)
             return;

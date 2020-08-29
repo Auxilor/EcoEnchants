@@ -3,10 +3,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -38,7 +38,7 @@ public class InfernalTouch extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
@@ -87,13 +87,13 @@ public class InfernalTouch extends EcoEnchant {
 
                 if(drop.getType().equals(Material.IRON_INGOT)) {
                     experience += 1;
-                    if(HasEnchant.playerHeld(player, Enchantment.LOOT_BONUS_BLOCKS)) {
-                        int level = HasEnchant.getPlayerLevel(player, LOOT_BONUS_BLOCKS);
+                    if(EnchantChecks.mainhand(player, Enchantment.LOOT_BONUS_BLOCKS)) {
+                        int level = EnchantChecks.getMainhandLevel(player, LOOT_BONUS_BLOCKS);
                         drop.setAmount((int) Math.ceil(1/((double) level + 2) + ((double) level + 1)/2));
                     }
                 } else if(drop.getType().equals(Material.GOLD_INGOT)) {
-                    if(HasEnchant.playerHeld(player, Enchantment.LOOT_BONUS_BLOCKS)) {
-                        int level = HasEnchant.getPlayerLevel(player, LOOT_BONUS_BLOCKS);
+                    if(EnchantChecks.mainhand(player, Enchantment.LOOT_BONUS_BLOCKS)) {
+                        int level = EnchantChecks.getMainhandLevel(player, LOOT_BONUS_BLOCKS);
                         drop.setAmount((int) Math.ceil(1/((double) level + 2) + ((double) level + 1)/2));
                     }
                 }

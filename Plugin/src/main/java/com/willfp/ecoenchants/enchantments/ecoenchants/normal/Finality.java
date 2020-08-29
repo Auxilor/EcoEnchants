@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -30,11 +30,11 @@ public class Finality extends EcoEnchant {
             return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-
+        Arrow arrow = (Arrow) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
-        int level = HasEnchant.getPlayerLevel(player, this);
+        if (!EnchantChecks.arrow(arrow, this)) return;
+        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         double minhealth = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "minimum-health-per-level");
         if (!(((LivingEntity) event.getEntity()).getHealth() <= level * minhealth))

@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -24,7 +24,7 @@ public class HungerCurse extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        if(!HasEnchant.playerHelmet(player, this)) return;
+        if(!EnchantChecks.helmet(player, this)) return;
         if(event.getFoodLevel() > player.getFoodLevel()) return;
 
         int delta = player.getFoodLevel() - event.getFoodLevel();

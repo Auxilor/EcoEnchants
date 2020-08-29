@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,9 +36,9 @@ public class Deflection extends EcoEnchant {
         if(!AntigriefManager.canInjure(player, victim)) return;
 
         int level;
-        if (!HasEnchant.playerOffhand(player, this) && !HasEnchant.playerHeld(player, this)) return;
-        if(HasEnchant.playerOffhand(player, this)) level = HasEnchant.getPlayerOffhandLevel(player, this);
-        else level = HasEnchant.getPlayerLevel(player, this);
+        if (!EnchantChecks.offhand(player, this) && !EnchantChecks.mainhand(player, this)) return;
+        if(EnchantChecks.offhand(player, this)) level = EnchantChecks.getOffhandLevel(player, this);
+        else level = EnchantChecks.getMainhandLevel(player, this);
 
         double perlevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-deflected-per-level");
         double damagePercent = (perlevel/100) * level;

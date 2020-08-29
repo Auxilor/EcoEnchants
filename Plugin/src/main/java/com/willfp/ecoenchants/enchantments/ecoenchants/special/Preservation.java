@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -26,7 +26,7 @@ public class Preservation extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        int totalPreservationPoints = HasEnchant.getArmorPoints(player, this, true);
+        int totalPreservationPoints = EnchantChecks.getArmorPoints(player, this, 1);
 
         if (totalPreservationPoints == 0)
             return;

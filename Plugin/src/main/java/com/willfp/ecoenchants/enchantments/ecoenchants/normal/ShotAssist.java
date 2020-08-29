@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -31,10 +31,10 @@ public class ShotAssist extends EcoEnchant {
         if(event.isCancelled()) return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-
+        Arrow arrow = (Arrow) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        int points = HasEnchant.getArmorPoints(player, this, true);
+        int points = EnchantChecks.getArmorPoints(player, this, 1);
 
         if(points == 0) return;
 

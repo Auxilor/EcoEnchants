@@ -1,19 +1,14 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.comphenix.protocol.PacketType;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 
 public class Force extends EcoEnchant {
     public Force() {
@@ -32,12 +27,13 @@ public class Force extends EcoEnchant {
         if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
 
+        Arrow arrow = (Arrow) event.getDamager();
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
 
-        if(!HasEnchant.playerHeld(player, this))
+        if(!EnchantChecks.arrow(arrow, this))
             return;
 
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

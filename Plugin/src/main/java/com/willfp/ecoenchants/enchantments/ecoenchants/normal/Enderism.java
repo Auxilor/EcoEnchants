@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -28,14 +28,15 @@ public class Enderism extends EcoEnchant {
             return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
+        Arrow arrow = (Arrow) event.getDamager();
 
         assert player != null;
         if(!player.getWorld().getEnvironment().equals(World.Environment.THE_END))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.arrow(arrow, this)) return;
 
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getArrowLevel(arrow, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");
 
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));

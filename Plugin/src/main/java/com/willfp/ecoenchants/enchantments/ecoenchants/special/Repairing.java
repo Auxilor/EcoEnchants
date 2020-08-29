@@ -4,9 +4,9 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
@@ -22,11 +22,11 @@ public class Repairing extends EcoEnchant implements EcoRunnable {
     @Override
     public void run() {
         EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().parallelStream().forEach((player -> {
-            if(Arrays.stream(player.getInventory().getContents()).parallel().noneMatch(item2 -> HasEnchant.item(item2, EcoEnchants.REPAIRING)))
+            if(Arrays.stream(player.getInventory().getContents()).parallel().noneMatch(item2 -> EnchantChecks.item(item2, EcoEnchants.REPAIRING)))
                 return;
 
             for(ItemStack item : player.getInventory().getContents()) {
-                if(!HasEnchant.item(item, EcoEnchants.REPAIRING)) continue;
+                if(!EnchantChecks.item(item, EcoEnchants.REPAIRING)) continue;
 
                 if(!(item.getItemMeta() instanceof Repairable)) continue;
 
@@ -35,7 +35,7 @@ public class Repairing extends EcoEnchant implements EcoRunnable {
                 if(player.getItemOnCursor().equals(item)) continue;
 
 
-                int level = HasEnchant.getItemLevel(item, EcoEnchants.REPAIRING);
+                int level = EnchantChecks.getItemLevel(item, EcoEnchants.REPAIRING);
                 int multiplier = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
                 int repairAmount = level * multiplier;
 

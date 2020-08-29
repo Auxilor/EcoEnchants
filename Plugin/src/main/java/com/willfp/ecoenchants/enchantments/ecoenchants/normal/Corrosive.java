@@ -1,13 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.comphenix.protocol.PacketType;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -43,12 +40,13 @@ public class Corrosive extends EcoEnchant {
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
         Player victim = (Player) event.getEntity();
+        Arrow arrow = (Arrow) event.getDamager();
 
         if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.arrow(arrow, this)) return;
 
-        int level = HasEnchant.getPlayerLevel(player, this);
+        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         ArrayList<ItemStack> armor = new ArrayList<ItemStack>(Arrays.asList(victim.getInventory().getArmorContents()));
         if (armor.isEmpty())

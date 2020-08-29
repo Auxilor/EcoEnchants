@@ -4,9 +4,9 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 public class Forcefield extends EcoEnchant implements EcoRunnable {
@@ -18,8 +18,8 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
 
     @Override
     public void run() {
-        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> HasEnchant.getArmorPoints(player, EcoEnchants.FORCEFIELD, false) > 0).forEach((player -> {
-            int level = HasEnchant.getArmorPoints(player, EcoEnchants.FORCEFIELD, false);
+        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 0) > 0).forEach((player -> {
+            int level = EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 0);
 
             double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
             double bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
@@ -32,7 +32,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
 
                 ((Monster) e).damage(damage, player);
 
-                HasEnchant.getArmorPoints(player, EcoEnchants.FORCEFIELD, true);
+                EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 1);
             }
         }));
     }

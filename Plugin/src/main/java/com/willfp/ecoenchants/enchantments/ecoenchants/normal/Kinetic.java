@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -26,9 +26,9 @@ public class Kinetic extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        if(!HasEnchant.playerElytra(player, this)) return;
+        if(!EnchantChecks.chestplate(player, this)) return;
 
-        int level = HasEnchant.getPlayerChestplateLevel(player, this);
+        int level = EnchantChecks.getChestplateLevel(player, this);
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "reduction-per-level");
         double multiplier = 1 - ((reduction/100) * level);

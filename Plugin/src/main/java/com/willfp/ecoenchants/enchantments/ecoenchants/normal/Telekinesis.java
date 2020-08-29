@@ -3,12 +3,12 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -39,7 +39,7 @@ public class Telekinesis extends EcoEnchant {
     public void telekinesisDropItem(BlockDropItemEvent event) {
         Player player = event.getPlayer();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         if (event.isCancelled()) return;
 
@@ -67,7 +67,7 @@ public class Telekinesis extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
@@ -113,7 +113,7 @@ public class Telekinesis extends EcoEnchant {
 
         if(player == null || item == null) return;
 
-        if (!HasEnchant.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) return;
 
         int xp = event.getDroppedExp();
         Collection<ItemStack> drops = event.getDrops();

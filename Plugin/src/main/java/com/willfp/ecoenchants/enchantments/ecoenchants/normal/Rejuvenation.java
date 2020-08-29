@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
@@ -27,7 +27,7 @@ public class Rejuvenation extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        int totalRejuvenationPoints = HasEnchant.getArmorPoints(player, this, false);
+        int totalRejuvenationPoints = EnchantChecks.getArmorPoints(player, this, 0);
 
         if (totalRejuvenationPoints == 0)
             return;

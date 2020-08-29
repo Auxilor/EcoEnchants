@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchantments;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -47,7 +47,7 @@ public abstract class Artifact extends EcoEnchant {
 
         if(!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase())) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!EnchantChecks.mainhand(player, this)) return;
 
         int amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount");
         block.getWorld().spawnParticle(particle, block.getLocation().add(0.5, 0.5, 0.5), amount, 0.4, 0.4, 0.4, 0, extra, false);
@@ -59,7 +59,7 @@ public abstract class Artifact extends EcoEnchant {
 
         if(!player.isGliding()) return;
 
-        if (!HasEnchant.playerElytra(player, this)) return;
+        if (!EnchantChecks.chestplate(player, this)) return;
 
         Location location = player.getLocation();
         Vector direction = player.getLocation().clone().getDirection();
@@ -86,7 +86,7 @@ public abstract class Artifact extends EcoEnchant {
         Player player = (Player) event.getDamager();
         LivingEntity entity = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         double radius = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius");
 
@@ -127,7 +127,7 @@ public abstract class Artifact extends EcoEnchant {
             item = TridentStack.getTridentStack((Trident) entity);
         }
 
-        if (!HasEnchant.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) return;
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 

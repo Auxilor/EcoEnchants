@@ -3,8 +3,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Boss;
 import org.bukkit.entity.ElderGuardian;
@@ -31,8 +31,8 @@ public class BossHunter extends EcoEnchant {
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
         Arrow arrow = (Arrow) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
-        int level = HasEnchant.getPlayerLevel(player, this);
+        if (!EnchantChecks.arrow(arrow, this)) return;
+        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 
