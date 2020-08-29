@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
 public class Aerial extends EcoEnchant {
     public Aerial() {
         super(
@@ -24,10 +25,10 @@ public class Aerial extends EcoEnchant {
 
     @EventHandler
     public void onShoot(ProjectileLaunchEvent event) {
-        if (event.getEntityType() != EntityType.ARROW)
+        if(event.getEntityType() != EntityType.ARROW)
             return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity().getShooter();
@@ -35,20 +36,20 @@ public class Aerial extends EcoEnchant {
         if(player.isOnGround())
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
         int level = HasEnchant.getPlayerLevel(player, this);
 
-        if (!(event.getEntity() instanceof Arrow)) return;
+        if(!(event.getEntity() instanceof Arrow)) return;
         Arrow a = (Arrow) event.getEntity();
         a.setMetadata("from-aerial", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), level));
     }
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
 
-        if (!event.getDamager().hasMetadata("from-aerial"))
+        if(!event.getDamager().hasMetadata("from-aerial"))
             return;
 
         int level = event.getDamager().getMetadata("from-aerial").get(0).asInt();

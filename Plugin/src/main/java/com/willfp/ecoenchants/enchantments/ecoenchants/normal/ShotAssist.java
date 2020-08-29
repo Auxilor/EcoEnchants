@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class ShotAssist extends EcoEnchant {
     public ShotAssist() {
         super(
@@ -21,11 +22,11 @@ public class ShotAssist extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
         if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         if(event.isCancelled()) return;

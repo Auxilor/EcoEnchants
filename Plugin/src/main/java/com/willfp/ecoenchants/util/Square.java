@@ -8,6 +8,7 @@ public class Square {
 
     /**
      * Get square as relative vectors
+     *
      * @param radius The radius of the square
      * @return An array of {@link Vector}s
      */
@@ -17,8 +18,8 @@ public class Square {
         int xoffset = -radius;
         int zoffset = -radius;
 
-        while (zoffset <= radius) {
-            while (xoffset <= radius) {
+        while(zoffset <= radius) {
+            while(xoffset <= radius) {
                 circleVecs.add(new Vector(xoffset, 0, zoffset));
                 xoffset++;
             }

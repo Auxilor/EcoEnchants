@@ -9,7 +9,7 @@ public class LocationUtils {
             NumberConversions.checkFinite(vector.getX(), "x not finite");
             NumberConversions.checkFinite(vector.getY(), "y not finite");
             NumberConversions.checkFinite(vector.getZ(), "z not finite");
-        } catch (IllegalArgumentException e) {
+        } catch(IllegalArgumentException e) {
             return false;
         }
 

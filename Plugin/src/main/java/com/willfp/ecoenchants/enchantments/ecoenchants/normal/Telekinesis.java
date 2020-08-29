@@ -39,13 +39,13 @@ public class Telekinesis extends EcoEnchant {
     public void telekinesisDropItem(BlockDropItemEvent event) {
         Player player = event.getPlayer();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (event.isCancelled()) return;
+        if(event.isCancelled()) return;
 
         Block block = event.getBlock();
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if(!AntigriefManager.canBreakBlock(player, block)) return;
 
         List<ItemStack> drops = new ArrayList<>();
         event.getItems().forEach((item -> {
@@ -67,15 +67,15 @@ public class Telekinesis extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
+        if(player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if(!AntigriefManager.canBreakBlock(player, block)) return;
 
         if(block.getType().equals(Material.SPAWNER)) event.setExpToDrop(0);
 
@@ -113,7 +113,7 @@ public class Telekinesis extends EcoEnchant {
 
         if(player == null || item == null) return;
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         int xp = event.getDroppedExp();
         Collection<ItemStack> drops = event.getDrops();

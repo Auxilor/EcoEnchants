@@ -20,7 +20,7 @@ public class AntigriefWorldGuard implements AntigriefWrapper {
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
 
-        if (!query.testState(BukkitAdapter.adapt(block.getLocation()), localPlayer, Flags.BUILD)) {
+        if(!query.testState(BukkitAdapter.adapt(block.getLocation()), localPlayer, Flags.BUILD)) {
             return WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(block.getWorld()));
         }
         return true;
@@ -32,7 +32,7 @@ public class AntigriefWorldGuard implements AntigriefWrapper {
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
 
-        if (!query.testState(BukkitAdapter.adapt(location), localPlayer, Flags.OTHER_EXPLOSION)) {
+        if(!query.testState(BukkitAdapter.adapt(location), localPlayer, Flags.OTHER_EXPLOSION)) {
             return WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(location.getWorld()));
         }
         return true;
@@ -44,7 +44,7 @@ public class AntigriefWorldGuard implements AntigriefWrapper {
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
 
-        if (!query.testState(BukkitAdapter.adapt(block.getLocation()), localPlayer, Flags.BLOCK_PLACE)) {
+        if(!query.testState(BukkitAdapter.adapt(block.getLocation()), localPlayer, Flags.BLOCK_PLACE)) {
             return WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(block.getWorld()));
         }
         return true;
@@ -57,11 +57,11 @@ public class AntigriefWorldGuard implements AntigriefWrapper {
         RegionQuery query = container.createQuery();
 
         if(victim instanceof Player) {
-            if (!query.testState(BukkitAdapter.adapt(victim.getLocation()), localPlayer, Flags.PVP)) {
+            if(!query.testState(BukkitAdapter.adapt(victim.getLocation()), localPlayer, Flags.PVP)) {
                 return WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));
             }
         } else {
-            if (!query.testState(BukkitAdapter.adapt(victim.getLocation()), localPlayer, Flags.DAMAGE_ANIMALS)) {
+            if(!query.testState(BukkitAdapter.adapt(victim.getLocation()), localPlayer, Flags.DAMAGE_ANIMALS)) {
                 return WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));
             }
         }

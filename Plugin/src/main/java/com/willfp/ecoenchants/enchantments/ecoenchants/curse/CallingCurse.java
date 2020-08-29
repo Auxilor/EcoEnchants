@@ -4,14 +4,15 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
+import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.LocationUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.util.Vector;
+
 public class CallingCurse extends EcoEnchant implements EcoRunnable {
     public CallingCurse() {
         super(
@@ -24,7 +25,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
         EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> HasEnchant.getArmorPoints(player, EcoEnchants.CALLING_CURSE, false) > 0).forEach((player -> {
             double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
 
-            for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, distance, distance)) {
+            for(Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, distance, distance)) {
                 if(!(e instanceof Monster)) continue;
 
                 if(e instanceof PigZombie) {

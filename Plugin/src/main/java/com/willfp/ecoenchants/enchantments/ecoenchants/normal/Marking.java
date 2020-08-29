@@ -27,22 +27,22 @@ public class Marking extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
 
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player))
+        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (!AntigriefManager.canInjure(player, victim)) return;
+        if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 

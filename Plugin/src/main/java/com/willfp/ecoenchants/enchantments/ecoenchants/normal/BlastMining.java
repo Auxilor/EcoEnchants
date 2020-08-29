@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
 public class BlastMining extends EcoEnchant {
     public BlastMining() {
         super(
@@ -28,13 +29,13 @@ public class BlastMining extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
+        if(block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
             return;
         }
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         if(!AntigriefManager.canBreakBlock(player, block)) return;
@@ -47,7 +48,7 @@ public class BlastMining extends EcoEnchant {
 
         for(int x = -1; x <= 1; x++) {
             for(int y = -1; y <= 1; y++) {
-                for (int z = -1; z <= 1; z++) {
+                for(int z = -1; z <= 1; z++) {
                     if(x == 0 && y == 0 && z == 0) continue;
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
                     block1.setMetadata("from-blastmining", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
@@ -56,7 +57,8 @@ public class BlastMining extends EcoEnchant {
                         continue;
                     }
 
-                    if(block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check")) continue;
+                    if(block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check"))
+                        continue;
 
                     if(!AntigriefManager.canBreakBlock(player, block1)) continue;
 

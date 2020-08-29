@@ -15,6 +15,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
+
 public class Succession extends EcoEnchant {
     public Succession() {
         super(
@@ -26,28 +27,28 @@ public class Succession extends EcoEnchant {
 
     @EventHandler
     public void onSuccessionShoot(EntityShootBowEvent event) {
-        if (event.getProjectile().getType() != EntityType.ARROW)
+        if(event.getProjectile().getType() != EntityType.ARROW)
             return;
 
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows");
 
         boolean fire = HasEnchant.playerHeld(player, Enchantment.ARROW_FIRE);
 
 
-        for (int i = 1; i <= number; i++) {
+        for(int i = 1; i <= number; i++) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(EcoEnchantsPlugin.getInstance(), () -> {
                 Arrow arrow = player.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
                 arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
                 if(fire) arrow.setFireTicks(Integer.MAX_VALUE);
 
-                if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-arrow-damage")) {
+                if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-arrow-damage")) {
                     ItemDurability.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
                 }
             }, i * 2);

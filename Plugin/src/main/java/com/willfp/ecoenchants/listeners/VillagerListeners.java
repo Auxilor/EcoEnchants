@@ -15,7 +15,11 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class VillagerListeners implements Listener {
@@ -47,9 +51,9 @@ public class VillagerListeners implements Listener {
         double multiplier = 0.01 / ConfigManager.getConfig().getDouble("villager.book-times-less-likely");
 
         for(EcoEnchant enchantment : enchantments) {
-            if (Rand.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
+            if(Rand.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
                 continue;
-            if (!enchantment.canGetFromVillager())
+            if(!enchantment.canGetFromVillager())
                 continue;
 
             int level;
@@ -114,23 +118,25 @@ public class VillagerListeners implements Listener {
         double multiplier = 0.01;
 
         for(EcoEnchant enchantment : enchantments) {
-            if (Rand.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
+            if(Rand.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
                 continue;
-            if (!enchantment.canGetFromVillager())
+            if(!enchantment.canGetFromVillager())
                 continue;
             if(!enchantment.canEnchantItem(result))
                 continue;
 
             AtomicBoolean anyConflicts = new AtomicBoolean(false);
             toAdd.forEach((enchant, integer) -> {
-                if (enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
-                if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
+                if(enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
+                if(enchant.conflictsWith(enchantment)) anyConflicts.set(true);
 
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) anyConflicts.set(true);
-                if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) anyConflicts.set(true);
+                if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL))
+                    anyConflicts.set(true);
+                if(enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT))
+                    anyConflicts.set(true);
             });
-            if (anyConflicts.get()) continue;
+            if(anyConflicts.get()) continue;
 
             int level;
 
@@ -149,7 +155,7 @@ public class VillagerListeners implements Listener {
 
             toAdd.put(enchantment, level);
 
-            if (ConfigManager.getConfig().getBool("villager.reduce-probability.enabled")) {
+            if(ConfigManager.getConfig().getBool("villager.reduce-probability.enabled")) {
                 multiplier /= ConfigManager.getConfig().getDouble("villager.reduce-probability.factor");
             }
         }

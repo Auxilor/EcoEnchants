@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -25,7 +24,7 @@ public abstract class YamlConfig {
     }
 
     private void init() {
-        if (!new File(EcoEnchantsPlugin.getInstance().getDataFolder(), name + ".yml").exists()) {
+        if(!new File(EcoEnchantsPlugin.getInstance().getDataFolder(), name + ".yml").exists()) {
             createFile();
         }
 
@@ -46,7 +45,7 @@ public abstract class YamlConfig {
     public void reload() {
         try {
             this.config.load(this.configFile);
-        } catch (IOException | InvalidConfigurationException e) {
+        } catch(IOException | InvalidConfigurationException e) {
             e.printStackTrace();
             PLUGIN.getLogger().severe("§cCould not reload " + name + ".yml - Contact Auxilor.");
         }
@@ -54,7 +53,7 @@ public abstract class YamlConfig {
 
     private void checkVersion() {
         double latestVersion = EcoEnchantsPlugin.configVersions.get(this.name);
-        if (latestVersion != config.getDouble("config-version")) {
+        if(latestVersion != config.getDouble("config-version")) {
             PLUGIN.getLogger().warning("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
             PLUGIN.getLogger().warning("If you've edited the config, copy over your changes!");
             performOverwrite();
@@ -75,13 +74,13 @@ public abstract class YamlConfig {
             FileOutputStream fos = new FileOutputStream(oldConf);
             byte[] buffer = new byte[1024];
             int length;
-            while ((length = fis.read(buffer)) > 0) {
+            while((length = fis.read(buffer)) > 0) {
                 fos.write(buffer, 0, length);
             }
             fis.close();
             fos.close();
             replaceFile();
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
             PLUGIN.getLogger().severe("§cCould not update config. Try reinstalling EcoEnchants");
         }

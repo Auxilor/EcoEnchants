@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Incandescence extends EcoEnchant {
     public Incandescence() {
         super(
@@ -22,10 +23,10 @@ public class Incandescence extends EcoEnchant {
 
     @EventHandler
     public void onIncandescenceHurt(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (!(event.getDamager() instanceof LivingEntity))
+        if(!(event.getDamager() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getEntity();
@@ -33,7 +34,7 @@ public class Incandescence extends EcoEnchant {
 
         int totalIncandescencePoints = HasEnchant.getArmorPoints(player, this, true);
 
-        if (totalIncandescencePoints == 0)
+        if(totalIncandescencePoints == 0)
             return;
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {

@@ -4,14 +4,15 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
+import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.LocationUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
+
 public class Magnetic extends EcoEnchant implements EcoRunnable {
     public Magnetic() {
         super(
@@ -28,11 +29,11 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
             double bonus = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
             double distance = initialDistance + (level * bonus);
 
-            for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
+            for(Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
                 if(!(e instanceof Item || e instanceof ExperienceOrb)) continue;
 
-                if (e instanceof Item) {
-                    if (((Item) e).getPickupDelay() > 0) {
+                if(e instanceof Item) {
+                    if(((Item) e).getPickupDelay() > 0) {
                         continue;
                     }
                 }

@@ -63,7 +63,7 @@ public class NMSEnchantManager implements NMSEnchantManagerWrapper {
             CraftEnchantWrapper wrappedEnchantment = new CraftEnchantWrapper(nmsEnchant, enchantment);
 
             org.bukkit.enchantments.Enchantment.registerEnchantment(wrappedEnchantment);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
+        } catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
             e.printStackTrace();
         }
     }

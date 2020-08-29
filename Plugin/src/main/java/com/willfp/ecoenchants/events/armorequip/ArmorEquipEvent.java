@@ -14,9 +14,9 @@ import org.bukkit.inventory.ItemStack;
 public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
-    private boolean cancel = false;
     private final EquipMethod equipType;
     private final ArmorType type;
+    private boolean cancel = false;
     private ItemStack oldArmorPiece, newArmorPiece;
 
     public ArmorEquipEvent(final Player player, final EquipMethod equipType, final ArmorType type, final ItemStack oldArmorPiece, final ItemStack newArmorPiece) {
@@ -25,6 +25,10 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
         this.type = type;
         this.oldArmorPiece = oldArmorPiece;
         this.newArmorPiece = newArmorPiece;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**
@@ -38,8 +42,13 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
+    /**
+     * Gets if this event is cancelled.
+     *
+     * @return If this event is cancelled
+     */
+    public final boolean isCancelled() {
+        return cancel;
     }
 
     /**
@@ -51,18 +60,10 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
         this.cancel = cancel;
     }
 
-    /**
-     * Gets if this event is cancelled.
-     *
-     * @return If this event is cancelled
-     */
-    public final boolean isCancelled() {
-        return cancel;
-    }
-
     public final ArmorType getType() {
         return type;
     }
+
     public final ItemStack getOldArmorPiece() {
         return oldArmorPiece;
     }

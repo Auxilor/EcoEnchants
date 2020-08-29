@@ -23,7 +23,7 @@ public class GrindstoneListeners implements Listener {
     public void onGrindstone(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        if (player.getOpenInventory().getTopInventory().getType() != InventoryType.GRINDSTONE)
+        if(player.getOpenInventory().getTopInventory().getType() != InventoryType.GRINDSTONE)
             return;
 
         GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();

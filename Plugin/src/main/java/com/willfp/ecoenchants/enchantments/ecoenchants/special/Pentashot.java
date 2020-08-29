@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
+
 public class Pentashot extends EcoEnchant {
     public Pentashot() {
         super(
@@ -24,17 +25,17 @@ public class Pentashot extends EcoEnchant {
 
     @EventHandler
     public void onPentashotShoot(EntityShootBowEvent event) {
-        if (event.getProjectile().getType() != EntityType.ARROW)
+        if(event.getProjectile().getType() != EntityType.ARROW)
             return;
 
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        for (int i = -2; i <= 2; i += 1) {
+        for(int i = -2; i <= 2; i += 1) {
             if(i == 0) continue;
 
             Vector velocity = event.getProjectile().getVelocity();

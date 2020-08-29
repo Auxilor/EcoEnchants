@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+
 public class Stamina extends EcoEnchant {
     public Stamina() {
         super(
@@ -20,7 +21,7 @@ public class Stamina extends EcoEnchant {
 
     @EventHandler
     public void onStaminaHunger(FoodLevelChangeEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
@@ -34,7 +35,7 @@ public class Stamina extends EcoEnchant {
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
 
-        if (Rand.randFloat(0, 1) > level * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > level * 0.01 * chance)
             return;
 
         event.setCancelled(true);

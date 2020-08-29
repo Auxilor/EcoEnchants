@@ -9,6 +9,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+
 public class Collateral extends EcoEnchant {
     public Collateral() {
         super(
@@ -20,19 +21,19 @@ public class Collateral extends EcoEnchant {
 
     @EventHandler
     public void onCollateralShoot(ProjectileLaunchEvent event) {
-        if (event.getEntityType() != EntityType.ARROW)
+        if(event.getEntityType() != EntityType.ARROW)
             return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity().getShooter();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
-        if (!(event.getEntity() instanceof Arrow)) return;
+        if(!(event.getEntity() instanceof Arrow)) return;
         Arrow a = (Arrow) event.getEntity();
 
         a.setPierceLevel(level);

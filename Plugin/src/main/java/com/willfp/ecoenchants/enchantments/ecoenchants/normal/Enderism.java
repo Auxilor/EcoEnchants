@@ -22,9 +22,9 @@ public class Enderism extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player))
+        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
@@ -33,7 +33,7 @@ public class Enderism extends EcoEnchant {
         if(!player.getWorld().getEnvironment().equals(World.Environment.THE_END))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");

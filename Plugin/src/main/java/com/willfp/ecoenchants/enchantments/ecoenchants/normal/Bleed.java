@@ -16,6 +16,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 public class Bleed extends EcoEnchant {
     public Bleed() {
         super(
@@ -27,10 +28,10 @@ public class Bleed extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getDamager();
@@ -39,13 +40,13 @@ public class Bleed extends EcoEnchant {
 
         if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+        if(Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
             return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
-        if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+        if(Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 
         double bleedDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bleed-damage");

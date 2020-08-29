@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 public class Flinch extends EcoEnchant {
     public Flinch() {
         super(
@@ -24,10 +25,10 @@ public class Flinch extends EcoEnchant {
 
     @EventHandler
     public void onFlinch(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (!(event.getDamager() instanceof LivingEntity))
+        if(!(event.getDamager() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getEntity();
@@ -39,14 +40,14 @@ public class Flinch extends EcoEnchant {
         if(!AntigriefManager.canInjure(player, victim)) return;
 
         int level;
-        if (!HasEnchant.playerOffhand(player, this) && !HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerOffhand(player, this) && !HasEnchant.playerHeld(player, this)) return;
         if(HasEnchant.playerOffhand(player, this)) level = HasEnchant.getPlayerOffhandLevel(player, this);
         else level = HasEnchant.getPlayerLevel(player, this);
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
 
-        double finalChance = (chance * level)/100;
+        double finalChance = (chance * level) / 100;
         if(Rand.randFloat(0, 1) > finalChance) return;
 
         int finalDuration = duration * level;

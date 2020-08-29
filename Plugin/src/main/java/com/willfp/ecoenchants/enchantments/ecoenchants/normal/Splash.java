@@ -7,12 +7,17 @@ import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class Splash extends EcoEnchant {
     public Splash() {
         super(
@@ -24,14 +29,13 @@ public class Splash extends EcoEnchant {
 
     @EventHandler
     public void onSplashLand(ProjectileHitEvent event) {
-        if (event.getEntityType() != EntityType.TRIDENT)
+        if(event.getEntityType() != EntityType.TRIDENT)
             return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof Trident)) return;
-
+        if(!(event.getEntity() instanceof Trident)) return;
 
 
         Trident trident = (Trident) event.getEntity();
@@ -39,17 +43,17 @@ public class Splash extends EcoEnchant {
 
         ItemStack item = TridentStack.getTridentStack(trident);
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         int level = HasEnchant.getItemLevel(item, this);
 
         double radius = level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
         double damage = level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
 
-        for (Entity e : trident.getNearbyEntities(radius, radius, radius)) {
+        for(Entity e : trident.getNearbyEntities(radius, radius, radius)) {
             if(e.hasMetadata("NPC")) continue;
 
-            if (!(e instanceof LivingEntity)) continue;
+            if(!(e instanceof LivingEntity)) continue;
             LivingEntity entity = (LivingEntity) e;
             if(e.equals(player)) continue;
 

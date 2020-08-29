@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class Abrasion extends EcoEnchant {
     public Abrasion() {
         super(
@@ -26,13 +27,13 @@ public class Abrasion extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         Player player = (Player) event.getDamager();
@@ -40,32 +41,32 @@ public class Abrasion extends EcoEnchant {
 
         if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
         boolean notcharged = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
-        if (Cooldown.getCooldown(player) != 1.0f && !notcharged)
+        if(Cooldown.getCooldown(player) != 1.0f && !notcharged)
             return;
 
         ArrayList<ItemStack> armor = new ArrayList<ItemStack>(Arrays.asList(victim.getInventory().getArmorContents()));
-        if (armor.isEmpty())
+        if(armor.isEmpty())
             return;
 
-        for (ItemStack armorPiece : armor) {
-            if (armorPiece == null)
+        for(ItemStack armorPiece : armor) {
+            if(armorPiece == null)
                 continue;
 
-            if (Target.Applicable.HELMET.getMaterials().contains(armorPiece.getType())) {
+            if(Target.Applicable.HELMET.getMaterials().contains(armorPiece.getType())) {
                 ItemDurability.damageItem(player, player.getInventory().getHelmet(), level, 39);
             }
-            if (Target.Applicable.CHESTPLATE.getMaterials().contains(armorPiece.getType())) {
+            if(Target.Applicable.CHESTPLATE.getMaterials().contains(armorPiece.getType())) {
                 ItemDurability.damageItem(player, player.getInventory().getChestplate(), level, 38);
             }
-            if (Target.Applicable.LEGGINGS.getMaterials().contains(armorPiece.getType())) {
+            if(Target.Applicable.LEGGINGS.getMaterials().contains(armorPiece.getType())) {
                 ItemDurability.damageItem(player, player.getInventory().getLeggings(), level, 37);
             }
-            if (Target.Applicable.BOOTS.getMaterials().contains(armorPiece.getType())) {
+            if(Target.Applicable.BOOTS.getMaterials().contains(armorPiece.getType())) {
                 ItemDurability.damageItem(player, player.getInventory().getBoots(), level, 36);
             }
         }

@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.commands;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,13 +18,13 @@ public class CommandEcodebug implements CommandExecutor {
     private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("ecodebug")) {
-            if (!(sender instanceof Player)) {
+        if(command.getName().equalsIgnoreCase("ecodebug")) {
+            if(!(sender instanceof Player)) {
                 sender.sendMessage(ConfigManager.getLang().getMessage("not-player"));
                 return true;
             }
 
-            if (!sender.hasPermission("ecoenchants.ecodebug")) {
+            if(!sender.hasPermission("ecoenchants.ecodebug")) {
                 sender.sendMessage(ConfigManager.getLang().getNoPermission());
                 return true;
             }
@@ -41,7 +40,7 @@ public class CommandEcodebug implements CommandExecutor {
                 byNameField.setAccessible(true);
                 Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
                 PLUGIN.getLogger().info("Enchantment.byName: " + byName.toString());
-            } catch (NoSuchFieldException | IllegalAccessException e) {
+            } catch(NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }
 

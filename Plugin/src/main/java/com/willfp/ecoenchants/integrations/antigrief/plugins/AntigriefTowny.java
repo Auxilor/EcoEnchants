@@ -33,12 +33,14 @@ public class AntigriefTowny implements AntigriefWrapper {
             try {
                 Town town = WorldCoord.parseWorldCoord(victim.getLocation()).getTownBlock().getTown();
                 return town.isPVP();
-            } catch (Exception ignored) {}
+            } catch(Exception ignored) {
+            }
         } else {
             try {
                 Town town = WorldCoord.parseWorldCoord(victim.getLocation()).getTownBlock().getTown();
                 return town.hasMobs();
-            } catch (Exception ignored) {}
+            } catch(Exception ignored) {
+            }
         }
         return true;
     }

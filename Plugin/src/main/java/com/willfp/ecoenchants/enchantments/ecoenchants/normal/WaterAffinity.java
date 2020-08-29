@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class WaterAffinity extends EcoEnchant {
     public WaterAffinity() {
         super(
@@ -21,14 +22,14 @@ public class WaterAffinity extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         if(!player.getLocation().getBlock().getType().equals(Material.WATER))
             return;
@@ -37,7 +38,7 @@ public class WaterAffinity extends EcoEnchant {
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 
-        double finalMultiplier = (multiplier/100 * level) + 1;
+        double finalMultiplier = (multiplier / 100 * level) + 1;
 
         event.setDamage(event.getDamage() * finalMultiplier);
     }

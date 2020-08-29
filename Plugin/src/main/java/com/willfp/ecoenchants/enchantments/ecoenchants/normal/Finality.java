@@ -22,22 +22,22 @@ public class Finality extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
         if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double minhealth = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "minimum-health-per-level");
-        if (!(((LivingEntity) event.getEntity()).getHealth() <= level * minhealth))
+        if(!(((LivingEntity) event.getEntity()).getHealth() <= level * minhealth))
             return;
 
         event.setDamage(10000); // cba to do this properly

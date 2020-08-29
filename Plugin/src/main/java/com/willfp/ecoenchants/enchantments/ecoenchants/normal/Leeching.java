@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Leeching extends EcoEnchant {
     public Leeching() {
         super(
@@ -22,20 +23,20 @@ public class Leeching extends EcoEnchant {
 
     @EventHandler
     public void leechingHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         Player player = (Player) event.getDamager();
 
         if(!AntigriefManager.canInjure(player, (LivingEntity) event.getEntity())) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
@@ -43,7 +44,7 @@ public class Leeching extends EcoEnchant {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
         double amountToHeal = damage * level * multiplier;
         double newHealth = player.getHealth() + amountToHeal;
-        if (newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+        if(newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
             newHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         }
         player.setHealth(newHealth);

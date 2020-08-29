@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class FirstStrike extends EcoEnchant {
     public FirstStrike() {
         super(
@@ -21,18 +22,18 @@ public class FirstStrike extends EcoEnchant {
 
     @EventHandler
     public void firstStrikeHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getDamager();
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (!(((LivingEntity) event.getEntity()).getHealth() == ((LivingEntity) event.getEntity()).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()))
+        if(!(((LivingEntity) event.getEntity()).getHealth() == ((LivingEntity) event.getEntity()).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()))
             return;
 
         int level = HasEnchant.getPlayerLevel(player, this);

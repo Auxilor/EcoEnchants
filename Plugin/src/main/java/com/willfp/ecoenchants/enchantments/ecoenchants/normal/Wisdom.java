@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+
 public class Wisdom extends EcoEnchant {
     public Wisdom() {
         super(
@@ -23,7 +24,7 @@ public class Wisdom extends EcoEnchant {
 
         if(event.getExpChangeEvent().getAmount() < 0) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 

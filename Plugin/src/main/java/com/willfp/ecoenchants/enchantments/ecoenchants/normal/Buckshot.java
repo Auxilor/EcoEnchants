@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
+
 public class Buckshot extends EcoEnchant {
     public Buckshot() {
         super(
@@ -27,15 +28,15 @@ public class Buckshot extends EcoEnchant {
 
     @EventHandler
     public void onShoot(EntityShootBowEvent event) {
-        if (event.getProjectile().getType() != EntityType.ARROW)
+        if(event.getProjectile().getType() != EntityType.ARROW)
             return;
 
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
         int level = HasEnchant.getPlayerLevel(player, this);
 
         event.getProjectile().remove();
@@ -46,7 +47,7 @@ public class Buckshot extends EcoEnchant {
         double spread = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "spread-per-level");
         spread *= level;
 
-        for (int i = 0; i < number; i += 1) {
+        for(int i = 0; i < number; i += 1) {
 
             Vector velocity = event.getProjectile().getVelocity().clone();
 

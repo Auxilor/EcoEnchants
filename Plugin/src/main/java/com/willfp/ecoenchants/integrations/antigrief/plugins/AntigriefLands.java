@@ -15,7 +15,7 @@ public class AntigriefLands implements AntigriefWrapper {
     public boolean canBreakBlock(Player player, Block block) {
         LandsIntegration landsIntegration = new LandsIntegration(EcoEnchantsPlugin.getInstance());
         Area area = landsIntegration.getAreaByLoc(block.getLocation());
-        if (area != null) {
+        if(area != null) {
             return area.canSetting(player, RoleSetting.BLOCK_BREAK, false);
         }
         return true;
@@ -25,7 +25,7 @@ public class AntigriefLands implements AntigriefWrapper {
     public boolean canCreateExplosion(Player player, Location location) {
         LandsIntegration landsIntegration = new LandsIntegration(EcoEnchantsPlugin.getInstance());
         Area area = landsIntegration.getAreaByLoc(location);
-        if (area != null) {
+        if(area != null) {
             return area.canSetting(player, RoleSetting.BLOCK_IGNITE, false);
         }
         return true;
@@ -35,7 +35,7 @@ public class AntigriefLands implements AntigriefWrapper {
     public boolean canPlaceBlock(Player player, Block block) {
         LandsIntegration landsIntegration = new LandsIntegration(EcoEnchantsPlugin.getInstance());
         Area area = landsIntegration.getAreaByLoc(block.getLocation());
-        if (area != null) {
+        if(area != null) {
             return area.canSetting(player, RoleSetting.BLOCK_PLACE, false);
         }
         return true;
@@ -46,11 +46,11 @@ public class AntigriefLands implements AntigriefWrapper {
         LandsIntegration landsIntegration = new LandsIntegration(EcoEnchantsPlugin.getInstance());
         Area area = landsIntegration.getAreaByLoc(victim.getLocation());
         if(victim instanceof Player) {
-            if (area != null) {
+            if(area != null) {
                 return area.canSetting(player, RoleSetting.ATTACK_PLAYER, false);
             }
         } else {
-            if (area != null) {
+            if(area != null) {
                 return area.canSetting(player, RoleSetting.ATTACK_ANIMAL, false);
             }
         }

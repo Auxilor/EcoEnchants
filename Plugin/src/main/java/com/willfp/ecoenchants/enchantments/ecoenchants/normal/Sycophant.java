@@ -9,6 +9,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Sycophant extends EcoEnchant {
     public Sycophant() {
         super(
@@ -20,7 +21,7 @@ public class Sycophant extends EcoEnchant {
 
     @EventHandler
     public void onBlock(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
@@ -28,7 +29,7 @@ public class Sycophant extends EcoEnchant {
         if(!player.isBlocking()) return;
 
         int level;
-        if (!HasEnchant.playerOffhand(player, this) && !HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerOffhand(player, this) && !HasEnchant.playerHeld(player, this)) return;
         if(HasEnchant.playerOffhand(player, this)) level = HasEnchant.getPlayerOffhandLevel(player, this);
         else level = HasEnchant.getPlayerLevel(player, this);
 
@@ -36,7 +37,7 @@ public class Sycophant extends EcoEnchant {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
         double amountToHeal = damage * level * multiplier;
         double newHealth = player.getHealth() + amountToHeal;
-        if (newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+        if(newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
             newHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         }
         player.setHealth(newHealth);

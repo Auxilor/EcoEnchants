@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class Indestructibility extends EcoEnchant {
     public Indestructibility() {
         super(
@@ -22,12 +23,12 @@ public class Indestructibility extends EcoEnchant {
     public void onItemDamage(PlayerItemDamageEvent event) {
         ItemStack item = event.getItem();
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         double level = HasEnchant.getItemLevel(item, this);
         double levelbonus = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "level-bonus");
 
-        if(Rand.randFloat(0, 1) < (100/ (level + (1 + levelbonus))/100)) return;
+        if(Rand.randFloat(0, 1) < (100 / (level + (1 + levelbonus)) / 100)) return;
 
         event.setCancelled(true);
         event.setDamage(0);

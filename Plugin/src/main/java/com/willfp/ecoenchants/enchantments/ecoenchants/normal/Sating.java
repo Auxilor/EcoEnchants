@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+
 public class Sating extends EcoEnchant {
     public Sating() {
         super(
@@ -20,7 +21,7 @@ public class Sating extends EcoEnchant {
 
     @EventHandler
     public void onSatingHunger(FoodLevelChangeEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
@@ -32,7 +33,7 @@ public class Sating extends EcoEnchant {
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
 
-        if (Rand.randFloat(0, 1) > level * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > level * 0.01 * chance)
             return;
 
         event.setCancelled(true);

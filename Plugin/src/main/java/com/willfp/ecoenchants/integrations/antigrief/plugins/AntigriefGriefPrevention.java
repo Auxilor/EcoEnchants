@@ -12,7 +12,7 @@ public class AntigriefGriefPrevention implements AntigriefWrapper {
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(block.getLocation(), false, null);
-        if (claim != null) {
+        if(claim != null) {
             return claim.allowBreak(player, block.getType()) == null;
         }
         return true;
@@ -21,7 +21,7 @@ public class AntigriefGriefPrevention implements AntigriefWrapper {
     @Override
     public boolean canCreateExplosion(Player player, Location location) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(location, false, null);
-        if (claim != null) {
+        if(claim != null) {
             return claim.areExplosivesAllowed;
         }
         return true;
@@ -30,7 +30,7 @@ public class AntigriefGriefPrevention implements AntigriefWrapper {
     @Override
     public boolean canPlaceBlock(Player player, Block block) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(block.getLocation(), false, null);
-        if (claim != null) {
+        if(claim != null) {
             return claim.allowBuild(player, block.getType()) == null;
         }
         return true;
@@ -42,7 +42,7 @@ public class AntigriefGriefPrevention implements AntigriefWrapper {
         if(victim instanceof Player) {
             return claim == null;
         } else {
-            if (claim != null) {
+            if(claim != null) {
                 return claim.ownerID.equals(player.getUniqueId());
             }
             return true;

@@ -10,6 +10,7 @@ public class Lightning {
 
     /**
      * Strike lightning on player without fire
+     *
      * @param victim The entity to smite
      * @param damage The damage to deal
      */

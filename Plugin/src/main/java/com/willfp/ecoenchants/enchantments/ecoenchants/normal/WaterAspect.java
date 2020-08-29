@@ -5,9 +5,14 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.HasEnchant;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Enderman;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class WaterAspect extends EcoEnchant {
     public WaterAspect() {
         super(
@@ -19,9 +24,9 @@ public class WaterAspect extends EcoEnchant {
 
     @EventHandler
     public void onWaterAspectDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) return;
+        if(!(event.getDamager() instanceof Player)) return;
 
-        if (!(event.getEntity() instanceof LivingEntity)) return;
+        if(!(event.getEntity() instanceof LivingEntity)) return;
 
         Player player = (Player) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
@@ -29,7 +34,7 @@ public class WaterAspect extends EcoEnchant {
         if(!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

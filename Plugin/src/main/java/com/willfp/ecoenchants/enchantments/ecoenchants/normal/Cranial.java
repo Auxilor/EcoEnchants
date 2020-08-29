@@ -12,6 +12,7 @@ import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class Cranial extends EcoEnchant {
     public Cranial() {
         super(
@@ -23,22 +24,22 @@ public class Cranial extends EcoEnchant {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident)) return;
+        if(!(event.getDamager() instanceof Trident)) return;
 
-        if (!(((Trident) event.getDamager()).getShooter() instanceof Player)) return;
+        if(!(((Trident) event.getDamager()).getShooter() instanceof Player)) return;
 
-        if (!(event.getEntity() instanceof LivingEntity)) return;
+        if(!(event.getEntity() instanceof LivingEntity)) return;
 
         Player player = (Player) ((Trident) event.getDamager()).getShooter();
         Trident trident = (Trident) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
 
-        if (!(trident.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
+        if(!(trident.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
 
         ItemStack item = TridentStack.getTridentStack(trident);
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
         int level = HasEnchant.getItemLevel(item, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

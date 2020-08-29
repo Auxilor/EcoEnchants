@@ -12,13 +12,13 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class CommandEcoskip implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("ecoskip")) {
-            if (!(sender instanceof Player)) {
+        if(command.getName().equalsIgnoreCase("ecoskip")) {
+            if(!(sender instanceof Player)) {
                 sender.sendMessage(ConfigManager.getLang().getMessage("not-player"));
                 return true;
             }
 
-            if (!sender.hasPermission("ecoenchants.skip")) {
+            if(!sender.hasPermission("ecoenchants.skip")) {
                 sender.sendMessage(ConfigManager.getLang().getNoPermission());
                 return true;
             }

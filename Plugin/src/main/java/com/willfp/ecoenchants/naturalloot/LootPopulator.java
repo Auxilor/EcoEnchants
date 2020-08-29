@@ -49,34 +49,36 @@ public class LootPopulator extends BlockPopulator {
                 Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
 
                 double multiplier = 0.01;
-                if (Target.Applicable.BOOK.getMaterials().contains(item.getType())) {
+                if(Target.Applicable.BOOK.getMaterials().contains(item.getType())) {
                     multiplier /= ConfigManager.getConfig().getInt("loot.book-times-less-likely");
                 }
 
-                if (ConfigManager.getConfig().getBool("loot.reduce-probability.enabled")) {
+                if(ConfigManager.getConfig().getBool("loot.reduce-probability.enabled")) {
                     multiplier /= ConfigManager.getConfig().getDouble("loot.reduce-probability.factor");
                 }
 
-                for (EcoEnchant enchantment : enchantments) {
+                for(EcoEnchant enchantment : enchantments) {
                     if(enchantment == null || enchantment.getRarity() == null) continue;
 
-                    if (Rand.randFloat(0, 1) > enchantment.getRarity().getLootProbability() * multiplier)
+                    if(Rand.randFloat(0, 1) > enchantment.getRarity().getLootProbability() * multiplier)
                         continue;
-                    if (!enchantment.canGetFromLoot())
+                    if(!enchantment.canGetFromLoot())
                         continue;
                     if(!enchantment.canEnchantItem(item))
                         continue;
 
                     AtomicBoolean anyConflicts = new AtomicBoolean(false);
                     toAdd.forEach((enchant, integer) -> {
-                        if (enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
-                        if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
+                        if(enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
+                        if(enchant.conflictsWith(enchantment)) anyConflicts.set(true);
 
                         EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                        if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) anyConflicts.set(true);
-                        if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) anyConflicts.set(true);
+                        if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL))
+                            anyConflicts.set(true);
+                        if(enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT))
+                            anyConflicts.set(true);
                     });
-                    if (anyConflicts.get()) continue;
+                    if(anyConflicts.get()) continue;
 
                     int level;
 
@@ -93,7 +95,7 @@ public class LootPopulator extends BlockPopulator {
 
                     toAdd.put(enchantment, level);
 
-                    if (ConfigManager.getConfig().getBool("loot.reduce-probability.enabled")) {
+                    if(ConfigManager.getConfig().getBool("loot.reduce-probability.enabled")) {
                         multiplier /= ConfigManager.getConfig().getDouble("loot.reduce-probability.factor");
                     }
                 }

@@ -22,10 +22,10 @@ public class AnvilMerge {
     /**
      * Merge items in anvil
      *
-     * @param left The {@link ItemStack} on the left of the anvil
+     * @param left  The {@link ItemStack} on the left of the anvil
      * @param right The {@link ItemStack} in the middle of the anvil
-     * @param old The previous {@link ItemStack} result
-     * @param name The anvil display name
+     * @param old   The previous {@link ItemStack} result
+     * @param name  The anvil display name
      * @return The result, stored as a {@link Pair} of {@link ItemStack} and {@link Integer}.
      */
     public static Pair<ItemStack, Integer> doMerge(ItemStack left, ItemStack right, ItemStack old, String name) {
@@ -33,7 +33,7 @@ public class AnvilMerge {
 
         int outDamage = -1;
         if(old != null) {
-            if (old.getItemMeta() instanceof Damageable) {
+            if(old.getItemMeta() instanceof Damageable) {
                 outDamage = ((Damageable) old.getItemMeta()).getDamage();
             }
         }
@@ -75,7 +75,8 @@ public class AnvilMerge {
             outDamage = ((Damageable) left.getItemMeta()).getDamage();
         }
 
-        if(!left.getType().equals(right.getType()) && !(right.getItemMeta() instanceof EnchantmentStorageMeta)) return new Pair<>(null, null);
+        if(!left.getType().equals(right.getType()) && !(right.getItemMeta() instanceof EnchantmentStorageMeta))
+            return new Pair<>(null, null);
 
         HashMap<Enchantment, Integer> leftEnchants = new HashMap<>();
         HashMap<Enchantment, Integer> rightEnchants = new HashMap<>();
@@ -101,8 +102,7 @@ public class AnvilMerge {
                 int rightLevel = rightEnchants.get(enchantment);
                 if(rightLevel > level) {
                     level = rightLevel;
-                }
-                else if(rightLevel == level) {
+                } else if(rightLevel == level) {
                     if(rightLevel > enchantment.getMaxLevel() && ConfigManager.getConfig().getBool("anvil.allow-combining-unsafe")) {
                         level++;
                     } else if((rightLevel + 1) <= enchantment.getMaxLevel() || ConfigManager.getConfig().getBool("anvil.allow-unsafe-levels")) {
@@ -118,8 +118,10 @@ public class AnvilMerge {
         rightEnchants.forEach(((enchantment, integer) -> {
             AtomicBoolean doesConflict = new AtomicBoolean(false);
 
-            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.SPECIAL)) doesConflict.set(true);
-            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.ARTIFACT)) doesConflict.set(true);
+            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.SPECIAL))
+                doesConflict.set(true);
+            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.ARTIFACT))
+                doesConflict.set(true);
 
             leftEnchants.forEach(((enchantment1, integer1) -> {
                 if(enchantment.conflictsWith(enchantment1)) doesConflict.set(true);

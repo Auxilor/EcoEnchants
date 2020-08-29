@@ -13,21 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 public class CommandEcoreload implements CommandExecutor {
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("ecoreload")) {
-            if (sender instanceof Player) {
-                if (!sender.hasPermission("ecoenchants.reload")) {
-                    sender.sendMessage(ConfigManager.getLang().getNoPermission());
-                    return true;
-                }
-            }
-            reload();
-            sender.sendMessage(ConfigManager.getLang().getMessage("reloaded"));
-        }
-
-        return false;
-    }
-
     public static void reload() {
         ConfigManager.updateConfigs();
         EnchantmentRarity.update();
@@ -43,5 +28,20 @@ public class CommandEcoreload implements CommandExecutor {
                 }
             }, 1);
         }));
+    }
+
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(command.getName().equalsIgnoreCase("ecoreload")) {
+            if(sender instanceof Player) {
+                if(!sender.hasPermission("ecoenchants.reload")) {
+                    sender.sendMessage(ConfigManager.getLang().getNoPermission());
+                    return true;
+                }
+            }
+            reload();
+            sender.sendMessage(ConfigManager.getLang().getMessage("reloaded"));
+        }
+
+        return false;
     }
 }

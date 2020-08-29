@@ -7,6 +7,7 @@ public class Numeral {
 
     /**
      * Get Roman Numeral from number
+     *
      * @param number The number to convert
      * @return The number, converted to a roman numeral
      */
@@ -27,7 +28,7 @@ public class Numeral {
         roman_numerals.put("IV", 4);
         roman_numerals.put("I", 1);
         StringBuilder res = new StringBuilder();
-        for (Map.Entry<String, Integer> entry : roman_numerals.entrySet()) {
+        for(Map.Entry<String, Integer> entry : roman_numerals.entrySet()) {
             int matches = number / entry.getValue();
             res.append(repeat(entry.getKey(), matches));
             number = number % entry.getValue();
@@ -36,11 +37,11 @@ public class Numeral {
     }
 
     private static String repeat(String s, int n) {
-        if (s == null) {
+        if(s == null) {
             return null;
         }
         final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             sb.append(s);
         }
         return sb.toString();

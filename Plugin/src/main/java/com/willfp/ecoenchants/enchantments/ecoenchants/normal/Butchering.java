@@ -10,6 +10,7 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Butchering extends EcoEnchant {
     public Butchering() {
         super(
@@ -21,16 +22,16 @@ public class Butchering extends EcoEnchant {
 
     @EventHandler
     public void butcheringHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
-        if (event.getEntity() instanceof Monster)
+        if(event.getEntity() instanceof Monster)
             return;
 
         Player player = (Player) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");

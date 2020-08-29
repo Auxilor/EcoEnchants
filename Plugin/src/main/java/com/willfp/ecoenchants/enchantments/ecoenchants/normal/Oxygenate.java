@@ -11,6 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
+
 public class Oxygenate extends EcoEnchant {
     public Oxygenate() {
         super(
@@ -25,12 +26,12 @@ public class Oxygenate extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if(!AntigriefManager.canBreakBlock(player, block)) return;
 
         if(player.getRemainingAir() == player.getMaximumAir()) return;
 

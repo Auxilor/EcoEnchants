@@ -13,6 +13,7 @@ import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class Aquatic extends EcoEnchant {
     public Aquatic() {
         super(
@@ -24,16 +25,16 @@ public class Aquatic extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
+        if(!(event.getDamager() instanceof Trident))
             return;
 
         if(!(((Trident) event.getDamager()).getShooter() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         Player player = (Player) ((Trident) event.getDamager()).getShooter();
@@ -43,13 +44,13 @@ public class Aquatic extends EcoEnchant {
         if(!player.getLocation().getBlock().getType().equals(Material.WATER))
             return;
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         int level = HasEnchant.getItemLevel(item, this);
 
         double perLevelDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 
-        double totalDamagePercent = (100 + (perLevelDamage * level))/100;
+        double totalDamagePercent = (100 + (perLevelDamage * level)) / 100;
 
         event.setDamage(event.getDamage() * totalDamagePercent);
     }

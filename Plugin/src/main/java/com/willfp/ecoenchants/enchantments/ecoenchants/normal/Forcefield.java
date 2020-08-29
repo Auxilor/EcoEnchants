@@ -4,11 +4,12 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
+import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
+
 public class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(
@@ -27,7 +28,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
             double damagePerPoint = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
             final double damage = damagePerPoint * level;
 
-            for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
+            for(Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
                 if(!(e instanceof Monster)) continue;
 
                 ((Monster) e).damage(damage, player);

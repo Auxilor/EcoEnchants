@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Criticals extends EcoEnchant {
     public Criticals() {
         super(
@@ -20,18 +21,18 @@ public class Criticals extends EcoEnchant {
 
     @EventHandler
     public void criticalHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getDamager();
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (!(player.getFallDistance() > 0 && !player.isOnGround()))
+        if(!(player.getFallDistance() > 0 && !player.isOnGround()))
             return;
 
         int level = HasEnchant.getPlayerLevel(player, this);

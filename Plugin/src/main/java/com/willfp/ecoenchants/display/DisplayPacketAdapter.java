@@ -27,28 +27,28 @@ public class DisplayPacketAdapter extends PacketAdapter {
         if(event.getPacket() == null) return;
 
         PacketType packetType = event.getPacketType();
-        if (packetType.equals(PacketType.Play.Server.WINDOW_ITEMS)) {
+        if(packetType.equals(PacketType.Play.Server.WINDOW_ITEMS)) {
             event.getPacket().getItemListModifier().modify(0, (itemStacks) -> {
                 itemStacks.forEach(EnchantDisplay::displayEnchantments);
                 return itemStacks;
             });
-        } else if (packetType.equals(PacketType.Play.Server.SET_SLOT)) {
+        } else if(packetType.equals(PacketType.Play.Server.SET_SLOT)) {
             event.getPacket().getItemModifier().modify(0, (item) -> {
                 item = EnchantDisplay.displayEnchantments(item);
                 return item;
             });
-        } else if (packetType.equals(PacketType.Play.Server.OPEN_WINDOW_MERCHANT)) {
+        } else if(packetType.equals(PacketType.Play.Server.OPEN_WINDOW_MERCHANT)) {
             List<MerchantRecipe> merchantRecipes = event.getPacket().getMerchantRecipeLists().readSafely(0);
-            if (merchantRecipes != null) {
+            if(merchantRecipes != null) {
                 List<MerchantRecipe> newList =
                         merchantRecipes.stream().map(oldRecipe -> {
                             MerchantRecipe recipe =
                                     new MerchantRecipe(EnchantDisplay.displayEnchantments(oldRecipe.getResult()),
-                                    oldRecipe.getUses(),
-                                    oldRecipe.getMaxUses(),
-                                    oldRecipe.hasExperienceReward(),
-                                    oldRecipe.getVillagerExperience(),
-                                    oldRecipe.getPriceMultiplier());
+                                            oldRecipe.getUses(),
+                                            oldRecipe.getMaxUses(),
+                                            oldRecipe.hasExperienceReward(),
+                                            oldRecipe.getVillagerExperience(),
+                                            oldRecipe.getPriceMultiplier());
                             recipe.setIngredients(oldRecipe.getIngredients());
                             return recipe;
                         }).collect(Collectors.toList());

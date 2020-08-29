@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class StoneSwitcher extends EcoEnchant {
     public StoneSwitcher() {
         super(
@@ -30,17 +31,17 @@ public class StoneSwitcher extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
+        if(player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
 
         if(!block.getType().equals(Material.STONE)) return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if(!AntigriefManager.canBreakBlock(player, block)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
@@ -52,8 +53,8 @@ public class StoneSwitcher extends EcoEnchant {
 
         Material material;
         double random = Rand.randFloat(0, 1);
-        double band = 1/(double) this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size();
-        int selectedIndex = (int) Math.floor(random/band);
+        double band = 1 / (double) this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size();
+        int selectedIndex = (int) Math.floor(random / band);
         selectedIndex = EqualIfOver.equalIfOver(selectedIndex, this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size() - 1);
         String materialName = this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").get(selectedIndex);
         material = Material.getMaterial(materialName.toUpperCase());

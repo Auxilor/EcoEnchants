@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+
 public class GreenThumb extends EcoEnchant {
     public GreenThumb() {
         super(
@@ -25,16 +26,16 @@ public class GreenThumb extends EcoEnchant {
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if (!event.getAction().equals(Action.LEFT_CLICK_BLOCK))
+        if(!event.getAction().equals(Action.LEFT_CLICK_BLOCK))
             return;
 
-        if (event.getClickedBlock() == null)
+        if(event.getClickedBlock() == null)
             return;
 
-        if (!event.getClickedBlock().getType().equals(Material.DIRT))
+        if(!event.getClickedBlock().getType().equals(Material.DIRT))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         if(!AntigriefManager.canBreakBlock(player, event.getClickedBlock())) return;
 

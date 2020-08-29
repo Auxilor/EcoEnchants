@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 public class Spearfishing extends EcoEnchant {
     public Spearfishing() {
         super(
@@ -31,13 +32,13 @@ public class Spearfishing extends EcoEnchant {
 
     @EventHandler
     public void onSpearfishingLand(ProjectileHitEvent event) {
-        if (event.getEntityType() != EntityType.TRIDENT)
+        if(event.getEntityType() != EntityType.TRIDENT)
             return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof Trident)) return;
+        if(!(event.getEntity() instanceof Trident)) return;
 
         Trident trident = (Trident) event.getEntity();
 
@@ -48,11 +49,11 @@ public class Spearfishing extends EcoEnchant {
 
         ItemStack item = TridentStack.getTridentStack(trident);
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         int level = HasEnchant.getItemLevel(item, this);
 
-        double chance = level * (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level")/100);
+        double chance = level * (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") / 100);
         if(Rand.randFloat(0, 1) > chance) return;
 
         List<Material> potentialDrops = new ArrayList<>();

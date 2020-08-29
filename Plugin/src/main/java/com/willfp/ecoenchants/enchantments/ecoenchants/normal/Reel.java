@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.util.Vector;
+
 public class Reel extends EcoEnchant {
     public Reel() {
         super(
@@ -36,7 +37,7 @@ public class Reel extends EcoEnchant {
 
         if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 

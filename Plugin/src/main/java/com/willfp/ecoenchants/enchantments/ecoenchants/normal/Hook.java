@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
+
 public class Hook extends EcoEnchant {
     public Hook() {
         super(
@@ -23,11 +24,11 @@ public class Hook extends EcoEnchant {
 
     @EventHandler
     public void hookHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
         if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         if(event.isCancelled()) return;
@@ -40,7 +41,7 @@ public class Hook extends EcoEnchant {
 
         if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 

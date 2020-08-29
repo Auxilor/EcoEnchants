@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.artifact;
 import com.willfp.ecoenchants.enchantments.Artifact;
 import org.bukkit.Color;
 import org.bukkit.Particle;
+
 public class ZapArtifact extends Artifact {
     public ZapArtifact() {
         super(

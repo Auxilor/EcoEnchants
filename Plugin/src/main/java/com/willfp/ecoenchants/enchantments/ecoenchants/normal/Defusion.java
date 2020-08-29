@@ -9,6 +9,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Defusion extends EcoEnchant {
     public Defusion() {
         super(
@@ -20,16 +21,16 @@ public class Defusion extends EcoEnchant {
 
     @EventHandler
     public void defusionHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof Creeper))
+        if(!(event.getEntity() instanceof Creeper))
             return;
 
         Player player = (Player) event.getDamager();
 
         Creeper victim = (Creeper) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");

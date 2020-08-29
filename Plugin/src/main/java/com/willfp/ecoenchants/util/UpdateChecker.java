@@ -21,11 +21,11 @@ public class UpdateChecker {
 
     public void getVersion(final Consumer<? super String> consumer) {
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
-            try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
-                if (scanner.hasNext()) {
+            try(InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
+                if(scanner.hasNext()) {
                     consumer.accept(scanner.next());
                 }
-            } catch (IOException exception) {
+            } catch(IOException exception) {
                 this.plugin.getLogger().warning("Failed to check for EcoEnchants updates: " + exception.getMessage());
             }
         });

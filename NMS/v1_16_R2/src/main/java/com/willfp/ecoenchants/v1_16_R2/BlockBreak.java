@@ -9,6 +9,6 @@ import org.bukkit.entity.Player;
 public class BlockBreak implements BlockBreakWrapper {
     @Override
     public void breakBlock(Player player, Block block) {
-        ((CraftPlayer)player).getHandle().playerInteractManager.breakBlock(new BlockPosition(block.getX(), block.getY(), block.getZ()));
+        ((CraftPlayer) player).getHandle().playerInteractManager.breakBlock(new BlockPosition(block.getX(), block.getY(), block.getZ()));
     }
 }

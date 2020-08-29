@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
 public class Marksman extends EcoEnchant {
     public Marksman() {
         super(
@@ -23,17 +24,17 @@ public class Marksman extends EcoEnchant {
 
     @EventHandler
     public void onMarksmanShoot(ProjectileLaunchEvent event) {
-        if (event.getEntityType() != EntityType.ARROW)
+        if(event.getEntityType() != EntityType.ARROW)
             return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity().getShooter();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (!(event.getEntity() instanceof Arrow)) return;
+        if(!(event.getEntity() instanceof Arrow)) return;
         Arrow a = (Arrow) event.getEntity();
         a.setGravity(false);
 
@@ -42,7 +43,7 @@ public class Marksman extends EcoEnchant {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!a.isOnGround()) {
+                if(!a.isOnGround()) {
                     a.remove();
                 }
             }

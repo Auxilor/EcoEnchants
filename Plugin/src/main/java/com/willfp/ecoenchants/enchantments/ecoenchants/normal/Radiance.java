@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 public class Radiance extends EcoEnchant {
     public Radiance() {
         super(
@@ -24,25 +25,25 @@ public class Radiance extends EcoEnchant {
 
     @EventHandler
     public void onLand(ProjectileHitEvent event) {
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof Arrow)) return;
+        if(!(event.getEntity() instanceof Arrow)) return;
 
         Arrow arrow = (Arrow) event.getEntity();
         Player player = (Player) event.getEntity().getShooter();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double radius = level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
         int duration = level * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "duration-per-level");
 
-        for (Entity e : arrow.getNearbyEntities(radius, radius, radius)) {
+        for(Entity e : arrow.getNearbyEntities(radius, radius, radius)) {
             if(e.hasMetadata("NPC")) continue;
 
-            if (!(e instanceof LivingEntity)) continue;
+            if(!(e instanceof LivingEntity)) continue;
             LivingEntity entity = (LivingEntity) e;
             if(e.equals(player)) continue;
 

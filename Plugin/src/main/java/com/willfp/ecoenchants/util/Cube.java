@@ -8,6 +8,7 @@ public class Cube {
 
     /**
      * Get cube as relative vectors
+     *
      * @param radius The radius of the cube
      * @return An array of {@link Vector}s
      */
@@ -18,9 +19,9 @@ public class Cube {
         int zoffset = -radius;
         int yoffset = -radius;
 
-        while (yoffset <= radius) {
-            while (zoffset <= radius) {
-                while (xoffset <= radius) {
+        while(yoffset <= radius) {
+            while(zoffset <= radius) {
+                while(xoffset <= radius) {
                     cubeVecs.add(new Vector(xoffset, yoffset, zoffset));
                     xoffset++;
                 }

@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
+
 public class Reinforcement extends EcoEnchant {
     public Reinforcement() {
         super(
@@ -31,7 +32,7 @@ public class Reinforcement extends EcoEnchant {
         int level = HasEnchant.getPlayerChestplateLevel(player, this);
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "reduction-per-level");
-        double multiplier = 1 - ((reduction/100) * level);
+        double multiplier = 1 - ((reduction / 100) * level);
         event.setDamage(event.getDamage() * multiplier);
     }
 }

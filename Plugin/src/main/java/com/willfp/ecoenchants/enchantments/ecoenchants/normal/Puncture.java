@@ -6,10 +6,15 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.HasEnchant;
-import org.bukkit.entity.*;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Shulker;
+import org.bukkit.entity.Trident;
+import org.bukkit.entity.Turtle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class Puncture extends EcoEnchant {
     public Puncture() {
         super(
@@ -21,16 +26,16 @@ public class Puncture extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
+        if(!(event.getDamager() instanceof Trident))
             return;
 
         if(!(((Trident) event.getDamager()).getShooter() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         Player player = (Player) ((Trident) event.getDamager()).getShooter();
@@ -42,13 +47,13 @@ public class Puncture extends EcoEnchant {
         if(!(victim instanceof Turtle || victim instanceof Shulker))
             return;
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         int level = HasEnchant.getItemLevel(item, this);
 
         double perLevelDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 
-        double totalDamagePercent = (100 + (perLevelDamage * level))/100;
+        double totalDamagePercent = (100 + (perLevelDamage * level)) / 100;
 
         event.setDamage(event.getDamage() * totalDamagePercent);
     }

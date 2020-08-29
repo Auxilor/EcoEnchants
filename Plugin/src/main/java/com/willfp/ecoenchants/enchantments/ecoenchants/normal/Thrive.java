@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
 public class Thrive extends EcoEnchant {
     public Thrive() {
         super(
@@ -30,7 +31,7 @@ public class Thrive extends EcoEnchant {
             public void run() {
                 int totalProsperityPoints = HasEnchant.getArmorPoints(player, EcoEnchants.PROSPERITY, false);
                 int totalThrivePoints = HasEnchant.getArmorPoints(player, EcoEnchants.THRIVE, false);
-                if (totalThrivePoints == 0 && totalProsperityPoints == 0) {
+                if(totalThrivePoints == 0 && totalProsperityPoints == 0) {
                     player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
                     return;
                 }
@@ -40,14 +41,14 @@ public class Thrive extends EcoEnchant {
                 double bonus = thriveBonus + prosperityBonus;
 
                 boolean onMaxHealth = false;
-                if (player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                if(player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
                     onMaxHealth = true;
 
                 player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue() + bonus);
                 boolean finalOnMaxHealth = onMaxHealth;
                 new BukkitRunnable() {
                     public void run() {
-                        if (finalOnMaxHealth) {
+                        if(finalOnMaxHealth) {
                             player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 255, false, false, false));
                         }
                     }

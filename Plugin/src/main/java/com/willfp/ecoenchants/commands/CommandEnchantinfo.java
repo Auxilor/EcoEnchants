@@ -18,8 +18,8 @@ import java.util.Set;
 
 public class CommandEnchantinfo implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("enchantinfo")) {
-            if (!sender.hasPermission("ecoenchants.enchantinfo")) {
+        if(command.getName().equalsIgnoreCase("enchantinfo")) {
+            if(!sender.hasPermission("ecoenchants.enchantinfo")) {
                 sender.sendMessage(ConfigManager.getLang().getNoPermission());
                 return true;
             }
@@ -61,10 +61,14 @@ public class CommandEnchantinfo implements CommandExecutor {
                 isArtifact = true;
             }
 
-            if(isCurse) color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("curse-color"));
-            else if(isSpecial) color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("special-color"));
-            else if(isArtifact) color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color"));
-            else color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("not-curse-color"));
+            if(isCurse)
+                color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("curse-color"));
+            else if(isSpecial)
+                color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("special-color"));
+            else if(isArtifact)
+                color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color"));
+            else
+                color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("not-curse-color"));
 
 
             name = enchantment.getName();
@@ -93,7 +97,7 @@ public class CommandEnchantinfo implements CommandExecutor {
             });
             String allConflicts = conflictNamesBuilder.toString();
             if(allConflicts.length() >= 2) {
-                allConflicts = allConflicts.substring(0, allConflicts.length() -2);
+                allConflicts = allConflicts.substring(0, allConflicts.length() - 2);
             } else {
                 allConflicts = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("no-conflicts"));
             }

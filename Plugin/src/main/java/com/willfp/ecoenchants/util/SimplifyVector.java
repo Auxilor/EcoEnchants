@@ -16,21 +16,21 @@ public class SimplifyVector {
         double y = Math.abs(vec.getY());
         double z = Math.abs(vec.getZ());
         double max = Math.max(x, Math.max(y, z));
-        if (x > 1 || z > 1) {
+        if(x > 1 || z > 1) {
             max = y;
         }
-        if (max == x) {
-            if (vec.getX() < 0) {
+        if(max == x) {
+            if(vec.getX() < 0) {
                 return new Vector(-1, 0, 0);
             }
             return new Vector(1, 0, 0);
-        } else if (max == y) {
-            if (vec.getY() < 0) {
+        } else if(max == y) {
+            if(vec.getY() < 0) {
                 return new Vector(0, -1, 0);
             }
             return new Vector(0, 1, 0);
         } else {
-            if (vec.getZ() < 0) {
+            if(vec.getZ() < 0) {
                 return new Vector(0, 0, -1);
             }
             return new Vector(0, 0, 1);

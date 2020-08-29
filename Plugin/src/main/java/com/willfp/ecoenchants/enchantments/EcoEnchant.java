@@ -1,12 +1,9 @@
 package com.willfp.ecoenchants.enchantments;
 
-import com.earth2me.essentials.Enchantments;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.nms.Target;
 import org.apache.commons.lang.WordUtils;
-import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -15,19 +12,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @SuppressWarnings("unchecked")
 public abstract class EcoEnchant extends Enchantment implements Listener {
+    private final String permissionName;
+    private final EnchantmentType type;
+    private final double configVersion;
+    private final EnchantmentConfig config;
     private String name;
     private String description;
     private Set<Material> target;
-    private final String permissionName;
-    private final EnchantmentType type;
-
-    private final double configVersion;
-    private final EnchantmentConfig config;
-
     private boolean grindstoneable;
     private boolean canGetFromTable;
     private boolean canGetFromVillager;
@@ -88,8 +87,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
             byName.remove(this.getName());
 
             Map<String, Enchantment> byNameClone = new HashMap<>(byName);
-            for (Map.Entry<String, Enchantment> entry : byNameClone.entrySet()) {
-                if (entry.getValue().getKey().equals(this.getKey())) {
+            for(Map.Entry<String, Enchantment> entry : byNameClone.entrySet()) {
+                if(entry.getValue().getKey().equals(this.getKey())) {
                     byName.remove(entry.getKey());
                 }
             }
@@ -100,7 +99,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
             f.setAccessible(false);
 
             Enchantment.registerEnchantment(this);
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {}
+        } catch(NoSuchFieldException | IllegalAccessException ignored) {
+        }
     }
 
     private void add() {
@@ -113,6 +113,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get if enchantment can be removed in grindstone
+     *
      * @return Whether the enchantment can be removed
      */
     public boolean isGrindstoneable() {
@@ -121,12 +122,16 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get {@link EnchantmentType} of enchantment
+     *
      * @return The {@link EnchantmentType}
      */
-    public EnchantmentType getType() { return this.type; }
+    public EnchantmentType getType() {
+        return this.type;
+    }
 
     /**
      * Get a set of all conflicts
+     *
      * @return Conflicts
      */
     public Set<Enchantment> getConflicts() {
@@ -135,6 +140,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get if enchantment is disabled
+     *
      * @return If disabled
      */
     public boolean isDisabled() {
@@ -143,6 +149,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get permission name of enchantment
+     *
      * @return The permission name
      */
     public String getPermissionName() {
@@ -151,6 +158,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get description of enchantment
+     *
      * @return The description
      */
     public List<String> getDescription() {
@@ -159,6 +167,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get if enchantment can be obtained from an enchanting table
+     *
      * @return If can be obtained
      */
     public boolean canGetFromTable() {
@@ -167,6 +176,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get if enchantment can be obtained from a villager
+     *
      * @return If can be obtained
      */
     public boolean canGetFromVillager() {
@@ -175,6 +185,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get if enchantment can be obtained from chest loot
+     *
      * @return If can be obtained
      */
     public boolean canGetFromLoot() {
@@ -183,6 +194,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get {@link EnchantmentRarity} of enchantment
+     *
      * @return The enchantment rarity
      */
     public EnchantmentRarity getRarity() {
@@ -191,6 +203,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * If enchantment conflicts with any enchantment in set
+     *
      * @param enchantments The set to test against
      * @return If there are any conflicts
      */
@@ -200,6 +213,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get enchantment cast to {@link Enchantment}
+     *
      * @return The enchantment
      */
     public Enchantment getEnchantment() {
@@ -208,6 +222,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get the {@link Target} of enchantment
+     *
      * @return Set of enchantable items
      */
     public Set<Material> getTarget() {
@@ -216,6 +231,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get latest config version
+     *
      * @return The latest version
      */
     public double getConfigVersion() {
@@ -224,6 +240,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get {@link EnchantmentConfig} of enchantment
+     *
      * @return The config
      */
     public EnchantmentConfig getConfig() {
@@ -243,6 +260,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get max level of enchantment
+     *
      * @return The max level
      */
     @Override
@@ -263,7 +281,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
      * Only here for compatibility with {@link Enchantment}
      *
      * @return Returns {@link EnchantmentTarget#ALL}. Do not use.
-     *
      * @deprecated {@link EnchantmentTarget} is not supported due to its lack of flexibility. Use {@link EcoEnchant#getTarget()} instead.
      */
     @Override
@@ -284,7 +301,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * @return Returns if enchantment is cursed.
-     *
      * @deprecated Use {@link EcoEnchant#getType()} instead.
      */
     @Override
@@ -295,6 +311,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * Get if enchantment conflicts with specified enchantment
+     *
      * @param enchantment The enchantment to test against
      * @return If conflicts
      */
@@ -305,6 +322,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
     /**
      * If enchantment can be applied to item
+     *
      * @param itemStack The {@link ItemStack} to test against
      * @return If can be applied
      */

@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 public class Disappear extends EcoEnchant {
     public Disappear() {
         super(
@@ -23,7 +24,7 @@ public class Disappear extends EcoEnchant {
 
     @EventHandler
     public void onHurt(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
@@ -34,7 +35,7 @@ public class Disappear extends EcoEnchant {
 
             final int points = HasEnchant.getArmorPoints(player, this, true);
 
-            if (points == 0)
+            if(points == 0)
                 return;
 
             int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");

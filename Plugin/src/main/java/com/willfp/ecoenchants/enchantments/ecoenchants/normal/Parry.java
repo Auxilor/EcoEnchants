@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Parry extends EcoEnchant {
     public Parry() {
         super(
@@ -19,15 +20,15 @@ public class Parry extends EcoEnchant {
 
     @EventHandler
     public void parryHit(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         Player player = (Player) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 

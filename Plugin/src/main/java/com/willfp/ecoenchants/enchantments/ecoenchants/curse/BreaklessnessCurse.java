@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockDamageEvent;
+
 public class BreaklessnessCurse extends EcoEnchant {
     public BreaklessnessCurse() {
         super(
@@ -22,9 +23,9 @@ public class BreaklessnessCurse extends EcoEnchant {
     public void onDamageBlock(BlockDamageEvent event) {
         Player player = event.getPlayer();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (Rand.randFloat(0, 1) > 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance"))
+        if(Rand.randFloat(0, 1) > 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance"))
             return;
 
         event.setCancelled(true);

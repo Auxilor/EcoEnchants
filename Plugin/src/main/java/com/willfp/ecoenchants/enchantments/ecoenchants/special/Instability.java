@@ -11,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
+
 public class Instability extends EcoEnchant {
     public Instability() {
         super(
@@ -22,17 +23,17 @@ public class Instability extends EcoEnchant {
 
     @EventHandler
     public void onInstabilityLand(ProjectileHitEvent event) {
-        if (event.getEntityType() != EntityType.ARROW)
+        if(event.getEntityType() != EntityType.ARROW)
             return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity().getShooter();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (!(event.getEntity() instanceof Arrow)) return;
+        if(!(event.getEntity() instanceof Arrow)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
@@ -41,9 +42,9 @@ public class Instability extends EcoEnchant {
 
         float power = (float) (0.5 + (level * 0.5));
 
-        if (!AntigriefManager.canCreateExplosion(player, event.getEntity().getLocation())) return;
-        if (breakblocks) {
-            if (!AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
+        if(!AntigriefManager.canCreateExplosion(player, event.getEntity().getLocation())) return;
+        if(breakblocks) {
+            if(!AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
                 return;
         }
 

@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
+
 public class Evasion extends EcoEnchant {
     public Evasion() {
         super(
@@ -20,19 +21,19 @@ public class Evasion extends EcoEnchant {
 
     @EventHandler
     public void onEvasionHurt(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
 
         int totalEvasionPoints = HasEnchant.getArmorPoints(player, this, true);
 
-        if (totalEvasionPoints == 0)
+        if(totalEvasionPoints == 0)
             return;
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point");
 
-        if (Rand.randFloat(0, 1) > totalEvasionPoints * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > totalEvasionPoints * 0.01 * chance)
             return;
 
         event.setCancelled(true);

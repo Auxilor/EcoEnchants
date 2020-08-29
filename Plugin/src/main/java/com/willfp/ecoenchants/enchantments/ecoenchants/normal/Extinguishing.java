@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
+
 public class Extinguishing extends EcoEnchant {
     public Extinguishing() {
         super(
@@ -20,21 +21,21 @@ public class Extinguishing extends EcoEnchant {
 
     @EventHandler
     public void onExtinguishingHurt(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (!event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK))
+        if(!event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK))
             return;
 
         Player player = (Player) event.getEntity();
 
         int totalExtinguishingPoints = HasEnchant.getArmorPoints(player, this, false);
 
-        if (totalExtinguishingPoints == 0)
+        if(totalExtinguishingPoints == 0)
             return;
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point");
-        if (Rand.randFloat(0, 1) > totalExtinguishingPoints * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > totalExtinguishingPoints * 0.01 * chance)
             return;
 
         player.setFireTicks(0);

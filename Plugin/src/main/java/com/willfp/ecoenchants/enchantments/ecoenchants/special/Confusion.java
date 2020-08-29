@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 public class Confusion extends EcoEnchant {
     public Confusion() {
         super(
@@ -27,9 +28,9 @@ public class Confusion extends EcoEnchant {
 
     @EventHandler
     public void confusionHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getDamager();
@@ -38,24 +39,24 @@ public class Confusion extends EcoEnchant {
 
         if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+        if(Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
             return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
-        if (Rand.randFloat(0, 1) > level * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > level * 0.01 * chance)
             return;
 
         List<ItemStack> hotbar = new ArrayList<ItemStack>();
-        for (int i = 0; i < 9; i++) {
+        for(int i = 0; i < 9; i++) {
             hotbar.add(victim.getInventory().getItem(i));
         }
         Collections.shuffle(hotbar);
         int i2 = 0;
-        for (ItemStack item : hotbar) {
+        for(ItemStack item : hotbar) {
             victim.getInventory().setItem(i2, item);
             i2++;
         }

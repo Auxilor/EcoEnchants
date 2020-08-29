@@ -12,6 +12,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Parasitic extends EcoEnchant {
     public Parasitic() {
         super(
@@ -23,23 +24,23 @@ public class Parasitic extends EcoEnchant {
 
     @EventHandler
     public void parasiticHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
 
         if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
 
         if(!AntigriefManager.canInjure(player, (LivingEntity) event.getEntity())) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
@@ -47,7 +48,7 @@ public class Parasitic extends EcoEnchant {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
         double amountToHeal = damage * level * multiplier;
         double newHealth = player.getHealth() + amountToHeal;
-        if (newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+        if(newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
             newHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         }
         player.setHealth(newHealth);

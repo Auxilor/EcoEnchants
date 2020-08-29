@@ -18,6 +18,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
 public class Farmhand extends EcoEnchant {
     public Farmhand() {
         super(
@@ -31,20 +32,20 @@ public class Farmhand extends EcoEnchant {
     public void onTill(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+        if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
             return;
 
-        if (event.getClickedBlock() == null)
+        if(event.getClickedBlock() == null)
             return;
 
-        if (!(event.getClickedBlock().getType().equals(Material.DIRT) || event.getClickedBlock().getType().equals(Material.GRASS_BLOCK)))
+        if(!(event.getClickedBlock().getType().equals(Material.DIRT) || event.getClickedBlock().getType().equals(Material.GRASS_BLOCK)))
             return;
 
         ItemStack item = event.getItem();
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
-        if (!(Target.Applicable.HOE.getMaterials().contains(item.getType())))
+        if(!(Target.Applicable.HOE.getMaterials().contains(item.getType())))
             return;
 
         if(!AntigriefManager.canBreakBlock(player, event.getClickedBlock())) return;
@@ -55,31 +56,31 @@ public class Farmhand extends EcoEnchant {
         int radius = initial + (HasEnchant.getItemLevel(item, this) - 1) * levelrad;
         Vector[] vecs;
 
-        if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-cube")) {
+        if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-cube")) {
             vecs = Cube.getCube(radius);
         } else {
             vecs = Square.getSquare(radius);
         }
 
-        if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {
+        if(!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {
 
             ItemDurability.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
         }
 
-        for (Vector vec : vecs) {
+        for(Vector vec : vecs) {
             Location loc = event.getClickedBlock().getLocation().add(vec);
             Block block = event.getClickedBlock().getWorld().getBlockAt(loc);
 
             if(!AntigriefManager.canBreakBlock(player, block)) continue;
 
-            if (!(block.getType().equals(Material.DIRT) || block.getType().equals(Material.GRASS_BLOCK)))
+            if(!(block.getType().equals(Material.DIRT) || block.getType().equals(Material.GRASS_BLOCK)))
                 continue;
 
-            if (!block.getWorld().getBlockAt(loc.add(0, 1, 0)).getType().equals(Material.AIR))
+            if(!block.getWorld().getBlockAt(loc.add(0, 1, 0)).getType().equals(Material.AIR))
                 continue;
 
             block.setType(Material.FARMLAND);
-            if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {
+            if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {
 
                 ItemDurability.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
             }

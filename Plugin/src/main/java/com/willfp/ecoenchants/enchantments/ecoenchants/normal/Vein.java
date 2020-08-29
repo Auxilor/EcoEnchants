@@ -36,13 +36,13 @@ public class Vein extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-vein")) {
+        if(block.hasMetadata("from-drill") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-vein")) {
             return;
         }
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         if(!AntigriefManager.canBreakBlock(player, block)) return;
@@ -69,7 +69,7 @@ public class Vein extends EcoEnchant {
 
             BlockBreak.breakBlock(player, veinBlock);
 
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> veinBlock.removeMetadata("from-vein", EcoEnchantsPlugin.getInstance()),1);
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> veinBlock.removeMetadata("from-vein", EcoEnchantsPlugin.getInstance()), 1);
         }
 
         AnticheatManager.unexemptPlayer(player);

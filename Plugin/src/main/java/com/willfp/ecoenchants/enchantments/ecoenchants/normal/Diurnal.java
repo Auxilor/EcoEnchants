@@ -21,7 +21,7 @@ public class Diurnal extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
         Player player = (Player) event.getDamager();
@@ -31,7 +31,7 @@ public class Diurnal extends EcoEnchant {
 
         if(!(player.getWorld().getTime() < 12300 && player.getWorld().getTime() > 23850)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");

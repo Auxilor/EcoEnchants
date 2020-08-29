@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+
 public class HungerCurse extends EcoEnchant {
     public HungerCurse() {
         super(
@@ -19,7 +20,7 @@ public class HungerCurse extends EcoEnchant {
 
     @EventHandler
     public void onHunger(FoodLevelChangeEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();

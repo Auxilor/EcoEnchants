@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.meta.Damageable;
+
 public class Grit extends EcoEnchant {
     public Grit() {
         super(
@@ -22,10 +23,10 @@ public class Grit extends EcoEnchant {
 
     @EventHandler
     public void onGritHurt(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
@@ -35,10 +36,10 @@ public class Grit extends EcoEnchant {
 
         int totalGritPoints = HasEnchant.getArmorPoints(player, this, false);
 
-        if (totalGritPoints == 0)
+        if(totalGritPoints == 0)
             return;
 
-        if (!(attacker.getInventory().getItemInMainHand() instanceof Damageable))
+        if(!(attacker.getInventory().getItemInMainHand() instanceof Damageable))
             return;
 
         int damage = (int) Math.ceil(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * totalGritPoints);

@@ -31,6 +31,7 @@ public class ConfigManager {
 
     /**
      * Get all enchantment configs
+     *
      * @return Set of all enchantment configs
      */
     public static Set<EnchantmentConfig> getEnchantmentConfigs() {
@@ -39,6 +40,7 @@ public class ConfigManager {
 
     /**
      * Get EnchantmentConfig matching permission name
+     *
      * @param permissionName The permission name to match
      * @return The matching {@link EnchantmentConfig}
      */
@@ -48,6 +50,7 @@ public class ConfigManager {
 
     /**
      * Adds new enchantment config yml
+     *
      * @param config The config to add
      */
     public static void addEnchantmentConfig(EnchantmentConfig config) {
@@ -56,6 +59,7 @@ public class ConfigManager {
 
     /**
      * Get lang.yml
+     *
      * @return lang.yml
      */
     public static Lang getLang() {
@@ -64,6 +68,7 @@ public class ConfigManager {
 
     /**
      * Get config.yml
+     *
      * @return config.yml
      */
     public static Config getConfig() {

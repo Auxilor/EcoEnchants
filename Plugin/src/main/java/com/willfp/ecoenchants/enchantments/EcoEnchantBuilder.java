@@ -16,19 +16,19 @@ public class EcoEnchantBuilder {
     public final String key;
     public final String permission;
     public final Set<Material> target;
-    public double configVersion;
     public final EnchantmentConfig config;
-    public Class<?> plugin;
     public final EcoEnchant.EnchantmentType type;
+    public double configVersion;
+    public Class<?> plugin;
 
     /**
      * Creates new EcoEnchantBuilder
      * Only used by base enchantments, do not use for extensions.
      *
-     * @param key The enchantment key name
-     * @param type The enchantment type
+     * @param key        The enchantment key name
+     * @param type       The enchantment type
      * @param applicable The materials that the enchantment can be applied to
-     * @param version The config version
+     * @param version    The config version
      */
     public EcoEnchantBuilder(String key, EcoEnchant.EnchantmentType type, Target.Applicable applicable, double version) {
         this(key, type, new Target.Applicable[]{applicable}, version);
@@ -38,11 +38,11 @@ public class EcoEnchantBuilder {
      * Creates new EcoEnchantBuilder
      * Use for extensions
      *
-     * @param key The enchantment key name
-     * @param type The enchantment type
+     * @param key        The enchantment key name
+     * @param type       The enchantment type
      * @param applicable The materials that the enchantment can be applied to
-     * @param version The config version
-     * @param plugin The main class of extension
+     * @param version    The config version
+     * @param plugin     The main class of extension
      */
     public EcoEnchantBuilder(String key, EcoEnchant.EnchantmentType type, Target.Applicable applicable, double version, Class<?> plugin) {
         this(key, type, new Target.Applicable[]{applicable}, version, plugin);
@@ -52,10 +52,10 @@ public class EcoEnchantBuilder {
      * Creates new EcoEnchantBuilder
      * Only used by base enchantments, do not use for extensions.
      *
-     * @param key The enchantment key name
-     * @param type The enchantment type
+     * @param key        The enchantment key name
+     * @param type       The enchantment type
      * @param applicable The materials that the enchantment can be applied to
-     * @param version The config version
+     * @param version    The config version
      */
     public EcoEnchantBuilder(String key, EcoEnchant.EnchantmentType type, Target.Applicable[] applicable, double version) {
         this(key, type, applicable, version, EcoEnchantsPlugin.class);
@@ -65,16 +65,17 @@ public class EcoEnchantBuilder {
      * Creates new EcoEnchantBuilder for Extension
      * Use for extensions
      *
-     * @param key The enchantment key name
-     * @param type The enchantment type
+     * @param key        The enchantment key name
+     * @param type       The enchantment type
      * @param applicable The materials that the enchantment can be applied to
-     * @param version The config version
-     * @param plugin The main class of extension
+     * @param version    The config version
+     * @param plugin     The main class of extension
      */
     public EcoEnchantBuilder(String key, EcoEnchant.EnchantmentType type, Target.Applicable[] applicable, double version, Class<?> plugin) {
-        if(Pattern.matches("[a-z_]", key)) throw new InvalidEnchantmentException("Key must only contain lowercase letters and underscores");
+        if(Pattern.matches("[a-z_]", key))
+            throw new InvalidEnchantmentException("Key must only contain lowercase letters and underscores");
         this.key = key;
-        this.permission = key.replace("_","");
+        this.permission = key.replace("_", "");
 
         Set<Material> target = new HashSet<>();
         Arrays.asList(applicable).forEach((applicable1 -> {
@@ -99,19 +100,19 @@ public class EcoEnchantBuilder {
      * Creates new EcoEnchantBuilder for Extension
      * Use for extensions
      *
-     * @param key The enchantment key name
-     * @param type The enchantment type
-     * @param target The materials that the enchantment can be applied to
+     * @param key     The enchantment key name
+     * @param type    The enchantment type
+     * @param target  The materials that the enchantment can be applied to
      * @param version The config version
-     * @param plugin The main class of extension
-     *
+     * @param plugin  The main class of extension
      * @deprecated Use {@link Target.Applicable} instead
      */
     @Deprecated
     public EcoEnchantBuilder(String key, EcoEnchant.EnchantmentType type, Set<Material> target, double version, Class<?> plugin) {
-        if(Pattern.matches("[a-z_]", key)) throw new InvalidEnchantmentException("Key must only contain lowercase letters and underscores");
+        if(Pattern.matches("[a-z_]", key))
+            throw new InvalidEnchantmentException("Key must only contain lowercase letters and underscores");
         this.key = key;
-        this.permission = key.replace("_","");
+        this.permission = key.replace("_", "");
 
         this.target = target;
 

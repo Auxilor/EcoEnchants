@@ -8,6 +8,7 @@ public class Circle {
 
     /**
      * Get circle as relative vectors
+     *
      * @param radius The radius
      * @return An array of {@link Vector}s
      */
@@ -17,9 +18,9 @@ public class Circle {
         int xoffset = -radius;
         int zoffset = -radius;
 
-        while (zoffset <= radius) {
-            while (xoffset <= radius) {
-                if (Math.round(Math.sqrt((xoffset * xoffset) + (zoffset * zoffset))) <= radius) {
+        while(zoffset <= radius) {
+            while(xoffset <= radius) {
+                if(Math.round(Math.sqrt((xoffset * xoffset) + (zoffset * zoffset))) <= radius) {
                     circleVecs.add(new Vector(xoffset, 0, zoffset));
                 } else {
                     xoffset++;

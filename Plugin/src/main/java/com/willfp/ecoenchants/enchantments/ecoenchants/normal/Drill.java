@@ -17,6 +17,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
+
 public class Drill extends EcoEnchant {
     public Drill() {
         super(
@@ -31,13 +32,13 @@ public class Drill extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
+        if(block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
             return;
         }
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
         if(!AntigriefManager.canBreakBlock(player, block)) return;
@@ -57,7 +58,8 @@ public class Drill extends EcoEnchant {
                 continue;
             }
 
-            if(block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check")) continue;
+            if(block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check"))
+                continue;
 
             if(!AntigriefManager.canBreakBlock(player, block1)) continue;
 

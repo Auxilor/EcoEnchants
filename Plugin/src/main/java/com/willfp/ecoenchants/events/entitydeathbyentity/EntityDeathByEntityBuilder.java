@@ -25,12 +25,12 @@ class EntityDeathByEntityBuilder {
         return this.victim;
     }
 
-    public void setDeathEvent(EntityDeathEvent deathEvent) {
-        this.deathEvent = deathEvent;
-    }
-
     public void setVictim(LivingEntity victim) {
         this.victim = victim;
+    }
+
+    public void setDeathEvent(EntityDeathEvent deathEvent) {
+        this.deathEvent = deathEvent;
     }
 
     public void setDamager(Entity damager) {

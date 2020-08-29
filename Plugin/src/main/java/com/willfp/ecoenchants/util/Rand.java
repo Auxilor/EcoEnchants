@@ -6,6 +6,7 @@ package com.willfp.ecoenchants.util;
 public class Rand {
     /**
      * Generate random integer in range
+     *
      * @param min Minimum
      * @param max Maximum
      * @return Random integer
@@ -16,6 +17,7 @@ public class Rand {
 
     /**
      * Generate random double in range
+     *
      * @param min Minimum
      * @param max Maximum
      * @return Random double
@@ -27,6 +29,7 @@ public class Rand {
 
     /**
      * Generate random double with a triangular distribution
+     *
      * @param a Minimum
      * @param b Maximum
      * @param c Peak
@@ -35,7 +38,7 @@ public class Rand {
     public static double triangularDistribution(double a, double b, double c) {
         double F = (c - a) / (b - a);
         double rand = Math.random();
-        if (rand < F) {
+        if(rand < F) {
             return a + Math.sqrt(rand * (b - a) * (c - a));
         } else {
             return b - Math.sqrt((1 - rand) * (b - a) * (b - c));

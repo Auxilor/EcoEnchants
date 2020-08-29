@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class FireAffinity extends EcoEnchant {
     public FireAffinity() {
         super(
@@ -20,14 +21,14 @@ public class FireAffinity extends EcoEnchant {
 
     @EventHandler
     public void fireAffinityHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         if(player.getFireTicks() == 0) return;
 
@@ -35,7 +36,7 @@ public class FireAffinity extends EcoEnchant {
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 
-        double finalMultiplier = (multiplier/100 * level) + 1;
+        double finalMultiplier = (multiplier / 100 * level) + 1;
 
         event.setDamage(event.getDamage() * finalMultiplier);
     }

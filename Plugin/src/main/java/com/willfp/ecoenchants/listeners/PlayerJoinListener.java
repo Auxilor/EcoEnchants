@@ -9,8 +9,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (EcoEnchantsPlugin.outdated) {
-            if (event.getPlayer().hasPermission("ecoenchants.updateannounce")) {
+        if(EcoEnchantsPlugin.outdated) {
+            if(event.getPlayer().hasPermission("ecoenchants.updateannounce")) {
                 event.getPlayer().sendMessage(ConfigManager.getLang().getMessage("outdated").replace("%ver%", EcoEnchantsPlugin.getInstance().getDescription().getVersion())
                         .replace("%newver%", EcoEnchantsPlugin.newVersion));
             }

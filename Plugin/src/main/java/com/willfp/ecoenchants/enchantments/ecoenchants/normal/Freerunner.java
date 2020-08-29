@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
+
 public class Freerunner extends EcoEnchant {
     public Freerunner() {
         super(
@@ -20,7 +21,7 @@ public class Freerunner extends EcoEnchant {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         if(!event.getCause().equals(EntityDamageEvent.DamageCause.FALL))
@@ -33,7 +34,7 @@ public class Freerunner extends EcoEnchant {
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
 
-        if (Rand.randFloat(0, 1) > level * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > level * 0.01 * chance)
             return;
 
         event.setCancelled(true);

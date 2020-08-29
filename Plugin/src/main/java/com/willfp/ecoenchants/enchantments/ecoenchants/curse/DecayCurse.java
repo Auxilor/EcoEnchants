@@ -4,14 +4,15 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
+import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
 
 import java.util.Arrays;
+
 public class DecayCurse extends EcoEnchant implements EcoRunnable {
     public DecayCurse() {
         super(

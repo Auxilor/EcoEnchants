@@ -21,7 +21,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnchantingListeners implements Listener {
@@ -42,7 +47,7 @@ public class EnchantingListeners implements Listener {
         ItemStack item = event.getItem();
         int cost = event.getExpLevelCost();
         Map<Enchantment, Integer> toAdd = event.getEnchantsToAdd();
-        if (!ConfigManager.getConfig().getBool("enchanting-table.enabled")) {
+        if(!ConfigManager.getConfig().getBool("enchanting-table.enabled")) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -53,20 +58,21 @@ public class EnchantingListeners implements Listener {
             return;
         }
 
-        if ((secondary.contains(event.getItem().getType()))) {
+        if((secondary.contains(event.getItem().getType()))) {
             try {
                 ItemStack lapis = event.getInventory().getItem(1);
                 lapis.setAmount(event.getInventory().getItem(1).getAmount() - (event.whichButton() + 1));
                 event.getInventory().setItem(1, lapis);
-            } catch (NullPointerException ignored) {} // Triggered if you're in creative
+            } catch(NullPointerException ignored) {
+            } // Triggered if you're in creative
         }
 
         double multiplier = 0.01;
-        if (Target.Applicable.BOOK.getMaterials().contains(item.getType())) {
+        if(Target.Applicable.BOOK.getMaterials().contains(item.getType())) {
             multiplier /= ConfigManager.getConfig().getInt("enchanting-table.book-times-less-likely");
         }
 
-        if (ConfigManager.getConfig().getBool("enchanting-table.reduce-probability.enabled")) {
+        if(ConfigManager.getConfig().getBool("enchanting-table.reduce-probability.enabled")) {
             multiplier /= ConfigManager.getConfig().getDouble("enchanting-table.reduce-probability.factor");
         }
 
@@ -75,31 +81,33 @@ public class EnchantingListeners implements Listener {
 
         boolean gotSpecial = false;
 
-        for (EcoEnchant enchantment : enchantments) {
+        for(EcoEnchant enchantment : enchantments) {
 
-            if (!enchantment.canEnchantItem(item))
+            if(!enchantment.canEnchantItem(item))
                 continue;
-            if (Rand.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier)
+            if(Rand.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier)
                 continue;
-            if (enchantment.getRarity().getMinimumLevel() > cost)
+            if(enchantment.getRarity().getMinimumLevel() > cost)
                 continue;
-            if (!enchantment.canGetFromTable())
+            if(!enchantment.canGetFromTable())
                 continue;
-            if (!player.hasPermission("ecoenchants.fromtable." + enchantment.getPermissionName()))
+            if(!player.hasPermission("ecoenchants.fromtable." + enchantment.getPermissionName()))
                 continue;
 
             AtomicBoolean anyConflicts = new AtomicBoolean(false);
             toAdd.forEach((enchant, integer) -> {
-                if (enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
-                if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
+                if(enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
+                if(enchant.conflictsWith(enchantment)) anyConflicts.set(true);
 
                 if(EcoEnchants.getFromEnchantment(enchant) != null) {
                     EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) anyConflicts.set(true);
-                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) anyConflicts.set(true);
+                    if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL))
+                        anyConflicts.set(true);
+                    if(enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT))
+                        anyConflicts.set(true);
                 }
             });
-            if (anyConflicts.get()) continue;
+            if(anyConflicts.get()) continue;
 
             int level;
 
@@ -129,7 +137,7 @@ public class EnchantingListeners implements Listener {
 
             if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) gotSpecial = true;
 
-            if (ConfigManager.getConfig().getBool("enchanting-table.reduce-probability.enabled")) {
+            if(ConfigManager.getConfig().getBool("enchanting-table.reduce-probability.enabled")) {
                 multiplier /= ConfigManager.getConfig().getDouble("enchanting-table.reduce-probability.factor");
             }
         }
@@ -171,16 +179,17 @@ public class EnchantingListeners implements Listener {
     public void allowElytraEnchant(PrepareItemEnchantEvent event) {
         try {
             event.getOffers()[2].setCost(EqualIfOver.equalIfOver(event.getOffers()[2].getCost(), ConfigManager.getConfig().getInt("enchanting-table.maximum-obtainable-level")));
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
+        } catch(ArrayIndexOutOfBoundsException | NullPointerException ignored) {
+        }
 
-        if (!secondary.contains(event.getItem().getType()))
+        if(!secondary.contains(event.getItem().getType()))
             return;
 
         int bonus = event.getEnchantmentBonus();
-        if (bonus > 15) {
+        if(bonus > 15) {
             bonus = 15;
         }
-        if (bonus == 0) {
+        if(bonus == 0) {
             bonus = 1;
         }
 
@@ -190,7 +199,7 @@ public class EnchantingListeners implements Listener {
 
         EnchantmentOffer offer3 = new EnchantmentOffer(Enchantment.DURABILITY, Rand.randInt(2, 3), bonus * 2);
 
-        if (offer3.getEnchantmentLevel() < offer2.getEnchantmentLevel()) {
+        if(offer3.getEnchantmentLevel() < offer2.getEnchantmentLevel()) {
             int temp = offer2.getEnchantmentLevel();
             offer2.setEnchantmentLevel(offer3.getEnchantmentLevel());
             offer3.setEnchantmentLevel(temp);
@@ -203,10 +212,10 @@ public class EnchantingListeners implements Listener {
         };
 
         event.getOffers()[0] = offers[0];
-        if (bonus > 5) {
+        if(bonus > 5) {
             event.getOffers()[1] = offers[1];
         }
-        if (bonus > 10) {
+        if(bonus > 10) {
             event.getOffers()[2] = offers[2];
         }
 

@@ -16,10 +16,10 @@ public class Target {
         String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         try {
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".Target");
-            if (TargetWrapper.class.isAssignableFrom(class2)) {
+            if(TargetWrapper.class.isAssignableFrom(class2)) {
                 target = (TargetWrapper) class2.getConstructor().newInstance();
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             PLUGIN.getLogger().info(e.getCause() + "");
             e.printStackTrace();
             target = null;

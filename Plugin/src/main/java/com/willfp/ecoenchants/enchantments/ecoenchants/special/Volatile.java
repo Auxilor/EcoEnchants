@@ -13,6 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Volatile extends EcoEnchant {
     public Volatile() {
         super(
@@ -24,9 +25,9 @@ public class Volatile extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getDamager();
@@ -35,14 +36,14 @@ public class Volatile extends EcoEnchant {
 
         if(!AntigriefManager.canInjure(player, victim)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+        if(Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
             return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
-        if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+        if(Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 
         boolean fire = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "fire");
@@ -50,9 +51,9 @@ public class Volatile extends EcoEnchant {
 
         float power = (float) (0.5 + (level * 0.5));
 
-        if (!AntigriefManager.canCreateExplosion(player, event.getEntity().getLocation())) return;
-        if (breakblocks) {
-            if (!AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
+        if(!AntigriefManager.canCreateExplosion(player, event.getEntity().getLocation())) return;
+        if(breakblocks) {
+            if(!AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
                 return;
         }
 

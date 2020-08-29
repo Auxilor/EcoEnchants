@@ -11,17 +11,22 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+
 public class Soulbound extends EcoEnchant {
+    HashMap<Player, List<ItemStack>> soulboundItemsMap = new HashMap<>();
+
+    // START OF LISTENERS
+
     public Soulbound() {
         super(
                 new EcoEnchantBuilder("soulbound", EnchantmentType.SPECIAL, Target.Applicable.ALL, 4.0)
         );
     }
-
-    // START OF LISTENERS
-
-    HashMap<Player, List<ItemStack>> soulboundItemsMap = new HashMap<>();
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onSoulboundDeath(PlayerDeathEvent event) {
@@ -34,7 +39,8 @@ public class Soulbound extends EcoEnchant {
             if(itemStack.containsEnchantment(this)) soulboundItems.add(itemStack);
 
             if(itemStack.getItemMeta() instanceof EnchantmentStorageMeta) {
-                if(((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this)) soulboundItems.add(itemStack);
+                if(((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this))
+                    soulboundItems.add(itemStack);
             }
         }));
 

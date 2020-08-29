@@ -9,6 +9,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class NetherInfusion extends EcoEnchant {
     public NetherInfusion() {
         super(
@@ -20,7 +21,7 @@ public class NetherInfusion extends EcoEnchant {
 
     @EventHandler
     public void netherInfusionHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
         Player player = (Player) event.getDamager();
@@ -28,7 +29,7 @@ public class NetherInfusion extends EcoEnchant {
         if(!player.getWorld().getEnvironment().equals(World.Environment.NETHER))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");

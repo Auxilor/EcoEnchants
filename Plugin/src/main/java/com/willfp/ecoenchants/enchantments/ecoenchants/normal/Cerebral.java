@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Cerebral extends EcoEnchant {
     public Cerebral() {
         super(
@@ -21,20 +22,20 @@ public class Cerebral extends EcoEnchant {
 
     @EventHandler
     public void onCerebralDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow)) return;
+        if(!(event.getDamager() instanceof Arrow)) return;
 
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
+        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
 
-        if (!(event.getEntity() instanceof LivingEntity)) return;
+        if(!(event.getEntity() instanceof LivingEntity)) return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
         Arrow arrow = (Arrow) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
 
-        if (!(arrow.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
+        if(!(arrow.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

@@ -9,7 +9,7 @@ import java.util.Map;
  * @param <K> Key
  * @param <V> Value
  */
-public class Pair<K, V> implements Map.Entry<K,V> {
+public class Pair<K, V> implements Map.Entry<K, V> {
     private K key;
     private V value;
 
@@ -42,8 +42,10 @@ public class Pair<K, V> implements Map.Entry<K,V> {
         String keyString;
         String valueString;
 
-        if(key == null) keyString = "null"; else keyString = key.toString();
-        if(value == null) valueString = "null"; else valueString = value.toString();
+        if(key == null) keyString = "null";
+        else keyString = key.toString();
+        if(value == null) valueString = "null";
+        else valueString = value.toString();
 
         return "Key: " + keyString + ", Value: " + valueString;
     }

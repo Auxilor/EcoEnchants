@@ -11,6 +11,7 @@ import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class BossHunter extends EcoEnchant {
     public BossHunter() {
         super(
@@ -22,16 +23,16 @@ public class BossHunter extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow)) return;
+        if(!(event.getDamager() instanceof Arrow)) return;
 
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
+        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
 
-        if (!(event.getEntity() instanceof Boss || event.getEntity() instanceof ElderGuardian)) return;
+        if(!(event.getEntity() instanceof Boss || event.getEntity() instanceof ElderGuardian)) return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
         Arrow arrow = (Arrow) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

@@ -3,7 +3,11 @@ package com.willfp.ecoenchants.queue;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.HasEnchant;
 import com.willfp.ecoenchants.util.Rand;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -11,22 +15,26 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * All drops generated from enchantments should be sent through a {@link DropQueue}
- *
  */
 public class DropQueue {
     private final List<ItemStack> items;
-    private int xp;
     private final Player player;
+    private int xp;
     private Location loc;
     private boolean hasTelekinesis = false;
     private ItemStack item;
 
     /**
      * Create {@link DropQueue} linked to player
+     *
      * @param player The player
      */
     public DropQueue(Player player) {
@@ -39,6 +47,7 @@ public class DropQueue {
 
     /**
      * Add item to queue
+     *
      * @param item The item to add
      * @return The DropQueue
      */
@@ -49,6 +58,7 @@ public class DropQueue {
 
     /**
      * Add multiple items to queue
+     *
      * @param itemStacks The items to add
      * @return The DropQueue
      */
@@ -59,6 +69,7 @@ public class DropQueue {
 
     /**
      * Add xp to queue
+     *
      * @param amount The amount to add
      * @return The DropQueue
      */
@@ -69,6 +80,7 @@ public class DropQueue {
 
     /**
      * Set location of the origin of the drops
+     *
      * @param l The location
      * @return The DropQueue
      */
@@ -79,6 +91,7 @@ public class DropQueue {
 
     /**
      * Force the queue to act as if player has {@link EcoEnchants#TELEKINESIS}
+     *
      * @return The DropQueue
      */
     public DropQueue forceTelekinesis() {
@@ -108,14 +121,14 @@ public class DropQueue {
         World world = loc.getWorld();
         assert world != null;
 
-        if (hasTelekinesis) {
-            for (ItemStack drop : items) {
+        if(hasTelekinesis) {
+            for(ItemStack drop : items) {
                 HashMap<Integer, ItemStack> nope = player.getInventory().addItem(drop);
                 for(Map.Entry<Integer, ItemStack> entry : nope.entrySet()) {
                     world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
                 }
             }
-            if (xp > 0) {
+            if(xp > 0) {
                 if(EcoEnchants.TELEKINESIS.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-orb")) {
                     ExperienceOrb orb = (ExperienceOrb) player.getWorld().spawnEntity(player.getLocation().add(0, 0.2, 0), EntityType.EXPERIENCE_ORB);
                     orb.setVelocity(new Vector(0, 0, 0));
@@ -130,10 +143,10 @@ public class DropQueue {
                 }
             }
         } else {
-            for (ItemStack drop : items) {
+            for(ItemStack drop : items) {
                 world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
             }
-            if (xp > 0) {
+            if(xp > 0) {
                 ExperienceOrb orb = (ExperienceOrb) world.spawnEntity(loc, EntityType.EXPERIENCE_ORB);
                 orb.setExperience(xp);
             }

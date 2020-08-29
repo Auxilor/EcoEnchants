@@ -2,12 +2,16 @@ package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,22 +23,22 @@ public abstract class EnchantmentYamlConfig {
     private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
 
     private final String name;
-    public YamlConfiguration config;
-    private File configFile;
     private final File directory;
     private final double latestVersion;
     private final JavaPlugin plugin = EcoEnchantsPlugin.getInstance();
     private final Class<?> plugin2;
     private final EcoEnchant.EnchantmentType type;
+    public YamlConfiguration config;
+    private File configFile;
     private File basedir = new File(this.plugin.getDataFolder(), "enchants/");
 
     /**
      * Create new config yml
      *
-     * @param name The config name
+     * @param name          The config name
      * @param latestVersion The latest config version
-     * @param plugin The class of the main class of plugin or extension
-     * @param type The enchantment type
+     * @param plugin        The class of the main class of plugin or extension
+     * @param type          The enchantment type
      */
     public EnchantmentYamlConfig(String name, double latestVersion, Class<?> plugin, EcoEnchant.EnchantmentType type) {
         this.name = name;
@@ -45,7 +49,7 @@ public abstract class EnchantmentYamlConfig {
         if(!basedir.exists()) basedir.mkdirs();
 
         File dir = new File(basedir, type.name().toLowerCase() + "/");
-        if (!dir.exists()) {
+        if(!dir.exists()) {
             dir.mkdirs();
         }
         this.directory = dir;
@@ -54,7 +58,7 @@ public abstract class EnchantmentYamlConfig {
     }
 
     private void init() {
-        if (!new File(directory, name + ".yml").exists()) {
+        if(!new File(directory, name + ".yml").exists()) {
             createFile();
         }
 
@@ -67,33 +71,35 @@ public abstract class EnchantmentYamlConfig {
     private void saveResource(boolean replace) {
         String resourcePath = "/enchants/" + type.name().toLowerCase() + "/" + name + ".yml";
 
-        InputStream in =  plugin2.getResourceAsStream(resourcePath);
+        InputStream in = plugin2.getResourceAsStream(resourcePath);
 
         File outFile = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath);
         int lastIndex = resourcePath.lastIndexOf('/');
         File outDir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath.substring(0, Math.max(lastIndex, 0)));
 
-        if (!outDir.exists()) {
+        if(!outDir.exists()) {
             outDir.mkdirs();
         }
 
         try {
-            if (!outFile.exists() || replace) {
+            if(!outFile.exists() || replace) {
                 OutputStream out = new FileOutputStream(outFile);
                 byte[] buf = new byte[1024];
                 int len;
-                while ((len = in.read(buf)) > 0) {
+                while((len = in.read(buf)) > 0) {
                     out.write(buf, 0, len);
                 }
                 out.close();
                 in.close();
             }
-        } catch (IOException ignored) {}
+        } catch(IOException ignored) {
+        }
     }
 
     private void createFile() {
         saveResource(false);
     }
+
     private void replaceFile() {
         saveResource(true);
     }
@@ -101,14 +107,14 @@ public abstract class EnchantmentYamlConfig {
     public void reload() {
         try {
             this.config.load(this.configFile);
-        } catch (IOException | InvalidConfigurationException e) {
+        } catch(IOException | InvalidConfigurationException e) {
             e.printStackTrace();
             PLUGIN.getLogger().severe("§cCould not reload " + name + ".yml - Contact Auxilor.");
         }
     }
 
     private void checkVersion() {
-        if (latestVersion != config.getDouble("config-version")) {
+        if(latestVersion != config.getDouble("config-version")) {
             PLUGIN.getLogger().warning("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
             PLUGIN.getLogger().warning("If you've edited the config, copy over your changes!");
             performOverwrite();
@@ -129,13 +135,13 @@ public abstract class EnchantmentYamlConfig {
             FileOutputStream fos = new FileOutputStream(oldConf);
             byte[] buffer = new byte[1024];
             int length;
-            while ((length = fis.read(buffer)) > 0) {
+            while((length = fis.read(buffer)) > 0) {
                 fos.write(buffer, 0, length);
             }
             fis.close();
             fos.close();
             replaceFile();
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
             PLUGIN.getLogger().severe("§cCould not update config. Try reinstalling EcoEnchants");
         }

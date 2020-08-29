@@ -45,9 +45,10 @@ public abstract class Artifact extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if(!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase())) return;
+        if(!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase()))
+            return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount");
         block.getWorld().spawnParticle(particle, block.getLocation().add(0.5, 0.5, 0.5), amount, 0.4, 0.4, 0.4, 0, extra, false);
@@ -59,7 +60,7 @@ public abstract class Artifact extends EcoEnchant {
 
         if(!player.isGliding()) return;
 
-        if (!HasEnchant.playerElytra(player, this)) return;
+        if(!HasEnchant.playerElytra(player, this)) return;
 
         Location location = player.getLocation();
         Vector direction = player.getLocation().clone().getDirection();
@@ -86,7 +87,7 @@ public abstract class Artifact extends EcoEnchant {
         Player player = (Player) event.getDamager();
         LivingEntity entity = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         double radius = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius");
 
@@ -99,8 +100,8 @@ public abstract class Artifact extends EcoEnchant {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for(int i = 0; i<3; i++) {
-                    if (yAtomic.get() > entity.getHeight()) this.cancel();
+                for(int i = 0; i < 3; i++) {
+                    if(yAtomic.get() > entity.getHeight()) this.cancel();
                     yAtomic.addAndGet(yDelta);
                     double y = yAtomic.get();
                     double x = radius * Math.cos((y + offset) * radiusMultiplier);
@@ -115,7 +116,7 @@ public abstract class Artifact extends EcoEnchant {
 
     @EventHandler
     public void onShoot(ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof AbstractArrow))
+        if(!(event.getEntity() instanceof AbstractArrow))
             return;
 
         if(!(event.getEntity().getShooter() instanceof Player)) return;
@@ -127,7 +128,7 @@ public abstract class Artifact extends EcoEnchant {
             item = TridentStack.getTridentStack((Trident) entity);
         }
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 
@@ -135,7 +136,7 @@ public abstract class Artifact extends EcoEnchant {
         AtomicDouble color = new AtomicDouble(0);
         if(particle.equals(Particle.NOTE)) {
             noteColor = Rand.randInt(0, 24);
-            color.set((double) noteColor/24);
+            color.set((double) noteColor / 24);
         }
         final double finalColor = color.get();
 

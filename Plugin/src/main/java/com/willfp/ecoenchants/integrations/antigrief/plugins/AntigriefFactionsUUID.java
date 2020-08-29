@@ -1,6 +1,10 @@
 package com.willfp.ecoenchants.integrations.antigrief.plugins;
 
-import com.massivecraft.factions.*;
+import com.massivecraft.factions.Board;
+import com.massivecraft.factions.FLocation;
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.perms.PermissibleAction;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefWrapper;
 import org.bukkit.Location;
@@ -15,7 +19,7 @@ public class AntigriefFactionsUUID implements AntigriefWrapper {
         FLocation flocation = new FLocation(block.getLocation());
         Faction faction = Board.getInstance().getFactionAt(flocation);
 
-        if (!faction.hasAccess(fplayer, PermissibleAction.DESTROY)) {
+        if(!faction.hasAccess(fplayer, PermissibleAction.DESTROY)) {
             return fplayer.isAdminBypassing();
         }
         return true;
@@ -36,7 +40,7 @@ public class AntigriefFactionsUUID implements AntigriefWrapper {
         FLocation flocation = new FLocation(block.getLocation());
         Faction faction = Board.getInstance().getFactionAt(flocation);
 
-        if (!faction.hasAccess(fplayer, PermissibleAction.BUILD)) {
+        if(!faction.hasAccess(fplayer, PermissibleAction.BUILD)) {
             return fplayer.isAdminBypassing();
         }
         return true;
@@ -49,11 +53,11 @@ public class AntigriefFactionsUUID implements AntigriefWrapper {
         Faction faction = Board.getInstance().getFactionAt(flocation);
 
         if(victim instanceof Player) {
-            if (faction.isPeaceful()) {
+            if(faction.isPeaceful()) {
                 return fplayer.isAdminBypassing();
             }
         } else {
-            if (faction.hasAccess(fplayer, PermissibleAction.DESTROY)) {
+            if(faction.hasAccess(fplayer, PermissibleAction.DESTROY)) {
                 return fplayer.isAdminBypassing();
             }
         }

@@ -14,18 +14,19 @@ public class HasEnchant {
 
     /**
      * If player is holding item with Enchantment
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return If the player is holding the item
      */
     public static boolean playerHeld(Player player, Enchantment enchant) {
-        if (player == null)
+        if(player == null)
             return false;
 
-        if (player.getInventory().getItemInMainHand() == null)
+        if(player.getInventory().getItemInMainHand() == null)
             return false;
 
-        if (!player.getInventory().getItemInMainHand().hasItemMeta())
+        if(!player.getInventory().getItemInMainHand().hasItemMeta())
             return false;
 
         return Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).hasEnchant(enchant);
@@ -33,18 +34,19 @@ public class HasEnchant {
 
     /**
      * If horse has enchantment on armor
-     * @param horse The horse
+     *
+     * @param horse   The horse
      * @param enchant The Enchantment to test
      * @return If the player is holding the item
      */
     public static boolean horseArmor(Horse horse, Enchantment enchant) {
-        if (horse == null)
+        if(horse == null)
             return false;
 
-        if (horse.getInventory().getArmor() == null)
+        if(horse.getInventory().getArmor() == null)
             return false;
 
-        if (!horse.getInventory().getArmor().hasItemMeta())
+        if(!horse.getInventory().getArmor().hasItemMeta())
             return false;
 
         return Objects.requireNonNull(horse.getInventory().getArmor().getItemMeta()).hasEnchant(enchant);
@@ -52,18 +54,19 @@ public class HasEnchant {
 
     /**
      * If player is holding item in offhand with Enchantment
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return If the player is holding the item in offhand
      */
     public static boolean playerOffhand(Player player, Enchantment enchant) {
-        if (player == null)
+        if(player == null)
             return false;
 
-        if (player.getInventory().getItemInOffHand() == null)
+        if(player.getInventory().getItemInOffHand() == null)
             return false;
 
-        if (!player.getInventory().getItemInOffHand().hasItemMeta())
+        if(!player.getInventory().getItemInOffHand().hasItemMeta())
             return false;
 
         return Objects.requireNonNull(player.getInventory().getItemInOffHand().getItemMeta()).hasEnchant(enchant);
@@ -71,18 +74,19 @@ public class HasEnchant {
 
     /**
      * If player has helmet with Enchantment
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return If the player has the enchantment on their helmet
      */
     public static boolean playerHelmet(Player player, Enchantment enchant) {
-        if (player == null)
+        if(player == null)
             return false;
 
-        if (player.getInventory().getHelmet() == null)
+        if(player.getInventory().getHelmet() == null)
             return false;
 
-        if (!player.getInventory().getHelmet().hasItemMeta())
+        if(!player.getInventory().getHelmet().hasItemMeta())
             return false;
 
         return Objects.requireNonNull(player.getInventory().getHelmet().getItemMeta()).hasEnchant(enchant);
@@ -90,18 +94,19 @@ public class HasEnchant {
 
     /**
      * If player has boots with Enchantment
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return If the player has the enchantment on their boots
      */
     public static boolean playerBoots(Player player, Enchantment enchant) {
-        if (player == null)
+        if(player == null)
             return false;
 
-        if (player.getInventory().getBoots() == null)
+        if(player.getInventory().getBoots() == null)
             return false;
 
-        if (!player.getInventory().getBoots().hasItemMeta())
+        if(!player.getInventory().getBoots().hasItemMeta())
             return false;
 
         return Objects.requireNonNull(player.getInventory().getBoots().getItemMeta()).hasEnchant(enchant);
@@ -109,21 +114,22 @@ public class HasEnchant {
 
     /**
      * If player has elytra with Enchantment
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return If the player has the enchantment on their elytra
      */
     public static boolean playerElytra(Player player, Enchantment enchant) {
-        if (player == null)
+        if(player == null)
             return false;
 
-        if (player.getInventory().getChestplate() == null)
+        if(player.getInventory().getChestplate() == null)
             return false;
 
-        if (!Target.Applicable.ELYTRA.getMaterials().contains(player.getInventory().getChestplate().getType()))
+        if(!Target.Applicable.ELYTRA.getMaterials().contains(player.getInventory().getChestplate().getType()))
             return false;
 
-        if (!player.getInventory().getChestplate().hasItemMeta())
+        if(!player.getInventory().getChestplate().hasItemMeta())
             return false;
 
         return Objects.requireNonNull(player.getInventory().getChestplate().getItemMeta()).hasEnchant(enchant);
@@ -131,19 +137,20 @@ public class HasEnchant {
 
     /**
      * If item has Enchantment
-     * @param item The item
+     *
+     * @param item    The item
      * @param enchant The Enchantment to test
      * @return If item has Enchantment
      */
     public static boolean item(ItemStack item, Enchantment enchant) {
 
-        if (item == null)
+        if(item == null)
             return false;
 
-        if (!item.hasItemMeta())
+        if(!item.hasItemMeta())
             return false;
 
-        if (item.getItemMeta() == null)
+        if(item.getItemMeta() == null)
             return false;
 
         return item.getItemMeta().hasEnchant(enchant);
@@ -151,7 +158,8 @@ public class HasEnchant {
 
     /**
      * Get level of player held item
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return The level
      */
@@ -161,7 +169,8 @@ public class HasEnchant {
 
     /**
      * Get level of horse armor
-     * @param horse The horse
+     *
+     * @param horse   The horse
      * @param enchant The Enchantment to test
      * @return The level
      */
@@ -171,7 +180,8 @@ public class HasEnchant {
 
     /**
      * Get level of player held item in offhand
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return The level
      */
@@ -181,7 +191,8 @@ public class HasEnchant {
 
     /**
      * Get level of player boots
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return The level
      */
@@ -192,7 +203,8 @@ public class HasEnchant {
 
     /**
      * Get level of player helmet
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return The level
      */
@@ -203,7 +215,8 @@ public class HasEnchant {
 
     /**
      * Get level of player chestplate/elytra
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
      * @return The level
      */
@@ -214,7 +227,8 @@ public class HasEnchant {
 
     /**
      * Get level of item
-     * @param item The item
+     *
+     * @param item    The item
      * @param enchant The Enchantment to test
      * @return The level
      */
@@ -225,36 +239,37 @@ public class HasEnchant {
 
     /**
      * Get total levels of player armor
-     * @param player The player
+     *
+     * @param player  The player
      * @param enchant The Enchantment to test
-     * @param damage Damage the armor
+     * @param damage  Damage the armor
      * @return The total levels
      */
     public static int getArmorPoints(Player player, Enchantment enchant, boolean damage) {
         ArrayList<ItemStack> armor = new ArrayList<ItemStack>(Arrays.asList(player.getInventory().getArmorContents()));
-        if (armor.isEmpty())
+        if(armor.isEmpty())
             return 0;
 
 
         int points = 0;
 
-        for (ItemStack armorPiece : armor) {
-            if (armorPiece == null)
+        for(ItemStack armorPiece : armor) {
+            if(armorPiece == null)
                 continue;
-            if (armorPiece.containsEnchantment(enchant)) {
+            if(armorPiece.containsEnchantment(enchant)) {
                 points += armorPiece.getEnchantmentLevel(enchant);
 
-                if (damage) {
-                    if (Target.Applicable.HELMET.getMaterials().contains(armorPiece.getType())) {
+                if(damage) {
+                    if(Target.Applicable.HELMET.getMaterials().contains(armorPiece.getType())) {
                         ItemDurability.damageItem(player, player.getInventory().getHelmet(), 1, 39);
                     }
-                    if (Target.Applicable.CHESTPLATE.getMaterials().contains(armorPiece.getType())) {
+                    if(Target.Applicable.CHESTPLATE.getMaterials().contains(armorPiece.getType())) {
                         ItemDurability.damageItem(player, player.getInventory().getChestplate(), 1, 38);
                     }
-                    if (Target.Applicable.LEGGINGS.getMaterials().contains(armorPiece.getType())) {
+                    if(Target.Applicable.LEGGINGS.getMaterials().contains(armorPiece.getType())) {
                         ItemDurability.damageItem(player, player.getInventory().getLeggings(), 1, 37);
                     }
-                    if (Target.Applicable.BOOTS.getMaterials().contains(armorPiece.getType())) {
+                    if(Target.Applicable.BOOTS.getMaterials().contains(armorPiece.getType())) {
                         ItemDurability.damageItem(player, player.getInventory().getBoots(), 1, 36);
                     }
                 }

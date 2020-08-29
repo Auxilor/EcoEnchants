@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Protector extends EcoEnchant {
     public Protector() {
         super(
@@ -19,9 +20,9 @@ public class Protector extends EcoEnchant {
 
     @EventHandler
     public void protectorHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof Tameable))
+        if(!(event.getEntity() instanceof Tameable))
             return;
 
         Player player = (Player) event.getDamager();
@@ -29,7 +30,7 @@ public class Protector extends EcoEnchant {
         if(entity.getOwner() == null) return;
         if(!entity.getOwner().equals(player)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         event.setCancelled(true);
     }

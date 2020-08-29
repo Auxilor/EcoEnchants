@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.HashSet;
 import java.util.Set;
+
 public class EnderSlayer extends EcoEnchant {
     public EnderSlayer() {
         super(
@@ -23,22 +24,22 @@ public class EnderSlayer extends EcoEnchant {
 
     @EventHandler
     public void enderSlayerHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
         Set<EntityType> endMobs = new HashSet<EntityType>() {{
-           add(EntityType.ENDERMITE);
-           add(EntityType.ENDERMAN);
-           add(EntityType.ENDER_DRAGON);
-           add(EntityType.SHULKER);
+            add(EntityType.ENDERMITE);
+            add(EntityType.ENDERMAN);
+            add(EntityType.ENDER_DRAGON);
+            add(EntityType.SHULKER);
         }};
 
-        if (!endMobs.contains(event.getEntityType()))
+        if(!endMobs.contains(event.getEntityType()))
             return;
 
         Player player = (Player) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");

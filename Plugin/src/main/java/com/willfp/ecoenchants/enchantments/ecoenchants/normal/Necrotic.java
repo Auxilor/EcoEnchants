@@ -13,6 +13,7 @@ import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class Necrotic extends EcoEnchant {
     public Necrotic() {
         super(
@@ -24,20 +25,20 @@ public class Necrotic extends EcoEnchant {
 
     @EventHandler
     public void necroticKill(EntityDeathEvent event) {
-        if (event.getEntity().getKiller() == null)
+        if(event.getEntity().getKiller() == null)
             return;
-        if (!(event.getEntity() instanceof WitherSkeleton))
+        if(!(event.getEntity() instanceof WitherSkeleton))
             return;
 
         Player player = event.getEntity().getKiller();
         WitherSkeleton victim = (WitherSkeleton) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
-        if (Rand.randFloat(0, 1) > level * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > level * 0.01 * chance)
             return;
 
         ItemStack item = new ItemStack(Material.WITHER_SKELETON_SKULL, 1);

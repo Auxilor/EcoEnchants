@@ -21,11 +21,11 @@ public class Defender extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+        if(!(event.getDamager() instanceof Arrow))
             return;
         if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof Tameable))
+        if(!(event.getEntity() instanceof Tameable))
             return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
@@ -33,7 +33,7 @@ public class Defender extends EcoEnchant {
         if(entity.getOwner() == null) return;
         if(!entity.getOwner().equals(player)) return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         event.setCancelled(true);
     }

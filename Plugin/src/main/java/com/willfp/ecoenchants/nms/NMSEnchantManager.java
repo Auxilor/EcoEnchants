@@ -6,17 +6,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 
 public class NMSEnchantManager {
-    private static NMSEnchantManagerWrapper nmsEnchantManagerWrapper;
-
     private static final String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+    private static NMSEnchantManagerWrapper nmsEnchantManagerWrapper;
 
     public static boolean init() {
         try {
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".NMSEnchantManager");
-            if (NMSEnchantManagerWrapper.class.isAssignableFrom(class2)) {
+            if(NMSEnchantManagerWrapper.class.isAssignableFrom(class2)) {
                 nmsEnchantManagerWrapper = (NMSEnchantManagerWrapper) class2.getConstructor().newInstance();
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
             nmsEnchantManagerWrapper = null;
         }

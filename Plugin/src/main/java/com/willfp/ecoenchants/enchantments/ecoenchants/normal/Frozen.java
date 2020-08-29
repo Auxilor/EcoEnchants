@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 public class Frozen extends EcoEnchant {
     public Frozen() {
         super(
@@ -25,10 +26,10 @@ public class Frozen extends EcoEnchant {
 
     @EventHandler
     public void onHurt(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (!(event.getDamager() instanceof LivingEntity))
+        if(!(event.getDamager() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getEntity();
@@ -36,10 +37,10 @@ public class Frozen extends EcoEnchant {
 
         final int points = HasEnchant.getArmorPoints(player, this, true);
 
-        if (points == 0)
+        if(points == 0)
             return;
 
-        if (Rand.randFloat(0, 1) > points * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point"))
+        if(Rand.randFloat(0, 1) > points * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point"))
             return;
 
         int divisor = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "points-per-level");

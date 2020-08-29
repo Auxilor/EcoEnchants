@@ -10,6 +10,7 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.scheduler.BukkitRunnable;
+
 public class Streamlining extends EcoEnchant {
     public Streamlining() {
         super(
@@ -25,7 +26,7 @@ public class Streamlining extends EcoEnchant {
 
         new BukkitRunnable() {
             public void run() {
-                if (!HasEnchant.playerBoots(player, EcoEnchants.STREAMLINING)) {
+                if(!HasEnchant.playerBoots(player, EcoEnchants.STREAMLINING)) {
                     player.setWalkSpeed(0.2f);
                     return;
                 }

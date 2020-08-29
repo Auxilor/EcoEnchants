@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+
 public class Invigoration extends EcoEnchant {
     public Invigoration() {
         super(
@@ -20,17 +21,17 @@ public class Invigoration extends EcoEnchant {
 
     @EventHandler
     public void onInvigorationHurt(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
         Player player = (Player) event.getEntity();
 
-        if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
+        if(player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
             return;
 
         int totalInvigorationPoints = HasEnchant.getArmorPoints(player, this, false);
 
-        if (totalInvigorationPoints == 0)
+        if(totalInvigorationPoints == 0)
             return;
 
         double damageReduction = totalInvigorationPoints * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "reduction-multiplier") * 0.01;
@@ -40,16 +41,16 @@ public class Invigoration extends EcoEnchant {
 
     @EventHandler
     public void onInvigorationDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
         Player player = (Player) event.getDamager();
 
-        if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
+        if(player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
             return;
 
         int totalInvigorationPoints = HasEnchant.getArmorPoints(player, this, false);
 
-        if (totalInvigorationPoints == 0)
+        if(totalInvigorationPoints == 0)
             return;
 
         double damageBonus = totalInvigorationPoints * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier") * 0.01;

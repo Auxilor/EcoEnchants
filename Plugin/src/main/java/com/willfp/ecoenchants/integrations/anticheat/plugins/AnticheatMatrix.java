@@ -31,7 +31,7 @@ public final class AnticheatMatrix implements AnticheatWrapper, Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     private void onViolate(PlayerViolationEvent event) {
-        if (!exempt.contains(event.getPlayer().getUniqueId())) {
+        if(!exempt.contains(event.getPlayer().getUniqueId())) {
             return;
         }
 

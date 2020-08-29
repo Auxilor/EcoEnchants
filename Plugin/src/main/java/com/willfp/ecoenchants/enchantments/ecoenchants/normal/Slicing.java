@@ -15,35 +15,36 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
+
 public class Slicing extends EcoEnchant {
+    ArrayList<LivingEntity> entities = new ArrayList<LivingEntity>();
+
+    // START OF LISTENERS
+
     public Slicing() {
         super(
                 new EcoEnchantBuilder("slicing", EnchantmentType.NORMAL, Target.Applicable.ELYTRA, 4.0)
         );
     }
 
-    // START OF LISTENERS
-
-    ArrayList<LivingEntity> entities = new ArrayList<LivingEntity>();
-
     @EventHandler
     public void onPlayerCollide(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (!player.isGliding())
+        if(!player.isGliding())
             return;
 
-        if (!HasEnchant.playerElytra(player, this)) return;
+        if(!HasEnchant.playerElytra(player, this)) return;
 
-        for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
+        for(Entity entity : player.getNearbyEntities(1, 1, 1)) {
             LivingEntity victim;
-            if (entity instanceof LivingEntity) {
+            if(entity instanceof LivingEntity) {
                 victim = (LivingEntity) entity;
             } else {
                 continue;
             }
 
-            if (entities.contains(victim))
+            if(entities.contains(victim))
                 continue;
 
             double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
@@ -56,7 +57,7 @@ public class Slicing extends EcoEnchant {
                     entities.remove(victim);
                 }
             }, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown"));
-            if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "damage-elytra")) {
+            if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "damage-elytra")) {
                 ItemDurability.damageItem(player, player.getInventory().getChestplate(), 1, 38);
             }
         }

@@ -21,12 +21,12 @@ public class Frenzy extends EcoEnchant {
 
     @EventHandler
     public void onFrenzyKill(EntityDeathEvent event) {
-        if (event.getEntity().getKiller() == null)
+        if(event.getEntity().getKiller() == null)
             return;
 
         Player player = event.getEntity().getKiller();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 

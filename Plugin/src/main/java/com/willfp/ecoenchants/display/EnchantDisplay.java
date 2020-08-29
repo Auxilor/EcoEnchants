@@ -28,16 +28,13 @@ import java.util.Map;
 public class EnchantDisplay {
 
     /**
-     * The meta key of the length of enchantments in lore
-     */
-    private static final NamespacedKey key = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
-
-    /**
      * The meta key to hide enchantments in lore
      */
     public static final NamespacedKey keySkip = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
-
-
+    /**
+     * The meta key of the length of enchantments in lore
+     */
+    private static final NamespacedKey key = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
     private static String normalColor;
     private static String curseColor;
     private static String specialColor;
@@ -77,6 +74,7 @@ public class EnchantDisplay {
 
     /**
      * Revert display
+     *
      * @param item The item to revert
      * @return The item, updated
      */
@@ -95,17 +93,17 @@ public class EnchantDisplay {
             itemLore = meta.getLore();
 
         try {
-            if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
+            if(meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
                 int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
                 if(itemLore.size() >= enchantLoreLength) {
                     itemLore.subList(0, enchantLoreLength).clear();
                 }
             }
-        } catch (NullPointerException ignored) {}
+        } catch(NullPointerException ignored) {
+        }
 
 
-
-        if (meta instanceof EnchantmentStorageMeta) {
+        if(meta instanceof EnchantmentStorageMeta) {
             EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;
             metaBook.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
             metaBook.removeItemFlags(ItemFlag.HIDE_ENCHANTS); // Here just in case
@@ -122,6 +120,7 @@ public class EnchantDisplay {
 
     /**
      * Show all enchantments in item lore
+     *
      * @param item The item to update
      * @return The item, updated
      */
@@ -209,7 +208,7 @@ public class EnchantDisplay {
             }
 
             if(!(isMaxLevelOne || type == EcoEnchant.EnchantmentType.CURSE)) {
-                if (useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
+                if(useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
                     name += " " + Numeral.getNumeral(integer);
                 } else {
                     name += " " + integer;
@@ -224,8 +223,7 @@ public class EnchantDisplay {
             if(type == EcoEnchant.EnchantmentType.CURSE) {
                 curseLore.add(color + name);
                 if(describe) curseLore.addAll(description);
-            }
-            else {
+            } else {
                 normalLore.add(color + name);
                 if(describe) normalLore.addAll(description);
             }
@@ -235,11 +233,11 @@ public class EnchantDisplay {
         combinedLore.addAll(normalLore);
         combinedLore.addAll(curseLore);
 
-        if (useShrink && (enchantments.size() > shrinkThreshold)) {
+        if(useShrink && (enchantments.size() > shrinkThreshold)) {
             List<List<String>> partitionedCombinedLoreList = Lists.partition(combinedLore, shrinkPerLine);
             partitionedCombinedLoreList.forEach((list) -> {
                 StringBuilder builder = new StringBuilder();
-                for (String s : list) {
+                for(String s : list) {
                     builder.append(s);
                     builder.append(", ");
                 }
@@ -253,9 +251,10 @@ public class EnchantDisplay {
 
         itemLore.addAll(loreStart, enchantLore);
 
-        if (meta instanceof EnchantmentStorageMeta) {
+        if(meta instanceof EnchantmentStorageMeta) {
             EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;
-            if(!metaBook.getStoredEnchants().equals(((EnchantmentStorageMeta) oldItem.getItemMeta()).getStoredEnchants())) return oldItem;
+            if(!metaBook.getStoredEnchants().equals(((EnchantmentStorageMeta) oldItem.getItemMeta()).getStoredEnchants()))
+                return oldItem;
             forRemoval.forEach((metaBook::removeStoredEnchant));
             metaBook.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
             metaBook.addItemFlags(ItemFlag.HIDE_ENCHANTS); // Here just in case

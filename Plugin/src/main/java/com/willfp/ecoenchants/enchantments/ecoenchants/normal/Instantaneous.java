@@ -10,6 +10,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockDamageEvent;
+
 public class Instantaneous extends EcoEnchant {
     public Instantaneous() {
         super(
@@ -23,11 +24,11 @@ public class Instantaneous extends EcoEnchant {
     public void onDamageBlock(BlockDamageEvent event) {
         Player player = event.getPlayer();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
-        if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+        if(Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 
         if(event.getBlock().getDrops(player.getInventory().getItemInMainHand()).isEmpty())

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
 public class InfernalTouch extends EcoEnchant {
     public InfernalTouch() {
         super(
@@ -38,18 +39,18 @@ public class InfernalTouch extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
+        if(player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
 
-        if (event.getBlock().getState() instanceof Container)
+        if(event.getBlock().getState() instanceof Container)
             return;
 
-        if (event.isCancelled())
+        if(event.isCancelled())
             return;
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if(!AntigriefManager.canBreakBlock(player, block)) return;
 
 
         Collection<ItemStack> drops = new ArrayList<>();
@@ -60,9 +61,9 @@ public class InfernalTouch extends EcoEnchant {
         List<ItemStack> newDrops = new ArrayList<ItemStack>();
         int experience = 0;
 
-        for (ItemStack drop : drops) {
-            if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "smelt-cobblestone")) {
-                if (drop.getType().equals(Material.COBBLESTONE)) {
+        for(ItemStack drop : drops) {
+            if(!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "smelt-cobblestone")) {
+                if(drop.getType().equals(Material.COBBLESTONE)) {
                     newDrops.add(drop);
                     continue;
                 }
@@ -71,17 +72,17 @@ public class InfernalTouch extends EcoEnchant {
             Iterator<Recipe> iterator = Bukkit.recipeIterator();
             boolean couldSmelt = false;
             Recipe recipe = null;
-            while (iterator.hasNext()) {
+            while(iterator.hasNext()) {
                 recipe = iterator.next();
-                if (!(recipe instanceof FurnaceRecipe)) {
+                if(!(recipe instanceof FurnaceRecipe)) {
                     continue;
                 }
-                if (((FurnaceRecipe) recipe).getInput().getType() == drop.getType()) {
+                if(((FurnaceRecipe) recipe).getInput().getType() == drop.getType()) {
                     couldSmelt = true;
                     break;
                 }
             }
-            if (couldSmelt) {
+            if(couldSmelt) {
                 drop.setType(recipe.getResult().getType());
                 experience += (int) ((FurnaceRecipe) recipe).getExperience();
 
@@ -89,12 +90,12 @@ public class InfernalTouch extends EcoEnchant {
                     experience += 1;
                     if(HasEnchant.playerHeld(player, Enchantment.LOOT_BONUS_BLOCKS)) {
                         int level = HasEnchant.getPlayerLevel(player, LOOT_BONUS_BLOCKS);
-                        drop.setAmount((int) Math.ceil(1/((double) level + 2) + ((double) level + 1)/2));
+                        drop.setAmount((int) Math.ceil(1 / ((double) level + 2) + ((double) level + 1) / 2));
                     }
                 } else if(drop.getType().equals(Material.GOLD_INGOT)) {
                     if(HasEnchant.playerHeld(player, Enchantment.LOOT_BONUS_BLOCKS)) {
                         int level = HasEnchant.getPlayerLevel(player, LOOT_BONUS_BLOCKS);
-                        drop.setAmount((int) Math.ceil(1/((double) level + 2) + ((double) level + 1)/2));
+                        drop.setAmount((int) Math.ceil(1 / ((double) level + 2) + ((double) level + 1) / 2));
                     }
                 }
             }

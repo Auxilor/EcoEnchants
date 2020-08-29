@@ -11,6 +11,7 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class HarmlessnessCurse extends EcoEnchant {
     public HarmlessnessCurse() {
         super(
@@ -22,18 +23,18 @@ public class HarmlessnessCurse extends EcoEnchant {
 
     @EventHandler
     public void harmlessnessHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
-        if (event.getEntity() instanceof Monster)
+        if(event.getEntity() instanceof Monster)
             return;
 
         Player player = (Player) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
-        if (Rand.randFloat(0, 1) > 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance"))
+        if(Rand.randFloat(0, 1) > 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance"))
             return;
 
         event.setDamage(0);

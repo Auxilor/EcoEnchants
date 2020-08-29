@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.util.HasEnchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Diverse extends EcoEnchant {
     public Diverse() {
         super(
@@ -19,7 +20,7 @@ public class Diverse extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
         if(!(event.getEntity() instanceof Player))
@@ -31,7 +32,7 @@ public class Diverse extends EcoEnchant {
         if(!Target.Applicable.SWORD.getMaterials().contains(victim.getInventory().getItemInMainHand().getType()))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");

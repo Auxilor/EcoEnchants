@@ -17,6 +17,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+
 public class Shockwave extends EcoEnchant {
     public Shockwave() {
         super(
@@ -28,7 +29,7 @@ public class Shockwave extends EcoEnchant {
 
     @EventHandler
     public void onShoot(ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof AbstractArrow))
+        if(!(event.getEntity() instanceof AbstractArrow))
             return;
 
         if(!(event.getEntity().getShooter() instanceof Player)) return;
@@ -40,7 +41,7 @@ public class Shockwave extends EcoEnchant {
             item = TridentStack.getTridentStack((Trident) entity);
         }
 
-        if (!HasEnchant.item(item, this)) return;
+        if(!HasEnchant.item(item, this)) return;
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 
@@ -64,7 +65,7 @@ public class Shockwave extends EcoEnchant {
                                 mob.removeMetadata("shockwaved", EcoEnchantsPlugin.getInstance());
                             }, 10);
                         }
-                ));
+                        ));
             }
         }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 4, ticks);
     }

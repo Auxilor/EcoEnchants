@@ -1,6 +1,12 @@
 package com.willfp.ecoenchants.v1_16_R1;
 
-import net.minecraft.server.v1_16_R1.*;
+import net.minecraft.server.v1_16_R1.ChatMessage;
+import net.minecraft.server.v1_16_R1.Enchantment;
+import net.minecraft.server.v1_16_R1.EnchantmentSlotType;
+import net.minecraft.server.v1_16_R1.EnumChatFormat;
+import net.minecraft.server.v1_16_R1.EnumItemSlot;
+import net.minecraft.server.v1_16_R1.IChatBaseComponent;
+import net.minecraft.server.v1_16_R1.IChatMutableComponent;
 
 public class NMSEnchant extends Enchantment {
     private org.bukkit.enchantments.Enchantment enchantment;
@@ -49,7 +55,7 @@ public class NMSEnchant extends Enchantment {
         IChatMutableComponent var1 = new ChatMessage(enchantment.getName());
         var1.a(EnumChatFormat.WHITE);
 
-        if (level != 1 || this.getMaxLevel() != 1) {
+        if(level != 1 || this.getMaxLevel() != 1) {
             var1.c(" ").addSibling(new ChatMessage("enchantment.level." + level));
         }
 

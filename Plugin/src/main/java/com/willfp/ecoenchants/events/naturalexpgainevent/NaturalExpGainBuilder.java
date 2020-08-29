@@ -27,12 +27,12 @@ class NaturalExpGainBuilder {
         this.cancelled = cancel;
     }
 
-    public void setLoc(Location location) {
-        this.loc = location;
-    }
-
     public Location getLoc() {
         return this.loc;
+    }
+
+    public void setLoc(Location location) {
+        this.loc = location;
     }
 
     public void push() {

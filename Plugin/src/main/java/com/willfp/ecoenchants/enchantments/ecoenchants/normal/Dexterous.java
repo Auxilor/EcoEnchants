@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class Dexterous extends EcoEnchant {
     public Dexterous() {
         super(
@@ -25,7 +26,7 @@ public class Dexterous extends EcoEnchant {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
 
-        if (!HasEnchant.item(item, this)) {
+        if(!HasEnchant.item(item, this)) {
             player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(4.0);
             return;
         }

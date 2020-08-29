@@ -26,19 +26,19 @@ public class Beheading extends EcoEnchant {
 
     @EventHandler
     public void onDeath(EntityDeathEvent event) {
-        if (event.getEntity().getKiller() == null)
+        if(event.getEntity().getKiller() == null)
             return;
 
         Player player = event.getEntity().getKiller();
 
         LivingEntity victim = event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
-        if (Rand.randFloat(0, 1) > level * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > level * 0.01 * chance)
             return;
 
         ItemStack item;
@@ -52,17 +52,13 @@ public class Beheading extends EcoEnchant {
         } else {
             if(event.getEntityType().equals(EntityType.ZOMBIE)) {
                 item = new ItemStack(Material.ZOMBIE_HEAD, 1);
-            }
-            else if(event.getEntityType().equals(EntityType.SKELETON)) {
+            } else if(event.getEntityType().equals(EntityType.SKELETON)) {
                 item = new ItemStack(Material.SKELETON_SKULL, 1);
-            }
-            else if(event.getEntityType().equals(EntityType.CREEPER)) {
+            } else if(event.getEntityType().equals(EntityType.CREEPER)) {
                 item = new ItemStack(Material.CREEPER_HEAD, 1);
-            }
-            else if(event.getEntityType().equals(EntityType.ENDER_DRAGON)) {
+            } else if(event.getEntityType().equals(EntityType.ENDER_DRAGON)) {
                 item = new ItemStack(Material.DRAGON_HEAD, 1);
-            }
-            else return;
+            } else return;
         }
 
         new DropQueue(player)

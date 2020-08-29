@@ -33,7 +33,7 @@ public class Aiming extends EcoEnchant {
 
     @EventHandler
     public void aimingLaunch(ProjectileLaunchEvent event) {
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
         if(!(event.getEntity() instanceof Arrow))
@@ -44,7 +44,7 @@ public class Aiming extends EcoEnchant {
         Player player = (Player) event.getEntity().getShooter();
         Arrow arrow = (Arrow) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
 
@@ -66,12 +66,12 @@ public class Aiming extends EcoEnchant {
         Runnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
-                List<LivingEntity> nearbyEntities = (List<LivingEntity>)(List<?>) Arrays.asList(arrow.getNearbyEntities(finalDistance, finalDistance, finalDistance).stream()
+                List<LivingEntity> nearbyEntities = (List<LivingEntity>) (List<?>) Arrays.asList(arrow.getNearbyEntities(finalDistance, finalDistance, finalDistance).stream()
                         .filter(entity -> entity instanceof LivingEntity)
                         .filter(entity -> !entity.equals(player))
                         .filter(entity -> !(entity instanceof Enderman))
                         .filter(entity -> {
-                            if (entity instanceof Player) {
+                            if(entity instanceof Player) {
                                 return ((Player) entity).getGameMode().equals(GameMode.SURVIVAL) || ((Player) entity).getGameMode().equals(GameMode.ADVENTURE);
                             }
                             return true;

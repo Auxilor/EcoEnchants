@@ -21,7 +21,7 @@ public class EndInfusion extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
 
         Player player = (Player) event.getDamager();
@@ -29,7 +29,7 @@ public class EndInfusion extends EcoEnchant {
         if(!player.getWorld().getEnvironment().equals(World.Environment.THE_END))
             return;
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         int level = HasEnchant.getPlayerLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");

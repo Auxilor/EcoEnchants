@@ -21,9 +21,9 @@ public class ItemDurability {
      * Armor slots are 39 (helmet), 38 (chestplate), 37 (leggings), 36 (boots)
      *
      * @param player The player
-     * @param item The item to damage
+     * @param item   The item to damage
      * @param damage The amount of damage to deal
-     * @param slot The slot in the inventory of the item
+     * @param slot   The slot in the inventory of the item
      */
     public static void damageItem(Player player, ItemStack item, int damage, int slot) {
         if(item == null) return;
@@ -43,19 +43,20 @@ public class ItemDurability {
                     PlayerItemBreakEvent event = new PlayerItemBreakEvent(player, item);
                     Bukkit.getPluginManager().callEvent(event);
                     player.getInventory().clear(slot);
-                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS,1, 1);
+                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1, 1);
                 } else {
                     item.setItemMeta((ItemMeta) meta);
                 }
             }
         }
     }
+
     /**
      * Damage an item in a player's inventory without breaking it
      * The slot of a held item can be obtained with {@link PlayerInventory#getHeldItemSlot()}
      * Armor slots are 39 (helmet), 38 (chestplate), 37 (leggings), 36 (boots)
      *
-     * @param item The item to damage
+     * @param item   The item to damage
      * @param damage The amount of damage to deal
      * @param player The player
      */
@@ -84,7 +85,7 @@ public class ItemDurability {
      * The slot of a held item can be obtained with {@link PlayerInventory#getHeldItemSlot()}
      * Armor slots are 39 (helmet), 38 (chestplate), 37 (leggings), 36 (boots)
      *
-     * @param item The item to damage
+     * @param item   The item to damage
      * @param repair The amount of damage to heal
      */
     public static void repairItem(ItemStack item, int repair) {

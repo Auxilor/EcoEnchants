@@ -43,10 +43,11 @@ public class EntityDeathByEntityEvent extends Event {
 
     /**
      * Create event based off parameters
-     * @param victim The killed entity
-     * @param damager The killer
-     * @param drops The item drops
-     * @param xp The amount of xp to drop
+     *
+     * @param victim     The killed entity
+     * @param damager    The killer
+     * @param drops      The item drops
+     * @param xp         The amount of xp to drop
      * @param deathEvent The associated {@link EntityDeathEvent}
      */
     public EntityDeathByEntityEvent(@NotNull LivingEntity victim, @NotNull Entity damager, @NotNull List<ItemStack> drops, @NotNull int xp, @NotNull EntityDeathEvent deathEvent) {
@@ -57,8 +58,13 @@ public class EntityDeathByEntityEvent extends Event {
         this.deathEvent = deathEvent;
     }
 
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
+
     /**
      * Get victim
+     *
      * @return The victim
      */
     public LivingEntity getVictim() {
@@ -67,6 +73,7 @@ public class EntityDeathByEntityEvent extends Event {
 
     /**
      * Get killer
+     *
      * @return The killer
      */
     public Entity getKiller() {
@@ -75,6 +82,7 @@ public class EntityDeathByEntityEvent extends Event {
 
     /**
      * Get xp amount
+     *
      * @return The xp
      */
     public int getDroppedExp() {
@@ -83,6 +91,7 @@ public class EntityDeathByEntityEvent extends Event {
 
     /**
      * Get drops
+     *
      * @return {@link List} of drops
      */
     public List<ItemStack> getDrops() {
@@ -92,6 +101,7 @@ public class EntityDeathByEntityEvent extends Event {
     /**
      * Get associated {@link EntityDeathEvent}
      * Use this to modify event parameters.
+     *
      * @return The associated {@link EntityDeathEvent}
      */
     public EntityDeathEvent getDeathEvent() {
@@ -100,10 +110,6 @@ public class EntityDeathByEntityEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
-        return HANDLERS;
-    }
-
-    public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 }

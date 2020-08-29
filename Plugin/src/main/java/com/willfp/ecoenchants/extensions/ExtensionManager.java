@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.extensions;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -25,15 +24,15 @@ public class ExtensionManager {
      */
     public static void loadExtensions() {
         File dir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "/extensions");
-        if (!dir.exists()) {
+        if(!dir.exists()) {
             dir.mkdirs();
         }
 
         File[] extensionJars = dir.listFiles();
         if(extensionJars != null) {
-            for (File extensionJar : extensionJars) {
+            for(File extensionJar : extensionJars) {
                 try {
-                    if (extensionJar.isFile()) {
+                    if(extensionJar.isFile()) {
                         try {
                             URL url = extensionJar.toURI().toURL();
                             URL[] urls = {url};
@@ -43,12 +42,12 @@ public class ExtensionManager {
                             InputStream ymlIn = cl.getResourceAsStream("extension.yml");
                             URL extensionYmlUrl = cl.getResource("extension.yml");
 
-                            if (extensionYmlUrl == null || ymlIn == null) {
+                            if(extensionYmlUrl == null || ymlIn == null) {
                                 throw new MalformedExtensionException("No extension.yml found in " + extensionJar.getName());
                             }
 
                             YamlConfiguration extensionYml = YamlConfiguration.loadConfiguration(new InputStreamReader(ymlIn));
-                            if (!extensionYml.getKeys(false).contains("main") || !extensionYml.getKeys(false).contains("name")) {
+                            if(!extensionYml.getKeys(false).contains("main") || !extensionYml.getKeys(false).contains("name")) {
                                 throw new MalformedExtensionException("Invalid extension.yml found in " + extensionJar.getName());
                             }
 
@@ -59,18 +58,18 @@ public class ExtensionManager {
 
                             Object object = cls.newInstance();
 
-                            if (object instanceof Extension) {
+                            if(object instanceof Extension) {
                                 Extension extension = (Extension) object;
                                 extension.onEnable();
                                 extensions.put(extension, name);
                             } else {
                                 throw new MalformedExtensionException(extensionJar.getName() + " is invalid");
                             }
-                        } catch (IllegalAccessException | InstantiationException | IOException | ClassNotFoundException e) {
+                        } catch(IllegalAccessException | InstantiationException | IOException | ClassNotFoundException e) {
                             e.printStackTrace();
                         }
                     }
-                } catch (MalformedExtensionException e) {
+                } catch(MalformedExtensionException e) {
                     PLUGIN.getLogger().info(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
                 }
             }
@@ -97,6 +96,7 @@ public class ExtensionManager {
 
     /**
      * Get Map of all loaded extensions and their names
+     *
      * @return {@link Map} of {@link Extension}s and their names
      */
     public static Map<Extension, String> getLoadedExtensions() {

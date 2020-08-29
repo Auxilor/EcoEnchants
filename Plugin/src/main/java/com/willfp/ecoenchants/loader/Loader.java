@@ -13,6 +13,7 @@ import com.willfp.ecoenchants.display.DisplayPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.EcoRunnable;
 import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
 import com.willfp.ecoenchants.events.armorequip.ArmorListener;
 import com.willfp.ecoenchants.events.armorequip.DispenserArmorListener;
@@ -24,7 +25,11 @@ import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatAAC;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefFactionsUUID;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefGriefPrevention;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefLands;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.listeners.EnchantingListeners;
@@ -35,7 +40,6 @@ import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.enchantments.EcoRunnable;
 import com.willfp.ecoenchants.util.UpdateChecker;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bukkit.Bukkit;
@@ -70,9 +74,10 @@ public class Loader {
         boolean isPapermc = false;
         try {
             isPapermc = Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData") != null;
-        } catch (ClassNotFoundException ignored) {}
+        } catch(ClassNotFoundException ignored) {
+        }
 
-        if (!isPapermc) {
+        if(!isPapermc) {
             PLUGIN.getLogger().info("");
             PLUGIN.getLogger().info("----------------------------");
             PLUGIN.getLogger().info("");
@@ -225,7 +230,7 @@ public class Loader {
             PLUGIN.getLogger().severe("§cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
-        
+
         PLUGIN.getLogger().info("");
 
         /*
@@ -299,7 +304,7 @@ public class Loader {
         }
         PLUGIN.getLogger().info("");
 
-        if (EcoEnchants.getAll().size() == 0) {
+        if(EcoEnchants.getAll().size() == 0) {
             PLUGIN.getLogger().severe("§cError adding enchantments! Aborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
@@ -403,7 +408,7 @@ public class Loader {
             PLUGIN.getLogger().info("");
             PLUGIN.getLogger().info("EcoEnchants Updater");
             PLUGIN.getLogger().info("");
-            if (currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion)) {
+            if(currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion)) {
                 PLUGIN.getLogger().info("§aEcoEnchants is up to date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
             } else {
                 EcoEnchantsPlugin.outdated = true;

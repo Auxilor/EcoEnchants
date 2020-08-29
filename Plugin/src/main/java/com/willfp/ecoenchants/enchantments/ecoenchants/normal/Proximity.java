@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Proximity extends EcoEnchant {
     public Proximity() {
         super(
@@ -20,16 +21,16 @@ public class Proximity extends EcoEnchant {
 
     @EventHandler
     public void proximityHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+        if(!(event.getDamager() instanceof Player))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        if(!(event.getEntity() instanceof LivingEntity))
             return;
 
         Player player = (Player) event.getDamager();
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         double distance = player.getLocation().distance(victim.getLocation());
 
@@ -39,7 +40,7 @@ public class Proximity extends EcoEnchant {
 
         if(distance <= decreaseAfter) {
             double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
-            double finalMultiplier = (multiplier/100 * level) +1;
+            double finalMultiplier = (multiplier / 100 * level) + 1;
             event.setDamage(event.getDamage() * finalMultiplier);
         }
     }

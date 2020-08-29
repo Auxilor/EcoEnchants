@@ -10,6 +10,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Optics extends EcoEnchant {
     public Optics() {
         super(
@@ -21,14 +22,14 @@ public class Optics extends EcoEnchant {
 
     @EventHandler
     public void onOpticsDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow)) return;
+        if(!(event.getDamager() instanceof Arrow)) return;
 
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
+        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
         Arrow arrow = (Arrow) event.getDamager();
 
-        if (!HasEnchant.playerHeld(player, this)) return;
+        if(!HasEnchant.playerHeld(player, this)) return;
 
         Location land = arrow.getLocation();
         Location source = player.getLocation();

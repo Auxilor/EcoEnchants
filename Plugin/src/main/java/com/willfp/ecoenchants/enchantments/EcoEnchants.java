@@ -1,9 +1,62 @@
 package com.willfp.ecoenchants.enchantments;
 
-import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.*;
-import com.willfp.ecoenchants.enchantments.ecoenchants.curse.*;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.DamageArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.DragonArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.DustArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.EmeraldArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.EnchantmentArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.EndArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.FireArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.HeartArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.HoneyArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.InkArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.LavaArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.LimeArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MagicArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MagmaArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MusicArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NetherArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.RedstoneArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SmokeArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SnowArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SparkleArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.TotemArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WaterArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WitchArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.ZapArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.BreaklessnessCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.CallingCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.DecayCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.FragilityCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.HarmlessnessCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.HungerCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.MisfortuneCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.PermanenceCurse;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.*;
-import com.willfp.ecoenchants.enchantments.ecoenchants.special.*;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Aiming;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Annihilate;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Bladed;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Bolt;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Carve;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Confusion;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Energizing;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Force;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Frenzy;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Harpoon;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Indestructibility;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Instability;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Intellect;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.LifeSteal;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Pentashot;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Preservation;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Prosperity;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Razor;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Repairing;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Spring;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Streamlining;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Volatile;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -22,9 +75,6 @@ public class EcoEnchants {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
-
-    private static final Set<EcoEnchant> ecoEnchants = new HashSet<>();
-
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();
     public static final EcoEnchant INFERNAL_TOUCH = new InfernalTouch();
@@ -201,6 +251,7 @@ public class EcoEnchants {
     public static final EcoEnchant NETHERIC = new Netheric();
     public static final EcoEnchant ENDERISM = new Enderism();
     public static final EcoEnchant RAGE = new Rage();
+    private static final Set<EcoEnchant> ecoEnchants = new HashSet<>();
 
     /**
      * Get all registered {@link EcoEnchant}s
@@ -253,6 +304,7 @@ public class EcoEnchants {
         Optional<EcoEnchant> matching = getAll().stream().filter(enchant -> enchant.getKey().equals(key)).findFirst();
         return matching.orElse(null);
     }
+
     /**
      * Get if {@link ItemStack} has any {@link EcoEnchant} matching specified {@link com.willfp.ecoenchants.enchantments.EcoEnchant.EnchantmentType}
      *
@@ -273,8 +325,8 @@ public class EcoEnchants {
             }));
         } else {
             item.getEnchantments().forEach(((enchantment, integer) -> {
-                if (getFromEnchantment(enchantment) != null) {
-                    if (getFromEnchantment(enchantment).getType().equals(type)) hasOfType.set(true);
+                if(getFromEnchantment(enchantment) != null) {
+                    if(getFromEnchantment(enchantment).getType().equals(type)) hasOfType.set(true);
                 }
             }));
         }
@@ -286,7 +338,7 @@ public class EcoEnchants {
      * Called on /ecoreload
      */
     public static void update() {
-        for (EcoEnchant ecoEnchant : new HashSet<>(getAll())) {
+        for(EcoEnchant ecoEnchant : new HashSet<>(getAll())) {
             ecoEnchant.update();
         }
         EssentialsManager.registerEnchantments();

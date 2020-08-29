@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
+
 public class Arcanic extends EcoEnchant {
     public Arcanic() {
         super(
@@ -20,21 +21,21 @@ public class Arcanic extends EcoEnchant {
 
     @EventHandler
     public void onEffect(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
+        if(!(event.getEntity() instanceof Player))
             return;
 
-        if (!(event.getCause().equals(EntityDamageEvent.DamageCause.POISON) || event.getCause().equals(EntityDamageEvent.DamageCause.WITHER)))
+        if(!(event.getCause().equals(EntityDamageEvent.DamageCause.POISON) || event.getCause().equals(EntityDamageEvent.DamageCause.WITHER)))
             return;
 
         Player player = (Player) event.getEntity();
 
         int totalArcanicPoints = HasEnchant.getArmorPoints(player, this, false);
 
-        if (totalArcanicPoints == 0)
+        if(totalArcanicPoints == 0)
             return;
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point");
-        if (Rand.randFloat(0, 1) > totalArcanicPoints * 0.01 * chance)
+        if(Rand.randFloat(0, 1) > totalArcanicPoints * 0.01 * chance)
             return;
 
         event.setCancelled(true);
