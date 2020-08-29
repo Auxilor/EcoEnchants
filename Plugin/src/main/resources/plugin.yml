@@ -211,6 +211,7 @@ permissions:
       ecoenchants.fromtable.endinfusion: true
       ecoenchants.fromtable.diurnal: true
       ecoenchants.fromtable.marking: true
+      ecoenchants.fromtable.corrosive: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -716,4 +717,7 @@ permissions:
     default: true
   ecoenchants.fromtable.marking:
     description: Allows getting marking from an enchanting table
+    default: true
+  ecoenchants.fromtable.corrosive:
+    description: Allows getting corrosive from an enchanting table
     default: true
