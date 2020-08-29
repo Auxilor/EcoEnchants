@@ -190,6 +190,7 @@ public class EcoEnchants {
     public static final EcoEnchant LIME_ARTIFACT = new LimeArtifact();
     public static final EcoEnchant FORCE = new Force();
     public static final EcoEnchant END_INFUSION = new EndInfusion();
+    public static final EcoEnchant DIURNAL = new Diurnal();
 
     /**
      * Get all registered {@link EcoEnchant}s

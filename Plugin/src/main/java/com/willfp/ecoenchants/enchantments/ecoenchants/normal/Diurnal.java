@@ -9,17 +9,18 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Nocturnal extends EcoEnchant {
-    public Nocturnal() {
+
+public class Diurnal extends EcoEnchant {
+    public Diurnal() {
         super(
-                new EcoEnchantBuilder("nocturnal", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.01)
+                new EcoEnchantBuilder("diurnal", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
         );
     }
 
     // START OF LISTENERS
 
     @EventHandler
-    public void nocturnalHit(EntityDamageByEntityEvent event) {
+    public void onHit(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player))
             return;
 
@@ -28,7 +29,7 @@ public class Nocturnal extends EcoEnchant {
         if(!player.getWorld().getEnvironment().equals(World.Environment.NORMAL))
             return;
 
-        if(!(player.getWorld().getTime() > 12300 && player.getWorld().getTime() < 23850)) return;
+        if(!(player.getWorld().getTime() < 12300 && player.getWorld().getTime() > 23850)) return;
 
         if (!HasEnchant.playerHeld(player, this)) return;
 

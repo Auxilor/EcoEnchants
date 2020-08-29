@@ -1,12 +1,12 @@
 #
-# Nocturnal EcoEnchant
+# Diurnal EcoEnchant
 #
 
-config-version: 4.01 # Don't edit this.
+config-version: 4.0 # Don't edit this.
 
-name: "Nocturnal"
+name: "Diurnal"
 
-description: Increases damage dealt at night.
+description: Increases damage dealt at daytime.
 
 obtaining:
   table: true
@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts:
-    - diurnal
+    - nocturnal
   maximum-level: 5
 
 config:
