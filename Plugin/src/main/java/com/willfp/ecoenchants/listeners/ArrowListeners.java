@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.checks;
+package com.willfp.ecoenchants.listeners;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Material;

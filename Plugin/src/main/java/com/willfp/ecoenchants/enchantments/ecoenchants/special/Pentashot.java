@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;

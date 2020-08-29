@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
-import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.ItemDurability;

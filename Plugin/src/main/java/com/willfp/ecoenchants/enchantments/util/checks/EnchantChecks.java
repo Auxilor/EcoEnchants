@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.checks;
+package com.willfp.ecoenchants.enchantments.util.checks;
 
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.ItemDurability;

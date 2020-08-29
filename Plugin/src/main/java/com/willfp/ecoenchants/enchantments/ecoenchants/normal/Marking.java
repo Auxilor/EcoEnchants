@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.checks.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import org.bukkit.Bukkit;
