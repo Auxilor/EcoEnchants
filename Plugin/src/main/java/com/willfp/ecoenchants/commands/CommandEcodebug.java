@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class CommandEcodebug implements CommandExecutor {
+
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("ecodebug")) {
             if (!(sender instanceof Player)) {
@@ -27,22 +30,22 @@ public class CommandEcodebug implements CommandExecutor {
                 return true;
             }
 
-            Bukkit.getLogger().info("--------------- BEGIN DEBUG ----------------");
+            PLUGIN.getLogger().info("--------------- BEGIN DEBUG ----------------");
             Player player = (Player) sender;
-            Bukkit.getLogger().info("Running Version: " + EcoEnchantsPlugin.getInstance().getDescription().getVersion());
-            Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
-            Bukkit.getLogger().info("EcoEnchants.getAll(): " + EcoEnchants.getAll().toString());
-            Bukkit.getLogger().info("Enchantment.values(): " + Arrays.toString(Enchantment.values()));
+            PLUGIN.getLogger().info("Running Version: " + EcoEnchantsPlugin.getInstance().getDescription().getVersion());
+            PLUGIN.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
+            PLUGIN.getLogger().info("EcoEnchants.getAll(): " + EcoEnchants.getAll().toString());
+            PLUGIN.getLogger().info("Enchantment.values(): " + Arrays.toString(Enchantment.values()));
             try {
                 Field byNameField = Enchantment.class.getDeclaredField("byName");
                 byNameField.setAccessible(true);
                 Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
-                Bukkit.getLogger().info("Enchantment.byName: " + byName.toString());
+                PLUGIN.getLogger().info("Enchantment.byName: " + byName.toString());
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }
 
-            Bukkit.getLogger().info("--------------- END DEBUG ----------------");
+            PLUGIN.getLogger().info("--------------- END DEBUG ----------------");
         }
 
         return false;

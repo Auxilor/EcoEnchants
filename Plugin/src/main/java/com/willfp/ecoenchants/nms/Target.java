@@ -2,12 +2,14 @@ package com.willfp.ecoenchants.nms;
 
 
 import com.willfp.ecoenchants.API.TargetWrapper;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 import java.util.Set;
 
 public class Target {
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
     private static TargetWrapper target;
 
     static {
@@ -18,7 +20,7 @@ public class Target {
                 target = (TargetWrapper) class2.getConstructor().newInstance();
             }
         } catch (Exception e) {
-            Bukkit.getLogger().info(e.getCause() + "");
+            PLUGIN.getLogger().info(e.getCause() + "");
             e.printStackTrace();
             target = null;
         }

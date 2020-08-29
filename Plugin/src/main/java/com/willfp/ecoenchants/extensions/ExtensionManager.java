@@ -17,6 +17,7 @@ import java.util.Map;
  * Class containing method to load extensions
  */
 public class ExtensionManager {
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
     private static final Map<Extension, String> extensions = new HashMap<>();
 
     /**
@@ -70,7 +71,7 @@ public class ExtensionManager {
                         }
                     }
                 } catch (MalformedExtensionException e) {
-                    Bukkit.getLogger().info(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
+                    PLUGIN.getLogger().info(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
                 }
             }
         }
