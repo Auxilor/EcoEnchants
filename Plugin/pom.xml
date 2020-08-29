@@ -89,22 +89,6 @@
                 <version>2.4</version>
                 <executions>
                     <execution>
-                        <id>install-external-non-maven1-jar</id>
-                        <phase>compile</phase>
-                        <configuration>
-                            <repositoryLayout>default</repositoryLayout>
-                            <groupId>n3kas.ae</groupId>
-                            <artifactId>aeapi</artifactId>
-                            <version>1.0.0</version>
-                            <file>${project.parent.basedir}/lib/AdvancedEnchantments.jar</file>
-                            <packaging>jar</packaging>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>install-external-non-maven2-jar</id>
                         <phase>compile</phase>
                         <configuration>
@@ -211,12 +195,6 @@
             <artifactId>annotations</artifactId>
             <version>19.0.0</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>n3kas.ae</groupId>
-            <artifactId>aeapi</artifactId>
-            <version>1.0.0</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>fr.neatmonster</groupId>
