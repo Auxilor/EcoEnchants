@@ -1,0 +1,24 @@
+#
+# Impact EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Impact"
+
+description: Small chance to deal extreme damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  damage-multiplier: 3
+  chance-per-level: 0.5 # Chance to deal more (as percentage)

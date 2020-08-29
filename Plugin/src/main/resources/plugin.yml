@@ -220,6 +220,7 @@ permissions:
       ecoenchants.fromtable.netheric: true
       ecoenchants.fromtable.enderism: true
       ecoenchants.fromtable.rage: true
+      ecoenchants.fromtable.impact: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -752,4 +753,7 @@ permissions:
     default: true
   ecoenchants.fromtable.rage:
     description: Allows getting rage from an enchanting table
+    default: true
+  ecoenchants.fromtable.impact:
+    description: Allows getting impact from an enchanting table
     default: true

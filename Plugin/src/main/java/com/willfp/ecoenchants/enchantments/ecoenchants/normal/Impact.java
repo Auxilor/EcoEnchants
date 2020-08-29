@@ -4,40 +4,46 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
-import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.Target;
+import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.Rand;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Supercritical extends EcoEnchant {
-    public Supercritical() {
+import org.bukkit.inventory.ItemStack;
+
+public class Impact extends EcoEnchant {
+    public Impact() {
         super(
-                new EcoEnchantBuilder("supercritical", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("impact", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
         );
     }
 
     // START OF LISTENERS
 
     @EventHandler
-    public void supercriticalHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+    public void onHit(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Trident))
             return;
+
+        if(!(((Trident) event.getDamager()).getShooter() instanceof Player))
+            return;
+
         if (!(event.getEntity() instanceof LivingEntity))
             return;
 
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+        if (event.isCancelled())
             return;
 
-        int level = EnchantChecks.getMainhandLevel(player, this);
+        Player player = (Player) ((Trident) event.getDamager()).getShooter();
+        Trident trident = (Trident) event.getDamager();
+        ItemStack item = TridentStack.getTridentStack(trident);
+
+        if (!EnchantChecks.item(item, this)) return;
+
+        int level = EnchantChecks.getItemLevel(item, this);
 
         if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
