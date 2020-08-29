@@ -27,17 +27,17 @@ public class DisplayPacketAdapter extends PacketAdapter {
         if(event.getPacket() == null) return;
 
         PacketType packetType = event.getPacketType();
-        if (PacketType.Play.Server.WINDOW_ITEMS.equals(packetType)) {
+        if (packetType.equals(PacketType.Play.Server.WINDOW_ITEMS)) {
             event.getPacket().getItemListModifier().modify(0, (itemStacks) -> {
                 itemStacks.forEach(EnchantDisplay::displayEnchantments);
                 return itemStacks;
             });
-        } else if (PacketType.Play.Server.SET_SLOT.equals(packetType)) {
+        } else if (packetType.equals(PacketType.Play.Server.SET_SLOT)) {
             event.getPacket().getItemModifier().modify(0, (item) -> {
                 item = EnchantDisplay.displayEnchantments(item);
                 return item;
             });
-        } else if (PacketType.Play.Server.OPEN_WINDOW_MERCHANT.equals(packetType)) {
+        } else if (packetType.equals(PacketType.Play.Server.OPEN_WINDOW_MERCHANT)) {
             List<MerchantRecipe> merchantRecipes = event.getPacket().getMerchantRecipeLists().readSafely(0);
             if (merchantRecipes != null) {
                 List<MerchantRecipe> newList =
