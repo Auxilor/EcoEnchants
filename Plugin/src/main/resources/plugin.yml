@@ -213,6 +213,7 @@ permissions:
       ecoenchants.fromtable.marking: true
       ecoenchants.fromtable.corrosive: true
       ecoenchants.fromtable.wound: true
+      ecoenchants.fromtable.finality: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -724,4 +725,7 @@ permissions:
     default: true
   ecoenchants.fromtable.wound:
     description: Allows getting wound from an enchanting table
+    default: true
+  ecoenchants.fromtable.finality:
+    description: Allows getting finality from an enchanting table
     default: true
