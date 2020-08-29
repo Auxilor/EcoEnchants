@@ -4,15 +4,18 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import com.willfp.ecoenchants.Main;
+import org.bukkit.inventory.MerchantRecipe;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DisplayPacketAdapter extends PacketAdapter {
     private static final List<PacketType> packets = Arrays.asList(
             PacketType.Play.Server.WINDOW_ITEMS,
             PacketType.Play.Server.SET_SLOT,
-            PacketType.Play.Client.SET_CREATIVE_SLOT
+            PacketType.Play.Client.SET_CREATIVE_SLOT,
+            PacketType.Play.Server.OPEN_WINDOW_MERCHANT
     );
 
     public DisplayPacketAdapter() {
@@ -34,6 +37,24 @@ public class DisplayPacketAdapter extends PacketAdapter {
                 item = EnchantDisplay.displayEnchantments(item);
                 return item;
             });
+        } else if (PacketType.Play.Server.OPEN_WINDOW_MERCHANT.equals(packetType)) {
+            List<MerchantRecipe> merchantRecipes = event.getPacket().getMerchantRecipeLists().readSafely(0);
+            if (merchantRecipes != null) {
+                List<MerchantRecipe> newList =
+                        merchantRecipes.stream().map(oldRecipe -> {
+                            MerchantRecipe recipe =
+                                    new MerchantRecipe(EnchantDisplay.displayEnchantments(oldRecipe.getResult()),
+                                    oldRecipe.getUses(),
+                                    oldRecipe.getMaxUses(),
+                                    oldRecipe.hasExperienceReward(),
+                                    oldRecipe.getVillagerExperience(),
+                                    oldRecipe.getPriceMultiplier());
+                            recipe.setIngredients(oldRecipe.getIngredients());
+                            return recipe;
+                        }).collect(Collectors.toList());
+
+                event.getPacket().getMerchantRecipeLists().writeSafely(0, newList);
+            }
         }
     }
 
