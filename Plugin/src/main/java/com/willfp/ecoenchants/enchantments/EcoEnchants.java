@@ -193,6 +193,7 @@ public class EcoEnchants {
     public static final EcoEnchant DIURNAL = new Diurnal();
     public static final EcoEnchant MARKING = new Marking();
     public static final EcoEnchant CORROSIVE = new Corrosive();
+    public static final EcoEnchant WOUND = new Wound();
 
     /**
      * Get all registered {@link EcoEnchant}s
