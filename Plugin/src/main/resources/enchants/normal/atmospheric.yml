@@ -1,0 +1,23 @@
+#
+# Atmospheric EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Atmospheric"
+
+description: Increases trident damage when you are in air.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  damage-multiplier-per-level: 0.1 # 1 + (Level * Multiplier) is multiplied with the damage
