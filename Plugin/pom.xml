@@ -7,7 +7,7 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>com.willfp.ecoenchants</groupId>
-        <version>4.1.0-pre16</version>
+        <version>4.1.0-pre17</version>
     </parent>
 
     <artifactId>plugin</artifactId>
