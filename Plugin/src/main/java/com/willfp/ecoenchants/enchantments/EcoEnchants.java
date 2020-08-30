@@ -225,6 +225,7 @@ public class EcoEnchants {
     public static final EcoEnchant BLOCK_BREATHER = new BlockBreather();
     public static final EcoEnchant VOLTAGE = new Voltage();
     public static final EcoEnchant TRANSFUSE = new Transfuse();
+    public static final EcoEnchant INACCURACY_CURSE = new InaccuracyCurse();
 
     /**
      * Get all registered {@link EcoEnchant}s

@@ -1,12 +1,12 @@
 #
-# Curse of Misfortune EcoEnchant
+# Curse of Inaccuracy EcoEnchant
 #
 
 config-version: 4.0 # Don't edit this.
 
-name: "Curse of Misfortune"
+name: "Curse of Inaccuracy"
 
-description: Chance for blocks to not drop items.
+description: Arrows fire incorrectly.
 
 obtaining:
   table: false
@@ -16,8 +16,7 @@ obtaining:
 
 general-config:
   grindstoneable: true
-  conflicts:
-    - fortune
+  conflicts: []
 
 config:
-  chance: 15
+  spread: 0.2

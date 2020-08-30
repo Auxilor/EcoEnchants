@@ -9,7 +9,7 @@ name: "Curse of Breaklessness"
 description: Chance to prevent block breaking.
 
 obtaining:
-  table: true
+  table: false
   villager: true
   loot: true
   rarity: legendary

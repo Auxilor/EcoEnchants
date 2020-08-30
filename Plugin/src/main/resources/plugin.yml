@@ -244,6 +244,7 @@ permissions:
       ecoenchants.fromtable.blockbreather: true
       ecoenchants.fromtable.voltage: true
       ecoenchants.fromtable.transfuse: true
+      ecoenchants.fromtable.inaccuracycurse: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -848,4 +849,7 @@ permissions:
     default: true
   ecoenchants.fromtable.transfuse:
     description: Allows getting transfuse from an enchanting table
+    default: true
+  ecoenchants.fromtable.inaccuracycurse:
+    description: Allows getting curse of inaccuracy from an enchanting table
     default: true
