@@ -1,0 +1,23 @@
+#
+# Block Breather EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Block Breather"
+
+description: Chance to ignore suffocation damage.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  chance-per-level: 15

@@ -241,6 +241,7 @@ permissions:
       ecoenchants.fromtable.lesion: true
       ecoenchants.fromtable.conclude: true
       ecoenchants.fromtable.graceful: true
+      ecoenchants.fromtable.blockbreather: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -836,4 +837,7 @@ permissions:
     default: true
   ecoenchants.fromtable.graceful:
     description: Allows getting graceful from an enchanting table
+    default: true
+  ecoenchants.fromtable.blockbreather:
+    description: Allows getting block breather from an enchanting table
     default: true
