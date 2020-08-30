@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
@@ -30,7 +31,7 @@ public class Atmospheric extends EcoEnchant {
         if(!(event.getEntity() instanceof Trident))
             return;
 
-        if(!(event.getEntity().getShooter() instanceof Trident))
+        if(!(event.getEntity().getShooter() instanceof Player))
             return;
 
         Trident trident = (Trident) event.getEntity();
