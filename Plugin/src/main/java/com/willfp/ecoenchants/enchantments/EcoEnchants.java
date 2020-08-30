@@ -217,6 +217,8 @@ public class EcoEnchants {
     public static final EcoEnchant DISABLE = new Disable();
     public static final EcoEnchant HELLISH = new Hellish();
     public static final EcoEnchant VOID_AFFINITY = new VoidAffinity();
+    public static final EcoEnchant CUBISM = new Cubism();
+    public static final EcoEnchant QUADRILATERALISM = new Quadrilateralism();
 
     /**
      * Get all registered {@link EcoEnchant}s

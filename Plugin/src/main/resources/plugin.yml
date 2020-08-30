@@ -236,6 +236,8 @@ permissions:
       ecoenchants.fromtable.disable: true
       ecoenchants.fromtable.hellish: true
       ecoenchants.fromtable.voidaffinity: true
+      ecoenchants.fromtable.cubism: true
+      ecoenchants.fromtable.quadrilateralism: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -816,4 +818,10 @@ permissions:
     default: true
   ecoenchants.fromtable.voidaffinity:
     description: Allows getting void affinity from an enchanting table
+    default: true
+  ecoenchants.fromtable.cubism:
+    description: Allows getting cubism from an enchanting table
+    default: true
+  ecoenchants.fromtable.quadrilateralism:
+    description: Allows getting quadrilateralism from an enchanting table
     default: true

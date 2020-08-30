@@ -1,0 +1,23 @@
+#
+# Quadrilateralism EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Quadrilateralism"
+
+description: Increases damage dealt against slimes and magma cubes.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  multiplier: 0.1 # Damage = level * multiplier + 1
