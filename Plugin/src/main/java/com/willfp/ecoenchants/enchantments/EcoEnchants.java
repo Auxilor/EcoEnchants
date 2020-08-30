@@ -223,6 +223,7 @@ public class EcoEnchants {
     public static final EcoEnchant CONCLUDE = new Conclude();
     public static final EcoEnchant GRACEFUL = new Graceful();
     public static final EcoEnchant BLOCK_BREATHER = new BlockBreather();
+    public static final EcoEnchant VOLTAGE = new Voltage();
 
     /**
      * Get all registered {@link EcoEnchant}s
