@@ -44,7 +44,7 @@ public class Aerial extends EcoEnchant {
             return;
 
         Arrow arrow = (Arrow) event.getDamager();
-        if(EnchantChecks.arrow(arrow, this)) return;
+        if(!EnchantChecks.arrow(arrow, this)) return;
         if(!arrow.hasMetadata("shot-in-air")) return;
 
         int level = EnchantChecks.getArrowLevel(arrow, this);

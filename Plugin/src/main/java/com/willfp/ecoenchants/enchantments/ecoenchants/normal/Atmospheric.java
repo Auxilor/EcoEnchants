@@ -49,7 +49,7 @@ public class Atmospheric extends EcoEnchant {
         Trident trident = (Trident) event.getDamager();
         if(!trident.hasMetadata("shot-in-air")) return;
         ItemStack item = TridentStack.getTridentStack(trident);
-        if(EnchantChecks.item(item, this)) return;
+        if(!EnchantChecks.item(item, this)) return;
 
         int level = EnchantChecks.getItemLevel(item, this);
 
