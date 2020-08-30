@@ -17,8 +17,12 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts:
-    - impaling
     - bladed
+    - phantasm
+    - arachnid
+    - pacify
+    - abattoir
+    - impaling
   maximum-level: 5
 
 config:

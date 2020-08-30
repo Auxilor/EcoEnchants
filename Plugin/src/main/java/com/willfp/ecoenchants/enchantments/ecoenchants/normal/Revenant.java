@@ -1,19 +1,18 @@
-package com.willfp.ecoenchants.enchantments.ecoenchants.special;
+package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Force extends EcoEnchant {
-    public Force() {
+public class Revenant extends EcoEnchant {
+    public Revenant() {
         super(
-                new EcoEnchantBuilder("force", EnchantmentType.SPECIAL, Target.Applicable.BOW, 4.01)
+                new EcoEnchantBuilder("revenant", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.0)
         );
     }
 
@@ -24,11 +23,9 @@ public class Force extends EcoEnchant {
         if (!(event.getDamager() instanceof Arrow))
             return;
 
-        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
-            return;
+        if(!(event.getEntity() instanceof Zombie || event.getEntity() instanceof Skeleton)) return;
 
         Arrow arrow = (Arrow) event.getDamager();
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
 
         if(!EnchantChecks.arrow(arrow, this))
             return;
@@ -37,7 +34,7 @@ public class Force extends EcoEnchant {
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
-        double bonus = (multiplier * (level + 6)) + 1;
+        double bonus = (multiplier * (level + 1)) + 1;
         event.setDamage(damage * bonus);
     }
 }

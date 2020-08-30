@@ -206,6 +206,14 @@ public class EcoEnchants {
     public static final EcoEnchant IDENTIFY = new Identify();
     public static final EcoEnchant INFURIATE = new Infuriate();
     public static final EcoEnchant ATMOSPHERIC = new Atmospheric();
+    public static final EcoEnchant REVENANT = new Revenant();
+    public static final EcoEnchant INSECTICIDE = new Insecticide();
+    public static final EcoEnchant SLAUGHTER = new Slaughter();
+    public static final EcoEnchant SETTLE = new Settle();
+    public static final EcoEnchant PHANTASM = new Phantasm();
+    public static final EcoEnchant ARACHNID = new Arachnid();
+    public static final EcoEnchant PACIFY = new Pacify();
+    public static final EcoEnchant ABATTOIR = new Abattoir();
 
     /**
      * Get all registered {@link EcoEnchant}s

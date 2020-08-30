@@ -225,6 +225,14 @@ permissions:
       ecoenchants.fromtable.identify: true
       ecoenchants.fromtable.infuriate: true
       ecoenchants.fromtable.atmospheric: true
+      ecoenchants.fromtable.revenant: true
+      ecoenchants.fromtable.insecticide: true
+      ecoenchants.fromtable.slaughter: true
+      ecoenchants.fromtable.settle: true
+      ecoenchants.fromtable.phantasm: true
+      ecoenchants.fromtable.arachnid: true
+      ecoenchants.fromtable.pacify: true
+      ecoenchants.fromtable.abattoir: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -772,4 +780,28 @@ permissions:
     default: true
   ecoenchants.fromtable.atmospheric:
     description: Allows getting atmospheric from an enchanting table
+    default: true
+  ecoenchants.fromtable.revenant:
+    description: Allows getting revenant from an enchanting table
+    default: true
+  ecoenchants.fromtable.insecticide:
+    description: Allows getting insecticide from an enchanting table
+    default: true
+  ecoenchants.fromtable.slaughter:
+    description: Allows getting slaughter from an enchanting table
+    default: true
+  ecoenchants.fromtable.settle:
+    description: Allows getting settle from an enchanting table
+    default: true
+  ecoenchants.fromtable.phantasm:
+    description: Allows getting phantasm from an enchanting table
+    default: true
+  ecoenchants.fromtable.arachnid:
+    description: Allows getting arachnid from an enchanting table
+    default: true
+  ecoenchants.fromtable.pacify:
+    description: Allows getting pacify from an enchanting table
+    default: true
+  ecoenchants.fromtable.abattoir:
+    description: Allows getting abattoir from an enchanting table
     default: true

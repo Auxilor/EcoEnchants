@@ -1,0 +1,28 @@
+#
+# Settle EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Settle"
+
+description: Increases damage against creepers.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: common
+
+general-config:
+  grindstoneable: true
+  conflicts:
+    - power
+    - force
+    - revenant
+    - slaughter
+    - insecticide
+  maximum-level: 5
+
+config:
+  multiplier: 0.4 # Formula is (multiplier * (level + 1) + 1)*damage | Power is 0.25

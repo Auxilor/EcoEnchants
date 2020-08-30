@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class Serrated extends EcoEnchant {
     public Serrated() {
         super(
-                new EcoEnchantBuilder("serrated", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("serrated", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.01)
         );
     }
 

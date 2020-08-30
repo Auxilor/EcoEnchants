@@ -2,7 +2,7 @@
 # Bladed EcoEnchant
 #
 
-config-version: 4.0 # Don't edit this.
+config-version: 4.01 # Don't edit this.
 
 name: "Bladed"
 
@@ -19,6 +19,10 @@ general-config:
   conflicts:
     - impaling
     - serrated
+    - phantasm
+    - arachnid
+    - pacify
+    - abattoir
   maximum-level: 5
 
 config:

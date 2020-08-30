@@ -2,7 +2,7 @@
 # Force EcoEnchant
 #
 
-config-version: 4.0 # Don't edit this.
+config-version: 4.01 # Don't edit this.
 
 name: "Force"
 
@@ -18,6 +18,10 @@ general-config:
   grindstoneable: true
   conflicts:
     - power
+    - revenant
+    - insecticide
+    - slaughter
+    - settle
   maximum-level: 5
 
 config:
