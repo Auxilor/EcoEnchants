@@ -240,6 +240,7 @@ permissions:
       ecoenchants.fromtable.quadrilateralism: true
       ecoenchants.fromtable.lesion: true
       ecoenchants.fromtable.conclude: true
+      ecoenchants.fromtable.graceful: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -832,4 +833,7 @@ permissions:
     default: true
   ecoenchants.fromtable.conclude:
     description: Allows getting conclude from an enchanting table
+    default: true
+  ecoenchants.fromtable.graceful:
+    description: Allows getting graceful from an enchanting table
     default: true

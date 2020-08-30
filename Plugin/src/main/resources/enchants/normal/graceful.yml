@@ -1,0 +1,23 @@
+#
+# Graceful EcoEnchant
+#
+
+config-version: 4.0 # Don't edit this.
+
+name: "Graceful"
+
+description: Chance of getting slow falling just above hitting the ground.
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-level: 5 #chance of slow falling per level
