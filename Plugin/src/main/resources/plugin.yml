@@ -243,6 +243,7 @@ permissions:
       ecoenchants.fromtable.graceful: true
       ecoenchants.fromtable.blockbreather: true
       ecoenchants.fromtable.voltage: true
+      ecoenchants.fromtable.transfuse: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -844,4 +845,7 @@ permissions:
     default: true
   ecoenchants.fromtable.voltage:
     description: Allows getting voltage from an enchanting table
+    default: true
+  ecoenchants.fromtable.transfuse:
+    description: Allows getting transfuse from an enchanting table
     default: true

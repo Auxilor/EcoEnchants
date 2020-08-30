@@ -2,7 +2,7 @@
 # Stone Switcher EcoEnchant
 #
 
-config-version: 4.0 # Don't edit this.
+config-version: 4.01 # Don't edit this.
 
 name: "Stone Switcher"
 
@@ -16,7 +16,9 @@ obtaining:
 
 general-config:
   grindstoneable: true
-  conflicts: []
+  conflicts:
+    - transfuse
+    - silk_touch
   maximum-level: 3
 
 config:

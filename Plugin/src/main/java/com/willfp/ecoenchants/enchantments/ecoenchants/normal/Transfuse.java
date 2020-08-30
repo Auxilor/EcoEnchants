@@ -16,17 +16,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-public class StoneSwitcher extends EcoEnchant {
-    public StoneSwitcher() {
+
+public class Transfuse extends EcoEnchant {
+    public Transfuse() {
         super(
-                new EcoEnchantBuilder("stone_switcher", EnchantmentType.NORMAL, Target.Applicable.PICKAXE, 4.01)
+                new EcoEnchantBuilder("transfuse", EnchantmentType.NORMAL, Target.Applicable.PICKAXE, 4.0)
         );
     }
 
     // START OF LISTENERS
 
     @EventHandler
-    public void stoneSwitcherBreak(BlockBreakEvent event) {
+    public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
