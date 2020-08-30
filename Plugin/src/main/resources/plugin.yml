@@ -239,6 +239,7 @@ permissions:
       ecoenchants.fromtable.cubism: true
       ecoenchants.fromtable.quadrilateralism: true
       ecoenchants.fromtable.lesion: true
+      ecoenchants.fromtable.conclude: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -828,4 +829,7 @@ permissions:
     default: true
   ecoenchants.fromtable.lesion:
     description: Allows getting lesion from an enchanting table
+    default: true
+  ecoenchants.fromtable.conclude:
+    description: Allows getting conclude from an enchanting table
     default: true

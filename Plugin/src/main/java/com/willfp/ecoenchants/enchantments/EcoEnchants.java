@@ -220,6 +220,7 @@ public class EcoEnchants {
     public static final EcoEnchant CUBISM = new Cubism();
     public static final EcoEnchant QUADRILATERALISM = new Quadrilateralism();
     public static final EcoEnchant LESION = new Lesion();
+    public static final EcoEnchant CONCLUDE = new Conclude();
 
     /**
      * Get all registered {@link EcoEnchant}s
