@@ -2,7 +2,7 @@
 # Telekinesis EcoEnchant
 #
 
-config-version: 4.11 # Don't edit this.
+config-version: 4.12 # Don't edit this.
 
 name: "Telekinesis"
 
@@ -19,5 +19,5 @@ general-config:
   conflicts: []
 
 config:
-  use-orb: false # Use experience orb above player to give xp. Use if you need mending interaction.
+  use-orb: true # Use experience orb above player to give xp. Use if you need mending interaction.
   not-on-players: false # Disallow getting drops from players

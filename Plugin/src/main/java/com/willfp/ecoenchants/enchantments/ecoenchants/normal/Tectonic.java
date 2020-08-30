@@ -42,6 +42,7 @@ public class Tectonic extends EcoEnchant {
         for (Entity entity : entities) {
             if (entity.equals(player))
                 continue;
+            if(!(entity instanceof LivingEntity)) continue;
             entity.teleport(entity.getLocation().add(0, 0.3, 0));
             ((LivingEntity) entity).damage(damage);
         }

@@ -30,7 +30,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
                 if(!(e instanceof Monster)) continue;
 
-                ((Monster) e).damage(damage, player);
+                ((Monster) e).damage(damage);
 
                 EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 1);
             }
