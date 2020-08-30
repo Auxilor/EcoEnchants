@@ -20,4 +20,4 @@ general-config:
   maximum-level: 5
 
 config:
-  percent-deflected-per-level: 10 # Percent of damage to deal to attacker per level (can go above 100)
+  percent-deflected-per-level: 5 # Percent of damage to deal to attacker per level (can go above 100)

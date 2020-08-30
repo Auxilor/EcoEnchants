@@ -21,4 +21,4 @@ general-config:
 
 config:
   ticks-per-level: 15 # Ticks to weaken player for per level
-  multiplier-while-weak: 1.3 # Times more damage to deal while weakened
+  multiplier-while-weak: 1.25 # Times more damage to deal while weakened

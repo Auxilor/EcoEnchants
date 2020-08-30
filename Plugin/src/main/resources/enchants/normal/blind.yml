@@ -21,4 +21,4 @@ general-config:
 
 config:
   chance-per-level: 3 #as percentage
-  duration-per-level: 30
+  duration-per-level: 15

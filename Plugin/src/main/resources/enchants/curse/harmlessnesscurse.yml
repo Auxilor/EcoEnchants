@@ -19,4 +19,4 @@ general-config:
   conflicts: []
 
 config:
-  chance: 30
+  chance: 15

@@ -20,5 +20,5 @@ general-config:
   maximum-level: 3
 
 config:
-  fire: true
+  fire: false
   break-blocks: false

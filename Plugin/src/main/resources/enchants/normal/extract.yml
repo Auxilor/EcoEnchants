@@ -20,4 +20,4 @@ general-config:
   maximum-level: 3
 
 config:
-  damage-multiplier-per-level: 0.08 # Damage * Level * Multiplier is used to calculate how much health to heal
+  damage-multiplier-per-level: 0.04 # Damage * Level * Multiplier is used to calculate how much health to heal

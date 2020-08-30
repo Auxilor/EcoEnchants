@@ -20,4 +20,4 @@ general-config:
   maximum-level: 5
 
 config:
-  percent-less-per-level: 1.5 # Points * Percent less / 100 * damage = damage taken
+  percent-less-per-level: 1 # Points * Percent less / 100 * damage = damage taken

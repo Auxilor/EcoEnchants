@@ -20,6 +20,6 @@ general-config:
   maximum-level: 4
 
 config:
-  chance-per-level: 2.5
+  chance-per-level: 2
   allow-not-fully-charged: false # dont require sword attack to be at full charge
   lightning-damage: 2.5

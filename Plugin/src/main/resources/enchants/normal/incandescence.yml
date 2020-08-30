@@ -6,7 +6,7 @@ config-version: 4.0 # Don't edit this.
 
 name: "Incandescence"
 
-description: Chance to light your attacker on fire.
+description: Light your attacker on fire.
 
 obtaining:
   table: true

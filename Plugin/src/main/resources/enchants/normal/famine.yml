@@ -20,5 +20,5 @@ general-config:
   maximum-level: 3
 
 config:
-  allow-not-fully-charged: false #require sword attack to be at full charge
-  chance-per-level: 5 #chance of slowness per level
+  allow-not-fully-charged: false
+  chance-per-level: 4

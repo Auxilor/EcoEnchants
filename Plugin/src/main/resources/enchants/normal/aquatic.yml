@@ -20,4 +20,4 @@ general-config:
   maximum-level: 3
 
 config:
-  percent-more-per-level: 10 # Percent more damage to do per level
+  percent-more-per-level: 6 # Percent more damage to do per level

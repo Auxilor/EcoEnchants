@@ -51,6 +51,6 @@ public class Levitate extends EcoEnchant {
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "duration-per-level");
 
         victim.setVelocity(new Vector(0, 0, 0));
-        victim.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, duration * level, level));
+        victim.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, duration * level, 0));
     }
 }

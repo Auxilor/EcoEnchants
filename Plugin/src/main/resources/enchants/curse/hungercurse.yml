@@ -20,5 +20,4 @@ general-config:
     - sating
 
 config:
-  repeat-ticks: 20 # How often (in ticks) to call entities
-  distance: 20 # Entity Range
+  # No config is available for this enchantment

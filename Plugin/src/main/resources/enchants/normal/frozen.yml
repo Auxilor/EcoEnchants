@@ -20,5 +20,5 @@ general-config:
   maximum-level: 4
 
 config:
-  chance-per-point: 5
+  chance-per-point: 1
   points-per-level: 4 # Points of frozen required to increment slowness level by 1

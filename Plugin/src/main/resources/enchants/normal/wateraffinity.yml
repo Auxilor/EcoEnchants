@@ -21,4 +21,4 @@ general-config:
   maximum-level: 5
 
 config:
-  percent-more-per-level: 5 # percent more damage to deal per level when on fire
+  percent-more-per-level: 4 # percent more damage to deal per level when on fire

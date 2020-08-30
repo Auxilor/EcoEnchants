@@ -20,5 +20,5 @@ general-config:
   maximum-level: 5
 
 config:
-  chance-per-level: 5
+  chance-per-level: 3
   distance-per-level: 4 # Distance for mobs to check

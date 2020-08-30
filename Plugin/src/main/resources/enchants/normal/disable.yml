@@ -20,5 +20,5 @@ general-config:
   maximum-level: 3
 
 config:
-  allow-not-fully-charged: false #require attack to be at full charge
+  allow-not-fully-charged: false
   chance-per-level: 2 #as percentage

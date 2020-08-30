@@ -21,3 +21,4 @@ general-config:
 
 config:
   damage-multiplier-per-level: 0.02 # If enemy has 200 health, and you have 20 w/ goliath 5 then your damage is multiplied by: ((200/10)*5*0.02) + 1 = 3
+  cap: 3 # Multiplier cap

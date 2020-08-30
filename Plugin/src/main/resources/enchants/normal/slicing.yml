@@ -20,6 +20,6 @@ general-config:
   maximum-level: 5
 
 config:
-  damage-per-level: 0.8 #Damage given to opponent per level
+  damage-per-level: 1 #Damage given to opponent per level
   cooldown: 20 #Cooldown in ticks until player can attack another entity with slicing
   damage-elytra: true

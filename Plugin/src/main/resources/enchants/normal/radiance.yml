@@ -21,4 +21,4 @@ general-config:
 
 config:
   radius-multiplier: 3 # Radius Multiplier * level = Radius of which to damage entities
-  duration-per-level: 15 # Duration (in ticks) to make entity glow for
+  duration-per-level: 10 # Duration (in ticks) to make entity glow for

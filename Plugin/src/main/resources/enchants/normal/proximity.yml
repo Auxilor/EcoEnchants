@@ -21,4 +21,4 @@ general-config:
 
 config:
   when-closer-than-blocks: 1.5
-  percent-more-per-level: 10 # percent more damage to deal per level when close
+  percent-more-per-level: 5 # percent more damage to deal per level when close

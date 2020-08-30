@@ -20,4 +20,4 @@ general-config:
   maximum-level: 5
 
 config:
-  damage-multiplier-per-level: 0.2
+  damage-multiplier-per-level: 0.05

@@ -20,5 +20,5 @@ general-config:
   maximum-level: 4
 
 config:
-  multiplier-per-level: 0.01 # Multiplier per mob per level (ie 10 mobs at level 4 will be 1.4x more powerful)
+  multiplier-per-level: 0.005 # Multiplier per mob per level (ie 10 mobs at level 4 will be 1.2x more powerful)
   distance-per-level: 2.5
