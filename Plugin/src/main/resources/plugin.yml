@@ -238,6 +238,7 @@ permissions:
       ecoenchants.fromtable.voidaffinity: true
       ecoenchants.fromtable.cubism: true
       ecoenchants.fromtable.quadrilateralism: true
+      ecoenchants.fromtable.lesion: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -824,4 +825,7 @@ permissions:
     default: true
   ecoenchants.fromtable.quadrilateralism:
     description: Allows getting quadrilateralism from an enchanting table
+    default: true
+  ecoenchants.fromtable.lesion:
+    description: Allows getting lesion from an enchanting table
     default: true

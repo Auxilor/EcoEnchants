@@ -219,6 +219,7 @@ public class EcoEnchants {
     public static final EcoEnchant VOID_AFFINITY = new VoidAffinity();
     public static final EcoEnchant CUBISM = new Cubism();
     public static final EcoEnchant QUADRILATERALISM = new Quadrilateralism();
+    public static final EcoEnchant LESION = new Lesion();
 
     /**
      * Get all registered {@link EcoEnchant}s
