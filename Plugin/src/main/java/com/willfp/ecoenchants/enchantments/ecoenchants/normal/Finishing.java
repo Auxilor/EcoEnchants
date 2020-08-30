@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
+import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Finishing extends EcoEnchant {
     public Finishing() {
         super(
-                new EcoEnchantBuilder("finishing", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("finishing", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.1)
         );
     }
 
@@ -31,6 +32,9 @@ public class Finishing extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
         int level = EnchantChecks.getMainhandLevel(player, this);
+
+        if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+            return;
 
         double minhealth = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "minimum-health-per-level");
         if (!(((LivingEntity) event.getEntity()).getHealth() <= level * minhealth))

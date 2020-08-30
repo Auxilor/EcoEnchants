@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
+import com.willfp.ecoenchants.util.Rand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -14,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Finality extends EcoEnchant {
     public Finality() {
         super(
-                new EcoEnchantBuilder("finality", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.0)
+                new EcoEnchantBuilder("finality", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.1)
         );
     }
 
@@ -35,6 +36,9 @@ public class Finality extends EcoEnchant {
 
         if (!EnchantChecks.arrow(arrow, this)) return;
         int level = EnchantChecks.getArrowLevel(arrow, this);
+
+        if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+            return;
 
         double minhealth = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "minimum-health-per-level");
         if (!(((LivingEntity) event.getEntity()).getHealth() <= level * minhealth))

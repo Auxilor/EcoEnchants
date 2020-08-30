@@ -2,11 +2,11 @@
 # Conclude EcoEnchant
 #
 
-config-version: 4.0 # Don't edit this.
+config-version: 4.1 # Don't edit this.
 
 name: "Conclude"
 
-description: Instantly kill entities on low health.
+description: Chance to instantly kill entities on low health.
 
 obtaining:
   table: true
@@ -21,3 +21,4 @@ general-config:
 
 config:
   minimum-health-per-level: 1 # Multiplied by level, eg: if 1, then Conclude 5 kills any mobs below 2.5 hearts
+  chance-per-level: 10
