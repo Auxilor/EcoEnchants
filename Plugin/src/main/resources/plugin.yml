@@ -234,6 +234,8 @@ permissions:
       ecoenchants.fromtable.pacify: true
       ecoenchants.fromtable.abattoir: true
       ecoenchants.fromtable.disable: true
+      ecoenchants.fromtable.hellish: true
+      ecoenchants.fromtable.voidaffinity: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -808,4 +810,10 @@ permissions:
     default: true
   ecoenchants.fromtable.disable:
     description: Allows getting disable from an enchanting table
+    default: true
+  ecoenchants.fromtable.hellish:
+    description: Allows getting hellish from an enchanting table
+    default: true
+  ecoenchants.fromtable.voidaffinity:
+    description: Allows getting void affinity from an enchanting table
     default: true

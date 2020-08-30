@@ -215,6 +215,8 @@ public class EcoEnchants {
     public static final EcoEnchant PACIFY = new Pacify();
     public static final EcoEnchant ABATTOIR = new Abattoir();
     public static final EcoEnchant DISABLE = new Disable();
+    public static final EcoEnchant HELLISH = new Hellish();
+    public static final EcoEnchant VOID_AFFINITY = new VoidAffinity();
 
     /**
      * Get all registered {@link EcoEnchant}s
