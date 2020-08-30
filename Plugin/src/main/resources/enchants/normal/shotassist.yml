@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 3
+  maximum-level: 6
 
 config:
-  damage-multiplier-per-level: 0.02
+  damage-multiplier-per-level: 0.015

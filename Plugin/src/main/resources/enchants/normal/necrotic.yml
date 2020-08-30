@@ -18,7 +18,7 @@ general-config:
   grindstoneable: true
   conflicts:
     - looting
-  maximum-level: 2
+  maximum-level: 4
 
 config:
-  chance-per-level: 10 #Chance of dropping a wither skull per level
+  chance-per-level: 5 #Chance of dropping a wither skull per level

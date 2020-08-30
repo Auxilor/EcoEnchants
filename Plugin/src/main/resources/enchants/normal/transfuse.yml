@@ -19,7 +19,7 @@ general-config:
   conflicts:
     - stone_switcher
     - silk_touch
-  maximum-level: 4
+  maximum-level: 7
 
 config:
   blocks:
@@ -28,4 +28,4 @@ config:
     - lapis_ore
     - redstone_ore
     - iron_ore
-  chance-per-level: 0.05 # Chance for drop to be switched
+  chance-per-level: 0.03 # Chance for drop to be switched

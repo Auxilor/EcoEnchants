@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 6
 
 config:
-  percent-less-per-level: 1 # Points * Percent less / 100 * damage = damage taken
+  percent-less-per-level: 0.8 # Points * Percent less / 100 * damage = damage taken

@@ -22,7 +22,7 @@ general-config:
     - insecticide
     - slaughter
     - settle
-  maximum-level: 5
+  maximum-level: 8
 
 config:
   multiplier: 0.25 # Formula is (multiplier * (level + 6) + 1)*damage | Default functions as power 5 + level, eg force 2 = power 7

@@ -18,7 +18,7 @@ general-config:
   grindstoneable: true
   conflicts:
     - fire_affinity
-  maximum-level: 5
+  maximum-level: 7
 
 config:
-  percent-more-per-level: 4 # percent more damage to deal per level when on fire
+  percent-more-per-level: 2 # percent more damage to deal per level when on fire

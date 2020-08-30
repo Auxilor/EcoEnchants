@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 6
 
 config:
   percent-deflected-per-level: 5 # Percent of damage to deal to attacker per level (can go above 100)

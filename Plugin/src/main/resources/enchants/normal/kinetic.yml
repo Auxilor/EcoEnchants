@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 3
+  maximum-level: 6
 
 config:
-  reduction-per-level: 20 #Percent less damage taken per level
+  reduction-per-level: 10 #Percent less damage taken per level

@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 3
+  maximum-level: 8
 
 config:
-  percent-more-per-level: 6 # Percent more damage to do per level
+  percent-more-per-level: 2.5 # Percent more damage to do per level

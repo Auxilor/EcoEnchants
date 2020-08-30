@@ -16,13 +16,13 @@ obtaining:
 
 general-config:
   grindstoneable: true
-  maximum-level: 5
+  maximum-level: 6
   conflicts:
     - drill
 
 config:
   disable-on-sneak: true
-  blocks-per-level: 64
+  blocks-per-level: 32
   whitelisted-blocks:
     - oak_wood
     - dark_oak_wood

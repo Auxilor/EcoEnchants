@@ -17,8 +17,8 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 3
+  maximum-level: 6
 
 config:
   allow-not-fully-charged: false
-  chance-per-level: 2 #chance of slowness per level
+  chance-per-level: 1 #chance of slowness per level

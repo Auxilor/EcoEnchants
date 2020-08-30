@@ -18,7 +18,7 @@ general-config:
   grindstoneable: true
   conflicts:
     - life_steal
-  maximum-level: 3
+  maximum-level: 6
 
 config:
-  damage-multiplier-per-level: 0.04 # Damage * Level * Multiplier is used to calculate how much health to heal
+  damage-multiplier-per-level: 0.02 # Damage * Level * Multiplier is used to calculate how much health to heal

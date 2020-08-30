@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 8
 
 config:
   speed-per-level: 0.02 # Base is 0.2

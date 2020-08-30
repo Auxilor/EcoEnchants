@@ -17,9 +17,9 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 8
 
 config:
-  damage-per-level: 1 #Damage given to opponent per level
+  damage-per-level: 0.7 #Damage given to opponent per level
   cooldown: 20 #Cooldown in ticks until player can attack another entity with slicing
   damage-elytra: true

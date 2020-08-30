@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 6
 
 config:
   per-level-multiplier: 0.05 # Multiplier per level for damage. Calculated as damage * (1 + level * multiplier)

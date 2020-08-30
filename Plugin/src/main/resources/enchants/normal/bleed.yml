@@ -17,10 +17,10 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 3
+  maximum-level: 7
 
 config:
-  chance-per-level: 3 #chance of bleeding per level
+  chance-per-level: 1.5 #chance of bleeding per level
   allow-not-fully-charged: false #dont require sword attack to be at full charge
   bleed-damage: 1
-  amount-per-level: 2 # Bleed number per level
+  amount-per-level: 1 # Bleed number per level

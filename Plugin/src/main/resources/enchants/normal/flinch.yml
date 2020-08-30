@@ -17,8 +17,8 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 3
+  maximum-level: 6
 
 config:
-  chance-per-level: 5
-  ticks-per-level: 10
+  chance-per-level: 2.5
+  ticks-per-level: 5

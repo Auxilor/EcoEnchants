@@ -17,9 +17,9 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 7
 
 config:
   allow-not-fully-charged: false #require sword attack to be at full charge
-  chance-per-level: 3
-  distance-per-level: 4 # Distance for mobs to check
+  chance-per-level: 2
+  distance-per-level: 3 # Distance for mobs to check

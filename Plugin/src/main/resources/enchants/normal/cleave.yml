@@ -18,8 +18,8 @@ general-config:
   grindstoneable: true
   conflicts:
     - carve
-  maximum-level: 4
+  maximum-level: 8
 
 config:
-  damage-percentage-per-level: 5
-  radius-per-level: 1
+  damage-percentage-per-level: 2.5
+  radius-per-level: 0.5

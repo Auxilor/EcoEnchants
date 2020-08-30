@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 8
 
 config:
-  multiplier: 0.05 # Damage = level * multiplier + 1. Headshot with Cerebral 5 = 5 * 0.05 + 1 = 1.25x damage
+  multiplier: 0.03 # Damage = level * multiplier + 1. Headshot with Cerebral 5 = 5 * 0.05 + 1 = 1.25x damage

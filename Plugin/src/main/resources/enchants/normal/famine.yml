@@ -17,8 +17,8 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 3
+  maximum-level: 8
 
 config:
   allow-not-fully-charged: false
-  chance-per-level: 4
+  chance-per-level: 1.5

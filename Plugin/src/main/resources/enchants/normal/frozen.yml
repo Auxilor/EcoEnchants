@@ -17,8 +17,8 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 4
+  maximum-level: 6
 
 config:
-  chance-per-point: 1
-  points-per-level: 4 # Points of frozen required to increment slowness level by 1
+  chance-per-point: 0.6
+  points-per-level: 6 # Points of frozen required to increment slowness level by 1

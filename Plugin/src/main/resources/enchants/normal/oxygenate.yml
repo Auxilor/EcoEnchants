@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 8
 
 config:
-  oxygen-per-level: 10 # Oxygen ticks to give per level
+  oxygen-per-level: 8 # Oxygen ticks to give per level

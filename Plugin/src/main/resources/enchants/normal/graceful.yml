@@ -17,7 +17,7 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 4
+  maximum-level: 6
 
 config:
-  chance-per-level: 5 #chance of slow falling per level
+  chance-per-level: 4 #chance of slow falling per level

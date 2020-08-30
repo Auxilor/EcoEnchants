@@ -17,8 +17,8 @@ obtaining:
 general-config:
   grindstoneable: true
   conflicts: []
-  maximum-level: 2
+  maximum-level: 6
 
 config:
-  chance-per-level: 3 #as percentage
+  chance-per-level: 1 #as percentage
   duration-per-level: 15
