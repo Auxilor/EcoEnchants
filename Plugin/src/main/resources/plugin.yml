@@ -233,6 +233,7 @@ permissions:
       ecoenchants.fromtable.arachnid: true
       ecoenchants.fromtable.pacify: true
       ecoenchants.fromtable.abattoir: true
+      ecoenchants.fromtable.disable: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -804,4 +805,7 @@ permissions:
     default: true
   ecoenchants.fromtable.abattoir:
     description: Allows getting abattoir from an enchanting table
+    default: true
+  ecoenchants.fromtable.disable:
+    description: Allows getting disable from an enchanting table
     default: true
