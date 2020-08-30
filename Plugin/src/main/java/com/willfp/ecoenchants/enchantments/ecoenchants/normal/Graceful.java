@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.Rand;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,7 +30,9 @@ public class Graceful extends EcoEnchant {
         if (player.isOnGround())
             return;
 
-        if(player.getLocation().clone().add(0, -1, 0).getBlock().getType().equals(Material.AIR))
+        if(player.getVelocity().getY() > -1) return;
+
+        if(player.getLocation().clone().add(0, -3, 0).getBlock().getType().equals(Material.AIR))
             return;
 
         if(!EnchantChecks.boots(player, this)) return;
@@ -38,6 +41,6 @@ public class Graceful extends EcoEnchant {
         if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 20, 1, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 20, 5, false, false, true));
     }
 }
