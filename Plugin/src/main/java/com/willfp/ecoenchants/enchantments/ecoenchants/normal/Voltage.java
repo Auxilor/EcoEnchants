@@ -57,6 +57,7 @@ public class Voltage extends EcoEnchant {
 
         int pieces = 0;
         for (ItemStack armorPiece : equipment.getArmorContents()) {
+            if(armorPiece == null) continue;
             if(Arrays.asList(items).contains(armorPiece.getType())) pieces++;
         }
 
