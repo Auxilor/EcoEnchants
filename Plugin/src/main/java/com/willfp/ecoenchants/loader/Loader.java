@@ -72,16 +72,18 @@ public class Loader {
         } catch (ClassNotFoundException ignored) {}
 
         if (!isPapermc) {
-            Bukkit.getLogger().info("");
-            Bukkit.getLogger().info("----------------------------");
-            Bukkit.getLogger().info("");
-            Bukkit.getLogger().severe("You don't seem to be running paper!");
-            Bukkit.getLogger().severe("Paper is strongly recommended for all servers,");
-            Bukkit.getLogger().severe("and enchantments like Drill may not function properly without it");
-            Bukkit.getLogger().severe("Download Paper from §fhttps://papermc.io");
-            Bukkit.getLogger().info("");
-            Bukkit.getLogger().info("----------------------------");
-            Bukkit.getLogger().info("");
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+                Bukkit.getLogger().info("");
+                Bukkit.getLogger().info("----------------------------");
+                Bukkit.getLogger().info("");
+                Bukkit.getLogger().severe("You don't seem to be running paper!");
+                Bukkit.getLogger().severe("Paper is strongly recommended for all servers,");
+                Bukkit.getLogger().severe("and enchantments like Drill may not function properly without it");
+                Bukkit.getLogger().severe("Download Paper from §fhttps://papermc.io");
+                Bukkit.getLogger().info("");
+                Bukkit.getLogger().info("----------------------------");
+                Bukkit.getLogger().info("");
+            }, 1);
         }
 
         /*
