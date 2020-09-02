@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
@@ -27,7 +27,7 @@ public class Indestructibility extends EcoEnchant {
         double level = EnchantChecks.getItemLevel(item, this);
         double levelbonus = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "level-bonus");
 
-        if(Rand.randFloat(0, 1) < (100/ (level + (1 + levelbonus))/100)) return;
+        if(NumberUtils.randFloat(0, 1) < (100/ (level + (1 + levelbonus))/100)) return;
 
         event.setCancelled(true);
         event.setDamage(0);

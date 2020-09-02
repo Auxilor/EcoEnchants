@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -53,14 +53,14 @@ public class Spearfishing extends EcoEnchant {
         int level = EnchantChecks.getItemLevel(item, this);
 
         double chance = level * (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level")/100);
-        if(Rand.randFloat(0, 1) > chance) return;
+        if(NumberUtils.randFloat(0, 1) > chance) return;
 
         List<Material> potentialDrops = new ArrayList<>();
         this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "drops").forEach(material -> {
             potentialDrops.add(Material.getMaterial(material.toUpperCase()));
         });
 
-        Collections.shuffle(potentialDrops, new Random(Rand.randInt(0, 100000)));
+        Collections.shuffle(potentialDrops, new Random(NumberUtils.randInt(0, 100000)));
         ItemStack drop = new ItemStack(potentialDrops.get(0), 1);
 
         new DropQueue(player)

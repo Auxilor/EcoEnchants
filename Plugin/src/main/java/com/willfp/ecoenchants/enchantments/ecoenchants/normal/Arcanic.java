@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -34,7 +34,7 @@ public class Arcanic extends EcoEnchant {
             return;
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point");
-        if (Rand.randFloat(0, 1) > totalArcanicPoints * 0.01 * chance)
+        if (NumberUtils.randFloat(0, 1) > totalArcanicPoints * 0.01 * chance)
             return;
 
         event.setCancelled(true);

@@ -6,13 +6,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.LocationUtils;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.VectorUtils;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class Infuriate extends EcoEnchant {
@@ -47,7 +45,7 @@ public class Infuriate extends EcoEnchant {
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
         double finalChance = (chance * level)/100;
-        if(Rand.randFloat(0, 1) > finalChance) return;
+        if(NumberUtils.randFloat(0, 1) > finalChance) return;
 
         double distancePerLevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance-per-level");
         final double distance = distancePerLevel * level;
@@ -63,7 +61,7 @@ public class Infuriate extends EcoEnchant {
 
             Vector vector = player.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
 
-            if(LocationUtils.isFinite(vector)) {
+            if(VectorUtils.isFinite(vector)) {
                 e.setVelocity(vector);
             }
         }

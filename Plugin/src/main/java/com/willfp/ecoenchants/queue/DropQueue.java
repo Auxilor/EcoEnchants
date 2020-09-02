@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.queue;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -126,7 +126,7 @@ public class DropQueue {
                     Bukkit.getPluginManager().callEvent(event);
 
                     player.giveExp(event.getAmount());
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.AMBIENT, 1f, (float) Rand.randFloat(0.7, 1.2));
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.AMBIENT, 1f, (float) NumberUtils.randFloat(0.7, 1.2));
                 }
             }
         } else {

@@ -5,9 +5,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.Bias;
-import com.willfp.ecoenchants.util.EqualIfOver;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
@@ -79,7 +77,7 @@ public class EnchantingListeners implements Listener {
 
             if (!enchantment.canEnchantItem(item))
                 continue;
-            if (Rand.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier)
+            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier)
                 continue;
             if (enchantment.getRarity().getMinimumLevel() > cost)
                 continue;
@@ -108,19 +106,19 @@ public class EnchantingListeners implements Listener {
             double maxLevelDouble = enchantment.getMaxLevel();
 
             if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
-                double enchantlevel1 = Rand.randFloat(0, 1);
-                double enchantlevel2 = Bias.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
+                double enchantlevel1 = NumberUtils.randFloat(0, 1);
+                double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / maxLevelDouble;
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
                 int maxLevel = ConfigManager.getConfig().getInt("enchanting-table.maximum-obtainable-level");
                 double enchantlevel1 = (cost / (double) enchantment.getRarity().getMinimumLevel()) / (maxLevel / (double) enchantment.getRarity().getMinimumLevel());
-                double enchantlevel2 = Rand.triangularDistribution(0, 1, enchantlevel1);
+                double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, enchantlevel1);
                 double enchantlevel3 = 1 / maxLevelDouble;
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             }
 
-            level = EqualIfOver.equalIfOver(level, enchantment.getMaxLevel());
+            level = NumberUtils.equalIfOver(level, enchantment.getMaxLevel());
             toAdd.put(enchantment, level);
 
             if(ConfigManager.getConfig().getBool("enchanting-table.cap-amount.enabled")) {
@@ -172,7 +170,7 @@ public class EnchantingListeners implements Listener {
     @EventHandler
     public void allowElytraEnchant(PrepareItemEnchantEvent event) {
         try {
-            event.getOffers()[2].setCost(EqualIfOver.equalIfOver(event.getOffers()[2].getCost(), ConfigManager.getConfig().getInt("enchanting-table.maximum-obtainable-level")));
+            event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), ConfigManager.getConfig().getInt("enchanting-table.maximum-obtainable-level")));
         } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
 
         if (!secondary.contains(event.getItem().getType()))
@@ -187,10 +185,10 @@ public class EnchantingListeners implements Listener {
         }
 
 
-        int level2 = (int) Math.ceil(Rand.randFloat(1.1, 2.5));
+        int level2 = (int) Math.ceil(NumberUtils.randFloat(1.1, 2.5));
         EnchantmentOffer offer2 = new EnchantmentOffer(Enchantment.DURABILITY, level2, (int) Math.floor(bonus * 1.5));
 
-        EnchantmentOffer offer3 = new EnchantmentOffer(Enchantment.DURABILITY, Rand.randInt(2, 3), bonus * 2);
+        EnchantmentOffer offer3 = new EnchantmentOffer(Enchantment.DURABILITY, NumberUtils.randInt(2, 3), bonus * 2);
 
         if (offer3.getEnchantmentLevel() < offer2.getEnchantmentLevel()) {
             int temp = offer2.getEnchantmentLevel();

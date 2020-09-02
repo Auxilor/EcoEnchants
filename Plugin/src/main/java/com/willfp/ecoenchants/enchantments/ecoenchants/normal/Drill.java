@@ -9,7 +9,7 @@ import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.SimplifyVector;
+import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -49,7 +49,7 @@ public class Drill extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for(int i = 1; i <= level; i++) {
-            Vector simplified = SimplifyVector.simplifyVector(player.getLocation().getDirection().normalize()).multiply(i);
+            Vector simplified = VectorUtils.simplifyVector(player.getLocation().getDirection().normalize()).multiply(i);
             Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(simplified));
             block1.setMetadata("from-drill", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
 

@@ -4,8 +4,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.Bias;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -60,7 +59,7 @@ public class LootPopulator extends BlockPopulator {
                 for (EcoEnchant enchantment : enchantments) {
                     if(enchantment == null || enchantment.getRarity() == null) continue;
 
-                    if (Rand.randFloat(0, 1) > enchantment.getRarity().getLootProbability() * multiplier)
+                    if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getLootProbability() * multiplier)
                         continue;
                     if (!enchantment.canGetFromLoot())
                         continue;
@@ -81,12 +80,12 @@ public class LootPopulator extends BlockPopulator {
                     int level;
 
                     if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
-                        double enchantlevel1 = Rand.randFloat(0, 1);
-                        double enchantlevel2 = Bias.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
+                        double enchantlevel1 = NumberUtils.randFloat(0, 1);
+                        double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
                         double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                         level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
                     } else {
-                        double enchantlevel2 = Rand.triangularDistribution(0, 1, 1);
+                        double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, 1);
                         double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                         level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
                     }

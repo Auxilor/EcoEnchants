@@ -9,7 +9,7 @@ import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.RecursiveBlock;
+import com.willfp.ecoenchants.util.BlockUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -59,7 +59,7 @@ public class Vein extends EcoEnchant {
         int level = EnchantChecks.getMainhandLevel(player, this);
         int limit = level * blocksPerLevel;
 
-        Set<Block> blockSet = RecursiveBlock.getVein(block, materials, limit);
+        Set<Block> blockSet = BlockUtils.getVein(block, materials, limit);
 
         AnticheatManager.exemptPlayer(player);
 

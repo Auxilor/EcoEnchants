@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.LocationUtils;
+import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
@@ -39,7 +39,7 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
 
                 Vector vector = player.getLocation().toVector().subtract(e.getLocation().toVector()).normalize().multiply(0.1 * level);
 
-                if(LocationUtils.isFinite(vector)) {
+                if(VectorUtils.isFinite(vector)) {
                     e.setVelocity(vector);
                 }
             }

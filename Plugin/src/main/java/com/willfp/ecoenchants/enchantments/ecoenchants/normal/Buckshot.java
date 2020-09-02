@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.enchantments.Enchantment;
@@ -50,7 +50,7 @@ public class Buckshot extends EcoEnchant {
 
             Vector velocity = event.getProjectile().getVelocity().clone();
 
-            velocity.add(new Vector(Rand.randFloat(-spread, spread), Rand.randFloat(-spread, spread), Rand.randFloat(-spread, spread)));
+            velocity.add(new Vector(NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread)));
 
             Arrow arrow = player.launchProjectile(Arrow.class, velocity);
             if(EnchantChecks.mainhand(player, Enchantment.ARROW_FIRE)) arrow.setFireTicks(Integer.MAX_VALUE);

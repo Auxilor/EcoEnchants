@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class RecursiveBlock {
+public class BlockUtils {
     private static Set<Block> getNearbyBlocks(Block start, List<Material> allowedMaterials, HashSet<Block> blocks, int limit) {
         for (BlockFace face : BlockFace.values()) {
             Block block = start.getRelative(face);

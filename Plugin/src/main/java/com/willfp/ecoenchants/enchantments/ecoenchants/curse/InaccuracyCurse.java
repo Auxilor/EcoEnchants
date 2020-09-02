@@ -5,12 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.Rand;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Arrow;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,7 +37,7 @@ public class InaccuracyCurse extends EcoEnchant {
 
         Vector velocity = event.getProjectile().getVelocity().clone();
 
-        velocity.add(new Vector(Rand.randFloat(-spread, spread), Rand.randFloat(-spread, spread), Rand.randFloat(-spread, spread)));
+        velocity.add(new Vector(NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread)));
         event.getProjectile().setVelocity(velocity);
     }
 }

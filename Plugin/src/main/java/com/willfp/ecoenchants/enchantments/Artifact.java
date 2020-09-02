@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
@@ -94,7 +94,7 @@ public abstract class Artifact extends EcoEnchant {
 
         double yDelta = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "y-delta");
         double radiusMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
-        double offset = Rand.randFloat(0, 0.75);
+        double offset = NumberUtils.randFloat(0, 0.75);
 
         new BukkitRunnable() {
             @Override
@@ -134,7 +134,7 @@ public abstract class Artifact extends EcoEnchant {
         int noteColor = 0;
         AtomicDouble color = new AtomicDouble(0);
         if(particle.equals(Particle.NOTE)) {
-            noteColor = Rand.randInt(0, 24);
+            noteColor = NumberUtils.randInt(0, 24);
             color.set((double) noteColor/24);
         }
         final double finalColor = color.get();

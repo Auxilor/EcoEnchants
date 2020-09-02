@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.Lightning;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,7 +46,7 @@ public class Electroshock extends EcoEnchant {
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage");
 
         double finalChance = (chance * level)/100;
-        if(Rand.randFloat(0, 1) > finalChance) return;
+        if(NumberUtils.randFloat(0, 1) > finalChance) return;
 
         Lightning.strike(victim, damage);
     }

@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.EqualIfOver;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,7 +39,7 @@ public class Oxygenate extends EcoEnchant {
         int oxygenLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "oxygen-per-level");
         int oxygen = level * oxygenLevel;
         int newOxygen = player.getRemainingAir() + oxygen;
-        newOxygen = EqualIfOver.equalIfOver(newOxygen, player.getMaximumAir());
+        newOxygen = NumberUtils.equalIfOver(newOxygen, player.getMaximumAir());
 
         player.setRemainingAir(newOxygen);
     }

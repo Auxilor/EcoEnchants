@@ -7,8 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.queue.DropQueue;
-import com.willfp.ecoenchants.util.EqualIfOver;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -46,16 +45,16 @@ public class Transfuse extends EcoEnchant {
         int level = EnchantChecks.getMainhandLevel(player, this);
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
 
-        if(Rand.randFloat(0, 1) > level * chance * 0.01)
+        if(NumberUtils.randFloat(0, 1) > level * chance * 0.01)
             return;
 
         event.setDropItems(false);
 
         Material material;
-        double random = Rand.randFloat(0, 1);
+        double random = NumberUtils.randFloat(0, 1);
         double band = 1/(double) this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size();
         int selectedIndex = (int) Math.floor(random/band);
-        selectedIndex = EqualIfOver.equalIfOver(selectedIndex, this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size() - 1);
+        selectedIndex = NumberUtils.equalIfOver(selectedIndex, this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size() - 1);
         String materialName = this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").get(selectedIndex);
         material = Material.getMaterial(materialName.toUpperCase());
         if(material == null) material = Material.COBBLESTONE;

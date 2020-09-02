@@ -6,9 +6,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.Cube;
 import com.willfp.ecoenchants.util.ItemDurability;
-import com.willfp.ecoenchants.util.Square;
+import com.willfp.ecoenchants.util.VectorShapes;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -56,9 +55,9 @@ public class Farmhand extends EcoEnchant {
         Vector[] vecs;
 
         if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-cube")) {
-            vecs = Cube.getCube(radius);
+            vecs = VectorShapes.getCube(radius);
         } else {
-            vecs = Square.getSquare(radius);
+            vecs = VectorShapes.getSquare(radius);
         }
 
         if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {

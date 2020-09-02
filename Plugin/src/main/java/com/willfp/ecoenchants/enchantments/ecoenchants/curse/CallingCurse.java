@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.LocationUtils;
+import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
@@ -35,7 +35,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
 
                 Vector vector = player.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
 
-                if(LocationUtils.isFinite(vector)) {
+                if(VectorUtils.isFinite(vector)) {
                     e.setVelocity(vector);
                 }
             }

@@ -7,8 +7,8 @@ import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.Target;
-import com.willfp.ecoenchants.util.LocationUtils;
-import com.willfp.ecoenchants.util.Rand;
+import com.willfp.ecoenchants.util.VectorUtils;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -42,7 +42,7 @@ public class Fury extends EcoEnchant {
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
-        if (Rand.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+        if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 
         double distancePerLevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance-per-level");
@@ -59,7 +59,7 @@ public class Fury extends EcoEnchant {
 
             Vector vector = player.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
 
-            if(LocationUtils.isFinite(vector)) {
+            if(VectorUtils.isFinite(vector)) {
                 e.setVelocity(vector);
             }
         }
