@@ -90,7 +90,7 @@
                 <executions>
                     <execution>
                         <id>install-external-non-maven2-jar</id>
-                        <phase>compile</phase>
+                        <phase>initialize</phase>
                         <configuration>
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>me.vagdedes</groupId>

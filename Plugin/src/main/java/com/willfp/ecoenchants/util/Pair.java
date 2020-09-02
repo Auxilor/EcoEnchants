@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.util;
 import java.util.Map;
 
 /**
- * Copy of {@link javafx.util.Pair}
  * Spigot doesn't include javafx
  *
  * @param <K> Key
