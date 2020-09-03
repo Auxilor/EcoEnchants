@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Vein"
-
 description: Mine blocks in a vein.
+enabled: true
 
 obtaining:
   table: true

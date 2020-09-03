@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Spiked"
-
 description: Hooking onto an entity will damage it.
+enabled: true
 
 obtaining:
   table: true

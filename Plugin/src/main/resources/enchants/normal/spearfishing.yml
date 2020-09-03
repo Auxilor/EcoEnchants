@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Spearfishing"
-
 description: Chance of dropping fish when tridenting water.
+enabled: true
 
 obtaining:
   table: true

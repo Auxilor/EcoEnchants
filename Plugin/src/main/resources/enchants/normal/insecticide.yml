@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Insecticide"
-
 description: Increases damage against spiders.
+enabled: true
 
 obtaining:
   table: true

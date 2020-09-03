@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Aerial"
-
 description: Increases arrow damage when you are in air.
+enabled: true
 
 obtaining:
   table: true

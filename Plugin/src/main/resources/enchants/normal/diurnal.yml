@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Diurnal"
-
 description: Increases damage dealt at daytime.
+enabled: true
 
 obtaining:
   table: true

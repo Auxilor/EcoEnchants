@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Collateral"
-
 description: Arrows can go through entities.
+enabled: true
 
 obtaining:
   table: true

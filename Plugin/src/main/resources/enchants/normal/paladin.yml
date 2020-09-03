@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Paladin"
-
 description: Increases damage dealt when riding a horse.
+enabled: true
 
 obtaining:
   table: true

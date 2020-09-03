@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Redstone Artifact"
-
 description: Creates redstone particles.
+enabled: true
 
 obtaining:
   table: true

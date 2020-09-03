@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Curse of Misfortune"
-
 description: Chance for blocks to not drop items.
+enabled: true
 
 obtaining:
   table: false
@@ -15,6 +15,11 @@ obtaining:
   rarity: legendary
 
 general-config:
+  targets:
+    - pickaxe
+    - axe
+    - hoe
+    - shovel
   grindstoneable: true
   conflicts:
     - fortune

@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Graceful"
-
 description: Chance of getting slow falling just above hitting the ground.
+enabled: true
 
 obtaining:
   table: true

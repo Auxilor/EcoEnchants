@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Aiming"
-
 description: Arrows hone in on your target.
+enabled: true
 
 obtaining:
   table: true

@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Water Artifact"
-
 description: Creates dripping water particles.
+enabled: true
 
 obtaining:
   table: true

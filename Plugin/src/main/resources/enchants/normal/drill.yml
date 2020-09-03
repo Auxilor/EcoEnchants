@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Drill"
-
 description: Mines blocks behind other blocks.
+enabled: true
 
 obtaining:
   table: true

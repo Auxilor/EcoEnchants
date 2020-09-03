@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Dexterous"
-
 description: Increases attack speed.
+enabled: true
 
 obtaining:
   table: true

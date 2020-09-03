@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Dullness"
-
 description: Chance of giving your opponent weakness.
+enabled: true
 
 obtaining:
   table: true

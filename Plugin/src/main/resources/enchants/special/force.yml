@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Force"
-
 description: Massively increases arrow damage.
+enabled: true
 
 obtaining:
   table: true

@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Horde"
-
 description: Increases damage dealt the more mobs are nearby.
+enabled: true
 
 obtaining:
   table: true

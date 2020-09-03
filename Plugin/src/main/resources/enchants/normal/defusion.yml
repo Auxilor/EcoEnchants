@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Defusion"
-
 description: Increases damage against creepers.
+enabled: true
 
 obtaining:
   table: true

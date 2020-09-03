@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Stone Switcher"
-
 description: Breaking stone can drop as variants.
+enabled: true
 
 obtaining:
   table: true

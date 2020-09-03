@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Defender"
-
 description: Prevents damaging your own pets.
+enabled: true
 
 obtaining:
   table: true

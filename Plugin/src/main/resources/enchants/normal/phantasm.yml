@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Phantasm"
-
 description: Increases damage against undead mobs.
+enabled: true
 
 obtaining:
   table: true

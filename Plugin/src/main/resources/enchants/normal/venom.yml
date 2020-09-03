@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Venom"
-
 description: Chance of withering your opponent.
+enabled: true
 
 obtaining:
   table: true

@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Thrive"
-
 description: Increases maximum health.
+enabled: true
 
 obtaining:
   table: true

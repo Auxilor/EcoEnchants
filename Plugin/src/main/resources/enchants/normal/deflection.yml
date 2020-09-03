@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Deflection"
-
 description: Rebounds some incoming damage back to your attacker.
+enabled: true
 
 obtaining:
   table: true

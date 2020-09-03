@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Disappear"
-
 description: Go invisble if damaged on low health.
+enabled: true
 
 obtaining:
   table: true

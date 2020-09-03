@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Invigoration"
-
 description: Increases outgoing damage and reduces incoming damage when low on health.
+enabled: true
 
 obtaining:
   table: true

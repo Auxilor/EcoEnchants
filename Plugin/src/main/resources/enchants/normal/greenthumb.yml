@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Green Thumb"
-
 description: Left clicking dirt turns it to grass.
+enabled: true
 
 obtaining:
   table: true

@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Intellect"
-
 description: Massively increases dropped experience.
+enabled: true
 
 obtaining:
   table: true

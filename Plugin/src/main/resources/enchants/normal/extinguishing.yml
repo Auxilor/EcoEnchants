@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Extinguishing"
-
 description: Chance to remove fire when taking fire damage.
+enabled: true
 
 obtaining:
   table: true

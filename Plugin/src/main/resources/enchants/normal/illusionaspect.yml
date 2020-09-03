@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Illusion Aspect"
-
 description: Chance to blind and nauseate opponent.
+enabled: true
 
 obtaining:
   table: true

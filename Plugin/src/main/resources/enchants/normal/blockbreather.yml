@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Block Breather"
-
 description: Chance to ignore suffocation damage.
+enabled: true
 
 obtaining:
   table: true

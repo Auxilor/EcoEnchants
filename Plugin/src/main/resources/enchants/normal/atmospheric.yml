@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Atmospheric"
-
 description: Increases trident damage when you are in air.
+enabled: true
 
 obtaining:
   table: true

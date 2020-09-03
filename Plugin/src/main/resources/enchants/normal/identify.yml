@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Identify"
-
 description: Chance to give your attacker glowing.
+enabled: true
 
 obtaining:
   table: true

@@ -5,8 +5,8 @@
 config-version: 5.0 # Don't edit this.
 
 name: "Leeching"
-
 description: Heals a portion of damage dealt.
+enabled: true
 
 obtaining:
   table: true
