@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
-import com.willfp.ecoenchants.nms.Target;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -18,7 +17,6 @@ import java.util.*;
 public abstract class EcoEnchant extends Enchantment implements Listener {
     private String name;
     private String description;
-    private Set<Material> target;
     private final String permissionName;
     private final EnchantmentType type;
 
@@ -32,8 +30,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
     private int maxLvl;
     private Set<Enchantment> conflicts;
     private EnchantmentRarity rarity;
+    private Set<Material> target;
 
-    private boolean disabled;
+    private boolean enabled;
 
     /**
      * Create new EcoEnchant matching builder
@@ -45,7 +44,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
 
         this.type = builder.type;
         this.name = builder.name;
-        this.target = builder.target;
         this.permissionName = builder.permission;
         this.configVersion = builder.configVersion;
         this.config = builder.config;
@@ -67,8 +65,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
         maxLvl = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
         name = config.getString("name");
         description = config.getString("description");
-        target = config.getTarget(target);
-        disabled = config.getBool("disabled", false);
+        target.clear();
+        config.getTargets().forEach(enchantmentTarget -> target.addAll(enchantmentTarget.getMaterials()));
+        enabled = config.getBool("enabled", true);
 
         this.register();
     }
@@ -131,11 +130,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
     }
 
     /**
-     * Get if enchantment is disabled
-     * @return If disabled
+     * Get if enchantment is enabled
+     * @return If enabled
      */
-    public boolean isDisabled() {
-        return this.disabled;
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
     /**
@@ -204,7 +203,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
     }
 
     /**
-     * Get the {@link Target} of enchantment
+     * Get the target of enchantment
      * @return Set of enchantable items
      */
     public Set<Material> getTarget() {
@@ -307,7 +306,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
      */
     @Override
     public boolean canEnchantItem(ItemStack itemStack) {
-        return target.contains(itemStack.getType()) || Target.Applicable.BOOK.getMaterials().contains(itemStack.getType());
+        return target.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
     }
 
     /**

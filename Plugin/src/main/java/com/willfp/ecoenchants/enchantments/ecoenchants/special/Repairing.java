@@ -6,7 +6,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;

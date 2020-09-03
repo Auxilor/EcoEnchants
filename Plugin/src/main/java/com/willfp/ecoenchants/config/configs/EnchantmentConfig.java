@@ -2,7 +2,9 @@ package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.ecoenchants.config.EnchantmentYamlConfig;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -83,14 +85,13 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
         return EnchantmentRarity.getByName(rarityName);
     }
 
-    public Set<Material> getTarget(Set<Material> initialTarget) {
-        List<String> targetName = config.getStringList("general-config.target");
-        if(targetName == null || targetName.isEmpty()) return initialTarget;
+    public Set<EnchantmentTarget> getTargets() {
+        List<String> targetNames = config.getStringList(EcoEnchants.GENERAL_LOCATION + "targets");
+        if(targetNames == null || targetNames.isEmpty()) return new HashSet<>();
+        Set<EnchantmentTarget> targets = new HashSet<>();
 
-        Set<Material> targets = new HashSet<>();
-        targetName.forEach((s -> {
-            Material mat = Material.getMaterial(s.toUpperCase());
-            targets.add(mat);
+        targetNames.forEach((s -> {
+            targets.add(EnchantmentTarget.getByName(s));
         }));
 
         return targets;

@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
@@ -201,7 +200,7 @@ public class EnchantDisplay {
                 name = enchantment.getName();
                 description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
                 description.replaceAll(line -> descriptionColor + line);
-                if(EcoEnchants.getFromEnchantment(enchantment).isDisabled()) forRemoval.add(enchantment);
+                if(EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
             } else {
                 name = ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".name");
                 description = Arrays.asList(WordUtils.wrap(ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".description"), ConfigManager.getConfig().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));

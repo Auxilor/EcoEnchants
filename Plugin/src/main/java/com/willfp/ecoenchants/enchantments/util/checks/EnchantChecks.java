@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.util.checks;
 
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

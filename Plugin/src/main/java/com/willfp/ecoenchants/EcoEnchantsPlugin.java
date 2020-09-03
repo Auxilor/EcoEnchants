@@ -18,6 +18,7 @@ public class EcoEnchantsPlugin extends JavaPlugin {
     public static final HashMap<String, Double> configVersions = new HashMap<String, Double>() {{
         put("config", 4.1);
         put("lang", 4.01);
+        put("target", 1.0);
     }};
 
     /**

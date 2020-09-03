@@ -3,7 +3,7 @@
 # by Auxilor
 #
 
-config-version: 4.1 # Don't edit this.
+config-version: 5.0 # Don't edit this.
 
 anvil:
   allow-unsafe-levels: false # Allow unsafe enchantments like Sharpness 6 by combining 2 Sharp 5.

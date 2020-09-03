@@ -2,7 +2,7 @@
 # Magma Artifact EcoEnchant
 #
 
-config-version: 4.0 # Don't edit this.
+config-version: 5.0 # Don't edit this.
 
 name: "Magma Artifact"
 
@@ -15,6 +15,14 @@ obtaining:
   rarity: epic
 
 general-config:
+  targets:
+    - pickaxe
+    - sword
+    - axe
+    - elytra
+    - bow
+    - crossbow
+    - trident
   grindstoneable: true
   conflicts: []
 

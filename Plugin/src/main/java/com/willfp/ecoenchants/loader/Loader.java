@@ -35,7 +35,6 @@ import com.willfp.ecoenchants.listeners.VillagerListeners;
 import com.willfp.ecoenchants.naturalloot.LootPopulator;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.UpdateChecker;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
@@ -195,14 +194,6 @@ public class Loader {
 
         Bukkit.getLogger().info("Loading NMS APIs...");
 
-        if(!Target.Applicable.ALL.getMaterials().isEmpty()) {
-            Bukkit.getLogger().info("Targets: §aSUCCESS");
-        } else {
-            Bukkit.getLogger().info("Targets: §cFAILURE");
-            Bukkit.getLogger().severe("§cAborting...");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
-
         if(Cooldown.init()) {
             Bukkit.getLogger().info("Cooldown: §aSUCCESS");
         } else {
@@ -355,7 +346,7 @@ public class Loader {
 
         Bukkit.getLogger().info("Registering Enchantment Listeners...");
         EcoEnchants.getAll().forEach((ecoEnchant -> {
-            if(!ecoEnchant.isDisabled()) {
+            if(!ecoEnchant.isEnabled()) {
                 Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
             }
         }));

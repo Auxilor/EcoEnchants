@@ -2,7 +2,7 @@
 # Curse of Fragility EcoEnchant
 #
 
-config-version: 4.0 # Don't edit this.
+config-version: 5.0 # Don't edit this.
 
 name: "Curse of Fragility"
 
@@ -15,6 +15,8 @@ obtaining:
   rarity: legendary
 
 general-config:
+  targets:
+    - all
   grindstoneable: false
   conflicts:
     - unbreaking

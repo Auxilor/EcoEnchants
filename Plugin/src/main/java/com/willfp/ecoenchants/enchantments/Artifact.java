@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchantments;
 import com.google.common.util.concurrent.AtomicDouble;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Location;

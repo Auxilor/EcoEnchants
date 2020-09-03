@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.nms.Target;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -81,7 +80,7 @@ public class EnchantingListeners implements Listener {
                 continue;
             if (enchantment.getRarity().getMinimumLevel() > cost)
                 continue;
-            if(enchantment.isDisabled())
+            if(enchantment.isEnabled())
                 continue;
             if (!enchantment.canGetFromTable())
                 continue;

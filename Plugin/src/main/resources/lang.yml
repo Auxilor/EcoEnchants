@@ -3,7 +3,7 @@
 # by Auxilor
 #
 
-config-version: 4.01 # Don't edit this.
+config-version: 5.0 # Don't edit this.
 
 messages:
   prefix: "&f[&aEcoEnchants&f] "

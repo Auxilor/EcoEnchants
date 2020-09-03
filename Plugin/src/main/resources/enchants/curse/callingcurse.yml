@@ -2,7 +2,7 @@
 # Curse of Calling EcoEnchant
 #
 
-config-version: 4.0 # Don't edit this.
+config-version: 5.0 # Don't edit this.
 
 name: "Curse of Calling"
 
@@ -15,6 +15,11 @@ obtaining:
   rarity: legendary
 
 general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
   grindstoneable: false
   conflicts:
     - mending

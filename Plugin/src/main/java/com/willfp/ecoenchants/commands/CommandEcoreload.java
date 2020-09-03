@@ -38,7 +38,7 @@ public class CommandEcoreload implements CommandExecutor {
             HandlerList.unregisterAll(ecoEnchant);
 
             Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-                if(!ecoEnchant.isDisabled()) {
+                if(!ecoEnchant.isEnabled()) {
                     Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
                 }
             }, 1);

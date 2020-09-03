@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.config;
 import com.willfp.ecoenchants.config.configs.Config;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.config.configs.Lang;
+import com.willfp.ecoenchants.config.configs.Target;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
 public class ConfigManager {
     private static final Lang LANG = new Lang();
     private static final Config CONFIG = new Config();
+    private static final Target TARGET = new Target();
     private static final Set<EnchantmentConfig> enchantmentConfigs = new HashSet<>();
 
     /**
@@ -19,6 +21,7 @@ public class ConfigManager {
     public static void updateConfigs() {
         LANG.reload();
         CONFIG.reload();
+        TARGET.reload();
         updateEnchantmentConfigs();
     }
 
@@ -68,5 +71,13 @@ public class ConfigManager {
      */
     public static Config getConfig() {
         return CONFIG;
+    }
+
+    /**
+     * Get target.yml
+     * @return target.yml
+     */
+    public static Target getTarget() {
+        return TARGET;
     }
 }
