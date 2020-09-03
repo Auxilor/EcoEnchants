@@ -17,7 +17,7 @@ import org.bukkit.util.Vector;
 public class Levitate extends EcoEnchant {
     public Levitate() {
         super(
-                new EcoEnchantBuilder("levitate", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.CROSSBOW, Target.Applicable.BOW}, 4.0)
+                new EcoEnchantBuilder("levitate", EnchantmentType.NORMAL,5.0)
         );
     }
 

@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class Corrosive extends EcoEnchant {
     public Corrosive() {
         super(
-                new EcoEnchantBuilder("corrosive", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("corrosive", EnchantmentType.NORMAL, 5.0)
         );
     }
 

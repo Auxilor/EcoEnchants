@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class Arcanic extends EcoEnchant {
     public Arcanic() {
         super(
-                new EcoEnchantBuilder("arcanic", EnchantmentType.NORMAL, Target.Applicable.ARMOR, 4.0)
+                new EcoEnchantBuilder("arcanic", EnchantmentType.NORMAL, 5.0)
         );
     }
 

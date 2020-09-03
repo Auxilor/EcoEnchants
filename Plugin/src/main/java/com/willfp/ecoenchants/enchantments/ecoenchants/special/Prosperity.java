@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 public class Prosperity extends EcoEnchant {
     public Prosperity() {
         super(
-                new EcoEnchantBuilder("prosperity", EnchantmentType.SPECIAL, Target.Applicable.ARMOR, 4.0)
+                new EcoEnchantBuilder("prosperity", EnchantmentType.SPECIAL, 5.0)
         );
     }
 

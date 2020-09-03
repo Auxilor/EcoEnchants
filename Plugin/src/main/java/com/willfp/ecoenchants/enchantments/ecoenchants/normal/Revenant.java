@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Revenant extends EcoEnchant {
     public Revenant() {
         super(
-                new EcoEnchantBuilder("revenant", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.0)
+                new EcoEnchantBuilder("revenant", EnchantmentType.NORMAL,5.0)
         );
     }
 

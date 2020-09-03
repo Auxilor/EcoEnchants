@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 public class Grapple extends EcoEnchant {
     public Grapple() {
         super(
-                new EcoEnchantBuilder("grapple", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("grapple", EnchantmentType.NORMAL, 5.0)
         );
     }
 

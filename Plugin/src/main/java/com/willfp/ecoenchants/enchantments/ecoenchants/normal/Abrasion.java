@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class Abrasion extends EcoEnchant {
     public Abrasion() {
         super(
-                new EcoEnchantBuilder("abrasion", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("abrasion", EnchantmentType.NORMAL,5.0)
         );
     }
 

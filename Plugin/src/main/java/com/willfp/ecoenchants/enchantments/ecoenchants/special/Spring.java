@@ -17,7 +17,7 @@ import java.util.UUID;
 public class Spring extends EcoEnchant {
     public Spring() {
         super(
-                new EcoEnchantBuilder("spring", EnchantmentType.SPECIAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("spring", EnchantmentType.SPECIAL, 5.0)
         );
     }
 

@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Thrive extends EcoEnchant {
     public Thrive() {
         super(
-                new EcoEnchantBuilder("thrive", EnchantmentType.NORMAL, Target.Applicable.ARMOR, 4.0)
+                new EcoEnchantBuilder("thrive", EnchantmentType.NORMAL, 5.0)
         );
     }
 

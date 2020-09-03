@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class Aquatic extends EcoEnchant {
     public Aquatic() {
         super(
-                new EcoEnchantBuilder("aquatic", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("aquatic", EnchantmentType.NORMAL, 5.0)
         );
     }
 

@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public class Pacify extends EcoEnchant {
     public Pacify() {
         super(
-                new EcoEnchantBuilder("pacify", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("pacify", EnchantmentType.NORMAL,5.0)
         );
     }
 

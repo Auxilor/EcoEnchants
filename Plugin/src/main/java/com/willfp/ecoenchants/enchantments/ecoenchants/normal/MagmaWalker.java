@@ -22,7 +22,7 @@ import org.bukkit.util.Vector;
 public class MagmaWalker extends EcoEnchant {
     public MagmaWalker() {
         super(
-                new EcoEnchantBuilder("magma_walker", EnchantmentType.NORMAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("magma_walker", EnchantmentType.NORMAL, 5.0)
         );
     }
 

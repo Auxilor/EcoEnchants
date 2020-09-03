@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Famine extends EcoEnchant {
     public Famine() {
         super(
-                new EcoEnchantBuilder("famine", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("famine", EnchantmentType.NORMAL, 5.0)
         );
     }
 

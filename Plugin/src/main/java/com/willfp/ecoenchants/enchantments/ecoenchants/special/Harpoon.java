@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 public class Harpoon extends EcoEnchant {
     public Harpoon() {
         super(
-                new EcoEnchantBuilder("harpoon", EnchantmentType.SPECIAL, Target.Applicable.ROD, 4.0)
+                new EcoEnchantBuilder("harpoon", EnchantmentType.SPECIAL, 5.0)
         );
     }
 

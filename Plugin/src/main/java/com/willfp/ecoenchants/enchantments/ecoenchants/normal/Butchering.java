@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Butchering extends EcoEnchant {
     public Butchering() {
         super(
-                new EcoEnchantBuilder("butchering", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("butchering", EnchantmentType.NORMAL, 5.0)
         );
     }
 

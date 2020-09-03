@@ -6,7 +6,7 @@ public class SmokeArtifact extends Artifact {
     public SmokeArtifact() {
         super(
                 "smoke_artifact",
-                4.0,
+                5.0,
                 Particle.CAMPFIRE_COSY_SMOKE
         );
     }

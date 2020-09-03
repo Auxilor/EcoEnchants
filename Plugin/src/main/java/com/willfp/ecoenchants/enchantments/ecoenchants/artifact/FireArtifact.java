@@ -6,7 +6,7 @@ public class FireArtifact extends Artifact {
     public FireArtifact() {
         super(
                 "fire_artifact",
-                4.0,
+                5.0,
                 Particle.FLAME
         );
     }

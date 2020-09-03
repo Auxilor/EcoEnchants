@@ -11,7 +11,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 public class Stamina extends EcoEnchant {
     public Stamina() {
         super(
-                new EcoEnchantBuilder("stamina", EnchantmentType.NORMAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("stamina", EnchantmentType.NORMAL, 5.0)
         );
     }
 

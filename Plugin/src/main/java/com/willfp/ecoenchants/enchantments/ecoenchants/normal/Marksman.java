@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Marksman extends EcoEnchant {
     public Marksman() {
         super(
-                new EcoEnchantBuilder("marksman", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.CROSSBOW, Target.Applicable.BOW}, 4.0)
+                new EcoEnchantBuilder("marksman", EnchantmentType.NORMAL,5.0)
         );
     }
 

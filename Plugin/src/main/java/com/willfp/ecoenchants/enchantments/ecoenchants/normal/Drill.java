@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 public class Drill extends EcoEnchant {
     public Drill() {
         super(
-                new EcoEnchantBuilder("drill", EnchantmentType.NORMAL, Target.Applicable.TOOL, 4.0)
+                new EcoEnchantBuilder("drill", EnchantmentType.NORMAL, 5.0)
         );
     }
 

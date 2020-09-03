@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Enderism extends EcoEnchant {
     public Enderism() {
         super(
-                new EcoEnchantBuilder("enderism", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("enderism", EnchantmentType.NORMAL,5.0)
         );
     }
 

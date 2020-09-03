@@ -10,7 +10,7 @@ import org.bukkit.event.EventHandler;
 public class Intellect extends EcoEnchant {
     public Intellect() {
         super(
-                new EcoEnchantBuilder("intellect", EnchantmentType.SPECIAL, new Target.Applicable[]{Target.Applicable.TOOL, Target.Applicable.SWORD, Target.Applicable.TRIDENT, Target.Applicable.BOW, Target.Applicable.CROSSBOW, Target.Applicable.ROD}, 4.0)
+                new EcoEnchantBuilder("intellect", EnchantmentType.SPECIAL, 5.0)
         );
     }
 

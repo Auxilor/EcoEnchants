@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class BlockBreather extends EcoEnchant {
     public BlockBreather() {
         super(
-                new EcoEnchantBuilder("block_breather", EnchantmentType.NORMAL, Target.Applicable.HELMET, 4.0)
+                new EcoEnchantBuilder("block_breather", EnchantmentType.NORMAL, 5.0)
         );
     }
 

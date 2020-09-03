@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 public class Annihilate extends EcoEnchant {
     public Annihilate() {
         super(
-                new EcoEnchantBuilder("annihilate", EnchantmentType.SPECIAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("annihilate", EnchantmentType.SPECIAL, 5.0)
         );
     }
 

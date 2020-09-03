@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class Freerunner extends EcoEnchant {
     public Freerunner() {
         super(
-                new EcoEnchantBuilder("freerunner", EnchantmentType.NORMAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("freerunner", EnchantmentType.NORMAL, 5.0)
         );
     }
 

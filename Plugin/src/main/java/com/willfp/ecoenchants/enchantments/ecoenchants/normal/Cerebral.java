@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Cerebral extends EcoEnchant {
     public Cerebral() {
         super(
-                new EcoEnchantBuilder("cerebral", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("cerebral", EnchantmentType.NORMAL,5.0)
         );
     }
 

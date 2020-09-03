@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Defusion extends EcoEnchant {
     public Defusion() {
         super(
-                new EcoEnchantBuilder("defusion", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("defusion", EnchantmentType.NORMAL,5.0)
         );
     }
 

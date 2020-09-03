@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class Invigoration extends EcoEnchant {
     public Invigoration() {
         super(
-                new EcoEnchantBuilder("invigoration", EnchantmentType.NORMAL, Target.Applicable.ARMOR, 4.0)
+                new EcoEnchantBuilder("invigoration", EnchantmentType.NORMAL, 5.0)
         );
     }
 

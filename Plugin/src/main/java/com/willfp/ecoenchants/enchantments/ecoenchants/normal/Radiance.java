@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Radiance extends EcoEnchant {
     public Radiance() {
         super(
-                new EcoEnchantBuilder("radiance", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("radiance", EnchantmentType.NORMAL, 5.0)
         );
     }
 

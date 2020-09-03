@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 public class Infuriate extends EcoEnchant {
     public Infuriate() {
         super(
-                new EcoEnchantBuilder("infuriate", EnchantmentType.NORMAL, Target.Applicable.SHIELD, 4.0)
+                new EcoEnchantBuilder("infuriate", EnchantmentType.NORMAL, 5.0)
         );
     }
 

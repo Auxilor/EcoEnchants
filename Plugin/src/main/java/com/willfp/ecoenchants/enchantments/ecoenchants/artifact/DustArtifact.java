@@ -6,7 +6,7 @@ public class DustArtifact extends Artifact {
     public DustArtifact() {
         super(
                 "dust_artifact",
-                4.0,
+                5.0,
                 Particle.CRIT
         );
     }

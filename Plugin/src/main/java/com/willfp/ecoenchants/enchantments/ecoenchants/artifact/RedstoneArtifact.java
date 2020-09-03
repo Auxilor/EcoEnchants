@@ -7,7 +7,7 @@ public class RedstoneArtifact extends Artifact {
     public RedstoneArtifact() {
         super(
                 "redstone_artifact",
-                4.0,
+                5.0,
                 Particle.REDSTONE,
                 new Particle.DustOptions(Color.RED, 1.0f)
         );

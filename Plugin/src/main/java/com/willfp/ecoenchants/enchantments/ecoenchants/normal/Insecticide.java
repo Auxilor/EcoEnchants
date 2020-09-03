@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Insecticide extends EcoEnchant {
     public Insecticide() {
         super(
-                new EcoEnchantBuilder("insecticide", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.0)
+                new EcoEnchantBuilder("insecticide", EnchantmentType.NORMAL, 5.0)
         );
     }
 

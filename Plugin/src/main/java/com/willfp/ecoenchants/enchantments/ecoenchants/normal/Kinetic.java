@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class Kinetic extends EcoEnchant {
     public Kinetic() {
         super(
-                new EcoEnchantBuilder("kinetic", EnchantmentType.NORMAL, Target.Applicable.ELYTRA, 4.0)
+                new EcoEnchantBuilder("kinetic", EnchantmentType.NORMAL, 5.0)
         );
     }
 

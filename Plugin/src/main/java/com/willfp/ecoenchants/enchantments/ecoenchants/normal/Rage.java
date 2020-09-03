@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 public class Rage extends EcoEnchant {
     public Rage() {
         super(
-                new EcoEnchantBuilder("rage", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.0)
+                new EcoEnchantBuilder("rage", EnchantmentType.NORMAL, 5.0)
         );
     }
 

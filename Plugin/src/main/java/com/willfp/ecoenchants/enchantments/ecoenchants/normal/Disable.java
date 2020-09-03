@@ -17,7 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Disable extends EcoEnchant {
     public Disable() {
         super(
-                new EcoEnchantBuilder("disable", EnchantmentType.NORMAL, Target.Applicable.AXE, 4.0)
+                new EcoEnchantBuilder("disable", EnchantmentType.NORMAL,5.0)
         );
     }
 

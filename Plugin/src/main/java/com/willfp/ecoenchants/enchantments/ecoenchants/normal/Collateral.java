@@ -11,7 +11,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 public class Collateral extends EcoEnchant {
     public Collateral() {
         super(
-                new EcoEnchantBuilder("collateral", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.0)
+                new EcoEnchantBuilder("collateral", EnchantmentType.NORMAL, 5.0)
         );
     }
 

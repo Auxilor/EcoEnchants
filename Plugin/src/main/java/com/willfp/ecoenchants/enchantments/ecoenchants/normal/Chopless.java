@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Chopless extends EcoEnchant {
     public Chopless() {
         super(
-                new EcoEnchantBuilder("chopless", EnchantmentType.NORMAL, Target.Applicable.ARMOR, 4.0)
+                new EcoEnchantBuilder("chopless", EnchantmentType.NORMAL, 5.0)
         );
     }
 
@@ -27,7 +27,7 @@ public class Chopless extends EcoEnchant {
         Player player = (Player) event.getEntity();
         Player damager = (Player) event.getDamager();
 
-        if(!Target.Applicable.AXE.getMaterials().contains(damager.getInventory().getItemInMainHand().getType()))
+        if(!damager.getInventory().getItemInMainHand().getType().toString().endsWith("_AXE"))
             return;
 
         int totalChoplessPoints = EnchantChecks.getArmorPoints(player, this, 1);

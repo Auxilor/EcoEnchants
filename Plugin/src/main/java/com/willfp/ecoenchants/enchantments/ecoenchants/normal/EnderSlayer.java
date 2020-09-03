@@ -14,7 +14,7 @@ import java.util.Set;
 public class EnderSlayer extends EcoEnchant {
     public EnderSlayer() {
         super(
-                new EcoEnchantBuilder("ender_slayer", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("ender_slayer", EnchantmentType.NORMAL, 5.0)
         );
     }
 

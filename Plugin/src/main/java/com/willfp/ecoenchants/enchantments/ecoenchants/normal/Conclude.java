@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class Conclude extends EcoEnchant {
     public Conclude() {
         super(
-                new EcoEnchantBuilder("conclude", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.1)
+                new EcoEnchantBuilder("conclude", EnchantmentType.NORMAL,5.0)
         );
     }
 

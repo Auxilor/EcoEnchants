@@ -6,7 +6,7 @@ public class EmeraldArtifact extends Artifact {
     public EmeraldArtifact() {
         super(
                 "emerald_artifact",
-                4.0,
+                5.0,
                 Particle.COMPOSTER
         );
     }

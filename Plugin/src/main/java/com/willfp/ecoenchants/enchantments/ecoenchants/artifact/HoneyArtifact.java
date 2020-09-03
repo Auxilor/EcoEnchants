@@ -6,7 +6,7 @@ public class HoneyArtifact extends Artifact {
     public HoneyArtifact() {
         super(
                 "honey_artifact",
-                4.0,
+                5.0,
                 Particle.FALLING_HONEY
         );
     }

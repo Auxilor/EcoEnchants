@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class VoidAffinity extends EcoEnchant {
     public VoidAffinity() {
         super(
-                new EcoEnchantBuilder("void_affinity", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("void_affinity", EnchantmentType.NORMAL, 5.0)
         );
     }
 

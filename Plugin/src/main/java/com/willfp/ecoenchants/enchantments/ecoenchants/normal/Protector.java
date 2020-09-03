@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Protector extends EcoEnchant {
     public Protector() {
         super(
-                new EcoEnchantBuilder("protector", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("protector", EnchantmentType.NORMAL,5.0)
         );
     }
 

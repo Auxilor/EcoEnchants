@@ -17,7 +17,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class Weakening extends EcoEnchant {
     public Weakening() {
         super(
-                new EcoEnchantBuilder("weakening", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("weakening", EnchantmentType.NORMAL,5.0)
         );
     }
 

@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 public class Farmhand extends EcoEnchant {
     public Farmhand() {
         super(
-                new EcoEnchantBuilder("farmhand", EnchantmentType.NORMAL, Target.Applicable.HOE, 4.0)
+                new EcoEnchantBuilder("farmhand", EnchantmentType.NORMAL, 5.0)
         );
     }
 

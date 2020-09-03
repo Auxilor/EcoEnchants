@@ -12,7 +12,7 @@ import org.bukkit.event.block.BlockDamageEvent;
 public class Instantaneous extends EcoEnchant {
     public Instantaneous() {
         super(
-                new EcoEnchantBuilder("instantaneous", EnchantmentType.NORMAL, Target.Applicable.TOOL, 4.0)
+                new EcoEnchantBuilder("instantaneous", EnchantmentType.NORMAL, 5.0)
         );
     }
 

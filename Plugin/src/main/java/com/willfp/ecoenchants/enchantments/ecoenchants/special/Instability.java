@@ -13,7 +13,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 public class Instability extends EcoEnchant {
     public Instability() {
         super(
-                new EcoEnchantBuilder("instability", EnchantmentType.SPECIAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("instability", EnchantmentType.SPECIAL,5.0)
         );
     }
 

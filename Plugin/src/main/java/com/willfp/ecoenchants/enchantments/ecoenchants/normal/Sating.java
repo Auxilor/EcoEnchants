@@ -11,7 +11,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 public class Sating extends EcoEnchant {
     public Sating() {
         super(
-                new EcoEnchantBuilder("sating", EnchantmentType.NORMAL, Target.Applicable.HELMET, 4.0)
+                new EcoEnchantBuilder("sating", EnchantmentType.NORMAL, 5.0)
         );
     }
 

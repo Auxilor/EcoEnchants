@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 public class Tripleshot extends EcoEnchant {
     public Tripleshot() {
         super(
-                new EcoEnchantBuilder("tripleshot", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.01)
+                new EcoEnchantBuilder("tripleshot", EnchantmentType.NORMAL, 5.0)
         );
     }
 

@@ -6,7 +6,7 @@ public class SnowArtifact extends Artifact {
     public SnowArtifact() {
         super(
                 "snow_artifact",
-                4.0,
+                5.0,
                 Particle.SNOWBALL
         );
     }

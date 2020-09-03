@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public class Inferno extends EcoEnchant {
     public Inferno() {
         super(
-                new EcoEnchantBuilder("inferno", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("inferno", EnchantmentType.NORMAL, 5.0)
         );
     }
 

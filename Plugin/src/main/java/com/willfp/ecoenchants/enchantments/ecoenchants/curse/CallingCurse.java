@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 public class CallingCurse extends EcoEnchant implements EcoRunnable {
     public CallingCurse() {
         super(
-                new EcoEnchantBuilder("calling_curse", EnchantmentType.CURSE, new Target.Applicable[]{Target.Applicable.ARMOR}, 4.0)
+                new EcoEnchantBuilder("calling_curse", EnchantmentType.CURSE,  5.0)
         );
     }
 

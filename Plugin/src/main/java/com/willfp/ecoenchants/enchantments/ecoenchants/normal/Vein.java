@@ -24,7 +24,7 @@ import java.util.Set;
 public class Vein extends EcoEnchant {
     public Vein() {
         super(
-                new EcoEnchantBuilder("vein", EnchantmentType.NORMAL, Target.Applicable.PICKAXE, 4.0)
+                new EcoEnchantBuilder("vein", EnchantmentType.NORMAL, 5.0)
         );
     }
 

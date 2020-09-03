@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Slaughter extends EcoEnchant {
     public Slaughter() {
         super(
-                new EcoEnchantBuilder("slaughter", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.0)
+                new EcoEnchantBuilder("slaughter", EnchantmentType.NORMAL,5.0)
         );
     }
 

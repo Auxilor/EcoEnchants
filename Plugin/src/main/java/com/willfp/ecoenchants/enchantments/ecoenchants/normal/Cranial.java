@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public class Cranial extends EcoEnchant {
     public Cranial() {
         super(
-                new EcoEnchantBuilder("cranial", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("cranial", EnchantmentType.NORMAL,5.0)
         );
     }
 

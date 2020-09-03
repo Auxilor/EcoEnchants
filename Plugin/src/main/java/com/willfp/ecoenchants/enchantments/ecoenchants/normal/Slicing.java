@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Slicing extends EcoEnchant {
     public Slicing() {
         super(
-                new EcoEnchantBuilder("slicing", EnchantmentType.NORMAL, Target.Applicable.ELYTRA, 4.0)
+                new EcoEnchantBuilder("slicing", EnchantmentType.NORMAL,5.0)
         );
     }
 

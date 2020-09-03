@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Venom extends EcoEnchant {
     public Venom() {
         super(
-                new EcoEnchantBuilder("venom", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.CROSSBOW, Target.Applicable.BOW}, 4.0)
+                new EcoEnchantBuilder("venom", EnchantmentType.NORMAL,5.0)
         );
     }
 

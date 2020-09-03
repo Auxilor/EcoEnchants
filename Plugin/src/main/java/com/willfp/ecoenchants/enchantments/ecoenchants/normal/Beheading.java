@@ -18,7 +18,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 public class Beheading extends EcoEnchant {
     public Beheading() {
         super(
-                new EcoEnchantBuilder("beheading", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("beheading", EnchantmentType.NORMAL,5.0)
         );
     }
     // START OF LISTENERS

@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Paralyze extends EcoEnchant {
     public Paralyze() {
         super(
-                new EcoEnchantBuilder("paralyze", EnchantmentType.NORMAL, Target.Applicable.SHIELD, 4.0)
+                new EcoEnchantBuilder("paralyze", EnchantmentType.NORMAL,5.0)
         );
     }
 

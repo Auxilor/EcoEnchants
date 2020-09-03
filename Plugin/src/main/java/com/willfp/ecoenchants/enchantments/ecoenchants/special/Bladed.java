@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public class Bladed extends EcoEnchant {
     public Bladed() {
         super(
-                new EcoEnchantBuilder("bladed", EnchantmentType.SPECIAL, Target.Applicable.TRIDENT, 4.01)
+                new EcoEnchantBuilder("bladed", EnchantmentType.SPECIAL, 5.0)
         );
     }
 

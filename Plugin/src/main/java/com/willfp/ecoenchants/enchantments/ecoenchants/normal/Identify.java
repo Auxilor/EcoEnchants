@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Identify extends EcoEnchant {
     public Identify() {
         super(
-                new EcoEnchantBuilder("identify", EnchantmentType.NORMAL, Target.Applicable.SHIELD, 4.0)
+                new EcoEnchantBuilder("identify", EnchantmentType.NORMAL, 5.0)
         );
     }
 

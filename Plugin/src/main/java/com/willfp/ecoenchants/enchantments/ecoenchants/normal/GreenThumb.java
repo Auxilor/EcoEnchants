@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class GreenThumb extends EcoEnchant {
     public GreenThumb() {
         super(
-                new EcoEnchantBuilder("green_thumb", EnchantmentType.NORMAL, Target.Applicable.HOE, 4.0)
+                new EcoEnchantBuilder("green_thumb", EnchantmentType.NORMAL, 5.0)
         );
     }
 

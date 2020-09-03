@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Proximity extends EcoEnchant {
     public Proximity() {
         super(
-                new EcoEnchantBuilder("proximity", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("proximity", EnchantmentType.NORMAL, 5.0)
         );
     }
 

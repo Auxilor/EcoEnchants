@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class FirstStrike extends EcoEnchant {
     public FirstStrike() {
         super(
-                new EcoEnchantBuilder("first_strike", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("first_strike", EnchantmentType.NORMAL, 5.0)
         );
     }
 

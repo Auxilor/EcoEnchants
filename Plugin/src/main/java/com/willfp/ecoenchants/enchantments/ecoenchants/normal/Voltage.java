@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class Voltage extends EcoEnchant {
     public Voltage() {
         super(
-                new EcoEnchantBuilder("voltage", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("voltage", EnchantmentType.NORMAL, 5.0)
         );
     }
 

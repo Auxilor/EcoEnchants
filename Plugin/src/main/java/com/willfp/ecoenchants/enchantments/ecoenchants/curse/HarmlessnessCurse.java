@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class HarmlessnessCurse extends EcoEnchant {
     public HarmlessnessCurse() {
         super(
-                new EcoEnchantBuilder("harmlessness_curse", EnchantmentType.CURSE, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("harmlessness_curse", EnchantmentType.CURSE,5.0)
         );
     }
 

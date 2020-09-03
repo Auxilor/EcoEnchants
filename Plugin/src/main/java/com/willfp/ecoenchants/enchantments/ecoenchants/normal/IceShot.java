@@ -17,7 +17,7 @@ import org.bukkit.util.Vector;
 public class IceShot extends EcoEnchant {
     public IceShot() {
         super(
-                new EcoEnchantBuilder("ice_shot", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.CROSSBOW, Target.Applicable.BOW}, 4.0)
+                new EcoEnchantBuilder("ice_shot", EnchantmentType.NORMAL, 5.0)
         );
     }
 

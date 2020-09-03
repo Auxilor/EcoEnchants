@@ -6,7 +6,7 @@ public class MagmaArtifact extends Artifact {
     public MagmaArtifact() {
         super(
                 "magma_artifact",
-                4.0,
+                5.0,
                 Particle.LAVA
         );
     }

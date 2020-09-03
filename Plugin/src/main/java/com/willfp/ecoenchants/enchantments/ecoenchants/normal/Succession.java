@@ -17,7 +17,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 public class Succession extends EcoEnchant {
     public Succession() {
         super(
-                new EcoEnchantBuilder("succession", EnchantmentType.NORMAL, Target.Applicable.BOW, 4.01)
+                new EcoEnchantBuilder("succession", EnchantmentType.NORMAL, 5.0)
         );
     }
 

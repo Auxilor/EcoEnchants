@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Energizing extends EcoEnchant {
     public Energizing() {
         super(
-                new EcoEnchantBuilder("energizing", EnchantmentType.SPECIAL, Target.Applicable.TOOL, 4.0)
+                new EcoEnchantBuilder("energizing", EnchantmentType.SPECIAL, 5.0)
         );
     }
     // START OF LISTENERS

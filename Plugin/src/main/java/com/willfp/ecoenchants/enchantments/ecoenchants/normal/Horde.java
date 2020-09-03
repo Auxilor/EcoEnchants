@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Horde extends EcoEnchant {
     public Horde() {
         super(
-                new EcoEnchantBuilder("horde", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("horde", EnchantmentType.NORMAL, 5.0)
         );
     }
 

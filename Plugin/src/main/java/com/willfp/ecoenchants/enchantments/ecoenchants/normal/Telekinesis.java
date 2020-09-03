@@ -28,7 +28,7 @@ import java.util.List;
 public class Telekinesis extends EcoEnchant {
     public Telekinesis() {
         super(
-                new EcoEnchantBuilder("telekinesis", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.TOOL, Target.Applicable.SWORD, Target.Applicable.TRIDENT, Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.12)
+                new EcoEnchantBuilder("telekinesis", EnchantmentType.NORMAL, 5.0)
         );
     }
 

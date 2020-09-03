@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 public class Magnetic extends EcoEnchant implements EcoRunnable {
     public Magnetic() {
         super(
-                new EcoEnchantBuilder("magnetic", EnchantmentType.NORMAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("magnetic", EnchantmentType.NORMAL, 5.0)
         );
     }
 

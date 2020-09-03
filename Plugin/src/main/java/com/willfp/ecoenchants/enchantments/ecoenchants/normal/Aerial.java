@@ -15,7 +15,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class Aerial extends EcoEnchant {
     public Aerial() {
         super(
-                new EcoEnchantBuilder("aerial", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("aerial", EnchantmentType.NORMAL,5.0)
         );
     }
 

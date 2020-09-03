@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class Phantasm extends EcoEnchant {
     public Phantasm() {
         super(
-                new EcoEnchantBuilder("phantasm", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("phantasm", EnchantmentType.NORMAL,5.0)
         );
     }
 

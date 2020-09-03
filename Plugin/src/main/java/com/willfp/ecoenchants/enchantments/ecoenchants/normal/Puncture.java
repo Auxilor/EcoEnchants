@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public class Puncture extends EcoEnchant {
     public Puncture() {
         super(
-                new EcoEnchantBuilder("puncture", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("puncture", EnchantmentType.NORMAL, 5.0)
         );
     }
 

@@ -11,7 +11,7 @@ import org.bukkit.entity.Monster;
 public class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(
-                new EcoEnchantBuilder("forcefield", EnchantmentType.NORMAL, Target.Applicable.ARMOR, 4.0)
+                new EcoEnchantBuilder("forcefield", EnchantmentType.NORMAL, 5.0)
         );
     }
 

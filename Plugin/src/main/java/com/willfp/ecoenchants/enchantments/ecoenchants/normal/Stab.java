@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Stab extends EcoEnchant {
     public Stab() {
         super(
-                new EcoEnchantBuilder("stab", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("stab", EnchantmentType.NORMAL, 5.0)
         );
     }
 

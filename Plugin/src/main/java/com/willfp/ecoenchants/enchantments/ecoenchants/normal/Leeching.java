@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Leeching extends EcoEnchant {
     public Leeching() {
         super(
-                new EcoEnchantBuilder("leeching", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.01)
+                new EcoEnchantBuilder("leeching", EnchantmentType.NORMAL,5.0)
         );
     }
 

@@ -6,7 +6,7 @@ public class EndArtifact extends Artifact {
     public EndArtifact() {
         super(
                 "end_artifact",
-                4.0,
+                5.0,
                 Particle.END_ROD
         );
     }

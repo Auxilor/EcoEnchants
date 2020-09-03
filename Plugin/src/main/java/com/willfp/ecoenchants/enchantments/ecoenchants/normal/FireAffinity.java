@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class FireAffinity extends EcoEnchant {
     public FireAffinity() {
         super(
-                new EcoEnchantBuilder("fire_affinity", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.01)
+                new EcoEnchantBuilder("fire_affinity", EnchantmentType.NORMAL,5.0)
         );
     }
 

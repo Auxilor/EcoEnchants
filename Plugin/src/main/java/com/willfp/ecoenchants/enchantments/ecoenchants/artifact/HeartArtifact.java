@@ -6,7 +6,7 @@ public class HeartArtifact extends Artifact {
     public HeartArtifact() {
         super(
                 "heart_artifact",
-                4.0,
+                5.0,
                 Particle.HEART
         );
     }

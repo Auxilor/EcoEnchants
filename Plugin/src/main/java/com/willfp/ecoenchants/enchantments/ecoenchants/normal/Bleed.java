@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Bleed extends EcoEnchant {
     public Bleed() {
         super(
-                new EcoEnchantBuilder("bleed", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("bleed", EnchantmentType.NORMAL,5.0)
         );
     }
 

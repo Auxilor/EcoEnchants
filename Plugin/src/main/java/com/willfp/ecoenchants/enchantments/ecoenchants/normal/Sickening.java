@@ -18,7 +18,7 @@ import org.bukkit.util.Vector;
 public class Sickening extends EcoEnchant {
     public Sickening() {
         super(
-                new EcoEnchantBuilder("sickening", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.CROSSBOW, Target.Applicable.BOW}, 4.0)
+                new EcoEnchantBuilder("sickening", EnchantmentType.NORMAL, 5.0)
         );
     }
 

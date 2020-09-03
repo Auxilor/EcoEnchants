@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class DecayCurse extends EcoEnchant implements EcoRunnable {
     public DecayCurse() {
         super(
-                new EcoEnchantBuilder("decay_curse", EnchantmentType.CURSE, Target.Applicable.ALL, 4.0)
+                new EcoEnchantBuilder("decay_curse", EnchantmentType.CURSE, 5.0)
         );
     }
 

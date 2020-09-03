@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public class Abattoir extends EcoEnchant {
     public Abattoir() {
         super(
-                new EcoEnchantBuilder("abattoir", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("abattoir", EnchantmentType.NORMAL, 5.0)
         );
     }
 

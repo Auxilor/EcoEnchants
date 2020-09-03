@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class Impact extends EcoEnchant {
     public Impact() {
         super(
-                new EcoEnchantBuilder("impact", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("impact", EnchantmentType.NORMAL, 5.0)
         );
     }
 

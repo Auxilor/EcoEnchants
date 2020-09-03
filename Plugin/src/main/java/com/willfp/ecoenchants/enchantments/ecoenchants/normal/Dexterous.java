@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public class Dexterous extends EcoEnchant {
     public Dexterous() {
         super(
-                new EcoEnchantBuilder("dexterous", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("dexterous", EnchantmentType.NORMAL, 5.0)
         );
     }
 
@@ -25,7 +25,7 @@ public class Dexterous extends EcoEnchant {
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
 
         if (!EnchantChecks.item(item, this)) {
-            player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(4.0);
+            player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(5.0);
             return;
         }
 

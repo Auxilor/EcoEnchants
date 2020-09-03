@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class Extract extends EcoEnchant {
     public Extract() {
         super(
-                new EcoEnchantBuilder("extract", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("extract", EnchantmentType.NORMAL,5.0)
         );
     }
 

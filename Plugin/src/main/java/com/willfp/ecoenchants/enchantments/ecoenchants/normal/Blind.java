@@ -18,7 +18,7 @@ import org.bukkit.util.Vector;
 public class Blind extends EcoEnchant {
     public Blind() {
         super(
-                new EcoEnchantBuilder("blind", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.CROSSBOW, Target.Applicable.BOW}, 4.0)
+                new EcoEnchantBuilder("blind", EnchantmentType.NORMAL, 5.0)
         );
     }
 

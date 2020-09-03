@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Criticals extends EcoEnchant {
     public Criticals() {
         super(
-                new EcoEnchantBuilder("criticals", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("criticals", EnchantmentType.NORMAL,5.0)
         );
     }
 

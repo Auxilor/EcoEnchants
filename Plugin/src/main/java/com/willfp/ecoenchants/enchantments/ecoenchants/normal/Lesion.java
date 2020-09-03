@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Lesion extends EcoEnchant {
     public Lesion() {
         super(
-                new EcoEnchantBuilder("lesion", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("lesion", EnchantmentType.NORMAL, 5.0)
         );
     }
 

@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public class StrayAspect extends EcoEnchant {
     public StrayAspect() {
         super(
-                new EcoEnchantBuilder("stray_aspect", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("stray_aspect", EnchantmentType.NORMAL, 5.0)
         );
     }
 

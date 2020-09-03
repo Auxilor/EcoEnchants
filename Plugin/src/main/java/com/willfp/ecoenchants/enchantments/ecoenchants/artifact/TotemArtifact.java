@@ -6,7 +6,7 @@ public class TotemArtifact extends Artifact {
     public TotemArtifact() {
         super(
                 "totem_artifact",
-                4.0,
+                5.0,
                 Particle.TOTEM
         );
     }

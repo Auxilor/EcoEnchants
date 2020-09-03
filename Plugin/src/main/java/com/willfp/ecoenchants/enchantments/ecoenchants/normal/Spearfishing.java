@@ -22,7 +22,7 @@ import java.util.Random;
 public class Spearfishing extends EcoEnchant {
     public Spearfishing() {
         super(
-                new EcoEnchantBuilder("spearfishing", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("spearfishing", EnchantmentType.NORMAL, 5.0)
         );
     }
 

@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Streamlining extends EcoEnchant {
     public Streamlining() {
         super(
-                new EcoEnchantBuilder("streamlining", EnchantmentType.SPECIAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("streamlining", EnchantmentType.SPECIAL, 5.0)
         );
     }
 

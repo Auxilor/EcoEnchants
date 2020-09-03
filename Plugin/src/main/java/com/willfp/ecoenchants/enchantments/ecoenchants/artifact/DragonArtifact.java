@@ -6,7 +6,7 @@ public class DragonArtifact extends Artifact {
     public DragonArtifact() {
         super(
                 "dragon_artifact",
-                4.0,
+                5.0,
                 Particle.DRAGON_BREATH
         );
     }

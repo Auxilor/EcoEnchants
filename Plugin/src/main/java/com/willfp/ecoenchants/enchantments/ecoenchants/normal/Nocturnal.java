@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Nocturnal extends EcoEnchant {
     public Nocturnal() {
         super(
-                new EcoEnchantBuilder("nocturnal", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.01)
+                new EcoEnchantBuilder("nocturnal", EnchantmentType.NORMAL,5.0)
         );
     }
 

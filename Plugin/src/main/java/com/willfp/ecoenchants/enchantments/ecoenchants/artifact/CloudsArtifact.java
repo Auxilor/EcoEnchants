@@ -7,7 +7,7 @@ public class CloudsArtifact extends Artifact {
     public CloudsArtifact() {
         super(
                 "clouds_artifact",
-                4.0,
+                5.0,
                 Particle.REDSTONE,
                 new Particle.DustOptions(Color.AQUA, 1.0f)
         );

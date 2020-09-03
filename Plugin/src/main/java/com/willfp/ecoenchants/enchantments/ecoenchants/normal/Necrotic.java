@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class Necrotic extends EcoEnchant {
     public Necrotic() {
         super(
-                new EcoEnchantBuilder("necrotic", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("necrotic", EnchantmentType.NORMAL, 5.0)
         );
     }
 

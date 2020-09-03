@@ -6,7 +6,7 @@ public class DamageArtifact extends Artifact {
     public DamageArtifact() {
         super(
                 "damage_artifact",
-                4.0,
+                5.0,
                 Particle.DAMAGE_INDICATOR
         );
     }

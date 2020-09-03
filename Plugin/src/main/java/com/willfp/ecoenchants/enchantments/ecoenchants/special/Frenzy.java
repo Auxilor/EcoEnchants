@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Frenzy extends EcoEnchant {
     public Frenzy() {
         super(
-                new EcoEnchantBuilder("frenzy", EnchantmentType.SPECIAL, new Target.Applicable[]{Target.Applicable.SWORD, Target.Applicable.AXE}, 4.0)
+                new EcoEnchantBuilder("frenzy", EnchantmentType.SPECIAL,5.0)
         );
     }
     // START OF LISTENERS

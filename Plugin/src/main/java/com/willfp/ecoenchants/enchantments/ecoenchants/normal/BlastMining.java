@@ -16,7 +16,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class BlastMining extends EcoEnchant {
     public BlastMining() {
         super(
-                new EcoEnchantBuilder("blast_mining", EnchantmentType.NORMAL, Target.Applicable.PICKAXE, 4.0)
+                new EcoEnchantBuilder("blast_mining", EnchantmentType.NORMAL,5.0)
         );
     }
 

@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class Reinforcement extends EcoEnchant {
     public Reinforcement() {
         super(
-                new EcoEnchantBuilder("reinforcement", EnchantmentType.NORMAL, Target.Applicable.ELYTRA, 4.0)
+                new EcoEnchantBuilder("reinforcement", EnchantmentType.NORMAL, 5.0)
         );
     }
 

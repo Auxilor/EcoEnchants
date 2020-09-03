@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Parry extends EcoEnchant {
     public Parry() {
         super(
-                new EcoEnchantBuilder("parry", EnchantmentType.NORMAL, Target.Applicable.SWORD, 4.0)
+                new EcoEnchantBuilder("parry", EnchantmentType.NORMAL,5.0)
         );
     }
 

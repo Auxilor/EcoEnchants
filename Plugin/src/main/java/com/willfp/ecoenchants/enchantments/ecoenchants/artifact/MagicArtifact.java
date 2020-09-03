@@ -6,7 +6,7 @@ public class MagicArtifact extends Artifact {
     public MagicArtifact() {
         super(
                 "magic_artifact",
-                4.0,
+                5.0,
                 Particle.CRIT_MAGIC
         );
     }

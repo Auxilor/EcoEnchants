@@ -16,7 +16,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class Cleave extends EcoEnchant {
     public Cleave() {
         super(
-                new EcoEnchantBuilder("cleave", EnchantmentType.NORMAL, Target.Applicable.AXE, 4.0)
+                new EcoEnchantBuilder("cleave", EnchantmentType.NORMAL, 5.0)
         );
     }
 

@@ -14,7 +14,7 @@ import java.util.Collection;
 public class Tectonic extends EcoEnchant {
     public Tectonic() {
         super(
-                new EcoEnchantBuilder("tectonic", EnchantmentType.NORMAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("tectonic", EnchantmentType.NORMAL,5.0)
         );
     }
 

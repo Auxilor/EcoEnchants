@@ -8,7 +8,7 @@ public class LimeArtifact extends Artifact {
     public LimeArtifact() {
         super(
                 "lime_artifact",
-                4.0,
+                5.0,
                 Particle.REDSTONE,
                 new Particle.DustOptions(Color.fromRGB(3, 252, 140), 1.0f)
         );

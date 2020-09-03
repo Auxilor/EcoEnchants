@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class LiquidShot extends EcoEnchant {
     public LiquidShot() {
         super(
-                new EcoEnchantBuilder("liquid_shot", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("liquid_shot", EnchantmentType.NORMAL, 5.0)
         );
     }
 

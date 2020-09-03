@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Graceful extends EcoEnchant {
     public Graceful() {
         super(
-                new EcoEnchantBuilder("graceful", EnchantmentType.NORMAL, Target.Applicable.BOOTS, 4.0)
+                new EcoEnchantBuilder("graceful", EnchantmentType.NORMAL, 5.0)
         );
     }
 

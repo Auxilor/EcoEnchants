@@ -6,7 +6,7 @@ public class WitchArtifact extends Artifact {
     public WitchArtifact() {
         super(
                 "witch_artifact",
-                4.0,
+                5.0,
                 Particle.SPELL_WITCH
         );
     }

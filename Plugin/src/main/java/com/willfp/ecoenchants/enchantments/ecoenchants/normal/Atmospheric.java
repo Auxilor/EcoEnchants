@@ -17,7 +17,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class Atmospheric extends EcoEnchant {
     public Atmospheric() {
         super(
-                new EcoEnchantBuilder("atmospheric", EnchantmentType.NORMAL, Target.Applicable.TRIDENT, 4.0)
+                new EcoEnchantBuilder("atmospheric", EnchantmentType.NORMAL, 5.0)
         );
     }
 

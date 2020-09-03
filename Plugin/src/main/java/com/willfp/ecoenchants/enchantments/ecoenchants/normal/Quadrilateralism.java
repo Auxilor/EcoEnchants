@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Quadrilateralism extends EcoEnchant {
     public Quadrilateralism() {
         super(
-                new EcoEnchantBuilder("quadrilateralism", EnchantmentType.NORMAL, new Target.Applicable[]{Target.Applicable.BOW, Target.Applicable.CROSSBOW}, 4.0)
+                new EcoEnchantBuilder("quadrilateralism", EnchantmentType.NORMAL, 5.0)
         );
     }
 

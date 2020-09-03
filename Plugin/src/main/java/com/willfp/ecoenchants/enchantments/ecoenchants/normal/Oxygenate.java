@@ -13,7 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 public class Oxygenate extends EcoEnchant {
     public Oxygenate() {
         super(
-                new EcoEnchantBuilder("oxygenate", EnchantmentType.NORMAL, Target.Applicable.TOOL, 4.0)
+                new EcoEnchantBuilder("oxygenate", EnchantmentType.NORMAL, 5.0)
         );
     }
 

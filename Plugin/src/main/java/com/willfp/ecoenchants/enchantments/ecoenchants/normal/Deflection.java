@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class Deflection extends EcoEnchant {
     public Deflection() {
         super(
-                new EcoEnchantBuilder("deflection", EnchantmentType.NORMAL, Target.Applicable.SHIELD, 4.0)
+                new EcoEnchantBuilder("deflection", EnchantmentType.NORMAL,5.0)
         );
     }
 
