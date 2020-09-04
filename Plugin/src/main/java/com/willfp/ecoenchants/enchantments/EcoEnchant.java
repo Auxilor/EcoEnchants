@@ -30,7 +30,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
     private int maxLvl;
     private Set<Enchantment> conflicts;
     private EnchantmentRarity rarity;
-    private Set<Material> target;
+    private Set<Material> target = new HashSet<>();
 
     private boolean enabled;
 
