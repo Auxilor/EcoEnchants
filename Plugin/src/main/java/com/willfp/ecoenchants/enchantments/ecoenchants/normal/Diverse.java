@@ -27,7 +27,7 @@ public class Diverse extends EcoEnchant {
         Player player = (Player) event.getDamager();
         Player victim = (Player) event.getEntity();
 
-        if(!Target.Applicable.SWORD.getMaterials().contains(victim.getInventory().getItemInMainHand().getType()))
+        if(!victim.getInventory().getItemInMainHand().getType().toString().endsWith("_SWORD"))
             return;
 
         if (!EnchantChecks.mainhand(player, this)) return;

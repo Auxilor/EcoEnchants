@@ -15,6 +15,9 @@ obtaining:
   rarity: legendary
 
 general-config:
+  targets:
+    - bow
+    - crossbow
   grindstoneable: true
   conflicts: []
   maximum-level: 2

@@ -15,6 +15,8 @@ obtaining:
   rarity: epic
 
 general-config:
+  targets:
+    - hoe
   grindstoneable: true
   conflicts: []
 

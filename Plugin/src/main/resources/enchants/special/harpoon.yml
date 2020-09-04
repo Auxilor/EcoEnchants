@@ -15,6 +15,8 @@ obtaining:
   rarity: special
 
 general-config:
+  targets:
+    - rod
   grindstoneable: true
   conflicts:
     - spiked

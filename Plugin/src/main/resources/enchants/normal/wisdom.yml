@@ -15,6 +15,15 @@ obtaining:
   rarity: uncommon
 
 general-config:
+  targets:
+    - sword
+    - axe
+    - pickaxe
+    - shovel
+    - hoe
+    - bow
+    - crossbow
+    - trident
   grindstoneable: true
   conflicts:
     - splash

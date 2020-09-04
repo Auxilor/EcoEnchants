@@ -15,6 +15,11 @@ obtaining:
   rarity: rare
 
 general-config:
+  targets:
+    - pickaxe
+    - axe
+    - shovel
+    - hoe
   grindstoneable: true
   conflicts: []
   maximum-level: 8

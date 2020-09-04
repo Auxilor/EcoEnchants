@@ -15,6 +15,11 @@ obtaining:
   rarity: epic
 
 general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
   grindstoneable: true
   conflicts: []
   maximum-level: 3
