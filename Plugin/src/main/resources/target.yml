@@ -40,10 +40,10 @@ targets:
   sword:
     - wooden_sword
     - stone_sword
-    - iron_shovel
-    - golden_shovel
-    - diamond_shovel
-    - netherite_shovel
+    - iron_sword
+    - golden_sword
+    - diamond_sword
+    - netherite_sword
 
   helmet:
     - turtle_helmet
