@@ -201,7 +201,7 @@ public class EnchantDisplay {
                 name = enchantment.getName();
                 description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
                 description.replaceAll(line -> descriptionColor + line);
-                if(EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
+                if(!EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
             } else {
                 name = ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".name");
                 description = Arrays.asList(WordUtils.wrap(ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".description"), ConfigManager.getConfig().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
