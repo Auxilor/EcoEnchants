@@ -20,7 +20,7 @@ public class EnchantmentTarget {
     /**
      * Create new EnchantmentRarity
      * @param name The name of the rarity
-     * @paran materials The items for the target
+     * @param materials The items for the target
      */
     public EnchantmentTarget(String name, Set<Material> materials) {
         this(name, materials, false);
@@ -29,7 +29,7 @@ public class EnchantmentTarget {
     /**
      * Create new EnchantmentRarity
      * @param name The name of the rarity
-     * @paran materials The items for the target
+     * @param materials The items for the target
      * @param noRegister Dont register internally
      */
     public EnchantmentTarget(String name, Set<Material> materials, boolean noRegister) {
