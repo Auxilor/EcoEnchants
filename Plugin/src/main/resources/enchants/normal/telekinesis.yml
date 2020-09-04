@@ -21,7 +21,6 @@ general-config:
     - shovel
     - hoe
     - sword
-    - axe
     - bow
     - crossbow
     - trident

@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -91,6 +92,8 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
         Set<EnchantmentTarget> targets = new HashSet<>();
 
         targetNames.forEach((s -> {
+            if(EnchantmentTarget.getByName(s) == null)
+                Bukkit.getLogger().severe(s + " is an invalid target!");
             targets.add(EnchantmentTarget.getByName(s));
         }));
 

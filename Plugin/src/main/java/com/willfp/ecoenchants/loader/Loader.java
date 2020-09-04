@@ -11,10 +11,7 @@ import com.willfp.ecoenchants.commands.CommandEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.DisplayPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.EcoRunnable;
-import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.*;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
 import com.willfp.ecoenchants.events.armorequip.ArmorListener;
 import com.willfp.ecoenchants.events.armorequip.DispenserArmorListener;
@@ -275,13 +272,14 @@ public class Loader {
         Bukkit.getLogger().info("");
 
         /*
-        Load all enchantments and rarities
+        Load all enchantments, rarities, and targets
          */
 
         Bukkit.getLogger().info("Adding Enchantments to API...");
         EnchantmentRarity.update();
-        if(EnchantmentRarity.getAll().size() == 0) {
-            Bukkit.getLogger().severe("§cError loading rarities! Aborting...");
+        EnchantmentTarget.update();
+        if(EnchantmentRarity.getAll().size() == 0 || EnchantmentTarget.getAll().size() == 0) {
+            Bukkit.getLogger().severe("§cError loading rarities or targets! Aborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
@@ -289,6 +287,13 @@ public class Loader {
             EnchantmentRarity.getAll().forEach((rarity -> {
                 Bukkit.getLogger().info("- " + rarity.getName() + ": Table Probability=" + rarity.getProbability() + ", Minimum Level=" + rarity.getMinimumLevel() + ", Villager Probability=" + rarity.getVillagerProbability() + ", Loot Probability=" + rarity.getLootProbability());
             }));
+
+            Bukkit.getLogger().info("");
+
+            Bukkit.getLogger().info(EnchantmentTarget.getAll().size() + " Targets Loaded:");
+            EnchantmentTarget.getAll().forEach((target) -> {
+                Bukkit.getLogger().info("- " + target.getName() + ": Materials=" + target.getMaterials().toString());
+            });
         }
         Bukkit.getLogger().info("");
 

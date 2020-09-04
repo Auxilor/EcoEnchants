@@ -16,7 +16,10 @@ obtaining:
 
 general-config:
   targets:
-    - armor
+    - helmet
+    - chestplate
+    - leggings
+    - boots
   grindstoneable: true
   conflicts:
     - protection

@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,6 +32,7 @@ public class CommandEcoreload implements CommandExecutor {
     public static void reload() {
         ConfigManager.updateConfigs();
         EnchantmentRarity.update();
+        EnchantmentTarget.update();
         EcoEnchants.update();
         EnchantDisplay.update();
 
