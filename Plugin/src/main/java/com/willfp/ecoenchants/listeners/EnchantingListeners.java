@@ -59,7 +59,7 @@ public class EnchantingListeners implements Listener {
         }
 
         double multiplier = 0.01;
-        if (Target.Applicable.BOOK.getMaterials().contains(item.getType())) {
+        if(item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
             multiplier /= ConfigManager.getConfig().getInt("enchanting-table.book-times-less-likely");
         }
 
@@ -80,7 +80,7 @@ public class EnchantingListeners implements Listener {
                 continue;
             if (enchantment.getRarity().getMinimumLevel() > cost)
                 continue;
-            if(enchantment.isEnabled())
+            if(!enchantment.isEnabled())
                 continue;
             if (!enchantment.canGetFromTable())
                 continue;

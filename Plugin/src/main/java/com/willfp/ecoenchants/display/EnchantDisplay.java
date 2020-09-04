@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
@@ -82,7 +83,7 @@ public class EnchantDisplay {
     public static ItemStack revertDisplay(ItemStack item) {
         if(item == null) return null;
 
-        if(!Target.Applicable.ALL.getMaterials().contains(item.getType()))
+        if(!EnchantmentTarget.ALL.contains(item.getType()))
             return item;
 
         ItemMeta meta = item.getItemMeta();
@@ -129,7 +130,7 @@ public class EnchantDisplay {
 
         ItemStack oldItem = item.clone();
 
-        if(!Target.Applicable.ALL.getMaterials().contains(item.getType()))
+        if(!EnchantmentTarget.ALL.contains(item.getType()))
             return oldItem;
 
         item = revertDisplay(item);

@@ -42,7 +42,7 @@ public class Farmhand extends EcoEnchant {
 
         if (!EnchantChecks.item(item, this)) return;
 
-        if (!(Target.Applicable.HOE.getMaterials().contains(item.getType())))
+        if (!item.getType().toString().endsWith("_HOE"))
             return;
 
         if(!AntigriefManager.canBreakBlock(player, event.getClickedBlock())) return;

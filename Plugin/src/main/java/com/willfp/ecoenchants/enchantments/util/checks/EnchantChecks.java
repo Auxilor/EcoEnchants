@@ -89,17 +89,17 @@ public abstract class EnchantChecks {
                 armorPoints.addAndGet(getItemLevel(itemStack, enchantment));
                 if(damage > 0 && isPlayer) {
                     Player player = (Player) entity;
-                    if (Target.Applicable.HELMET.getMaterials().contains(itemStack.getType())) {
-                        ItemDurability.damageItem(player, player.getInventory().getHelmet(), 1, 39);
+                    if(itemStack.equals(entity.getEquipment().getHelmet())) {
+                        ItemDurability.damageItem(player, player.getInventory().getHelmet(), level, 39);
                     }
-                    if (Target.Applicable.CHESTPLATE.getMaterials().contains(itemStack.getType())) {
-                        ItemDurability.damageItem(player, player.getInventory().getChestplate(), 1, 38);
+                    if(itemStack.equals(entity.getEquipment().getChestplate())) {
+                        ItemDurability.damageItem(player, player.getInventory().getChestplate(), level, 38);
                     }
-                    if (Target.Applicable.LEGGINGS.getMaterials().contains(itemStack.getType())) {
-                        ItemDurability.damageItem(player, player.getInventory().getLeggings(), 1, 37);
+                    if(itemStack.equals(entity.getEquipment().getLeggings())) {
+                        ItemDurability.damageItem(player, player.getInventory().getLeggings(), level, 37);
                     }
-                    if (Target.Applicable.BOOTS.getMaterials().contains(itemStack.getType())) {
-                        ItemDurability.damageItem(player, player.getInventory().getBoots(), 1, 36);
+                    if(itemStack.equals(entity.getEquipment().getBoots())) {
+                        ItemDurability.damageItem(player, player.getInventory().getBoots(), level, 36);
                     }
                 }
             }

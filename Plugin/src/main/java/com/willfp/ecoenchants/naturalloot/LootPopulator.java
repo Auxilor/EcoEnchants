@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.naturalloot;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -38,7 +39,7 @@ public class LootPopulator extends BlockPopulator {
 
             for(ItemStack item : inventory) {
                 if(item == null) continue;
-                if(!Target.Applicable.ALL.getMaterials().contains(item.getType())) continue;
+                if(!EnchantmentTarget.ALL.contains(item.getType())) continue;
                 if(item.getType().equals(Material.BOOK)) continue;
 
                 HashMap<Enchantment, Integer> toAdd = new HashMap<>();
@@ -47,7 +48,7 @@ public class LootPopulator extends BlockPopulator {
                 Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
 
                 double multiplier = 0.01;
-                if (Target.Applicable.BOOK.getMaterials().contains(item.getType())) {
+                if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
                     multiplier /= ConfigManager.getConfig().getInt("loot.book-times-less-likely");
                 }
 
@@ -63,6 +64,8 @@ public class LootPopulator extends BlockPopulator {
                     if (!enchantment.canGetFromLoot())
                         continue;
                     if(!enchantment.canEnchantItem(item))
+                        continue;
+                    if(!enchantment.isEnabled())
                         continue;
 
                     AtomicBoolean anyConflicts = new AtomicBoolean(false);

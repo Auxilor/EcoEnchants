@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.listeners;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -84,7 +85,7 @@ public class VillagerListeners implements Listener {
     @EventHandler
     public void onVillagerGainItemTrade(VillagerAcquireTradeEvent event) {
 
-        if(!Target.Applicable.ALL.getMaterials().contains(event.getRecipe().getResult().getType()))
+        if(!EnchantmentTarget.ALL.contains(event.getRecipe().getResult().getType()))
             return;
 
         if(event.getRecipe().getResult().getType().equals(Material.BOOK)) return;
@@ -117,6 +118,8 @@ public class VillagerListeners implements Listener {
             if (!enchantment.canGetFromVillager())
                 continue;
             if(!enchantment.canEnchantItem(result))
+                continue;
+            if(!enchantment.isEnabled())
                 continue;
 
             AtomicBoolean anyConflicts = new AtomicBoolean(false);

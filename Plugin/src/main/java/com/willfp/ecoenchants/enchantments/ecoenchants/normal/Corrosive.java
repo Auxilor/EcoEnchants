@@ -55,16 +55,17 @@ public class Corrosive extends EcoEnchant {
             if (armorPiece == null)
                 continue;
 
-            if (Target.Applicable.HELMET.getMaterials().contains(armorPiece.getType())) {
+
+            if(armorPiece.equals(victim.getInventory().getHelmet())) {
                 ItemDurability.damageItem(player, player.getInventory().getHelmet(), level, 39);
             }
-            if (Target.Applicable.CHESTPLATE.getMaterials().contains(armorPiece.getType())) {
+            if(armorPiece.equals(victim.getInventory().getChestplate())) {
                 ItemDurability.damageItem(player, player.getInventory().getChestplate(), level, 38);
             }
-            if (Target.Applicable.LEGGINGS.getMaterials().contains(armorPiece.getType())) {
+            if(armorPiece.equals(victim.getInventory().getLeggings())) {
                 ItemDurability.damageItem(player, player.getInventory().getLeggings(), level, 37);
             }
-            if (Target.Applicable.BOOTS.getMaterials().contains(armorPiece.getType())) {
+            if(armorPiece.equals(victim.getInventory().getBoots())) {
                 ItemDurability.damageItem(player, player.getInventory().getBoots(), level, 36);
             }
         }
