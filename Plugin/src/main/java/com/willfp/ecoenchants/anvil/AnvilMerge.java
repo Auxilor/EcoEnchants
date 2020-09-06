@@ -42,7 +42,7 @@ public class AnvilMerge {
 
         if(left.getEnchantments().containsKey(EcoEnchants.PERMANENCE_CURSE)) return new Pair<>(null, null);
 
-        if(!EnchantmentTarget.ALL.contains(left.getType()) || right == null || EnchantmentTarget.ALL.contains(right.getType())) {
+        if(!EnchantmentTarget.ALL.contains(left.getType()) || right == null || !EnchantmentTarget.ALL.contains(right.getType())) {
             ItemStack out = left.clone();
             ItemMeta outMeta = out.getItemMeta();
             outMeta.setDisplayName(name);
