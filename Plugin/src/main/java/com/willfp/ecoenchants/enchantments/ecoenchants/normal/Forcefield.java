@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EcoRunnable;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 public class Forcefield extends EcoEnchant implements EcoRunnable {
@@ -31,7 +32,9 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
 
                 ((Monster) e).damage(damage);
 
-                EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 1);
+                if(NumberUtils.randFloat(0, 1) < 0.2) {
+                    EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 1);
+                }
             }
         }));
     }
