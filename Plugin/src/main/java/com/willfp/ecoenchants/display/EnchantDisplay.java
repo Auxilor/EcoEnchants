@@ -28,8 +28,9 @@ import java.util.Map;
 public class EnchantDisplay {
 
     /**
-     * The meta key of the length of enchantments in lore
+     * The meta key of the length of enchantments in lore (for legacy support)
      */
+    @Deprecated
     private static final NamespacedKey key = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
 
     /**
@@ -103,6 +104,7 @@ public class EnchantDisplay {
                 if(itemLore.size() >= enchantLoreLength) {
                     itemLore.subList(0, enchantLoreLength).clear();
                 }
+                meta.getPersistentDataContainer().remove(key);
             }
         } catch (NullPointerException ignored) {}
 
