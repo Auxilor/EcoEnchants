@@ -133,14 +133,14 @@ public class EnchantDisplay {
         if(!EnchantmentTarget.ALL.contains(item.getType()))
             return oldItem;
 
-        item = revertDisplay(item);
-
         ItemMeta meta = item.getItemMeta();
         List<String> itemLore = new ArrayList<>();
 
         int loreStart = 0;
 
         if(meta == null) return oldItem;
+
+        item = revertDisplay(item);
 
         if(meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER))
             return oldItem;

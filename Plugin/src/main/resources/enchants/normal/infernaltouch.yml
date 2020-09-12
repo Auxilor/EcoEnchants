@@ -17,9 +17,6 @@ obtaining:
 general-config:
   targets:
     - pickaxe
-    - axe
-    - shovel
-    - hoe
   grindstoneable: true
   conflicts:
     - silk_touch

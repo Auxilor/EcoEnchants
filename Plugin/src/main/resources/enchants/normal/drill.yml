@@ -16,7 +16,9 @@ obtaining:
 
 general-config:
   targets:
+    - pickaxe
     - axe
+    - shovel
   grindstoneable: true
   conflicts:
     - lumberjack
