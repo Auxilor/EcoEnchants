@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -38,7 +39,7 @@ public class EnchantDisplay {
      */
     public static final NamespacedKey keySkip = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
-    private static final String prefix = ChatColor.translateAlternateColorCodes('&',"&a&e&a&r");
+    private static final String prefix = ChatColor.COLOR_CHAR + "w";
 
     private static String normalColor;
     private static String curseColor;
@@ -96,19 +97,17 @@ public class EnchantDisplay {
         if(meta.hasLore())
             itemLore = meta.getLore();
 
-        if(itemLore == null) itemLore = new ArrayList<>();
-
         try {
             if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
                 int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
                 if(itemLore.size() >= enchantLoreLength) {
                     itemLore.subList(0, enchantLoreLength).clear();
                 }
-                meta.getPersistentDataContainer().remove(key);
             }
         } catch (NullPointerException ignored) {}
 
-        itemLore.removeIf((s -> s.startsWith(prefix)));
+        meta.getPersistentDataContainer().remove(key);
+        itemLore.removeIf((s) -> s.startsWith(prefix));
 
         if (meta instanceof EnchantmentStorageMeta) {
             EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;
