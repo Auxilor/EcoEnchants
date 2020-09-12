@@ -37,6 +37,7 @@ public class EnchantDisplay {
      */
     public static final NamespacedKey keySkip = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
+    private static final String prefix = ChatColor.translateAlternateColorCodes('&',"&a&e&a&r");
 
     private static String normalColor;
     private static String curseColor;
@@ -94,6 +95,8 @@ public class EnchantDisplay {
         if(meta.hasLore())
             itemLore = meta.getLore();
 
+        if(itemLore == null) itemLore = new ArrayList<>();
+
         try {
             if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
                 int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
@@ -103,7 +106,7 @@ public class EnchantDisplay {
             }
         } catch (NullPointerException ignored) {}
 
-
+        itemLore.removeIf((s -> s.startsWith(prefix)));
 
         if (meta instanceof EnchantmentStorageMeta) {
             EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;
@@ -200,12 +203,12 @@ public class EnchantDisplay {
             if(isEcoEnchant) {
                 name = enchantment.getName();
                 description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
-                description.replaceAll(line -> descriptionColor + line);
+                description.replaceAll(line -> prefix + descriptionColor + line);
                 if(!EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
             } else {
                 name = ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".name");
                 description = Arrays.asList(WordUtils.wrap(ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".description"), ConfigManager.getConfig().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
-                description.replaceAll(line -> descriptionColor + line);
+                description.replaceAll(line -> prefix + descriptionColor + line);
             }
 
             if(!(isMaxLevelOne || type == EcoEnchant.EnchantmentType.CURSE)) {
@@ -222,11 +225,11 @@ public class EnchantDisplay {
             }
 
             if(type == EcoEnchant.EnchantmentType.CURSE) {
-                curseLore.add(color + name);
+                curseLore.add(prefix + color + name);
                 if(describe) curseLore.addAll(description);
             }
             else {
-                normalLore.add(color + name);
+                normalLore.add(prefix + color + name);
                 if(describe) normalLore.addAll(description);
             }
         }));
@@ -260,14 +263,12 @@ public class EnchantDisplay {
             metaBook.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
             metaBook.addItemFlags(ItemFlag.HIDE_ENCHANTS); // Here just in case
             metaBook.setLore(itemLore);
-            metaBook.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, enchantLore.size());
             item.setItemMeta(metaBook);
         } else {
             if(!meta.getEnchants().equals(oldItem.getItemMeta().getEnchants())) return oldItem;
             forRemoval.forEach((meta::removeEnchant));
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             meta.setLore(itemLore);
-            meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, enchantLore.size());
             item.setItemMeta(meta);
         }
 
