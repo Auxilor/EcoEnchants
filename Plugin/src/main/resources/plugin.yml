@@ -245,6 +245,7 @@ permissions:
       ecoenchants.fromtable.voltage: true
       ecoenchants.fromtable.transfuse: true
       ecoenchants.fromtable.inaccuracycurse: true
+      ecoenchants.fromtable.respirator: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -852,4 +853,7 @@ permissions:
     default: true
   ecoenchants.fromtable.inaccuracycurse:
     description: Allows getting curse of inaccuracy from an enchanting table
+    default: true
+  ecoenchants.fromtable.respirator:
+    description: Allows getting respirator from an enchanting table
     default: true

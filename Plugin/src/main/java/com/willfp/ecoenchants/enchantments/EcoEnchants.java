@@ -226,6 +226,7 @@ public class EcoEnchants {
     public static final EcoEnchant VOLTAGE = new Voltage();
     public static final EcoEnchant TRANSFUSE = new Transfuse();
     public static final EcoEnchant INACCURACY_CURSE = new InaccuracyCurse();
+    public static final EcoEnchant RESPIRATOR = new Respirator();
 
     /**
      * Get all registered {@link EcoEnchant}s
