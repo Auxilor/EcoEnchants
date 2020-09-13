@@ -39,7 +39,7 @@ public class EnchantDisplay {
      */
     public static final NamespacedKey keySkip = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
-    private static final String prefix = ChatColor.COLOR_CHAR + "w";
+    private static final String prefix = "§w";
 
     private static String normalColor;
     private static String curseColor;
@@ -97,6 +97,8 @@ public class EnchantDisplay {
         if(meta.hasLore())
             itemLore = meta.getLore();
 
+        if(itemLore == null) itemLore = new ArrayList<>();
+
         try {
             if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
                 int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
@@ -137,14 +139,12 @@ public class EnchantDisplay {
         if(!EnchantmentTarget.ALL.contains(item.getType()))
             return oldItem;
 
+        item = revertDisplay(item);
+
         ItemMeta meta = item.getItemMeta();
         List<String> itemLore = new ArrayList<>();
 
-        int loreStart = 0;
-
         if(meta == null) return oldItem;
-
-        item = revertDisplay(item);
 
         if(meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER))
             return oldItem;
@@ -255,7 +255,7 @@ public class EnchantDisplay {
             enchantLore.addAll(combinedLore);
         }
 
-        itemLore.addAll(loreStart, enchantLore);
+        itemLore.addAll(0, enchantLore);
 
         if (meta instanceof EnchantmentStorageMeta) {
             EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;

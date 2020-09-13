@@ -4,6 +4,8 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.MerchantRecipe;
 
 import java.util.Arrays;
