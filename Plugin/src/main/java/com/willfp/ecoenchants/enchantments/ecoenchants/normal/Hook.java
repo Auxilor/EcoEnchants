@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -45,6 +46,8 @@ public class Hook extends EcoEnchant {
 
         double baseMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-multiplier");
         Vector vector = player.getLocation().toVector().clone().subtract(victim.getLocation().toVector()).normalize().multiply(level * baseMultiplier);
-        victim.setVelocity(vector);
+        if(VectorUtils.isFinite(vector)) {
+            victim.setVelocity(vector);
+        }
     }
 }
