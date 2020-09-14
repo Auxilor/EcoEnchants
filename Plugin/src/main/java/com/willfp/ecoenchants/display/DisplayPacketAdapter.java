@@ -6,6 +6,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
 import java.util.Arrays;
@@ -51,7 +52,9 @@ public class DisplayPacketAdapter extends PacketAdapter {
                                     oldRecipe.hasExperienceReward(),
                                     oldRecipe.getVillagerExperience(),
                                     oldRecipe.getPriceMultiplier());
-                            recipe.setIngredients(oldRecipe.getIngredients());
+                            List<ItemStack> ingredients = oldRecipe.getIngredients();
+                            ingredients.forEach(EnchantDisplay::displayEnchantments);
+                            recipe.setIngredients(ingredients);
                             return recipe;
                         }).collect(Collectors.toList());
 
