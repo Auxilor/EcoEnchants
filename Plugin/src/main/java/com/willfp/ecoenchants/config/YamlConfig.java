@@ -52,7 +52,7 @@ public abstract class YamlConfig {
     }
 
     private void checkVersion() {
-        double latestVersion = EcoEnchantsPlugin.configVersions.get(this.name);
+        double latestVersion = ConfigManager.configVersions.get(this.name);
         if (latestVersion != config.getDouble("config-version")) {
             Bukkit.getLogger().warning("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
             Bukkit.getLogger().warning("If you've edited the config, copy over your changes!");

@@ -285,7 +285,7 @@ public class Loader {
         } else {
             Bukkit.getLogger().info(EnchantmentRarity.getAll().size() + " Rarities Loaded:");
             EnchantmentRarity.getAll().forEach((rarity -> {
-                Bukkit.getLogger().info("- " + rarity.getName() + ": Table Probability=" + rarity.getProbability() + ", Minimum Level=" + rarity.getMinimumLevel() + ", Villager Probability=" + rarity.getVillagerProbability() + ", Loot Probability=" + rarity.getLootProbability());
+                Bukkit.getLogger().info("- " + rarity.getName() + ": Table Probability=" + rarity.getProbability() + ", Minimum Level=" + rarity.getMinimumLevel() + ", Villager Probability=" + rarity.getVillagerProbability() + ", Loot Probability=" + rarity.getLootProbability() + ", Has Custom Color=" + rarity.hasCustomColor());
             }));
 
             Bukkit.getLogger().info("");

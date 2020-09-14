@@ -204,7 +204,7 @@ public class EnchantDisplay {
                 name = enchantment.getName();
                 description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
                 EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
-                if(rarity.hasCustomColor()) {
+                if(rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
                     color = rarity.getCustomColor();
                 }
                 description.replaceAll(line -> prefix + descriptionColor + line);

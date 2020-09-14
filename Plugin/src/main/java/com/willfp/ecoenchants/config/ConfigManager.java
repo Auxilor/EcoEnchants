@@ -2,10 +2,18 @@ package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.config.configs.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ConfigManager {
+    public static final HashMap<String, Double> configVersions = new HashMap<String, Double>() {{
+        put("config", 5.0);
+        put("lang", 5.0);
+        put("target", 1.0);
+        put("rarity", 1.0);
+    }};
+
     private static final Lang LANG = new Lang();
     private static final Config CONFIG = new Config();
     private static final Target TARGET = new Target();
