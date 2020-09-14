@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.apache.commons.lang.WordUtils;
@@ -202,6 +203,10 @@ public class EnchantDisplay {
             if(isEcoEnchant) {
                 name = enchantment.getName();
                 description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
+                EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
+                if(rarity.hasCustomColor()) {
+                    color = rarity.getCustomColor();
+                }
                 description.replaceAll(line -> prefix + descriptionColor + line);
                 if(!EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
             } else {

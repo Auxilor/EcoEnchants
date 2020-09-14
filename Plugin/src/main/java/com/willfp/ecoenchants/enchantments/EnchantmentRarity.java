@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.config.ConfigManager;
+import org.bukkit.ChatColor;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class EnchantmentRarity {
     private final int minimumLevel;
     private final double villagerProbability;
     private final double lootProbability;
+    private final String customColor;
 
     /**
      * Create new EnchantmentRarity
@@ -25,8 +27,9 @@ public class EnchantmentRarity {
      * @param minimumLevel The minimum xp level
      * @param villagerProbability The probability of a villager obtaining an enchantment with this rarity
      * @param lootProbability The probability of an item in a loot chest having an enchantment with this rarity
+     * @param customColor The custom display color, or null if not enabled
      */
-    public EnchantmentRarity(String name, double probability, int minimumLevel, double villagerProbability, double lootProbability) {
+    public EnchantmentRarity(String name, double probability, int minimumLevel, double villagerProbability, double lootProbability, String customColor) {
         Optional<EnchantmentRarity> matching = rarities.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         matching.ifPresent(rarities::remove);
 
@@ -35,6 +38,7 @@ public class EnchantmentRarity {
         this.minimumLevel = minimumLevel;
         this.villagerProbability = villagerProbability;
         this.lootProbability = lootProbability;
+        this.customColor = customColor;
 
         rarities.add(this);
     }
@@ -45,6 +49,22 @@ public class EnchantmentRarity {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Is custom color enabled
+     * @return If has enabled custom color
+     */
+    public boolean hasCustomColor() {
+        return this.customColor != null;
+    }
+
+    /**
+     * Get custom color
+     * @return The custom color
+     */
+    public String getCustomColor() {
+        return this.customColor;
     }
 
     /**
@@ -97,12 +117,16 @@ public class EnchantmentRarity {
         Set<String> raritiesNames = ConfigManager.getRarity().getRarities();
         raritiesNames.forEach((rarity) -> {
             String name = rarity;
-            double probability = ConfigManager.getConfig().getDouble("rarities." + rarity + ".table-probability");
-            int minimumLevel = ConfigManager.getConfig().getInt("rarities." + rarity + ".minimum-level");
-            double villagerProbability = ConfigManager.getConfig().getDouble("rarities." + rarity + ".villager-probability");
-            double lootProbability = ConfigManager.getConfig().getDouble("rarities." + rarity + ".loot-probability");
+            double probability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".table-probability");
+            int minimumLevel = ConfigManager.getRarity().getInt("rarities." + rarity + ".minimum-level");
+            double villagerProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".villager-probability");
+            double lootProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".loot-probability");
+            String customColor = null;
+            if(ConfigManager.getRarity().getBool("rarities." + rarity + ".custom-color.enabled")) {
+                customColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getRarity().getString("rarities." + rarity + ".custom-color.color"));
+            }
 
-            new EnchantmentRarity(name, probability, minimumLevel, villagerProbability, lootProbability);
+            new EnchantmentRarity(name, probability, minimumLevel, villagerProbability, lootProbability, customColor);
         });
     }
 

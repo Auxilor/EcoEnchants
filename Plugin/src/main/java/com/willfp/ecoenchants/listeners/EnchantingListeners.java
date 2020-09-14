@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.NumberUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
@@ -38,6 +39,7 @@ public class EnchantingListeners implements Listener {
         Player player = event.getEnchanter();
         ItemStack item = event.getItem();
         int cost = event.getExpLevelCost();
+
         Map<Enchantment, Integer> toAdd = event.getEnchantsToAdd();
         if (!ConfigManager.getConfig().getBool("enchanting-table.enabled")) {
             new BukkitRunnable() {

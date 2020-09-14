@@ -19,7 +19,7 @@ lore:
   use-numbers-above-threshold: 10 #After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
 
   describe: # Describe enchantments in lore
-    enabled: true
+    enabled: false
     before-lines: 5 # Describe before or equal to number of enchantments
     wrap: 30 # Word wrap after number of characters
 
