@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -43,7 +44,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
         super(NamespacedKey.minecraft(builder.key));
 
         this.type = builder.type;
-        this.name = builder.name;
         this.permissionName = builder.permission;
         this.configVersion = builder.configVersion;
         this.config = builder.config;
@@ -63,8 +63,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
         canGetFromVillager = config.getBool(EcoEnchants.OBTAINING_LOCATION + "villager");
         canGetFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
         maxLvl = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
-        name = config.getString("name");
-        description = config.getString("description");
+        name = ChatColor.translateAlternateColorCodes('&', config.getString("name"));
+        description = ChatColor.translateAlternateColorCodes('&', config.getString("description"));
         target.clear();
         config.getTargets().forEach(enchantmentTarget -> target.addAll(enchantmentTarget.getMaterials()));
         enabled = config.getBool("enabled", true);
