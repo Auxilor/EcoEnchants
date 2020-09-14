@@ -53,6 +53,9 @@ public class Ignite extends EcoEnchant {
 
         assert face != null;
 
-        block.getRelative(face).setType(Material.FIRE);
+        Block toIgnite = block.getRelative(face);
+        if(toIgnite.getType().equals(Material.AIR)) {
+            toIgnite.setType(Material.FIRE);
+        }
     }
 }
