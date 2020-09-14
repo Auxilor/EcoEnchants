@@ -35,7 +35,7 @@ rarities:
     loot-probability: 18
     custom-color:
       enabled: false
-      color: "&a"
+      color: "&b"
   epic:
     table-probability: 10
     minimum-level: 16
