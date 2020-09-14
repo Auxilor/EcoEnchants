@@ -19,6 +19,7 @@ public class EcoEnchantsPlugin extends JavaPlugin {
         put("config", 5.0);
         put("lang", 5.0);
         put("target", 1.0);
+        put("rarity", 1.0);
     }};
 
     /**

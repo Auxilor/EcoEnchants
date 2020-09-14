@@ -94,13 +94,13 @@ public class EnchantmentRarity {
      * Called on /ecoreload
      */
     public static void update() {
-        Set<String> raritiesNames = ConfigManager.getConfig().getRarities();
+        Set<String> raritiesNames = ConfigManager.getRarity().getRarities();
         raritiesNames.forEach((rarity) -> {
             String name = rarity;
-            double probability = ConfigManager.getConfig().getDouble("obtaining.rarities." + rarity + ".table-probability");
-            int minimumLevel = ConfigManager.getConfig().getInt("obtaining.rarities." + rarity + ".minimum-level");
-            double villagerProbability = ConfigManager.getConfig().getDouble("obtaining.rarities." + rarity + ".villager-probability");
-            double lootProbability = ConfigManager.getConfig().getDouble("obtaining.rarities." + rarity + ".loot-probability");
+            double probability = ConfigManager.getConfig().getDouble("rarities." + rarity + ".table-probability");
+            int minimumLevel = ConfigManager.getConfig().getInt("rarities." + rarity + ".minimum-level");
+            double villagerProbability = ConfigManager.getConfig().getDouble("rarities." + rarity + ".villager-probability");
+            double lootProbability = ConfigManager.getConfig().getDouble("rarities." + rarity + ".loot-probability");
 
             new EnchantmentRarity(name, probability, minimumLevel, villagerProbability, lootProbability);
         });

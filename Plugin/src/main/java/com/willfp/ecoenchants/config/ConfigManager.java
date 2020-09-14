@@ -1,9 +1,6 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.ecoenchants.config.configs.Config;
-import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
-import com.willfp.ecoenchants.config.configs.Lang;
-import com.willfp.ecoenchants.config.configs.Target;
+import com.willfp.ecoenchants.config.configs.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +9,7 @@ public class ConfigManager {
     private static final Lang LANG = new Lang();
     private static final Config CONFIG = new Config();
     private static final Target TARGET = new Target();
+    private static final Rarity RARITY = new Rarity();
     private static final Set<EnchantmentConfig> enchantmentConfigs = new HashSet<>();
 
     /**
@@ -22,6 +20,7 @@ public class ConfigManager {
         LANG.reload();
         CONFIG.reload();
         TARGET.reload();
+        RARITY.reload();
         updateEnchantmentConfigs();
     }
 
@@ -79,5 +78,13 @@ public class ConfigManager {
      */
     public static Target getTarget() {
         return TARGET;
+    }
+
+    /**
+     * Get rarity.yml
+     * @return rarity.yml
+     */
+    public static Rarity getRarity() {
+        return RARITY;
     }
 }

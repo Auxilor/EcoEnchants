@@ -53,8 +53,4 @@ public class Config extends YamlConfig {
     public ItemStack getItemStack(String path) {
         return config.getItemStack(path);
     }
-
-    public Set<String> getRarities() {
-        return config.getConfigurationSection("obtaining.rarities").getKeys(false);
-    }
 }
