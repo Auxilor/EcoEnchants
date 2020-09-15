@@ -1,9 +1,7 @@
 package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.ecoenchants.config.YamlConfig;
-import org.bukkit.Material;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

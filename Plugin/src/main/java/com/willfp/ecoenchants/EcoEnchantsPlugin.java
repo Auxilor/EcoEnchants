@@ -4,8 +4,6 @@ import com.comphenix.protocol.ProtocolManager;
 import com.willfp.ecoenchants.loader.Loader;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-
 /**
  * The Main class for EcoEnchants
  */

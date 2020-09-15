@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.config.YamlConfig;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Wrapper for config.yml

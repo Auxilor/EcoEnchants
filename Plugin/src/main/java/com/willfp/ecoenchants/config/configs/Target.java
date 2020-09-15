@@ -1,12 +1,9 @@
 package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.ecoenchants.config.YamlConfig;
-import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
