@@ -246,6 +246,7 @@ permissions:
       ecoenchants.fromtable.transfuse: true
       ecoenchants.fromtable.inaccuracycurse: true
       ecoenchants.fromtable.respirator: true
+      ecoenchants.fromtable.fetching: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -856,4 +857,7 @@ permissions:
     default: true
   ecoenchants.fromtable.respirator:
     description: Allows getting respirator from an enchanting table
+    default: true
+  ecoenchants.fromtable.fetching:
+    description: Allows getting fetching from an enchanting table
     default: true
