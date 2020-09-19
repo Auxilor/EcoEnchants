@@ -29,11 +29,11 @@ public class CommandEcoskip implements CommandExecutor {
             if(meta == null) {
                 return true;
             }
-            if(meta.getPersistentDataContainer().has(EnchantDisplay.keySkip, PersistentDataType.INTEGER)) {
-                meta.getPersistentDataContainer().remove(EnchantDisplay.keySkip);
+            if(meta.getPersistentDataContainer().has(EnchantDisplay.KEY_SKIP, PersistentDataType.INTEGER)) {
+                meta.getPersistentDataContainer().remove(EnchantDisplay.KEY_SKIP);
                 player.sendMessage(ConfigManager.getLang().getMessage("skip-removed"));
             } else {
-                meta.getPersistentDataContainer().set(EnchantDisplay.keySkip, PersistentDataType.INTEGER, 1);
+                meta.getPersistentDataContainer().set(EnchantDisplay.KEY_SKIP, PersistentDataType.INTEGER, 1);
                 player.sendMessage(ConfigManager.getLang().getMessage("skip-added"));
             }
             item.setItemMeta(meta);

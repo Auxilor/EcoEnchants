@@ -33,12 +33,12 @@ public class EnchantDisplay {
      * @deprecated This is no longer used due to a change in the lore storage mechanism
      */
     @Deprecated
-    private static final NamespacedKey key = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
+    private static final NamespacedKey KEY = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
 
     /**
      * The meta key to hide enchantments in lore
      */
-    public static final NamespacedKey keySkip = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
+    public static final NamespacedKey KEY_SKIP = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
     private static final String prefix = "§w";
 
@@ -101,15 +101,15 @@ public class EnchantDisplay {
         if(itemLore == null) itemLore = new ArrayList<>();
 
         try {
-            if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
-                int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
+            if (meta.getPersistentDataContainer().has(KEY, PersistentDataType.INTEGER)) {
+                int enchantLoreLength = meta.getPersistentDataContainer().get(KEY, PersistentDataType.INTEGER);
                 if(itemLore.size() >= enchantLoreLength) {
                     itemLore.subList(0, enchantLoreLength).clear();
                 }
             }
         } catch (NullPointerException ignored) {}
 
-        meta.getPersistentDataContainer().remove(key);
+        meta.getPersistentDataContainer().remove(KEY);
         itemLore.removeIf((s) -> s.startsWith(prefix));
 
         if (meta instanceof EnchantmentStorageMeta) {
@@ -147,7 +147,7 @@ public class EnchantDisplay {
 
         if(meta == null) return oldItem;
 
-        if(meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER))
+        if(meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER))
             return oldItem;
 
         if(meta.hasLore())
