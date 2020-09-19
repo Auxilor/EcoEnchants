@@ -30,6 +30,7 @@ public class EnchantDisplay {
 
     /**
      * The meta key of the length of enchantments in lore (for legacy support)
+     * @deprecated This is no longer used due to a change in the lore storage mechanism
      */
     @Deprecated
     private static final NamespacedKey key = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
