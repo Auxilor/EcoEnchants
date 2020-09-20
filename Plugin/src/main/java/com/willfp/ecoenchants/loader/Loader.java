@@ -88,7 +88,6 @@ public class Loader {
 
         Bukkit.getLogger().info("Loading Configs...");
         ConfigManager.updateConfigs();
-        EnchantDisplay.update();
         Bukkit.getLogger().info("");
 
         /*
@@ -342,7 +341,7 @@ public class Loader {
 
         Bukkit.getLogger().info("Registering Enchantments...");
         EcoEnchants.update();
-        EcoEnchants.update();
+        EnchantDisplay.update();
         Bukkit.getLogger().info("");
 
         /*
