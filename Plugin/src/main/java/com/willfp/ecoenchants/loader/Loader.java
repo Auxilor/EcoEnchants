@@ -88,7 +88,6 @@ public class Loader {
 
         Bukkit.getLogger().info("Loading Configs...");
         ConfigManager.updateConfigs();
-        EnchantDisplay.update();
         Bukkit.getLogger().info("");
 
         /*
@@ -342,7 +341,7 @@ public class Loader {
 
         Bukkit.getLogger().info("Registering Enchantments...");
         EcoEnchants.update();
-        EcoEnchants.update();
+        EnchantDisplay.update();
         Bukkit.getLogger().info("");
 
         /*
@@ -351,7 +350,7 @@ public class Loader {
 
         Bukkit.getLogger().info("Registering Enchantment Listeners...");
         EcoEnchants.getAll().forEach((ecoEnchant -> {
-            if(!ecoEnchant.isEnabled()) {
+            if(ecoEnchant.isEnabled()) {
                 Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
             }
         }));
@@ -416,15 +415,6 @@ public class Loader {
             Bukkit.getLogger().info("");
             Bukkit.getLogger().info("----------------------------");
         });
-
-        /*
-        Reload Data
-         */
-
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            Bukkit.getLogger().info("Reloading...");
-            CommandEcoreload.reload();
-        }, 2);
 
         /*
         Finish

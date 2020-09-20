@@ -20,6 +20,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +34,19 @@ public class EnchantDisplay {
      * @deprecated This is no longer used due to a change in the lore storage mechanism
      */
     @Deprecated
-    private static final NamespacedKey key = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
+    private static final NamespacedKey KEY = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
 
     /**
      * The meta key to hide enchantments in lore
      */
-    public static final NamespacedKey keySkip = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
+    public static final NamespacedKey KEY_SKIP = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
+
+    /**
+     * Cached description lore.
+     *
+     * @see Enchantment#getKey()
+     */
+    public static final Map<NamespacedKey, List<String>> DESCRIPTION_CACHE = new HashMap<>();
 
     private static final String prefix = "§w";
 
@@ -68,6 +76,17 @@ public class EnchantDisplay {
         artifactColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color"));
         normalColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("not-curse-color"));
 
+        DESCRIPTION_CACHE.clear();
+        Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
+            List<String> description;
+            NamespacedKey key = enchantment.getKey();
+            if(EcoEnchants.getByKey(key) != null) description = ((EcoEnchant) enchantment).getDescription();
+            else
+                description = Arrays.asList(WordUtils.wrap(ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey().toLowerCase() + ".description"), ConfigManager.getConfig().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
+            description.replaceAll(line -> prefix + descriptionColor + line);
+            DESCRIPTION_CACHE.put(key, description);
+        });
+
         useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
         numbersThreshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");
 
@@ -85,44 +104,34 @@ public class EnchantDisplay {
      * @return The item, updated
      */
     public static ItemStack revertDisplay(ItemStack item) {
-        if(item == null) return null;
-
-        if(!EnchantmentTarget.ALL.contains(item.getType()))
-            return item;
+        if(item == null || !EnchantmentTarget.ALL.contains(item.getType()) || item.getItemMeta() == null) return item;
 
         ItemMeta meta = item.getItemMeta();
-        List<String> itemLore = new ArrayList<>();
-
-        if(meta == null) return item;
+        List<String> itemLore;
 
         if(meta.hasLore())
             itemLore = meta.getLore();
+        else
+            itemLore = new ArrayList<>();
 
         if(itemLore == null) itemLore = new ArrayList<>();
 
         try {
-            if (meta.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
-                int enchantLoreLength = meta.getPersistentDataContainer().get(key, PersistentDataType.INTEGER);
-                if(itemLore.size() >= enchantLoreLength) {
+            if(meta.getPersistentDataContainer().has(KEY, PersistentDataType.INTEGER)) {
+                int enchantLoreLength = meta.getPersistentDataContainer().get(KEY, PersistentDataType.INTEGER);
+                if(itemLore.size() >= enchantLoreLength)
                     itemLore.subList(0, enchantLoreLength).clear();
-                }
             }
-        } catch (NullPointerException ignored) {}
+        } catch(NullPointerException ignored) { }
 
-        meta.getPersistentDataContainer().remove(key);
+        meta.getPersistentDataContainer().remove(KEY);
         itemLore.removeIf((s) -> s.startsWith(prefix));
 
-        if (meta instanceof EnchantmentStorageMeta) {
-            EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;
-            metaBook.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
-            metaBook.removeItemFlags(ItemFlag.HIDE_ENCHANTS); // Here just in case
-            metaBook.setLore(itemLore);
-            item.setItemMeta(metaBook);
-        } else {
-            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-            meta.setLore(itemLore);
-            item.setItemMeta(meta);
-        }
+        if(meta instanceof EnchantmentStorageMeta)
+            meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
+        meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.setLore(itemLore);
+        item.setItemMeta(meta);
 
         return item;
     }
@@ -133,30 +142,21 @@ public class EnchantDisplay {
      * @return The item, updated
      */
     public static ItemStack displayEnchantments(ItemStack item) {
-        if(item == null) return null;
-
-        ItemStack oldItem = item.clone();
-
-        if(!EnchantmentTarget.ALL.contains(item.getType()))
-            return oldItem;
+        if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.contains(item.getType()) || item.getItemMeta().getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER))
+            return item;
 
         item = revertDisplay(item);
 
         ItemMeta meta = item.getItemMeta();
+        if(meta == null) return item;
         List<String> itemLore = new ArrayList<>();
-
-        if(meta == null) return oldItem;
-
-        if(meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER))
-            return oldItem;
 
         if(meta.hasLore())
             itemLore = meta.getLore();
 
-        List<String> normalLore = new ArrayList<>();
-        List<String> curseLore = new ArrayList<>();
+        if(itemLore == null) itemLore = new ArrayList<>();
 
-        List<String> enchantLore = new ArrayList<>();
+        List<String> lore = new ArrayList<>();
 
         Map<Enchantment, Integer> enchantments;
         List<Enchantment> forRemoval = new ArrayList<>();
@@ -168,24 +168,15 @@ public class EnchantDisplay {
         }
 
         final ItemStack finalItem = item;
-        enchantments.forEach(((enchantment, integer) -> {
+        enchantments.forEach((enchantment, level) -> {
             boolean isEcoEnchant = EcoEnchants.getFromEnchantment(enchantment) != null;
 
             String name;
             String color;
-            List<String> description;
-
             EcoEnchant.EnchantmentType type;
 
-            if(enchantment.isCursed()) type = EcoEnchant.EnchantmentType.CURSE;
-            else type = EcoEnchant.EnchantmentType.NORMAL;
-
-            if(isEcoEnchant) {
-                type = EcoEnchants.getFromEnchantment(enchantment).getType();
-            }
-
-            boolean isMaxLevelOne = false;
-            if(enchantment.getMaxLevel() == 1 && integer == 1) isMaxLevelOne = true;
+            if(isEcoEnchant) type = EcoEnchants.getFromEnchantment(enchantment).getType();
+            else type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
 
             switch(type) {
                 case ARTIFACT:
@@ -204,79 +195,49 @@ public class EnchantDisplay {
 
             if(isEcoEnchant) {
                 name = enchantment.getName();
-                description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
                 EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
                 if(rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
                     color = rarity.getCustomColor();
                 }
-                description.replaceAll(line -> prefix + descriptionColor + line);
+
                 if(!EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
             } else {
                 name = ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".name");
-                description = Arrays.asList(WordUtils.wrap(ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey() + ".description"), ConfigManager.getConfig().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
-                description.replaceAll(line -> prefix + descriptionColor + line);
             }
 
-            if(!(isMaxLevelOne || type == EcoEnchant.EnchantmentType.CURSE)) {
-                if (useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
-                    name += " " + NumberUtils.toNumeral(integer);
+            if(!(enchantment.getMaxLevel() == 1 && level == 1)) {
+                if(useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
+                    name += " " + NumberUtils.toNumeral(level);
                 } else {
-                    name += " " + integer;
+                    name += " " + level;
                 }
             }
 
-            boolean describe = false;
-            if(enchantments.size() <= describeThreshold && useDescribe) {
-                describe = true;
-            }
-
-            if(type == EcoEnchant.EnchantmentType.CURSE) {
-                curseLore.add(prefix + color + name);
-                if(describe) curseLore.addAll(description);
-            }
-            else {
-                normalLore.add(prefix + color + name);
-                if(describe) normalLore.addAll(description);
-            }
-        }));
-
-        List<String> combinedLore = new ArrayList<>();
-        combinedLore.addAll(normalLore);
-        combinedLore.addAll(curseLore);
+            lore.add(prefix + color + name);
+            if(enchantments.size() <= describeThreshold && useDescribe)
+                lore.addAll(DESCRIPTION_CACHE.get(enchantment.getKey()));
+        });
 
         if (useShrink && (enchantments.size() > shrinkThreshold)) {
-            List<List<String>> partitionedCombinedLoreList = Lists.partition(combinedLore, shrinkPerLine);
+            List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, shrinkPerLine);
             partitionedCombinedLoreList.forEach((list) -> {
                 StringBuilder builder = new StringBuilder();
-                for (String s : list) {
+                for(String s : list) {
                     builder.append(s);
                     builder.append(", ");
                 }
                 String line = builder.toString();
                 line = line.substring(0, line.length() - 2);
-                enchantLore.add(line);
+                lore.add(line);
             });
-        } else {
-            enchantLore.addAll(combinedLore);
         }
 
-        itemLore.addAll(0, enchantLore);
-
-        if (meta instanceof EnchantmentStorageMeta) {
-            EnchantmentStorageMeta metaBook = (EnchantmentStorageMeta) meta;
-            if(!metaBook.getStoredEnchants().equals(((EnchantmentStorageMeta) oldItem.getItemMeta()).getStoredEnchants())) return oldItem;
-            forRemoval.forEach((metaBook::removeStoredEnchant));
-            metaBook.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
-            metaBook.addItemFlags(ItemFlag.HIDE_ENCHANTS); // Here just in case
-            metaBook.setLore(itemLore);
-            item.setItemMeta(metaBook);
-        } else {
-            if(!meta.getEnchants().equals(oldItem.getItemMeta().getEnchants())) return oldItem;
-            forRemoval.forEach((meta::removeEnchant));
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            meta.setLore(itemLore);
-            item.setItemMeta(meta);
-        }
+        if(meta instanceof EnchantmentStorageMeta) meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
+        forRemoval.forEach((meta::removeEnchant));
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        lore.addAll(itemLore);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
 
         return item;
     }
