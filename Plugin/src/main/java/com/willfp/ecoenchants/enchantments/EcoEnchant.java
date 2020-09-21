@@ -2,8 +2,6 @@ package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
-import com.willfp.ecoenchants.display.EnchantDisplay;
-import com.willfp.ecoenchants.util.NumberUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
@@ -14,7 +12,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @SuppressWarnings("unchecked")
 public abstract class EcoEnchant extends Enchantment implements Listener {

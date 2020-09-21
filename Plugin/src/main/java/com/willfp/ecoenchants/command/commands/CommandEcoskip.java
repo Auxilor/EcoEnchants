@@ -3,8 +3,6 @@ package com.willfp.ecoenchants.command.commands;
 import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

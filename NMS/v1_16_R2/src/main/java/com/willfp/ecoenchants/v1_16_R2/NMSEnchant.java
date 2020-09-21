@@ -1,6 +1,12 @@
 package com.willfp.ecoenchants.v1_16_R2;
 
-import net.minecraft.server.v1_16_R2.*;
+import net.minecraft.server.v1_16_R2.ChatMessage;
+import net.minecraft.server.v1_16_R2.Enchantment;
+import net.minecraft.server.v1_16_R2.EnchantmentSlotType;
+import net.minecraft.server.v1_16_R2.EnumChatFormat;
+import net.minecraft.server.v1_16_R2.EnumItemSlot;
+import net.minecraft.server.v1_16_R2.IChatBaseComponent;
+import net.minecraft.server.v1_16_R2.IChatMutableComponent;
 
 public class NMSEnchant extends Enchantment {
     private org.bukkit.enchantments.Enchantment enchantment;
