@@ -5,7 +5,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 
-public class PacketSetCreativeSlot extends AbstractPacketAdapter {
+public final class PacketSetCreativeSlot extends AbstractPacketAdapter {
     private PacketSetCreativeSlot() {
         super(PacketType.Play.Client.SET_CREATIVE_SLOT);
     }

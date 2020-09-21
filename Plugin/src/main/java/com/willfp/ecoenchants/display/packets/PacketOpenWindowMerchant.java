@@ -10,7 +10,7 @@ import org.bukkit.inventory.MerchantRecipe;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
+public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
     private PacketOpenWindowMerchant() {
         super(PacketType.Play.Server.OPEN_WINDOW_MERCHANT);
     }
