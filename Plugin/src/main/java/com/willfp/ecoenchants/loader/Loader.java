@@ -9,8 +9,11 @@ import com.willfp.ecoenchants.commands.CommandEcoreload;
 import com.willfp.ecoenchants.commands.CommandEcoskip;
 import com.willfp.ecoenchants.commands.CommandEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.display.DisplayPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
+import com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot;
+import com.willfp.ecoenchants.display.packets.PacketSetSlot;
+import com.willfp.ecoenchants.display.packets.PacketWindowItems;
 import com.willfp.ecoenchants.enchantments.*;
 import com.willfp.ecoenchants.events.armorequip.ArmorListener;
 import com.willfp.ecoenchants.events.armorequip.DispenserArmorListener;
@@ -96,7 +99,10 @@ public class Loader {
 
         Bukkit.getLogger().info("Loading ProtocolLib...");
         EcoEnchantsPlugin.getInstance().protocolManager = ProtocolLibrary.getProtocolManager();
-        EcoEnchantsPlugin.getInstance().protocolManager.addPacketListener(new DisplayPacketAdapter());
+        new PacketOpenWindowMerchant().register();
+        new PacketSetCreativeSlot().register();
+        new PacketSetSlot().register();
+        new PacketWindowItems().register();
 
         /*
         Load land management support

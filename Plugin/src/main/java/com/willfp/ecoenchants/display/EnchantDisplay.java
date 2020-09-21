@@ -80,9 +80,17 @@ public class EnchantDisplay {
         Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
             List<String> description;
             NamespacedKey key = enchantment.getKey();
-            if(EcoEnchants.getByKey(key) != null) description = ((EcoEnchant) enchantment).getDescription();
-            else
-                description = Arrays.asList(WordUtils.wrap(ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey().toLowerCase() + ".description"), ConfigManager.getConfig().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
+            if(EcoEnchants.getByKey(key) != null) {
+                description = ((EcoEnchant) enchantment).getDescription();
+            } else {
+                description =
+                        Arrays.asList(
+                                WordUtils.wrap(
+                                        ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey().toLowerCase() + ".description"),
+                                        ConfigManager.getConfig().getInt("lore.describe.wrap"),
+                                        "\n", false
+                                ).split("\\r?\\n"));
+            }
             description.replaceAll(line -> prefix + descriptionColor + line);
             DESCRIPTION_CACHE.put(key, description);
         });
@@ -232,8 +240,12 @@ public class EnchantDisplay {
             });
         }
 
-        if(meta instanceof EnchantmentStorageMeta) meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
-        forRemoval.forEach((meta::removeEnchant));
+        if (meta instanceof EnchantmentStorageMeta) {
+            meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+            forRemoval.forEach(((EnchantmentStorageMeta) meta)::removeStoredEnchant);
+        } else {
+            forRemoval.forEach(meta::removeEnchant);
+        }
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         lore.addAll(itemLore);
         meta.setLore(lore);
