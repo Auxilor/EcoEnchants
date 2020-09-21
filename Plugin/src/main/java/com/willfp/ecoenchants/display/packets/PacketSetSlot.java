@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 
 public class PacketSetSlot extends AbstractPacketAdapter {
-    public PacketSetSlot() {
+    private PacketSetSlot() {
         super(PacketType.Play.Server.SET_SLOT);
     }
 

@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 
 public class PacketWindowItems extends AbstractPacketAdapter {
-    public PacketWindowItems() {
+    private PacketWindowItems() {
         super(PacketType.Play.Server.WINDOW_ITEMS);
     }
 

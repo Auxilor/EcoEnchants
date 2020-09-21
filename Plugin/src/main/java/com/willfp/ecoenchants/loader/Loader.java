@@ -99,10 +99,10 @@ public class Loader {
 
         Bukkit.getLogger().info("Loading ProtocolLib...");
         EcoEnchantsPlugin.getInstance().protocolManager = ProtocolLibrary.getProtocolManager();
-        new PacketOpenWindowMerchant().register();
-        new PacketSetCreativeSlot().register();
-        new PacketSetSlot().register();
-        new PacketWindowItems().register();
+        PacketOpenWindowMerchant.getInstance().register();
+        PacketSetCreativeSlot.getInstance().register();
+        PacketSetSlot.getInstance().register();
+        PacketWindowItems.getInstance().register();
 
         /*
         Load land management support
