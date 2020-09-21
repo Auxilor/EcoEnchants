@@ -4,10 +4,10 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.anvil.AnvilListeners;
 import com.willfp.ecoenchants.bstats.Metrics;
-import com.willfp.ecoenchants.commands.CommandEcodebug;
-import com.willfp.ecoenchants.commands.CommandEcoreload;
-import com.willfp.ecoenchants.commands.CommandEcoskip;
-import com.willfp.ecoenchants.commands.CommandEnchantinfo;
+import com.willfp.ecoenchants.command.commands.CommandEcodebug;
+import com.willfp.ecoenchants.command.commands.CommandEcoreload;
+import com.willfp.ecoenchants.command.commands.CommandEcoskip;
+import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
@@ -380,10 +380,10 @@ public class Loader {
          */
 
         Bukkit.getLogger().info("Loading Commands...");
-        Bukkit.getPluginCommand("ecoreload").setExecutor(new CommandEcoreload());
-        Bukkit.getPluginCommand("ecodebug").setExecutor(new CommandEcodebug());
-        Bukkit.getPluginCommand("enchantinfo").setExecutor(new CommandEnchantinfo());
-        Bukkit.getPluginCommand("ecoskip").setExecutor(new CommandEcoskip());
+        Bukkit.getPluginCommand("ecoreload").setExecutor(CommandEcoreload.getInstance());
+        Bukkit.getPluginCommand("ecodebug").setExecutor(CommandEcodebug.getInstance());
+        Bukkit.getPluginCommand("enchantinfo").setExecutor(CommandEnchantinfo.getInstance());
+        Bukkit.getPluginCommand("ecoskip").setExecutor(CommandEcoskip.getInstance());
         Bukkit.getLogger().info("");
         
         /*

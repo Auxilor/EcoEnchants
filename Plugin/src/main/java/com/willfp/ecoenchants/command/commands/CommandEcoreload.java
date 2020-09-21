@@ -1,6 +1,7 @@
-package com.willfp.ecoenchants.commands;
+package com.willfp.ecoenchants.command.commands;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -13,20 +14,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-public class CommandEcoreload implements CommandExecutor {
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("ecoreload")) {
-            if (sender instanceof Player) {
-                if (!sender.hasPermission("ecoenchants.reload")) {
-                    sender.sendMessage(ConfigManager.getLang().getNoPermission());
-                    return true;
-                }
-            }
-            reload();
-            sender.sendMessage(ConfigManager.getLang().getMessage("reloaded"));
-        }
+import java.util.List;
 
-        return false;
+public final class CommandEcoreload extends AbstractCommand {
+    private CommandEcoreload() {
+        super("ecoreload", "ecoenchants.reload", false);
+    }
+
+    @Override
+    public void onExecute(CommandSender sender, List<String> args) {
+        reload();
+        sender.sendMessage(ConfigManager.getLang().getMessage("reloaded"));
     }
 
     public static void reload() {
