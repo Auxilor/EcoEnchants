@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractCommand implements CommandExecutor {
-    private static AbstractCommand instance;
+    protected static AbstractCommand instance;
 
     private final String name;
     private final String permission;
@@ -43,8 +43,4 @@ public abstract class AbstractCommand implements CommandExecutor {
     }
 
     public abstract void onExecute(CommandSender sender, List<String> args);
-
-    public static AbstractCommand getInstance() {
-        return instance;
-    }
 }

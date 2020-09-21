@@ -7,7 +7,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 
@@ -136,5 +135,12 @@ public final class CommandEnchantinfo extends AbstractCommand {
                     .replaceAll("%maxlevel%", finalMaxLevel);
             sender.sendMessage(string);
         }));
+    }
+
+    public static AbstractCommand getInstance() {
+        if(instance == null) {
+            instance = new CommandEnchantinfo();
+        }
+        return instance;
     }
 }

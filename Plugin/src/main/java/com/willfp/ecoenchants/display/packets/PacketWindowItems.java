@@ -17,4 +17,11 @@ public final class PacketWindowItems extends AbstractPacketAdapter {
             return itemStacks;
         });
     }
+
+    public static AbstractPacketAdapter getInstance() {
+        if(instance == null) {
+            instance = new PacketWindowItems();
+        }
+        return instance;
+    }
 }

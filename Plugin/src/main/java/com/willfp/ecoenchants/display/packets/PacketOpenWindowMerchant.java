@@ -38,4 +38,11 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
 
         packet.getMerchantRecipeLists().writeSafely(0, newList);
     }
+
+    public static AbstractPacketAdapter getInstance() {
+        if(instance == null) {
+            instance = new PacketOpenWindowMerchant();
+        }
+        return instance;
+    }
 }

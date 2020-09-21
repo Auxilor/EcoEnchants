@@ -1,24 +1,14 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.ecoenchants.config.YamlConfig;
+import com.willfp.ecoenchants.config.RootConfig;
 import org.bukkit.ChatColor;
-
-import java.util.List;
 
 /**
  * Wrapper for lang.yml
  */
-public class Lang extends YamlConfig {
+public class Lang extends RootConfig {
     public Lang() {
         super("lang");
-    }
-
-    public String getString(String path) {
-        return config.getString(path);
-    }
-
-    public List<String> getStrings(String path) {
-        return config.getStringList(path);
     }
 
 

@@ -9,7 +9,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import java.util.Collections;
 
 public abstract class AbstractPacketAdapter extends PacketAdapter {
-    private static AbstractPacketAdapter instance;
+    protected static AbstractPacketAdapter instance;
 
     private final PacketType type;
 
@@ -44,10 +44,6 @@ public abstract class AbstractPacketAdapter extends PacketAdapter {
             return;
 
         onSend(event.getPacket());
-    }
-
-    public static AbstractPacketAdapter getInstance() {
-        return instance;
     }
 
     public final void register() {

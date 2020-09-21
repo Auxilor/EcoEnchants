@@ -17,4 +17,11 @@ public final class PacketSetCreativeSlot extends AbstractPacketAdapter {
             return item;
         });
     }
+
+    public static AbstractPacketAdapter getInstance() {
+        if(instance == null) {
+            instance = new PacketSetCreativeSlot();
+        }
+        return instance;
+    }
 }

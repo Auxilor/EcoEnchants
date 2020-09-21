@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.ecoenchants.config.YamlConfig;
+import com.willfp.ecoenchants.config.RootConfig;
 import org.bukkit.Material;
 
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Wrapper for config.yml
  */
-public class Target extends YamlConfig {
+public class Target extends RootConfig {
     public Target() {
         super("target");
     }
