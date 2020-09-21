@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 
 public final class PacketWindowItems extends AbstractPacketAdapter {
-    private PacketWindowItems() {
+    public PacketWindowItems() {
         super(PacketType.Play.Server.WINDOW_ITEMS);
     }
 
@@ -16,12 +16,5 @@ public final class PacketWindowItems extends AbstractPacketAdapter {
             itemStacks.forEach(EnchantDisplay::displayEnchantments);
             return itemStacks;
         });
-    }
-
-    public static AbstractPacketAdapter getInstance() {
-        if(instance == null) {
-            instance = new PacketWindowItems();
-        }
-        return instance;
     }
 }

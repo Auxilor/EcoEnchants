@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 
 public final class PacketSetSlot extends AbstractPacketAdapter {
-    private PacketSetSlot() {
+    public PacketSetSlot() {
         super(PacketType.Play.Server.SET_SLOT);
     }
 
@@ -16,12 +16,5 @@ public final class PacketSetSlot extends AbstractPacketAdapter {
             item = EnchantDisplay.displayEnchantments(item);
             return item;
         });
-    }
-
-    public static AbstractPacketAdapter getInstance() {
-        if(instance == null) {
-            instance = new PacketSetSlot();
-        }
-        return instance;
     }
 }

@@ -9,15 +9,11 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import java.util.Collections;
 
 public abstract class AbstractPacketAdapter extends PacketAdapter {
-    protected static AbstractPacketAdapter instance;
-
     private final PacketType type;
 
     protected AbstractPacketAdapter(PacketType type) {
         super(EcoEnchantsPlugin.getInstance(), Collections.singletonList(type));
         this.type = type;
-
-        instance = this;
     }
 
     public void onReceive(PacketContainer packet) {}

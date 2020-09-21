@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
-    private PacketOpenWindowMerchant() {
+    public PacketOpenWindowMerchant() {
         super(PacketType.Play.Server.OPEN_WINDOW_MERCHANT);
     }
 
@@ -37,12 +37,5 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
                 }).collect(Collectors.toList());
 
         packet.getMerchantRecipeLists().writeSafely(0, newList);
-    }
-
-    public static AbstractPacketAdapter getInstance() {
-        if(instance == null) {
-            instance = new PacketOpenWindowMerchant();
-        }
-        return instance;
     }
 }
