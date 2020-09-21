@@ -63,12 +63,5 @@ public class GrindstoneListeners implements Listener {
             });
 
         }, 1);
-
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            for(Entity entity : player.getNearbyEntities(8, 8, 8)) {
-                if(entity.getType().equals(EntityType.EXPERIENCE_ORB))
-                    ((ExperienceOrb) entity).setExperience(2);
-            }
-        }, 1);
     }
 }
