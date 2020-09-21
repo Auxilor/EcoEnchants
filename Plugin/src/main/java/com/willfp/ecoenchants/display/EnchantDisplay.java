@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -224,6 +225,7 @@ public final class EnchantDisplay {
 
         if (useShrink && (enchantments.size() > shrinkThreshold)) {
             List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, shrinkPerLine);
+            List<String> newLore = new ArrayList<>();
             partitionedCombinedLoreList.forEach((list) -> {
                 StringBuilder builder = new StringBuilder();
                 for(String s : list) {
@@ -232,8 +234,10 @@ public final class EnchantDisplay {
                 }
                 String line = builder.toString();
                 line = line.substring(0, line.length() - 2);
-                lore.add(line);
+                newLore.add(line);
             });
+            lore.clear();
+            lore.addAll(newLore);
         }
 
         if (meta instanceof EnchantmentStorageMeta) {
