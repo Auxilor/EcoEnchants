@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -54,6 +55,8 @@ public class Metrics {
             }
         }
     }
+
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
 
     // The version of this bStats class
     public static final int B_STATS_VERSION = 1;
@@ -437,7 +440,7 @@ public class Metrics {
                 chart.add("data", data);
             } catch (Throwable t) {
                 if (logFailedRequests) {
-                    Bukkit.getLogger().log(Level.WARNING, "Failed to get data for custom chart with id " + chartId, t);
+                    PLUGIN.getLogger().log(Level.WARNING, "Failed to get data for custom chart with id " + chartId, t);
                 }
                 return null;
             }

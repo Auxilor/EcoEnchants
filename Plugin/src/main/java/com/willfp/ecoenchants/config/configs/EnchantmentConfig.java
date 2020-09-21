@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.config.configs;
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.EnchantmentYamlConfig;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +18,8 @@ import java.util.Set;
  * Wrapper for enchantment-specific configs
  */
 public class EnchantmentConfig extends EnchantmentYamlConfig {
+
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
     private final String name;
 
     public EnchantmentConfig(String name, double version, Class<?> plugin, EcoEnchant.EnchantmentType type) {
@@ -92,7 +94,7 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
 
         targetNames.forEach((s -> {
             if(EnchantmentTarget.getByName(s) == null)
-                Bukkit.getLogger().severe(s + " is an invalid target!");
+                PLUGIN.getLogger().severe(s + " is an invalid target!");
             targets.add(EnchantmentTarget.getByName(s));
         }));
 

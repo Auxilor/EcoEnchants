@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -13,6 +12,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class YamlConfig {
+
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
     private final String name;
     public YamlConfiguration config;
     private File configFile;
@@ -47,17 +48,17 @@ public abstract class YamlConfig {
             this.config.load(this.configFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
-            Bukkit.getLogger().severe("§cCould not reload " + name + ".yml - Contact Auxilor.");
+            PLUGIN.getLogger().severe("§cCould not reload " + name + ".yml - Contact Auxilor.");
         }
     }
 
     private void checkVersion() {
         double latestVersion = ConfigManager.configVersions.get(this.name);
         if (latestVersion != config.getDouble("config-version")) {
-            Bukkit.getLogger().warning("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
-            Bukkit.getLogger().warning("If you've edited the config, copy over your changes!");
+            PLUGIN.getLogger().warning("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
+            PLUGIN.getLogger().warning("If you've edited the config, copy over your changes!");
             performOverwrite();
-            Bukkit.getLogger().info("§aReplacement complete!");
+            PLUGIN.getLogger().info("§aReplacement complete!");
         }
     }
 
@@ -82,7 +83,7 @@ public abstract class YamlConfig {
             replaceFile();
         } catch (IOException e) {
             e.printStackTrace();
-            Bukkit.getLogger().severe("§cCould not update config. Try reinstalling EcoEnchants");
+            PLUGIN.getLogger().severe("§cCould not update config. Try reinstalling EcoEnchants");
         }
     }
 }

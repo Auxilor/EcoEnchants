@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.extensions;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -18,6 +17,7 @@ import java.util.Map;
  */
 public class ExtensionManager {
     private static final Map<Extension, String> extensions = new HashMap<>();
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
 
     /**
      * Load all extensions
@@ -70,7 +70,7 @@ public class ExtensionManager {
                         }
                     }
                 } catch (MalformedExtensionException e) {
-                    Bukkit.getLogger().info(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
+                    PLUGIN.getLogger().info(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
                 }
             }
         }
