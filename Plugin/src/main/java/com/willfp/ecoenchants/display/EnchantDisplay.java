@@ -140,13 +140,17 @@ public final class EnchantDisplay {
         return item;
     }
 
+    public static ItemStack displayEnchantments(ItemStack item) {
+        return displayEnchantments(item, false);
+    }
+
     /**
      * Show all enchantments in item lore
      * @param item The item to update
      * @return The item, updated
      */
-    public static ItemStack displayEnchantments(ItemStack item) {
-        if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta().getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER))
+    public static ItemStack displayEnchantments(ItemStack item, boolean hideEnchants) {
+        if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()))
             return item;
 
         item = revertDisplay(item);
@@ -154,6 +158,14 @@ public final class EnchantDisplay {
         ItemMeta meta = item.getItemMeta();
         if(meta == null) return item;
         List<String> itemLore = new ArrayList<>();
+
+        if(hideEnchants || meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+            meta.getPersistentDataContainer().set(KEY_SKIP, PersistentDataType.INTEGER, 1);
+            item.setItemMeta(meta);
+            return item;
+        }
 
         if(meta.hasLore())
             itemLore = meta.getLore();

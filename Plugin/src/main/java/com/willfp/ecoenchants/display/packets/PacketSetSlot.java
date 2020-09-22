@@ -4,6 +4,9 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.util.Logger;
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.ItemFlag;
 
 public final class PacketSetSlot extends AbstractPacketAdapter {
     public PacketSetSlot() {
@@ -13,7 +16,13 @@ public final class PacketSetSlot extends AbstractPacketAdapter {
     @Override
     public void onSend(PacketContainer packet) {
         packet.getItemModifier().modify(0, (item) -> {
-            item = EnchantDisplay.displayEnchantments(item);
+            boolean hideEnchants = false;
+
+            if(item != null && item.getItemMeta() != null) {
+                hideEnchants = item.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS);
+            }
+
+            item = EnchantDisplay.displayEnchantments(item, hideEnchants);
             return item;
         });
     }
