@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.naturalloot;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -39,7 +39,7 @@ public class LootPopulator extends BlockPopulator {
 
             for(ItemStack item : inventory) {
                 if(item == null) continue;
-                if(!EnchantmentTarget.ALL.contains(item.getType())) continue;
+                if(!EnchantmentTarget.ALL.getMaterials().contains(item.getType())) continue;
                 if(item.getType().equals(Material.BOOK)) continue;
 
                 HashMap<Enchantment, Integer> toAdd = new HashMap<>();

@@ -1,6 +1,8 @@
-package com.willfp.ecoenchants.enchantments;
+package com.willfp.ecoenchants.enchantments.meta;
 
+import com.google.common.collect.ImmutableSet;
 import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.util.Registerable;
 import org.bukkit.Material;
 
 import java.util.HashSet;
@@ -10,9 +12,13 @@ import java.util.Set;
 /**
  * Class for storing all enchantment rarities
  */
-public class EnchantmentTarget {
+public class EnchantmentTarget implements Registerable {
     private static final Set<EnchantmentTarget> targets = new HashSet<>();
-    public static final Set<Material> ALL = new HashSet<>();
+    public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>());
+
+    static {
+        ALL.register();
+    }
 
     private final String name;
     private final Set<Material> materials;
@@ -23,27 +29,17 @@ public class EnchantmentTarget {
      * @param materials The items for the target
      */
     public EnchantmentTarget(String name, Set<Material> materials) {
-        this(name, materials, false);
-    }
-
-    /**
-     * Create new EnchantmentRarity
-     * @param name The name of the rarity
-     * @param materials The items for the target
-     * @param noRegister Dont register internally
-     */
-    public EnchantmentTarget(String name, Set<Material> materials, boolean noRegister) {
-        Optional<EnchantmentTarget> matching = targets.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
-        matching.ifPresent(targets::remove);
-        matching.ifPresent(enchantmentTarget -> ALL.removeAll(enchantmentTarget.getMaterials()));
-
         this.name = name;
         this.materials = materials;
+    }
 
-        if(!noRegister) {
-            targets.add(this);
-            ALL.addAll(materials);
-        }
+    @Override
+    public void register() {
+        Optional<EnchantmentTarget> matching = targets.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+        matching.ifPresent(targets::remove);
+        matching.ifPresent(enchantmentTarget -> ALL.materials.removeAll(enchantmentTarget.getMaterials()));
+        targets.add(this);
+        ALL.materials.addAll(this.getMaterials());
     }
 
     /**
@@ -59,7 +55,7 @@ public class EnchantmentTarget {
      * @return The materials
      */
     public Set<Material> getMaterials() {
-        return this.materials;
+        return ImmutableSet.copyOf(this.materials);
     }
 
     /**
@@ -68,8 +64,6 @@ public class EnchantmentTarget {
      * @return The matching EnchantmentTarget, or null if not found
      */
     public static EnchantmentTarget getByName(String name) {
-        if(name.equalsIgnoreCase("all")) return new EnchantmentTarget("all", EnchantmentTarget.ALL, true);
-
         Optional<EnchantmentTarget> matching = targets.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         return matching.orElse(null);
     }
@@ -80,11 +74,10 @@ public class EnchantmentTarget {
      */
     public static void update() {
         Set<String> targetNames = ConfigManager.getTarget().getTargets();
-        targetNames.forEach((target) -> {
-            String name = target;
-            Set<Material> materials = ConfigManager.getTarget().getTargetMaterials(target);
-
-            new EnchantmentTarget(name, materials);
+        ALL.getMaterials().clear();
+        targetNames.forEach((name) -> {
+            Set<Material> materials = ConfigManager.getTarget().getTargetMaterials(name);
+            new EnchantmentTarget(name, materials).register();
         });
     }
 

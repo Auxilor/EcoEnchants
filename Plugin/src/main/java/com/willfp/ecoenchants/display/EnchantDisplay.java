@@ -5,11 +5,10 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.EnchantmentRarity;
-import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.apache.commons.lang.WordUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -109,7 +108,7 @@ public final class EnchantDisplay {
      * @return The item, updated
      */
     public static ItemStack revertDisplay(ItemStack item) {
-        if(item == null || !EnchantmentTarget.ALL.contains(item.getType()) || item.getItemMeta() == null) return item;
+        if(item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) return item;
 
         ItemMeta meta = item.getItemMeta();
         List<String> itemLore;
@@ -147,7 +146,7 @@ public final class EnchantDisplay {
      * @return The item, updated
      */
     public static ItemStack displayEnchantments(ItemStack item) {
-        if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.contains(item.getType()) || item.getItemMeta().getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER))
+        if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta().getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER))
             return item;
 
         item = revertDisplay(item);

@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.anvil;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.Pair;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -42,7 +42,7 @@ public class AnvilMerge {
 
         if(left.getEnchantments().containsKey(EcoEnchants.PERMANENCE_CURSE)) return new Pair<>(null, null);
 
-        if(!EnchantmentTarget.ALL.contains(left.getType()) || right == null || !EnchantmentTarget.ALL.contains(right.getType())) {
+        if(!EnchantmentTarget.ALL.getMaterials().contains(left.getType()) || right == null || !EnchantmentTarget.ALL.getMaterials().contains(right.getType())) {
             ItemStack out = left.clone();
             ItemMeta outMeta = out.getItemMeta();
             outMeta.setDisplayName(name);

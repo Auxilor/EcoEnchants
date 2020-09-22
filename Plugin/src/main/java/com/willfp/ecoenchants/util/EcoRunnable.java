@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments;
+package com.willfp.ecoenchants.util;
 
 /**
  * Interface for Enchantments with tasks

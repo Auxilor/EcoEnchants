@@ -1,6 +1,7 @@
-package com.willfp.ecoenchants.enchantments;
+package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.util.Registerable;
 import org.bukkit.ChatColor;
 
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Set;
 /**
  * Class for storing all enchantment rarities
  */
-public class EnchantmentRarity {
+public class EnchantmentRarity implements Registerable {
     private static final Set<EnchantmentRarity> rarities = new HashSet<>();
 
     private final String name;
@@ -30,15 +31,18 @@ public class EnchantmentRarity {
      * @param customColor The custom display color, or null if not enabled
      */
     public EnchantmentRarity(String name, double probability, int minimumLevel, double villagerProbability, double lootProbability, String customColor) {
-        Optional<EnchantmentRarity> matching = rarities.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
-        matching.ifPresent(rarities::remove);
-
         this.name = name;
         this.probability = probability;
         this.minimumLevel = minimumLevel;
         this.villagerProbability = villagerProbability;
         this.lootProbability = lootProbability;
         this.customColor = customColor;
+    }
+
+    @Override
+    public void register() {
+        Optional<EnchantmentRarity> matching = rarities.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+        matching.ifPresent(rarities::remove);
 
         rarities.add(this);
     }
@@ -126,7 +130,7 @@ public class EnchantmentRarity {
                 customColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getRarity().getString("rarities." + rarity + ".custom-color.color"));
             }
 
-            new EnchantmentRarity(name, probability, minimumLevel, villagerProbability, lootProbability, customColor);
+            new EnchantmentRarity(name, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();
         });
     }
 

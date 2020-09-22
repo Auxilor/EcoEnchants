@@ -2,6 +2,8 @@ package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.util.Registerable;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
@@ -15,7 +17,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 @SuppressWarnings("unchecked")
-public abstract class EcoEnchant extends Enchantment implements Listener {
+public abstract class EcoEnchant extends Enchantment implements Listener, Registerable {
     private String name;
     private String description;
     private final String permissionName;
@@ -31,7 +33,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
     private int maxLvl;
     private Set<Enchantment> conflicts;
     private EnchantmentRarity rarity;
-    private Set<Material> target = new HashSet<>();
+    private final Set<Material> target = new HashSet<>();
 
     private boolean enabled;
 
@@ -72,7 +74,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener {
         this.register();
     }
 
-    private void register() {
+    /**
+     * Register the enchantment with spigot
+     * Only used internally
+     */
+    @Override
+    public void register() {
         try {
             Field byIdField = Enchantment.class.getDeclaredField("byKey");
             Field byNameField = Enchantment.class.getDeclaredField("byName");
