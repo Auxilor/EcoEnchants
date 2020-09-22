@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.util.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -47,17 +48,17 @@ public abstract class YamlConfig {
             this.config.load(this.configFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
-            Bukkit.getLogger().severe("§cCould not reload " + name + ".yml - Contact Auxilor.");
+            Logger.error("§cCould not reload " + name + ".yml - Contact Auxilor.");
         }
     }
 
     private void checkVersion() {
         double latestVersion = ConfigManager.configVersions.get(this.name);
         if (latestVersion != config.getDouble("config-version")) {
-            Bukkit.getLogger().warning("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
-            Bukkit.getLogger().warning("If you've edited the config, copy over your changes!");
+            Logger.warn("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
+            Logger.warn("If you've edited the config, copy over your changes!");
             performOverwrite();
-            Bukkit.getLogger().info("§aReplacement complete!");
+            Logger.info("§aReplacement complete!");
         }
     }
 
@@ -82,7 +83,7 @@ public abstract class YamlConfig {
             replaceFile();
         } catch (IOException e) {
             e.printStackTrace();
-            Bukkit.getLogger().severe("§cCould not update config. Try reinstalling EcoEnchants");
+            Logger.error("§cCould not update config. Try reinstalling EcoEnchants");
         }
     }
 }
