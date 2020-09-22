@@ -17,7 +17,7 @@ public class EnchantmentTarget implements Registerable {
     public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>());
 
     static {
-        ALL.register();
+        targets.add(ALL);
     }
 
     private final String name;
@@ -74,7 +74,7 @@ public class EnchantmentTarget implements Registerable {
      */
     public static void update() {
         Set<String> targetNames = ConfigManager.getTarget().getTargets();
-        ALL.getMaterials().clear();
+        ALL.materials.clear();
         targetNames.forEach((name) -> {
             Set<Material> materials = ConfigManager.getTarget().getTargetMaterials(name);
             new EnchantmentTarget(name, materials).register();
