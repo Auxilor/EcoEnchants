@@ -9,7 +9,7 @@ import org.bukkit.enchantments.Enchantment;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public class IntegrationEssentials implements EssentialsWrapper {
+public final class IntegrationEssentials implements EssentialsWrapper {
     @Override
     public void registerAllEnchantments() {
         try {
