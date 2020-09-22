@@ -26,9 +26,6 @@ commands:
   ecodebug:
     description: Debug information
     permission: ecoenchants.ecodebug
-  ecoskip:
-    description: Toggle hiding enchantments on item
-    permission: ecoenchants.skip
   enchantinfo:
     description: Show information about an enchantment
     permission: ecoenchants.enchantinfo
@@ -43,7 +40,6 @@ permissions:
       ecoenchants.updateannounce: true
       ecoenchants.enchantinfo: true
       ecoenchants.ecodebug: true
-      ecoenchants.skip: true
   ecoenchants.fromtable.*:
     description: Allows getting all enchantments from an enchanting table
     default: true
@@ -257,9 +253,6 @@ permissions:
   ecoenchants.ecodebug:
     description: Allows the use of /ecodebug to print verbose debug information to console
     default: true
-  ecoenchants.skip:
-    description: Allows the use of /ecoskip to toggle hiding enchantments on an item
-    default: op
   ecoenchants.enchantinfo:
     description: Allows the use of /enchantinfo to show enchant info
     default: true

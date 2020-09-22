@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.anvil.AnvilListeners;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
-import com.willfp.ecoenchants.command.commands.CommandEcoskip;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
@@ -375,7 +374,6 @@ public class Loader {
         Bukkit.getPluginCommand("ecoreload").setExecutor(new CommandEcoreload());
         Bukkit.getPluginCommand("ecodebug").setExecutor(new CommandEcodebug());
         Bukkit.getPluginCommand("enchantinfo").setExecutor(new CommandEnchantinfo());
-        Bukkit.getPluginCommand("ecoskip").setExecutor(new CommandEcoskip());
         Logger.info("");
         
         /*
