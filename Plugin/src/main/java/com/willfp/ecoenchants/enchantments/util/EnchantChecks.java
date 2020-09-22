@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.util.checks;
+package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.Material;

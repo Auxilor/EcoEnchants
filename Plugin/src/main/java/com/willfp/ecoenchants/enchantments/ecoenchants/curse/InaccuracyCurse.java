@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

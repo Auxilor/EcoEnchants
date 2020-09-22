@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.queue;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.util.checks.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
