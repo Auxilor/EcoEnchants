@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class CommandEcodebug extends AbstractCommand {
-    private CommandEcodebug() {
+    public CommandEcodebug() {
         super("ecodebug", "ecoenchants.ecodebug", true);
     }
 
@@ -36,12 +36,5 @@ public final class CommandEcodebug extends AbstractCommand {
         }
 
         Bukkit.getLogger().info("--------------- END DEBUG ----------------");
-    }
-
-    public static AbstractCommand getInstance() {
-        if(instance == null) {
-            instance = new CommandEcodebug();
-        }
-        return instance;
     }
 }

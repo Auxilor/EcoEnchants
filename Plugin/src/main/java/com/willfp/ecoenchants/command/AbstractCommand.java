@@ -10,8 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractCommand implements CommandExecutor {
-    protected static AbstractCommand instance;
-
     private final String name;
     private final String permission;
     private final boolean playersOnly;
@@ -20,10 +18,9 @@ public abstract class AbstractCommand implements CommandExecutor {
         this.name = name;
         this.permission = permission;
         this.playersOnly = playersOnly;
-
-        instance = this;
     }
 
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!command.getName().equalsIgnoreCase(name)) return false;
 

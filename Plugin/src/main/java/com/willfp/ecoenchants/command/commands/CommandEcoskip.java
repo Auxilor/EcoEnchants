@@ -12,7 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.List;
 
 public final class CommandEcoskip extends AbstractCommand {
-    private CommandEcoskip() {
+    public CommandEcoskip() {
         super("ecoskip", "ecoenchants.skip", true);
     }
 
@@ -32,12 +32,5 @@ public final class CommandEcoskip extends AbstractCommand {
             player.sendMessage(ConfigManager.getLang().getMessage("skip-added"));
         }
         item.setItemMeta(meta);
-    }
-
-    public static AbstractCommand getInstance() {
-        if(instance == null) {
-            instance = new CommandEcoskip();
-        }
-        return instance;
     }
 }

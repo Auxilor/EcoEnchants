@@ -14,7 +14,7 @@ import org.bukkit.event.HandlerList;
 import java.util.List;
 
 public final class CommandEcoreload extends AbstractCommand {
-    private CommandEcoreload() {
+    public CommandEcoreload() {
         super("ecoreload", "ecoenchants.reload", false);
     }
 
@@ -40,12 +40,5 @@ public final class CommandEcoreload extends AbstractCommand {
                 }
             }, 1);
         }));
-    }
-
-    public static AbstractCommand getInstance() {
-        if(instance == null) {
-            instance = new CommandEcoreload();
-        }
-        return instance;
     }
 }

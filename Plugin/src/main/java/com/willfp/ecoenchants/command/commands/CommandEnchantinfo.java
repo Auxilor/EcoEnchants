@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public final class CommandEnchantinfo extends AbstractCommand {
-    private CommandEnchantinfo() {
+    public CommandEnchantinfo() {
         super("enchantinfo", "ecoenchants.enchantinfo", false);
     }
 
@@ -135,12 +135,5 @@ public final class CommandEnchantinfo extends AbstractCommand {
                     .replaceAll("%maxlevel%", finalMaxLevel);
             sender.sendMessage(string);
         }));
-    }
-
-    public static AbstractCommand getInstance() {
-        if(instance == null) {
-            instance = new CommandEnchantinfo();
-        }
-        return instance;
     }
 }
