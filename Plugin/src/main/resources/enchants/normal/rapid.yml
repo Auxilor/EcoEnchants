@@ -22,4 +22,4 @@ general-config:
   maximum-level: 6
 
 config:
-  percent-faster-per-level: 10
+  percent-faster-per-level: 16
