@@ -76,8 +76,8 @@ public final class EnchantDisplay {
         Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
             List<String> description;
             NamespacedKey key = enchantment.getKey();
-            if(EcoEnchants.getByKey(key) != null) {
-                description = ((EcoEnchant) enchantment).getDescription();
+            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+                description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
             } else {
                 description =
                         Arrays.asList(
