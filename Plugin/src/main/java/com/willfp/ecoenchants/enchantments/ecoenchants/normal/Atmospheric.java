@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.nms.TridentStack;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
@@ -23,33 +24,16 @@ public class Atmospheric extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onLaunch(ProjectileLaunchEvent event) {
-        if(!(event.getEntity() instanceof Trident))
-            return;
-
-        if(!(event.getEntity().getShooter() instanceof Player))
-            return;
-
-        Trident trident = (Trident) event.getEntity();
-        Player player = (Player) trident.getShooter();
-
-        if(player.isOnGround()) return;
+    @Override
+    public void onTridentLaunch(LivingEntity shooter, Trident trident, int level, ProjectileLaunchEvent event) {
+        if(shooter.isOnGround()) return;
 
         trident.setMetadata("shot-in-air", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
     }
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
-
-        Trident trident = (Trident) event.getDamager();
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         if(!trident.hasMetadata("shot-in-air")) return;
-        ItemStack item = TridentStack.getTridentStack(trident);
-        if(!EnchantChecks.item(item, this)) return;
-
-        int level = EnchantChecks.getItemLevel(item, this);
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");

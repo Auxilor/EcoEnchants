@@ -1,14 +1,17 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
@@ -21,32 +24,19 @@ public class Aerial extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onLaunch(ProjectileLaunchEvent event) {
-        if(!(event.getEntity() instanceof Arrow))
-            return;
 
-        if(!(event.getEntity().getShooter() instanceof Player))
-            return;
+    @Override
+    public void onBowShoot(LivingEntity shooter, int level, EntityShootBowEvent event) {
+        if(!(event.getProjectile() instanceof Arrow)) return;
 
-        Arrow arrow = (Arrow) event.getEntity();
-        Player player = (Player) arrow.getShooter();
+        if(shooter.isOnGround()) return;
 
-        if(player.isOnGround()) return;
-
-        arrow.setMetadata("shot-in-air", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+        event.getProjectile().setMetadata("shot-in-air", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
     }
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
-            return;
-
-        Arrow arrow = (Arrow) event.getDamager();
-        if(!EnchantChecks.arrow(arrow, this)) return;
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
         if(!arrow.hasMetadata("shot-in-air")) return;
-
-        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");

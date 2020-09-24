@@ -19,19 +19,9 @@ public class HarmlessnessCurse extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void harmlessnessHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-        if (event.getEntity() instanceof Monster)
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         if (NumberUtils.randFloat(0, 1) > 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance"))
             return;
 

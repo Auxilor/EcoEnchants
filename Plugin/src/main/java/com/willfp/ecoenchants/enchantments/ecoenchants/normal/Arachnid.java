@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.nms.TridentStack;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
@@ -20,20 +21,10 @@ public class Arachnid extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
 
-        if(!(event.getEntity() instanceof Spider)) return;
-
-        Trident trident = (Trident) event.getDamager();
-        ItemStack item = TridentStack.getTridentStack(trident);
-
-        if(!EnchantChecks.item(item, this))
-            return;
-
-        int level = EnchantChecks.getItemLevel(item, this);
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
+        if(!(victim instanceof Spider)) return;
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

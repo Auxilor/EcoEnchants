@@ -1,7 +1,10 @@
-package com.willfp.ecoenchants.enchantments;
+package com.willfp.ecoenchants.enchantments.itemtypes;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.NumberUtils;

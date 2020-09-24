@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.util.ItemDurability;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -23,28 +24,14 @@ public class Abrasion extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
 
-        if (!(event.getEntity() instanceof Player))
-            return;
-
-        if (event.isCancelled())
-            return;
-
-        Player player = (Player) event.getDamager();
-        Player victim = (Player) event.getEntity();
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity uncastVictim, int level, EntityDamageByEntityEvent event) {
+        if(!(uncastVictim instanceof Player)) return;
+        Player victim = (Player) uncastVictim;
 
         boolean notcharged = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
-        if (Cooldown.getCooldown(player) != 1.0f && !notcharged)
+        if (attacker instanceof Player && Cooldown.getCooldown((Player) attacker) != 1.0f && !notcharged)
             return;
 
         ArrayList<ItemStack> armor = new ArrayList<ItemStack>(Arrays.asList(victim.getInventory().getArmorContents()));
@@ -55,18 +42,17 @@ public class Abrasion extends EcoEnchant {
             if (armorPiece == null)
                 continue;
 
-
             if(armorPiece.equals(victim.getInventory().getHelmet())) {
-                ItemDurability.damageItem(player, player.getInventory().getHelmet(), level, 39);
+                ItemDurability.damageItem(victim, victim.getInventory().getHelmet(), level, 39);
             }
             if(armorPiece.equals(victim.getInventory().getChestplate())) {
-                ItemDurability.damageItem(player, player.getInventory().getChestplate(), level, 38);
+                ItemDurability.damageItem(victim, victim.getInventory().getChestplate(), level, 38);
             }
             if(armorPiece.equals(victim.getInventory().getLeggings())) {
-                ItemDurability.damageItem(player, player.getInventory().getLeggings(), level, 37);
+                ItemDurability.damageItem(victim, victim.getInventory().getLeggings(), level, 37);
             }
             if(armorPiece.equals(victim.getInventory().getBoots())) {
-                ItemDurability.damageItem(player, player.getInventory().getBoots(), level, 36);
+                ItemDurability.damageItem(victim, victim.getInventory().getBoots(), level, 36);
             }
         }
     }

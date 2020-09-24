@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.util.Watcher;
 import com.willfp.ecoenchants.util.Registerable;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 @SuppressWarnings("unchecked")
-public abstract class EcoEnchant extends Enchantment implements Listener, Registerable {
+public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
     private String name;
     private String description;
     private final String permissionName;
