@@ -22,6 +22,9 @@ public class Instantaneous extends EcoEnchant {
 
     @Override
     public void onDamageBlock(Player player, Block block, int level, BlockDamageEvent event) {
+        if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+            return;
+
         AnticheatManager.exemptPlayer(player);
 
         event.setInstaBreak(true);

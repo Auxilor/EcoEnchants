@@ -21,6 +21,7 @@ public class Tripleshot extends EcoEnchant {
 
     @Override
     public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
+
         for (int i = -1; i < 2; i += 2) {
 
             Vector velocity = event.getProjectile().getVelocity();

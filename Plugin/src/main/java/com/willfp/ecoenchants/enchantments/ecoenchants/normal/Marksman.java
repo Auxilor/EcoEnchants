@@ -22,18 +22,29 @@ public class Marksman extends EcoEnchant {
 
     // START OF LISTENERS
 
+    @EventHandler
+    public void onMarksmanShoot(ProjectileLaunchEvent event) {
+        if (event.getEntityType() != EntityType.ARROW)
+            return;
 
-    @Override
-    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
-        arrow.setGravity(false);
+        if (!(event.getEntity().getShooter() instanceof Player))
+            return;
+
+        Player player = (Player) event.getEntity().getShooter();
+
+        if (!EnchantChecks.mainhand(player, this)) return;
+
+        if (!(event.getEntity() instanceof Arrow)) return;
+        Arrow a = (Arrow) event.getEntity();
+        a.setGravity(false);
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "remove-arrow-after-ticks");
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!arrow.isOnGround()) {
-                    arrow.remove();
+                if (!a.isOnGround()) {
+                    a.remove();
                 }
             }
         }.runTaskLater(EcoEnchantsPlugin.getInstance(), ticks);

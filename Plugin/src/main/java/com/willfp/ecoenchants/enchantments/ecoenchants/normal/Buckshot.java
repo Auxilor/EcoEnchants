@@ -41,7 +41,7 @@ public class Buckshot extends EcoEnchant {
 
             Arrow arrow1 = shooter.launchProjectile(Arrow.class, velocity);
             if(EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE)) arrow1.setFireTicks(Integer.MAX_VALUE);
-            arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
+            if(EnchantChecks.mainhand(shooter, EcoEnchants.MARKSMAN)) arrow1.setGravity(false);
         }
     }
 }
