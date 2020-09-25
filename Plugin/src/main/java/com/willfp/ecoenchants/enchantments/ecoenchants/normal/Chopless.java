@@ -4,9 +4,12 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+
 public class Chopless extends EcoEnchant {
     public Chopless() {
         super(
@@ -16,28 +19,17 @@ public class Chopless extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onPreservationHurt(EntityDamageByEntityEvent event) {
-        if(!(event.getDamager() instanceof Player))
-            return;
 
-        if (!(event.getEntity() instanceof Player))
-            return;
+    @Override
+    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
+        if(victim.getEquipment() == null) return;
 
-        Player player = (Player) event.getEntity();
-        Player damager = (Player) event.getDamager();
-
-        if(!damager.getInventory().getItemInMainHand().getType().toString().endsWith("_AXE"))
-            return;
-
-        int totalChoplessPoints = EnchantChecks.getArmorPoints(player, this, 1);
-
-        if (totalChoplessPoints == 0)
+        if(!victim.getEquipment().getItemInMainHand().getType().toString().endsWith("_AXE"))
             return;
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-less-per-level");
 
-        double multiplier = 1 - (reduction/100 * totalChoplessPoints);
+        double multiplier = 1 - (reduction/100 * level);
 
         event.setDamage(event.getDamage() * multiplier);
     }

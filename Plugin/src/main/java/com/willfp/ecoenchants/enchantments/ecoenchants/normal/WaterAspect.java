@@ -16,20 +16,11 @@ public class WaterAspect extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onWaterAspectDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) return;
 
-        if (!(event.getEntity() instanceof LivingEntity)) return;
-
-        Player player = (Player) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         if(!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman))
             return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

@@ -17,20 +17,10 @@ public class FireAffinity extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void fireAffinityHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if(player.getFireTicks() == 0) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(attacker.getFireTicks() == 0) return;
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 

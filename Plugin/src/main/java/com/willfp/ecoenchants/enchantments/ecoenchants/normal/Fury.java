@@ -21,25 +21,12 @@ public class Fury extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
-            return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(attacker instanceof Player) {
+            if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+                return;
+        }
 
         if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
@@ -56,7 +43,7 @@ public class Fury extends EcoEnchant {
 
             ((Monster) e).setTarget(victim);
 
-            Vector vector = player.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
+            Vector vector = attacker.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
 
             if(VectorUtils.isFinite(vector)) {
                 e.setVelocity(vector);

@@ -18,23 +18,10 @@ public class FirstStrike extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void firstStrikeHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if (!(victim.getHealth() == victim.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (!(((LivingEntity) event.getEntity()).getHealth() == ((LivingEntity) event.getEntity()).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()))
-            return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         double damagemultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
         event.setDamage(event.getDamage() * ((level * damagemultiplier) + 1));

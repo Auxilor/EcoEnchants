@@ -18,31 +18,13 @@ public class Deflection extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onDeflect(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return;
 
-        if (!(event.getDamager() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getEntity();
-
-        LivingEntity victim = (LivingEntity) event.getDamager();
-
-        if(!player.isBlocking()) return;
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        int level;
-        if (!EnchantChecks.offhand(player, this) && !EnchantChecks.mainhand(player, this)) return;
-        if(EnchantChecks.offhand(player, this)) level = EnchantChecks.getOffhandLevel(player, this);
-        else level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
         double perlevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-deflected-per-level");
         double damagePercent = (perlevel/100) * level;
         double damage = event.getDamage() * damagePercent;
 
-        victim.damage(damage, player);
+        attacker.damage(damage, attacker);
     }
 }

@@ -27,27 +27,9 @@ public class Lesion extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
 
-        if(!(((Trident) event.getDamager()).getShooter() instanceof Player))
-            return;
-
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) ((Trident) event.getDamager()).getShooter();
-        Trident trident = (Trident) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-        ItemStack item = TridentStack.getTridentStack(trident);
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.item(item, this)) return;
-
-        int level = EnchantChecks.getItemLevel(item, this);
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 

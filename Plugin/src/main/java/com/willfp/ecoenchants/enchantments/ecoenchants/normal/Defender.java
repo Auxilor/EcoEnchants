@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
@@ -18,22 +19,15 @@ public class Defender extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
-            return;
-        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof Tameable))
-            return;
 
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Tameable entity = (Tameable) event.getEntity();
-        Arrow arrow = (Arrow) event.getDamager();
-        if(entity.getOwner() == null) return;
-        if(!entity.getOwner().equals(player)) return;
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+        if(!(victim instanceof Tameable)) return;
 
-        if (!EnchantChecks.arrow(arrow, this)) return;
+        Tameable pet = (Tameable) victim;
+
+        if(pet.getOwner() == null) return;
+        if(!pet.getOwner().equals(attacker)) return;
 
         event.setCancelled(true);
     }

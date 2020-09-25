@@ -22,27 +22,9 @@ public class Identify extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onBlock(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return;
 
-        if (!(event.getDamager() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getEntity();
-
-        LivingEntity victim = (LivingEntity) event.getDamager();
-
-        if(!player.isBlocking()) return;
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        int level;
-        if (!EnchantChecks.offhand(player, this) && !EnchantChecks.mainhand(player, this)) return;
-        if(EnchantChecks.offhand(player, this)) level = EnchantChecks.getOffhandLevel(player, this);
-        else level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
 
@@ -51,6 +33,6 @@ public class Identify extends EcoEnchant {
 
         int finalDuration = duration * level;
 
-        victim.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, finalDuration, 1, false, false, false));
+        attacker.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, finalDuration, 1, false, false, false));
     }
 }

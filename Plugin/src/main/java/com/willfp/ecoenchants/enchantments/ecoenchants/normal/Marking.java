@@ -24,27 +24,9 @@ public class Marking extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
-            return;
 
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player))
-            return;
-
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Arrow arrow = (Arrow) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.arrow(arrow, this)) return;
-
-        int level = EnchantChecks.getArrowLevel(arrow, this);
-
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
         int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
         int ticks = ticksPerLevel * level;
 

@@ -20,29 +20,9 @@ public class Bladed extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void bladedHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
 
-        if(!(((Trident) event.getDamager()).getShooter() instanceof Player))
-            return;
-
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        if (event.isCancelled())
-            return;
-
-        Player player = (Player) ((Trident) event.getDamager()).getShooter();
-        Trident trident = (Trident) event.getDamager();
-        ItemStack item = TridentStack.getTridentStack(trident);
-
-
-        if (!EnchantChecks.item(item, this)) return;
-
-        int level = EnchantChecks.getItemLevel(item, this);
-
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-base");
         double perLevelDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 

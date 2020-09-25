@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -17,26 +18,15 @@ public class Extinguishing extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onExtinguishingHurt(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return;
-
-        if (!event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK))
-            return;
-
-        Player player = (Player) event.getEntity();
-
-        int totalExtinguishingPoints = EnchantChecks.getArmorPoints(player, this, 0);
-
-        if (totalExtinguishingPoints == 0)
+    @Override
+    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
+        if(!event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK))
             return;
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point");
-        if (NumberUtils.randFloat(0, 1) > totalExtinguishingPoints * 0.01 * chance)
+        if (NumberUtils.randFloat(0, 1) > level * 0.01 * chance)
             return;
 
-        player.setFireTicks(0);
+        victim.setFireTicks(0);
     }
-
 }

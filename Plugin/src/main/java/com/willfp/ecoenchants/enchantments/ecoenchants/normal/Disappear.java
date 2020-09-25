@@ -6,9 +6,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 public class Disappear extends EcoEnchant {
@@ -20,25 +22,15 @@ public class Disappear extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHurt(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return;
-
+    @Override
+    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            Player player = (Player) event.getEntity();
-
-            if(player.getHealth() > EcoEnchants.DISAPPEAR.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "threshold"))
-                return;
-
-            final int points = EnchantChecks.getArmorPoints(player, this, 1);
-
-            if (points == 0)
+            if(victim.getHealth() > EcoEnchants.DISAPPEAR.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "threshold"))
                 return;
 
             int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
-            final int ticks = ticksPerLevel * points;
-            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, ticks, 1, false, false, true));
+            final int ticks = ticksPerLevel * level;
+            victim.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, ticks, 1, false, false, true));
         }, 1);
     }
 }

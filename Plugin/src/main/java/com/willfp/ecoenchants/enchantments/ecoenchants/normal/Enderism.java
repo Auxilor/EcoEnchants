@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.World;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -18,6 +19,17 @@ public class Enderism extends EcoEnchant {
     }
 
     // START OF LISTENERS
+
+
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+        if(!attacker.getWorld().getEnvironment().equals(World.Environment.THE_END))
+            return;
+
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");
+
+        event.setDamage(event.getDamage() * (1 + (level * multiplier)));
+    }
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {

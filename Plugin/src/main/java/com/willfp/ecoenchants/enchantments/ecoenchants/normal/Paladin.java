@@ -18,22 +18,10 @@ public class Paladin extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void paladinHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if(!(player.getVehicle() instanceof Horse)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(!(attacker.getVehicle() instanceof Horse)) return;
 
         event.setDamage(event.getDamage() * ((level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level")) + 1));
     }

@@ -40,15 +40,8 @@ public class Voltage extends EcoEnchant {
             Material.CHAINMAIL_BOOTS,
     };
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if(!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         EntityEquipment equipment = victim.getEquipment();
         if(equipment == null) return;
 
@@ -60,9 +53,6 @@ public class Voltage extends EcoEnchant {
 
         if(pieces == 0) return;
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 
         event.setDamage(event.getDamage() * (1 + (level * multiplier * pieces)));

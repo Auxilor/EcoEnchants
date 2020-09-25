@@ -17,15 +17,10 @@ public class Respirator extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHurt(EntityDamageEvent event) {
+
+    @Override
+    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
         if(!event.getCause().equals(EntityDamageEvent.DamageCause.DRAGON_BREATH)) return;
-
-        if(!(event.getEntity() instanceof LivingEntity)) return;
-
-        if(!EnchantChecks.helmet((LivingEntity) event.getEntity(), this)) return;
-
-        int level = EnchantChecks.getHelmetLevel((LivingEntity) event.getEntity(), this);
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-less-per-level");
 

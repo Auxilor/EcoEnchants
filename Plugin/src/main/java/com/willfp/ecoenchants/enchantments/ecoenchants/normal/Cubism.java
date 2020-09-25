@@ -19,20 +19,9 @@ public class Cubism extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) return;
-
-        if (!(event.getEntity() instanceof LivingEntity)) return;
-
-        Player player = (Player) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if(!(victim instanceof Slime))
-            return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-        int level = EnchantChecks.getMainhandLevel(player, this);
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(!(victim instanceof Slime)) return;
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

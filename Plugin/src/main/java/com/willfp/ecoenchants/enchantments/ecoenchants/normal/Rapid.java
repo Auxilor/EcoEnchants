@@ -4,7 +4,9 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -17,20 +19,9 @@ public class Rapid extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onRapidShoot(EntityShootBowEvent event) {
-        if (event.getProjectile().getType() != EntityType.ARROW)
-            return;
 
-        if (!(event.getEntity() instanceof Player))
-            return;
-
-        Player player = (Player) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
         double multiplier = 1 - ((this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-faster-per-level")/100) * level);
 
         if(event.getForce() < multiplier)

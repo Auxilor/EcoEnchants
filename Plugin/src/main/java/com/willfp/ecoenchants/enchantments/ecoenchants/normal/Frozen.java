@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 public class Frozen extends EcoEnchant {
@@ -22,31 +23,18 @@ public class Frozen extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHurt(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return;
 
-        if (!(event.getDamager() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getEntity();
-        LivingEntity victim = (LivingEntity) event.getDamager();
-
-        final int points = EnchantChecks.getArmorPoints(player, this, 1);
-
-        if (points == 0)
-            return;
-
-        if (NumberUtils.randFloat(0, 1) > points * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point"))
+    @Override
+    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
+        if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-point"))
             return;
 
         int divisor = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "points-per-level");
-        final int level = (int) Math.ceil((double) points / divisor);
+        final int amplifier = (int) Math.ceil((double) level / divisor);
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, points * 5, level));
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, points * 5, level));
+            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, level * 5, amplifier));
+            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, level * 5, amplifier));
         }, 1);
     }
 }

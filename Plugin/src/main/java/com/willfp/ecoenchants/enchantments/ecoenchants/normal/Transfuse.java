@@ -24,24 +24,12 @@ public class Transfuse extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-
+    @Override
+    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
 
-        if(!block.getType().equals(Material.STONE)) return;
-
-        if (event.isCancelled())
-            return;
-
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
 
         if(NumberUtils.randFloat(0, 1) > level * chance * 0.01)

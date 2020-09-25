@@ -22,41 +22,29 @@ public class Carve extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         if(victim.hasMetadata("carved"))
             return;
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
-            return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         double damagePerLevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-percentage-per-level") * 0.01;
         double radiusPerLevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-per-level");
         final double damage = damagePerLevel * level * event.getDamage();
         final double radius = radiusPerLevel * level;
 
+        if(attacker instanceof Player) {
+            if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+                return;
+        }
+
         victim.getNearbyEntities(radius, radius, radius).stream()
                 .filter(entity -> entity instanceof LivingEntity)
-                .filter(entity -> !entity.equals(player))
+                .filter(entity -> !entity.equals(attacker))
                 .forEach(entity -> {
                     entity.setMetadata("carved", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
-                    ((LivingEntity) entity).damage(damage, player);
-                    Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> entity.removeMetadata("carved", EcoEnchantsPlugin.getInstance()), 5);
+                    ((LivingEntity) entity).damage(damage, attacker);
+                    Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> entity.removeMetadata("carved", EcoEnchantsPlugin.getInstance()), 20);
                 });
     }
 }

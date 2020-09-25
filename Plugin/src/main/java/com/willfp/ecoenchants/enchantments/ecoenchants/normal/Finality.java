@@ -20,27 +20,14 @@ public class Finality extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
-            return;
-        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Arrow arrow = (Arrow) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.arrow(arrow, this)) return;
-        int level = EnchantChecks.getArrowLevel(arrow, this);
-
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
         if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 
         double minhealth = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "minimum-health-per-level");
-        if (!(((LivingEntity) event.getEntity()).getHealth() <= level * minhealth))
+        if (!(victim.getHealth() <= level * minhealth))
             return;
 
         event.setDamage(10000); // cba to do this properly

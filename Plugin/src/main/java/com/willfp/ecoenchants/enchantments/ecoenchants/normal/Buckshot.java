@@ -8,10 +8,7 @@ import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
@@ -24,21 +21,12 @@ public class Buckshot extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onShoot(EntityShootBowEvent event) {
-        if (event.getProjectile().getType() != EntityType.ARROW)
-            return;
-
-        if (!(event.getEntity() instanceof Player))
-            return;
-
-        Player player = (Player) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-        int level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
         event.getProjectile().remove();
-        player.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+        if(shooter instanceof Player) {
+            ((Player) shooter).playSound(shooter.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+        }
 
         int numberPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount-per-level");
         int number = numberPerLevel * level;
@@ -51,9 +39,9 @@ public class Buckshot extends EcoEnchant {
 
             velocity.add(new Vector(NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread)));
 
-            Arrow arrow = player.launchProjectile(Arrow.class, velocity);
-            if(EnchantChecks.mainhand(player, Enchantment.ARROW_FIRE)) arrow.setFireTicks(Integer.MAX_VALUE);
-            arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
+            Arrow arrow1 = shooter.launchProjectile(Arrow.class, velocity);
+            if(EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE)) arrow1.setFireTicks(Integer.MAX_VALUE);
+            arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         }
     }
 }

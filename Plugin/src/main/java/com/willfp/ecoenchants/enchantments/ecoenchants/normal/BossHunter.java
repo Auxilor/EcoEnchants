@@ -4,10 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Boss;
-import org.bukkit.entity.ElderGuardian;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class BossHunter extends EcoEnchant {
@@ -19,19 +16,9 @@ public class BossHunter extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow)) return;
-
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
-
-        if (!(event.getEntity() instanceof Boss || event.getEntity() instanceof ElderGuardian)) return;
-
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Arrow arrow = (Arrow) event.getDamager();
-
-        if (!EnchantChecks.arrow(arrow, this)) return;
-        int level = EnchantChecks.getArrowLevel(arrow, this);
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+        if(!(victim instanceof Boss || victim instanceof ElderGuardian)) return;
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

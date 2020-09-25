@@ -20,35 +20,14 @@ public class Inferno extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onInfernoShoot(ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof Trident))
-            return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
-            return;
-
-        Player player = (Player) event.getEntity().getShooter();
-        Trident trident = (Trident) event.getEntity();
-        ItemStack item = TridentStack.getTridentStack(trident);
-
-        if (!EnchantChecks.item(item, this)) return;
-
+    @Override
+    public void onTridentLaunch(LivingEntity shooter, Trident trident, int level, ProjectileLaunchEvent event) {
         trident.setFireTicks(Integer.MAX_VALUE);
     }
-    @EventHandler
-    public void onInfernoShoot(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
 
-        if(!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Trident trident = (Trident) event.getDamager();
-        ItemStack item = TridentStack.getTridentStack(trident);
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.item(item, this)) return;
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         if(trident.getFireTicks() <= 0) return;
 
         victim.setFireTicks(100);

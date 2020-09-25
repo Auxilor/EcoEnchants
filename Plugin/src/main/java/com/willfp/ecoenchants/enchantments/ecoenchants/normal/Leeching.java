@@ -19,32 +19,16 @@ public class Leeching extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void leechingHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
 
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        if (event.isCancelled())
-            return;
-
-        Player player = (Player) event.getDamager();
-
-        if(!AntigriefManager.canInjure(player, (LivingEntity) event.getEntity())) return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
         double amountToHeal = damage * level * multiplier;
-        double newHealth = player.getHealth() + amountToHeal;
-        if (newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
-            newHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double newHealth = attacker.getHealth() + amountToHeal;
+        if (newHealth > attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+            newHealth = attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         }
-        player.setHealth(newHealth);
+        attacker.setHealth(newHealth);
     }
 }

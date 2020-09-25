@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.World;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -17,19 +18,12 @@ public class NetherInfusion extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void netherInfusionHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER))
             return;
 
-        Player player = (Player) event.getDamager();
-
-        if(!player.getWorld().getEnvironment().equals(World.Environment.NETHER))
-            return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");
 
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));

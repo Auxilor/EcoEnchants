@@ -18,23 +18,14 @@ public class Streamlining extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onEquip(ArmorEquipEvent event) {
-        final Player player = event.getPlayer();
 
-        new BukkitRunnable() {
-            public void run() {
-                if (!EnchantChecks.boots(player, EcoEnchants.STREAMLINING)) {
-                    player.setWalkSpeed(0.2f);
-                    return;
-                }
+    @Override
+    public void onArmorEquip(Player player, int level, ArmorEquipEvent event) {
+        if(level == 0) {
+            player.setWalkSpeed(0.2f);
+            return;
+        }
 
-                int level = EnchantChecks.getBootsLevel(player, EcoEnchants.STREAMLINING);
-                double speed;
-                player.setWalkSpeed((float) (0.2 + (level * EcoEnchants.STREAMLINING.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "speed-per-level"))));
-
-            }
-        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
+        player.setWalkSpeed((float) (0.2 + (level * EcoEnchants.STREAMLINING.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "speed-per-level"))));
     }
-
 }

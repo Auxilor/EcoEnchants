@@ -18,22 +18,12 @@ public class Butchering extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void butcheringHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-        if (event.getEntity() instanceof Monster)
-            return;
 
-        Player player = (Player) event.getDamager();
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(victim instanceof Monster) return;
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
-
         event.setDamage(event.getDamage() + (level * multiplier));
     }
 }

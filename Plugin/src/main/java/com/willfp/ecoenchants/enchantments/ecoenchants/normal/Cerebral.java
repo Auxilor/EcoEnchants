@@ -18,23 +18,12 @@ public class Cerebral extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onCerebralDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow)) return;
 
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) return;
-
-        if (!(event.getEntity() instanceof LivingEntity)) return;
-
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Arrow arrow = (Arrow) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
         if (!(arrow.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
 
         if (!EnchantChecks.arrow(arrow, this)) return;
-        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

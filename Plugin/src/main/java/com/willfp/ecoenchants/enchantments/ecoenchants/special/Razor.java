@@ -18,26 +18,16 @@ public class Razor extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void razorHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         double perLevelMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");
         double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "base-damage");
         double extra = level*perLevelMultiplier + baseDamage;
         if(this.getConfig().getBool((EcoEnchants.CONFIG_LOCATION) + "decrease-if-cooldown")) {
-            extra *= Cooldown.getCooldown(player);
+            if(attacker instanceof Player) {
+                extra *= Cooldown.getCooldown((Player) attacker);
+            }
         }
 
         event.setDamage(event.getDamage() + extra);

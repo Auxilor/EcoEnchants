@@ -18,21 +18,11 @@ public class WaterAffinity extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(!attacker.getLocation().getBlock().getType().equals(Material.WATER))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getDamager();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if(!player.getLocation().getBlock().getType().equals(Material.WATER))
-            return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 

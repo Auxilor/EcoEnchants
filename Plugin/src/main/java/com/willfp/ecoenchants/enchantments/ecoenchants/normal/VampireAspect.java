@@ -22,6 +22,20 @@ public class VampireAspect extends EcoEnchant {
 
     // START OF LISTENERS
 
+
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(attacker instanceof Player) {
+            if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+                return;
+        }
+
+        if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+            return;
+
+        victim.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, level * 10 + 20, level));
+    }
+
     @EventHandler
     public void vampireAspectHit(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player))

@@ -21,20 +21,9 @@ public class Conclude extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Trident trident = (Trident) event.getDamager();
-        ItemStack item = TridentStack.getTridentStack(trident);
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.item(item, this)) return;
-        int level = EnchantChecks.getItemLevel(item, this);
-
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
 

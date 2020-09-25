@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -20,26 +21,18 @@ public class EnderSlayer extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void enderSlayerHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+    private static Set<EntityType> endMobs = new HashSet<EntityType>() {{
+        add(EntityType.ENDERMITE);
+        add(EntityType.ENDERMAN);
+        add(EntityType.ENDER_DRAGON);
+        add(EntityType.SHULKER);
+    }};
+
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if (!endMobs.contains(victim.getType()))
             return;
 
-        Set<EntityType> endMobs = new HashSet<EntityType>() {{
-           add(EntityType.ENDERMITE);
-           add(EntityType.ENDERMAN);
-           add(EntityType.ENDER_DRAGON);
-           add(EntityType.SHULKER);
-        }};
-
-        if (!endMobs.contains(event.getEntityType()))
-            return;
-
-        Player player = (Player) event.getDamager();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
 
         event.setDamage(event.getDamage() + (level * multiplier));

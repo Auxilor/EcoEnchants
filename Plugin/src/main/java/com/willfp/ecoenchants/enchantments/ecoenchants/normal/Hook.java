@@ -21,31 +21,11 @@ public class Hook extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void hookHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
-            return;
-        if(!(((Arrow) event.getDamager()).getShooter() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        if(event.isCancelled()) return;
-
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Arrow arrow = (Arrow) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if(victim.hasMetadata("NPC")) return;
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.arrow(arrow, this)) return;
-
-        int level = EnchantChecks.getArrowLevel(arrow, this);
-
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
         double baseMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-multiplier");
-        Vector vector = player.getLocation().toVector().clone().subtract(victim.getLocation().toVector()).normalize().multiply(level * baseMultiplier);
+        Vector vector = attacker.getLocation().toVector().clone().subtract(victim.getLocation().toVector()).normalize().multiply(level * baseMultiplier);
         if(VectorUtils.isFinite(vector)) {
             victim.setVelocity(vector);
         }

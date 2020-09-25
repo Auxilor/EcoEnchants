@@ -18,32 +18,11 @@ public class Puncture extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
 
-        if(!(((Trident) event.getDamager()).getShooter() instanceof Player))
-            return;
-
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        if (event.isCancelled())
-            return;
-
-        Player player = (Player) ((Trident) event.getDamager()).getShooter();
-        Trident trident = (Trident) event.getDamager();
-        ItemStack item = TridentStack.getTridentStack(trident);
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         if(!(victim instanceof Turtle || victim instanceof Shulker))
             return;
-
-        if (!EnchantChecks.item(item, this)) return;
-
-        int level = EnchantChecks.getItemLevel(item, this);
 
         double perLevelDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
 

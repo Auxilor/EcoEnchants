@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
@@ -16,19 +17,13 @@ public class Protector extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void protectorHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof Tameable))
-            return;
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity uncastVictim, int level, EntityDamageByEntityEvent event) {
+        if(!(uncastVictim instanceof Tameable)) return;
 
-        Player player = (Player) event.getDamager();
-        Tameable entity = (Tameable) event.getEntity();
-        if(entity.getOwner() == null) return;
-        if(!entity.getOwner().equals(player)) return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
+        Tameable victim = (Tameable) uncastVictim;
+        if(victim.getOwner() == null) return;
+        if(!victim.getOwner().equals(attacker)) return;
 
         event.setCancelled(true);
     }

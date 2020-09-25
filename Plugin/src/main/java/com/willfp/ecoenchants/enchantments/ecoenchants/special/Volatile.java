@@ -21,25 +21,15 @@ public class Volatile extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+
+    @Override
+    public void onMeleeAttack(LivingEntity uncastAttacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if(!(uncastAttacker instanceof Player)) return;
+
+        Player attacker = (Player) uncastAttacker;
+
+        if (Cooldown.getCooldown(attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
-            return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
             return;
@@ -49,13 +39,13 @@ public class Volatile extends EcoEnchant {
 
         float power = (float) (0.5 + (level * 0.5));
 
-        if (!AntigriefManager.canCreateExplosion(player, event.getEntity().getLocation())) return;
+        if (!AntigriefManager.canCreateExplosion(attacker, event.getEntity().getLocation())) return;
         if (breakblocks) {
-            if (!AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
+            if (!AntigriefManager.canBreakBlock(attacker, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
                 return;
         }
 
-        double distance = player.getLocation().distance(victim.getLocation());
+        double distance = attacker.getLocation().distance(victim.getLocation());
         Location explosionLoc = victim.getEyeLocation();
 
         victim.getWorld().createExplosion(explosionLoc, power, fire, breakblocks);

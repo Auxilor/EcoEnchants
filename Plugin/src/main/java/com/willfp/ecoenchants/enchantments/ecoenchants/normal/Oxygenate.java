@@ -19,21 +19,10 @@ public class Oxygenate extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void oxygenateBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (event.isCancelled())
-            return;
-
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
-
+    @Override
+    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
         if(player.getRemainingAir() == player.getMaximumAir()) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         int oxygenLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "oxygen-per-level");
         int oxygen = level * oxygenLevel;

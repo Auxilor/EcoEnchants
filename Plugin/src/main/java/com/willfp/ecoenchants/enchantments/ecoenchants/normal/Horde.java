@@ -17,20 +17,12 @@ public class Horde extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         double distance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance-per-level") * level;
 
-        int entitiesNearby = (int) player.getNearbyEntities(distance, distance, distance).stream().filter(entity -> entity instanceof LivingEntity).count();
+        int entitiesNearby = (int) attacker.getNearbyEntities(distance, distance, distance).stream().filter(entity -> entity instanceof LivingEntity).count();
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier-per-level");
         multiplier = (1 + (level * multiplier * entitiesNearby));

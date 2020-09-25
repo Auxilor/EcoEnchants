@@ -22,37 +22,16 @@ public class Extract extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void extractHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident))
-            return;
 
-        if(!(((Trident) event.getDamager()).getShooter() instanceof Player))
-            return;
-
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        if (event.isCancelled())
-            return;
-
-        Player player = (Player) ((Trident) event.getDamager()).getShooter();
-        Trident trident = (Trident) event.getDamager();
-        ItemStack item = TridentStack.getTridentStack(trident);
-
-        if(!AntigriefManager.canInjure(player, (LivingEntity) event.getEntity())) return;
-
-        if (!EnchantChecks.item(item, this)) return;
-
-        int level = EnchantChecks.getItemLevel(item, this);
-
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
         double amountToHeal = damage * level * multiplier;
-        double newHealth = player.getHealth() + amountToHeal;
-        if (newHealth > player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
-            newHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double newHealth = attacker.getHealth() + amountToHeal;
+        if (newHealth > attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+            newHealth = attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         }
-        player.setHealth(newHealth);
+        attacker.setHealth(newHealth);
     }
 }

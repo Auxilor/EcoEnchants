@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -22,28 +23,17 @@ public class Ignite extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onLand(ProjectileHitEvent event) {
-        if (!(event.getEntity() instanceof Arrow))
-            return;
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+    @Override
+    public void onArrowHit(LivingEntity uncastShooter, int level, ProjectileHitEvent event) {
+        if(!(uncastShooter instanceof Player))
             return;
 
         if(event.getHitBlock() == null)
             return;
 
-        Block block = event.getHitBlock();
-        Arrow arrow = (Arrow) event.getEntity();
-        Player player = (Player) event.getEntity().getShooter();
-
-        if (!EnchantChecks.arrow(arrow, this)) return;
-
-        int level = EnchantChecks.getArrowLevel(arrow, this);
-
-        float power = (float) (0.5 + (level * 0.5));
-
-        if (!AntigriefManager.canBreakBlock(player, block))
+        Player shooter = (Player) uncastShooter;
+        if (!AntigriefManager.canBreakBlock(shooter, event.getHitBlock()))
             return;
 
         if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
@@ -53,7 +43,7 @@ public class Ignite extends EcoEnchant {
 
         assert face != null;
 
-        Block toIgnite = block.getRelative(face);
+        Block toIgnite = event.getHitBlock().getRelative(face);
         if(toIgnite.getType().equals(Material.AIR)) {
             toIgnite.setType(Material.FIRE);
         }

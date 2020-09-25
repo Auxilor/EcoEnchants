@@ -26,7 +26,7 @@ public class Aerial extends EcoEnchant {
 
 
     @Override
-    public void onBowShoot(LivingEntity shooter, int level, EntityShootBowEvent event) {
+    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
         if(!(event.getProjectile() instanceof Arrow)) return;
 
         if(shooter.isOnGround()) return;

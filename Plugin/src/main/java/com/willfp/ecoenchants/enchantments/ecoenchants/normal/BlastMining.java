@@ -22,21 +22,12 @@ public class BlastMining extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
 
+    @Override
+    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
         if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
             return;
         }
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (event.isCancelled())
-            return;
-
-        if(!AntigriefManager.canBreakBlock(player, block)) return;
 
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 

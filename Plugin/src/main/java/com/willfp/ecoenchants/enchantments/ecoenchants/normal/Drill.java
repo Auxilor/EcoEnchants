@@ -25,29 +25,19 @@ public class Drill extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void drillBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
-
+    @Override
+    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
         if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
             return;
         }
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (event.isCancelled())
-            return;
-
-        if(!AntigriefManager.canBreakBlock(player, block)) return;
-
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 
-        int level = EnchantChecks.getMainhandLevel(player, this) * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "blocks-per-level");
+        int blocks = level * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "blocks-per-level");
 
         AnticheatManager.exemptPlayer(player);
 
-        for(int i = 1; i <= level; i++) {
+        for(int i = 1; i <= blocks; i++) {
             Vector simplified = VectorUtils.simplifyVector(player.getLocation().getDirection().normalize()).multiply(i);
             Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(simplified));
             block1.setMetadata("from-drill", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));

@@ -18,24 +18,13 @@ public class Goliath extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void goliathHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (victim.getHealth() <= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if (victim.getHealth() <= attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
             return;
 
-        int level = EnchantChecks.getMainhandLevel(player, this);
-        double timesMoreHealth = victim.getHealth() / player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double timesMoreHealth = victim.getHealth() / attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
         event.setDamage(event.getDamage() * ((level * multiplier * timesMoreHealth) + 1));

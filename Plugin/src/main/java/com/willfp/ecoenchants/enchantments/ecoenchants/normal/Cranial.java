@@ -20,25 +20,10 @@ public class Cranial extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Trident)) return;
 
-        if (!(((Trident) event.getDamager()).getShooter() instanceof Player)) return;
-
-        if (!(event.getEntity() instanceof LivingEntity)) return;
-
-        Player player = (Player) ((Trident) event.getDamager()).getShooter();
-        Trident trident = (Trident) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-
+    @Override
+    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
         if (!(trident.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
-
-        ItemStack item = TridentStack.getTridentStack(trident);
-
-        if (!EnchantChecks.item(item, this)) return;
-        int level = EnchantChecks.getItemLevel(item, this);
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

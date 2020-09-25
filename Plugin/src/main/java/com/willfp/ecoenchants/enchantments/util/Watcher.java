@@ -16,8 +16,8 @@ public interface Watcher {
     default void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {}
     default void onJump(Player player, int level, PlayerMoveEvent event) {}
     default void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {}
-    default void onBowShoot(LivingEntity shooter, int level, EntityShootBowEvent event) {}
-    default void onFallDamage(LivingEntity shooter, int level, EntityDamageEvent event) {}
+    default void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {}
+    default void onFallDamage(LivingEntity faller, int level, EntityDamageEvent event) {}
     default void onArrowHit(LivingEntity shooter, int level, ProjectileHitEvent event) {}
     default void onTridentHit(LivingEntity shooter, int level, ProjectileHitEvent event) {}
     default void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {}
@@ -25,4 +25,5 @@ public interface Watcher {
     default void onArmorEquip(Player player, int level, ArmorEquipEvent event) {}
     default void onDamageBlock(Player player, Block block, int level, BlockDamageEvent event) {}
     default void onTridentLaunch(LivingEntity shooter, Trident trident, int level, ProjectileLaunchEvent event) {}
+    default void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {}
 }

@@ -21,16 +21,10 @@ public class Replenish extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onCropBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
+
+    @Override
+    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
         Material type = block.getType();
-
-        if(!EnchantChecks.mainhand(player, this)) return;
-
-        if(!AntigriefManager.canBreakBlock(player, block)) return;
-        if(event.isCancelled()) return;
 
         if(!(block.getBlockData() instanceof Ageable)) return;
 
@@ -38,7 +32,6 @@ public class Replenish extends EcoEnchant {
         if(data.getAge() != data.getMaximumAge()) return;
 
         data.setAge(0);
-
 
         new BukkitRunnable() {
             @Override

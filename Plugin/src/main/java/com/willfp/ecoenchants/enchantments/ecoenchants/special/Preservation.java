@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -16,23 +17,14 @@ public class Preservation extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onPreservationHurt(EntityDamageEvent event) {
+
+    @Override
+    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
         if(event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) return;
-
-        if (!(event.getEntity() instanceof Player))
-            return;
-
-        Player player = (Player) event.getEntity();
-
-        int totalPreservationPoints = EnchantChecks.getArmorPoints(player, this, 1);
-
-        if (totalPreservationPoints == 0)
-            return;
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-less-per-level");
 
-        double multiplier = 1 - (reduction/100 * totalPreservationPoints);
+        double multiplier = 1 - (reduction/100 * level);
 
         event.setDamage(event.getDamage() * multiplier);
     }

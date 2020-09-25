@@ -17,24 +17,12 @@ public class Proximity extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void proximityHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
 
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        double distance = player.getLocation().distance(victim.getLocation());
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        double distance = attacker.getLocation().distance(victim.getLocation());
 
         double decreaseAfter = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "when-closer-than-blocks");
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         if(distance <= decreaseAfter) {
             double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");

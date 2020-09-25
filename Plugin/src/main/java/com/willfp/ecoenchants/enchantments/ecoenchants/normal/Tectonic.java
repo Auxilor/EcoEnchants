@@ -20,26 +20,20 @@ public class Tectonic extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onTecFall(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return;
 
-        Player player = (Player) event.getEntity();
+    @Override
+    public void onFallDamage(LivingEntity faller, int level, EntityDamageEvent event) {
 
         if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL))
             return;
-
-        if (!EnchantChecks.boots(player, this)) return;
-
-        int radius = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius") + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius") * EnchantChecks.getBootsLevel(player, this) - 1);
-        int damage = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-damage") + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-damage") * EnchantChecks.getBootsLevel(player, this) - 1);
+        int radius = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius") + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius") * level - 1);
+        int damage = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-damage") + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-damage") * level - 1);
 
 
-        Collection<Entity> entities = player.getWorld().getNearbyEntities(player.getLocation(), radius, 2, radius);
+        Collection<Entity> entities = faller.getWorld().getNearbyEntities(faller.getLocation(), radius, 2, radius);
 
         for (Entity entity : entities) {
-            if (entity.equals(player))
+            if (entity.equals(faller))
                 continue;
             if(!(entity instanceof LivingEntity)) continue;
             entity.teleport(entity.getLocation().add(0, 0.3, 0));

@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.util.NumberUtils;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,25 +25,16 @@ public class Confusion extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void confusionHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
-        if (!(event.getEntity() instanceof Player))
-            return;
 
-        Player player = (Player) event.getDamager();
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity uncastVictim, int level, EntityDamageByEntityEvent event) {
+        if(!(uncastVictim instanceof Player)) return;
+        Player victim = (Player) uncastVictim;
 
-        Player victim = (Player) event.getEntity();
-
-        if(!AntigriefManager.canInjure(player, victim)) return;
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (Cooldown.getCooldown(player) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
-            return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
+        if(attacker instanceof Player) {
+            if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+                return;
+        }
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
         if (NumberUtils.randFloat(0, 1) > level * 0.01 * chance)

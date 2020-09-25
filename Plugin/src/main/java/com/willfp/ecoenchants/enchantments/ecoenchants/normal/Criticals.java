@@ -17,23 +17,11 @@ public class Criticals extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void criticalHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+
+    @Override
+    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+        if (!(attacker.getFallDistance() > 0 && !attacker.isOnGround()))
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
-            return;
-
-        Player player = (Player) event.getDamager();
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (!(player.getFallDistance() > 0 && !player.isOnGround()))
-            return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         event.setDamage(event.getDamage() * ((level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level")) + 1));
     }

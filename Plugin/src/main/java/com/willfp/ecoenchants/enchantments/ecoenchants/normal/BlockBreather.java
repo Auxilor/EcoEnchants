@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -18,18 +19,11 @@ public class BlockBreather extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onHurt(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return;
 
+    @Override
+    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
         if(!event.getCause().equals(EntityDamageEvent.DamageCause.SUFFOCATION))
             return;
-
-        Player player = (Player) event.getEntity();
-
-        if(!EnchantChecks.helmet(player, this)) return;
-        int level = EnchantChecks.getHelmetLevel(player, this);
 
         double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
 
@@ -38,5 +32,4 @@ public class BlockBreather extends EcoEnchant {
 
         event.setCancelled(true);
     }
-
 }

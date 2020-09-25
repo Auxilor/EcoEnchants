@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -19,15 +20,9 @@ public class Energizing extends EcoEnchant {
     }
     // START OF LISTENERS
 
-    @EventHandler
-    public void onEnergizingBreak(BlockBreakEvent event) {
-        if(event.isCancelled()) return;
-        Player player = event.getPlayer();
-        if(!AntigriefManager.canBreakBlock(player, event.getBlock())) return;
-        if(!EnchantChecks.mainhand(player, this)) return;
 
-        int level = EnchantChecks.getMainhandLevel(player, this);
-
+    @Override
+    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level") * level;
         int amplifier = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-level") + (level - 2);
 

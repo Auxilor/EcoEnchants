@@ -5,9 +5,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Spider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import sun.security.provider.ConfigFile;
 
 public class Insecticide extends EcoEnchant {
     public Insecticide() {
@@ -18,19 +20,11 @@ public class Insecticide extends EcoEnchant {
 
     // START OF LISTENERS
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+
+    @Override
+    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+        if(!(victim instanceof Spider))
             return;
-
-        if(!(event.getEntity() instanceof Spider)) return;
-
-        Arrow arrow = (Arrow) event.getDamager();
-
-        if(!EnchantChecks.arrow(arrow, this))
-            return;
-
-        int level = EnchantChecks.getArrowLevel(arrow, this);
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

@@ -39,6 +39,8 @@ public class WatcherTriggers implements Listener {
         Arrow arrow = (Arrow) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
+        if(victim.hasMetadata("NPC")) return;
+
         if(attacker instanceof Player) {
             if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
         }
@@ -46,6 +48,8 @@ public class WatcherTriggers implements Listener {
         if(event.isCancelled()) return;
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.arrow(arrow, enchant)) return;
             int level = EnchantChecks.getArrowLevel(arrow, enchant);
             enchant.onArrowDamage(attacker, victim, arrow, level, event);
@@ -72,11 +76,15 @@ public class WatcherTriggers implements Listener {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
+        if(victim.hasMetadata("NPC")) return;
+
         if(attacker instanceof Player) {
             if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
         }
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.item(item, enchant)) return;
             int level = EnchantChecks.getItemLevel(item, enchant);
             enchant.onTridentDamage(attacker, victim, trident, level, event);
@@ -99,6 +107,8 @@ public class WatcherTriggers implements Listener {
             if (event.getPlayer().getLocation().getBlock().getType() != Material.LADDER && prevPlayersOnGround.contains(player.getUniqueId())) {
                 if (!player.isOnGround() && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
                     EcoEnchants.getAll().forEach((enchant -> {
+                        if(event.isCancelled()) return;
+                        if(!enchant.isEnabled()) return;
                         int level = EnchantChecks.getArmorPoints(player, enchant);
                         if(level == 0) return;
                         enchant.onJump(player, level, event);
@@ -127,11 +137,15 @@ public class WatcherTriggers implements Listener {
         LivingEntity attacker = (LivingEntity) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
+        if(victim.hasMetadata("NPC")) return;
+
         if(attacker instanceof Player) {
             if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
         }
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.mainhand(attacker, enchant)) return;
             int level = EnchantChecks.getMainhandLevel(attacker, enchant);
             enchant.onMeleeAttack(attacker, victim, level, event);
@@ -144,11 +158,14 @@ public class WatcherTriggers implements Listener {
             return;
 
         LivingEntity shooter = event.getEntity();
+        Arrow arrow = (Arrow) event.getProjectile();
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.mainhand(shooter, enchant)) return;
             int level = EnchantChecks.getMainhandLevel(shooter, enchant);
-            enchant.onBowShoot(shooter, level, event);
+            enchant.onBowShoot(shooter, arrow, level, event);
         }));
     }
 
@@ -163,6 +180,8 @@ public class WatcherTriggers implements Listener {
         LivingEntity victim = (LivingEntity) event.getEntity();
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             int level = EnchantChecks.getArmorPoints(victim, enchant);
             if(level == 0) return;
             enchant.onFallDamage(victim, level, event);
@@ -180,6 +199,7 @@ public class WatcherTriggers implements Listener {
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.arrow(arrow, enchant)) return;
             int level = EnchantChecks.getArrowLevel(arrow, enchant);
             enchant.onArrowHit(shooter, level, event);
@@ -198,6 +218,7 @@ public class WatcherTriggers implements Listener {
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.item(item, enchant)) return;
             int level = EnchantChecks.getItemLevel(item, enchant);
             enchant.onTridentHit(shooter, level, event);
@@ -215,6 +236,8 @@ public class WatcherTriggers implements Listener {
             return;
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.mainhand(player, enchant)) return;
             int level = EnchantChecks.getMainhandLevel(player, enchant);
             enchant.onBlockBreak(player, block, level, event);
@@ -229,6 +252,8 @@ public class WatcherTriggers implements Listener {
         LivingEntity victim = (LivingEntity) event.getEntity();
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             int level = EnchantChecks.getArmorPoints(victim, enchant);
             if(level == 0) return;
             enchant.onDamageWearingArmor(victim, level, event);
@@ -241,6 +266,8 @@ public class WatcherTriggers implements Listener {
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
             EcoEnchants.getAll().forEach((enchant -> {
+                if(event.isCancelled()) return;
+                if(!enchant.isEnabled()) return;
                 int level = EnchantChecks.getArmorPoints(player, enchant);
                 enchant.onArmorEquip(player, level, event);
             }));
@@ -252,7 +279,12 @@ public class WatcherTriggers implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
+        if(event.getBlock().getDrops(player.getInventory().getItemInMainHand()).isEmpty())
+            return;
+
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.mainhand(player, enchant)) return;
             int level = EnchantChecks.getMainhandLevel(player, enchant);
             enchant.onDamageBlock(player, block, level, event);
@@ -272,9 +304,38 @@ public class WatcherTriggers implements Listener {
         ItemStack item = TridentStack.getTridentStack(trident);
 
         EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
             if (!EnchantChecks.item(item, enchant)) return;
             int level = EnchantChecks.getItemLevel(item, enchant);
             enchant.onTridentLaunch(shooter, trident, level, event);
+        }));
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onDeflect(EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof Player))
+            return;
+
+        if (!(event.getDamager() instanceof LivingEntity))
+            return;
+
+        Player blocker = (Player) event.getEntity();
+
+        LivingEntity attacker = (LivingEntity) event.getDamager();
+
+        if(!blocker.isBlocking()) return;
+
+        if(!AntigriefManager.canInjure(blocker, attacker)) return;
+
+        EcoEnchants.getAll().forEach((enchant -> {
+            if(event.isCancelled()) return;
+            if(!enchant.isEnabled()) return;
+            int level;
+            if (!EnchantChecks.offhand(blocker, enchant) && !EnchantChecks.mainhand(blocker, enchant)) return;
+            if(EnchantChecks.offhand(blocker, enchant)) level = EnchantChecks.getOffhandLevel(blocker, enchant);
+            else level = EnchantChecks.getMainhandLevel(blocker, enchant);
+            enchant.onDeflect(blocker, attacker, level, event);
         }));
     }
 }
