@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.NumberUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
@@ -25,6 +26,8 @@ public class EnchantingListeners implements Listener {
     private static final Set<Material> secondary = new HashSet<Material>() {{
         add(Material.ELYTRA);
         add(Material.SHIELD);
+        add(Material.FLINT_AND_STEEL);
+        add(Material.SHEARS);
     }};
     public static HashMap<Player, int[]> currentlyEnchantingSecondary = new HashMap<>();
 
@@ -168,9 +171,11 @@ public class EnchantingListeners implements Listener {
     }
 
     @EventHandler
-    public void allowElytraEnchant(PrepareItemEnchantEvent event) {
+    public void secondaryEnchant(PrepareItemEnchantEvent event) {
+        int maxLevel = ConfigManager.getConfig().getInt("enchanting-table.maximum-obtainable-level");
+
         try {
-            event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), ConfigManager.getConfig().getInt("enchanting-table.maximum-obtainable-level")));
+            event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), maxLevel));
         } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
 
         if (!secondary.contains(event.getItem().getType()))
@@ -184,38 +189,44 @@ public class EnchantingListeners implements Listener {
             bonus = 1;
         }
 
+        double baseLevel = (NumberUtils.randInt(1, 8) + Math.floor((double) bonus/2) + NumberUtils.randInt(0, bonus));
 
-        int level2 = (int) Math.ceil(NumberUtils.randFloat(1.1, 2.5));
-        EnchantmentOffer offer2 = new EnchantmentOffer(Enchantment.DURABILITY, level2, (int) Math.floor(bonus * 1.5));
+        int bottomEnchantLevel = (int) Math.ceil(Math.max(baseLevel / 3, 1));
+        int midEnchantLevel = (int) ((baseLevel * 2)/3) + 1;
+        int topEnchantLevel = (int) Math.max(baseLevel, bonus * 2);
 
-        EnchantmentOffer offer3 = new EnchantmentOffer(Enchantment.DURABILITY, NumberUtils.randInt(2, 3), bonus * 2);
+        bottomEnchantLevel *= (int) Math.ceil((double) maxLevel/30);
+        midEnchantLevel *= (int) Math.ceil((double) maxLevel/30);
+        topEnchantLevel *= (int) Math.ceil((double) maxLevel/30);
 
-        if (offer3.getEnchantmentLevel() < offer2.getEnchantmentLevel()) {
-            int temp = offer2.getEnchantmentLevel();
-            offer2.setEnchantmentLevel(offer3.getEnchantmentLevel());
-            offer3.setEnchantmentLevel(temp);
-        }
+        bottomEnchantLevel = NumberUtils.equalIfOver(bottomEnchantLevel, maxLevel);
+
+        int midUnbreakingLevel = NumberUtils.randInt(1, 3);
+        if(midUnbreakingLevel < 2) midUnbreakingLevel = 2;
+        if(midEnchantLevel < 15) midUnbreakingLevel = 1;
+
+        int topUnbreakingLevel = 3;
+        if(topEnchantLevel < 20) topUnbreakingLevel = 2;
+        if(topEnchantLevel < 10) topUnbreakingLevel = 1;
 
         EnchantmentOffer[] offers = {
-                new EnchantmentOffer(Enchantment.DURABILITY, 1, bonus),
-                offer2,
-                offer3
+                new EnchantmentOffer(Enchantment.DURABILITY, 1, bottomEnchantLevel),
+                new EnchantmentOffer(Enchantment.DURABILITY, midUnbreakingLevel, midEnchantLevel),
+                new EnchantmentOffer(Enchantment.DURABILITY, topUnbreakingLevel, topEnchantLevel),
         };
 
-        event.getOffers()[0] = offers[0];
-        if (bonus > 5) {
-            event.getOffers()[1] = offers[1];
-        }
-        if (bonus > 10) {
-            event.getOffers()[2] = offers[2];
+        for(int i = 0; i < offers.length; i++) {
+            event.getOffers()[i]= offers[i];
         }
 
         currentlyEnchantingSecondary.remove(event.getEnchanter());
+
         int[] unbLevels = {
                 event.getOffers()[0].getEnchantmentLevel(),
                 event.getOffers()[1].getEnchantmentLevel(),
                 event.getOffers()[2].getEnchantmentLevel()
         };
+
         currentlyEnchantingSecondary.put(event.getEnchanter(), unbLevels);
     }
 }
