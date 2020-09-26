@@ -3,11 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockDamageEvent;
 public class BreaklessnessCurse extends EcoEnchant {
     public BreaklessnessCurse() {

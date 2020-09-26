@@ -4,8 +4,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
-import com.willfp.ecoenchants.util.Logger;
-import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemFlag;
 
 public final class PacketSetSlot extends AbstractPacketAdapter {

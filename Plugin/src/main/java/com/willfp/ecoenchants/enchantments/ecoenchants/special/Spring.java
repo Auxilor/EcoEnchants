@@ -1,20 +1,11 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.google.common.collect.Sets;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
-import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.potion.PotionEffectType;
-
-import java.text.DecimalFormat;
-import java.util.Set;
-import java.util.UUID;
 public class Spring extends EcoEnchant {
     public Spring() {
         super(

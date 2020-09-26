@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.util;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 
 public class Logger {
