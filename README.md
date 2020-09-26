@@ -25,10 +25,10 @@
 </p>
 
 
-![Title](https://i.imgur.com/O08LBOR.png)
-![Features](https://i.imgur.com/nrBvTlm.png)
-![Docs](https://i.imgur.com/3LzH2tB.png)
-![Compatibility](https://i.imgur.com/jMHT1rF.png)
+![Title](https://i.imgur.com/hyPlV1m.png)
+![Features](https://i.imgur.com/Tqcu1o2.png)
+![Docs](https://i.imgur.com/TRDDt5W.png)
+![Compatibility](https://i.imgur.com/mlAGlKn.png)
 
 ## License
 *Click here to read [the entire license](https://github.com/Auxilor/EcoEnchants/blob/master/LICENSE.md).* 
