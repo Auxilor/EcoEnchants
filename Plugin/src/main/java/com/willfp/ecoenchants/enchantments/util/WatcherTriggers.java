@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.google.common.collect.Sets;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -102,13 +101,11 @@ public class WatcherTriggers implements Listener {
             jumpVelocity = Float.parseFloat(df.format(jumpVelocity).replace(',', '.'));
             if (event.getPlayer().getLocation().getBlock().getType() != Material.LADDER && prevPlayersOnGround.contains(player.getUniqueId())) {
                 if (!player.isOnGround() && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
-                    EcoEnchants.getAll().forEach((enchant -> {
+                    EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, level) -> {
                         if(event.isCancelled()) return;
                         if(!enchant.isEnabled()) return;
-                        int level = EnchantChecks.getArmorPoints(player, enchant);
-                        if(level == 0) return;
                         enchant.onJump(player, level, event);
-                    }));
+                    });
                 }
             }
         }
@@ -171,13 +168,11 @@ public class WatcherTriggers implements Listener {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnArmor(victim).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            int level = EnchantChecks.getArmorPoints(victim, enchant);
-            if(level == 0) return;
             enchant.onFallDamage(victim, level, event);
-        }));
+        });
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -237,13 +232,11 @@ public class WatcherTriggers implements Listener {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnArmor(victim).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            int level = EnchantChecks.getArmorPoints(victim, enchant);
-            if(level == 0) return;
             enchant.onDamageWearingArmor(victim, level, event);
-        }));
+        });
     }
 
     @EventHandler(ignoreCancelled = true)

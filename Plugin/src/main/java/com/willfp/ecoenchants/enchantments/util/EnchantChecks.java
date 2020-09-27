@@ -183,6 +183,22 @@ public final class EnchantChecks {
         return armorPoints.get();
     }
 
+    public static Map<EcoEnchant, Integer> getEnchantsOnArmor(LivingEntity entity) {
+        if(entity.getEquipment() == null)
+            return new HashMap<>();
+
+        AtomicInteger armorPoints = new AtomicInteger(0);
+        List<ItemStack> armor = Arrays.asList(entity.getEquipment().getArmorContents());
+
+        Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
+
+        armor.forEach((itemStack -> {
+            ecoEnchants.putAll(EnchantChecks.getEnchantsOnItem(itemStack));
+        }));
+
+        return ecoEnchants;
+    }
+
     public static boolean helmet(LivingEntity entity, Enchantment enchantment) {
         return getHelmetLevel(entity, enchantment) != 0;
     }
