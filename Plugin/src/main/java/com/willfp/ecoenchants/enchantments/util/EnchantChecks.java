@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants.enchantments.util;
 
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.ItemDurability;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -29,6 +32,22 @@ public final class EnchantChecks {
         return item.getItemMeta().getEnchantLevel(enchantment);
     }
 
+    public static Map<EcoEnchant, Integer> getEnchantsOnItem(ItemStack item) {
+        if(item == null) return new HashMap<>();
+        if(item.getType().equals(Material.AIR)) return new HashMap<>();
+        if(!item.hasItemMeta()) return new HashMap<>();
+        if(item.getItemMeta() == null) return new HashMap<>();
+
+        Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
+        item.getEnchantments().forEach(((enchantment, integer) -> {
+            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+                ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
+            }
+        }));
+
+        return ecoEnchants;
+    }
+
     public static boolean arrow(Arrow arrow, Enchantment enchantment) {
         return getArrowLevel(arrow, enchantment) != 0;
     }
@@ -46,6 +65,23 @@ public final class EnchantChecks {
         return enchantments.get(enchantment);
     }
 
+    public static Map<EcoEnchant, Integer> getEnchantsOnArrow(Arrow arrow) {
+        if (arrow.getMetadata("enchantments").isEmpty()) return new HashMap<>();
+
+        MetadataValue enchantmentsMetaValue = arrow.getMetadata("enchantments").get(0);
+        if (!(enchantmentsMetaValue.value() instanceof Map))
+            return new HashMap<>();
+
+        Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
+        ((Map<Enchantment, Integer>) enchantmentsMetaValue.value()).forEach(((enchantment, integer) -> {
+            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+                ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
+            }
+        }));
+
+        return ecoEnchants;
+    }
+
     public static boolean mainhand(LivingEntity entity, Enchantment enchantment) {
         return getMainhandLevel(entity, enchantment) != 0;
     }
@@ -58,6 +94,26 @@ public final class EnchantChecks {
 
         return getItemLevel(item, enchantment);
     }
+
+    public static Map<EcoEnchant, Integer> getEnchantsOnMainhand(LivingEntity entity) {
+        if(entity.getEquipment() == null)
+            return new HashMap<>();
+
+        ItemStack item = entity.getEquipment().getItemInMainHand();
+
+        if(item == null) return new HashMap<>();
+
+        Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
+
+        item.getEnchantments().forEach(((enchantment, integer) -> {
+            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+                ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
+            }
+        }));
+
+        return ecoEnchants;
+    }
+
     public static boolean offhand(LivingEntity entity, Enchantment enchantment) {
         return getOffhandLevel(entity, enchantment) != 0;
     }
@@ -69,6 +125,25 @@ public final class EnchantChecks {
         ItemStack item = entity.getEquipment().getItemInOffHand();
 
         return getItemLevel(item, enchantment);
+    }
+
+    public static Map<EcoEnchant, Integer> getEnchantsOnOffhand(LivingEntity entity) {
+        if(entity.getEquipment() == null)
+            return new HashMap<>();
+
+        ItemStack item = entity.getEquipment().getItemInOffHand();
+
+        if(item == null) return new HashMap<>();
+
+        Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
+
+        item.getEnchantments().forEach(((enchantment, integer) -> {
+            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+                ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
+            }
+        }));
+
+        return ecoEnchants;
     }
 
     public static int getArmorPoints(LivingEntity entity, Enchantment enchantment) {

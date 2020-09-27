@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.google.common.collect.Sets;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -46,11 +47,9 @@ public class WatcherTriggers implements Listener {
 
         if(event.isCancelled()) return;
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnArrow(arrow).forEach(((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.arrow(arrow, enchant)) return;
-            int level = EnchantChecks.getArrowLevel(arrow, enchant);
             enchant.onArrowDamage(attacker, victim, arrow, level, event);
         }));
     }
@@ -81,11 +80,9 @@ public class WatcherTriggers implements Listener {
             if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
         }
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.item(item, enchant)) return;
-            int level = EnchantChecks.getItemLevel(item, enchant);
             enchant.onTridentDamage(attacker, victim, trident, level, event);
         }));
     }
@@ -142,13 +139,11 @@ public class WatcherTriggers implements Listener {
             if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
         }
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnMainhand(attacker).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.mainhand(attacker, enchant)) return;
-            int level = EnchantChecks.getMainhandLevel(attacker, enchant);
             enchant.onMeleeAttack(attacker, victim, level, event);
-        }));
+        });
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -159,13 +154,11 @@ public class WatcherTriggers implements Listener {
         LivingEntity shooter = event.getEntity();
         Arrow arrow = (Arrow) event.getProjectile();
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnMainhand(shooter).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.mainhand(shooter, enchant)) return;
-            int level = EnchantChecks.getMainhandLevel(shooter, enchant);
             enchant.onBowShoot(shooter, arrow, level, event);
-        }));
+        });
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -197,10 +190,8 @@ public class WatcherTriggers implements Listener {
         Arrow arrow = (Arrow) event.getEntity();
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnArrow(arrow).forEach(((enchant, level) -> {
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.arrow(arrow, enchant)) return;
-            int level = EnchantChecks.getArrowLevel(arrow, enchant);
             enchant.onArrowHit(shooter, level, event);
         }));
     }
@@ -216,10 +207,8 @@ public class WatcherTriggers implements Listener {
         ItemStack item = TridentStack.getTridentStack(trident);
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.item(item, enchant)) return;
-            int level = EnchantChecks.getItemLevel(item, enchant);
             enchant.onTridentHit(shooter, level, event);
         }));
     }
@@ -234,13 +223,11 @@ public class WatcherTriggers implements Listener {
         if (event.isCancelled())
             return;
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnMainhand(player).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.mainhand(player, enchant)) return;
-            int level = EnchantChecks.getMainhandLevel(player, enchant);
             enchant.onBlockBreak(player, block, level, event);
-        }));
+        });
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -281,13 +268,11 @@ public class WatcherTriggers implements Listener {
         if(event.getBlock().getDrops(player.getInventory().getItemInMainHand()).isEmpty())
             return;
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnMainhand(player).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.mainhand(player, enchant)) return;
-            int level = EnchantChecks.getMainhandLevel(player, enchant);
             enchant.onDamageBlock(player, block, level, event);
-        }));
+        });
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -302,13 +287,11 @@ public class WatcherTriggers implements Listener {
         LivingEntity shooter = (LivingEntity) trident.getShooter();
         ItemStack item = TridentStack.getTridentStack(trident);
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
-            if (!EnchantChecks.item(item, enchant)) return;
-            int level = EnchantChecks.getItemLevel(item, enchant);
             enchant.onTridentLaunch(shooter, trident, level, event);
-        }));
+        });
     }
 
     @EventHandler(ignoreCancelled = true)
