@@ -25,7 +25,7 @@ public class Dexterous extends EcoEnchant {
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
 
         if (!EnchantChecks.item(item, this)) {
-            player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(5.0);
+            player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(4.0);
             return;
         }
 
