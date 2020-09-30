@@ -1,25 +1,26 @@
 #
-# First Strike EcoEnchant
+# Backstab EcoEnchant
 #
 
 config-version: 5.0 # Don't edit this.
 
-name: "First Strike"
-description: Increases damage dealt when entity is on max health.
+name: "Backstab"
+description: Increases damage when behind opponent
 enabled: true
 
 obtaining:
   table: true
   villager: true
   loot: true
-  rarity: rare
+  rarity: epic
 
 general-config:
   targets:
     - sword
+    - axe
   grindstoneable: true
   conflicts: []
-  maximum-level: 5
+  maximum-level: 3
 
 config:
-  damage-multiplier-per-level: 0.15
+  damage-multiplier-per-level: 0.1
