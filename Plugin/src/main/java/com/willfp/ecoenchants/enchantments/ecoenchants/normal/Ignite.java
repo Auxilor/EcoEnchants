@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Material;
@@ -33,7 +34,8 @@ public class Ignite extends EcoEnchant {
         if (!AntigriefManager.canBreakBlock(shooter, event.getHitBlock()))
             return;
 
-        if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         BlockFace face = event.getHitBlockFace();

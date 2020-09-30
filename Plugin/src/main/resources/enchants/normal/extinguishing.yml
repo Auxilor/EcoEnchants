@@ -25,4 +25,4 @@ general-config:
   maximum-level: 3
 
 config:
-  chance-per-point: 4 #Chance of being extinguished = Total points (12 points * 4 chance = 48% chance)
+  chance-per-level: 4 #Chance of being extinguished = Total points (12 points * 4 chance = 48% chance)

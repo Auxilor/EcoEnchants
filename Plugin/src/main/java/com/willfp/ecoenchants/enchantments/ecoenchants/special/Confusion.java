@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.LivingEntity;
@@ -32,9 +33,7 @@ public class Confusion extends EcoEnchant {
             if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
                 return;
         }
-
-        double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
-        if (NumberUtils.randFloat(0, 1) > level * 0.01 * chance)
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         List<ItemStack> hotbar = new ArrayList<ItemStack>();

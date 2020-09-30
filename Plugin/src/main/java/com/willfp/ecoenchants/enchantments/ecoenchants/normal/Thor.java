@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.util.Lightning;
 import com.willfp.ecoenchants.util.NumberUtils;
@@ -26,7 +27,7 @@ public class Thor extends EcoEnchant {
                 return;
         }
 
-        if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "lightning-damage");

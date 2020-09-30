@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.queue.DropQueue;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Material;
@@ -35,8 +36,7 @@ public class Necrotic extends EcoEnchant {
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
-        double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
-        if (NumberUtils.randFloat(0, 1) > level * 0.01 * chance)
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         ItemStack item = new ItemStack(Material.WITHER_SKELETON_SKULL, 1);

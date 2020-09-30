@@ -25,4 +25,4 @@ general-config:
   maximum-level: 6
 
 config:
-  chance-per-point: 2 #Chance of ignoring potion damage = Total points (16 points * 3 chance = 48% chance)
+  chance-per-level: 2 #Chance of ignoring potion damage = Total points (16 points * 3 chance = 48% chance)

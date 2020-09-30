@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.queue.DropQueue;
 import com.willfp.ecoenchants.util.NumberUtils;
@@ -50,9 +51,8 @@ public class Spearfishing extends EcoEnchant {
         if (!EnchantChecks.item(item, this)) return;
 
         int level = EnchantChecks.getItemLevel(item, this);
-
-        double chance = level * (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level")/100);
-        if(NumberUtils.randFloat(0, 1) > chance) return;
+        if(!EnchantmentUtils.passedChance(this, level))
+            return;
 
         List<Material> potentialDrops = new ArrayList<>();
         this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "drops").forEach(material -> {

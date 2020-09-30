@@ -24,4 +24,4 @@ general-config:
   conflicts: []
 
 config:
-  chance: 15
+  chance-per-level: 15

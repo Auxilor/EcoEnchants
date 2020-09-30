@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -22,11 +23,10 @@ public class Paralyze extends EcoEnchant {
 
     @Override
     public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
-        double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
 
-        double finalChance = (chance * level)/100;
-        if(NumberUtils.randFloat(0, 1) > finalChance) return;
+        if(!EnchantmentUtils.passedChance(this, level))
+            return;
 
         int finalDuration = duration * level;
 

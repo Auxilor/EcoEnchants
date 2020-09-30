@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.queue.DropQueue;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.GameMode;
@@ -27,9 +28,7 @@ public class Transfuse extends EcoEnchant {
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
 
-        double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
-
-        if(NumberUtils.randFloat(0, 1) > level * chance * 0.01)
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         event.setDropItems(false);

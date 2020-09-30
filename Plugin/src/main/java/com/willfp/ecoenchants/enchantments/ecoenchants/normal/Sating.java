@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,9 +30,7 @@ public class Sating extends EcoEnchant {
 
         int level = EnchantChecks.getHelmetLevel(player, this);
 
-        double chance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level");
-
-        if (NumberUtils.randFloat(0, 1) > level * 0.01 * chance)
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         event.setCancelled(true);

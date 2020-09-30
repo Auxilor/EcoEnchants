@@ -26,4 +26,4 @@ general-config:
 
 config:
   # Each level of evasion on each piece of armor counts as a point, so if a player is wearing 4 pieces of armor all with Evasion 3, then that would be 12 points
-  chance-per-point: 0.5
+  chance-per-level: 0.5

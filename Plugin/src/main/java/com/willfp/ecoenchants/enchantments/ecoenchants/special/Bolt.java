@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.util.Lightning;
 import com.willfp.ecoenchants.util.NumberUtils;
@@ -25,8 +26,7 @@ public class Bolt extends EcoEnchant {
             if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
                 return;
         }
-
-        if (NumberUtils.randFloat(0, 1) > level * 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "lightning-damage");

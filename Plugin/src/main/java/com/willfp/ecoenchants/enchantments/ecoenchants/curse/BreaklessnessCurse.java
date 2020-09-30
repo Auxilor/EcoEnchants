@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class BreaklessnessCurse extends EcoEnchant {
 
     @Override
     public void onDamageBlock(Player player, Block block, int level, BlockDamageEvent event) {
-        if (NumberUtils.randFloat(0, 1) > 0.01 * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance"))
+        if(!EnchantmentUtils.passedChance(this, level))
             return;
 
         event.setCancelled(true);
