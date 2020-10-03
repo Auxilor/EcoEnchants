@@ -16,6 +16,9 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.obtaining.EnchantingListeners;
+import com.willfp.ecoenchants.enchantments.obtaining.LootPopulator;
+import com.willfp.ecoenchants.enchantments.obtaining.VillagerListeners;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.events.armorequip.ArmorListener;
 import com.willfp.ecoenchants.events.armorequip.DispenserArmorListener;
@@ -33,10 +36,7 @@ import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
-import com.willfp.ecoenchants.listeners.EnchantingListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
-import com.willfp.ecoenchants.listeners.VillagerListeners;
-import com.willfp.ecoenchants.naturalloot.LootPopulator;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.TridentStack;
@@ -279,9 +279,9 @@ public class Loader {
          */
 
         Logger.info("Loading Commands...");
-        Bukkit.getPluginCommand("ecoreload").setExecutor(new CommandEcoreload());
-        Bukkit.getPluginCommand("ecodebug").setExecutor(new CommandEcodebug());
-        Bukkit.getPluginCommand("enchantinfo").setExecutor(new CommandEnchantinfo());
+        new CommandEcoreload().register();
+        new CommandEcodebug().register();
+        new CommandEnchantinfo().register();
         Logger.info("");
         
         /*

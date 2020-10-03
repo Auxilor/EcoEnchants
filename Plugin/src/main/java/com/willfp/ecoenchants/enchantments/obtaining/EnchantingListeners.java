@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.listeners;
+package com.willfp.ecoenchants.enchantments.obtaining;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
