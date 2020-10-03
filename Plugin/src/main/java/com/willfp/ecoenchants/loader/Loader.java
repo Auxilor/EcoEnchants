@@ -159,6 +159,7 @@ public class Loader {
             if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
                 EssentialsManager.registerEssentials(new IntegrationEssentials());
                 Logger.info("Essentials: §aENABLED");
+                EssentialsManager.registerEnchantments();
             } else {
                 Logger.info("Essentials: §9DISABLED");
             }
@@ -315,7 +316,6 @@ public class Loader {
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
-            EssentialsManager.registerEnchantments();
             Logger.info(EcoEnchants.getAll().size() + " Enchantments Loaded:");
             EcoEnchants.getAll().forEach((ecoEnchant -> {
                 if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {

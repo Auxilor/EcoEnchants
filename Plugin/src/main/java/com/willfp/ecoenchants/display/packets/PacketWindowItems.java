@@ -14,6 +14,7 @@ public final class PacketWindowItems extends AbstractPacketAdapter {
     @Override
     public void onSend(PacketContainer packet) {
         packet.getItemListModifier().modify(0, (itemStacks) -> {
+            if(itemStacks == null) return null;
             itemStacks.forEach(item -> {
                 boolean hideEnchants = false;
 
