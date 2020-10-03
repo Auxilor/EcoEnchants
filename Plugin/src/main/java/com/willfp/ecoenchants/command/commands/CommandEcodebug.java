@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public final class CommandEcodebug extends AbstractCommand {
     public CommandEcodebug() {
         super("ecodebug", "ecoenchants.ecodebug", true);

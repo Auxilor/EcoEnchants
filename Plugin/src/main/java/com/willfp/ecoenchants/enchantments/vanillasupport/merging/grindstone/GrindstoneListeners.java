@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.grindstone;
+package com.willfp.ecoenchants.enchantments.vanillasupport.merging.grindstone;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;

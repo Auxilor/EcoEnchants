@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.anvil;
+package com.willfp.ecoenchants.enchantments.vanillasupport.merging.anvil;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
