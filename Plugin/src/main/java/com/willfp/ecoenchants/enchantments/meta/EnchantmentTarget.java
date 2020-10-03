@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.util.Registerable;
 import org.bukkit.Material;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class EnchantmentTarget implements Registerable {
      */
     public EnchantmentTarget(String name, Set<Material> materials) {
         this.name = name;
+        materials.removeIf(Objects::isNull);
         this.materials = materials;
     }
 
