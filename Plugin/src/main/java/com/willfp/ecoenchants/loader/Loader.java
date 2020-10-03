@@ -111,91 +111,6 @@ public class Loader {
         new PacketSetSlot().register();
         new PacketWindowItems().register();
 
-        /*
-        Load land management support
-         */
-
-        Logger.info("Scheduling Integration Loading...");
-
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-
-            Logger.info("Loading Integrations...");
-
-            if(Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
-                AntigriefManager.registerAntigrief(new AntigriefWorldGuard());
-                Logger.info("WorldGuard: §aENABLED");
-            } else {
-                Logger.info("WorldGuard: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("GriefPrevention")) {
-                AntigriefManager.registerAntigrief(new AntigriefGriefPrevention());
-                Logger.info("GriefPrevention: §aENABLED");
-            } else {
-                Logger.info("GriefPrevention: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")) {
-                AntigriefManager.registerAntigrief(new AntigriefFactionsUUID());
-                Logger.info("FactionsUUID: §aENABLED");
-            } else {
-                Logger.info("FactionsUUID: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("Towny")) {
-                AntigriefManager.registerAntigrief(new AntigriefTowny());
-                Logger.info("Towny: §aENABLED");
-            } else {
-                Logger.info("Towny: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("Lands")) {
-                AntigriefManager.registerAntigrief(new AntigriefLands());
-                Logger.info("Lands: §aENABLED");
-            } else {
-                Logger.info("Lands: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
-                EssentialsManager.registerEssentials(new IntegrationEssentials());
-                Logger.info("Essentials: §aENABLED");
-                EssentialsManager.registerEnchantments();
-            } else {
-                Logger.info("Essentials: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
-                AnticheatManager.registerAnticheat(new AnticheatAAC());
-                Logger.info("AAC: §aENABLED");
-            } else {
-                Logger.info("AAC: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("Matrix")) {
-                AnticheatManager.registerAnticheat(new AnticheatMatrix());
-                Logger.info("Matrix: §aENABLED");
-            } else {
-                Logger.info("Matrix: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("NoCheatPlus")) {
-                AnticheatManager.registerAnticheat(new AnticheatNCP());
-                Logger.info("NCP: §aENABLED");
-            } else {
-                Logger.info("NCP: §9DISABLED");
-            }
-
-            if(Bukkit.getPluginManager().isPluginEnabled("Spartan")) {
-                AnticheatManager.registerAnticheat(new AnticheatSpartan());
-                Logger.info("Spartan: §aENABLED");
-            } else {
-                Logger.info("Spartan: §9DISABLED");
-            }
-
-            Logger.info("");
-
-        }, 1);
-
         Logger.info("");
 
         /*
@@ -246,18 +161,6 @@ public class Loader {
         Bukkit.getPluginManager().registerEvents(new VillagerListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getPluginManager().registerEvents(new ArrowListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getPluginManager().registerEvents(new WatcherTriggers(), EcoEnchantsPlugin.getInstance());
-        Logger.info("");
-
-        /*
-        Add Block Populators
-         */
-
-        Logger.info("Scheduling Adding Block Populators...");
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            Bukkit.getServer().getWorlds().forEach((world -> {
-                world.getPopulators().add(new LootPopulator());
-            }));
-        }, 1);
         Logger.info("");
 
         /*
@@ -390,9 +293,25 @@ public class Loader {
         Logger.info("");
 
         /*
-        Start update checker
+        Finish
          */
 
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), Loader::postLoad, 1);
+
+        Logger.info("Loaded §aEcoEnchants!");
+    }
+
+    /**
+     * Called after server is loaded
+     */
+    public static void postLoad() {
+        Logger.info("Adding block populators...");
+
+        Bukkit.getServer().getWorlds().forEach((world -> {
+            world.getPopulators().add(new LootPopulator());
+        }));
+
+        Logger.info("");
 
         new UpdateChecker(EcoEnchantsPlugin.getInstance(), 79573).getVersion((version) -> {
             DefaultArtifactVersion currentVersion = new DefaultArtifactVersion(EcoEnchantsPlugin.getInstance().getDescription().getVersion());
@@ -417,11 +336,81 @@ public class Loader {
             Logger.info("----------------------------");
         });
 
-        /*
-        Finish
-         */
+        Logger.info("");
+        Logger.info("Loading Integrations...");
 
-        Logger.info("Loaded §aEcoEnchants!");
+        if(Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
+            AntigriefManager.registerAntigrief(new AntigriefWorldGuard());
+            Logger.info("WorldGuard: §aENABLED");
+        } else {
+            Logger.info("WorldGuard: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("GriefPrevention")) {
+            AntigriefManager.registerAntigrief(new AntigriefGriefPrevention());
+            Logger.info("GriefPrevention: §aENABLED");
+        } else {
+            Logger.info("GriefPrevention: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")) {
+            AntigriefManager.registerAntigrief(new AntigriefFactionsUUID());
+            Logger.info("FactionsUUID: §aENABLED");
+        } else {
+            Logger.info("FactionsUUID: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Towny")) {
+            AntigriefManager.registerAntigrief(new AntigriefTowny());
+            Logger.info("Towny: §aENABLED");
+        } else {
+            Logger.info("Towny: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Lands")) {
+            AntigriefManager.registerAntigrief(new AntigriefLands());
+            Logger.info("Lands: §aENABLED");
+        } else {
+            Logger.info("Lands: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
+            EssentialsManager.registerEssentials(new IntegrationEssentials());
+            Logger.info("Essentials: §aENABLED");
+            EssentialsManager.registerEnchantments();
+        } else {
+            Logger.info("Essentials: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
+            AnticheatManager.registerAnticheat(new AnticheatAAC());
+            Logger.info("AAC: §aENABLED");
+        } else {
+            Logger.info("AAC: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Matrix")) {
+            AnticheatManager.registerAnticheat(new AnticheatMatrix());
+            Logger.info("Matrix: §aENABLED");
+        } else {
+            Logger.info("Matrix: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("NoCheatPlus")) {
+            AnticheatManager.registerAnticheat(new AnticheatNCP());
+            Logger.info("NCP: §aENABLED");
+        } else {
+            Logger.info("NCP: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Spartan")) {
+            AnticheatManager.registerAnticheat(new AnticheatSpartan());
+            Logger.info("Spartan: §aENABLED");
+        } else {
+            Logger.info("Spartan: §9DISABLED");
+        }
+
+        Logger.info("");
     }
 
     /**

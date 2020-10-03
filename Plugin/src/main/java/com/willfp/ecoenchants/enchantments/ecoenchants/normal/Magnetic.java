@@ -5,12 +5,20 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.util.EcoRunnable;
 import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
+
+import java.util.HashMap;
+
 public class Magnetic extends EcoEnchant implements EcoRunnable {
     public Magnetic() {
         super(
@@ -18,13 +26,37 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
         );
     }
 
+    private HashMap<Player, Integer> players = new HashMap<>();
+    private double initialDistance = 1;
+    private double bonus = 1;
+
+    @EventHandler
+    public void onArmorEquip(ArmorEquipEvent event) {
+        refresh();
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        refresh();
+    }
+
+    @EventHandler
+    public void onPlayerLeave(PlayerQuitEvent event) {
+        refresh();
+    }
+
+    private void refresh() {
+        players.clear();
+        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
+            players.put(player, EnchantChecks.getArmorPoints(player, this, 0));
+        });
+        initialDistance = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
+        bonus = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
+    }
+
     @Override
     public void run() {
-        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> EnchantChecks.getArmorPoints(player, EcoEnchants.MAGNETIC, 0) > 0).forEach((player -> {
-            int level = EnchantChecks.getArmorPoints(player, EcoEnchants.MAGNETIC, 0);
-
-            double initialDistance = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
-            double bonus = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
+        players.forEach((player, level) -> {
             double distance = initialDistance + (level * bonus);
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
@@ -42,7 +74,7 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
                     e.setVelocity(vector);
                 }
             }
-        }));
+        });
     }
 
     @Override
