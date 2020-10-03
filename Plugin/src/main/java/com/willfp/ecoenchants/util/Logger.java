@@ -1,17 +1,20 @@
 package com.willfp.ecoenchants.util;
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 
 public class Logger {
+    private static final EcoEnchantsPlugin INSTANCE = EcoEnchantsPlugin.getInstance();
+
     public static void info(String message) {
-        Bukkit.getLogger().info(StringUtils.translate(message));
+        INSTANCE.getLogger().info(StringUtils.translate(message));
     }
 
     public static void warn(String message) {
-        Bukkit.getLogger().warning(StringUtils.translate(message));
+        INSTANCE.getLogger().warning(StringUtils.translate(message));
     }
 
     public static void error(String message) {
-        Bukkit.getLogger().severe(StringUtils.translate(message));
+        INSTANCE.getLogger().severe(StringUtils.translate(message));
     }
 }

@@ -26,7 +26,7 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
         );
     }
 
-    private HashMap<Player, Integer> players = new HashMap<>();
+    private final HashMap<Player, Integer> players = new HashMap<>();
     private double initialDistance = 1;
     private double bonus = 1;
 
