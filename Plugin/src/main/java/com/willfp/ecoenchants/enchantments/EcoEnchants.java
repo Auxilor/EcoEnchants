@@ -316,7 +316,6 @@ public class EcoEnchants {
         for (EcoEnchant ecoEnchant : new HashSet<>(getAll())) {
             ecoEnchant.update();
         }
-        EssentialsManager.registerEnchantments();
     }
 
     /**

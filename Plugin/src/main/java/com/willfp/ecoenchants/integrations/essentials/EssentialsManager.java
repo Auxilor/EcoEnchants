@@ -6,7 +6,7 @@ import java.util.Set;
 public class EssentialsManager {
     private static final Set<EssentialsWrapper> registered = new HashSet<>();
 
-    public static void registerAntigrief(EssentialsWrapper essentials) {
+    public static void registerEssentials(EssentialsWrapper essentials) {
         registered.add(essentials);
     }
 

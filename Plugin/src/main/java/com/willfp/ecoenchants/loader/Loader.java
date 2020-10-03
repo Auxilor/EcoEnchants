@@ -26,6 +26,8 @@ import com.willfp.ecoenchants.grindstone.GrindstoneListeners;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatAAC;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
+import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatNCP;
+import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatSpartan;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
@@ -155,7 +157,7 @@ public class Loader {
             }
 
             if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
-                EssentialsManager.registerAntigrief(new IntegrationEssentials());
+                EssentialsManager.registerEssentials(new IntegrationEssentials());
                 Logger.info("Essentials: §aENABLED");
             } else {
                 Logger.info("Essentials: §9DISABLED");
@@ -176,14 +178,14 @@ public class Loader {
             }
 
             if(Bukkit.getPluginManager().isPluginEnabled("NoCheatPlus")) {
-                AnticheatManager.registerAnticheat(new AnticheatAAC());
+                AnticheatManager.registerAnticheat(new AnticheatNCP());
                 Logger.info("NCP: §aENABLED");
             } else {
                 Logger.info("NCP: §9DISABLED");
             }
 
             if(Bukkit.getPluginManager().isPluginEnabled("Spartan")) {
-                AnticheatManager.registerAnticheat(new AnticheatAAC());
+                AnticheatManager.registerAnticheat(new AnticheatSpartan());
                 Logger.info("Spartan: §aENABLED");
             } else {
                 Logger.info("Spartan: §9DISABLED");
@@ -313,6 +315,7 @@ public class Loader {
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
+            EssentialsManager.registerEnchantments();
             Logger.info(EcoEnchants.getAll().size() + " Enchantments Loaded:");
             EcoEnchants.getAll().forEach((ecoEnchant -> {
                 if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
