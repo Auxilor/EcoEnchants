@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.loader;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.enchantments.vanillasupport.merging.anvil.AnvilListeners;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
@@ -16,16 +15,17 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
-import com.willfp.ecoenchants.enchantments.vanillasupport.obtaining.EnchantingListeners;
-import com.willfp.ecoenchants.enchantments.vanillasupport.obtaining.LootPopulator;
-import com.willfp.ecoenchants.enchantments.vanillasupport.obtaining.VillagerListeners;
+import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
+import com.willfp.ecoenchants.enchantments.support.merging.grindstone.GrindstoneListeners;
+import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners;
+import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
+import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.events.armorequip.ArmorListener;
 import com.willfp.ecoenchants.events.armorequip.DispenserArmorListener;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityListeners;
 import com.willfp.ecoenchants.events.naturalexpgainevent.NaturalExpGainListeners;
 import com.willfp.ecoenchants.extensions.ExtensionManager;
-import com.willfp.ecoenchants.enchantments.vanillasupport.merging.grindstone.GrindstoneListeners;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatAAC;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
@@ -40,13 +40,14 @@ import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.EcoRunnable;
+import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.UpdateChecker;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.event.HandlerList;
 import org.bukkit.generator.BlockPopulator;
 
 import java.util.ArrayList;
@@ -431,5 +432,26 @@ public class Loader {
         Logger.info("§cUnloading Extensions...");
         ExtensionManager.unloadExtensions();
         Logger.info("§fBye! :)");
+    }
+
+    /**
+     * Called by /ecoreload
+     */
+    public static void reload() {
+        ConfigManager.updateConfigs();
+        EnchantmentRarity.update();
+        EnchantmentTarget.update();
+        EcoEnchants.update();
+        EnchantDisplay.update();
+
+        EcoEnchants.getAll().forEach((ecoEnchant -> {
+            HandlerList.unregisterAll(ecoEnchant);
+
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+                if(ecoEnchant.isEnabled()) {
+                    Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
+                }
+            }, 1);
+        }));
     }
 }

@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableSet;
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.util.Registerable;
+import com.willfp.ecoenchants.util.interfaces.Registerable;
 import org.bukkit.Material;
 
 import java.util.HashSet;

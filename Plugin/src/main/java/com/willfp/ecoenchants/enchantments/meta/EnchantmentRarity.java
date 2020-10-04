@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.util.Registerable;
+import com.willfp.ecoenchants.util.interfaces.Registerable;
 import org.bukkit.ChatColor;
 
 import java.util.HashSet;
@@ -117,6 +117,7 @@ public class EnchantmentRarity implements Registerable {
      * Update all rarities
      * Called on /ecoreload
      */
+
     public static void update() {
         Set<String> raritiesNames = ConfigManager.getRarity().getRarities();
         raritiesNames.forEach((rarity) -> {

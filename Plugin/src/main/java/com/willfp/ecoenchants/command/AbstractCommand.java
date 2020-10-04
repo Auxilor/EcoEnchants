@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.command;
 
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.util.Registerable;
+import com.willfp.ecoenchants.util.interfaces.Registerable;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

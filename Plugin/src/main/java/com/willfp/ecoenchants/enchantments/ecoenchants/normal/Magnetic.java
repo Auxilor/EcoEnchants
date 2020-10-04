@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
-import com.willfp.ecoenchants.util.EcoRunnable;
+import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;

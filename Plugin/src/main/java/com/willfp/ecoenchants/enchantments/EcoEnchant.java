@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
-import com.willfp.ecoenchants.util.Registerable;
+import com.willfp.ecoenchants.util.interfaces.Registerable;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;

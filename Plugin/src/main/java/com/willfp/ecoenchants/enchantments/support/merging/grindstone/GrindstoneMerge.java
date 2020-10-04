@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.vanillasupport.merging.grindstone;
+package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;

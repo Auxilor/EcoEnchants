@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.util.EcoRunnable;
+import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;

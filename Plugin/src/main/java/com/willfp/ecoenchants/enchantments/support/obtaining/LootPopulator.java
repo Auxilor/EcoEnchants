@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.vanillasupport.obtaining;
+package com.willfp.ecoenchants.enchantments.support.obtaining;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;

@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.vanillasupport.obtaining;
+package com.willfp.ecoenchants.enchantments.support.obtaining;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -49,6 +49,8 @@ public class VillagerListeners implements Listener {
             if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
                 continue;
             if (!enchantment.canGetFromVillager())
+                continue;
+            if(!enchantment.isEnabled())
                 continue;
 
             int level;
