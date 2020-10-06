@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-public class Abrasion extends EcoEnchant {
+public final class Abrasion extends EcoEnchant {
     public Abrasion() {
         super(
                 new EcoEnchantBuilder("abrasion", EnchantmentType.NORMAL,5.0)

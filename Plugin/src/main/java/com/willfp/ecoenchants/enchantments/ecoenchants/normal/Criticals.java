@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Criticals extends EcoEnchant {
+public final class Criticals extends EcoEnchant {
     public Criticals() {
         super(
                 new EcoEnchantBuilder("criticals", EnchantmentType.NORMAL,5.0)

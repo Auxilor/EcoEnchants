@@ -11,7 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-public class BlastMining extends EcoEnchant {
+public final class BlastMining extends EcoEnchant {
     public BlastMining() {
         super(
                 new EcoEnchantBuilder("blast_mining", EnchantmentType.NORMAL,5.0)

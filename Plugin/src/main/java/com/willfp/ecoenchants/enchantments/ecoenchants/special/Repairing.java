@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
 
 import java.util.Arrays;
-public class Repairing extends EcoEnchant implements EcoRunnable {
+public final class Repairing extends EcoEnchant implements EcoRunnable {
     public Repairing() {
         super(
                 new EcoEnchantBuilder("repairing", EnchantmentType.SPECIAL, 5.0)

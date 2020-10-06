@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Hellish extends EcoEnchant {
+public final class Hellish extends EcoEnchant {
     public Hellish() {
         super(
                 new EcoEnchantBuilder("hellish", EnchantmentType.NORMAL, 5.0)

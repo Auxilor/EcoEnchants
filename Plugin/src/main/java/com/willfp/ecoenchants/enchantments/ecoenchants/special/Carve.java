@@ -10,7 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-public class Carve extends EcoEnchant {
+public final class Carve extends EcoEnchant {
     public Carve() {
         super(
                 new EcoEnchantBuilder("carve", EnchantmentType.SPECIAL,5.0)

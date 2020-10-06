@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-public class MagmaWalker extends EcoEnchant {
+public final class MagmaWalker extends EcoEnchant {
     public MagmaWalker() {
         super(
                 new EcoEnchantBuilder("magma_walker", EnchantmentType.NORMAL, 5.0)

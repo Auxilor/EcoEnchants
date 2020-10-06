@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
-public class Kinetic extends EcoEnchant {
+public final class Kinetic extends EcoEnchant {
     public Kinetic() {
         super(
                 new EcoEnchantBuilder("kinetic", EnchantmentType.NORMAL, 5.0)

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public class Flinch extends EcoEnchant {
+public final class Flinch extends EcoEnchant {
     public Flinch() {
         super(
                 new EcoEnchantBuilder("flinch", EnchantmentType.NORMAL, 5.0)

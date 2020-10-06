@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 import java.util.*;
-public class Soulbound extends EcoEnchant {
+public final class Soulbound extends EcoEnchant {
     public Soulbound() {
         super(
                 new EcoEnchantBuilder("soulbound", EnchantmentType.SPECIAL, 5.0)

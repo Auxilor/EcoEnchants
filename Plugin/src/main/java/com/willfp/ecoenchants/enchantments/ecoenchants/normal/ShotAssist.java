@@ -9,7 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class ShotAssist extends EcoEnchant {
+public final class ShotAssist extends EcoEnchant {
     public ShotAssist() {
         super(
                 new EcoEnchantBuilder("shot_assist", EnchantmentType.NORMAL, 5.0)

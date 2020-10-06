@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class WaterAffinity extends EcoEnchant {
+public final class WaterAffinity extends EcoEnchant {
     public WaterAffinity() {
         super(
                 new EcoEnchantBuilder("water_affinity", EnchantmentType.NORMAL,5.0)

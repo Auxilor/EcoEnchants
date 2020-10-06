@@ -7,7 +7,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Extract extends EcoEnchant {
+public final class Extract extends EcoEnchant {
     public Extract() {
         super(
                 new EcoEnchantBuilder("extract", EnchantmentType.NORMAL,5.0)

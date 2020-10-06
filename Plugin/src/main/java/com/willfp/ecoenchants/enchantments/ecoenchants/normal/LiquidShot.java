@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class LiquidShot extends EcoEnchant {
+public final class LiquidShot extends EcoEnchant {
     public LiquidShot() {
         super(
                 new EcoEnchantBuilder("liquid_shot", EnchantmentType.NORMAL, 5.0)

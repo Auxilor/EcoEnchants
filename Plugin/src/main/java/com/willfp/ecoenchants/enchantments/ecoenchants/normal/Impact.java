@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Impact extends EcoEnchant {
+public final class Impact extends EcoEnchant {
     public Impact() {
         super(
                 new EcoEnchantBuilder("impact", EnchantmentType.NORMAL, 5.0)

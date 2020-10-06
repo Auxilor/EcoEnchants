@@ -6,7 +6,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-public class Spring extends EcoEnchant {
+public final class Spring extends EcoEnchant {
     public Spring() {
         super(
                 new EcoEnchantBuilder("spring", EnchantmentType.SPECIAL, 5.0)

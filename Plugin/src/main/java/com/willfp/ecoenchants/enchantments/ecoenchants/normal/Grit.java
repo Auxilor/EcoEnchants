@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.meta.Damageable;
-public class Grit extends EcoEnchant {
+public final class Grit extends EcoEnchant {
     public Grit() {
         super(
                 new EcoEnchantBuilder("grit", EnchantmentType.NORMAL,5.0)

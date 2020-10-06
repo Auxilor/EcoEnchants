@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class Blind extends EcoEnchant {
+public final class Blind extends EcoEnchant {
     public Blind() {
         super(
                 new EcoEnchantBuilder("blind", EnchantmentType.NORMAL, 5.0)

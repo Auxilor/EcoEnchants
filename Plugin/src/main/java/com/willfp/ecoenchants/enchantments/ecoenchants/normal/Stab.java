@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Stab extends EcoEnchant {
+public final class Stab extends EcoEnchant {
     public Stab() {
         super(
                 new EcoEnchantBuilder("stab", EnchantmentType.NORMAL, 5.0)

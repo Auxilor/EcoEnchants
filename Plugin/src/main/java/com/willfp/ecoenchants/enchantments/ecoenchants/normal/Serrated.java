@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Serrated extends EcoEnchant {
+public final class Serrated extends EcoEnchant {
     public Serrated() {
         super(
                 new EcoEnchantBuilder("serrated", EnchantmentType.NORMAL, 5.0)

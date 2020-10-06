@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-public class InfernalTouch extends EcoEnchant {
+public final class InfernalTouch extends EcoEnchant {
     public InfernalTouch() {
         super(
                 new EcoEnchantBuilder("infernal_touch", EnchantmentType.NORMAL,5.0)

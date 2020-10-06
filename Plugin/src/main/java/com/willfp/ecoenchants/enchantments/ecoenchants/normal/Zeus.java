@@ -8,7 +8,7 @@ import com.willfp.ecoenchants.util.Lightning;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Zeus extends EcoEnchant {
+public final class Zeus extends EcoEnchant {
     public Zeus() {
         super(
                 new EcoEnchantBuilder("zeus", EnchantmentType.NORMAL, 5.0)

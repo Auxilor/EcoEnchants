@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
-public class Splash extends EcoEnchant {
+public final class Splash extends EcoEnchant {
     public Splash() {
         super(
                 new EcoEnchantBuilder("splash", EnchantmentType.NORMAL, 5.0)

@@ -10,7 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Incandescence extends EcoEnchant {
+public final class Incandescence extends EcoEnchant {
     public Incandescence() {
         super(
                 new EcoEnchantBuilder("incandescence", EnchantmentType.NORMAL, 5.0)

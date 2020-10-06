@@ -8,7 +8,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Settle extends EcoEnchant {
+public final class Settle extends EcoEnchant {
     public Settle() {
         super(
                 new EcoEnchantBuilder("settle", EnchantmentType.NORMAL,5.0)

@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public class Venom extends EcoEnchant {
+public final class Venom extends EcoEnchant {
     public Venom() {
         super(
                 new EcoEnchantBuilder("venom", EnchantmentType.NORMAL,5.0)

@@ -11,7 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.util.Vector;
-public class CallingCurse extends EcoEnchant implements EcoRunnable {
+public final class CallingCurse extends EcoEnchant implements EcoRunnable {
     public CallingCurse() {
         super(
                 new EcoEnchantBuilder("calling_curse", EnchantmentType.CURSE,  5.0)

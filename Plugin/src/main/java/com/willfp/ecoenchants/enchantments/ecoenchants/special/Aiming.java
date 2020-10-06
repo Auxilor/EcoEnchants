@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
-public class Aiming extends EcoEnchant {
+public final class Aiming extends EcoEnchant {
     public Aiming() {
         super(
                 new EcoEnchantBuilder("aiming", EnchantmentType.SPECIAL, 5.0)

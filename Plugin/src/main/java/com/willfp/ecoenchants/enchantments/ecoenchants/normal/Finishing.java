@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Finishing extends EcoEnchant {
+public final class Finishing extends EcoEnchant {
     public Finishing() {
         super(
                 new EcoEnchantBuilder("finishing", EnchantmentType.NORMAL, 5.0)

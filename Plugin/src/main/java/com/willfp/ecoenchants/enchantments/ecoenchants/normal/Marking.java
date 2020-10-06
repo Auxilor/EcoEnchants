@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-public class Marking extends EcoEnchant {
+public final class Marking extends EcoEnchant {
     public Marking() {
         super(
                 new EcoEnchantBuilder("marking", EnchantmentType.NORMAL,5.0)

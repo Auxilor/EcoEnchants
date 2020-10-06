@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-public class Grapple extends EcoEnchant {
+public final class Grapple extends EcoEnchant {
     public Grapple() {
         super(
                 new EcoEnchantBuilder("grapple", EnchantmentType.NORMAL, 5.0)

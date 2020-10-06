@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class LifeSteal extends EcoEnchant {
+public final class LifeSteal extends EcoEnchant {
     public LifeSteal() {
         super(
                 new EcoEnchantBuilder("life_steal", EnchantmentType.SPECIAL, 5.0)

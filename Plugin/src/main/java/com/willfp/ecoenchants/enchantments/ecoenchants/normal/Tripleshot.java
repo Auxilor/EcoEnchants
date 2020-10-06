@@ -10,7 +10,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
-public class Tripleshot extends EcoEnchant {
+public final class Tripleshot extends EcoEnchant {
     public Tripleshot() {
         super(
                 new EcoEnchantBuilder("tripleshot", EnchantmentType.NORMAL, 5.0)

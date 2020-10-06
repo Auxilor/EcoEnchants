@@ -13,7 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public class Frozen extends EcoEnchant {
+public final class Frozen extends EcoEnchant {
     public Frozen() {
         super(
                 new EcoEnchantBuilder("frozen", EnchantmentType.NORMAL, 5.0)

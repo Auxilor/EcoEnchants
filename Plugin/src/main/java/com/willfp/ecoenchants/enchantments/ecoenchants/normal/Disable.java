@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class Disable extends EcoEnchant {
+public final class Disable extends EcoEnchant {
     public Disable() {
         super(
                 new EcoEnchantBuilder("disable", EnchantmentType.NORMAL,5.0)

@@ -13,7 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
-public class Buckshot extends EcoEnchant {
+public final class Buckshot extends EcoEnchant {
     public Buckshot() {
         super(
                 new EcoEnchantBuilder("buckshot", EnchantmentType.NORMAL, 5.0)

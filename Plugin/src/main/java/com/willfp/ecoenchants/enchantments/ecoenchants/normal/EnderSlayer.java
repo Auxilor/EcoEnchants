@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.HashSet;
 import java.util.Set;
-public class EnderSlayer extends EcoEnchant {
+public final class EnderSlayer extends EcoEnchant {
     public EnderSlayer() {
         super(
                 new EcoEnchantBuilder("ender_slayer", EnchantmentType.NORMAL, 5.0)

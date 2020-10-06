@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
-public class Freerunner extends EcoEnchant {
+public final class Freerunner extends EcoEnchant {
     public Freerunner() {
         super(
                 new EcoEnchantBuilder("freerunner", EnchantmentType.NORMAL, 5.0)

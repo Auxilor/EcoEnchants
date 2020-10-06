@@ -9,7 +9,7 @@ import com.willfp.ecoenchants.util.Lightning;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Bolt extends EcoEnchant {
+public final class Bolt extends EcoEnchant {
     public Bolt() {
         super(
                 new EcoEnchantBuilder("bolt", EnchantmentType.SPECIAL, 5.0)

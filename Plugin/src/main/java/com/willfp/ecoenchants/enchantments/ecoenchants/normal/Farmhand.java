@@ -16,7 +16,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-public class Farmhand extends EcoEnchant {
+public final class Farmhand extends EcoEnchant {
     public Farmhand() {
         super(
                 new EcoEnchantBuilder("farmhand", EnchantmentType.NORMAL, 5.0)

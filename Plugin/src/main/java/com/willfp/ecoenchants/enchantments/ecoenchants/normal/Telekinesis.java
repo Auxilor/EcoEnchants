@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Telekinesis extends EcoEnchant {
+public final class Telekinesis extends EcoEnchant {
     public Telekinesis() {
         super(
                 new EcoEnchantBuilder("telekinesis", EnchantmentType.NORMAL, 5.0)

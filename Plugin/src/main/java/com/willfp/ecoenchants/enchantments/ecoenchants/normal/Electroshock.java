@@ -8,7 +8,7 @@ import com.willfp.ecoenchants.util.Lightning;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Electroshock extends EcoEnchant {
+public final class Electroshock extends EcoEnchant {
     public Electroshock() {
         super(
                 new EcoEnchantBuilder("electroshock", EnchantmentType.NORMAL, 5.0)

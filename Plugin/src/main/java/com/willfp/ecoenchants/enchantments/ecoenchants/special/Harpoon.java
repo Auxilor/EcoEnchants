@@ -9,7 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
-public class Harpoon extends EcoEnchant {
+public final class Harpoon extends EcoEnchant {
     public Harpoon() {
         super(
                 new EcoEnchantBuilder("harpoon", EnchantmentType.SPECIAL, 5.0)

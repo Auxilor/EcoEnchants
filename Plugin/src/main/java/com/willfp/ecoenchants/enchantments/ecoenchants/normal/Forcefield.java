@@ -9,7 +9,7 @@ import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
-public class Forcefield extends EcoEnchant implements EcoRunnable {
+public final class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(
                 new EcoEnchantBuilder("forcefield", EnchantmentType.NORMAL, 5.0)

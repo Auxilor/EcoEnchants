@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Proximity extends EcoEnchant {
+public final class Proximity extends EcoEnchant {
     public Proximity() {
         super(
                 new EcoEnchantBuilder("proximity", EnchantmentType.NORMAL, 5.0)

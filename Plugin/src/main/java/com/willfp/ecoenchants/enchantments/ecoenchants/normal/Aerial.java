@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-public class Aerial extends EcoEnchant {
+public final class Aerial extends EcoEnchant {
     public Aerial() {
         super(
                 new EcoEnchantBuilder("aerial", EnchantmentType.NORMAL,5.0)

@@ -8,7 +8,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Netheric extends EcoEnchant {
+public final class Netheric extends EcoEnchant {
     public Netheric() {
         super(
                 new EcoEnchantBuilder("netheric", EnchantmentType.NORMAL,5.0)

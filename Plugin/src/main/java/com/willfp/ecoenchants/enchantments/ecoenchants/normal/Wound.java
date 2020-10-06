@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Wound extends EcoEnchant {
+public final class Wound extends EcoEnchant {
     public Wound() {
         super(
                 new EcoEnchantBuilder("wound", EnchantmentType.NORMAL, 5.0)

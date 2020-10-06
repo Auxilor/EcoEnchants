@@ -7,7 +7,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Sycophant extends EcoEnchant {
+public final class Sycophant extends EcoEnchant {
     public Sycophant() {
         super(
                 new EcoEnchantBuilder("sycophant", EnchantmentType.NORMAL,5.0)

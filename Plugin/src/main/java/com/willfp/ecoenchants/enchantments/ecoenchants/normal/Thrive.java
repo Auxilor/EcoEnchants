@@ -12,7 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-public class Thrive extends EcoEnchant {
+public final class Thrive extends EcoEnchant {
     public Thrive() {
         super(
                 new EcoEnchantBuilder("thrive", EnchantmentType.NORMAL, 5.0)

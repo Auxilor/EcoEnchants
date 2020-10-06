@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
-public class Rapid extends EcoEnchant {
+public final class Rapid extends EcoEnchant {
     public Rapid() {
         super(
                 new EcoEnchantBuilder("rapid", EnchantmentType.NORMAL, 5.0)

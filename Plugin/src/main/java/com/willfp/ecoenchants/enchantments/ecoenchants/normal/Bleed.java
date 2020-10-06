@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
-public class Bleed extends EcoEnchant {
+public final class Bleed extends EcoEnchant {
     public Bleed() {
         super(
                 new EcoEnchantBuilder("bleed", EnchantmentType.NORMAL,5.0)

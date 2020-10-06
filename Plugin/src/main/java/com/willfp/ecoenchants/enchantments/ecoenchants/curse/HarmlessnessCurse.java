@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class HarmlessnessCurse extends EcoEnchant {
+public final class HarmlessnessCurse extends EcoEnchant {
     public HarmlessnessCurse() {
         super(
                 new EcoEnchantBuilder("harmlessness_curse", EnchantmentType.CURSE,5.0)

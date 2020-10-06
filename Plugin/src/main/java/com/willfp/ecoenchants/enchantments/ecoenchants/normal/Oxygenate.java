@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-public class Oxygenate extends EcoEnchant {
+public final class Oxygenate extends EcoEnchant {
     public Oxygenate() {
         super(
                 new EcoEnchantBuilder("oxygenate", EnchantmentType.NORMAL, 5.0)

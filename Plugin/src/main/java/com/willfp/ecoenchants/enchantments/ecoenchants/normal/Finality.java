@@ -8,7 +8,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Finality extends EcoEnchant {
+public final class Finality extends EcoEnchant {
     public Finality() {
         super(
                 new EcoEnchantBuilder("finality", EnchantmentType.NORMAL,5.0)

@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 
-public class LimeArtifact extends Artifact {
+public final class LimeArtifact extends Artifact {
     public LimeArtifact() {
         super(
                 "lime_artifact",

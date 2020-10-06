@@ -10,7 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Volatile extends EcoEnchant {
+public final class Volatile extends EcoEnchant {
     public Volatile() {
         super(
                 new EcoEnchantBuilder("volatile", EnchantmentType.SPECIAL, 5.0)

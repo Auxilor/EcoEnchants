@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-public class Invigoration extends EcoEnchant {
+public final class Invigoration extends EcoEnchant {
     public Invigoration() {
         super(
                 new EcoEnchantBuilder("invigoration", EnchantmentType.NORMAL, 5.0)

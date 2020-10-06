@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-public class Atmospheric extends EcoEnchant {
+public final class Atmospheric extends EcoEnchant {
     public Atmospheric() {
         super(
                 new EcoEnchantBuilder("atmospheric", EnchantmentType.NORMAL, 5.0)

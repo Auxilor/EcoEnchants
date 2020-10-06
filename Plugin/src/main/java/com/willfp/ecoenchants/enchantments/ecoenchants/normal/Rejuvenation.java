@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
-public class Rejuvenation extends EcoEnchant {
+public final class Rejuvenation extends EcoEnchant {
     public Rejuvenation() {
         super(
                 new EcoEnchantBuilder("rejuvenation", EnchantmentType.NORMAL, 5.0)

@@ -7,7 +7,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Parasitic extends EcoEnchant {
+public final class Parasitic extends EcoEnchant {
     public Parasitic() {
         super(
                 new EcoEnchantBuilder("parasitic", EnchantmentType.NORMAL,5.0)

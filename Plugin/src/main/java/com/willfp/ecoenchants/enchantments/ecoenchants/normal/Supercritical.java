@@ -8,7 +8,7 @@ import com.willfp.ecoenchants.nms.Cooldown;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Supercritical extends EcoEnchant {
+public final class Supercritical extends EcoEnchant {
     public Supercritical() {
         super(
                 new EcoEnchantBuilder("supercritical", EnchantmentType.NORMAL, 5.0)

@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class Transfuse extends EcoEnchant {
+public final class Transfuse extends EcoEnchant {
     public Transfuse() {
         super(
                 new EcoEnchantBuilder("transfuse", EnchantmentType.NORMAL, 5.0)

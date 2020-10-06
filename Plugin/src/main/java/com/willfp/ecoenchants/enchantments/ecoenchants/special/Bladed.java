@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Bladed extends EcoEnchant {
+public final class Bladed extends EcoEnchant {
     public Bladed() {
         super(
                 new EcoEnchantBuilder("bladed", EnchantmentType.SPECIAL, 5.0)

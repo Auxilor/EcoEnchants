@@ -9,7 +9,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
-public class Rage extends EcoEnchant {
+public final class Rage extends EcoEnchant {
     public Rage() {
         super(
                 new EcoEnchantBuilder("rage", EnchantmentType.NORMAL, 5.0)

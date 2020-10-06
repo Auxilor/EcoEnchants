@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-public class IceShot extends EcoEnchant {
+public final class IceShot extends EcoEnchant {
     public IceShot() {
         super(
                 new EcoEnchantBuilder("ice_shot", EnchantmentType.NORMAL, 5.0)

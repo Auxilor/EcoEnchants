@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.util.Vector;
-public class Reel extends EcoEnchant {
+public final class Reel extends EcoEnchant {
     public Reel() {
         super(
                 new EcoEnchantBuilder("reel", EnchantmentType.NORMAL, 5.0)

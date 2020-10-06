@@ -9,7 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
-public class Spiked extends EcoEnchant {
+public final class Spiked extends EcoEnchant {
     public Spiked() {
         super(
                 new EcoEnchantBuilder("spiked", EnchantmentType.NORMAL, 5.0)

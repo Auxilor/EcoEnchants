@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class BlockBreather extends EcoEnchant {
+public final class BlockBreather extends EcoEnchant {
     public BlockBreather() {
         super(
                 new EcoEnchantBuilder("block_breather", EnchantmentType.NORMAL, 5.0)

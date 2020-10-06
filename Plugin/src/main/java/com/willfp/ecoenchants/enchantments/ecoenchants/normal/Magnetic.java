@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 
-public class Magnetic extends EcoEnchant implements EcoRunnable {
+public final class Magnetic extends EcoEnchant implements EcoRunnable {
     public Magnetic() {
         super(
                 new EcoEnchantBuilder("magnetic", EnchantmentType.NORMAL, 5.0)

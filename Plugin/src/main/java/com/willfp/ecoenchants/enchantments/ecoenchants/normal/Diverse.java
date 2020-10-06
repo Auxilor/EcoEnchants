@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Diverse extends EcoEnchant {
+public final class Diverse extends EcoEnchant {
     public Diverse() {
         super(
                 new EcoEnchantBuilder("diverse", EnchantmentType.NORMAL, 5.0)

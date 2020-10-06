@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Defender extends EcoEnchant {
+public final class Defender extends EcoEnchant {
     public Defender() {
         super(
                 new EcoEnchantBuilder("defender", EnchantmentType.NORMAL, 5.0)

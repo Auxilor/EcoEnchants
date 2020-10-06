@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 
-public class Fetching extends EcoEnchant {
+public final class Fetching extends EcoEnchant {
     public Fetching() {
         super(
                 new EcoEnchantBuilder("fetching", EnchantmentType.NORMAL, 5.0)

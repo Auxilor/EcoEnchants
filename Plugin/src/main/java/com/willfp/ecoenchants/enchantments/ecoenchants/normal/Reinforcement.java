@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
-public class Reinforcement extends EcoEnchant {
+public final class Reinforcement extends EcoEnchant {
     public Reinforcement() {
         super(
                 new EcoEnchantBuilder("reinforcement", EnchantmentType.NORMAL, 5.0)

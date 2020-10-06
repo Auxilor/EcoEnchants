@@ -8,7 +8,7 @@ import org.bukkit.entity.Enderman;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class WaterAspect extends EcoEnchant {
+public final class WaterAspect extends EcoEnchant {
     public WaterAspect() {
         super(
                 new EcoEnchantBuilder("water_aspect", EnchantmentType.NORMAL,5.0)

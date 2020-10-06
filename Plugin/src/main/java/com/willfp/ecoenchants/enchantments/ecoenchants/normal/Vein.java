@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class Vein extends EcoEnchant {
+public final class Vein extends EcoEnchant {
     public Vein() {
         super(
                 new EcoEnchantBuilder("vein", EnchantmentType.NORMAL, 5.0)

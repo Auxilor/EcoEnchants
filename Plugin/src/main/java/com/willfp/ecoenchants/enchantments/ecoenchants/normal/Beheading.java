@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-public class Beheading extends EcoEnchant {
+public final class Beheading extends EcoEnchant {
     public Beheading() {
         super(
                 new EcoEnchantBuilder("beheading", EnchantmentType.NORMAL,5.0)

@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
-public class Preservation extends EcoEnchant {
+public final class Preservation extends EcoEnchant {
     public Preservation() {
         super(
                 new EcoEnchantBuilder("preservation", EnchantmentType.SPECIAL, 5.0)

@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
 
 import java.util.Arrays;
-public class DecayCurse extends EcoEnchant implements EcoRunnable {
+public final class DecayCurse extends EcoEnchant implements EcoRunnable {
     public DecayCurse() {
         super(
                 new EcoEnchantBuilder("decay_curse", EnchantmentType.CURSE, 5.0)

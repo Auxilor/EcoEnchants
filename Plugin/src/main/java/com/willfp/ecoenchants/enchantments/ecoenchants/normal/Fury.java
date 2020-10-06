@@ -9,7 +9,7 @@ import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-public class Fury extends EcoEnchant {
+public final class Fury extends EcoEnchant {
     public Fury() {
         super(
                 new EcoEnchantBuilder("fury", EnchantmentType.NORMAL, 5.0)

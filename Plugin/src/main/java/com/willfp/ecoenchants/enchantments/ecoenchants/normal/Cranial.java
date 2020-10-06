@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Cranial extends EcoEnchant {
+public final class Cranial extends EcoEnchant {
     public Cranial() {
         super(
                 new EcoEnchantBuilder("cranial", EnchantmentType.NORMAL,5.0)

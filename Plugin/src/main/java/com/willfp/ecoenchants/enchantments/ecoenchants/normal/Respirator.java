@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class Respirator extends EcoEnchant {
+public final class Respirator extends EcoEnchant {
     public Respirator() {
         super(
                 new EcoEnchantBuilder("respirator", EnchantmentType.NORMAL, 5.0)

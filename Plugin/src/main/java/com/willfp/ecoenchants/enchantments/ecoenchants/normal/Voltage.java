@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
-public class Voltage extends EcoEnchant {
+public final class Voltage extends EcoEnchant {
     public Voltage() {
         super(
                 new EcoEnchantBuilder("voltage", EnchantmentType.NORMAL, 5.0)

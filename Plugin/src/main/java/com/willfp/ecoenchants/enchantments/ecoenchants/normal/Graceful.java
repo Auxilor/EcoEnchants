@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class Graceful extends EcoEnchant {
+public final class Graceful extends EcoEnchant {
     public Graceful() {
         super(
                 new EcoEnchantBuilder("graceful", EnchantmentType.NORMAL, 5.0)

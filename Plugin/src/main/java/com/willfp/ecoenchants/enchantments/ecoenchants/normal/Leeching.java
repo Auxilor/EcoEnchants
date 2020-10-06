@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public class Leeching extends EcoEnchant {
+public final class Leeching extends EcoEnchant {
     public Leeching() {
         super(
                 new EcoEnchantBuilder("leeching", EnchantmentType.NORMAL,5.0)

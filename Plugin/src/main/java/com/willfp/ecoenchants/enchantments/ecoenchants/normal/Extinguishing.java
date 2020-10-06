@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
-public class Extinguishing extends EcoEnchant {
+public final class Extinguishing extends EcoEnchant {
     public Extinguishing() {
         super(
                 new EcoEnchantBuilder("extinguishing", EnchantmentType.NORMAL,5.0)

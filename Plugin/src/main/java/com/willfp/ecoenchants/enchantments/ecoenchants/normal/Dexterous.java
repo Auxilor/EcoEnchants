@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
-public class Dexterous extends EcoEnchant {
+public final class Dexterous extends EcoEnchant {
     public Dexterous() {
         super(
                 new EcoEnchantBuilder("dexterous", EnchantmentType.NORMAL, 5.0)

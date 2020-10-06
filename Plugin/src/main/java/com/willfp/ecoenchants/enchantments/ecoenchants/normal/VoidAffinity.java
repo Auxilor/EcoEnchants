@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class VoidAffinity extends EcoEnchant {
+public final class VoidAffinity extends EcoEnchant {
     public VoidAffinity() {
         super(
                 new EcoEnchantBuilder("void_affinity", EnchantmentType.NORMAL, 5.0)

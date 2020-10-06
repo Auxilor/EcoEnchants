@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-public class Tornado extends EcoEnchant {
+public final class Tornado extends EcoEnchant {
     public Tornado() {
         super(
                 new EcoEnchantBuilder("tornado", EnchantmentType.NORMAL, 5.0)

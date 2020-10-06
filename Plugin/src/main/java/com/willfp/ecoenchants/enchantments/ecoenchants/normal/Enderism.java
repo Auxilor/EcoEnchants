@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Enderism extends EcoEnchant {
+public final class Enderism extends EcoEnchant {
     public Enderism() {
         super(
                 new EcoEnchantBuilder("enderism", EnchantmentType.NORMAL,5.0)

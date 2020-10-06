@@ -13,7 +13,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
-public class Succession extends EcoEnchant {
+public final class Succession extends EcoEnchant {
     public Succession() {
         super(
                 new EcoEnchantBuilder("succession", EnchantmentType.NORMAL, 5.0)

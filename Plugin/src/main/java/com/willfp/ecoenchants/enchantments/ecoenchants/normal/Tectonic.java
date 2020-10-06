@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.Collection;
-public class Tectonic extends EcoEnchant {
+public final class Tectonic extends EcoEnchant {
     public Tectonic() {
         super(
                 new EcoEnchantBuilder("tectonic", EnchantmentType.NORMAL,5.0)

@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
-public class Collateral extends EcoEnchant {
+public final class Collateral extends EcoEnchant {
     public Collateral() {
         super(
                 new EcoEnchantBuilder("collateral", EnchantmentType.NORMAL, 5.0)

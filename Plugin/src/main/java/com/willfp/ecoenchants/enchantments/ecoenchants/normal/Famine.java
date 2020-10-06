@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public class Famine extends EcoEnchant {
+public final class Famine extends EcoEnchant {
     public Famine() {
         super(
                 new EcoEnchantBuilder("famine", EnchantmentType.NORMAL, 5.0)
