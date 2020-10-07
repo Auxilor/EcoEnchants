@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
+import com.willfp.ecoenchants.config.UpdatingLang;
 import com.willfp.ecoenchants.config.YamlConfig;
 import org.bukkit.ChatColor;
 
@@ -8,9 +9,9 @@ import java.util.List;
 /**
  * Wrapper for lang.yml
  */
-public class Lang extends YamlConfig {
+public class Lang extends UpdatingLang {
     public Lang() {
-        super("lang");
+        super();
     }
 
     public String getString(String path) {

@@ -29,7 +29,6 @@ public final class Succession extends EcoEnchant {
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
 
-
         for (int i = 1; i <= number; i++) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(EcoEnchantsPlugin.getInstance(), () -> {
                 Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());

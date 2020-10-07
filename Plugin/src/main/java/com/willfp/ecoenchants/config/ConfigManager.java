@@ -9,7 +9,6 @@ import java.util.Set;
 public class ConfigManager {
     public static final HashMap<String, Double> configVersions = new HashMap<String, Double>() {{
         put("config", 5.0);
-        put("lang", 5.0);
         put("target", 1.0);
         put("rarity", 1.0);
     }};
@@ -25,7 +24,7 @@ public class ConfigManager {
      * Called on /ecoreload
      */
     public static void updateConfigs() {
-        LANG.reload();
+        LANG.update();
         CONFIG.reload();
         TARGET.reload();
         RARITY.reload();

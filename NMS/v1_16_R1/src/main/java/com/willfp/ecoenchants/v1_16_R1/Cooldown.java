@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.v1_16_R1;
 
 import com.willfp.ecoenchants.API.CooldownWrapper;
+import org.bukkit.craftbukkit.libs.org.apache.commons.io.FileUtils;
 import org.bukkit.entity.Player;
 
 public class Cooldown implements CooldownWrapper {

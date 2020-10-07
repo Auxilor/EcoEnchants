@@ -3,8 +3,6 @@
 # by Auxilor
 #
 
-config-version: 5.0 # Don't edit this.
-
 messages:
   prefix: "&f[&aEcoEnchants&f] "
   no-permission: "&cYou don't have permission to do this!"
