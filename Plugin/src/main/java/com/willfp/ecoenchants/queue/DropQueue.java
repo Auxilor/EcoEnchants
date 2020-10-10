@@ -111,9 +111,9 @@ public class DropQueue {
         if (hasTelekinesis) {
             for (ItemStack drop : items) {
                 HashMap<Integer, ItemStack> nope = player.getInventory().addItem(drop);
-                for(Map.Entry<Integer, ItemStack> entry : nope.entrySet()) {
-                    world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
-                }
+                nope.forEach(((integer, itemStack) -> {
+                    world.dropItemNaturally(loc.add(0.5, 0, 0.5), itemStack).setVelocity(new Vector());
+                }));
             }
             if (xp > 0) {
                 if(EcoEnchants.TELEKINESIS.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-orb")) {

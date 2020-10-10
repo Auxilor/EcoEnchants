@@ -31,6 +31,7 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
                                     oldRecipe.getVillagerExperience(),
                                     oldRecipe.getPriceMultiplier());
                     List<ItemStack> ingredients = oldRecipe.getIngredients();
+                    recipe.setPriceMultiplier(oldRecipe.getPriceMultiplier()); // idk either, no idea why it doesn't work
                     ingredients.forEach(EnchantDisplay::displayEnchantments);
                     recipe.setIngredients(ingredients);
                     return recipe;
