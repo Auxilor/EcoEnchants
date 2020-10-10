@@ -59,6 +59,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * Update the enchantment based off config values
      */
     public void update() {
+        config.loadFromLang();
         rarity = config.getRarity();
         conflicts = config.getEnchantments(EcoEnchants.GENERAL_LOCATION + "conflicts");
         grindstoneable = config.getBool(EcoEnchants.GENERAL_LOCATION + "grindstoneable");

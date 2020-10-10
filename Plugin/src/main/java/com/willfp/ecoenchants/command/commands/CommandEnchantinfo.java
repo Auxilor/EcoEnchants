@@ -81,7 +81,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
             if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
                 conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getName());
             } else {
-                conflictNames.add(ConfigManager.getLang().getString("vanilla." + enchantment1.getKey().getKey() + ".name"));
+                conflictNames.add(ConfigManager.getLang().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
             }
         }));
 

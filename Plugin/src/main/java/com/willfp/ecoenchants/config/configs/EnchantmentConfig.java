@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
+import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.EnchantmentYamlConfig;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -97,5 +98,13 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
         }));
 
         return targets;
+    }
+
+    public void loadFromLang() {
+        if(!ConfigManager.getLang().config.contains("enchantments." + this.getName()))
+            return;
+
+        config.set("name", ConfigManager.getLang().getString("enchantments." + this.getName() + ".name"));
+        config.set("description", ConfigManager.getLang().getString("enchantments." + this.getName() + ".description"));
     }
 }

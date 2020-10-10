@@ -30,7 +30,7 @@ artifact-color: "&e"
 
 description-color: "&8"
 
-vanilla:
+enchantments:
   protection:
     name: "Protection"
     description: Reduces most types of damage.
