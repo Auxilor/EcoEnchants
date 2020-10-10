@@ -30,7 +30,7 @@ public final class EnchantDisplay {
      * @deprecated This is no longer used due to a change in the lore storage mechanism
      */
     @Deprecated
-    private static final NamespacedKey KEY = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
+    public static final NamespacedKey KEY = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
 
     /**
      * The meta key to hide enchantments in lore

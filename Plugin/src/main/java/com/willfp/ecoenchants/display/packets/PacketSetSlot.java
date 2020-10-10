@@ -5,6 +5,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.persistence.PersistentDataType;
 
 public final class PacketSetSlot extends AbstractPacketAdapter {
     public PacketSetSlot() {
@@ -18,6 +19,8 @@ public final class PacketSetSlot extends AbstractPacketAdapter {
 
             if(item != null && item.getItemMeta() != null) {
                 hideEnchants = item.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS);
+                if(hideEnchants && item.getItemMeta().getPersistentDataContainer().has(EnchantDisplay.KEY, PersistentDataType.INTEGER))
+                    hideEnchants = false;
             }
 
             item = EnchantDisplay.displayEnchantments(item, hideEnchants);
