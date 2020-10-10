@@ -1,7 +1,4 @@
-#
-# EcoEnchants
-# by Auxilor
-#
+# INFO: Use the permission name of enchantments if you want to add them to this file (ie damageartifact, not damage_artifact)
 
 messages:
   prefix: "&f[&aEcoEnchants&f] "
