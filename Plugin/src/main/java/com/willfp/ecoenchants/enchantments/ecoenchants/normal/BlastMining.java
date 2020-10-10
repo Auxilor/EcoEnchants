@@ -11,6 +11,10 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public final class BlastMining extends EcoEnchant {
     public BlastMining() {
         super(
@@ -33,12 +37,17 @@ public final class BlastMining extends EcoEnchant {
 
         AnticheatManager.exemptPlayer(player);
 
+        Set<Block> toBreak = new HashSet<>();
+
+
         for(int x = -1; x <= 1; x++) {
             for(int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
-                    if(x == 0 && y == 0 && z == 0) continue;
+                    if(x == 0 && y == 0 && z == 0) {
+                        block.getWorld().createExplosion(block.getLocation().clone().add(0.5, 0.5, 0.5), 0, false);
+                        continue;
+                    }
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
-                    block1.setMetadata("from-blastmining", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
 
                     if(this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                         continue;
@@ -48,15 +57,16 @@ public final class BlastMining extends EcoEnchant {
 
                     if(!AntigriefManager.canBreakBlock(player, block1)) continue;
 
-                    BlockBreak.breakBlock(player, block1);
-                    if(!hasExploded) {
-                        block.getWorld().createExplosion(block.getLocation().clone().add(0.5, 0.5, 0.5), 0, false);
-                        hasExploded = true;
-                    }
-                    block1.removeMetadata("from-blastmining", EcoEnchantsPlugin.getInstance());
+                    toBreak.add(block1);
                 }
             }
         }
+
+        toBreak.forEach((block1 -> {
+            block1.setMetadata("from-blastmining", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            BlockBreak.breakBlock(player, block1);
+            block1.removeMetadata("from-blastmining", EcoEnchantsPlugin.getInstance());
+        }));
 
         AnticheatManager.unexemptPlayer(player);
     }
