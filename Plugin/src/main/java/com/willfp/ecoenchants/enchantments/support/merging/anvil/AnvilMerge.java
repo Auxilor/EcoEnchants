@@ -131,7 +131,7 @@ public class AnvilMerge {
 
             if(canEnchantItem && !doesConflict.get()) {
                 if(ConfigManager.getConfig().getBool("anvil.hard-cap.enabled")) {
-                    if(outEnchants.size() > ConfigManager.getConfig().getInt("anvil.hard-cap.cap")) {
+                    if(outEnchants.size() >= ConfigManager.getConfig().getInt("anvil.hard-cap.cap")) {
                         return;
                     }
                 }
