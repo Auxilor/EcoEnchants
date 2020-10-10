@@ -108,7 +108,6 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
 
         config.set("name", ConfigManager.getLang().getString("enchantments." + this.getName() + ".name"));
         config.set("description", ConfigManager.getLang().getString("enchantments." + this.getName() + ".description"));
-        Logger.info("LOADED " + name + ".");
         try {
             this.config.save(this.configFile);
         } catch (IOException e) {
