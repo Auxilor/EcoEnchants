@@ -186,14 +186,10 @@ public class AnvilMerge {
         AtomicInteger inEnchantLevels = new AtomicInteger();
 
         outEnchants.forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
-                outEnchantLevels.addAndGet(integer);
-            }
+            outEnchantLevels.addAndGet(integer);
         }));
         leftEnchants.forEach((((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
-                outEnchantLevels.addAndGet(integer);
-            }
+            outEnchantLevels.addAndGet(integer);
         })));
 
         totalEnchantLevelDelta = Math.abs(outEnchantLevels.intValue() - inEnchantLevels.intValue());
