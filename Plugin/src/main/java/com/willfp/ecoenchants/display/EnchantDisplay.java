@@ -82,7 +82,7 @@ public final class EnchantDisplay {
                 description =
                         Arrays.asList(
                                 WordUtils.wrap(
-                                        ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey().toLowerCase() + ".description"),
+                                        String.valueOf(ConfigManager.getLang().getString("vanilla." + enchantment.getKey().getKey().toLowerCase() + ".description")),
                                         ConfigManager.getConfig().getInt("lore.describe.wrap"),
                                         "\n", false
                                 ).split("\\r?\\n"));
