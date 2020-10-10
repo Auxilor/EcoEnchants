@@ -14,6 +14,10 @@ anvil:
     enabled: true # Use exponent
     exponent: 0.95 # Exponent. Beware that slight changes to this value may cause huge changes in cost.
 
+  hard-cap: # Completely limit the amount of enchantments that can be placed on an item
+    enabled: false # Enable a hard cap
+    cap: 10 # Most enchantments allowed on an item
+
 lore:
   use-numerals: true
   use-numbers-above-threshold: 10 #After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
