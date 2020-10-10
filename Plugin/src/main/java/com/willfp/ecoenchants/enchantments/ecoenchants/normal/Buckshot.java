@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -43,6 +44,7 @@ public final class Buckshot extends EcoEnchant {
             Arrow arrow1 = shooter.launchProjectile(Arrow.class, velocity);
             if(EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE)) arrow1.setFireTicks(Integer.MAX_VALUE);
             if(EnchantChecks.mainhand(shooter, EcoEnchants.MARKSMAN)) arrow1.setGravity(false);
+            arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         }
     }
 }
