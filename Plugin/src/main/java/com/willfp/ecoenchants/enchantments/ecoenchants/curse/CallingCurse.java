@@ -5,22 +5,56 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
+
+import java.util.HashMap;
+
 public final class CallingCurse extends EcoEnchant implements EcoRunnable {
     public CallingCurse() {
         super(
                 new EcoEnchantBuilder("calling_curse", EnchantmentType.CURSE,  5.0)
         );
     }
+    private final HashMap<Player, Integer> players = new HashMap<>();
+
+    @EventHandler
+    public void onArmorEquip(ArmorEquipEvent event) {
+        refresh();
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        refresh();
+    }
+
+    @EventHandler
+    public void onPlayerLeave(PlayerQuitEvent event) {
+        refresh();
+    }
+
+    private void refresh() {
+        players.clear();
+        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
+            int level = EnchantChecks.getArmorPoints(player, this, 0);
+            if(level > 0) {
+                players.put(player, level);
+            }
+        });
+    }
 
     @Override
     public void run() {
-        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> EnchantChecks.getArmorPoints(player, EcoEnchants.CALLING_CURSE, 0) > 0).forEach((player -> {
+        players.forEach((player, level) -> {
             double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, distance, distance)) {
@@ -38,7 +72,7 @@ public final class CallingCurse extends EcoEnchant implements EcoRunnable {
                     e.setVelocity(vector);
                 }
             }
-        }));
+        });
     }
 
     @Override

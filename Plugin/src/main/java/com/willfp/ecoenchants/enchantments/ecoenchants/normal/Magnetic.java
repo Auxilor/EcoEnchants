@@ -48,7 +48,10 @@ public final class Magnetic extends EcoEnchant implements EcoRunnable {
     private void refresh() {
         players.clear();
         EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
-            players.put(player, EnchantChecks.getArmorPoints(player, this, 0));
+            int level = EnchantChecks.getArmorPoints(player, this, 0);
+            if(level > 0) {
+                players.put(player, level);
+            }
         });
         initialDistance = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
         bonus = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");

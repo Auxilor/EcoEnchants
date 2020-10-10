@@ -5,10 +5,18 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
+import com.willfp.ecoenchants.util.VectorUtils;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.NumberUtils;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Monster;
+import org.bukkit.entity.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.util.Vector;
+
+import java.util.HashMap;
+
 public final class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(
@@ -16,11 +24,36 @@ public final class Forcefield extends EcoEnchant implements EcoRunnable {
         );
     }
 
+    private final HashMap<Player, Integer> players = new HashMap<>();
+
+    @EventHandler
+    public void onArmorEquip(ArmorEquipEvent event) {
+        refresh();
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        refresh();
+    }
+
+    @EventHandler
+    public void onPlayerLeave(PlayerQuitEvent event) {
+        refresh();
+    }
+
+    private void refresh() {
+        players.clear();
+        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
+            int level = EnchantChecks.getArmorPoints(player, this, 0);
+            if(level > 0) {
+                players.put(player, level);
+            }
+        });
+    }
+
     @Override
     public void run() {
-        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().stream().filter(player -> EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 0) > 0).forEach((player -> {
-            int level = EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 0);
-
+        players.forEach((player, level) -> {
             double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
             double bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
             double distance = initialDistance + (level * bonus);
@@ -36,7 +69,7 @@ public final class Forcefield extends EcoEnchant implements EcoRunnable {
                     EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 1);
                 }
             }
-        }));
+        });
     }
 
     @Override
