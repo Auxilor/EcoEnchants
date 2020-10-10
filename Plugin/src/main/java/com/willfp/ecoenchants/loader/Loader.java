@@ -331,7 +331,7 @@ public class Loader {
                     Logger.info("§6EcoEnchants is out of date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
                     Logger.info("§6The newest version is §f" + version);
                     Logger.info("§6Download the new version here: §fhttps://www.spigotmc.org/resources/ecoenchants.79573/");
-                }, 0, 36000);
+                }, 0, 864000);
             }
             Logger.info("");
             Logger.info("----------------------------");
