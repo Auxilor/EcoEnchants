@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -32,19 +33,23 @@ public abstract class UpdatingLang {
 
     public void update() {
         try {
+            config.load(configFile);
+            Bukkit.getLogger().info("BEFORE: " + config.getKeys(true).toString());
+
             InputStream newIn = EcoEnchantsPlugin.getInstance().getResource("lang.yml");
             BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));
             YamlConfiguration newConfig = new YamlConfiguration();
             newConfig.load(reader);
+            Bukkit.getLogger().info("NEW: " + newConfig.getKeys(true).toString());
 
             newConfig.getKeys(true).forEach((s -> {
                 if (!config.getKeys(true).contains(s)) {
                     config.set(s, newConfig.get(s));
                 }
             }));
+            Bukkit.getLogger().info("AFTER: " + config.getKeys(true).toString());
 
             config.save(configFile);
-            config.load(configFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }

@@ -7,10 +7,12 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -106,5 +108,11 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
 
         config.set("name", ConfigManager.getLang().getString("enchantments." + this.getName() + ".name"));
         config.set("description", ConfigManager.getLang().getString("enchantments." + this.getName() + ".description"));
+        Logger.info("LOADED " + name + ".");
+        try {
+            this.config.save(this.configFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

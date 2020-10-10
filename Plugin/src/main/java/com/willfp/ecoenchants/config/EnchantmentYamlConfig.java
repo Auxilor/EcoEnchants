@@ -18,7 +18,7 @@ public abstract class EnchantmentYamlConfig {
 
     private final String name;
     public YamlConfiguration config;
-    private File configFile;
+    protected File configFile;
     private final File directory;
     private final double latestVersion;
     private final JavaPlugin plugin = EcoEnchantsPlugin.getInstance();
