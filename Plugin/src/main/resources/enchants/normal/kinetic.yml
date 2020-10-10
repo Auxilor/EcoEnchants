@@ -22,4 +22,4 @@ general-config:
   maximum-level: 6
 
 config:
-  reduction-per-level: 10 #Percent less damage taken per level
+  reduction-per-level: 15 #Percent less damage taken per level
