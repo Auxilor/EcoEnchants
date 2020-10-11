@@ -116,15 +116,13 @@ public class DropQueue {
                 }));
             }
             if (xp > 0) {
+                PlayerExpChangeEvent event = new PlayerExpChangeEvent(player, xp);
+                Bukkit.getPluginManager().callEvent(event);
                 if(EcoEnchants.TELEKINESIS.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-orb")) {
                     ExperienceOrb orb = (ExperienceOrb) player.getWorld().spawnEntity(player.getLocation().add(0, 0.2, 0), EntityType.EXPERIENCE_ORB);
                     orb.setVelocity(new Vector(0, 0, 0));
-                    orb.setExperience(xp);
+                    orb.setExperience(event.getAmount());
                 } else {
-                    PlayerExpChangeEvent event = new PlayerExpChangeEvent(player, xp);
-
-                    Bukkit.getPluginManager().callEvent(event);
-
                     player.giveExp(event.getAmount());
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.AMBIENT, 1f, (float) NumberUtils.randFloat(0.7, 1.2));
                 }
