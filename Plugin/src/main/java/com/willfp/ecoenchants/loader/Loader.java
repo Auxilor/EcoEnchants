@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
-import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
@@ -44,6 +43,7 @@ import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.UpdateChecker;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -69,30 +69,6 @@ public class Loader {
         Logger.info("Made by §aAuxilor§f - willfp.com");
         Logger.info("");
         Logger.info("==========================================");
-
-        /*
-        Check for paper
-         */
-
-        boolean isPapermc = false;
-        try {
-            isPapermc = Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData") != null;
-        } catch (ClassNotFoundException ignored) {}
-
-        if (!isPapermc) {
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-                Logger.info("");
-                Logger.info("----------------------------");
-                Logger.info("");
-                Logger.error("You don't seem to be running paper!");
-                Logger.error("Paper is strongly recommended for all servers,");
-                Logger.error("and enchantments like Drill may not function properly without it");
-                Logger.error("Download Paper from §fhttps://papermc.io");
-                Logger.info("");
-                Logger.info("----------------------------");
-                Logger.info("");
-            }, 1);
-        }
 
         /*
         Load Configs
@@ -283,7 +259,7 @@ public class Loader {
         Logger.info("Loading Commands...");
         new CommandEcoreload().register();
         new CommandEcodebug().register();
-        new CommandEnchantinfo().setTab(new TabCompleterEnchantinfo()).register();
+        new CommandEnchantinfo().register();
         Logger.info("");
         
         /*
@@ -410,6 +386,23 @@ public class Loader {
             Logger.info("Spartan: §aENABLED");
         } else {
             Logger.info("Spartan: §9DISABLED");
+        }
+
+        /*
+        Check for paper
+         */
+
+        if (!Prerequisite.HasPaper.isMet()) {
+            Logger.info("");
+            Logger.info("----------------------------");
+            Logger.info("");
+            Logger.error("You don't seem to be running paper!");
+            Logger.error("Paper is strongly recommended for all servers,");
+            Logger.error("and enchantments like Drill may not function properly without it");
+            Logger.error("Download Paper from §fhttps://papermc.io");
+            Logger.info("");
+            Logger.info("----------------------------");
+            Logger.info("");
         }
 
         Logger.info("");

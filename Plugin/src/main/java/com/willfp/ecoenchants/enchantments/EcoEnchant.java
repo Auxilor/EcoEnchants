@@ -4,7 +4,9 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
+import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
@@ -39,11 +41,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private boolean enabled;
 
     /**
-     * Create new EcoEnchant matching builder
+     * Create new EcoEnchant matching builder and prerequisites
      *
      * @param builder The {@link EcoEnchantBuilder} for enchantment
      */
-    protected EcoEnchant(EcoEnchantBuilder builder) {
+    protected EcoEnchant(EcoEnchantBuilder builder, Prerequisite[] prerequisites) {
         super(NamespacedKey.minecraft(builder.key));
 
         this.type = builder.type;
@@ -51,8 +53,26 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         this.configVersion = builder.configVersion;
         this.config = builder.config;
 
+        if(!Arrays.stream(prerequisites).allMatch(Prerequisite::isMet)) {
+            Arrays.stream(prerequisites).forEach(prerequisite -> {
+                if(!prerequisite.isMet()) {
+                    Logger.warn("Enchantment " + builder.key + " does not match prerequisite \"" + prerequisite.name() + "\". It will not be available.");
+                }
+            });
+            return;
+        }
+
         this.update();
         this.add();
+    }
+
+    /**
+     * Create new EcoEnchant matching builder
+     *
+     * @param builder The {@link EcoEnchantBuilder} for enchantment
+     */
+    protected EcoEnchant(EcoEnchantBuilder builder) {
+        this(builder, new Prerequisite[]{});
     }
 
     /**

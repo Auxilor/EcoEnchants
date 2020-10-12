@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.command.commands;
 
 import com.willfp.ecoenchants.command.AbstractCommand;
+import com.willfp.ecoenchants.command.AbstractTabCompleter;
+import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -18,6 +20,11 @@ import java.util.Set;
 public final class CommandEnchantinfo extends AbstractCommand {
     public CommandEnchantinfo() {
         super("enchantinfo", "ecoenchants.enchantinfo", false);
+    }
+
+    @Override
+    public AbstractTabCompleter getTab() {
+        return new TabCompleterEnchantinfo();
     }
 
     @Override

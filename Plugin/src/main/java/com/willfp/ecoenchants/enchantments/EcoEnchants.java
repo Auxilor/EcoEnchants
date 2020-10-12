@@ -227,6 +227,7 @@ public class EcoEnchants {
     public static final EcoEnchant INACCURACY_CURSE = new InaccuracyCurse();
     public static final EcoEnchant RESPIRATOR = new Respirator();
     public static final EcoEnchant FETCHING = new Fetching();
+    public static final EcoEnchant ECONOMICAL = new Economical();
 
     /**
      * Get all registered {@link EcoEnchant}s

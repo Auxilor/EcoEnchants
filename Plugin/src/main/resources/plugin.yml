@@ -854,3 +854,6 @@ permissions:
   ecoenchants.fromtable.fetching:
     description: Allows getting fetching from an enchanting table
     default: true
+  ecoenchants.fromtable.economical:
+    description: Allows getting economical from an enchanting table
+    default: true

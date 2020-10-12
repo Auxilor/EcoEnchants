@@ -1,0 +1,25 @@
+#
+# Economical EcoEnchant
+#
+
+config-version: 5.0 # Don't edit this.
+
+name: "Economical"
+description: Chance to not consume fireworks while boosting.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - elytra
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-level: 20

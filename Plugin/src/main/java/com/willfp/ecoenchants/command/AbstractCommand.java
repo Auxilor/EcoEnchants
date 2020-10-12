@@ -23,9 +23,8 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
         this.playersOnly = playersOnly;
     }
 
-    public AbstractCommand setTab(AbstractTabCompleter tabCompleter) {
-        this.tabCompleter = tabCompleter;
-        return this;
+    public AbstractTabCompleter getTab() {
+        return null;
     }
 
     public String getPermission() {
@@ -58,6 +57,8 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
     @Override
     public final void register() {
         Bukkit.getPluginCommand(name).setExecutor(this);
+
+        this.tabCompleter = this.getTab();
         if(tabCompleter != null) {
             Bukkit.getPluginCommand(name).setTabCompleter(tabCompleter);
         }
