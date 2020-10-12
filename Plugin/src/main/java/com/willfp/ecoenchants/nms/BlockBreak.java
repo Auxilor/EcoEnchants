@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.nms;
 
 
-import com.willfp.ecoenchants.API.BlockBreakWrapper;
+import com.willfp.ecoenchants.nms.API.BlockBreakWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

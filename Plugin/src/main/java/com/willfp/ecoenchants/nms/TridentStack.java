@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.nms;
 
 
-import com.willfp.ecoenchants.API.TridentStackWrapper;
+import com.willfp.ecoenchants.nms.API.TridentStackWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Trident;
 import org.bukkit.inventory.ItemStack;

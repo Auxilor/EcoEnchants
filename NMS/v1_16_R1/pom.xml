@@ -25,5 +25,11 @@
             <version>1.16.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.willfp.ecoenchants</groupId>
+            <artifactId>Interfacing</artifactId>
+            <version>5.0.0-beta25</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
