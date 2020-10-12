@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.ecoenchants.config.UpdatingLang;
-import com.willfp.ecoenchants.config.YamlConfig;
 import org.bukkit.ChatColor;
 
 import java.util.List;

@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -16,11 +15,25 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
     private final String name;
     private final String permission;
     private final boolean playersOnly;
+    private AbstractTabCompleter tabCompleter = null;
 
     protected AbstractCommand(String name, String permission, boolean playersOnly) {
         this.name = name;
         this.permission = permission;
         this.playersOnly = playersOnly;
+    }
+
+    public AbstractCommand setTab(AbstractTabCompleter tabCompleter) {
+        this.tabCompleter = tabCompleter;
+        return this;
+    }
+
+    public String getPermission() {
+        return this.permission;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -44,9 +57,10 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
 
     @Override
     public final void register() {
-        PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
-        pluginCommand.setExecutor(this);
-        pluginCommand.setTabCompleter(new EcoEnchantsTabCompleter());
+        Bukkit.getPluginCommand(name).setExecutor(this);
+        if(tabCompleter != null) {
+            Bukkit.getPluginCommand(name).setTabCompleter(tabCompleter);
+        }
     }
 
     public abstract void onExecute(CommandSender sender, List<String> args);

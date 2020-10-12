@@ -36,9 +36,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         EcoEnchant enchantment = EcoEnchants.getByName(searchName);
 
-        boolean notFound = enchantment == null;
-
-        if(notFound) {
+        if(enchantment == null) {
             String message = ConfigManager.getLang().getMessage("not-found").replace("%name%", searchName);
             sender.sendMessage(message);
             return;

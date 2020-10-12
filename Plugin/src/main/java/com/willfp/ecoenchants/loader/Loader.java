@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
-import com.willfp.ecoenchants.command.EcoEnchantsTabCompleter;
+import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
@@ -41,9 +41,9 @@ import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.UpdateChecker;
+import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -283,7 +283,7 @@ public class Loader {
         Logger.info("Loading Commands...");
         new CommandEcoreload().register();
         new CommandEcodebug().register();
-        new CommandEnchantinfo().register();
+        new CommandEnchantinfo().setTab(new TabCompleterEnchantinfo()).register();
         Logger.info("");
         
         /*
