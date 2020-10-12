@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -43,7 +44,9 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
 
     @Override
     public final void register() {
-        Bukkit.getPluginCommand(name).setExecutor(this);
+        PluginCommand pluginCommand = Bukkit.getPluginCommand(name);
+        pluginCommand.setExecutor(this);
+        pluginCommand.setTabCompleter(new EcoEnchantsTabCompleter());
     }
 
     public abstract void onExecute(CommandSender sender, List<String> args);

@@ -126,7 +126,6 @@ public final class CommandEnchantinfo extends AbstractCommand {
         final String finalTargets = allTargets;
         final String finalConflicts = allConflicts;
         final String finalMaxLevel = maxLevel;
-
         Arrays.asList(ConfigManager.getLang().getMessage("enchantinfo").split("\\r?\\n")).forEach((string -> {
             string = string.replaceAll("%name%", finalName)
                     .replaceAll("%description%", finalDescription)
