@@ -5,8 +5,7 @@ import org.bukkit.Bukkit;
 
 public enum Prerequisite {
     MinVer1_16(false),
-    HasPaper(false),
-    Dummy(false);
+    HasPaper(false);
 
     private boolean isMet;
 
