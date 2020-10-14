@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +40,14 @@ public final class EnchantDisplay {
 
     /**
      * The meta key to hide enchantments in lore
+     *
+     * Only used for parity in setcreative slot.
+     * More robust method to be introduced
+     *
+     * @deprecated Temporary fix
      */
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval
     public static final NamespacedKey KEY_SKIP = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
     /**
