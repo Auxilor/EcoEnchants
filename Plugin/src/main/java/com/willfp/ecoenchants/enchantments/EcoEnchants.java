@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.enchantments;
 
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CrimsonArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.DamageArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.DragonArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.DustArtifact;
@@ -20,8 +22,12 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NetherArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.RedstoneArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SmokeArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SnowArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SoulArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SoulFireArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SparkleArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.TearArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.TotemArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WarpedArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WaterArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WitchArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.ZapArtifact;
@@ -282,6 +288,12 @@ public class EcoEnchants {
     public static final EcoEnchant RESPIRATOR = new Respirator();
     public static final EcoEnchant FETCHING = new Fetching();
     public static final EcoEnchant ECONOMICAL = new Economical();
+    public static final EcoEnchant SOUL_ARTIFACT = new SoulArtifact();
+    public static final EcoEnchant SOUL_FIRE_ARTIFACT = new SoulFireArtifact();
+    public static final EcoEnchant CRIMSON_ARTIFACT = new CrimsonArtifact();
+    public static final EcoEnchant ASH_ARTIFACT = new AshArtifact();
+    public static final EcoEnchant WARPED_ARTIFACT = new WarpedArtifact();
+    public static final EcoEnchant TEAR_ARTIFACT = new TearArtifact();
 
     /**
      * Get all registered {@link EcoEnchant}s

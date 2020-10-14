@@ -4,13 +4,25 @@ import com.willfp.ecoenchants.util.ClassUtils;
 import org.bukkit.Bukkit;
 
 public enum Prerequisite {
-    MinVer1_16(false),
-    HasPaper(false);
+    MinVer1_16(
+            false,
+            "Requires minimum server version of 1.16"
+    ),
+    HasPaper(
+            false,
+            "Requires server to be running paper (or a fork)"
+    );
 
     private boolean isMet;
+    private final String description;
 
-    Prerequisite(boolean isMet) {
+    Prerequisite(boolean isMet, String description) {
         this.isMet = isMet;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public boolean isMet() {

@@ -61,7 +61,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         if(!Arrays.stream(prerequisites).allMatch(Prerequisite::isMet)) {
             Arrays.stream(prerequisites).forEach(prerequisite -> {
                 if(!prerequisite.isMet()) {
-                    Logger.warn("Enchantment " + builder.key + " does not match prerequisite \"" + prerequisite.name() + "\". It will not be available.");
+                    Logger.warn("Enchantment " + builder.key + " does not match prerequisite \"" + prerequisite.getDescription() + "\". It will not be available.");
                 }
             });
             return;
