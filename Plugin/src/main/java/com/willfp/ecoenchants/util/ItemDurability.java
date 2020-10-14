@@ -27,6 +27,9 @@ public class ItemDurability {
      */
     public static void damageItem(Player player, ItemStack item, int damage, int slot) {
         if(item == null) return;
+        if(item.getItemMeta() == null) return;
+
+        if(item.getItemMeta().isUnbreakable()) return;
 
         PlayerItemDamageEvent event3 = new PlayerItemDamageEvent(player, item, damage);
         Bukkit.getPluginManager().callEvent(event3);
@@ -61,6 +64,9 @@ public class ItemDurability {
      */
     public static void damageItemNoBreak(ItemStack item, int damage, Player player) {
         if(item == null) return;
+        if(item.getItemMeta() == null) return;
+
+        if(item.getItemMeta().isUnbreakable()) return;
 
         PlayerItemDamageEvent event3 = new PlayerItemDamageEvent(player, item, damage);
         Bukkit.getPluginManager().callEvent(event3);
@@ -89,6 +95,9 @@ public class ItemDurability {
      */
     public static void repairItem(ItemStack item, int repair) {
         if(item == null) return;
+        if(item.getItemMeta() == null) return;
+
+        if(item.getItemMeta().isUnbreakable()) return;
         if(item.getItemMeta() instanceof Damageable) {
             Damageable meta = (Damageable) item.getItemMeta();
             meta.setDamage(meta.getDamage() - repair);
