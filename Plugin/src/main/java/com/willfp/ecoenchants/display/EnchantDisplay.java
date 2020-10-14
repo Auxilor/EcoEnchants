@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
+import com.willfp.ecoenchants.util.Pair;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -42,11 +43,9 @@ public final class EnchantDisplay {
     public static final NamespacedKey KEY_SKIP = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
     /**
-     * Cached description lore.
-     *
-     * @see Enchantment#getKey()
+     * Cached enchantment descriptions and names
      */
-    public static final Map<NamespacedKey, List<String>> DESCRIPTION_CACHE = new HashMap<>();
+    public static final Map<Enchantment, Pair<String, List<String>>> CACHE = new HashMap<>();
 
     private static final String prefix = "§w";
 
@@ -76,23 +75,26 @@ public final class EnchantDisplay {
         artifactColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color"));
         normalColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("not-curse-color"));
 
-        DESCRIPTION_CACHE.clear();
+        CACHE.clear();
         Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
+            String name;
             List<String> description;
-            NamespacedKey key = enchantment.getKey();
             if(EcoEnchants.getFromEnchantment(enchantment) != null) {
-                description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
+                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
+                description = ecoEnchant.getDescription();
+                name = ecoEnchant.getName();
             } else {
-                description =
-                        Arrays.asList(
-                                WordUtils.wrap(
-                                        String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
-                                        ConfigManager.getConfig().getInt("lore.describe.wrap"),
-                                        "\n", false
-                                ).split("\\r?\\n"));
+                description = Arrays.asList(
+                        WordUtils.wrap(
+                                String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
+                                ConfigManager.getConfig().getInt("lore.describe.wrap"),
+                                "\n", false
+                        ).split("\\r?\\n")
+                );
+                description.replaceAll(line -> prefix + descriptionColor + line);
+                name = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
             }
-            description.replaceAll(line -> prefix + descriptionColor + line);
-            DESCRIPTION_CACHE.put(key, description);
+            CACHE.put(enchantment, new Pair<>(name, description));
         });
 
         useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
@@ -191,7 +193,7 @@ public final class EnchantDisplay {
         enchantments.forEach((enchantment, level) -> {
             boolean isEcoEnchant = EcoEnchants.getFromEnchantment(enchantment) != null;
 
-            String name;
+            String name = CACHE.get(enchantment).getKey();
             String color;
             EcoEnchant.EnchantmentType type;
 
@@ -214,15 +216,12 @@ public final class EnchantDisplay {
             }
 
             if(isEcoEnchant) {
-                name = enchantment.getName();
                 EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
                 if(rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
                     color = rarity.getCustomColor();
                 }
 
                 if(!EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
-            } else {
-                name = ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey() + ".name");
             }
 
             if(!(enchantment.getMaxLevel() == 1 && level == 1)) {
@@ -235,7 +234,7 @@ public final class EnchantDisplay {
 
             lore.add(prefix + color + name);
             if(enchantments.size() <= describeThreshold && useDescribe)
-                lore.addAll(DESCRIPTION_CACHE.get(enchantment.getKey()));
+                lore.addAll(CACHE.get(enchantment).getValue());
         });
 
         if (useShrink && (enchantments.size() > shrinkThreshold)) {

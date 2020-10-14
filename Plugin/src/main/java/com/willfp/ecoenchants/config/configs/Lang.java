@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.ecoenchants.config.UpdatingLang;
-import org.bukkit.ChatColor;
+import com.willfp.ecoenchants.util.StringUtils;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Lang extends UpdatingLang {
     }
 
     public String getString(String path) {
-        return config.getString(path);
+        return StringUtils.translate(config.getString(path));
     }
 
     public List<String> getStrings(String path) {
@@ -23,14 +23,14 @@ public class Lang extends UpdatingLang {
 
 
     public String getPrefix() {
-        return ChatColor.translateAlternateColorCodes('&', config.getString("messages.prefix"));
+        return StringUtils.translate(config.getString("messages.prefix"));
     }
 
     public String getNoPermission() {
-        return getPrefix() + ChatColor.translateAlternateColorCodes('&', config.getString("messages.no-permission"));
+        return getPrefix() + StringUtils.translate(config.getString("messages.no-permission"));
     }
 
     public String getMessage(String message) {
-        return getPrefix() + ChatColor.translateAlternateColorCodes('&', config.getString("messages." + message));
+        return getPrefix() + StringUtils.translate(config.getString("messages." + message));
     }
 }
