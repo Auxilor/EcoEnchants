@@ -18,7 +18,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
 
     public TabCompleterEnchantinfo() {
         super((AbstractCommand) Bukkit.getPluginCommand("enchantinfo").getExecutor());
-        enchantsNames = EcoEnchants.getAll().stream().map(EcoEnchant::getName).collect(Collectors.toList());
+        enchantsNames = EcoEnchants.getAll().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
     }
 
     private static String removePrefix(String s, String prefix) {
