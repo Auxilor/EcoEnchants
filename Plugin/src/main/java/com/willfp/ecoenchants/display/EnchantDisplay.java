@@ -19,11 +19,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
@@ -97,9 +93,9 @@ public final class EnchantDisplay {
                                 "\n", false
                         ).split("\\r?\\n")
                 );
-                description.replaceAll(line -> prefix + descriptionColor + line);
                 name = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
             }
+            description.replaceAll(line -> prefix + descriptionColor + line);
             CACHE.put(enchantment, new Pair<>(name, description));
         });
 
