@@ -27,7 +27,7 @@ public class AnvilListeners implements Listener {
 
         Player player = (Player) event.getViewers().get(0);
 
-        Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name);
+        Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
         if(newOut.getKey() == null) {
             newOut.setKey(new ItemStack(Material.AIR, 0));

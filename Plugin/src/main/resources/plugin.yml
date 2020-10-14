@@ -40,6 +40,12 @@ permissions:
       ecoenchants.updateannounce: true
       ecoenchants.enchantinfo: true
       ecoenchants.ecodebug: true
+      ecoenchants.anvil.*: true
+  ecoenchants.anvil.*:
+    description: Allows all anvil permissions
+    default: op
+    children:
+      ecoenchants.anvil.bypasshardcap: true
   ecoenchants.fromtable.*:
     description: Allows getting all enchantments from an enchanting table
     default: true
@@ -263,6 +269,9 @@ permissions:
   ecoenchants.enchantinfo:
     description: Allows the use of /enchantinfo to show enchant info
     default: true
+  ecoenchants.anvil.bypasshardcap:
+    description: Allows bypassing the anvil hard cap
+    default: op
 
   ecoenchants.fromtable.beheading:
     description: Allows getting beheading from an enchanting table

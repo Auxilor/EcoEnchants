@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.Pair;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -26,9 +27,10 @@ public class AnvilMerge {
      * @param right The {@link ItemStack} in the middle of the anvil
      * @param old The previous {@link ItemStack} result
      * @param name The anvil display name
+     * @param player The player merging (for permissions)
      * @return The result, stored as a {@link Pair} of {@link ItemStack} and {@link Integer}.
      */
-    public static Pair<ItemStack, Integer> doMerge(ItemStack left, ItemStack right, ItemStack old, String name) {
+    public static Pair<ItemStack, Integer> doMerge(ItemStack left, ItemStack right, ItemStack old, String name, Player player) {
         // Here so it can be accessed later (scope)
 
         int outDamage = -1;
@@ -130,7 +132,7 @@ public class AnvilMerge {
             if(left.getItemMeta() instanceof EnchantmentStorageMeta) canEnchantItem = true;
 
             if(canEnchantItem && !doesConflict.get()) {
-                if(ConfigManager.getConfig().getBool("anvil.hard-cap.enabled")) {
+                if(ConfigManager.getConfig().getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap")) {
                     if(outEnchants.size() >= ConfigManager.getConfig().getInt("anvil.hard-cap.cap")) {
                         return;
                     }
