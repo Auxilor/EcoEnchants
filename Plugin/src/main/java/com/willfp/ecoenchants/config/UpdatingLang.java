@@ -43,6 +43,9 @@ public abstract class UpdatingLang {
             YamlConfiguration newConfig = new YamlConfiguration();
             newConfig.load(reader);
 
+            if(newConfig.getKeys(true).equals(config.getKeys(true)))
+                return;
+
             newConfig.getKeys(true).forEach((s -> {
                 if (!config.getKeys(true).contains(s)) {
                     config.set(s, newConfig.get(s));
