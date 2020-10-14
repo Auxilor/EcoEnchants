@@ -40,6 +40,6 @@ public final class GreenThumb extends EcoEnchant {
         if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "damage"))
             ItemDurability.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
 
-        event.getClickedBlock().setType(Material.GRASS);
+        event.getClickedBlock().setType(Material.GRASS_BLOCK);
     }
 }
