@@ -243,6 +243,13 @@ permissions:
       ecoenchants.fromtable.inaccuracycurse: true
       ecoenchants.fromtable.respirator: true
       ecoenchants.fromtable.fetching: true
+      ecoenchants.fromtable.economical: true
+      ecoenchants.fromtable.soulfireartifact: true
+      ecoenchants.fromtable.soulartifact: true
+      ecoenchants.fromtable.crimsonartifact: true
+      ecoenchants.fromtable.warpedartifact: true
+      ecoenchants.fromtable.ashartifact: true
+      ecoenchants.fromtable.tearartifact: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -856,4 +863,22 @@ permissions:
     default: true
   ecoenchants.fromtable.economical:
     description: Allows getting economical from an enchanting table
+    default: true
+  ecoenchants.fromtable.soulfireartifact:
+    description: Allows getting soul fire artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.soulartifact:
+    description: Allows getting soul artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.crimsonartifact:
+    description: Allows getting crimson artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.warpedartifact:
+    description: Allows getting warped artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.ashartifact:
+    description: Allows getting ash artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.tearartifact:
+    description: Allows getting tear artifact from an enchanting table
     default: true

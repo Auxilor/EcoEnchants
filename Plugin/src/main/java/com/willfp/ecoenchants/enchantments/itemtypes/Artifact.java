@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.NumberUtils;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
@@ -33,11 +34,19 @@ public abstract class Artifact extends EcoEnchant {
     private final Particle.DustOptions extra;
 
     protected Artifact(String key, double version, Particle particle) {
-        this(key, version, particle, null);
+        this(key, version, particle, null, new Prerequisite[]{} );
     }
 
     protected Artifact(String key, double version, Particle particle, Particle.DustOptions extra) {
-        super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT, version));
+        this(key, version, particle, extra, new Prerequisite[]{});
+    }
+
+    protected Artifact(String key, double version, Particle particle, Prerequisite[] prerequisites) {
+        this(key, version, particle, null, prerequisites);
+    }
+
+    protected Artifact(String key, double version, Particle particle, Particle.DustOptions extra, Prerequisite[] prerequisites) {
+        super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT, version), prerequisites);
         this.particle = particle;
         this.extra = extra;
     }
