@@ -40,9 +40,8 @@ public class AnvilListeners implements Listener {
             modCost = newOut.getValue();
         }
 
-        final int cost = modCost + event.getInventory().getRepairCost();
-
         Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
+            final int cost = modCost + event.getInventory().getRepairCost();
             event.getInventory().setRepairCost(cost);
             event.setResult(newOut.getKey());
             event.getInventory().setItem(2, newOut.getKey());
