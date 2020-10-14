@@ -41,7 +41,7 @@ public final class EnchantDisplay {
     /**
      * The meta key to hide enchantments in lore
      *
-     * Only used for parity in setcreative slot.
+     * Only used for parity in setcreativeslot.
      * More robust method to be introduced
      *
      * @deprecated Temporary fix
@@ -145,9 +145,12 @@ public final class EnchantDisplay {
         meta.getPersistentDataContainer().remove(KEY);
         itemLore.removeIf((s) -> s.startsWith(prefix));
 
-        if(meta instanceof EnchantmentStorageMeta)
-            meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
-        meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+        if(!meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
+            if (meta instanceof EnchantmentStorageMeta)
+                meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
+            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        meta.getPersistentDataContainer().remove(KEY_SKIP);
         meta.setLore(itemLore);
         item.setItemMeta(meta);
 
