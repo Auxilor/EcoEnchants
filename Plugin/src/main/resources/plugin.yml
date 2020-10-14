@@ -256,6 +256,7 @@ permissions:
       ecoenchants.fromtable.warpedartifact: true
       ecoenchants.fromtable.ashartifact: true
       ecoenchants.fromtable.tearartifact: true
+      ecoenchants.fromtable.backstab: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -890,4 +891,7 @@ permissions:
     default: true
   ecoenchants.fromtable.tearartifact:
     description: Allows getting tear artifact from an enchanting table
+    default: true
+  ecoenchants.fromtable.backstab:
+    description: Allows getting backstab from an enchanting table
     default: true
