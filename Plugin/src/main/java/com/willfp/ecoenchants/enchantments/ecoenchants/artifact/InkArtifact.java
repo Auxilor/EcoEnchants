@@ -6,8 +6,12 @@ public final class InkArtifact extends Artifact {
     public InkArtifact() {
         super(
                 "ink_artifact",
-                5.0,
-                Particle.SQUID_INK
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.SQUID_INK;
     }
 }

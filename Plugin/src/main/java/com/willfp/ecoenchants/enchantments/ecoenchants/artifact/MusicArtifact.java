@@ -6,8 +6,12 @@ public final class MusicArtifact extends Artifact {
     public MusicArtifact() {
         super(
                 "music_artifact",
-                5.0,
-                Particle.NOTE
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.NOTE;
     }
 }

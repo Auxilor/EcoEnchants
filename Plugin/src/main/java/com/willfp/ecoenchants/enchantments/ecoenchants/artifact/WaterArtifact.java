@@ -6,8 +6,12 @@ public final class WaterArtifact extends Artifact {
     public WaterArtifact() {
         super(
                 "water_artifact",
-                5.0,
-                Particle.DRIP_WATER
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.DRIP_WATER;
     }
 }

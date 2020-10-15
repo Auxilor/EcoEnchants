@@ -6,8 +6,12 @@ public final class WitchArtifact extends Artifact {
     public WitchArtifact() {
         super(
                 "witch_artifact",
-                5.0,
-                Particle.SPELL_WITCH
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.SPELL_WITCH;
     }
 }

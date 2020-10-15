@@ -6,8 +6,12 @@ public final class DustArtifact extends Artifact {
     public DustArtifact() {
         super(
                 "dust_artifact",
-                5.0,
-                Particle.CRIT
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.CRIT;
     }
 }

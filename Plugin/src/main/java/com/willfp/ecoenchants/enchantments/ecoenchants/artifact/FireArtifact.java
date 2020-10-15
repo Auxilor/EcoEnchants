@@ -6,8 +6,12 @@ public final class FireArtifact extends Artifact {
     public FireArtifact() {
         super(
                 "fire_artifact",
-                5.0,
-                Particle.FLAME
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.FLAME;
     }
 }

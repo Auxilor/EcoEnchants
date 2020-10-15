@@ -6,8 +6,12 @@ public final class SnowArtifact extends Artifact {
     public SnowArtifact() {
         super(
                 "snow_artifact",
-                5.0,
-                Particle.SNOWBALL
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.SNOWBALL;
     }
 }

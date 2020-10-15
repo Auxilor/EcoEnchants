@@ -6,8 +6,12 @@ public final class EndArtifact extends Artifact {
     public EndArtifact() {
         super(
                 "end_artifact",
-                5.0,
-                Particle.END_ROD
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.END_ROD;
     }
 }

@@ -9,8 +9,12 @@ public final class AshArtifact extends Artifact {
         super(
                 "ash_artifact",
                 5.0,
-                Particle.WHITE_ASH,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.WHITE_ASH;
     }
 }

@@ -6,8 +6,12 @@ public final class HeartArtifact extends Artifact {
     public HeartArtifact() {
         super(
                 "heart_artifact",
-                5.0,
-                Particle.HEART
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.HEART;
     }
 }

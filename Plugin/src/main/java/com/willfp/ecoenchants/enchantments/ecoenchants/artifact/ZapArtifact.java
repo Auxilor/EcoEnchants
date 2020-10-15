@@ -7,9 +7,17 @@ public final class ZapArtifact extends Artifact {
     public ZapArtifact() {
         super(
                 "zap_artifact",
-                5.0,
-                Particle.REDSTONE,
-                new Particle.DustOptions(Color.YELLOW, 1.0f)
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.REDSTONE;
+    }
+
+    @Override
+    protected Particle.DustOptions getDustOptions() {
+        return new Particle.DustOptions(Color.YELLOW, 1.0f);
     }
 }

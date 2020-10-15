@@ -6,8 +6,12 @@ public final class NetherArtifact extends Artifact {
     public NetherArtifact() {
         super(
                 "nether_artifact",
-                5.0,
-                Particle.PORTAL
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.PORTAL;
     }
 }

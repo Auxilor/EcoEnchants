@@ -6,8 +6,12 @@ public final class DragonArtifact extends Artifact {
     public DragonArtifact() {
         super(
                 "dragon_artifact",
-                5.0,
-                Particle.DRAGON_BREATH
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.DRAGON_BREATH;
     }
 }

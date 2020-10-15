@@ -30,26 +30,26 @@ import org.bukkit.util.Vector;
  * in order to reduce copying existing code between artifacts.
  */
 public abstract class Artifact extends EcoEnchant {
-    private final Particle particle;
-    private final Particle.DustOptions extra;
+    private Particle particle;
+    private Particle.DustOptions extra;
 
-    protected Artifact(String key, double version, Particle particle) {
-        this(key, version, particle, null, new Prerequisite[]{} );
+    protected Artifact(String key, double version) {
+        this(key, version, new Prerequisite[]{});
     }
 
-    protected Artifact(String key, double version, Particle particle, Particle.DustOptions extra) {
-        this(key, version, particle, extra, new Prerequisite[]{});
-    }
-
-    protected Artifact(String key, double version, Particle particle, Prerequisite[] prerequisites) {
-        this(key, version, particle, null, prerequisites);
-    }
-
-    protected Artifact(String key, double version, Particle particle, Particle.DustOptions extra, Prerequisite[] prerequisites) {
+    protected Artifact(String key, double version, Prerequisite[] prerequisites) {
         super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT, version), prerequisites);
-        this.particle = particle;
-        this.extra = extra;
+        if(!this.isRegistered()) return;
+
+        this.particle = this.getParticle();
+        this.extra = this.getDustOptions();
     }
+
+    protected abstract Particle getParticle();
+
+    protected Particle.DustOptions getDustOptions() {
+        return null;
+    };
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {

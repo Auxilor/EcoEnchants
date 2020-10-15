@@ -9,8 +9,12 @@ public final class SoulArtifact extends Artifact {
         super(
                 "soul_artifact",
                 5.0,
-                Particle.SOUL,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.SOUL;
     }
 }

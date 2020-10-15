@@ -44,6 +44,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private final Set<Material> target = new HashSet<>();
 
     private boolean enabled;
+    private boolean registered = false;
 
     /**
      * Create new EcoEnchant matching builder and prerequisites
@@ -130,6 +131,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             f.setAccessible(false);
 
             Enchantment.registerEnchantment(this);
+
+            this.registered = true;
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
     }
 
@@ -169,6 +172,14 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      */
     public boolean isEnabled() {
         return this.enabled;
+    }
+
+    /**
+     * Get if enchantment is registered
+     * @return If registered
+     */
+    public boolean isRegistered() {
+        return this.registered;
     }
 
     /**

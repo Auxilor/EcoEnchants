@@ -9,8 +9,12 @@ public final class TearArtifact extends Artifact {
         super(
                 "tear_artifact",
                 5.0,
-                Particle.DRIPPING_OBSIDIAN_TEAR,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.DRIPPING_OBSIDIAN_TEAR;
     }
 }

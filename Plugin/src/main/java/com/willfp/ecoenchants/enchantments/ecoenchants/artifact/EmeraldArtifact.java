@@ -6,8 +6,12 @@ public final class EmeraldArtifact extends Artifact {
     public EmeraldArtifact() {
         super(
                 "emerald_artifact",
-                5.0,
-                Particle.COMPOSTER
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.COMPOSTER;
     }
 }

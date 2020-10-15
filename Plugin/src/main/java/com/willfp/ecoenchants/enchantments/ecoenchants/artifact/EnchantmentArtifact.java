@@ -6,8 +6,12 @@ public final class EnchantmentArtifact extends Artifact {
     public EnchantmentArtifact() {
         super(
                 "enchantment_artifact",
-                5.0,
-                Particle.ENCHANTMENT_TABLE
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.ENCHANTMENT_TABLE;
     }
 }

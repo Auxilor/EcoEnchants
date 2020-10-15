@@ -6,8 +6,12 @@ public final class MagicArtifact extends Artifact {
     public MagicArtifact() {
         super(
                 "magic_artifact",
-                5.0,
-                Particle.CRIT_MAGIC
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.CRIT_MAGIC;
     }
 }

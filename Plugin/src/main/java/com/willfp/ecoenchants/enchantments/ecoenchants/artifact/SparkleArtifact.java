@@ -6,8 +6,12 @@ public final class SparkleArtifact extends Artifact {
     public SparkleArtifact() {
         super(
                 "sparkle_artifact",
-                5.0,
-                Particle.FIREWORKS_SPARK
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.FIREWORKS_SPARK;
     }
 }

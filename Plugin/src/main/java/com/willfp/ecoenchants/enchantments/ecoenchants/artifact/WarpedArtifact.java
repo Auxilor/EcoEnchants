@@ -9,8 +9,12 @@ public final class WarpedArtifact extends Artifact {
         super(
                 "warped_artifact",
                 5.0,
-                Particle.WARPED_SPORE,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.WARPED_SPORE;
     }
 }

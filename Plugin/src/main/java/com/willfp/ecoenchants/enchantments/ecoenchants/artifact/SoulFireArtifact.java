@@ -9,8 +9,12 @@ public final class SoulFireArtifact extends Artifact {
         super(
                 "soul_fire_artifact",
                 5.0,
-                Particle.SOUL_FIRE_FLAME,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.SOUL_FIRE_FLAME;
     }
 }

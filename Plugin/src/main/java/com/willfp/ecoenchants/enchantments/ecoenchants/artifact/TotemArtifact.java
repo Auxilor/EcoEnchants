@@ -6,8 +6,12 @@ public final class TotemArtifact extends Artifact {
     public TotemArtifact() {
         super(
                 "totem_artifact",
-                5.0,
-                Particle.TOTEM
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.TOTEM;
     }
 }

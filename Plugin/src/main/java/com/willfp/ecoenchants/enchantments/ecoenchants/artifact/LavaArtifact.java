@@ -6,8 +6,12 @@ public final class LavaArtifact extends Artifact {
     public LavaArtifact() {
         super(
                 "lava_artifact",
-                5.0,
-                Particle.DRIP_LAVA
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.DRIP_LAVA;
     }
 }

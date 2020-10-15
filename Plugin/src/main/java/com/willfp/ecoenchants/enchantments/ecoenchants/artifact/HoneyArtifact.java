@@ -6,8 +6,12 @@ public final class HoneyArtifact extends Artifact {
     public HoneyArtifact() {
         super(
                 "honey_artifact",
-                5.0,
-                Particle.FALLING_HONEY
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.FALLING_HONEY;
     }
 }

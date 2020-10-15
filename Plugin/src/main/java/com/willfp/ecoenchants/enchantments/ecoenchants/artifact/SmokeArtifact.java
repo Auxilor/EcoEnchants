@@ -6,8 +6,12 @@ public final class SmokeArtifact extends Artifact {
     public SmokeArtifact() {
         super(
                 "smoke_artifact",
-                5.0,
-                Particle.CAMPFIRE_COSY_SMOKE
+                5.0
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.CAMPFIRE_COSY_SMOKE;
     }
 }

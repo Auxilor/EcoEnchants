@@ -9,8 +9,12 @@ public final class CrimsonArtifact extends Artifact {
         super(
                 "crimson_artifact",
                 5.0,
-                Particle.CRIMSON_SPORE,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
+    }
+
+    @Override
+    protected Particle getParticle() {
+        return Particle.CRIMSON_SPORE;
     }
 }
