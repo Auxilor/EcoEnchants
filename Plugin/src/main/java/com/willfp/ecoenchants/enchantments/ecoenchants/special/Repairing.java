@@ -15,12 +15,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Repairable;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public final class Repairing extends EcoEnchant implements EcoRunnable {
     public Repairing() {
@@ -73,17 +72,22 @@ public final class Repairing extends EcoEnchant implements EcoRunnable {
     @Override
     public void run() {
         players.forEach((player -> {
-            List<ItemStack> toRepair = Arrays.stream(player.getInventory().getContents())
-                    .filter(ItemStack::hasItemMeta)
-                    .filter(item -> item.getItemMeta().hasEnchant(EcoEnchants.REPAIRING))
-                    .filter(item -> !player.getInventory().getItemInOffHand().equals(item))
-                    .filter(item -> !player.getInventory().getItemInMainHand().equals(item))
-                    .filter(item -> !player.getItemOnCursor().equals(item)).collect(Collectors.toList());
-            toRepair.forEach(item -> {
+            for(ItemStack item : player.getInventory().getContents()) {
+                if(!EnchantChecks.item(item, EcoEnchants.REPAIRING)) continue;
+
+                if(!(item.getItemMeta() instanceof Repairable)) continue;
+
+                if(player.getInventory().getItemInMainHand().equals(item)) continue;
+                if(player.getInventory().getItemInOffHand().equals(item)) continue;
+                if(player.getItemOnCursor().equals(item)) continue;
+
+
                 int level = EnchantChecks.getItemLevel(item, EcoEnchants.REPAIRING);
+                int multiplier = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
                 int repairAmount = level * multiplier;
+
                 DurabilityUtils.repairItem(item, repairAmount);
-            });
+            }
         }));
     }
 

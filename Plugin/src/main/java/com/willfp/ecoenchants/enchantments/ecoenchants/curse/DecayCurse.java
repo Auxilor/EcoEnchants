@@ -15,12 +15,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Repairable;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public final class DecayCurse extends EcoEnchant implements EcoRunnable {
     public DecayCurse() {
@@ -65,24 +64,29 @@ public final class DecayCurse extends EcoEnchant implements EcoRunnable {
     private void refresh() {
         players.clear();
         EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
-            if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, EcoEnchants.DECAY_CURSE)))
+            if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, EcoEnchants.REPAIRING)))
                 players.add(player);
         });
-        amount = EcoEnchants.DECAY_CURSE.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
+        amount = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
     }
 
     @Override
     public void run() {
         players.forEach((player -> {
-            List<ItemStack> toRepair = Arrays.stream(player.getInventory().getContents())
-                    .filter(ItemStack::hasItemMeta)
-                    .filter(item -> item.getItemMeta().hasEnchant(EcoEnchants.DECAY_CURSE))
-                    .filter(item -> !player.getInventory().getItemInOffHand().equals(item))
-                    .filter(item -> !player.getInventory().getItemInMainHand().equals(item))
-                    .filter(item -> !player.getItemOnCursor().equals(item)).collect(Collectors.toList());
-            toRepair.forEach(itemStack -> {
-                DurabilityUtils.damageItemNoBreak(itemStack, amount, player);
-            });
+            for(ItemStack item : player.getInventory().getContents()) {
+                if(!EnchantChecks.item(item, EcoEnchants.DECAY_CURSE)) continue;
+
+                if(!(item.getItemMeta() instanceof Repairable)) continue;
+
+                if(player.getInventory().getItemInMainHand().equals(item)) continue;
+                if(player.getInventory().getItemInOffHand().equals(item)) continue;
+                if(player.getItemOnCursor().equals(item)) continue;
+
+
+                int damage = EcoEnchants.DECAY_CURSE.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
+
+                DurabilityUtils.damageItemNoBreak(item, damage, player);
+            }
         }));
     }
 
