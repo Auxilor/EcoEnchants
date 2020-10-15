@@ -22,8 +22,8 @@ import java.util.Set;
 public class EnchantmentConfig extends EnchantmentYamlConfig {
     private final String name;
 
-    public EnchantmentConfig(String name, double version, Class<?> plugin, EcoEnchant.EnchantmentType type) {
-        super(name, version, plugin, type);
+    public EnchantmentConfig(String name, Class<?> plugin, EcoEnchant.EnchantmentType type) {
+        super(name, plugin, type);
         this.name = name;
     }
 

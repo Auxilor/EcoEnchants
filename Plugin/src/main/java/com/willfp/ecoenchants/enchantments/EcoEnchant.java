@@ -30,7 +30,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private final String permissionName;
     private final EnchantmentType type;
 
-    private final double configVersion;
     private final EnchantmentConfig config;
 
     private boolean grindstoneable;
@@ -54,7 +53,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         this.type = builder.type;
         this.permissionName = builder.permission;
-        this.configVersion = builder.configVersion;
         this.config = builder.config;
 
         if(!Prerequisite.areMet(prerequisites))
@@ -235,14 +233,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      */
     public Set<Material> getTarget() {
         return target;
-    }
-
-    /**
-     * Get latest config version
-     * @return The latest version
-     */
-    public double getConfigVersion() {
-        return configVersion;
     }
 
     /**

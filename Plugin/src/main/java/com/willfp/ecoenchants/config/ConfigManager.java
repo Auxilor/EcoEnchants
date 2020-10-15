@@ -39,7 +39,7 @@ public class ConfigManager {
      * Update enchantment configs
      */
     public static void updateEnchantmentConfigs() {
-        enchantmentConfigs.forEach((EnchantmentYamlConfig::reload));
+        enchantmentConfigs.forEach((EnchantmentYamlConfig::update));
     }
 
     /**

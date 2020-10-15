@@ -2,19 +2,18 @@ package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.util.Logger;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Class implemented by enchantment configs
@@ -25,23 +24,20 @@ public abstract class EnchantmentYamlConfig {
     public YamlConfiguration config;
     protected File configFile;
     private final File directory;
-    private final double latestVersion;
     private final JavaPlugin plugin = EcoEnchantsPlugin.getInstance();
     private final Class<?> plugin2;
     private final EcoEnchant.EnchantmentType type;
-    private File basedir = new File(this.plugin.getDataFolder(), "enchants/");
+    private final File basedir = new File(this.plugin.getDataFolder(), "enchants/");
 
     /**
      * Create new config yml
      *
      * @param name The config name
-     * @param latestVersion The latest config version
      * @param plugin The class of the main class of plugin or extension
      * @param type The enchantment type
      */
-    public EnchantmentYamlConfig(String name, double latestVersion, Class<?> plugin, EcoEnchant.EnchantmentType type) {
+    public EnchantmentYamlConfig(String name, Class<?> plugin, EcoEnchant.EnchantmentType type) {
         this.name = name;
-        this.latestVersion = latestVersion;
         this.plugin2 = plugin;
         this.type = type;
 
@@ -64,7 +60,7 @@ public abstract class EnchantmentYamlConfig {
         this.configFile = new File(directory, name + ".yml");
         this.config = YamlConfiguration.loadConfiguration(configFile);
 
-        checkVersion();
+        update();
     }
 
     private void saveResource(boolean replace) {
@@ -97,50 +93,36 @@ public abstract class EnchantmentYamlConfig {
     private void createFile() {
         saveResource(false);
     }
-    private void replaceFile() {
-        saveResource(true);
-    }
 
-    public void reload() {
+    public void update() {
         try {
-            this.config.load(this.configFile);
+            config.load(configFile);
+
+            String resourcePath = "/enchants/" + type.name().toLowerCase() + "/" + name + ".yml";
+            InputStream newIn =  plugin2.getResourceAsStream(resourcePath);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));
+            YamlConfiguration newConfig = new YamlConfiguration();
+            newConfig.load(reader);
+
+            if(newConfig.getKeys(true).equals(config.getKeys(true)))
+                return;
+
+            newConfig.getKeys(true).forEach((s -> {
+                if (!config.getKeys(true).contains(s)) {
+                    config.set(s, newConfig.get(s));
+                }
+            }));
+
+            config.getKeys(true).forEach((s -> {
+                if(!newConfig.getKeys(true).contains(s)) {
+                    config.set(s, null);
+                }
+            }));
+
+            config.save(configFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
-            Logger.error("§cCould not reload " + name + ".yml - Contact Auxilor.");
-        }
-    }
-
-    private void checkVersion() {
-        if (latestVersion != config.getDouble("config-version")) {
-            Logger.warn("EcoEnchants detected an older or invalid " + name + ".yml. Replacing it with the default config...");
-            Logger.warn("If you've edited the config, copy over your changes!");
-            performOverwrite();
-            Logger.info("§aReplacement complete!");
-        }
-    }
-
-    private void performOverwrite() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTime = dtf.format(now);
-        try {
-            File backupDir = new File(plugin.getDataFolder(), "backup/");
-            if(!backupDir.exists()) backupDir.mkdirs();
-            File oldConf = new File(backupDir, name + "_" + dateTime + ".yml");
-            oldConf.createNewFile();
-            FileInputStream fis = new FileInputStream(directory + "/" + name + ".yml");
-            FileOutputStream fos = new FileOutputStream(oldConf);
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = fis.read(buffer)) > 0) {
-                fos.write(buffer, 0, length);
-            }
-            fis.close();
-            fos.close();
-            replaceFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Logger.error("§cCould not update config. Try reinstalling EcoEnchants");
         }
     }
 }
