@@ -36,6 +36,7 @@ public final class GreenThumb extends EcoEnchant {
         if (!EnchantChecks.mainhand(player, this)) return;
 
         if(!AntigriefManager.canBreakBlock(player, event.getClickedBlock())) return;
+        if(!AntigriefManager.canPlaceBlock(player, event.getClickedBlock())) return;
 
         if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "damage"))
             ItemDurability.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());

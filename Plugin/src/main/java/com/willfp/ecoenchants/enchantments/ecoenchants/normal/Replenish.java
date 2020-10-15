@@ -26,7 +26,20 @@ public final class Replenish extends EcoEnchant {
         if(!(block.getBlockData() instanceof Ageable)) return;
 
         Ageable data = (Ageable) block.getBlockData();
-        if(data.getAge() != data.getMaximumAge()) return;
+        if(data.getAge() != data.getMaximumAge()) {
+            event.setDropItems(false);
+            event.setExpToDrop(0);
+
+            data.setAge(0);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    block.setType(type);
+                    block.setBlockData(data);
+                }
+            }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
+        }
 
         data.setAge(0);
 
