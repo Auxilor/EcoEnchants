@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
-import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import net.md_5.bungee.api.ChatColor;
@@ -44,7 +43,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private final Set<Material> target = new HashSet<>();
 
     private boolean enabled;
-    private boolean registered = false;
 
     /**
      * Create new EcoEnchant matching builder and prerequisites
@@ -59,14 +57,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         this.configVersion = builder.configVersion;
         this.config = builder.config;
 
-        if(!Arrays.stream(prerequisites).allMatch(Prerequisite::isMet)) {
-            Arrays.stream(prerequisites).forEach(prerequisite -> {
-                if(!prerequisite.isMet()) {
-                    Logger.warn("Enchantment " + builder.key + " does not match prerequisite \"" + prerequisite.getDescription() + "\". It will not be available.");
-                }
-            });
+        if(!Prerequisite.areMet(prerequisites))
             return;
-        }
 
         this.update();
         this.add();
@@ -131,8 +123,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             f.setAccessible(false);
 
             Enchantment.registerEnchantment(this);
-
-            this.registered = true;
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
     }
 
@@ -172,14 +162,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      */
     public boolean isEnabled() {
         return this.enabled;
-    }
-
-    /**
-     * Get if enchantment is registered
-     * @return If registered
-     */
-    public boolean isRegistered() {
-        return this.registered;
     }
 
     /**

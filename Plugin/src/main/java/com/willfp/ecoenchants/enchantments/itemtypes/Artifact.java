@@ -17,6 +17,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -39,7 +40,11 @@ public abstract class Artifact extends EcoEnchant {
 
     protected Artifact(String key, double version, Prerequisite[] prerequisites) {
         super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT, version), prerequisites);
-        if(!this.isRegistered()) return;
+
+        if(!Prerequisite.areMet(prerequisites)) {
+            HandlerList.unregisterAll(this); // Prevent events firing
+            return;
+        }
 
         this.particle = this.getParticle();
         this.extra = this.getDustOptions();

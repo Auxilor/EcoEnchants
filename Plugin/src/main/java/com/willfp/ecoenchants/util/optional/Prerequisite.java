@@ -3,6 +3,8 @@ package com.willfp.ecoenchants.util.optional;
 import com.willfp.ecoenchants.util.ClassUtils;
 import org.bukkit.Bukkit;
 
+import java.util.Arrays;
+
 public enum Prerequisite {
     MinVer1_16(
             false,
@@ -36,5 +38,9 @@ public enum Prerequisite {
     static {
         MinVer1_16.setMet(!Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].contains("15"));
         HasPaper.setMet(ClassUtils.exists("com.destroystokyo.paper.event.player.PlayerElytraBoostEvent"));
+    }
+
+    public static boolean areMet(Prerequisite[] prerequisites) {
+        return Arrays.stream(prerequisites).allMatch(Prerequisite::isMet);
     }
 }
