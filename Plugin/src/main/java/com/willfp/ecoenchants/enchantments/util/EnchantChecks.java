@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.util.ItemDurability;
+import com.willfp.ecoenchants.util.DurabilityUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
@@ -165,16 +165,16 @@ public final class EnchantChecks {
                 if(damage > 0 && isPlayer) {
                     Player player = (Player) entity;
                     if(itemStack.equals(entity.getEquipment().getHelmet())) {
-                        ItemDurability.damageItem(player, player.getInventory().getHelmet(), level, 39);
+                        DurabilityUtils.damageItem(player, player.getInventory().getHelmet(), level, 39);
                     }
                     if(itemStack.equals(entity.getEquipment().getChestplate())) {
-                        ItemDurability.damageItem(player, player.getInventory().getChestplate(), level, 38);
+                        DurabilityUtils.damageItem(player, player.getInventory().getChestplate(), level, 38);
                     }
                     if(itemStack.equals(entity.getEquipment().getLeggings())) {
-                        ItemDurability.damageItem(player, player.getInventory().getLeggings(), level, 37);
+                        DurabilityUtils.damageItem(player, player.getInventory().getLeggings(), level, 37);
                     }
                     if(itemStack.equals(entity.getEquipment().getBoots())) {
-                        ItemDurability.damageItem(player, player.getInventory().getBoots(), level, 36);
+                        DurabilityUtils.damageItem(player, player.getInventory().getBoots(), level, 36);
                     }
                 }
             }

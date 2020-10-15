@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.util.ItemDurability;
+import com.willfp.ecoenchants.util.DurabilityUtils;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
@@ -36,7 +36,7 @@ public final class DecayCurse extends EcoEnchant implements EcoRunnable {
 
                 int damage = EcoEnchants.DECAY_CURSE.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
 
-                ItemDurability.damageItemNoBreak(item, damage, player);
+                DurabilityUtils.damageItemNoBreak(item, damage, player);
             }
         }));
     }

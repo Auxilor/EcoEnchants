@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.util.ItemDurability;
+import com.willfp.ecoenchants.util.DurabilityUtils;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
@@ -38,7 +38,7 @@ public final class Repairing extends EcoEnchant implements EcoRunnable {
                 int multiplier = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
                 int repairAmount = level * multiplier;
 
-                ItemDurability.repairItem(item, repairAmount);
+                DurabilityUtils.repairItem(item, repairAmount);
             }
         }));
     }

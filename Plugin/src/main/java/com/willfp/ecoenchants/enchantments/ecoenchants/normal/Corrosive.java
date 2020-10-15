@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
-import com.willfp.ecoenchants.util.ItemDurability;
+import com.willfp.ecoenchants.util.DurabilityUtils;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -36,16 +36,16 @@ public final class Corrosive extends EcoEnchant {
 
 
             if(armorPiece.equals(victim.getInventory().getHelmet())) {
-                ItemDurability.damageItem(victim, victim.getInventory().getHelmet(), level, 39);
+                DurabilityUtils.damageItem(victim, victim.getInventory().getHelmet(), level, 39);
             }
             if(armorPiece.equals(victim.getInventory().getChestplate())) {
-                ItemDurability.damageItem(victim, victim.getInventory().getChestplate(), level, 38);
+                DurabilityUtils.damageItem(victim, victim.getInventory().getChestplate(), level, 38);
             }
             if(armorPiece.equals(victim.getInventory().getLeggings())) {
-                ItemDurability.damageItem(victim, victim.getInventory().getLeggings(), level, 37);
+                DurabilityUtils.damageItem(victim, victim.getInventory().getLeggings(), level, 37);
             }
             if(armorPiece.equals(victim.getInventory().getBoots())) {
-                ItemDurability.damageItem(victim, victim.getInventory().getBoots(), level, 36);
+                DurabilityUtils.damageItem(victim, victim.getInventory().getBoots(), level, 36);
             }
         }
     }

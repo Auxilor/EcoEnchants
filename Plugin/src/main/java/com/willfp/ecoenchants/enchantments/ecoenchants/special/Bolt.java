@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
-import com.willfp.ecoenchants.util.Lightning;
+import com.willfp.ecoenchants.util.LightningUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -30,6 +30,6 @@ public final class Bolt extends EcoEnchant {
 
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "lightning-damage");
 
-        Lightning.strike(victim, damage);
+        LightningUtils.strike(victim, damage);
     }
 }

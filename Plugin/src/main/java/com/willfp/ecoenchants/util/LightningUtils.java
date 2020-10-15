@@ -6,7 +6,7 @@ import org.bukkit.entity.LivingEntity;
 /**
  * Class containing methods for striking lightning
  */
-public class Lightning {
+public class LightningUtils {
 
     /**
      * Strike lightning on player without fire

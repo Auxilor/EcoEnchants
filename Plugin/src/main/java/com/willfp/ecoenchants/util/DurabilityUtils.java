@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 /**
  * Contains methods for damaging/repairing items
  */
-public class ItemDurability {
+public class DurabilityUtils {
     /**
      * Damage an item in a player's inventory
      * The slot of a held item can be obtained with {@link PlayerInventory#getHeldItemSlot()}

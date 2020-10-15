@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.util.ItemDurability;
+import com.willfp.ecoenchants.util.DurabilityUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -56,7 +56,7 @@ public final class Slicing extends EcoEnchant {
                 }
             }, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown"));
             if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "damage-elytra")) {
-                ItemDurability.damageItem(player, player.getInventory().getChestplate(), 1, 38);
+                DurabilityUtils.damageItem(player, player.getInventory().getChestplate(), 1, 38);
             }
         }
     }

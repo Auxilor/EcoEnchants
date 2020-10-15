@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.util.ItemDurability;
+import com.willfp.ecoenchants.util.DurabilityUtils;
 import com.willfp.ecoenchants.util.VectorShapes;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -61,7 +61,7 @@ public final class Farmhand extends EcoEnchant {
 
         if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {
 
-            ItemDurability.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
+            DurabilityUtils.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
         }
 
         for (Vector vec : vecs) {
@@ -79,7 +79,7 @@ public final class Farmhand extends EcoEnchant {
             block.setType(Material.FARMLAND);
             if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {
 
-                ItemDurability.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
+                DurabilityUtils.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
             }
         }
     }
