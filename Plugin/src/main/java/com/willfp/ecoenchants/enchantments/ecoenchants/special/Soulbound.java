@@ -1,7 +1,9 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -46,6 +48,7 @@ public final class Soulbound extends EcoEnchant {
 
         event.getDrops().removeAll(soulboundItems);
 
+        soulboundItemsMap.remove(player);
         soulboundItemsMap.put(player, soulboundItems);
     }
 
@@ -60,6 +63,9 @@ public final class Soulbound extends EcoEnchant {
 
             event.getPlayer().getInventory().addItem(itemStack);
         }));
-        soulboundItemsMap.remove(event.getPlayer());
+
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+            soulboundItemsMap.remove(event.getPlayer());
+        }, 1);
     }
 }
