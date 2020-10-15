@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.ecoenchants.config.UpdatingLang;
+import com.willfp.ecoenchants.config.UpdatingYamlConfig;
 import com.willfp.ecoenchants.util.StringUtils;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Wrapper for lang.yml
  */
-public class Lang extends UpdatingLang {
+public class Lang extends UpdatingYamlConfig {
     public Lang() {
-        super();
+        super("lang", false);
     }
 
     public String getString(String path) {

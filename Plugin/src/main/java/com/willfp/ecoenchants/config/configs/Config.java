@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.ecoenchants.config.YamlConfig;
+import com.willfp.ecoenchants.config.UpdatingYamlConfig;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Wrapper for config.yml
  */
-public class Config extends YamlConfig {
+public class Config extends UpdatingYamlConfig {
     public Config() {
-        super("config");
+        super("config", true);
     }
 
     public int getInt(String path) {

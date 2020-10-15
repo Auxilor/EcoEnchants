@@ -12,7 +12,6 @@ import java.util.Set;
 
 public class ConfigManager {
     public static final HashMap<String, Double> configVersions = new HashMap<String, Double>() {{
-        put("config", 5.0);
         put("target", 1.0);
         put("rarity", 1.0);
     }};
@@ -29,7 +28,7 @@ public class ConfigManager {
      */
     public static void updateConfigs() {
         LANG.update();
-        CONFIG.reload();
+        CONFIG.update();
         TARGET.reload();
         RARITY.reload();
         updateEnchantmentConfigs();
