@@ -22,7 +22,7 @@ import java.util.HashMap;
 public final class CallingCurse extends EcoEnchant implements EcoRunnable {
     public CallingCurse() {
         super(
-                new EcoEnchantBuilder("calling_curse", EnchantmentType.CURSE,  5.0)
+                new EcoEnchantBuilder("calling_curse", EnchantmentType.CURSE)
         );
     }
     private final HashMap<Player, Integer> players = new HashMap<>();
