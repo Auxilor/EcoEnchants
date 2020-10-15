@@ -13,7 +13,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 public final class Ignite extends EcoEnchant {
     public Ignite() {
         super(
-                new EcoEnchantBuilder("ignite", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("ignite", EnchantmentType.NORMAL)
         );
     }
 

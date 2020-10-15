@@ -2,8 +2,6 @@
 # Electroshock EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Electroshock"
 description: Chance to strike lightning on your attacker.
 enabled: true

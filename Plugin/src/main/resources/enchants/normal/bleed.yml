@@ -2,8 +2,6 @@
 # Bleed EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Bleed"
 description: Causes your opponent to bleed, damaging them repeatedly.
 enabled: true

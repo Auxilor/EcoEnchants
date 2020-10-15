@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class LavaArtifact extends Artifact {
     public LavaArtifact() {
         super(
-                "lava_artifact",
-                5.0
+                "lava_artifact"
         );
     }
 

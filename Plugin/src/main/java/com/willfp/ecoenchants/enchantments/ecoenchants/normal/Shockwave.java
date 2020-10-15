@@ -19,7 +19,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class Shockwave extends EcoEnchant {
     public Shockwave() {
         super(
-                new EcoEnchantBuilder("shockwave", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("shockwave", EnchantmentType.NORMAL)
         );
     }
 

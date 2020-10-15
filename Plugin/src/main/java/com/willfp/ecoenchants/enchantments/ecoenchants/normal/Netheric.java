@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Netheric extends EcoEnchant {
     public Netheric() {
         super(
-                new EcoEnchantBuilder("netheric", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("netheric", EnchantmentType.NORMAL)
         );
     }
 

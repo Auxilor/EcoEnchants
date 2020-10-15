@@ -6,8 +6,7 @@ import org.bukkit.Particle;
 public final class RedstoneArtifact extends Artifact {
     public RedstoneArtifact() {
         super(
-                "redstone_artifact",
-                5.0
+                "redstone_artifact"
         );
     }
 

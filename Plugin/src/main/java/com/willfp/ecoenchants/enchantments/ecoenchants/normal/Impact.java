@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Impact extends EcoEnchant {
     public Impact() {
         super(
-                new EcoEnchantBuilder("impact", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("impact", EnchantmentType.NORMAL)
         );
     }
 

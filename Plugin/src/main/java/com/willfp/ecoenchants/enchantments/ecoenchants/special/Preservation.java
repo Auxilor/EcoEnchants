@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Preservation extends EcoEnchant {
     public Preservation() {
         super(
-                new EcoEnchantBuilder("preservation", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("preservation", EnchantmentType.SPECIAL)
         );
     }
 

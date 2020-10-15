@@ -10,7 +10,7 @@ import org.bukkit.event.EventHandler;
 public final class Intellect extends EcoEnchant {
     public Intellect() {
         super(
-                new EcoEnchantBuilder("intellect", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("intellect", EnchantmentType.SPECIAL)
         );
     }
 

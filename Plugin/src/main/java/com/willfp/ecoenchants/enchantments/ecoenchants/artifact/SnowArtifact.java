@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class SnowArtifact extends Artifact {
     public SnowArtifact() {
         super(
-                "snow_artifact",
-                5.0
+                "snow_artifact"
         );
     }
 

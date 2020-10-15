@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Extinguishing extends EcoEnchant {
     public Extinguishing() {
         super(
-                new EcoEnchantBuilder("extinguishing", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("extinguishing", EnchantmentType.NORMAL)
         );
     }
 

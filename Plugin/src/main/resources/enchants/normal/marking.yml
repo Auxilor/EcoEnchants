@@ -2,8 +2,6 @@
 # Marking EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Marking"
 description: Increases subsequent damage dealt to opponent.
 enabled: true

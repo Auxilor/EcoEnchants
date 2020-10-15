@@ -2,8 +2,6 @@
 # Ender Slayer EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Ender Slayer"
 description: Increases damage against end mobs.
 enabled: true

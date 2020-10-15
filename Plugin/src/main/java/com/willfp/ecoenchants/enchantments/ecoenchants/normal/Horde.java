@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Horde extends EcoEnchant {
     public Horde() {
         super(
-                new EcoEnchantBuilder("horde", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("horde", EnchantmentType.NORMAL)
         );
     }
 

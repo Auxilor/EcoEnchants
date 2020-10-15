@@ -2,8 +2,6 @@
 # Arcanic EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Arcanic"
 description: Chance to ignore potion damage.
 enabled: true

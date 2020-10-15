@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Flinch extends EcoEnchant {
     public Flinch() {
         super(
-                new EcoEnchantBuilder("flinch", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("flinch", EnchantmentType.NORMAL)
         );
     }
 

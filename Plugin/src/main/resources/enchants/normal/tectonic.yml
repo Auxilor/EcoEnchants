@@ -2,8 +2,6 @@
 # Tectonic EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Tectonic"
 description: Damages nearby entities when taking fall damage.
 enabled: true

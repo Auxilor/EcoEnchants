@@ -8,7 +8,6 @@ public final class AshArtifact extends Artifact {
     public AshArtifact() {
         super(
                 "ash_artifact",
-                5.0,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
     }

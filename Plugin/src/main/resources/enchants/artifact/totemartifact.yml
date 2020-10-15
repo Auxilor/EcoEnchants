@@ -2,8 +2,6 @@
 # Totem Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Totem Artifact"
 description: Creates totem particles.
 enabled: true

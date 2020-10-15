@@ -2,8 +2,6 @@
 # Curse of Hunger EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Curse of Hunger"
 description: Increases hunger loss.
 enabled: true

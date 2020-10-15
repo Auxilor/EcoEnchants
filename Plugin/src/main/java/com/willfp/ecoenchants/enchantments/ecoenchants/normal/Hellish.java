@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Hellish extends EcoEnchant {
     public Hellish() {
         super(
-                new EcoEnchantBuilder("hellish", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("hellish", EnchantmentType.NORMAL)
         );
     }
 

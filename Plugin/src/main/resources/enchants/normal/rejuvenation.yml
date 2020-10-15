@@ -2,8 +2,6 @@
 # Rejuvenation EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Rejuvenation"
 description: Increases natural regeneration speed.
 enabled: true

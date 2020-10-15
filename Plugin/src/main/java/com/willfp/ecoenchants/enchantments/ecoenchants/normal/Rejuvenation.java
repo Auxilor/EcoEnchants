@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 public final class Rejuvenation extends EcoEnchant {
     public Rejuvenation() {
         super(
-                new EcoEnchantBuilder("rejuvenation", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("rejuvenation", EnchantmentType.NORMAL)
         );
     }
 

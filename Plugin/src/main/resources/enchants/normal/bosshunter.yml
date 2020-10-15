@@ -2,8 +2,6 @@
 # Boss Hunter EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Boss Hunter"
 description: Increases damage against bosses.
 enabled: true

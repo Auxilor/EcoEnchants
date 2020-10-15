@@ -2,8 +2,6 @@
 # Respirator EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Respirator"
 description: Reduces dragon breath damage.
 enabled: true

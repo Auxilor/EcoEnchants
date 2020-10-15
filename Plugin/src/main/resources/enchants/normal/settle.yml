@@ -2,8 +2,6 @@
 # Settle EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Settle"
 description: Increases damage against creepers.
 enabled: true

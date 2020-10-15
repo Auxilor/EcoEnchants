@@ -2,8 +2,6 @@
 # Revenant EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Revenant"
 description: Increases damage against undead mobs.
 enabled: true

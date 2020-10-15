@@ -18,7 +18,7 @@ import java.util.Objects;
 public final class Soulbound extends EcoEnchant {
     public Soulbound() {
         super(
-                new EcoEnchantBuilder("soulbound", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("soulbound", EnchantmentType.SPECIAL)
         );
     }
 

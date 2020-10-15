@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Supercritical extends EcoEnchant {
     public Supercritical() {
         super(
-                new EcoEnchantBuilder("supercritical", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("supercritical", EnchantmentType.NORMAL)
         );
     }
 

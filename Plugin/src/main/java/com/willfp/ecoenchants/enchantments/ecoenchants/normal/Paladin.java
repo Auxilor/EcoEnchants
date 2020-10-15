@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Paladin extends EcoEnchant {
     public Paladin() {
         super(
-                new EcoEnchantBuilder("paladin", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("paladin", EnchantmentType.NORMAL)
         );
     }
 

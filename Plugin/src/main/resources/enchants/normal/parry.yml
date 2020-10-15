@@ -2,8 +2,6 @@
 # Parry EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Parry"
 description: Reduces incoming damage when holding item.
 enabled: true

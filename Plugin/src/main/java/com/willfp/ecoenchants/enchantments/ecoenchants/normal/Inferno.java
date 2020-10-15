@@ -9,7 +9,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 public final class Inferno extends EcoEnchant {
     public Inferno() {
         super(
-                new EcoEnchantBuilder("inferno", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("inferno", EnchantmentType.NORMAL)
         );
     }
 

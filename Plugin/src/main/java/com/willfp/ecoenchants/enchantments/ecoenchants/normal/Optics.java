@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Optics extends EcoEnchant {
     public Optics() {
         super(
-                new EcoEnchantBuilder("optics", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("optics", EnchantmentType.NORMAL)
         );
     }
 

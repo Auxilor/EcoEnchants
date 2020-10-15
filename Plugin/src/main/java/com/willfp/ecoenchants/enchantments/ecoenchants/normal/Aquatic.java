@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Aquatic extends EcoEnchant {
     public Aquatic() {
         super(
-                new EcoEnchantBuilder("aquatic", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("aquatic", EnchantmentType.NORMAL)
         );
     }
 

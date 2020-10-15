@@ -2,8 +2,6 @@
 # Quadrilateralism EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Quadrilateralism"
 description: Increases damage dealt against slimes and magma cubes.
 enabled: true

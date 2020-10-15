@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Electroshock extends EcoEnchant {
     public Electroshock() {
         super(
-                new EcoEnchantBuilder("electroshock", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("electroshock", EnchantmentType.NORMAL)
         );
     }
 

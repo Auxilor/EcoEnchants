@@ -13,7 +13,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public final class Carve extends EcoEnchant {
     public Carve() {
         super(
-                new EcoEnchantBuilder("carve", EnchantmentType.SPECIAL,5.0)
+                new EcoEnchantBuilder("carve", EnchantmentType.SPECIAL)
         );
     }
 

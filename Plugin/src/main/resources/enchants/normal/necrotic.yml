@@ -2,8 +2,6 @@
 # Necrotic EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Necrotic"
 description: Wither skeletons have a higher chance to drop skulls.
 enabled: true

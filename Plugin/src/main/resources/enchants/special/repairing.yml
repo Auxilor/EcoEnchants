@@ -2,8 +2,6 @@
 # Repairing EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Repairing"
 description: Automatically repairs items when not held.
 enabled: true

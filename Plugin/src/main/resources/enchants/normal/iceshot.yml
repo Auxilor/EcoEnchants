@@ -2,8 +2,6 @@
 # Ice Shot EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Ice Shot"
 description: Chance of freezing your opponent.
 enabled: true

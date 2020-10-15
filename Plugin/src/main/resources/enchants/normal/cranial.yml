@@ -2,8 +2,6 @@
 # Cranial EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Cranial"
 description: Increases damage on headshots.
 enabled: true

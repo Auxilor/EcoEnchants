@@ -15,7 +15,7 @@ import java.util.Arrays;
 public final class Abrasion extends EcoEnchant {
     public Abrasion() {
         super(
-                new EcoEnchantBuilder("abrasion", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("abrasion", EnchantmentType.NORMAL)
         );
     }
 

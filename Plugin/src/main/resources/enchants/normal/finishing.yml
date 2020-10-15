@@ -2,8 +2,6 @@
 # Finishing EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Finishing"
 description: Chance to instantly kill entities on low health.
 enabled: true

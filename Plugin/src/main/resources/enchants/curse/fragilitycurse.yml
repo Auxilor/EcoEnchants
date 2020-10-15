@@ -2,8 +2,6 @@
 # Curse of Fragility EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Curse of Fragility"
 description: Decreases item durability.
 enabled: true

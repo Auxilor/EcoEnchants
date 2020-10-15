@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class FireArtifact extends Artifact {
     public FireArtifact() {
         super(
-                "fire_artifact",
-                5.0
+                "fire_artifact"
         );
     }
 

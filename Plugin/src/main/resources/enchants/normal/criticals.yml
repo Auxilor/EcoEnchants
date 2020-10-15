@@ -2,8 +2,6 @@
 # Criticals EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Criticals"
 description: Increases critical damage.
 enabled: true

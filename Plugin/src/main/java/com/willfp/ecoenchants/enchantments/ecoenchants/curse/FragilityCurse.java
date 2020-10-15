@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public final class FragilityCurse extends EcoEnchant {
     public FragilityCurse() {
         super(
-                new EcoEnchantBuilder("fragility_curse", EnchantmentType.CURSE, 5.0)
+                new EcoEnchantBuilder("fragility_curse", EnchantmentType.CURSE)
         );
     }
 

@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class DamageArtifact extends Artifact {
     public DamageArtifact() {
         super(
-                "damage_artifact",
-                5.0
+                "damage_artifact"
         );
     }
 

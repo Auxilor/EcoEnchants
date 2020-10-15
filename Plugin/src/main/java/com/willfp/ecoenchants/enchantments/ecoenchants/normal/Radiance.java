@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Radiance extends EcoEnchant {
     public Radiance() {
         super(
-                new EcoEnchantBuilder("radiance", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("radiance", EnchantmentType.NORMAL)
         );
     }
 

@@ -2,8 +2,6 @@
 # Enderism EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Enderism"
 description: Increases damage dealt in the end.
 enabled: true

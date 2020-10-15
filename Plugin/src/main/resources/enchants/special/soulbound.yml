@@ -2,8 +2,6 @@
 # Soulbound EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Soulbound"
 description: Keep this item on death.
 enabled: true

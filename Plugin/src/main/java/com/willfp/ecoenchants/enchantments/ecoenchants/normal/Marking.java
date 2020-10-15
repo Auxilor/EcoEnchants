@@ -15,7 +15,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public final class Marking extends EcoEnchant {
     public Marking() {
         super(
-                new EcoEnchantBuilder("marking", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("marking", EnchantmentType.NORMAL)
         );
     }
 

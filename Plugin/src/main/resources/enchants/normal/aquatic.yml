@@ -2,8 +2,6 @@
 # Aquatic EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Aquatic"
 description: Trident deals additional damage when shot from water.
 enabled: true

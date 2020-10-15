@@ -2,8 +2,6 @@
 # Incandescence EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Incandescence"
 description: Light your attacker on fire.
 enabled: true

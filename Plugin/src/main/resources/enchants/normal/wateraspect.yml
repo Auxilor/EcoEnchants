@@ -2,8 +2,6 @@
 # Water Aspect EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Water Aspect"
 description: Increases damage dealt against fiery mobs.
 enabled: true

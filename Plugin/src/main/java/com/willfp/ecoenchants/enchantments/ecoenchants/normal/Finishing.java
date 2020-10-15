@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Finishing extends EcoEnchant {
     public Finishing() {
         super(
-                new EcoEnchantBuilder("finishing", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("finishing", EnchantmentType.NORMAL)
         );
     }
 

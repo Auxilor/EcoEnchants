@@ -2,8 +2,6 @@
 # Honey Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Honey Artifact"
 description: Creates dripping honey particles.
 enabled: true

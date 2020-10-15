@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class Replenish extends EcoEnchant {
     public Replenish() {
         super(
-                new EcoEnchantBuilder("replenish", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("replenish", EnchantmentType.NORMAL)
         );
     }
 

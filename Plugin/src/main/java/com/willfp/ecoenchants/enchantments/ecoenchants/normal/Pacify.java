@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Pacify extends EcoEnchant {
     public Pacify() {
         super(
-                new EcoEnchantBuilder("pacify", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("pacify", EnchantmentType.NORMAL)
         );
     }
 

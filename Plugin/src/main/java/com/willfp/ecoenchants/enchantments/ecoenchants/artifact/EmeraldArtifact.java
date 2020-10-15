@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class EmeraldArtifact extends Artifact {
     public EmeraldArtifact() {
         super(
-                "emerald_artifact",
-                5.0
+                "emerald_artifact"
         );
     }
 

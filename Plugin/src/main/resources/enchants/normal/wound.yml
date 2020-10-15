@@ -2,8 +2,6 @@
 # Wound EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Wound"
 description: Causes your opponent to bleed, damaging them repeatedly.
 enabled: true

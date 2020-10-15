@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Serrated extends EcoEnchant {
     public Serrated() {
         super(
-                new EcoEnchantBuilder("serrated", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("serrated", EnchantmentType.NORMAL)
         );
     }
 

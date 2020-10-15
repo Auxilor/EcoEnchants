@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Puncture extends EcoEnchant {
     public Puncture() {
         super(
-                new EcoEnchantBuilder("puncture", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("puncture", EnchantmentType.NORMAL)
         );
     }
 

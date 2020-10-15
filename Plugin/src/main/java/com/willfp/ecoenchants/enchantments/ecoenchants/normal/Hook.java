@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 public final class Hook extends EcoEnchant {
     public Hook() {
         super(
-                new EcoEnchantBuilder("hook", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("hook", EnchantmentType.NORMAL)
         );
     }
 

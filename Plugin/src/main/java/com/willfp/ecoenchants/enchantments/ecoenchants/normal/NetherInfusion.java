@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class NetherInfusion extends EcoEnchant {
     public NetherInfusion() {
         super(
-                new EcoEnchantBuilder("nether_infusion", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("nether_infusion", EnchantmentType.NORMAL)
         );
     }
 

@@ -2,8 +2,6 @@
 # Cleave EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Cleave"
 description: Damage all entities around attacked entity.
 enabled: true

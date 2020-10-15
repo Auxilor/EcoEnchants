@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler;
 public final class Economical extends EcoEnchant {
     public Economical() {
         super(
-                new EcoEnchantBuilder("economical", EnchantmentType.NORMAL, 5.0),
+                new EcoEnchantBuilder("economical", EnchantmentType.NORMAL),
                 new Prerequisite[]{Prerequisite.HasPaper}
         );
     }

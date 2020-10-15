@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Dullness extends EcoEnchant {
     public Dullness() {
         super(
-                new EcoEnchantBuilder("dullness", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("dullness", EnchantmentType.NORMAL)
         );
     }
 

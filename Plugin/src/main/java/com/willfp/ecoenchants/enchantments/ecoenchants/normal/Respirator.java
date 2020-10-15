@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Respirator extends EcoEnchant {
     public Respirator() {
         super(
-                new EcoEnchantBuilder("respirator", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("respirator", EnchantmentType.NORMAL)
         );
     }
 

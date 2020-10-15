@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Frozen extends EcoEnchant {
     public Frozen() {
         super(
-                new EcoEnchantBuilder("frozen", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("frozen", EnchantmentType.NORMAL)
         );
     }
 

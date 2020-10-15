@@ -2,8 +2,6 @@
 # Ash Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Ash Artifact"
 description: Creates basalt deltas particles.
 enabled: true

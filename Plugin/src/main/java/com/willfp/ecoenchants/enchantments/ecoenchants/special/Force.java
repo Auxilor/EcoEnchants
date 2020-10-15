@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Force extends EcoEnchant {
     public Force() {
         super(
-                new EcoEnchantBuilder("force", EnchantmentType.SPECIAL,5.0)
+                new EcoEnchantBuilder("force", EnchantmentType.SPECIAL)
         );
     }
 

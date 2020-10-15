@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Diverse extends EcoEnchant {
     public Diverse() {
         super(
-                new EcoEnchantBuilder("diverse", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("diverse", EnchantmentType.NORMAL)
         );
     }
 

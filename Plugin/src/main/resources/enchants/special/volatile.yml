@@ -2,8 +2,6 @@
 # Volatile EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Volatile"
 description: Explosive sword attacks.
 enabled: true

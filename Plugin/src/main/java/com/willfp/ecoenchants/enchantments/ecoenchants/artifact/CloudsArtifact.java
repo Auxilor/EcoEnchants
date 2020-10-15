@@ -6,8 +6,7 @@ import org.bukkit.Particle;
 public final class CloudsArtifact extends Artifact {
     public CloudsArtifact() {
         super(
-                "clouds_artifact",
-                5.0
+                "clouds_artifact"
         );
     }
 

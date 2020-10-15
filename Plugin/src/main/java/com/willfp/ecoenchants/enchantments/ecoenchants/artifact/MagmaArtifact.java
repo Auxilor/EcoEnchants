@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class MagmaArtifact extends Artifact {
     public MagmaArtifact() {
         super(
-                "magma_artifact",
-                5.0
+                "magma_artifact"
         );
     }
 

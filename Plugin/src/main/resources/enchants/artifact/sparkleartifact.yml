@@ -2,8 +2,6 @@
 # Sparkle Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Sparkle Artifact"
 description: Creates firework particles.
 enabled: true

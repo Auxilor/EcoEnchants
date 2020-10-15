@@ -2,8 +2,6 @@
 # Zeus EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Zeus"
 description: Chance to strike lightning on your opponent.
 enabled: true

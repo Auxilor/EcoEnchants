@@ -2,8 +2,6 @@
 # Pentashot EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Pentashot"
 description: Shoots 5 arrows.
 enabled: true

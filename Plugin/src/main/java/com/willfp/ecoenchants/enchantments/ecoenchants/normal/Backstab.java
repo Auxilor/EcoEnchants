@@ -10,7 +10,7 @@ import org.bukkit.util.Vector;
 public final class Backstab extends EcoEnchant {
     public Backstab() {
         super(
-                new EcoEnchantBuilder("backstab", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("backstab", EnchantmentType.NORMAL)
         );
     }
 

@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class TotemArtifact extends Artifact {
     public TotemArtifact() {
         super(
-                "totem_artifact",
-                5.0
+                "totem_artifact"
         );
     }
 

@@ -18,7 +18,7 @@ import java.util.Collection;
 public final class Fetching extends EcoEnchant {
     public Fetching() {
         super(
-                new EcoEnchantBuilder("fetching", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("fetching", EnchantmentType.NORMAL)
         );
     }
 

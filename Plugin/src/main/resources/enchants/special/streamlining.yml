@@ -2,8 +2,6 @@
 # Streamlining EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Streamlining"
 description: Increases movement speed.
 enabled: true

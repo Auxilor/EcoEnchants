@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class LifeSteal extends EcoEnchant {
     public LifeSteal() {
         super(
-                new EcoEnchantBuilder("life_steal", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("life_steal", EnchantmentType.SPECIAL)
         );
     }
 

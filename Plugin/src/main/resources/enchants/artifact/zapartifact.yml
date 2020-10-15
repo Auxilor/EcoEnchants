@@ -2,8 +2,6 @@
 # Zap Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Zap Artifact"
 description: Creates electric particles.
 enabled: true

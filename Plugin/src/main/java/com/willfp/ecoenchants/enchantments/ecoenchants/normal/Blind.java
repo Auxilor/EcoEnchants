@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 public final class Blind extends EcoEnchant {
     public Blind() {
         super(
-                new EcoEnchantBuilder("blind", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("blind", EnchantmentType.NORMAL)
         );
     }
 

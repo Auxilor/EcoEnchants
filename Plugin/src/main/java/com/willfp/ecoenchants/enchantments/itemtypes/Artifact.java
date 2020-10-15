@@ -34,12 +34,12 @@ public abstract class Artifact extends EcoEnchant {
     private Particle particle;
     private Particle.DustOptions extra;
 
-    protected Artifact(String key, double version) {
-        this(key, version, new Prerequisite[]{});
+    protected Artifact(String key) {
+        this(key, new Prerequisite[]{});
     }
 
-    protected Artifact(String key, double version, Prerequisite[] prerequisites) {
-        super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT, version), prerequisites);
+    protected Artifact(String key, Prerequisite[] prerequisites) {
+        super(new EcoEnchantBuilder(key, EnchantmentType.ARTIFACT), prerequisites);
 
         if(!Prerequisite.areMet(prerequisites)) {
             HandlerList.unregisterAll(this); // Prevent events firing

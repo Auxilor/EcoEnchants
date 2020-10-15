@@ -7,8 +7,7 @@ import org.bukkit.Particle;
 public final class LimeArtifact extends Artifact {
     public LimeArtifact() {
         super(
-                "lime_artifact",
-                5.0
+                "lime_artifact"
         );
     }
 

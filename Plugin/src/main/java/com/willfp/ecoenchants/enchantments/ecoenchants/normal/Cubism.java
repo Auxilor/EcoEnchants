@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Cubism extends EcoEnchant {
     public Cubism() {
         super(
-                new EcoEnchantBuilder("cubism", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("cubism", EnchantmentType.NORMAL)
         );
     }
 

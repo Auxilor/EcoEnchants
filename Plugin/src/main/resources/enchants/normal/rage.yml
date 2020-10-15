@@ -2,8 +2,6 @@
 # Rage EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Rage"
 description: Chance of angering nearby monsters towards your opponent.
 enabled: true

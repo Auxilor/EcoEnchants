@@ -17,7 +17,7 @@ import org.bukkit.util.Vector;
 public final class Buckshot extends EcoEnchant {
     public Buckshot() {
         super(
-                new EcoEnchantBuilder("buckshot", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("buckshot", EnchantmentType.NORMAL)
         );
     }
 

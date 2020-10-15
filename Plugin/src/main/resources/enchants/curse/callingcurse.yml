@@ -2,8 +2,6 @@
 # Curse of Calling EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Curse of Calling"
 description: Angers all nearby mobs.
 enabled: true

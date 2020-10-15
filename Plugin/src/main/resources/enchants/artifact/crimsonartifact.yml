@@ -2,8 +2,6 @@
 # Crimson Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Crimson Artifact"
 description: Creates crimson forest particles.
 enabled: true

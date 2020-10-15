@@ -2,8 +2,6 @@
 # Beheading EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Beheading"
 description: Chance of getting player or mob head.
 enabled: true

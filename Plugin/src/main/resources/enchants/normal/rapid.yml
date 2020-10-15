@@ -2,8 +2,6 @@
 # Rapid EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Rapid"
 description: Increases bow pull speed.
 enabled: true

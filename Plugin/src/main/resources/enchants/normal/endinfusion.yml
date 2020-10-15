@@ -2,8 +2,6 @@
 # End Infusion EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "End Infusion"
 description: Increases damage dealt in the end.
 enabled: true

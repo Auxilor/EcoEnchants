@@ -2,8 +2,6 @@
 # Reinforcement EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Reinforcement"
 description: Reduces incoming damage.
 enabled: true

@@ -16,7 +16,7 @@ import org.bukkit.util.Vector;
 public final class Drill extends EcoEnchant {
     public Drill() {
         super(
-                new EcoEnchantBuilder("drill", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("drill", EnchantmentType.NORMAL)
         );
     }
 

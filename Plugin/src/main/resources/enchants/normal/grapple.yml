@@ -2,8 +2,6 @@
 # Grapple EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Grapple"
 description: Pulls entities towards you.
 enabled: true

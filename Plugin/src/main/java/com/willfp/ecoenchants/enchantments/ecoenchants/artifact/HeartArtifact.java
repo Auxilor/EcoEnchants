@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class HeartArtifact extends Artifact {
     public HeartArtifact() {
         super(
-                "heart_artifact",
-                5.0
+                "heart_artifact"
         );
     }
 

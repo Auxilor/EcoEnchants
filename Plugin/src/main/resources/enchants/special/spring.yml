@@ -2,8 +2,6 @@
 # Spring EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Spring"
 description: Increases jump height and distance.
 enabled: true

@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Bolt extends EcoEnchant {
     public Bolt() {
         super(
-                new EcoEnchantBuilder("bolt", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("bolt", EnchantmentType.SPECIAL)
         );
     }
 

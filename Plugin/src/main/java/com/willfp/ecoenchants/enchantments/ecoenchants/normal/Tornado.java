@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 public final class Tornado extends EcoEnchant {
     public Tornado() {
         super(
-                new EcoEnchantBuilder("tornado", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("tornado", EnchantmentType.NORMAL)
         );
     }
 

@@ -2,8 +2,6 @@
 # Curse of Decay EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Curse of Decay"
 description: Automatically damages items when not held.
 enabled: true

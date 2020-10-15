@@ -2,8 +2,6 @@
 # Cerebral EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Cerebral"
 description: Increases damage on headshots.
 enabled: true

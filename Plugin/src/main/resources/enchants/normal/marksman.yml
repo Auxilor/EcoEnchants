@@ -2,8 +2,6 @@
 # Marksman EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Marksman"
 description: Removes arrow drop.
 enabled: true

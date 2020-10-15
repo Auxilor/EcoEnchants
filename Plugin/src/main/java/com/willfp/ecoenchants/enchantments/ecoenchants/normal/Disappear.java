@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Disappear extends EcoEnchant {
     public Disappear() {
         super(
-                new EcoEnchantBuilder("disappear", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("disappear", EnchantmentType.NORMAL)
         );
     }
 

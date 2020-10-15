@@ -2,8 +2,6 @@
 # Kinetic EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Kinetic"
 description: Reduces damage taken when flying into a wall.
 enabled: true

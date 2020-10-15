@@ -20,7 +20,7 @@ import java.util.HashMap;
 public final class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(
-                new EcoEnchantBuilder("forcefield", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("forcefield", EnchantmentType.NORMAL)
         );
     }
 

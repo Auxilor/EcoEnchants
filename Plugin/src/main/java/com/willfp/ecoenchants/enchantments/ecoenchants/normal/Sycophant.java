@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Sycophant extends EcoEnchant {
     public Sycophant() {
         super(
-                new EcoEnchantBuilder("sycophant", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("sycophant", EnchantmentType.NORMAL)
         );
     }
 

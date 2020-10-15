@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class BossHunter extends EcoEnchant {
     public BossHunter() {
         super(
-                new EcoEnchantBuilder("boss_hunter", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("boss_hunter", EnchantmentType.NORMAL)
         );
     }
 

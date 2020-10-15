@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Toxic extends EcoEnchant {
     public Toxic() {
         super(
-                new EcoEnchantBuilder("toxic", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("toxic", EnchantmentType.NORMAL)
         );
     }
 

@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public final class Indestructibility extends EcoEnchant {
     public Indestructibility() {
         super(
-                new EcoEnchantBuilder("indestructibility", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("indestructibility", EnchantmentType.SPECIAL)
         );
     }
 

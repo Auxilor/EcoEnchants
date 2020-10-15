@@ -2,8 +2,6 @@
 # Curse of Harmlessness EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Curse of Harmlessness"
 description: Chance for attacks to do nothing.
 enabled: true

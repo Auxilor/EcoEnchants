@@ -2,8 +2,6 @@
 # Ink Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Ink Artifact"
 description: Creates ink particles.
 enabled: true

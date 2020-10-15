@@ -2,8 +2,6 @@
 # Flinch EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Flinch"
 description: Chance to blind your attacker.
 enabled: true

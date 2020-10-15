@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Razor extends EcoEnchant {
     public Razor() {
         super(
-                new EcoEnchantBuilder("razor", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("razor", EnchantmentType.SPECIAL)
         );
     }
 

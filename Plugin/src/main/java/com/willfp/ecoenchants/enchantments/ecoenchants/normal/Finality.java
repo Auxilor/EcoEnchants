@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Finality extends EcoEnchant {
     public Finality() {
         super(
-                new EcoEnchantBuilder("finality", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("finality", EnchantmentType.NORMAL)
         );
     }
 

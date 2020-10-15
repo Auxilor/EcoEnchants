@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Butchering extends EcoEnchant {
     public Butchering() {
         super(
-                new EcoEnchantBuilder("butchering", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("butchering", EnchantmentType.NORMAL)
         );
     }
 

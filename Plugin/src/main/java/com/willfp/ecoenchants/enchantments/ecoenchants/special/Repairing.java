@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class Repairing extends EcoEnchant implements EcoRunnable {
     public Repairing() {
         super(
-                new EcoEnchantBuilder("repairing", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("repairing", EnchantmentType.SPECIAL)
         );
     }
 

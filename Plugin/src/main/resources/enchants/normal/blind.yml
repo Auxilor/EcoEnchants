@@ -2,8 +2,6 @@
 # Blind EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Blind"
 description: Chance of blinding your opponent.
 enabled: true

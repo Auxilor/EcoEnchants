@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Volatile extends EcoEnchant {
     public Volatile() {
         super(
-                new EcoEnchantBuilder("volatile", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("volatile", EnchantmentType.SPECIAL)
         );
     }
 

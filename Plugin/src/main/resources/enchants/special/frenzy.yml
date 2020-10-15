@@ -2,8 +2,6 @@
 # Frenzy EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Frenzy"
 description: Gives strength after killing an entity.
 enabled: true

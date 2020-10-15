@@ -2,8 +2,6 @@
 # Infuriate EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Infuriate"
 description: Chance to cause nearby mobs to attack your opponent.
 enabled: true

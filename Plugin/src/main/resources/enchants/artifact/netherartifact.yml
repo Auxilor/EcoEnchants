@@ -2,8 +2,6 @@
 # Nether Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Nether Artifact"
 description: Creates nether portal particles.
 enabled: true

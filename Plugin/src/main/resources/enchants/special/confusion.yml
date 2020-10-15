@@ -2,8 +2,6 @@
 # Confusion EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Confusion"
 description: Chance to shuffle your opponents hotbar.
 enabled: true

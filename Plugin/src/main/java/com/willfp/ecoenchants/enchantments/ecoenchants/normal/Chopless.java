@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Chopless extends EcoEnchant {
     public Chopless() {
         super(
-                new EcoEnchantBuilder("chopless", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("chopless", EnchantmentType.NORMAL)
         );
     }
 

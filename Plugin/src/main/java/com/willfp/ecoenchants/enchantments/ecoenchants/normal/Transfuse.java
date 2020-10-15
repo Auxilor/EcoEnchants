@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public final class Transfuse extends EcoEnchant {
     public Transfuse() {
         super(
-                new EcoEnchantBuilder("transfuse", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("transfuse", EnchantmentType.NORMAL)
         );
     }
 

@@ -2,8 +2,6 @@
 # Freerunner EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Freerunner"
 description: Chance to ignore fall damage.
 enabled: true

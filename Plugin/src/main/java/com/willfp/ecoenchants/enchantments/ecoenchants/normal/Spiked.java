@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 public final class Spiked extends EcoEnchant {
     public Spiked() {
         super(
-                new EcoEnchantBuilder("spiked", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("spiked", EnchantmentType.NORMAL)
         );
     }
 

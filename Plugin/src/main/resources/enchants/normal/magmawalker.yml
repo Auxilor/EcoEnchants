@@ -2,8 +2,6 @@
 # Magma Walker EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Magma Walker"
 description: Turns lava beneath the player into obsidian.
 enabled: true

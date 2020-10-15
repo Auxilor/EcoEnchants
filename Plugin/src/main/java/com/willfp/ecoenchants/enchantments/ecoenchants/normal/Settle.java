@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Settle extends EcoEnchant {
     public Settle() {
         super(
-                new EcoEnchantBuilder("settle", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("settle", EnchantmentType.NORMAL)
         );
     }
 

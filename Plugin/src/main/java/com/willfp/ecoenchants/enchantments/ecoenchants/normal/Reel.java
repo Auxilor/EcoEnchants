@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 public final class Reel extends EcoEnchant {
     public Reel() {
         super(
-                new EcoEnchantBuilder("reel", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("reel", EnchantmentType.NORMAL)
         );
     }
 

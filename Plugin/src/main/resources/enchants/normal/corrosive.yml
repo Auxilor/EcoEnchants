@@ -2,8 +2,6 @@
 # Corrosive EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Corrosive"
 description: Damages your opponents armor.
 enabled: true

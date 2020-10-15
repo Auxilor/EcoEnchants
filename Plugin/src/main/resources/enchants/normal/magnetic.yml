@@ -2,8 +2,6 @@
 # Magnetic EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Magnetic"
 description: Items and XP go towards you.
 enabled: true

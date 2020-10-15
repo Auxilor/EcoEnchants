@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class WaterArtifact extends Artifact {
     public WaterArtifact() {
         super(
-                "water_artifact",
-                5.0
+                "water_artifact"
         );
     }
 

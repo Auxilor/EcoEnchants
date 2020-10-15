@@ -22,7 +22,7 @@ import java.util.Set;
 public final class Lumberjack extends EcoEnchant {
     public Lumberjack() {
         super(
-                new EcoEnchantBuilder("lumberjack", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("lumberjack", EnchantmentType.NORMAL)
         );
     }
 

@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Evasion extends EcoEnchant {
     public Evasion() {
         super(
-                new EcoEnchantBuilder("evasion", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("evasion", EnchantmentType.NORMAL)
         );
     }
 

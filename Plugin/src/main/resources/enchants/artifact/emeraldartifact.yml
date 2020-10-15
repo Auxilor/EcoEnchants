@@ -2,8 +2,6 @@
 # Emerald Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Emerald Artifact"
 description: Creates emerald particles.
 enabled: true

@@ -2,8 +2,6 @@
 # Liquid Shot EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Liquid Shot"
 description: Increases damage against fiery mobs.
 enabled: true

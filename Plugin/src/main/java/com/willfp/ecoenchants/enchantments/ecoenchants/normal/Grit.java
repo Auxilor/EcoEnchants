@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.Damageable;
 public final class Grit extends EcoEnchant {
     public Grit() {
         super(
-                new EcoEnchantBuilder("grit", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("grit", EnchantmentType.NORMAL)
         );
     }
 

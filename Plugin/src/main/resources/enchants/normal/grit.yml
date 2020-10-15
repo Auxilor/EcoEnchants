@@ -2,8 +2,6 @@
 # Grit EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Grit"
 description: Damages your opponents weapon.
 enabled: true

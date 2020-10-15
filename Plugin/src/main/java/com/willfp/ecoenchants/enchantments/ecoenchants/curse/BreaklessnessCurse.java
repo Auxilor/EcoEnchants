@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockDamageEvent;
 public final class BreaklessnessCurse extends EcoEnchant {
     public BreaklessnessCurse() {
         super(
-                new EcoEnchantBuilder("breaklessness_curse", EnchantmentType.CURSE, 5.0)
+                new EcoEnchantBuilder("breaklessness_curse", EnchantmentType.CURSE)
         );
     }
 

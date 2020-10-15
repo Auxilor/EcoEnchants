@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class WitchArtifact extends Artifact {
     public WitchArtifact() {
         super(
-                "witch_artifact",
-                5.0
+                "witch_artifact"
         );
     }
 

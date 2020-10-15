@@ -2,8 +2,6 @@
 # Dust Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Dust Artifact"
 description: Creates dust particles.
 enabled: true

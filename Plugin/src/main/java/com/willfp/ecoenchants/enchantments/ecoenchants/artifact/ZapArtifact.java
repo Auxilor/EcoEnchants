@@ -6,8 +6,7 @@ import org.bukkit.Particle;
 public final class ZapArtifact extends Artifact {
     public ZapArtifact() {
         super(
-                "zap_artifact",
-                5.0
+                "zap_artifact"
         );
     }
 

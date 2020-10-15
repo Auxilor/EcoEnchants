@@ -2,8 +2,6 @@
 # Proximity EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Proximity"
 description: Increases damage when closer to opponent.
 enabled: true

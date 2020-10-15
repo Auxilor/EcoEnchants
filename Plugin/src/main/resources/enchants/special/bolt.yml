@@ -2,8 +2,6 @@
 # Bolt EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Bolt"
 description: Chance of striking powerful lightning on your opponent.
 enabled: true

@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 public final class Rapid extends EcoEnchant {
     public Rapid() {
         super(
-                new EcoEnchantBuilder("rapid", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("rapid", EnchantmentType.NORMAL)
         );
     }
 

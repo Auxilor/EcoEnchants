@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class InkArtifact extends Artifact {
     public InkArtifact() {
         super(
-                "ink_artifact",
-                5.0
+                "ink_artifact"
         );
     }
 

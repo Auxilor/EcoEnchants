@@ -2,8 +2,6 @@
 # Instantaneous EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Instantaneous"
 description: Chance of instantly breaking blocks.
 enabled: true

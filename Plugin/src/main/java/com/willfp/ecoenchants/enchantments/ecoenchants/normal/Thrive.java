@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class Thrive extends EcoEnchant {
     public Thrive() {
         super(
-                new EcoEnchantBuilder("thrive", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("thrive", EnchantmentType.NORMAL)
         );
     }
 

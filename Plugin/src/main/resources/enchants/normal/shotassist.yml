@@ -2,8 +2,6 @@
 # Shot Assist EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Shot Assist"
 description: Deal more damage with arrows while wearing.
 enabled: true

@@ -2,8 +2,6 @@
 # Extract EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Extract"
 description: Heals a portion of damage dealt.
 enabled: true

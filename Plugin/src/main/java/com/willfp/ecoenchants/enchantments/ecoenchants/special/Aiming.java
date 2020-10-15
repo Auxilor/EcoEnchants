@@ -24,7 +24,7 @@ import java.util.List;
 public final class Aiming extends EcoEnchant {
     public Aiming() {
         super(
-                new EcoEnchantBuilder("aiming", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("aiming", EnchantmentType.SPECIAL)
         );
     }
 

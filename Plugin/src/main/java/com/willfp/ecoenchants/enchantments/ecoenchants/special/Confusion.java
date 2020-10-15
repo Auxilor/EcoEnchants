@@ -16,7 +16,7 @@ import java.util.List;
 public final class Confusion extends EcoEnchant {
     public Confusion() {
         super(
-                new EcoEnchantBuilder("confusion", EnchantmentType.SPECIAL,5.0)
+                new EcoEnchantBuilder("confusion", EnchantmentType.SPECIAL)
         );
     }
 

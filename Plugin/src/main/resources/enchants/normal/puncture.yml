@@ -2,8 +2,6 @@
 # Puncture EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Puncture"
 description: Trident deals additional damage to shelled mobs.
 enabled: true

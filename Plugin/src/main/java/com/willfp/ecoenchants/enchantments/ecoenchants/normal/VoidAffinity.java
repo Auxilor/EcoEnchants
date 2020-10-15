@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class VoidAffinity extends EcoEnchant {
     public VoidAffinity() {
         super(
-                new EcoEnchantBuilder("void_affinity", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("void_affinity", EnchantmentType.NORMAL)
         );
     }
 

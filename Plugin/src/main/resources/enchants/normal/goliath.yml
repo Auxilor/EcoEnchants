@@ -2,8 +2,6 @@
 # Goliath EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Goliath"
 description: Increases damage against entities with more health than you.
 enabled: true

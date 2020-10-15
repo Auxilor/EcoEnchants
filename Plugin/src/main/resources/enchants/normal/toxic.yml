@@ -2,8 +2,6 @@
 # Toxic EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Toxic"
 description: Chance to apply poison to your opponent.
 enabled: true

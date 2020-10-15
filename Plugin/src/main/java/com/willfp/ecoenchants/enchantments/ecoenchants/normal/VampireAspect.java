@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class VampireAspect extends EcoEnchant {
     public VampireAspect() {
         super(
-                new EcoEnchantBuilder("vampire_aspect", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("vampire_aspect", EnchantmentType.NORMAL)
         );
     }
 

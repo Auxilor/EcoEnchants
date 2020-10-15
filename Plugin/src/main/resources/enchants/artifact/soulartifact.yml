@@ -2,8 +2,6 @@
 # Soul Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Soul Artifact"
 description: Creates soul particles.
 enabled: true

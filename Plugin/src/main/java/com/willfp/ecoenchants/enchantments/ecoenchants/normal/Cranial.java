@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Cranial extends EcoEnchant {
     public Cranial() {
         super(
-                new EcoEnchantBuilder("cranial", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("cranial", EnchantmentType.NORMAL)
         );
     }
 

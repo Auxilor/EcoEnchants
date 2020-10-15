@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 public final class InaccuracyCurse extends EcoEnchant {
     public InaccuracyCurse() {
         super(
-                new EcoEnchantBuilder("inaccuracy_curse", EnchantmentType.CURSE,5.0)
+                new EcoEnchantBuilder("inaccuracy_curse", EnchantmentType.CURSE)
         );
     }
 

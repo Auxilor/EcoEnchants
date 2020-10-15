@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Leeching extends EcoEnchant {
     public Leeching() {
         super(
-                new EcoEnchantBuilder("leeching", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("leeching", EnchantmentType.NORMAL)
         );
     }
 

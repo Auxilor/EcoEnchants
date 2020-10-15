@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Goliath extends EcoEnchant {
     public Goliath() {
         super(
-                new EcoEnchantBuilder("goliath", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("goliath", EnchantmentType.NORMAL)
         );
     }
 

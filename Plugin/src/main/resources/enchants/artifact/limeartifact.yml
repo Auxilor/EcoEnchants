@@ -2,8 +2,6 @@
 # Lime Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Lime Artifact"
 description: Creates lime particles.
 enabled: true

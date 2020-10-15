@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public final class Dexterous extends EcoEnchant {
     public Dexterous() {
         super(
-                new EcoEnchantBuilder("dexterous", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("dexterous", EnchantmentType.NORMAL)
         );
     }
 

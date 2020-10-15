@@ -2,8 +2,6 @@
 # Supercritical EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Supercritical"
 description: Small chance to deal extreme damage.
 enabled: true

@@ -2,8 +2,6 @@
 # Transfuse EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Transfuse"
 description: Breaking stone can drop as random ore.
 enabled: true

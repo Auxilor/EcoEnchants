@@ -2,8 +2,6 @@
 # Tear Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Tear Artifact"
 description: Creates crying obsidian particles.
 enabled: true

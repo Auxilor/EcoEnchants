@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class NetherArtifact extends Artifact {
     public NetherArtifact() {
         super(
-                "nether_artifact",
-                5.0
+                "nether_artifact"
         );
     }
 

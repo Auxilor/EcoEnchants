@@ -2,8 +2,6 @@
 # Telekinesis EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Telekinesis"
 description: Drops and xp go directly into your inventory.
 enabled: true

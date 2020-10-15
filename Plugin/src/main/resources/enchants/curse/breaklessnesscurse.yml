@@ -2,8 +2,6 @@
 # Curse of Breaklessness EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Curse of Breaklessness"
 description: Chance to prevent block breaking.
 enabled: true

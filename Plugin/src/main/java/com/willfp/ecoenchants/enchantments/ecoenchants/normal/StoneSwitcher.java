@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public final class StoneSwitcher extends EcoEnchant {
     public StoneSwitcher() {
         super(
-                new EcoEnchantBuilder("stone_switcher", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("stone_switcher", EnchantmentType.NORMAL)
         );
     }
 

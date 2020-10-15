@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Zeus extends EcoEnchant {
     public Zeus() {
         super(
-                new EcoEnchantBuilder("zeus", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("zeus", EnchantmentType.NORMAL)
         );
     }
 

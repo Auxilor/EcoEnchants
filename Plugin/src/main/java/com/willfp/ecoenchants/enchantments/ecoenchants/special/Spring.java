@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public final class Spring extends EcoEnchant {
     public Spring() {
         super(
-                new EcoEnchantBuilder("spring", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("spring", EnchantmentType.SPECIAL)
         );
     }
 

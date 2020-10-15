@@ -2,8 +2,6 @@
 # Stamina EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Stamina"
 description: Decreases hunger loss while sprinting.
 enabled: true

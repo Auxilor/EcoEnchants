@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 public final class Splash extends EcoEnchant {
     public Splash() {
         super(
-                new EcoEnchantBuilder("splash", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("splash", EnchantmentType.NORMAL)
         );
     }
 

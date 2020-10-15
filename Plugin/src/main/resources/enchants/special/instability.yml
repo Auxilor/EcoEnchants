@@ -2,8 +2,6 @@
 # Instability EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Instability"
 description: Explosive arrows.
 enabled: true

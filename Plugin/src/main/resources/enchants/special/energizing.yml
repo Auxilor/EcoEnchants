@@ -2,8 +2,6 @@
 # Energizing EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Energizing"
 description: Receive a short burst of haste after breaking a block.
 enabled: true

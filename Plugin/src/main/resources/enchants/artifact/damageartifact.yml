@@ -2,8 +2,6 @@
 # Damage Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Damage Artifact"
 description: Creates damage particles.
 enabled: true

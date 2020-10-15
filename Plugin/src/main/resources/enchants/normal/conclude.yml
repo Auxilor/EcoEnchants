@@ -2,8 +2,6 @@
 # Conclude EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Conclude"
 description: Chance to instantly kill entities on low health.
 enabled: true

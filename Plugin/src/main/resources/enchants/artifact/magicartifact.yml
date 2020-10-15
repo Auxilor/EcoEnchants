@@ -2,8 +2,6 @@
 # Magic Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Magic Artifact"
 description: Creates magic particles.
 enabled: true

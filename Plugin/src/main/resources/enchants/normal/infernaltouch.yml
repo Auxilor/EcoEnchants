@@ -2,8 +2,6 @@
 # Infernal Touch EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Infernal Touch"
 description: Automatically smelt mined blocks.
 enabled: true

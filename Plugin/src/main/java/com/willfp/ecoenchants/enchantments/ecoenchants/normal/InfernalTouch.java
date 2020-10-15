@@ -26,7 +26,7 @@ import java.util.List;
 public final class InfernalTouch extends EcoEnchant {
     public InfernalTouch() {
         super(
-                new EcoEnchantBuilder("infernal_touch", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("infernal_touch", EnchantmentType.NORMAL)
         );
     }
 

@@ -16,7 +16,7 @@ import org.bukkit.util.Vector;
 public final class Fury extends EcoEnchant {
     public Fury() {
         super(
-                new EcoEnchantBuilder("fury", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("fury", EnchantmentType.NORMAL)
         );
     }
 

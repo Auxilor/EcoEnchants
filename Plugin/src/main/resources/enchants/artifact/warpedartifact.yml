@@ -2,8 +2,6 @@
 # Warped Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Warped Artifact"
 description: Creates warped forest particles.
 enabled: true

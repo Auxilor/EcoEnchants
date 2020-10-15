@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class WaterAffinity extends EcoEnchant {
     public WaterAffinity() {
         super(
-                new EcoEnchantBuilder("water_affinity", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("water_affinity", EnchantmentType.NORMAL)
         );
     }
 

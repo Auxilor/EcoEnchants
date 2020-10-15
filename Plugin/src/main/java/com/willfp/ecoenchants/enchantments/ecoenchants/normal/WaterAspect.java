@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class WaterAspect extends EcoEnchant {
     public WaterAspect() {
         super(
-                new EcoEnchantBuilder("water_aspect", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("water_aspect", EnchantmentType.NORMAL)
         );
     }
 

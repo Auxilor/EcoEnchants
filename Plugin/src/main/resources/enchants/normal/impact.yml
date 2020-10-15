@@ -2,8 +2,6 @@
 # Impact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Impact"
 description: Small chance to deal extreme damage.
 enabled: true

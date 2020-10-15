@@ -2,8 +2,6 @@
 # Aerial EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Aerial"
 description: Increases arrow damage when shot while in air.
 enabled: true

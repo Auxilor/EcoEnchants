@@ -2,8 +2,6 @@
 # Nocturnal EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Nocturnal"
 description: Increases damage dealt at night.
 enabled: true

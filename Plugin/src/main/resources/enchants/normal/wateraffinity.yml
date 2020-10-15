@@ -2,8 +2,6 @@
 # Water Affinity EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Water Affinity"
 description: Increases damage dealt when in water.
 enabled: true

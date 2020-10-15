@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Kinetic extends EcoEnchant {
     public Kinetic() {
         super(
-                new EcoEnchantBuilder("kinetic", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("kinetic", EnchantmentType.NORMAL)
         );
     }
 

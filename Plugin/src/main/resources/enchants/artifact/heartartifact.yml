@@ -2,8 +2,6 @@
 # Heart Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Heart Artifact"
 description: Creates heart particles.
 enabled: true

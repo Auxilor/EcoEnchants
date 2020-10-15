@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Phantasm extends EcoEnchant {
     public Phantasm() {
         super(
-                new EcoEnchantBuilder("phantasm", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("phantasm", EnchantmentType.NORMAL)
         );
     }
 

@@ -18,7 +18,7 @@ import java.util.Set;
 public final class BlastMining extends EcoEnchant {
     public BlastMining() {
         super(
-                new EcoEnchantBuilder("blast_mining", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("blast_mining", EnchantmentType.NORMAL)
         );
     }
 

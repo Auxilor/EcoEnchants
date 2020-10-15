@@ -12,7 +12,7 @@ import java.util.Set;
 public final class EnderSlayer extends EcoEnchant {
     public EnderSlayer() {
         super(
-                new EcoEnchantBuilder("ender_slayer", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("ender_slayer", EnchantmentType.NORMAL)
         );
     }
 

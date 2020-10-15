@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 public final class Collateral extends EcoEnchant {
     public Collateral() {
         super(
-                new EcoEnchantBuilder("collateral", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("collateral", EnchantmentType.NORMAL)
         );
     }
 

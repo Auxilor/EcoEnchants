@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Defusion extends EcoEnchant {
     public Defusion() {
         super(
-                new EcoEnchantBuilder("defusion", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("defusion", EnchantmentType.NORMAL)
         );
     }
 

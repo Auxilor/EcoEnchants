@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Defender extends EcoEnchant {
     public Defender() {
         super(
-                new EcoEnchantBuilder("defender", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("defender", EnchantmentType.NORMAL)
         );
     }
 

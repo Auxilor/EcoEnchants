@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Thor extends EcoEnchant {
     public Thor() {
         super(
-                new EcoEnchantBuilder("thor", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("thor", EnchantmentType.NORMAL)
         );
     }
 

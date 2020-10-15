@@ -10,7 +10,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 public final class HungerCurse extends EcoEnchant {
     public HungerCurse() {
         super(
-                new EcoEnchantBuilder("hunger_curse", EnchantmentType.CURSE, 5.0)
+                new EcoEnchantBuilder("hunger_curse", EnchantmentType.CURSE)
         );
     }
 

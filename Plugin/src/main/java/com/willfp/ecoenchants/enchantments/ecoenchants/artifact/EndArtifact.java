@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class EndArtifact extends Artifact {
     public EndArtifact() {
         super(
-                "end_artifact",
-                5.0
+                "end_artifact"
         );
     }
 

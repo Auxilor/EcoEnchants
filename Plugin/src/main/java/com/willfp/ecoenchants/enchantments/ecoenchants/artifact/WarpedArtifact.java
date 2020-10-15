@@ -8,7 +8,6 @@ public final class WarpedArtifact extends Artifact {
     public WarpedArtifact() {
         super(
                 "warped_artifact",
-                5.0,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
     }

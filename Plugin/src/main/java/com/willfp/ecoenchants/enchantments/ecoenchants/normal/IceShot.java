@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 public final class IceShot extends EcoEnchant {
     public IceShot() {
         super(
-                new EcoEnchantBuilder("ice_shot", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("ice_shot", EnchantmentType.NORMAL)
         );
     }
 

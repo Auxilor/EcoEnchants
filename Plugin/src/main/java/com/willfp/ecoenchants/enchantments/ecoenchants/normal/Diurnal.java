@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Diurnal extends EcoEnchant {
     public Diurnal() {
         super(
-                new EcoEnchantBuilder("diurnal", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("diurnal", EnchantmentType.NORMAL)
         );
     }
 

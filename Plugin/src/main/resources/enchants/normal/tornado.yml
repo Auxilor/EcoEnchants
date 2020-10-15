@@ -2,8 +2,6 @@
 # Tornado EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Tornado"
 description: Knocks your opponent into the air.
 enabled: true

@@ -2,8 +2,6 @@
 # Splash EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Splash"
 description: Damages entities near where trident lands but does not drop experience.
 enabled: true

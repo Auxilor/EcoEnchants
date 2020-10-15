@@ -2,8 +2,6 @@
 # Optics EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Optics"
 description: Increases damage when further from target.
 enabled: true

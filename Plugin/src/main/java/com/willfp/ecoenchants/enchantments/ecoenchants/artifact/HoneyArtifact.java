@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class HoneyArtifact extends Artifact {
     public HoneyArtifact() {
         super(
-                "honey_artifact",
-                5.0
+                "honey_artifact"
         );
     }
 

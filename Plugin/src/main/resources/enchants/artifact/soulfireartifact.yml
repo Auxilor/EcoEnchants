@@ -2,8 +2,6 @@
 # Soul Fire Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Soul Fire Artifact"
 description: Creates soul flame particles.
 enabled: true

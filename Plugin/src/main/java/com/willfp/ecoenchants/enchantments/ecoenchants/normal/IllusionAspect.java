@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class IllusionAspect extends EcoEnchant {
     public IllusionAspect() {
         super(
-                new EcoEnchantBuilder("illusion_aspect", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("illusion_aspect", EnchantmentType.NORMAL)
         );
     }
 

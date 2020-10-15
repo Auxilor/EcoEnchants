@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 public final class MisfortuneCurse extends EcoEnchant {
     public MisfortuneCurse() {
         super(
-                new EcoEnchantBuilder("misfortune_curse", EnchantmentType.CURSE,5.0)
+                new EcoEnchantBuilder("misfortune_curse", EnchantmentType.CURSE)
         );
     }
 

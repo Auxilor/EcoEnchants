@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 public final class Levitate extends EcoEnchant {
     public Levitate() {
         super(
-                new EcoEnchantBuilder("levitate", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("levitate", EnchantmentType.NORMAL)
         );
     }
 

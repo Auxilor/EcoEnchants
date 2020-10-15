@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Parasitic extends EcoEnchant {
     public Parasitic() {
         super(
-                new EcoEnchantBuilder("parasitic", EnchantmentType.NORMAL,5.0)
+                new EcoEnchantBuilder("parasitic", EnchantmentType.NORMAL)
         );
     }
 

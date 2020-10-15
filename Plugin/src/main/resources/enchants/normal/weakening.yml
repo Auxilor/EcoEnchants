@@ -2,8 +2,6 @@
 # Weakening EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Weakening"
 description: Increases subsequent damage dealt to opponent.
 enabled: true

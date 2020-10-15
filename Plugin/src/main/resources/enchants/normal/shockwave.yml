@@ -2,8 +2,6 @@
 # Shockwave EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Shockwave"
 description: Damages entities that arrows fly near.
 enabled: true

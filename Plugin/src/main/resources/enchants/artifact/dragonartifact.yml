@@ -2,8 +2,6 @@
 # Dragon Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Dragon Artifact"
 description: Creates dragon breath particles.
 enabled: true

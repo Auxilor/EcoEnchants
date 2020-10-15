@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public final class Streamlining extends EcoEnchant {
     public Streamlining() {
         super(
-                new EcoEnchantBuilder("streamlining", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("streamlining", EnchantmentType.SPECIAL)
         );
     }
 

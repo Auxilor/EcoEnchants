@@ -2,8 +2,6 @@
 # Razor EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Razor"
 description: Massively increases damage dealt.
 enabled: true

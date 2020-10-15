@@ -22,7 +22,7 @@ import java.util.Set;
 public final class Vein extends EcoEnchant {
     public Vein() {
         super(
-                new EcoEnchantBuilder("vein", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("vein", EnchantmentType.NORMAL)
         );
     }
 

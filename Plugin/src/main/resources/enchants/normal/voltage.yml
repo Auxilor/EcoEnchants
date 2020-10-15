@@ -2,8 +2,6 @@
 # Voltage EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Voltage"
 description: Increases damage dealt against opponents with iron, gold, or chain armor.
 enabled: true

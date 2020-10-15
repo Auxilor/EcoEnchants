@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 public final class Pentashot extends EcoEnchant {
     public Pentashot() {
         super(
-                new EcoEnchantBuilder("pentashot", EnchantmentType.SPECIAL, 5.0)
+                new EcoEnchantBuilder("pentashot", EnchantmentType.SPECIAL)
         );
     }
 

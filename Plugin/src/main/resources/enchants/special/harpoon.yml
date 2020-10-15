@@ -2,8 +2,6 @@
 # Harpoon EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Harpoon"
 description: Hooking onto an entity will heavily damage it.
 enabled: true

@@ -2,8 +2,6 @@
 # Protector EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Protector"
 description: Prevents damaging your own pets.
 enabled: true

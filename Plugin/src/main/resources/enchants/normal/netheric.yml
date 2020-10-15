@@ -2,8 +2,6 @@
 # Netheric EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Netheric"
 description: Increases damage dealt in the nether.
 enabled: true

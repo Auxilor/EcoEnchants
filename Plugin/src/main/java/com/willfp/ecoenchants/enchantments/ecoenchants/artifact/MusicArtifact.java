@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class MusicArtifact extends Artifact {
     public MusicArtifact() {
         super(
-                "music_artifact",
-                5.0
+                "music_artifact"
         );
     }
 

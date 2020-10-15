@@ -5,8 +5,7 @@ import org.bukkit.Particle;
 public final class SparkleArtifact extends Artifact {
     public SparkleArtifact() {
         super(
-                "sparkle_artifact",
-                5.0
+                "sparkle_artifact"
         );
     }
 

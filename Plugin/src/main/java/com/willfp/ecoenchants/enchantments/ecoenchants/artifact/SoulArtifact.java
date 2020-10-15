@@ -8,7 +8,6 @@ public final class SoulArtifact extends Artifact {
     public SoulArtifact() {
         super(
                 "soul_artifact",
-                5.0,
                 new Prerequisite[]{Prerequisite.MinVer1_16}
         );
     }

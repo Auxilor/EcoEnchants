@@ -2,8 +2,6 @@
 # Oxygenate EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Oxygenate"
 description: Gain oxygen when breaking blocks underwater.
 enabled: true

@@ -2,8 +2,6 @@
 # Hook EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Hook"
 description: Pulls entities towards you.
 enabled: true

@@ -2,8 +2,6 @@
 # Infernal EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Inferno"
 description: Flaming tridents.
 enabled: true

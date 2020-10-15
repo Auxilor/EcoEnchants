@@ -2,8 +2,6 @@
 # Backstab EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Backstab"
 description: Increases damage when behind opponent.
 enabled: true

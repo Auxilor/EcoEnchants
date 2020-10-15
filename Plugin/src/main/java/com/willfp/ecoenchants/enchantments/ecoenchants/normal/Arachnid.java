@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Arachnid extends EcoEnchant {
     public Arachnid() {
         super(
-                new EcoEnchantBuilder("arachnid", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("arachnid", EnchantmentType.NORMAL)
         );
     }
 

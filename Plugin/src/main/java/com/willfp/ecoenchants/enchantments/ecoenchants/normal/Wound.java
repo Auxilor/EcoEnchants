@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class Wound extends EcoEnchant {
     public Wound() {
         super(
-                new EcoEnchantBuilder("wound", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("wound", EnchantmentType.NORMAL)
         );
     }
 

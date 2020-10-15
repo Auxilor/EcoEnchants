@@ -2,8 +2,6 @@
 # Economical EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Economical"
 description: Chance to not consume fireworks while boosting.
 enabled: true

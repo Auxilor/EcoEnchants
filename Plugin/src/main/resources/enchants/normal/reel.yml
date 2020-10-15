@@ -2,8 +2,6 @@
 # Reel EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Reel"
 description: Pulls entities towards you.
 enabled: true

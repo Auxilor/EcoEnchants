@@ -2,8 +2,6 @@
 # Void Affinity EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Void Affinity"
 description: Increases damage dealt in the end.
 enabled: true

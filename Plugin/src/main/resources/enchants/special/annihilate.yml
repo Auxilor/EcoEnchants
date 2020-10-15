@@ -2,8 +2,6 @@
 # Annihilate EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Annihilate"
 description: Extreme Knockback.
 enabled: true

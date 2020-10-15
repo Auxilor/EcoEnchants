@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Reinforcement extends EcoEnchant {
     public Reinforcement() {
         super(
-                new EcoEnchantBuilder("reinforcement", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("reinforcement", EnchantmentType.NORMAL)
         );
     }
 

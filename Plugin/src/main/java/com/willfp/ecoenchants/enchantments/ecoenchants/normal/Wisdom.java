@@ -10,7 +10,7 @@ import org.bukkit.event.EventHandler;
 public final class Wisdom extends EcoEnchant {
     public Wisdom() {
         super(
-                new EcoEnchantBuilder("wisdom", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("wisdom", EnchantmentType.NORMAL)
         );
     }
 

@@ -2,8 +2,6 @@
 # Famine EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Famine"
 description: Chance of giving your opponent hunger.
 enabled: true

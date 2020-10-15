@@ -2,8 +2,6 @@
 # Paralyze EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Paralyze"
 description: Chance to give your attacker mining fatigue.
 enabled: true

@@ -2,8 +2,6 @@
 # Clouds Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Clouds Artifact"
 description: Creates cloud particles.
 enabled: true

@@ -2,8 +2,6 @@
 # Preservation EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Preservation"
 description: Massively reduces incoming damage.
 enabled: true

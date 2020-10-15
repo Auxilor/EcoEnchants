@@ -2,8 +2,6 @@
 # Buckshot EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Buckshot"
 description: Shoots multiple arrows spread out.
 enabled: true

@@ -2,8 +2,6 @@
 # Carve EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Carve"
 description: Heavily damage all entities around attacked entity.
 enabled: true

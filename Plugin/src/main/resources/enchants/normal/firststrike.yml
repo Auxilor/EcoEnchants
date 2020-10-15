@@ -2,8 +2,6 @@
 # First Strike EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "First Strike"
 description: Increases damage dealt when entity is on max health.
 enabled: true

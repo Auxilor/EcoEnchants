@@ -2,8 +2,6 @@
 # Wisdom EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Wisdom"
 description: Increases dropped experience.
 enabled: true

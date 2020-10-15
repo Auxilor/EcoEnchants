@@ -2,8 +2,6 @@
 # Fire Artifact EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Fire Artifact"
 description: Creates fire particles.
 enabled: true

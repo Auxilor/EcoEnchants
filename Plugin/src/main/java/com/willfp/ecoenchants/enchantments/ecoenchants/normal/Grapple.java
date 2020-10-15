@@ -10,7 +10,7 @@ import org.bukkit.util.Vector;
 public final class Grapple extends EcoEnchant {
     public Grapple() {
         super(
-                new EcoEnchantBuilder("grapple", EnchantmentType.NORMAL, 5.0)
+                new EcoEnchantBuilder("grapple", EnchantmentType.NORMAL)
         );
     }
 

@@ -2,8 +2,6 @@
 # Abrasion EcoEnchant
 #
 
-config-version: 5.0 # Don't edit this.
-
 name: "Abrasion"
 description: Damages your opponents armor.
 enabled: true
