@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.BlockBreak;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -44,7 +45,11 @@ public final class BlastMining extends EcoEnchant {
             for(int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
                     if(x == 0 && y == 0 && z == 0) {
-                        block.getWorld().createExplosion(block.getLocation().clone().add(0.5, 0.5, 0.5), 0, false);
+                        if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "enable-sound")) {
+                            block.getWorld().createExplosion(block.getLocation().clone().add(0.5, 0.5, 0.5), 0, false);
+                        } else {
+                            block.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation().clone().add(0.5, 0.5, 0.5), 1);
+                        }
                         continue;
                     }
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
