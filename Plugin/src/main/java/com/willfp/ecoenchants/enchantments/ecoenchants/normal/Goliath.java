@@ -23,7 +23,9 @@ public final class Goliath extends EcoEnchant {
 
         double timesMoreHealth = victim.getHealth() / attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
-        event.setDamage(event.getDamage() * ((level * multiplier * timesMoreHealth) + 1));
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level * timesMoreHealth);
+        event.setDamage(damage * bonus);
     }
 }

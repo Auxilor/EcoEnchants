@@ -21,4 +21,4 @@ general-config:
   maximum-level: 7
 
 config:
-  percent-more-per-level: 2 # percent more damage to deal per level when on fire
+  multiplier: 0.05 # 1 + (Level * Multiplier) is multiplied with the damage

@@ -22,10 +22,9 @@ public final class Aquatic extends EcoEnchant {
         if(!attacker.getLocation().getBlock().getType().equals(Material.WATER))
             return;
 
-        double perLevelDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
-
-        double totalDamagePercent = (100 + (perLevelDamage * level))/100;
-
-        event.setDamage(event.getDamage() * totalDamagePercent);
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double reduction = 1 + (multiplier * level);
+        event.setDamage(damage * reduction);
     }
 }

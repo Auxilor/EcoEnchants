@@ -38,7 +38,7 @@ public final class ShotAssist extends EcoEnchant {
         if(points == 0) return;
 
         double damage = event.getDamage();
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double reduction = 1 + (multiplier * points);
         event.setDamage(damage * reduction);
     }

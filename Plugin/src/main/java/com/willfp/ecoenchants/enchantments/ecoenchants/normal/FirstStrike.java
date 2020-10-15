@@ -20,7 +20,9 @@ public final class FirstStrike extends EcoEnchant {
         if (!(victim.getHealth() == victim.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()))
             return;
 
-        double damagemultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
-        event.setDamage(event.getDamage() * ((level * damagemultiplier) + 1));
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level);
+        event.setDamage(damage * bonus);
     }
 }

@@ -19,10 +19,9 @@ public final class FireAffinity extends EcoEnchant {
     public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
         if(attacker.getFireTicks() == 0) return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
-
-        double finalMultiplier = (multiplier/100 * level) + 1;
-
-        event.setDamage(event.getDamage() * finalMultiplier);
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level);
+        event.setDamage(damage * bonus);
     }
 }

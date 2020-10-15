@@ -20,4 +20,4 @@ general-config:
   maximum-level: 4
 
 config:
-  damage-multiplier-per-level: 0.05 # 1 - (Level * Multiplier) is multiplied with the damage
+  multiplier: 0.05 # 1 - (Level * Multiplier) is multiplied with the damage

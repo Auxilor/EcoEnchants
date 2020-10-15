@@ -23,7 +23,7 @@ public final class Diurnal extends EcoEnchant {
 
         if(!(attacker.getWorld().getTime() < 12300 && attacker.getWorld().getTime() > 23850)) return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }

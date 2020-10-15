@@ -26,6 +26,6 @@ general-config:
   maximum-level: 8
 
 config:
-  per-level-multiplier: 0.5 # Vanilla sharpness is 0.5*level + 0.5 extra damage. Razor formula is multiplier*level + base extra damage.
+  multiplier: 0.5 # Vanilla sharpness is 0.5*level + 0.5 extra damage. Razor formula is multiplier*level + base extra damage.
   base-damage: 10 # Vanilla Smite 5/BOA 5 extra damage is 12.5
   decrease-if-cooldown: true

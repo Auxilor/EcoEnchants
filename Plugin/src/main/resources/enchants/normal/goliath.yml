@@ -20,4 +20,4 @@ general-config:
   maximum-level: 8
 
 config:
-  damage-multiplier-per-level: 0.01 # If enemy has 200 health, and you have 20 w/ goliath 8 then your damage is multiplied by: ((200/10)*8*0.01) + 1 = 2.6
+  multiplier: 0.01 # If enemy has 200 health, and you have 20 w/ goliath 8 then your damage is multiplied by: ((200/10)*8*0.01) + 1 = 2.6

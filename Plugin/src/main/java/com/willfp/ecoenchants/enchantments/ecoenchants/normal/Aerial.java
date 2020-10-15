@@ -34,8 +34,8 @@ public final class Aerial extends EcoEnchant {
         if(!arrow.hasMetadata("shot-in-air")) return;
 
         double damage = event.getDamage();
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level");
-        double reduction = 1 + (multiplier * level);
-        event.setDamage(damage * reduction);
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level);
+        event.setDamage(damage * bonus);
     }
 }

@@ -20,6 +20,9 @@ public final class Criticals extends EcoEnchant {
         if (!(attacker.getFallDistance() > 0 && !attacker.isOnGround()))
             return;
 
-        event.setDamage(event.getDamage() * ((level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier-per-level")) + 1));
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level);
+        event.setDamage(damage * bonus);
     }
 }

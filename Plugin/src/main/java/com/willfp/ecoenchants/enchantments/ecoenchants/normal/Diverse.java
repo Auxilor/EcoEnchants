@@ -22,7 +22,7 @@ public final class Diverse extends EcoEnchant {
         if(!victim.getEquipment().getItemInMainHand().getType().toString().endsWith("_SWORD"))
             return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }

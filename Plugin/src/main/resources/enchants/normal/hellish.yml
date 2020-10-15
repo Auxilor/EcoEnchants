@@ -21,4 +21,4 @@ general-config:
   maximum-level: 6
 
 config:
-  per-level-multiplier: 0.02 # Multiplier per level for damage. Calculated as damage * (1 + level * multiplier)
+  multiplier: 0.02 # Multiplier per level for damage. Calculated as damage * (1 + level * multiplier)

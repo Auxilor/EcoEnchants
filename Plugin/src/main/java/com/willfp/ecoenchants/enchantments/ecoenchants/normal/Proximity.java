@@ -21,10 +21,12 @@ public final class Proximity extends EcoEnchant {
 
         double decreaseAfter = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "when-closer-than-blocks");
 
-        if(distance <= decreaseAfter) {
-            double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
-            double finalMultiplier = (multiplier/100 * level) +1;
-            event.setDamage(event.getDamage() * finalMultiplier);
-        }
+        if(distance > decreaseAfter)
+            return;
+
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level);
+        event.setDamage(damage * bonus);
     }
 }

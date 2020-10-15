@@ -18,11 +18,10 @@ public final class Bladed extends EcoEnchant {
 
     @Override
     public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
-        double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-base");
-        double perLevelDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
-
-        double totalDamagePercent = (100 + baseDamage + (perLevelDamage * level))/100;
-
-        event.setDamage(event.getDamage() * totalDamagePercent);
+        double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "base-multiplier");
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level) + baseDamage;
+        event.setDamage(damage * bonus);
     }
 }

@@ -21,10 +21,9 @@ public final class WaterAffinity extends EcoEnchant {
         if(!attacker.getLocation().getBlock().getType().equals(Material.WATER))
             return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-more-per-level");
-
-        double finalMultiplier = (multiplier/100 * level) + 1;
-
-        event.setDamage(event.getDamage() * finalMultiplier);
+        double damage = event.getDamage();
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double bonus = 1 + (multiplier * level);
+        event.setDamage(damage * bonus);
     }
 }

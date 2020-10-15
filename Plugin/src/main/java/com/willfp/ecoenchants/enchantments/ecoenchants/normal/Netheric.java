@@ -23,7 +23,7 @@ public final class Netheric extends EcoEnchant {
         if(!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER))
             return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "per-level-multiplier");
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }

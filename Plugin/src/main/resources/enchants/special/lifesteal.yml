@@ -19,7 +19,7 @@ general-config:
   grindstoneable: true
   conflicts:
     - leeching
-  maximum-level: 6
+  maximum-level: 3
 
 config:
-  damage-multiplier-per-level: 0.06 # Damage * Level * Multiplier is used to calculate how much health to heal
+  health-per-level: 2 # Level * Health = Amount of health to heal

@@ -20,4 +20,4 @@ general-config:
   maximum-level: 3
 
 config:
-  damage-multiplier-per-level: 0.1 # This number can be relatively high as it is rare for a player to be riding a horse, therefore rewarding that.
+  multiplier: 0.2 # 1 + (Level * Multiplier) is multiplied with the damage

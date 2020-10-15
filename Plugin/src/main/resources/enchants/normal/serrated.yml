@@ -26,7 +26,4 @@ general-config:
   maximum-level: 5
 
 config:
-  percent-more-base: 25 # Percent more damage to do as base
-  percent-more-per-level: 25 # Percent more damage to do per level
-  # To explain, Serrated V would be 150% more damage: 25 + (5*25)
-  # Default values are taken from the power enchantment
+  multiplier: 0.25 # 1 + (Level * Multiplier) is multiplied with the damage

@@ -18,7 +18,7 @@ general-config:
     - crossbow
   grindstoneable: true
   conflicts: []
-  maximum-level: 6
+  maximum-level: 3
 
 config:
-  damage-multiplier-per-level: 0.02 # Damage * Level * Multiplier is used to calculate how much health to heal
+  health-per-level: 1 # Level * Health = Amount of health to heal
