@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
@@ -24,9 +23,13 @@ public final class Soulbound extends EcoEnchant {
 
     // START OF LISTENERS
 
-    HashMap<Player, List<ItemStack>> soulboundItemsMap = new HashMap<>();
+    private static final HashMap<Player, List<ItemStack>> soulboundItemsMap = new HashMap<>();
 
-    @EventHandler(priority = EventPriority.HIGH)
+    public static List<ItemStack> getSoulboundItems(Player player) {
+        return soulboundItemsMap.get(player);
+    }
+
+    @EventHandler
     public void onSoulboundDeath(PlayerDeathEvent event) {
         if(event.getKeepInventory()) return;
 
@@ -46,7 +49,7 @@ public final class Soulbound extends EcoEnchant {
         soulboundItemsMap.put(player, soulboundItems);
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onSoulboundRespawn(PlayerRespawnEvent event) {
         if(!soulboundItemsMap.containsKey(event.getPlayer())) return;
 

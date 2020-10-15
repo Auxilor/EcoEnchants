@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -116,6 +117,12 @@ public final class Telekinesis extends EcoEnchant {
 
         int xp = event.getDroppedExp();
         Collection<ItemStack> drops = event.getDrops();
+
+        if(entity instanceof Player) {
+            if(Soulbound.getSoulboundItems((Player) entity) != null) {
+                drops.removeAll(Soulbound.getSoulboundItems((Player) entity));
+            }
+        }
 
         new DropQueue(player)
                 .addItems(drops)
