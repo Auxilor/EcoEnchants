@@ -18,7 +18,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class DecayCurse extends EcoEnchant implements EcoRunnable {
     public DecayCurse() {
@@ -72,16 +74,15 @@ public final class DecayCurse extends EcoEnchant implements EcoRunnable {
     @Override
     public void run() {
         players.forEach((player -> {
-            Arrays.stream(player.getInventory().getContents())
+            List<ItemStack> toRepair = Arrays.stream(player.getInventory().getContents())
                     .filter(ItemStack::hasItemMeta)
                     .filter(item -> item.getItemMeta().hasEnchant(EcoEnchants.DECAY_CURSE))
-                    .filter(item -> player.getInventory().getItemInOffHand().equals(item))
-                    .filter(item -> player.getInventory().getItemInMainHand().equals(item))
-                    .filter(item -> player.getItemOnCursor().equals(item))
-                    .forEach(item -> {
-                                DurabilityUtils.repairItem(item, amount);
-                            }
-                    );
+                    .filter(item -> !player.getInventory().getItemInOffHand().equals(item))
+                    .filter(item -> !player.getInventory().getItemInMainHand().equals(item))
+                    .filter(item -> !player.getItemOnCursor().equals(item)).collect(Collectors.toList());
+            toRepair.forEach(itemStack -> {
+                DurabilityUtils.damageItemNoBreak(itemStack, amount, player);
+            });
         }));
     }
 
