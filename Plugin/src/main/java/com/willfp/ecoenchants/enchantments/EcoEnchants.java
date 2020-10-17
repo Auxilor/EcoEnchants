@@ -327,7 +327,7 @@ public class EcoEnchants {
 
     /**
      * Add new {@link EcoEnchant} to EcoEnchants
-     * Only for internal use, enchantments are automatically added in the {@link EcoEnchant#EcoEnchant(EcoEnchantBuilder)} constructor.
+     * Only for internal use, enchantments are automatically added in the constructor.
      *
      * @param enchant The {@link EcoEnchant} to add
      */
