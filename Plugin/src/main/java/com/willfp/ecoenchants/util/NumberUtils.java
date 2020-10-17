@@ -100,18 +100,18 @@ public class NumberUtils {
 
     /**
      * Generate random double with a triangular distribution
-     * @param a Minimum
-     * @param b Maximum
-     * @param c Peak
+     * @param minimum Minimum
+     * @param maximum Maximum
+     * @param peak Peak
      * @return Random double
      */
-    public static double triangularDistribution(double a, double b, double c) {
-        double F = (c - a) / (b - a);
+    public static double triangularDistribution(double minimum, double maximum, double peak) {
+        double F = (peak - minimum) / (maximum - minimum);
         double rand = Math.random();
         if (rand < F) {
-            return a + Math.sqrt(rand * (b - a) * (c - a));
+            return minimum + Math.sqrt(rand * (maximum - minimum) * (peak - minimum));
         } else {
-            return b - Math.sqrt((1 - rand) * (b - a) * (b - c));
+            return maximum - Math.sqrt((1 - rand) * (maximum - minimum) * (maximum - peak));
         }
     }
 }
