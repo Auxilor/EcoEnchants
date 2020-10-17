@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
@@ -11,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Invigoration extends EcoEnchant {
     public Invigoration() {
         super(
-                new EcoEnchantBuilder("invigoration", EnchantmentType.NORMAL)
+                "invigoration", EnchantmentType.NORMAL
         );
     }
 

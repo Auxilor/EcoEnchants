@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Player;
@@ -10,7 +9,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 public final class Sating extends EcoEnchant {
     public Sating() {
         super(
-                new EcoEnchantBuilder("sating", EnchantmentType.NORMAL)
+                "sating", EnchantmentType.NORMAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
@@ -16,7 +15,7 @@ import java.util.List;
 public final class Confusion extends EcoEnchant {
     public Confusion() {
         super(
-                new EcoEnchantBuilder("confusion", EnchantmentType.SPECIAL)
+                "confusion", EnchantmentType.SPECIAL
         );
     }
 

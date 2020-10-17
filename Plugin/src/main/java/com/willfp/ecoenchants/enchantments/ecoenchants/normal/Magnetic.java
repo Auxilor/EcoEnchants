@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
@@ -22,7 +21,7 @@ import java.util.HashMap;
 public final class Magnetic extends EcoEnchant implements EcoRunnable {
     public Magnetic() {
         super(
-                new EcoEnchantBuilder("magnetic", EnchantmentType.NORMAL)
+                "magnetic", EnchantmentType.NORMAL
         );
     }
 

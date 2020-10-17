@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 public final class Reinforcement extends EcoEnchant {
     public Reinforcement() {
         super(
-                new EcoEnchantBuilder("reinforcement", EnchantmentType.NORMAL)
+                "reinforcement", EnchantmentType.NORMAL
         );
     }
 

@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 public final class Kinetic extends EcoEnchant {
     public Kinetic() {
         super(
-                new EcoEnchantBuilder("kinetic", EnchantmentType.NORMAL)
+                "kinetic", EnchantmentType.NORMAL
         );
     }
 

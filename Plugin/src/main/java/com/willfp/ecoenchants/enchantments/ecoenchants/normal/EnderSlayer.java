@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -12,7 +11,7 @@ import java.util.Set;
 public final class EnderSlayer extends EcoEnchant {
     public EnderSlayer() {
         super(
-                new EcoEnchantBuilder("ender_slayer", EnchantmentType.NORMAL)
+                "ender_slayer", EnchantmentType.NORMAL
         );
     }
 

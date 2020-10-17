@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.util.VectorUtils;
@@ -16,7 +15,7 @@ import org.bukkit.util.Vector;
 public final class Rage extends EcoEnchant {
     public Rage() {
         super(
-                new EcoEnchantBuilder("rage", EnchantmentType.NORMAL)
+                "rage", EnchantmentType.NORMAL
         );
     }
 

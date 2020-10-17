@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
@@ -14,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class Marksman extends EcoEnchant {
     public Marksman() {
         super(
-                new EcoEnchantBuilder("marksman", EnchantmentType.NORMAL)
+                "marksman", EnchantmentType.NORMAL
         );
     }
 

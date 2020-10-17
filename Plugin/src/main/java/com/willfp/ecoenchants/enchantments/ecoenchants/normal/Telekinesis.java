@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
@@ -29,7 +28,7 @@ import java.util.List;
 public final class Telekinesis extends EcoEnchant {
     public Telekinesis() {
         super(
-                new EcoEnchantBuilder("telekinesis", EnchantmentType.NORMAL)
+                "telekinesis", EnchantmentType.NORMAL
         );
     }
 

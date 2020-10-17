@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -19,7 +18,7 @@ import org.bukkit.util.Vector;
 public final class Farmhand extends EcoEnchant {
     public Farmhand() {
         super(
-                new EcoEnchantBuilder("farmhand", EnchantmentType.NORMAL)
+                "farmhand", EnchantmentType.NORMAL
         );
     }
 

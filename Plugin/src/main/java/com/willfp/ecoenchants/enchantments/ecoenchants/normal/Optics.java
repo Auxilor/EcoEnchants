@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
@@ -10,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Optics extends EcoEnchant {
     public Optics() {
         super(
-                new EcoEnchantBuilder("optics", EnchantmentType.NORMAL)
+                "optics", EnchantmentType.NORMAL
         );
     }
 

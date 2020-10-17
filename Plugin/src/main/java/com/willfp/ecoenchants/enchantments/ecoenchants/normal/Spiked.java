@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -12,7 +11,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 public final class Spiked extends EcoEnchant {
     public Spiked() {
         super(
-                new EcoEnchantBuilder("spiked", EnchantmentType.NORMAL)
+                "spiked", EnchantmentType.NORMAL
         );
     }
 

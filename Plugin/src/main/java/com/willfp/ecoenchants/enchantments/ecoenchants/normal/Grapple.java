@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.LivingEntity;
@@ -10,7 +9,7 @@ import org.bukkit.util.Vector;
 public final class Grapple extends EcoEnchant {
     public Grapple() {
         super(
-                new EcoEnchantBuilder("grapple", EnchantmentType.NORMAL)
+                "grapple", EnchantmentType.NORMAL
         );
     }
 

@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class HarmlessnessCurse extends EcoEnchant {
     public HarmlessnessCurse() {
         super(
-                new EcoEnchantBuilder("harmlessness_curse", EnchantmentType.CURSE)
+                "harmlessness_curse", EnchantmentType.CURSE
         );
     }
 

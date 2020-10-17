@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
@@ -13,7 +12,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public final class Atmospheric extends EcoEnchant {
     public Atmospheric() {
         super(
-                new EcoEnchantBuilder("atmospheric", EnchantmentType.NORMAL)
+                "atmospheric", EnchantmentType.NORMAL
         );
     }
 

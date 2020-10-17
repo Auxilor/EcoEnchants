@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.Enderman;
@@ -11,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class WaterAspect extends EcoEnchant {
     public WaterAspect() {
         super(
-                new EcoEnchantBuilder("water_aspect", EnchantmentType.NORMAL)
+                "water_aspect", EnchantmentType.NORMAL
         );
     }
 

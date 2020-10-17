@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.entity.Arrow;
@@ -11,7 +10,7 @@ import org.bukkit.util.Vector;
 public final class Hook extends EcoEnchant {
     public Hook() {
         super(
-                new EcoEnchantBuilder("hook", EnchantmentType.NORMAL)
+                "hook", EnchantmentType.NORMAL
         );
     }
 

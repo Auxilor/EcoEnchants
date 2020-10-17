@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
@@ -12,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Thor extends EcoEnchant {
     public Thor() {
         super(
-                new EcoEnchantBuilder("thor", EnchantmentType.NORMAL)
+                "thor", EnchantmentType.NORMAL
         );
     }
 

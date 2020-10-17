@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
@@ -12,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class Replenish extends EcoEnchant {
     public Replenish() {
         super(
-                new EcoEnchantBuilder("replenish", EnchantmentType.NORMAL)
+                "replenish", EnchantmentType.NORMAL
         );
     }
 

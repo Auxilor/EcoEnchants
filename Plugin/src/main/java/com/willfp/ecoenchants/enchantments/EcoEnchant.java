@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments;
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -22,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("unchecked")
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
@@ -43,32 +45,33 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     private boolean enabled;
 
-    /**
-     * Create new EcoEnchant matching builder and prerequisites
-     *
-     * @param builder The {@link EcoEnchantBuilder} for enchantment
-     */
-    protected EcoEnchant(EcoEnchantBuilder builder, Prerequisite[] prerequisites) {
-        super(NamespacedKey.minecraft(builder.key));
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type) {
+        this(key, type, EcoEnchantsPlugin.class, new Prerequisite[]{});
+    }
 
-        this.type = builder.type;
-        this.permissionName = builder.permission;
-        this.config = builder.config;
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Prerequisite[] prerequisites) {
+        this(key, type, EcoEnchantsPlugin.class, prerequisites);
+    }
+
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin) {
+        this(key, type, plugin, new Prerequisite[]{});
+    }
+
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite[] prerequisites) {
+        super(NamespacedKey.minecraft(key));
+
+        if(Pattern.matches("[a-z_]", key)) throw new InvalidEnchantmentException("Key must only contain lowercase letters and underscores");
+
+        this.type = type;
+        this.permissionName = key.replace("_", "");
+        ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, plugin, this.type));
+        this.config = ConfigManager.getEnchantmentConfig(permissionName);
 
         if(!Prerequisite.areMet(prerequisites))
             return;
 
         this.update();
         this.add();
-    }
-
-    /**
-     * Create new EcoEnchant matching builder
-     *
-     * @param builder The {@link EcoEnchantBuilder} for enchantment
-     */
-    protected EcoEnchant(EcoEnchantBuilder builder) {
-        this(builder, new Prerequisite[]{});
     }
 
     /**

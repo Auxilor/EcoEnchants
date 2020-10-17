@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Horde extends EcoEnchant {
     public Horde() {
         super(
-                new EcoEnchantBuilder("horde", EnchantmentType.NORMAL)
+                "horde", EnchantmentType.NORMAL
         );
     }
 

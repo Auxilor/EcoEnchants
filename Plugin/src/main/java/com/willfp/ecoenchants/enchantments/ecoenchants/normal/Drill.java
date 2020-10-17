@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -16,7 +15,7 @@ import org.bukkit.util.Vector;
 public final class Drill extends EcoEnchant {
     public Drill() {
         super(
-                new EcoEnchantBuilder("drill", EnchantmentType.NORMAL)
+                "drill", EnchantmentType.NORMAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.LivingEntity;
@@ -11,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Pacify extends EcoEnchant {
     public Pacify() {
         super(
-                new EcoEnchantBuilder("pacify", EnchantmentType.NORMAL)
+                "pacify", EnchantmentType.NORMAL
         );
     }
 

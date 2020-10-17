@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.nms.Cooldown;
 import org.bukkit.Bukkit;
@@ -13,7 +12,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public final class Cleave extends EcoEnchant {
     public Cleave() {
         super(
-                new EcoEnchantBuilder("cleave", EnchantmentType.NORMAL)
+                "cleave", EnchantmentType.NORMAL
         );
     }
 

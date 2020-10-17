@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Protector extends EcoEnchant {
     public Protector() {
         super(
-                new EcoEnchantBuilder("protector", EnchantmentType.NORMAL)
+                "protector", EnchantmentType.NORMAL
         );
     }
 

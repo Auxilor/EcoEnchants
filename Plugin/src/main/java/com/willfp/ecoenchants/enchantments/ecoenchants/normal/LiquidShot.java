@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Blaze;
@@ -12,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class LiquidShot extends EcoEnchant {
     public LiquidShot() {
         super(
-                new EcoEnchantBuilder("liquid_shot", EnchantmentType.NORMAL)
+                "liquid_shot", EnchantmentType.NORMAL
         );
     }
 

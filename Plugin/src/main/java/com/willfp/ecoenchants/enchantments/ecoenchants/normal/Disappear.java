@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
@@ -12,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Disappear extends EcoEnchant {
     public Disappear() {
         super(
-                new EcoEnchantBuilder("disappear", EnchantmentType.NORMAL)
+                "disappear", EnchantmentType.NORMAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.nms.Cooldown;
 import org.bukkit.entity.LivingEntity;
@@ -10,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Razor extends EcoEnchant {
     public Razor() {
         super(
-                new EcoEnchantBuilder("razor", EnchantmentType.SPECIAL)
+                "razor", EnchantmentType.SPECIAL
         );
     }
 

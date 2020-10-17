@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -9,7 +8,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 public final class Inferno extends EcoEnchant {
     public Inferno() {
         super(
-                new EcoEnchantBuilder("inferno", EnchantmentType.NORMAL)
+                "inferno", EnchantmentType.NORMAL
         );
     }
 

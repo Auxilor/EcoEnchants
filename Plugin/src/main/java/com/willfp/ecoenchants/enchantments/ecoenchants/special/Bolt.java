@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
@@ -12,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Bolt extends EcoEnchant {
     public Bolt() {
         super(
-                new EcoEnchantBuilder("bolt", EnchantmentType.SPECIAL)
+                "bolt", EnchantmentType.SPECIAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
@@ -9,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Butchering extends EcoEnchant {
     public Butchering() {
         super(
-                new EcoEnchantBuilder("butchering", EnchantmentType.NORMAL)
+                "butchering", EnchantmentType.NORMAL
         );
     }
 

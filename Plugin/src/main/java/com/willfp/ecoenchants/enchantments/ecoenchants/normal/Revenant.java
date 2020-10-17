@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -12,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Revenant extends EcoEnchant {
     public Revenant() {
         super(
-                new EcoEnchantBuilder("revenant", EnchantmentType.NORMAL)
+                "revenant", EnchantmentType.NORMAL
         );
     }
 

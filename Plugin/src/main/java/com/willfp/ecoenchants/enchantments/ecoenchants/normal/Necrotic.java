@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.queue.DropQueue;
@@ -14,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public final class Necrotic extends EcoEnchant {
     public Necrotic() {
         super(
-                new EcoEnchantBuilder("necrotic", EnchantmentType.NORMAL)
+                "necrotic", EnchantmentType.NORMAL
         );
     }
 

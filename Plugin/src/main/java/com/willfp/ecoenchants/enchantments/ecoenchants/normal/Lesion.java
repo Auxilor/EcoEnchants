@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
@@ -15,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class Lesion extends EcoEnchant {
     public Lesion() {
         super(
-                new EcoEnchantBuilder("lesion", EnchantmentType.NORMAL)
+                "lesion", EnchantmentType.NORMAL
         );
     }
 

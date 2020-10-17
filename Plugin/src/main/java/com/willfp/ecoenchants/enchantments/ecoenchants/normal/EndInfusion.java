@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
@@ -10,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class EndInfusion extends EcoEnchant {
     public EndInfusion() {
         super(
-                new EcoEnchantBuilder("end_infusion", EnchantmentType.NORMAL)
+                "end_infusion", EnchantmentType.NORMAL
         );
     }
 

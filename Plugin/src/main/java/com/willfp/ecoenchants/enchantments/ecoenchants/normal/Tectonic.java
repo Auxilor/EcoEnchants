@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -11,7 +10,7 @@ import java.util.Collection;
 public final class Tectonic extends EcoEnchant {
     public Tectonic() {
         super(
-                new EcoEnchantBuilder("tectonic", EnchantmentType.NORMAL)
+                "tectonic", EnchantmentType.NORMAL
         );
     }
 

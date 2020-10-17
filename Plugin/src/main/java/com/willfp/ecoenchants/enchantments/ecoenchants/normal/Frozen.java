@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
@@ -16,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Frozen extends EcoEnchant {
     public Frozen() {
         super(
-                new EcoEnchantBuilder("frozen", EnchantmentType.NORMAL)
+                "frozen", EnchantmentType.NORMAL
         );
     }
 

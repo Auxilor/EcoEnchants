@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
@@ -13,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Frenzy extends EcoEnchant {
     public Frenzy() {
         super(
-                new EcoEnchantBuilder("frenzy", EnchantmentType.SPECIAL)
+                "frenzy", EnchantmentType.SPECIAL
         );
     }
     // START OF LISTENERS

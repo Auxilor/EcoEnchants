@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -13,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Volatile extends EcoEnchant {
     public Volatile() {
         super(
-                new EcoEnchantBuilder("volatile", EnchantmentType.SPECIAL)
+                "volatile", EnchantmentType.SPECIAL
         );
     }
 

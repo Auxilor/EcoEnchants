@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class FireAffinity extends EcoEnchant {
     public FireAffinity() {
         super(
-                new EcoEnchantBuilder("fire_affinity", EnchantmentType.NORMAL)
+                "fire_affinity", EnchantmentType.NORMAL
         );
     }
 

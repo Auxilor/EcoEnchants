@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.naturalexpgainevent.NaturalExpGainEvent;
@@ -10,7 +9,7 @@ import org.bukkit.event.EventHandler;
 public final class Intellect extends EcoEnchant {
     public Intellect() {
         super(
-                new EcoEnchantBuilder("intellect", EnchantmentType.SPECIAL)
+                "intellect", EnchantmentType.SPECIAL
         );
     }
 

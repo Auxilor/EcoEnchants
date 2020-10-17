@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.queue.DropQueue;
@@ -17,7 +16,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 public final class Beheading extends EcoEnchant {
     public Beheading() {
         super(
-                new EcoEnchantBuilder("beheading", EnchantmentType.NORMAL)
+                "beheading", EnchantmentType.NORMAL
         );
     }
     // START OF LISTENERS

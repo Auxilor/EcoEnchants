@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
@@ -9,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Bladed extends EcoEnchant {
     public Bladed() {
         super(
-                new EcoEnchantBuilder("bladed", EnchantmentType.SPECIAL)
+                "bladed", EnchantmentType.SPECIAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Creeper;
@@ -11,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Settle extends EcoEnchant {
     public Settle() {
         super(
-                new EcoEnchantBuilder("settle", EnchantmentType.NORMAL)
+                "settle", EnchantmentType.NORMAL
         );
     }
 

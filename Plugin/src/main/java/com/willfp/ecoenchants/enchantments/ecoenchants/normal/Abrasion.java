@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.util.DurabilityUtils;
@@ -15,7 +14,7 @@ import java.util.Arrays;
 public final class Abrasion extends EcoEnchant {
     public Abrasion() {
         super(
-                new EcoEnchantBuilder("abrasion", EnchantmentType.NORMAL)
+                "abrasion", EnchantmentType.NORMAL
         );
     }
 

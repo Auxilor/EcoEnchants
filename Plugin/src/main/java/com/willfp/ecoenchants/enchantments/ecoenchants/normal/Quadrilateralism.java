@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -11,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Quadrilateralism extends EcoEnchant {
     public Quadrilateralism() {
         super(
-                new EcoEnchantBuilder("quadrilateralism", EnchantmentType.NORMAL)
+                "quadrilateralism", EnchantmentType.NORMAL
         );
     }
 

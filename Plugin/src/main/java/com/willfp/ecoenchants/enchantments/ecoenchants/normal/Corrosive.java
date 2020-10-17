@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.util.DurabilityUtils;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -15,7 +14,7 @@ import java.util.Arrays;
 public final class Corrosive extends EcoEnchant {
     public Corrosive() {
         super(
-                new EcoEnchantBuilder("corrosive", EnchantmentType.NORMAL)
+                "corrosive", EnchantmentType.NORMAL
         );
     }
 

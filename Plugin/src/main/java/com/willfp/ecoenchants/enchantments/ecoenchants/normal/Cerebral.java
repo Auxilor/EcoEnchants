@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
@@ -10,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Cerebral extends EcoEnchant {
     public Cerebral() {
         super(
-                new EcoEnchantBuilder("cerebral", EnchantmentType.NORMAL)
+                "cerebral", EnchantmentType.NORMAL
         );
     }
 

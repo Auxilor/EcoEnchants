@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
@@ -24,7 +23,7 @@ import java.util.List;
 public final class Aiming extends EcoEnchant {
     public Aiming() {
         super(
-                new EcoEnchantBuilder("aiming", EnchantmentType.SPECIAL)
+                "aiming", EnchantmentType.SPECIAL
         );
     }
 

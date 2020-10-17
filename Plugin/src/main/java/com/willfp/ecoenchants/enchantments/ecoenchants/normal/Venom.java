@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -11,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Venom extends EcoEnchant {
     public Venom() {
         super(
-                new EcoEnchantBuilder("venom", EnchantmentType.NORMAL)
+                "venom", EnchantmentType.NORMAL
         );
     }
 

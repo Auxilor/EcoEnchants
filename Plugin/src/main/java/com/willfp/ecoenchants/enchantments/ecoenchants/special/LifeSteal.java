@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
@@ -9,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class LifeSteal extends EcoEnchant {
     public LifeSteal() {
         super(
-                new EcoEnchantBuilder("life_steal", EnchantmentType.SPECIAL)
+                "life_steal", EnchantmentType.SPECIAL
         );
     }
 

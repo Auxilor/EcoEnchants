@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.World;
@@ -14,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Enderism extends EcoEnchant {
     public Enderism() {
         super(
-                new EcoEnchantBuilder("enderism", EnchantmentType.NORMAL)
+                "enderism", EnchantmentType.NORMAL
         );
     }
 

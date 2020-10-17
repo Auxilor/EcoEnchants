@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.nms.TridentStack;
@@ -19,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 public final class Splash extends EcoEnchant {
     public Splash() {
         super(
-                new EcoEnchantBuilder("splash", EnchantmentType.NORMAL)
+                "splash", EnchantmentType.NORMAL
         );
     }
 

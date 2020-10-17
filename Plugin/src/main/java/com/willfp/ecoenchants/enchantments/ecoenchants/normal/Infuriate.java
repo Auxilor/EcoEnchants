@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.util.VectorUtils;
@@ -16,7 +15,7 @@ import org.bukkit.util.Vector;
 public final class Infuriate extends EcoEnchant {
     public Infuriate() {
         super(
-                new EcoEnchantBuilder("infuriate", EnchantmentType.NORMAL)
+                "infuriate", EnchantmentType.NORMAL
         );
     }
 

@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,7 +18,7 @@ import java.util.Objects;
 public final class Soulbound extends EcoEnchant {
     public Soulbound() {
         super(
-                new EcoEnchantBuilder("soulbound", EnchantmentType.SPECIAL)
+                "soulbound", EnchantmentType.SPECIAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -9,7 +8,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 public final class Rapid extends EcoEnchant {
     public Rapid() {
         super(
-                new EcoEnchantBuilder("rapid", EnchantmentType.NORMAL)
+                "rapid", EnchantmentType.NORMAL
         );
     }
 

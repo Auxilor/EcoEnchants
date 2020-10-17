@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.entity.Arrow;
@@ -12,7 +11,7 @@ import org.bukkit.util.Vector;
 public final class InaccuracyCurse extends EcoEnchant {
     public InaccuracyCurse() {
         super(
-                new EcoEnchantBuilder("inaccuracy_curse", EnchantmentType.CURSE)
+                "inaccuracy_curse", EnchantmentType.CURSE
         );
     }
 

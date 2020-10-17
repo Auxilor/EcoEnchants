@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
@@ -20,7 +19,7 @@ import java.util.HashMap;
 public final class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(
-                new EcoEnchantBuilder("forcefield", EnchantmentType.NORMAL)
+                "forcefield", EnchantmentType.NORMAL
         );
     }
 

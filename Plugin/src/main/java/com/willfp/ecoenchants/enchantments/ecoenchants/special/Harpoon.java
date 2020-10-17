@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -12,7 +11,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 public final class Harpoon extends EcoEnchant {
     public Harpoon() {
         super(
-                new EcoEnchantBuilder("harpoon", EnchantmentType.SPECIAL)
+                "harpoon", EnchantmentType.SPECIAL
         );
     }
 

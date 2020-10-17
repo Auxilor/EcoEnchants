@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -9,7 +8,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public final class Spring extends EcoEnchant {
     public Spring() {
         super(
-                new EcoEnchantBuilder("spring", EnchantmentType.SPECIAL)
+                "spring", EnchantmentType.SPECIAL
         );
     }
 

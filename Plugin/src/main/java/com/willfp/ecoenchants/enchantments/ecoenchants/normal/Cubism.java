@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Slime;
@@ -10,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Cubism extends EcoEnchant {
     public Cubism() {
         super(
-                new EcoEnchantBuilder("cubism", EnchantmentType.NORMAL)
+                "cubism", EnchantmentType.NORMAL
         );
     }
 

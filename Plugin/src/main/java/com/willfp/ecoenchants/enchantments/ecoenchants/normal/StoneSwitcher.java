@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.queue.DropQueue;
@@ -15,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public final class StoneSwitcher extends EcoEnchant {
     public StoneSwitcher() {
         super(
-                new EcoEnchantBuilder("stone_switcher", EnchantmentType.NORMAL)
+                "stone_switcher", EnchantmentType.NORMAL
         );
     }
 

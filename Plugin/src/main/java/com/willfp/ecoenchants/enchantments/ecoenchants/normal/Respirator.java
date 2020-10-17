@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -9,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public final class Respirator extends EcoEnchant {
     public Respirator() {
         super(
-                new EcoEnchantBuilder("respirator", EnchantmentType.NORMAL)
+                "respirator", EnchantmentType.NORMAL
         );
     }
 

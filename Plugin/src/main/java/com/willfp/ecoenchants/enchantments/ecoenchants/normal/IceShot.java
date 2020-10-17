@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -12,7 +11,7 @@ import org.bukkit.util.Vector;
 public final class IceShot extends EcoEnchant {
     public IceShot() {
         super(
-                new EcoEnchantBuilder("ice_shot", EnchantmentType.NORMAL)
+                "ice_shot", EnchantmentType.NORMAL
         );
     }
 

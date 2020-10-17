@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEvent;
@@ -18,7 +17,7 @@ import java.util.Collection;
 public final class Fetching extends EcoEnchant {
     public Fetching() {
         super(
-                new EcoEnchantBuilder("fetching", EnchantmentType.NORMAL)
+                "fetching", EnchantmentType.NORMAL
         );
     }
 

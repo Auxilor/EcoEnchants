@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -12,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Energizing extends EcoEnchant {
     public Energizing() {
         super(
-                new EcoEnchantBuilder("energizing", EnchantmentType.SPECIAL)
+                "energizing", EnchantmentType.SPECIAL
         );
     }
     // START OF LISTENERS

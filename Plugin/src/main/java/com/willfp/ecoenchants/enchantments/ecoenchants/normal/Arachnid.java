@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Spider;
@@ -11,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Arachnid extends EcoEnchant {
     public Arachnid() {
         super(
-                new EcoEnchantBuilder("arachnid", EnchantmentType.NORMAL)
+                "arachnid", EnchantmentType.NORMAL
         );
     }
 

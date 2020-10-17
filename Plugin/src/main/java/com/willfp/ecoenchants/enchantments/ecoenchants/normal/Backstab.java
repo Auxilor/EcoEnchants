@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -10,7 +9,7 @@ import org.bukkit.util.Vector;
 public final class Backstab extends EcoEnchant {
     public Backstab() {
         super(
-                new EcoEnchantBuilder("backstab", EnchantmentType.NORMAL)
+                "backstab", EnchantmentType.NORMAL
         );
     }
 

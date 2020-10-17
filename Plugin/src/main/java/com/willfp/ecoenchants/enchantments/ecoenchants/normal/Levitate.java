@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Arrow;
@@ -13,7 +12,7 @@ import org.bukkit.util.Vector;
 public final class Levitate extends EcoEnchant {
     public Levitate() {
         super(
-                new EcoEnchantBuilder("levitate", EnchantmentType.NORMAL)
+                "levitate", EnchantmentType.NORMAL
         );
     }
 

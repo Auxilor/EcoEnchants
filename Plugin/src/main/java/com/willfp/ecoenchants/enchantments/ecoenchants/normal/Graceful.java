@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.Material;
@@ -14,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Graceful extends EcoEnchant {
     public Graceful() {
         super(
-                new EcoEnchantBuilder("graceful", EnchantmentType.NORMAL)
+                "graceful", EnchantmentType.NORMAL
         );
     }
 

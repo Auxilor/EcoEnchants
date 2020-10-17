@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Arrow;
@@ -14,7 +13,7 @@ import org.bukkit.util.Vector;
 public final class Sickening extends EcoEnchant {
     public Sickening() {
         super(
-                new EcoEnchantBuilder("sickening", EnchantmentType.NORMAL)
+                "sickening", EnchantmentType.NORMAL
         );
     }
 

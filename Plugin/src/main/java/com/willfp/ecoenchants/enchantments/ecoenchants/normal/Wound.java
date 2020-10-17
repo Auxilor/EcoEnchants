@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Arrow;
@@ -15,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class Wound extends EcoEnchant {
     public Wound() {
         super(
-                new EcoEnchantBuilder("wound", EnchantmentType.NORMAL)
+                "wound", EnchantmentType.NORMAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
@@ -10,7 +9,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 public final class HungerCurse extends EcoEnchant {
     public HungerCurse() {
         super(
-                new EcoEnchantBuilder("hunger_curse", EnchantmentType.CURSE)
+                "hunger_curse", EnchantmentType.CURSE
         );
     }
 

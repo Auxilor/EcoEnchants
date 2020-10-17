@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
@@ -11,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public final class FragilityCurse extends EcoEnchant {
     public FragilityCurse() {
         super(
-                new EcoEnchantBuilder("fragility_curse", EnchantmentType.CURSE)
+                "fragility_curse", EnchantmentType.CURSE
         );
     }
 

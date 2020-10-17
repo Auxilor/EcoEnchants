@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
@@ -22,7 +21,7 @@ import org.bukkit.util.Vector;
 public final class MagmaWalker extends EcoEnchant {
     public MagmaWalker() {
         super(
-                new EcoEnchantBuilder("magma_walker", EnchantmentType.NORMAL)
+                "magma_walker", EnchantmentType.NORMAL
         );
     }
 

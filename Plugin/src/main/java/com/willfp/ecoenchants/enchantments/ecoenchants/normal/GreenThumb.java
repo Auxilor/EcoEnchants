@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
@@ -14,7 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public final class GreenThumb extends EcoEnchant {
     public GreenThumb() {
         super(
-                new EcoEnchantBuilder("green_thumb", EnchantmentType.NORMAL)
+                "green_thumb", EnchantmentType.NORMAL
         );
     }
 

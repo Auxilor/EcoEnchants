@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
@@ -15,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class Bleed extends EcoEnchant {
     public Bleed() {
         super(
-                new EcoEnchantBuilder("bleed", EnchantmentType.NORMAL)
+                "bleed", EnchantmentType.NORMAL
         );
     }
 

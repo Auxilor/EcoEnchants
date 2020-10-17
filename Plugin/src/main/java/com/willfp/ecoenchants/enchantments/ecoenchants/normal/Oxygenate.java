@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.block.Block;
@@ -10,7 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 public final class Oxygenate extends EcoEnchant {
     public Oxygenate() {
         super(
-                new EcoEnchantBuilder("oxygenate", EnchantmentType.NORMAL)
+                "oxygenate", EnchantmentType.NORMAL
         );
     }
 

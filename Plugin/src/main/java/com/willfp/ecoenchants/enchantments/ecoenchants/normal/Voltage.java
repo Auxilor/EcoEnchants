@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -14,7 +13,7 @@ import java.util.Arrays;
 public final class Voltage extends EcoEnchant {
     public Voltage() {
         super(
-                new EcoEnchantBuilder("voltage", EnchantmentType.NORMAL)
+                "voltage", EnchantmentType.NORMAL
         );
     }
 

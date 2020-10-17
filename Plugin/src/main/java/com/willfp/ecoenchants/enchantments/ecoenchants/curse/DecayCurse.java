@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.DurabilityUtils;
@@ -24,7 +23,7 @@ import java.util.Set;
 public final class DecayCurse extends EcoEnchant implements EcoRunnable {
     public DecayCurse() {
         super(
-                new EcoEnchantBuilder("decay_curse", EnchantmentType.CURSE)
+                "decay_curse", EnchantmentType.CURSE
         );
     }
 

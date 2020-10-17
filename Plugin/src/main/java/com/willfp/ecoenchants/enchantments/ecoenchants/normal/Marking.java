@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
@@ -15,7 +14,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 public final class Marking extends EcoEnchant {
     public Marking() {
         super(
-                new EcoEnchantBuilder("marking", EnchantmentType.NORMAL)
+                "marking", EnchantmentType.NORMAL
         );
     }
 

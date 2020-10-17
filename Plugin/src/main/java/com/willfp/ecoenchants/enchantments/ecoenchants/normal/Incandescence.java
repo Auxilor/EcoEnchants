@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Bukkit;
@@ -13,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public final class Incandescence extends EcoEnchant {
     public Incandescence() {
         super(
-                new EcoEnchantBuilder("incandescence", EnchantmentType.NORMAL)
+                "incandescence", EnchantmentType.NORMAL
         );
     }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchantBuilder;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -9,7 +8,7 @@ import org.bukkit.event.block.BlockDamageEvent;
 public final class BreaklessnessCurse extends EcoEnchant {
     public BreaklessnessCurse() {
         super(
-                new EcoEnchantBuilder("breaklessness_curse", EnchantmentType.CURSE)
+                "breaklessness_curse", EnchantmentType.CURSE
         );
     }
 
