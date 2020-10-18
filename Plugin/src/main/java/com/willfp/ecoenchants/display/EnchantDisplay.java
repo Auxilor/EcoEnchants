@@ -80,11 +80,14 @@ public final class EnchantDisplay {
         CACHE.clear();
         Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
             String name;
+            String color;
+            EcoEnchant.EnchantmentType type;
             List<String> description;
             if(EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
                 description = ecoEnchant.getDescription();
                 name = ecoEnchant.getName();
+                type = ecoEnchant.getType();
             } else {
                 description = Arrays.asList(
                         WordUtils.wrap(
@@ -94,7 +97,30 @@ public final class EnchantDisplay {
                         ).split("\\r?\\n")
                 );
                 name = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
+                type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
             }
+
+            switch(type) {
+                case ARTIFACT:
+                    color = artifactColor;
+                    break;
+                case SPECIAL:
+                    color = specialColor;
+                    break;
+                case CURSE:
+                    color = curseColor;
+                    break;
+                default:
+                    color = normalColor;
+                    break;
+            }
+
+            EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
+            if(rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
+                color = rarity.getCustomColor();
+            }
+
+            name = color + name;
             description.replaceAll(line -> prefix + descriptionColor + line);
             CACHE.put(enchantment, new Pair<>(name, description));
         });
@@ -199,33 +225,8 @@ public final class EnchantDisplay {
             boolean isEcoEnchant = EcoEnchants.getFromEnchantment(enchantment) != null;
 
             String name = CACHE.get(enchantment).getKey();
-            String color;
-            EcoEnchant.EnchantmentType type;
-
-            if(isEcoEnchant) type = EcoEnchants.getFromEnchantment(enchantment).getType();
-            else type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
-
-            switch(type) {
-                case ARTIFACT:
-                    color = artifactColor;
-                    break;
-                case SPECIAL:
-                    color = specialColor;
-                    break;
-                case CURSE:
-                    color = curseColor;
-                    break;
-                default:
-                    color = normalColor;
-                    break;
-            }
 
             if(isEcoEnchant) {
-                EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
-                if(rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
-                    color = rarity.getCustomColor();
-                }
-
                 if(!EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
             }
 
@@ -237,7 +238,7 @@ public final class EnchantDisplay {
                 }
             }
 
-            lore.add(prefix + color + name);
+            lore.add(prefix + name);
             if(enchantments.size() <= describeThreshold && useDescribe)
                 lore.addAll(CACHE.get(enchantment).getValue());
         });

@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.command.AbstractTabCompleter;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.apache.commons.lang.WordUtils;
@@ -48,35 +49,6 @@ public final class CommandEnchantinfo extends AbstractCommand {
             sender.sendMessage(message);
             return;
         }
-
-        String name;
-        String color;
-        List<String> description;
-
-        boolean isCurse = enchantment.isCursed();
-        boolean isSpecial = false;
-        boolean isArtifact = false;
-
-        if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
-            isSpecial = true;
-        }
-        if(enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) {
-            isArtifact = true;
-        }
-
-        if(isCurse) color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("curse-color"));
-        else if(isSpecial) color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("special-color"));
-        else if(isArtifact) color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color"));
-        else color = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("not-curse-color"));
-
-
-        name = enchantment.getName();
-        description = EcoEnchants.getFromEnchantment(enchantment).getDescription();
-        StringBuilder descriptionBuilder = new StringBuilder();
-        description.forEach((line) -> {
-            descriptionBuilder.append(line).append(" ");
-        });
-        String desc = descriptionBuilder.toString();
 
         Set<String> conflictNames = new HashSet<>();
 
@@ -126,8 +98,8 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         String maxLevel = String.valueOf(enchantment.getMaxLevel());
 
-        final String finalName = color + name;
-        final String finalDescription = desc;
+        final String finalName = EnchantDisplay.CACHE.get(enchantment).getKey();
+        final String finalDescription = String.join("\n", EnchantDisplay.CACHE.get(enchantment).getValue());
         final String finalTargets = allTargets;
         final String finalConflicts = allConflicts;
         final String finalMaxLevel = maxLevel;
