@@ -115,9 +115,11 @@ public final class EnchantDisplay {
                     break;
             }
 
-            EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
-            if(rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
-                color = rarity.getCustomColor();
+            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+                EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
+                if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
+                    color = rarity.getCustomColor();
+                }
             }
 
             name = color + name;
