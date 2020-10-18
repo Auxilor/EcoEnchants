@@ -54,7 +54,12 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         Set<Enchantment> conflicts = enchantment.getConflicts();
 
-        conflicts.removeIf(enchant -> (EcoEnchants.getFromEnchantment(enchant) != null) && !EcoEnchants.getFromEnchantment(enchantment).isEnabled());
+        new HashSet<>(conflicts).forEach(enchantment1 -> {
+            if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
+                if(!EcoEnchants.getFromEnchantment(enchantment1).isEnabled())
+                    conflicts.remove(enchantment1);
+            }
+        });
 
         conflicts.forEach((enchantment1 -> {
             if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
@@ -101,7 +106,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
         String maxLevel = String.valueOf(enchantment.getMaxLevel());
 
         final String finalName = EnchantDisplay.CACHE.get(enchantment).getKey();
-        final String finalDescription = String.join("\n", EnchantDisplay.CACHE.get(enchantment).getValue());
+        final String finalDescription = "§f" + String.join(" ", EnchantDisplay.CACHE.get(enchantment).getValue()).replaceAll("\n","").replaceAll(EnchantDisplay.descriptionColor, "");
         final String finalTargets = allTargets;
         final String finalConflicts = allConflicts;
         final String finalMaxLevel = maxLevel;

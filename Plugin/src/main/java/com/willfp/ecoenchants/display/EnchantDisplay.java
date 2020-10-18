@@ -55,7 +55,7 @@ public final class EnchantDisplay {
     private static String curseColor;
     private static String specialColor;
     private static String artifactColor;
-    private static String descriptionColor;
+    public static String descriptionColor;
 
     private static int numbersThreshold;
     private static boolean useNumerals;
