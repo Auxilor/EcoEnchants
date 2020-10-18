@@ -105,8 +105,19 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         String maxLevel = String.valueOf(enchantment.getMaxLevel());
 
+        StringBuilder descriptionBuilder = new StringBuilder();
+
+        EnchantDisplay.CACHE.get(enchantment).getValue().forEach(s -> {
+            descriptionBuilder.append(s);
+            descriptionBuilder.append(" ");
+        });
+
+        String description = descriptionBuilder.toString();
+        description = description.replaceAll("§w", "");
+        description = description.replaceAll(EnchantDisplay.descriptionColor, "");
+
         final String finalName = EnchantDisplay.CACHE.get(enchantment).getKey();
-        final String finalDescription = "§f" + String.join(" ", EnchantDisplay.CACHE.get(enchantment).getValue()).replaceAll("\n","").replaceAll(EnchantDisplay.descriptionColor, "");
+        final String finalDescription = description;
         final String finalTargets = allTargets;
         final String finalConflicts = allConflicts;
         final String finalMaxLevel = maxLevel;
