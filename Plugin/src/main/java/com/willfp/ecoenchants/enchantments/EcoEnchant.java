@@ -36,7 +36,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private int maxLvl;
     private Set<Enchantment> conflicts;
     private EnchantmentRarity rarity;
-    private Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> target = new HashSet<>();
+    private final Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> target = new HashSet<>();
+    private final Set<Material> targetMaterials = new HashSet<>();
 
     private boolean enabled;
 
@@ -84,7 +85,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         name = ChatColor.translateAlternateColorCodes('&', config.getString("name"));
         description = ChatColor.translateAlternateColorCodes('&', config.getString("description"));
         target.clear();
+        targetMaterials.clear();
         target.addAll(config.getTargets());
+        target.forEach(enchantmentTarget -> targetMaterials.addAll(enchantmentTarget.getMaterials()));
         enabled = config.getBool("enabled", true);
 
         this.register();
@@ -230,18 +233,14 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return Set of enchantable items
      */
     public Set<Material> getTarget() {
-        Set<Material> materials = new HashSet<>();
-        target.forEach(target -> {
-            materials.addAll(target.getMaterials());
-        });
-        return materials;
+        return targetMaterials;
     }
 
     /**
      * Get raw target of enchantment
      * @return {@link com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget}
      */
-    public Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> getRawTarget() {
+    public Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> getRawTargets() {
         return target;
     }
 
@@ -333,7 +332,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      */
     @Override
     public boolean canEnchantItem(ItemStack itemStack) {
-        return target.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
+        return targetMaterials.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
     }
 
     /**

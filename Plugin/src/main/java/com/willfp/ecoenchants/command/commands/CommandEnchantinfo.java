@@ -85,7 +85,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
         Set<String> applicableItemsSet = new HashSet<>();
 
         if(ConfigManager.getConfig().getBool("commands.enchantinfo.show-target-group")) {
-            enchantment.getRawTarget().forEach(target -> {
+            enchantment.getRawTargets().forEach(target -> {
                 String targetName = target.getName();
                 targetName = targetName.toLowerCase();
                 targetName = targetName.replaceAll("_", " ");
