@@ -84,13 +84,23 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         Set<String> applicableItemsSet = new HashSet<>();
 
-        targets.forEach(material -> {
-            String matName = material.toString();
-            matName = matName.toLowerCase();
-            matName = matName.replaceAll("_", " ");
-            matName = WordUtils.capitalize(matName);
-            applicableItemsSet.add(matName);
-        });
+        if(ConfigManager.getConfig().getBool("commands.enchantinfo.show-target-group")) {
+            enchantment.getRawTarget().forEach(target -> {
+                String targetName = target.getName();
+                targetName = targetName.toLowerCase();
+                targetName = targetName.replaceAll("_", " ");
+                targetName = WordUtils.capitalize(targetName);
+                applicableItemsSet.add(targetName);
+            });
+        } else {
+            targets.forEach(material -> {
+                String matName = material.toString();
+                matName = matName.toLowerCase();
+                matName = matName.replaceAll("_", " ");
+                matName = WordUtils.capitalize(matName);
+                applicableItemsSet.add(matName);
+            });
+        }
 
         StringBuilder targetNamesBuilder = new StringBuilder();
         applicableItemsSet.forEach((name1) -> {

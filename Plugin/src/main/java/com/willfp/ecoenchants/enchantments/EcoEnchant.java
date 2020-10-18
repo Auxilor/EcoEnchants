@@ -17,12 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("unchecked")
@@ -41,7 +36,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private int maxLvl;
     private Set<Enchantment> conflicts;
     private EnchantmentRarity rarity;
-    private final Set<Material> target = new HashSet<>();
+    private Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> target = new HashSet<>();
 
     private boolean enabled;
 
@@ -89,7 +84,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         name = ChatColor.translateAlternateColorCodes('&', config.getString("name"));
         description = ChatColor.translateAlternateColorCodes('&', config.getString("description"));
         target.clear();
-        config.getTargets().forEach(enchantmentTarget -> target.addAll(enchantmentTarget.getMaterials()));
+        target.addAll(config.getTargets());
         enabled = config.getBool("enabled", true);
 
         this.register();
@@ -235,6 +230,18 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return Set of enchantable items
      */
     public Set<Material> getTarget() {
+        Set<Material> materials = new HashSet<>();
+        target.forEach(target -> {
+            materials.addAll(target.getMaterials());
+        });
+        return materials;
+    }
+
+    /**
+     * Get raw target of enchantment
+     * @return {@link com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget}
+     */
+    public Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> getRawTarget() {
         return target;
     }
 
