@@ -14,11 +14,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TabCompleterEnchantinfo extends AbstractTabCompleter {
-    private final List<String> enchantsNames;
+    private static final List<String> enchantsNames = EcoEnchants.getAll().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
 
     public TabCompleterEnchantinfo() {
         super((AbstractCommand) Bukkit.getPluginCommand("enchantinfo").getExecutor());
-        enchantsNames = EcoEnchants.getAll().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
+    }
+
+    public static void reload() {
+        enchantsNames.clear();
+        enchantsNames.addAll(EcoEnchants.getAll().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
     }
 
     private static String removePrefix(String s, String prefix) {

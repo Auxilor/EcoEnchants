@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
+import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
@@ -32,11 +33,7 @@ import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatNCP;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatSpartan;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefFactionsUUID;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefGriefPrevention;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefLands;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
@@ -441,6 +438,7 @@ public class Loader {
         EnchantmentTarget.update();
         EcoEnchants.update();
         EnchantDisplay.update();
+        TabCompleterEnchantinfo.reload();
 
         EcoEnchants.getAll().forEach((ecoEnchant -> {
             HandlerList.unregisterAll(ecoEnchant);
