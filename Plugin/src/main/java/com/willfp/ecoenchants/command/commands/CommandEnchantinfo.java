@@ -44,7 +44,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         EcoEnchant enchantment = EcoEnchants.getByName(searchName);
 
-        if(enchantment == null) {
+        if(enchantment == null || !enchantment.isEnabled()) {
             String message = ConfigManager.getLang().getMessage("not-found").replace("%name%", searchName);
             sender.sendMessage(message);
             return;
@@ -55,7 +55,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
         Set<Enchantment> conflicts = enchantment.getConflicts();
 
         conflicts.forEach((enchantment1 -> {
-            if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
+            if(EcoEnchants.getFromEnchantment(enchantment1) != null && EcoEnchants.getFromEnchantment(enchantment).isEnabled()) {
                 conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getName());
             } else {
                 conflictNames.add(ConfigManager.getLang().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
