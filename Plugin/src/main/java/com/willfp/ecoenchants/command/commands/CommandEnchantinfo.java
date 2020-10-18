@@ -54,8 +54,10 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         Set<Enchantment> conflicts = enchantment.getConflicts();
 
+        conflicts.removeIf(enchant -> (EcoEnchants.getFromEnchantment(enchant) != null) && !EcoEnchants.getFromEnchantment(enchantment).isEnabled());
+
         conflicts.forEach((enchantment1 -> {
-            if(EcoEnchants.getFromEnchantment(enchantment1) != null && EcoEnchants.getFromEnchantment(enchantment).isEnabled()) {
+            if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
                 conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getName());
             } else {
                 conflictNames.add(ConfigManager.getLang().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
