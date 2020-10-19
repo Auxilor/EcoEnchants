@@ -85,7 +85,9 @@ public class Loader {
 
         Logger.info("Loading ProtocolLib...");
         EcoEnchantsPlugin.getInstance().protocolManager = ProtocolLibrary.getProtocolManager();
-        new PacketOpenWindowMerchant().register();
+        if(ConfigManager.getConfig().getBool("villager.enabled")) {
+            new PacketOpenWindowMerchant().register();
+        }
         new PacketSetCreativeSlot().register();
         new PacketSetSlot().register();
         new PacketWindowItems().register();
