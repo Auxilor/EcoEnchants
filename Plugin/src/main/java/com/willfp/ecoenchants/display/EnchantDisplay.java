@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.Pair;
 import org.apache.commons.lang.WordUtils;
@@ -117,8 +118,12 @@ public final class EnchantDisplay {
 
             if(EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
-                if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
-                    color = rarity.getCustomColor();
+                if(rarity != null) {
+                    if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
+                        color = rarity.getCustomColor();
+                    }
+                } else {
+                    Logger.warn("Enchantment " + enchantment.getKey().getKey() + " has an invalid rarity");
                 }
             }
 
