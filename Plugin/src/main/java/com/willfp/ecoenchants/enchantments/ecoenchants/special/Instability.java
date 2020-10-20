@@ -41,8 +41,7 @@ public final class Instability extends EcoEnchant {
 
         if (!AntigriefManager.canCreateExplosion(player, event.getEntity().getLocation())) return;
         if (breakblocks) {
-            if (!AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
-                return;
+            breakblocks = AntigriefManager.canBreakBlock(player, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation()));
         }
 
         event.getEntity().getWorld().createExplosion(event.getEntity().getLocation().getX(), event.getEntity().getLocation().getY(), event.getEntity().getLocation().getZ(), power, fire, breakblocks);
