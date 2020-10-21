@@ -50,8 +50,9 @@ public final class CommandEcodebug extends AbstractCommand {
         }
         Logger.info("");
 
-        List<Enchantment> extern = Arrays.asList(Enchantment.values());
-        extern.removeAll(EcoEnchants.getAll());
+
+        List<Enchantment> extern = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
+        extern.removeAll(EcoEnchants.getAll().stream().map(EcoEnchant::getEnchantment).collect(Collectors.toList()));
         Logger.info("External/Vanilla Enchantments: " + extern.toString());
         Logger.info("");
 
