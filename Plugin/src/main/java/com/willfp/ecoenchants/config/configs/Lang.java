@@ -14,7 +14,7 @@ public class Lang extends UpdatingYamlConfig {
     }
 
     public String getString(String path) {
-        return StringUtils.translate(config.getString(path));
+        return StringUtils.translate(String.valueOf(config.getString(path)));
     }
 
     public List<String> getStrings(String path) {
