@@ -2,6 +2,7 @@ package com.willfp.ecoenchants;
 
 import com.comphenix.protocol.ProtocolManager;
 import com.willfp.ecoenchants.loader.Loader;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -19,6 +20,11 @@ public class EcoEnchantsPlugin extends JavaPlugin {
      * Newest available plugin version
      */
     public static String newVersion;
+
+    /**
+     * NMS version
+     */
+    public static final String nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 
     /**
      * ProtocolLib

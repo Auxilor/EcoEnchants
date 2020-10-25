@@ -17,9 +17,12 @@ public final class PacketWindowItems extends AbstractPacketAdapter {
         packet.getItemListModifier().modify(0, (itemStacks) -> {
             if(itemStacks == null) return null;
             itemStacks.forEach(item -> {
+                if(item == null)
+                    return;
+
                 boolean hideEnchants = false;
 
-                if(item != null && item.getItemMeta() != null) {
+                if(item.getItemMeta() != null) {
                     hideEnchants = item.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS);
                     if(hideEnchants && item.getItemMeta().getPersistentDataContainer().has(EnchantDisplay.KEY, PersistentDataType.INTEGER))
                         hideEnchants = false;
