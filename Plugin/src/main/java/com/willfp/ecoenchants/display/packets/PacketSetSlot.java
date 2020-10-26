@@ -17,7 +17,10 @@ public final class PacketSetSlot extends AbstractPacketAdapter {
         packet.getItemModifier().modify(0, (item) -> {
             boolean hideEnchants = false;
 
-            if(item != null && item.getItemMeta() != null) {
+            if(item == null)
+                return item;
+
+            if(item.getItemMeta() != null) {
                 hideEnchants = item.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS);
                 if(hideEnchants && item.getItemMeta().getPersistentDataContainer().has(EnchantDisplay.KEY, PersistentDataType.INTEGER))
                     hideEnchants = false;

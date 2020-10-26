@@ -24,6 +24,8 @@ public class AnticheatManager {
     }
 
     public static void unexemptPlayer(Player player) {
-        anticheats.forEach(anticheat -> anticheat.unexempt(player));
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+            anticheats.forEach(anticheat -> anticheat.unexempt(player));
+        }, 1);
     }
 }

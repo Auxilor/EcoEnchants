@@ -26,31 +26,38 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
 
         recipes = recipes.stream().peek(merchantRecipe -> {
             try {
+                // Enables removing final modifier
                 Field modifiersField = Field.class.getDeclaredField("modifiers");
                 modifiersField.setAccessible(true);
 
+                // Bukkit MerchantRecipe result
                 Field fResult = merchantRecipe.getClass().getSuperclass().getDeclaredField("result");
                 fResult.setAccessible(true);
-                fResult.set(merchantRecipe, EnchantDisplay.displayEnchantments(merchantRecipe.getResult()));
+                ItemStack result = EnchantDisplay.displayEnchantments(merchantRecipe.getResult());
+                result = EnchantDisplay.addV(result);
+                fResult.set(merchantRecipe, result);
 
+                // Get NMS MerchantRecipe from CraftMerchantRecipe
                 Field fHandle = merchantRecipe.getClass().getDeclaredField("handle");
                 fHandle.setAccessible(true);
-                Object handle = fHandle.get(merchantRecipe);
+                Object handle = fHandle.get(merchantRecipe); // NMS Recipe
+                modifiersField.setInt(fHandle, fHandle.getModifiers() & ~Modifier.FINAL); // Remove final
 
-                modifiersField.setInt(fHandle, fHandle.getModifiers() & ~Modifier.FINAL);
-
+                // NMS MerchantRecipe
                 Field fSelling = fHandle.get(merchantRecipe).getClass().getDeclaredField("sellingItem");
                 fSelling.setAccessible(true);
-
-                Object selling = fSelling.get(handle);
-
+                Object selling = fSelling.get(handle); // NMS Selling ItemStack
                 modifiersField.setInt(fSelling, fSelling.getModifiers() & ~Modifier.FINAL);
 
-                ItemStack itemStack = (ItemStack) Class.forName("org.bukkit.craftbukkit." + EcoEnchantsPlugin.nmsVersion + ".inventory.CraftItemStack").getMethod("asBukkitCopy", selling.getClass()).invoke(null, selling);
+                // Reflectively access CraftItemStack.class for respective version
+                Class<?> craftItemStack = Class.forName("org.bukkit.craftbukkit." + EcoEnchantsPlugin.nmsVersion + ".inventory.CraftItemStack");
 
-                itemStack = EnchantDisplay.displayEnchantments(itemStack);
+                // Bukkit Result ItemStack from NMS Result ItemStack
+                ItemStack nmsSelling = (ItemStack) craftItemStack.getMethod("asBukkitCopy", selling.getClass()).invoke(null, selling);
+                nmsSelling = EnchantDisplay.displayEnchantments(nmsSelling);
+                nmsSelling = EnchantDisplay.addV(nmsSelling);
+                fSelling.set(handle, craftItemStack.getMethod("asNMSCopy", ItemStack.class).invoke(null, nmsSelling));
 
-                fSelling.set(handle, Class.forName("org.bukkit.craftbukkit." + EcoEnchantsPlugin.nmsVersion + ".inventory.CraftItemStack").getMethod("asNMSCopy", ItemStack.class).invoke(null, itemStack));
             } catch (IllegalAccessException | NoSuchFieldException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
             }

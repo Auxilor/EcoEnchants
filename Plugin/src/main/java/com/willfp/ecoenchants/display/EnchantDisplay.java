@@ -45,6 +45,8 @@ public final class EnchantDisplay {
     @Deprecated
     public static final NamespacedKey KEY_SKIP = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
+    public static final NamespacedKey KEY_V = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-v");
+
     /**
      * Cached enchantment descriptions and names
      */
@@ -143,6 +145,15 @@ public final class EnchantDisplay {
         shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
     }
 
+    public static ItemStack addV(ItemStack item) {
+        if(item == null || item.getItemMeta() == null) return item;
+
+        ItemMeta meta = item.getItemMeta();
+        meta.getPersistentDataContainer().set(KEY_V, PersistentDataType.INTEGER, 1);
+        item.setItemMeta(meta);
+        return item;
+    }
+
     /**
      * Revert display
      * @param item The item to revert
@@ -197,6 +208,11 @@ public final class EnchantDisplay {
         if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()))
             return item;
 
+        if(hideEnchants && item.getItemMeta().getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
+            hideEnchants = false;
+            item.getItemMeta().getPersistentDataContainer().remove(KEY_V);
+        }
+
         item = revertDisplay(item);
 
         ItemMeta meta = item.getItemMeta();
@@ -230,6 +246,8 @@ public final class EnchantDisplay {
         final ItemStack finalItem = item;
         enchantments.forEach((enchantment, level) -> {
             boolean isEcoEnchant = EcoEnchants.getFromEnchantment(enchantment) != null;
+
+            if(CACHE.get(enchantment) == null) return;
 
             String name = CACHE.get(enchantment).getKey();
 
