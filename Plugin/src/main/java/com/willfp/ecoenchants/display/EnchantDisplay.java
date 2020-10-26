@@ -45,6 +45,11 @@ public final class EnchantDisplay {
     @Deprecated
     public static final NamespacedKey KEY_SKIP = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
 
+    /**
+     * The meta key to notify the server that an item is from a villager trade
+     *
+     * Bit of a bodge - plan on making it better.
+     */
     public static final NamespacedKey KEY_V = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-v");
 
     /**
@@ -145,6 +150,14 @@ public final class EnchantDisplay {
         shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
     }
 
+    /**
+     * Bodge to fix hidden enchantments from villagers.
+     *
+     * It isn't recommended to mess with this unless you <b>really</b> know your way around EcoEnchants.
+     *
+     * @param item The item to modify
+     * @return The item, with KEY_V
+     */
     public static ItemStack addV(ItemStack item) {
         if(item == null || item.getItemMeta() == null) return item;
 
