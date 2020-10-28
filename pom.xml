@@ -45,8 +45,12 @@
             <url>https://jitpack.io</url>
         </repository>
         <repository>
+            <id>enderzone-projects</id>
+            <url>https://ci.ender.zone/plugin/repository/project/</url>
+        </repository>
+        <repository>
             <id>enderzone</id>
-            <url>http://ci.ender.zone/plugin/repository/everything/</url>
+            <url>https://ci.ender.zone/plugin/repository/everything/</url>
         </repository>
         <repository>
             <id>md_5-releases</id>

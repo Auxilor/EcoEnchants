@@ -11,19 +11,16 @@ import com.willfp.ecoenchants.queue.DropQueue;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Trident;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class Telekinesis extends EcoEnchant {
     public Telekinesis() {
@@ -46,10 +43,7 @@ public final class Telekinesis extends EcoEnchant {
 
         if (!AntigriefManager.canBreakBlock(player, block)) return;
 
-        List<ItemStack> drops = new ArrayList<>();
-        event.getItems().forEach((item -> {
-            drops.add(item.getItemStack());
-        }));
+        List<ItemStack> drops = event.getItems().stream().map(Item::getItemStack).collect(Collectors.toList());
 
         event.getItems().clear();
 
