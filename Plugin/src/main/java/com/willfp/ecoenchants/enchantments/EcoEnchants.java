@@ -287,6 +287,7 @@ public class EcoEnchants {
         Optional<EcoEnchant> matching = getAll().stream().filter(enchant -> enchant.getKey().equals(key)).findFirst();
         return matching.orElse(null);
     }
+
     /**
      * Get if {@link ItemStack} has any {@link EcoEnchant} matching specified {@link com.willfp.ecoenchants.enchantments.EcoEnchant.EnchantmentType}
      *
