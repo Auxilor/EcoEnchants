@@ -20,6 +20,12 @@ You are not allowed to redistribute full, partial or modified versions of the pa
 is associated. This license does not apply to modules or extensions that use but do not contain full, 
 partial or modified code from this package.
 
+By purchasing the package from the offical distributor (spigotmc.org) you agree to the following terms:
+
+1. No refunds, under any circumstance, unless explicitly approved by the copyright holder.
+
+2. You are of legal age and/or have permission from your legal guardian.
+
 
 ## ECOENCHANTS LICENSE
 ### TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
