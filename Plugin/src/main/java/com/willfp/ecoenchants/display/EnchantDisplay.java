@@ -256,17 +256,27 @@ public final class EnchantDisplay {
             enchantments = meta.getEnchants();
         }
 
+        enchantments.forEach((enchantment, level) -> {
+            if(EcoEnchants.getFromEnchantment(enchantment) == null) return;
+
+            EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
+
+            if(!ecoEnchant.isEnabled())
+                forRemoval.add(enchantment);
+        });
+
+        forRemoval.forEach(enchantments::remove);
+        if(meta instanceof EnchantmentStorageMeta) {
+            forRemoval.forEach(((EnchantmentStorageMeta) meta)::removeStoredEnchant);
+        } else {
+            forRemoval.forEach(meta::removeEnchant);
+        }
+
         final ItemStack finalItem = item;
         enchantments.forEach((enchantment, level) -> {
-            boolean isEcoEnchant = EcoEnchants.getFromEnchantment(enchantment) != null;
-
             if(CACHE.get(enchantment) == null) return;
 
             String name = CACHE.get(enchantment).getKey();
-
-            if(isEcoEnchant) {
-                if(!EcoEnchants.getFromEnchantment(enchantment).isEnabled()) forRemoval.add(enchantment);
-            }
 
             if(!(enchantment.getMaxLevel() == 1 && level == 1)) {
                 if(useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
@@ -300,9 +310,6 @@ public final class EnchantDisplay {
 
         if (meta instanceof EnchantmentStorageMeta) {
             meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-            forRemoval.forEach(((EnchantmentStorageMeta) meta)::removeStoredEnchant);
-        } else {
-            forRemoval.forEach(meta::removeEnchant);
         }
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         lore.addAll(itemLore);
