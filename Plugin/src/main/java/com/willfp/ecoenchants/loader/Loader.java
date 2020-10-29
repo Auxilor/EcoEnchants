@@ -391,16 +391,16 @@ public class Loader {
          */
 
         if (!Prerequisite.HasPaper.isMet()) {
-            Logger.info("");
-            Logger.info("----------------------------");
-            Logger.info("");
+            Logger.error("");
+            Logger.error("----------------------------");
+            Logger.error("");
             Logger.error("You don't seem to be running paper!");
             Logger.error("Paper is strongly recommended for all servers,");
-            Logger.error("and enchantments like Drill may not function properly without it");
+            Logger.error("and some enchantments may not function properly without it");
             Logger.error("Download Paper from §fhttps://papermc.io");
-            Logger.info("");
-            Logger.info("----------------------------");
-            Logger.info("");
+            Logger.error("");
+            Logger.error("----------------------------");
+            Logger.error("");
         }
 
         Logger.info("");
