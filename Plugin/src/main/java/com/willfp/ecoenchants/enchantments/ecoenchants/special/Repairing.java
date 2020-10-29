@@ -28,7 +28,7 @@ public final class Repairing extends EcoEnchant implements EcoRunnable {
     }
 
     private final Set<Player> players = new HashSet<>();
-    private int amount = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
+    private int amount = 10000;
 
     @EventHandler
     public void onItemPickup(EntityPickupItemEvent event) {
