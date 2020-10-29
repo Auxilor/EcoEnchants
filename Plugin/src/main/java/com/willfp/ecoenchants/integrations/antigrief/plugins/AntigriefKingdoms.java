@@ -10,7 +10,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.kingdoms.constants.kingdom.Kingdom;
 import org.kingdoms.constants.land.Land;
-import org.kingdoms.constants.player.KingdomPlayer;
 import org.kingdoms.managers.PvPManager;
 import org.kingdoms.managers.land.LandManager;
 
@@ -31,7 +30,7 @@ public final class AntigriefKingdoms implements AntigriefWrapper {
         if(!land.isClaimed()) return true;
 
         Kingdom kingdom = land.getKingdom();
-        return kingdom.getKingdomMembers().contains(KingdomPlayer.getKingdomPlayer(player));
+        return kingdom.isMember(player);
     }
 
     @Override
@@ -52,7 +51,7 @@ public final class AntigriefKingdoms implements AntigriefWrapper {
             if(!land.isClaimed()) return true;
 
             Kingdom kingdom = land.getKingdom();
-            return kingdom.getKingdomMembers().contains(KingdomPlayer.getKingdomPlayer(player));
+            return kingdom.isMember(player);
         }
     }
 
