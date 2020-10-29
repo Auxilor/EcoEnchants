@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.command.AbstractTabCompleter;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.apache.commons.lang.WordUtils;
@@ -115,19 +115,8 @@ public final class CommandEnchantinfo extends AbstractCommand {
 
         String maxLevel = String.valueOf(enchantment.getMaxLevel());
 
-        StringBuilder descriptionBuilder = new StringBuilder();
-
-        EnchantDisplay.CACHE.get(enchantment).getValue().forEach(s -> {
-            descriptionBuilder.append(s);
-            descriptionBuilder.append(" ");
-        });
-
-        String description = descriptionBuilder.toString();
-        description = description.replaceAll("§w", "");
-        description = description.replaceAll(EnchantDisplay.descriptionColor, "");
-
-        final String finalName = EnchantDisplay.CACHE.get(enchantment).getKey();
-        final String finalDescription = description;
+        final String finalName = EnchantmentCache.getEntry(enchantment).getName();
+        final String finalDescription = EnchantmentCache.getEntry(enchantment).getStringDescription();
         final String finalTargets = allTargets;
         final String finalConflicts = allConflicts;
         final String finalMaxLevel = maxLevel;

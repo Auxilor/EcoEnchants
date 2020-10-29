@@ -5,12 +5,8 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
-import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.NumberUtils;
-import com.willfp.ecoenchants.util.Pair;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -20,7 +16,10 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
@@ -52,28 +51,23 @@ public final class EnchantDisplay {
      */
     public static final NamespacedKey KEY_V = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-v");
 
-    /**
-     * Cached enchantment descriptions and names
-     */
-    public static final Map<Enchantment, Pair<String, List<String>>> CACHE = new HashMap<>();
+    public static final String PREFIX = "§w";
 
-    private static final String prefix = "§w";
+    static String normalColor;
+    static String curseColor;
+    static String specialColor;
+    static String artifactColor;
+    static String descriptionColor;
 
-    private static String normalColor;
-    private static String curseColor;
-    private static String specialColor;
-    private static String artifactColor;
-    public static String descriptionColor;
+    static int numbersThreshold;
+    static boolean useNumerals;
 
-    private static int numbersThreshold;
-    private static boolean useNumerals;
+    static int describeThreshold;
+    static boolean useDescribe;
 
-    private static int describeThreshold;
-    private static boolean useDescribe;
-
-    private static int shrinkThreshold;
-    private static int shrinkPerLine;
-    private static boolean useShrink;
+    static int shrinkThreshold;
+    static int shrinkPerLine;
+    static boolean useShrink;
 
     /**
      * Update config values
@@ -84,60 +78,6 @@ public final class EnchantDisplay {
         specialColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("special-color"));
         artifactColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color"));
         normalColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("not-curse-color"));
-
-        CACHE.clear();
-        Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
-            String name;
-            String color;
-            EcoEnchant.EnchantmentType type;
-            List<String> description;
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
-                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
-                description = ecoEnchant.getDescription();
-                name = ecoEnchant.getName();
-                type = ecoEnchant.getType();
-            } else {
-                description = Arrays.asList(
-                        WordUtils.wrap(
-                                String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
-                                ConfigManager.getConfig().getInt("lore.describe.wrap"),
-                                "\n", false
-                        ).split("\\r?\\n")
-                );
-                name = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
-                type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
-            }
-
-            switch(type) {
-                case ARTIFACT:
-                    color = artifactColor;
-                    break;
-                case SPECIAL:
-                    color = specialColor;
-                    break;
-                case CURSE:
-                    color = curseColor;
-                    break;
-                default:
-                    color = normalColor;
-                    break;
-            }
-
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
-                EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
-                if(rarity != null) {
-                    if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
-                        color = rarity.getCustomColor();
-                    }
-                } else {
-                    Logger.warn("Enchantment " + enchantment.getKey().getKey() + " has an invalid rarity");
-                }
-            }
-
-            name = color + name;
-            description.replaceAll(line -> prefix + descriptionColor + line);
-            CACHE.put(enchantment, new Pair<>(name, description));
-        });
 
         useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
         numbersThreshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");
@@ -194,7 +134,7 @@ public final class EnchantDisplay {
         } catch(NullPointerException ignored) { }
 
         meta.getPersistentDataContainer().remove(KEY);
-        itemLore.removeIf((s) -> s.startsWith(prefix));
+        itemLore.removeIf((s) -> s.startsWith(PREFIX));
 
         if(!meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
             if (meta instanceof EnchantmentStorageMeta)
@@ -247,14 +187,46 @@ public final class EnchantDisplay {
 
         List<String> lore = new ArrayList<>();
 
-        Map<Enchantment, Integer> enchantments;
+        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>();
         List<Enchantment> forRemoval = new ArrayList<>();
 
         if(meta instanceof EnchantmentStorageMeta) {
-            enchantments = ((EnchantmentStorageMeta) meta).getStoredEnchants();
+            enchantments.putAll(((EnchantmentStorageMeta) meta).getStoredEnchants());
         } else {
-            enchantments = meta.getEnchants();
+            enchantments.putAll(meta.getEnchants());
         }
+
+        List<Enchantment> unsorted = new ArrayList<>();
+        enchantments.forEach((enchantment, integer) -> {
+            unsorted.add(enchantment);
+        });
+
+        HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
+        unsorted.sort(((enchantment1, enchantment2) -> {
+            String name1;
+            String name2;
+
+            if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
+                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment1);
+                name1 = ecoEnchant.getName();
+            } else {
+                name1 = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment1.getKey().getKey().toLowerCase() + ".name"));
+            }
+
+            if(EcoEnchants.getFromEnchantment(enchantment2) != null) {
+                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment2);
+                name2 = ecoEnchant.getName();
+            } else {
+                name2 = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment2.getKey().getKey().toLowerCase() + ".name"));
+            }
+
+            return name1.compareToIgnoreCase(name2);
+        }));
+
+        enchantments.clear();
+        unsorted.forEach(enchantment -> {
+            enchantments.put(enchantment, tempEnchantments.get(enchantment));
+        });
 
         enchantments.forEach((enchantment, level) -> {
             if(EcoEnchants.getFromEnchantment(enchantment) == null) return;
@@ -265,18 +237,18 @@ public final class EnchantDisplay {
                 forRemoval.add(enchantment);
         });
 
-        forRemoval.forEach(enchantments::remove);
-        if(meta instanceof EnchantmentStorageMeta) {
-            forRemoval.forEach(((EnchantmentStorageMeta) meta)::removeStoredEnchant);
-        } else {
-            forRemoval.forEach(meta::removeEnchant);
-        }
+        forRemoval.forEach(enchantment -> {
+            enchantments.remove(enchantment);
+            if(meta instanceof EnchantmentStorageMeta) {
+                ((EnchantmentStorageMeta) meta).removeStoredEnchant(enchantment);
+            } else {
+                meta.removeEnchant(enchantment);
+            }
+        });
 
         final ItemStack finalItem = item;
         enchantments.forEach((enchantment, level) -> {
-            if(CACHE.get(enchantment) == null) return;
-
-            String name = CACHE.get(enchantment).getKey();
+            String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if(!(enchantment.getMaxLevel() == 1 && level == 1)) {
                 if(useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
@@ -286,9 +258,9 @@ public final class EnchantDisplay {
                 }
             }
 
-            lore.add(prefix + name);
+            lore.add(PREFIX + name);
             if(enchantments.size() <= describeThreshold && useDescribe)
-                lore.addAll(CACHE.get(enchantment).getValue());
+                lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
         });
 
         if (useShrink && (enchantments.size() > shrinkThreshold)) {

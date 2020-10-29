@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.util;
+package com.willfp.ecoenchants.util.tuplets;
 
 import java.util.Map;
 
