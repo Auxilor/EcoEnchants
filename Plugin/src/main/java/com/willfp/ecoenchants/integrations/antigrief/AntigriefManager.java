@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.integrations.antigrief;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
@@ -11,8 +12,12 @@ import java.util.Set;
 public class AntigriefManager {
     private static final Set<AntigriefWrapper> antigriefs = new HashSet<>();
 
-    public static void registerAntigrief(AntigriefWrapper antigrief) {
-        antigriefs.add(antigrief);
+    public static boolean registerIfPresent(AntigriefWrapper antigrief) {
+        if(Bukkit.getPluginManager().isPluginEnabled(antigrief.getPluginName())) {
+            antigriefs.add(antigrief);
+            return true;
+        }
+        return false;
     }
 
     /**
