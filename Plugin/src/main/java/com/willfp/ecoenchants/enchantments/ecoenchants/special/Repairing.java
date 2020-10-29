@@ -28,13 +28,13 @@ public final class Repairing extends EcoEnchant implements EcoRunnable {
     }
 
     private final Set<Player> players = new HashSet<>();
-    private int multiplier;
+    private int amount = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
 
     @EventHandler
     public void onItemPickup(EntityPickupItemEvent event) {
         if(!(event.getEntity() instanceof Player))
             return;
-        refresh();
+        refreshPlayer((Player) event.getEntity());
     }
 
     @EventHandler
@@ -51,12 +51,14 @@ public final class Repairing extends EcoEnchant implements EcoRunnable {
     public void onInventoryDrop(EntityDropItemEvent event) {
         if(!(event.getEntity() instanceof Player))
             return;
-        refresh();
+        refreshPlayer((Player) event.getEntity());
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        refresh();
+        if(!(event.getWhoClicked() instanceof Player))
+            return;
+        refreshPlayer((Player) event.getWhoClicked());
     }
 
     private void refresh() {
@@ -65,7 +67,13 @@ public final class Repairing extends EcoEnchant implements EcoRunnable {
             if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, EcoEnchants.REPAIRING)))
                 players.add(player);
         });
-        multiplier = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        amount = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
+    }
+
+    private void refreshPlayer(Player player) {
+        players.remove(player);
+        if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, EcoEnchants.REPAIRING)))
+            players.add(player);
     }
 
     @Override
@@ -80,12 +88,7 @@ public final class Repairing extends EcoEnchant implements EcoRunnable {
                 if(player.getInventory().getItemInOffHand().equals(item)) continue;
                 if(player.getItemOnCursor().equals(item)) continue;
 
-
-                int level = EnchantChecks.getItemLevel(item, EcoEnchants.REPAIRING);
-                int multiplier = EcoEnchants.REPAIRING.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
-                int repairAmount = level * multiplier;
-
-                DurabilityUtils.repairItem(item, repairAmount);
+                DurabilityUtils.repairItem(item, amount);
             }
         }));
     }
