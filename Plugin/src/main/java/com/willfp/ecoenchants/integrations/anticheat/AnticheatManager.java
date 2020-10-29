@@ -11,16 +11,11 @@ import java.util.Set;
 public class AnticheatManager {
     private static final Set<AnticheatWrapper> anticheats = new HashSet<>();
 
-    public static boolean registerIfPresent(AnticheatWrapper anticheat) {
-        if(Bukkit.getPluginManager().isPluginEnabled(anticheat.getPluginName())) {
-            if(anticheat instanceof Listener) {
-                Bukkit.getPluginManager().registerEvents((Listener) anticheat, EcoEnchantsPlugin.getInstance());
-            }
-
-            anticheats.add(anticheat);
-            return true;
+    public static void register(AnticheatWrapper anticheat) {
+        if(anticheat instanceof Listener) {
+            Bukkit.getPluginManager().registerEvents((Listener) anticheat, EcoEnchantsPlugin.getInstance());
         }
-        return false;
+        anticheats.add(anticheat);
     }
 
     public static void exemptPlayer(Player player) {

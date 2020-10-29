@@ -320,71 +320,84 @@ public class Loader {
         Logger.info("");
         Logger.info("Loading Integrations...");
 
-        if(AntigriefManager.registerIfPresent(new AntigriefWorldGuard())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
+            AntigriefManager.register(new AntigriefWorldGuard());
             Logger.info("WorldGuard: §aENABLED");
         } else {
             Logger.info("WorldGuard: §9DISABLED");
         }
 
-        if(AntigriefManager.registerIfPresent(new AntigriefFactionsUUID())) {
-            Logger.info("FactionsUUID: §aENABLED");
-        } else {
-            Logger.info("FactionsUUID: §9DISABLED");
-        }
-
-        if(AntigriefManager.registerIfPresent(new AntigriefGriefPrevention())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("GriefPrevention")) {
+            AntigriefManager.register(new AntigriefGriefPrevention());
             Logger.info("GriefPrevention: §aENABLED");
         } else {
             Logger.info("GriefPrevention: §9DISABLED");
         }
 
-        if(AntigriefManager.registerIfPresent(new AntigriefKingdoms())) {
-            Logger.info("Kingdoms: §aENABLED");
+        if(Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")) {
+            AntigriefManager.register(new AntigriefFactionsUUID());
+            Logger.info("FactionsUUID: §aENABLED");
         } else {
-            Logger.info("Kingdoms: §9DISABLED");
+            Logger.info("FactionsUUID: §9DISABLED");
         }
 
-        if(AntigriefManager.registerIfPresent(new AntigriefLands())) {
-            Logger.info("Lands: §aENABLED");
-        } else {
-            Logger.info("Lands: §9DISABLED");
-        }
-
-        if(AntigriefManager.registerIfPresent(new AntigriefTowny())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("Towny")) {
+            AntigriefManager.register(new AntigriefTowny());
             Logger.info("Towny: §aENABLED");
         } else {
             Logger.info("Towny: §9DISABLED");
         }
 
-        if(EssentialsManager.registerIfPresent(new IntegrationEssentials())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("Lands")) {
+            AntigriefManager.register(new AntigriefLands());
+            Logger.info("Lands: §aENABLED");
+        } else {
+            Logger.info("Lands: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Kingdoms")) {
+            AntigriefManager.register(new AntigriefKingdoms());
+            Logger.info("Kingdoms: §aENABLED");
+        } else {
+            Logger.info("Kingdoms: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
+            EssentialsManager.register(new IntegrationEssentials());
             Logger.info("Essentials: §aENABLED");
+            EssentialsManager.registerEnchantments();
         } else {
             Logger.info("Essentials: §9DISABLED");
         }
 
-        if(AnticheatManager.registerIfPresent(new AnticheatAAC())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
+            AnticheatManager.register(new AnticheatAAC());
             Logger.info("AAC: §aENABLED");
         } else {
             Logger.info("AAC: §9DISABLED");
         }
 
-        if(AnticheatManager.registerIfPresent(new AnticheatMatrix())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("Matrix")) {
+            AnticheatManager.register(new AnticheatMatrix());
             Logger.info("Matrix: §aENABLED");
         } else {
             Logger.info("Matrix: §9DISABLED");
         }
 
-        if(AnticheatManager.registerIfPresent(new AnticheatNCP())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("NoCheatPlus")) {
+            AnticheatManager.register(new AnticheatNCP());
             Logger.info("NCP: §aENABLED");
         } else {
             Logger.info("NCP: §9DISABLED");
         }
 
-        if(AnticheatManager.registerIfPresent(new AnticheatSpartan())) {
+        if(Bukkit.getPluginManager().isPluginEnabled("Spartan")) {
+            AnticheatManager.register(new AnticheatSpartan());
             Logger.info("Spartan: §aENABLED");
         } else {
             Logger.info("Spartan: §9DISABLED");
         }
+
 
         /*
         Check for paper

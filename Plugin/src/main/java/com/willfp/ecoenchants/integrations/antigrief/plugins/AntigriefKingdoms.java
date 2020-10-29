@@ -14,10 +14,11 @@ import org.kingdoms.managers.PvPManager;
 import org.kingdoms.managers.land.LandManager;
 
 public final class AntigriefKingdoms implements AntigriefWrapper {
+    private final LandManager landManager = new LandManager();
+
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         BlockBreakEvent event = new BlockBreakEvent(block, player);
-        LandManager landManager = new LandManager();
         landManager.onBreak(event);
         return !event.isCancelled();
     }
@@ -36,7 +37,6 @@ public final class AntigriefKingdoms implements AntigriefWrapper {
     public boolean canPlaceBlock(Player player, Block block) {
         Block placedOn = block.getRelative(0, -1, 0);
         BlockPlaceEvent event = new BlockPlaceEvent(block, block.getState(), placedOn, player.getInventory().getItemInMainHand(), player, true, EquipmentSlot.HAND);
-        LandManager landManager = new LandManager();
         landManager.onPlace(event);
         return !event.isCancelled();
     }
