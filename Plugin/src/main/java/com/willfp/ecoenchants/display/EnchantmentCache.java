@@ -13,10 +13,6 @@ import java.util.*;
 public class EnchantmentCache {
     private static final Set<CacheEntry> CACHE = new HashSet<>();
 
-    static {
-        update();
-    }
-
     public static CacheEntry getEntry(Enchantment enchantment) {
         Optional<CacheEntry> matching = CACHE.stream().filter(enchant -> enchant.getEnchantment().getKey().equals(enchantment.getKey())).findFirst();
         return matching.orElse(new CacheEntry(enchantment, enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList("No Description Found")));
@@ -82,15 +78,28 @@ public class EnchantmentCache {
 
     public static class CacheEntry {
         private final Enchantment enchantment;
-        private String name;
-        private String rawName;
-        private List<String> description;
+        private final String name;
+        private final String rawName;
+        private final List<String> description;
+        private final String stringDescription;
 
         public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description) {
             this.enchantment = enchantment;
             this.name = name;
             this.rawName = rawName;
             this.description = description;
+
+
+            StringBuilder descriptionBuilder = new StringBuilder();
+
+            description.forEach(s -> {
+                descriptionBuilder.append(s);
+                descriptionBuilder.append(" ");
+            });
+
+            String stringDescription = descriptionBuilder.toString();
+            stringDescription = stringDescription.replaceAll("§w", "");
+            this.stringDescription = stringDescription.replaceAll(EnchantDisplay.descriptionColor, "");
         }
 
         public Enchantment getEnchantment() {
@@ -110,30 +119,7 @@ public class EnchantmentCache {
         }
 
         public String getStringDescription() {
-            StringBuilder descriptionBuilder = new StringBuilder();
-
-            EnchantmentCache.getEntry(enchantment).getDescription().forEach(s -> {
-                descriptionBuilder.append(s);
-                descriptionBuilder.append(" ");
-            });
-
-            String description = descriptionBuilder.toString();
-            description = description.replaceAll("§w", "");
-            description = description.replaceAll(EnchantDisplay.descriptionColor, "");
-
-            return description;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setRawName(String rawName) {
-            this.rawName = rawName;
-        }
-
-        public void setDescription(List<String> description) {
-            this.description = description;
+            return stringDescription;
         }
     }
 }

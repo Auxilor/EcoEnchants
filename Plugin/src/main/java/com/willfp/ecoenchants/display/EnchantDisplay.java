@@ -88,6 +88,8 @@ public final class EnchantDisplay {
         shrinkThreshold = ConfigManager.getConfig().getInt("lore.shrink.after-lines");
         useShrink = ConfigManager.getConfig().getBool("lore.shrink.enabled");
         shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
+
+        EnchantmentCache.update();
     }
 
     /**
