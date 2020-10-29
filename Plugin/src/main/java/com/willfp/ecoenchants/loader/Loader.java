@@ -338,10 +338,10 @@ public class Loader {
             Logger.info("GriefPrevention: §9DISABLED");
         }
 
-        if(AntigriefManager.registerIfPresent(new AntigriefKingdomsX())) {
-            Logger.info("KingdomsX: §aENABLED");
+        if(AntigriefManager.registerIfPresent(new AntigriefKingdoms())) {
+            Logger.info("Kingdoms: §aENABLED");
         } else {
-            Logger.info("KingdomsX: §9DISABLED");
+            Logger.info("Kingdoms: §9DISABLED");
         }
 
         if(AntigriefManager.registerIfPresent(new AntigriefLands())) {

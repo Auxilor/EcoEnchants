@@ -14,7 +14,7 @@ import org.kingdoms.constants.player.KingdomPlayer;
 import org.kingdoms.managers.PvPManager;
 import org.kingdoms.managers.land.LandManager;
 
-public final class AntigriefKingdomsX implements AntigriefWrapper {
+public final class AntigriefKingdoms implements AntigriefWrapper {
     private final LandManager landManager = new LandManager();
 
     @Override
@@ -58,6 +58,6 @@ public final class AntigriefKingdomsX implements AntigriefWrapper {
 
     @Override
     public String getPluginName() {
-        return "KingdomsX";
+        return "Kingdoms";
     }
 }
