@@ -202,26 +202,7 @@ public final class EnchantDisplay {
         });
 
         HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
-        unsorted.sort(((enchantment1, enchantment2) -> {
-            String name1;
-            String name2;
-
-            if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
-                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment1);
-                name1 = ecoEnchant.getName();
-            } else {
-                name1 = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment1.getKey().getKey().toLowerCase() + ".name"));
-            }
-
-            if(EcoEnchants.getFromEnchantment(enchantment2) != null) {
-                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment2);
-                name2 = ecoEnchant.getName();
-            } else {
-                name2 = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment2.getKey().getKey().toLowerCase() + ".name"));
-            }
-
-            return name1.compareToIgnoreCase(name2);
-        }));
+        unsorted.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
 
         enchantments.clear();
         unsorted.forEach(enchantment -> {
