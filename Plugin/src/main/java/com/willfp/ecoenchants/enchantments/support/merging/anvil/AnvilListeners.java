@@ -30,22 +30,22 @@ public class AnvilListeners implements Listener {
 
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
-        if(newOut.getKey() == null) {
-            newOut.setKey(new ItemStack(Material.AIR, 0));
+        if(newOut.getFirst() == null) {
+            newOut.setFirst(new ItemStack(Material.AIR, 0));
         }
 
         int modCost;
-        if(newOut.getValue() == null) {
+        if(newOut.getSecond() == null) {
             modCost = 0;
         } else {
-            modCost = newOut.getValue();
+            modCost = newOut.getSecond();
         }
 
         Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
             final int cost = modCost + event.getInventory().getRepairCost();
             event.getInventory().setRepairCost(cost);
-            event.setResult(newOut.getKey());
-            event.getInventory().setItem(2, newOut.getKey());
+            event.setResult(newOut.getFirst());
+            event.getInventory().setItem(2, newOut.getFirst());
             player.updateInventory();
         });
     }
