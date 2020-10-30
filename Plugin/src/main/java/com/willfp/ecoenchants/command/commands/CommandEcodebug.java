@@ -65,6 +65,15 @@ public final class CommandEcodebug extends AbstractCommand {
         Logger.info("Uncached Enchantments: " + uncached.toString());
         Logger.info("");
 
+        List<Enchantment> brokenCache = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
+        brokenCache.removeAll(EnchantmentCache.getCache().stream()
+                .filter(cacheEntry -> cacheEntry.getRawName().equalsIgnoreCase("null")
+                        || cacheEntry.getName().equalsIgnoreCase("null")
+                        || cacheEntry.getStringDescription().equalsIgnoreCase("null "))
+                .map(EnchantmentCache.CacheEntry::getEnchantment).collect(Collectors.toList()));
+        Logger.info("Enchantments with broken cache: " + brokenCache.toString());
+        Logger.info("");
+
         Logger.info("Installed Plugins: " + Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toList()).toString());
         Logger.info("");
 
@@ -80,6 +89,7 @@ public final class CommandEcodebug extends AbstractCommand {
         Logger.info("Players Online: " + Bukkit.getServer().getOnlinePlayers().size());
         Logger.info("Bukkit IP: " + Bukkit.getIp());
         Logger.info("Running Version: " + Bukkit.getVersion() + ", Bukkit Version: " + Bukkit.getBukkitVersion() + ", Alt Version: " + Bukkit.getServer().getVersion());
+        Logger.info("Motd: " + Bukkit.getServer().getMotd());
         Logger.info("--------------- END DEBUG ----------------");
     }
 }
