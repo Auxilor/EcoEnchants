@@ -1,49 +1,38 @@
 package com.willfp.ecoenchants.util.tuplets;
 
-import java.util.Map;
-
 /**
  * Spigot doesn't include javafx
- *
- * @param <K> Key
- * @param <V> Value
  */
-public class Pair<K, V> implements Map.Entry<K,V> {
-    private K key;
-    private V value;
+public class Pair<A, B> {
+    private A first;
+    private B second;
 
-    public Pair(K key, V value) {
-        this.key = key;
-        this.value = value;
+    public Pair(A first, B second) {
+        this.first = first;
+        this.second = second;
     }
 
-    @Override
-    public K getKey() {
-        return key;
+    public A getFirst() {
+        return first;
     }
 
-    @Override
-    public V getValue() {
-        return value;
+    public B getSecond() {
+        return second;
     }
 
-    @Override
-    public V setValue(V value) {
-        return this.value = value;
+    public void setFirst(A first) {
+        this.first = first;
     }
 
-    public K setKey(K key) {
-        return this.key = key;
+    public void setSecond(B second) {
+        this.second = second;
     }
 
     @Override
     public String toString() {
-        String keyString;
-        String valueString;
-
-        if(key == null) keyString = "null"; else keyString = key.toString();
-        if(value == null) valueString = "null"; else valueString = value.toString();
-
-        return "Key: " + keyString + ", Value: " + valueString;
+        return "Pair{" +
+                "first=" + first +
+                ", second=" + second +
+                '}';
     }
 }
