@@ -18,6 +18,10 @@ public class EnchantmentCache {
         return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found")));
     }
 
+    public static Set<CacheEntry> getCache() {
+        return new HashSet<>(CACHE);
+    }
+
     public static void update() {
         CACHE.clear();
         Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
@@ -120,6 +124,17 @@ public class EnchantmentCache {
 
         public String getStringDescription() {
             return stringDescription;
+        }
+
+        @Override
+        public String toString() {
+            return "CacheEntry{" +
+                    "enchantment=" + enchantment +
+                    ", name='" + name + '\'' +
+                    ", rawName='" + rawName + '\'' +
+                    ", description=" + description +
+                    ", stringDescription='" + stringDescription + '\'' +
+                    '}';
         }
     }
 }

@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.command.commands;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.command.AbstractCommand;
+import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.Logger;
@@ -40,6 +41,9 @@ public final class CommandEcodebug extends AbstractCommand {
         Logger.info("Enchantment.values(): " + Arrays.toString(Enchantment.values()));
         Logger.info("");
 
+        Logger.info("Enchantment Cache: " + EnchantmentCache.getCache().toString());
+        Logger.info("");
+
         try {
             Field byNameField = Enchantment.class.getDeclaredField("byName");
             byNameField.setAccessible(true);
@@ -54,6 +58,11 @@ public final class CommandEcodebug extends AbstractCommand {
         List<Enchantment> extern = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
         extern.removeAll(EcoEnchants.getAll().stream().map(EcoEnchant::getEnchantment).collect(Collectors.toList()));
         Logger.info("External/Vanilla Enchantments: " + extern.toString());
+        Logger.info("");
+
+        List<Enchantment> uncached = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
+        uncached.removeAll(EnchantmentCache.getCache().stream().map(EnchantmentCache.CacheEntry::getEnchantment).collect(Collectors.toList()));
+        Logger.info("Uncached Enchantments: " + uncached.toString());
         Logger.info("");
 
         Logger.info("Installed Plugins: " + Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toList()).toString());
