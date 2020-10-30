@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
 import com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot;
 import com.willfp.ecoenchants.display.packets.PacketSetSlot;
@@ -316,6 +317,10 @@ public class Loader {
             Logger.info("");
             Logger.info("----------------------------");
         });
+
+        Logger.info("");
+        Logger.info("Updating cache...");
+        EnchantmentCache.update();
 
         Logger.info("");
         Logger.info("Loading Integrations...");

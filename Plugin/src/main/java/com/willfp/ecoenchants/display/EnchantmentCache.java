@@ -130,11 +130,11 @@ public class EnchantmentCache {
         public String toString() {
             return "CacheEntry{" +
                     "enchantment=" + enchantment +
-                    ", name='" + name + '\'' +
-                    ", rawName='" + rawName + '\'' +
-                    ", description=" + description +
-                    ", stringDescription='" + stringDescription + '\'' +
-                    '}';
+                    "§f, name='" + name + '\'' +
+                    "§f, rawName='" + rawName + '\'' +
+                    "§f, description=" + description +
+                    "§f, stringDescription='" + stringDescription + '\'' +
+                    "§f}";
         }
     }
 }
