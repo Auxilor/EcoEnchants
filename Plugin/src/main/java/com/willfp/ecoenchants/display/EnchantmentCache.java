@@ -14,8 +14,8 @@ public class EnchantmentCache {
     private static final Set<CacheEntry> CACHE = new HashSet<>();
 
     public static CacheEntry getEntry(Enchantment enchantment) {
-        Optional<CacheEntry> matching = CACHE.stream().filter(enchant -> enchant.getEnchantment().getKey().equals(enchantment.getKey())).findFirst();
-        return matching.orElse(new CacheEntry(enchantment, enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList("No Description Found")));
+        Optional<CacheEntry> matching = CACHE.stream().filter(entry -> entry.getEnchantment().getKey().getKey().equals(enchantment.getKey().getKey())).findFirst();
+        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found")));
     }
 
     public static void update() {
