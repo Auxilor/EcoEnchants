@@ -135,6 +135,10 @@ public final class EnchantDisplay {
             }
         } catch(NullPointerException ignored) { }
 
+        if(meta.getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
+            meta.getPersistentDataContainer().remove(KEY_V);
+        }
+
         meta.getPersistentDataContainer().remove(KEY);
         itemLore.removeIf((s) -> s.startsWith(PREFIX));
 
@@ -163,9 +167,9 @@ public final class EnchantDisplay {
         if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()))
             return item;
 
-        if(hideEnchants && item.getItemMeta().getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
-            hideEnchants = false;
-            item.getItemMeta().getPersistentDataContainer().remove(KEY_V);
+        if(item.getItemMeta().getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
+            if(hideEnchants)
+                hideEnchants = false;
         }
 
         item = revertDisplay(item);

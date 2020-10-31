@@ -5,6 +5,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
@@ -35,6 +36,8 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
                 fResult.setAccessible(true);
                 ItemStack result = EnchantDisplay.displayEnchantments(merchantRecipe.getResult());
                 result = EnchantDisplay.addV(result);
+                if(!EnchantmentTarget.ALL.getMaterials().contains(result.getType()))
+                    return;
                 fResult.set(merchantRecipe, result);
 
                 // Get NMS MerchantRecipe from CraftMerchantRecipe
