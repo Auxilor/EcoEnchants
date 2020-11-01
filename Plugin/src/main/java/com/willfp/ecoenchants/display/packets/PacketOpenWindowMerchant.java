@@ -27,6 +27,9 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
 
         recipes = recipes.stream().peek(merchantRecipe -> {
             try {
+                if(!EnchantmentTarget.ALL.getMaterials().contains(merchantRecipe.getResult().getType()))
+                    return;
+
                 // Enables removing final modifier
                 Field modifiersField = Field.class.getDeclaredField("modifiers");
                 modifiersField.setAccessible(true);
@@ -36,8 +39,6 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
                 fResult.setAccessible(true);
                 ItemStack result = EnchantDisplay.displayEnchantments(merchantRecipe.getResult());
                 result = EnchantDisplay.addV(result);
-                if(!EnchantmentTarget.ALL.getMaterials().contains(result.getType()))
-                    return;
                 fResult.set(merchantRecipe, result);
 
                 // Get NMS MerchantRecipe from CraftMerchantRecipe
