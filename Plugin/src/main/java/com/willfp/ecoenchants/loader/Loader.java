@@ -41,6 +41,7 @@ import com.willfp.ecoenchants.listeners.ArrowListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
+import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.UpdateChecker;
@@ -121,6 +122,14 @@ public class Loader {
             Logger.info("Block Break: §aSUCCESS");
         } else {
             Logger.info("Block Break: §cFAILURE");
+            Logger.error("§cAborting...");
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
+        }
+
+        if(RepairCost.init()) {
+            Logger.info("Repair Cost: §aSUCCESS");
+        } else {
+            Logger.info("Repair Cost: §cFAILURE");
             Logger.error("§cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }

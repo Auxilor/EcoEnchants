@@ -8,6 +8,7 @@ commands:
     show-target-group: true # Show name of target group rather than individual items
 
 anvil:
+  rework-cost: false # Use vanilla rework penalty
   allow-unsafe-levels: false # Allow unsafe enchantments like Sharpness 6 by combining 2 Sharp 5.
   allow-combining-unsafe: true # Allow further combining unsafe levels, eg Sharp 6 + Sharp 6 = Sharp 7.
   allow-existing-unsafe-levels: true # Allow combining existing unsafe enchantments like Sharpness 6

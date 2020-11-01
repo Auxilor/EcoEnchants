@@ -114,4 +114,13 @@ public class NumberUtils {
             return maximum - Math.sqrt((1 - rand) * (maximum - minimum) * (maximum - peak));
         }
     }
+
+    /**
+     * Get Log base 2 of a number
+     * @param N The number
+     * @return The result
+     */
+    public static int log2(int N) {
+        return (int)(Math.log(N) / Math.log(2));
+    }
 }
