@@ -48,11 +48,9 @@ public class AnvilListeners implements Listener {
             modCost = newOut.getSecond();
         }
 
-        new EcoBukkitRunnable(player.getLocation().hashCode()) {
+        new EcoBukkitRunnable(player.getTicksLived()) {
             @Override
             public void onRun() {
-                Logger.info("ID: " + this.getEcoID());
-
                 int preCost = event.getInventory().getRepairCost();
                 ItemStack item = newOut.getFirst();
 
