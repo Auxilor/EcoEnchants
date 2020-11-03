@@ -61,7 +61,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         this.type = type;
         this.permissionName = key.replace("_", "");
         ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, plugin, this.type));
-        this.config = ConfigManager.getEnchantmentConfig(permissionName);
+        this.config = ConfigManager.getEnchantmentConfig(this.permissionName);
 
         if(!Prerequisite.areMet(prerequisites))
             return;

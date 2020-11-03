@@ -155,23 +155,6 @@ public class Loader {
         Logger.info("");
 
         /*
-        Load Extensions
-         */
-
-        Logger.info("Loading Extensions...");
-
-        ExtensionManager.loadExtensions();
-        if(ExtensionManager.getLoadedExtensions().isEmpty()) {
-            Logger.info("§cNo extensions found");
-        } else {
-            Logger.info("Extensions Loaded:");
-            ExtensionManager.getLoadedExtensions().forEach((extension, name) -> {
-                Logger.info("- " + name);
-            });
-        }
-        Logger.info("");
-
-        /*
         Create enchantment config files (for first time use)
          */
 
@@ -201,6 +184,23 @@ public class Loader {
             Logger.info(EnchantmentTarget.getAll().size() + " Targets Loaded:");
             EnchantmentTarget.getAll().forEach((target) -> {
                 Logger.info("- " + target.getName() + ": Materials=" + target.getMaterials().toString());
+            });
+        }
+        Logger.info("");
+
+        /*
+        Load Extensions
+         */
+
+        Logger.info("Loading Extensions...");
+
+        ExtensionManager.loadExtensions();
+        if(ExtensionManager.getLoadedExtensions().isEmpty()) {
+            Logger.info("§cNo extensions found");
+        } else {
+            Logger.info("Extensions Loaded:");
+            ExtensionManager.getLoadedExtensions().forEach((extension, name) -> {
+                Logger.info("- " + name);
             });
         }
         Logger.info("");

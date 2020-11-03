@@ -6,13 +6,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -25,7 +19,7 @@ public abstract class EnchantmentYamlConfig {
     protected File configFile;
     private final File directory;
     private final JavaPlugin plugin = EcoEnchantsPlugin.getInstance();
-    private final Class<?> plugin2;
+    private final Class<?> source;
     private final EcoEnchant.EnchantmentType type;
     private final File basedir = new File(this.plugin.getDataFolder(), "enchants/");
 
@@ -38,7 +32,7 @@ public abstract class EnchantmentYamlConfig {
      */
     public EnchantmentYamlConfig(String name, Class<?> plugin, EcoEnchant.EnchantmentType type) {
         this.name = name;
-        this.plugin2 = plugin;
+        this.source = plugin;
         this.type = type;
 
         if(!basedir.exists()) basedir.mkdirs();
@@ -66,7 +60,7 @@ public abstract class EnchantmentYamlConfig {
     private void saveResource(boolean replace) {
         String resourcePath = "/enchants/" + type.name().toLowerCase() + "/" + name + ".yml";
 
-        InputStream in =  plugin2.getResourceAsStream(resourcePath);
+        InputStream in =  source.getResourceAsStream(resourcePath);
 
         File outFile = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath);
         int lastIndex = resourcePath.lastIndexOf('/');
@@ -99,7 +93,7 @@ public abstract class EnchantmentYamlConfig {
             config.load(configFile);
 
             String resourcePath = "/enchants/" + type.name().toLowerCase() + "/" + name + ".yml";
-            InputStream newIn =  plugin2.getResourceAsStream(resourcePath);
+            InputStream newIn =  source.getResourceAsStream(resourcePath);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));
             YamlConfiguration newConfig = new YamlConfiguration();
