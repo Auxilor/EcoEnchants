@@ -15,6 +15,7 @@
         <module>NMS/v1_15_R1</module>
         <module>NMS/v1_16_R1</module>
         <module>NMS/v1_16_R2</module>
+        <module>NMS/v1_16_R3</module>
 		<module>Plugin</module>
     </modules>
 
