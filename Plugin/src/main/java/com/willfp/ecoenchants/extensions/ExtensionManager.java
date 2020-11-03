@@ -70,11 +70,11 @@ public class ExtensionManager {
         String mainClass = extensionYml.getString("main");
         String name = extensionYml.getString("name");
 
-        Class<?> cls = null;
+        Class<?> cls;
         Object object = null;
         try {
-            object = cls.newInstance();
             cls = cl.loadClass(mainClass);
+            object = cls.newInstance();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
         }
