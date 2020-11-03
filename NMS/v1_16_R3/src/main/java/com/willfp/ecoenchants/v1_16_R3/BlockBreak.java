@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.v1_16_R3;
 
 import com.willfp.ecoenchants.nms.API.BlockBreakWrapper;
-import net.minecraft.server.v1_16_R2.BlockPosition;
+import net.minecraft.server.v1_16_R3.BlockPosition;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class BlockBreak implements BlockBreakWrapper {
