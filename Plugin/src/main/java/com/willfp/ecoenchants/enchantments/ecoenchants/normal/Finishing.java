@@ -25,6 +25,6 @@ public final class Finishing extends EcoEnchant {
         if (!(victim.getHealth() <= level * minhealth))
             return;
 
-        event.setDamage(10000); // cba to do this properly
+        event.setDamage(30); // cba to do this properly
     }
 }
