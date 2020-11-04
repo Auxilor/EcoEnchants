@@ -21,4 +21,4 @@ general-config:
     - stone_switcher
 
 config:
-  smelt-cobblestone: true #Smelt cobblestone into stone
+  # No config is available for this enchantment

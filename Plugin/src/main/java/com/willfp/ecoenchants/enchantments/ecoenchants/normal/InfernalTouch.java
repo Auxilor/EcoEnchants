@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.queue.DropQueue;
+import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -18,15 +18,34 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public final class InfernalTouch extends EcoEnchant {
     public InfernalTouch() {
         super(
                 "infernal_touch", EnchantmentType.NORMAL
         );
+    }
+
+    private static final HashMap<Material, Pair<Material, Integer>> recipes = new HashMap<>();
+    private static final Set<Material> allowsFortune = new HashSet<>(Arrays.asList(Material.GOLD_INGOT, Material.IRON_INGOT));
+
+    static {
+        Iterator<Recipe> iterator = Bukkit.recipeIterator();
+        while (iterator.hasNext()) {
+            Recipe recipe = iterator.next();
+            if (!(recipe instanceof FurnaceRecipe)) {
+                continue;
+            }
+            FurnaceRecipe furnaceRecipe = (FurnaceRecipe) recipe;
+            recipes.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), (int) furnaceRecipe.getExperience()));
+        }
+    }
+
+    private static Pair<Material, Integer> getOutput(Material input) {
+        Optional<Pair<Material, Integer>> matching = recipes.entrySet().parallelStream().filter(materialPairEntry -> materialPairEntry.getKey().equals(input)).map(Map.Entry::getValue).findFirst();
+        return matching.orElse(new Pair<>(input, 0));
     }
 
     // START OF LISTENERS
@@ -49,62 +68,30 @@ public final class InfernalTouch extends EcoEnchant {
 
         if (!AntigriefManager.canBreakBlock(player, block)) return;
 
-
         Collection<ItemStack> drops = new ArrayList<>();
         event.getItems().forEach((item -> {
             drops.add(item.getItemStack());
         }));
 
-        List<ItemStack> newDrops = new ArrayList<ItemStack>();
-        int experience = 0;
+        AtomicInteger experience = new AtomicInteger(0);
+        int fortune = EnchantChecks.getMainhandLevel(player, Enchantment.LOOT_BONUS_BLOCKS);
 
-        for (ItemStack drop : drops) {
-            if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "smelt-cobblestone")) {
-                if (drop.getType().equals(Material.COBBLESTONE)) {
-                    newDrops.add(drop);
-                    continue;
-                }
-            }
 
-            Iterator<Recipe> iterator = Bukkit.recipeIterator();
-            boolean couldSmelt = false;
-            Recipe recipe = null;
-            while (iterator.hasNext()) {
-                recipe = iterator.next();
-                if (!(recipe instanceof FurnaceRecipe)) {
-                    continue;
-                }
-                if (((FurnaceRecipe) recipe).getInput().getType() == drop.getType()) {
-                    couldSmelt = true;
-                    break;
-                }
-            }
-            if (couldSmelt) {
-                drop.setType(recipe.getResult().getType());
-                experience += (int) ((FurnaceRecipe) recipe).getExperience();
+        drops.forEach(itemStack -> {
+            itemStack.setType(getOutput(itemStack.getType()).getFirst());
+            experience.addAndGet(getOutput(itemStack.getType()).getSecond());
 
-                if(drop.getType().equals(Material.IRON_INGOT)) {
-                    experience += 1;
-                    if(EnchantChecks.mainhand(player, Enchantment.LOOT_BONUS_BLOCKS)) {
-                        int level = EnchantChecks.getMainhandLevel(player, LOOT_BONUS_BLOCKS);
-                        drop.setAmount((int) Math.ceil(1/((double) level + 2) + ((double) level + 1)/2));
-                    }
-                } else if(drop.getType().equals(Material.GOLD_INGOT)) {
-                    if(EnchantChecks.mainhand(player, Enchantment.LOOT_BONUS_BLOCKS)) {
-                        int level = EnchantChecks.getMainhandLevel(player, LOOT_BONUS_BLOCKS);
-                        drop.setAmount((int) Math.ceil(1/((double) level + 2) + ((double) level + 1)/2));
-                    }
-                }
+            if(fortune > 0 && allowsFortune.contains(itemStack.getType())) {
+                itemStack.setAmount((int) Math.ceil(1/((double) fortune + 2) + ((double) fortune + 1)/2));
             }
-            newDrops.add(drop);
-        }
+        });
 
         event.getItems().clear();
 
         new DropQueue(player)
                 .setLocation(block.getLocation())
-                .addItems(newDrops)
-                .addXP(experience)
+                .addItems(drops)
+                .addXP(experience.get())
                 .push();
     }
 }
