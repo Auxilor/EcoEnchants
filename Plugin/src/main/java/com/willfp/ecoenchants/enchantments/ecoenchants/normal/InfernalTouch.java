@@ -39,7 +39,7 @@ public final class InfernalTouch extends EcoEnchant {
                 continue;
             }
             FurnaceRecipe furnaceRecipe = (FurnaceRecipe) recipe;
-            recipes.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), (int) furnaceRecipe.getExperience()));
+            recipes.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), (int) Math.ceil(furnaceRecipe.getExperience())));
         }
     }
 
@@ -83,6 +83,7 @@ public final class InfernalTouch extends EcoEnchant {
 
             if(fortune > 0 && allowsFortune.contains(itemStack.getType())) {
                 itemStack.setAmount((int) Math.ceil(1/((double) fortune + 2) + ((double) fortune + 1)/2));
+                experience.addAndGet(1);
             }
         });
 
