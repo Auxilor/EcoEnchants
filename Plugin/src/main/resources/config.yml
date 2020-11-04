@@ -68,6 +68,12 @@ loot:
     enabled: true # Enable reduction
     factor: 7.5 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
 
+types:
+  special:
+    allow-multiple: false # Allow multiple special enchantments on a single item
+  artifact:
+    allow-multiple: false # Allow multiple artifacts on a single item (can cause lag!)
+
 #
 # Enchantment-specific config has now been moved to their own files.
 # Check the /enchants directory.

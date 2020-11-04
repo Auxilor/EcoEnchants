@@ -339,9 +339,28 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * The types of {@link EcoEnchant}
      */
     public enum EnchantmentType {
-        NORMAL,
-        CURSE,
-        SPECIAL,
-        ARTIFACT
+        NORMAL(false),
+        CURSE(false),
+        SPECIAL(true),
+        ARTIFACT(true);
+
+        static {
+            update();
+        }
+
+        boolean singular;
+
+        EnchantmentType(boolean singular) {
+            this.singular = singular;
+        }
+
+        public boolean isSingular() {
+            return singular;
+        }
+
+        public static void update() {
+            SPECIAL.singular = !ConfigManager.getConfig().getBool("types.special.allow-multiple");
+            ARTIFACT.singular = !ConfigManager.getConfig().getBool("types.artifact.allow-multiple");
+        }
     }
 }

@@ -463,6 +463,7 @@ public class Loader {
         EcoEnchants.update();
         EnchantDisplay.update();
         TabCompleterEnchantinfo.reload();
+        EcoEnchant.EnchantmentType.update();
 
         EcoEnchants.getAll().forEach((ecoEnchant -> {
             HandlerList.unregisterAll(ecoEnchant);

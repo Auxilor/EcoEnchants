@@ -18,12 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnchantingListeners implements Listener {
@@ -102,8 +97,8 @@ public class EnchantingListeners implements Listener {
 
                 if(EcoEnchants.getFromEnchantment(enchant) != null) {
                     EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) anyConflicts.set(true);
-                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) anyConflicts.set(true);
+                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchant.EnchantmentType.SPECIAL.isSingular()) anyConflicts.set(true);
+                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchant.EnchantmentType.ARTIFACT.isSingular()) anyConflicts.set(true);
                 }
             });
             if (anyConflicts.get()) continue;

@@ -14,11 +14,7 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class VillagerListeners implements Listener {
@@ -134,8 +130,8 @@ public class VillagerListeners implements Listener {
                 if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
 
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) anyConflicts.set(true);
-                if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) anyConflicts.set(true);
+                if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchant.EnchantmentType.SPECIAL.isSingular()) anyConflicts.set(true);
+                if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchant.EnchantmentType.ARTIFACT.isSingular()) anyConflicts.set(true);
             });
             if (anyConflicts.get()) continue;
 
