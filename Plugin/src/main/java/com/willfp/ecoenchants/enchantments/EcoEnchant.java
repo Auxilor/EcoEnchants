@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
+import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import net.md_5.bungee.api.ChatColor;
@@ -82,8 +83,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         canGetFromVillager = config.getBool(EcoEnchants.OBTAINING_LOCATION + "villager");
         canGetFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
         maxLvl = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
-        name = ChatColor.translateAlternateColorCodes('&', config.getString("name"));
-        description = ChatColor.translateAlternateColorCodes('&', config.getString("description"));
+        name = StringUtils.translate(config.getString("name"));
+        description = StringUtils.translate(config.getString("description"));
         target.clear();
         targetMaterials.clear();
         target.addAll(config.getTargets());

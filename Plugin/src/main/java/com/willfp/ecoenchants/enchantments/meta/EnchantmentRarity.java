@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import org.bukkit.ChatColor;
 
@@ -128,7 +129,7 @@ public class EnchantmentRarity implements Registerable {
             double lootProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".loot-probability");
             String customColor = null;
             if(ConfigManager.getRarity().getBool("rarities." + rarity + ".custom-color.enabled")) {
-                customColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getRarity().getString("rarities." + rarity + ".custom-color.color"));
+                customColor = StringUtils.translate(ConfigManager.getRarity().getString("rarities." + rarity + ".custom-color.color"));
             }
 
             new EnchantmentRarity(name, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();

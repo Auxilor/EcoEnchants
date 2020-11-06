@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.util.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -77,7 +78,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
         if(allConflicts.length() >= 2) {
             allConflicts = allConflicts.substring(0, allConflicts.length() -2);
         } else {
-            allConflicts = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("no-conflicts"));
+            allConflicts = StringUtils.translate(ConfigManager.getLang().getString("no-conflicts"));
         }
 
         Set<Material> targets = enchantment.getTarget();
@@ -110,7 +111,7 @@ public final class CommandEnchantinfo extends AbstractCommand {
         if(allTargets.length() >= 2) {
             allTargets = allTargets.substring(0, allTargets.length() - 2);
         } else {
-            allTargets = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("no-targets"));
+            allTargets = StringUtils.translate(ConfigManager.getLang().getString("no-targets"));
         }
 
         String maxLevel = String.valueOf(enchantment.getMaxLevel());

@@ -54,7 +54,7 @@ public final class PacketOpenWindowMerchant extends AbstractPacketAdapter {
                 modifiersField.setInt(fSelling, fSelling.getModifiers() & ~Modifier.FINAL);
 
                 // Reflectively access CraftItemStack.class for respective version
-                Class<?> craftItemStack = Class.forName("org.bukkit.craftbukkit." + EcoEnchantsPlugin.nmsVersion + ".inventory.CraftItemStack");
+                Class<?> craftItemStack = Class.forName("org.bukkit.craftbukkit." + EcoEnchantsPlugin.NMS_VERSION + ".inventory.CraftItemStack");
 
                 // Bukkit Result ItemStack from NMS Result ItemStack
                 ItemStack nmsSelling = (ItemStack) craftItemStack.getMethod("asBukkitCopy", selling.getClass()).invoke(null, selling);

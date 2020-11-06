@@ -235,7 +235,7 @@ public class EcoEnchants {
     public static final EcoEnchant WARPED_ARTIFACT = new WarpedArtifact();
     public static final EcoEnchant TEAR_ARTIFACT = new TearArtifact();
     public static final EcoEnchant BACKSTAB = new Backstab();
-    public static final EcoEnchant DWELLER = new Dweller();
+    public static final EcoEnchant EXTRACTION = new Extraction();
 
     /**
      * Get all registered {@link EcoEnchant}s
