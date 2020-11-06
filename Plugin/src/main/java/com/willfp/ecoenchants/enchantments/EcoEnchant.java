@@ -74,13 +74,15 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         if(!Prerequisite.areMet(prerequisites))
             return;
 
-        Permission permission =  new Permission(
-                "ecoenchants.fromtable." + permissionName,
-                "Allows getting " + permissionName + " from an Enchanting Table",
-                PermissionDefault.TRUE
-        );
-        permission.addParent(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*"), true);
-        Bukkit.getPluginManager().addPermission(permission);
+        if(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
+            Permission permission = new Permission(
+                    "ecoenchants.fromtable." + permissionName,
+                    "Allows getting " + permissionName + " from an Enchanting Table",
+                    PermissionDefault.TRUE
+            );
+            permission.addParent(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*"), true);
+            Bukkit.getPluginManager().addPermission(permission);
+        }
 
         this.update();
         this.add();
