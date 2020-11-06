@@ -246,6 +246,7 @@ public class EcoEnchants {
     public static final EcoEnchant EXTRACTION = new Extraction();
     public static final EcoEnchant DWELLER = new Dweller();
     public static final EcoEnchant STALWART = new Stalwart();
+    public static final EcoEnchant PLASMIC = new Plasmic();
 
     /**
      * Get all registered {@link EcoEnchant}s
