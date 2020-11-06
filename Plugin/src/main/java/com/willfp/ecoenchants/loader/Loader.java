@@ -44,6 +44,7 @@ import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.Logger;
+import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.UpdateChecker;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
@@ -213,9 +214,9 @@ public class Loader {
             Logger.info(EcoEnchants.getAll().size() + " Enchantments Loaded:");
             EcoEnchants.getAll().forEach((ecoEnchant -> {
                 if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
-                    Logger.info(ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("special-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
+                    Logger.info(StringUtils.translate(ConfigManager.getLang().getString("special-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
                 } else if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) {
-                    Logger.info(ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
+                    Logger.info(StringUtils.translate(ConfigManager.getLang().getString("artifact-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
                 } else {
                     Logger.info("- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
                 }

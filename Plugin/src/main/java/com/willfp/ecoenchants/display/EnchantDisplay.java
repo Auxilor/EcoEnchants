@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
+import com.willfp.ecoenchants.util.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -73,11 +74,11 @@ public final class EnchantDisplay {
      * Update config values
      */
     public static void update() {
-        descriptionColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("description-color"));
-        curseColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("curse-color"));
-        specialColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("special-color"));
-        artifactColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("artifact-color"));
-        normalColor = ChatColor.translateAlternateColorCodes('&', ConfigManager.getLang().getString("not-curse-color"));
+        descriptionColor = StringUtils.translate(ConfigManager.getLang().getString("description-color"));
+        curseColor = StringUtils.translate(ConfigManager.getLang().getString("curse-color"));
+        specialColor = StringUtils.translate(ConfigManager.getLang().getString("special-color"));
+        artifactColor = StringUtils.translate(ConfigManager.getLang().getString("artifact-color"));
+        normalColor = StringUtils.translate(ConfigManager.getLang().getString("not-curse-color"));
 
         useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
         numbersThreshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");
