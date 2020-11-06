@@ -9,12 +9,15 @@ import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -70,6 +73,14 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         if(!Prerequisite.areMet(prerequisites))
             return;
+
+        Permission permission =  new Permission(
+                "ecoenchants.fromtable." + permissionName,
+                "Allows getting " + permissionName + " from an Enchanting Table",
+                PermissionDefault.TRUE
+        );
+        permission.addParent(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*"), true);
+        Bukkit.getPluginManager().addPermission(permission);
 
         this.update();
         this.add();
