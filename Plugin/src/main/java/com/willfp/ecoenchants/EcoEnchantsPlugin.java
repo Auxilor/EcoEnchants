@@ -24,7 +24,7 @@ public class EcoEnchantsPlugin extends JavaPlugin {
     /**
      * NMS version
      */
-    public static final String nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+    public static final String NMS_VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 
     /**
      * ProtocolLib

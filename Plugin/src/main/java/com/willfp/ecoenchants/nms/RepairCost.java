@@ -1,10 +1,7 @@
 package com.willfp.ecoenchants.nms;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.nms.API.BlockBreakWrapper;
 import com.willfp.ecoenchants.nms.API.RepairCostWrapper;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class RepairCost {
@@ -12,7 +9,7 @@ public class RepairCost {
 
     public static boolean init() {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.nmsVersion + ".RepairCost");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".RepairCost");
             if (RepairCostWrapper.class.isAssignableFrom(class2)) {
                 repairCostWrapper = (RepairCostWrapper) class2.getConstructor().newInstance();
             }

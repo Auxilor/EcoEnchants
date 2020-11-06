@@ -10,7 +10,7 @@ public class BlockBreak {
 
     public static boolean init() {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.nmsVersion + ".BlockBreak");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".BlockBreak");
             if (BlockBreakWrapper.class.isAssignableFrom(class2)) {
                 blockBreakWrapper = (BlockBreakWrapper) class2.getConstructor().newInstance();
             }
