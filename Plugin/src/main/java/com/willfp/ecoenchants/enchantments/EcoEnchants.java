@@ -1,7 +1,15 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.*;
-import com.willfp.ecoenchants.enchantments.ecoenchants.curse.*;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.BreaklessnessCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.CallingCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.DecayCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.FragilityCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.HarmlessnessCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.HungerCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.InaccuracyCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.MisfortuneCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.PermanenceCurse;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.*;
 import org.bukkit.NamespacedKey;

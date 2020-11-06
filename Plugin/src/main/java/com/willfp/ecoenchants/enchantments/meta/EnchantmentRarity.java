@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchantments.meta;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
-import org.bukkit.ChatColor;
 
 import java.util.HashSet;
 import java.util.Optional;

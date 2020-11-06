@@ -21,14 +21,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class Repairing extends EcoEnchant implements EcoRunnable {
+    private final Set<Player> players = new HashSet<>();
+    private int amount = 10000;
+
     public Repairing() {
         super(
                 "repairing", EnchantmentType.SPECIAL
         );
     }
-
-    private final Set<Player> players = new HashSet<>();
-    private int amount = 10000;
 
     @EventHandler
     public void onItemPickup(EntityPickupItemEvent event) {

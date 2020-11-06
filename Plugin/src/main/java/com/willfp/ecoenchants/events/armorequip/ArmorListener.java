@@ -26,9 +26,6 @@ import org.bukkit.inventory.ItemStack;
  * @since Jul 30, 2015
  */
 public class ArmorListener implements Listener {
-
-    public ArmorListener() {
-    }
     //Event Priority is highest because other plugins might cancel the events before we check.
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

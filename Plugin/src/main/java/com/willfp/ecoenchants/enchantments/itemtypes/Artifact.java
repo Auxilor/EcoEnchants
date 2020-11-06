@@ -76,9 +76,6 @@ public abstract class Artifact extends EcoEnchant {
 
         if (!EnchantChecks.chestplate(player, this)) return;
 
-        Location location = player.getLocation();
-        Vector direction = player.getLocation().clone().getDirection();
-
         Vector point1 = player.getLocation().getDirection().clone();
         point1.rotateAroundY(Math.toRadians(90));
         point1.multiply(1.2);

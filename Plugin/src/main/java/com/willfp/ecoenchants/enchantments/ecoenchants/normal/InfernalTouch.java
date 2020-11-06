@@ -18,18 +18,26 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class InfernalTouch extends EcoEnchant {
+    private static final HashMap<Material, Pair<Material, Integer>> recipes = new HashMap<>();
+    private static final Set<Material> allowsFortune = new HashSet<>(Arrays.asList(Material.GOLD_INGOT, Material.IRON_INGOT));
+
     public InfernalTouch() {
         super(
                 "infernal_touch", EnchantmentType.NORMAL
         );
     }
-
-    private static final HashMap<Material, Pair<Material, Integer>> recipes = new HashMap<>();
-    private static final Set<Material> allowsFortune = new HashSet<>(Arrays.asList(Material.GOLD_INGOT, Material.IRON_INGOT));
 
     static {
         Iterator<Recipe> iterator = Bukkit.recipeIterator();

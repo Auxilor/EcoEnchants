@@ -22,7 +22,7 @@ public final class Finishing extends EcoEnchant {
             return;
 
         double minhealth = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "minimum-health-per-level");
-        if (!(victim.getHealth() <= level * minhealth))
+        if (victim.getHealth() > level * minhealth)
             return;
 
         event.setDamage(30); // cba to do this properly

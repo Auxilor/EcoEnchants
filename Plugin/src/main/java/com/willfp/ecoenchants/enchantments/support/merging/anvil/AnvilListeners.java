@@ -2,13 +2,10 @@ package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.util.EcoBukkitRunnable;
-import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.tuplets.Pair;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +13,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class AnvilListeners implements Listener {
 

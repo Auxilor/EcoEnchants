@@ -8,7 +8,6 @@ import com.willfp.ecoenchants.enchantments.util.Watcher;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
-import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -18,7 +17,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("unchecked")
