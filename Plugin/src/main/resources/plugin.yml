@@ -258,6 +258,7 @@ permissions:
       ecoenchants.fromtable.ashartifact: true
       ecoenchants.fromtable.tearartifact: true
       ecoenchants.fromtable.backstab: true
+      ecoenchants.fromtable.extracting: true
 
   ecoenchants.updateannounce:
     description: Informs admins of a new update
@@ -895,4 +896,7 @@ permissions:
     default: true
   ecoenchants.fromtable.backstab:
     description: Allows getting backstab from an enchanting table
+    default: true
+  ecoenchants.fromtable.extracting:
+    description: Allows getting extracting from an enchanting table
     default: true
