@@ -31,7 +31,7 @@ public abstract class Spell extends EcoEnchant {
 
     @EventHandler
     public void onRightClickEventHandler(PlayerInteractEvent event) {
-        if(!event.getAction().equals(Action.RIGHT_CLICK_AIR))
+        if(!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
             return;
 
         Player player = event.getPlayer();
@@ -59,6 +59,8 @@ public abstract class Spell extends EcoEnchant {
             return;
         }
 
+        String message = ConfigManager.getLang().getMessage("used-spell").replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
+        player.sendMessage(message);
         runnable.run();
     }
 
