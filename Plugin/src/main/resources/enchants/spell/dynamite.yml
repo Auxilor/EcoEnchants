@@ -20,6 +20,7 @@ general-config:
   maximum-level: 2
 
 config:
+  activation-sound: ENTITY_DRAGON_FIREBALL_EXPLODE
   cooldown: 30 # In seconds
   enable-sound: true # Play explosion sound
   hardness-check: true # Only break blocks with hardness less than or equal to first block

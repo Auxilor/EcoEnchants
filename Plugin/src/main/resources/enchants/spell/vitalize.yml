@@ -23,4 +23,5 @@ general-config:
   maximum-level: 1
 
 config:
+  activation-sound: ENTITY_PLAYER_LEVELUP
   cooldown: 60 # In seconds

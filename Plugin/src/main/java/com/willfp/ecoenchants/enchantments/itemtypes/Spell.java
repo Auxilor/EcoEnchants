@@ -9,6 +9,8 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -32,6 +34,10 @@ public abstract class Spell extends EcoEnchant {
 
     public int getCooldownTime() {
         return this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown");
+    }
+
+    public final Sound getActivationSound() {
+        return Sound.valueOf(this.getConfig().getString(EcoEnchants.CONFIG_LOCATION + "activation-sound").toUpperCase());
     }
 
     @EventHandler
@@ -71,6 +77,7 @@ public abstract class Spell extends EcoEnchant {
 
         String message = ConfigManager.getLang().getMessage("used-spell").replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
         player.sendMessage(message);
+        player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
         runnable.run();
     }
 
