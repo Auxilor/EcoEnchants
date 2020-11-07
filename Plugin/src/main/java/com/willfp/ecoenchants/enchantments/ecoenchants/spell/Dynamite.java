@@ -47,11 +47,7 @@ public class Dynamite extends Spell {
             for(int y = -size; y <= size; y++) {
                 for (int z = -size; z <= size; z++) {
                     if(x == 0 && y == 0 && z == 0) {
-                        if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "enable-sound")) {
-                            block.getWorld().createExplosion(block.getLocation().clone().add(0.5, 0.5, 0.5), 0, false);
-                        } else {
-                            block.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, block.getLocation().clone().add(0.5, 0.5, 0.5), 1);
-                        }
+                        block.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, block.getLocation().clone().add(0.5, 0.5, 0.5), 1);
                     }
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
 
