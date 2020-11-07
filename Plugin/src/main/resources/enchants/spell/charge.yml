@@ -1,0 +1,24 @@
+#
+# Charge EcoEnchant
+#
+
+name: "Charge"
+description: Launches you in the direction you're looking.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - sword
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 6
+
+config:
+  activation-sound: ENTITY_FIREWORK_ROCKET_LAUNCH
+  cooldown: 20 # In seconds

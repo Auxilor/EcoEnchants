@@ -12,6 +12,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.curse.MisfortuneCurse;
 import com.willfp.ecoenchants.enchantments.ecoenchants.curse.PermanenceCurse;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.*;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Charge;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Dynamite;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
@@ -255,6 +256,7 @@ public class EcoEnchants {
     public static final EcoEnchant QUAKE = new Quake();
     public static final EcoEnchant VITALIZE = new Vitalize();
     public static final EcoEnchant DYNAMITE = new Dynamite();
+    public static final EcoEnchant CHARGE = new Charge();
 
     /**
      * Get all registered {@link EcoEnchant}s
