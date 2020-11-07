@@ -23,4 +23,4 @@ general-config:
 config:
   cooldown: 20 # In seconds
   velocity: 3
-  power: 5
+  damage-per-level: 8
