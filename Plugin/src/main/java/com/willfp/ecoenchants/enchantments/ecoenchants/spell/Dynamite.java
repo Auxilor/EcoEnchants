@@ -24,6 +24,8 @@ public class Dynamite extends Spell {
     public void onRightClick(Player player, int level, PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
+        if(block == null) return;
+
         if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
             return;
         }
@@ -37,7 +39,7 @@ public class Dynamite extends Spell {
         final int size = baseDiff + (bonusPerLevel * (level - 1));
 
 
-        for(int x = -size; size <= 1; x++) {
+        for(int x = -size; x <= size; x++) {
             for(int y = -size; y <= size; y++) {
                 for (int z = -size; z <= size; z++) {
                     if(x == 0 && y == 0 && z == 0) {
@@ -46,7 +48,6 @@ public class Dynamite extends Spell {
                         } else {
                             block.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, block.getLocation().clone().add(0.5, 0.5, 0.5), 1);
                         }
-                        continue;
                     }
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
 

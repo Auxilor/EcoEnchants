@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.itemtypes;
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -7,12 +8,15 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,6 +24,7 @@ import java.util.UUID;
  */
 public abstract class Spell extends EcoEnchant {
     private final HashMap<UUID, SpellRunnable> cooldownTracker = new HashMap<>();
+    private final Set<UUID> runningSpell = new HashSet<>();
 
     protected Spell(String key, Prerequisite... prerequisites) {
         super(key, EnchantmentType.SPELL, prerequisites);
@@ -35,6 +40,11 @@ public abstract class Spell extends EcoEnchant {
             return;
 
         Player player = event.getPlayer();
+
+        if(runningSpell.contains(player.getUniqueId())) return;
+
+        runningSpell.add(player.getUniqueId());
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> runningSpell.remove(player.getUniqueId()), 1);
 
         if(!EnchantChecks.mainhand(player, this))
             return;
