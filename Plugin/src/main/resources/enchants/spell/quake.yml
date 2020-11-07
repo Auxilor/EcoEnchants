@@ -1,0 +1,25 @@
+#
+# Quake EcoEnchant
+#
+
+name: "Quake"
+description: Damages all nearby entities
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - sword
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  cooldown: 20 # In seconds
+  damage-per-level: 3
+  radius-per-level: 2

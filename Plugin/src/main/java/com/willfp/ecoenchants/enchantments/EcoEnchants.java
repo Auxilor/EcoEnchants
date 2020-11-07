@@ -13,6 +13,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.curse.PermanenceCurse;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -249,6 +250,7 @@ public class EcoEnchants {
     public static final EcoEnchant STALWART = new Stalwart();
     public static final EcoEnchant PLASMIC = new Plasmic();
     public static final EcoEnchant MISSILE = new Missile();
+    public static final EcoEnchant QUAKE = new Quake();
 
     /**
      * Get all registered {@link EcoEnchant}s
