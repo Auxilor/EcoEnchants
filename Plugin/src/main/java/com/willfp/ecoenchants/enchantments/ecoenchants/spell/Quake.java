@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.Collection;
 
@@ -15,7 +16,7 @@ public class Quake extends Spell {
     }
 
     @Override
-    public void onRightClick(Player player, int level) {
+    public void onRightClick(Player player, int level, PlayerInteractEvent event) {
         int radius = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "radius-per-level") * level;
         int damage = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level;
 

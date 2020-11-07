@@ -8,6 +8,7 @@ import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class Missile extends Spell {
@@ -16,7 +17,7 @@ public class Missile extends Spell {
     }
 
     @Override
-    public void onRightClick(Player player, int level) {
+    public void onRightClick(Player player, int level, PlayerInteractEvent event) {
         WitherSkull skull = player.launchProjectile(WitherSkull.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
         skull.setCharged(true);
         skull.setIsIncendiary(false);

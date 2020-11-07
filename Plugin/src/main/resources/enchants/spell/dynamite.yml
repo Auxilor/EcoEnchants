@@ -1,0 +1,29 @@
+#
+# Dynamite EcoEnchant
+#
+
+name: "Dynamite"
+description: Mines blocks in a large area.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - pickaxe
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 2
+
+config:
+  cooldown: 30 # In seconds
+  enable-sound: true # Play explosion sound
+  hardness-check: true # Only break blocks with hardness less than or equal to first block
+  blacklisted-blocks:
+    - bedrock
+  base-bonus: 2 # Base extra blocks on all sides to break (1 = 3x3x3, 2 = 5x5x5, 3 = 7x7x7)
+  per-level-bonus: 1 # Extra blocks on all sides per level

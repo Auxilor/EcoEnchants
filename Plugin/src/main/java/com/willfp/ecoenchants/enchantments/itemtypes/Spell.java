@@ -46,7 +46,7 @@ public abstract class Spell extends EcoEnchant {
 
         SpellRunnable runnable = cooldownTracker.get(player.getUniqueId());
         runnable.setTask(() -> {
-            this.onRightClick(player, level);
+            this.onRightClick(player, level, event);
         });
 
         long msLeft = runnable.getEndTime() - System.currentTimeMillis();
@@ -64,5 +64,5 @@ public abstract class Spell extends EcoEnchant {
         runnable.run();
     }
 
-    public abstract void onRightClick(Player player, int level);
+    public abstract void onRightClick(Player player, int level, PlayerInteractEvent event);
 }
