@@ -14,8 +14,9 @@ public class Charge extends Spell {
     @Override
     public void onRightClick(Player player, int level, PlayerInteractEvent event) {
         Vector velocity = player.getEyeLocation().getDirection().clone();
+        velocity.normalize();
         velocity.multiply(level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-per-level"));
-        velocity.setY(0.2);
+        velocity.setY(player.getEyeLocation().getDirection().clone().getY() + 0.2);
         player.setVelocity(velocity);
     }
 }

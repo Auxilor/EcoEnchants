@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.nms.BlockBreak;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
@@ -23,6 +24,9 @@ public class Dynamite extends Spell {
     @Override
     public void onRightClick(Player player, int level, PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
+
+        if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+            return;
 
         if(block == null) return;
 
