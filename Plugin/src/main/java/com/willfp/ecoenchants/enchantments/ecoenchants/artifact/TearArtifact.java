@@ -8,7 +8,7 @@ public final class TearArtifact extends Artifact {
     public TearArtifact() {
         super(
                 "tear_artifact",
-                new Prerequisite[]{Prerequisite.MinVer1_16}
+                Prerequisite.MinVer1_16
         );
     }
 

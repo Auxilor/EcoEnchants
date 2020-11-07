@@ -37,7 +37,7 @@ public abstract class Artifact extends EcoEnchant {
         this(key, new Prerequisite[]{});
     }
 
-    protected Artifact(String key, Prerequisite[] prerequisites) {
+    protected Artifact(String key, Prerequisite... prerequisites) {
         super(key, EnchantmentType.ARTIFACT, prerequisites);
 
         if(!Prerequisite.areMet(prerequisites)) {

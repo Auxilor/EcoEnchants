@@ -53,7 +53,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         this(key, type, EcoEnchantsPlugin.class, new Prerequisite[]{});
     }
 
-    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Prerequisite[] prerequisites) {
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Prerequisite... prerequisites) {
         this(key, type, EcoEnchantsPlugin.class, prerequisites);
     }
 
@@ -61,7 +61,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         this(key, type, plugin, new Prerequisite[]{});
     }
 
-    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite[] prerequisites) {
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite... prerequisites) {
         super(NamespacedKey.minecraft(key));
 
         if(Pattern.matches("[a-z_]", key)) throw new InvalidEnchantmentException("Key must only contain lowercase letters and underscores");

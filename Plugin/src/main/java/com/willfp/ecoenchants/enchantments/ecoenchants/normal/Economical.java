@@ -11,7 +11,7 @@ public final class Economical extends EcoEnchant {
     public Economical() {
         super(
                 "economical", EnchantmentType.NORMAL,
-                new Prerequisite[]{Prerequisite.HasPaper}
+                Prerequisite.HasPaper
         );
     }
 
