@@ -50,7 +50,7 @@ public abstract class Spell extends EcoEnchant {
         if(runningSpell.contains(player.getUniqueId())) return;
 
         runningSpell.add(player.getUniqueId());
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> runningSpell.remove(player.getUniqueId()), 1);
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> runningSpell.remove(player.getUniqueId()), 5);
 
         if(!EnchantChecks.mainhand(player, this))
             return;
