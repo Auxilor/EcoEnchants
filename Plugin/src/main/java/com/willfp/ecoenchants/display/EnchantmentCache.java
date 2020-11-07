@@ -61,6 +61,9 @@ public class EnchantmentCache {
                 case CURSE:
                     color = EnchantDisplay.curseColor;
                     break;
+                case SPELL:
+                    color = EnchantDisplay.spellColor;
+                    break;
                 default:
                     color = EnchantDisplay.normalColor;
                     break;

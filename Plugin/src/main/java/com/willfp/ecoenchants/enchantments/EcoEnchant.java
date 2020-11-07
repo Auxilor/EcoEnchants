@@ -49,16 +49,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     private boolean enabled;
 
-    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type) {
-        this(key, type, EcoEnchantsPlugin.class, new Prerequisite[]{});
-    }
-
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Prerequisite... prerequisites) {
         this(key, type, EcoEnchantsPlugin.class, prerequisites);
-    }
-
-    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin) {
-        this(key, type, plugin, new Prerequisite[]{});
     }
 
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite... prerequisites) {
@@ -360,7 +352,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         NORMAL(false),
         CURSE(false),
         SPECIAL(true),
-        ARTIFACT(true);
+        ARTIFACT(true),
+        SPELL(true);
 
         static {
             update();

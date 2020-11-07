@@ -33,10 +33,6 @@ public abstract class Artifact extends EcoEnchant {
     private Particle particle;
     private Particle.DustOptions extra;
 
-    protected Artifact(String key) {
-        this(key, new Prerequisite[]{});
-    }
-
     protected Artifact(String key, Prerequisite... prerequisites) {
         super(key, EnchantmentType.ARTIFACT, prerequisites);
 

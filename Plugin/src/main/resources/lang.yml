@@ -16,6 +16,7 @@ messages:
     &9Can be applied to: &r%target%
     &9Conflicts with: &r%conflicts%
   outdated: "You are running an outdated version of &aEcoEnchants! &fCurrently running &e%ver%&f, newest version &e%newver%&f. Download at &a&lhttps://www.spigotmc.org/resources/ecoenchants.79573/"
+  on-cooldown: "&fThis spell is on cooldown! Wait &a%seconds% Seconds&f to use &a%name%&f again."
 
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
@@ -24,6 +25,7 @@ curse-color: "&c"
 not-curse-color: "&7"
 special-color: "&d"
 artifact-color: "&e"
+spell-color: "&9"
 
 description-color: "&8"
 

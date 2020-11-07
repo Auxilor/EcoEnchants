@@ -221,6 +221,8 @@ public class Loader {
                     Logger.info(StringUtils.translate(ConfigManager.getLang().getString("special-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
                 } else if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) {
                     Logger.info(StringUtils.translate(ConfigManager.getLang().getString("artifact-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
+                } else if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPELL)) {
+                    Logger.info(StringUtils.translate(ConfigManager.getLang().getString("spell-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
                 } else {
                     Logger.info("- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
                 }

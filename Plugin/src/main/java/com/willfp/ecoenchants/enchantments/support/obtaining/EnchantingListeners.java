@@ -102,8 +102,7 @@ public class EnchantingListeners implements Listener {
 
                 if(EcoEnchants.getFromEnchantment(enchant) != null) {
                     EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchant.EnchantmentType.SPECIAL.isSingular()) anyConflicts.set(true);
-                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchant.EnchantmentType.ARTIFACT.isSingular()) anyConflicts.set(true);
+                    if(enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) anyConflicts.set(true);
                 }
             });
             if (anyConflicts.get()) continue;

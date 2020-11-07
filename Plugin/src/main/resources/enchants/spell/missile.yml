@@ -1,0 +1,26 @@
+#
+# Missile EcoEnchant
+#
+
+name: "Missile"
+description: Shoots a wither skull
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - sword
+    - axe
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  cooldown: 20 # In seconds
+  velocity: 3
+  power: 5
