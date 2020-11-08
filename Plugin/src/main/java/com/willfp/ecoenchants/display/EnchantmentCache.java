@@ -20,7 +20,7 @@ public class EnchantmentCache {
 
     public static CacheEntry getEntry(Enchantment enchantment) {
         Optional<CacheEntry> matching = CACHE.stream().filter(entry -> entry.getEnchantment().getKey().getKey().equals(enchantment.getKey().getKey())).findFirst();
-        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found")));
+        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found"), EcoEnchant.EnchantmentType.NORMAL));
     }
 
     public static Set<CacheEntry> getCache() {
@@ -83,7 +83,7 @@ public class EnchantmentCache {
             String rawName = name;
             name = color + name;
             description.replaceAll(line -> EnchantDisplay.PREFIX + EnchantDisplay.descriptionColor + line);
-            CACHE.add(new CacheEntry(enchantment, name, rawName, description));
+            CACHE.add(new CacheEntry(enchantment, name, rawName, description, type));
         });
     }
 
@@ -94,12 +94,14 @@ public class EnchantmentCache {
         private final String rawName;
         private final List<String> description;
         private final String stringDescription;
+        private final EcoEnchant.EnchantmentType type;
 
-        public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description) {
+        public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description, EcoEnchant.EnchantmentType type) {
             this.enchantment = enchantment;
             this.name = name;
             this.rawName = rawName;
             this.description = description;
+            this.type = type;
 
 
             StringBuilder descriptionBuilder = new StringBuilder();
@@ -132,6 +134,10 @@ public class EnchantmentCache {
 
         public String getStringDescription() {
             return stringDescription;
+        }
+
+        public EcoEnchant.EnchantmentType getType() {
+            return type;
         }
 
         @Override
