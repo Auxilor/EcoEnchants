@@ -14,6 +14,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
+
 public class AnvilListeners implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -50,7 +52,9 @@ public class AnvilListeners implements Listener {
                 int preCost = event.getInventory().getRepairCost();
                 ItemStack item = newOut.getFirst();
 
-                if(!event.getInventory().getItem(0).getType().equals(item.getType())) return;
+                if(event.getInventory().getItem(0) == null) return;
+
+                if(!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
 
                 if(ConfigManager.getConfig().getBool("anvil.rework-cost")) {
                     int repairCost = RepairCost.getRepairCost(item);
