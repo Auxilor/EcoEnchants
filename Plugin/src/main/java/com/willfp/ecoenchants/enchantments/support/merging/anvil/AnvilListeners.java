@@ -44,13 +44,13 @@ public class AnvilListeners implements Listener {
             modCost = newOut.getSecond();
         }
 
-        if(!newOut.getFirst().getType().equals(left.getType())) return; // sketchy hotfix
-
         new EcoBukkitRunnable(player.getTicksLived()) {
             @Override
             public void onRun() {
                 int preCost = event.getInventory().getRepairCost();
                 ItemStack item = newOut.getFirst();
+
+                if(!event.getInventory().getItem(0).getType().equals(item.getType())) return;
 
                 if(ConfigManager.getConfig().getBool("anvil.rework-cost")) {
                     int repairCost = RepairCost.getRepairCost(item);
