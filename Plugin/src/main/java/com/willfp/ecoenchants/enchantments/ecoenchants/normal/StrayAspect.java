@@ -28,7 +28,9 @@ public final class StrayAspect extends EcoEnchant {
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 
-        victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, level * 10, level));
-        victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, level * 10, level));
+        int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
+
+        victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, level * ticksPerLevel, level));
+        victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, level * ticksPerLevel, level));
     }
 }

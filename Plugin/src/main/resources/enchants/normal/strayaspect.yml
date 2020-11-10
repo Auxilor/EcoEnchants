@@ -22,3 +22,4 @@ general-config:
 config:
   allow-not-fully-charged: false
   chance-per-level: 1 #chance of slowness per level
+  ticks-per-level: 10
