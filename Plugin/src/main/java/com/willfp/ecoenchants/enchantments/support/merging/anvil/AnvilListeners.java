@@ -44,6 +44,8 @@ public class AnvilListeners implements Listener {
             modCost = newOut.getSecond();
         }
 
+        if(!newOut.getFirst().getType().equals(left.getType())) return; // sketchy hotfix
+
         new EcoBukkitRunnable(player.getTicksLived()) {
             @Override
             public void onRun() {

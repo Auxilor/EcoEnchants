@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -220,11 +221,11 @@ public final class EnchantDisplay {
             List<Enchantment> spellEnchants = unsorted.stream().filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(EcoEnchant.EnchantmentType.SPELL)).collect(Collectors.toList());
             List<Enchantment> curseEnchants = unsorted.stream().filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(EcoEnchant.EnchantmentType.CURSE)).collect(Collectors.toList());
 
-            normalEnchants.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
-            specialEnchants.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
-            artifactEnchants.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
-            spellEnchants.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
-            curseEnchants.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
+            normalEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
+            specialEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
+            artifactEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
+            spellEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
+            curseEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
 
             unsorted.clear();
             unsorted.addAll(normalEnchants);

@@ -120,8 +120,9 @@ public class AnvilMerge {
         rightEnchants.forEach(((enchantment, integer) -> {
             AtomicBoolean doesConflict = new AtomicBoolean(false);
 
-            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.SPECIAL)) doesConflict.set(true);
-            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.ARTIFACT)) doesConflict.set(true);
+            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.SPECIAL) && EcoEnchant.EnchantmentType.SPECIAL.isSingular()) doesConflict.set(true);
+            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchant.EnchantmentType.ARTIFACT.isSingular()) doesConflict.set(true);
+            if(EcoEnchants.getFromEnchantment(enchantment) != null && EcoEnchants.getFromEnchantment(enchantment).getType().equals(EcoEnchant.EnchantmentType.ARTIFACT) && EcoEnchants.hasAnyOfType(left, EcoEnchant.EnchantmentType.SPELL)) doesConflict.set(true);
 
             leftEnchants.forEach(((enchantment1, integer1) -> {
                 if(enchantment.conflictsWith(enchantment1)) doesConflict.set(true);
