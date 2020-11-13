@@ -21,7 +21,7 @@ general-config:
 
 config:
   activation-sound: ENTITY_DRAGON_FIREBALL_EXPLODE
-  cooldown: 30 # In seconds
+  cooldown: 60 # In seconds
   hardness-check: true # Only break blocks with hardness less than or equal to first block
   blacklisted-blocks:
     - bedrock

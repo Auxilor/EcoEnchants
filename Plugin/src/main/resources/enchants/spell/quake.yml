@@ -21,6 +21,6 @@ general-config:
 
 config:
   activation-sound: ENTITY_ENDER_DRAGON_GROWL
-  cooldown: 20 # In seconds
+  cooldown: 40 # In seconds
   damage-per-level: 3
   radius-per-level: 2

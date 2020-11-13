@@ -22,6 +22,6 @@ general-config:
 
 config:
   activation-sound: ENTITY_WITHER_SHOOT
-  cooldown: 20 # In seconds
+  cooldown: 40 # In seconds
   velocity: 3
   damage-per-level: 8
