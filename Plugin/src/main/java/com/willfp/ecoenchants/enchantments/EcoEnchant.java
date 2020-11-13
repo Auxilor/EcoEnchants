@@ -178,7 +178,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown", (player) -> {
                         return String.valueOf(Spell.getCooldown((Spell) this, player));
-                    })
+                    }, true)
             );
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown_total", (player) -> {
