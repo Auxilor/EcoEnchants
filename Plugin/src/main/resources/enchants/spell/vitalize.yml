@@ -24,4 +24,4 @@ general-config:
 
 config:
   activation-sound: ENTITY_PLAYER_LEVELUP
-  cooldown: 60 # In seconds
+  cooldown: 300 # In seconds
