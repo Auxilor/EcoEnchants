@@ -24,7 +24,13 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("unchecked")
@@ -194,11 +200,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level", (player) -> {
                         return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"));
-                    })
-            );
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level_percentage", (player) -> {
-                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") * 100);
                     })
             );
         }
