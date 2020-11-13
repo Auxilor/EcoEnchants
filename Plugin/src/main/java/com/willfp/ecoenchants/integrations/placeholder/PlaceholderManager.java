@@ -33,14 +33,15 @@ public class PlaceholderManager {
 
     public static String translatePlaceholders(String text, Player player) {
         if(integrations.isEmpty()) {
+            AtomicReference<String> returnText = new AtomicReference<>();
             placeholders.forEach(placeholderEntry -> {
                 if(player == null && placeholderEntry.requiresPlayer())
                     return;
 
                 String test = "%ecoenchants_" + placeholderEntry.getIdentifier() + "%";
-                text.replaceAll(test, placeholderEntry.getResult(player));
+                returnText.set(text.replaceAll(test, placeholderEntry.getResult(player)));
             });
-            return text;
+            return returnText.get();
         } else {
             AtomicReference<String> translatedReference = new AtomicReference<>(text);
             integrations.forEach(placeholderIntegration -> translatedReference.set(placeholderIntegration.translate(translatedReference.get(), player)));
