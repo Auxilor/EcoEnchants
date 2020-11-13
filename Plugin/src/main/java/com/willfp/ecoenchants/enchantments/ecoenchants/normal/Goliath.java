@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.kingdoms.utils.caffeine.checkerframework.checker.units.qual.A;
 
 public final class Goliath extends EcoEnchant {
     public Goliath() {
@@ -30,7 +29,6 @@ public final class Goliath extends EcoEnchant {
         if(bonus - 1 > this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier-cap")) {
             bonus = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier-cap") + 1;
         }
-        A
         event.setDamage(damage * bonus);
     }
 }
