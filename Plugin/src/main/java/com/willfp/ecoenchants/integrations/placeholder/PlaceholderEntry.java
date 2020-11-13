@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.integrations.placeholder;
 
-import com.willfp.ecoenchants.util.ObjectCallable;
+import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import org.bukkit.entity.Player;
 
 public class PlaceholderEntry {

@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
-import com.willfp.ecoenchants.util.Callable;
+import com.willfp.ecoenchants.util.interfaces.Callable;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;

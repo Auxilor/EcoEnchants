@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.util;
+package com.willfp.ecoenchants.util.interfaces;
 
 @FunctionalInterface
 public interface ObjectCallable<A, B> {
