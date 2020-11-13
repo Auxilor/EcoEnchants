@@ -275,5 +275,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.gmail.nossr50.mcMMO</groupId>
+            <artifactId>mcMMO</artifactId>
+            <version>2.1.157</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

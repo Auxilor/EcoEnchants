@@ -73,6 +73,10 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>mcmmo-repo</id>
+            <url>http://repo.mcmmo.org/</url>
+        </repository>
     </repositories>
 
     <build>

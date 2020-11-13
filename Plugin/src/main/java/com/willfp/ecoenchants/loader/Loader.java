@@ -42,6 +42,8 @@ import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
+import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
+import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
@@ -426,6 +428,13 @@ public class Loader {
             Logger.info("PlaceholderAPI: §aENABLED");
         } else {
             Logger.info("PlaceholderAPI: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("mcMMO")) {
+            McmmoManager.registerIntegration(new McmmoIntegrationImpl());
+            Logger.info("mcMMO: §aENABLED");
+        } else {
+            Logger.info("mcMMO: §9DISABLED");
         }
 
 

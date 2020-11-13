@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.nms.TridentStack;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -35,6 +36,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onArrowDamage(EntityDamageByEntityEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if (!(event.getDamager() instanceof Arrow))
             return;
         if (!(event.getEntity() instanceof LivingEntity))
@@ -63,6 +66,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onTridentDamage(EntityDamageByEntityEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if (!(event.getDamager() instanceof Trident))
             return;
 
@@ -100,6 +105,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onJump(PlayerMoveEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         Player player = event.getPlayer();
         if (player.getVelocity().getY() > 0) {
             float jumpVelocity = 0.42f;
@@ -126,6 +133,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onMeleeAttack(EntityDamageByEntityEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if (!(event.getDamager() instanceof LivingEntity))
             return;
 
@@ -153,6 +162,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onBowShoot(EntityShootBowEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if (event.getProjectile().getType() != EntityType.ARROW)
             return;
 
@@ -168,6 +179,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onFallDamage(EntityDamageEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if(!event.getCause().equals(EntityDamageEvent.DamageCause.FALL))
             return;
 
@@ -185,6 +198,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onArrowHit(ProjectileHitEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if (!(event.getEntity().getShooter() instanceof LivingEntity))
             return;
 
@@ -201,6 +216,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onTridentHit(ProjectileHitEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if (!(event.getEntity().getShooter() instanceof LivingEntity))
             return;
 
@@ -218,6 +235,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
@@ -235,6 +254,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onDamageWearingArmor(EntityDamageEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         if (!(event.getEntity() instanceof LivingEntity))
             return;
 
@@ -249,6 +270,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onArmorEquip(ArmorEquipEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
@@ -263,6 +286,8 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onDamageBlock(BlockDamageEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
@@ -278,6 +303,9 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onTridentLaunch(ProjectileLaunchEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
+
         if(!(event.getEntity() instanceof Trident))
             return;
 
@@ -297,6 +325,9 @@ public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onDeflect(EntityDamageByEntityEvent event) {
+        if(McmmoManager.isFake(event))
+            return;
+
         if (!(event.getEntity() instanceof Player))
             return;
 
