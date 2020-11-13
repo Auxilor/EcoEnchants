@@ -7,8 +7,6 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
-import javax.annotation.PostConstruct;
-
 public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements PlaceholderIntegration {
     @Override
     public boolean persist() {
@@ -37,9 +35,6 @@ public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements 
 
     @Override
     public String onPlaceholderRequest(Player player, String identifier) {
-        if(player == null)
-            return "";
-
         return PlaceholderManager.getResult(player, identifier);
     }
 

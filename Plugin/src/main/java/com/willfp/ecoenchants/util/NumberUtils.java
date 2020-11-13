@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.util;
 
+import java.text.DecimalFormat;
 import java.util.TreeMap;
 
 public class NumberUtils {
@@ -122,5 +123,17 @@ public class NumberUtils {
      */
     public static int log2(int N) {
         return (int)(Math.log(N) / Math.log(2));
+    }
+
+    /**
+     * Format double to string
+     * @param toFormat The number to format
+     * @return Formatted
+     */
+    public static String format(double toFormat) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        String formatted = df.format(toFormat);
+
+        return formatted.endsWith("00") ? String.valueOf((int) toFormat) : formatted;
     }
 }

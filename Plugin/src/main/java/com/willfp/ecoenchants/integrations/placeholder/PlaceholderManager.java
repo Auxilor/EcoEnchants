@@ -1,7 +1,10 @@
 package com.willfp.ecoenchants.integrations.placeholder;
 
+import com.willfp.ecoenchants.util.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import javax.print.DocFlavor;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -23,7 +26,12 @@ public class PlaceholderManager {
 
     public static String getResult(Player player, String identifier) {
         Optional<PlaceholderEntry> matching = placeholders.stream().filter(expansion -> expansion.getIdentifier().equalsIgnoreCase(identifier)).findFirst();
-        return matching.map(placeholderEntry -> placeholderEntry.getResult(player)).orElse(null);
+        if(!matching.isPresent())
+            return null;
+        PlaceholderEntry entry = matching.get();
+        if(player == null && entry.requiresPlayer())
+            return "";
+        return entry.getResult(player);
     }
 
     public static String translatePlaceholders(String text, Player player) {

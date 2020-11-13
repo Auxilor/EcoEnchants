@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderEntry;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
+import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
@@ -151,12 +152,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level", (player) -> {
-                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"));
+                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"));
                     })
             );
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level_percentage", (player) -> {
-                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") * 100);
+                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") * 100);
                     })
             );
         }
@@ -164,12 +165,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "multiplier", (player) -> {
-                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier"));
+                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier"));
                     })
             );
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "multiplier_percentage", (player) -> {
-                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * 100);
+                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * 100);
                     })
             );
         }
@@ -177,12 +178,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         if(this instanceof Spell) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown", (player) -> {
-                        return String.valueOf(Spell.getCooldown((Spell) this, player));
+                        return NumberUtils.format(Spell.getCooldown((Spell) this, player));
                     }, true)
             );
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown_total", (player) -> {
-                        return String.valueOf(((Spell) this).getCooldownTime());
+                        return NumberUtils.format(((Spell) this).getCooldownTime());
                     })
             );
         }

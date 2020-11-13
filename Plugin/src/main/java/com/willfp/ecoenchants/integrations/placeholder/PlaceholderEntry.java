@@ -25,4 +25,8 @@ public class PlaceholderEntry {
     public String getResult(Player player) {
         return this.function.call(player);
     }
+
+    public boolean requiresPlayer() {
+        return requiresPlayer;
+    }
 }
