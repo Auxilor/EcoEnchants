@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.nms.RepairCost;
-import com.willfp.ecoenchants.util.EcoBukkitRunnable;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.tuplets.Pair;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,32 +46,29 @@ public class AnvilListeners implements Listener {
             modCost = newOut.getSecond();
         }
 
-        new EcoBukkitRunnable(player.getTicksLived()) {
-            @Override
-            public void onRun() {
-                int preCost = event.getInventory().getRepairCost();
-                ItemStack item = newOut.getFirst();
+        Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
+            int preCost = event.getInventory().getRepairCost();
+            ItemStack item = newOut.getFirst();
 
-                if(event.getInventory().getItem(0) == null) return;
+            if(event.getInventory().getItem(0) == null) return;
 
-                if(!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
+            if(!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
 
-                if(ConfigManager.getConfig().getBool("anvil.rework-cost")) {
-                    int repairCost = RepairCost.getRepairCost(item);
-                    int reworkCount = NumberUtils.log2(repairCost + 1);
-                    if (repairCost == 0) reworkCount = 0;
-                    reworkCount++;
-                    repairCost = (int) Math.pow(2, reworkCount) - 1;
-                    item = RepairCost.setRepairCost(item, repairCost);
-                }
-
-                int cost = preCost + modCost;
-
-                event.getInventory().setRepairCost(cost);
-                event.setResult(item);
-                event.getInventory().setItem(2, item);
-                player.updateInventory();
+            if(ConfigManager.getConfig().getBool("anvil.rework-cost")) {
+                int repairCost = RepairCost.getRepairCost(item);
+                int reworkCount = NumberUtils.log2(repairCost + 1);
+                if (repairCost == 0) reworkCount = 0;
+                reworkCount++;
+                repairCost = (int) Math.pow(2, reworkCount) - 1;
+                item = RepairCost.setRepairCost(item, repairCost);
             }
-        }.runTask(EcoEnchantsPlugin.getInstance());
+
+            int cost = preCost + modCost;
+
+            event.getInventory().setRepairCost(cost);
+            event.setResult(item);
+            event.getInventory().setItem(2, item);
+            player.updateInventory();
+        });
     }
 }
