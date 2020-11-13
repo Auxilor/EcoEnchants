@@ -19,6 +19,7 @@ softdepend:
   - Matrix
   - Spartan
   - Essentials
+  - PlaceholderAPI
 
 commands:
   ecoreload:
