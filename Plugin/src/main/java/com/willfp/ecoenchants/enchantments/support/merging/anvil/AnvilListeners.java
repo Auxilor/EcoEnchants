@@ -14,9 +14,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 public class AnvilListeners implements Listener {
+    private static final HashMap<UUID, Integer> noIncreaseXpMap = new HashMap<>();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAnvilPrepare(PrepareAnvilEvent event) {
@@ -47,6 +50,20 @@ public class AnvilListeners implements Listener {
         }
 
         Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
+
+            // This is a disgusting bodge
+            if(!noIncreaseXpMap.containsKey(player.getUniqueId()))
+                noIncreaseXpMap.put(player.getUniqueId(), 0);
+
+            Integer num = noIncreaseXpMap.get(player.getUniqueId());
+            num += 1;
+            noIncreaseXpMap.put(player.getUniqueId(), num);
+
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+                noIncreaseXpMap.remove(player.getUniqueId());
+            }, 1);
+            // End pain
+
             int preCost = event.getInventory().getRepairCost();
             ItemStack item = newOut.getFirst();
 
@@ -63,7 +80,13 @@ public class AnvilListeners implements Listener {
                 item = RepairCost.setRepairCost(item, repairCost);
             }
 
-            int cost = preCost + modCost;
+            int cost;
+
+            if(noIncreaseXpMap.get(player.getUniqueId()) == 1) {
+                cost = preCost + modCost;
+            } else {
+                cost = preCost;
+            }
 
             event.getInventory().setRepairCost(cost);
             event.setResult(item);
