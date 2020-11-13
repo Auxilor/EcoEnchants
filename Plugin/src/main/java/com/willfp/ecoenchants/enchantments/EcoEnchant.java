@@ -149,6 +149,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     private void updatePlaceholders() {
+        PlaceholderManager.registerPlaceholder(
+                new PlaceholderEntry(this.getPermissionName() + "_" + "enabled", (player) -> {
+                    return String.valueOf(this.isEnabled());
+                })
+        );
+
         if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level", (player) -> {

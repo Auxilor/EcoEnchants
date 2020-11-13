@@ -1,6 +1,9 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.integrations.placeholder.PlaceholderEntry;
+import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
+import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 
@@ -43,6 +46,27 @@ public class EnchantmentRarity implements Registerable {
     public void register() {
         Optional<EnchantmentRarity> matching = rarities.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         matching.ifPresent(rarities::remove);
+
+        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
+                "rarity_" + this.getName() + "_probability",
+                (player) -> NumberUtils.format(this.probability)
+        ));
+        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
+                "rarity_" + this.getName() + "_minlevel",
+                (player) -> NumberUtils.format(this.minimumLevel)
+        ));
+        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
+                "rarity_" + this.getName() + "_villagerprobability",
+                (player) -> NumberUtils.format(this.villagerProbability)
+        ));
+        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
+                "rarity_" + this.getName() + "_lootprobability",
+                (player) -> NumberUtils.format(this.lootProbability)
+        ));
+        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
+                "rarity_" + this.getName() + "_color",
+                (player) -> this.customColor
+        ));
 
         rarities.add(this);
     }
