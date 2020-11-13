@@ -65,12 +65,10 @@ public abstract class Spell extends EcoEnchant {
             this.onRightClick(player, level, event);
         });
 
-        long msLeft = runnable.getEndTime() - System.currentTimeMillis();
+        int cooldown = getCooldown(this, player);
 
-        long secondsLeft = (long) Math.ceil((double) msLeft / 1000);
-
-        if(msLeft > 0) {
-            String message = ConfigManager.getLang().getMessage("on-cooldown").replaceAll("%seconds%", String.valueOf(secondsLeft)).replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
+        if(cooldown > 0) {
+            String message = ConfigManager.getLang().getMessage("on-cooldown").replaceAll("%seconds%", String.valueOf(cooldown)).replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
             player.sendMessage(message);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
             return;
@@ -83,4 +81,17 @@ public abstract class Spell extends EcoEnchant {
     }
 
     public abstract void onRightClick(Player player, int level, PlayerInteractEvent event);
+
+    public static int getCooldown(Spell spell, Player player) {
+        if(!spell.cooldownTracker.containsKey(player.getUniqueId()))
+            spell.cooldownTracker.put(player.getUniqueId(), new SpellRunnable(player, spell));
+
+        SpellRunnable runnable = spell.cooldownTracker.get(player.getUniqueId());
+
+        long msLeft = runnable.getEndTime() - System.currentTimeMillis();
+
+        long secondsLeft = (long) Math.ceil((double) msLeft / 1000);
+
+        return new Long(secondsLeft).intValue();
+    }
 }

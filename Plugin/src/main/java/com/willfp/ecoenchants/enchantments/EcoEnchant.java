@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderEntry;
@@ -169,6 +170,19 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + "multiplier_percentage", (player) -> {
                         return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * 100);
+                    })
+            );
+        }
+
+        if(this instanceof Spell) {
+            PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown", (player) -> {
+                        return String.valueOf(Spell.getCooldown((Spell) this, player));
+                    })
+            );
+            PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown_total", (player) -> {
+                        return String.valueOf(((Spell) this).getCooldownTime());
                     })
             );
         }
