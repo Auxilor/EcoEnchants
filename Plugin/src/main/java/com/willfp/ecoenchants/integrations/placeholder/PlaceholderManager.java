@@ -32,19 +32,8 @@ public class PlaceholderManager {
     }
 
     public static String translatePlaceholders(String text, Player player) {
-        if(integrations.isEmpty()) {
-            placeholders.forEach(placeholderEntry -> {
-                if(player == null && placeholderEntry.requiresPlayer())
-                    return;
-
-                String test = "%ecoenchants_" + placeholderEntry.getIdentifier() + "%";
-                text.replaceAll(test, placeholderEntry.getResult(player));
-            });
-            return text;
-        } else {
-            AtomicReference<String> translatedReference = new AtomicReference<>(text);
-            integrations.forEach(placeholderIntegration -> translatedReference.set(placeholderIntegration.translate(translatedReference.get(), player)));
-            return translatedReference.get();
-        }
+        AtomicReference<String> translatedReference = new AtomicReference<>(text);
+        integrations.forEach(placeholderIntegration -> translatedReference.set(placeholderIntegration.translate(translatedReference.get(), player)));
+        return translatedReference.get();
     }
 }

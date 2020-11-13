@@ -447,6 +447,10 @@ public class Loader {
         }
 
         Logger.info("");
+
+        Logger.info("Updating cache...");
+        EnchantmentCache.update();
+        Logger.info("");
     }
 
     /**
