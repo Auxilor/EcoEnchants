@@ -21,6 +21,9 @@ public final class Instantaneous extends EcoEnchant {
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 
+        if(block.getDrops(player.getInventory().getItemInMainHand()).isEmpty())
+            return;
+
         AnticheatManager.exemptPlayer(player);
 
         event.setInstaBreak(true);
