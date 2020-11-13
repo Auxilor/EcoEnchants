@@ -449,6 +449,7 @@ public class Loader {
         Logger.info("");
 
         Logger.info("Updating cache...");
+        EcoEnchants.getAll().forEach(EcoEnchant::update);
         EnchantmentCache.update();
         Logger.info("");
     }
