@@ -35,6 +35,7 @@ public class AnvilListeners implements Listener {
 
         Player player = (Player) event.getViewers().get(0);
         if(player.getOpenInventory().getTitle().toLowerCase().contains("quest")) return; // Fix for QuestsGUI
+        if(event.getView().getTitle().toLowerCase().contains("quest")) return; // Maybe this will fix it?
 
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
