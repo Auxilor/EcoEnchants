@@ -3,7 +3,7 @@
 #
 
 name: "Curse of Breaklessness"
-description: Chance to prevent block breaking.
+description: &a%ecoenchants_breaklessnesscurse_chance_per_level_percentage%%&f chance to prevent block breaking.
 enabled: true
 
 obtaining:

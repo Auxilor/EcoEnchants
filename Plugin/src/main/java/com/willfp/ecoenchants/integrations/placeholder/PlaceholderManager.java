@@ -34,6 +34,9 @@ public class PlaceholderManager {
     public static String translatePlaceholders(String text, Player player) {
         if(integrations.isEmpty()) {
             placeholders.forEach(placeholderEntry -> {
+                if(player == null && placeholderEntry.requiresPlayer())
+                    return;
+
                 String test = "%ecoenchants_" + placeholderEntry.getIdentifier() + "%";
                 text.replaceAll(test, placeholderEntry.getResult(player));
             });
