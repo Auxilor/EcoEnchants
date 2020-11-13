@@ -5,6 +5,8 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
+import com.willfp.ecoenchants.integrations.placeholder.PlaceholderEntry;
+import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
@@ -99,6 +101,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         target.addAll(config.getTargets());
         target.forEach(enchantmentTarget -> targetMaterials.addAll(enchantmentTarget.getMaterials()));
         enabled = config.getBool("enabled", true);
+        this.updatePlaceholders();
 
         this.register();
     }
@@ -141,6 +144,34 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     private void remove() {
         EcoEnchants.removeEcoEnchant(this);
+    }
+
+    private void updatePlaceholders() {
+        if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
+            PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level", (player) -> {
+                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"));
+                    })
+            );
+            PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level_percentage", (player) -> {
+                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") * 100);
+                    })
+            );
+        }
+
+        if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
+            PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + "multiplier", (player) -> {
+                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier"));
+                    })
+            );
+            PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + "multiplier_percentage", (player) -> {
+                        return String.valueOf(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * 100);
+                    })
+            );
+        }
     }
 
     /**

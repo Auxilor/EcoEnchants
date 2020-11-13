@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
+import com.willfp.ecoenchants.util.Callable;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -9,7 +10,7 @@ public class SpellRunnable {
     private final UUID player;
     private final Spell spell;
     private long endTime = 0;
-    private Callback callback = () -> {};
+    private Callable callable = () -> {};
 
     public SpellRunnable(Player player, Spell spell) {
         this.player = player.getUniqueId();
@@ -21,7 +22,7 @@ public class SpellRunnable {
     }
 
     public void run() {
-        callback.call();
+        callable.call();
         updateEndTime();
     }
 
@@ -33,7 +34,7 @@ public class SpellRunnable {
         endTime = System.currentTimeMillis() + (spell.getCooldownTime()*1000);
     }
 
-    public void setTask(Callback callback) {
-        this.callback = callback;
+    public void setTask(Callable callable) {
+        this.callable = callable;
     }
 }

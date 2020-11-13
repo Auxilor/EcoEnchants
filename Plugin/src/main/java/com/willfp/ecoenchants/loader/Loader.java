@@ -42,6 +42,8 @@ import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
+import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
+import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.nms.BlockBreak;
@@ -417,6 +419,13 @@ public class Loader {
             Logger.info("Spartan: §aENABLED");
         } else {
             Logger.info("Spartan: §9DISABLED");
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI());
+            Logger.info("PlaceholderAPI: §aENABLED");
+        } else {
+            Logger.info("PlaceholderAPI: §9DISABLED");
         }
 
 
