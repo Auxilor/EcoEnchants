@@ -1,10 +1,7 @@
 package com.willfp.ecoenchants.integrations.placeholder;
 
-import com.willfp.ecoenchants.util.Logger;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import javax.print.DocFlavor;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;

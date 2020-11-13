@@ -24,12 +24,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("unchecked")
@@ -154,6 +149,46 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
                     return String.valueOf(this.isEnabled());
                 })
         );
+
+        this.getConfig().config.getKeys(true).forEach(string -> {
+            String key = string.replaceAll("\\.", "_").replaceAll("-", "_");
+            Object object = this.getConfig().config.get(string);
+
+            if (object instanceof Integer) {
+                PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
+                        return ((Integer) object).toString();
+                    })
+                );
+            } else if(object instanceof String) {
+                PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
+                        return (String) object;
+                    })
+                );
+            } else if(object instanceof Double) {
+                PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
+                        return NumberUtils.format((Double) object);
+                    })
+                );
+            } else if(object instanceof Collection<?>) {
+                PlaceholderManager.registerPlaceholder(
+                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
+                        Collection<?> c = (Collection<?>) object;
+                        StringBuilder builder = new StringBuilder();
+                        c.forEach(o -> {
+                            builder.append(o.toString()).append(", ");
+                        });
+                        String output = builder.toString();
+                        if(output.length() < 3)
+                            return "";
+                        output = output.substring(output.length() - 3, output.length() - 1);
+                        return output;
+                    })
+                );
+            }
+        });
 
         if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
             PlaceholderManager.registerPlaceholder(
