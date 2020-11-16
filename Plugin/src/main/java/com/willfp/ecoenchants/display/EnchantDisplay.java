@@ -208,6 +208,8 @@ public final class EnchantDisplay {
             enchantments.putAll(meta.getEnchants());
         }
 
+        enchantments.entrySet().removeIf(enchantmentIntegerEntry -> enchantmentIntegerEntry.getValue().equals(0));
+
         List<Enchantment> unsorted = new ArrayList<>();
         enchantments.forEach((enchantment, integer) -> {
             unsorted.add(enchantment);
