@@ -4,9 +4,6 @@ plugins {
     id 'java'
 }
 
-compileJava.dependsOn clean
-build.dependsOn shadowJar
-
 dependencies {
     implementation project(':API')
     implementation project(':v1_15_R1')
@@ -49,5 +46,8 @@ shadowJar {
 jar{
     archiveName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
 }
+
+compileJava.dependsOn clean
+build.dependsOn shadowJar
 
 description = 'EcoEnchants'
