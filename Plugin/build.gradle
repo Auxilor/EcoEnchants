@@ -41,7 +41,8 @@ dependencies {
 
 shadowJar {
     relocate('org.bstats.bukkit', 'com.willfp.ecoenchants.shaded.bstats')
-    relocate('org.jetbrains.annotations', 'com.willfp.ecoenchants.shaded.annotations')
+    relocate('org.jetbrains', 'com.willfp.ecoenchants.shaded.jetbrains')
+    relocate('org.intellij', 'com.willfp.ecoenchants.shaded.intellij')
     relocate('org.apache.maven', 'com.willfp.ecoenchants.shaded.maven') {
         exclude 'org.codehaus.plexus.util'
     }
