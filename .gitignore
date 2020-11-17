@@ -11,9 +11,14 @@ bin/
 .idea/
 *.iml
 
-# Maven
-target/
-dependency-reduced-pom.xml
+# Gradle
+.gradle
+**/build/
+/buildSrc/
+!src/**/build/
+.gradletasknamecache
+!gradle-wrapper.jar
+gradle-app.setting
 
 # Mac OSX
 .DS_Store
