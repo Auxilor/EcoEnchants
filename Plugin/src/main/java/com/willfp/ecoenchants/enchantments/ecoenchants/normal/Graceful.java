@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+@SuppressWarnings("deprecation")
 public final class Graceful extends EcoEnchant {
     public Graceful() {
         super(

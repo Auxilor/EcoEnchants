@@ -8,7 +8,7 @@ dependencies {
 }
 
 jar{
-    archiveName = project.name + " v" + findProperty("version") + ".jar"
+    archiveFileName = project.name + " v" + findProperty("version") + ".jar"
 }
 
 description = 'v1_16_R3'

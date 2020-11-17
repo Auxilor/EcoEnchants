@@ -7,7 +7,7 @@ dependencies {
 }
 
 jar{
-    archiveName = findProperty("Name") + " v" + findProperty("version") + ".jar"
+    archiveFileName = findProperty("Name") + " v" + findProperty("version") + ".jar"
 }
 
 description = 'EcoEnchants API'

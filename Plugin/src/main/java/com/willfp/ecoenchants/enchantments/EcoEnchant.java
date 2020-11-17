@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "deprecation"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
     private String name;
     private String description;

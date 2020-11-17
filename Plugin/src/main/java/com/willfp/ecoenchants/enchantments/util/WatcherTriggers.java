@@ -32,6 +32,7 @@ import java.text.DecimalFormat;
 import java.util.Set;
 import java.util.UUID;
 
+@SuppressWarnings("deprecation")
 public class WatcherTriggers implements Listener {
 
     @EventHandler(ignoreCancelled = true)

@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.persistence.PersistentDataType;
 
+@SuppressWarnings("deprecation")
 public final class PacketSetSlot extends AbstractPacketAdapter {
     public PacketSetSlot() {
         super(PacketType.Play.Server.SET_SLOT);

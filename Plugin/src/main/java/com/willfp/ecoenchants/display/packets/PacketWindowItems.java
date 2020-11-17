@@ -6,7 +6,9 @@ import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.persistence.PersistentDataType;
+import org.kingdoms.utils.caffeine.checkerframework.checker.units.qual.Speed;
 
+@SuppressWarnings("deprecation")
 public final class PacketWindowItems extends AbstractPacketAdapter {
     public PacketWindowItems() {
         super(PacketType.Play.Server.WINDOW_ITEMS);

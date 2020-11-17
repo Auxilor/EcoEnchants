@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@SuppressWarnings("deprecation")
 public class EnchantmentCache {
     private static final Set<CacheEntry> CACHE = new HashSet<>();
 

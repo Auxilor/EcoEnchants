@@ -78,11 +78,11 @@ allprojects {
         }
 
         maven {
-            url 'http://repo.mikeprimm.com/'
+            url 'https://repo.mikeprimm.com/'
         }
 
         maven {
-            url 'http://maven.sk89q.com/repo/'
+            url 'https://maven.sk89q.com/repo/'
         }
 
         maven {
@@ -95,6 +95,7 @@ allprojects {
     }
 
     tasks.withType(JavaCompile) {
+        options.deprecation = true
         options.encoding = 'UTF-8'
     }
     compileJava.options.encoding = 'UTF-8'

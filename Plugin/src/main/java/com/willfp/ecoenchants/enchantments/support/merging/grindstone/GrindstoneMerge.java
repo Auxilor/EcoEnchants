@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 public class GrindstoneMerge {
     public static Map<Enchantment, Integer> doMerge(ItemStack top, ItemStack bottom) {
         Map<Enchantment, Integer> bottomEnchants = new HashMap<>();
