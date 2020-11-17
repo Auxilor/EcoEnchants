@@ -1,5 +1,5 @@
 name: EcoEnchants
-version: ${project.parent.version}
+version: ${projectVersion}
 main: com.willfp.ecoenchants.EcoEnchantsPlugin
 api-version: 1.15
 authors: [Auxilor]

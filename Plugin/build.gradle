@@ -43,6 +43,12 @@ shadowJar {
     archiveName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 
+processResources {
+    filesNotMatching(["**/*.png", "**/models/**", "**/textures/**"]) {
+        expand projectVersion: findProperty("version")
+    }
+}
+
 jar{
     archiveName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
 }
