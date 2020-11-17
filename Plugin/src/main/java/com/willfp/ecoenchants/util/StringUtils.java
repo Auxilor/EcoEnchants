@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.util;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
-import scala.runtime.Static;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
