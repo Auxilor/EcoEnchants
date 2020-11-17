@@ -93,6 +93,11 @@ allprojects {
             url 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
         }
     }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+    compileJava.options.encoding = 'UTF-8'
 }
 
 group = 'com.willfp.ecoenchants'
@@ -106,8 +111,4 @@ publishing {
             from(components.java)
         }
     }
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
 }

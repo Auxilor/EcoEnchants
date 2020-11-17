@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.compile.JavaCompile
+
 plugins {
     id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'java'
@@ -49,7 +51,12 @@ jar {
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 compileJava.dependsOn clean
 build.dependsOn shadowJar
 
 description = 'EcoEnchants'
+compileJava.options.encoding = 'UTF-8'
