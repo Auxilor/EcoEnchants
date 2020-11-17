@@ -1,6 +1,5 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '5.2.0'
-    id 'com.willfp.ecoenchants.java-conventions'
     id 'java'
 }
 
@@ -37,7 +36,7 @@ shadowJar {
     relocate('org.jetbrains', 'com.willfp.ecoenchants.shaded.jetbrains')
     relocate('org.intellij', 'com.willfp.ecoenchants.shaded.intellij')
     relocate('org.apache.maven', 'com.willfp.ecoenchants.shaded.maven')
-    archiveName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
+    archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 
 processResources {
@@ -47,7 +46,7 @@ processResources {
 }
 
 jar {
-    archiveName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
+    archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
 }
 
 compileJava.dependsOn clean

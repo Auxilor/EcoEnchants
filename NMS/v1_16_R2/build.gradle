@@ -1,5 +1,5 @@
 plugins {
-    id 'com.willfp.ecoenchants.java-conventions'
+    id 'java'
 }
 
 dependencies {
