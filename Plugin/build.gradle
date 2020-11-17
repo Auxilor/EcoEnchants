@@ -49,7 +49,7 @@ processResources {
     }
 }
 
-jar{
+jar {
     archiveName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
 }
 
