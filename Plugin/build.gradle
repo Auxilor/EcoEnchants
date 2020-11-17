@@ -36,10 +36,7 @@ shadowJar {
     relocate('org.bstats.bukkit', 'com.willfp.ecoenchants.shaded.bstats')
     relocate('org.jetbrains', 'com.willfp.ecoenchants.shaded.jetbrains')
     relocate('org.intellij', 'com.willfp.ecoenchants.shaded.intellij')
-    relocate('org.apache.maven', 'com.willfp.ecoenchants.shaded.maven') {
-        exclude 'org.codehaus.plexus.util'
-    }
-    relocate('org.codehaus.plexus.util', 'com.willfp.ecoenchants.shaded.plexus')
+    relocate('org.apache.maven', 'com.willfp.ecoenchants.shaded.maven')
     archiveName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 
