@@ -1,5 +1,3 @@
-import org.gradle.api.tasks.compile.JavaCompile
-
 plugins {
     id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'java'
@@ -19,7 +17,7 @@ dependencies {
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4-SNAPSHOT'
     compileOnly 'com.github.TechFortress:GriefPrevention:16.14.0'
     compileOnly 'com.massivecraft:Factions:1.6.9.5-U0.5.10'
-    shadow files('../lib/Kingdoms-1.9.2.0.0.2.jar')
+    compileOnly 'com.github.cryptomorin:kingdoms:1.10.3.1'
     shadow files('../lib/SpartanAPI.jar')
     compileOnly 'com.github.TownyAdvanced:Towny:0.96.2.0'
     compileOnly 'com.github.angeschossen:LandsAPI:4.7.3'
