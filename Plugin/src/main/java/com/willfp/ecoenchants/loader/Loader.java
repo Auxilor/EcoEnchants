@@ -77,8 +77,8 @@ public class Loader {
     public static void load() {
         Logger.info("==========================================");
         Logger.info("");
-        Logger.info("Loading §aEcoEnchants");
-        Logger.info("Made by §aAuxilor§f - willfp.com");
+        Logger.info("Loading &aEcoEnchants");
+        Logger.info("Made by &aAuxilor&f - willfp.com");
         Logger.info("");
         Logger.info("==========================================");
 
@@ -112,34 +112,34 @@ public class Loader {
         Logger.info("Loading NMS APIs...");
 
         if(Cooldown.init()) {
-            Logger.info("Cooldown: §aSUCCESS");
+            Logger.info("Cooldown: &aSUCCESS");
         } else {
-            Logger.info("Cooldown: §cFAILURE");
-            Logger.error("§cAborting...");
+            Logger.info("Cooldown: &cFAILURE");
+            Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
         if(TridentStack.init()) {
-            Logger.info("Trident API: §aSUCCESS");
+            Logger.info("Trident API: &aSUCCESS");
         } else {
-            Logger.info("Trident API: §cFAILURE");
-            Logger.error("§cAborting...");
+            Logger.info("Trident API: &cFAILURE");
+            Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
         if(BlockBreak.init()) {
-            Logger.info("Block Break: §aSUCCESS");
+            Logger.info("Block Break: &aSUCCESS");
         } else {
-            Logger.info("Block Break: §cFAILURE");
-            Logger.error("§cAborting...");
+            Logger.info("Block Break: &cFAILURE");
+            Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
         if(RepairCost.init()) {
-            Logger.info("Repair Cost: §aSUCCESS");
+            Logger.info("Repair Cost: &aSUCCESS");
         } else {
-            Logger.info("Repair Cost: §cFAILURE");
-            Logger.error("§cAborting...");
+            Logger.info("Repair Cost: &cFAILURE");
+            Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
         
@@ -179,7 +179,7 @@ public class Loader {
         EnchantmentRarity.update();
         EnchantmentTarget.update();
         if(EnchantmentRarity.getAll().size() == 0 || EnchantmentTarget.getAll().size() == 0) {
-            Logger.error("§cError loading rarities or targets! Aborting...");
+            Logger.error("&cError loading rarities or targets! Aborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
@@ -205,7 +205,7 @@ public class Loader {
 
         ExtensionManager.loadExtensions();
         if(ExtensionManager.getLoadedExtensions().isEmpty()) {
-            Logger.info("§cNo extensions found");
+            Logger.info("&cNo extensions found");
         } else {
             Logger.info("Extensions Loaded:");
             ExtensionManager.getLoadedExtensions().forEach((extension, name) -> {
@@ -215,7 +215,7 @@ public class Loader {
         Logger.info("");
 
         if (EcoEnchants.getAll().size() == 0) {
-            Logger.error("§cError adding enchantments! Aborting...");
+            Logger.error("&cError adding enchantments! Aborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
@@ -300,7 +300,7 @@ public class Loader {
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), Loader::postLoad, 1);
 
-        Logger.info("Loaded §aEcoEnchants!");
+        Logger.info("Loaded &aEcoEnchants!");
     }
 
     /**
@@ -323,15 +323,15 @@ public class Loader {
             Logger.info("EcoEnchants Updater");
             Logger.info("");
             if (currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion)) {
-                Logger.info("§aEcoEnchants is up to date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
+                Logger.info("&aEcoEnchants is up to date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
             } else {
                 EcoEnchantsPlugin.outdated = true;
                 EcoEnchantsPlugin.newVersion = version;
 
                 Bukkit.getScheduler().runTaskTimer(EcoEnchantsPlugin.getInstance(), () -> {
-                    Logger.info("§6EcoEnchants is out of date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
-                    Logger.info("§6The newest version is §f" + version);
-                    Logger.info("§6Download the new version here: §fhttps://www.spigotmc.org/resources/ecoenchants.79573/");
+                    Logger.info("&6EcoEnchants is out of date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
+                    Logger.info("&6The newest version is &f" + version);
+                    Logger.info("&6Download the new version here: &fhttps://www.spigotmc.org/resources/ecoenchants.79573/");
                 }, 0, 864000);
             }
             Logger.info("");
@@ -347,94 +347,94 @@ public class Loader {
 
         if(Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
             AntigriefManager.register(new AntigriefWorldGuard());
-            Logger.info("WorldGuard: §aENABLED");
+            Logger.info("WorldGuard: &aENABLED");
         } else {
-            Logger.info("WorldGuard: §9DISABLED");
+            Logger.info("WorldGuard: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("GriefPrevention")) {
             AntigriefManager.register(new AntigriefGriefPrevention());
-            Logger.info("GriefPrevention: §aENABLED");
+            Logger.info("GriefPrevention: &aENABLED");
         } else {
-            Logger.info("GriefPrevention: §9DISABLED");
+            Logger.info("GriefPrevention: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")) {
             AntigriefManager.register(new AntigriefFactionsUUID());
-            Logger.info("FactionsUUID: §aENABLED");
+            Logger.info("FactionsUUID: &aENABLED");
         } else {
-            Logger.info("FactionsUUID: §9DISABLED");
+            Logger.info("FactionsUUID: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("Towny")) {
             AntigriefManager.register(new AntigriefTowny());
-            Logger.info("Towny: §aENABLED");
+            Logger.info("Towny: &aENABLED");
         } else {
-            Logger.info("Towny: §9DISABLED");
+            Logger.info("Towny: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("Lands")) {
             AntigriefManager.register(new AntigriefLands());
-            Logger.info("Lands: §aENABLED");
+            Logger.info("Lands: &aENABLED");
         } else {
-            Logger.info("Lands: §9DISABLED");
+            Logger.info("Lands: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("Kingdoms")) {
             AntigriefManager.register(new AntigriefKingdoms());
-            Logger.info("Kingdoms: §aENABLED");
+            Logger.info("Kingdoms: &aENABLED");
         } else {
-            Logger.info("Kingdoms: §9DISABLED");
+            Logger.info("Kingdoms: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
             EssentialsManager.register(new IntegrationEssentials());
-            Logger.info("Essentials: §aENABLED");
+            Logger.info("Essentials: &aENABLED");
             EssentialsManager.registerEnchantments();
         } else {
-            Logger.info("Essentials: §9DISABLED");
+            Logger.info("Essentials: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
             AnticheatManager.register(new AnticheatAAC());
-            Logger.info("AAC: §aENABLED");
+            Logger.info("AAC: &aENABLED");
         } else {
-            Logger.info("AAC: §9DISABLED");
+            Logger.info("AAC: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("Matrix")) {
             AnticheatManager.register(new AnticheatMatrix());
-            Logger.info("Matrix: §aENABLED");
+            Logger.info("Matrix: &aENABLED");
         } else {
-            Logger.info("Matrix: §9DISABLED");
+            Logger.info("Matrix: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("NoCheatPlus")) {
             AnticheatManager.register(new AnticheatNCP());
-            Logger.info("NCP: §aENABLED");
+            Logger.info("NCP: &aENABLED");
         } else {
-            Logger.info("NCP: §9DISABLED");
+            Logger.info("NCP: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("Spartan")) {
             AnticheatManager.register(new AnticheatSpartan());
-            Logger.info("Spartan: §aENABLED");
+            Logger.info("Spartan: &aENABLED");
         } else {
-            Logger.info("Spartan: §9DISABLED");
+            Logger.info("Spartan: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI());
-            Logger.info("PlaceholderAPI: §aENABLED");
+            Logger.info("PlaceholderAPI: &aENABLED");
         } else {
-            Logger.info("PlaceholderAPI: §9DISABLED");
+            Logger.info("PlaceholderAPI: &9DISABLED");
         }
 
         if(Bukkit.getPluginManager().isPluginEnabled("mcMMO")) {
             McmmoManager.registerIntegration(new McmmoIntegrationImpl());
-            Logger.info("mcMMO: §aENABLED");
+            Logger.info("mcMMO: &aENABLED");
         } else {
-            Logger.info("mcMMO: §9DISABLED");
+            Logger.info("mcMMO: &9DISABLED");
         }
 
 
@@ -449,7 +449,7 @@ public class Loader {
             Logger.error("You don't seem to be running paper!");
             Logger.error("Paper is strongly recommended for all servers,");
             Logger.error("and some enchantments may not function properly without it");
-            Logger.error("Download Paper from §fhttps://papermc.io");
+            Logger.error("Download Paper from &fhttps://papermc.io");
             Logger.error("");
             Logger.error("----------------------------");
             Logger.error("");
@@ -467,7 +467,7 @@ public class Loader {
      * Called by {@link EcoEnchantsPlugin#onDisable()}
      */
     public static void unload() {
-        Logger.info("§cDisabling EcoEnchants...");
+        Logger.info("&cDisabling EcoEnchants...");
         Logger.info("Removing Block Populators...");
         Bukkit.getServer().getWorlds().forEach((world -> {
             List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
@@ -478,9 +478,9 @@ public class Loader {
             }));
         }));
         Logger.info("");
-        Logger.info("§cUnloading Extensions...");
+        Logger.info("&cUnloading Extensions...");
         ExtensionManager.unloadExtensions();
-        Logger.info("§fBye! :)");
+        Logger.info("&fBye! :)");
     }
 
     /**
