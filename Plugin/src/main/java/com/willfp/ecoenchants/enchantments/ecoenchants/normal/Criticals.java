@@ -21,7 +21,14 @@ public final class Criticals extends EcoEnchant {
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
-        double bonus = 1 + (multiplier * level);
-        event.setDamage(damage * bonus);
+        if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-additive")) {
+            damage = damage/1.5;
+            double bonus = damage * (multiplier * level);
+            damage = damage + bonus + damage/2;
+            event.setDamage(damage);
+        } else {
+            double bonus = 1 + (multiplier * level);
+            event.setDamage(damage * bonus);
+        }
     }
 }
