@@ -55,6 +55,7 @@ import com.willfp.ecoenchants.util.ClassUtils;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.UpdateChecker;
+import com.willfp.ecoenchants.util.interfaces.Callable;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
@@ -62,9 +63,11 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.generator.BlockPopulator;
+import org.bukkit.plugin.Plugin;
+import org.checkerframework.checker.units.qual.A;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class containing methods for the loading and unloading of EcoEnchants
@@ -169,6 +172,58 @@ public class Loader {
         Bukkit.getPluginManager().registerEvents(new VillagerListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getPluginManager().registerEvents(new ArrowListeners(), EcoEnchantsPlugin.getInstance());
         Bukkit.getPluginManager().registerEvents(new WatcherTriggers(), EcoEnchantsPlugin.getInstance());
+        Logger.info("");
+
+        /*
+        Load integrations
+         */
+
+        Logger.info("Loading Integrations...");
+
+        final HashMap<String, Callable> integrations = new HashMap<String, Callable>() {{
+            // AntiGrief
+            put("WorldGuard", () -> AntigriefManager.register(new AntigriefWorldGuard()));
+            put("GriefPrevention", () -> AntigriefManager.register(new AntigriefGriefPrevention()));
+            put("FactionsUUID", () -> AntigriefManager.register(new AntigriefFactionsUUID()));
+            put("Towny", () -> AntigriefManager.register(new AntigriefTowny()));
+            put("Lands", () -> AntigriefManager.register(new AntigriefLands()));
+            put("Kingdoms", () -> AntigriefManager.register(new AntigriefKingdoms()));
+
+            // AntiCheat
+            put("AAC", () -> AnticheatManager.register(new AnticheatAAC()));
+            put("Matrix", () -> AnticheatManager.register(new AnticheatMatrix()));
+            put("NoCheatPlus", () -> AnticheatManager.register(new AnticheatNCP()));
+            put("Spartan", () -> AnticheatManager.register(new AnticheatSpartan()));
+
+            // MISC
+            put("Essentials", () -> EssentialsManager.register(new IntegrationEssentials()));
+            put("PlaceholderAPI", () -> PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI()));
+            put("mcMMO", () -> McmmoManager.registerIntegration(new McmmoIntegrationImpl()));
+        }};
+
+        Set<String> enabledPlugins = Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toSet());
+
+        integrations.forEach(((s, callable) -> {
+            StringBuilder log = new StringBuilder();
+            log.append(s).append(": ");
+            if(enabledPlugins.contains(s)) {
+                callable.call();
+                log.append("&aENABLED");
+            } else {
+                log.append("&9DISABLED");
+            }
+            Logger.info(log.toString());
+        }));
+
+        Prerequisite.update();
+
+        if(ClassUtils.exists("net.wesjd.anvilgui.AnvilGUI")) {
+            AnvilGUIManager.registerIntegration(new AnvilGUIImpl());
+            Logger.info("AnvilGUI: &aENABLED");
+        } else {
+            Logger.info("AnvilGUI: &9DISABLED");
+        }
+
         Logger.info("");
 
         /*
@@ -349,109 +404,7 @@ public class Loader {
         Logger.info("");
         Logger.info("Updating cache...");
         EnchantmentCache.update();
-
-        Logger.info("");
-        Logger.info("Loading Integrations...");
-
-        if(Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
-            AntigriefManager.register(new AntigriefWorldGuard());
-            Logger.info("WorldGuard: &aENABLED");
-        } else {
-            Logger.info("WorldGuard: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("GriefPrevention")) {
-            AntigriefManager.register(new AntigriefGriefPrevention());
-            Logger.info("GriefPrevention: &aENABLED");
-        } else {
-            Logger.info("GriefPrevention: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("FactionsUUID")) {
-            AntigriefManager.register(new AntigriefFactionsUUID());
-            Logger.info("FactionsUUID: &aENABLED");
-        } else {
-            Logger.info("FactionsUUID: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("Towny")) {
-            AntigriefManager.register(new AntigriefTowny());
-            Logger.info("Towny: &aENABLED");
-        } else {
-            Logger.info("Towny: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("Lands")) {
-            AntigriefManager.register(new AntigriefLands());
-            Logger.info("Lands: &aENABLED");
-        } else {
-            Logger.info("Lands: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("Kingdoms")) {
-            AntigriefManager.register(new AntigriefKingdoms());
-            Logger.info("Kingdoms: &aENABLED");
-        } else {
-            Logger.info("Kingdoms: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
-            EssentialsManager.register(new IntegrationEssentials());
-            Logger.info("Essentials: &aENABLED");
-            EssentialsManager.registerEnchantments();
-        } else {
-            Logger.info("Essentials: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("AAC")) {
-            AnticheatManager.register(new AnticheatAAC());
-            Logger.info("AAC: &aENABLED");
-        } else {
-            Logger.info("AAC: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("Matrix")) {
-            AnticheatManager.register(new AnticheatMatrix());
-            Logger.info("Matrix: &aENABLED");
-        } else {
-            Logger.info("Matrix: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("NoCheatPlus")) {
-            AnticheatManager.register(new AnticheatNCP());
-            Logger.info("NCP: &aENABLED");
-        } else {
-            Logger.info("NCP: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("Spartan")) {
-            AnticheatManager.register(new AnticheatSpartan());
-            Logger.info("Spartan: &aENABLED");
-        } else {
-            Logger.info("Spartan: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI());
-            Logger.info("PlaceholderAPI: &aENABLED");
-        } else {
-            Logger.info("PlaceholderAPI: &9DISABLED");
-        }
-
-        if(Bukkit.getPluginManager().isPluginEnabled("mcMMO")) {
-            McmmoManager.registerIntegration(new McmmoIntegrationImpl());
-            Logger.info("mcMMO: &aENABLED");
-        } else {
-            Logger.info("mcMMO: &9DISABLED");
-        }
-
-        if(ClassUtils.exists("net.wesjd.anvilgui.AnvilGUI")) {
-            AnvilGUIManager.registerIntegration(new AnvilGUIImpl());
-            Logger.info("AnvilGUI: &aENABLED");
-        } else {
-            Logger.info("AnvilGUI: &9DISABLED");
-        }
-
+        EssentialsManager.registerEnchantments();
 
         /*
         Check for paper

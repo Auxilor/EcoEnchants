@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.util.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -23,20 +24,22 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unchecked")
 public final class CommandEcodebug extends AbstractCommand {
     public CommandEcodebug() {
-        super("ecodebug", "ecoenchants.ecodebug", true);
+        super("ecodebug", "ecoenchants.ecodebug", false);
     }
 
     @Override
     public void onExecute(CommandSender sender, List<String> args) {
         Logger.info("--------------- BEGIN DEBUG ----------------");
-        Player player = (Player) sender;
-        player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand().toString());
-        Logger.info("");
+        if(sender instanceof Player) {
+            Player player = (Player) sender;
+            player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand().toString());
+            Logger.info("");
+
+            Logger.info("Held Item: " + player.getInventory().getItemInMainHand().toString());
+            Logger.info("");
+        }
 
         Logger.info("Running Version: " + EcoEnchantsPlugin.getInstance().getDescription().getVersion());
-        Logger.info("");
-
-        Logger.info("Held Item: " + player.getInventory().getItemInMainHand().toString());
         Logger.info("");
 
         Logger.info("EcoEnchants.getAll(): " + EcoEnchants.getAll().toString());
@@ -70,11 +73,10 @@ public final class CommandEcodebug extends AbstractCommand {
         Logger.info("");
 
         List<Enchantment> brokenCache = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
-        brokenCache.removeAll(EnchantmentCache.getCache().stream()
-                .filter(cacheEntry -> cacheEntry.getRawName().equalsIgnoreCase("null")
-                        || cacheEntry.getName().equalsIgnoreCase("null")
-                        || cacheEntry.getStringDescription().equalsIgnoreCase("null "))
-                .map(EnchantmentCache.CacheEntry::getEnchantment).collect(Collectors.toList()));
+        brokenCache.removeIf(enchantment -> !(
+                EnchantmentCache.getEntry(enchantment).getName().equalsIgnoreCase("null") ||
+                EnchantmentCache.getEntry(enchantment).getRawName().equalsIgnoreCase("null") ||
+                EnchantmentCache.getEntry(enchantment).getStringDescription().equalsIgnoreCase("null")));
         Logger.info("Enchantments with broken cache: " + brokenCache.toString());
         Logger.info("");
 

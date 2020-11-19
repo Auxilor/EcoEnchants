@@ -68,9 +68,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, plugin, this.type));
         this.config = ConfigManager.getEnchantmentConfig(this.permissionName);
 
-        if(!Prerequisite.areMet(prerequisites))
-            return;
-
         if(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
             Permission permission = new Permission(
                     "ecoenchants.fromtable." + permissionName,
@@ -80,6 +77,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             permission.addParent(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*"), true);
             Bukkit.getPluginManager().addPermission(permission);
         }
+
+        if(!Prerequisite.areMet(prerequisites))
+            return;
 
         this.update();
         this.add();

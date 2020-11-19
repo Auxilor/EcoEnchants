@@ -36,6 +36,10 @@ public enum Prerequisite {
     }
 
     static {
+        update();
+    }
+
+    public static void update() {
         MinVer1_16.setMet(!Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].contains("15"));
         HasPaper.setMet(ClassUtils.exists("com.destroystokyo.paper.event.player.PlayerElytraBoostEvent"));
     }
