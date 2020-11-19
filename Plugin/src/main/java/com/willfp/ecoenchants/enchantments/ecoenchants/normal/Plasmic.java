@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -19,17 +20,31 @@ public final class Plasmic extends EcoEnchant {
 
     // START OF LISTENERS
 
-    private static final Material[] items = {
-            Material.DIAMOND_HELMET,
-            Material.DIAMOND_CHESTPLATE,
-            Material.DIAMOND_LEGGINGS,
-            Material.DIAMOND_BOOTS,
+    private static Material[] items;
 
-            Material.NETHERITE_HELMET,
-            Material.NETHERITE_CHESTPLATE,
-            Material.NETHERITE_LEGGINGS,
-            Material.NETHERITE_BOOTS
-    };
+    static {
+        if(Prerequisite.MinVer1_16.isMet()) {
+            items = new Material[]{
+                    Material.DIAMOND_HELMET,
+                    Material.DIAMOND_CHESTPLATE,
+                    Material.DIAMOND_LEGGINGS,
+                    Material.DIAMOND_BOOTS,
+
+                    Material.NETHERITE_HELMET,
+                    Material.NETHERITE_CHESTPLATE,
+                    Material.NETHERITE_LEGGINGS,
+                    Material.NETHERITE_BOOTS
+            };
+        } else {
+            items = new Material[]{
+                    Material.DIAMOND_HELMET,
+                    Material.DIAMOND_CHESTPLATE,
+                    Material.DIAMOND_LEGGINGS,
+                    Material.DIAMOND_BOOTS
+            };
+
+        }
+    }
 
     @Override
     public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
