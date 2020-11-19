@@ -20,7 +20,7 @@ public final class Plasmic extends EcoEnchant {
 
     // START OF LISTENERS
 
-    private static Material[] items;
+    private static final Material[] items;
 
     static {
         if(Prerequisite.MinVer1_16.isMet()) {
@@ -42,7 +42,6 @@ public final class Plasmic extends EcoEnchant {
                     Material.DIAMOND_LEGGINGS,
                     Material.DIAMOND_BOOTS
             };
-
         }
     }
 
