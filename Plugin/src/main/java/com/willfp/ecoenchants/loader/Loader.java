@@ -40,6 +40,8 @@ import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefKingdoms;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefLands;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
+import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIManager;
+import com.willfp.ecoenchants.integrations.anvilgui.plugins.AnvilGUIImpl;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
@@ -48,10 +50,8 @@ import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
-import com.willfp.ecoenchants.nms.BlockBreak;
-import com.willfp.ecoenchants.nms.Cooldown;
-import com.willfp.ecoenchants.nms.RepairCost;
-import com.willfp.ecoenchants.nms.TridentStack;
+import com.willfp.ecoenchants.nms.*;
+import com.willfp.ecoenchants.util.ClassUtils;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.UpdateChecker;
@@ -139,6 +139,14 @@ public class Loader {
             Logger.info("Repair Cost: &aSUCCESS");
         } else {
             Logger.info("Repair Cost: &cFAILURE");
+            Logger.error("&cAborting...");
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
+        }
+
+        if(OpenInventory.init()) {
+            Logger.info("Open Inventory: &aSUCCESS");
+        } else {
+            Logger.info("Open Inventory: &cFAILURE");
             Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
@@ -435,6 +443,13 @@ public class Loader {
             Logger.info("mcMMO: &aENABLED");
         } else {
             Logger.info("mcMMO: &9DISABLED");
+        }
+
+        if(ClassUtils.exists("net.wesjd.anvilgui.AnvilGUI")) {
+            AnvilGUIManager.registerIntegration(new AnvilGUIImpl());
+            Logger.info("AnvilGUI: &aENABLED");
+        } else {
+            Logger.info("AnvilGUI: &9DISABLED");
         }
 
 

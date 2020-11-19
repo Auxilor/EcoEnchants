@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIManager;
 import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.tuplets.Pair;
@@ -34,9 +35,7 @@ public class AnvilListeners implements Listener {
         if(event.getViewers().isEmpty()) return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
 
         Player player = (Player) event.getViewers().get(0);
-        if(player.getOpenInventory().getTitle().toLowerCase().contains("quest")) return; // Fix for QuestsGUI
-        if(event.getView().getTitle().toLowerCase().contains("quest")) return; // Maybe this will fix it?
-        if(event.getView().getTitle().toLowerCase().contains("contents")) return; // Fix for ticketGui
+        if(AnvilGUIManager.hasAnvilGUIOpen(player)) return;
 
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
