@@ -23,5 +23,6 @@ config:
   activation-sound: ENTITY_GHAST_SHOOT
   cooldown: 60 # In seconds
   velocity: 3
+  fire: true
   damage-per-level: 8
   no-explode: false # Don't explode
