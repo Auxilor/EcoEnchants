@@ -15,7 +15,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 public class Firewand extends Spell {
     public Firewand() {
-        super("firewand");
+        super("firewand", FirewandMain.class);
     }
 
     @Override

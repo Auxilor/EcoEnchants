@@ -36,7 +36,11 @@ public abstract class Spell extends EcoEnchant {
     );
 
     protected Spell(String key, Prerequisite... prerequisites) {
-        super(key, EnchantmentType.SPELL, prerequisites);
+        this(key, EcoEnchantsPlugin.class, prerequisites);
+    }
+
+    protected Spell(String key, Class<?> plugin, Prerequisite... prerequisites) {
+        super(key, EnchantmentType.SPELL, plugin, prerequisites);
     }
 
     public int getCooldownTime() {

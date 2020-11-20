@@ -4,7 +4,7 @@ dependencies {
 }
 
 jar{
-    archiveFileName = findProperty("Name") + " v" + findProperty("version") + ".jar"
+    archiveFileName = project.name + " Extension" + ".jar"
 }
 
 description = 'FireWand'

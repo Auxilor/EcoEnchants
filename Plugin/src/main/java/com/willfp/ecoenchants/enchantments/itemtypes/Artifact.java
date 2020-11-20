@@ -34,7 +34,11 @@ public abstract class Artifact extends EcoEnchant {
     private Particle.DustOptions extra;
 
     protected Artifact(String key, Prerequisite... prerequisites) {
-        super(key, EnchantmentType.ARTIFACT, prerequisites);
+        this(key, EcoEnchantsPlugin.class, prerequisites);
+    }
+
+    protected Artifact(String key, Class<?> plugin, Prerequisite... prerequisites) {
+        super(key, EnchantmentType.ARTIFACT, plugin, prerequisites);
 
         if(!Prerequisite.areMet(prerequisites)) {
             HandlerList.unregisterAll(this); // Prevent events firing
@@ -43,6 +47,7 @@ public abstract class Artifact extends EcoEnchant {
 
         this.particle = this.getParticle();
         this.extra = this.getDustOptions();
+
     }
 
     protected abstract Particle getParticle();
