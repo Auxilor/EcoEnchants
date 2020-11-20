@@ -20,7 +20,7 @@ general-config:
   maximum-level: 3
 
 config:
-  activation-sound: ENTITY_WITHER_SHOOT
+  activation-sound: ENTITY_GHAST_SHOOT
   cooldown: 60 # In seconds
   velocity: 3
   damage-per-level: 8

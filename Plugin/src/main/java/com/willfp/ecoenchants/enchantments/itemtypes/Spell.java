@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
+import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -59,7 +60,7 @@ public abstract class Spell extends EcoEnchant {
             if(!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
                 return;
         } else {
-            if(!(event.getAction().equals(Action.LEFT_CLICK_BLOCK) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)))
+            if(!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)))
                 return;
         }
 
