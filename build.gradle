@@ -103,6 +103,10 @@ allprojects {
     compileJava.options.encoding = 'UTF-8'
 }
 
+clean.doLast {
+    file("${rootDir}/bin").deleteDir()
+}
+
 group = 'com.willfp.ecoenchants'
 archivesBaseName = project.name
 version = project.version

@@ -53,6 +53,10 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+tasks.withType(Jar) {
+    destinationDirectory = file("$rootDir/bin/")
+}
+
 compileJava.dependsOn clean
 build.dependsOn shadowJar
 
