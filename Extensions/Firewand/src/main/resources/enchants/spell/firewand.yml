@@ -1,0 +1,27 @@
+#
+# Firewand EcoEnchant
+#
+
+name: "Firewand"
+description: Shoots a fireball
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - rod
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 3
+
+config:
+  activation-sound: ENTITY_WITHER_SHOOT
+  cooldown: 60 # In seconds
+  velocity: 3
+  damage-per-level: 8
+  no-explode: false # Don't explode

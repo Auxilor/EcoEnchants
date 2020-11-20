@@ -16,7 +16,7 @@ public class Quake extends Spell {
     }
 
     @Override
-    public void onRightClick(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(Player player, int level, PlayerInteractEvent event) {
         int radius = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "radius-per-level") * level;
         int damage = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level;
 

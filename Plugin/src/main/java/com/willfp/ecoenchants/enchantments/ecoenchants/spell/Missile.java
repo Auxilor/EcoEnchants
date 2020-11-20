@@ -18,7 +18,7 @@ public class Missile extends Spell {
     }
 
     @Override
-    public void onRightClick(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(Player player, int level, PlayerInteractEvent event) {
         WitherSkull skull = player.launchProjectile(WitherSkull.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
         skull.setCharged(true);
         skull.setIsIncendiary(false);

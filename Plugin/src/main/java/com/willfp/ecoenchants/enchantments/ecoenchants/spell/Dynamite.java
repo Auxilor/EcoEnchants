@@ -22,7 +22,7 @@ public class Dynamite extends Spell {
     }
 
     @Override
-    public void onRightClick(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(Player player, int level, PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
         if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))

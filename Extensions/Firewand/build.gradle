@@ -1,0 +1,14 @@
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
+    compileOnly project(':plugin')
+}
+
+jar{
+    archiveFileName = findProperty("Name") + " v" + findProperty("version") + ".jar"
+}
+
+description = 'FireWand'
+
+tasks.withType(Jar) {
+    destinationDirectory = file("$rootDir/bin/")
+}

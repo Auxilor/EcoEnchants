@@ -11,7 +11,7 @@ public class Vitalize extends Spell {
     }
 
     @Override
-    public void onRightClick(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(Player player, int level, PlayerInteractEvent event) {
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
     }
 }

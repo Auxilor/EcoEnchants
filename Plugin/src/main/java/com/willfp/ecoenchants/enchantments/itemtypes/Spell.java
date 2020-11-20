@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -16,8 +17,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,6 +30,10 @@ import java.util.UUID;
 public abstract class Spell extends EcoEnchant {
     private final HashMap<UUID, SpellRunnable> cooldownTracker = new HashMap<>();
     private final Set<UUID> runningSpell = new HashSet<>();
+    private static final List<Material> leftClickItems = Arrays.asList(
+            Material.FISHING_ROD,
+            Material.BOW
+    );
 
     protected Spell(String key, Prerequisite... prerequisites) {
         super(key, EnchantmentType.SPELL, prerequisites);
@@ -41,11 +48,16 @@ public abstract class Spell extends EcoEnchant {
     }
 
     @EventHandler
-    public void onRightClickEventHandler(PlayerInteractEvent event) {
-        if(!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
-            return;
-
+    public void onUseEventHandler(PlayerInteractEvent event) {
         Player player = event.getPlayer();
+
+        if(!leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
+            if(!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
+                return;
+        } else {
+            if(!(event.getAction().equals(Action.LEFT_CLICK_BLOCK) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)))
+                return;
+        }
 
         if(runningSpell.contains(player.getUniqueId())) return;
 
@@ -62,7 +74,7 @@ public abstract class Spell extends EcoEnchant {
 
         SpellRunnable runnable = cooldownTracker.get(player.getUniqueId());
         runnable.setTask(() -> {
-            this.onRightClick(player, level, event);
+            this.onUse(player, level, event);
         });
 
         int cooldown = getCooldown(this, player);
@@ -80,7 +92,7 @@ public abstract class Spell extends EcoEnchant {
         runnable.run();
     }
 
-    public abstract void onRightClick(Player player, int level, PlayerInteractEvent event);
+    public abstract void onUse(Player player, int level, PlayerInteractEvent event);
 
     public static int getCooldown(Spell spell, Player player) {
         if(!spell.cooldownTracker.containsKey(player.getUniqueId()))
