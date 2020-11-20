@@ -56,18 +56,19 @@ public abstract class Spell extends EcoEnchant {
     public void onUseEventHandler(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if(!leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
-            if(!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
-                return;
-        } else {
-            if(!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)))
-                return;
-        }
-
         if(runningSpell.contains(player.getUniqueId())) return;
-
         runningSpell.add(player.getUniqueId());
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> runningSpell.remove(player.getUniqueId()), 5);
+
+        if(leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
+            if(!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+                return;
+            }
+        } else {
+            if(!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
+                return;
+            }
+        }
 
         if(!EnchantChecks.mainhand(player, this))
             return;
