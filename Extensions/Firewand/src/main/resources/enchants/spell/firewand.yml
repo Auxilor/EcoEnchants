@@ -15,6 +15,7 @@ obtaining:
 general-config:
   targets:
     - rod
+    - carrot_stick
   grindstoneable: true
   conflicts: []
   maximum-level: 3
