@@ -32,6 +32,7 @@ public class EnchantingListeners implements Listener {
         add(Material.SHIELD);
         add(Material.FLINT_AND_STEEL);
         add(Material.SHEARS);
+        add(Material.CARROT_ON_A_STICK);
     }};
     public static HashMap<Player, int[]> currentlyEnchantingSecondary = new HashMap<>();
 
