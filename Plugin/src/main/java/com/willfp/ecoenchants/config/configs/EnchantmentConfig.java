@@ -93,8 +93,10 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
         Set<EnchantmentTarget> targets = new HashSet<>();
 
         targetNames.forEach((s -> {
-            if(EnchantmentTarget.getByName(s) == null)
+            if(EnchantmentTarget.getByName(s) == null) {
                 Logger.error(s + " is an invalid target!");
+                return;
+            }
             targets.add(EnchantmentTarget.getByName(s));
         }));
 
