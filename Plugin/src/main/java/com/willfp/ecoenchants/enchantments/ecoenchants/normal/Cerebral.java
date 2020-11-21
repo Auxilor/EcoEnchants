@@ -18,7 +18,7 @@ public final class Cerebral extends EcoEnchant {
 
     @Override
     public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if (!(arrow.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
+        if (arrow.getLocation().getY() < victim.getLocation().getY() + victim.getEyeHeight() - 0.22) return;
 
         if (!EnchantChecks.arrow(arrow, this)) return;
 
