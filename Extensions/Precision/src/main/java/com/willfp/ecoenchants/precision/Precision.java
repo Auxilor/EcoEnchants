@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class Precision extends EcoEnchant {
     public Precision() {
         super(
-                "precision", EnchantmentType.SPECIAL
+                "precision", EnchantmentType.SPECIAL, PrecisionMain.class
         );
     }
 
