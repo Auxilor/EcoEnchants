@@ -32,7 +32,7 @@ public final class Frozen extends EcoEnchant {
         Player player = (Player) event.getEntity();
         LivingEntity victim = (LivingEntity) event.getDamager();
 
-        final int points = EnchantChecks.getArmorPoints(player, this, 1);
+        final int points = EnchantChecks.getArmorPoints(player, this, 0);
 
         if (points == 0)
             return;

@@ -25,7 +25,6 @@ public final class Dullness extends EcoEnchant {
                 return;
         }
 
-
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 
