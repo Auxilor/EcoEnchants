@@ -1,9 +1,7 @@
 package com.willfp.ecoenchants.nms;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.nms.API.BlockBreakWrapper;
 import com.willfp.ecoenchants.nms.API.OpenInventoryWrapper;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class OpenInventory {

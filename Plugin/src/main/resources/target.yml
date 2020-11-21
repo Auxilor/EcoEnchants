@@ -8,11 +8,11 @@ targets:
     - golden_axe
     - diamond_axe
     - netherite_axe
-  
+
   book:
     - book
     - enchanted_book
-    
+
   pickaxe:
     - wooden_pickaxe
     - stone_pickaxe
@@ -20,7 +20,7 @@ targets:
     - golden_pickaxe
     - diamond_pickaxe
     - netherite_pickaxe
-  
+
   hoe:
     - wooden_hoe
     - stone_hoe

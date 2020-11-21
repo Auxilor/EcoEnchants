@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.util.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

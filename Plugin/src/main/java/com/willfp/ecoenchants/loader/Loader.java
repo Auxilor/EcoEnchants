@@ -50,7 +50,11 @@ import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
-import com.willfp.ecoenchants.nms.*;
+import com.willfp.ecoenchants.nms.BlockBreak;
+import com.willfp.ecoenchants.nms.Cooldown;
+import com.willfp.ecoenchants.nms.OpenInventory;
+import com.willfp.ecoenchants.nms.RepairCost;
+import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.ClassUtils;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.StringUtils;
@@ -64,9 +68,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.plugin.Plugin;
-import org.checkerframework.checker.units.qual.A;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -153,7 +160,7 @@ public class Loader {
             Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
-        
+
         Logger.info("");
 
         /*

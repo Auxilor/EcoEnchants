@@ -12,7 +12,7 @@ public final class Arcanic extends EcoEnchant {
     }
 
     // START OF LISTENERS
-    
+
     @Override
     public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
         if (!(event.getCause().equals(EntityDamageEvent.DamageCause.POISON) || event.getCause().equals(EntityDamageEvent.DamageCause.WITHER)))
