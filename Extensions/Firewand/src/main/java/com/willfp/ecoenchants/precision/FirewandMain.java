@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.firewand;
+package com.willfp.ecoenchants.precision;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;

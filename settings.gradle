@@ -5,7 +5,6 @@ include('API')
 include('v1_16_R1')
 include('v1_16_R2')
 include('v1_16_R3')
-include('Firewand')
 
 project(":v1_15_R1").projectDir = file('NMS/v1_15_R1')
 project(":plugin").projectDir = file('Plugin')
@@ -13,4 +12,11 @@ project(":API").projectDir = file('NMS/API')
 project(":v1_16_R1").projectDir = file('NMS/v1_16_R1')
 project(":v1_16_R2").projectDir = file('NMS/v1_16_R2')
 project(":v1_16_R3").projectDir = file('NMS/v1_16_R3')
+
+// Extensions
+include('Firewand')
 project(":Firewand").projectDir = file('Extensions/Firewand')
+
+include('Precision')
+project(":Precision").projectDir = file('Extensions/Precision')
+

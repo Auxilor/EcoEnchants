@@ -1,0 +1,25 @@
+#
+# Precision EcoEnchant
+#
+
+name: "Precision"
+description: Tridents hone in on your target.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  targets:
+    - trident
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 5
+
+config:
+  distance-per-level: 4 # Distance to scan per level
+  check-ticks: 10 # Ticks between rotations
+  checks-per-level: 2 # Amount of times to rotate arrow per level (prevents "floating")
