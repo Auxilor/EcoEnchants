@@ -8,7 +8,6 @@ public class AnvilGUIImpl implements AnvilGUIIntegration {
 
     @Override
     public boolean isInstance(Object object) {
-        assert ANVIL_GUI_CLASS != null;
         return object.getClass().toString().equals(ANVIL_GUI_CLASS);
     }
 
