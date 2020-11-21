@@ -18,6 +18,7 @@ import org.bukkit.util.Vector;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @SuppressWarnings("unchecked")
 public final class Aiming extends EcoEnchant {
@@ -91,12 +92,18 @@ public final class Aiming extends EcoEnchant {
             }
         };
 
+        final int period = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "check-ticks");
+        final int checks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "checks-per-level") * level;
+        AtomicInteger checksPerformed = new AtomicInteger(0);
+
         new BukkitRunnable() {
             @Override
             public void run() {
+                checksPerformed.addAndGet(1);
+                if(checksPerformed.get() > checks) this.cancel();
                 if(arrow.isDead() || arrow.isInBlock() || arrow.isOnGround()) this.cancel();
                 Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), runnable);
             }
-        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 3, 5);
+        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 3, period);
     }
 }

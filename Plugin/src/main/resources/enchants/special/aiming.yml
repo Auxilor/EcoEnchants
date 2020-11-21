@@ -23,3 +23,5 @@ config:
   distance-per-level: 4 # Distance to scan per aiming level
   scale-on-force: true # Scale distance based on bow pull
   require-full-force: true # Require full bow pull (works with rapid) If true, then scale-on-force is irrelevant.
+  check-ticks: 10 # Ticks between rotations
+  checks-per-level: 2 # Amount of times to rotate arrow per level (prevents "floating")
