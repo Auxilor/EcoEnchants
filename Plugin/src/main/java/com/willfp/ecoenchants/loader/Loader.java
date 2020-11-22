@@ -273,8 +273,8 @@ public class Loader {
             Logger.info("&cNo extensions found");
         } else {
             Logger.info("Extensions Loaded:");
-            ExtensionManager.getLoadedExtensions().forEach((extension, name) -> {
-                Logger.info("- " + name);
+            ExtensionManager.getLoadedExtensions().forEach((extension, pair) -> {
+                Logger.info("- " + pair.getFirst() + " v" + pair.getSecond());
             });
         }
         Logger.info("");

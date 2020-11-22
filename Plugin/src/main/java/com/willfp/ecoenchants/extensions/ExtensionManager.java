@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.extensions;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -17,7 +18,7 @@ import java.util.Map;
  * Class containing method to load extensions
  */
 public class ExtensionManager {
-    private static final Map<Extension, String> extensions = new HashMap<>();
+    private static final Map<Extension, Pair<String, String>> extensions = new HashMap<>();
 
     /**
      * Load all extensions
@@ -63,12 +64,13 @@ public class ExtensionManager {
         }
 
         YamlConfiguration extensionYml = YamlConfiguration.loadConfiguration(new InputStreamReader(ymlIn));
-        if (!extensionYml.getKeys(false).contains("main") || !extensionYml.getKeys(false).contains("name")) {
+        if (!extensionYml.getKeys(false).contains("main") || !extensionYml.getKeys(false).contains("name") || !extensionYml.getKeys(false).contains("version")) {
             throw new MalformedExtensionException("Invalid extension.yml found in " + extensionJar.getName());
         }
 
         String mainClass = extensionYml.getString("main");
         String name = extensionYml.getString("name");
+        String version = extensionYml.getString("version");
 
         Class<?> cls;
         Object object = null;
@@ -84,7 +86,7 @@ public class ExtensionManager {
 
         Extension extension = (Extension) object;
         extension.onEnable();
-        extensions.put(extension, name);
+        extensions.put(extension, new Pair<>(name, version));
     }
 
     /**
@@ -109,7 +111,7 @@ public class ExtensionManager {
      * Get Map of all loaded extensions and their names
      * @return {@link Map} of {@link Extension}s and their names
      */
-    public static Map<Extension, String> getLoadedExtensions() {
+    public static Map<Extension, Pair<String, String>> getLoadedExtensions() {
         return extensions;
     }
 }
