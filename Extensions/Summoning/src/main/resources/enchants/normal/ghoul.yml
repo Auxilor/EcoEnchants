@@ -18,7 +18,7 @@ general-config:
     - crossbow
   grindstoneable: true
   conflicts:
-    - ghoulF
+    - mortality
   maximum-level: 4
 
 config:
