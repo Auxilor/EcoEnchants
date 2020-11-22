@@ -19,6 +19,7 @@ import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -163,6 +164,17 @@ public class ArmorListener implements Listener {
     public void playerJoinEvent(PlayerJoinEvent e) {
         ArmorEquipEvent armorEquipEvent = new ArmorEquipEvent(e.getPlayer(), null, null, null, null);
         Bukkit.getPluginManager().callEvent(armorEquipEvent);
+    }
+
+    @EventHandler
+    public void playerRespawnEvent(PlayerRespawnEvent e) {
+        Player p = e.getPlayer();
+        for (ItemStack i : p.getInventory().getArmorContents()) {
+            if (!isAirOrNull(i)) {
+                Bukkit.getPluginManager().callEvent(new ArmorEquipEvent(p, EquipMethod.DEATH, ArmorType.matchType(i), i, null));
+                // No way to cancel a death event.
+            }
+        }
     }
 
     @EventHandler
