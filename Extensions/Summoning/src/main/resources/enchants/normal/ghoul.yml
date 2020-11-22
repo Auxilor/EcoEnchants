@@ -17,7 +17,8 @@ general-config:
     - bow
     - crossbow
   grindstoneable: true
-  conflicts: []
+  conflicts:
+    - ghoulF
   maximum-level: 4
 
 config:

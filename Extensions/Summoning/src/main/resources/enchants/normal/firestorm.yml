@@ -16,7 +16,8 @@ general-config:
   targets:
     - sword
   grindstoneable: true
-  conflicts: []
+  conflicts:
+    - metallic
   maximum-level: 3
 
 config:

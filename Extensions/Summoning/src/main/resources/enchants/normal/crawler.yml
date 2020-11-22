@@ -16,7 +16,8 @@ general-config:
   targets:
     - trident
   grindstoneable: true
-  conflicts: []
+  conflicts:
+    - sniper
   maximum-level: 3
 
 config:
