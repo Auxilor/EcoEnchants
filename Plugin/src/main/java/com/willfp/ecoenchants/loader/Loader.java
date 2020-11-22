@@ -224,12 +224,7 @@ public class Loader {
 
         Prerequisite.update();
 
-        if(ClassUtils.exists("net.wesjd.anvilgui.AnvilGUI")) {
-            AnvilGUIManager.registerIntegration(new AnvilGUIImpl());
-            Logger.info("AnvilGUI: &aENABLED");
-        } else {
-            Logger.info("AnvilGUI: &9DISABLED");
-        }
+        AnvilGUIManager.registerIntegration(new AnvilGUIImpl()); // No direct lib, can always register
 
         Logger.info("");
 
