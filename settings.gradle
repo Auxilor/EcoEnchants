@@ -20,3 +20,6 @@ project(":Firewand").projectDir = file('Extensions/Firewand')
 include('Precision')
 project(":Precision").projectDir = file('Extensions/Precision')
 
+include('Effects')
+findProject(':Effects').projectDir = file('Extensions/Effects')
+

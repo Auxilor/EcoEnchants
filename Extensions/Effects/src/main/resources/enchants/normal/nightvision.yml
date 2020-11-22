@@ -1,0 +1,23 @@
+#
+# Night Vision EcoEnchant
+#
+
+name: "Night Vision"
+description: Gives you permanent night vision.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - helmet
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 1
+
+config:
+  # No config is available for this enchantment
