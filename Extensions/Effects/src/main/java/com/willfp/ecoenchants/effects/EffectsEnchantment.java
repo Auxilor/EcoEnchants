@@ -23,17 +23,16 @@ public abstract class EffectsEnchantment extends EcoEnchant {
         final Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            if (EnchantChecks.getArmorPoints(player, this) > 0) {
-                if (player.hasPotionEffect(this.getPotionEffect())) {
-                    if (player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
-                        player.removePotionEffect(this.getPotionEffect());
-                    }
+            if (player.hasPotionEffect(this.getPotionEffect())) {
+                if (player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
+                    player.removePotionEffect(this.getPotionEffect());
                 }
             }
 
             int level = EnchantChecks.getArmorPoints(player, this);
-
-            player.addPotionEffect(new PotionEffect(this.getPotionEffect(), 0x6fffffff, level-1, false, false, true));
+            if(level > 0) {
+                player.addPotionEffect(new PotionEffect(this.getPotionEffect(), 0x6fffffff, level - 1, false, false, true));
+            }
         }, 1);
     }
 }
