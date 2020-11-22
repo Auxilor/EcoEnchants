@@ -23,3 +23,5 @@ project(":Precision").projectDir = file('Extensions/Precision')
 include('Effects')
 findProject(':Effects').projectDir = file('Extensions/Effects')
 
+include('Summoning')
+findProject(':Summoning').projectDir = file('Extensions/Summoning')
