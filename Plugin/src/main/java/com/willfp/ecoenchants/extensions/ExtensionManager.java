@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.extensions;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,8 +12,13 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Class containing method to load extensions
@@ -64,8 +70,12 @@ public class ExtensionManager {
         }
 
         YamlConfiguration extensionYml = YamlConfiguration.loadConfiguration(new InputStreamReader(ymlIn));
-        if (!extensionYml.getKeys(false).contains("main") || !extensionYml.getKeys(false).contains("name") || !extensionYml.getKeys(false).contains("version")) {
-            throw new MalformedExtensionException("Invalid extension.yml found in " + extensionJar.getName());
+
+        Set<String> keys = extensionYml.getKeys(false);
+        ArrayList<String> required = new ArrayList<>(Arrays.asList("main", "name", "version"));
+        required.removeAll(keys);
+        if(!required.isEmpty()) {
+            throw new MalformedExtensionException("Invalid extension.yml found in " + extensionJar.getName() + " - Missing: " + String.join(", ", required));
         }
 
         String mainClass = extensionYml.getString("main");
