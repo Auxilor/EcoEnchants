@@ -408,11 +408,6 @@ public class Loader {
             Logger.info("----------------------------");
         });
 
-        Logger.info("");
-        Logger.info("Updating cache...");
-        EnchantmentCache.update();
-        EssentialsManager.registerEnchantments();
-
         /*
         Check for paper
          */
@@ -435,6 +430,7 @@ public class Loader {
         Logger.info("Updating cache...");
         EcoEnchants.getAll().forEach(EcoEnchant::update);
         EnchantmentCache.update();
+        EssentialsManager.registerEnchantments();
         Logger.info("");
     }
 
