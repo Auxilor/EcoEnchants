@@ -31,6 +31,8 @@ public class Endershot extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
+        if(!player.isSneaking()) return;
+
         if(!EnchantChecks.mainhand(player, this)) return;
 
         if(!player.getInventory().contains(Material.ENDER_PEARL, 1) && !player.getGameMode().equals(GameMode.CREATIVE))

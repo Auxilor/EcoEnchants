@@ -3,7 +3,7 @@
 #
 
 name: "Endershot"
-description: Shoot ender pearls out of your bow
+description: Shoot ender pearls out of your bow while crouching
 enabled: true
 
 obtaining:
