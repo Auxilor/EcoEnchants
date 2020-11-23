@@ -25,3 +25,6 @@ findProject(':Effects').projectDir = file('Extensions/Effects')
 
 include('Summoning')
 findProject(':Summoning').projectDir = file('Extensions/Summoning')
+
+include('Endershot')
+findProject(':Endershot').projectDir = file('Extensions/Endershot')

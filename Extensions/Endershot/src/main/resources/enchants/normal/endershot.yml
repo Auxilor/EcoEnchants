@@ -1,0 +1,24 @@
+#
+# Endershot EcoEnchant
+#
+
+name: "Endershot"
+description: Shoot ender pearls out of your bow
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - bow
+    - crossbow
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 1
+
+config:
+  work-with-infinity: true # Don't consume ender pearls when enchanted with infinity
