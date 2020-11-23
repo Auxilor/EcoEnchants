@@ -33,9 +33,9 @@ public class Endershot extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        event.setCancelled(true);
-
         if(!player.isSneaking()) return;
+
+        event.setCancelled(true);
 
         if(!EnchantChecks.mainhand(player, this)) return;
 
