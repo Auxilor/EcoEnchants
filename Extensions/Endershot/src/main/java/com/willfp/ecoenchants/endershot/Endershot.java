@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
@@ -31,6 +33,8 @@ public class Endershot extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
+        event.setCancelled(true);
+
         if(!player.isSneaking()) return;
 
         if(!EnchantChecks.mainhand(player, this)) return;
@@ -47,5 +51,6 @@ public class Endershot extends EcoEnchant {
         EnderPearl pearl = player.launchProjectile(EnderPearl.class);
         pearl.setShooter(player);
         pearl.setVelocity(event.getProjectile().getVelocity());
+        player.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1f, 1f);
     }
 }
