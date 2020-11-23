@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EnderPearl;
@@ -30,16 +31,14 @@ public class Endershot extends EcoEnchant {
 
         Player player = (Player) event.getEntity();
 
-        event.setCancelled(true);
-
         if(!EnchantChecks.mainhand(player, this)) return;
+
+        if(!player.getInventory().contains(Material.ENDER_PEARL, 1) && !player.getGameMode().equals(GameMode.CREATIVE))
+            return;
 
         boolean hasInfinity = EnchantChecks.mainhand(player, ARROW_INFINITE) && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "work-with-infinity");
         if(!hasInfinity) {
             ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 1);
-            if(!player.getInventory().contains(Material.ENDER_PEARL, 1))
-                return;
-
             player.getInventory().remove(pearl);
         }
 
