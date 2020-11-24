@@ -6,7 +6,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Goliath extends EcoEnchant {
+public class Goliath extends EcoEnchant {
     public Goliath() {
         super(
                 "goliath", EnchantmentType.NORMAL

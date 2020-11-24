@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Optics extends EcoEnchant {
+public class Optics extends EcoEnchant {
     public Optics() {
         super(
                 "optics", EnchantmentType.NORMAL

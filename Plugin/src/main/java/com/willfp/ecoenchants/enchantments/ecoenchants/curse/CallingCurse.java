@@ -18,7 +18,7 @@ import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 
-public final class CallingCurse extends EcoEnchant implements EcoRunnable {
+public class CallingCurse extends EcoEnchant implements EcoRunnable {
     public CallingCurse() {
         super(
                 "calling_curse", EnchantmentType.CURSE

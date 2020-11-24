@@ -16,7 +16,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
 
-public final class Forcefield extends EcoEnchant implements EcoRunnable {
+public class Forcefield extends EcoEnchant implements EcoRunnable {
     public Forcefield() {
         super(
                 "forcefield", EnchantmentType.NORMAL

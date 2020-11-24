@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class Telekinesis extends EcoEnchant {
+public class Telekinesis extends EcoEnchant {
     public Telekinesis() {
         super(
                 "telekinesis", EnchantmentType.NORMAL

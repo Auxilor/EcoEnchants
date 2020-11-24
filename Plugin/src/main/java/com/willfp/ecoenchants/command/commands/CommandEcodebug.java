@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
-public final class CommandEcodebug extends AbstractCommand {
+public class CommandEcodebug extends AbstractCommand {
     public CommandEcodebug() {
         super("ecodebug", "ecoenchants.ecodebug", false);
     }

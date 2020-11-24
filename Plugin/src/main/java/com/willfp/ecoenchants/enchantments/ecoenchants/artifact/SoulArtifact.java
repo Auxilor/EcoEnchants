@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Particle;
 
-public final class SoulArtifact extends Artifact {
+public class SoulArtifact extends Artifact {
     public SoulArtifact() {
         super(
                 "soul_artifact",

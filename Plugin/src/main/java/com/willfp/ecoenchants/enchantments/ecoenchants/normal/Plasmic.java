@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
-public final class Plasmic extends EcoEnchant {
+public class Plasmic extends EcoEnchant {
     public Plasmic() {
         super(
                 "plasmic", EnchantmentType.NORMAL

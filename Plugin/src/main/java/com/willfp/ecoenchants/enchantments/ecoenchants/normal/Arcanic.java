@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
-public final class Arcanic extends EcoEnchant {
+public class Arcanic extends EcoEnchant {
     public Arcanic() {
         super(
                 "arcanic", EnchantmentType.NORMAL

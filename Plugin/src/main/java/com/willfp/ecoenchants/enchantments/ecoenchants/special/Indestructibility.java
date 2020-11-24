@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
-public final class Indestructibility extends EcoEnchant {
+public class Indestructibility extends EcoEnchant {
     public Indestructibility() {
         super(
                 "indestructibility", EnchantmentType.SPECIAL

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @SuppressWarnings("unchecked")
-public final class Precision extends EcoEnchant {
+public class Precision extends EcoEnchant {
     public Precision() {
         super(
                 "precision", EnchantmentType.SPECIAL, PrecisionMain.class

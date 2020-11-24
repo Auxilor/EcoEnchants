@@ -8,7 +8,7 @@ import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-public final class Replenish extends EcoEnchant {
+public class Replenish extends EcoEnchant {
     public Replenish() {
         super(
                 "replenish", EnchantmentType.NORMAL

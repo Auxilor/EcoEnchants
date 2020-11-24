@@ -12,7 +12,7 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
-public final class Rage extends EcoEnchant {
+public class Rage extends EcoEnchant {
     public Rage() {
         super(
                 "rage", EnchantmentType.NORMAL

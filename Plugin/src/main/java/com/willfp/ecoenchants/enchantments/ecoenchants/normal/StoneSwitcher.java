@@ -11,7 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-public final class StoneSwitcher extends EcoEnchant {
+public class StoneSwitcher extends EcoEnchant {
     public StoneSwitcher() {
         super(
                 "stone_switcher", EnchantmentType.NORMAL

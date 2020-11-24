@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Protector extends EcoEnchant {
+public class Protector extends EcoEnchant {
     public Protector() {
         super(
                 "protector", EnchantmentType.NORMAL

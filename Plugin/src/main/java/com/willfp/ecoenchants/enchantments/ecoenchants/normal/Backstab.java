@@ -6,7 +6,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
-public final class Backstab extends EcoEnchant {
+public class Backstab extends EcoEnchant {
     public Backstab() {
         super(
                 "backstab", EnchantmentType.NORMAL

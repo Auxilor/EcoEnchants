@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public final class Lumberjack extends EcoEnchant {
+public class Lumberjack extends EcoEnchant {
     public Lumberjack() {
         super(
                 "lumberjack", EnchantmentType.NORMAL

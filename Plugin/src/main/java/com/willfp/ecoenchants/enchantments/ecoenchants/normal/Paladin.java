@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Paladin extends EcoEnchant {
+public class Paladin extends EcoEnchant {
     public Paladin() {
         super(
                 "paladin", EnchantmentType.NORMAL

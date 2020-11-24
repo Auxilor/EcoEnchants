@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Cerebral extends EcoEnchant {
+public class Cerebral extends EcoEnchant {
     public Cerebral() {
         super(
                 "cerebral", EnchantmentType.NORMAL

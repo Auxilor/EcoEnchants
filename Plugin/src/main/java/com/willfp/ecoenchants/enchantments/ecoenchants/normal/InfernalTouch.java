@@ -29,7 +29,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class InfernalTouch extends EcoEnchant {
+public class InfernalTouch extends EcoEnchant {
     private static final HashMap<Material, Pair<Material, Integer>> recipes = new HashMap<>();
     private static final Set<Material> allowsFortune = new HashSet<>(Arrays.asList(Material.GOLD_INGOT, Material.IRON_INGOT));
 

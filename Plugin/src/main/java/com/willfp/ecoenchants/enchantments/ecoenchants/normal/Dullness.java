@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public final class Dullness extends EcoEnchant {
+public class Dullness extends EcoEnchant {
     public Dullness() {
         super(
                 "dullness", EnchantmentType.NORMAL

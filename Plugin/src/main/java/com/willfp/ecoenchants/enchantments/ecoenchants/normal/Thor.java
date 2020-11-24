@@ -8,7 +8,7 @@ import com.willfp.ecoenchants.util.LightningUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Thor extends EcoEnchant {
+public class Thor extends EcoEnchant {
     public Thor() {
         super(
                 "thor", EnchantmentType.NORMAL

@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-public final class Marksman extends EcoEnchant {
+public class Marksman extends EcoEnchant {
     public Marksman() {
         super(
                 "marksman", EnchantmentType.NORMAL

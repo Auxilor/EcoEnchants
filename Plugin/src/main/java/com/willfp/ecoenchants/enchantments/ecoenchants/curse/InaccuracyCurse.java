@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
 
-public final class InaccuracyCurse extends EcoEnchant {
+public class InaccuracyCurse extends EcoEnchant {
     public InaccuracyCurse() {
         super(
                 "inaccuracy_curse", EnchantmentType.CURSE

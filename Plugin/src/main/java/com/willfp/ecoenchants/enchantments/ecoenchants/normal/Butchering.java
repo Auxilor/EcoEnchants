@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Butchering extends EcoEnchant {
+public class Butchering extends EcoEnchant {
     public Butchering() {
         super(
                 "butchering", EnchantmentType.NORMAL

@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public final class CommandEnchantinfo extends AbstractCommand {
+public class CommandEnchantinfo extends AbstractCommand {
     public CommandEnchantinfo() {
         super("enchantinfo", "ecoenchants.enchantinfo", false);
     }

@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Deflection extends EcoEnchant {
+public class Deflection extends EcoEnchant {
     public Deflection() {
         super(
                 "deflection", EnchantmentType.NORMAL

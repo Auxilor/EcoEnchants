@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-public final class Levitate extends EcoEnchant {
+public class Levitate extends EcoEnchant {
     public Levitate() {
         super(
                 "levitate", EnchantmentType.NORMAL

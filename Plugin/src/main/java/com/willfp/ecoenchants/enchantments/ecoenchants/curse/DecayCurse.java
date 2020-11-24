@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class DecayCurse extends EcoEnchant implements EcoRunnable {
+public class DecayCurse extends EcoEnchant implements EcoRunnable {
     private final Set<Player> players = new HashSet<>();
     private int amount = 10000;
 

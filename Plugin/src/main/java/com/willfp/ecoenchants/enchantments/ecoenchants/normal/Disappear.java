@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public final class Disappear extends EcoEnchant {
+public class Disappear extends EcoEnchant {
     public Disappear() {
         super(
                 "disappear", EnchantmentType.NORMAL

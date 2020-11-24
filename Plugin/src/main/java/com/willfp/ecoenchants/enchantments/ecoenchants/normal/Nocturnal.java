@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Nocturnal extends EcoEnchant {
+public class Nocturnal extends EcoEnchant {
     public Nocturnal() {
         super(
                 "nocturnal", EnchantmentType.NORMAL

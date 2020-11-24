@@ -11,7 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public final class AntigriefTowny implements AntigriefWrapper {
+public class AntigriefTowny implements AntigriefWrapper {
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         return PlayerCacheUtil.getCachePermission(player, block.getLocation(), block.getType(), TownyPermission.ActionType.DESTROY);

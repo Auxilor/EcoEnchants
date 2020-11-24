@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.nms.Cooldown;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Razor extends EcoEnchant {
+public class Razor extends EcoEnchant {
     public Razor() {
         super(
                 "razor", EnchantmentType.SPECIAL

@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-public final class MisfortuneCurse extends EcoEnchant {
+public class MisfortuneCurse extends EcoEnchant {
     public MisfortuneCurse() {
         super(
                 "misfortune_curse", EnchantmentType.CURSE

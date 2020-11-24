@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Particle;
 
-public final class AshArtifact extends Artifact {
+public class AshArtifact extends Artifact {
     public AshArtifact() {
         super(
                 "ash_artifact",

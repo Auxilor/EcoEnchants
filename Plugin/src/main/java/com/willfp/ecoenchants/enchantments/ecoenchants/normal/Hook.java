@@ -7,7 +7,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-public final class Hook extends EcoEnchant {
+public class Hook extends EcoEnchant {
     public Hook() {
         super(
                 "hook", EnchantmentType.NORMAL

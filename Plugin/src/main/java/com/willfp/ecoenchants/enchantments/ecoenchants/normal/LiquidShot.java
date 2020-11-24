@@ -8,7 +8,7 @@ import org.bukkit.entity.Enderman;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class LiquidShot extends EcoEnchant {
+public class LiquidShot extends EcoEnchant {
     public LiquidShot() {
         super(
                 "liquid_shot", EnchantmentType.NORMAL

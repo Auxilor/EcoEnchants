@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public final class IllusionAspect extends EcoEnchant {
+public class IllusionAspect extends EcoEnchant {
     public IllusionAspect() {
         super(
                 "illusion_aspect", EnchantmentType.NORMAL

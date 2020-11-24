@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.event.EventHandler;
 
-public final class Economical extends EcoEnchant {
+public class Economical extends EcoEnchant {
     public Economical() {
         super(
                 "economical", EnchantmentType.NORMAL,

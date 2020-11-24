@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class Corrosive extends EcoEnchant {
+public class Corrosive extends EcoEnchant {
     public Corrosive() {
         super(
                 "corrosive", EnchantmentType.NORMAL

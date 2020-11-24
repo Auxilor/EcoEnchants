@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @SuppressWarnings("unchecked")
-public final class EnchantChecks {
+public class EnchantChecks {
     public static boolean item(ItemStack item, Enchantment enchantment) {
         return getItemLevel(item, enchantment) != 0;
     }

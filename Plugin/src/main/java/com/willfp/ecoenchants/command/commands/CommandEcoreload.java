@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public final class CommandEcoreload extends AbstractCommand {
+public class CommandEcoreload extends AbstractCommand {
     public CommandEcoreload() {
         super("ecoreload", "ecoenchants.reload", false);
     }

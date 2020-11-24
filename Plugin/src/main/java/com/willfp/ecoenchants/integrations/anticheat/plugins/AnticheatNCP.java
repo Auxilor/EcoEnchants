@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public final class AnticheatNCP implements AnticheatWrapper {
+public class AnticheatNCP implements AnticheatWrapper {
     private final Set<UUID> exempt = new HashSet<>();
 
     @Override

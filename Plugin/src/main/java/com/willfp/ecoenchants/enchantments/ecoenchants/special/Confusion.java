@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-public final class Confusion extends EcoEnchant {
+public class Confusion extends EcoEnchant {
     public Confusion() {
         super(
                 "confusion", EnchantmentType.SPECIAL

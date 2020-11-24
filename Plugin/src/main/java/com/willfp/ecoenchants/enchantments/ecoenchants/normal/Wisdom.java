@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.naturalexpgainevent.NaturalExpGainEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-public final class Wisdom extends EcoEnchant {
+public class Wisdom extends EcoEnchant {
     public Wisdom() {
         super(
                 "wisdom", EnchantmentType.NORMAL

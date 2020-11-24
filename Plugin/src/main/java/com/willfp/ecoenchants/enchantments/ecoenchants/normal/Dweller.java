@@ -6,7 +6,7 @@ import org.bukkit.entity.Illager;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Dweller extends EcoEnchant {
+public class Dweller extends EcoEnchant {
     public Dweller() {
         super(
                 "dweller", EnchantmentType.NORMAL

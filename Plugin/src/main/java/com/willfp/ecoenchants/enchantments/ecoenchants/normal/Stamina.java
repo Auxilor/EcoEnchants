@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-public final class Stamina extends EcoEnchant {
+public class Stamina extends EcoEnchant {
     public Stamina() {
         super(
                 "stamina", EnchantmentType.NORMAL

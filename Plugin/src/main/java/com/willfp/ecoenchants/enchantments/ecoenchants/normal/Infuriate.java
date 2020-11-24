@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
-public final class Infuriate extends EcoEnchant {
+public class Infuriate extends EcoEnchant {
     public Infuriate() {
         super(
                 "infuriate", EnchantmentType.NORMAL

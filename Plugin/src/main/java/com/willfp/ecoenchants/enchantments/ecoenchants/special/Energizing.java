@@ -8,7 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public final class Energizing extends EcoEnchant {
+public class Energizing extends EcoEnchant {
     public Energizing() {
         super(
                 "energizing", EnchantmentType.SPECIAL

@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Spider;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Insecticide extends EcoEnchant {
+public class Insecticide extends EcoEnchant {
     public Insecticide() {
         super(
                 "insecticide", EnchantmentType.NORMAL

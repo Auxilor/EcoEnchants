@@ -8,7 +8,7 @@ import com.willfp.ecoenchants.util.LightningUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Bolt extends EcoEnchant {
+public class Bolt extends EcoEnchant {
     public Bolt() {
         super(
                 "bolt", EnchantmentType.SPECIAL

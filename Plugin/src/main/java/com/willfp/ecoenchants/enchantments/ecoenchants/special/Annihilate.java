@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-public final class Annihilate extends EcoEnchant {
+public class Annihilate extends EcoEnchant {
     public Annihilate() {
         super(
                 "annihilate", EnchantmentType.SPECIAL

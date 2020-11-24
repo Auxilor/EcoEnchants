@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-public final class Soulbound extends EcoEnchant {
+public class Soulbound extends EcoEnchant {
     public Soulbound() {
         super(
                 "soulbound", EnchantmentType.SPECIAL

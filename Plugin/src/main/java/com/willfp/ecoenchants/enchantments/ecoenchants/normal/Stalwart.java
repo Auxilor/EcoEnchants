@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public final class Stalwart extends EcoEnchant {
+public class Stalwart extends EcoEnchant {
     public Stalwart() {
         super(
                 "stalwart", EnchantmentType.NORMAL

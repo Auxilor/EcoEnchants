@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Conclude extends EcoEnchant {
+public class Conclude extends EcoEnchant {
     public Conclude() {
         super(
                 "conclude", EnchantmentType.NORMAL

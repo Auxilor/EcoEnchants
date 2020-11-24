@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public final class Frenzy extends EcoEnchant {
+public class Frenzy extends EcoEnchant {
     public Frenzy() {
         super(
                 "frenzy", EnchantmentType.SPECIAL

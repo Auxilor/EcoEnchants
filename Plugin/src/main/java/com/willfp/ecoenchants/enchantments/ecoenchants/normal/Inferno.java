@@ -5,7 +5,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-public final class Inferno extends EcoEnchant {
+public class Inferno extends EcoEnchant {
     public Inferno() {
         super(
                 "inferno", EnchantmentType.NORMAL

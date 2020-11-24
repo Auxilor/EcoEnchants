@@ -9,7 +9,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
-public final class Pentashot extends EcoEnchant {
+public class Pentashot extends EcoEnchant {
     public Pentashot() {
         super(
                 "pentashot", EnchantmentType.SPECIAL

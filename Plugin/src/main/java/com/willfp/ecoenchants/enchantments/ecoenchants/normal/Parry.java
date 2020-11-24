@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Parry extends EcoEnchant {
+public class Parry extends EcoEnchant {
     public Parry() {
         super(
                 "parry", EnchantmentType.NORMAL

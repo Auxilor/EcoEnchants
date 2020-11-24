@@ -9,7 +9,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
-public final class Ignite extends EcoEnchant {
+public class Ignite extends EcoEnchant {
     public Ignite() {
         super(
                 "ignite", EnchantmentType.NORMAL

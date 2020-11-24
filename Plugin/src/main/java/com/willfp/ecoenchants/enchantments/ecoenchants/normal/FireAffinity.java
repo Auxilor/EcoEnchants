@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class FireAffinity extends EcoEnchant {
+public class FireAffinity extends EcoEnchant {
     public FireAffinity() {
         super(
                 "fire_affinity", EnchantmentType.NORMAL

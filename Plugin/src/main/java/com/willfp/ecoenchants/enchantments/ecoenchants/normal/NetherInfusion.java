@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class NetherInfusion extends EcoEnchant {
+public class NetherInfusion extends EcoEnchant {
     public NetherInfusion() {
         super(
                 "nether_infusion", EnchantmentType.NORMAL

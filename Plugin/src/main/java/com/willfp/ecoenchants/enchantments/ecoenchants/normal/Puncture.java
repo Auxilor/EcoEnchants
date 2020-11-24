@@ -7,7 +7,7 @@ import org.bukkit.entity.Shulker;
 import org.bukkit.entity.Trident;
 import org.bukkit.entity.Turtle;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Puncture extends EcoEnchant {
+public class Puncture extends EcoEnchant {
     public Puncture() {
         super(
                 "puncture", EnchantmentType.NORMAL

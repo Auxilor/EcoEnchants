@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public final class Sickening extends EcoEnchant {
+public class Sickening extends EcoEnchant {
     public Sickening() {
         super(
                 "sickening", EnchantmentType.NORMAL

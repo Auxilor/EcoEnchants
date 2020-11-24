@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-public final class Spearfishing extends EcoEnchant {
+public class Spearfishing extends EcoEnchant {
     public Spearfishing() {
         super(
                 "spearfishing", EnchantmentType.NORMAL

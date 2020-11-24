@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Defusion extends EcoEnchant {
+public class Defusion extends EcoEnchant {
     public Defusion() {
         super(
                 "defusion", EnchantmentType.NORMAL

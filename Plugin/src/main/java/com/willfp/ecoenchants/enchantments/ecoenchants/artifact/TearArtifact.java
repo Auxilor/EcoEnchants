@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Particle;
 
-public final class TearArtifact extends Artifact {
+public class TearArtifact extends Artifact {
     public TearArtifact() {
         super(
                 "tear_artifact",

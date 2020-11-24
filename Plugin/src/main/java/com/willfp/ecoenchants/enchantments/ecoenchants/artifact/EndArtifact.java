@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.artifact;
 
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import org.bukkit.Particle;
-public final class EndArtifact extends Artifact {
+public class EndArtifact extends Artifact {
     public EndArtifact() {
         super(
                 "end_artifact"

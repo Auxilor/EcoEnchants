@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
-public final class EnchantDisplay {
+public class EnchantDisplay {
 
     /**
      * The meta key of the length of enchantments in lore (for legacy support)

@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public final class AnticheatAAC implements AnticheatWrapper, Listener {
+public class AnticheatAAC implements AnticheatWrapper, Listener {
     private final Set<UUID> exempt = new HashSet<>();
 
     @Override

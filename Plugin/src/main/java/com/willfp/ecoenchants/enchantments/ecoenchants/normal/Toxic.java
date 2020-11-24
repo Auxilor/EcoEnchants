@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public final class Toxic extends EcoEnchant {
+public class Toxic extends EcoEnchant {
     public Toxic() {
         super(
                 "toxic", EnchantmentType.NORMAL

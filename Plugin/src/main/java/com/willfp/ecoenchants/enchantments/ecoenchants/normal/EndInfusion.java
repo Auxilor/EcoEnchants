@@ -6,7 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class EndInfusion extends EcoEnchant {
+public class EndInfusion extends EcoEnchant {
     public EndInfusion() {
         super(
                 "end_infusion", EnchantmentType.NORMAL

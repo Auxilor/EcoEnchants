@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-public final class Weakening extends EcoEnchant {
+public class Weakening extends EcoEnchant {
     public Weakening() {
         super(
                 "weakening", EnchantmentType.NORMAL

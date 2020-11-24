@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.artifact;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import org.bukkit.Color;
 import org.bukkit.Particle;
-public final class RedstoneArtifact extends Artifact {
+public class RedstoneArtifact extends Artifact {
     public RedstoneArtifact() {
         super(
                 "redstone_artifact"

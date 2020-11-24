@@ -8,7 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public final class AntigriefGriefPrevention implements AntigriefWrapper {
+public class AntigriefGriefPrevention implements AntigriefWrapper {
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(block.getLocation(), false, null);

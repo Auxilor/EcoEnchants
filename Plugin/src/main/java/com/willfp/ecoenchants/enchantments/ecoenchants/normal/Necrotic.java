@@ -10,7 +10,7 @@ import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-public final class Necrotic extends EcoEnchant {
+public class Necrotic extends EcoEnchant {
     public Necrotic() {
         super(
                 "necrotic", EnchantmentType.NORMAL

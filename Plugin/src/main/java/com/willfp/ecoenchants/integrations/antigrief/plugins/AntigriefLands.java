@@ -10,7 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public final class AntigriefLands implements AntigriefWrapper {
+public class AntigriefLands implements AntigriefWrapper {
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         LandsIntegration landsIntegration = new LandsIntegration(EcoEnchantsPlugin.getInstance());

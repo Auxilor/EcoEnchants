@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
-public final class Spiked extends EcoEnchant {
+public class Spiked extends EcoEnchant {
     public Spiked() {
         super(
                 "spiked", EnchantmentType.NORMAL

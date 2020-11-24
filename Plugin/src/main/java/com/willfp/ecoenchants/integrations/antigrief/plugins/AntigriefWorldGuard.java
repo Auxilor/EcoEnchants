@@ -13,7 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public final class AntigriefWorldGuard implements AntigriefWrapper {
+public class AntigriefWorldGuard implements AntigriefWrapper {
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);

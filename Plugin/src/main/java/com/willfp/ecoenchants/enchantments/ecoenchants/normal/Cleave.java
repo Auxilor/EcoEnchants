@@ -9,7 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-public final class Cleave extends EcoEnchant {
+public class Cleave extends EcoEnchant {
     public Cleave() {
         super(
                 "cleave", EnchantmentType.NORMAL

@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockDamageEvent;
-public final class Instantaneous extends EcoEnchant {
+public class Instantaneous extends EcoEnchant {
     public Instantaneous() {
         super(
                 "instantaneous", EnchantmentType.NORMAL

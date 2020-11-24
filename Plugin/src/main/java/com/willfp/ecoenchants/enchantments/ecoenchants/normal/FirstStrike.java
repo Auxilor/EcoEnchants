@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class FirstStrike extends EcoEnchant {
+public class FirstStrike extends EcoEnchant {
     public FirstStrike() {
         super(
                 "first_strike", EnchantmentType.NORMAL

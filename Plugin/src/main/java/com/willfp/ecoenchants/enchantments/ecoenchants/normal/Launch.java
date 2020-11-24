@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-public final class Launch extends EcoEnchant {
+public class Launch extends EcoEnchant {
     public Launch() {
         super(
                 "launch", EnchantmentType.NORMAL

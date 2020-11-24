@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
-public final class FragilityCurse extends EcoEnchant {
+public class FragilityCurse extends EcoEnchant {
     public FragilityCurse() {
         super(
                 "fragility_curse", EnchantmentType.CURSE

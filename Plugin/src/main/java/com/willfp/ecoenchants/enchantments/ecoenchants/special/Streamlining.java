@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import org.bukkit.entity.Player;
-public final class Streamlining extends EcoEnchant {
+public class Streamlining extends EcoEnchant {
     public Streamlining() {
         super(
                 "streamlining", EnchantmentType.SPECIAL

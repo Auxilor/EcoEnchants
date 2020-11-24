@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Quadrilateralism extends EcoEnchant {
+public class Quadrilateralism extends EcoEnchant {
     public Quadrilateralism() {
         super(
                 "quadrilateralism", EnchantmentType.NORMAL

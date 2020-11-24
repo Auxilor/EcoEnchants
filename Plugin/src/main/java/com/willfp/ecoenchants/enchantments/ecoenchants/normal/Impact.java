@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Impact extends EcoEnchant {
+public class Impact extends EcoEnchant {
     public Impact() {
         super(
                 "impact", EnchantmentType.NORMAL

@@ -7,7 +7,7 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Abattoir extends EcoEnchant {
+public class Abattoir extends EcoEnchant {
     public Abattoir() {
         super(
                 "abattoir", EnchantmentType.NORMAL

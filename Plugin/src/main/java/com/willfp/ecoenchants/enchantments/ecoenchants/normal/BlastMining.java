@@ -15,7 +15,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class BlastMining extends EcoEnchant {
+public class BlastMining extends EcoEnchant {
     public BlastMining() {
         super(
                 "blast_mining", EnchantmentType.NORMAL

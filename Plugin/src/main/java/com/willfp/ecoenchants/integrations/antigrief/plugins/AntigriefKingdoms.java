@@ -13,7 +13,7 @@ import org.kingdoms.constants.land.Land;
 import org.kingdoms.managers.PvPManager;
 import org.kingdoms.managers.land.LandManager;
 
-public final class AntigriefKingdoms implements AntigriefWrapper {
+public class AntigriefKingdoms implements AntigriefWrapper {
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         BlockBreakEvent event = new BlockBreakEvent(block, player);

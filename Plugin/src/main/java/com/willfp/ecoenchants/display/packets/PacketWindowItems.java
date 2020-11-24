@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.persistence.PersistentDataType;
 
 @SuppressWarnings("deprecation")
-public final class PacketWindowItems extends AbstractPacketAdapter {
+public class PacketWindowItems extends AbstractPacketAdapter {
     public PacketWindowItems() {
         super(PacketType.Play.Server.WINDOW_ITEMS);
     }

@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public final class Paralyze extends EcoEnchant {
+public class Paralyze extends EcoEnchant {
     public Paralyze() {
         super(
                 "paralyze", EnchantmentType.NORMAL

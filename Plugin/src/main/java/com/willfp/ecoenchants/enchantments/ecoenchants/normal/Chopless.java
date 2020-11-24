@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public final class Chopless extends EcoEnchant {
+public class Chopless extends EcoEnchant {
     public Chopless() {
         super(
                 "chopless", EnchantmentType.NORMAL

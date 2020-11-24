@@ -12,7 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public final class AntigriefFactionsUUID implements AntigriefWrapper {
+public class AntigriefFactionsUUID implements AntigriefWrapper {
     @Override
     public boolean canBreakBlock(Player player, Block block) {
         FPlayer fplayer = FPlayers.getInstance().getByPlayer(player);

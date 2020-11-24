@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-public final class Extraction extends EcoEnchant {
+public class Extraction extends EcoEnchant {
     public Extraction() {
         super(
                 "extraction", EnchantmentType.NORMAL

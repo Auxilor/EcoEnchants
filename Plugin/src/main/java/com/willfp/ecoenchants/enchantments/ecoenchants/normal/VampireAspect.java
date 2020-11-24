@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public final class VampireAspect extends EcoEnchant {
+public class VampireAspect extends EcoEnchant {
     public VampireAspect() {
         super(
                 "vampire_aspect", EnchantmentType.NORMAL

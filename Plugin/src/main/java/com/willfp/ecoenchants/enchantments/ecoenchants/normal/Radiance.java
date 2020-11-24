@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-public final class Radiance extends EcoEnchant {
+public class Radiance extends EcoEnchant {
     public Radiance() {
         super(
                 "radiance", EnchantmentType.NORMAL

@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 
-public final class PermanenceCurse extends EcoEnchant {
+public class PermanenceCurse extends EcoEnchant {
     public PermanenceCurse() {
         super(
                 "permanence_curse", EnchantmentType.CURSE

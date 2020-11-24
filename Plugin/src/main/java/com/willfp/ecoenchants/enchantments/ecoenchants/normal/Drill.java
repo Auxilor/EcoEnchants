@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
-public final class Drill extends EcoEnchant {
+public class Drill extends EcoEnchant {
     public Drill() {
         super(
                 "drill", EnchantmentType.NORMAL

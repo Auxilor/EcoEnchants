@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
-public final class Collateral extends EcoEnchant {
+public class Collateral extends EcoEnchant {
     public Collateral() {
         super(
                 "collateral", EnchantmentType.NORMAL

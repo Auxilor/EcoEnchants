@@ -7,7 +7,7 @@ import org.bukkit.entity.Boss;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class BossHunter extends EcoEnchant {
+public class BossHunter extends EcoEnchant {
     public BossHunter() {
         super(
                 "boss_hunter", EnchantmentType.NORMAL

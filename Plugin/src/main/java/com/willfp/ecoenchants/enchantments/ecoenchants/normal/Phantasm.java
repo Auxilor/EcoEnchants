@@ -8,7 +8,7 @@ import org.bukkit.entity.Trident;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Phantasm extends EcoEnchant {
+public class Phantasm extends EcoEnchant {
     public Phantasm() {
         super(
                 "phantasm", EnchantmentType.NORMAL

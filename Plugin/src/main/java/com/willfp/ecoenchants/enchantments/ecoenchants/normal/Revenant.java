@@ -8,7 +8,7 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public final class Revenant extends EcoEnchant {
+public class Revenant extends EcoEnchant {
     public Revenant() {
         super(
                 "revenant", EnchantmentType.NORMAL

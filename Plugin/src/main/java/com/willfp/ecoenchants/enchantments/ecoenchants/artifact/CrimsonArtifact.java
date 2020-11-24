@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Particle;
 
-public final class CrimsonArtifact extends Artifact {
+public class CrimsonArtifact extends Artifact {
     public CrimsonArtifact() {
         super(
                 "crimson_artifact",

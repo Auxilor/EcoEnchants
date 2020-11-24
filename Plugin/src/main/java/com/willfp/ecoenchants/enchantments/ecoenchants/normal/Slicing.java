@@ -13,7 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
-public final class Slicing extends EcoEnchant {
+public class Slicing extends EcoEnchant {
     public Slicing() {
         super(
                 "slicing", EnchantmentType.NORMAL

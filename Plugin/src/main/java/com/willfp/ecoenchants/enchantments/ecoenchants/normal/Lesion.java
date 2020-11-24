@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class Lesion extends EcoEnchant {
+public class Lesion extends EcoEnchant {
     public Lesion() {
         super(
                 "lesion", EnchantmentType.NORMAL

@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public final class Identify extends EcoEnchant {
+public class Identify extends EcoEnchant {
     public Identify() {
         super(
                 "identify", EnchantmentType.NORMAL

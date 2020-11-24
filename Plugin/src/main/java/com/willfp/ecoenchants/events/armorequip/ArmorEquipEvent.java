@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
  * @author Arnah
  * @since Jul 30, 2015
  */
-public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
+public class ArmorEquipEvent extends PlayerEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean cancel = false;

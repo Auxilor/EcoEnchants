@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-public final class Horde extends EcoEnchant {
+public class Horde extends EcoEnchant {
     public Horde() {
         super(
                 "horde", EnchantmentType.NORMAL
