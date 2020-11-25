@@ -12,12 +12,12 @@ public class LimeArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.REDSTONE;
     }
 
     @Override
-    protected Particle.DustOptions getDustOptions() {
+    public Particle.DustOptions getDustOptions() {
         return new Particle.DustOptions(Color.fromRGB(3, 252, 140), 1.0f);
     }
 }

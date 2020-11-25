@@ -10,7 +10,7 @@ public class DragonArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.DRAGON_BREATH;
     }
 }

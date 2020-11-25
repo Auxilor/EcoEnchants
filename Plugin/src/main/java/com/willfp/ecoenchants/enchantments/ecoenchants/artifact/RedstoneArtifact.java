@@ -11,12 +11,12 @@ public class RedstoneArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.REDSTONE;
     }
 
     @Override
-    protected Particle.DustOptions getDustOptions() {
+    public Particle.DustOptions getDustOptions() {
         return new Particle.DustOptions(Color.RED, 1.0f);
     }
 }

@@ -13,7 +13,7 @@ public class WarpedArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.WARPED_SPORE;
     }
 }

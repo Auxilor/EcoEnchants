@@ -10,7 +10,7 @@ public class EnchantmentArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.ENCHANTMENT_TABLE;
     }
 }

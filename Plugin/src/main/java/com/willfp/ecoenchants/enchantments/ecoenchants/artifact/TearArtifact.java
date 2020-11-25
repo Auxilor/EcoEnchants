@@ -13,7 +13,7 @@ public class TearArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.DRIPPING_OBSIDIAN_TEAR;
     }
 }

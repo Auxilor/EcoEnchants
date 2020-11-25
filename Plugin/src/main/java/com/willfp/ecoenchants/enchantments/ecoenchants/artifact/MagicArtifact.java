@@ -10,7 +10,7 @@ public class MagicArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.CRIT_MAGIC;
     }
 }

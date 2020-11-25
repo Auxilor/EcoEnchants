@@ -10,7 +10,7 @@ public class TotemArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.TOTEM;
     }
 }

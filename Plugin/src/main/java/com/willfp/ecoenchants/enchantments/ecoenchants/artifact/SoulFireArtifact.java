@@ -13,7 +13,7 @@ public class SoulFireArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.SOUL_FIRE_FLAME;
     }
 }

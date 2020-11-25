@@ -13,7 +13,7 @@ public class CrimsonArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.CRIMSON_SPORE;
     }
 }

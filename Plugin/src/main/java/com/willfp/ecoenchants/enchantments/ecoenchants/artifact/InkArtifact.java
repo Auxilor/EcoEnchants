@@ -10,7 +10,7 @@ public class InkArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.SQUID_INK;
     }
 }

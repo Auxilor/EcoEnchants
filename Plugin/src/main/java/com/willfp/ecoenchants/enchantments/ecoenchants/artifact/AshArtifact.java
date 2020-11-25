@@ -13,7 +13,7 @@ public class AshArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.WHITE_ASH;
     }
 }

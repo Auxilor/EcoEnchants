@@ -50,9 +50,9 @@ public abstract class Artifact extends EcoEnchant {
 
     }
 
-    protected abstract Particle getParticle();
+    public abstract Particle getParticle();
 
-    protected Particle.DustOptions getDustOptions() {
+    public Particle.DustOptions getDustOptions() {
         return null;
     };
 

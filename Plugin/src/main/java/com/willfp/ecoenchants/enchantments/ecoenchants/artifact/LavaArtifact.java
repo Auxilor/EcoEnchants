@@ -10,7 +10,7 @@ public class LavaArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.DRIP_LAVA;
     }
 }

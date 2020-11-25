@@ -10,7 +10,7 @@ public class EndArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.END_ROD;
     }
 }

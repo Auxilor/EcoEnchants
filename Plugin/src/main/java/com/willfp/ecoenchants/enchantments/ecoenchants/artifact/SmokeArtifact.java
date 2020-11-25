@@ -10,7 +10,7 @@ public class SmokeArtifact extends Artifact {
     }
 
     @Override
-    protected Particle getParticle() {
+    public Particle getParticle() {
         return Particle.CAMPFIRE_COSY_SMOKE;
     }
 }
