@@ -1,0 +1,31 @@
+#
+# Rainforest EcoEnchant
+#
+
+name: "Rainforest"
+description: Deal more damage in jungles.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  targets:
+    - bow
+    - crossbow
+    - sword
+    - axe
+    - trident
+  grindstoneable: true
+  conflicts:
+    - altitude
+    - aquamarine
+    - dehydration
+    - icelord
+  maximum-level: 6
+
+config:
+  multiplier: 0.03

@@ -28,3 +28,6 @@ findProject(':Summoning').projectDir = file('Extensions/Summoning')
 
 include('Endershot')
 findProject(':Endershot').projectDir = file('Extensions/Endershot')
+
+include('Biomes')
+findProject(':Biomes').projectDir = file('Extensions/Biomes')

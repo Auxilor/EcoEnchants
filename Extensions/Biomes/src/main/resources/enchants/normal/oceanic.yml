@@ -1,0 +1,30 @@
+#
+# Oceanic EcoEnchant
+#
+
+name: "Oceanic"
+description: Take less damage in oceans.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  grindstoneable: true
+  conflicts:
+    - elevation
+    - glacial
+    - heat_treated
+    - tropical
+  maximum-level: 3
+
+config:
+  reduction-per-level: 2 # As percentage
