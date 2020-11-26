@@ -35,3 +35,5 @@ findProject(':Biomes').projectDir = file('Extensions/Biomes')
 include('SprintArtifacts')
 findProject(':SprintArtifacts').projectDir = file('Extensions/SprintArtifacts')
 
+include('Alchemy')
+findProject(':Alchemy').projectDir = file('Extensions/Alchemy')

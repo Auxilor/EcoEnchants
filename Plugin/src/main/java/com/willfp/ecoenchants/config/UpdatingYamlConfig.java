@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.util.Logger;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -43,6 +44,10 @@ public abstract class UpdatingYamlConfig {
             config.load(configFile);
 
             InputStream newIn = EcoEnchantsPlugin.getInstance().getResource(name);
+            if(newIn == null) {
+                Logger.error(name + " is null?");
+                return;
+            }
             BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));
             YamlConfiguration newConfig = new YamlConfiguration();
             newConfig.load(reader);
