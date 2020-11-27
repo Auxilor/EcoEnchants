@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.extensions;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
@@ -12,19 +13,14 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Class containing method to load extensions
  */
 public class ExtensionManager {
-    private static final Map<Extension, Pair<String, String>> extensions = new HashMap<>();
+    private static final Set<Extension> extensions = new HashSet<>();
 
     /**
      * Load all extensions
@@ -58,14 +54,12 @@ public class ExtensionManager {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        URL[] urls = {url};
 
-        ClassLoader cl = new URLClassLoader(urls, EcoEnchantsPlugin.class.getClassLoader());
+        ClassLoader cl = new URLClassLoader(new URL[]{url}, EcoEnchantsPlugin.class.getClassLoader());
 
         InputStream ymlIn = cl.getResourceAsStream("extension.yml");
-        URL extensionYmlUrl = cl.getResource("extension.yml");
 
-        if (extensionYmlUrl == null || ymlIn == null) {
+        if (ymlIn == null) {
             throw new MalformedExtensionException("No extension.yml found in " + extensionJar.getName());
         }
 
@@ -81,6 +75,7 @@ public class ExtensionManager {
         String mainClass = extensionYml.getString("main");
         String name = extensionYml.getString("name");
         String version = extensionYml.getString("version");
+        Extension.ExtensionMetadata metadata = new Extension.ExtensionMetadata(name, version);
 
         Class<?> cls;
         Object object = null;
@@ -95,17 +90,16 @@ public class ExtensionManager {
             throw new MalformedExtensionException(extensionJar.getName() + " is invalid");
 
         Extension extension = (Extension) object;
-        extension.onEnable();
-        extensions.put(extension, new Pair<>(name, version));
+        extension.setMetadata(metadata);
+        extension.enable();
+        extensions.add(extension);
     }
 
     /**
      * Unload all extensions
      */
     public static void unloadExtensions() {
-        extensions.forEach(((extension, s) -> {
-            extension.onDisable();
-        }));
+        extensions.forEach(Extension::onDisable);
         extensions.clear();
     }
 
@@ -118,10 +112,10 @@ public class ExtensionManager {
     }
 
     /**
-     * Get Map of all loaded extensions and their names
-     * @return {@link Map} of {@link Extension}s and their names
+     * Get set of all loaded extensions
+     * @return {@link Set} of {@link Extension}s
      */
-    public static Map<Extension, Pair<String, String>> getLoadedExtensions() {
+    public static Set<Extension> getLoadedExtensions() {
         return extensions;
     }
 }
