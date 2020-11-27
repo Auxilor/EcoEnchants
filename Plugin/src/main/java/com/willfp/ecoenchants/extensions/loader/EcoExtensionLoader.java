@@ -78,7 +78,7 @@ public class EcoExtensionLoader implements ExtensionLoader {
         String mainClass = extensionYml.getString("main");
         String name = extensionYml.getString("name");
         String version = extensionYml.getString("version");
-        Extension.ExtensionMetadata metadata = new Extension.ExtensionMetadata(name, version);
+        Extension.ExtensionMetadata metadata = new Extension.ExtensionMetadata(version, name);
 
         Class<?> cls;
         Object object = null;

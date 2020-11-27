@@ -4,17 +4,23 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import org.bukkit.NamespacedKey;
+import com.willfp.ecoenchants.util.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.stream.Collectors;
 
 public class Alchemy extends EcoEnchant {
     public Alchemy() {
         super("alchemy", EnchantmentType.NORMAL, AlchemyMain.class);
     }
+
+    private static final FixedMetadataValue TRUE = new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true);
 
     @EventHandler
     public void onPotionEffect(EntityPotionEffectEvent event) {
@@ -22,6 +28,9 @@ public class Alchemy extends EcoEnchant {
         if(!(event.getEntity() instanceof LivingEntity)) return;
 
         LivingEntity entity = (LivingEntity) event.getEntity();
+
+        if(entity.hasMetadata(event.getNewEffect().toString()))
+            return;
 
         int level = EnchantChecks.getArmorPoints(entity, this);
         if(level == 0) return;
@@ -40,7 +49,16 @@ public class Alchemy extends EcoEnchant {
                 effect.hasIcon()
         );
 
+        entity.setMetadata(newEffect.toString(), TRUE);
+
         entity.removePotionEffect(effect.getType());
-        entity.addPotionEffect(newEffect);
+
+        Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
+            newEffect.apply(entity);
+        });
+
+        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+            entity.removeMetadata(newEffect.toString(), EcoEnchantsPlugin.getInstance());
+        }, 1);
     }
 }
