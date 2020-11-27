@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIManager;
 import com.willfp.ecoenchants.nms.RepairCost;
+import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
@@ -68,7 +69,9 @@ public class AnvilListeners implements Listener {
             int preCost = event.getInventory().getRepairCost();
             ItemStack item = newOut.getFirst();
 
-            if(event.getInventory().getItem(0) == null) return;
+            if(event.getInventory().getItem(0) == null) {
+                return;
+            }
 
             if(!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
 
@@ -88,6 +91,12 @@ public class AnvilListeners implements Listener {
             } else {
                 cost = preCost;
             }
+
+            if(!Objects.equals(left, player.getOpenInventory().getItem(0))) {
+                return;
+            }
+            if(cost == 0)
+                return;
 
             event.getInventory().setRepairCost(cost);
             event.setResult(item);
