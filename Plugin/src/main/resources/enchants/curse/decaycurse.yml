@@ -22,4 +22,4 @@ general-config:
 
 config:
   repeat-ticks: 100 # How often (in ticks) to repair items
-  damage: 1
+  multiplier: 1

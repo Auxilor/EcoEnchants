@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.DurabilityUtils;
+import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ import java.util.Set;
 
 public class DecayCurse extends EcoEnchant implements EcoRunnable {
     private final Set<Player> players = new HashSet<>();
-    private int amount = 10000;
+    private int amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
 
     public DecayCurse() {
         super(
@@ -64,15 +65,15 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
     private void refresh() {
         players.clear();
         EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
-            if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, EcoEnchants.DECAY_CURSE)))
+            if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
                 players.add(player);
         });
-        amount = EcoEnchants.DECAY_CURSE.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage");
+        amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
     }
 
     private void refreshPlayer(Player player) {
         players.remove(player);
-        if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, EcoEnchants.DECAY_CURSE)))
+        if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
             players.add(player);
     }
 
@@ -80,7 +81,8 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
     public void run() {
         players.forEach((player -> {
             for(ItemStack item : player.getInventory().getContents()) {
-                if(!EnchantChecks.item(item, EcoEnchants.DECAY_CURSE)) continue;
+                int level = EnchantChecks.getItemLevel(item, this);
+                if(level == 0) continue;
 
                 if(!(item.getItemMeta() instanceof Repairable)) continue;
 
@@ -89,6 +91,7 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
                 if(player.getItemOnCursor().equals(item)) continue;
 
                 DurabilityUtils.damageItemNoBreak(item, amount, player);
+                player.updateInventory();
             }
         }));
     }
