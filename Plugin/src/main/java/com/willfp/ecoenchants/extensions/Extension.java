@@ -73,11 +73,11 @@ public abstract class Extension {
      * Designed for internal use
      */
     @ApiStatus.Internal
-    static final class ExtensionMetadata {
+    public static final class ExtensionMetadata {
         private final @NotNull String version;
         private final @NotNull String name;
 
-        ExtensionMetadata(@NotNull String version, @NotNull String name) {
+        public ExtensionMetadata(@NotNull String version, @NotNull String name) {
             this.version = version;
             this.name = name;
         }

@@ -27,7 +27,7 @@ import com.willfp.ecoenchants.events.armorequip.ArmorListener;
 import com.willfp.ecoenchants.events.armorequip.DispenserArmorListener;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityListeners;
 import com.willfp.ecoenchants.events.naturalexpgainevent.NaturalExpGainListeners;
-import com.willfp.ecoenchants.extensions.ExtensionManager;
+import com.willfp.ecoenchants.extensions.loader.ExtensionLoader;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatAAC;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
@@ -264,12 +264,13 @@ public class Loader {
 
         Logger.info("Loading Extensions...");
 
-        ExtensionManager.loadExtensions();
-        if(ExtensionManager.getLoadedExtensions().isEmpty()) {
+        EcoEnchantsPlugin.getInstance().getExtensionLoader().loadExtensions();
+
+        if(EcoEnchantsPlugin.getInstance().getExtensionLoader().getLoadedExtensions().isEmpty()){
             Logger.info("&cNo extensions found");
         } else {
             Logger.info("Extensions Loaded:");
-            ExtensionManager.getLoadedExtensions().forEach((extension) -> {
+            EcoEnchantsPlugin.getInstance().getExtensionLoader().getLoadedExtensions().forEach((extension) -> {
                 Logger.info("- " + extension.getName() + " v" + extension.getVersion());
             });
         }
@@ -386,8 +387,8 @@ public class Loader {
             if (currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion)) {
                 Logger.info("&aEcoEnchants is up to date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
             } else {
-                EcoEnchantsPlugin.outdated = true;
-                EcoEnchantsPlugin.newVersion = version;
+                UpdateChecker.setOutdated(true);
+                UpdateChecker.setNewVersion(version);
 
                 Bukkit.getScheduler().runTaskTimer(EcoEnchantsPlugin.getInstance(), () -> {
                     Logger.info("&6EcoEnchants is out of date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
@@ -441,7 +442,7 @@ public class Loader {
         }));
         Logger.info("");
         Logger.info("&cUnloading Extensions...");
-        ExtensionManager.unloadExtensions();
+        EcoEnchantsPlugin.getInstance().getExtensionLoader().unloadExtensions();
         Logger.info("&fBye! :)");
     }
 

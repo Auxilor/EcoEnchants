@@ -11,6 +11,9 @@ import java.util.Scanner;
 
 public class UpdateChecker {
 
+    private static boolean outdated;
+    private static String newVersion;
+
     private final Plugin plugin;
     private final int resourceId;
 
@@ -29,6 +32,22 @@ public class UpdateChecker {
                 this.plugin.getLogger().warning("Failed to check for EcoEnchants updates: " + exception.getMessage());
             }
         });
+    }
+
+    public static boolean isOutdated() {
+        return outdated;
+    }
+
+    public static String getNewVersion() {
+        return newVersion;
+    }
+
+    public static void setOutdated(boolean outdated) {
+        UpdateChecker.outdated = outdated;
+    }
+
+    public static void setNewVersion(String newVersion) {
+        UpdateChecker.newVersion = newVersion;
     }
 }
  

@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants;
 
 import com.comphenix.protocol.ProtocolManager;
+import com.willfp.ecoenchants.extensions.loader.EcoExtensionLoader;
+import com.willfp.ecoenchants.extensions.loader.ExtensionLoader;
 import com.willfp.ecoenchants.util.Loader;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,17 +11,15 @@ import org.bukkit.plugin.java.JavaPlugin;
  * The Main class for EcoEnchants
  */
 public class EcoEnchantsPlugin extends JavaPlugin {
+    /**
+     * Instance of EcoEnchants
+     */
     private static EcoEnchantsPlugin instance;
 
     /**
-     * Is the plugin outdated
+     * Extension loader
      */
-    public static boolean outdated;
-
-    /**
-     * Newest available plugin version
-     */
-    public static String newVersion;
+    private final ExtensionLoader loader = new EcoExtensionLoader();
 
     /**
      * NMS version
@@ -50,6 +50,14 @@ public class EcoEnchantsPlugin extends JavaPlugin {
      */
     public void onLoad() {
         instance = this;
+    }
+
+    /**
+     * Get extension loader
+     * @return The {@link ExtensionLoader} attached to EcoEnchants
+     */
+    public ExtensionLoader getExtensionLoader() {
+        return loader;
     }
 
     /**

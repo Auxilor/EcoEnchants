@@ -1,7 +1,9 @@
-package com.willfp.ecoenchants.extensions;
+package com.willfp.ecoenchants.extensions.loader;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.extensions.Extension;
+import com.willfp.ecoenchants.extensions.MalformedExtensionException;
 import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
@@ -19,13 +21,14 @@ import java.util.stream.Collectors;
 /**
  * Class containing method to load extensions
  */
-public class ExtensionManager {
-    private static final Set<Extension> extensions = new HashSet<>();
+public class EcoExtensionLoader implements ExtensionLoader {
+    private final Set<Extension> extensions = new HashSet<>();
 
     /**
      * Load all extensions
      */
-    public static void loadExtensions() {
+    @Override
+    public void loadExtensions() {
         File dir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "/extensions");
         if (!dir.exists()) {
             dir.mkdirs();
@@ -47,7 +50,7 @@ public class ExtensionManager {
         }
     }
 
-    private static void loadExtension(File extensionJar) throws MalformedExtensionException {
+    private void loadExtension(File extensionJar) throws MalformedExtensionException {
         URL url = null;
         try {
             url = extensionJar.toURI().toURL();
@@ -98,15 +101,17 @@ public class ExtensionManager {
     /**
      * Unload all extensions
      */
-    public static void unloadExtensions() {
-        extensions.forEach(Extension::onDisable);
+    @Override
+    public void unloadExtensions() {
+        extensions.forEach(Extension::disable);
         extensions.clear();
     }
 
     /**
      * Reload all extensions
      */
-    public static void reloadExtensions() {
+    @Override
+    public void reloadExtensions() {
         unloadExtensions();
         loadExtensions();
     }
@@ -115,7 +120,8 @@ public class ExtensionManager {
      * Get set of all loaded extensions
      * @return {@link Set} of {@link Extension}s
      */
-    public static Set<Extension> getLoadedExtensions() {
+    @Override
+    public Set<Extension> getLoadedExtensions() {
         return extensions;
     }
 }
