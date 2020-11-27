@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.command.commands;
 
 import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.loader.Loader;
+import com.willfp.ecoenchants.util.Loader;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;

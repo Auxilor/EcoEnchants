@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.loader;
+package com.willfp.ecoenchants.util;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
@@ -55,10 +55,6 @@ import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.OpenInventory;
 import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.ClassUtils;
-import com.willfp.ecoenchants.util.Logger;
-import com.willfp.ecoenchants.util.StringUtils;
-import com.willfp.ecoenchants.util.UpdateChecker;
 import com.willfp.ecoenchants.util.interfaces.Callable;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
