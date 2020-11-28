@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
 public class EnchantDisplay {
-
     /**
      * The meta key to hide enchantments in lore
      *
