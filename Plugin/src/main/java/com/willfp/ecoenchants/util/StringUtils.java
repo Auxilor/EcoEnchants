@@ -12,20 +12,20 @@ import static net.md_5.bungee.api.ChatColor.COLOR_CHAR;
 public class StringUtils {
     public static String translate(String message, Player player) {
         message = PlaceholderManager.translatePlaceholders(message, player);
-        message = translateHexColorCodes("&#", "", message);
+        message = translateHexColorCodes(message);
         message = ChatColor.translateAlternateColorCodes('&', message);
-        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes("&#", "", message));
+        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes(message));
     }
 
     public static String translate(String message) {
         message = PlaceholderManager.translatePlaceholders(message, null);
-        message = translateHexColorCodes("&#", "", message);
+        message = translateHexColorCodes(message);
         message = ChatColor.translateAlternateColorCodes('&', message);
-        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes("&#", "", message));
+        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes(message));
     }
 
-    private static String translateHexColorCodes(String startTag, String endTag, String message) {
-        Pattern hexPattern = Pattern.compile(startTag + "([A-Fa-f0-9]{6})" + endTag);
+    private static String translateHexColorCodes(String message) {
+        Pattern hexPattern = Pattern.compile("&#" + "([A-Fa-f0-9]{6})" + "");
         Matcher matcher = hexPattern.matcher(message);
         StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
         while(matcher.find()) {

@@ -1,11 +1,8 @@
 package com.willfp.ecoenchants.extensions.loader;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.extensions.Extension;
 import com.willfp.ecoenchants.extensions.MalformedExtensionException;
-import com.willfp.ecoenchants.util.Logger;
-import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -15,8 +12,10 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class containing method to load extensions

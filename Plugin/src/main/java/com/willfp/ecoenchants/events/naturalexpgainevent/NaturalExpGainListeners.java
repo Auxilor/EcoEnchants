@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class NaturalExpGainListeners implements Listener {
 
-    Set<NaturalExpGainBuilder> events = new HashSet<>();
+    final Set<NaturalExpGainBuilder> events = new HashSet<>();
 
     @EventHandler
     public void onExpChange(PlayerExpChangeEvent event) {

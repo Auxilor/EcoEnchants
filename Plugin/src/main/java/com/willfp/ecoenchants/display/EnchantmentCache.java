@@ -8,12 +8,7 @@ import com.willfp.ecoenchants.util.Logger;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.enchantments.Enchantment;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("deprecation")
 public class EnchantmentCache {

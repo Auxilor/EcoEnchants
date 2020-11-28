@@ -23,6 +23,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -70,7 +71,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
                     "Allows getting " + permissionName + " from an Enchanting Table",
                     PermissionDefault.TRUE
             );
-            permission.addParent(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*"), true);
+            permission.addParent(Objects.requireNonNull(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*")), true);
             Bukkit.getPluginManager().addPermission(permission);
         }
 
@@ -345,7 +346,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return The display name
      */
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return name;
     }
 
@@ -376,7 +377,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      */
     @Override
     @Deprecated
-    public EnchantmentTarget getItemTarget() {
+    public @NotNull EnchantmentTarget getItemTarget() {
         return EnchantmentTarget.ALL;
     }
 
@@ -407,7 +408,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return If conflicts
      */
     @Override
-    public boolean conflictsWith(Enchantment enchantment) {
+    public boolean conflictsWith(@NotNull Enchantment enchantment) {
         return conflicts.contains(enchantment);
     }
 

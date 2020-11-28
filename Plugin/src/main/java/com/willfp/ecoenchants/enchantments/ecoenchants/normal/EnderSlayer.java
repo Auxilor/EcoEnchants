@@ -17,7 +17,7 @@ public class EnderSlayer extends EcoEnchant {
 
     // START OF LISTENERS
 
-    private static Set<EntityType> endMobs = new HashSet<EntityType>() {{
+    private static final Set<EntityType> endMobs = new HashSet<EntityType>() {{
         add(EntityType.ENDERMITE);
         add(EntityType.ENDERMAN);
         add(EntityType.ENDER_DRAGON);

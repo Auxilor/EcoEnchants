@@ -5,9 +5,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.ecoenchants.display.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.persistence.PersistentDataType;
 
-@SuppressWarnings("deprecation")
 public class PacketWindowItems extends AbstractPacketAdapter {
     public PacketWindowItems() {
         super(PacketType.Play.Server.WINDOW_ITEMS);

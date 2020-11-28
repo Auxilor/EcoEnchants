@@ -24,7 +24,7 @@ public class Spring extends EcoEnchant {
 
     @Override
     public void onJump(Player player, int level, PlayerMoveEvent event) {
-        double multiplier = 0.5 + (double) ((level * level) / 4 - 0.2) / 3;
+        double multiplier = 0.5 + ((double) (level * level) / 4 - 0.2) / 3;
         player.setVelocity(player.getLocation().getDirection().multiply(multiplier).setY(multiplier));
     }
 }

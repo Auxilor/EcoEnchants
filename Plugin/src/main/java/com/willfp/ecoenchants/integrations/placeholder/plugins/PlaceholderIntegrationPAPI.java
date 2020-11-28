@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements PlaceholderIntegration {
     @Override
@@ -19,22 +20,22 @@ public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements 
     }
 
     @Override
-    public String getAuthor() {
+    public @NotNull String getAuthor() {
         return "Auxilor";
     }
 
     @Override
-    public String getIdentifier() {
+    public @NotNull String getIdentifier() {
         return "ecoenchants";
     }
 
     @Override
-    public String getVersion() {
+    public @NotNull String getVersion() {
         return EcoEnchantsPlugin.getInstance().getDescription().getVersion();
     }
 
     @Override
-    public String onPlaceholderRequest(Player player, String identifier) {
+    public String onPlaceholderRequest(Player player, @NotNull String identifier) {
         return PlaceholderManager.getResult(player, identifier);
     }
 

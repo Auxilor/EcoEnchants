@@ -145,7 +145,6 @@ public class EnchantmentRarity implements Registerable {
     public static void update() {
         Set<String> raritiesNames = ConfigManager.getRarity().getRarities();
         raritiesNames.forEach((rarity) -> {
-            String name = rarity;
             double probability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".table-probability");
             int minimumLevel = ConfigManager.getRarity().getInt("rarities." + rarity + ".minimum-level");
             double villagerProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".villager-probability");
@@ -155,7 +154,7 @@ public class EnchantmentRarity implements Registerable {
                 customColor = StringUtils.translate(ConfigManager.getRarity().getString("rarities." + rarity + ".custom-color.color"));
             }
 
-            new EnchantmentRarity(name, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();
+            new EnchantmentRarity(rarity, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();
         });
     }
 

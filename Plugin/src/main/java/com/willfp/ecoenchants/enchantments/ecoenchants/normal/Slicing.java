@@ -22,7 +22,7 @@ public class Slicing extends EcoEnchant {
 
     // START OF LISTENERS
 
-    ArrayList<LivingEntity> entities = new ArrayList<LivingEntity>();
+    private final ArrayList<LivingEntity> entities = new ArrayList<>();
 
     @EventHandler
     public void onPlayerCollide(PlayerMoveEvent event) {
@@ -49,11 +49,7 @@ public class Slicing extends EcoEnchant {
             victim.damage(level * damage, player);
             entities.add(victim);
 
-            Bukkit.getServer().getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), new Runnable() {
-                public void run() {
-                    entities.remove(victim);
-                }
-            }, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown"));
+            Bukkit.getServer().getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> entities.remove(victim), this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown"));
             if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "damage-elytra")) {
                 DurabilityUtils.damageItem(player, player.getInventory().getChestplate(), 1, 38);
             }

@@ -54,7 +54,7 @@ public abstract class Artifact extends EcoEnchant {
 
     public Particle.DustOptions getDustOptions() {
         return null;
-    };
+    }
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
@@ -144,7 +144,7 @@ public abstract class Artifact extends EcoEnchant {
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 
-        int noteColor = 0;
+        int noteColor;
         AtomicDouble color = new AtomicDouble(0);
         if(particle.equals(Particle.NOTE)) {
             noteColor = NumberUtils.randInt(0, 24);

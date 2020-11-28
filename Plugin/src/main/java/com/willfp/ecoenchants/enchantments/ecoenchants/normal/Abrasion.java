@@ -30,7 +30,7 @@ public class Abrasion extends EcoEnchant {
         if (attacker instanceof Player && Cooldown.getCooldown((Player) attacker) != 1.0f && !notcharged)
             return;
 
-        ArrayList<ItemStack> armor = new ArrayList<ItemStack>(Arrays.asList(victim.getInventory().getArmorContents()));
+        ArrayList<ItemStack> armor = new ArrayList<>(Arrays.asList(victim.getInventory().getArmorContents()));
         if (armor.isEmpty())
             return;
 

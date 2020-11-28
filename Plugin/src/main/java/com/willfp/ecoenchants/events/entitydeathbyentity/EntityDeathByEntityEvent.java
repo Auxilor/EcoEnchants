@@ -34,12 +34,12 @@ public class EntityDeathByEntityEvent extends Event {
     /**
      * The entity drops
      */
-    private List<ItemStack> drops;
+    private final List<ItemStack> drops;
 
     /**
      * The xp to drop
      */
-    private int xp;
+    private final int xp;
 
     /**
      * Create event based off parameters
@@ -49,7 +49,7 @@ public class EntityDeathByEntityEvent extends Event {
      * @param xp The amount of xp to drop
      * @param deathEvent The associated {@link EntityDeathEvent}
      */
-    public EntityDeathByEntityEvent(@NotNull LivingEntity victim, @NotNull Entity damager, @NotNull List<ItemStack> drops, @NotNull int xp, @NotNull EntityDeathEvent deathEvent) {
+    public EntityDeathByEntityEvent(@NotNull LivingEntity victim, @NotNull Entity damager, @NotNull List<ItemStack> drops, int xp, @NotNull EntityDeathEvent deathEvent) {
         this.victim = victim;
         this.damager = damager;
         this.drops = drops;
@@ -99,7 +99,7 @@ public class EntityDeathByEntityEvent extends Event {
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return HANDLERS;
     }
 

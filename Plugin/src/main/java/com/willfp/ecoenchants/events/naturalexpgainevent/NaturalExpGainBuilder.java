@@ -6,7 +6,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 
 class NaturalExpGainBuilder {
-    private LivingEntity victim = null;
+    private final LivingEntity victim = null;
     private boolean cancelled = false;
     private PlayerExpChangeEvent event;
     private Location loc;

@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class EntityDeathByEntityListeners implements Listener {
 
-    Set<EntityDeathByEntityBuilder> events = new HashSet<>();
+    final Set<EntityDeathByEntityBuilder> events = new HashSet<>();
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageByEntityEvent event) {
@@ -35,8 +35,7 @@ public class EntityDeathByEntityListeners implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(events.contains(builtEvent))
-                    events.remove(builtEvent);
+                events.remove(builtEvent);
             }
         }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
     }

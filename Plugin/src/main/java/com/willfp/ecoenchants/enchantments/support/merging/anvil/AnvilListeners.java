@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIManager;
 import com.willfp.ecoenchants.nms.RepairCost;
-import com.willfp.ecoenchants.util.Logger;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;

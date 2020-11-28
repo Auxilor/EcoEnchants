@@ -15,7 +15,6 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unchecked")
 public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
     public PacketOpenWindowMerchant() {
         super(PacketType.Play.Server.OPEN_WINDOW_MERCHANT);

@@ -3,11 +3,7 @@ package com.willfp.ecoenchants.summoning;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.extensions.Extension;
-import com.willfp.ecoenchants.summoning.enchants.Crawler;
-import com.willfp.ecoenchants.summoning.enchants.Firestorm;
-import com.willfp.ecoenchants.summoning.enchants.Ghoul;
-import com.willfp.ecoenchants.summoning.enchants.Metallic;
-import com.willfp.ecoenchants.summoning.enchants.Mortality;
+import com.willfp.ecoenchants.summoning.enchants.*;
 import org.bukkit.Bukkit;
 
 public class SummoningMain extends Extension {

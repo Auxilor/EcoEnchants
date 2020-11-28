@@ -25,7 +25,7 @@ public class Corrosive extends EcoEnchant {
         if(!(uncastVictim instanceof Player)) return;
         Player victim = (Player) uncastVictim;
 
-        ArrayList<ItemStack> armor = new ArrayList<ItemStack>(Arrays.asList(victim.getInventory().getArmorContents()));
+        ArrayList<ItemStack> armor = new ArrayList<>(Arrays.asList(victim.getInventory().getArmorContents()));
         if (armor.isEmpty())
             return;
 

@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +16,6 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
     private final String name;
     private final String permission;
     private final boolean playersOnly;
-    private AbstractTabCompleter tabCompleter = null;
 
     protected AbstractCommand(String name, String permission, boolean playersOnly) {
         this.name = name;
@@ -36,7 +36,7 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
         if(!command.getName().equalsIgnoreCase(name)) return false;
 
         if(playersOnly && !(sender instanceof Player)) {
@@ -58,7 +58,7 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
     public final void register() {
         Bukkit.getPluginCommand(name).setExecutor(this);
 
-        this.tabCompleter = this.getTab();
+        AbstractTabCompleter tabCompleter = this.getTab();
         if(tabCompleter != null) {
             Bukkit.getPluginCommand(name).setTabCompleter(tabCompleter);
         }

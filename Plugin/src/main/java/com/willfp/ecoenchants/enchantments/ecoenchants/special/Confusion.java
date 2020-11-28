@@ -34,7 +34,7 @@ public class Confusion extends EcoEnchant {
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 
-        List<ItemStack> hotbar = new ArrayList<ItemStack>();
+        List<ItemStack> hotbar = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             hotbar.add(victim.getInventory().getItem(i));
         }

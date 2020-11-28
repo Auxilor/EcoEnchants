@@ -14,11 +14,7 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class VillagerListeners implements Listener {
@@ -66,7 +62,7 @@ public class VillagerListeners implements Listener {
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
                 int cost = event.getRecipe().getIngredients().get(0).getAmount();
-                double enchantlevel1 = cost / 64;
+                double enchantlevel1 = (double) cost / 64;
                 double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, enchantlevel1);
                 double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
@@ -147,7 +143,7 @@ public class VillagerListeners implements Listener {
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
                 int cost = event.getRecipe().getIngredients().get(0).getAmount();
-                double enchantlevel1 = cost / 64;
+                double enchantlevel1 = (double) cost / 64;
                 double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, enchantlevel1);
                 double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);

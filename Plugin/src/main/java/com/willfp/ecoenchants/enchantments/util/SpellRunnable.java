@@ -2,18 +2,13 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.ecoenchants.util.interfaces.Callable;
-import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class SpellRunnable {
-    private final UUID player;
     private final Spell spell;
     private long endTime = 0;
     private Callable callable = () -> {};
 
-    public SpellRunnable(Player player, Spell spell) {
-        this.player = player.getUniqueId();
+    public SpellRunnable(Spell spell) {
         this.spell = spell;
     }
 

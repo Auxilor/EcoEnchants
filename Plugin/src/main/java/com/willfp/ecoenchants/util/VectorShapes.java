@@ -12,7 +12,7 @@ public class VectorShapes {
      * @return An array of {@link Vector}s
      */
     public static Vector[] getCircle(int radius) {
-        ArrayList<Vector> circleVecs = new ArrayList<Vector>();
+        ArrayList<Vector> circleVecs = new ArrayList<>();
 
         int xoffset = -radius;
         int zoffset = -radius;
@@ -40,7 +40,7 @@ public class VectorShapes {
      * @return An array of {@link Vector}s
      */
     public static Vector[] getSquare(int radius) {
-        ArrayList<Vector> circleVecs = new ArrayList<Vector>();
+        ArrayList<Vector> circleVecs = new ArrayList<>();
 
         int xoffset = -radius;
         int zoffset = -radius;
@@ -63,7 +63,7 @@ public class VectorShapes {
      * @return An array of {@link Vector}s
      */
     public static Vector[] getCube(int radius) {
-        ArrayList<Vector> cubeVecs = new ArrayList<Vector>();
+        ArrayList<Vector> cubeVecs = new ArrayList<>();
 
         int xoffset = -radius;
         int zoffset = -radius;

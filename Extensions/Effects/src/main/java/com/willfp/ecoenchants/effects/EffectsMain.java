@@ -1,11 +1,7 @@
 package com.willfp.ecoenchants.effects;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.effects.enchants.JumpBoost;
-import com.willfp.ecoenchants.effects.enchants.NightVision;
-import com.willfp.ecoenchants.effects.enchants.Regeneration;
-import com.willfp.ecoenchants.effects.enchants.Speed;
-import com.willfp.ecoenchants.effects.enchants.WaterBreathing;
+import com.willfp.ecoenchants.effects.enchants.*;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.extensions.Extension;
 import org.bukkit.Bukkit;

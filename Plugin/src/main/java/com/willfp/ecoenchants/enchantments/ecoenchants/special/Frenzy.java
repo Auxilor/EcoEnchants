@@ -29,8 +29,7 @@ public class Frenzy extends EcoEnchant {
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         int duration = (int) (level * 20 * this.getConfig().getDouble((EcoEnchants.CONFIG_LOCATION + "seconds-per-level")));
-        int amplifier = level;
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, duration, amplifier, true, true, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, duration, level, true, true, true));
     }
 }

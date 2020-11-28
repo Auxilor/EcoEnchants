@@ -1,10 +1,6 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.ecoenchants.config.configs.Config;
-import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
-import com.willfp.ecoenchants.config.configs.Lang;
-import com.willfp.ecoenchants.config.configs.Rarity;
-import com.willfp.ecoenchants.config.configs.Target;
+import com.willfp.ecoenchants.config.configs.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -54,6 +50,7 @@ public class ConfigManager {
      * @param permissionName The permission name to match
      * @return The matching {@link EnchantmentConfig}
      */
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public static EnchantmentConfig getEnchantmentConfig(String permissionName) {
         return enchantmentConfigs.stream().filter(config -> config.getName().equalsIgnoreCase(permissionName)).findFirst().get();
     }
