@@ -282,7 +282,7 @@ public class Loader {
             return;
         } else {
             Logger.info(EcoEnchants.getAll().size() + " Enchantments Loaded:");
-            Logger.info(EcoEnchants.getAll().stream().map(ecoEnchant -> ecoEnchant.getType().getColor() + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString()).collect(Collectors.joining(", ")));
+            Logger.info(EcoEnchants.getAll().stream().map(ecoEnchant -> ecoEnchant.getType().getColor() + ecoEnchant.getName()).collect(Collectors.joining(", ")));
         }
         Logger.info("");
 
