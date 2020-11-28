@@ -151,7 +151,7 @@ public class EnchantDisplay {
                 hideEnchants = false;
         }
 
-        item = revertDisplay(item);
+        revertDisplay(item);
 
         ItemMeta meta = item.getItemMeta();
         if(meta == null) return item;
@@ -228,12 +228,11 @@ public class EnchantDisplay {
             }
         });
 
-        final ItemStack finalItem = item;
         enchantments.forEach((enchantment, level) -> {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if(!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if(useNumerals && finalItem.getEnchantmentLevel(enchantment) < numbersThreshold) {
+                if(useNumerals && item.getEnchantmentLevel(enchantment) < numbersThreshold) {
                     name += " " + NumberUtils.toNumeral(level);
                 } else {
                     name += " " + level;
