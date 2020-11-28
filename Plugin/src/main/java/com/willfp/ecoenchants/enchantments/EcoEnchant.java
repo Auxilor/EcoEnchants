@@ -436,13 +436,13 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     public static class EnchantmentType {
+        private static final Set<EnchantmentType> values = new HashSet<>();
+
         public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> ConfigManager.getLang().getString("not-curse-color"));
         public static final EnchantmentType CURSE = new EnchantmentType("curse", false, () -> ConfigManager.getLang().getString("curse-color"));
         public static final EnchantmentType SPECIAL = new EnchantmentType("special", () -> !ConfigManager.getConfig().getBool("types.special.allow-multiple"), () -> ConfigManager.getLang().getString("special-color"));
         public static final EnchantmentType ARTIFACT = new EnchantmentType("artifact", () -> !ConfigManager.getConfig().getBool("types.artifact.allow-multiple"), () -> ConfigManager.getLang().getString("artifact-color"));
         public static final EnchantmentType SPELL = new EnchantmentType("spell", true, () -> ConfigManager.getLang().getString("spell-color"));
-
-        private static final Set<EnchantmentType> values = new HashSet<>();
 
         private boolean singular;
         private String color;
