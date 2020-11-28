@@ -282,17 +282,7 @@ public class Loader {
             return;
         } else {
             Logger.info(EcoEnchants.getAll().size() + " Enchantments Loaded:");
-            EcoEnchants.getAll().forEach((ecoEnchant -> {
-                if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
-                    Logger.info(StringUtils.translate(ConfigManager.getLang().getString("special-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
-                } else if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)) {
-                    Logger.info(StringUtils.translate(ConfigManager.getLang().getString("artifact-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
-                } else if(ecoEnchant.getType().equals(EcoEnchant.EnchantmentType.SPELL)) {
-                    Logger.info(StringUtils.translate(ConfigManager.getLang().getString("spell-color")) + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
-                } else {
-                    Logger.info("- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString());
-                }
-            }));
+            Logger.info(EcoEnchants.getAll().stream().map(ecoEnchant -> ecoEnchant.getType().getColor() + "- " + ecoEnchant.getName() + ": " + ecoEnchant.getKey().toString()).collect(Collectors.joining(", ")));
         }
         Logger.info("");
 
