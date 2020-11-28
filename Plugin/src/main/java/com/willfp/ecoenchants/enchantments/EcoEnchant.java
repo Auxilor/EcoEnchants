@@ -352,14 +352,36 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         private final ObjectCallable<String> colorCallable;
         private final ObjectCallable<Boolean> singularCallable;
 
+        /**
+         * Create simple EnchantmentType
+         *
+         * Singularity and Color will not be updated using this constructor
+         * @param name The name of the type
+         * @param singular Whether an item can have several enchantments of this type
+         * @param color The color for enchantments with this type in lore to have
+         */
         public EnchantmentType(String name, boolean singular, String color) {
             this(name, () -> singular, () -> color);
         }
 
+        /**
+         * Create EnchantmentType with updatable color
+         *
+         * Singularity will not be updated using this constructor
+         * @param name The name of the type
+         * @param singular Whether an item can have several enchantments of this type
+         * @param colorCallable Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
+         */
         public EnchantmentType(String name, boolean singular, ObjectCallable<String> colorCallable) {
             this(name, () -> singular, colorCallable);
         }
 
+        /**
+         * Create EnchantmentType with updatable color and singularity
+         * @param name The name of the type
+         * @param singularCallable Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload
+         * @param colorCallable Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
+         */
         public EnchantmentType(String name, ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable) {
             this.name = name;
             this.singularCallable = singularCallable;
