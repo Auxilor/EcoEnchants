@@ -29,13 +29,6 @@ import java.util.stream.Collectors;
 public class EnchantDisplay {
 
     /**
-     * The meta key of the length of enchantments in lore (for legacy support)
-     * @deprecated This is no longer used due to a change in the lore storage mechanism
-     */
-    @Deprecated
-    public static final NamespacedKey KEY = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-len");
-
-    /**
      * The meta key to hide enchantments in lore
      *
      * Only used for parity in {@link com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot}.
@@ -123,19 +116,9 @@ public class EnchantDisplay {
 
         if(itemLore == null) itemLore = new ArrayList<>();
 
-        try {
-            if(meta.getPersistentDataContainer().has(KEY, PersistentDataType.INTEGER)) {
-                int enchantLoreLength = meta.getPersistentDataContainer().get(KEY, PersistentDataType.INTEGER);
-                if(itemLore.size() >= enchantLoreLength)
-                    itemLore.subList(0, enchantLoreLength).clear();
-            }
-        } catch(NullPointerException ignored) { }
-
         if(meta.getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
             meta.getPersistentDataContainer().remove(KEY_V);
         }
-
-        meta.getPersistentDataContainer().remove(KEY);
         itemLore.removeIf((s) -> s.startsWith(PREFIX));
 
         if(!meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
@@ -207,24 +190,17 @@ public class EnchantDisplay {
 
         HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
         if(sortByType) {
-            List<Enchantment> normalEnchants = unsorted.stream().filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(EcoEnchant.EnchantmentType.NORMAL)).collect(Collectors.toList());
-            List<Enchantment> specialEnchants = unsorted.stream().filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(EcoEnchant.EnchantmentType.SPECIAL)).collect(Collectors.toList());
-            List<Enchantment> artifactEnchants = unsorted.stream().filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(EcoEnchant.EnchantmentType.ARTIFACT)).collect(Collectors.toList());
-            List<Enchantment> spellEnchants = unsorted.stream().filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(EcoEnchant.EnchantmentType.SPELL)).collect(Collectors.toList());
-            List<Enchantment> curseEnchants = unsorted.stream().filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(EcoEnchant.EnchantmentType.CURSE)).collect(Collectors.toList());
-
-            normalEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
-            specialEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
-            artifactEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
-            spellEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
-            curseEnchants.sort((Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length())));
+            List<Enchantment> sorted = new ArrayList<>();
+            EcoEnchant.EnchantmentType.getValues().forEach(enchantmentType -> {
+                List<Enchantment> typeEnchants = unsorted.stream()
+                        .filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(enchantmentType))
+                        .sorted(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()))
+                        .collect(Collectors.toList());
+                sorted.addAll(typeEnchants);
+            });
 
             unsorted.clear();
-            unsorted.addAll(normalEnchants);
-            unsorted.addAll(specialEnchants);
-            unsorted.addAll(artifactEnchants);
-            unsorted.addAll(spellEnchants);
-            unsorted.addAll(curseEnchants);
+            unsorted.addAll(sorted);
         } else {
             unsorted.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
         }

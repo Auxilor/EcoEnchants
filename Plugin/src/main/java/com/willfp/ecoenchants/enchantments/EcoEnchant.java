@@ -422,7 +422,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     public static class EnchantmentType {
-        private static final Set<EnchantmentType> values = new HashSet<>();
+        private static final List<EnchantmentType> values = new ArrayList<>();
 
         public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> ConfigManager.getLang().getString("not-curse-color"));
         public static final EnchantmentType CURSE = new EnchantmentType("curse", false, () -> ConfigManager.getLang().getString("curse-color"));
@@ -474,8 +474,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             values.forEach(EnchantmentType::refresh);
         }
 
-        public static Set<EnchantmentType> getValues() {
-            return values;
+        public static List<EnchantmentType> getValues() {
+            return new ArrayList<>(values);
         }
     }
 }
