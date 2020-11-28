@@ -3,16 +3,14 @@ package com.willfp.ecoenchants.enchantments;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
-import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
-import com.willfp.ecoenchants.integrations.placeholder.PlaceholderEntry;
-import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
-import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
+import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @SuppressWarnings({"unchecked", "deprecation"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
@@ -58,10 +55,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite... prerequisites) {
         super(NamespacedKey.minecraft(key));
 
-        if(Pattern.matches("[a-z_]", key)) throw new InvalidEnchantmentException("Key must only contain lowercase letters and underscores");
+        Validate.isTrue(Pattern.matches("[a-z_]", key), "Key must only contain lowercase letters and underscores");
 
         this.type = type;
-        this.permissionName = key.replace("_", "");
+        this.permissionName = key.replaceAll("_", "");
         ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, plugin, this.type));
         this.config = ConfigManager.getEnchantmentConfig(this.permissionName);
 
@@ -79,7 +76,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             return;
 
         this.update();
-        this.add();
+        EcoEnchants.addNewEcoEnchant(this);
     }
 
     /**
@@ -101,7 +98,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         target.addAll(config.getTargets());
         target.forEach(enchantmentTarget -> targetMaterials.addAll(enchantmentTarget.getMaterials()));
         enabled = config.getBool("enabled", true);
-        this.updatePlaceholders();
+        EnchantmentUtils.registerPlaceholders(this);
 
         this.register();
     }
@@ -136,88 +133,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
             Enchantment.registerEnchantment(this);
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
-    }
-
-    private void add() {
-        EcoEnchants.addNewEcoEnchant(this);
-    }
-
-    private void remove() {
-        EcoEnchants.removeEcoEnchant(this);
-    }
-
-    private void updatePlaceholders() {
-        PlaceholderManager.registerPlaceholder(
-                new PlaceholderEntry(this.getPermissionName() + "_" + "enabled", (player) -> {
-                    return String.valueOf(this.isEnabled());
-                })
-        );
-
-        this.getConfig().config.getKeys(true).forEach(string -> {
-            String key = string.replaceAll("\\.", "_").replaceAll("-", "_");
-            Object object = this.getConfig().config.get(string);
-
-            if (object instanceof Integer) {
-                PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
-                        return ((Integer) object).toString();
-                    })
-                );
-            } else if(object instanceof String) {
-                PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
-                        return (String) object;
-                    })
-                );
-            } else if(object instanceof Double) {
-                PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
-                        return NumberUtils.format((Double) object);
-                    })
-                );
-            } else if(object instanceof Collection<?>) {
-                PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
-                        Collection<?> c = (Collection<?>) object;
-                        return c.stream().map(String::valueOf).collect(Collectors.joining(", "));
-                    })
-                );
-            }
-        });
-
-        if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + "chance_per_level", (player) -> {
-                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"));
-                    })
-            );
-        }
-
-        if(this.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + "multiplier", (player) -> {
-                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier"));
-                    })
-            );
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + "multiplier_percentage", (player) -> {
-                        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * 100);
-                    })
-            );
-        }
-
-        if(this instanceof Spell) {
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown", (player) -> {
-                        return NumberUtils.format(Spell.getCooldown((Spell) this, player));
-                    }, true)
-            );
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(this.getPermissionName() + "_" + "cooldown_total", (player) -> {
-                        return NumberUtils.format(((Spell) this).getCooldownTime());
-                    })
-            );
-        }
     }
 
     /**
