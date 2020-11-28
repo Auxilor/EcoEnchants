@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +17,6 @@ public abstract class EnchantmentYamlConfig {
     public YamlConfiguration config;
     protected File configFile;
     private final File directory;
-    private final JavaPlugin plugin = EcoEnchantsPlugin.getInstance();
     private final Class<?> source;
     private final EcoEnchant.EnchantmentType type;
 
@@ -34,7 +32,7 @@ public abstract class EnchantmentYamlConfig {
         this.source = plugin;
         this.type = type;
 
-        File basedir = new File(this.plugin.getDataFolder(), "enchants/");
+        File basedir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "enchants/");
         if(!basedir.exists()) basedir.mkdirs();
 
         File dir = new File(basedir, type.getName() + "/");
