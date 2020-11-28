@@ -1,26 +1,34 @@
 package com.willfp.ecoenchants.util.optional;
 
 import com.willfp.ecoenchants.util.ClassUtils;
+import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import org.bukkit.Bukkit;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Prerequisite {
+    private static final List<Prerequisite> values = new ArrayList<>();
+
     public static final Prerequisite MinVer1_16 = new Prerequisite(
-            false,
+            () -> !Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].contains("15"),
             "Requires minimum server version of 1.16"
     );
     public static final Prerequisite HasPaper = new Prerequisite(
-            false,
+            () -> ClassUtils.exists("com.destroystokyo.paper.event.player.PlayerElytraBoostEvent"),
             "Requires server to be running paper (or a fork)"
     );
 
     private boolean isMet;
+    private final ObjectCallable<Boolean> isMetCallable;
     private final String description;
 
-    protected Prerequisite(boolean isMet, String description) {
-        this.isMet = isMet;
+    public Prerequisite(ObjectCallable<Boolean> isMetCallable, String description) {
+        this.isMetCallable = isMetCallable;
+        this.isMet = isMetCallable.call();
         this.description = description;
+        values.add(this);
     }
 
     public String getDescription() {
@@ -31,20 +39,16 @@ public class Prerequisite {
         return isMet;
     }
 
-    private void setMet(boolean met) {
-        isMet = met;
-    }
-
-    static {
-        update();
+    private void refresh() {
+        this.isMet = this.isMetCallable.call();
     }
 
     public static void update() {
-        MinVer1_16.setMet(!Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].contains("15"));
-        HasPaper.setMet(ClassUtils.exists("com.destroystokyo.paper.event.player.PlayerElytraBoostEvent"));
+        values.forEach(Prerequisite::refresh);
     }
 
     public static boolean areMet(Prerequisite[] prerequisites) {
+        update();
         return Arrays.stream(prerequisites).allMatch(Prerequisite::isMet);
     }
 }
