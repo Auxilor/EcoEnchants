@@ -13,7 +13,6 @@ import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
-import jdk.nashorn.internal.codegen.ObjectClassGenerator;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -26,14 +25,9 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @SuppressWarnings({"unchecked", "deprecation"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
@@ -184,15 +178,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
                 PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(this.getPermissionName() + "_" + key, (player) -> {
                         Collection<?> c = (Collection<?>) object;
-                        StringBuilder builder = new StringBuilder();
-                        c.forEach(o -> {
-                            builder.append(o.toString()).append(", ");
-                        });
-                        String output = builder.toString();
-                        if(output.length() < 3)
-                            return "";
-                        output = output.substring(output.length() - 3, output.length() - 1);
-                        return output;
+                        return c.stream().map(String::valueOf).collect(Collectors.joining(", "));
                     })
                 );
             }
