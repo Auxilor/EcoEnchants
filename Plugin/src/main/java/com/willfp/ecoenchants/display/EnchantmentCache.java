@@ -62,7 +62,7 @@ public class EnchantmentCache {
 
             String rawName = name;
             name = color + name;
-            description.replaceAll(line -> EnchantDisplay.PREFIX + EnchantDisplay.descriptionColor + line);
+            description.replaceAll(line -> EnchantDisplay.PREFIX + EnchantDisplay.OPTIONS.getDescriptionColor() + line);
             CACHE.add(new CacheEntry(enchantment, name, rawName, description, type));
         });
     }
@@ -93,7 +93,7 @@ public class EnchantmentCache {
 
             String stringDescription = descriptionBuilder.toString();
             stringDescription = stringDescription.replaceAll("§w", "");
-            this.stringDescription = stringDescription.replaceAll(EnchantDisplay.descriptionColor, "");
+            this.stringDescription = stringDescription.replaceAll(EnchantDisplay.OPTIONS.getDescriptionColor(), "");
         }
 
         public Enchantment getEnchantment() {

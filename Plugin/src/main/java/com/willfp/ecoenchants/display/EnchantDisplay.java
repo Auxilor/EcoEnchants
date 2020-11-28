@@ -41,38 +41,21 @@ public class EnchantDisplay {
      */
     public static final NamespacedKey KEY_V = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-v");
 
+    /**
+     * The prefix for all enchantment lines to have in lore
+     */
     public static final String PREFIX = "§w";
 
-    static String descriptionColor;
-
-    static int numbersThreshold;
-    static boolean useNumerals;
-
-    static int describeThreshold;
-    static boolean useDescribe;
-
-    static int shrinkThreshold;
-    static int shrinkPerLine;
-    static boolean useShrink;
-    static boolean sortByType;
+    /**
+     * The configurable options for displaying enchantments
+     */
+    public static final DisplayOptions OPTIONS = new DisplayOptions();
 
     /**
      * Update config values
      */
     public static void update() {
-        descriptionColor = StringUtils.translate(ConfigManager.getLang().getString("description-color"));
-
-        useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
-        numbersThreshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");
-
-        describeThreshold = ConfigManager.getConfig().getInt("lore.describe.before-lines");
-        useDescribe = ConfigManager.getConfig().getBool("lore.describe.enabled");
-
-        shrinkThreshold = ConfigManager.getConfig().getInt("lore.shrink.after-lines");
-        useShrink = ConfigManager.getConfig().getBool("lore.shrink.enabled");
-        shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
-        sortByType = ConfigManager.getConfig().getBool("lore.sort-by-type");
-
+        OPTIONS.update();
         EnchantmentCache.update();
     }
 
@@ -184,7 +167,7 @@ public class EnchantDisplay {
         });
 
         HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
-        if(sortByType) {
+        if(OPTIONS.isSortByType()) {
             List<Enchantment> sorted = new ArrayList<>();
             EcoEnchant.EnchantmentType.getValues().forEach(enchantmentType -> {
                 List<Enchantment> typeEnchants = unsorted.stream()
@@ -227,7 +210,7 @@ public class EnchantDisplay {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if(!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if(useNumerals && item.getEnchantmentLevel(enchantment) < numbersThreshold) {
+                if(OPTIONS.isUseNumerals() && item.getEnchantmentLevel(enchantment) < OPTIONS.getNumbersThreshold()) {
                     name += " " + NumberUtils.toNumeral(level);
                 } else {
                     name += " " + level;
@@ -235,12 +218,12 @@ public class EnchantDisplay {
             }
 
             lore.add(PREFIX + name);
-            if(enchantments.size() <= describeThreshold && useDescribe)
+            if(enchantments.size() <= OPTIONS.getDescribeThreshold() && OPTIONS.isUseDescribe())
                 lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
         });
 
-        if (useShrink && (enchantments.size() > shrinkThreshold)) {
-            List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, shrinkPerLine);
+        if (OPTIONS.isUseShrink() && (enchantments.size() > OPTIONS.getShrinkThreshold())) {
+            List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, OPTIONS.getShrinkPerLine());
             List<String> newLore = new ArrayList<>();
             partitionedCombinedLoreList.forEach((list) -> {
                 StringBuilder builder = new StringBuilder();
@@ -265,5 +248,75 @@ public class EnchantDisplay {
         item.setItemMeta(meta);
 
         return item;
+    }
+
+    public static class DisplayOptions {
+        private String descriptionColor;
+
+        private int numbersThreshold;
+        private boolean useNumerals;
+
+        private int describeThreshold;
+        private boolean useDescribe;
+
+        private int shrinkThreshold;
+        private int shrinkPerLine;
+        private boolean useShrink;
+        private boolean sortByType;
+
+        private DisplayOptions() {
+            update();
+        }
+
+        public String getDescriptionColor() {
+            return descriptionColor;
+        }
+
+        public int getNumbersThreshold() {
+            return numbersThreshold;
+        }
+
+        public boolean isUseNumerals() {
+            return useNumerals;
+        }
+
+        public int getDescribeThreshold() {
+            return describeThreshold;
+        }
+
+        public boolean isUseDescribe() {
+            return useDescribe;
+        }
+
+        public int getShrinkThreshold() {
+            return shrinkThreshold;
+        }
+
+        public int getShrinkPerLine() {
+            return shrinkPerLine;
+        }
+
+        public boolean isUseShrink() {
+            return useShrink;
+        }
+
+        public boolean isSortByType() {
+            return sortByType;
+        }
+
+        public void update() {
+            descriptionColor = StringUtils.translate(ConfigManager.getLang().getString("description-color"));
+
+            useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
+            numbersThreshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");
+
+            describeThreshold = ConfigManager.getConfig().getInt("lore.describe.before-lines");
+            useDescribe = ConfigManager.getConfig().getBool("lore.describe.enabled");
+
+            shrinkThreshold = ConfigManager.getConfig().getInt("lore.shrink.after-lines");
+            useShrink = ConfigManager.getConfig().getBool("lore.shrink.enabled");
+            shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
+            sortByType = ConfigManager.getConfig().getBool("lore.sort-by-type");
+        }
     }
 }
