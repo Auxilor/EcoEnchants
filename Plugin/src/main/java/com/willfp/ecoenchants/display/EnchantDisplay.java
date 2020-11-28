@@ -55,12 +55,7 @@ public class EnchantDisplay {
 
     public static final String PREFIX = "§w";
 
-    static String normalColor;
-    static String curseColor;
-    static String specialColor;
-    static String artifactColor;
     static String descriptionColor;
-    static String spellColor;
 
     static int numbersThreshold;
     static boolean useNumerals;
@@ -78,11 +73,6 @@ public class EnchantDisplay {
      */
     public static void update() {
         descriptionColor = StringUtils.translate(ConfigManager.getLang().getString("description-color"));
-        curseColor = StringUtils.translate(ConfigManager.getLang().getString("curse-color"));
-        specialColor = StringUtils.translate(ConfigManager.getLang().getString("special-color"));
-        artifactColor = StringUtils.translate(ConfigManager.getLang().getString("artifact-color"));
-        spellColor = StringUtils.translate(ConfigManager.getLang().getString("spell-color"));
-        normalColor = StringUtils.translate(ConfigManager.getLang().getString("not-curse-color"));
 
         useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
         numbersThreshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");

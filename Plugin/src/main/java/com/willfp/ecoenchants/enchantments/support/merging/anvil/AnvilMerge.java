@@ -121,7 +121,7 @@ public class AnvilMerge {
         rightEnchants.forEach(((enchantment, integer) -> {
             AtomicBoolean doesConflict = new AtomicBoolean(false);
 
-            Arrays.stream(EcoEnchant.EnchantmentType.values()).forEach(enchantmentType -> {
+            EcoEnchant.EnchantmentType.getValues().forEach(enchantmentType -> {
                 EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantment);
                 if(enchant == null) return;
                 if(enchant.getType().equals(enchantmentType) && EcoEnchants.hasAnyOfType(left, enchantmentType) && enchantmentType.isSingular()) doesConflict.set(true);

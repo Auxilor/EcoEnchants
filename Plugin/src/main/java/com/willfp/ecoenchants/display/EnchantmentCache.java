@@ -52,23 +52,7 @@ public class EnchantmentCache {
                 type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
             }
 
-            switch(type) {
-                case ARTIFACT:
-                    color = EnchantDisplay.artifactColor;
-                    break;
-                case SPECIAL:
-                    color = EnchantDisplay.specialColor;
-                    break;
-                case CURSE:
-                    color = EnchantDisplay.curseColor;
-                    break;
-                case SPELL:
-                    color = EnchantDisplay.spellColor;
-                    break;
-                default:
-                    color = EnchantDisplay.normalColor;
-                    break;
-            }
+            color = type.getColor();
 
             if(EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();

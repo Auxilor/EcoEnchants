@@ -10,8 +10,10 @@ import com.willfp.ecoenchants.integrations.placeholder.PlaceholderEntry;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.StringUtils;
+import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
+import jdk.nashorn.internal.codegen.ObjectClassGenerator;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -433,24 +435,43 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         return targetMaterials.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
     }
 
-    /**
-     * The types of {@link EcoEnchant}
-     */
-    public enum EnchantmentType {
-        NORMAL(false),
-        CURSE(false),
-        SPECIAL(true),
-        ARTIFACT(true),
-        SPELL(true);
+    public static class EnchantmentType {
+        public static final EnchantmentType NORMAL = new EnchantmentType(false, () -> ConfigManager.getLang().getString("not-curse-color"));
+        public static final EnchantmentType CURSE = new EnchantmentType(false, () -> ConfigManager.getLang().getString("curse-color"));
+        public static final EnchantmentType SPECIAL = new EnchantmentType(() -> !ConfigManager.getConfig().getBool("types.special.allow-multiple"), () -> ConfigManager.getLang().getString("special-color"));
+        public static final EnchantmentType ARTIFACT = new EnchantmentType(() -> !ConfigManager.getConfig().getBool("types.artifact.allow-multiple"), () -> ConfigManager.getLang().getString("artifact-color"));
+        public static final EnchantmentType SPELL = new EnchantmentType(true, () -> ConfigManager.getLang().getString("spell-color"));
 
-        static {
-            update();
+        private static final Set<EnchantmentType> values = new HashSet<>();
+
+        private boolean singular;
+        private String color;
+        private final ObjectCallable<String> colorCallable;
+        private final ObjectCallable<Boolean> singularCallable;
+
+        public EnchantmentType(boolean singular, String color) {
+            this(() -> singular, () -> color);
         }
 
-        boolean singular;
+        public EnchantmentType(boolean singular, ObjectCallable<String> colorCallable) {
+            this(() -> singular, colorCallable);
+        }
 
-        EnchantmentType(boolean singular) {
-            this.singular = singular;
+        public EnchantmentType(ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable) {
+            this.singularCallable = singularCallable;
+            this.colorCallable = colorCallable;
+            color = colorCallable.call();
+            singular = singularCallable.call();
+            values.add(this);
+        }
+
+        private void refresh() {
+            this.color = colorCallable.call();
+            this.singular = singularCallable.call();
+        }
+
+        public String getColor() {
+            return color;
         }
 
         public boolean isSingular() {
@@ -458,8 +479,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         }
 
         public static void update() {
-            SPECIAL.singular = !ConfigManager.getConfig().getBool("types.special.allow-multiple");
-            ARTIFACT.singular = !ConfigManager.getConfig().getBool("types.artifact.allow-multiple");
+            values.forEach(EnchantmentType::refresh);
+        }
+
+        public static Set<EnchantmentType> getValues() {
+            return values;
         }
     }
 }
