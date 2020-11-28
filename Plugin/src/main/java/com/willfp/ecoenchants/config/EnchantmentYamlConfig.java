@@ -43,7 +43,7 @@ public abstract class EnchantmentYamlConfig {
 
         if(!basedir.exists()) basedir.mkdirs();
 
-        File dir = new File(basedir, type.name().toLowerCase() + "/");
+        File dir = new File(basedir, type.getName() + "/");
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -64,7 +64,7 @@ public abstract class EnchantmentYamlConfig {
     }
 
     private void saveResource(boolean replace) {
-        String resourcePath = "/enchants/" + type.name().toLowerCase() + "/" + name + ".yml";
+        String resourcePath = "/enchants/" + type.getName() + "/" + name + ".yml";
 
         InputStream in =  source.getResourceAsStream(resourcePath);
 
@@ -98,7 +98,7 @@ public abstract class EnchantmentYamlConfig {
         try {
             config.load(configFile);
 
-            String resourcePath = "/enchants/" + type.name().toLowerCase() + "/" + name + ".yml";
+            String resourcePath = "/enchants/" + type.getName() + "/" + name + ".yml";
             InputStream newIn =  source.getResourceAsStream(resourcePath);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));

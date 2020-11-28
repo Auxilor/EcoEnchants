@@ -436,28 +436,30 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     public static class EnchantmentType {
-        public static final EnchantmentType NORMAL = new EnchantmentType(false, () -> ConfigManager.getLang().getString("not-curse-color"));
-        public static final EnchantmentType CURSE = new EnchantmentType(false, () -> ConfigManager.getLang().getString("curse-color"));
-        public static final EnchantmentType SPECIAL = new EnchantmentType(() -> !ConfigManager.getConfig().getBool("types.special.allow-multiple"), () -> ConfigManager.getLang().getString("special-color"));
-        public static final EnchantmentType ARTIFACT = new EnchantmentType(() -> !ConfigManager.getConfig().getBool("types.artifact.allow-multiple"), () -> ConfigManager.getLang().getString("artifact-color"));
-        public static final EnchantmentType SPELL = new EnchantmentType(true, () -> ConfigManager.getLang().getString("spell-color"));
+        public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> ConfigManager.getLang().getString("not-curse-color"));
+        public static final EnchantmentType CURSE = new EnchantmentType("curse", false, () -> ConfigManager.getLang().getString("curse-color"));
+        public static final EnchantmentType SPECIAL = new EnchantmentType("special", () -> !ConfigManager.getConfig().getBool("types.special.allow-multiple"), () -> ConfigManager.getLang().getString("special-color"));
+        public static final EnchantmentType ARTIFACT = new EnchantmentType("artifact", () -> !ConfigManager.getConfig().getBool("types.artifact.allow-multiple"), () -> ConfigManager.getLang().getString("artifact-color"));
+        public static final EnchantmentType SPELL = new EnchantmentType("spell", true, () -> ConfigManager.getLang().getString("spell-color"));
 
         private static final Set<EnchantmentType> values = new HashSet<>();
 
         private boolean singular;
         private String color;
+        private final String name;
         private final ObjectCallable<String> colorCallable;
         private final ObjectCallable<Boolean> singularCallable;
 
-        public EnchantmentType(boolean singular, String color) {
-            this(() -> singular, () -> color);
+        public EnchantmentType(String name, boolean singular, String color) {
+            this(name, () -> singular, () -> color);
         }
 
-        public EnchantmentType(boolean singular, ObjectCallable<String> colorCallable) {
-            this(() -> singular, colorCallable);
+        public EnchantmentType(String name, boolean singular, ObjectCallable<String> colorCallable) {
+            this(name, () -> singular, colorCallable);
         }
 
-        public EnchantmentType(ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable) {
+        public EnchantmentType(String name, ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable) {
+            this.name = name;
             this.singularCallable = singularCallable;
             this.colorCallable = colorCallable;
             color = colorCallable.call();
@@ -476,6 +478,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         public boolean isSingular() {
             return singular;
+        }
+
+        public String getName() {
+            return name;
         }
 
         public static void update() {
