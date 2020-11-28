@@ -25,6 +25,7 @@ lore:
   use-numerals: true
   use-numbers-above-threshold: 10 #After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
   sort-by-type: false # Sort enchantments by type
+  sort-by-length: false # Sort enchantments by length. Any combination of this and the above option is valid
 
   describe: # Describe enchantments in lore
     enabled: false

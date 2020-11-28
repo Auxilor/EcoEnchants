@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.display;
 import com.google.common.collect.Lists;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.display.sorting.*;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -167,21 +168,8 @@ public class EnchantDisplay {
         });
 
         HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
-        if(OPTIONS.isSortByType()) {
-            List<Enchantment> sorted = new ArrayList<>();
-            EcoEnchant.EnchantmentType.getValues().forEach(enchantmentType -> {
-                List<Enchantment> typeEnchants = unsorted.stream()
-                        .filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(enchantmentType))
-                        .sorted(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()))
-                        .collect(Collectors.toList());
-                sorted.addAll(typeEnchants);
-            });
 
-            unsorted.clear();
-            unsorted.addAll(sorted);
-        } else {
-            unsorted.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
-        }
+        OPTIONS.getSorter().sortEnchantments(unsorted);
 
         enchantments.clear();
         unsorted.forEach(enchantment -> {
@@ -262,7 +250,8 @@ public class EnchantDisplay {
         private int shrinkThreshold;
         private int shrinkPerLine;
         private boolean useShrink;
-        private boolean sortByType;
+
+        private EnchantmentSorter sorter;
 
         private DisplayOptions() {
             update();
@@ -300,8 +289,8 @@ public class EnchantDisplay {
             return useShrink;
         }
 
-        public boolean isSortByType() {
-            return sortByType;
+        public EnchantmentSorter getSorter() {
+            return sorter;
         }
 
         public void update() {
@@ -316,7 +305,13 @@ public class EnchantDisplay {
             shrinkThreshold = ConfigManager.getConfig().getInt("lore.shrink.after-lines");
             useShrink = ConfigManager.getConfig().getBool("lore.shrink.enabled");
             shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
-            sortByType = ConfigManager.getConfig().getBool("lore.sort-by-type");
+
+            boolean byType = ConfigManager.getConfig().getBool("lore.sort-by-type");
+            boolean byLength = ConfigManager.getConfig().getBool("lore.sort-by-length");
+            if(byType && byLength) sorter = new TypeLengthSorter();
+            if(byType && !byLength) sorter = new TypeAlphabeticSorter();
+            if(!byType && byLength) sorter = new LengthSorter();
+            if(!byType && !byLength) sorter = new AlphabeticSorter();
         }
     }
 }
