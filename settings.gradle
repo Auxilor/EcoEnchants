@@ -37,3 +37,7 @@ findProject(':SprintArtifacts').projectDir = file('Extensions/SprintArtifacts')
 
 include('Alchemy')
 findProject(':Alchemy').projectDir = file('Extensions/Alchemy')
+
+include('MMO')
+findProject(':MMO').projectDir = file('Extensions/MMO')
+

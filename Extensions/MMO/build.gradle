@@ -1,0 +1,22 @@
+repositories {
+    maven {
+        url 'https://mvn.lumine.io/repository/maven-public/'
+    }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
+    compileOnly project(':plugin')
+    compileOnly 'net.Indyuce:MMOCore:1.4.11'
+    compileOnly 'net.Indyuce:MMOItems:6.4'
+}
+
+jar{
+    archiveFileName = project.name + " Extension" + ".jar"
+}
+
+description = 'MMO'
+
+tasks.withType(Jar) {
+    destinationDirectory = file("$rootDir/bin/")
+}
