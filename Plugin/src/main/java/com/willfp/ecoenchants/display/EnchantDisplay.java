@@ -17,8 +17,10 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
@@ -112,7 +114,7 @@ public class EnchantDisplay {
         return item;
     }
 
-    public static ItemStack displayEnchantments(ItemStack item) {
+    public static ItemStack displayEnchantments(final ItemStack item) {
         return displayEnchantments(item, false);
     }
 
@@ -121,7 +123,7 @@ public class EnchantDisplay {
      * @param item The item to update
      * @return The item, updated
      */
-    public static ItemStack displayEnchantments(ItemStack item, boolean hideEnchants) {
+    public static ItemStack displayEnchantments(final ItemStack item, boolean hideEnchants) {
         if(item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()))
             return item;
 
