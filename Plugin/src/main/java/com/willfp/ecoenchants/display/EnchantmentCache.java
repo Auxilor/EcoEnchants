@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
-import com.willfp.ecoenchants.util.Logger;
+import com.willfp.ecoenchants.util.internal.Logger;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.enchantments.Enchantment;
 

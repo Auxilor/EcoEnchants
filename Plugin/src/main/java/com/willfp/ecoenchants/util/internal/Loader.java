@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.util;
+package com.willfp.ecoenchants.util.internal;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;

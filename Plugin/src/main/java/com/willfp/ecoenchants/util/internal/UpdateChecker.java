@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.util;
+package com.willfp.ecoenchants.util.internal;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;

@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.util.VectorShapes;
+import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -36,7 +36,7 @@ public class MagmaWalker extends EcoEnchant {
 
         if (!EnchantChecks.boots(player, this)) return;
 
-        Vector[] circle = VectorShapes.getCircle(this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius")
+        Vector[] circle = VectorUtils.getCircle(this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius")
                 + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius") * EnchantChecks.getBootsLevel(player, this) - 1));
 
         AnticheatManager.exemptPlayer(player);

@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.command.AbstractTabCompleter;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.util.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.util.StringUtil;
@@ -25,13 +26,6 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
         enchantsNames.addAll(EcoEnchants.getAll().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
     }
 
-    private static String removePrefix(String s, String prefix) {
-        if (s != null && prefix != null && s.startsWith(prefix)) {
-            return s.substring(prefix.length());
-        }
-        return s;
-    }
-
     @Override
     public List<String> onTab(CommandSender sender, List<String> args) {
         List<String> completions = new ArrayList<>();
@@ -48,7 +42,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
             finishedArgs.remove(args.size() - 1);
 
             String prefix = String.join(" ", finishedArgs);
-            completions = completions.stream().map(enchantName -> removePrefix(enchantName, prefix).trim()).collect(Collectors.toList());
+            completions = completions.stream().map(enchantName -> StringUtils.removePrefix(enchantName, prefix).trim()).collect(Collectors.toList());
         }
 
         Collections.sort(completions);

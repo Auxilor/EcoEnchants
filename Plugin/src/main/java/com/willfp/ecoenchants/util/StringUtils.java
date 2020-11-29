@@ -55,4 +55,11 @@ public class StringUtils {
             return c.stream().map(String::valueOf).collect(Collectors.joining(", "));
         } else return String.valueOf(object);
     }
+
+    public static String removePrefix(String s, String prefix) {
+        if (s != null && prefix != null && s.startsWith(prefix)) {
+            return s.substring(prefix.length());
+        }
+        return s;
+    }
 }

@@ -16,7 +16,7 @@ import com.willfp.ecoenchants.mmo.enchants.stamina.Endurance;
 import com.willfp.ecoenchants.mmo.enchants.stamina.Fortitude;
 import com.willfp.ecoenchants.mmo.enchants.stamina.Motivate;
 import com.willfp.ecoenchants.mmo.structure.MMOEnchant;
-import com.willfp.ecoenchants.util.Logger;
+import com.willfp.ecoenchants.util.internal.Logger;
 import org.bukkit.Bukkit;
 
 public class MMOMain extends Extension {

@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.DropQueue;
+import com.willfp.ecoenchants.util.internal.DropQueue;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

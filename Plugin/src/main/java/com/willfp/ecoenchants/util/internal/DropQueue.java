@@ -1,7 +1,8 @@
-package com.willfp.ecoenchants.util;
+package com.willfp.ecoenchants.util.internal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;

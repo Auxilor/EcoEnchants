@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.listeners;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.util.UpdateChecker;
+import com.willfp.ecoenchants.util.internal.UpdateChecker;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

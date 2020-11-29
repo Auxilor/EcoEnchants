@@ -84,7 +84,7 @@ public class EnchantDisplay {
      * @param item The item to revert
      * @return The item, updated
      */
-    public static ItemStack revertDisplay(ItemStack item) {
+    public static ItemStack revertDisplay(final ItemStack item) {
         if(item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) return item;
 
         ItemMeta meta = item.getItemMeta();

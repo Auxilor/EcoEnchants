@@ -1,6 +1,7 @@
-package com.willfp.ecoenchants.util;
+package com.willfp.ecoenchants.util.internal;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.util.StringUtils;
 
 public class Logger {
     private static final EcoEnchantsPlugin INSTANCE = EcoEnchantsPlugin.getInstance();
