@@ -13,7 +13,7 @@ dependencies {
     compileOnly project(':plugin')
     compileOnly 'net.Indyuce:MMOCore:1.4.11'
     compileOnly 'net.Indyuce:MMOItems:6.4'
-    shadow files('/lib/MMOLib-1.4.3.jar')
+    compileOnly 'net.Indyuce:MMOLib:1.4.1@jar'
 }
 
 jar{
