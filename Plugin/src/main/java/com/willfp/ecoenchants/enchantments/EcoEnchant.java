@@ -10,7 +10,6 @@ import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -25,7 +24,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.regex.Pattern;
 
 @SuppressWarnings({"unchecked", "deprecation"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
@@ -54,8 +52,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite... prerequisites) {
         super(NamespacedKey.minecraft(key));
-
-        Validate.isTrue(Pattern.matches("[a-z_]", key), "Key must only contain lowercase letters and underscores");
 
         this.type = type;
         this.permissionName = key.replaceAll("_", "");
