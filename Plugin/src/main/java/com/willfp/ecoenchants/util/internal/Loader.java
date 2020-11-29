@@ -33,7 +33,12 @@ import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatNCP;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatSpartan;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefFactionsUUID;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefGriefPrevention;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefKingdoms;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefLands;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIManager;
 import com.willfp.ecoenchants.integrations.anvilgui.plugins.AnvilGUIImpl;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
@@ -44,7 +49,11 @@ import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.ecoenchants.listeners.ArrowListeners;
 import com.willfp.ecoenchants.listeners.PlayerJoinListener;
-import com.willfp.ecoenchants.nms.*;
+import com.willfp.ecoenchants.nms.BlockBreak;
+import com.willfp.ecoenchants.nms.Cooldown;
+import com.willfp.ecoenchants.nms.OpenInventory;
+import com.willfp.ecoenchants.nms.RepairCost;
+import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.interfaces.Callable;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
@@ -55,7 +64,11 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.plugin.Plugin;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -88,7 +101,7 @@ public class Loader {
 
         Logger.info("Loading ProtocolLib...");
         EcoEnchantsPlugin.getInstance().protocolManager = ProtocolLibrary.getProtocolManager();
-        if(ConfigManager.getConfig().getBool("villager.enabled")) {
+        if (ConfigManager.getConfig().getBool("villager.enabled")) {
             new PacketOpenWindowMerchant().register();
         }
         new PacketSetCreativeSlot().register();
@@ -103,7 +116,7 @@ public class Loader {
 
         Logger.info("Loading NMS APIs...");
 
-        if(Cooldown.init()) {
+        if (Cooldown.init()) {
             Logger.info("Cooldown: &aSUCCESS");
         } else {
             Logger.info("Cooldown: &cFAILURE");
@@ -111,7 +124,7 @@ public class Loader {
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
-        if(TridentStack.init()) {
+        if (TridentStack.init()) {
             Logger.info("Trident API: &aSUCCESS");
         } else {
             Logger.info("Trident API: &cFAILURE");
@@ -119,7 +132,7 @@ public class Loader {
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
-        if(BlockBreak.init()) {
+        if (BlockBreak.init()) {
             Logger.info("Block Break: &aSUCCESS");
         } else {
             Logger.info("Block Break: &cFAILURE");
@@ -127,7 +140,7 @@ public class Loader {
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
-        if(RepairCost.init()) {
+        if (RepairCost.init()) {
             Logger.info("Repair Cost: &aSUCCESS");
         } else {
             Logger.info("Repair Cost: &cFAILURE");
@@ -135,7 +148,7 @@ public class Loader {
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
-        if(OpenInventory.init()) {
+        if (OpenInventory.init()) {
             Logger.info("Open Inventory: &aSUCCESS");
         } else {
             Logger.info("Open Inventory: &cFAILURE");
@@ -195,7 +208,7 @@ public class Loader {
         integrations.forEach(((s, callable) -> {
             StringBuilder log = new StringBuilder();
             log.append(s).append(": ");
-            if(enabledPlugins.contains(s)) {
+            if (enabledPlugins.contains(s)) {
                 callable.call();
                 log.append("&aENABLED");
             } else {
@@ -225,7 +238,7 @@ public class Loader {
         Logger.info("Adding Enchantments to API...");
         EnchantmentRarity.update();
         EnchantmentTarget.update();
-        if(EnchantmentRarity.getAll().size() == 0 || EnchantmentTarget.getAll().size() == 0) {
+        if (EnchantmentRarity.getAll().size() == 0 || EnchantmentTarget.getAll().size() == 0) {
             Logger.error("&cError loading rarities or targets! Aborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
@@ -252,7 +265,7 @@ public class Loader {
 
         EcoEnchantsPlugin.getInstance().getExtensionLoader().loadExtensions();
 
-        if(EcoEnchantsPlugin.getInstance().getExtensionLoader().getLoadedExtensions().isEmpty()){
+        if (EcoEnchantsPlugin.getInstance().getExtensionLoader().getLoadedExtensions().isEmpty()) {
             Logger.info("&cNo extensions found");
         } else {
             Logger.info("Extensions Loaded:");
@@ -295,7 +308,7 @@ public class Loader {
 
         Logger.info("Registering Enchantment Listeners...");
         EcoEnchants.getAll().forEach((ecoEnchant -> {
-            if(ecoEnchant.isEnabled()) {
+            if (ecoEnchant.isEnabled()) {
                 Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
             }
         }));
@@ -307,7 +320,7 @@ public class Loader {
 
         Logger.info("Registering Enchantment Tasks...");
         EcoEnchants.getAll().forEach((ecoEnchant -> {
-            if(ecoEnchant instanceof EcoRunnable) {
+            if (ecoEnchant instanceof EcoRunnable) {
                 Bukkit.getScheduler().scheduleSyncRepeatingTask(EcoEnchantsPlugin.getInstance(), (Runnable) ecoEnchant, 5, ((EcoRunnable) ecoEnchant).getTime());
             }
         }));
@@ -411,7 +424,7 @@ public class Loader {
         Bukkit.getServer().getWorlds().forEach((world -> {
             List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
             populators.forEach((blockPopulator -> {
-                if(blockPopulator instanceof LootPopulator) {
+                if (blockPopulator instanceof LootPopulator) {
                     world.getPopulators().remove(blockPopulator);
                 }
             }));
@@ -438,7 +451,7 @@ public class Loader {
             HandlerList.unregisterAll(ecoEnchant);
 
             Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-                if(ecoEnchant.isEnabled()) {
+                if (ecoEnchant.isEnabled()) {
                     Bukkit.getPluginManager().registerEvents(ecoEnchant, EcoEnchantsPlugin.getInstance());
                 }
             }, 1);

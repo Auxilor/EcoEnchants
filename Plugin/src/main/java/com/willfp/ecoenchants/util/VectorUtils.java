@@ -6,6 +6,12 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 
 public class VectorUtils {
+    /**
+     * If vector has all components as finite
+     *
+     * @param vector The vector to check
+     * @return If the vector is finite
+     */
     public static boolean isFinite(Vector vector) {
         try {
             NumberConversions.checkFinite(vector.getX(), "x not finite");
@@ -53,6 +59,7 @@ public class VectorUtils {
 
     /**
      * Get circle as relative vectors
+     *
      * @param radius The radius
      * @return An array of {@link Vector}s
      */
@@ -81,6 +88,7 @@ public class VectorUtils {
 
     /**
      * Get square as relative vectors
+     *
      * @param radius The radius of the square
      * @return An array of {@link Vector}s
      */
@@ -104,6 +112,7 @@ public class VectorUtils {
 
     /**
      * Get cube as relative vectors
+     *
      * @param radius The radius of the cube
      * @return An array of {@link Vector}s
      */

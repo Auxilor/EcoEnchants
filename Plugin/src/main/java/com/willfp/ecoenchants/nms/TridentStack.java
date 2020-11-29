@@ -5,12 +5,17 @@ import com.willfp.ecoenchants.nms.API.TridentStackWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Trident;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.ApiStatus;
 
+/**
+ * Utility class to get the {@link ItemStack} of a given {@link Trident}
+ */
 public class TridentStack {
     private static TridentStackWrapper tridentStackWrapper;
 
     private static final String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 
+    @ApiStatus.Internal
     public static boolean init() {
         try {
             final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".TridentStack");
@@ -24,6 +29,12 @@ public class TridentStack {
         return tridentStackWrapper != null;
     }
 
+    /**
+     * Get the {@link ItemStack} of a given {@link Trident}
+     *
+     * @param trident The trident to get the ItemStack from
+     * @return The ItemStack associated with the trident
+     */
     public static ItemStack getTridentStack(Trident trident) {
         assert tridentStackWrapper != null;
         return tridentStackWrapper.getTridentStack(trident);

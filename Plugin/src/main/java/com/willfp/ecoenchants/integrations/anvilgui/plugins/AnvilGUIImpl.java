@@ -3,6 +3,9 @@ package com.willfp.ecoenchants.integrations.anvilgui.plugins;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIIntegration;
 
+/**
+ * Concrete implementation of {@link AnvilGUIIntegration}
+ */
 public class AnvilGUIImpl implements AnvilGUIIntegration {
     private static final String ANVIL_GUI_CLASS = "net.wesjd.anvilgui.version.Wrapper" + EcoEnchantsPlugin.NMS_VERSION.substring(1) + "$AnvilContainer";
 

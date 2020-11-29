@@ -27,20 +27,22 @@ public class NumberUtils {
 
     /**
      * Bias the input value according to a curve
+     *
      * @param input The input value
-     * @param bias The bias between -1 and 1, where higher values bias input values to lower output values
+     * @param bias  The bias between -1 and 1, where higher values bias input values to lower output values
      * @return The biased output
      */
     public static double bias(double input, double bias) {
-        double k = Math.pow(1-bias, 3);
+        double k = Math.pow(1 - bias, 3);
 
         return (input * k) / (input * k - input + 1);
     }
 
     /**
      * If value is above maximum, set it to maximum
+     *
      * @param toChange The value to test
-     * @param limit The maximum
+     * @param limit    The maximum
      * @return The new value
      */
     public static int equalIfOver(int toChange, int limit) {
@@ -52,8 +54,9 @@ public class NumberUtils {
 
     /**
      * If value is above maximum, set it to maximum
+     *
      * @param toChange The value to test
-     * @param limit The maximum
+     * @param limit    The maximum
      * @return The new value
      */
     public static double equalIfOver(double toChange, double limit) {
@@ -65,6 +68,7 @@ public class NumberUtils {
 
     /**
      * Get Roman Numeral from number
+     *
      * @param number The number to convert
      * @return The number, converted to a roman numeral
      */
@@ -80,6 +84,7 @@ public class NumberUtils {
 
     /**
      * Generate random integer in range
+     *
      * @param min Minimum
      * @param max Maximum
      * @return Random integer
@@ -90,6 +95,7 @@ public class NumberUtils {
 
     /**
      * Generate random double in range
+     *
      * @param min Minimum
      * @param max Maximum
      * @return Random double
@@ -101,9 +107,10 @@ public class NumberUtils {
 
     /**
      * Generate random double with a triangular distribution
+     *
      * @param minimum Minimum
      * @param maximum Maximum
-     * @param peak Peak
+     * @param peak    Peak
      * @return Random double
      */
     public static double triangularDistribution(double minimum, double maximum, double peak) {
@@ -118,15 +125,17 @@ public class NumberUtils {
 
     /**
      * Get Log base 2 of a number
+     *
      * @param N The number
      * @return The result
      */
     public static int log2(int N) {
-        return (int)(Math.log(N) / Math.log(2));
+        return (int) (Math.log(N) / Math.log(2));
     }
 
     /**
      * Format double to string
+     *
      * @param toFormat The number to format
      * @return Formatted
      */

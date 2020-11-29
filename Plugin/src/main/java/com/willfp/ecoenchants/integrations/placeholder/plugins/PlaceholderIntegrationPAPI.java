@@ -8,6 +8,9 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * PlaceholderAPI integration
+ */
 public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements PlaceholderIntegration {
     @Override
     public boolean persist() {

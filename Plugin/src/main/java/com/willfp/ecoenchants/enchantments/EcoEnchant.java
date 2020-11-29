@@ -23,7 +23,14 @@ import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 @SuppressWarnings({"unchecked", "deprecation"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
@@ -58,7 +65,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, plugin, this.type));
         this.config = ConfigManager.getEnchantmentConfig(this.permissionName);
 
-        if(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
+        if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
             Permission permission = new Permission(
                     "ecoenchants.fromtable." + permissionName,
                     "Allows getting " + permissionName + " from an Enchanting Table",
@@ -68,7 +75,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             Bukkit.getPluginManager().addPermission(permission);
         }
 
-        if(!Prerequisite.areMet(prerequisites))
+        if (!Prerequisite.areMet(prerequisites))
             return;
 
         this.update();
@@ -128,11 +135,13 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             f.setAccessible(false);
 
             Enchantment.registerEnchantment(this);
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {}
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        }
     }
 
     /**
      * Get if enchantment can be removed in grindstone
+     *
      * @return Whether the enchantment can be removed
      */
     public boolean isGrindstoneable() {
@@ -141,12 +150,16 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get {@link EnchantmentType} of enchantment
+     *
      * @return The {@link EnchantmentType}
      */
-    public EnchantmentType getType() { return this.type; }
+    public EnchantmentType getType() {
+        return this.type;
+    }
 
     /**
      * Get a set of all conflicts
+     *
      * @return Conflicts
      */
     public Set<Enchantment> getConflicts() {
@@ -155,6 +168,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get if enchantment is enabled
+     *
      * @return If enabled
      */
     public boolean isEnabled() {
@@ -163,6 +177,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get permission name of enchantment
+     *
      * @return The permission name
      */
     public String getPermissionName() {
@@ -171,6 +186,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get description of enchantment
+     *
      * @return The description
      */
     public List<String> getDescription() {
@@ -179,6 +195,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get if enchantment can be obtained from an enchanting table
+     *
      * @return If can be obtained
      */
     public boolean canGetFromTable() {
@@ -187,6 +204,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get if enchantment can be obtained from a villager
+     *
      * @return If can be obtained
      */
     public boolean canGetFromVillager() {
@@ -195,6 +213,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get if enchantment can be obtained from chest loot
+     *
      * @return If can be obtained
      */
     public boolean canGetFromLoot() {
@@ -203,6 +222,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get {@link EnchantmentRarity} of enchantment
+     *
      * @return The enchantment rarity
      */
     public EnchantmentRarity getRarity() {
@@ -211,6 +231,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * If enchantment conflicts with any enchantment in set
+     *
      * @param enchantments The set to test against
      * @return If there are any conflicts
      */
@@ -220,6 +241,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get enchantment cast to {@link Enchantment}
+     *
      * @return The enchantment
      */
     public Enchantment getEnchantment() {
@@ -228,6 +250,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get the target of enchantment
+     *
      * @return Set of enchantable items
      */
     public Set<Material> getTarget() {
@@ -236,6 +259,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get raw target of enchantment
+     *
      * @return {@link com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget}
      */
     public Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> getRawTargets() {
@@ -244,6 +268,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get {@link EnchantmentConfig} of enchantment
+     *
      * @return The config
      */
     public EnchantmentConfig getConfig() {
@@ -263,6 +288,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get max level of enchantment
+     *
      * @return The max level
      */
     @Override
@@ -283,7 +309,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * Only here for compatibility with {@link Enchantment}
      *
      * @return Returns {@link EnchantmentTarget#ALL}. Do not use.
-     *
      * @deprecated {@link EnchantmentTarget} is not supported due to its lack of flexibility. Use {@link EcoEnchant#getTarget()} instead.
      */
     @Override
@@ -304,7 +329,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * @return Returns if enchantment is cursed.
-     *
      * @deprecated Use {@link EcoEnchant#getType()} instead.
      */
     @Override
@@ -315,6 +339,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get if enchantment conflicts with specified enchantment
+     *
      * @param enchantment The enchantment to test against
      * @return If conflicts
      */
@@ -325,6 +350,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * If enchantment can be applied to item
+     *
      * @param itemStack The {@link ItemStack} to test against
      * @return If can be applied
      */
@@ -350,11 +376,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         /**
          * Create simple EnchantmentType
-         *
+         * <p>
          * Singularity and Color will not be updated using this constructor
-         * @param name The name of the type
+         *
+         * @param name     The name of the type
          * @param singular Whether an item can have several enchantments of this type
-         * @param color The color for enchantments with this type in lore to have
+         * @param color    The color for enchantments with this type in lore to have
          */
         public EnchantmentType(String name, boolean singular, String color) {
             this(name, () -> singular, () -> color);
@@ -362,10 +389,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         /**
          * Create EnchantmentType with updatable color
-         *
+         * <p>
          * Singularity will not be updated using this constructor
-         * @param name The name of the type
-         * @param singular Whether an item can have several enchantments of this type
+         *
+         * @param name          The name of the type
+         * @param singular      Whether an item can have several enchantments of this type
          * @param colorCallable Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
          */
         public EnchantmentType(String name, boolean singular, ObjectCallable<String> colorCallable) {
@@ -374,9 +402,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         /**
          * Create EnchantmentType with updatable color and singularity
-         * @param name The name of the type
+         *
+         * @param name             The name of the type
          * @param singularCallable Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload
-         * @param colorCallable Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
+         * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
          */
         public EnchantmentType(String name, ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable) {
             this.name = name;
