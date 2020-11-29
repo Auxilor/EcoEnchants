@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.mmo.structure;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.mmo.MMOMain;
 import com.willfp.ecoenchants.mmo.MMOPrerequisites;
-import com.willfp.ecoenchants.util.optional.Prerequisite;
+import com.willfp.ecoenchants.util.internal.Prerequisite;
 
 public abstract class MMOEnchantment extends EcoEnchant implements MMOEnchant {
     protected MMOEnchantment(String key, EnchantmentType type, Prerequisite... prerequisites) {

@@ -4,7 +4,7 @@ import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import com.willfp.ecoenchants.util.optional.Prerequisite;
+import com.willfp.ecoenchants.util.internal.Prerequisite;
 import org.bukkit.event.EventHandler;
 
 public class Economical extends EcoEnchant {

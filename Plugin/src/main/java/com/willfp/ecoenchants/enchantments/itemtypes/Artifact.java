@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.NumberUtils;
-import com.willfp.ecoenchants.util.optional.Prerequisite;
+import com.willfp.ecoenchants.util.internal.Prerequisite;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;

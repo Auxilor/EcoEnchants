@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.biomes;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.util.optional.Prerequisite;
+import com.willfp.ecoenchants.util.internal.Prerequisite;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
