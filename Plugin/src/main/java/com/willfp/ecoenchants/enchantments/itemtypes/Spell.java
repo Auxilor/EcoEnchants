@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
-import com.willfp.ecoenchants.util.internal.Prerequisite;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;

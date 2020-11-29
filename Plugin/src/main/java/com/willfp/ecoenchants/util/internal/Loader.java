@@ -47,6 +47,7 @@ import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.nms.*;
 import com.willfp.ecoenchants.util.interfaces.Callable;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;

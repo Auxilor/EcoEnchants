@@ -9,7 +9,7 @@ import com.willfp.ecoenchants.enchantments.util.Watcher;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
-import com.willfp.ecoenchants.util.internal.Prerequisite;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

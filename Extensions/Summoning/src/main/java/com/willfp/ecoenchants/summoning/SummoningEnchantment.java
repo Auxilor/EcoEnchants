@@ -6,7 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.util.NumberUtils;
-import com.willfp.ecoenchants.util.internal.Prerequisite;
+import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

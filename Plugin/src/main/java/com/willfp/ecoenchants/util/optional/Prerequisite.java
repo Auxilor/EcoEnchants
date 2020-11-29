@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.util.internal;
+package com.willfp.ecoenchants.util.optional;
 
 import com.willfp.ecoenchants.util.ClassUtils;
 import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
