@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.mmo.enchants.abilities;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.mmo.MMOEnchantment;
+import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
 import com.willfp.ecoenchants.mmo.MMOPrerequisites;
 import net.Indyuce.mmoitems.api.event.AbilityUseEvent;
 import org.bukkit.entity.Player;

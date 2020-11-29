@@ -1,3 +1,7 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
 repositories {
     maven {
         url 'https://mvn.lumine.io/repository/maven-public/'
@@ -9,6 +13,7 @@ dependencies {
     compileOnly project(':plugin')
     compileOnly 'net.Indyuce:MMOCore:1.4.11'
     compileOnly 'net.Indyuce:MMOItems:6.4'
+    shadow files('/lib/MMOLib-1.4.3.jar')
 }
 
 jar{

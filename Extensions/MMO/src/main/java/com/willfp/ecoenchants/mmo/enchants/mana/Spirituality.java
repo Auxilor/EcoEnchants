@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.mmo.enchants.mana;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.mmo.MMOEnchantment;
+import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
 import net.Indyuce.mmocore.api.event.PlayerRegenResourceEvent;
 import net.Indyuce.mmocore.api.player.profess.resource.PlayerResource;
 import org.bukkit.entity.Player;

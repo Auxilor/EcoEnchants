@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.mmo.enchants.mana;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.mmo.MMOSpell;
+import com.willfp.ecoenchants.mmo.structure.MMOSpell;
 import com.willfp.ecoenchants.mmo.integrations.mmo.MMOManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;

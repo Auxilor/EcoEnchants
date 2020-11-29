@@ -1,0 +1,26 @@
+#
+# Athletic EcoEnchant
+#
+
+name: "Athletic"
+description: Increases your max stamina.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  grindstoneable: true
+  conflicts: []
+  maximum-level: 4
+
+config:
+  stamina-per-level: 10 # Bonus max stamina to give per level

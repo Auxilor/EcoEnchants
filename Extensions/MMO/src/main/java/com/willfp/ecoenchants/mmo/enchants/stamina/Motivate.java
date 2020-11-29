@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.mmo.enchants.stamina;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.mmo.MMOEnchantment;
+import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
 import com.willfp.ecoenchants.mmo.integrations.mmo.MMOManager;
 import com.willfp.ecoenchants.nms.Cooldown;
 import org.bukkit.entity.LivingEntity;
