@@ -18,14 +18,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Class containing method to load extensions
+ * Concrete implementation of {@link ExtensionLoader}
  */
 public class EcoExtensionLoader implements ExtensionLoader {
     private final Set<Extension> extensions = new HashSet<>();
 
-    /**
-     * Load all extensions
-     */
     @Override
     public void loadExtensions() {
         File dir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "/extensions");
@@ -35,11 +32,11 @@ public class EcoExtensionLoader implements ExtensionLoader {
 
         File[] extensionJars = dir.listFiles();
 
-        if(extensionJars == null)
+        if (extensionJars == null)
             return;
 
         for (File extensionJar : extensionJars) {
-            if(!extensionJar.isFile()) continue;
+            if (!extensionJar.isFile()) continue;
 
             try {
                 loadExtension(extensionJar);
@@ -70,7 +67,7 @@ public class EcoExtensionLoader implements ExtensionLoader {
         Set<String> keys = extensionYml.getKeys(false);
         ArrayList<String> required = new ArrayList<>(Arrays.asList("main", "name", "version"));
         required.removeAll(keys);
-        if(!required.isEmpty()) {
+        if (!required.isEmpty()) {
             throw new MalformedExtensionException("Invalid extension.yml found in " + extensionJar.getName() + " - Missing: " + String.join(", ", required));
         }
 
@@ -88,7 +85,7 @@ public class EcoExtensionLoader implements ExtensionLoader {
             e.printStackTrace();
         }
 
-        if(!(object instanceof Extension))
+        if (!(object instanceof Extension))
             throw new MalformedExtensionException(extensionJar.getName() + " is invalid");
 
         Extension extension = (Extension) object;
@@ -97,28 +94,18 @@ public class EcoExtensionLoader implements ExtensionLoader {
         extensions.add(extension);
     }
 
-    /**
-     * Unload all extensions
-     */
     @Override
     public void unloadExtensions() {
         extensions.forEach(Extension::disable);
         extensions.clear();
     }
 
-    /**
-     * Reload all extensions
-     */
     @Override
     public void reloadExtensions() {
         unloadExtensions();
         loadExtensions();
     }
 
-    /**
-     * Get set of all loaded extensions
-     * @return {@link Set} of {@link Extension}s
-     */
     @Override
     public Set<Extension> getLoadedExtensions() {
         return extensions;

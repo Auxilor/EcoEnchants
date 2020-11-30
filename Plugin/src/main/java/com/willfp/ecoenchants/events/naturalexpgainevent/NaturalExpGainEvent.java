@@ -18,6 +18,7 @@ public class NaturalExpGainEvent extends Event {
 
     /**
      * Create event based off parameters
+     *
      * @param event The associate PlayerExpChangeEvent
      */
     public NaturalExpGainEvent(@NotNull PlayerExpChangeEvent event) {
@@ -27,6 +28,7 @@ public class NaturalExpGainEvent extends Event {
     /**
      * Get associated {@link PlayerExpChangeEvent}
      * Use this to modify event parameters.
+     *
      * @return The associated {@link PlayerExpChangeEvent}
      */
     public PlayerExpChangeEvent getExpChangeEvent() {

@@ -17,30 +17,53 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Utility class to simplify enchantment fetching
+ */
 @SuppressWarnings("unchecked")
 public class EnchantChecks {
+    /**
+     * Does the specified ItemStack have a certain Enchantment present?
+     *
+     * @param item        The {@link ItemStack} to check
+     * @param enchantment The enchantment to query
+     * @return If the item has the queried enchantment
+     */
     public static boolean item(ItemStack item, Enchantment enchantment) {
         return getItemLevel(item, enchantment) != 0;
     }
 
+    /**
+     * What level of the specified enchantment does the specified ItemStack have?
+     *
+     * @param item        The {@link ItemStack} to check
+     * @param enchantment The enchantment to query
+     * @return The level of the enchantment, or 0 if not found
+     */
     public static int getItemLevel(ItemStack item, Enchantment enchantment) {
-        if(item == null) return 0;
-        if(item.getType().equals(Material.AIR)) return 0;
-        if(!item.hasItemMeta()) return 0;
-        if(item.getItemMeta() == null) return 0;
+        if (item == null) return 0;
+        if (item.getType().equals(Material.AIR)) return 0;
+        if (!item.hasItemMeta()) return 0;
+        if (item.getItemMeta() == null) return 0;
 
         return item.getItemMeta().getEnchantLevel(enchantment);
     }
 
+    /**
+     * Get all {@link EcoEnchant}s on a specified ItemStack
+     *
+     * @param item The ItemStack to query
+     * @return A {@link HashMap<EcoEnchant, Integer>} of all EcoEnchants, where the key represents the level
+     */
     public static Map<EcoEnchant, Integer> getEnchantsOnItem(ItemStack item) {
-        if(item == null) return new HashMap<>();
-        if(item.getType().equals(Material.AIR)) return new HashMap<>();
-        if(!item.hasItemMeta()) return new HashMap<>();
-        if(item.getItemMeta() == null) return new HashMap<>();
+        if (item == null) return new HashMap<>();
+        if (item.getType().equals(Material.AIR)) return new HashMap<>();
+        if (!item.hasItemMeta()) return new HashMap<>();
+        if (item.getItemMeta() == null) return new HashMap<>();
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
         item.getEnchantments().forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
             }
         }));
@@ -48,10 +71,28 @@ public class EnchantChecks {
         return ecoEnchants;
     }
 
+    /**
+     * Does the specified Arrow have a certain Enchantment present?
+     * <p>
+     * EcoEnchants automatically gives an arrow NBT data consisting of the enchantments present to avoid switching errors
+     *
+     * @param arrow       The {@link Arrow} to check
+     * @param enchantment The enchantment to query
+     * @return If the arrow has the queried enchantment
+     */
     public static boolean arrow(Arrow arrow, Enchantment enchantment) {
         return getArrowLevel(arrow, enchantment) != 0;
     }
 
+    /**
+     * What level specified Arrow has of a certain Enchantment present?
+     * <p>
+     * EcoEnchants automatically gives an arrow NBT data consisting of the enchantments present to avoid switching errors
+     *
+     * @param arrow       The {@link Arrow} to check
+     * @param enchantment The enchantment to query
+     * @return The level found on the arrow, or 0 if not found
+     */
     public static int getArrowLevel(Arrow arrow, Enchantment enchantment) {
         if (arrow.getMetadata("enchantments").isEmpty()) return 0;
 
@@ -61,10 +102,16 @@ public class EnchantChecks {
 
         Map<Enchantment, Integer> enchantments = (Map<Enchantment, Integer>) enchantmentsMetaValue.value();
         if (enchantments == null) return 0;
-        if(!enchantments.containsKey(enchantment)) return 0;
+        if (!enchantments.containsKey(enchantment)) return 0;
         return enchantments.get(enchantment);
     }
 
+    /**
+     * Get all {@link EcoEnchant}s on a specified Arrow
+     *
+     * @param arrow The Arrow to query
+     * @return A {@link HashMap<EcoEnchant, Integer>} of all EcoEnchants, where the key represents the level
+     */
     public static Map<EcoEnchant, Integer> getEnchantsOnArrow(Arrow arrow) {
         if (arrow.getMetadata("enchantments").isEmpty()) return new HashMap<>();
 
@@ -74,7 +121,7 @@ public class EnchantChecks {
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
         ((Map<Enchantment, Integer>) enchantmentsMetaValue.value()).forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
             }
         }));
@@ -87,7 +134,7 @@ public class EnchantChecks {
     }
 
     public static int getMainhandLevel(LivingEntity entity, Enchantment enchantment) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return 0;
 
         ItemStack item = entity.getEquipment().getItemInMainHand();
@@ -96,17 +143,17 @@ public class EnchantChecks {
     }
 
     public static Map<EcoEnchant, Integer> getEnchantsOnMainhand(LivingEntity entity) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return new HashMap<>();
 
         ItemStack item = entity.getEquipment().getItemInMainHand();
 
-        if(item == null) return new HashMap<>();
+        if (item == null) return new HashMap<>();
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
 
         item.getEnchantments().forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
             }
         }));
@@ -119,7 +166,7 @@ public class EnchantChecks {
     }
 
     public static int getOffhandLevel(LivingEntity entity, Enchantment enchantment) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return 0;
 
         ItemStack item = entity.getEquipment().getItemInOffHand();
@@ -128,17 +175,17 @@ public class EnchantChecks {
     }
 
     public static Map<EcoEnchant, Integer> getEnchantsOnOffhand(LivingEntity entity) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return new HashMap<>();
 
         ItemStack item = entity.getEquipment().getItemInOffHand();
 
-        if(item == null) return new HashMap<>();
+        if (item == null) return new HashMap<>();
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
 
         item.getEnchantments().forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
             }
         }));
@@ -151,7 +198,7 @@ public class EnchantChecks {
     }
 
     public static int getArmorPoints(LivingEntity entity, Enchantment enchantment, int damage) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return 0;
 
         boolean isPlayer = entity instanceof Player;
@@ -160,20 +207,20 @@ public class EnchantChecks {
         List<ItemStack> armor = Arrays.asList(entity.getEquipment().getArmorContents());
         armor.forEach((itemStack -> {
             int level = getItemLevel(itemStack, enchantment);
-            if(level != 0) {
+            if (level != 0) {
                 armorPoints.addAndGet(getItemLevel(itemStack, enchantment));
-                if(damage > 0 && isPlayer) {
+                if (damage > 0 && isPlayer) {
                     Player player = (Player) entity;
-                    if(itemStack.equals(entity.getEquipment().getHelmet())) {
+                    if (itemStack.equals(entity.getEquipment().getHelmet())) {
                         DurabilityUtils.damageItem(player, player.getInventory().getHelmet(), level, 39);
                     }
-                    if(itemStack.equals(entity.getEquipment().getChestplate())) {
+                    if (itemStack.equals(entity.getEquipment().getChestplate())) {
                         DurabilityUtils.damageItem(player, player.getInventory().getChestplate(), level, 38);
                     }
-                    if(itemStack.equals(entity.getEquipment().getLeggings())) {
+                    if (itemStack.equals(entity.getEquipment().getLeggings())) {
                         DurabilityUtils.damageItem(player, player.getInventory().getLeggings(), level, 37);
                     }
-                    if(itemStack.equals(entity.getEquipment().getBoots())) {
+                    if (itemStack.equals(entity.getEquipment().getBoots())) {
                         DurabilityUtils.damageItem(player, player.getInventory().getBoots(), level, 36);
                     }
                 }
@@ -184,7 +231,7 @@ public class EnchantChecks {
     }
 
     public static Map<EcoEnchant, Integer> getEnchantsOnArmor(LivingEntity entity) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return new HashMap<>();
 
         AtomicInteger armorPoints = new AtomicInteger(0);
@@ -204,7 +251,7 @@ public class EnchantChecks {
     }
 
     public static int getHelmetLevel(LivingEntity entity, Enchantment enchantment) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return 0;
 
         ItemStack item = entity.getEquipment().getHelmet();
@@ -217,7 +264,7 @@ public class EnchantChecks {
     }
 
     public static int getChestplateLevel(LivingEntity entity, Enchantment enchantment) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return 0;
 
         ItemStack item = entity.getEquipment().getChestplate();
@@ -230,7 +277,7 @@ public class EnchantChecks {
     }
 
     public static int getLeggingsLevel(LivingEntity entity, Enchantment enchantment) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return 0;
 
         ItemStack item = entity.getEquipment().getLeggings();
@@ -243,7 +290,7 @@ public class EnchantChecks {
     }
 
     public static int getBootsLevel(LivingEntity entity, Enchantment enchantment) {
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return 0;
 
         ItemStack item = entity.getEquipment().getBoots();

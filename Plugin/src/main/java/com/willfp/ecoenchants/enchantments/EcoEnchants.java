@@ -306,14 +306,14 @@ public class EcoEnchants {
      * @return True if has, false if doesn't have.
      */
     public static boolean hasAnyOfType(ItemStack item, EcoEnchant.EnchantmentType type) {
-        if(item == null) return false;
+        if (item == null) return false;
 
         AtomicBoolean hasOfType = new AtomicBoolean(false);
 
-        if(item.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
             ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().forEach(((enchantment, integer) -> {
-                if(getFromEnchantment(enchantment) != null) {
-                    if(getFromEnchantment(enchantment).getType().equals(type)) hasOfType.set(true);
+                if (getFromEnchantment(enchantment) != null) {
+                    if (getFromEnchantment(enchantment).getType().equals(type)) hasOfType.set(true);
                 }
             }));
         } else {

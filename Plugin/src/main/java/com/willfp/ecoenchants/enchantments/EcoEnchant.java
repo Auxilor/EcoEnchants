@@ -20,6 +20,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
@@ -53,10 +54,27 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     private boolean enabled;
 
+
+    /**
+     * Create a new EcoEnchant that exists within the base plugin
+     *
+     * @param key           The key name of the enchantment
+     * @param type          The type of the enchantment
+     * @param prerequisites Optional {@link Prerequisite}s that must be met
+     */
+    @ApiStatus.Internal
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Prerequisite... prerequisites) {
         this(key, type, EcoEnchantsPlugin.class, prerequisites);
     }
 
+    /**
+     * Create a new EcoEnchant that exists within an extension or external plugin
+     *
+     * @param key           The key name of the enchantment
+     * @param type          The type of the enchantment
+     * @param plugin        The Main class of the {@link org.bukkit.plugin.Plugin} or {@link com.willfp.ecoenchants.extensions.Extension} that the enchantment was created by
+     * @param prerequisites Optional {@link Prerequisite}s that must be met
+     */
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite... prerequisites) {
         super(NamespacedKey.minecraft(key));
 
@@ -84,6 +102,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Update the enchantment based off config values
+     * This can be overriden but may lead to unexpected behavior
      */
     public void update() {
         config.loadFromLang();

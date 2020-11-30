@@ -41,8 +41,9 @@ public abstract class Extension {
 
     /**
      * Set the metadata of the extension
-     *
+     * <p>
      * Must be called before enabling
+     *
      * @param metadata The metadata to set
      */
     public final void setMetadata(ExtensionMetadata metadata) {
@@ -51,6 +52,7 @@ public abstract class Extension {
 
     /**
      * Get the name of the extension
+     *
      * @return The name of the metadata attached to the extension
      */
     public final String getName() {
@@ -60,6 +62,7 @@ public abstract class Extension {
 
     /**
      * Get the version of the extension
+     *
      * @return The version of the metadata attached to the extension
      */
     public final String getVersion() {
