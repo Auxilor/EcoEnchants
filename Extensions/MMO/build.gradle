@@ -25,3 +25,7 @@ description = 'MMO'
 tasks.withType(Jar) {
     destinationDirectory = file("$rootDir/bin/")
 }
+
+configurations.all {
+    exclude group: 'com.mojang', module: 'authlib'
+}
