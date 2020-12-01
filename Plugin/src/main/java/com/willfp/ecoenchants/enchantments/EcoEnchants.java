@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Contains general methods for EcoEnchants
  */
+@SuppressWarnings("unused")
 public class EcoEnchants {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
