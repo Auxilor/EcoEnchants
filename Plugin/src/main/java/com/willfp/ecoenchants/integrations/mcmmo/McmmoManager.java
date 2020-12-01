@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.integrations.mcmmo;
 
+import com.willfp.ecoenchants.util.ClassUtils;
 import org.bukkit.event.Event;
 
 import java.util.HashSet;
@@ -18,6 +19,8 @@ public class McmmoManager {
      * @param integration The integration to register
      */
     public static void registerIntegration(McmmoIntegration integration) {
+        if(!ClassUtils.exists("com.gmail.nossr50.events.fake.FakeEvent"))
+            return;
         integrations.add(integration);
     }
 
