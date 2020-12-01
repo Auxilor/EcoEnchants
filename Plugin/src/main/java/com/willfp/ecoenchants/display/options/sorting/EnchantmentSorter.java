@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.display.sorting;
+package com.willfp.ecoenchants.display.options.sorting;
 
 import org.bukkit.enchantments.Enchantment;
 

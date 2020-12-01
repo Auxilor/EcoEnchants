@@ -2,13 +2,11 @@ package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.display.sorting.*;
+import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.util.NumberUtils;
-import com.willfp.ecoenchants.util.StringUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -239,82 +237,5 @@ public class EnchantDisplay {
         item.setItemMeta(meta);
 
         return item;
-    }
-
-    public static class DisplayOptions {
-        private String descriptionColor;
-
-        private int numbersThreshold;
-        private boolean useNumerals;
-
-        private int describeThreshold;
-        private boolean useDescribe;
-
-        private int shrinkThreshold;
-        private int shrinkPerLine;
-        private boolean useShrink;
-
-        private EnchantmentSorter sorter;
-
-        private DisplayOptions() {
-            update();
-        }
-
-        public String getDescriptionColor() {
-            return descriptionColor;
-        }
-
-        public int getNumbersThreshold() {
-            return numbersThreshold;
-        }
-
-        public boolean isUseNumerals() {
-            return useNumerals;
-        }
-
-        public int getDescribeThreshold() {
-            return describeThreshold;
-        }
-
-        public boolean isUseDescribe() {
-            return useDescribe;
-        }
-
-        public int getShrinkThreshold() {
-            return shrinkThreshold;
-        }
-
-        public int getShrinkPerLine() {
-            return shrinkPerLine;
-        }
-
-        public boolean isUseShrink() {
-            return useShrink;
-        }
-
-        public EnchantmentSorter getSorter() {
-            return sorter;
-        }
-
-        public void update() {
-            descriptionColor = StringUtils.translate(ConfigManager.getLang().getString("description-color"));
-
-            useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
-            numbersThreshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");
-
-            describeThreshold = ConfigManager.getConfig().getInt("lore.describe.before-lines");
-            useDescribe = ConfigManager.getConfig().getBool("lore.describe.enabled");
-
-            shrinkThreshold = ConfigManager.getConfig().getInt("lore.shrink.after-lines");
-            useShrink = ConfigManager.getConfig().getBool("lore.shrink.enabled");
-            shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
-
-            boolean byType = ConfigManager.getConfig().getBool("lore.sort-by-type");
-            boolean byLength = ConfigManager.getConfig().getBool("lore.sort-by-length");
-            if(byType && byLength) sorter = new TypeLengthSorter();
-            if(byType && !byLength) sorter = new TypeAlphabeticSorter();
-            if(!byType && byLength) sorter = new LengthSorter();
-            if(!byType && !byLength) sorter = new AlphabeticSorter();
-        }
     }
 }
