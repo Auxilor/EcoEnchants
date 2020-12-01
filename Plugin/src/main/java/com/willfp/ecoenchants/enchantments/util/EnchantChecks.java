@@ -53,7 +53,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a specified ItemStack
      *
      * @param item The ItemStack to query
-     * @return A {@link HashMap<EcoEnchant, Integer>} of all EcoEnchants, where the key represents the level
+     * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnItem(ItemStack item) {
         if (item == null) return new HashMap<>();
@@ -110,7 +110,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a specified Arrow
      *
      * @param arrow The Arrow to query
-     * @return A {@link HashMap<EcoEnchant, Integer>} of all EcoEnchants, where the key represents the level
+     * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnArrow(Arrow arrow) {
         if (arrow.getMetadata("enchantments").isEmpty()) return new HashMap<>();
@@ -160,7 +160,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a queried {@link LivingEntity}s main hand item
      *
      * @param entity The entity to query
-     * @return A {@link HashMap<EcoEnchant, Integer>} of all EcoEnchants, where the key represents the level
+     * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnMainhand(LivingEntity entity) {
         if (entity.getEquipment() == null)
@@ -212,7 +212,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a queried {@link LivingEntity}s offhand item
      *
      * @param entity The entity to query
-     * @return A {@link HashMap<EcoEnchant, Integer>} of all EcoEnchants, where the key represents the level
+     * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnOffhand(LivingEntity entity) {
         if (entity.getEquipment() == null)
@@ -291,7 +291,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a queried {@link LivingEntity}s armor
      *
      * @param entity The entity to query
-     * @return A {@link HashMap<EcoEnchant, Integer>} of all EcoEnchants, where the key represents the cumulative total levels
+     * @return A {@link HashMap} of all EcoEnchants, where the key represents the cumulative total levels
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnArmor(LivingEntity entity) {
         if (entity.getEquipment() == null)

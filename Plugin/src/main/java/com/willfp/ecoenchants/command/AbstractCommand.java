@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,11 +57,13 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
 
     @Override
     public final void register() {
-        Bukkit.getPluginCommand(name).setExecutor(this);
+        PluginCommand command = Bukkit.getPluginCommand(name);
+        assert command != null;
+        command.setExecutor(this);
 
         AbstractTabCompleter tabCompleter = this.getTab();
         if(tabCompleter != null) {
-            Bukkit.getPluginCommand(name).setTabCompleter(tabCompleter);
+            command.setTabCompleter(tabCompleter);
         }
     }
 

@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A placeholder entry consists of an identifier and an {@link ObjectBiCallable<String, Player>} to fetch the result
+ * A placeholder entry consists of an identifier and an {@link ObjectBiCallable} to fetch the result
  */
 public class PlaceholderEntry {
     private final String identifier;

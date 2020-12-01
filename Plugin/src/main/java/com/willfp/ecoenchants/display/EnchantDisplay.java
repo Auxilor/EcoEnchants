@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
 public class EnchantDisplay {
     /**
      * The meta key to hide enchantments in lore

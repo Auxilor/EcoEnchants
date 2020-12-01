@@ -55,7 +55,7 @@ public abstract class EnchantmentYamlConfig {
         update();
     }
 
-    private void saveResource(boolean replace) {
+    private void saveResource() {
         String resourcePath = "/enchants/" + type.getName() + "/" + name + ".yml";
 
         InputStream in =  source.getResourceAsStream(resourcePath);
@@ -69,7 +69,7 @@ public abstract class EnchantmentYamlConfig {
         }
 
         try {
-            if (!outFile.exists() || replace) {
+            if (!outFile.exists() || false) {
                 OutputStream out = new FileOutputStream(outFile);
                 byte[] buf = new byte[1024];
                 int len;
@@ -83,7 +83,7 @@ public abstract class EnchantmentYamlConfig {
     }
 
     private void createFile() {
-        saveResource(false);
+        saveResource();
     }
 
     public void update() {

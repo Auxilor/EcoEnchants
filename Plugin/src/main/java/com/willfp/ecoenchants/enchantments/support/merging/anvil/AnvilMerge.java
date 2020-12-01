@@ -47,6 +47,9 @@ public class AnvilMerge {
         if(!EnchantmentTarget.ALL.getMaterials().contains(left.getType()) || right == null || !EnchantmentTarget.ALL.getMaterials().contains(right.getType())) {
             ItemStack out = left.clone();
             ItemMeta outMeta = out.getItemMeta();
+            assert outMeta != null;
+            assert left.getItemMeta() != null;
+
             outMeta.setDisplayName(name);
 
             if(left.getItemMeta().getDisplayName().equals(name)) {

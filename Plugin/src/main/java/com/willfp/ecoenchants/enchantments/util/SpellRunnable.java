@@ -26,7 +26,7 @@ public class SpellRunnable {
     }
 
     public void updateEndTime() {
-        endTime = System.currentTimeMillis() + (spell.getCooldownTime()*1000);
+        endTime = System.currentTimeMillis() + (spell.getCooldownTime()* 1000L);
     }
 
     public void setTask(Callable callable) {

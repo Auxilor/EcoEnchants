@@ -39,7 +39,7 @@ public class Succession extends EcoEnchant {
                         DurabilityUtils.damageItem((Player) shooter, ((Player) shooter).getInventory().getItemInMainHand(), 1, ((Player) shooter).getInventory().getHeldItemSlot());
                     }
                 }
-            }, i * 2);
+            }, i * 2L);
         }
     }
 }
