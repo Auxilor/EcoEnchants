@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.nms;
 
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.nms.API.TridentStackWrapper;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Trident;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.ApiStatus;
@@ -13,12 +13,10 @@ import org.jetbrains.annotations.ApiStatus;
 public class TridentStack {
     private static TridentStackWrapper tridentStackWrapper;
 
-    private static final String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-
     @ApiStatus.Internal
     public static boolean init() {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".TridentStack");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".TridentStack");
             if (TridentStackWrapper.class.isAssignableFrom(class2)) {
                 tridentStackWrapper = (TridentStackWrapper) class2.getConstructor().newInstance();
             }

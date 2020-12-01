@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.nms;
 
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.nms.API.CooldownWrapper;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -12,12 +12,10 @@ import org.jetbrains.annotations.ApiStatus;
 public class Cooldown {
     private static CooldownWrapper cooldown;
 
-    private static final String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-
     @ApiStatus.Internal
     public static boolean init() {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + version + ".Cooldown");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".Cooldown");
             if (CooldownWrapper.class.isAssignableFrom(class2)) {
                 cooldown = (CooldownWrapper) class2.getConstructor().newInstance();
             }
