@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.display;
 
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
@@ -10,6 +11,11 @@ import java.util.Collections;
 
 public abstract class AbstractPacketAdapter extends PacketAdapter {
     private final PacketType type;
+
+    protected AbstractPacketAdapter(PacketType type, ListenerPriority priority) {
+        super(EcoEnchantsPlugin.getInstance(), priority, Collections.singletonList(type));
+        this.type = type;
+    }
 
     protected AbstractPacketAdapter(PacketType type) {
         super(EcoEnchantsPlugin.getInstance(), Collections.singletonList(type));

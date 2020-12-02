@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
+import com.willfp.ecoenchants.display.packets.PacketChat;
 import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
 import com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot;
 import com.willfp.ecoenchants.display.packets.PacketSetSlot;
@@ -47,8 +48,6 @@ import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
-import com.willfp.ecoenchants.listeners.ArrowListeners;
-import com.willfp.ecoenchants.listeners.PlayerJoinListener;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
 import com.willfp.ecoenchants.nms.OpenInventory;
@@ -56,6 +55,8 @@ import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.interfaces.Callable;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
+import com.willfp.ecoenchants.util.internal.updater.PlayerJoinListener;
+import com.willfp.ecoenchants.util.internal.updater.UpdateChecker;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
@@ -107,6 +108,7 @@ public class Loader {
         new PacketSetCreativeSlot().register();
         new PacketSetSlot().register();
         new PacketWindowItems().register();
+        new PacketChat().register();
 
         Logger.info("");
 

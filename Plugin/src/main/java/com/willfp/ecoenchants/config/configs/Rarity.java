@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.ecoenchants.config.YamlConfig;
+import com.willfp.ecoenchants.config.UpdatingYamlConfig;
 
 import java.util.List;
 import java.util.Set;
@@ -8,9 +8,9 @@ import java.util.Set;
 /**
  * Wrapper for config.yml
  */
-public class Rarity extends YamlConfig {
+public class Rarity extends UpdatingYamlConfig {
     public Rarity() {
-        super("rarity");
+        super("rarity", false);
     }
 
     public Set<String> getRarities() {
