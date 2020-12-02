@@ -1,6 +1,10 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.ecoenchants.config.configs.*;
+import com.willfp.ecoenchants.config.configs.Config;
+import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import com.willfp.ecoenchants.config.configs.Lang;
+import com.willfp.ecoenchants.config.configs.Rarity;
+import com.willfp.ecoenchants.config.configs.Target;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,8 +29,8 @@ public class ConfigManager {
     public static void updateConfigs() {
         LANG.update();
         CONFIG.update();
-        TARGET.reload();
-        RARITY.reload();
+        TARGET.update();
+        RARITY.update();
         updateEnchantmentConfigs();
     }
 

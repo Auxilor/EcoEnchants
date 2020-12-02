@@ -49,8 +49,8 @@ import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.ecoenchants.nms.BlockBreak;
+import com.willfp.ecoenchants.nms.ChatComponent;
 import com.willfp.ecoenchants.nms.Cooldown;
-import com.willfp.ecoenchants.nms.JsonStack;
 import com.willfp.ecoenchants.nms.OpenInventory;
 import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.nms.TridentStack;
@@ -109,7 +109,6 @@ public class Loader {
         new PacketSetCreativeSlot().register();
         new PacketSetSlot().register();
         new PacketWindowItems().register();
-        new PacketChat().register();
 
         Logger.info("");
 
@@ -159,10 +158,10 @@ public class Loader {
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
 
-        if (JsonStack.init()) {
-            Logger.info("Json Stack: &aSUCCESS");
+        if (ChatComponent.init()) {
+            Logger.info("Chat Component: &aSUCCESS");
         } else {
-            Logger.info("Json Stack: &cFAILURE");
+            Logger.info("Chat Component: &cFAILURE");
             Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
@@ -420,6 +419,7 @@ public class Loader {
         Logger.info("");
 
         Logger.info("Updating cache...");
+        new PacketChat().register();
         EcoEnchants.getAll().forEach(EcoEnchant::update);
         EnchantmentCache.update();
         EssentialsManager.registerEnchantments();
