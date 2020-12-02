@@ -50,6 +50,7 @@ import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.ecoenchants.nms.BlockBreak;
 import com.willfp.ecoenchants.nms.Cooldown;
+import com.willfp.ecoenchants.nms.JsonStack;
 import com.willfp.ecoenchants.nms.OpenInventory;
 import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.nms.TridentStack;
@@ -154,6 +155,14 @@ public class Loader {
             Logger.info("Open Inventory: &aSUCCESS");
         } else {
             Logger.info("Open Inventory: &cFAILURE");
+            Logger.error("&cAborting...");
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
+        }
+
+        if (JsonStack.init()) {
+            Logger.info("Json Stack: &aSUCCESS");
+        } else {
+            Logger.info("Json Stack: &cFAILURE");
             Logger.error("&cAborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
         }
