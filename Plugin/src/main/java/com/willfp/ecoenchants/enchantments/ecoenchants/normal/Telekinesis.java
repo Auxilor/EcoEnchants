@@ -31,6 +31,7 @@ public class Telekinesis extends EcoEnchant {
 
     // START OF LISTENERS
 
+    // For block drops
     @EventHandler(priority = EventPriority.HIGH)
     public void telekinesisDropItem(BlockDropItemEvent event) {
         Player player = event.getPlayer();
@@ -55,6 +56,7 @@ public class Telekinesis extends EcoEnchant {
         player.updateInventory();
     }
 
+    // For exp drops, blockdropitemevent doesn't cover xp
     @EventHandler(priority = EventPriority.HIGH)
     public void telekinesisBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
