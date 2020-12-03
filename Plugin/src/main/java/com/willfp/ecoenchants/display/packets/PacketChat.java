@@ -16,6 +16,8 @@ public class PacketChat extends AbstractPacketAdapter {
     public void onSend(PacketContainer packet) {
         for(int i = 0; i < packet.getChatComponents().size(); i++) {
             WrappedChatComponent component = packet.getChatComponents().read(i);
+            if(component == null || component.getHandle() == null)
+                continue;
             WrappedChatComponent newComponent = WrappedChatComponent.fromHandle(ChatComponent.modifyComponent(component.getHandle()));
             packet.getChatComponents().write(i, newComponent);
         }
