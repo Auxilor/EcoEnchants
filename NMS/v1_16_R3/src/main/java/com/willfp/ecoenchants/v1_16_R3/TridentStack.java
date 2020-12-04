@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.v1_16_R3;
 
-import com.willfp.ecoenchants.nms.API.TridentStackWrapper;
+import com.willfp.ecoenchants.nms.api.TridentStackWrapper;
 import net.minecraft.server.v1_16_R3.EntityThrownTrident;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftTrident;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;

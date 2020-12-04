@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.nms;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.nms.API.OpenInventoryWrapper;
+import com.willfp.ecoenchants.nms.api.OpenInventoryWrapper;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 

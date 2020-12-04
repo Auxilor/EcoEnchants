@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.nms;
 
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.nms.API.TridentStackWrapper;
+import com.willfp.ecoenchants.nms.api.TridentStackWrapper;
 import org.bukkit.entity.Trident;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.ApiStatus;

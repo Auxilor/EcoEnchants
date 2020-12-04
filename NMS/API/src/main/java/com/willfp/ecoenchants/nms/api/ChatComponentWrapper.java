@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.nms.API;
+package com.willfp.ecoenchants.nms.api;
 
 public interface ChatComponentWrapper {
     Object modifyComponent(Object object);

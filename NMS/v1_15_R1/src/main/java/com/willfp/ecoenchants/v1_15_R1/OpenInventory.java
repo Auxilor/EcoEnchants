@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.v1_15_R1;
 
-import com.willfp.ecoenchants.nms.API.OpenInventoryWrapper;
+import com.willfp.ecoenchants.nms.api.OpenInventoryWrapper;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 

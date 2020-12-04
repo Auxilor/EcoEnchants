@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.v1_16_R2;
 
-import com.willfp.ecoenchants.nms.API.RepairCostWrapper;
+import com.willfp.ecoenchants.nms.api.RepairCostWrapper;
 import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 

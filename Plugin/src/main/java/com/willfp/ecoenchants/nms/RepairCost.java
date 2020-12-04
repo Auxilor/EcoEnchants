@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.nms;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.nms.API.RepairCostWrapper;
+import com.willfp.ecoenchants.nms.api.RepairCostWrapper;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.ApiStatus;
 

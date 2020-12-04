@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.nms.API;
+package com.willfp.ecoenchants.nms.api;
 
 import org.bukkit.entity.Trident;
 import org.bukkit.inventory.ItemStack;

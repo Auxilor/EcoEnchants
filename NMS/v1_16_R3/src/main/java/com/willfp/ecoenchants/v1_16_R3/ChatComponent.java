@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.willfp.ecoenchants.nms.API.ChatComponentWrapper;
+import com.willfp.ecoenchants.nms.api.ChatComponentWrapper;
 import net.minecraft.server.v1_16_R3.ChatBaseComponent;
 import net.minecraft.server.v1_16_R3.ChatHoverable;
 import net.minecraft.server.v1_16_R3.ChatMessage;

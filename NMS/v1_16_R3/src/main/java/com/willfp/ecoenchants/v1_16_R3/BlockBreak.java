@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.v1_16_R3;
 
-import com.willfp.ecoenchants.nms.API.BlockBreakWrapper;
+import com.willfp.ecoenchants.nms.api.BlockBreakWrapper;
 import net.minecraft.server.v1_16_R3.BlockPosition;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
