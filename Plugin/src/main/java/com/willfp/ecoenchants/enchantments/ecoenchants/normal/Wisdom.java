@@ -23,6 +23,8 @@ public class Wisdom extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         event.getExpChangeEvent().setAmount((int) Math.ceil(event.getExpChangeEvent().getAmount() * (1 + (level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-point")))));

@@ -32,6 +32,7 @@ public class Thrive extends EcoEnchant {
                     player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
                     return;
                 }
+                if(EcoEnchants.THRIVE.getDisabledWorlds().contains(player.getWorld())) return;
 
                 double thriveBonus = totalThrivePoints * EcoEnchants.THRIVE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-point");
                 double prosperityBonus = totalProsperityPoints * EcoEnchants.PROSPERITY.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-point");

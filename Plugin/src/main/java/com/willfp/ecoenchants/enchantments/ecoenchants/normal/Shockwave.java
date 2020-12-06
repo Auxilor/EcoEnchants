@@ -39,6 +39,7 @@ public class Shockwave extends EcoEnchant {
         }
 
         if (!EnchantChecks.item(item, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 

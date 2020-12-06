@@ -37,6 +37,7 @@ public class Endershot extends EcoEnchant {
         event.setCancelled(true);
 
         if(!EnchantChecks.mainhand(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if(!player.getInventory().contains(Material.ENDER_PEARL, 1) && !player.getGameMode().equals(GameMode.CREATIVE))
             return;

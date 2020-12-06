@@ -37,6 +37,8 @@ public class Beheading extends EcoEnchant {
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         ItemStack item;
 
         if(victim instanceof Player) {

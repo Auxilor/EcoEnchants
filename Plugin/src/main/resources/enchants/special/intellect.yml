@@ -23,6 +23,7 @@ general-config:
     - hoe
     - sword
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - splash
     - wisdom

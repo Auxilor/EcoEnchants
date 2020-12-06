@@ -55,6 +55,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
     public void run() {
         players.forEach((player, level) -> {
             double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
+            if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, distance, distance)) {
                 if(!(e instanceof Monster)) continue;

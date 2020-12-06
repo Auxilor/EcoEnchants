@@ -30,6 +30,7 @@ public abstract class EffectsEnchantment extends EcoEnchant {
             }
 
             int level = EnchantChecks.getArmorPoints(player, this);
+            if(this.getDisabledWorlds().contains(player.getWorld())) return;
             if(level > 0) {
                 player.addPotionEffect(new PotionEffect(this.getPotionEffect(), 0x6fffffff, level - 1, false, false, true));
             }

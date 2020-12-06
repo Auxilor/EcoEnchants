@@ -16,6 +16,7 @@ general-config:
   targets:
     - trident
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts: []
   maximum-level: 7
 

@@ -16,6 +16,7 @@ general-config:
   targets:
     - rod
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - harpoon
   maximum-level: 3

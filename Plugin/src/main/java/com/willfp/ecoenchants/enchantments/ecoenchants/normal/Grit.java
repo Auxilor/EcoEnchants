@@ -35,6 +35,7 @@ public class Grit extends EcoEnchant {
 
         if (totalGritPoints == 0)
             return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (!(attacker.getInventory().getItemInMainHand() instanceof Damageable))
             return;

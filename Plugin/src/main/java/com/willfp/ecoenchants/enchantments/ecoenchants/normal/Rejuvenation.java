@@ -26,6 +26,7 @@ public class Rejuvenation extends EcoEnchant {
         Player player = (Player) event.getEntity();
 
         int totalRejuvenationPoints = EnchantChecks.getArmorPoints(player, this, 0);
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (totalRejuvenationPoints == 0)
             return;

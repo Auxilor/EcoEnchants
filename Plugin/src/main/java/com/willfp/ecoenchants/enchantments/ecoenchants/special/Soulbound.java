@@ -5,12 +5,17 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 public class Soulbound extends EcoEnchant {
     public Soulbound() {
         super(
@@ -26,12 +31,14 @@ public class Soulbound extends EcoEnchant {
         return soulboundItemsMap.get(player);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onSoulboundDeath(PlayerDeathEvent event) {
         if(event.getKeepInventory()) return;
 
         Player player = event.getEntity();
         List<ItemStack> soulboundItems = new ArrayList<>(); // Stored as list to preserve duplicates
+
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         Arrays.stream(player.getInventory().getContents()).filter(Objects::nonNull).forEach((itemStack -> {
             if(itemStack.containsEnchantment(this)) soulboundItems.add(itemStack);
@@ -47,7 +54,7 @@ public class Soulbound extends EcoEnchant {
         soulboundItemsMap.put(player, soulboundItems);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onSoulboundRespawn(PlayerRespawnEvent event) {
         if(!soulboundItemsMap.containsKey(event.getPlayer())) return;
 

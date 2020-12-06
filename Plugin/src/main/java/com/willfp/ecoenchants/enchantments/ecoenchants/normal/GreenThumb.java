@@ -34,6 +34,8 @@ public class GreenThumb extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         if(!AntigriefManager.canBreakBlock(player, event.getClickedBlock())) return;
         if(!AntigriefManager.canPlaceBlock(player, event.getClickedBlock())) return;
 

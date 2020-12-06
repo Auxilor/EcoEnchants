@@ -22,6 +22,8 @@ public class FragilityCurse extends EcoEnchant {
 
         if (!EnchantChecks.item(item, this)) return;
 
+        if(this.getDisabledWorlds().contains(event.getPlayer().getWorld())) return;
+
         int min = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "minimum-extra-durability");
         int max = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "maximum-extra-durability");
 

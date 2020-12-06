@@ -35,6 +35,7 @@ public class MagmaWalker extends EcoEnchant {
         if(event.getFrom().getBlock().equals(event.getTo().getBlock())) return;
 
         if (!EnchantChecks.boots(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         Vector[] circle = VectorUtils.getCircle(this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius")
                 + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius") * EnchantChecks.getBootsLevel(player, this) - 1));

@@ -53,6 +53,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
     @Override
     public void run() {
         players.forEach((player, level) -> {
+            if(this.getDisabledWorlds().contains(player.getWorld())) return;
             double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
             double bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
             double distance = initialDistance + (level * bonus);

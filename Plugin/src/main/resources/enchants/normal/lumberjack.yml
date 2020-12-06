@@ -16,6 +16,7 @@ general-config:
   targets:
     - axe
   grindstoneable: true
+  disabled-in-worlds: []
   maximum-level: 6
   conflicts:
     - drill

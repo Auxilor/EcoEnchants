@@ -19,6 +19,7 @@ general-config:
     - pickaxe
     - shovel
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts: []
   maximum-level: 1
 

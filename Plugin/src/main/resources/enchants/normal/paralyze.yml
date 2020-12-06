@@ -16,6 +16,7 @@ general-config:
   targets:
     - shield
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts: []
   maximum-level: 6
 

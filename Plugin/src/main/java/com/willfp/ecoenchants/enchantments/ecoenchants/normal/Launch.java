@@ -35,6 +35,8 @@ public class Launch extends EcoEnchant {
 
         if(!EnchantChecks.chestplate(player, this)) return;
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         int level = EnchantChecks.getChestplateLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double boost = 1 + (multiplier * level);

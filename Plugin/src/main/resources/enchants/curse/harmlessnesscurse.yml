@@ -17,6 +17,7 @@ general-config:
     - sword
     - axe
   grindstoneable: false
+  disabled-in-worlds: []
   conflicts: []
 
 config:

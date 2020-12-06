@@ -30,6 +30,7 @@ public class Marksman extends EcoEnchant {
         Player player = (Player) event.getEntity().getShooter();
 
         if (!EnchantChecks.mainhand(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (!(event.getEntity() instanceof Arrow)) return;
         Arrow a = (Arrow) event.getEntity();

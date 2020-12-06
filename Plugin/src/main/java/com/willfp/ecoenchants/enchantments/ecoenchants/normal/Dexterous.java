@@ -28,6 +28,8 @@ public class Dexterous extends EcoEnchant {
             return;
         }
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
 
         int level = EnchantChecks.getItemLevel(item, this);
         double bonus = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "add-speed-per-level");

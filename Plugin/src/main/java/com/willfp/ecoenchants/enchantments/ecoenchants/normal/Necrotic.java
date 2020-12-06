@@ -30,6 +30,7 @@ public class Necrotic extends EcoEnchant {
         WitherSkeleton victim = (WitherSkeleton) event.getEntity();
 
         if (!EnchantChecks.mainhand(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 

@@ -30,6 +30,8 @@ public class Instability extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         if (!(event.getEntity() instanceof Arrow)) return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);

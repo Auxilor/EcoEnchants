@@ -27,6 +27,7 @@ public class Invigoration extends EcoEnchant {
             return;
 
         int totalInvigorationPoints = EnchantChecks.getArmorPoints(player, this, 0);
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (totalInvigorationPoints == 0)
             return;
@@ -46,6 +47,7 @@ public class Invigoration extends EcoEnchant {
             return;
 
         int totalInvigorationPoints = EnchantChecks.getArmorPoints(player, this, 0);
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (totalInvigorationPoints == 0)
             return;

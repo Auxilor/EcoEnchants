@@ -35,7 +35,8 @@ public class SprintArtifactsListener implements Listener {
         if(!matching.isPresent()) return;
         Artifact artifact = (Artifact) matching.get();
 
-        if (!EnchantChecks.chestplate(player, artifact)) return;
+        if (!EnchantChecks.boots(player, artifact)) return;
+        if(artifact.getDisabledWorlds().contains(player.getWorld())) return;
 
         player.getWorld().spawnParticle(artifact.getParticle(), player.getLocation().add(0, 0.1, 0), 1, 0, 0, 0, 0, artifact.getDustOptions(), true);
     }

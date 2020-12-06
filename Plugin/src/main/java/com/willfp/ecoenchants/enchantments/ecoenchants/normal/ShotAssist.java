@@ -34,6 +34,8 @@ public class ShotAssist extends EcoEnchant {
 
         int points = EnchantChecks.getArmorPoints(player, this, 0);
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         if(points == 0) return;
 
         double damage = event.getDamage();

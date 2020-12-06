@@ -34,6 +34,7 @@ public class Harpoon extends EcoEnchant {
         if(!AntigriefManager.canInjure(player, victim)) return;
 
         if (!EnchantChecks.mainhand(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 

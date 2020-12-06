@@ -45,6 +45,7 @@ public class Enderism extends EcoEnchant {
             return;
 
         if (!EnchantChecks.arrow(arrow, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getArrowLevel(arrow, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

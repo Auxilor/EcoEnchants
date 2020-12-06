@@ -22,6 +22,8 @@ public class Indestructibility extends EcoEnchant {
 
         if (!EnchantChecks.item(item, this)) return;
 
+        if(this.getDisabledWorlds().contains(event.getPlayer().getWorld())) return;
+
         double level = EnchantChecks.getItemLevel(item, this);
         double levelbonus = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "level-bonus");
 

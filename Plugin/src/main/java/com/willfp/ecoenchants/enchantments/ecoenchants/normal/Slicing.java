@@ -32,6 +32,7 @@ public class Slicing extends EcoEnchant {
             return;
 
         if (!EnchantChecks.chestplate(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
             LivingEntity victim;

@@ -36,6 +36,7 @@ public class Frozen extends EcoEnchant {
 
         if (points == 0)
             return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
 
         if(!EnchantmentUtils.passedChance(this, points))

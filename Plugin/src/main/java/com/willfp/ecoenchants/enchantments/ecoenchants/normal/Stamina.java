@@ -25,6 +25,7 @@ public class Stamina extends EcoEnchant {
         if(!player.isSprinting()) return;
 
         if(!EnchantChecks.boots(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
         if(event.getFoodLevel() > player.getFoodLevel()) return;
 
         int level = EnchantChecks.getBootsLevel(player, this);

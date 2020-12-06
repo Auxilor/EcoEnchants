@@ -10,12 +10,20 @@ import com.willfp.ecoenchants.nms.TridentStack;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
-import org.bukkit.event.entity.*;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
@@ -35,6 +43,8 @@ public class WatcherTriggers implements Listener {
             return;
         if (!(event.getEntity() instanceof LivingEntity))
             return;
+        if(((Arrow) event.getDamager()).getShooter() == null)
+            return;
         if(!(((Arrow) event.getDamager()).getShooter() instanceof LivingEntity))
             return;
 
@@ -53,6 +63,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnArrow(arrow).forEach(((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(attacker.getWorld())) return;
             enchant.onArrowDamage(attacker, victim, arrow, level, event);
         }));
     }
@@ -65,6 +76,9 @@ public class WatcherTriggers implements Listener {
             return;
 
         if(!(((Trident) event.getDamager()).getShooter() instanceof LivingEntity))
+            return;
+
+        if(((Trident) event.getDamager()).getShooter() == null)
             return;
 
         if (!(event.getEntity() instanceof LivingEntity))
@@ -88,6 +102,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(attacker.getWorld())) return;
             enchant.onTridentDamage(attacker, victim, trident, level, event);
         }));
     }
@@ -112,6 +127,7 @@ public class WatcherTriggers implements Listener {
                     EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, level) -> {
                         if(event.isCancelled()) return;
                         if(!enchant.isEnabled()) return;
+                        if(enchant.getDisabledWorlds().contains(player.getWorld())) return;
                         enchant.onJump(player, level, event);
                     });
                 }
@@ -149,6 +165,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnMainhand(attacker).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(attacker.getWorld())) return;
             enchant.onMeleeAttack(attacker, victim, level, event);
         });
     }
@@ -166,6 +183,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnMainhand(shooter).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
             enchant.onBowShoot(shooter, arrow, level, event);
         });
     }
@@ -185,6 +203,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnArmor(victim).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(victim.getWorld())) return;
             enchant.onFallDamage(victim, level, event);
         });
     }
@@ -198,11 +217,15 @@ public class WatcherTriggers implements Listener {
 
         if (!(event.getEntity() instanceof Arrow)) return;
 
+        if(event.getEntity().getShooter() == null)
+            return;
+
         Arrow arrow = (Arrow) event.getEntity();
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
         EnchantChecks.getEnchantsOnArrow(arrow).forEach(((enchant, level) -> {
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
             enchant.onArrowHit(shooter, level, event);
         }));
     }
@@ -213,6 +236,8 @@ public class WatcherTriggers implements Listener {
             return;
         if (!(event.getEntity().getShooter() instanceof LivingEntity))
             return;
+        if(event.getEntity().getShooter() == null)
+            return;
 
         if (!(event.getEntity() instanceof Trident)) return;
 
@@ -222,6 +247,7 @@ public class WatcherTriggers implements Listener {
 
         EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
             enchant.onTridentHit(shooter, level, event);
         }));
     }
@@ -241,6 +267,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnMainhand(player).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(player.getWorld())) return;
             enchant.onBlockBreak(player, block, level, event);
         });
     }
@@ -257,6 +284,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnArmor(victim).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(victim.getWorld())) return;
             enchant.onDamageWearingArmor(victim, level, event);
         });
     }
@@ -271,6 +299,7 @@ public class WatcherTriggers implements Listener {
             EcoEnchants.getAll().forEach((enchant -> {
                 if(event.isCancelled()) return;
                 if(!enchant.isEnabled()) return;
+                if(enchant.getDisabledWorlds().contains(player.getWorld())) return;
                 int level = EnchantChecks.getArmorPoints(player, enchant);
                 enchant.onArmorEquip(player, level, event);
             }));
@@ -290,6 +319,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnMainhand(player).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(player.getWorld())) return;
             enchant.onDamageBlock(player, block, level, event);
         });
     }
@@ -312,6 +342,7 @@ public class WatcherTriggers implements Listener {
         EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
             enchant.onTridentLaunch(shooter, trident, level, event);
         });
     }
@@ -338,6 +369,7 @@ public class WatcherTriggers implements Listener {
         EcoEnchants.getAll().forEach((enchant -> {
             if(event.isCancelled()) return;
             if(!enchant.isEnabled()) return;
+            if(enchant.getDisabledWorlds().contains(blocker.getWorld())) return;
             int level;
             if (!EnchantChecks.offhand(blocker, enchant) && !EnchantChecks.mainhand(blocker, enchant)) return;
             if(EnchantChecks.offhand(blocker, enchant)) level = EnchantChecks.getOffhandLevel(blocker, enchant);

@@ -20,6 +20,7 @@ general-config:
     - axe
     - trident
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - altitude
     - aquamarine

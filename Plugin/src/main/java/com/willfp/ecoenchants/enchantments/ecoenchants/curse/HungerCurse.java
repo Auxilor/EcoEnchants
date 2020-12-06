@@ -24,6 +24,7 @@ public class HungerCurse extends EcoEnchant {
 
         if(!EnchantChecks.helmet(player, this)) return;
         if(event.getFoodLevel() > player.getFoodLevel()) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int delta = player.getFoodLevel() - event.getFoodLevel();
         delta *= this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "times-more-hunger");

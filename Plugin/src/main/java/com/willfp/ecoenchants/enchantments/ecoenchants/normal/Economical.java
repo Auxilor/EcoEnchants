@@ -18,6 +18,7 @@ public class Economical extends EcoEnchant {
     @EventHandler
     public void onElytraBoost(PlayerElytraBoostEvent event) {
         if(EnchantmentUtils.passedChance(this, EnchantChecks.getArmorPoints(event.getPlayer(), this)))
+        if(this.getDisabledWorlds().contains(event.getPlayer().getWorld())) return;
         event.setShouldConsume(false);
     }
 }

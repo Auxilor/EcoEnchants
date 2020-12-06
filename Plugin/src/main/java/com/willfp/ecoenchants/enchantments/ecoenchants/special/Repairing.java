@@ -79,6 +79,7 @@ public class Repairing extends EcoEnchant implements EcoRunnable {
     @Override
     public void run() {
         players.forEach((player -> {
+            if(this.getDisabledWorlds().contains(player.getWorld())) return;
             for(ItemStack item : player.getInventory().getContents()) {
                 int level = EnchantChecks.getItemLevel(item, this);
                 if(level == 0) continue;

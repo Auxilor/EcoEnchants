@@ -23,6 +23,7 @@ public class Sating extends EcoEnchant {
         Player player = (Player) event.getEntity();
 
         if(!EnchantChecks.helmet(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
         if(event.getFoodLevel() > player.getFoodLevel()) return;
 
         int level = EnchantChecks.getHelmetLevel(player, this);

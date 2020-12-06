@@ -26,6 +26,8 @@ public class Frenzy extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         int duration = (int) (level * 20 * this.getConfig().getDouble((EcoEnchants.CONFIG_LOCATION + "seconds-per-level")));

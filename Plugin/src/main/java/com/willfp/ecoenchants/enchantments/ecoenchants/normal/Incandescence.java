@@ -33,6 +33,7 @@ public class Incandescence extends EcoEnchant {
 
         if (totalIncandescencePoints == 0)
             return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
             victim.setFireTicks(totalIncandescencePoints * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-point") + this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-ticks"));

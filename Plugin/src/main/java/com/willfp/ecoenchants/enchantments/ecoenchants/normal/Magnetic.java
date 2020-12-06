@@ -60,6 +60,7 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
     public void run() {
         players.forEach((player, level) -> {
             double distance = initialDistance + (level * bonus);
+            if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
                 if(!(e instanceof Item || e instanceof ExperienceOrb)) continue;

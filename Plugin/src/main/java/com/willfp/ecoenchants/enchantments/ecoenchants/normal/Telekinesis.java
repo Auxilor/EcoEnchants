@@ -11,7 +11,11 @@ import com.willfp.ecoenchants.util.internal.DropQueue;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -37,6 +41,7 @@ public class Telekinesis extends EcoEnchant {
         Player player = event.getPlayer();
 
         if (!EnchantChecks.mainhand(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (event.isCancelled()) return;
 
@@ -63,6 +68,7 @@ public class Telekinesis extends EcoEnchant {
         Block block = event.getBlock();
 
         if (!EnchantChecks.mainhand(player, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
@@ -109,6 +115,7 @@ public class Telekinesis extends EcoEnchant {
         if(player == null || item == null) return;
 
         if (!EnchantChecks.item(item, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int xp = event.getDroppedExp();
         Collection<ItemStack> drops = event.getDrops();

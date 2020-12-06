@@ -16,6 +16,7 @@ general-config:
   targets:
     - all
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts: []
 
 config:

@@ -16,6 +16,7 @@ general-config:
   targets:
     - boots
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - spring
   maximum-level: 3

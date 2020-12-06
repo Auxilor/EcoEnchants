@@ -16,6 +16,7 @@ general-config:
   targets:
     - sword
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - end_infusion
   maximum-level: 6

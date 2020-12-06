@@ -40,6 +40,7 @@ public class Farmhand extends EcoEnchant {
         ItemStack item = event.getItem();
 
         if (!EnchantChecks.item(item, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (!item.getType().toString().endsWith("_HOE"))
             return;

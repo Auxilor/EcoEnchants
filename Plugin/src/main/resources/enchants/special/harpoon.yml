@@ -16,6 +16,7 @@ general-config:
   targets:
     - rod
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - spiked
   maximum-level: 3

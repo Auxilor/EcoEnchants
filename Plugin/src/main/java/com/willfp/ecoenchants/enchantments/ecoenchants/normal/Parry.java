@@ -27,6 +27,8 @@ public class Parry extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         double damage = event.getDamage();

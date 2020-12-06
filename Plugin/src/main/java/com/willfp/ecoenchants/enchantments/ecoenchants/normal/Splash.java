@@ -6,7 +6,11 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.TridentStack;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -39,6 +43,7 @@ public class Splash extends EcoEnchant {
         ItemStack item = TridentStack.getTridentStack(trident);
 
         if (!EnchantChecks.item(item, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getItemLevel(item, this);
 

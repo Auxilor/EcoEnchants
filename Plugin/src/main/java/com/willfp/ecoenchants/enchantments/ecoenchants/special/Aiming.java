@@ -47,6 +47,8 @@ public class Aiming extends EcoEnchant {
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance-per-level");
 
         double distance = level * multiplier;

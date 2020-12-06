@@ -18,6 +18,7 @@ general-config:
     - axe
     - shovel
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - lumberjack
     - blast_mining

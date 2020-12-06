@@ -16,6 +16,7 @@ general-config:
   targets:
     - helmet
   grindstoneable: false
+  disabled-in-worlds: []
   conflicts:
     - sating
 

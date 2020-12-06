@@ -17,7 +17,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Wrapper for Spell enchantments
@@ -68,6 +73,7 @@ public abstract class Spell extends EcoEnchant {
             return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if(!cooldownTracker.containsKey(player.getUniqueId()))
             cooldownTracker.put(player.getUniqueId(), new SpellRunnable(this));

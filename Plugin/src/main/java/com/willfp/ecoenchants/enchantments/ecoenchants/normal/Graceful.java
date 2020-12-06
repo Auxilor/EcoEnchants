@@ -35,6 +35,8 @@ public class Graceful extends EcoEnchant {
         if(!EnchantChecks.boots(player, this)) return;
         int level = EnchantChecks.getBootsLevel(player, this);
 
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
 
         if(!EnchantmentUtils.passedChance(this, level))
             return;

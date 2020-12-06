@@ -17,6 +17,7 @@ general-config:
     - sword
     - axe
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - sharpness
     - bane_of_arthropods

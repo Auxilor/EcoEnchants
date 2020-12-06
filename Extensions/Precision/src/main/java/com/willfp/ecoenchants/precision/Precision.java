@@ -46,6 +46,7 @@ public class Precision extends EcoEnchant {
 
         ItemStack itemStack = TridentStack.getTridentStack(trident);
         if (!EnchantChecks.item(itemStack, this)) return;
+        if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 

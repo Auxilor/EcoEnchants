@@ -33,6 +33,7 @@ public class Alchemy extends EcoEnchant {
 
         if(!EnchantmentUtils.passedChance(this, level))
             return;
+        if(this.getDisabledWorlds().contains(entity.getWorld())) return;
 
         PotionEffect effect = event.getNewEffect();
 

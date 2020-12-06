@@ -19,6 +19,7 @@ general-config:
     - shovel
     - hoe
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts: []
   maximum-level: 8
 

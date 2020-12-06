@@ -16,6 +16,7 @@ general-config:
   targets:
     - boots
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - feather_falling
   maximum-level: 2

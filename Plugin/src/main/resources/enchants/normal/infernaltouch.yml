@@ -16,6 +16,7 @@ general-config:
   targets:
     - pickaxe
   grindstoneable: true
+  disabled-in-worlds: []
   conflicts:
     - silk_touch
     - stone_switcher

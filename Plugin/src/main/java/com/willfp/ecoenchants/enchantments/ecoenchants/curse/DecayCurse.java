@@ -82,6 +82,7 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
             for(ItemStack item : player.getInventory().getContents()) {
                 int level = EnchantChecks.getItemLevel(item, this);
                 if(level == 0) continue;
+                if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
                 if(!(item.getItemMeta() instanceof Repairable)) continue;
 
