@@ -30,9 +30,8 @@ public class Vein extends EcoEnchant {
 
     @Override
     public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-vein")) {
+        if (block.hasMetadata("block-ignore"))
             return;
-        }
 
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 
@@ -50,12 +49,12 @@ public class Vein extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for(Block veinBlock : blockSet) {
-            veinBlock.setMetadata("from-vein", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            veinBlock.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
             if(!AntigriefManager.canBreakBlock(player, veinBlock)) continue;
 
             BlockBreak.breakBlock(player, veinBlock);
 
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> veinBlock.removeMetadata("from-vein", EcoEnchantsPlugin.getInstance()),1);
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> veinBlock.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance()),1);
         }
 
         AnticheatManager.unexemptPlayer(player);

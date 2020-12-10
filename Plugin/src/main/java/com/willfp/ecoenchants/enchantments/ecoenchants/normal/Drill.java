@@ -23,9 +23,8 @@ public class Drill extends EcoEnchant {
 
     @Override
     public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
+        if (block.hasMetadata("block-ignore"))
             return;
-        }
 
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 
@@ -36,7 +35,7 @@ public class Drill extends EcoEnchant {
         for(int i = 1; i <= blocks; i++) {
             Vector simplified = VectorUtils.simplifyVector(player.getLocation().getDirection().normalize()).multiply(i);
             Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(simplified));
-            block1.setMetadata("from-drill", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            block1.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
 
             if(this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                 continue;
@@ -47,7 +46,7 @@ public class Drill extends EcoEnchant {
             if(!AntigriefManager.canBreakBlock(player, block1)) continue;
 
             BlockBreak.breakBlock(player, block1);
-            block1.removeMetadata("from-drill", EcoEnchantsPlugin.getInstance());
+            block1.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance());
         }
 
         AnticheatManager.unexemptPlayer(player);

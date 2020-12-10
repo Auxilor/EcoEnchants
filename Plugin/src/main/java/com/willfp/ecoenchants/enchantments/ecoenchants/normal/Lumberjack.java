@@ -30,9 +30,8 @@ public class Lumberjack extends EcoEnchant {
 
     @Override
     public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-vein")) {
+        if (block.hasMetadata("block-ignore"))
             return;
-        }
 
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 
@@ -50,12 +49,12 @@ public class Lumberjack extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for(Block treeBlock : treeBlocks) {
-            treeBlock.setMetadata("from-lumberjack", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            treeBlock.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
             if(!AntigriefManager.canBreakBlock(player, treeBlock)) continue;
 
             BlockBreak.breakBlock(player, treeBlock);
 
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> treeBlock.removeMetadata("from-lumberjack", EcoEnchantsPlugin.getInstance()),1);
+            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> treeBlock.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance()),1);
         }
 
         AnticheatManager.unexemptPlayer(player);

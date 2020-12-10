@@ -27,9 +27,8 @@ public class BlastMining extends EcoEnchant {
 
     @Override
     public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
+        if (block.hasMetadata("block-ignore"))
             return;
-        }
 
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 
@@ -67,9 +66,9 @@ public class BlastMining extends EcoEnchant {
         }
 
         toBreak.forEach((block1 -> {
-            block1.setMetadata("from-blastmining", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            block1.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
             BlockBreak.breakBlock(player, block1);
-            block1.removeMetadata("from-blastmining", EcoEnchantsPlugin.getInstance());
+            block1.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance());
         }));
 
         AnticheatManager.unexemptPlayer(player);
