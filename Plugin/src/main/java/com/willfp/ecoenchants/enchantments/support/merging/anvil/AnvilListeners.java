@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIManager;
+import com.willfp.ecoenchants.nms.OpenInventory;
 import com.willfp.ecoenchants.nms.RepairCost;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.tuplets.Pair;
@@ -21,6 +21,7 @@ import java.util.UUID;
 
 public class AnvilListeners implements Listener {
     private static final HashMap<UUID, Integer> noIncreaseXpMap = new HashMap<>();
+    private static final String ANVIL_GUI_CLASS = "net.wesjd.anvilgui.version.Wrapper" + EcoEnchantsPlugin.NMS_VERSION.substring(1) + "$AnvilContainer";
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAnvilPrepare(PrepareAnvilEvent event) {
@@ -35,7 +36,8 @@ public class AnvilListeners implements Listener {
         if(event.getViewers().isEmpty()) return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
 
         Player player = (Player) event.getViewers().get(0);
-        if(AnvilGUIManager.hasAnvilGUIOpen(player)) return;
+        if(OpenInventory.getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS))
+            return;
 
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 

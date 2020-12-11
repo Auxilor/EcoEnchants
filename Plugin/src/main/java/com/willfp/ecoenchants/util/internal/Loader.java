@@ -39,8 +39,6 @@ import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefKingdoms;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefLands;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
 import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
-import com.willfp.ecoenchants.integrations.anvilgui.AnvilGUIManager;
-import com.willfp.ecoenchants.integrations.anvilgui.plugins.AnvilGUIImpl;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
@@ -226,9 +224,6 @@ public class Loader {
         }));
 
         Prerequisite.update();
-
-        AnvilGUIManager.registerIntegration(new AnvilGUIImpl()); // No direct lib, can always register
-
         Logger.info("");
 
         /*
