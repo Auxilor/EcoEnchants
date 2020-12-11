@@ -27,12 +27,6 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
         this.name = name;
     }
 
-    @Deprecated
-    public EnchantmentConfig(String name, Class<?> registerer, EcoEnchant.EnchantmentType type) {
-        super(name, registerer, type);
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
