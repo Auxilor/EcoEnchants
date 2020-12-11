@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.extensions;
 
+import com.willfp.ecoenchants.enchantments.util.EnchantmentRegisterer;
 import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -8,17 +9,23 @@ import org.jetbrains.annotations.NotNull;
  * Extensions are a way of interfacing with EcoEnchants
  * Syntactically similar to Bukkit Plugins.
  */
-public abstract class Extension {
+public abstract class Extension implements EnchantmentRegisterer {
     /**
      * Metadata containing version and name
      */
     private ExtensionMetadata metadata = null;
 
     /**
+     * Instance of the extension
+     */
+    private Extension instance;
+
+    /**
      * Method to validate metadata and enable extension
      */
     public final void enable() {
         Validate.notNull(metadata, "Metadata cannot be null!");
+        instance = this;
         this.onEnable();
     }
 
@@ -38,6 +45,14 @@ public abstract class Extension {
      * Called when Extension is disabled
      */
     protected abstract void onDisable();
+
+    /**
+     * Get instance of the extension
+     * @return The instance
+     */
+    public final Extension getInstance() {
+        return instance;
+    }
 
     /**
      * Set the metadata of the extension

@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentRegisterer;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import com.willfp.ecoenchants.util.StringUtils;
@@ -57,7 +58,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     private boolean enabled;
 
-
     /**
      * Create a new EcoEnchant that exists within the base plugin
      *
@@ -67,7 +67,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      */
     @ApiStatus.Internal
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Prerequisite... prerequisites) {
-        this(key, type, EcoEnchantsPlugin.class, prerequisites);
+        this(key, type, EcoEnchantsPlugin.getInstance(), prerequisites);
     }
 
     /**
@@ -75,15 +75,15 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      *
      * @param key           The key name of the enchantment
      * @param type          The type of the enchantment
-     * @param plugin        The Main class of the {@link org.bukkit.plugin.Plugin} or {@link com.willfp.ecoenchants.extensions.Extension} that the enchantment was created by
+     * @param registerer    The Main class of the {@link org.bukkit.plugin.Plugin} or {@link com.willfp.ecoenchants.extensions.Extension} that the enchantment was created by
      * @param prerequisites Optional {@link Prerequisite}s that must be met
      */
-    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite... prerequisites) {
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, EnchantmentRegisterer registerer, Prerequisite... prerequisites) {
         super(NamespacedKey.minecraft(key));
 
         this.type = type;
         this.permissionName = key.replaceAll("_", "");
-        ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, plugin, this.type));
+        ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, registerer, this.type));
         this.config = ConfigManager.getEnchantmentConfig(this.permissionName);
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
