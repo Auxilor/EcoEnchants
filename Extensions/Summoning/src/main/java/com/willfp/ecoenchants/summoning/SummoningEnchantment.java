@@ -28,7 +28,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
     private final SummoningType summoningType;
 
     protected SummoningEnchantment(String key, EnchantmentType type, SummoningType summoningType, Prerequisite... prerequisites) {
-        super(key, type, SummoningMain.getInstance(), prerequisites);
+        super(key, type, SummoningMain.class, prerequisites);
 
         this.summoningType = summoningType;
     }

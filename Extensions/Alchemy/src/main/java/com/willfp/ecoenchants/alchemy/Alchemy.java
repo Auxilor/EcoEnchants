@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffect;
 
 public class Alchemy extends EcoEnchant {
     public Alchemy() {
-        super("alchemy", EnchantmentType.NORMAL, AlchemyMain.getInstance());
+        super("alchemy", EnchantmentType.NORMAL, AlchemyMain.class);
     }
 
     private static final FixedMetadataValue TRUE = new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true);
