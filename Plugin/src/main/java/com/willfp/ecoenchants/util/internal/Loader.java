@@ -379,20 +379,13 @@ public class Loader {
         new UpdateChecker(EcoEnchantsPlugin.getInstance(), 79573).getVersion((version) -> {
             DefaultArtifactVersion currentVersion = new DefaultArtifactVersion(EcoEnchantsPlugin.getInstance().getDescription().getVersion());
             DefaultArtifactVersion mostRecentVersion = new DefaultArtifactVersion(version);
-            Logger.info("----------------------------");
-            Logger.info("");
-            Logger.info("EcoEnchants Updater");
-            Logger.info("");
-            if (currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion)) {
-                Logger.info("&aEcoEnchants is up to date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
-            } else {
+            if (!(currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion))) {
                 UpdateChecker.setOutdated(true);
                 UpdateChecker.setNewVersion(version);
-
                 Bukkit.getScheduler().runTaskTimer(EcoEnchantsPlugin.getInstance(), () -> {
-                    Logger.info("&6EcoEnchants is out of date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
-                    Logger.info("&6The newest version is &f" + version);
-                    Logger.info("&6Download the new version here: &fhttps://www.spigotmc.org/resources/ecoenchants.79573/");
+                    Logger.info("&cEcoEnchants is out of date! (Version " + EcoEnchantsPlugin.getInstance().getDescription().getVersion() + ")");
+                    Logger.info("&cThe newest version is &f" + version);
+                    Logger.info("&cDownload the new version here:&f https://www.spigotmc.org/resources/ecoenchants.79573/");
                 }, 0, 864000);
             }
             Logger.info("");
