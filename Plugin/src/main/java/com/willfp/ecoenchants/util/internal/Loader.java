@@ -45,12 +45,6 @@ import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
-import com.willfp.ecoenchants.nms.BlockBreak;
-import com.willfp.ecoenchants.nms.ChatComponent;
-import com.willfp.ecoenchants.nms.Cooldown;
-import com.willfp.ecoenchants.nms.OpenInventory;
-import com.willfp.ecoenchants.nms.RepairCost;
-import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.interfaces.Callable;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.internal.updater.PlayerJoinListener;
@@ -105,62 +99,6 @@ public class Loader {
         new PacketSetCreativeSlot().register();
         new PacketSetSlot().register();
         new PacketWindowItems().register();
-
-        Logger.info("");
-
-        /*
-        Load NMS
-         */
-
-        Logger.info("Loading NMS APIs...");
-
-        if (Cooldown.init()) {
-            Logger.info("Cooldown: &aSUCCESS");
-        } else {
-            Logger.info("Cooldown: &cFAILURE");
-            Logger.error("&cAborting...");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
-
-        if (TridentStack.init()) {
-            Logger.info("Trident API: &aSUCCESS");
-        } else {
-            Logger.info("Trident API: &cFAILURE");
-            Logger.error("&cAborting...");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
-
-        if (BlockBreak.init()) {
-            Logger.info("Block Break: &aSUCCESS");
-        } else {
-            Logger.info("Block Break: &cFAILURE");
-            Logger.error("&cAborting...");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
-
-        if (RepairCost.init()) {
-            Logger.info("Repair Cost: &aSUCCESS");
-        } else {
-            Logger.info("Repair Cost: &cFAILURE");
-            Logger.error("&cAborting...");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
-
-        if (OpenInventory.init()) {
-            Logger.info("Open Inventory: &aSUCCESS");
-        } else {
-            Logger.info("Open Inventory: &cFAILURE");
-            Logger.error("&cAborting...");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
-
-        if (ChatComponent.init()) {
-            Logger.info("Chat Component: &aSUCCESS");
-        } else {
-            Logger.info("Chat Component: &cFAILURE");
-            Logger.error("&cAborting...");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
 
         Logger.info("");
 
