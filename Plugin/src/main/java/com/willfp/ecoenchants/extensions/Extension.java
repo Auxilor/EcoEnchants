@@ -18,7 +18,7 @@ public abstract class Extension implements EnchantmentRegisterer {
     /**
      * Instance of the extension
      */
-    private Extension instance;
+    private static Extension instance;
 
     /**
      * Method to validate metadata and enable extension
@@ -50,7 +50,7 @@ public abstract class Extension implements EnchantmentRegisterer {
      * Get instance of the extension
      * @return The instance
      */
-    public final Extension getInstance() {
+    public static Extension getInstance() {
         return instance;
     }
 

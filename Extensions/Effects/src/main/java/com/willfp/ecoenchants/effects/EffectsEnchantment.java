@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public abstract class EffectsEnchantment extends EcoEnchant {
     protected EffectsEnchantment(String key, EnchantmentType type, Prerequisite... prerequisites) {
-        super(key, type, EffectsMain.class, prerequisites);
+        super(key, type, EffectsMain.getInstance(), prerequisites);
     }
 
     public abstract PotionEffectType getPotionEffect();

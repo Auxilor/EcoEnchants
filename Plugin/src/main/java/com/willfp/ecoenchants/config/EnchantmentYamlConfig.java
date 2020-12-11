@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.config;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentRegisterer;
+import com.willfp.ecoenchants.util.internal.Logger;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -27,6 +28,9 @@ public abstract class EnchantmentYamlConfig {
     private final EnchantmentRegisterer registerer;
     private final EcoEnchant.EnchantmentType type;
 
+    private final boolean legacy;
+    private Class<?> legacyRegisterer;
+
     /**
      * Create new config yml
      *
@@ -38,6 +42,30 @@ public abstract class EnchantmentYamlConfig {
         this.name = name;
         this.registerer = registerer;
         this.type = type;
+        legacy = false;
+
+        File basedir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "enchants/");
+        if (!basedir.exists()) basedir.mkdirs();
+
+        File dir = new File(basedir, type.getName() + "/");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        this.directory = dir;
+
+        init();
+    }
+
+    @Deprecated
+    public EnchantmentYamlConfig(String name, Class<?> registerer, EcoEnchant.EnchantmentType type) {
+        this.name = name;
+        this.legacyRegisterer = registerer;
+        this.registerer = null;
+        this.type = type;
+        legacy = true;
+
+        Logger.warn("Config " + name + " was created in legacy mode!");
+        Logger.warn("Update your extensions");
 
         File basedir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "enchants/");
         if (!basedir.exists()) basedir.mkdirs();
@@ -65,7 +93,12 @@ public abstract class EnchantmentYamlConfig {
     private void saveResource() {
         String resourcePath = "/enchants/" + type.getName() + "/" + name + ".yml";
 
-        InputStream in = registerer.getResourceAsStream(resourcePath);
+        InputStream in;
+        if(legacy) {
+            in = legacyRegisterer.getResourceAsStream(resourcePath);
+        } else {
+            in = registerer.getResourceAsStream(resourcePath);
+        }
 
         File outFile = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath);
         int lastIndex = resourcePath.lastIndexOf('/');
@@ -99,7 +132,14 @@ public abstract class EnchantmentYamlConfig {
             config.load(configFile);
 
             String resourcePath = "/enchants/" + type.getName() + "/" + name + ".yml";
-            InputStream newIn = registerer.getResourceAsStream(resourcePath);
+
+            InputStream newIn;
+
+            if(legacy) {
+                newIn = legacyRegisterer.getResourceAsStream(resourcePath);
+            } else {
+                newIn = registerer.getResourceAsStream(resourcePath);
+            }
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));
             YamlConfiguration newConfig = new YamlConfiguration();

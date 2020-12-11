@@ -10,6 +10,7 @@ import com.willfp.ecoenchants.enchantments.util.Watcher;
 import com.willfp.ecoenchants.util.StringUtils;
 import com.willfp.ecoenchants.util.interfaces.ObjectCallable;
 import com.willfp.ecoenchants.util.interfaces.Registerable;
+import com.willfp.ecoenchants.util.internal.Logger;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
@@ -73,9 +74,49 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     /**
      * Create a new EcoEnchant that exists within an extension or external plugin
      *
+     * @param key             The key name of the enchantment
+     * @param type            The type of the enchantment
+     * @param registererClass The Main class of the {@link org.bukkit.plugin.Plugin} or {@link com.willfp.ecoenchants.extensions.Extension} that the enchantment was created by
+     * @param prerequisites   Optional {@link Prerequisite}s that must be met
+     *
+     * @deprecated Class-based enchantment registration was deprecated in 5.6.0. Base your extensions off of {@link EnchantmentRegisterer}
+     */
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval(inVersion = "5.7.0")
+    protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> registererClass, Prerequisite... prerequisites) {
+        super(NamespacedKey.minecraft(key));
+
+        Logger.warn("Enchantment " + key + " was created in legacy mode!");
+        Logger.warn("Update your extensions");
+
+        this.type = type;
+        this.permissionName = key.replaceAll("_", "");
+        ConfigManager.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, registererClass, this.type));
+        this.config = ConfigManager.getEnchantmentConfig(this.permissionName);
+
+        if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
+            Permission permission = new Permission(
+                    "ecoenchants.fromtable." + permissionName,
+                    "Allows getting " + permissionName + " from an Enchanting Table",
+                    PermissionDefault.TRUE
+            );
+            permission.addParent(Objects.requireNonNull(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*")), true);
+            Bukkit.getPluginManager().addPermission(permission);
+        }
+
+        if (!Prerequisite.areMet(prerequisites))
+            return;
+
+        this.update();
+        EcoEnchants.addNewEcoEnchant(this);
+    }
+
+    /**
+     * Create a new EcoEnchant that exists within an extension or external plugin
+     *
      * @param key           The key name of the enchantment
      * @param type          The type of the enchantment
-     * @param registerer    The Main class of the {@link org.bukkit.plugin.Plugin} or {@link com.willfp.ecoenchants.extensions.Extension} that the enchantment was created by
+     * @param registerer    Instance of the main class of the {@link com.willfp.ecoenchants.extensions.Extension} or {@link EnchantmentRegisterer} that the enchantment was created by
      * @param prerequisites Optional {@link Prerequisite}s that must be met
      */
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, EnchantmentRegisterer registerer, Prerequisite... prerequisites) {

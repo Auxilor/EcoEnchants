@@ -11,7 +11,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -23,7 +28,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
     private final SummoningType summoningType;
 
     protected SummoningEnchantment(String key, EnchantmentType type, SummoningType summoningType, Prerequisite... prerequisites) {
-        super(key, type, SummoningMain.class, prerequisites);
+        super(key, type, SummoningMain.getInstance(), prerequisites);
 
         this.summoningType = summoningType;
     }

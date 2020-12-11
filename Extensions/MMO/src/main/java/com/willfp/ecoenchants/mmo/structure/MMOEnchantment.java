@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.util.optional.Prerequisite;
 
 public abstract class MMOEnchantment extends EcoEnchant implements MMOEnchant {
     protected MMOEnchantment(String key, EnchantmentType type, Prerequisite... prerequisites) {
-        super(key, type, MMOMain.class, MMOPrerequisites.append(prerequisites, MMOPrerequisites.HAS_MMOCORE));
+        super(key, type, MMOMain.getInstance(), MMOPrerequisites.append(prerequisites, MMOPrerequisites.HAS_MMOCORE));
 
         MMOEnchant.REGISTRY.add(this);
     }

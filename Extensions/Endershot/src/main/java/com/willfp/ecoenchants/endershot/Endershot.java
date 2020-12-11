@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Endershot extends EcoEnchant {
     public Endershot() {
-        super("endershot", EnchantmentType.NORMAL, EndershotMain.class);
+        super("endershot", EnchantmentType.NORMAL, EndershotMain.getInstance());
     }
 
     @EventHandler(priority = EventPriority.LOW)

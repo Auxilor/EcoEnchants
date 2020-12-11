@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentRegisterer;
 import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,11 +38,17 @@ public abstract class Spell extends EcoEnchant {
     );
 
     protected Spell(String key, Prerequisite... prerequisites) {
-        this(key, EcoEnchantsPlugin.class, prerequisites);
+        this(key, EcoEnchantsPlugin.getInstance(), prerequisites);
     }
 
-    protected Spell(String key, Class<?> plugin, Prerequisite... prerequisites) {
-        super(key, EnchantmentType.SPELL, plugin, prerequisites);
+    protected Spell(String key, EnchantmentRegisterer registerer, Prerequisite... prerequisites) {
+        super(key, EnchantmentType.SPELL, registerer, prerequisites);
+    }
+
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval(inVersion = "5.7.0")
+    protected Spell(String key, Class<?> registerer, Prerequisite... prerequisites) {
+        super(key, EnchantmentType.SPELL, registerer, prerequisites);
     }
 
     public int getCooldownTime() {
