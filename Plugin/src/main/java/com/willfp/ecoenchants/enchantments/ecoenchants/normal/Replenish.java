@@ -24,6 +24,9 @@ public class Replenish extends EcoEnchant {
 
         if(!(block.getBlockData() instanceof Ageable)) return;
 
+        if(block.getType().equals(Material.SUGAR_CANE) || block.getType().equals(Material.SWEET_BERRY_BUSH))
+            return;
+
         Ageable data = (Ageable) block.getBlockData();
         if(data.getAge() != data.getMaximumAge()) {
             event.setDropItems(false);
