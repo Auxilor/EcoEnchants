@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.v1_16_R1;
+package com.willfp.ecoenchants.nms.v1_16_R1;
 
 import com.willfp.ecoenchants.nms.api.BlockBreakWrapper;
 import net.minecraft.server.v1_16_R1.BlockPosition;

@@ -1,18 +1,18 @@
-package com.willfp.ecoenchants.v1_16_R3;
+package com.willfp.ecoenchants.nms.v1_16_R1;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.willfp.ecoenchants.nms.api.ChatComponentWrapper;
-import net.minecraft.server.v1_16_R3.ChatBaseComponent;
-import net.minecraft.server.v1_16_R3.ChatHoverable;
-import net.minecraft.server.v1_16_R3.ChatMessage;
-import net.minecraft.server.v1_16_R3.ChatModifier;
-import net.minecraft.server.v1_16_R3.IChatBaseComponent;
-import net.minecraft.server.v1_16_R3.MojangsonParser;
+import net.minecraft.server.v1_16_R1.ChatBaseComponent;
+import net.minecraft.server.v1_16_R1.ChatHoverable;
+import net.minecraft.server.v1_16_R1.ChatMessage;
+import net.minecraft.server.v1_16_R1.ChatModifier;
+import net.minecraft.server.v1_16_R1.IChatBaseComponent;
+import net.minecraft.server.v1_16_R1.MojangsonParser;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
@@ -82,7 +82,7 @@ public class ChatComponent implements ChatComponentWrapper {
 
         assert material != null;
         ItemStack itemStack = new ItemStack(material);
-        net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
+        net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
 
         try {
             nmsStack.setTag(MojangsonParser.parse(jsonTag));

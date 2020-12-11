@@ -81,6 +81,20 @@ public class Loader {
         Logger.info("==========================================");
 
         /*
+        Check server version is supported
+         */
+
+        if(!Arrays.asList(
+                "v1_15_R1",
+                "v1_16_R1",
+                "v1_16_R2",
+                "v1_16_R3"
+        ).contains(EcoEnchantsPlugin.NMS_VERSION)) {
+            Logger.error("Your server version (" + EcoEnchantsPlugin.NMS_VERSION + ") is not supported!");
+            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
+        }
+
+        /*
         Load Configs
          */
 

@@ -25,7 +25,7 @@ public class Cooldown {
 
     static {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".Cooldown");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants.nms." + EcoEnchantsPlugin.NMS_VERSION + ".Cooldown");
             if (CooldownWrapper.class.isAssignableFrom(class2)) {
                 cooldown = (CooldownWrapper) class2.getConstructor().newInstance();
             }

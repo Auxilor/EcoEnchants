@@ -24,7 +24,7 @@ public class OpenInventory {
 
     static {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".OpenInventory");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants.nms." + EcoEnchantsPlugin.NMS_VERSION + ".OpenInventory");
             if (OpenInventoryWrapper.class.isAssignableFrom(class2)) {
                 openInventoryWrapper = (OpenInventoryWrapper) class2.getConstructor().newInstance();
             }

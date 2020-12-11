@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.v1_15_R1;
+package com.willfp.ecoenchants.nms.v1_15_R1;
 
 import com.willfp.ecoenchants.nms.api.TridentStackWrapper;
 import net.minecraft.server.v1_15_R1.EntityThrownTrident;

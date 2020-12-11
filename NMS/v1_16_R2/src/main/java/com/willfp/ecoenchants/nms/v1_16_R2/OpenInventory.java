@@ -1,7 +1,7 @@
-package com.willfp.ecoenchants.v1_16_R1;
+package com.willfp.ecoenchants.nms.v1_16_R2;
 
 import com.willfp.ecoenchants.nms.api.OpenInventoryWrapper;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class OpenInventory implements OpenInventoryWrapper {

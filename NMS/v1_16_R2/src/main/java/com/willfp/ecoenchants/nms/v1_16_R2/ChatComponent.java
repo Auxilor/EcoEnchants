@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.v1_16_R2;
+package com.willfp.ecoenchants.nms.v1_16_R2;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

@@ -35,7 +35,7 @@ public class RepairCost {
 
     static {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".RepairCost");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants.nms." + EcoEnchantsPlugin.NMS_VERSION + ".RepairCost");
             if (RepairCostWrapper.class.isAssignableFrom(class2)) {
                 repairCostWrapper = (RepairCostWrapper) class2.getConstructor().newInstance();
             }

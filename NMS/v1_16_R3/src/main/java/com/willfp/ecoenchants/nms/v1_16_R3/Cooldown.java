@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.v1_16_R1;
+package com.willfp.ecoenchants.nms.v1_16_R3;
 
 import com.willfp.ecoenchants.nms.api.CooldownWrapper;
 import org.bukkit.entity.Player;

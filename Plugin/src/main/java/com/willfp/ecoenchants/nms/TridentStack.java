@@ -26,7 +26,7 @@ public class TridentStack {
 
     static {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".TridentStack");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants.nms." + EcoEnchantsPlugin.NMS_VERSION + ".TridentStack");
             if (TridentStackWrapper.class.isAssignableFrom(class2)) {
                 tridentStackWrapper = (TridentStackWrapper) class2.getConstructor().newInstance();
             }

@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.v1_16_R1;
+package com.willfp.ecoenchants.nms.v1_16_R1;
 
 import com.willfp.ecoenchants.nms.api.RepairCostWrapper;
 import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;

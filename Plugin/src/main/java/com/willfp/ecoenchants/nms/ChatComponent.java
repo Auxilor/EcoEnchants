@@ -27,7 +27,7 @@ public class ChatComponent {
 
     static {
         try {
-            final Class<?> class2 = Class.forName("com.willfp.ecoenchants." + EcoEnchantsPlugin.NMS_VERSION + ".ChatComponent");
+            final Class<?> class2 = Class.forName("com.willfp.ecoenchants.nms." + EcoEnchantsPlugin.NMS_VERSION + ".ChatComponent");
             if (ChatComponentWrapper.class.isAssignableFrom(class2)) {
                 chatComponentWrapper = (ChatComponentWrapper) class2.getConstructor().newInstance();
             }
