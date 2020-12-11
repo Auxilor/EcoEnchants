@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.enchantments.util.EnchantmentRegisterer;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.NumberUtils;
 import com.willfp.ecoenchants.util.optional.Prerequisite;
@@ -36,25 +35,11 @@ public abstract class Artifact extends EcoEnchant {
     private Particle.DustOptions extra;
 
     protected Artifact(String key, Prerequisite... prerequisites) {
-        this(key, EcoEnchantsPlugin.getInstance(), prerequisites);
+        this(key, EcoEnchantsPlugin.class, prerequisites);
     }
 
-    protected Artifact(String key, EnchantmentRegisterer registerer, Prerequisite... prerequisites) {
-        super(key, EnchantmentType.ARTIFACT, registerer, prerequisites);
-
-        if(!Prerequisite.areMet(prerequisites)) {
-            HandlerList.unregisterAll(this); // Prevent events firing
-            return;
-        }
-
-        this.particle = this.getParticle();
-        this.extra = this.getDustOptions();
-    }
-
-    @Deprecated
-    @ApiStatus.ScheduledForRemoval(inVersion = "5.7.0")
-    protected Artifact(String key, Class<?> registerer, Prerequisite... prerequisites) {
-        super(key, EnchantmentType.ARTIFACT, registerer, prerequisites);
+    protected Artifact(String key, Class<?> plugin, Prerequisite... prerequisites) {
+        super(key, EnchantmentType.ARTIFACT, plugin, prerequisites);
 
         if(!Prerequisite.areMet(prerequisites)) {
             HandlerList.unregisterAll(this); // Prevent events firing
