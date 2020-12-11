@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.util.internal;
 
-import com.comphenix.protocol.ProtocolLibrary;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
@@ -102,7 +101,6 @@ public class Loader {
          */
 
         Logger.info("Loading ProtocolLib...");
-        EcoEnchantsPlugin.getInstance().protocolManager = ProtocolLibrary.getProtocolManager();
         if (ConfigManager.getConfig().getBool("villager.enabled")) {
             new PacketOpenWindowMerchant().register();
         }

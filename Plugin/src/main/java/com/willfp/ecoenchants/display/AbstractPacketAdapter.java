@@ -49,8 +49,8 @@ public abstract class AbstractPacketAdapter extends PacketAdapter {
     }
 
     public final void register() {
-        if(!EcoEnchantsPlugin.getInstance().protocolManager.getPacketListeners().contains(this)) {
-            EcoEnchantsPlugin.getInstance().protocolManager.addPacketListener(this);
+        if(!EcoEnchantsPlugin.getInstance().getProtocolManager().getPacketListeners().contains(this)) {
+            EcoEnchantsPlugin.getInstance().getProtocolManager().addPacketListener(this);
         }
     }
 }
