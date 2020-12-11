@@ -6,7 +6,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
-import com.willfp.ecoenchants.enchantments.util.EnchantmentRegisterer;
 import com.willfp.ecoenchants.util.internal.Logger;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -23,8 +22,8 @@ import java.util.Set;
 public class EnchantmentConfig extends EnchantmentYamlConfig {
     private final String name;
 
-    public EnchantmentConfig(String name, EnchantmentRegisterer registerer, EcoEnchant.EnchantmentType type) {
-        super(name, registerer, type);
+    public EnchantmentConfig(String name, Class<?> plugin, EcoEnchant.EnchantmentType type) {
+        super(name, plugin, type);
         this.name = name;
     }
 

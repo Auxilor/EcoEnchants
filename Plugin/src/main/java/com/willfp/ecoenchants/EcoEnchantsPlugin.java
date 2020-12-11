@@ -2,7 +2,6 @@ package com.willfp.ecoenchants;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.willfp.ecoenchants.enchantments.util.EnchantmentRegisterer;
 import com.willfp.ecoenchants.extensions.loader.EcoExtensionLoader;
 import com.willfp.ecoenchants.extensions.loader.ExtensionLoader;
 import com.willfp.ecoenchants.util.internal.Loader;
@@ -12,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * The Main class for EcoEnchants
  */
-public class EcoEnchantsPlugin extends JavaPlugin implements EnchantmentRegisterer {
+public class EcoEnchantsPlugin extends JavaPlugin {
     /**
      * Instance of EcoEnchants
      */
