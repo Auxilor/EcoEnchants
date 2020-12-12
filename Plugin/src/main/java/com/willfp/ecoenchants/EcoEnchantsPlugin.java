@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import com.willfp.ecoenchants.extensions.loader.EcoExtensionLoader;
 import com.willfp.ecoenchants.extensions.loader.ExtensionLoader;
 import com.willfp.ecoenchants.util.internal.Loader;
