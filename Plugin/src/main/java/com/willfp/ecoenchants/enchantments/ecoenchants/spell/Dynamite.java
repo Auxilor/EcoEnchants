@@ -54,7 +54,7 @@ public class Dynamite extends Spell {
                     if(this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                         continue;
                     }
-U
+
                     if(block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check")) continue;
 
                     if(!AntigriefManager.canBreakBlock(player, block1)) continue;
