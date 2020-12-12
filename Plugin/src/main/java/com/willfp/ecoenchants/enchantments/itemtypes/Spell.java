@@ -37,11 +37,13 @@ public abstract class Spell extends EcoEnchant {
     );
 
     protected Spell(String key, Prerequisite... prerequisites) {
-        this(key, EcoEnchantsPlugin.class, prerequisites);
+        super(key, EnchantmentType.SPELL, prerequisites);
     }
 
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval(inVersion = "5.8.0")
     protected Spell(String key, Class<?> plugin, Prerequisite... prerequisites) {
-        super(key, EnchantmentType.SPELL, plugin, prerequisites);
+        this(key, prerequisites);
     }
 
     public int getCooldownTime() {

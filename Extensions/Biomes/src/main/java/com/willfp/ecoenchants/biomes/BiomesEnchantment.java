@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public abstract class BiomesEnchantment extends EcoEnchant {
     protected BiomesEnchantment(String key, EnchantmentType type, Prerequisite... prerequisites) {
-        super(key, type, BiomesMain.class, prerequisites);
+        super(key, type, prerequisites);
     }
 
     public abstract boolean isValid(Biome biome);
