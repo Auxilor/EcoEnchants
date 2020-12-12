@@ -8,7 +8,11 @@ import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
-import com.willfp.ecoenchants.display.packets.*;
+import com.willfp.ecoenchants.display.packets.PacketChat;
+import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
+import com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot;
+import com.willfp.ecoenchants.display.packets.PacketSetSlot;
+import com.willfp.ecoenchants.display.packets.PacketWindowItems;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -29,7 +33,12 @@ import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatNCP;
 import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatSpartan;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.*;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefFactionsUUID;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefGriefPrevention;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefKingdoms;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefLands;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
+import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
@@ -48,7 +57,11 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.plugin.Plugin;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -66,20 +79,6 @@ public class Loader {
         Logger.info("Made by &aAuxilor&f - willfp.com");
         Logger.info("");
         Logger.info("==========================================");
-
-        /*
-        Check server version is supported
-         */
-
-        if(!Arrays.asList(
-                "v1_15_R1",
-                "v1_16_R1",
-                "v1_16_R2",
-                "v1_16_R3"
-        ).contains(EcoEnchantsPlugin.NMS_VERSION)) {
-            Logger.error("Your server version (" + EcoEnchantsPlugin.NMS_VERSION + ") is not supported!");
-            Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
-        }
 
         /*
         Load Configs

@@ -30,7 +30,7 @@ public class Dynamite extends Spell {
 
         if(block == null) return;
 
-        if (block.hasMetadata("from-drill") || block.hasMetadata("from-lumberjack") || block.hasMetadata("from-blastmining") || block.hasMetadata("from-vein")) {
+        if (block.hasMetadata("block-ignore")) {
             return;
         }
 
@@ -54,7 +54,7 @@ public class Dynamite extends Spell {
                     if(this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                         continue;
                     }
-
+U
                     if(block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check")) continue;
 
                     if(!AntigriefManager.canBreakBlock(player, block1)) continue;
@@ -65,9 +65,9 @@ public class Dynamite extends Spell {
         }
 
         toBreak.forEach((block1 -> {
-            block1.setMetadata("from-blastmining", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            block1.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
             BlockBreak.breakBlock(player, block1);
-            block1.removeMetadata("from-blastmining", EcoEnchantsPlugin.getInstance());
+            block1.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance());
         }));
 
         AnticheatManager.unexemptPlayer(player);
