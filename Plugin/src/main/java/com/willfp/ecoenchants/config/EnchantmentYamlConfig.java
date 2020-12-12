@@ -69,7 +69,7 @@ public abstract class EnchantmentYamlConfig {
         }
 
         try {
-            if (!outFile.exists() || false) {
+            if (!outFile.exists()) {
                 OutputStream out = new FileOutputStream(outFile);
                 byte[] buf = new byte[1024];
                 int len;
