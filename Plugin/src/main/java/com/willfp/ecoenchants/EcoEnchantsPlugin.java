@@ -23,11 +23,6 @@ public class EcoEnchantsPlugin extends JavaPlugin {
     private final ExtensionLoader loader = new EcoExtensionLoader();
 
     /**
-     * ProtocolLib
-     */
-    private final ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
-
-    /**
      * NMS version
      */
     public static final String NMS_VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
@@ -59,14 +54,6 @@ public class EcoEnchantsPlugin extends JavaPlugin {
      */
     public ExtensionLoader getExtensionLoader() {
         return loader;
-    }
-
-    /**
-     * Get ProtocolLib protocol manager
-     * @return The {@link ProtocolManager} that EcoEnchants interacts with
-     */
-    public ProtocolManager getProtocolManager() {
-        return protocolManager;
     }
 
     /**

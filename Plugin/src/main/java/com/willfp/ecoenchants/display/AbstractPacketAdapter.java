@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.display;
 
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
@@ -49,8 +50,8 @@ public abstract class AbstractPacketAdapter extends PacketAdapter {
     }
 
     public final void register() {
-        if(!EcoEnchantsPlugin.getInstance().getProtocolManager().getPacketListeners().contains(this)) {
-            EcoEnchantsPlugin.getInstance().getProtocolManager().addPacketListener(this);
+        if(!ProtocolLibrary.getProtocolManager().getPacketListeners().contains(this)) {
+            ProtocolLibrary.getProtocolManager().addPacketListener(this);
         }
     }
 }
