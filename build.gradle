@@ -10,7 +10,7 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
-        //mavenLocal()
+        mavenLocal()
 
         maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
         maven { url 'https://repo.codemc.org/repository/maven-public' }
