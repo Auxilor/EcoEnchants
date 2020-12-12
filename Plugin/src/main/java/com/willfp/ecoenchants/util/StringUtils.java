@@ -78,7 +78,7 @@ public class StringUtils {
             return NumberUtils.format((Double) object);
         } else if (object instanceof Collection<?>) {
             Collection<?> c = (Collection<?>) object;
-            return c.stream().map(String::valueOf).collect(Collectors.joining(", "));
+            return c.stream().map(StringUtils::internalToString).collect(Collectors.joining(", "));
         } else return String.valueOf(object);
     }
 
