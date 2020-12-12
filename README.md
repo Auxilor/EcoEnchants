@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://plugins.willfp.com/ecoenchants/logo.png" alt="EcoEnchants logo" width="256">
+  <img src="https://i.imgur.com/1kAQbe6.png" alt="EcoEnchants logo" width="256">
   <br>
 </h1>
 
