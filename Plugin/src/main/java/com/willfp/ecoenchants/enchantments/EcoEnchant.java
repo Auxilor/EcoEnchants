@@ -78,7 +78,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             Bukkit.getPluginManager().addPermission(permission);
         }
 
-        if(type.getRequiredToExtend() != null && type.getRequiredToExtend().isInstance(this)) {
+        if(type.getRequiredToExtend() != null && !type.getRequiredToExtend().isInstance(this)) {
             Logger.error("Enchantment " + key + " has type " + this.getType().getName() + " but doesn't extend " + type.getRequiredToExtend().getName());
             return;
         }
