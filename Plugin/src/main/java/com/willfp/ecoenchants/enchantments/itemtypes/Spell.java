@@ -36,7 +36,7 @@ public abstract class Spell extends EcoEnchant {
     }
 
     @Deprecated
-    @ApiStatus.ScheduledForRemoval(inVersion = "5.8.0")
+    @ApiStatus.ScheduledForRemoval(inVersion = "6.0.0")
     protected Spell(String key, Class<?> plugin, Prerequisite... prerequisites) {
         this(key, prerequisites);
     }

@@ -101,7 +101,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @deprecated Specifying the source class is no longer needed
      */
     @Deprecated
-    @ApiStatus.ScheduledForRemoval(inVersion = "5.8.0")
+    @ApiStatus.ScheduledForRemoval(inVersion = "6.0.0")
     protected EcoEnchant(String key, EcoEnchant.EnchantmentType type, Class<?> plugin, Prerequisite... prerequisites) {
         this(key, type, prerequisites);
 

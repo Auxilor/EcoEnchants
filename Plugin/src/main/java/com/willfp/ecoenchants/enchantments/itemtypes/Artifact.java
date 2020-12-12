@@ -47,7 +47,7 @@ public abstract class Artifact extends EcoEnchant {
     }
 
     @Deprecated
-    @ApiStatus.ScheduledForRemoval(inVersion = "5.8.0")
+    @ApiStatus.ScheduledForRemoval(inVersion = "6.0.0")
     protected Artifact(String key, Class<?> plugin, Prerequisite... prerequisites) {
         this(key, prerequisites);
     }
