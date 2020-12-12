@@ -2,6 +2,8 @@ package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
+import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
@@ -74,6 +76,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             );
             permission.addParent(Objects.requireNonNull(Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*")), true);
             Bukkit.getPluginManager().addPermission(permission);
+        }
+
+        if(type.getRequiredToExtend() != null && type.getRequiredToExtend().isInstance(this)) {
+            Logger.error("Enchantment " + key + " has type " + this.getType().getName() + " but doesn't extend " + type.getRequiredToExtend().getName());
+            return;
         }
 
         if (!Prerequisite.areMet(prerequisites))
@@ -405,14 +412,15 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> ConfigManager.getLang().getString("not-curse-color"));
         public static final EnchantmentType CURSE = new EnchantmentType("curse", false, () -> ConfigManager.getLang().getString("curse-color"));
         public static final EnchantmentType SPECIAL = new EnchantmentType("special", () -> !ConfigManager.getConfig().getBool("types.special.allow-multiple"), () -> ConfigManager.getLang().getString("special-color"));
-        public static final EnchantmentType ARTIFACT = new EnchantmentType("artifact", () -> !ConfigManager.getConfig().getBool("types.artifact.allow-multiple"), () -> ConfigManager.getLang().getString("artifact-color"));
-        public static final EnchantmentType SPELL = new EnchantmentType("spell", true, () -> ConfigManager.getLang().getString("spell-color"));
+        public static final EnchantmentType ARTIFACT = new EnchantmentType("artifact", () -> !ConfigManager.getConfig().getBool("types.artifact.allow-multiple"), () -> ConfigManager.getLang().getString("artifact-color"), Artifact.class);
+        public static final EnchantmentType SPELL = new EnchantmentType("spell", true, () -> ConfigManager.getLang().getString("spell-color"), Spell.class);
 
         private boolean singular;
         private String color;
         private final String name;
         private final ObjectCallable<String> colorCallable;
         private final ObjectCallable<Boolean> singularCallable;
+        private final Class<? extends EcoEnchant> requiredToExtend;
 
         /**
          * Create simple EnchantmentType
@@ -441,6 +449,20 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         }
 
         /**
+         * Create EnchantmentType with updatable color that <b>must</b> extend a specified class
+         * <p>
+         * Singularity will not be updated using this constructor
+         *
+         * @param name          The name of the type
+         * @param singular      Whether an item can have several enchantments of this type
+         * @param colorCallable Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
+         * @param requiredToExtend Class that all enchantments of this type must extend - or null if not required
+         */
+        public EnchantmentType(String name, boolean singular, ObjectCallable<String> colorCallable, Class<? extends EcoEnchant> requiredToExtend) {
+            this(name, () -> singular, colorCallable, requiredToExtend);
+        }
+
+        /**
          * Create EnchantmentType with updatable color and singularity
          *
          * @param name             The name of the type
@@ -448,9 +470,22 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
          * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
          */
         public EnchantmentType(String name, ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable) {
+            this(name, singularCallable, colorCallable, null);
+        }
+
+        /**
+         * Create EnchantmentType with updatable color and singularity that <b>must</b> extend a specified class
+         *
+         * @param name             The name of the type
+         * @param singularCallable Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload
+         * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
+         * @param requiredToExtend Class that all enchantments of this type must extend - or null if not required
+         */
+        public EnchantmentType(String name, ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable, Class<? extends EcoEnchant> requiredToExtend) {
             this.name = name;
             this.singularCallable = singularCallable;
             this.colorCallable = colorCallable;
+            this.requiredToExtend = requiredToExtend;
             color = colorCallable.call();
             singular = singularCallable.call();
             values.add(this);
@@ -471,6 +506,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         public String getName() {
             return name;
+        }
+
+        public Class<? extends EcoEnchant> getRequiredToExtend() {
+            return requiredToExtend;
         }
 
         public static void update() {
