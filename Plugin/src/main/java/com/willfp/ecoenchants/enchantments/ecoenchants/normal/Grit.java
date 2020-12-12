@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.meta.Damageable;
+
 public class Grit extends EcoEnchant {
     public Grit() {
         super(
@@ -29,13 +30,13 @@ public class Grit extends EcoEnchant {
         Player player = (Player) event.getEntity();
         Player attacker = (Player) event.getDamager();
 
-        if(!AntigriefManager.canInjure(attacker, player)) return;
+        if (!AntigriefManager.canInjure(attacker, player)) return;
 
         int totalGritPoints = EnchantChecks.getArmorPoints(player, this, 0);
 
         if (totalGritPoints == 0)
             return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (!(attacker.getInventory().getItemInMainHand() instanceof Damageable))
             return;

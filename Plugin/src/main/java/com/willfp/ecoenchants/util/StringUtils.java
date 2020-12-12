@@ -18,6 +18,7 @@ public class StringUtils {
      *
      * @param message The message to translate
      * @param player  The player to translate placeholders with respect to
+     *
      * @return The message, translated
      */
     public static String translate(String message, @Nullable Player player) {
@@ -31,7 +32,9 @@ public class StringUtils {
      * Translate a string without respect to a player
      *
      * @param message The message to translate
+     *
      * @return The message, translated
+     *
      * @see StringUtils#translate(String, Player)
      */
     public static String translate(String message) {
@@ -61,6 +64,7 @@ public class StringUtils {
      * Formats collections and doubles better
      *
      * @param object The object to convert to string
+     *
      * @return The object stringified
      */
     public static String internalToString(@Nullable Object object) {
@@ -83,6 +87,7 @@ public class StringUtils {
      *
      * @param s      The string to remove the prefix from
      * @param prefix The substring to remove
+     *
      * @return The string with the prefix removed
      */
     public static String removePrefix(String s, String prefix) {

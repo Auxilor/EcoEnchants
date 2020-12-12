@@ -26,7 +26,8 @@ public class EnchantmentTarget implements Registerable {
 
     /**
      * Create new EnchantmentRarity
-     * @param name The name of the rarity
+     *
+     * @param name      The name of the rarity
      * @param materials The items for the target
      */
     public EnchantmentTarget(String name, Set<Material> materials) {
@@ -46,6 +47,7 @@ public class EnchantmentTarget implements Registerable {
 
     /**
      * Get the name of the rarity
+     *
      * @return The name
      */
     public String getName() {
@@ -54,6 +56,7 @@ public class EnchantmentTarget implements Registerable {
 
     /**
      * Get the materials of the rarity
+     *
      * @return The materials
      */
     public Set<Material> getMaterials() {
@@ -62,7 +65,9 @@ public class EnchantmentTarget implements Registerable {
 
     /**
      * Get EnchantmentTarget matching name
+     *
      * @param name The name to search for
+     *
      * @return The matching EnchantmentTarget, or null if not found
      */
     public static EnchantmentTarget getByName(String name) {
@@ -85,6 +90,7 @@ public class EnchantmentTarget implements Registerable {
 
     /**
      * Get all rarities
+     *
      * @return A set of all rarities
      */
     public static Set<EnchantmentTarget> getAll() {

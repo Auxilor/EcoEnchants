@@ -89,11 +89,11 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
 
     public Set<EnchantmentTarget> getTargets() {
         List<String> targetNames = config.getStringList(EcoEnchants.GENERAL_LOCATION + "targets");
-        if(targetNames == null || targetNames.isEmpty()) return new HashSet<>();
+        if (targetNames == null || targetNames.isEmpty()) return new HashSet<>();
         Set<EnchantmentTarget> targets = new HashSet<>();
 
         targetNames.forEach((s -> {
-            if(EnchantmentTarget.getByName(s) == null) {
+            if (EnchantmentTarget.getByName(s) == null) {
                 Logger.error(s + " is an invalid target!");
                 return;
             }
@@ -104,7 +104,7 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
     }
 
     public void loadFromLang() {
-        if(!ConfigManager.getLang().config.contains("enchantments." + this.getName()))
+        if (!ConfigManager.getLang().config.contains("enchantments." + this.getName()))
             return;
 
         config.set("name", ConfigManager.getLang().getString("enchantments." + this.getName() + ".name"));

@@ -16,6 +16,7 @@ public class OpenInventory {
      * Get the NMS container of the inventory
      *
      * @param player The player to check
+     *
      * @return The NMS container
      */
     public static Object getOpenInventory(Player player) {

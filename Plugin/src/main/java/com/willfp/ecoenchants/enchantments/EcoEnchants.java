@@ -260,6 +260,7 @@ public class EcoEnchants {
      * Gets {@link EcoEnchant} from {@link Enchantment}
      *
      * @param enchantment The enchantment
+     *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getFromEnchantment(Enchantment enchantment) {
@@ -270,6 +271,7 @@ public class EcoEnchants {
      * Get {@link EcoEnchant} matching display name
      *
      * @param name The display name to search for
+     *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByName(String name) {
@@ -281,6 +283,7 @@ public class EcoEnchants {
      * Get {@link EcoEnchant} matching permission name
      *
      * @param permissionName The permission name to search for
+     *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByPermission(String permissionName) {
@@ -292,6 +295,7 @@ public class EcoEnchants {
      * Get {@link EcoEnchant} matching key
      *
      * @param key The NamespacedKey to search for
+     *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByKey(NamespacedKey key) {
@@ -304,6 +308,7 @@ public class EcoEnchants {
      *
      * @param item The {@link ItemStack} to check
      * @param type The {@link com.willfp.ecoenchants.enchantments.EcoEnchant.EnchantmentType} to match
+     *
      * @return True if has, false if doesn't have.
      */
     public static boolean hasAnyOfType(ItemStack item, EcoEnchant.EnchantmentType type) {

@@ -29,6 +29,7 @@ public class BlockUtils {
      * @param start            The initial block
      * @param allowedMaterials A list of all valid {@link Material}s
      * @param limit            The maximum size of vein to return
+     *
      * @return A set of all {@link Block}s
      */
     public static Set<Block> getVein(Block start, List<Material> allowedMaterials, int limit) {

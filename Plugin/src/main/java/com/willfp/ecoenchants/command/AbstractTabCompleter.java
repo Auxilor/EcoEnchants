@@ -18,10 +18,10 @@ public abstract class AbstractTabCompleter implements TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!command.getName().equalsIgnoreCase(this.command.getName()))
+        if (!command.getName().equalsIgnoreCase(this.command.getName()))
             return null;
 
-        if(!sender.hasPermission(this.command.getPermission()))
+        if (!sender.hasPermission(this.command.getPermission()))
             return null;
 
         return onTab(sender, Arrays.asList(args));

@@ -80,6 +80,7 @@ public class Prerequisite {
      * Check if all prerequisites in array are met
      *
      * @param prerequisites A primitive array of prerequisites to check
+     *
      * @return If all the prerequisites are met
      */
     public static boolean areMet(Prerequisite[] prerequisites) {

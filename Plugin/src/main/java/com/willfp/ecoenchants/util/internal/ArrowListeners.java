@@ -17,23 +17,23 @@ import java.util.Map;
 public class ArrowListeners implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLaunch(ProjectileLaunchEvent event) {
-        if(!(event.getEntity() instanceof Arrow))
+        if (!(event.getEntity() instanceof Arrow))
             return;
-        if(!(event.getEntity().getShooter() instanceof LivingEntity))
+        if (!(event.getEntity().getShooter() instanceof LivingEntity))
             return;
 
         Arrow arrow = (Arrow) event.getEntity();
         LivingEntity entity = (LivingEntity) arrow.getShooter();
 
-        if(entity.getEquipment() == null)
+        if (entity.getEquipment() == null)
             return;
 
         ItemStack item = entity.getEquipment().getItemInMainHand();
 
-        if(item == null) return;
-        if(item.getType().equals(Material.AIR)) return;
-        if(!item.hasItemMeta()) return;
-        if(item.getItemMeta() == null) return;
+        if (item == null) return;
+        if (item.getType().equals(Material.AIR)) return;
+        if (!item.hasItemMeta()) return;
+        if (item.getItemMeta() == null) return;
 
         Map<Enchantment, Integer> enchantments = item.getItemMeta().getEnchants();
         arrow.setMetadata("enchantments", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), enchantments));

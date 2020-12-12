@@ -40,7 +40,7 @@ public abstract class UpdatingYamlConfig {
             config.load(configFile);
 
             InputStream newIn = EcoEnchantsPlugin.getInstance().getResource(name);
-            if(newIn == null) {
+            if (newIn == null) {
                 Logger.error(name + " is null?");
                 return;
             }
@@ -48,7 +48,7 @@ public abstract class UpdatingYamlConfig {
             YamlConfiguration newConfig = new YamlConfiguration();
             newConfig.load(reader);
 
-            if(newConfig.getKeys(true).equals(config.getKeys(true)))
+            if (newConfig.getKeys(true).equals(config.getKeys(true)))
                 return;
 
             newConfig.getKeys(true).forEach((s -> {
@@ -57,9 +57,9 @@ public abstract class UpdatingYamlConfig {
                 }
             }));
 
-            if(this.removeUnused) {
+            if (this.removeUnused) {
                 config.getKeys(true).forEach((s -> {
-                    if(!newConfig.getKeys(true).contains(s)) {
+                    if (!newConfig.getKeys(true).contains(s)) {
                         config.set(s, null);
                     }
                 }));

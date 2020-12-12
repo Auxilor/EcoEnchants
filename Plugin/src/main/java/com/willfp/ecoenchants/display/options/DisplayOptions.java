@@ -1,11 +1,7 @@
 package com.willfp.ecoenchants.display.options;
 
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.display.options.sorting.AlphabeticSorter;
-import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
-import com.willfp.ecoenchants.display.options.sorting.LengthSorter;
-import com.willfp.ecoenchants.display.options.sorting.TypeAlphabeticSorter;
-import com.willfp.ecoenchants.display.options.sorting.TypeLengthSorter;
+import com.willfp.ecoenchants.display.options.sorting.*;
 
 public class DisplayOptions {
     private EnchantmentSorter sorter;

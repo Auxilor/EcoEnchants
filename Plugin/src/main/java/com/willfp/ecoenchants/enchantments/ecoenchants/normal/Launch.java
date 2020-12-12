@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+
 public class Launch extends EcoEnchant {
     public Launch() {
         super(
@@ -20,22 +21,22 @@ public class Launch extends EcoEnchant {
     // START OF LISTENERS
     @EventHandler
     public void onFireworkUse(PlayerInteractEvent event) {
-        if(event.getItem() == null) return;
+        if (event.getItem() == null) return;
 
-        if(!event.getItem().getType().equals(Material.FIREWORK_ROCKET))
+        if (!event.getItem().getType().equals(Material.FIREWORK_ROCKET))
             return;
 
-        if(!event.getAction().equals(Action.RIGHT_CLICK_AIR))
+        if (!event.getAction().equals(Action.RIGHT_CLICK_AIR))
             return;
 
         Player player = event.getPlayer();
 
-        if(!player.isGliding())
+        if (!player.isGliding())
             return;
 
-        if(!EnchantChecks.chestplate(player, this)) return;
+        if (!EnchantChecks.chestplate(player, this)) return;
 
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getChestplateLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

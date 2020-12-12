@@ -30,7 +30,7 @@ public class CommandEnchantinfo extends AbstractCommand {
 
     @Override
     public void onExecute(CommandSender sender, List<String> args) {
-        if(args.size() == 0) {
+        if (args.size() == 0) {
             sender.sendMessage(ConfigManager.getLang().getMessage("missing-enchant"));
             return;
         }
@@ -44,7 +44,7 @@ public class CommandEnchantinfo extends AbstractCommand {
 
         EcoEnchant enchantment = EcoEnchants.getByName(searchName);
 
-        if(enchantment == null || !enchantment.isEnabled()) {
+        if (enchantment == null || !enchantment.isEnabled()) {
             String message = ConfigManager.getLang().getMessage("not-found").replace("%name%", searchName);
             sender.sendMessage(message);
             return;
@@ -55,14 +55,14 @@ public class CommandEnchantinfo extends AbstractCommand {
         Set<Enchantment> conflicts = enchantment.getConflicts();
 
         new HashSet<>(conflicts).forEach(enchantment1 -> {
-            if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
-                if(!EcoEnchants.getFromEnchantment(enchantment1).isEnabled())
+            if (EcoEnchants.getFromEnchantment(enchantment1) != null) {
+                if (!EcoEnchants.getFromEnchantment(enchantment1).isEnabled())
                     conflicts.remove(enchantment1);
             }
         });
 
         conflicts.forEach((enchantment1 -> {
-            if(EcoEnchants.getFromEnchantment(enchantment1) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment1) != null) {
                 conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getName());
             } else {
                 conflictNames.add(ConfigManager.getLang().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
@@ -74,8 +74,8 @@ public class CommandEnchantinfo extends AbstractCommand {
             conflictNamesBuilder.append(name1).append(", ");
         });
         String allConflicts = conflictNamesBuilder.toString();
-        if(allConflicts.length() >= 2) {
-            allConflicts = allConflicts.substring(0, allConflicts.length() -2);
+        if (allConflicts.length() >= 2) {
+            allConflicts = allConflicts.substring(0, allConflicts.length() - 2);
         } else {
             allConflicts = StringUtils.translate(ConfigManager.getLang().getString("no-conflicts"));
         }
@@ -84,7 +84,7 @@ public class CommandEnchantinfo extends AbstractCommand {
 
         Set<String> applicableItemsSet = new HashSet<>();
 
-        if(ConfigManager.getConfig().getBool("commands.enchantinfo.show-target-group")) {
+        if (ConfigManager.getConfig().getBool("commands.enchantinfo.show-target-group")) {
             enchantment.getRawTargets().forEach(target -> {
                 String targetName = target.getName();
                 targetName = targetName.toLowerCase();
@@ -107,7 +107,7 @@ public class CommandEnchantinfo extends AbstractCommand {
             targetNamesBuilder.append(name1).append(", ");
         });
         String allTargets = targetNamesBuilder.toString();
-        if(allTargets.length() >= 2) {
+        if (allTargets.length() >= 2) {
             allTargets = allTargets.substring(0, allTargets.length() - 2);
         } else {
             allTargets = StringUtils.translate(ConfigManager.getLang().getString("no-targets"));

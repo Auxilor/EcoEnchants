@@ -3,7 +3,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot:1.16.1-R0.1-SNAPSHOT'
 }
 
-jar{
+jar {
     archiveFileName = project.name + " v" + findProperty("version") + ".jar"
 }
 

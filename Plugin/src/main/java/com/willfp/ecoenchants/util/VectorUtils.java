@@ -10,6 +10,7 @@ public class VectorUtils {
      * If vector has all components as finite
      *
      * @param vector The vector to check
+     *
      * @return If the vector is finite
      */
     public static boolean isFinite(Vector vector) {
@@ -29,6 +30,7 @@ public class VectorUtils {
      * For example: -0.8, 0.01, -0.2 would become -1, 0, 0
      *
      * @param vec The vector to simplify
+     *
      * @return The vector, simplified
      */
     public static Vector simplifyVector(Vector vec) {
@@ -61,6 +63,7 @@ public class VectorUtils {
      * Get circle as relative vectors
      *
      * @param radius The radius
+     *
      * @return An array of {@link Vector}s
      */
     public static Vector[] getCircle(int radius) {
@@ -90,6 +93,7 @@ public class VectorUtils {
      * Get square as relative vectors
      *
      * @param radius The radius of the square
+     *
      * @return An array of {@link Vector}s
      */
     public static Vector[] getSquare(int radius) {
@@ -114,6 +118,7 @@ public class VectorUtils {
      * Get cube as relative vectors
      *
      * @param radius The radius of the cube
+     *
      * @return An array of {@link Vector}s
      */
     public static Vector[] getCube(int radius) {

@@ -12,7 +12,7 @@ public class EnchantmentUtils {
     public static boolean passedChance(EcoEnchant enchantment, int level) {
         return NumberUtils.randFloat(0, 1) < ((enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") * level) / 100);
     }
-    
+
     public static void registerPlaceholders(EcoEnchant enchantment) {
 
         PlaceholderManager.registerPlaceholder(
@@ -28,13 +28,13 @@ public class EnchantmentUtils {
             );
         });
 
-        if(enchantment.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
+        if (enchantment.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(enchantment.getPermissionName() + "_" + "chance_per_level", (player) -> NumberUtils.format(enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level")))
             );
         }
 
-        if(enchantment.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
+        if (enchantment.getConfig().config.get(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(enchantment.getPermissionName() + "_" + "multiplier", (player) -> NumberUtils.format(enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier")))
             );
@@ -43,7 +43,7 @@ public class EnchantmentUtils {
             );
         }
 
-        if(enchantment instanceof Spell) {
+        if (enchantment instanceof Spell) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(enchantment.getPermissionName() + "_" + "cooldown", (player) -> NumberUtils.format(Spell.getCooldown((Spell) enchantment, player)), true)
             );

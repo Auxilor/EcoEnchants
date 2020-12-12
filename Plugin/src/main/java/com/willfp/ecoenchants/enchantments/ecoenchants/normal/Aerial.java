@@ -21,16 +21,16 @@ public class Aerial extends EcoEnchant {
 
     @Override
     public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
-        if(!(event.getProjectile() instanceof Arrow)) return;
+        if (!(event.getProjectile() instanceof Arrow)) return;
 
-        if(shooter.isOnGround()) return;
+        if (shooter.isOnGround()) return;
 
         event.getProjectile().setMetadata("shot-in-air", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
     }
 
     @Override
     public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!arrow.hasMetadata("shot-in-air")) return;
+        if (!arrow.hasMetadata("shot-in-air")) return;
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

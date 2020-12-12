@@ -23,16 +23,18 @@ public abstract class AbstractPacketAdapter extends PacketAdapter {
         this.type = type;
     }
 
-    public void onReceive(PacketContainer packet) {}
+    public void onReceive(PacketContainer packet) {
+    }
 
-    public void onSend(PacketContainer packet) {}
+    public void onSend(PacketContainer packet) {
+    }
 
     @Override
     public final void onPacketReceiving(PacketEvent event) {
-        if(event.getPacket() == null)
+        if (event.getPacket() == null)
             return;
 
-        if(!event.getPacket().getType().equals(type))
+        if (!event.getPacket().getType().equals(type))
             return;
 
         onReceive(event.getPacket());
@@ -40,17 +42,17 @@ public abstract class AbstractPacketAdapter extends PacketAdapter {
 
     @Override
     public final void onPacketSending(PacketEvent event) {
-        if(event.getPacket() == null)
+        if (event.getPacket() == null)
             return;
 
-        if(!event.getPacket().getType().equals(type))
+        if (!event.getPacket().getType().equals(type))
             return;
 
         onSend(event.getPacket());
     }
 
     public final void register() {
-        if(!ProtocolLibrary.getProtocolManager().getPacketListeners().contains(this)) {
+        if (!ProtocolLibrary.getProtocolManager().getPacketListeners().contains(this)) {
             ProtocolLibrary.getProtocolManager().addPacketListener(this);
         }
     }

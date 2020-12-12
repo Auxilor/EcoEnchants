@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.util.LightningUtils;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Zeus extends EcoEnchant {
     public Zeus() {
         super(
@@ -19,7 +20,7 @@ public class Zeus extends EcoEnchant {
 
     @Override
     public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level))
             return;
 
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "lightning-damage");

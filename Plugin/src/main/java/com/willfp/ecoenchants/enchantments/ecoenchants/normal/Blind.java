@@ -23,7 +23,7 @@ public class Blind extends EcoEnchant {
     @Override
     public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level))
             return;
 
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "duration-per-level");

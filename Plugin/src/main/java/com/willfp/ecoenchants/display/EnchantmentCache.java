@@ -30,7 +30,7 @@ public class EnchantmentCache {
             String color;
             EcoEnchant.EnchantmentType type;
             List<String> description;
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
                 description = ecoEnchant.getDescription();
                 name = ecoEnchant.getName();
@@ -49,9 +49,9 @@ public class EnchantmentCache {
 
             color = type.getColor();
 
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
-                if(rarity != null) {
+                if (rarity != null) {
                     if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
                         color = rarity.getCustomColor();
                     }

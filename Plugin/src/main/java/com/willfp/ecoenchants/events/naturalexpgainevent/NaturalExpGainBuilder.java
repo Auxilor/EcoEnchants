@@ -36,8 +36,8 @@ class NaturalExpGainBuilder {
     }
 
     public void push() {
-        if(this.event == null) return;
-        if(this.cancelled) return;
+        if (this.event == null) return;
+        if (this.cancelled) return;
 
         NaturalExpGainEvent naturalExpGainEvent = new NaturalExpGainEvent(event);
 

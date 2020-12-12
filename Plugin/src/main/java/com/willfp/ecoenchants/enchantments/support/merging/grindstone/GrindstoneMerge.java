@@ -17,16 +17,16 @@ public class GrindstoneMerge {
 
         Map<Enchantment, Integer> toKeep = new HashMap<>();
 
-        if(top != null) {
-            if(top.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (top != null) {
+            if (top.getItemMeta() instanceof EnchantmentStorageMeta) {
                 topEnchants = new HashMap<>(((EnchantmentStorageMeta) top.getItemMeta()).getStoredEnchants());
             } else {
                 topEnchants = new HashMap<>(top.getEnchantments());
             }
         }
 
-        if(bottom != null) {
-            if(bottom.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (bottom != null) {
+            if (bottom.getItemMeta() instanceof EnchantmentStorageMeta) {
                 bottomEnchants = new HashMap<>(((EnchantmentStorageMeta) bottom.getItemMeta()).getStoredEnchants());
             } else {
                 bottomEnchants = new HashMap<>(bottom.getEnchantments());
@@ -34,19 +34,19 @@ public class GrindstoneMerge {
         }
 
         bottomEnchants.forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
-                if(!ecoEnchant.isGrindstoneable()) toKeep.putIfAbsent(enchantment, integer);
+                if (!ecoEnchant.isGrindstoneable()) toKeep.putIfAbsent(enchantment, integer);
             } else {
-                if(enchantment.isCursed()) toKeep.putIfAbsent(enchantment, integer);
+                if (enchantment.isCursed()) toKeep.putIfAbsent(enchantment, integer);
             }
         }));
         topEnchants.forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
-                if(!ecoEnchant.isGrindstoneable()) toKeep.putIfAbsent(enchantment, integer);
+                if (!ecoEnchant.isGrindstoneable()) toKeep.putIfAbsent(enchantment, integer);
             } else {
-                if(enchantment.isCursed()) toKeep.putIfAbsent(enchantment, integer);
+                if (enchantment.isCursed()) toKeep.putIfAbsent(enchantment, integer);
             }
         }));
 

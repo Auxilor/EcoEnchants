@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 public class Bleed extends EcoEnchant {
     public Bleed() {
         super(
@@ -26,7 +27,7 @@ public class Bleed extends EcoEnchant {
         if (attacker instanceof Player && Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
             return;
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level))
             return;
 
         double bleedDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bleed-damage");
@@ -44,7 +45,7 @@ public class Bleed extends EcoEnchant {
 
                 victim.damage(bleedDamage);
 
-                if(currentBleedCount.get() >= finalBleedCount) this.cancel();
+                if (currentBleedCount.get() >= finalBleedCount) this.cancel();
             }
         }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 0, 10);
     }

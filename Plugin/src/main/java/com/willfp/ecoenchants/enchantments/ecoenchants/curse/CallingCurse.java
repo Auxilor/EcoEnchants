@@ -24,6 +24,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
                 "calling_curse", EnchantmentType.CURSE
         );
     }
+
     private final HashMap<Player, Integer> players = new HashMap<>();
 
     @EventHandler
@@ -45,7 +46,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
         players.clear();
         EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
-            if(level > 0) {
+            if (level > 0) {
                 players.put(player, level);
             }
         });
@@ -55,12 +56,12 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
     public void run() {
         players.forEach((player, level) -> {
             double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
-            if(this.getDisabledWorlds().contains(player.getWorld())) return;
+            if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, distance, distance)) {
-                if(!(e instanceof Monster)) continue;
+                if (!(e instanceof Monster)) continue;
 
-                if(e instanceof PigZombie) {
+                if (e instanceof PigZombie) {
                     ((PigZombie) e).setAngry(true);
                 }
 
@@ -68,7 +69,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
 
                 Vector vector = player.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
 
-                if(VectorUtils.isFinite(vector)) {
+                if (VectorUtils.isFinite(vector)) {
                     e.setVelocity(vector);
                 }
             }

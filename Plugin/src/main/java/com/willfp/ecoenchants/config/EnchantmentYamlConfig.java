@@ -23,9 +23,9 @@ public abstract class EnchantmentYamlConfig {
     /**
      * Create new config yml
      *
-     * @param name The config name
+     * @param name   The config name
      * @param plugin The class of the main class of plugin or extension
-     * @param type The enchantment type
+     * @param type   The enchantment type
      */
     public EnchantmentYamlConfig(String name, Class<?> plugin, EcoEnchant.EnchantmentType type) {
         this.name = name;
@@ -33,7 +33,7 @@ public abstract class EnchantmentYamlConfig {
         this.type = type;
 
         File basedir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "enchants/");
-        if(!basedir.exists()) basedir.mkdirs();
+        if (!basedir.exists()) basedir.mkdirs();
 
         File dir = new File(basedir, type.getName() + "/");
         if (!dir.exists()) {
@@ -58,7 +58,7 @@ public abstract class EnchantmentYamlConfig {
     private void saveResource() {
         String resourcePath = "/enchants/" + type.getName() + "/" + name + ".yml";
 
-        InputStream in =  source.getResourceAsStream(resourcePath);
+        InputStream in = source.getResourceAsStream(resourcePath);
 
         File outFile = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath);
         int lastIndex = resourcePath.lastIndexOf('/');
@@ -79,7 +79,8 @@ public abstract class EnchantmentYamlConfig {
                 out.close();
                 in.close();
             }
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 
     private void createFile() {
@@ -91,13 +92,13 @@ public abstract class EnchantmentYamlConfig {
             config.load(configFile);
 
             String resourcePath = "/enchants/" + type.getName() + "/" + name + ".yml";
-            InputStream newIn =  source.getResourceAsStream(resourcePath);
+            InputStream newIn = source.getResourceAsStream(resourcePath);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));
             YamlConfiguration newConfig = new YamlConfiguration();
             newConfig.load(reader);
 
-            if(newConfig.getKeys(true).equals(config.getKeys(true)))
+            if (newConfig.getKeys(true).equals(config.getKeys(true)))
                 return;
 
             newConfig.getKeys(true).forEach((s -> {
@@ -107,7 +108,7 @@ public abstract class EnchantmentYamlConfig {
             }));
 
             config.getKeys(true).forEach((s -> {
-                if(!newConfig.getKeys(true).contains(s)) {
+                if (!newConfig.getKeys(true).contains(s)) {
                     config.set(s, null);
                 }
             }));

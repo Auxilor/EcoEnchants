@@ -37,7 +37,7 @@ public abstract class Artifact extends EcoEnchant {
     protected Artifact(String key, Prerequisite... prerequisites) {
         super(key, EnchantmentType.ARTIFACT, prerequisites);
 
-        if(!Prerequisite.areMet(prerequisites)) {
+        if (!Prerequisite.areMet(prerequisites)) {
             HandlerList.unregisterAll(this); // Prevent events firing
             return;
         }
@@ -63,9 +63,10 @@ public abstract class Artifact extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if(!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase())) return;
+        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase()))
+            return;
 
-        if(!EnchantChecks.mainhand(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) return;
 
         int amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount");
         block.getWorld().spawnParticle(particle, block.getLocation().add(0.5, 0.5, 0.5), amount, 0.4, 0.4, 0.4, 0, extra, false);
@@ -75,7 +76,7 @@ public abstract class Artifact extends EcoEnchant {
     public void onElytra(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if(!player.isGliding()) return;
+        if (!player.isGliding()) return;
 
         if (!EnchantChecks.chestplate(player, this)) return;
 
@@ -95,8 +96,8 @@ public abstract class Artifact extends EcoEnchant {
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-        if(!(event.getDamager() instanceof Player)) return;
-        if(!(event.getEntity() instanceof LivingEntity)) return;
+        if (!(event.getDamager() instanceof Player)) return;
+        if (!(event.getEntity() instanceof LivingEntity)) return;
 
         Player player = (Player) event.getDamager();
         LivingEntity entity = (LivingEntity) event.getEntity();
@@ -114,7 +115,7 @@ public abstract class Artifact extends EcoEnchant {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for(int i = 0; i<3; i++) {
+                for (int i = 0; i < 3; i++) {
                     if (yAtomic.get() > entity.getHeight()) this.cancel();
                     yAtomic.addAndGet(yDelta);
                     double y = yAtomic.get();
@@ -133,12 +134,12 @@ public abstract class Artifact extends EcoEnchant {
         if (!(event.getEntity() instanceof AbstractArrow))
             return;
 
-        if(!(event.getEntity().getShooter() instanceof Player)) return;
+        if (!(event.getEntity().getShooter() instanceof Player)) return;
         Player player = (Player) event.getEntity().getShooter();
 
         AbstractArrow entity = (AbstractArrow) event.getEntity();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(entity instanceof Trident) {
+        if (entity instanceof Trident) {
             item = TridentStack.getTridentStack((Trident) entity);
         }
 
@@ -148,16 +149,16 @@ public abstract class Artifact extends EcoEnchant {
 
         int noteColor;
         AtomicDouble color = new AtomicDouble(0);
-        if(particle.equals(Particle.NOTE)) {
+        if (particle.equals(Particle.NOTE)) {
             noteColor = NumberUtils.randInt(0, 24);
-            color.set((double) noteColor/24);
+            color.set((double) noteColor / 24);
         }
         final double finalColor = color.get();
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
+                if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
                 entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
             }
         }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 4, ticks);

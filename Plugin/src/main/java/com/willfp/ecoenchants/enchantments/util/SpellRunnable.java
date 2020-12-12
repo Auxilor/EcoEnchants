@@ -6,7 +6,8 @@ import com.willfp.ecoenchants.util.interfaces.Callable;
 public class SpellRunnable {
     private final Spell spell;
     private long endTime = 0;
-    private Callable callable = () -> {};
+    private Callable callable = () -> {
+    };
 
     public SpellRunnable(Spell spell) {
         this.spell = spell;
@@ -26,7 +27,7 @@ public class SpellRunnable {
     }
 
     public void updateEndTime() {
-        endTime = System.currentTimeMillis() + (spell.getCooldownTime()* 1000L);
+        endTime = System.currentTimeMillis() + (spell.getCooldownTime() * 1000L);
     }
 
     public void setTask(Callable callable) {

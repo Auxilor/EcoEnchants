@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 public class Flinch extends EcoEnchant {
     public Flinch() {
         super(
@@ -22,7 +23,7 @@ public class Flinch extends EcoEnchant {
     public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level))
             return;
 
         int finalDuration = duration * level;

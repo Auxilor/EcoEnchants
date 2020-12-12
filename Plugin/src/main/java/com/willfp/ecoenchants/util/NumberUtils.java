@@ -30,6 +30,7 @@ public class NumberUtils {
      *
      * @param input The input value
      * @param bias  The bias between -1 and 1, where higher values bias input values to lower output values
+     *
      * @return The biased output
      */
     public static double bias(double input, double bias) {
@@ -43,6 +44,7 @@ public class NumberUtils {
      *
      * @param toChange The value to test
      * @param limit    The maximum
+     *
      * @return The new value
      */
     public static int equalIfOver(int toChange, int limit) {
@@ -57,6 +59,7 @@ public class NumberUtils {
      *
      * @param toChange The value to test
      * @param limit    The maximum
+     *
      * @return The new value
      */
     public static double equalIfOver(double toChange, double limit) {
@@ -70,6 +73,7 @@ public class NumberUtils {
      * Get Roman Numeral from number
      *
      * @param number The number to convert
+     *
      * @return The number, converted to a roman numeral
      */
     public static String toNumeral(int number) {
@@ -87,6 +91,7 @@ public class NumberUtils {
      *
      * @param min Minimum
      * @param max Maximum
+     *
      * @return Random integer
      */
     public static int randInt(int min, int max) {
@@ -98,6 +103,7 @@ public class NumberUtils {
      *
      * @param min Minimum
      * @param max Maximum
+     *
      * @return Random double
      */
     public static double randFloat(double min, double max) {
@@ -111,6 +117,7 @@ public class NumberUtils {
      * @param minimum Minimum
      * @param maximum Maximum
      * @param peak    Peak
+     *
      * @return Random double
      */
     public static double triangularDistribution(double minimum, double maximum, double peak) {
@@ -127,6 +134,7 @@ public class NumberUtils {
      * Get Log base 2 of a number
      *
      * @param N The number
+     *
      * @return The result
      */
     public static int log2(int N) {
@@ -137,6 +145,7 @@ public class NumberUtils {
      * Format double to string
      *
      * @param toFormat The number to format
+     *
      * @return Formatted
      */
     public static String format(double toFormat) {

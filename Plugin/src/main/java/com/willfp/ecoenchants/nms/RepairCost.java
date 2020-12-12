@@ -16,6 +16,7 @@ public class RepairCost {
      * Get the rework penalty of an ItemStack
      *
      * @param itemStack The item to check
+     *
      * @return The anvil rework penalty
      */
     public static int getRepairCost(ItemStack itemStack) {
@@ -27,6 +28,7 @@ public class RepairCost {
      *
      * @param itemStack The item to set
      * @param cost      The penalty to set
+     *
      * @return The ItemStack, with the repair cost set
      */
     public static ItemStack setRepairCost(ItemStack itemStack, int cost) {

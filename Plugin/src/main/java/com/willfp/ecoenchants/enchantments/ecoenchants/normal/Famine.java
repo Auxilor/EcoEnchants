@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 public class Famine extends EcoEnchant {
     public Famine() {
         super(
@@ -21,13 +22,13 @@ public class Famine extends EcoEnchant {
 
     @Override
     public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if(attacker instanceof Player) {
+        if (attacker instanceof Player) {
             if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
                 return;
         }
 
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level))
             return;
 
         victim.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, level * 40, level));

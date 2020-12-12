@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
+
 public class FragilityCurse extends EcoEnchant {
     public FragilityCurse() {
         super(
@@ -22,7 +23,7 @@ public class FragilityCurse extends EcoEnchant {
 
         if (!EnchantChecks.item(item, this)) return;
 
-        if(this.getDisabledWorlds().contains(event.getPlayer().getWorld())) return;
+        if (this.getDisabledWorlds().contains(event.getPlayer().getWorld())) return;
 
         int min = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "minimum-extra-durability");
         int max = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "maximum-extra-durability");

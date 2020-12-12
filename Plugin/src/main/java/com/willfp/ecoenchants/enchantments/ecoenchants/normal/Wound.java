@@ -23,7 +23,7 @@ public class Wound extends EcoEnchant {
 
     @Override
     public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level))
             return;
 
         double bleedDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bleed-damage");
@@ -41,7 +41,7 @@ public class Wound extends EcoEnchant {
 
                 victim.damage(bleedDamage);
 
-                if(currentBleedCount.get() >= finalBleedCount) this.cancel();
+                if (currentBleedCount.get() >= finalBleedCount) this.cancel();
             }
         }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 0, 10);
     }

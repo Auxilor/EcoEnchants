@@ -21,11 +21,11 @@ public class EntityDeathByEntityListeners implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if(!(event.getEntity() instanceof LivingEntity)) return;
+        if (!(event.getEntity() instanceof LivingEntity)) return;
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if(victim.getHealth() > event.getFinalDamage()) return;
+        if (victim.getHealth() > event.getFinalDamage()) return;
 
         EntityDeathByEntityBuilder builtEvent = new EntityDeathByEntityBuilder();
         builtEvent.setVictim(victim);
@@ -51,12 +51,12 @@ public class EntityDeathByEntityListeners implements Listener {
         EntityDeathByEntityBuilder builtEvent;
 
         events.forEach((deathByEntityEvent) -> {
-            if(deathByEntityEvent.getVictim().equals(victim)) {
+            if (deathByEntityEvent.getVictim().equals(victim)) {
                 atomicBuiltEvent.set(deathByEntityEvent);
             }
         });
 
-        if(atomicBuiltEvent.get() == null) return;
+        if (atomicBuiltEvent.get() == null) return;
 
         builtEvent = atomicBuiltEvent.get();
         events.remove(builtEvent);

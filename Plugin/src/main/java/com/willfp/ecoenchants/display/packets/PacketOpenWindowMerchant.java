@@ -26,7 +26,7 @@ public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
 
         recipes = recipes.stream().peek(merchantRecipe -> {
             try {
-                if(!EnchantmentTarget.ALL.getMaterials().contains(merchantRecipe.getResult().getType()))
+                if (!EnchantmentTarget.ALL.getMaterials().contains(merchantRecipe.getResult().getType()))
                     return;
 
                 // Enables removing final modifier

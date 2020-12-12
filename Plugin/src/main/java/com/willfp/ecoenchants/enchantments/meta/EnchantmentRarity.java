@@ -26,12 +26,13 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Create new EnchantmentRarity
-     * @param name The name of the rarity
-     * @param probability The probability
-     * @param minimumLevel The minimum xp level
+     *
+     * @param name                The name of the rarity
+     * @param probability         The probability
+     * @param minimumLevel        The minimum xp level
      * @param villagerProbability The probability of a villager obtaining an enchantment with this rarity
-     * @param lootProbability The probability of an item in a loot chest having an enchantment with this rarity
-     * @param customColor The custom display color, or null if not enabled
+     * @param lootProbability     The probability of an item in a loot chest having an enchantment with this rarity
+     * @param customColor         The custom display color, or null if not enabled
      */
     public EnchantmentRarity(String name, double probability, int minimumLevel, double villagerProbability, double lootProbability, String customColor) {
         this.name = name;
@@ -73,6 +74,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get the name of the rarity
+     *
      * @return The name
      */
     public String getName() {
@@ -81,6 +83,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Is custom color enabled
+     *
      * @return If has enabled custom color
      */
     public boolean hasCustomColor() {
@@ -89,6 +92,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get custom color
+     *
      * @return The custom color
      */
     public String getCustomColor() {
@@ -97,6 +101,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get the probability of obtaining enchantment with this rarity from an enchanting table
+     *
      * @return The probability as a percentage
      */
     public double getProbability() {
@@ -105,6 +110,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get the probability of obtaining enchantment with this rarity from a villager
+     *
      * @return The probability as a percentage
      */
     public double getVillagerProbability() {
@@ -113,6 +119,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get the probability of obtaining enchantment with this rarity from a loot chest
+     *
      * @return The probability as a percentage
      */
     public double getLootProbability() {
@@ -121,6 +128,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get the minimum level required to obtain enchantment with this rarity from an enchanting table
+     *
      * @return The minimum level
      */
     public int getMinimumLevel() {
@@ -129,7 +137,9 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get EnchantmentRarity matching name
+     *
      * @param name The name to search for
+     *
      * @return The matching EnchantmentRarity, or null if not found
      */
     public static EnchantmentRarity getByName(String name) {
@@ -150,7 +160,7 @@ public class EnchantmentRarity implements Registerable {
             double villagerProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".villager-probability");
             double lootProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".loot-probability");
             String customColor = null;
-            if(ConfigManager.getRarity().getBool("rarities." + rarity + ".custom-color.enabled")) {
+            if (ConfigManager.getRarity().getBool("rarities." + rarity + ".custom-color.enabled")) {
                 customColor = StringUtils.translate(ConfigManager.getRarity().getString("rarities." + rarity + ".custom-color.color"));
             }
 
@@ -160,6 +170,7 @@ public class EnchantmentRarity implements Registerable {
 
     /**
      * Get all rarities
+     *
      * @return A set of all rarities
      */
     public static Set<EnchantmentRarity> getAll() {

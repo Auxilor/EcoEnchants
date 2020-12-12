@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
 public class Cleave extends EcoEnchant {
     public Cleave() {
         super(
@@ -20,10 +21,10 @@ public class Cleave extends EcoEnchant {
 
     @Override
     public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if(victim.hasMetadata("cleaved"))
+        if (victim.hasMetadata("cleaved"))
             return;
 
-        if(attacker instanceof Player) {
+        if (attacker instanceof Player) {
             if (Cooldown.getCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
                 return;
         }

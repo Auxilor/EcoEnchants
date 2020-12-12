@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 public class Frozen extends EcoEnchant {
     public Frozen() {
         super(
@@ -36,10 +37,10 @@ public class Frozen extends EcoEnchant {
 
         if (points == 0)
             return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
 
-        if(!EnchantmentUtils.passedChance(this, points))
+        if (!EnchantmentUtils.passedChance(this, points))
             return;
 
         int divisor = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "points-per-level");

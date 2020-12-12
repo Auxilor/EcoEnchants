@@ -17,6 +17,7 @@ public class Cooldown {
      * Get a player's attack cooldown
      *
      * @param player The player to check
+     *
      * @return A value between 0 and 1, with 1 representing max strength
      */
     public static double getCooldown(Player player) {

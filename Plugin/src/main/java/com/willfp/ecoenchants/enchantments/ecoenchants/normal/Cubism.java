@@ -17,7 +17,7 @@ public class Cubism extends EcoEnchant {
 
     @Override
     public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if(!(victim instanceof Slime)) return;
+        if (!(victim instanceof Slime)) return;
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

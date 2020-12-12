@@ -23,28 +23,29 @@ public class AnvilMerge {
     /**
      * Merge items in anvil
      *
-     * @param left The {@link ItemStack} on the left of the anvil
-     * @param right The {@link ItemStack} in the middle of the anvil
-     * @param old The previous {@link ItemStack} result
-     * @param name The anvil display name
+     * @param left   The {@link ItemStack} on the left of the anvil
+     * @param right  The {@link ItemStack} in the middle of the anvil
+     * @param old    The previous {@link ItemStack} result
+     * @param name   The anvil display name
      * @param player The player merging (for permissions)
+     *
      * @return The result, stored as a {@link Pair} of {@link ItemStack} and {@link Integer}.
      */
     public static Pair<ItemStack, Integer> doMerge(ItemStack left, ItemStack right, ItemStack old, String name, Player player) {
         // Here so it can be accessed later (scope)
 
         int outDamage = -1;
-        if(old != null) {
+        if (old != null) {
             if (old.getItemMeta() instanceof Damageable) {
                 outDamage = ((Damageable) old.getItemMeta()).getDamage();
             }
         }
 
-        if(left == null) return new Pair<>(null, null);
+        if (left == null) return new Pair<>(null, null);
 
-        if(left.getEnchantments().containsKey(EcoEnchants.PERMANENCE_CURSE)) return new Pair<>(null, null);
+        if (left.getEnchantments().containsKey(EcoEnchants.PERMANENCE_CURSE)) return new Pair<>(null, null);
 
-        if(!EnchantmentTarget.ALL.getMaterials().contains(left.getType()) || right == null || !EnchantmentTarget.ALL.getMaterials().contains(right.getType())) {
+        if (!EnchantmentTarget.ALL.getMaterials().contains(left.getType()) || right == null || !EnchantmentTarget.ALL.getMaterials().contains(right.getType())) {
             ItemStack out = left.clone();
             ItemMeta outMeta = out.getItemMeta();
             assert outMeta != null;
@@ -52,12 +53,12 @@ public class AnvilMerge {
 
             outMeta.setDisplayName(name);
 
-            if(left.getItemMeta().getDisplayName().equals(name)) {
+            if (left.getItemMeta().getDisplayName().equals(name)) {
 
-                if(left.getItemMeta() instanceof Damageable) {
+                if (left.getItemMeta() instanceof Damageable) {
                     int leftDamage = ((Damageable) left.getItemMeta()).getDamage();
 
-                    if(outDamage >= leftDamage || outDamage == -1) {
+                    if (outDamage >= leftDamage || outDamage == -1) {
                         return new Pair<>(null, null);
                     } else {
                         ((Damageable) outMeta).setDamage(outDamage);
@@ -65,35 +66,36 @@ public class AnvilMerge {
                 } else {
                     return new Pair<>(null, null);
                 }
-                if(right == null) {
+                if (right == null) {
                     return new Pair<>(null, null);
                 }
             }
 
             out.setItemMeta(outMeta);
 
-            if(out.equals(left)) return new Pair<>(null, null);
+            if (out.equals(left)) return new Pair<>(null, null);
             return new Pair<>(out, 0);
         }
 
-        if(left.getItemMeta() instanceof Damageable && right.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (left.getItemMeta() instanceof Damageable && right.getItemMeta() instanceof EnchantmentStorageMeta) {
             outDamage = ((Damageable) left.getItemMeta()).getDamage();
         }
 
-        if(!left.getType().equals(right.getType()) && !(right.getItemMeta() instanceof EnchantmentStorageMeta)) return new Pair<>(null, null);
+        if (!left.getType().equals(right.getType()) && !(right.getItemMeta() instanceof EnchantmentStorageMeta))
+            return new Pair<>(null, null);
 
         HashMap<Enchantment, Integer> leftEnchants = new HashMap<>();
         HashMap<Enchantment, Integer> rightEnchants = new HashMap<>();
 
         Map<Enchantment, Integer> outEnchants = new HashMap<>();
 
-        if(left.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (left.getItemMeta() instanceof EnchantmentStorageMeta) {
             leftEnchants.putAll(((EnchantmentStorageMeta) left.getItemMeta()).getStoredEnchants());
         } else {
             leftEnchants.putAll(left.getItemMeta().getEnchants());
         }
 
-        if(right.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (right.getItemMeta() instanceof EnchantmentStorageMeta) {
             rightEnchants.putAll(((EnchantmentStorageMeta) right.getItemMeta()).getStoredEnchants());
         } else {
             rightEnchants.putAll(right.getItemMeta().getEnchants());
@@ -102,15 +104,14 @@ public class AnvilMerge {
         leftEnchants.forEach(((enchantment, integer) -> {
             int level = integer;
 
-            if(rightEnchants.containsKey(enchantment)) {
+            if (rightEnchants.containsKey(enchantment)) {
                 int rightLevel = rightEnchants.get(enchantment);
-                if(rightLevel > level) {
+                if (rightLevel > level) {
                     level = rightLevel;
-                }
-                else if(rightLevel == level) {
-                    if(rightLevel > enchantment.getMaxLevel() && ConfigManager.getConfig().getBool("anvil.allow-combining-unsafe")) {
+                } else if (rightLevel == level) {
+                    if (rightLevel > enchantment.getMaxLevel() && ConfigManager.getConfig().getBool("anvil.allow-combining-unsafe")) {
                         level++;
-                    } else if((rightLevel + 1) <= enchantment.getMaxLevel() || ConfigManager.getConfig().getBool("anvil.allow-unsafe-levels")) {
+                    } else if ((rightLevel + 1) <= enchantment.getMaxLevel() || ConfigManager.getConfig().getBool("anvil.allow-unsafe-levels")) {
                         level++;
                     }
                 }
@@ -125,21 +126,22 @@ public class AnvilMerge {
 
             EcoEnchant.EnchantmentType.getValues().forEach(enchantmentType -> {
                 EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantment);
-                if(enchant == null) return;
-                if(enchant.getType().equals(enchantmentType) && EcoEnchants.hasAnyOfType(left, enchantmentType) && enchantmentType.isSingular()) doesConflict.set(true);
+                if (enchant == null) return;
+                if (enchant.getType().equals(enchantmentType) && EcoEnchants.hasAnyOfType(left, enchantmentType) && enchantmentType.isSingular())
+                    doesConflict.set(true);
             });
 
             leftEnchants.forEach(((enchantment1, integer1) -> {
-                if(enchantment.conflictsWith(enchantment1)) doesConflict.set(true);
-                if(enchantment1.conflictsWith(enchantment)) doesConflict.set(true);
+                if (enchantment.conflictsWith(enchantment1)) doesConflict.set(true);
+                if (enchantment1.conflictsWith(enchantment)) doesConflict.set(true);
             }));
 
             boolean canEnchantItem = enchantment.canEnchantItem(left);
-            if(left.getItemMeta() instanceof EnchantmentStorageMeta) canEnchantItem = true;
+            if (left.getItemMeta() instanceof EnchantmentStorageMeta) canEnchantItem = true;
 
-            if(canEnchantItem && !doesConflict.get()) {
-                if(ConfigManager.getConfig().getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap")) {
-                    if(outEnchants.size() >= ConfigManager.getConfig().getInt("anvil.hard-cap.cap")) {
+            if (canEnchantItem && !doesConflict.get()) {
+                if (ConfigManager.getConfig().getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap")) {
+                    if (outEnchants.size() >= ConfigManager.getConfig().getInt("anvil.hard-cap.cap")) {
                         return;
                     }
                 }
@@ -148,11 +150,11 @@ public class AnvilMerge {
         }));
 
         // Test if the output is the same as left
-        if(outEnchants.equals(leftEnchants) && left.getItemMeta().getDisplayName().equals(name)) {
-            if(left.getItemMeta() instanceof Damageable) {
+        if (outEnchants.equals(leftEnchants) && left.getItemMeta().getDisplayName().equals(name)) {
+            if (left.getItemMeta() instanceof Damageable) {
                 int leftDamage = ((Damageable) left.getItemMeta()).getDamage();
 
-                if(outDamage == leftDamage) {
+                if (outDamage == leftDamage) {
                     return new Pair<>(null, null);
                 }
             }
@@ -160,7 +162,7 @@ public class AnvilMerge {
 
         ItemStack output = left.clone();
 
-        if(output.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (output.getItemMeta() instanceof EnchantmentStorageMeta) {
             EnchantmentStorageMeta meta = (EnchantmentStorageMeta) output.getItemMeta();
             meta.getStoredEnchants().forEach(((enchantment, integer) -> {
                 meta.removeStoredEnchant(enchantment);
@@ -183,7 +185,7 @@ public class AnvilMerge {
                 meta.addEnchant(enchantment, integer, ConfigManager.getConfig().getBool("anvil.allow-existing-unsafe-levels") || ConfigManager.getConfig().getBool("anvil.allow-unsafe-levels"));
             }));
 
-            if(output.getItemMeta() instanceof Damageable) {
+            if (output.getItemMeta() instanceof Damageable) {
                 ((Damageable) meta).setDamage(outDamage);
             }
 
@@ -199,21 +201,21 @@ public class AnvilMerge {
         AtomicInteger inEnchantLevels = new AtomicInteger();
 
         outEnchants.forEach(((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 outEnchantLevels.addAndGet(integer);
             }
         }));
         leftEnchants.forEach((((enchantment, integer) -> {
-            if(EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 outEnchantLevels.addAndGet(integer);
             }
         })));
 
         totalEnchantLevelDelta = Math.abs(outEnchantLevels.intValue() - inEnchantLevels.intValue());
 
-        if(output.equals(left)) return new Pair<>(null, null);
+        if (output.equals(left)) return new Pair<>(null, null);
 
-        if(ConfigManager.getConfig().getBool("anvil.cost-exponent.enabled")) {
+        if (ConfigManager.getConfig().getBool("anvil.cost-exponent.enabled")) {
             double exponent = ConfigManager.getConfig().getDouble("anvil.cost-exponent.exponent");
             int prevDelta = totalEnchantLevelDelta;
 
@@ -221,7 +223,7 @@ public class AnvilMerge {
             double modifiedCost = Math.ceil((double) totalEnchantLevelDelta * costMultiplier);
             totalEnchantLevelDelta = (int) modifiedCost;
 
-            if(prevDelta > 0 && totalEnchantLevelDelta == 0) {
+            if (prevDelta > 0 && totalEnchantLevelDelta == 0) {
                 totalEnchantLevelDelta = prevDelta;
             }
         }

@@ -3,11 +3,7 @@ package com.willfp.ecoenchants.util.internal;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -49,6 +45,7 @@ public class DropQueue {
      * Add item to queue
      *
      * @param item The item to add
+     *
      * @return The DropQueue
      */
     public DropQueue addItem(ItemStack item) {
@@ -60,6 +57,7 @@ public class DropQueue {
      * Add multiple items to queue
      *
      * @param itemStacks The items to add
+     *
      * @return The DropQueue
      */
     public DropQueue addItems(Collection<ItemStack> itemStacks) {
@@ -71,6 +69,7 @@ public class DropQueue {
      * Add xp to queue
      *
      * @param amount The amount to add
+     *
      * @return The DropQueue
      */
     public DropQueue addXP(int amount) {
@@ -82,6 +81,7 @@ public class DropQueue {
      * Set location of the origin of the drops
      *
      * @param l The location
+     *
      * @return The DropQueue
      */
     public DropQueue setLocation(Location l) {
@@ -104,6 +104,7 @@ public class DropQueue {
      * Default item is the player's held item, however for this is required for Tridents.
      *
      * @param item The item to test
+     *
      * @return The DropQueue
      */
     public DropQueue setItem(ItemStack item) {

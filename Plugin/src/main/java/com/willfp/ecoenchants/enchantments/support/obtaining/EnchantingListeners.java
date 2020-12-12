@@ -59,11 +59,12 @@ public class EnchantingListeners implements Listener {
                 ItemStack lapis = event.getInventory().getItem(1);
                 lapis.setAmount(event.getInventory().getItem(1).getAmount() - (event.whichButton() + 1));
                 event.getInventory().setItem(1, lapis);
-            } catch (NullPointerException ignored) {} // Triggered if you're in creative
+            } catch (NullPointerException ignored) {
+            } // Triggered if you're in creative
         }
 
         double multiplier = 0.01;
-        if(item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
+        if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
             multiplier /= ConfigManager.getConfig().getInt("enchanting-table.book-times-less-likely");
         }
 
@@ -84,7 +85,7 @@ public class EnchantingListeners implements Listener {
                 continue;
             if (enchantment.getRarity().getMinimumLevel() > cost)
                 continue;
-            if(!enchantment.isEnabled())
+            if (!enchantment.isEnabled())
                 continue;
             if (!enchantment.canGetFromTable())
                 continue;
@@ -96,9 +97,10 @@ public class EnchantingListeners implements Listener {
                 if (enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
                 if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
 
-                if(EcoEnchants.getFromEnchantment(enchant) != null) {
+                if (EcoEnchants.getFromEnchantment(enchant) != null) {
                     EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                    if(enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) anyConflicts.set(true);
+                    if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular())
+                        anyConflicts.set(true);
                 }
             });
             if (anyConflicts.get()) continue;
@@ -107,7 +109,7 @@ public class EnchantingListeners implements Listener {
 
             double maxLevelDouble = enchantment.getMaxLevel();
 
-            if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
+            if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
                 double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / maxLevelDouble;
@@ -123,13 +125,13 @@ public class EnchantingListeners implements Listener {
             level = NumberUtils.equalIfOver(level, enchantment.getMaxLevel());
             toAdd.put(enchantment, level);
 
-            if(ConfigManager.getConfig().getBool("enchanting-table.cap-amount.enabled")) {
-                if(toAdd.size() >= ConfigManager.getConfig().getInt("enchanting-table.cap-amount.limit")) {
+            if (ConfigManager.getConfig().getBool("enchanting-table.cap-amount.enabled")) {
+                if (toAdd.size() >= ConfigManager.getConfig().getInt("enchanting-table.cap-amount.limit")) {
                     break;
                 }
             }
 
-            if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) gotSpecial = true;
+            if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) gotSpecial = true;
 
             if (ConfigManager.getConfig().getBool("enchanting-table.reduce-probability.enabled")) {
                 multiplier /= ConfigManager.getConfig().getDouble("enchanting-table.reduce-probability.factor");
@@ -137,14 +139,14 @@ public class EnchantingListeners implements Listener {
         }
         toAdd.forEach(event.getEnchantsToAdd()::putIfAbsent);
 
-        if((secondary.contains(event.getItem().getType()))) {
-            if(!toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY)) {
+        if ((secondary.contains(event.getItem().getType()))) {
+            if (!toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY)) {
                 event.getEnchantsToAdd().put(Enchantment.DURABILITY, currentlyEnchantingSecondary.get(player)[event.whichButton()]);
                 currentlyEnchantingSecondary.remove(player);
             }
         }
 
-        if(gotSpecial && ConfigManager.getConfig().getBool("enchanting-table.notify-on-special")) {
+        if (gotSpecial && ConfigManager.getConfig().getBool("enchanting-table.notify-on-special")) {
             player.sendMessage(ConfigManager.getLang().getMessage("got-special"));
         }
 
@@ -154,9 +156,9 @@ public class EnchantingListeners implements Listener {
             public void run() {
                 ItemStack item = event.getInventory().getItem(0);
                 assert item != null;
-                if(item.getItemMeta() instanceof EnchantmentStorageMeta) {
+                if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
                     EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
-                    for(Enchantment enchantment : meta.getStoredEnchants().keySet()) {
+                    for (Enchantment enchantment : meta.getStoredEnchants().keySet()) {
                         meta.removeStoredEnchant(enchantment);
                     }
                     event.getEnchantsToAdd().forEach(((enchantment, integer) -> {
@@ -175,7 +177,8 @@ public class EnchantingListeners implements Listener {
 
         try {
             event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), maxLevel));
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
+        }
 
         if (!secondary.contains(event.getItem().getType()))
             return;
@@ -188,25 +191,25 @@ public class EnchantingListeners implements Listener {
             bonus = 1;
         }
 
-        double baseLevel = (NumberUtils.randInt(1, 8) + Math.floor((double) bonus/2) + NumberUtils.randInt(0, bonus));
+        double baseLevel = (NumberUtils.randInt(1, 8) + Math.floor((double) bonus / 2) + NumberUtils.randInt(0, bonus));
 
         int bottomEnchantLevel = (int) Math.ceil(Math.max(baseLevel / 3, 1));
-        int midEnchantLevel = (int) ((baseLevel * 2)/3) + 1;
+        int midEnchantLevel = (int) ((baseLevel * 2) / 3) + 1;
         int topEnchantLevel = (int) Math.max(baseLevel, bonus * 2);
 
-        bottomEnchantLevel *= (int) Math.ceil((double) maxLevel/30);
-        midEnchantLevel *= (int) Math.ceil((double) maxLevel/30);
-        topEnchantLevel *= (int) Math.ceil((double) maxLevel/30);
+        bottomEnchantLevel *= (int) Math.ceil((double) maxLevel / 30);
+        midEnchantLevel *= (int) Math.ceil((double) maxLevel / 30);
+        topEnchantLevel *= (int) Math.ceil((double) maxLevel / 30);
 
         bottomEnchantLevel = NumberUtils.equalIfOver(bottomEnchantLevel, maxLevel);
 
         int midUnbreakingLevel = NumberUtils.randInt(1, 3);
-        if(midUnbreakingLevel < 2) midUnbreakingLevel = 2;
-        if(midEnchantLevel < 15) midUnbreakingLevel = 1;
+        if (midUnbreakingLevel < 2) midUnbreakingLevel = 2;
+        if (midEnchantLevel < 15) midUnbreakingLevel = 1;
 
         int topUnbreakingLevel = 3;
-        if(topEnchantLevel < 20) topUnbreakingLevel = 2;
-        if(topEnchantLevel < 10) topUnbreakingLevel = 1;
+        if (topEnchantLevel < 20) topUnbreakingLevel = 2;
+        if (topEnchantLevel < 10) topUnbreakingLevel = 1;
 
         EnchantmentOffer[] offers = {
                 new EnchantmentOffer(Enchantment.DURABILITY, 1, bottomEnchantLevel),
@@ -214,8 +217,8 @@ public class EnchantingListeners implements Listener {
                 new EnchantmentOffer(Enchantment.DURABILITY, topUnbreakingLevel, topEnchantLevel),
         };
 
-        for(int i = 0; i < offers.length; i++) {
-            event.getOffers()[i]= offers[i];
+        for (int i = 0; i < offers.length; i++) {
+            event.getOffers()[i] = offers[i];
         }
 
         currentlyEnchantingSecondary.remove(event.getEnchanter());

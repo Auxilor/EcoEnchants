@@ -26,14 +26,14 @@ public class NaturalExpGainListeners implements Listener {
 
         Set<NaturalExpGainBuilder> eventsClone = new HashSet<>(events);
         eventsClone.forEach((builder) -> {
-            if(builder.getLoc().getWorld().getNearbyEntities(builder.getLoc(), 7.25, 7.25, 7.25).contains(event.getPlayer())) {
+            if (builder.getLoc().getWorld().getNearbyEntities(builder.getLoc(), 7.25, 7.25, 7.25).contains(event.getPlayer())) {
                 events.remove(builder);
                 isNatural.set(false);
                 atomicBuiltEvent.set(builder);
             }
         });
 
-        if(isNatural.get()) {
+        if (isNatural.get()) {
             events.remove(atomicBuiltEvent.get());
             builtEvent.push();
         }

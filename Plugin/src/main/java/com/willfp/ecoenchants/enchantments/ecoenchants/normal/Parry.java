@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
 public class Parry extends EcoEnchant {
     public Parry() {
         super(
@@ -27,7 +28,7 @@ public class Parry extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
 
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 

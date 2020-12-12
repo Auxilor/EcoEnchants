@@ -25,7 +25,7 @@ public class CommandEcodebug extends AbstractCommand {
     @Override
     public void onExecute(CommandSender sender, List<String> args) {
         Logger.info("--------------- BEGIN DEBUG ----------------");
-        if(sender instanceof Player) {
+        if (sender instanceof Player) {
             Player player = (Player) sender;
             player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand().toString());
             Logger.info("");
@@ -73,8 +73,8 @@ public class CommandEcodebug extends AbstractCommand {
         List<Enchantment> brokenCache = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
         brokenCache.removeIf(enchantment -> !(
                 EnchantmentCache.getEntry(enchantment).getName().equalsIgnoreCase("null") ||
-                EnchantmentCache.getEntry(enchantment).getRawName().equalsIgnoreCase("null") ||
-                EnchantmentCache.getEntry(enchantment).getStringDescription().equalsIgnoreCase("null")));
+                        EnchantmentCache.getEntry(enchantment).getRawName().equalsIgnoreCase("null") ||
+                        EnchantmentCache.getEntry(enchantment).getStringDescription().equalsIgnoreCase("null")));
         Logger.info("Enchantments with broken cache: " + brokenCache.toString());
         Logger.info("");
 
@@ -83,8 +83,8 @@ public class CommandEcodebug extends AbstractCommand {
 
         Set<EcoEnchant> withIssues = new HashSet<>();
         EcoEnchants.getAll().forEach(enchant -> {
-            if(enchant.getRarity() == null) withIssues.add(enchant);
-            if(enchant.getRawTargets().isEmpty()) withIssues.add(enchant);
+            if (enchant.getRarity() == null) withIssues.add(enchant);
+            if (enchant.getRawTargets().isEmpty()) withIssues.add(enchant);
         });
         Logger.info("Enchantments with evident issues: " + withIssues.toString());
         Logger.info("");

@@ -19,6 +19,7 @@ public class ChatComponent {
      * This method will convert any show_item Hover Events using {@link com.willfp.ecoenchants.display.EnchantDisplay#displayEnchantments(ItemStack)}
      *
      * @param object The NMS chat component to modify
+     *
      * @return The NMS chat component, having been modified
      */
     public static Object modifyComponent(Object object) {

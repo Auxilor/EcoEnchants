@@ -23,14 +23,14 @@ public class Missile extends Spell {
         skull.setCharged(true);
         skull.setIsIncendiary(false);
         skull.setMetadata("eco-damage", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
-        skull.setMetadata("nobreak", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(),true));
+        skull.setMetadata("nobreak", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
         skull.setShooter(player);
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onWitherSkullDamage(EntityDamageByEntityEvent event) {
-        if(!(event.getDamager() instanceof WitherSkull)) return;
-        if(event.getDamager().getMetadata("eco-damage").isEmpty()) return;
+        if (!(event.getDamager() instanceof WitherSkull)) return;
+        if (event.getDamager().getMetadata("eco-damage").isEmpty()) return;
 
         double multiplier = event.getDamager().getMetadata("eco-damage").get(0).asDouble();
 
@@ -39,8 +39,8 @@ public class Missile extends Spell {
 
     @EventHandler
     public void onWitherSkullExplode(EntityExplodeEvent event) {
-        if(!(event.getEntity() instanceof WitherSkull)) return;
-        if(event.getEntity().getMetadata("nobreak").isEmpty()) return;
+        if (!(event.getEntity() instanceof WitherSkull)) return;
+        if (event.getEntity().getMetadata("nobreak").isEmpty()) return;
 
         event.setCancelled(true);
     }

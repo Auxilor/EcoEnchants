@@ -27,6 +27,7 @@ public class EnchantChecks {
      *
      * @param item        The {@link ItemStack} to check
      * @param enchantment The enchantment to query
+     *
      * @return If the item has the queried enchantment
      */
     public static boolean item(ItemStack item, Enchantment enchantment) {
@@ -38,6 +39,7 @@ public class EnchantChecks {
      *
      * @param item        The {@link ItemStack} to check
      * @param enchantment The enchantment to query
+     *
      * @return The level of the enchantment, or 0 if not found
      */
     public static int getItemLevel(ItemStack item, Enchantment enchantment) {
@@ -53,6 +55,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a specified ItemStack
      *
      * @param item The ItemStack to query
+     *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnItem(ItemStack item) {
@@ -78,6 +81,7 @@ public class EnchantChecks {
      *
      * @param arrow       The {@link Arrow} to check
      * @param enchantment The enchantment to query
+     *
      * @return If the arrow has the queried enchantment
      */
     public static boolean arrow(Arrow arrow, Enchantment enchantment) {
@@ -91,6 +95,7 @@ public class EnchantChecks {
      *
      * @param arrow       The {@link Arrow} to check
      * @param enchantment The enchantment to query
+     *
      * @return The level found on the arrow, or 0 if not found
      */
     public static int getArrowLevel(Arrow arrow, Enchantment enchantment) {
@@ -110,6 +115,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a specified Arrow
      *
      * @param arrow The Arrow to query
+     *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnArrow(Arrow arrow) {
@@ -134,6 +140,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return If the LivingEntity has the enchantment
      */
     public static boolean mainhand(LivingEntity entity, Enchantment enchantment) {
@@ -145,6 +152,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return The level found on the mainhand item, or 0 if not found
      */
     public static int getMainhandLevel(LivingEntity entity, Enchantment enchantment) {
@@ -160,6 +168,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a queried {@link LivingEntity}s main hand item
      *
      * @param entity The entity to query
+     *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnMainhand(LivingEntity entity) {
@@ -186,6 +195,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return If the LivingEntity has the enchantment
      */
     public static boolean offhand(LivingEntity entity, Enchantment enchantment) {
@@ -197,6 +207,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return The level found on the offhand item, or 0 if not found
      */
     public static int getOffhandLevel(LivingEntity entity, Enchantment enchantment) {
@@ -212,6 +223,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a queried {@link LivingEntity}s offhand item
      *
      * @param entity The entity to query
+     *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnOffhand(LivingEntity entity) {
@@ -238,6 +250,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return The cumulative total of all levels, ie 4 pieces all with level 3 returns 12
      */
     public static int getArmorPoints(LivingEntity entity, Enchantment enchantment) {
@@ -252,6 +265,7 @@ public class EnchantChecks {
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
      * @param damage      The amount of damage to deal to all armor pieces
+     *
      * @return The cumulative total of all levels, ie 4 pieces all with level 3 returns 12
      */
     public static int getArmorPoints(LivingEntity entity, Enchantment enchantment, int damage) {
@@ -291,6 +305,7 @@ public class EnchantChecks {
      * Get all {@link EcoEnchant}s on a queried {@link LivingEntity}s armor
      *
      * @param entity The entity to query
+     *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the cumulative total levels
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnArmor(LivingEntity entity) {
@@ -314,6 +329,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return If the LivingEntity has the enchantment
      */
     public static boolean helmet(LivingEntity entity, Enchantment enchantment) {
@@ -325,6 +341,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return The level found, or 0 if not found
      */
     public static int getHelmetLevel(LivingEntity entity, Enchantment enchantment) {
@@ -341,6 +358,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return If the LivingEntity has the enchantment
      */
     public static boolean chestplate(LivingEntity entity, Enchantment enchantment) {
@@ -352,6 +370,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return The level found, or 0 if not found
      */
     public static int getChestplateLevel(LivingEntity entity, Enchantment enchantment) {
@@ -368,6 +387,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return If the LivingEntity has the enchantment
      */
     public static boolean leggings(LivingEntity entity, Enchantment enchantment) {
@@ -379,6 +399,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return The level found, or 0 if not found
      */
     public static int getLeggingsLevel(LivingEntity entity, Enchantment enchantment) {
@@ -395,6 +416,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return If the LivingEntity has the enchantment
      */
     public static boolean boots(LivingEntity entity, Enchantment enchantment) {
@@ -406,6 +428,7 @@ public class EnchantChecks {
      *
      * @param entity      The entity to query
      * @param enchantment The enchantment to check
+     *
      * @return The level found, or 0 if not found
      */
     public static int getBootsLevel(LivingEntity entity, Enchantment enchantment) {

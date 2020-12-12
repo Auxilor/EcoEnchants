@@ -38,9 +38,9 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
-        if(!command.getName().equalsIgnoreCase(name)) return false;
+        if (!command.getName().equalsIgnoreCase(name)) return false;
 
-        if(playersOnly && !(sender instanceof Player)) {
+        if (playersOnly && !(sender instanceof Player)) {
             sender.sendMessage(ConfigManager.getLang().getMessage("not-player"));
             return true;
         }
@@ -62,7 +62,7 @@ public abstract class AbstractCommand implements CommandExecutor, Registerable {
         command.setExecutor(this);
 
         AbstractTabCompleter tabCompleter = this.getTab();
-        if(tabCompleter != null) {
+        if (tabCompleter != null) {
             command.setTabCompleter(tabCompleter);
         }
     }

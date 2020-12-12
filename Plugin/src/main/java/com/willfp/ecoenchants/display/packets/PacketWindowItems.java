@@ -14,14 +14,14 @@ public class PacketWindowItems extends AbstractPacketAdapter {
     @Override
     public void onSend(PacketContainer packet) {
         packet.getItemListModifier().modify(0, (itemStacks) -> {
-            if(itemStacks == null) return null;
+            if (itemStacks == null) return null;
             itemStacks.forEach(item -> {
-                if(item == null)
+                if (item == null)
                     return;
 
                 boolean hideEnchants = false;
 
-                if(item.getItemMeta() != null) {
+                if (item.getItemMeta() != null) {
                     hideEnchants = item.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS);
                 }
 

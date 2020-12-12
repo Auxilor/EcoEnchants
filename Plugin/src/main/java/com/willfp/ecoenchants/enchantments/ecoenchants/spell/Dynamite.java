@@ -25,10 +25,10 @@ public class Dynamite extends Spell {
     public void onUse(Player player, int level, PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
-        if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
             return;
 
-        if(block == null) return;
+        if (block == null) return;
 
         if (block.hasMetadata("block-ignore")) {
             return;
@@ -43,21 +43,22 @@ public class Dynamite extends Spell {
         final int size = baseDiff + (bonusPerLevel * (level - 1));
 
 
-        for(int x = -size; x <= size; x++) {
-            for(int y = -size; y <= size; y++) {
+        for (int x = -size; x <= size; x++) {
+            for (int y = -size; y <= size; y++) {
                 for (int z = -size; z <= size; z++) {
-                    if(x == 0 && y == 0 && z == 0) {
+                    if (x == 0 && y == 0 && z == 0) {
                         block.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, block.getLocation().clone().add(0.5, 0.5, 0.5), 1);
                     }
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
 
-                    if(this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
+                    if (this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                         continue;
                     }
 
-                    if(block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check")) continue;
+                    if (block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check"))
+                        continue;
 
-                    if(!AntigriefManager.canBreakBlock(player, block1)) continue;
+                    if (!AntigriefManager.canBreakBlock(player, block1)) continue;
 
                     toBreak.add(block1);
                 }

@@ -33,13 +33,13 @@ public class GrindstoneListeners implements Listener {
 
             Map<Enchantment, Integer> toKeep = GrindstoneMerge.doMerge(top, bottom);
 
-            if(toKeep.isEmpty()) {
+            if (toKeep.isEmpty()) {
                 inventory.setItem(2, out);
             }
-            if(out == null) return;
+            if (out == null) return;
 
             ItemStack newOut = out.clone();
-            if(newOut.getItemMeta() instanceof EnchantmentStorageMeta) {
+            if (newOut.getItemMeta() instanceof EnchantmentStorageMeta) {
                 EnchantmentStorageMeta meta = (EnchantmentStorageMeta) newOut.getItemMeta();
                 toKeep.forEach(((enchantment, integer) -> {
                     meta.addStoredEnchant(enchantment, integer, true);

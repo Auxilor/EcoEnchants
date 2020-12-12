@@ -22,10 +22,10 @@ public class VillagerListeners implements Listener {
     // For books
     @EventHandler
     public void onVillagerGainBookTrade(VillagerAcquireTradeEvent event) {
-        if(!event.getRecipe().getResult().getType().equals(Material.ENCHANTED_BOOK))
+        if (!event.getRecipe().getResult().getType().equals(Material.ENCHANTED_BOOK))
             return;
 
-        if(!ConfigManager.getConfig().getBool("villager.enabled"))
+        if (!ConfigManager.getConfig().getBool("villager.enabled"))
             return;
 
         ItemStack result = event.getRecipe().getResult().clone();
@@ -36,7 +36,7 @@ public class VillagerListeners implements Listener {
         float priceMultiplier = event.getRecipe().getPriceMultiplier();
         List<ItemStack> ingredients = event.getRecipe().getIngredients();
 
-        if(!(result.getItemMeta() instanceof EnchantmentStorageMeta)) return;
+        if (!(result.getItemMeta() instanceof EnchantmentStorageMeta)) return;
 
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) result.getItemMeta();
 
@@ -45,17 +45,17 @@ public class VillagerListeners implements Listener {
 
         double multiplier = 0.01 / ConfigManager.getConfig().getDouble("villager.book-times-less-likely");
 
-        for(EcoEnchant enchantment : enchantments) {
+        for (EcoEnchant enchantment : enchantments) {
             if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
                 continue;
             if (!enchantment.canGetFromVillager())
                 continue;
-            if(!enchantment.isEnabled())
+            if (!enchantment.isEnabled())
                 continue;
 
             int level;
 
-            if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
+            if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
                 double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
@@ -87,12 +87,12 @@ public class VillagerListeners implements Listener {
     @EventHandler
     public void onVillagerGainItemTrade(VillagerAcquireTradeEvent event) {
 
-        if(!EnchantmentTarget.ALL.getMaterials().contains(event.getRecipe().getResult().getType()))
+        if (!EnchantmentTarget.ALL.getMaterials().contains(event.getRecipe().getResult().getType()))
             return;
 
-        if(event.getRecipe().getResult().getType().equals(Material.BOOK)) return;
+        if (event.getRecipe().getResult().getType().equals(Material.BOOK)) return;
 
-        if(!ConfigManager.getConfig().getBool("villager.enabled"))
+        if (!ConfigManager.getConfig().getBool("villager.enabled"))
             return;
 
         ItemStack result = event.getRecipe().getResult().clone();
@@ -103,7 +103,7 @@ public class VillagerListeners implements Listener {
         float priceMultiplier = event.getRecipe().getPriceMultiplier();
         List<ItemStack> ingredients = event.getRecipe().getIngredients();
 
-        if(result.getItemMeta() instanceof EnchantmentStorageMeta) return;
+        if (result.getItemMeta() instanceof EnchantmentStorageMeta) return;
 
         ItemMeta meta = result.getItemMeta();
 
@@ -114,14 +114,14 @@ public class VillagerListeners implements Listener {
 
         double multiplier = 0.01;
 
-        for(EcoEnchant enchantment : enchantments) {
+        for (EcoEnchant enchantment : enchantments) {
             if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
                 continue;
             if (!enchantment.canGetFromVillager())
                 continue;
-            if(!enchantment.canEnchantItem(result))
+            if (!enchantment.canEnchantItem(result))
                 continue;
-            if(!enchantment.isEnabled())
+            if (!enchantment.isEnabled())
                 continue;
 
             AtomicBoolean anyConflicts = new AtomicBoolean(false);
@@ -130,13 +130,14 @@ public class VillagerListeners implements Listener {
                 if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
 
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                if(enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) anyConflicts.set(true);
+                if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular())
+                    anyConflicts.set(true);
             });
             if (anyConflicts.get()) continue;
 
             int level;
 
-            if(enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
+            if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
                 double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();

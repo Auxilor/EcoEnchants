@@ -26,8 +26,8 @@ public class Quake extends Spell {
         for (Entity entity : entities) {
             if (entity.equals(player))
                 continue;
-            if(!(entity instanceof LivingEntity)) continue;
-            if(!AntigriefManager.canInjure(player, (LivingEntity) entity))
+            if (!(entity instanceof LivingEntity)) continue;
+            if (!AntigriefManager.canInjure(player, (LivingEntity) entity))
                 continue;
 
             ((LivingEntity) entity).damage(damage);

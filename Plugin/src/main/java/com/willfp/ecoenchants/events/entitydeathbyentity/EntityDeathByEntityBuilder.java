@@ -46,10 +46,10 @@ class EntityDeathByEntityBuilder {
     }
 
     public void push() {
-        if(this.victim == null) return;
-        if(this.damager == null) return;
-        if(this.drops == null) return;
-        if(this.deathEvent == null) return;
+        if (this.victim == null) return;
+        if (this.damager == null) return;
+        if (this.drops == null) return;
+        if (this.deathEvent == null) return;
 
         EntityDeathByEntityEvent event = new EntityDeathByEntityEvent(victim, damager, drops, xp, deathEvent);
 

@@ -32,7 +32,7 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
 
     @EventHandler
     public void onItemPickup(EntityPickupItemEvent event) {
-        if(!(event.getEntity() instanceof Player))
+        if (!(event.getEntity() instanceof Player))
             return;
         refreshPlayer((Player) event.getEntity());
     }
@@ -49,14 +49,14 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
 
     @EventHandler
     public void onInventoryDrop(EntityDropItemEvent event) {
-        if(!(event.getEntity() instanceof Player))
+        if (!(event.getEntity() instanceof Player))
             return;
         refreshPlayer((Player) event.getEntity());
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if(!(event.getWhoClicked() instanceof Player))
+        if (!(event.getWhoClicked() instanceof Player))
             return;
         refreshPlayer((Player) event.getWhoClicked());
     }
@@ -64,7 +64,7 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
     private void refresh() {
         players.clear();
         EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
-            if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
+            if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
                 players.add(player);
         });
         amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
@@ -72,23 +72,23 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
 
     private void refreshPlayer(Player player) {
         players.remove(player);
-        if(Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
+        if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
             players.add(player);
     }
 
     @Override
     public void run() {
         players.forEach((player -> {
-            for(ItemStack item : player.getInventory().getContents()) {
+            for (ItemStack item : player.getInventory().getContents()) {
                 int level = EnchantChecks.getItemLevel(item, this);
-                if(level == 0) continue;
-                if(this.getDisabledWorlds().contains(player.getWorld())) return;
+                if (level == 0) continue;
+                if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
-                if(!(item.getItemMeta() instanceof Repairable)) continue;
+                if (!(item.getItemMeta() instanceof Repairable)) continue;
 
-                if(player.getInventory().getItemInMainHand().equals(item)) continue;
-                if(player.getInventory().getItemInOffHand().equals(item)) continue;
-                if(player.getItemOnCursor().equals(item)) continue;
+                if (player.getInventory().getItemInMainHand().equals(item)) continue;
+                if (player.getInventory().getItemInOffHand().equals(item)) continue;
+                if (player.getItemOnCursor().equals(item)) continue;
 
                 DurabilityUtils.damageItemNoBreak(item, amount, player);
                 player.updateInventory();

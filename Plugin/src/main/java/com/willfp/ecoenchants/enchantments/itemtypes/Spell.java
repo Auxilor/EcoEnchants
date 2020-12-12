@@ -18,12 +18,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jetbrains.annotations.ApiStatus;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Wrapper for Spell enchantments
@@ -58,27 +53,27 @@ public abstract class Spell extends EcoEnchant {
     public void onUseEventHandler(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if(runningSpell.contains(player.getUniqueId())) return;
+        if (runningSpell.contains(player.getUniqueId())) return;
         runningSpell.add(player.getUniqueId());
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> runningSpell.remove(player.getUniqueId()), 5);
 
-        if(leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
-            if(!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+        if (leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
+            if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
                 return;
             }
         } else {
-            if(!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
+            if (!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
                 return;
             }
         }
 
-        if(!EnchantChecks.mainhand(player, this))
+        if (!EnchantChecks.mainhand(player, this))
             return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
-        if(!cooldownTracker.containsKey(player.getUniqueId()))
+        if (!cooldownTracker.containsKey(player.getUniqueId()))
             cooldownTracker.put(player.getUniqueId(), new SpellRunnable(this));
 
         SpellRunnable runnable = cooldownTracker.get(player.getUniqueId());
@@ -88,7 +83,7 @@ public abstract class Spell extends EcoEnchant {
 
         int cooldown = getCooldown(this, player);
 
-        if(cooldown > 0) {
+        if (cooldown > 0) {
             String message = ConfigManager.getLang().getMessage("on-cooldown").replaceAll("%seconds%", String.valueOf(cooldown)).replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
             player.sendMessage(message);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
@@ -104,7 +99,7 @@ public abstract class Spell extends EcoEnchant {
     public abstract void onUse(Player player, int level, PlayerInteractEvent event);
 
     public static int getCooldown(Spell spell, Player player) {
-        if(!spell.cooldownTracker.containsKey(player.getUniqueId()))
+        if (!spell.cooldownTracker.containsKey(player.getUniqueId()))
             spell.cooldownTracker.put(player.getUniqueId(), new SpellRunnable(spell));
 
         SpellRunnable runnable = spell.cooldownTracker.get(player.getUniqueId());

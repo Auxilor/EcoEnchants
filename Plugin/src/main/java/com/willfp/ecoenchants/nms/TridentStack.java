@@ -18,6 +18,7 @@ public class TridentStack {
      * Get the {@link ItemStack} of a given {@link Trident}
      *
      * @param trident The trident to get the ItemStack from
+     *
      * @return The ItemStack associated with the trident
      */
     public static ItemStack getTridentStack(Trident trident) {

@@ -5,12 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.willfp.ecoenchants.nms.api.ChatComponentWrapper;
-import net.minecraft.server.v1_16_R3.ChatBaseComponent;
-import net.minecraft.server.v1_16_R3.ChatHoverable;
-import net.minecraft.server.v1_16_R3.ChatMessage;
-import net.minecraft.server.v1_16_R3.ChatModifier;
-import net.minecraft.server.v1_16_R3.IChatBaseComponent;
-import net.minecraft.server.v1_16_R3.MojangsonParser;
+import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
@@ -21,7 +16,7 @@ import java.util.Arrays;
 public class ChatComponent implements ChatComponentWrapper {
     @Override
     public Object modifyComponent(Object object) {
-        if(!(object instanceof IChatBaseComponent)) {
+        if (!(object instanceof IChatBaseComponent)) {
             return object;
         }
 
@@ -33,7 +28,7 @@ public class ChatComponent implements ChatComponentWrapper {
 
     public void modifyBaseComponent(IChatBaseComponent component) {
         component.getSiblings().forEach(this::modifyBaseComponent);
-        if(component instanceof ChatMessage) {
+        if (component instanceof ChatMessage) {
             Arrays.stream(((ChatMessage) component).getArgs())
                     .filter(o -> o instanceof IChatBaseComponent)
                     .map(o -> (IChatBaseComponent) o)
@@ -42,13 +37,13 @@ public class ChatComponent implements ChatComponentWrapper {
 
         ChatHoverable hoverable = component.getChatModifier().getHoverEvent();
 
-        if(hoverable == null)
+        if (hoverable == null)
             return;
 
         JsonObject jsonObject = hoverable.b();
         JsonElement json = hoverable.b().get("contents");
-        if(json.getAsJsonObject().get("id") == null) return;
-        if(json.getAsJsonObject().get("tag") == null) return;
+        if (json.getAsJsonObject().get("id") == null) return;
+        if (json.getAsJsonObject().get("tag") == null) return;
         String id = json.getAsJsonObject().get("id").toString();
         String tag = json.getAsJsonObject().get("tag").toString();
         ItemStack itemStack = getFromTag(tag, id);
@@ -75,7 +70,7 @@ public class ChatComponent implements ChatComponentWrapper {
         id = id.replaceAll("minecraft:", "");
         id = id.toUpperCase();
         id = id.replaceAll("\"", "");
-        jsonTag = jsonTag.substring( 1, jsonTag.length() - 1 );
+        jsonTag = jsonTag.substring(1, jsonTag.length() - 1);
         jsonTag = jsonTag.replaceAll("id:", "\"id\":");
         jsonTag = jsonTag.replace("\\", "");
         Material material = Material.getMaterial(id);

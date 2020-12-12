@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.util.Vector;
+
 public class Reel extends EcoEnchant {
     public Reel() {
         super(
@@ -21,28 +22,28 @@ public class Reel extends EcoEnchant {
 
     @EventHandler
     public void onFish(PlayerFishEvent event) {
-        if(!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY))
+        if (!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY))
             return;
 
-        if(!(event.getCaught() instanceof LivingEntity))
+        if (!(event.getCaught() instanceof LivingEntity))
             return;
 
         Player player = event.getPlayer();
 
         LivingEntity victim = (LivingEntity) event.getCaught();
 
-        if(victim.hasMetadata("NPC")) return;
+        if (victim.hasMetadata("NPC")) return;
 
-        if(!AntigriefManager.canInjure(player, victim)) return;
+        if (!AntigriefManager.canInjure(player, victim)) return;
 
         if (!EnchantChecks.mainhand(player, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         double baseMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-multiplier");
         Vector vector = player.getLocation().toVector().clone().subtract(victim.getLocation().toVector()).normalize().multiply(level * baseMultiplier);
-        if(VectorUtils.isFinite(vector)) {
+        if (VectorUtils.isFinite(vector)) {
             victim.setVelocity(vector);
         }
     }

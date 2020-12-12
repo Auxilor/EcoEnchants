@@ -20,16 +20,16 @@ public class Rage extends EcoEnchant {
 
     @Override
     public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level))
             return;
 
         double distancePerLevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance-per-level");
         final double distance = distancePerLevel * level;
 
         for (Entity e : victim.getWorld().getNearbyEntities(victim.getLocation(), distance, distance, distance)) {
-            if(!(e instanceof Monster)) continue;
+            if (!(e instanceof Monster)) continue;
 
-            if(e instanceof PigZombie) {
+            if (e instanceof PigZombie) {
                 ((PigZombie) e).setAngry(true);
             }
 
@@ -37,7 +37,7 @@ public class Rage extends EcoEnchant {
 
             Vector vector = attacker.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
 
-            if(VectorUtils.isFinite(vector)) {
+            if (VectorUtils.isFinite(vector)) {
                 e.setVelocity(vector);
             }
         }

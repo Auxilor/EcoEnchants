@@ -64,6 +64,7 @@ public class ArmorEquipEvent extends PlayerEvent implements Cancellable {
     public final ArmorType getType() {
         return type;
     }
+
     public final ItemStack getOldArmorPiece() {
         return oldArmorPiece;
     }

@@ -33,20 +33,20 @@ public class AnvilListeners implements Listener {
         event.setResult(null);
         event.getInventory().setItem(2, null);
 
-        if(event.getViewers().isEmpty()) return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
+        if (event.getViewers().isEmpty()) return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
 
         Player player = (Player) event.getViewers().get(0);
-        if(OpenInventory.getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS))
+        if (OpenInventory.getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS))
             return;
 
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
-        if(newOut.getFirst() == null) {
+        if (newOut.getFirst() == null) {
             newOut.setFirst(new ItemStack(Material.AIR, 0));
         }
 
         int modCost;
-        if(newOut.getSecond() == null) {
+        if (newOut.getSecond() == null) {
             modCost = 0;
         } else {
             modCost = newOut.getSecond();
@@ -55,7 +55,7 @@ public class AnvilListeners implements Listener {
         Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
 
             // This is a disgusting bodge
-            if(!noIncreaseXpMap.containsKey(player.getUniqueId()))
+            if (!noIncreaseXpMap.containsKey(player.getUniqueId()))
                 noIncreaseXpMap.put(player.getUniqueId(), 0);
 
             Integer num = noIncreaseXpMap.get(player.getUniqueId());
@@ -70,13 +70,13 @@ public class AnvilListeners implements Listener {
             int preCost = event.getInventory().getRepairCost();
             ItemStack item = newOut.getFirst();
 
-            if(event.getInventory().getItem(0) == null) {
+            if (event.getInventory().getItem(0) == null) {
                 return;
             }
 
-            if(!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
+            if (!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
 
-            if(ConfigManager.getConfig().getBool("anvil.rework-cost")) {
+            if (ConfigManager.getConfig().getBool("anvil.rework-cost")) {
                 int repairCost = RepairCost.getRepairCost(item);
                 int reworkCount = NumberUtils.log2(repairCost + 1);
                 if (repairCost == 0) reworkCount = 0;
@@ -87,16 +87,16 @@ public class AnvilListeners implements Listener {
 
             int cost;
 
-            if(noIncreaseXpMap.get(player.getUniqueId()) == 1) {
+            if (noIncreaseXpMap.get(player.getUniqueId()) == 1) {
                 cost = preCost + modCost;
             } else {
                 cost = preCost;
             }
 
-            if(!Objects.equals(left, player.getOpenInventory().getItem(0))) {
+            if (!Objects.equals(left, player.getOpenInventory().getItem(0))) {
                 return;
             }
-            if(cost == 0)
+            if (cost == 0)
                 return;
 
             event.getInventory().setRepairCost(cost);
