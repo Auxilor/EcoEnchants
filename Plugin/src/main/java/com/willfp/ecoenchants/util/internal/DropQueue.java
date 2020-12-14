@@ -28,6 +28,8 @@ public class DropQueue {
     private boolean hasTelekinesis = false;
     private ItemStack item;
 
+    private static boolean useOrb;
+
     /**
      * Create {@link DropQueue} linked to player
      *
@@ -116,25 +118,22 @@ public class DropQueue {
      * Push the queue
      */
     public void push() {
-        if (!hasTelekinesis) hasTelekinesis = EnchantChecks.item(item, EcoEnchants.TELEKINESIS);
-        if (hasTelekinesis && !EcoEnchants.TELEKINESIS.isEnabled()) hasTelekinesis = false;
-
+        if(!hasTelekinesis) hasTelekinesis = EnchantChecks.item(item, EcoEnchants.TELEKINESIS);
+        if(hasTelekinesis && !EcoEnchants.TELEKINESIS.isEnabled()) hasTelekinesis = false;
 
         World world = loc.getWorld();
         assert world != null;
 
-        if (hasTelekinesis) {
-            for (ItemStack drop : items) {
-                HashMap<Integer, ItemStack> nope = player.getInventory().addItem(drop);
-                nope.forEach(((integer, itemStack) -> {
-                    world.dropItemNaturally(loc.add(0.5, 0, 0.5), itemStack).setVelocity(new Vector());
-                }));
+        if(hasTelekinesis) {
+            HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(items.toArray(new ItemStack[]{}));
+            for(ItemStack drop : leftover.values()) {
+                world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
             }
             if (xp > 0) {
                 PlayerExpChangeEvent event = new PlayerExpChangeEvent(player, xp);
                 Bukkit.getPluginManager().callEvent(event);
-                if (EcoEnchants.TELEKINESIS.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-orb")) {
-                    ExperienceOrb orb = (ExperienceOrb) player.getWorld().spawnEntity(player.getLocation().add(0, 0.2, 0), EntityType.EXPERIENCE_ORB);
+                if (useOrb) {
+                    ExperienceOrb orb = (ExperienceOrb) world.spawnEntity(player.getLocation().add(0, 0.2, 0), EntityType.EXPERIENCE_ORB);
                     orb.setVelocity(new Vector(0, 0, 0));
                     orb.setExperience(event.getAmount());
                 } else {
@@ -151,5 +150,13 @@ public class DropQueue {
                 orb.setExperience(xp);
             }
         }
+    }
+
+    public static void update() {
+        useOrb = EcoEnchants.TELEKINESIS.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-orb");
+    }
+
+    static {
+        update();
     }
 }

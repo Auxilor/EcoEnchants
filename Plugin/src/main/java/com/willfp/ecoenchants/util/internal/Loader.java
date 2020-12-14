@@ -365,6 +365,7 @@ public class Loader {
         EnchantmentRarity.update();
         EnchantmentTarget.update();
         EcoEnchants.update();
+        DropQueue.update();
         EnchantDisplay.update();
         TabCompleterEnchantinfo.reload();
         EcoEnchant.EnchantmentType.update();
