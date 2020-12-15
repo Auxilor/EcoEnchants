@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.extensions.loader;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.extensions.Extension;
 import com.willfp.ecoenchants.extensions.MalformedExtensionException;
-import org.bukkit.Bukkit;
+import com.willfp.ecoenchants.util.internal.Logger;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -41,7 +41,7 @@ public class EcoExtensionLoader implements ExtensionLoader {
             try {
                 loadExtension(extensionJar);
             } catch (MalformedExtensionException e) {
-                Bukkit.getLogger().info(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
+                Logger.error(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
             }
         }
     }
