@@ -246,6 +246,7 @@ public class EcoEnchants {
     public static final EcoEnchant VITALIZE = new Vitalize();
     public static final EcoEnchant DYNAMITE = new Dynamite();
     public static final EcoEnchant CHARGE = new Charge();
+    public static final EcoEnchant ASCEND = new Ascend();
 
     /**
      * Get all registered {@link EcoEnchant}s
