@@ -5,10 +5,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.willfp.ecoenchants.nms.api.ChatComponentWrapper;
-import net.minecraft.server.v1_16_R2.*;
+import net.minecraft.server.v1_16_R2.ChatBaseComponent;
+import net.minecraft.server.v1_16_R2.ChatHoverable;
+import net.minecraft.server.v1_16_R2.ChatMessage;
+import net.minecraft.server.v1_16_R2.ChatModifier;
+import net.minecraft.server.v1_16_R2.IChatBaseComponent;
+import net.minecraft.server.v1_16_R2.MojangsonParser;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -47,8 +54,14 @@ public class ChatComponent implements ChatComponentWrapper {
         String id = json.getAsJsonObject().get("id").toString();
         String tag = json.getAsJsonObject().get("tag").toString();
         ItemStack itemStack = getFromTag(tag, id);
+        boolean hideEnchants = false;
+        if(itemStack.getItemMeta() != null) {
+            if(itemStack.getItemMeta().hasItemFlag(ItemFlag.HIDE_ENCHANTS)) hideEnchants = true;
+            if(itemStack.getItemMeta() instanceof EnchantmentStorageMeta && itemStack.getItemMeta().hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) hideEnchants = true;
+        }
+
         try {
-            itemStack = (ItemStack) Class.forName("com.willfp.ecoenchants.display.EnchantDisplay").getMethod("displayEnchantments", ItemStack.class).invoke(null, itemStack);
+            itemStack = (ItemStack) Class.forName("com.willfp.ecoenchants.display.EnchantDisplay").getMethod("displayEnchantments", ItemStack.class, boolean.class).invoke(null, itemStack, hideEnchants);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             e.printStackTrace();
         }
