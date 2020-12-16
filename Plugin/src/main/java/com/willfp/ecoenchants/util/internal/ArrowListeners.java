@@ -30,7 +30,6 @@ public class ArrowListeners implements Listener {
 
         ItemStack item = entity.getEquipment().getItemInMainHand();
 
-        if (item == null) return;
         if (item.getType().equals(Material.AIR)) return;
         if (!item.hasItemMeta()) return;
         if (item.getItemMeta() == null) return;

@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class AbstractTabCompleter implements TabCompleter {
     private final AbstractCommand command;
 
-    public AbstractTabCompleter(AbstractCommand command) {
+    protected AbstractTabCompleter(AbstractCommand command) {
         this.command = command;
     }
 

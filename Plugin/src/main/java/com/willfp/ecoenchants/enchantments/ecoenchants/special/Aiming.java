@@ -55,8 +55,8 @@ public class Aiming extends EcoEnchant {
         double force = arrow.getVelocity().clone().length() / 3;
         force = NumberUtils.equalIfOver(force, 1);
 
-        if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "require-full-force")) {
-            if(force < 0.9) return;
+        if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "require-full-force") && force < 0.9) {
+            return;
         }
 
         if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "scale-on-force")) {

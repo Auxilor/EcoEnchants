@@ -23,7 +23,6 @@ public class AntigriefFactionsUUID implements AntigriefWrapper {
 
     @Override
     public boolean canCreateExplosion(Player player, Location location) {
-        FPlayer fplayer = FPlayers.getInstance().getByPlayer(player);
         FLocation flocation = new FLocation(location);
         Faction faction = Board.getInstance().getFactionAt(flocation);
 
