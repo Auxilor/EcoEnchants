@@ -68,3 +68,17 @@ permissions:
   ecoenchants.anvil.bypasshardcap:
     description: Allows bypassing the anvil hard cap
     default: op
+
+  # Perks
+  ecoenchants.cooldowntime.half:
+    description: Halves the cooldown time on spells
+    default: op
+  ecoenchants.cooldowntime.third:
+    description: Thirds the cooldown time on spells
+    default: op
+  ecoenchants.cooldowntime.quarter:
+    description: Quarters the cooldown time on spells
+    default: op
+  ecoenchants.cooldowntime.75:
+    description: Reduces the cooldown time on spells by 25%
+    default: op

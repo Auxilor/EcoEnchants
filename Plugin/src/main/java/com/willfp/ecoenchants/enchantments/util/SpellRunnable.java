@@ -2,15 +2,18 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.ecoenchants.util.interfaces.Callable;
+import org.bukkit.entity.Player;
 
 public class SpellRunnable {
     private final Spell spell;
+    private final Player player;
     private long endTime = 0;
     private Callable callable = () -> {
     };
 
-    public SpellRunnable(Spell spell) {
+    public SpellRunnable(Spell spell, Player player) {
         this.spell = spell;
+        this.player = player;
     }
 
     public Spell getSpell() {
@@ -27,7 +30,7 @@ public class SpellRunnable {
     }
 
     public void updateEndTime() {
-        endTime = System.currentTimeMillis() + (spell.getCooldownTime() * 1000L);
+        endTime = System.currentTimeMillis() + (long) ((spell.getCooldownTime() * 1000L) * Spell.getCooldownMultiplier(player));
     }
 
     public void setTask(Callable callable) {

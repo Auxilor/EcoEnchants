@@ -74,7 +74,7 @@ public abstract class Spell extends EcoEnchant {
         if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (!cooldownTracker.containsKey(player.getUniqueId()))
-            cooldownTracker.put(player.getUniqueId(), new SpellRunnable(this));
+            cooldownTracker.put(player.getUniqueId(), new SpellRunnable(this, player));
 
         SpellRunnable runnable = cooldownTracker.get(player.getUniqueId());
         runnable.setTask(() -> {
@@ -100,7 +100,7 @@ public abstract class Spell extends EcoEnchant {
 
     public static int getCooldown(Spell spell, Player player) {
         if (!spell.cooldownTracker.containsKey(player.getUniqueId()))
-            spell.cooldownTracker.put(player.getUniqueId(), new SpellRunnable(spell));
+            spell.cooldownTracker.put(player.getUniqueId(), new SpellRunnable(spell, player));
 
         SpellRunnable runnable = spell.cooldownTracker.get(player.getUniqueId());
 
@@ -109,5 +109,13 @@ public abstract class Spell extends EcoEnchant {
         long secondsLeft = (long) Math.ceil((double) msLeft / 1000);
 
         return new Long(secondsLeft).intValue();
+    }
+
+    public static double getCooldownMultiplier(Player player) {
+        if(player.hasPermission("ecoenchants.cooldowntime.quarter")) return 0.25;
+        if(player.hasPermission("ecoenchants.cooldowntime.third")) return 0.33;
+        if(player.hasPermission("ecoenchants.cooldowntime.half")) return 0.5;
+        if(player.hasPermission("ecoenchants.cooldowntime.75")) return 0.75;
+        return 1;
     }
 }
