@@ -27,6 +27,13 @@ lore:
   sort-by-type: false # Sort enchantments by type
   sort-by-length: false # Sort enchantments by length. Any combination of this and the above option is valid
 
+  type-ordering: # Only used if sort-by-type is enabled - top to bottom
+    - normal
+    - special
+    - artifact
+    - spell
+    - curse
+
   describe: # Describe enchantments in lore
     enabled: false
     before-lines: 5 # Describe before or equal to number of enchantments

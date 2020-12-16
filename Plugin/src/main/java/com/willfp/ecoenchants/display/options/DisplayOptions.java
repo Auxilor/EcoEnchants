@@ -1,13 +1,24 @@
 package com.willfp.ecoenchants.display.options;
 
 import com.willfp.ecoenchants.config.ConfigManager;
-import com.willfp.ecoenchants.display.options.sorting.*;
+import com.willfp.ecoenchants.display.options.sorting.AlphabeticSorter;
+import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
+import com.willfp.ecoenchants.display.options.sorting.LengthSorter;
+import com.willfp.ecoenchants.display.options.sorting.TypeAlphabeticSorter;
+import com.willfp.ecoenchants.display.options.sorting.TypeLengthSorter;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class DisplayOptions {
     private EnchantmentSorter sorter;
     private final DescriptionOptions descriptionOptions = new DescriptionOptions();
     private final NumbersOptions numbersOptions = new NumbersOptions();
     private final ShrinkOptions shrinkOptions = new ShrinkOptions();
+    private final List<EcoEnchant.EnchantmentType> sortedTypes = new ArrayList<>();
 
     public DisplayOptions() {
         update();
@@ -45,6 +56,10 @@ public class DisplayOptions {
         return shrinkOptions.isEnabled();
     }
 
+    public List<EcoEnchant.EnchantmentType> getSortedTypes() {
+        return sortedTypes;
+    }
+
     public EnchantmentSorter getSorter() {
         return sorter;
     }
@@ -53,6 +68,13 @@ public class DisplayOptions {
         descriptionOptions.update();
         numbersOptions.update();
         shrinkOptions.update();
+
+        sortedTypes.clear();
+        sortedTypes.addAll(ConfigManager.getConfig().getStrings("lore.type-ordering").stream()
+                .map(typeName -> EcoEnchant.EnchantmentType.values().stream().filter(type -> type.getName().equalsIgnoreCase(typeName)).findFirst().orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList()));
+        sortedTypes.addAll(EcoEnchant.EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).collect(Collectors.toList()));
 
         boolean byType = ConfigManager.getConfig().getBool("lore.sort-by-type");
         boolean byLength = ConfigManager.getConfig().getBool("lore.sort-by-length");

@@ -516,7 +516,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
             values.forEach(EnchantmentType::refresh);
         }
 
-        public static List<EnchantmentType> getValues() {
+        public static List<EnchantmentType> values() {
             return new ArrayList<>(values);
         }
     }
