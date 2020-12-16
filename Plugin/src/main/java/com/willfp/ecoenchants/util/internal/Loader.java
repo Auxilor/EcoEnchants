@@ -278,8 +278,6 @@ public class Loader {
          */
 
         Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), Loader::postLoad, 1);
-
-        Logger.info("Loaded &aEcoEnchants!");
     }
 
     /**
@@ -306,8 +304,6 @@ public class Loader {
                     Logger.info("&cDownload the new version here:&f https://www.spigotmc.org/resources/ecoenchants.79573/");
                 }, 0, 864000);
             }
-            Logger.info("");
-            Logger.info("----------------------------");
         });
 
         /*
@@ -334,7 +330,8 @@ public class Loader {
         EcoEnchants.getAll().forEach(EcoEnchant::update);
         EnchantmentCache.update();
         EssentialsManager.registerEnchantments();
-        Logger.info("");
+
+        Logger.info("Loaded &aEcoEnchants!");
     }
 
     /**
