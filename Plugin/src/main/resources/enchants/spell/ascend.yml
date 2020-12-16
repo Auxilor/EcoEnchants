@@ -18,10 +18,10 @@ general-config:
   grindstoneable: true
   disabled-in-worlds: []
   conflicts: []
-  maximum-level: 3
+  maximum-level: 2
 
 config:
   activation-sound: ENTITY_FIREWORK_ROCKET_LARGE_BLAST
   cooldown: 90 # In seconds
-  power: 15 # Level of levitation to give
-  ticks-per-level: 5
+  power: 25 # Level of levitation to give
+  ticks-per-level: 6
