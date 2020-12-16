@@ -72,13 +72,13 @@ permissions:
   # Perks
   ecoenchants.cooldowntime.half:
     description: Halves the cooldown time on spells
-    default: op
+    default: false
   ecoenchants.cooldowntime.third:
     description: Thirds the cooldown time on spells
-    default: op
+    default: false
   ecoenchants.cooldowntime.quarter:
     description: Quarters the cooldown time on spells
-    default: op
+    default: false
   ecoenchants.cooldowntime.75:
     description: Reduces the cooldown time on spells by 25%
-    default: op
+    default: false
