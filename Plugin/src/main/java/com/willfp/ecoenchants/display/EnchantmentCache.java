@@ -48,7 +48,7 @@ public class EnchantmentCache {
                 );
                 name = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
                 type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
-                rarity = EnchantmentRarity.getByName(ConfigManager.getConfig().getString("lore.vanilla-rarity"));
+                rarity = enchantment.isTreasure() ? EnchantmentRarity.getByName(ConfigManager.getConfig().getString("lore.vanilla-treasure-rarity")) : EnchantmentRarity.getByName(ConfigManager.getConfig().getString("lore.vanilla-rarity"));
             }
 
             color = type.getColor();
