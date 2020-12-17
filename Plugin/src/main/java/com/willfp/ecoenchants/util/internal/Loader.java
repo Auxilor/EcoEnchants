@@ -36,6 +36,8 @@ import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
+import com.willfp.ecoenchants.integrations.worldguard.WorldguardManager;
+import com.willfp.ecoenchants.integrations.worldguard.plugins.WorldguardIntegrationImpl;
 import com.willfp.ecoenchants.util.interfaces.Callable;
 import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.util.internal.updater.PlayerJoinListener;
@@ -115,7 +117,10 @@ public class Loader {
 
         final HashMap<String, Callable> integrations = new HashMap<String, Callable>() {{
             // AntiGrief
-            put("WorldGuard", () -> AntigriefManager.register(new AntigriefWorldGuard()));
+            put("WorldGuard", () -> {
+                AntigriefManager.register(new AntigriefWorldGuard());
+                WorldguardManager.register(new WorldguardIntegrationImpl());
+            });
             put("GriefPrevention", () -> AntigriefManager.register(new AntigriefGriefPrevention()));
             put("FactionsUUID", () -> AntigriefManager.register(new AntigriefFactionsUUID()));
             put("Towny", () -> AntigriefManager.register(new AntigriefTowny()));
