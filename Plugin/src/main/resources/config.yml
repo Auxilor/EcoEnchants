@@ -98,3 +98,4 @@ types:
 rarity:
   vanilla-rarity: uncommon # Vanilla enchantments do not have an EcoEnchants rarity - what rarity should they have?
   vanilla-treasure-rarity: legendary # Treasure enchantments do not appear in vanilla enchanting tables (Mending, Soul Speed, Frost Walker)
+  # The above options *do not* affect actual enchantment rarities. They are purely for cosmetic purposes, like in item lores.
