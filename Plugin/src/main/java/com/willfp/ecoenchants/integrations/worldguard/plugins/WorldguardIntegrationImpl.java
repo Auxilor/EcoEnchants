@@ -24,6 +24,6 @@ public class WorldguardIntegrationImpl implements WorldguardWrapper {
     @Override
     public boolean enabledForPlayer(EcoEnchant enchant, Player player, Location location) {
         if(WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(WorldGuardPlugin.inst().wrapPlayer(player), BukkitAdapter.adapt(location.getWorld()))) return true;
-        return WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testState(BukkitAdapter.adapt(location), WorldGuardPlugin.inst().wrapPlayer(player), (StateFlag) REGISTRY.get(enchant.getKey().getKey() + "-enabled"));
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().queryState(BukkitAdapter.adapt(location), WorldGuardPlugin.inst().wrapPlayer(player), (StateFlag) REGISTRY.get(enchant.getKey().getKey() + "-enabled")) == StateFlag.State.ALLOW;
     }
 }
