@@ -1,5 +1,3 @@
-config-version: 1.0
-
 rarities:
   # Table Probability is the chance of getting enchantment as a percentage from an enchanting table
   # Minimum Level is the minimum xp level you have to be to get the enchantment
