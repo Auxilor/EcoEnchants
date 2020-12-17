@@ -24,8 +24,11 @@ anvil:
 lore:
   use-numerals: true
   use-numbers-above-threshold: 10 #After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
+
   sort-by-type: false # Sort enchantments by type
-  sort-by-length: false # Sort enchantments by length. Any combination of this and the above option is valid
+  sort-by-length: false # Sort enchantments by length
+  sort-by-rarity: false # Sort enchantments by rarity.
+  # Any combination of the above options is valid
 
   type-ordering: # Only used if sort-by-type is enabled - top to bottom
     - normal
@@ -33,6 +36,16 @@ lore:
     - artifact
     - spell
     - curse
+
+  rarity-ordering: # Only used if sort-by-rarity is enabled - top to bottom
+    - common
+    - uncommon
+    - rare
+    - epic
+    - legendary
+    - special
+    - veryspecial
+  vanilla-rarity: uncommon # Vanilla enchantments do not have an EcoEnchants rarity - what rarity should they have?
 
   describe: # Describe enchantments in lore
     enabled: false

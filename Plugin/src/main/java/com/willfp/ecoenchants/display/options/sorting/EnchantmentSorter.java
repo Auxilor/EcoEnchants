@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface EnchantmentSorter {
     void sortEnchantments(final List<Enchantment> toSort);
+    SortParameters[] getParameters();
 }

@@ -14,9 +14,10 @@ import java.util.*;
 public class EnchantmentCache {
     private static final Set<CacheEntry> CACHE = new HashSet<>();
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public static CacheEntry getEntry(Enchantment enchantment) {
         Optional<CacheEntry> matching = CACHE.stream().filter(entry -> entry.getEnchantment().getKey().getKey().equals(enchantment.getKey().getKey())).findFirst();
-        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found"), EcoEnchant.EnchantmentType.NORMAL));
+        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found"), EcoEnchant.EnchantmentType.NORMAL, EnchantmentRarity.values().stream().findFirst().get()));
     }
 
     public static Set<CacheEntry> getCache() {
@@ -29,12 +30,14 @@ public class EnchantmentCache {
             String name;
             String color;
             EcoEnchant.EnchantmentType type;
+            EnchantmentRarity rarity;
             List<String> description;
             if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
                 description = ecoEnchant.getDescription();
                 name = ecoEnchant.getName();
                 type = ecoEnchant.getType();
+                rarity = ecoEnchant.getRarity();
             } else {
                 description = Arrays.asList(
                         WordUtils.wrap(
@@ -45,25 +48,23 @@ public class EnchantmentCache {
                 );
                 name = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
                 type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
+                rarity = EnchantmentRarity.getByName(ConfigManager.getConfig().getString("lore.vanilla-rarity"));
             }
 
             color = type.getColor();
 
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                EnchantmentRarity rarity = EcoEnchants.getFromEnchantment(enchantment).getRarity();
-                if (rarity != null) {
-                    if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
-                        color = rarity.getCustomColor();
-                    }
-                } else {
-                    Logger.warn("Enchantment " + enchantment.getKey().getKey() + " has an invalid rarity");
+            if (rarity != null) {
+                if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
+                    color = rarity.getCustomColor();
                 }
+            } else {
+                Logger.warn("Enchantment " + enchantment.getKey().getKey() + " has an invalid rarity");
             }
 
             String rawName = name;
             name = color + name;
             description.replaceAll(line -> EnchantDisplay.PREFIX + EnchantDisplay.OPTIONS.getDescriptionColor() + line);
-            CACHE.add(new CacheEntry(enchantment, name, rawName, description, type));
+            CACHE.add(new CacheEntry(enchantment, name, rawName, description, type, rarity));
         });
     }
 
@@ -75,14 +76,15 @@ public class EnchantmentCache {
         private final List<String> description;
         private final String stringDescription;
         private final EcoEnchant.EnchantmentType type;
+        private final EnchantmentRarity rarity;
 
-        public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description, EcoEnchant.EnchantmentType type) {
+        public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description, EcoEnchant.EnchantmentType type, EnchantmentRarity rarity) {
             this.enchantment = enchantment;
             this.name = name;
             this.rawName = rawName;
             this.description = description;
             this.type = type;
-
+            this.rarity = rarity;
 
             StringBuilder descriptionBuilder = new StringBuilder();
 
@@ -118,6 +120,10 @@ public class EnchantmentCache {
 
         public EcoEnchant.EnchantmentType getType() {
             return type;
+        }
+
+        public EnchantmentRarity getRarity() {
+            return rarity;
         }
 
         @Override

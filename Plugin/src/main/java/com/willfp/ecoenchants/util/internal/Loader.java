@@ -166,20 +166,20 @@ public class Loader {
         Logger.info("Adding Enchantments to API...");
         EnchantmentRarity.update();
         EnchantmentTarget.update();
-        if (EnchantmentRarity.getAll().size() == 0 || EnchantmentTarget.getAll().size() == 0) {
+        if (EnchantmentRarity.values().size() == 0 || EnchantmentTarget.values().size() == 0) {
             Logger.error("&cError loading rarities or targets! Aborting...");
             Bukkit.getPluginManager().disablePlugin(EcoEnchantsPlugin.getInstance());
             return;
         } else {
-            Logger.info(EnchantmentRarity.getAll().size() + " Rarities Loaded:");
-            EnchantmentRarity.getAll().forEach((rarity -> {
+            Logger.info(EnchantmentRarity.values().size() + " Rarities Loaded:");
+            EnchantmentRarity.values().forEach((rarity -> {
                 Logger.info("- " + rarity.getName() + ": Table Probability=" + rarity.getProbability() + ", Minimum Level=" + rarity.getMinimumLevel() + ", Villager Probability=" + rarity.getVillagerProbability() + ", Loot Probability=" + rarity.getLootProbability() + ", Has Custom Color=" + rarity.hasCustomColor());
             }));
 
             Logger.info("");
 
-            Logger.info(EnchantmentTarget.getAll().size() + " Targets Loaded:");
-            EnchantmentTarget.getAll().forEach((target) -> {
+            Logger.info(EnchantmentTarget.values().size() + " Targets Loaded:");
+            EnchantmentTarget.values().forEach((target) -> {
                 Logger.info("- " + target.getName() + ": Materials=" + target.getMaterials().toString());
             });
         }

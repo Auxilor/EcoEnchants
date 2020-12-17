@@ -173,7 +173,7 @@ public class EnchantmentRarity implements Registerable {
      *
      * @return A set of all rarities
      */
-    public static Set<EnchantmentRarity> getAll() {
+    public static Set<EnchantmentRarity> values() {
         return rarities;
     }
 }

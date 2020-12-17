@@ -93,7 +93,7 @@ public class EnchantmentTarget implements Registerable {
      *
      * @return A set of all rarities
      */
-    public static Set<EnchantmentTarget> getAll() {
+    public static Set<EnchantmentTarget> values() {
         return targets;
     }
 }
