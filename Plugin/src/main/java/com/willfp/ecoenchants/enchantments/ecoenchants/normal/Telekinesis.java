@@ -52,6 +52,7 @@ public class Telekinesis extends EcoEnchant {
                         .addItems(entry.getValue().getDrops())
                         .push();
             }
+            COLLATED_MAP.clear();
         }
     };
 
