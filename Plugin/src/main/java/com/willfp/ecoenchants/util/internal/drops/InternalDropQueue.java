@@ -131,7 +131,7 @@ public class InternalDropQueue implements AbstractDropQueue {
         assert world != null;
 
         if(hasTelekinesis) {
-            HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(items.toArray(new ItemStack[]{}));
+            HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(items.toArray(new ItemStack[0]));
             for(ItemStack drop : leftover.values()) {
                 world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
             }

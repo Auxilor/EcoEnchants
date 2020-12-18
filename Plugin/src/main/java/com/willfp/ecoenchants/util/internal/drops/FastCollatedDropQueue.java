@@ -33,7 +33,7 @@ public class FastCollatedDropQueue extends InternalDropQueue {
 
     @Override
     public void push() {
-        CollatedDrops collatedDrops = COLLATED_MAP.containsKey(player) ? COLLATED_MAP.get(player).addDrops(items) : new CollatedDrops(items, loc, xp);
+        CollatedDrops collatedDrops = COLLATED_MAP.containsKey(player) ? COLLATED_MAP.get(player).addDrops(items).setLocation(loc) : new CollatedDrops(items, loc, xp);
         COLLATED_MAP.put(player, collatedDrops);
     }
 
@@ -62,7 +62,7 @@ public class FastCollatedDropQueue extends InternalDropQueue {
 
     private static class CollatedDrops {
         private final List<ItemStack> drops;
-        private final Location location;
+        private Location location;
         private final int xp;
 
         private CollatedDrops(List<ItemStack> drops, Location location, int xp) {
@@ -87,5 +87,11 @@ public class FastCollatedDropQueue extends InternalDropQueue {
             drops.addAll(toAdd);
             return this;
         }
+
+        public CollatedDrops setLocation(Location loc) {
+            this.location = loc;
+            return this;
+        }
+
     }
 }

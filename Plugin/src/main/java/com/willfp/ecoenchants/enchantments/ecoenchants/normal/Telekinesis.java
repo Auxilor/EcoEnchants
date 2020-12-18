@@ -42,7 +42,6 @@ public class Telekinesis extends EcoEnchant {
 
         if (!EnchantChecks.mainhand(player, this)) return;
         if(this.getDisabledWorldNames().contains(player.getWorld().getName())) return;
-        //if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (event.isCancelled()) return;
 
@@ -58,6 +57,7 @@ public class Telekinesis extends EcoEnchant {
         new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addItems(drops)
+                .forceTelekinesis()
                 .push();
 
         player.updateInventory();
