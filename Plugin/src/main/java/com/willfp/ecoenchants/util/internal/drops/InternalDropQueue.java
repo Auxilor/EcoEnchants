@@ -31,7 +31,7 @@ public class InternalDropQueue implements AbstractDropQueue {
     private static boolean useOrb;
 
     /**
-     * Create {@link com.willfp.ecoenchants.util.internal.DropQueue} linked to player
+     * Create {@link com.willfp.ecoenchants.util.internal.drops.InternalDropQueue} linked to player
      *
      * @param player The player
      */

@@ -8,7 +8,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,15 +33,7 @@ public class FastCollatedDropQueue extends InternalDropQueue {
 
     @Override
     public void push() {
-        CollatedDrops collatedDrops;
-        if(COLLATED_MAP.containsKey(player)) {
-            List<ItemStack> dropSet = COLLATED_MAP.get(player).getDrops();
-            dropSet.addAll(items);
-            collatedDrops = new FastCollatedDropQueue.CollatedDrops(dropSet, loc, xp);
-        } else {
-            collatedDrops = new FastCollatedDropQueue.CollatedDrops(new ArrayList<>(items), loc, xp);
-        }
-
+        CollatedDrops collatedDrops = COLLATED_MAP.containsKey(player) ? COLLATED_MAP.get(player).addDrops(items) : new CollatedDrops(items, loc, xp);
         COLLATED_MAP.put(player, collatedDrops);
     }
 
@@ -56,7 +47,6 @@ public class FastCollatedDropQueue extends InternalDropQueue {
 
     static {
         Bukkit.getScheduler().runTaskTimer(EcoEnchantsPlugin.getInstance(), () -> {
-            if (!collate) return;
             for (Map.Entry<Player, CollatedDrops> entry : COLLATED_MAP.entrySet()) {
                 new InternalDropQueue(entry.getKey())
                         .setLocation(entry.getValue().getLocation())
@@ -91,6 +81,11 @@ public class FastCollatedDropQueue extends InternalDropQueue {
 
         public int getXp() {
             return xp;
+        }
+
+        public CollatedDrops addDrops(List<ItemStack> toAdd) {
+            drops.addAll(toAdd);
+            return this;
         }
     }
 }

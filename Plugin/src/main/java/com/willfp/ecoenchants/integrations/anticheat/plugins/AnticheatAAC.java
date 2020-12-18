@@ -1,18 +1,15 @@
 package com.willfp.ecoenchants.integrations.anticheat.plugins;
 
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatWrapper;
-import me.konsolas.aac.api.PlayerViolationEvent;
+import me.konsolas.aac.api.AACAPI;
+import me.konsolas.aac.api.AACExemption;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 public class AnticheatAAC implements AnticheatWrapper, Listener {
-    private final Set<UUID> exempt = new HashSet<>();
+    private final AACExemption ECOENCHANTS = new AACExemption("EcoEnchants");
+    private final AACAPI api = Bukkit.getServicesManager().load(AACAPI.class);
 
     @Override
     public String getPluginName() {
@@ -21,20 +18,11 @@ public class AnticheatAAC implements AnticheatWrapper, Listener {
 
     @Override
     public void exempt(Player player) {
-        this.exempt.add(player.getUniqueId());
+        api.addExemption(player, ECOENCHANTS);
     }
 
     @Override
     public void unexempt(Player player) {
-        this.exempt.remove(player.getUniqueId());
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    private void onViolate(PlayerViolationEvent event) {
-        if (!exempt.contains(event.getPlayer().getUniqueId())) {
-            return;
-        }
-
-        event.setCancelled(true);
+        api.removeExemption(player, ECOENCHANTS);
     }
 }
