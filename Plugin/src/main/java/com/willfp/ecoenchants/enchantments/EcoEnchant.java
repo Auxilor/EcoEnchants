@@ -142,7 +142,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         enabled = config.getBool("enabled", true);
         EnchantmentUtils.registerPlaceholders(this);
 
+        postUpdate();
         this.register();
+    }
+
+    protected void postUpdate() {
+        // Unused as some enchantments may have postUpdate tasks, however most won't.
     }
 
     /**

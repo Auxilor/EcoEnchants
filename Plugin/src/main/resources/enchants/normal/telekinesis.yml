@@ -29,5 +29,3 @@ general-config:
 config:
   use-orb: true # Use experience orb above player to give xp. Use if you need mending interaction.
   not-on-players: false # Disallow getting drops from players
-
-  collate: false # Experimental feature - may help performance on larger servers. Stores all drops temporarily and only pushes them at the end of this tick. This should reduce the DropQueue calls from thousands a second to about 10

@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
@@ -9,9 +8,8 @@ import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEven
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.internal.DropQueue;
-import org.bukkit.Bukkit;
+import com.willfp.ecoenchants.util.internal.FastCollatedDropQueue;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
@@ -24,44 +22,16 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 public class Telekinesis extends EcoEnchant {
     public Telekinesis() {
         super(
                 "telekinesis", EnchantmentType.NORMAL
         );
-    }
-
-    private static boolean collate = false;
-    private static final HashMap<Player, CollatedDrops> COLLATED_MAP = new HashMap<>();
-    private static final BukkitRunnable COLLATED_RUNNABLE = new BukkitRunnable() {
-        @Override
-        public void run() {
-            for(Map.Entry<Player, CollatedDrops> entry : COLLATED_MAP.entrySet()) {
-                new DropQueue(entry.getKey())
-                        .setLocation(entry.getValue().getLocation())
-                        .addItems(entry.getValue().getDrops())
-                        .push();
-            }
-            COLLATED_MAP.clear();
-        }
-    };
-
-    private static BukkitTask collatedRunnableTask = null;
-
-    public void update() {
-        collate = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "collate");
-        if(collate) collatedRunnableTask = COLLATED_RUNNABLE.runTaskTimer(EcoEnchantsPlugin.getInstance(), 0, 1);
-        else if(collatedRunnableTask != null) Bukkit.getScheduler().cancelTask(collatedRunnableTask.getTaskId());
     }
 
     // START OF LISTENERS
@@ -79,37 +49,24 @@ public class Telekinesis extends EcoEnchant {
 
         Block block = event.getBlock();
 
-        //if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if (!AntigriefManager.canBreakBlock(player, block)) return;
 
         List<ItemStack> drops = new ArrayList<>();
         for(Item item : event.getItems()) drops.add(item.getItemStack());
 
         event.getItems().clear();
 
-        if(collate) collateDropItem(event, player, drops, block);
-        else defaultDropItem(event, player, drops, block);
-    }
+        if(FastCollatedDropQueue.use()) {
+            FastCollatedDropQueue.collateDrop(player, drops, 0, block.getLocation());
+            return;
+        }
 
-    private void collateDropItem(BlockDropItemEvent event, Player player, List<ItemStack> drops, Block block) {
         new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addItems(drops)
                 .push();
 
         player.updateInventory();
-    }
-
-    private void defaultDropItem(BlockDropItemEvent event, Player player, List<ItemStack> drops, Block block) {
-        CollatedDrops collatedDrops;
-        if(COLLATED_MAP.containsKey(player)) {
-            HashSet<ItemStack> dropSet = COLLATED_MAP.get(player).getDrops();
-            dropSet.addAll(drops);
-            collatedDrops = new CollatedDrops(dropSet, block.getLocation());
-        } else {
-            collatedDrops = new CollatedDrops(new HashSet<>(drops), block.getLocation());
-        }
-
-        COLLATED_MAP.put(player, collatedDrops);
     }
 
     // For exp drops, blockdropitemevent doesn't cover xp
@@ -186,27 +143,5 @@ public class Telekinesis extends EcoEnchant {
 
         event.getDeathEvent().setDroppedExp(0);
         event.getDeathEvent().getDrops().clear();
-    }
-
-    static {
-        EcoEnchants.TELEKINESIS.update();
-    }
-
-    private static class CollatedDrops {
-        private final HashSet<ItemStack> drops;
-        private final Location location;
-
-        private CollatedDrops(HashSet<ItemStack> drops, Location location) {
-            this.drops = drops;
-            this.location = location;
-        }
-
-        public HashSet<ItemStack> getDrops() {
-            return drops;
-        }
-
-        public Location getLocation() {
-            return location;
-        }
     }
 }

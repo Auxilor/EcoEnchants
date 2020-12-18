@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.util.internal.FastCollatedDropQueue;
 import com.willfp.ecoenchants.util.internal.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -87,6 +88,9 @@ public class CommandEcodebug extends AbstractCommand {
             if (enchant.getRawTargets().isEmpty()) withIssues.add(enchant);
         });
         Logger.info("Enchantments with evident issues: " + withIssues.toString());
+        Logger.info("");
+
+        Logger.info("Collate? " + FastCollatedDropQueue.use());
         Logger.info("");
 
         Logger.info("Server Information: ");

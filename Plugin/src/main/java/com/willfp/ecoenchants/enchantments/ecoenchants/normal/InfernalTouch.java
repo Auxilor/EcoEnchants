@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.util.internal.DropQueue;
+import com.willfp.ecoenchants.util.internal.FastCollatedDropQueue;
 import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -24,8 +25,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -52,8 +51,9 @@ public class InfernalTouch extends EcoEnchant {
     }
 
     private static Pair<Material, Integer> getOutput(Material input) {
-        Optional<Pair<Material, Integer>> matching = recipes.entrySet().parallelStream().filter(materialPairEntry -> materialPairEntry.getKey().equals(input)).map(Map.Entry::getValue).findFirst();
-        return matching.orElse(new Pair<>(input, 0));
+        Pair<Material, Integer> toReturn = recipes.get(input);
+        if(toReturn == null) return new Pair<>(input, 0);
+        return toReturn;
     }
 
     // START OF LISTENERS
@@ -97,6 +97,11 @@ public class InfernalTouch extends EcoEnchant {
         });
 
         event.getItems().clear();
+
+        if(FastCollatedDropQueue.use()) {
+            FastCollatedDropQueue.collateDrop(player, drops, experience.get(), block.getLocation());
+            return;
+        }
 
         new DropQueue(player)
                 .setLocation(block.getLocation())

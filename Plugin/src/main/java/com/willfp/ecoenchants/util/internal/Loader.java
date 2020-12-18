@@ -370,8 +370,10 @@ public class Loader {
         DropQueue.update();
         EnchantDisplay.update();
         TabCompleterEnchantinfo.reload();
-        EcoEnchants.TELEKINESIS.update();
+        FastCollatedDropQueue.update();
         EcoEnchant.EnchantmentType.update();
+
+        Bukkit.getScheduler().cancelTasks(EcoEnchantsPlugin.getInstance());
 
         EcoEnchants.getAll().forEach((ecoEnchant -> {
             HandlerList.unregisterAll(ecoEnchant);
