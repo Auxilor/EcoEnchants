@@ -327,6 +327,15 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
+     * Get world names that the enchantment is disabled in
+     *
+     * @return A list of all disabled world names
+     */
+    public Set<String> getDisabledWorldNames() {
+        return disabledWorldNames;
+    }
+
+    /**
      * Get display name of enchantment.
      * Not deprecated, unlike {@link Enchantment#getName()}
      *
@@ -370,6 +379,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
+     * Treasure enchantments do not exist in EcoEnchants
+     * @see EnchantmentType#SPECIAL
+     *
      * @return false
      *
      * @deprecated Treasure enchantments do not exist. Use {@link EcoEnchant#getType()} instead.
@@ -381,6 +393,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
+     * While this method works, it is not recommended to use it.
+     * @see EnchantmentType#CURSE
+     *
      * @return Returns if enchantment is cursed.
      *
      * @deprecated Use {@link EcoEnchant#getType()} instead.

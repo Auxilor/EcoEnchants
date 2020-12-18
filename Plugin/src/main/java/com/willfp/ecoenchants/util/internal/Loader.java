@@ -370,6 +370,7 @@ public class Loader {
         DropQueue.update();
         EnchantDisplay.update();
         TabCompleterEnchantinfo.reload();
+        EcoEnchants.TELEKINESIS.update();
         EcoEnchant.EnchantmentType.update();
 
         EcoEnchants.getAll().forEach((ecoEnchant -> {

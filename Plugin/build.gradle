@@ -1,5 +1,7 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'maven-publish'
+    id 'maven'
 }
 
 dependencies {
@@ -60,3 +62,12 @@ build.dependsOn shadowJar
 
 description = 'EcoEnchants'
 compileJava.options.encoding = 'UTF-8'
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
