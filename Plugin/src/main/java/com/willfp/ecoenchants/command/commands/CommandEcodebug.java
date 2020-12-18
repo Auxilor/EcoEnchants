@@ -5,8 +5,8 @@ import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.util.internal.FastCollatedDropQueue;
 import com.willfp.ecoenchants.util.internal.Logger;
+import com.willfp.ecoenchants.util.internal.drops.FastCollatedDropQueue;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -14,7 +14,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")

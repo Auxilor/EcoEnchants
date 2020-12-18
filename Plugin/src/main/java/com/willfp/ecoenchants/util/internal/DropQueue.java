@@ -1,34 +1,21 @@
 package com.willfp.ecoenchants.util.internal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.util.NumberUtils;
-import org.bukkit.*;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.ExperienceOrb;
+import com.willfp.ecoenchants.util.internal.drops.AbstractDropQueue;
+import com.willfp.ecoenchants.util.internal.drops.FastCollatedDropQueue;
+import com.willfp.ecoenchants.util.internal.drops.InternalDropQueue;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * All drops generated from enchantments should be sent through a {@link DropQueue}
  * Interacts with {@link EcoEnchants#TELEKINESIS}
  */
 public class DropQueue {
-    private final List<ItemStack> items;
-    private int xp;
-    private final Player player;
-    private Location loc;
-    private boolean hasTelekinesis = false;
-    private ItemStack item;
-
-    private static boolean useOrb;
+    private final AbstractDropQueue handle;
 
     /**
      * Create {@link DropQueue} linked to player
@@ -36,11 +23,7 @@ public class DropQueue {
      * @param player The player
      */
     public DropQueue(Player player) {
-        this.items = new ArrayList<>();
-        this.xp = 0;
-        this.player = player;
-        this.loc = player.getLocation();
-        this.item = player.getInventory().getItemInMainHand();
+        handle = FastCollatedDropQueue.use() ? new FastCollatedDropQueue(player) : new InternalDropQueue(player);
     }
 
     /**
@@ -51,7 +34,7 @@ public class DropQueue {
      * @return The DropQueue
      */
     public DropQueue addItem(ItemStack item) {
-        this.items.add(item);
+        handle.addItem(item);
         return this;
     }
 
@@ -63,7 +46,7 @@ public class DropQueue {
      * @return The DropQueue
      */
     public DropQueue addItems(Collection<ItemStack> itemStacks) {
-        this.items.addAll(itemStacks);
+        handle.addItems(itemStacks);
         return this;
     }
 
@@ -75,7 +58,7 @@ public class DropQueue {
      * @return The DropQueue
      */
     public DropQueue addXP(int amount) {
-        this.xp += amount;
+        handle.addXP(amount);
         return this;
     }
 
@@ -87,7 +70,7 @@ public class DropQueue {
      * @return The DropQueue
      */
     public DropQueue setLocation(Location l) {
-        this.loc = l;
+        handle.setLocation(l);
         return this;
     }
 
@@ -97,7 +80,7 @@ public class DropQueue {
      * @return The DropQueue
      */
     public DropQueue forceTelekinesis() {
-        this.hasTelekinesis = true;
+        handle.forceTelekinesis();
         return this;
     }
 
@@ -110,7 +93,7 @@ public class DropQueue {
      * @return The DropQueue
      */
     public DropQueue setItem(ItemStack item) {
-        this.item = item;
+        handle.setItem(item);
         return this;
     }
 
@@ -118,45 +101,6 @@ public class DropQueue {
      * Push the queue
      */
     public void push() {
-        if(!hasTelekinesis) hasTelekinesis = EnchantChecks.item(item, EcoEnchants.TELEKINESIS);
-        if(hasTelekinesis && !EcoEnchants.TELEKINESIS.isEnabled()) hasTelekinesis = false;
-
-        World world = loc.getWorld();
-        assert world != null;
-
-        if(hasTelekinesis) {
-            HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(items.toArray(new ItemStack[]{}));
-            for(ItemStack drop : leftover.values()) {
-                world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
-            }
-            if (xp > 0) {
-                PlayerExpChangeEvent event = new PlayerExpChangeEvent(player, xp);
-                Bukkit.getPluginManager().callEvent(event);
-                if (useOrb) {
-                    ExperienceOrb orb = (ExperienceOrb) world.spawnEntity(player.getLocation().add(0, 0.2, 0), EntityType.EXPERIENCE_ORB);
-                    orb.setVelocity(new Vector(0, 0, 0));
-                    orb.setExperience(event.getAmount());
-                } else {
-                    player.giveExp(event.getAmount());
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.AMBIENT, 1f, (float) NumberUtils.randFloat(0.7, 1.2));
-                }
-            }
-        } else {
-            for (ItemStack drop : items) {
-                world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
-            }
-            if (xp > 0) {
-                ExperienceOrb orb = (ExperienceOrb) world.spawnEntity(loc, EntityType.EXPERIENCE_ORB);
-                orb.setExperience(xp);
-            }
-        }
-    }
-
-    public static void update() {
-        useOrb = EcoEnchants.TELEKINESIS.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-orb");
-    }
-
-    static {
-        update();
+        handle.push();
     }
 }

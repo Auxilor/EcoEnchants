@@ -8,7 +8,6 @@ import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEven
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.nms.TridentStack;
 import com.willfp.ecoenchants.util.internal.DropQueue;
-import com.willfp.ecoenchants.util.internal.FastCollatedDropQueue;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -55,11 +54,6 @@ public class Telekinesis extends EcoEnchant {
         for(Item item : event.getItems()) drops.add(item.getItemStack());
 
         event.getItems().clear();
-
-        if(FastCollatedDropQueue.use()) {
-            FastCollatedDropQueue.collateDrop(player, drops, 0, block.getLocation());
-            return;
-        }
 
         new DropQueue(player)
                 .setLocation(block.getLocation())

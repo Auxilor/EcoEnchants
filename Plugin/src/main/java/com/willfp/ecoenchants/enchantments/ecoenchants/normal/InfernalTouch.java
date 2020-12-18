@@ -4,7 +4,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.util.internal.DropQueue;
-import com.willfp.ecoenchants.util.internal.FastCollatedDropQueue;
 import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -97,11 +96,6 @@ public class InfernalTouch extends EcoEnchant {
         });
 
         event.getItems().clear();
-
-        if(FastCollatedDropQueue.use()) {
-            FastCollatedDropQueue.collateDrop(player, drops, experience.get(), block.getLocation());
-            return;
-        }
 
         new DropQueue(player)
                 .setLocation(block.getLocation())
