@@ -103,4 +103,8 @@ public class DropQueue {
     public void push() {
         handle.push();
     }
+
+    static {
+        FastCollatedDropQueue.update();
+    }
 }
