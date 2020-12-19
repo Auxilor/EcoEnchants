@@ -1,54 +1,41 @@
 package com.willfp.ecoenchants.events.naturalexpgainevent;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ExpBottleEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class NaturalExpGainListeners implements Listener {
-
-    final Set<NaturalExpGainBuilder> events = new HashSet<>();
+    private final Set<NaturalExpGainBuilder> events = new HashSet<>();
 
     @EventHandler
-    public void onExpChange(PlayerExpChangeEvent event) {
-        NaturalExpGainBuilder builtEvent = new NaturalExpGainBuilder();
-        builtEvent.setEvent(event);
+    public void playerChange(PlayerExpChangeEvent event) {
+        NaturalExpGainBuilder builder = new NaturalExpGainBuilder(NaturalExpGainBuilder.BuildReason.PLAYER);
+        builder.setEvent(event);
 
-        AtomicBoolean isNatural = new AtomicBoolean(true);
-        AtomicReference<NaturalExpGainBuilder> atomicBuiltEvent = new AtomicReference<>();
-
-        Set<NaturalExpGainBuilder> eventsClone = new HashSet<>(events);
-        eventsClone.forEach((builder) -> {
-            if (builder.getLoc().getWorld().getNearbyEntities(builder.getLoc(), 7.25, 7.25, 7.25).contains(event.getPlayer())) {
-                events.remove(builder);
-                isNatural.set(false);
-                atomicBuiltEvent.set(builder);
-            }
-        });
-
-        if (isNatural.get()) {
-            events.remove(atomicBuiltEvent.get());
-            builtEvent.push();
+        NaturalExpGainBuilder toRemove = null;
+        for (NaturalExpGainBuilder searchBuilder : events) {
+            if(searchBuilder.getReason().equals(NaturalExpGainBuilder.BuildReason.BOTTLE) && searchBuilder.getLoc().distanceSquared(event.getPlayer().getLocation()) > 52)
+                toRemove = searchBuilder;
         }
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                events.remove(builtEvent);
-            }
-        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
+        if(toRemove != null) {
+            events.remove(toRemove);
+            return;
+        }
+
+        builder.setEvent(event);
+        builder.push();
+
+        events.remove(builder);
     }
 
     @EventHandler
     public void onExpBottle(ExpBottleEvent event) {
-        NaturalExpGainBuilder builtEvent = new NaturalExpGainBuilder();
+        NaturalExpGainBuilder builtEvent = new NaturalExpGainBuilder(NaturalExpGainBuilder.BuildReason.BOTTLE);
         builtEvent.setLoc(event.getEntity().getLocation());
 
         events.add(builtEvent);

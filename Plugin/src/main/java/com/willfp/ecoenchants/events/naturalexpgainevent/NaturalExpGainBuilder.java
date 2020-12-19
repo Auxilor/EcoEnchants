@@ -10,9 +10,10 @@ class NaturalExpGainBuilder {
     private boolean cancelled = false;
     private PlayerExpChangeEvent event;
     private Location loc;
+    private BuildReason reason;
 
-    public NaturalExpGainBuilder() {
-
+    public NaturalExpGainBuilder(BuildReason reason) {
+        this.reason = reason;
     }
 
     public LivingEntity getVictim() {
@@ -35,6 +36,10 @@ class NaturalExpGainBuilder {
         return this.loc;
     }
 
+    public BuildReason getReason() {
+        return reason;
+    }
+
     public void push() {
         if (this.event == null) return;
         if (this.cancelled) return;
@@ -42,5 +47,10 @@ class NaturalExpGainBuilder {
         NaturalExpGainEvent naturalExpGainEvent = new NaturalExpGainEvent(event);
 
         Bukkit.getPluginManager().callEvent(naturalExpGainEvent);
+    }
+
+    public enum BuildReason {
+        BOTTLE,
+        PLAYER
     }
 }

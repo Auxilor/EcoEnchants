@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Container;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockDropItemEvent;
@@ -25,7 +26,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class InfernalTouch extends EcoEnchant {
     private static final HashMap<Material, Pair<Material, Integer>> recipes = new HashMap<>();
@@ -45,7 +45,8 @@ public class InfernalTouch extends EcoEnchant {
                 continue;
             }
             FurnaceRecipe furnaceRecipe = (FurnaceRecipe) recipe;
-            recipes.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), (int) Math.ceil(furnaceRecipe.getExperience())));
+            int xp = (int) Math.ceil(furnaceRecipe.getExperience());
+            recipes.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), xp));
         }
     }
 
@@ -77,30 +78,30 @@ public class InfernalTouch extends EcoEnchant {
         if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         Collection<ItemStack> drops = new ArrayList<>();
-        event.getItems().forEach((item -> {
-            drops.add(item.getItemStack());
-        }));
 
-        AtomicInteger experience = new AtomicInteger(0);
+        for (Item item : event.getItems()) {
+            drops.add(item.getItemStack());
+        }
+
+        int experience = 0;
         int fortune = EnchantChecks.getMainhandLevel(player, Enchantment.LOOT_BONUS_BLOCKS);
 
-
-        drops.forEach(itemStack -> {
+        for (ItemStack itemStack : drops) {
             itemStack.setType(getOutput(itemStack.getType()).getFirst());
-            experience.addAndGet(getOutput(itemStack.getType()).getSecond());
+            experience += (getOutput(itemStack.getType()).getSecond());
 
             if(fortune > 0 && allowsFortune.contains(itemStack.getType())) {
-                itemStack.setAmount((int) Math.ceil(1/((double) fortune + 2) + ((double) fortune + 1)/2));
-                experience.addAndGet(1);
+                itemStack.setAmount((int) Math.ceil(1 / ((double) fortune + 2) + ((double) fortune + 1) / 2));
+                experience++;
             }
-        });
+        }
 
         event.getItems().clear();
 
         new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addItems(drops)
-                .addXP(experience.get())
+                .addXP(experience)
                 .push();
     }
 }

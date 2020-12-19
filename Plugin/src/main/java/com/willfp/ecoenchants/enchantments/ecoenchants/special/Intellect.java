@@ -21,11 +21,11 @@ public class Intellect extends EcoEnchant {
 
         if(event.getExpChangeEvent().getAmount() < 0) return;
 
-        if (!EnchantChecks.mainhand(player, this)) return;
+        int level = EnchantChecks.getMainhandLevel(player, this);
+
+        if(level == 0) return;
 
         if(this.getDisabledWorlds().contains(player.getWorld())) return;
-
-        int level = EnchantChecks.getMainhandLevel(player, this);
 
         event.getExpChangeEvent().setAmount((int) Math.ceil(event.getExpChangeEvent().getAmount() * (1 + (level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-point")))));
     }
