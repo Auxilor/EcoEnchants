@@ -1,18 +1,32 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.*;
-import com.willfp.ecoenchants.enchantments.ecoenchants.curse.*;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.BreaklessnessCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.CallingCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.DecayCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.FragilityCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.HarmlessnessCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.HungerCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.InaccuracyCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.MisfortuneCurse;
+import com.willfp.ecoenchants.enchantments.ecoenchants.curse.PermanenceCurse;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.*;
-import com.willfp.ecoenchants.enchantments.ecoenchants.spell.*;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Ascend;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Charge;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Dynamite;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -24,7 +38,7 @@ public class EcoEnchants {
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
 
-    private static final Set<EcoEnchant> ecoEnchants = new HashSet<>();
+    private static final List<EcoEnchant> ecoEnchants = new ArrayList<>();
 
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();
@@ -250,9 +264,9 @@ public class EcoEnchants {
     /**
      * Get all registered {@link EcoEnchant}s
      *
-     * @return A set of all {@link EcoEnchant}s
+     * @return A list of all {@link EcoEnchant}s
      */
-    public static Set<EcoEnchant> getAll() {
+    public static List<EcoEnchant> getAll() {
         return ecoEnchants;
     }
 
@@ -299,8 +313,8 @@ public class EcoEnchants {
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByKey(NamespacedKey key) {
-        for (EcoEnchant ecoEnchant : getAll()) {
-            if(ecoEnchant.getKey().equals(key)) return ecoEnchant;
+        for (EcoEnchant found : ecoEnchants) {
+            if (found.getKey().equals(key)) return found;
         }
         return null;
     }

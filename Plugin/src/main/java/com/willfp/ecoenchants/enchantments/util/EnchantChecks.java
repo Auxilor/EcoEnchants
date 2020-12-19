@@ -181,11 +181,10 @@ public class EnchantChecks {
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
 
-        item.getEnchantments().forEach(((enchantment, integer) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
-            }
-        }));
+        for (Map.Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
+            EcoEnchant enchant = EcoEnchants.getFromEnchantment(entry.getKey());
+            if(enchant != null) ecoEnchants.put(enchant, entry.getValue());
+        }
 
         return ecoEnchants;
     }
