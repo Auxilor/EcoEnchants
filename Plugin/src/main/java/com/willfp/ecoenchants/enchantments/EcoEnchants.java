@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments;
 
+import com.google.common.collect.ImmutableList;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.*;
 import com.willfp.ecoenchants.enchantments.ecoenchants.curse.BreaklessnessCurse;
 import com.willfp.ecoenchants.enchantments.ecoenchants.curse.CallingCurse;
@@ -24,8 +25,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -39,6 +42,7 @@ public class EcoEnchants {
     public static final String GENERAL_LOCATION = "general-config.";
 
     private static final List<EcoEnchant> ecoEnchants = new ArrayList<>();
+    private static final Map<NamespacedKey, EcoEnchant> byKey = new HashMap<>();
 
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();
@@ -267,7 +271,7 @@ public class EcoEnchants {
      * @return A list of all {@link EcoEnchant}s
      */
     public static List<EcoEnchant> getAll() {
-        return ecoEnchants;
+        return ImmutableList.copyOf(ecoEnchants);
     }
 
     /**
@@ -313,10 +317,7 @@ public class EcoEnchants {
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByKey(NamespacedKey key) {
-        for (EcoEnchant found : ecoEnchants) {
-            if (found.getKey().equals(key)) return found;
-        }
-        return null;
+        return byKey.get(key);
     }
 
     /**
@@ -367,6 +368,8 @@ public class EcoEnchants {
     public static void addNewEcoEnchant(EcoEnchant enchant) {
         ecoEnchants.remove(enchant);
         ecoEnchants.add(enchant);
+        byKey.remove(enchant.getKey());
+        byKey.put(enchant.getKey(), enchant);
     }
 
     /**
@@ -376,5 +379,6 @@ public class EcoEnchants {
      */
     public static void removeEcoEnchant(EcoEnchant enchant) {
         ecoEnchants.remove(enchant);
+        byKey.remove(enchant.getKey());
     }
 }
