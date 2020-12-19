@@ -33,7 +33,8 @@ public class FastCollatedDropQueue extends InternalDropQueue {
 
     @Override
     public void push() {
-        CollatedDrops collatedDrops = COLLATED_MAP.containsKey(player) ? COLLATED_MAP.get(player).addDrops(items).setLocation(loc) : new CollatedDrops(items, loc, xp);
+        CollatedDrops fetched = COLLATED_MAP.get(player);
+        CollatedDrops collatedDrops = fetched == null ? new CollatedDrops(items, loc, xp) : fetched.addDrops(items).setLocation(loc);
         COLLATED_MAP.put(player, collatedDrops);
     }
 

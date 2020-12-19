@@ -59,8 +59,6 @@ public class Telekinesis extends EcoEnchant {
                 .addItems(drops)
                 .forceTelekinesis()
                 .push();
-
-        player.updateInventory();
     }
 
     // For exp drops, blockdropitemevent doesn't cover xp
