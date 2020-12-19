@@ -83,6 +83,7 @@ public class Telekinesis extends EcoEnchant {
         new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addXP(event.getExpToDrop())
+                .forceTelekinesis()
                 .push();
 
         event.setExpToDrop(0);
