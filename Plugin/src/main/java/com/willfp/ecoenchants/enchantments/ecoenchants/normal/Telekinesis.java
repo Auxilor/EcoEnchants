@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
@@ -33,14 +34,21 @@ public class Telekinesis extends EcoEnchant {
         );
     }
 
+    private static boolean always = false;
+
     // START OF LISTENERS
+
+    @Override
+    protected void postUpdate() {
+        always = ConfigManager.getConfig().getBool("drops.force-dropqueue");
+    }
 
     // For block drops
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void telekinesisDropItem(BlockDropItemEvent event) {
         Player player = event.getPlayer();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
+        if(!always && !EnchantChecks.mainhand(player, this)) return;
         if(this.getDisabledWorldNames().contains(player.getWorld().getName())) return;
 
         if (event.isCancelled()) return;
@@ -57,7 +65,6 @@ public class Telekinesis extends EcoEnchant {
         new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addItems(drops)
-                .forceTelekinesis()
                 .push();
     }
 
@@ -67,7 +74,7 @@ public class Telekinesis extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
+        if(!always && !EnchantChecks.mainhand(player, this)) return;
         if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
@@ -83,7 +90,6 @@ public class Telekinesis extends EcoEnchant {
         new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addXP(event.getExpToDrop())
-                .forceTelekinesis()
                 .push();
 
         event.setExpToDrop(0);
