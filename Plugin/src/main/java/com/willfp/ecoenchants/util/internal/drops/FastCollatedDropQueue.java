@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.util.internal.drops;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.util.internal.DropQueue;
+import com.willfp.ecoenchants.util.internal.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

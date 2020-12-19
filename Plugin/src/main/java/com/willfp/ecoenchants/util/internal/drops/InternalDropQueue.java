@@ -129,11 +129,12 @@ public class InternalDropQueue implements AbstractDropQueue {
 
         World world = loc.getWorld();
         assert world != null;
+        loc = loc.add(0.5, 0.5, 0.5);
 
         if(hasTelekinesis) {
             HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(items.toArray(new ItemStack[0]));
             for(ItemStack drop : leftover.values()) {
-                world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
+                world.dropItem(loc, drop).setVelocity(new Vector());
             }
             if (xp > 0) {
                 PlayerExpChangeEvent event = new PlayerExpChangeEvent(player, xp);
@@ -149,7 +150,7 @@ public class InternalDropQueue implements AbstractDropQueue {
             }
         } else {
             for (ItemStack drop : items) {
-                world.dropItemNaturally(loc.add(0.5, 0, 0.5), drop).setVelocity(new Vector());
+                world.dropItem(loc, drop).setVelocity(new Vector());
             }
             if (xp > 0) {
                 ExperienceOrb orb = (ExperienceOrb) world.spawnEntity(loc, EntityType.EXPERIENCE_ORB);
