@@ -101,6 +101,7 @@ rarity:
   # The above options *do not* affect actual enchantment rarities. They are purely for cosmetic purposes, like in item lores.
 
 drops:
+  ### ADVANCED OPTIONS
   collate: false
   # Instead of directly dropping all drops and xp, some intensive enchantments (eg Telekinesis and Infernal Touch) will push to a collated queue.
   # At the end of each tick, the queue will be pushed rather than pushing on every drop creation
