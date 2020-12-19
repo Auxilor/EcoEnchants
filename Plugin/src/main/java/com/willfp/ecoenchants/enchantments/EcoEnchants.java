@@ -299,8 +299,10 @@ public class EcoEnchants {
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByKey(NamespacedKey key) {
-        Optional<EcoEnchant> matching = getAll().stream().filter(enchant -> enchant.getKey().equals(key)).findFirst();
-        return matching.orElse(null);
+        for (EcoEnchant ecoEnchant : getAll()) {
+            if(ecoEnchant.getKey().equals(key)) return ecoEnchant;
+        }
+        return null;
     }
 
     /**
