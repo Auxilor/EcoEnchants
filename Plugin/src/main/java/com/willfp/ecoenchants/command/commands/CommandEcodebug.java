@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants.command.commands;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.ListenerPriority;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.command.AbstractCommand;
 import com.willfp.ecoenchants.display.EnchantmentCache;
@@ -97,10 +99,13 @@ public class CommandEcodebug extends AbstractCommand {
         Logger.info("Collate? " + FastCollatedDropQueue.use());
         Logger.info("");
 
+        Logger.info("Packets: " + ProtocolLibrary.getProtocolManager().getPacketListeners().stream().filter(packetListener -> packetListener.getSendingWhitelist().getPriority().equals(ListenerPriority.MONITOR)).collect(Collectors.toList()).toString());
+        Logger.info("");
+
         Logger.info("Server Information: ");
         Logger.info("Players Online: " + Bukkit.getServer().getOnlinePlayers().size());
         Logger.info("Bukkit IP: " + Bukkit.getIp());
-        Logger.info("Running Version: " + Bukkit.getVersion() + ", Bukkit Version: " + Bukkit.getBukkitVersion() + ", Alt Version: " + Bukkit.getServer().getVersion());
+        Logger.info("Running Version: " + Bukkit.getVersion() + ", Bukkit Version: " + Bukkit.getBukkitVersion() + ", Alt Version: " + Bukkit.getServer().getVersion() + ", NMS: " + EcoEnchantsPlugin.NMS_VERSION);
         Logger.info("Motd: " + Bukkit.getServer().getMotd());
         Logger.info("--------------- END DEBUG ----------------");
     }
