@@ -62,10 +62,11 @@ public class Telekinesis extends EcoEnchant {
 
         event.getItems().clear();
 
-        new DropQueue(player)
+        DropQueue queue = new DropQueue(player)
                 .setLocation(block.getLocation())
-                .addItems(drops)
-                .push();
+                .addItems(drops);
+        if(!always) queue.forceTelekinesis();
+        queue.push();
     }
 
     // For exp drops, blockdropitemevent doesn't cover xp
@@ -87,10 +88,11 @@ public class Telekinesis extends EcoEnchant {
 
         if(block.getType().equals(Material.SPAWNER)) event.setExpToDrop(0);
 
-        new DropQueue(player)
+        DropQueue queue = new DropQueue(player)
                 .setLocation(block.getLocation())
-                .addXP(event.getExpToDrop())
-                .push();
+                .addXP(event.getExpToDrop());
+        if(!always) queue.forceTelekinesis();
+        queue.push();
 
         event.setExpToDrop(0);
     }
