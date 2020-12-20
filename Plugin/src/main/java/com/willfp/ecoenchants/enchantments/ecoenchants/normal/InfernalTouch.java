@@ -87,8 +87,9 @@ public class InfernalTouch extends EcoEnchant {
         int fortune = EnchantChecks.getMainhandLevel(player, Enchantment.LOOT_BONUS_BLOCKS);
 
         for (ItemStack itemStack : drops) {
-            itemStack.setType(getOutput(itemStack.getType()).getFirst());
-            experience += (getOutput(itemStack.getType()).getSecond());
+            Pair<Material, Integer> out = getOutput(itemStack.getType());
+            itemStack.setType(out.getFirst());
+            experience += out.getSecond();
 
             if(fortune > 0 && allowsFortune.contains(itemStack.getType())) {
                 itemStack.setAmount((int) Math.ceil(1 / ((double) fortune + 2) + ((double) fortune + 1) / 2));
