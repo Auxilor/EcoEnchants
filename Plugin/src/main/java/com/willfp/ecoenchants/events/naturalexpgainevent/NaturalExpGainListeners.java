@@ -18,6 +18,7 @@ public class NaturalExpGainListeners implements Listener {
 
         NaturalExpGainBuilder toRemove = null;
         for (NaturalExpGainBuilder searchBuilder : events) {
+            if(!searchBuilder.getLoc().getWorld().equals(event.getPlayer().getLocation().getWorld())) continue;
             if(searchBuilder.getReason().equals(NaturalExpGainBuilder.BuildReason.BOTTLE) && searchBuilder.getLoc().distanceSquared(event.getPlayer().getLocation()) > 52)
                 toRemove = searchBuilder;
         }
