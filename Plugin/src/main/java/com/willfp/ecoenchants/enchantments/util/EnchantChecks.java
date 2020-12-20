@@ -47,9 +47,7 @@ public class EnchantChecks {
         if (item == null) return 0;
         if (item.getType().equals(Material.AIR)) return 0;
 
-        Integer level = FastGetEnchants.getEnchantsOnItem(item).get(enchantment);
-
-        return level == null ? 0 : level;
+        return FastGetEnchants.getLevelOnItem(item, enchantment);
     }
 
     /**

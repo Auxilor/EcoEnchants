@@ -7,4 +7,5 @@ import java.util.Map;
 
 public interface FastGetEnchantsWrapper {
     Map<Enchantment, Integer> getEnchantmentsOnItem(ItemStack itemStack);
+    int getLevelOnItem(ItemStack itemStack, Enchantment enchantment);
 }

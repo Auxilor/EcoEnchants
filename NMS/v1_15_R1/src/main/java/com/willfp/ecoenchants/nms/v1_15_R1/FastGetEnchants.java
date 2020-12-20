@@ -29,4 +29,20 @@ public class FastGetEnchants implements FastGetEnchantsWrapper {
         }
         return foundEnchantments;
     }
+
+    @Override
+    public int getLevelOnItem(ItemStack itemStack, Enchantment enchantment) {
+        net.minecraft.server.v1_15_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
+        NBTTagList enchantmentNBT = nmsStack.getEnchantments();
+
+        for (NBTBase base : enchantmentNBT) {
+            NBTTagCompound compound = (NBTTagCompound) base;
+            String key = compound.getString("id");
+            if(!key.equals(enchantment.getKey().toString()))
+                continue;
+
+            return '\uffff' & compound.getShort("lvl");
+        }
+        return 0;
+    }
 }

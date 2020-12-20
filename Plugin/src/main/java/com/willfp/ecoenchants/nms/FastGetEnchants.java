@@ -19,11 +19,21 @@ public class FastGetEnchants {
      * Efficiently get enchantments on an item without instantiating ItemMeta
      *
      * @param item The item to query
-     *
      * @return A map of all enchantments, where the integer is the level
      */
     public static Map<Enchantment, Integer> getEnchantsOnItem(ItemStack item) {
         return fastGetEnchantsWrapper.getEnchantmentsOnItem(item);
+    }
+
+    /**
+     * Efficiently get level of enchantment on an item without using getByKey or instantiating keys or ItemMeta
+     *
+     * @param item        The item to query
+     * @param enchantment The enchantment to query
+     * @return The level found, or 0 if not found
+     */
+    public static int getLevelOnItem(ItemStack item, Enchantment enchantment) {
+        return fastGetEnchantsWrapper.getLevelOnItem(item, enchantment);
     }
 
     static {
