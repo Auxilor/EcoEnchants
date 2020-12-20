@@ -2,8 +2,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.Collection;
@@ -33,6 +35,8 @@ public class Tectonic extends EcoEnchant {
                 continue;
             if(!(entity instanceof LivingEntity)) continue;
             entity.teleport(entity.getLocation().add(0, 0.3, 0));
+            if(faller instanceof Player && !AntigriefManager.canInjure((Player) faller, (LivingEntity) entity))
+                return;
             ((LivingEntity) entity).damage(damage);
         }
     }
