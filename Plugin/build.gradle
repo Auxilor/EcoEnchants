@@ -11,7 +11,6 @@ dependencies {
     implementation project(':v1_16_R2')
     implementation project(':v1_16_R3')
     implementation 'org.apache.maven:maven-artifact:3.0.3'
-    implementation 'org.jetbrains:annotations:19.0.0'
     implementation 'org.bstats:bstats-bukkit:1.7'
     compileOnly 'org.spigotmc:spigot-api:1.16.3-R0.1-SNAPSHOT'
     compileOnly 'commons-io:commons-io:2.8.0'
@@ -30,12 +29,11 @@ dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT'
     compileOnly 'com.gmail.nossr50.mcMMO:mcMMO:2.1.157'
     compileOnly 'me.clip:placeholderapi:2.10.9'
+    compileOnly 'org.jetbrains:annotations:19.0.0'
 }
 
 shadowJar {
     relocate('org.bstats.bukkit', 'com.willfp.ecoenchants.shaded.bstats')
-    relocate('org.jetbrains', 'com.willfp.ecoenchants.shaded.jetbrains')
-    relocate('org.intellij', 'com.willfp.ecoenchants.shaded.intellij')
     relocate('org.apache.maven', 'com.willfp.ecoenchants.shaded.maven')
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
