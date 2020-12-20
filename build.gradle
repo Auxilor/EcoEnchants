@@ -22,7 +22,6 @@ allprojects {
         maven { url 'https://ci.ender.zone/plugin/repository/project/' }
         maven { url 'https://ci.ender.zone/plugin/repository/everything/' }
         maven { url 'https://repo.md-5.net/content/repositories/snapshots/' }
-        maven { url 'https://repo.janmm14.de/repository/public/' }
         maven { url 'https://repo.dmulloy2.net/nexus/repository/public/' }
         maven { url 'https://papermc.io/repo/repository/maven-public/' }
         maven { url 'https://repo.maven.apache.org/maven2/' }
