@@ -56,6 +56,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private final Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> target = new HashSet<>();
     private final Set<Material> targetMaterials = new HashSet<>();
     private final Set<String> disabledWorldNames = new HashSet<>();
+    private final List<World> disabledWorlds = new ArrayList<>();
 
     private boolean enabled;
 
@@ -135,6 +136,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         description = StringUtils.translate(config.getString("description"));
         disabledWorldNames.clear();
         disabledWorldNames.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "disabled-in-worlds"));
+        disabledWorlds.clear();
+        List<String> worldNames = Bukkit.getWorlds().stream().map(World::getName).map(String::toLowerCase).collect(Collectors.toList());
+        List<String> disabledExistingWorldNames = disabledWorldNames.stream().filter(s -> worldNames.contains(s.toLowerCase())).collect(Collectors.toList());
+        disabledWorlds.addAll(Bukkit.getWorlds().stream().filter(world -> disabledExistingWorldNames.contains(world.getName().toLowerCase())).collect(Collectors.toList()));
         target.clear();
         targetMaterials.clear();
         target.addAll(config.getTargets());
@@ -326,9 +331,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return A list of all disabled worlds
      */
     public List<World> getDisabledWorlds() {
-        List<String> worldNames = Bukkit.getWorlds().stream().map(World::getName).map(String::toLowerCase).collect(Collectors.toList());
-        List<String> disabledExistingWorldNames = disabledWorldNames.stream().filter(s -> worldNames.contains(s.toLowerCase())).collect(Collectors.toList());
-        return Bukkit.getWorlds().stream().filter(world -> disabledExistingWorldNames.contains(world.getName().toLowerCase())).collect(Collectors.toList());
+        return disabledWorlds;
     }
 
     /**
