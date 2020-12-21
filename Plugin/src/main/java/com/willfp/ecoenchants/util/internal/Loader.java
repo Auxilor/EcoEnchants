@@ -399,5 +399,7 @@ public class Loader {
                 }
             }, 1);
         }));
+
+        Bukkit.getScheduler().runTaskTimer(EcoEnchantsPlugin.getInstance(), FastCollatedDropQueue.RUNNABLE, 0, 1);
     }
 }

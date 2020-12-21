@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.util.internal.drops;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.util.NumberUtils;
+import com.willfp.ecoenchants.util.internal.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -126,6 +127,7 @@ public class InternalDropQueue implements AbstractDropQueue {
     public void push() {
         if(!hasTelekinesis) hasTelekinesis = EnchantChecks.item(item, EcoEnchants.TELEKINESIS);
         if(hasTelekinesis && !EcoEnchants.TELEKINESIS.isEnabled()) hasTelekinesis = false;
+        Logger.info("1");
 
         World world = loc.getWorld();
         assert world != null;
@@ -150,6 +152,7 @@ public class InternalDropQueue implements AbstractDropQueue {
             }
         } else {
             for (ItemStack drop : items) {
+                Logger.info(drop + "");
                 world.dropItem(loc, drop).setVelocity(new Vector());
             }
             if (xp > 0) {
