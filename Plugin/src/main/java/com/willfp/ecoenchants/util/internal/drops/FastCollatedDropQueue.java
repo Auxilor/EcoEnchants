@@ -102,5 +102,14 @@ public class FastCollatedDropQueue extends InternalDropQueue {
             this.xp += xp;
             return this;
         }
+
+        @Override
+        public String toString() {
+            return "CollatedDrops{" +
+                    "drops=" + drops +
+                    ", location=" + location +
+                    ", xp=" + xp +
+                    '}';
+        }
     }
 }
