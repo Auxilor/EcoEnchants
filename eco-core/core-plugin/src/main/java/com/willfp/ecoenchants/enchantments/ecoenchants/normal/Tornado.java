@@ -24,7 +24,7 @@ public class Tornado extends EcoEnchant {
 
         Vector toAdd = new Vector(0, yVelocity, 0);
 
-        this.plugin.getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
             victim.setVelocity(victim.getVelocity().clone().add(toAdd));
         }, 1);
     }

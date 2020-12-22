@@ -28,7 +28,7 @@ public class Succession extends EcoEnchant {
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
 
         for (int i = 1; i <= number; i++) {
-            this.plugin.getScheduler().runLater(() -> {
+            this.getPlugin().getScheduler().runLater(() -> {
                 Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
                 arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
                 if(fire) arrow1.setFireTicks(Integer.MAX_VALUE);

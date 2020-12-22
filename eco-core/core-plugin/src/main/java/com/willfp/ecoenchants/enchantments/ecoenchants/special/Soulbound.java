@@ -64,7 +64,7 @@ public class Soulbound extends EcoEnchant {
             event.getPlayer().getInventory().addItem(itemStack);
         }));
 
-        this.plugin.getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
             soulboundItemsMap.remove(event.getPlayer());
         }, 1);
     }

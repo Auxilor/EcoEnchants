@@ -13,7 +13,7 @@ public class EcoEventManager extends PluginDependent implements EventManager {
 
     @Override
     public void registerEvents(Listener listener) {
-        Bukkit.getPluginManager().registerEvents(listener, this.plugin);
+        Bukkit.getPluginManager().registerEvents(listener, this.getPlugin());
     }
 
     @Override
@@ -23,6 +23,6 @@ public class EcoEventManager extends PluginDependent implements EventManager {
 
     @Override
     public void unregisterAllEvents() {
-        HandlerList.unregisterAll(this.plugin);
+        HandlerList.unregisterAll(this.getPlugin());
     }
 }

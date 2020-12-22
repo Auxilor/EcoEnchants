@@ -37,7 +37,7 @@ public class Drill extends EcoEnchant {
         for (int i = 1; i <= blocks; i++) {
             Vector simplified = VectorUtils.simplifyVector(player.getLocation().getDirection().normalize()).multiply(i);
             Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(simplified));
-            block1.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
+            block1.setMetadata("block-ignore", new FixedMetadataValue(this.getPlugin(), true));
 
             if (this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                 continue;
@@ -49,7 +49,7 @@ public class Drill extends EcoEnchant {
             if (!AntigriefManager.canBreakBlock(player, block1)) continue;
 
             ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, block1);
-            block1.removeMetadata("block-ignore", this.plugin);
+            block1.removeMetadata("block-ignore", this.getPlugin());
         }
 
         AnticheatManager.unexemptPlayer(player);

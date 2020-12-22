@@ -44,7 +44,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        this.plugin.getServer().getOnlinePlayers().forEach(player -> {
+        this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
             if (level > 0) {
                 players.put(player, level);

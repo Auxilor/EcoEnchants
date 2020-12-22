@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
@@ -17,7 +16,7 @@ public class Alchemy extends EcoEnchant {
         super("alchemy", EnchantmentType.NORMAL);
     }
 
-    private final FixedMetadataValue metaKeyTrue = this.plugin.getMetadataValueFactory().create(true);
+    private final FixedMetadataValue metaKeyTrue = this.getPlugin().getMetadataValueFactory().create(true);
 
     @EventHandler
     public void onPotionEffect(EntityPotionEffectEvent event) {
@@ -51,8 +50,8 @@ public class Alchemy extends EcoEnchant {
 
         entity.removePotionEffect(effect.getType());
 
-        this.plugin.getScheduler().run(() -> newEffect.apply(entity));
+        this.getPlugin().getScheduler().run(() -> newEffect.apply(entity));
 
-        this.plugin.getScheduler().runLater(() -> entity.removeMetadata(newEffect.toString(), this.plugin), 1);
+        this.getPlugin().getScheduler().runLater(() -> entity.removeMetadata(newEffect.toString(), this.getPlugin()), 1);
     }
 }

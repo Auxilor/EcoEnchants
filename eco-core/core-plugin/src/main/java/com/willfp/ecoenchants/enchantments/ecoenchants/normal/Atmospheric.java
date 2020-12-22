@@ -22,7 +22,7 @@ public class Atmospheric extends EcoEnchant {
     public void onTridentLaunch(LivingEntity shooter, Trident trident, int level, ProjectileLaunchEvent event) {
         if(shooter.isOnGround()) return;
 
-        trident.setMetadata("shot-in-air", new FixedMetadataValue(this.plugin, true));
+        trident.setMetadata("shot-in-air", new FixedMetadataValue(this.getPlugin(), true));
     }
 
     @Override

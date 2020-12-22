@@ -41,6 +41,6 @@ public class Launch extends EcoEnchant {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double boost = 1 + (multiplier * level);
 
-        this.plugin.getScheduler().run(() -> player.setVelocity(player.getVelocity().multiply(boost)));
+        this.getPlugin().getScheduler().run(() -> player.setVelocity(player.getVelocity().multiply(boost)));
     }
 }

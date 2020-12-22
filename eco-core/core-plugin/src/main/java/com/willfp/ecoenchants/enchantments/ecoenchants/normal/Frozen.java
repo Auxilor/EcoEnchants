@@ -46,7 +46,7 @@ public class Frozen extends EcoEnchant {
         int divisor = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "points-per-level");
         final int level = (int) Math.ceil((double) points / divisor);
 
-        this.plugin.getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
             victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, points * 5, level));
             victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, points * 5, level));
         }, 1);

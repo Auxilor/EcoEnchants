@@ -14,7 +14,7 @@ public class CommandEcoreload extends AbstractCommand {
 
     @Override
     public void onExecute(CommandSender sender, List<String> args) {
-        this.plugin.reload();
+        this.getPlugin().reload();
         sender.sendMessage(Configs.LANG.getMessage("reloaded"));
     }
 }

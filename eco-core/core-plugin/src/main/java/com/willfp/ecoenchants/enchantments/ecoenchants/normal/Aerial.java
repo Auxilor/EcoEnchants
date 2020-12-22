@@ -25,7 +25,7 @@ public class Aerial extends EcoEnchant {
 
         if (shooter.isOnGround()) return;
 
-        event.getProjectile().setMetadata("shot-in-air", new FixedMetadataValue(this.plugin, true));
+        event.getProjectile().setMetadata("shot-in-air", new FixedMetadataValue(this.getPlugin(), true));
     }
 
     @Override

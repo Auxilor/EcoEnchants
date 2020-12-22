@@ -30,7 +30,7 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
 
     @Override
     public void loadExtensions() {
-        File dir = new File(this.plugin.getDataFolder(), "/extensions");
+        File dir = new File(this.getPlugin().getDataFolder(), "/extensions");
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -46,7 +46,7 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
             try {
                 loadExtension(extensionJar);
             } catch (MalformedExtensionException e) {
-                plugin.getLog().error(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
+                this.getPlugin().getLog().error(extensionJar.getName() + " caused MalformedExtensionException: " + e.getMessage());
             }
         }
     }
@@ -59,7 +59,7 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
             e.printStackTrace();
         }
 
-        ClassLoader cl = new URLClassLoader(new URL[]{url}, this.plugin.getClass().getClassLoader());
+        ClassLoader cl = new URLClassLoader(new URL[]{url}, this.getPlugin().getClass().getClassLoader());
 
         InputStream ymlIn = cl.getResourceAsStream("extension.yml");
 

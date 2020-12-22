@@ -2,12 +2,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
 import com.willfp.eco.util.ProxyUtils;
-import com.willfp.eco.util.bukkit.scheduling.EcoBukkitRunnable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -49,23 +47,20 @@ public class Shockwave extends EcoEnchant {
         damage *= level;
         final double finalDamage = damage;
 
-        new EcoBukkitRunnable(this.plugin) {
-            @Override
-            public void run() {
-                if(entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
-                entity.getNearbyEntities(1.5, 1.5, 1.5).stream()
-                        .filter(entity1 -> entity1 instanceof LivingEntity)
-                        .filter(entity1 -> entity1 != player)
-                        .filter(entity1 -> !entity1.hasMetadata("shockwaved"))
-                        .forEach((mob -> {
-                            ((LivingEntity) mob).damage(finalDamage, player);
-                            mob.setMetadata("shockwaved", new FixedMetadataValue(this.plugin, true));
-                            this.plugin.getScheduler().runLater(() -> {
-                                mob.removeMetadata("shockwaved", this.plugin);
-                            }, 10);
-                        }
-                ));
-            }
-        }.runTaskTimer(this.plugin, 4, ticks);
+        this.getPlugin().getRunnableFactory().create(runnable -> {
+            if(entity.isOnGround() || entity.isInBlock() || entity.isDead()) runnable.cancel();
+            entity.getNearbyEntities(1.5, 1.5, 1.5).stream()
+                    .filter(entity1 -> entity1 instanceof LivingEntity)
+                    .filter(entity1 -> entity1 != player)
+                    .filter(entity1 -> !entity1.hasMetadata("shockwaved"))
+                    .forEach((mob -> {
+                        ((LivingEntity) mob).damage(finalDamage, player);
+                        mob.setMetadata("shockwaved", new FixedMetadataValue(this.getPlugin(), true));
+                        this.getPlugin().getScheduler().runLater(() -> {
+                            mob.removeMetadata("shockwaved", this.getPlugin());
+                        }, 10);
+                    }
+                    ));
+        }).runTaskTimer(4, ticks);
     }
 }

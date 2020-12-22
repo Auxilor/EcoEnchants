@@ -7,7 +7,6 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -34,15 +33,12 @@ public class Wound extends EcoEnchant {
 
         AtomicInteger currentBleedCount = new AtomicInteger(0);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                currentBleedCount.addAndGet(1);
+        this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
+            currentBleedCount.addAndGet(1);
 
-                victim.damage(bleedDamage);
+            victim.damage(bleedDamage);
 
-                if (currentBleedCount.get() >= finalBleedCount) this.cancel();
-            }
-        }.runTaskTimer(this.plugin, 0, 10);
+            if (currentBleedCount.get() >= finalBleedCount) bukkitRunnable.cancel();
+        }).runTaskTimer(0, 10);
     }
 }

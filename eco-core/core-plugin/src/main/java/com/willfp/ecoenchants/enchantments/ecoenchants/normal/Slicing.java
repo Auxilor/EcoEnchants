@@ -50,7 +50,7 @@ public class Slicing extends EcoEnchant {
             victim.damage(level * damage, player);
             entities.add(victim);
 
-            Bukkit.getServer().getScheduler().runTaskLater(this.plugin, () -> entities.remove(victim), this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown"));
+            Bukkit.getServer().getScheduler().runTaskLater(this.getPlugin(), () -> entities.remove(victim), this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown"));
             if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "damage-elytra")) {
                 DurabilityUtils.damageItem(player, player.getInventory().getChestplate(), 1, 38);
             }

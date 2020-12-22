@@ -291,7 +291,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             return;
         Player player = event.getPlayer();
 
-        this.plugin.getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
             EcoEnchants.values().forEach((enchant -> {
                 if (event.isCancelled()) return;
                 if (!enchant.isEnabled()) return;

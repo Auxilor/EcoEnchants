@@ -10,6 +10,6 @@ public class NamespacedKeyFactory extends PluginDependentFactory {
     }
 
     public NamespacedKey create(String key) {
-        return new NamespacedKey(this.plugin, key);
+        return new NamespacedKey(this.getPlugin(), key);
     }
 }

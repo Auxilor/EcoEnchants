@@ -8,6 +8,7 @@ import com.willfp.eco.util.bukkit.logging.EcoLogger;
 import com.willfp.eco.util.bukkit.logging.Logger;
 import com.willfp.eco.util.bukkit.meta.MetadataValueFactory;
 import com.willfp.eco.util.bukkit.scheduling.EcoScheduler;
+import com.willfp.eco.util.bukkit.scheduling.RunnableFactory;
 import com.willfp.eco.util.bukkit.scheduling.Scheduler;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.config.Configs;
@@ -69,6 +70,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     private final EventManager eventManager;
     private final NamespacedKeyFactory namespacedKeyFactory;
     private final MetadataValueFactory metadataValueFactory;
+    private final RunnableFactory runnableFactory;
     private final ExtensionLoader extensionLoader;
 
     protected boolean outdated = false;
@@ -83,6 +85,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.eventManager = new EcoEventManager(this);
         this.namespacedKeyFactory = new NamespacedKeyFactory(this);
         this.metadataValueFactory = new MetadataValueFactory(this);
+        this.runnableFactory = new RunnableFactory(this);
         this.extensionLoader = new EcoExtensionLoader(this);
 
         if (!Bukkit.getServicesManager().isProvidedFor(TelekinesisTests.class)) {
@@ -264,6 +267,10 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
 
     public final MetadataValueFactory getMetadataValueFactory() {
         return metadataValueFactory;
+    }
+
+    public final RunnableFactory getRunnableFactory() {
+        return runnableFactory;
     }
 
     public final ExtensionLoader getExtensionLoader() {

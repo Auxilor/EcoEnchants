@@ -6,11 +6,11 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Extensions are a way of interfacing with EcoEnchants
+ * Extensions are a way of interfacing with the base plugin
  * Syntactically similar to Bukkit Plugins.
  */
 public abstract class Extension {
-    protected final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
+    private final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
 
     /**
      * Metadata containing version and name
@@ -41,6 +41,14 @@ public abstract class Extension {
      * Called when Extension is disabled
      */
     protected abstract void onDisable();
+
+    /**
+     * Get instance of the owning plugin
+     * @return The instance to interface with
+     */
+    protected final AbstractEcoPlugin getPlugin() {
+        return plugin;
+    }
 
     /**
      * Set the metadata of the extension

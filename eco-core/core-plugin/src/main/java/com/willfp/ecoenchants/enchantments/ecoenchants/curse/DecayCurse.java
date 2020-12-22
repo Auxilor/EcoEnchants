@@ -63,7 +63,7 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        this.plugin.getServer().getOnlinePlayers().forEach(player -> {
+        this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
                 players.add(player);
         });

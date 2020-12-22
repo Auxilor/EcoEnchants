@@ -25,10 +25,10 @@ public class Weakening extends EcoEnchant {
         int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
         int ticks = ticksPerLevel * level;
 
-        victim.setMetadata("weak", new FixedMetadataValue(this.plugin, true));
+        victim.setMetadata("weak", new FixedMetadataValue(this.getPlugin(), true));
 
-        this.plugin.getScheduler().runLater(() -> {
-            victim.removeMetadata("weak", this.plugin);
+        this.getPlugin().getScheduler().runLater(() -> {
+            victim.removeMetadata("weak", this.getPlugin());
         }, ticks);
     }
 

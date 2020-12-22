@@ -23,6 +23,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
@@ -38,7 +39,7 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings({"unchecked", "deprecation"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
-    protected final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
+    private final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
 
     private String name;
     private String description;
@@ -134,6 +135,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     protected void postUpdate() {
         // Unused as some enchantments may have postUpdate tasks, however most won't.
+    }
+
+    @ApiStatus.Internal
+    protected AbstractEcoPlugin getPlugin() {
+        return this.plugin;
     }
 
     /**

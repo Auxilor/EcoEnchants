@@ -23,7 +23,7 @@ public class Thrive extends EcoEnchant {
     public void onArmorEquip(ArmorEquipEvent event) {
         final Player player = event.getPlayer();
 
-        this.plugin.getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
             int totalProsperityPoints = EnchantChecks.getArmorPoints(player, EcoEnchants.PROSPERITY, 0);
             int totalThrivePoints = EnchantChecks.getArmorPoints(player, EcoEnchants.THRIVE, 0);
             if (totalThrivePoints == 0 && totalProsperityPoints == 0) {
@@ -42,7 +42,7 @@ public class Thrive extends EcoEnchant {
 
             player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue() + bonus);
             boolean finalOnMaxHealth = onMaxHealth;
-            this.plugin.getScheduler().runLater(() -> {
+            this.getPlugin().getScheduler().runLater(() -> {
                 if (finalOnMaxHealth) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 255, false, false, false));
                 }

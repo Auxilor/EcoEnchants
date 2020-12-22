@@ -50,12 +50,12 @@ public class Vein extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for (Block veinBlock : blockSet) {
-            veinBlock.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
+            veinBlock.setMetadata("block-ignore", new FixedMetadataValue(this.getPlugin(), true));
             if (!AntigriefManager.canBreakBlock(player, veinBlock)) continue;
 
             ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, veinBlock);
 
-            this.plugin.getScheduler().runLater(() -> veinBlock.removeMetadata("block-ignore", this.plugin), 1);
+            this.getPlugin().getScheduler().runLater(() -> veinBlock.removeMetadata("block-ignore", this.getPlugin()), 1);
         }
 
         AnticheatManager.unexemptPlayer(player);

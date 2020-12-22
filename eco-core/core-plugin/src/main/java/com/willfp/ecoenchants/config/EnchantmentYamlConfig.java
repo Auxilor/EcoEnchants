@@ -39,7 +39,7 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
         this.source = source;
         this.type = type;
 
-        File basedir = new File(this.plugin.getDataFolder(), "enchants/");
+        File basedir = new File(this.getPlugin().getDataFolder(), "enchants/");
         if (!basedir.exists()) basedir.mkdirs();
 
         File dir = new File(basedir, type.getName() + "/");
@@ -67,9 +67,9 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
 
         InputStream in = source.getResourceAsStream(resourcePath);
 
-        File outFile = new File(this.plugin.getDataFolder(), resourcePath);
+        File outFile = new File(this.getPlugin().getDataFolder(), resourcePath);
         int lastIndex = resourcePath.lastIndexOf('/');
-        File outDir = new File(this.plugin.getDataFolder(), resourcePath.substring(0, Math.max(lastIndex, 0)));
+        File outDir = new File(this.getPlugin().getDataFolder(), resourcePath.substring(0, Math.max(lastIndex, 0)));
 
         if (!outDir.exists()) {
             outDir.mkdirs();

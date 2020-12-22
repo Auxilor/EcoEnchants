@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -36,12 +35,7 @@ public class EntityDeathByEntityListeners extends PluginDependent implements Lis
         builtEvent.setDamager(event.getDamager());
         events.add(builtEvent);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                events.remove(builtEvent);
-            }
-        }.runTaskLater(this.plugin, 1);
+        this.getPlugin().getScheduler().runLater(() -> events.remove(builtEvent), 1);
     }
 
     @EventHandler
@@ -54,7 +48,7 @@ public class EntityDeathByEntityListeners extends PluginDependent implements Lis
         AtomicReference<EntityDeathByEntityBuilder> atomicBuiltEvent = new AtomicReference<>(null);
         EntityDeathByEntityBuilder builtEvent;
 
-        events.forEach((deathByEntityEvent) -> {
+        events.forEach(deathByEntityEvent -> {
             if (deathByEntityEvent.getVictim().equals(victim)) {
                 atomicBuiltEvent.set(deathByEntityEvent);
             }

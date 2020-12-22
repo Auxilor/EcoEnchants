@@ -30,7 +30,7 @@ public class GrindstoneListeners extends PluginDependent implements Listener {
 
         GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();
 
-        this.plugin.getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
             ItemStack top = inventory.getItem(0);
             ItemStack bottom = inventory.getItem(1);
             ItemStack out = inventory.getItem(2);
@@ -59,7 +59,7 @@ public class GrindstoneListeners extends PluginDependent implements Listener {
 
             final ItemStack finalOut = newOut;
 
-            this.plugin.getScheduler().run(() -> {
+            this.getPlugin().getScheduler().run(() -> {
                 inventory.setItem(2, finalOut);
             });
         }, 1);

@@ -7,7 +7,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 public class Replenish extends EcoEnchant {
     public Replenish() {
         super(
@@ -34,23 +33,17 @@ public class Replenish extends EcoEnchant {
 
             data.setAge(0);
 
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    block.setType(type);
-                    block.setBlockData(data);
-                }
-            }.runTaskLater(this.plugin, 1);
+            this.getPlugin().getScheduler().runLater(() -> {
+                block.setType(type);
+                block.setBlockData(data);
+            }, 1);
         }
 
         data.setAge(0);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                block.setType(type);
-                block.setBlockData(data);
-            }
-        }.runTaskLater(this.plugin, 1);
+        this.getPlugin().getScheduler().runLater(() -> {
+            block.setType(type);
+            block.setBlockData(data);
+        }, 1);
     }
 }

@@ -26,7 +26,7 @@ public class CommandEnchantinfo extends AbstractCommand {
 
     @Override
     public AbstractTabCompleter getTab() {
-        return new TabCompleterEnchantinfo(this.plugin);
+        return new TabCompleterEnchantinfo(this.getPlugin());
     }
 
     @Override

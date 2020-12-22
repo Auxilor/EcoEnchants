@@ -35,7 +35,7 @@ public class Incandescence extends EcoEnchant {
             return;
         if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
-        this.plugin.getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
             victim.setFireTicks(totalIncandescencePoints * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-point") + this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-ticks"));
         }, 1);
     }

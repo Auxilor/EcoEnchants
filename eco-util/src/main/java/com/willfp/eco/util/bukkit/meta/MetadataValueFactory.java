@@ -10,6 +10,6 @@ public class MetadataValueFactory extends PluginDependentFactory {
     }
 
     public FixedMetadataValue create(Object value) {
-        return new FixedMetadataValue(this.plugin, value);
+        return new FixedMetadataValue(this.getPlugin(), value);
     }
 }

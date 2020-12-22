@@ -9,7 +9,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 public class Marksman extends EcoEnchant {
     public Marksman() {
         super(
@@ -30,7 +29,7 @@ public class Marksman extends EcoEnchant {
         Player player = (Player) event.getEntity().getShooter();
 
         if (!EnchantChecks.mainhand(player, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) return;
 
         if (!(event.getEntity() instanceof Arrow)) return;
         Arrow a = (Arrow) event.getEntity();
@@ -38,13 +37,10 @@ public class Marksman extends EcoEnchant {
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "remove-arrow-after-ticks");
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (!a.isOnGround()) {
-                    a.remove();
-                }
+        this.getPlugin().getScheduler().runLater(() -> {
+            if (!a.isOnGround()) {
+                a.remove();
             }
-        }.runTaskLater(this.plugin, ticks);
+        }, ticks);
     }
 }

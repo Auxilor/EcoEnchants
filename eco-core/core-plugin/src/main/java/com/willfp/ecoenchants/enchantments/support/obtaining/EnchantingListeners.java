@@ -19,7 +19,6 @@ import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,7 +54,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
 
         Map<Enchantment, Integer> toAdd = event.getEnchantsToAdd();
         if (!Configs.CONFIG.getBool("enchanting-table.enabled")) {
-            this.plugin.getScheduler().runLater(() -> {
+            this.getPlugin().getScheduler().runLater(() -> {
                 ItemStack item0 = event.getInventory().getItem(0);
                 event.getInventory().setItem(0, item0);
 
@@ -155,24 +154,21 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         }
 
         // Ew
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                ItemStack item = event.getInventory().getItem(0);
-                assert item != null;
-                if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
-                    EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
-                    for (Enchantment enchantment : meta.getStoredEnchants().keySet()) {
-                        meta.removeStoredEnchant(enchantment);
-                    }
-                    event.getEnchantsToAdd().forEach(((enchantment, integer) -> {
-                        meta.addStoredEnchant(enchantment, integer, false);
-                    }));
-                    item.setItemMeta(meta);
+        this.getPlugin().getScheduler().runLater(() -> {
+            ItemStack item0 = event.getInventory().getItem(0);
+            assert item0 != null;
+            if (item0.getItemMeta() instanceof EnchantmentStorageMeta) {
+                EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item0.getItemMeta();
+                for (Enchantment enchantment : meta.getStoredEnchants().keySet()) {
+                    meta.removeStoredEnchant(enchantment);
                 }
-                event.getInventory().setItem(0, item);
+                event.getEnchantsToAdd().forEach(((enchantment, integer) -> {
+                    meta.addStoredEnchant(enchantment, integer, false);
+                }));
+                item0.setItemMeta(meta);
             }
-        }.runTaskLater(this.plugin, 1);
+            event.getInventory().setItem(0, item0);
+        }, 1);
     }
 
     @EventHandler

@@ -22,8 +22,8 @@ public class Missile extends Spell {
         WitherSkull skull = player.launchProjectile(WitherSkull.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
         skull.setCharged(true);
         skull.setIsIncendiary(false);
-        skull.setMetadata("eco-damage", new FixedMetadataValue(this.plugin, this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
-        skull.setMetadata("nobreak", new FixedMetadataValue(this.plugin, true));
+        skull.setMetadata("eco-damage", new FixedMetadataValue(this.getPlugin(), this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
+        skull.setMetadata("nobreak", new FixedMetadataValue(this.getPlugin(), true));
         skull.setShooter(player);
     }
 

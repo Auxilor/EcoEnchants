@@ -58,7 +58,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
             modCost = newOut.getSecond();
         }
 
-        this.plugin.getScheduler().run(() -> {
+        this.getPlugin().getScheduler().run(() -> {
 
             // This is a disgusting bodge
             if (!noIncreaseXpMap.containsKey(player.getUniqueId()))
@@ -68,7 +68,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
             num += 1;
             noIncreaseXpMap.put(player.getUniqueId(), num);
 
-            this.plugin.getScheduler().runLater(() -> noIncreaseXpMap.remove(player.getUniqueId()), 1);
+            this.getPlugin().getScheduler().runLater(() -> noIncreaseXpMap.remove(player.getUniqueId()), 1);
 
             // End pain
 

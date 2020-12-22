@@ -23,7 +23,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 /**
@@ -106,21 +105,18 @@ public abstract class Artifact extends EcoEnchant {
         double radiusMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
         double offset = NumberUtils.randFloat(0, 0.75);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 3; i++) {
-                    if (yAtomic.get() > entity.getHeight()) this.cancel();
-                    yAtomic.addAndGet(yDelta);
-                    double y = yAtomic.get();
-                    double x = radius * Math.cos((y + offset) * radiusMultiplier);
-                    double z = radius * Math.sin((y + offset) * radiusMultiplier);
-                    Location particleLocation = entity.getLocation();
-                    particleLocation.add(x, y, z);
-                    entity.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
-                }
+        this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
+            for (int i = 0; i < 3; i++) {
+                if (yAtomic.get() > entity.getHeight()) bukkitRunnable.cancel();
+                yAtomic.addAndGet(yDelta);
+                double y = yAtomic.get();
+                double x = radius * Math.cos((y + offset) * radiusMultiplier);
+                double z = radius * Math.sin((y + offset) * radiusMultiplier);
+                Location particleLocation = entity.getLocation();
+                particleLocation.add(x, y, z);
+                entity.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
             }
-        }.runTaskTimer(this.plugin, 0, 1);
+        }).runTaskTimer(0, 1);
     }
 
     @EventHandler
@@ -149,12 +145,9 @@ public abstract class Artifact extends EcoEnchant {
         }
         final double finalColor = color.get();
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
-                entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
-            }
-        }.runTaskTimer(this.plugin, 4, ticks);
+        this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
+            if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) bukkitRunnable.cancel();
+            entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
+        }).runTaskTimer(4, ticks);
     }
 }
