@@ -1,7 +1,6 @@
 group 'com.willfp'
 version rootProject.version
 
-
 repositories {
     maven { url 'https://repo.codemc.org/repository/maven-public' }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
@@ -25,7 +24,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.bstats:bstats-bukkit:1.7'
+    compileOnly project(":eco-core:core-proxy")
+
     compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
     compileOnly 'commons-io:commons-io:2.8.0'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4-SNAPSHOT'
@@ -41,6 +41,6 @@ dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT'
     compileOnly 'com.gmail.nossr50.mcMMO:mcMMO:2.1.157'
     compileOnly 'me.clip:placeholderapi:2.10.9'
-    shadow files('../lib/SpartanAPI.jar')
-    shadow files('../lib/aac-api-5.0.0.jar')
+    shadow files('../../lib/SpartanAPI.jar')
+    shadow files('../../lib/aac-api-5.0.0.jar')
 }

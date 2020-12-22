@@ -51,8 +51,8 @@ clean.doLast {
 }
 
 shadowJar {
-    relocate('org.bstats.bukkit', 'com.willfp.ecoenchants.shaded.bstats')
-    relocate('org.apache.maven', 'com.willfp.ecoenchants.shaded.maven')
+    relocate('org.bstats.bukkit', 'com.willfp.eco.core.util.shaded.bstats')
+    relocate('org.apache.maven', 'com.willfp.eco.core.util.shaded.maven')
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 

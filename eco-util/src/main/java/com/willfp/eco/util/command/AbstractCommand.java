@@ -1,7 +1,9 @@
 package com.willfp.eco.util.command;
 
 import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.interfaces.Registerable;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,12 +15,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractCommand implements CommandExecutor, Registerable {
+public abstract class AbstractCommand extends PluginDependent implements CommandExecutor, Registerable {
     private final String name;
     private final String permission;
     private final boolean playersOnly;
 
-    protected AbstractCommand(String name, String permission, boolean playersOnly) {
+    protected AbstractCommand(AbstractEcoPlugin plugin, String name, String permission, boolean playersOnly) {
+        super(plugin);
         this.name = name;
         this.permission = permission;
         this.playersOnly = playersOnly;

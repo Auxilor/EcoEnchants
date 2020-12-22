@@ -1,5 +1,7 @@
 package com.willfp.eco.util.command;
 
+import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -9,10 +11,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractTabCompleter implements TabCompleter {
+public abstract class AbstractTabCompleter extends PluginDependent implements TabCompleter {
     private final AbstractCommand command;
 
-    protected AbstractTabCompleter(AbstractCommand command) {
+    protected AbstractTabCompleter(AbstractEcoPlugin plugin, AbstractCommand command) {
+        super(plugin);
         this.command = command;
     }
 

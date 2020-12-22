@@ -13,15 +13,13 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public abstract class BaseConfig extends PluginDependent {
-    private static final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
-
     public final YamlConfiguration config;
     private final File configFile;
     private final String name;
     private final boolean removeUnused;
 
     protected BaseConfig(String name, boolean removeUnused) {
-        super(plugin);
+        super(AbstractEcoPlugin.getInstance());
         this.name = name + ".yml";
         this.removeUnused = removeUnused;
 

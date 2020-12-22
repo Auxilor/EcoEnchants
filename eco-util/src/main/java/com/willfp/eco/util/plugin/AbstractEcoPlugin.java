@@ -9,6 +9,7 @@ import com.willfp.eco.util.bukkit.logging.Logger;
 import com.willfp.eco.util.bukkit.meta.MetadataValueFactory;
 import com.willfp.eco.util.bukkit.scheduling.EcoScheduler;
 import com.willfp.eco.util.bukkit.scheduling.Scheduler;
+import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;
 import com.willfp.eco.util.events.armorequip.ArmorListener;
 import com.willfp.eco.util.events.armorequip.DispenserArmorListener;
@@ -16,29 +17,32 @@ import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityListene
 import com.willfp.eco.util.events.naturalexpgainevent.NaturalExpGainListeners;
 import com.willfp.eco.util.extensions.loader.EcoExtensionLoader;
 import com.willfp.eco.util.extensions.loader.ExtensionLoader;
+import com.willfp.eco.util.integrations.IntegrationLoader;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
-import com.willfp.eco.util.lambda.Callable;
 import com.willfp.eco.util.updater.UpdateChecker;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("DeprecatedIsStillUsed")
 public abstract class AbstractEcoPlugin extends JavaPlugin {
     protected static AbstractEcoPlugin instance;
 
     protected final String pluginName;
     protected final int resourceId;
+    protected final int bStatsId;
 
-    private final Map<String, Callable> integrations = new HashMap<>();
+    private final List<IntegrationLoader> integrations = new ArrayList<>();
 
     private final Logger log;
     private final Scheduler scheduler;
@@ -51,9 +55,10 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
 
     protected boolean outdated = false;
 
-    protected AbstractEcoPlugin(String pluginName, int resourceId) {
+    protected AbstractEcoPlugin(String pluginName, int resourceId, int bStatsId) {
         this.pluginName = pluginName;
         this.resourceId = resourceId;
+        this.bStatsId = bStatsId;
 
         this.log = new EcoLogger(this);
         this.scheduler = new EcoScheduler(this);
@@ -68,6 +73,13 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     @Override
     public final void onEnable() {
         super.onLoad();
+
+        this.getLog().info("==========================================");
+        this.getLog().info("");
+        this.getLog().info("Loading &a" + this.pluginName);
+        this.getLog().info("Made by &aAuxilor&f - willfp.com");
+        this.getLog().info("");
+        this.getLog().info("==========================================");
 
         this.getEventManager().registerEvents(new ArrowDataListener(this));
         this.getEventManager().registerEvents(new NaturalExpGainListeners());
@@ -87,19 +99,23 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
             }
         });
 
+        new Metrics(this, this.bStatsId);
+
         Set<String> enabledPlugins = Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toSet());
 
-        this.getDefaultIntegrations().forEach(((s, callable) -> {
+        this.getDefaultIntegrations().forEach((integrationLoader -> {
             StringBuilder log = new StringBuilder();
-            log.append(s).append(": ");
-            if (enabledPlugins.contains(s)) {
-                callable.call();
+            log.append(integrationLoader.getPluginName()).append(": ");
+            if (enabledPlugins.contains(integrationLoader.getPluginName())) {
+                integrationLoader.load();
                 log.append("&aENABLED");
             } else {
                 log.append("&9DISABLED");
             }
             this.getLog().info(log.toString());
         }));
+
+        this.getCommands().forEach(AbstractCommand::register);
 
         this.enable();
     }
@@ -119,9 +135,9 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.load();
     }
 
-    public final Map<String, Callable> getDefaultIntegrations() {
-        integrations.put("PlaceholderAPI", () -> PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI(this)));
-        integrations.putAll(this.getIntegrations());
+    public final List<IntegrationLoader> getDefaultIntegrations() {
+        integrations.add(new IntegrationLoader("PlaceholderAPI", () -> PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI(this))));
+        integrations.addAll(this.getIntegrations());
         return integrations;
     }
 
@@ -131,7 +147,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
 
     public abstract void load();
 
-    public abstract Map<String, Callable> getIntegrations();
+    public abstract void reload();
+
+    public abstract List<IntegrationLoader> getIntegrations();
+
+    public abstract List<AbstractCommand> getCommands();
 
     public final Logger getLog() {
         return log;
@@ -161,6 +181,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         return outdated;
     }
 
+    @Deprecated
     public static AbstractEcoPlugin getInstance() {
         return instance;
     }
