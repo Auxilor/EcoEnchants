@@ -1,9 +1,13 @@
 package com.willfp.ecoenchants.effects;
 
-import com.willfp.ecoenchants.effects.enchants.*;
+
+import com.willfp.eco.util.extensions.Extension;
+import com.willfp.ecoenchants.effects.enchants.JumpBoost;
+import com.willfp.ecoenchants.effects.enchants.NightVision;
+import com.willfp.ecoenchants.effects.enchants.Regeneration;
+import com.willfp.ecoenchants.effects.enchants.Speed;
+import com.willfp.ecoenchants.effects.enchants.WaterBreathing;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.extensions.Extension;
-import org.bukkit.Bukkit;
 
 public class EffectsMain extends Extension {
     public static final EcoEnchant JUMP_BOOST = new JumpBoost();
@@ -14,11 +18,6 @@ public class EffectsMain extends Extension {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(JUMP_BOOST, this.plugin);
-        Bukkit.getPluginManager().registerEvents(NIGHT_VISION, this.plugin);
-        Bukkit.getPluginManager().registerEvents(REGENERATION, this.plugin);
-        Bukkit.getPluginManager().registerEvents(SPEED, this.plugin);
-        Bukkit.getPluginManager().registerEvents(WATER_BREATHING, this.plugin);
     }
 
     @Override
