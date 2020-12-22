@@ -1,3 +1,7 @@
 group 'com.willfp'
 version '3.0.0'
 description = 'Sprint Artifacts Extension'
+
+jar {
+    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
+}

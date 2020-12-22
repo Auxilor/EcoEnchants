@@ -23,6 +23,10 @@ allprojects {
         maven { url 'https://repo.codemc.org/repository/nms/' }
     }
 
+    jar {
+        onlyIf { !sourceSets.main.allSource.files.isEmpty() }
+    }
+
     dependencies {
         compileOnly 'org.jetbrains:annotations:19.0.0'
     }

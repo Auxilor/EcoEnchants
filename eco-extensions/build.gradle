@@ -12,8 +12,4 @@ subprojects {
     tasks.withType(Jar) {
         destinationDirectory = file("$rootDir/bin/")
     }
-
-    jar{
-        archiveFileName = project.description + " v" + project.version + ".jar"
-    }
 }

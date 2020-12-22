@@ -17,3 +17,7 @@ dependencies {
 configurations.all {
     exclude group: 'com.mojang', module: 'authlib'
 }
+
+jar {
+    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
+}
