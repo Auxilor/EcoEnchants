@@ -15,11 +15,6 @@ class EntityDeathByEntityBuilder {
 
     private List<ItemStack> drops;
     private int xp = 0;
-    private boolean dropItems;
-
-    public EntityDeathByEntityBuilder() {
-
-    }
 
     public LivingEntity getVictim() {
         return this.victim;

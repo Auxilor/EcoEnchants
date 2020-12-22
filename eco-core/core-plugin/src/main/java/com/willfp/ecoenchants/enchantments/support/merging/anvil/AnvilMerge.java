@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class AnvilMerge {
+    private static final String ALLOW_UNSAFE_KEY = "anvil.allow-unsafe-levels";
 
     /**
      * Merge items in anvil
@@ -36,10 +37,8 @@ public class AnvilMerge {
         // Here so it can be accessed later (scope)
 
         int outDamage = -1;
-        if (old != null) {
-            if (old.getItemMeta() instanceof Damageable) {
-                outDamage = ((Damageable) old.getItemMeta()).getDamage();
-            }
+        if (old != null && old.getItemMeta() instanceof Damageable) {
+            outDamage = ((Damageable) old.getItemMeta()).getDamage();
         }
 
         if (left == null) return new Pair<>(null, null);
@@ -50,14 +49,15 @@ public class AnvilMerge {
             ItemStack out = left.clone();
             ItemMeta outMeta = out.getItemMeta();
             assert outMeta != null;
-            assert left.getItemMeta() != null;
+            ItemMeta meta = left.getItemMeta();
+            assert meta != null;
 
             outMeta.setDisplayName(name);
 
-            if (left.getItemMeta().getDisplayName().equals(name)) {
+            if (meta.getDisplayName().equals(name)) {
 
-                if (left.getItemMeta() instanceof Damageable) {
-                    int leftDamage = ((Damageable) left.getItemMeta()).getDamage();
+                if (meta instanceof Damageable) {
+                    int leftDamage = ((Damageable) meta).getDamage();
 
                     if (outDamage >= leftDamage || outDamage == -1) {
                         return new Pair<>(null, null);
@@ -110,9 +110,7 @@ public class AnvilMerge {
                 if (rightLevel > level) {
                     level = rightLevel;
                 } else if (rightLevel == level) {
-                    if (rightLevel > enchantment.getMaxLevel() && Configs.CONFIG.getBool("anvil.allow-combining-unsafe")) {
-                        level++;
-                    } else if ((rightLevel + 1) <= enchantment.getMaxLevel() || Configs.CONFIG.getBool("anvil.allow-unsafe-levels")) {
+                    if ((rightLevel > enchantment.getMaxLevel() && Configs.CONFIG.getBool("anvil.allow-combining-unsafe")) || ((rightLevel + 1) <= enchantment.getMaxLevel() || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY))) {
                         level++;
                     }
                 }
@@ -141,23 +139,19 @@ public class AnvilMerge {
             if (left.getItemMeta() instanceof EnchantmentStorageMeta) canEnchantItem = true;
 
             if (canEnchantItem && !doesConflict.get()) {
-                if (Configs.CONFIG.getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap")) {
-                    if (outEnchants.size() >= Configs.CONFIG.getInt("anvil.hard-cap.cap")) {
-                        return;
-                    }
+                if (Configs.CONFIG.getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap") && outEnchants.size() >= Configs.CONFIG.getInt("anvil.hard-cap.cap")) {
+                    return;
                 }
                 outEnchants.put(enchantment, integer);
             }
         }));
 
         // Test if the output is the same as left
-        if (outEnchants.equals(leftEnchants) && left.getItemMeta().getDisplayName().equals(name)) {
-            if (left.getItemMeta() instanceof Damageable) {
-                int leftDamage = ((Damageable) left.getItemMeta()).getDamage();
+        if (outEnchants.equals(leftEnchants) && left.getItemMeta().getDisplayName().equals(name) && left.getItemMeta() instanceof Damageable) {
+            int leftDamage = ((Damageable) left.getItemMeta()).getDamage();
 
-                if (outDamage == leftDamage) {
-                    return new Pair<>(null, null);
-                }
+            if (outDamage == leftDamage) {
+                return new Pair<>(null, null);
             }
         }
 
@@ -170,7 +164,7 @@ public class AnvilMerge {
             }));
 
             outEnchants.forEach(((enchantment, integer) -> {
-                meta.addStoredEnchant(enchantment, integer, Configs.CONFIG.getBool("anvil.allow-existing-unsafe-levels") || Configs.CONFIG.getBool("anvil.allow-unsafe-levels"));
+                meta.addStoredEnchant(enchantment, integer, Configs.CONFIG.getBool("anvil.allow-existing-unsafe-levels") || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY));
             }));
 
             meta.setDisplayName(name);
@@ -183,7 +177,7 @@ public class AnvilMerge {
             }));
 
             outEnchants.forEach(((enchantment, integer) -> {
-                meta.addEnchant(enchantment, integer, Configs.CONFIG.getBool("anvil.allow-existing-unsafe-levels") || Configs.CONFIG.getBool("anvil.allow-unsafe-levels"));
+                meta.addEnchant(enchantment, integer, Configs.CONFIG.getBool("anvil.allow-existing-unsafe-levels") || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY));
             }));
 
             if (output.getItemMeta() instanceof Damageable) {

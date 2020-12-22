@@ -43,9 +43,7 @@ public class Soulbound extends EcoEnchant {
         Arrays.stream(player.getInventory().getContents()).filter(Objects::nonNull).forEach((itemStack -> {
             if(itemStack.containsEnchantment(this)) soulboundItems.add(itemStack);
 
-            if(itemStack.getItemMeta() instanceof EnchantmentStorageMeta) {
-                if(((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this)) soulboundItems.add(itemStack);
-            }
+            if(itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this))) soulboundItems.add(itemStack);
         }));
 
         event.getDrops().removeAll(soulboundItems);

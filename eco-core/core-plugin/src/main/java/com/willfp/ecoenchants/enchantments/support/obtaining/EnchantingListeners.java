@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.obtaining;
 
+import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.injection.PluginDependent;
@@ -23,19 +24,17 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnchantingListeners extends PluginDependent implements Listener {
-    private static final Set<Material> secondary = new HashSet<Material>() {{
-        add(Material.ELYTRA);
-        add(Material.SHIELD);
-        add(Material.FLINT_AND_STEEL);
-        add(Material.SHEARS);
-        add(Material.CARROT_ON_A_STICK);
-    }};
+    private static final Set<Material> secondary = new ImmutableSet.Builder<Material>()
+            .add(Material.ELYTRA)
+            .add(Material.SHIELD)
+            .add(Material.FLINT_AND_STEEL)
+            .add(Material.SHEARS)
+            .add(Material.CARROT_ON_A_STICK).build();
 
     public static final Map<Player, int[]> currentlyEnchantingSecondary = new HashMap<>();
 
@@ -135,10 +134,8 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             level = NumberUtils.equalIfOver(level, enchantment.getMaxLevel());
             toAdd.put(enchantment, level);
 
-            if (Configs.CONFIG.getBool("enchanting-table.cap-amount.enabled")) {
-                if (toAdd.size() >= Configs.CONFIG.getInt("enchanting-table.cap-amount.limit")) {
-                    break;
-                }
+            if (Configs.CONFIG.getBool("enchanting-table.cap-amount.enabled") && toAdd.size() >= Configs.CONFIG.getInt("enchanting-table.cap-amount.limit")) {
+                break;
             }
 
             if (enchantment.getType().equals(EnchantmentType.SPECIAL)) gotSpecial = true;
@@ -149,11 +146,9 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         }
         toAdd.forEach(event.getEnchantsToAdd()::putIfAbsent);
 
-        if ((secondary.contains(event.getItem().getType()))) {
-            if (!toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY)) {
-                event.getEnchantsToAdd().put(Enchantment.DURABILITY, currentlyEnchantingSecondary.get(player)[event.whichButton()]);
-                currentlyEnchantingSecondary.remove(player);
-            }
+        if (secondary.contains(event.getItem().getType()) && !toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY))  {
+            event.getEnchantsToAdd().put(Enchantment.DURABILITY, currentlyEnchantingSecondary.get(player)[event.whichButton()]);
+            currentlyEnchantingSecondary.remove(player);
         }
 
         if (gotSpecial && Configs.CONFIG.getBool("enchanting-table.notify-on-special")) {

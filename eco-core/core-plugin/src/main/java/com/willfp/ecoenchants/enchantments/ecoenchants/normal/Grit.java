@@ -44,7 +44,7 @@ public class Grit extends EcoEnchant {
 
         int damage = (int) Math.ceil(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * totalGritPoints);
 
-        DurabilityUtils.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
+        DurabilityUtils.damageItem(player, player.getInventory().getItemInMainHand(), damage, player.getInventory().getHeldItemSlot());
     }
 
 }

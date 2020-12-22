@@ -17,7 +17,7 @@ public class FirstStrike extends EcoEnchant {
 
     @Override
     public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if (!(victim.getHealth() == victim.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()))
+        if (victim.getHealth() != victim.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
             return;
 
         double damage = event.getDamage();

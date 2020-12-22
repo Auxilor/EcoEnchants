@@ -51,7 +51,7 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
         }
     }
 
-    private void loadExtension(File extensionJar) throws MalformedExtensionException {
+    private void loadExtension(File extensionJar) {
         URL url = null;
         try {
             url = extensionJar.toURI().toURL();

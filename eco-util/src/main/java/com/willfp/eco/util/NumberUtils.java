@@ -1,11 +1,12 @@
 package com.willfp.eco.util;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 import java.util.TreeMap;
 
 public class NumberUtils {
-
-    private final static TreeMap<Integer, String> NUMERALS = new TreeMap<>();
+    private static final Random RANDOM = new Random();
+    private static final TreeMap<Integer, String> NUMERALS = new TreeMap<>();
 
     static {
 
@@ -107,8 +108,7 @@ public class NumberUtils {
      * @return Random double
      */
     public static double randFloat(double min, double max) {
-        java.util.Random rand = new java.util.Random();
-        return rand.nextFloat() * (max - min) + min;
+        return RANDOM.nextFloat() * (max - min) + min;
     }
 
     /**

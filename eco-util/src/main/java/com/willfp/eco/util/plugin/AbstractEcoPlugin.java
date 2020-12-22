@@ -109,15 +109,15 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         Set<String> enabledPlugins = Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toSet());
 
         this.getDefaultIntegrations().forEach((integrationLoader -> {
-            StringBuilder log = new StringBuilder();
-            log.append(integrationLoader.getPluginName()).append(": ");
+            StringBuilder infoBuilder = new StringBuilder();
+            infoBuilder.append(integrationLoader.getPluginName()).append(": ");
             if (enabledPlugins.contains(integrationLoader.getPluginName())) {
                 integrationLoader.load();
-                log.append("&aENABLED");
+                infoBuilder.append("&aENABLED");
             } else {
-                log.append("&9DISABLED");
+                infoBuilder.append("&9DISABLED");
             }
-            this.getLog().info(log.toString());
+            this.getLog().info(infoBuilder.toString());
         }));
         this.getLog().info("");
 

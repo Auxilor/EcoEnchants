@@ -292,7 +292,6 @@ public class EnchantChecks {
         if (entity.getEquipment() == null)
             return new HashMap<>();
 
-        AtomicInteger armorPoints = new AtomicInteger(0);
         List<ItemStack> armor = Arrays.asList(entity.getEquipment().getArmorContents());
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();

@@ -24,10 +24,8 @@ public class Razor extends EcoEnchant {
         double perLevelMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "base-damage");
         double extra = level*perLevelMultiplier + baseDamage;
-        if(this.getConfig().getBool((EcoEnchants.CONFIG_LOCATION) + "decrease-if-cooldown")) {
-            if(attacker instanceof Player) {
-                extra *= ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker);
-            }
+        if(this.getConfig().getBool((EcoEnchants.CONFIG_LOCATION) + "decrease-if-cooldown") && attacker instanceof Player) {
+            extra *= ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker);
         }
 
         event.setDamage(event.getDamage() + extra);

@@ -58,10 +58,8 @@ public class EnchantmentCache {
 
             color = type.getColor();
 
-            if (rarity != null) {
-                if (rarity.hasCustomColor() && type != EnchantmentType.CURSE) {
-                    color = rarity.getCustomColor();
-                }
+            if (rarity != null && rarity.hasCustomColor() && type != EnchantmentType.CURSE) {
+                color = rarity.getCustomColor();
             }
 
             String rawName = name;
@@ -96,9 +94,9 @@ public class EnchantmentCache {
                 descriptionBuilder.append(" ");
             });
 
-            String stringDescription = descriptionBuilder.toString();
-            stringDescription = stringDescription.replaceAll("§w", "");
-            this.stringDescription = stringDescription.replaceAll(EnchantDisplay.OPTIONS.getDescriptionColor(), "");
+            String processedStringDescription = descriptionBuilder.toString();
+            processedStringDescription = processedStringDescription.replace("§w", "");
+            this.stringDescription = processedStringDescription.replaceAll(EnchantDisplay.OPTIONS.getDescriptionColor(), "");
         }
 
         public Enchantment getEnchantment() {

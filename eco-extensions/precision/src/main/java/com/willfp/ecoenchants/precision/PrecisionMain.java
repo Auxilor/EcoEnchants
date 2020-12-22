@@ -8,10 +8,11 @@ public class PrecisionMain extends Extension {
 
     @Override
     public void onEnable() {
+        // Handled by super
     }
 
     @Override
     public void onDisable() {
-
+        // Handled by super
     }
 }

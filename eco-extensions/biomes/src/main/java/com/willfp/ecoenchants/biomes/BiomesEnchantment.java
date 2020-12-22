@@ -12,6 +12,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 public abstract class BiomesEnchantment extends EcoEnchant {
+    private static final String MULTIPLIER_KEY = "multiplier";
+
     protected BiomesEnchantment(String key, EnchantmentType type, Prerequisite... prerequisites) {
         super(key, type, prerequisites);
     }
@@ -28,7 +30,7 @@ public abstract class BiomesEnchantment extends EcoEnchant {
         if(!isInBiome(attacker))
             return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + MULTIPLIER_KEY);
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }
 
@@ -47,7 +49,7 @@ public abstract class BiomesEnchantment extends EcoEnchant {
         if(!isInBiome(attacker))
             return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + MULTIPLIER_KEY);
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }
 
@@ -56,7 +58,7 @@ public abstract class BiomesEnchantment extends EcoEnchant {
         if(!isInBiome(attacker))
             return;
 
-        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
+        double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + MULTIPLIER_KEY);
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }
 }

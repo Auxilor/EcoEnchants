@@ -40,21 +40,21 @@ public class MMOManager {
 
     public static double getStamina(Player player) {
         MMOIntegration integration = getIntegration();
-        return integration.getMana(player);
+        return integration.getStamina(player);
     }
 
     public static double getMaxStamina(Player player) {
         MMOIntegration integration = getIntegration();
-        return integration.getMaxMana(player);
+        return integration.getMaxStamina(player);
     }
 
     public static void setStamina(Player player, double amount) {
         MMOIntegration integration = getIntegration();
-        integration.setMana(player, amount);
+        integration.setStamina(player, amount);
     }
 
     public static void giveStamina(Player player, double amount) {
         MMOIntegration integration = getIntegration();
-        integration.giveMana(player, amount);
+        integration.giveStamina(player, amount);
     }
 }

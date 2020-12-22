@@ -25,7 +25,6 @@ public class BlastMining extends EcoEnchant {
 
     // START OF LISTENERS
 
-
     @Override
     public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
         if (block.hasMetadata("block-ignore"))

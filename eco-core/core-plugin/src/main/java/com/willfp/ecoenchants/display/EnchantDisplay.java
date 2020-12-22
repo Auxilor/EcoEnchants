@@ -134,9 +134,8 @@ public class EnchantDisplay {
         if (item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()))
             return item;
 
-        if (item.getItemMeta().getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
-            if (hideEnchants)
-                hideEnchants = false;
+        if (item.getItemMeta().getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER) && hideEnchants) {
+            hideEnchants = false;
         }
 
         revertDisplay(item);

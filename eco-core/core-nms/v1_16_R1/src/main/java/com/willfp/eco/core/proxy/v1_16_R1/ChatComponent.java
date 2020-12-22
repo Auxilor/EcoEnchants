@@ -73,11 +73,11 @@ public class ChatComponent implements ChatComponentProxy {
     }
 
     private static ItemStack getFromTag(String jsonTag, String id) {
-        id = id.replaceAll("minecraft:", "");
+        id = id.replace("minecraft:", "");
         id = id.toUpperCase();
-        id = id.replaceAll("\"", "");
+        id = id.replace("\"", "");
         jsonTag = jsonTag.substring(1, jsonTag.length() - 1);
-        jsonTag = jsonTag.replaceAll("id:", "\"id\":");
+        jsonTag = jsonTag.replace("id:", "\"id\":");
         jsonTag = jsonTag.replace("\\", "");
         Material material = Material.getMaterial(id);
 

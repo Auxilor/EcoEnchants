@@ -17,7 +17,7 @@ public class Alchemy extends EcoEnchant {
         super("alchemy", EnchantmentType.NORMAL);
     }
 
-    private final FixedMetadataValue TRUE = this.plugin.getMetadataValueFactory().create(true);
+    private final FixedMetadataValue metaKeyTrue = this.plugin.getMetadataValueFactory().create(true);
 
     @EventHandler
     public void onPotionEffect(EntityPotionEffectEvent event) {
@@ -47,7 +47,7 @@ public class Alchemy extends EcoEnchant {
                 effect.hasIcon()
         );
 
-        entity.setMetadata(newEffect.toString(), TRUE);
+        entity.setMetadata(newEffect.toString(), metaKeyTrue);
 
         entity.removePotionEffect(effect.getType());
 

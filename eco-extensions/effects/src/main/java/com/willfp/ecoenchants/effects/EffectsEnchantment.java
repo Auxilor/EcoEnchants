@@ -24,10 +24,8 @@ public abstract class EffectsEnchantment extends EcoEnchant {
         final Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
-            if (player.hasPotionEffect(this.getPotionEffect())) {
-                if (player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
+            if (player.hasPotionEffect(this.getPotionEffect()) && player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
                     player.removePotionEffect(this.getPotionEffect());
-                }
             }
 
             int level = EnchantChecks.getArmorPoints(player, this);

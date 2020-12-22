@@ -58,9 +58,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         if (victim.hasMetadata("NPC")) return;
 
-        if (attacker instanceof Player) {
-            if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
-        }
+        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) return;
 
         if (event.isCancelled()) return;
 
@@ -99,9 +97,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         if (victim.hasMetadata("NPC")) return;
 
-        if (attacker instanceof Player) {
-            if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
-        }
+        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) return;
 
         EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
             if (event.isCancelled()) return;
@@ -126,15 +122,13 @@ public class WatcherTriggers extends PluginDependent implements Listener {
                 jumpVelocity += ((float) player.getPotionEffect(PotionEffectType.JUMP).getAmplifier() + 1) * 0.1F;
             }
             jumpVelocity = Float.parseFloat(df.format(jumpVelocity).replace(',', '.'));
-            if (event.getPlayer().getLocation().getBlock().getType() != Material.LADDER && prevPlayersOnGround.contains(player.getUniqueId())) {
-                if (!player.isOnGround() && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
-                    EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, level) -> {
-                        if (event.isCancelled()) return;
-                        if (!enchant.isEnabled()) return;
-                        if (enchant.getDisabledWorlds().contains(player.getWorld())) return;
-                        enchant.onJump(player, level, event);
-                    });
-                }
+            if (event.getPlayer().getLocation().getBlock().getType() != Material.LADDER && prevPlayersOnGround.contains(player.getUniqueId())&& !player.isOnGround() && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
+                EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, level) -> {
+                    if (event.isCancelled()) return;
+                    if (!enchant.isEnabled()) return;
+                    if (enchant.getDisabledWorlds().contains(player.getWorld())) return;
+                    enchant.onJump(player, level, event);
+                });
             }
         }
         if (player.isOnGround()) {
@@ -162,9 +156,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         if (victim.hasMetadata("NPC")) return;
 
-        if (attacker instanceof Player) {
-            if (!AntigriefManager.canInjure((Player) attacker, victim)) return;
-        }
+        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) return;
 
         EnchantChecks.getEnchantsOnMainhand(attacker).forEach((enchant, level) -> {
             if (event.isCancelled()) return;

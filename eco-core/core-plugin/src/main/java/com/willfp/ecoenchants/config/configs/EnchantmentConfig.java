@@ -88,7 +88,7 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
 
     public Set<EnchantmentTarget> getTargets() {
         List<String> targetNames = config.getStringList(EcoEnchants.GENERAL_LOCATION + "targets");
-        if (targetNames == null || targetNames.isEmpty()) return new HashSet<>();
+        if (targetNames.isEmpty()) return new HashSet<>();
         Set<EnchantmentTarget> targets = new HashSet<>();
 
         targetNames.forEach((s -> {

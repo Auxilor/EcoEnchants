@@ -41,6 +41,6 @@ public class MMOMain extends Extension {
 
     @Override
     protected void onDisable() {
-
+        // Handled by super
     }
 }

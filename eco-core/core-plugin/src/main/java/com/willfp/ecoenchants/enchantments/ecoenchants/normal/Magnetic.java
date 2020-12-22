@@ -65,10 +65,8 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
                 if(!(e instanceof Item || e instanceof ExperienceOrb)) continue;
 
-                if (e instanceof Item) {
-                    if (((Item) e).getPickupDelay() > 0) {
-                        continue;
-                    }
+                if (e instanceof Item && ((Item) e).getPickupDelay() > 0) {
+                    continue;
                 }
 
                 Vector vector = player.getLocation().toVector().subtract(e.getLocation().toVector()).normalize().multiply(0.1 * level);

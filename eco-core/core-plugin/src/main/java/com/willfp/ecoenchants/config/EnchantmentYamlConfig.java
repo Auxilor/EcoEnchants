@@ -33,7 +33,7 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
      * @param source The class of the main class of source or extension
      * @param type   The enchantment type
      */
-    public EnchantmentYamlConfig(String name, Class<?> source, EnchantmentType type) {
+    protected EnchantmentYamlConfig(String name, Class<?> source, EnchantmentType type) {
         super(AbstractEcoPlugin.getInstance());
         this.name = name;
         this.source = source;

@@ -9,11 +9,11 @@ public class EndershotMain extends Extension {
 
     @Override
     public void onEnable() {
-
+        // Handled by super
     }
 
     @Override
     public void onDisable() {
-
+        // Handled by super
     }
 }

@@ -56,9 +56,9 @@ public class CommandEnchantinfo extends AbstractCommand {
         Set<Enchantment> conflicts = enchantment.getConflicts();
 
         new HashSet<>(conflicts).forEach(enchantment1 -> {
-            if (EcoEnchants.getFromEnchantment(enchantment1) != null) {
-                if (!EcoEnchants.getFromEnchantment(enchantment1).isEnabled())
-                    conflicts.remove(enchantment1);
+            EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment1);
+            if (ecoEnchant != null && !ecoEnchant.isEnabled()) {
+                conflicts.remove(enchantment1);
             }
         });
 
@@ -89,7 +89,7 @@ public class CommandEnchantinfo extends AbstractCommand {
             enchantment.getRawTargets().forEach(target -> {
                 String targetName = target.getName();
                 targetName = targetName.toLowerCase();
-                targetName = targetName.replaceAll("_", " ");
+                targetName = targetName.replace("_", " ");
                 targetName = WordUtils.capitalize(targetName);
                 applicableItemsSet.add(targetName);
             });
@@ -97,7 +97,7 @@ public class CommandEnchantinfo extends AbstractCommand {
             targets.forEach(material -> {
                 String matName = material.toString();
                 matName = matName.toLowerCase();
-                matName = matName.replaceAll("_", " ");
+                matName = matName.replace("_", " ");
                 matName = WordUtils.capitalize(matName);
                 applicableItemsSet.add(matName);
             });
@@ -122,11 +122,11 @@ public class CommandEnchantinfo extends AbstractCommand {
         final String finalConflicts = allConflicts;
         final String finalMaxLevel = maxLevel;
         Arrays.asList(Configs.LANG.getMessage("enchantinfo").split("\\r?\\n")).forEach((string -> {
-            string = string.replaceAll("%name%", finalName)
-                    .replaceAll("%description%", finalDescription)
-                    .replaceAll("%target%", finalTargets)
-                    .replaceAll("%conflicts%", finalConflicts)
-                    .replaceAll("%maxlevel%", finalMaxLevel);
+            string = string.replace("%name%", finalName)
+                    .replace("%description%", finalDescription)
+                    .replace("%target%", finalTargets)
+                    .replace("%conflicts%", finalConflicts)
+                    .replace("%maxlevel%", finalMaxLevel);
             sender.sendMessage(string);
         }));
     }

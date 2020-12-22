@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.Bukkit;
@@ -13,6 +12,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Ascend extends Spell {
+    private static final String IGNORE_FALL_KEY = "ignore-fall-damage";
+
     public Ascend() {
         super("ascend");
     }
@@ -21,8 +22,8 @@ public class Ascend extends Spell {
     public void onUse(Player player, int level, PlayerInteractEvent event) {
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level") * level;
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, ticks, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "power") - 1,false,false));
-        player.setMetadata("ignore-fall-damage", new FixedMetadataValue(this.plugin, true));
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> player.removeMetadata("ignore-fall-damage", this.plugin), ticks * 4L);
+        player.setMetadata(IGNORE_FALL_KEY, new FixedMetadataValue(this.plugin, true));
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> player.removeMetadata(IGNORE_FALL_KEY, this.plugin), ticks * 4L);
     }
 
     @EventHandler
@@ -30,7 +31,7 @@ public class Ascend extends Spell {
         if(!event.getCause().equals(EntityDamageEvent.DamageCause.FALL))
             return;
 
-        if(!event.getEntity().hasMetadata("ignore-fall-damage"))
+        if(!event.getEntity().hasMetadata(IGNORE_FALL_KEY))
             return;
 
         event.setCancelled(true);

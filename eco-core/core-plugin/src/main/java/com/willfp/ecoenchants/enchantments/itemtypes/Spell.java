@@ -82,13 +82,13 @@ public abstract class Spell extends EcoEnchant {
         int cooldown = getCooldown(this, player);
 
         if (cooldown > 0) {
-            String message = Configs.LANG.getMessage("on-cooldown").replaceAll("%seconds%", String.valueOf(cooldown)).replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
+            String message = Configs.LANG.getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
             player.sendMessage(message);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
             return;
         }
 
-        String message = Configs.LANG.getMessage("used-spell").replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
+        String message = Configs.LANG.getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
         player.sendMessage(message);
         player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
         runnable.run();

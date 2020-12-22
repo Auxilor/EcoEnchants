@@ -73,7 +73,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         super(NamespacedKey.minecraft(key));
 
         this.type = type;
-        this.permissionName = key.replaceAll("_", "");
+        this.permissionName = key.replace("_", "");
         EcoEnchantsConfigs.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, this.getClass(), this.type));
         this.config = EcoEnchantsConfigs.getEnchantmentConfig(this.permissionName);
 

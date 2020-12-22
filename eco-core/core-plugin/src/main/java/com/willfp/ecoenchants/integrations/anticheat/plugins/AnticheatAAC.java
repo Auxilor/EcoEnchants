@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 public class AnticheatAAC implements AnticheatWrapper, Listener {
-    private final AACExemption ECOENCHANTS = new AACExemption("EcoEnchants");
+    private final AACExemption ecoEnchantsExemption = new AACExemption("EcoEnchants");
     private final AACAPI api = Bukkit.getServicesManager().load(AACAPI.class);
 
     @Override
@@ -18,11 +18,11 @@ public class AnticheatAAC implements AnticheatWrapper, Listener {
 
     @Override
     public void exempt(Player player) {
-        api.addExemption(player, ECOENCHANTS);
+        api.addExemption(player, ecoEnchantsExemption);
     }
 
     @Override
     public void unexempt(Player player) {
-        api.removeExemption(player, ECOENCHANTS);
+        api.removeExemption(player, ecoEnchantsExemption);
     }
 }

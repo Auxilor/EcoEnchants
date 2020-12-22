@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.google.common.collect.ImmutableSet;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -7,7 +8,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import java.util.HashSet;
 import java.util.Set;
 public class EnderSlayer extends EcoEnchant {
     public EnderSlayer() {
@@ -18,12 +18,13 @@ public class EnderSlayer extends EcoEnchant {
 
     // START OF LISTENERS
 
-    private static final Set<EntityType> endMobs = new HashSet<EntityType>() {{
-        add(EntityType.ENDERMITE);
-        add(EntityType.ENDERMAN);
-        add(EntityType.ENDER_DRAGON);
-        add(EntityType.SHULKER);
-    }};
+    private static final Set<EntityType> endMobs = new ImmutableSet.Builder<EntityType>()
+            .add(EntityType.ENDERMITE)
+            .add(EntityType.ENDERMAN)
+            .add(EntityType.ENDER_DRAGON)
+            .add(EntityType.SHULKER)
+            .build();
+
 
     @Override
     public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {

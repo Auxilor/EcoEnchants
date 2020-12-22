@@ -39,12 +39,10 @@ public class Volatile extends EcoEnchant {
         float power = (float) (0.5 + (level * 0.5));
 
         if (!AntigriefManager.canCreateExplosion(attacker, event.getEntity().getLocation())) return;
-        if (breakblocks) {
-            if (!AntigriefManager.canBreakBlock(attacker, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation())))
-                return;
+        if (breakblocks && !AntigriefManager.canBreakBlock(attacker, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation()))) {
+            return;
         }
 
-        double distance = attacker.getLocation().distance(victim.getLocation());
         Location explosionLoc = victim.getEyeLocation();
 
         victim.getWorld().createExplosion(explosionLoc, power, fire, breakblocks);

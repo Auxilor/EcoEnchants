@@ -245,7 +245,6 @@ public class EcoEnchants {
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
 
-    private static final List<EcoEnchant> ecoEnchants = new ArrayList<>();
     private static final Map<NamespacedKey, EcoEnchant> byKey = new HashMap<>();
 
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
@@ -475,7 +474,7 @@ public class EcoEnchants {
      * @return A list of all {@link EcoEnchant}s
      */
     public static List<EcoEnchant> values() {
-        return ImmutableList.copyOf(ecoEnchants);
+        return ImmutableList.copyOf(byKey.values());
     }
 
     /**
@@ -570,8 +569,6 @@ public class EcoEnchants {
      * @param enchant The {@link EcoEnchant} to add
      */
     public static void addNewEcoEnchant(EcoEnchant enchant) {
-        ecoEnchants.remove(enchant);
-        ecoEnchants.add(enchant);
         byKey.remove(enchant.getKey());
         byKey.put(enchant.getKey(), enchant);
     }
@@ -582,7 +579,6 @@ public class EcoEnchants {
      * @param enchant The {@link EcoEnchant} to remove
      */
     public static void removeEcoEnchant(EcoEnchant enchant) {
-        ecoEnchants.remove(enchant);
         byKey.remove(enchant.getKey());
     }
 }

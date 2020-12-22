@@ -131,10 +131,8 @@ public class Telekinesis extends EcoEnchant {
         int xp = event.getDroppedExp();
         Collection<ItemStack> drops = event.getDrops();
 
-        if(entity instanceof Player) {
-            if(Soulbound.getSoulboundItems((Player) entity) != null) {
-                drops.removeAll(Soulbound.getSoulboundItems((Player) entity));
-            }
+        if(entity instanceof Player && Soulbound.getSoulboundItems((Player) entity) != null) {
+            drops.removeAll(Soulbound.getSoulboundItems((Player) entity));
         }
 
         new DropQueue(player)

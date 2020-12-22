@@ -31,9 +31,8 @@ public class Carve extends EcoEnchant {
         final double damage = damagePerLevel * level * event.getDamage();
         final double radius = radiusPerLevel * level;
 
-        if(attacker instanceof Player) {
-            if (ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
-                return;
+        if(attacker instanceof Player && ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
+            return;
         }
 
         victim.getNearbyEntities(radius, radius, radius).stream()

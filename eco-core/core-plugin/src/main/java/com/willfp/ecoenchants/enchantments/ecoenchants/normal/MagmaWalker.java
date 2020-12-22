@@ -64,12 +64,10 @@ public class MagmaWalker extends EcoEnchant {
             BukkitRunnable replace = new EcoBukkitRunnable(this.plugin) {
                 @Override
                 public void run() {
-                    if (block.getType().equals(Material.OBSIDIAN)) {
-                        if(!player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
-                            block.setType(Material.LAVA);
-                            block.removeMetadata("byMagmaWalker", this.plugin);
-                            this.cancel();
-                        }
+                    if (block.getType().equals(Material.OBSIDIAN) && !player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
+                        block.setType(Material.LAVA);
+                        block.removeMetadata("byMagmaWalker", this.plugin);
+                        this.cancel();
                     }
                 }
             };

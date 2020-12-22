@@ -11,6 +11,6 @@ public class SprintArtifactsMain extends Extension {
 
     @Override
     public void onDisable() {
-
+        // Handled by super
     }
 }

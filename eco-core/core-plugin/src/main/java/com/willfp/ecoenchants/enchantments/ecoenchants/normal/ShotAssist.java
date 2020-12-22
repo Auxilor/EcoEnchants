@@ -30,8 +30,6 @@ public class ShotAssist extends EcoEnchant {
         if(event.isCancelled()) return;
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Arrow arrow = (Arrow) event.getDamager();
-        LivingEntity victim = (LivingEntity) event.getEntity();
 
         int points = EnchantChecks.getArmorPoints(player, this, 0);
 
