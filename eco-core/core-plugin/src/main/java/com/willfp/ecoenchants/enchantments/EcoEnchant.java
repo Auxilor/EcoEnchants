@@ -62,7 +62,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     private boolean enabled;
 
-
     /**
      * Create a new EcoEnchant
      *
@@ -425,4 +424,17 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         return targetMaterials.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EcoEnchant)) return false;
+        if (!super.equals(o)) return false;
+        EcoEnchant enchant = (EcoEnchant) o;
+        return enchant.getKey().equals(((EcoEnchant) o).getKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getKey());
+    }
 }

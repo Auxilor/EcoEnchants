@@ -2,10 +2,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
 import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
 import com.willfp.eco.util.ProxyUtils;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.eco.util.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

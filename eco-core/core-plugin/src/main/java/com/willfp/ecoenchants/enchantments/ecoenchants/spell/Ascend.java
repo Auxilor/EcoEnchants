@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
