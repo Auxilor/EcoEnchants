@@ -13,27 +13,27 @@ public class EcoScheduler extends PluginDependent implements Scheduler {
 
     @Override
     public BukkitTask runLater(Callable callable, long ticksLater) {
-        return Bukkit.getServer().getScheduler().runTaskLater(this.getPlugin(), callable::call, ticksLater);
+        return Bukkit.getScheduler().runTaskLater(this.getPlugin(), callable::call, ticksLater);
     }
 
     @Override
     public BukkitTask runTimer(Callable callable, long delay, long repeat) {
-        return Bukkit.getServer().getScheduler().runTaskTimer(this.getPlugin(), callable::call, delay, repeat);
+        return Bukkit.getScheduler().runTaskTimer(this.getPlugin(), callable::call, delay, repeat);
     }
 
     @Override
     public BukkitTask runAsyncTimer(Callable callable, long delay, long repeat) {
-        return Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(this.getPlugin(), callable::call, delay, repeat);
+        return Bukkit.getScheduler().runTaskTimerAsynchronously(this.getPlugin(), callable::call, delay, repeat);
     }
 
     @Override
     public BukkitTask run(Runnable runnable) {
-        return Bukkit.getServer().getScheduler().runTask(this.getPlugin(), runnable::run);
+        return Bukkit.getScheduler().runTask(this.getPlugin(), runnable);
     }
 
     @Override
     public BukkitTask runAsync(Callable callable) {
-        return Bukkit.getServer().getScheduler().runTaskAsynchronously(this.getPlugin(), callable::call);
+        return Bukkit.getScheduler().runTaskAsynchronously(this.getPlugin(), callable::call);
     }
 
     @Override
