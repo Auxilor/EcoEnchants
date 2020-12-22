@@ -106,11 +106,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.getLog().info("");
         this.getLog().info("==========================================");
 
-        this.getEventManager().registerEvents(new ArrowDataListener(this));
-        this.getEventManager().registerEvents(new NaturalExpGainListeners());
-        this.getEventManager().registerEvents(new ArmorListener());
-        this.getEventManager().registerEvents(new DispenserArmorListener());
-        this.getEventManager().registerEvents(new EntityDeathByEntityListeners(this));
+        this.getEventManager().registerListener(new ArrowDataListener(this));
+        this.getEventManager().registerListener(new NaturalExpGainListeners());
+        this.getEventManager().registerListener(new ArmorListener());
+        this.getEventManager().registerListener(new DispenserArmorListener());
+        this.getEventManager().registerListener(new EntityDeathByEntityListeners(this));
 
         new FastCollatedDropQueue.CollatedRunnable(this);
 
@@ -149,7 +149,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
             if(!abstractPacketAdapter.isPostLoad()) abstractPacketAdapter.register();
         });
 
-        this.getListeners().forEach(listener -> this.getEventManager().registerEvents(listener));
+        this.getListeners().forEach(listener -> this.getEventManager().registerListener(listener));
 
         this.getCommands().forEach(AbstractCommand::register);
 
@@ -162,7 +162,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     public final void onDisable() {
         super.onDisable();
 
-        this.getEventManager().unregisterAllEvents();
+        this.getEventManager().unregisterAllListeners();
         this.getScheduler().cancelAll();
 
         this.disable();

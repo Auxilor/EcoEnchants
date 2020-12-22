@@ -68,7 +68,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
 
         EcoEnchants.values().forEach(enchant -> {
             if(enchant.isEnabled()) {
-                this.getEventManager().registerEvents(enchant);
+                this.getEventManager().registerListener(enchant);
                 if(enchant instanceof EcoRunnable) {
                     this.getScheduler().syncRepeating((EcoRunnable) enchant, 5, ((EcoRunnable) enchant).getTime());
                 }
@@ -116,7 +116,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
             HandlerList.unregisterAll(ecoEnchant);
 
             this.getScheduler().runLater(() -> {
-                if(ecoEnchant.isEnabled()) this.getEventManager().registerEvents(ecoEnchant);
+                if(ecoEnchant.isEnabled()) this.getEventManager().registerListener(ecoEnchant);
             }, 1);
         }));
     }

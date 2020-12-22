@@ -16,11 +16,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Wrapper for commands in {@link AbstractEcoPlugin}s
- * <p>
- * Reduces boilerplate and copying code between different commands.
- */
 public abstract class AbstractCommand extends PluginDependent implements CommandExecutor, Registerable {
     /**
      * The name of the command

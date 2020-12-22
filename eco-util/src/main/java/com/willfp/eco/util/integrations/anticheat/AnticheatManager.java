@@ -21,7 +21,7 @@ public class AnticheatManager {
      */
     public static void register(AnticheatWrapper anticheat) {
         if (anticheat instanceof Listener) {
-            plugin.getEventManager().registerEvents((Listener) anticheat);
+            plugin.getEventManager().registerListener((Listener) anticheat);
         }
         anticheats.add(anticheat);
     }
