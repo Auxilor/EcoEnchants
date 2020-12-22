@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,7 +24,7 @@ public class Tornado extends EcoEnchant {
 
         Vector toAdd = new Vector(0, yVelocity, 0);
 
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
             victim.setVelocity(victim.getVelocity().clone().add(toAdd));
         }, 1);
     }

@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
 import com.willfp.eco.util.VectorUtils;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import org.bukkit.block.Block;
@@ -37,7 +37,7 @@ public class Drill extends EcoEnchant {
         for (int i = 1; i <= blocks; i++) {
             Vector simplified = VectorUtils.simplifyVector(player.getLocation().getDirection().normalize()).multiply(i);
             Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(simplified));
-            block1.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            block1.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
 
             if (this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                 continue;
@@ -49,7 +49,7 @@ public class Drill extends EcoEnchant {
             if (!AntigriefManager.canBreakBlock(player, block1)) continue;
 
             new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, block1);
-            block1.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance());
+            block1.removeMetadata("block-ignore", this.plugin);
         }
 
         AnticheatManager.unexemptPlayer(player);

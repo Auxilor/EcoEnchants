@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.eco.core.proxy.ProxyConstants;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.display.AbstractPacketAdapter;
+import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
     public PacketOpenWindowMerchant(AbstractEcoPlugin plugin) {
-        super(plugin, PacketType.Play.Server.OPEN_WINDOW_MERCHANT);
+        super(plugin, PacketType.Play.Server.OPEN_WINDOW_MERCHANT, false);
     }
 
     @Override

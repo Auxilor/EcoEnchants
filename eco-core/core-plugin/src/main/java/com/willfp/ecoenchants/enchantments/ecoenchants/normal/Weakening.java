@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -25,10 +25,10 @@ public class Weakening extends EcoEnchant {
         int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
         int ticks = ticksPerLevel * level;
 
-        victim.setMetadata("weak", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+        victim.setMetadata("weak", new FixedMetadataValue(this.plugin, true));
 
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            victim.removeMetadata("weak", EcoEnchantsPlugin.getInstance());
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+            victim.removeMetadata("weak", this.plugin);
         }, ticks);
     }
 

@@ -5,9 +5,9 @@ import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.optional.Prerequisite;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -120,7 +120,7 @@ public abstract class Artifact extends EcoEnchant {
                     entity.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
                 }
             }
-        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 0, 1);
+        }.runTaskTimer(this.plugin, 0, 1);
     }
 
     @EventHandler
@@ -155,6 +155,6 @@ public abstract class Artifact extends EcoEnchant {
                 if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
                 entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
             }
-        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 4, ticks);
+        }.runTaskTimer(this.plugin, 4, ticks);
     }
 }

@@ -4,8 +4,8 @@ import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
 import com.willfp.ecoenchants.display.options.sorting.SorterManager;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +19,7 @@ public class DisplayOptions {
     private final DescriptionOptions descriptionOptions = new DescriptionOptions();
     private final NumbersOptions numbersOptions = new NumbersOptions();
     private final ShrinkOptions shrinkOptions = new ShrinkOptions();
-    private final List<EcoEnchant.EnchantmentType> sortedTypes = new ArrayList<>();
+    private final List<EnchantmentType> sortedTypes = new ArrayList<>();
     private final List<EnchantmentRarity> sortedRarities = new ArrayList<>();
 
     public DisplayOptions() {
@@ -58,7 +58,7 @@ public class DisplayOptions {
         return shrinkOptions.isEnabled();
     }
 
-    public List<EcoEnchant.EnchantmentType> getSortedTypes() {
+    public List<EnchantmentType> getSortedTypes() {
         return sortedTypes;
     }
 
@@ -77,10 +77,10 @@ public class DisplayOptions {
 
         sortedTypes.clear();
         sortedTypes.addAll(Configs.CONFIG.getStrings("lore.type-ordering").stream()
-                .map(typeName -> EcoEnchant.EnchantmentType.values().stream().filter(type -> type.getName().equalsIgnoreCase(typeName)).findFirst().orElse(null))
+                .map(typeName -> EnchantmentType.values().stream().filter(type -> type.getName().equalsIgnoreCase(typeName)).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
-        sortedTypes.addAll(EcoEnchant.EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).collect(Collectors.toList()));
+        sortedTypes.addAll(EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).collect(Collectors.toList()));
 
         sortedRarities.clear();
         sortedRarities.addAll(Configs.CONFIG.getStrings("lore.rarity-ordering").stream()

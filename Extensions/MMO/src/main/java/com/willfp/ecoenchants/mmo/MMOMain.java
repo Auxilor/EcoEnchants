@@ -42,7 +42,7 @@ public class MMOMain extends Extension {
         }
 
         MMOEnchant.REGISTRY.forEach(mmoEnchant -> {
-            Bukkit.getPluginManager().registerEvents((EcoEnchant) mmoEnchant, EcoEnchantsPlugin.getInstance());
+            Bukkit.getPluginManager().registerEvents((EcoEnchant) mmoEnchant, this.plugin);
         });
     }
 

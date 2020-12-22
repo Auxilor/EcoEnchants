@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
@@ -40,7 +40,7 @@ public class Replenish extends EcoEnchant {
                     block.setType(type);
                     block.setBlockData(data);
                 }
-            }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
+            }.runTaskLater(this.plugin, 1);
         }
 
         data.setAge(0);
@@ -51,6 +51,6 @@ public class Replenish extends EcoEnchant {
                 block.setType(type);
                 block.setBlockData(data);
             }
-        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
+        }.runTaskLater(this.plugin, 1);
     }
 }

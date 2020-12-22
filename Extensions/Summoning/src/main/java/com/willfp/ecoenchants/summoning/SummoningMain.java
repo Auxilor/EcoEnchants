@@ -15,11 +15,11 @@ public class SummoningMain extends Extension {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(FIRESTORM, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(METALLIC, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(MORTALITY, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(GHOUL, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(CRAWLER, EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(FIRESTORM, this.plugin);
+        Bukkit.getPluginManager().registerEvents(METALLIC, this.plugin);
+        Bukkit.getPluginManager().registerEvents(MORTALITY, this.plugin);
+        Bukkit.getPluginManager().registerEvents(GHOUL, this.plugin);
+        Bukkit.getPluginManager().registerEvents(CRAWLER, this.plugin);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.util.VectorUtils;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.eco.util.bukkit.scheduling.EcoBukkitRunnable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -57,30 +57,30 @@ public class MagmaWalker extends EcoEnchant {
 
             block.setType(Material.OBSIDIAN);
 
-            block.setMetadata("byMagmaWalker", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            block.setMetadata("byMagmaWalker", new FixedMetadataValue(this.plugin, true));
 
             long afterTicks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "remove-after-ticks");
 
-            BukkitRunnable replace = new BukkitRunnable() {
+            BukkitRunnable replace = new EcoBukkitRunnable(this.plugin) {
                 @Override
                 public void run() {
                     if (block.getType().equals(Material.OBSIDIAN)) {
                         if(!player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
                             block.setType(Material.LAVA);
-                            block.removeMetadata("byMagmaWalker", EcoEnchantsPlugin.getInstance());
+                            block.removeMetadata("byMagmaWalker", this.plugin);
                             this.cancel();
                         }
                     }
                 }
             };
 
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+            this.plugin.getScheduler().runLater(() -> {
                 if (block.getType().equals(Material.OBSIDIAN)) {
                     if(!player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
                         block.setType(Material.LAVA);
-                        block.removeMetadata("byMagmaWalker", EcoEnchantsPlugin.getInstance());
+                        block.removeMetadata("byMagmaWalker", this.plugin);
                     } else {
-                        replace.runTaskTimer(EcoEnchantsPlugin.getInstance(), afterTicks, afterTicks);
+                        replace.runTaskTimer(this.plugin, afterTicks, afterTicks);
                     }
                 }
             }, afterTicks);

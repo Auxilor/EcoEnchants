@@ -9,7 +9,6 @@ import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.tuplets.Pair;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,7 +26,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
     private static final HashMap<UUID, Integer> noIncreaseXpMap = new HashMap<>();
     private static final String ANVIL_GUI_CLASS = "net.wesjd.anvilgui.version.Wrapper" + ProxyConstants.NMS_VERSION.substring(1) + "$AnvilContainer";
 
-    protected AnvilListeners(AbstractEcoPlugin plugin) {
+    public AnvilListeners(AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
@@ -70,7 +69,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
             num += 1;
             noIncreaseXpMap.put(player.getUniqueId(), num);
 
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
                 noIncreaseXpMap.remove(player.getUniqueId());
             }, 1);
             // End pain

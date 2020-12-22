@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -15,7 +16,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Map;
 
-public class GrindstoneListeners implements Listener {
+public class GrindstoneListeners extends PluginDependent implements Listener {
+    public GrindstoneListeners(AbstractEcoPlugin plugin) {
+        super(plugin);
+    }
+
     @EventHandler
     public void onGrindstone(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
@@ -25,8 +30,7 @@ public class GrindstoneListeners implements Listener {
 
         GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();
 
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-
+        this.plugin.getScheduler().runLater(() -> {
             ItemStack top = inventory.getItem(0);
             ItemStack bottom = inventory.getItem(1);
             ItemStack out = inventory.getItem(2);
@@ -55,10 +59,9 @@ public class GrindstoneListeners implements Listener {
 
             final ItemStack finalOut = newOut;
 
-            Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> {
+            Bukkit.getScheduler().runTask(this.plugin, () -> {
                 inventory.setItem(2, finalOut);
             });
-
         }, 1);
     }
 }

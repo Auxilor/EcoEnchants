@@ -16,7 +16,7 @@ public class Alchemy extends EcoEnchant {
         super("alchemy", EnchantmentType.NORMAL);
     }
 
-    private static final FixedMetadataValue TRUE = new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true);
+    private static final FixedMetadataValue TRUE = new FixedMetadataValue(this.plugin, true);
 
     @EventHandler
     public void onPotionEffect(EntityPotionEffectEvent event) {
@@ -50,8 +50,8 @@ public class Alchemy extends EcoEnchant {
 
         entity.removePotionEffect(effect.getType());
 
-        Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), () -> newEffect.apply(entity));
+        Bukkit.getScheduler().runTask(this.plugin, () -> newEffect.apply(entity));
 
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> entity.removeMetadata(newEffect.toString(), EcoEnchantsPlugin.getInstance()), 1);
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> entity.removeMetadata(newEffect.toString(), this.plugin), 1);
     }
 }

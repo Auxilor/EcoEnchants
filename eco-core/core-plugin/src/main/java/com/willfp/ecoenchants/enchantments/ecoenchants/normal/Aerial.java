@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -25,7 +25,7 @@ public class Aerial extends EcoEnchant {
 
         if (shooter.isOnGround()) return;
 
-        event.getProjectile().setMetadata("shot-in-air", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+        event.getProjectile().setMetadata("shot-in-air", new FixedMetadataValue(this.plugin, true));
     }
 
     @Override

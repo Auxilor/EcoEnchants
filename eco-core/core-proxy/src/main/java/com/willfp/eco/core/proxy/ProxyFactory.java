@@ -16,11 +16,13 @@ public class ProxyFactory<T extends AbstractProxy> {
             T cachedProxy = attemptCache();
             if(cachedProxy != null) return cachedProxy;
 
-            final Class<?> class2 = Class.forName("com.willfp.eco.core.proxy." + ProxyConstants.NMS_VERSION + "." + proxyClass.getSimpleName().replace("Proxy", ""));
+            String className = "com.willfp.eco.core.proxy." + ProxyConstants.NMS_VERSION + "." + proxyClass.getSimpleName().replace("Proxy", "");
+            final Class<?> class2 = Class.forName(className);
             Object instance = class2.getConstructor().newInstance();
             if (proxyClass.isAssignableFrom(class2) && proxyClass.isInstance(instance)) {
                 T proxy = proxyClass.cast(instance);
                 CACHE.put(proxyClass, proxy);
+                return proxy;
             }
         } catch (Exception e) {
             // If not returned, then throw error

@@ -8,5 +8,6 @@ public interface Scheduler {
     BukkitTask runTimer(Callable callable, long delay, long repeat);
     BukkitTask runAsyncTimer(Callable callable, long delay, long repeat);
     BukkitTask run(Callable callable);
+    int syncRepeating(Runnable runnable, long delay, long repeat);
     void cancelAll();
 }

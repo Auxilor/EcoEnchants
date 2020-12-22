@@ -15,11 +15,11 @@ public class EffectsMain extends Extension {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(JUMP_BOOST, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(NIGHT_VISION, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(REGENERATION, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(SPEED, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(WATER_BREATHING, EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(JUMP_BOOST, this.plugin);
+        Bukkit.getPluginManager().registerEvents(NIGHT_VISION, this.plugin);
+        Bukkit.getPluginManager().registerEvents(REGENERATION, this.plugin);
+        Bukkit.getPluginManager().registerEvents(SPEED, this.plugin);
+        Bukkit.getPluginManager().registerEvents(WATER_BREATHING, this.plugin);
     }
 
     @Override

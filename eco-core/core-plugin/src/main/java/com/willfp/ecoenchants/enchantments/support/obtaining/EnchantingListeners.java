@@ -4,9 +4,9 @@ import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
@@ -39,7 +39,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
 
     public static final Map<Player, int[]> currentlyEnchantingSecondary = new HashMap<>();
 
-    protected EnchantingListeners(AbstractEcoPlugin plugin) {
+    public EnchantingListeners(AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
@@ -82,7 +82,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             multiplier /= Configs.CONFIG.getDouble("enchanting-table.reduce-probability.factor");
         }
 
-        ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.getAll());
+        ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
         Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
 
         boolean gotSpecial = false;
@@ -119,7 +119,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
 
             double maxLevelDouble = enchantment.getMaxLevel();
 
-            if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
+            if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
                 double enchantlevel2 = NumberUtils.bias(enchantlevel1, Configs.CONFIG.getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / maxLevelDouble;
@@ -141,7 +141,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
                 }
             }
 
-            if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) gotSpecial = true;
+            if (enchantment.getType().equals(EnchantmentType.SPECIAL)) gotSpecial = true;
 
             if (Configs.CONFIG.getBool("enchanting-table.reduce-probability.enabled")) {
                 multiplier /= Configs.CONFIG.getDouble("enchanting-table.reduce-probability.factor");
@@ -178,7 +178,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
                 }
                 event.getInventory().setItem(0, item);
             }
-        }.runTaskLater(EcoEnchantsPlugin.getInstance(), 1);
+        }.runTaskLater(this.plugin, 1);
     }
 
     @EventHandler

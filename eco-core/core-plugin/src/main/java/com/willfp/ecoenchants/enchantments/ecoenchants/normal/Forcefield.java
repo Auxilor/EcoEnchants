@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.eco.util.interfaces.EcoRunnable;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
@@ -42,7 +42,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
+        this.plugin.getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
             if(level > 0) {
                 players.put(player, level);

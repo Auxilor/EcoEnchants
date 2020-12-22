@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.CooldownProxy;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -39,9 +39,9 @@ public class Cleave extends EcoEnchant {
                 .filter(entity -> entity instanceof LivingEntity)
                 .filter(entity -> !entity.equals(attacker))
                 .forEach(entity -> {
-                    entity.setMetadata("cleaved", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+                    entity.setMetadata("cleaved", new FixedMetadataValue(this.plugin, true));
                     ((LivingEntity) entity).damage(damage, attacker);
-                    Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> entity.removeMetadata("cleaved", EcoEnchantsPlugin.getInstance()), 5);
+                    Bukkit.getScheduler().runTaskLater(this.plugin, () -> entity.removeMetadata("cleaved", this.plugin), 5);
                 });
     }
 }

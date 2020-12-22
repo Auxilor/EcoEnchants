@@ -222,6 +222,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Dynamite;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -473,7 +474,7 @@ public class EcoEnchants {
      *
      * @return A list of all {@link EcoEnchant}s
      */
-    public static List<EcoEnchant> getAll() {
+    public static List<EcoEnchant> values() {
         return ImmutableList.copyOf(ecoEnchants);
     }
 
@@ -496,7 +497,7 @@ public class EcoEnchants {
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByName(String name) {
-        Optional<EcoEnchant> matching = getAll().stream().filter(enchant -> enchant.getName().equalsIgnoreCase(name)).findFirst();
+        Optional<EcoEnchant> matching = values().stream().filter(enchant -> enchant.getName().equalsIgnoreCase(name)).findFirst();
         return matching.orElse(null);
     }
 
@@ -508,7 +509,7 @@ public class EcoEnchants {
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByPermission(String permissionName) {
-        Optional<EcoEnchant> matching = getAll().stream().filter(enchant -> enchant.getPermissionName().equalsIgnoreCase(permissionName)).findFirst();
+        Optional<EcoEnchant> matching = values().stream().filter(enchant -> enchant.getPermissionName().equalsIgnoreCase(permissionName)).findFirst();
         return matching.orElse(null);
     }
 
@@ -524,14 +525,14 @@ public class EcoEnchants {
     }
 
     /**
-     * Get if {@link ItemStack} has any {@link EcoEnchant} matching specified {@link EcoEnchant.EnchantmentType}
+     * Get if {@link ItemStack} has any {@link EcoEnchant} matching specified {@link EnchantmentType}
      *
      * @param item The {@link ItemStack} to check
-     * @param type The {@link EcoEnchant.EnchantmentType} to match
+     * @param type The {@link EnchantmentType} to match
      *
      * @return True if has, false if doesn't have.
      */
-    public static boolean hasAnyOfType(ItemStack item, EcoEnchant.EnchantmentType type) {
+    public static boolean hasAnyOfType(ItemStack item, EnchantmentType type) {
         if (item == null) return false;
 
         AtomicBoolean hasOfType = new AtomicBoolean(false);
@@ -557,7 +558,7 @@ public class EcoEnchants {
      * Called on /ecoreload
      */
     public static void update() {
-        for (EcoEnchant ecoEnchant : new HashSet<>(getAll())) {
+        for (EcoEnchant ecoEnchant : new HashSet<>(values())) {
             ecoEnchant.update();
         }
     }

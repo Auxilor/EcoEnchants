@@ -21,16 +21,16 @@ public class BiomesMain extends Extension {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(ELEVATION, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(GLACIAL, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(HEAT_TREATED, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(OCEANIC, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(TROPICAL, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(ALTITUDE, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(AQUAMARINE, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(DEHYDRATION, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(ICELORD, EcoEnchantsPlugin.getInstance());
-        Bukkit.getPluginManager().registerEvents(RAINFOREST, EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(ELEVATION, this.plugin);
+        Bukkit.getPluginManager().registerEvents(GLACIAL, this.plugin);
+        Bukkit.getPluginManager().registerEvents(HEAT_TREATED, this.plugin);
+        Bukkit.getPluginManager().registerEvents(OCEANIC, this.plugin);
+        Bukkit.getPluginManager().registerEvents(TROPICAL, this.plugin);
+        Bukkit.getPluginManager().registerEvents(ALTITUDE, this.plugin);
+        Bukkit.getPluginManager().registerEvents(AQUAMARINE, this.plugin);
+        Bukkit.getPluginManager().registerEvents(DEHYDRATION, this.plugin);
+        Bukkit.getPluginManager().registerEvents(ICELORD, this.plugin);
+        Bukkit.getPluginManager().registerEvents(RAINFOREST, this.plugin);
     }
 
     @Override

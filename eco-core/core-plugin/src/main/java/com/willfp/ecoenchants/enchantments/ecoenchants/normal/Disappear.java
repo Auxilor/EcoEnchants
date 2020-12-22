@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -19,7 +19,7 @@ public class Disappear extends EcoEnchant {
 
     @Override
     public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
             if(victim.getHealth() > EcoEnchants.DISAPPEAR.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "threshold"))
                 return;
 

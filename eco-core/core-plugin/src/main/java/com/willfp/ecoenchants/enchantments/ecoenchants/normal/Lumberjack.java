@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
 import com.willfp.eco.util.BlockUtils;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import org.bukkit.Bukkit;
@@ -50,12 +50,12 @@ public class Lumberjack extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for(Block treeBlock : treeBlocks) {
-            treeBlock.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            treeBlock.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
             if(!AntigriefManager.canBreakBlock(player, treeBlock)) continue;
 
             new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, treeBlock);
 
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> treeBlock.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance()),1);
+            Bukkit.getScheduler().runTaskLater(this.plugin, () -> treeBlock.removeMetadata("block-ignore", this.plugin),1);
         }
 
         AnticheatManager.unexemptPlayer(player);

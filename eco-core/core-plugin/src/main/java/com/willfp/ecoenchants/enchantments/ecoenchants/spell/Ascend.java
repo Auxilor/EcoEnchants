@@ -21,8 +21,8 @@ public class Ascend extends Spell {
     public void onUse(Player player, int level, PlayerInteractEvent event) {
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level") * level;
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, ticks, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "power") - 1,false,false));
-        player.setMetadata("ignore-fall-damage", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> player.removeMetadata("ignore-fall-damage", EcoEnchantsPlugin.getInstance()), ticks * 4L);
+        player.setMetadata("ignore-fall-damage", new FixedMetadataValue(this.plugin, true));
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> player.removeMetadata("ignore-fall-damage", this.plugin), ticks * 4L);
     }
 
     @EventHandler

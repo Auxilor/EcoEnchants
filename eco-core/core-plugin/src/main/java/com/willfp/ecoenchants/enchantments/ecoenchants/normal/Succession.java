@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.util.DurabilityUtils;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
@@ -29,7 +29,7 @@ public class Succession extends EcoEnchant {
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
 
         for (int i = 1; i <= number; i++) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(EcoEnchantsPlugin.getInstance(), () -> {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin, () -> {
                 Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
                 arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
                 if(fire) arrow1.setFireTicks(Integer.MAX_VALUE);

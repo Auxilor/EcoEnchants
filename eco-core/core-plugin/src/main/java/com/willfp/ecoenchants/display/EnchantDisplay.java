@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -25,6 +26,8 @@ import java.util.List;
  */
 @SuppressWarnings("DeprecatedIsStillUsed")
 public class EnchantDisplay {
+    private static final AbstractEcoPlugin plugin = EcoEnchantsPlugin.getInstance();
+
     /**
      * The meta key to hide enchantments in lore
      * <p>
@@ -34,14 +37,14 @@ public class EnchantDisplay {
      * @deprecated Temporary fix
      */
     @Deprecated
-    public static final NamespacedKey KEY_SKIP = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-skip");
+    public static final NamespacedKey KEY_SKIP = plugin.getNamespacedKeyFactory().create("ecoenchantlore-skip");
 
     /**
      * The meta key to notify the server that an item is from a villager trade
      * <p>
      * Bit of a bodge - plan on making it better.
      */
-    public static final NamespacedKey KEY_V = new NamespacedKey(EcoEnchantsPlugin.getInstance(), "ecoenchantlore-v");
+    public static final NamespacedKey KEY_V = plugin.getNamespacedKeyFactory().create("ecoenchantlore-v");
 
     /**
      * The prefix for all enchantment lines to have in lore

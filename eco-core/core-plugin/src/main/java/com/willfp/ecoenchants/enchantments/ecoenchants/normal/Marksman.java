@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
@@ -45,6 +45,6 @@ public class Marksman extends EcoEnchant {
                     a.remove();
                 }
             }
-        }.runTaskLater(EcoEnchantsPlugin.getInstance(), ticks);
+        }.runTaskLater(this.plugin, ticks);
     }
 }

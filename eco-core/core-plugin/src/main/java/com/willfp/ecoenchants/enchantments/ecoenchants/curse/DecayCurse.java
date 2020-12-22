@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.eco.util.DurabilityUtils;
 import com.willfp.eco.util.interfaces.EcoRunnable;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -63,7 +63,7 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        EcoEnchantsPlugin.getInstance().getServer().getOnlinePlayers().forEach(player -> {
+        this.plugin.getServer().getOnlinePlayers().forEach(player -> {
             if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
                 players.add(player);
         });

@@ -5,7 +5,7 @@ import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.interfaces.Registerable;
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -153,15 +153,15 @@ public class EnchantmentRarity implements Registerable {
      */
 
     public static void update() {
-        Set<String> raritiesNames = ConfigManager.getRarity().getRarities();
+        Set<String> raritiesNames = EcoEnchantsConfigs.getRarity().getRarities();
         raritiesNames.forEach((rarity) -> {
-            double probability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".table-probability");
-            int minimumLevel = ConfigManager.getRarity().getInt("rarities." + rarity + ".minimum-level");
-            double villagerProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".villager-probability");
-            double lootProbability = ConfigManager.getRarity().getDouble("rarities." + rarity + ".loot-probability");
+            double probability = EcoEnchantsConfigs.getRarity().getDouble("rarities." + rarity + ".table-probability");
+            int minimumLevel = EcoEnchantsConfigs.getRarity().getInt("rarities." + rarity + ".minimum-level");
+            double villagerProbability = EcoEnchantsConfigs.getRarity().getDouble("rarities." + rarity + ".villager-probability");
+            double lootProbability = EcoEnchantsConfigs.getRarity().getDouble("rarities." + rarity + ".loot-probability");
             String customColor = null;
-            if (ConfigManager.getRarity().getBool("rarities." + rarity + ".custom-color.enabled")) {
-                customColor = StringUtils.translate(ConfigManager.getRarity().getString("rarities." + rarity + ".custom-color.color"));
+            if (EcoEnchantsConfigs.getRarity().getBool("rarities." + rarity + ".custom-color.enabled")) {
+                customColor = StringUtils.translate(EcoEnchantsConfigs.getRarity().getString("rarities." + rarity + ".custom-color.color"));
             }
 
             new EnchantmentRarity(rarity, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();
@@ -175,5 +175,9 @@ public class EnchantmentRarity implements Registerable {
      */
     public static Set<EnchantmentRarity> values() {
         return rarities;
+    }
+
+    static {
+        update();
     }
 }

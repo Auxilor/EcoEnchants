@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.config.configs.Target;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ConfigManager {
+public class EcoEnchantsConfigs {
     private static final Target TARGET = new Target();
     private static final Rarity RARITY = new Rarity();
     private static final Set<EnchantmentConfig> enchantmentConfigs = new HashSet<>();

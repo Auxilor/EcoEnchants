@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.util.interfaces.Registerable;
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import org.bukkit.Material;
 
 import java.util.HashSet;
@@ -80,10 +80,10 @@ public class EnchantmentTarget implements Registerable {
      * Called on /ecoreload
      */
     public static void update() {
-        Set<String> targetNames = ConfigManager.getTarget().getTargets();
+        Set<String> targetNames = EcoEnchantsConfigs.getTarget().getTargets();
         ALL.materials.clear();
         targetNames.forEach((name) -> {
-            Set<Material> materials = ConfigManager.getTarget().getTargetMaterials(name);
+            Set<Material> materials = EcoEnchantsConfigs.getTarget().getTargetMaterials(name);
             new EnchantmentTarget(name, materials).register();
         });
     }
@@ -95,5 +95,9 @@ public class EnchantmentTarget implements Registerable {
      */
     public static Set<EnchantmentTarget> values() {
         return targets;
+    }
+
+    static {
+        update();
     }
 }

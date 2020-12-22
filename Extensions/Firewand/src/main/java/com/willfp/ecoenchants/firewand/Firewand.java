@@ -21,9 +21,9 @@ public class Firewand extends Spell {
     public void onUse(Player player, int level, PlayerInteractEvent event) {
         SmallFireball fireball = player.launchProjectile(SmallFireball.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
         fireball.setIsIncendiary(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "fire"));
-        fireball.setMetadata("eco-damage", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
+        fireball.setMetadata("eco-damage", new FixedMetadataValue(this.plugin, this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
         if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "no-explode")) {
-            fireball.setMetadata("nobreak", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            fireball.setMetadata("nobreak", new FixedMetadataValue(this.plugin, true));
         }
         fireball.setShooter(player);
     }

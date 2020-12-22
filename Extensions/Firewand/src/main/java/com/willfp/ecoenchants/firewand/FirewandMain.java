@@ -10,7 +10,7 @@ public class FirewandMain extends Extension {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(FIREWAND, EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(FIREWAND, this.plugin);
     }
 
     @Override

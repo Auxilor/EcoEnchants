@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.eco.util.drops.DropQueue;
 import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import org.bukkit.Bukkit;

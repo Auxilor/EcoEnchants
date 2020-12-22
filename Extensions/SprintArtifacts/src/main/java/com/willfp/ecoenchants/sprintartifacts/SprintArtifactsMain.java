@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 public class SprintArtifactsMain extends Extension {
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(new SprintArtifactsListener(), EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(new SprintArtifactsListener(), this.plugin);
     }
 
     @Override

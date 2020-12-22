@@ -35,7 +35,7 @@ import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 public class WatcherTriggers extends PluginDependent implements Listener {
-    protected WatcherTriggers(AbstractEcoPlugin plugin) {
+    public WatcherTriggers(AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
@@ -300,7 +300,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         Player player = event.getPlayer();
 
         this.plugin.getScheduler().runLater(() -> {
-            EcoEnchants.getAll().forEach((enchant -> {
+            EcoEnchants.values().forEach((enchant -> {
                 if (event.isCancelled()) return;
                 if (!enchant.isEnabled()) return;
                 if (enchant.getDisabledWorlds().contains(player.getWorld())) return;
@@ -370,7 +370,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         if (!AntigriefManager.canInjure(blocker, attacker)) return;
 
-        EcoEnchants.getAll().forEach((enchant -> {
+        EcoEnchants.values().forEach((enchant -> {
             if (event.isCancelled()) return;
             if (!enchant.isEnabled()) return;
             if (enchant.getDisabledWorlds().contains(blocker.getWorld())) return;

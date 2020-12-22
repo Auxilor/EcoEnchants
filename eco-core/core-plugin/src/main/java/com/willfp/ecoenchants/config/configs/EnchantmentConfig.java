@@ -2,10 +2,10 @@ package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.config.EnchantmentYamlConfig;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -21,7 +21,7 @@ import java.util.Set;
 public class EnchantmentConfig extends EnchantmentYamlConfig {
     private final String name;
 
-    public EnchantmentConfig(String name, Class<?> plugin, EcoEnchant.EnchantmentType type) {
+    public EnchantmentConfig(String name, Class<?> plugin, EnchantmentType type) {
         super(name, plugin, type);
         this.name = name;
     }

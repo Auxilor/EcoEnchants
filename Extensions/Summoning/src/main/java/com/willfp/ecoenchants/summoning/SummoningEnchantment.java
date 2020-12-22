@@ -84,9 +84,9 @@ public abstract class SummoningEnchantment extends EcoEnchant {
             entity.setTarget(victim);
             if(health > entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
             entity.setHealth(health);
-            entity.setMetadata("eco-target", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), victim));
+            entity.setMetadata("eco-target", new FixedMetadataValue(this.plugin, victim));
 
-            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), entity::remove, ticksToLive);
+            Bukkit.getScheduler().runTaskLater(this.plugin, entity::remove, ticksToLive);
         }
     }
 

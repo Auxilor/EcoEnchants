@@ -4,6 +4,7 @@ import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.enchantments.Enchantment;
 
@@ -21,7 +22,7 @@ public class EnchantmentCache {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public static CacheEntry getEntry(Enchantment enchantment) {
         Optional<CacheEntry> matching = CACHE.stream().filter(entry -> entry.getEnchantment().getKey().getKey().equals(enchantment.getKey().getKey())).findFirst();
-        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found"), EcoEnchant.EnchantmentType.NORMAL, EnchantmentRarity.values().stream().findFirst().get()));
+        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found"), EnchantmentType.NORMAL, EnchantmentRarity.values().stream().findFirst().get()));
     }
 
     public static Set<CacheEntry> getCache() {
@@ -33,7 +34,7 @@ public class EnchantmentCache {
         Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {
             String name;
             String color;
-            EcoEnchant.EnchantmentType type;
+            EnchantmentType type;
             EnchantmentRarity rarity;
             List<String> description;
             if (EcoEnchants.getFromEnchantment(enchantment) != null) {
@@ -51,14 +52,14 @@ public class EnchantmentCache {
                         ).split("\\r?\\n")
                 );
                 name = String.valueOf(Configs.LANG.getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
-                type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
+                type = enchantment.isCursed() ? EnchantmentType.CURSE : EnchantmentType.NORMAL;
                 rarity = enchantment.isTreasure() ? EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-treasure-rarity")) : EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-rarity"));
             }
 
             color = type.getColor();
 
             if (rarity != null) {
-                if (rarity.hasCustomColor() && type != EcoEnchant.EnchantmentType.CURSE) {
+                if (rarity.hasCustomColor() && type != EnchantmentType.CURSE) {
                     color = rarity.getCustomColor();
                 }
             }
@@ -77,10 +78,10 @@ public class EnchantmentCache {
         private final String rawName;
         private final List<String> description;
         private final String stringDescription;
-        private final EcoEnchant.EnchantmentType type;
+        private final EnchantmentType type;
         private final EnchantmentRarity rarity;
 
-        public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description, EcoEnchant.EnchantmentType type, EnchantmentRarity rarity) {
+        public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description, EnchantmentType type, EnchantmentRarity rarity) {
             this.enchantment = enchantment;
             this.name = name;
             this.rawName = rawName;
@@ -120,7 +121,7 @@ public class EnchantmentCache {
             return stringDescription;
         }
 
-        public EcoEnchant.EnchantmentType getType() {
+        public EnchantmentType getType() {
             return type;
         }
 

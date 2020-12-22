@@ -22,7 +22,7 @@ public abstract class EffectsEnchantment extends EcoEnchant {
     public void onEquip(ArmorEquipEvent event) {
         final Player player = event.getPlayer();
 
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
             if (player.hasPotionEffect(this.getPotionEffect())) {
                 if (player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
                     player.removePotionEffect(this.getPotionEffect());

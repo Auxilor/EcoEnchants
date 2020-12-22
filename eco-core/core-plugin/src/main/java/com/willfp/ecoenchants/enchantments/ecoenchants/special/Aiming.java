@@ -1,9 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.eco.util.bukkit.scheduling.EcoBukkitRunnable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -98,14 +99,14 @@ public class Aiming extends EcoEnchant {
         final int checks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "checks-per-level") * level;
         AtomicInteger checksPerformed = new AtomicInteger(0);
 
-        new BukkitRunnable() {
+        new EcoBukkitRunnable(this.plugin) {
             @Override
             public void run() {
                 checksPerformed.addAndGet(1);
                 if(checksPerformed.get() > checks) this.cancel();
                 if(arrow.isDead() || arrow.isInBlock() || arrow.isOnGround()) this.cancel();
-                Bukkit.getScheduler().runTask(EcoEnchantsPlugin.getInstance(), runnable);
+                Bukkit.getScheduler().runTask(this.plugin, runnable);
             }
-        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 3, period);
+        }.runTaskTimer(this.plugin, 3, period);
     }
 }

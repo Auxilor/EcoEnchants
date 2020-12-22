@@ -7,11 +7,11 @@ import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.ChatComponentProxy;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.display.AbstractPacketAdapter;
+import com.willfp.eco.util.packets.AbstractPacketAdapter;
 
 public class PacketChat extends AbstractPacketAdapter {
     public PacketChat(AbstractEcoPlugin plugin) {
-        super(plugin, PacketType.Play.Server.CHAT, ListenerPriority.MONITOR);
+        super(plugin, PacketType.Play.Server.CHAT, ListenerPriority.MONITOR, true);
     }
 
     @Override

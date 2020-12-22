@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -26,10 +26,10 @@ public class Marking extends EcoEnchant {
         int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
         int ticks = ticksPerLevel * level;
 
-        victim.setMetadata("marked", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+        victim.setMetadata("marked", new FixedMetadataValue(this.plugin, true));
 
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-            victim.removeMetadata("marked", EcoEnchantsPlugin.getInstance());
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+            victim.removeMetadata("marked", this.plugin);
         }, ticks);
     }
 

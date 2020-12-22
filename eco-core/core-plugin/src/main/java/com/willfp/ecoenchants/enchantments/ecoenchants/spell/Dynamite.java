@@ -67,9 +67,9 @@ public class Dynamite extends Spell {
         }
 
         toBreak.forEach((block1 -> {
-            block1.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            block1.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
             new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, block1);
-            block1.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance());
+            block1.removeMetadata("block-ignore", this.plugin);
         }));
 
         AnticheatManager.unexemptPlayer(player);

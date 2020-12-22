@@ -10,7 +10,7 @@ public class PrecisionMain extends Extension {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(PRECISION, EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(PRECISION, this.plugin);
     }
 
     @Override

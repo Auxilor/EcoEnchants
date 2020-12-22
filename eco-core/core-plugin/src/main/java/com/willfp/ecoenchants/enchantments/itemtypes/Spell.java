@@ -2,10 +2,10 @@ package com.willfp.ecoenchants.enchantments.itemtypes;
 
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.optional.Prerequisite;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
 import org.bukkit.Bukkit;
@@ -53,7 +53,7 @@ public abstract class Spell extends EcoEnchant {
 
         if (runningSpell.contains(player.getUniqueId())) return;
         runningSpell.add(player.getUniqueId());
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> runningSpell.remove(player.getUniqueId()), 5);
+        Bukkit.getScheduler().runTaskLater(this.plugin, () -> runningSpell.remove(player.getUniqueId()), 5);
 
         if (leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
             if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {

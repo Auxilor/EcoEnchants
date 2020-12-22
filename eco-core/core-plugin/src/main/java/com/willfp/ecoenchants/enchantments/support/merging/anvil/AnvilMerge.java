@@ -5,6 +5,7 @@ import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -124,7 +125,7 @@ public class AnvilMerge {
         rightEnchants.forEach(((enchantment, integer) -> {
             AtomicBoolean doesConflict = new AtomicBoolean(false);
 
-            EcoEnchant.EnchantmentType.values().forEach(enchantmentType -> {
+            EnchantmentType.values().forEach(enchantmentType -> {
                 EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantment);
                 if (enchant == null) return;
                 if (enchant.getType().equals(enchantmentType) && EcoEnchants.hasAnyOfType(left, enchantmentType) && enchantmentType.isSingular())

@@ -3,13 +3,13 @@ package com.willfp.ecoenchants.display.packets;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.display.AbstractPacketAdapter;
+import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.inventory.ItemFlag;
 
 public class PacketSetSlot extends AbstractPacketAdapter {
     public PacketSetSlot(AbstractEcoPlugin plugin) {
-        super(plugin, PacketType.Play.Server.SET_SLOT);
+        super(plugin, PacketType.Play.Server.SET_SLOT, false);
     }
 
     @Override

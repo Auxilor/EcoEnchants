@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.integrations.anticheat;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import org.bukkit.Bukkit;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -21,7 +20,7 @@ public class AnticheatManager {
      */
     public static void register(AnticheatWrapper anticheat) {
         if (anticheat instanceof Listener) {
-            Bukkit.getPluginManager().registerEvents((Listener) anticheat, EcoEnchantsPlugin.getInstance());
+            AbstractEcoPlugin.getInstance().getEventManager().registerEvents((Listener) anticheat);
         }
         anticheats.add(anticheat);
     }
@@ -42,7 +41,7 @@ public class AnticheatManager {
      * @param player The player to remove the exemption
      */
     public static void unexemptPlayer(Player player) {
-        Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
+        AbstractEcoPlugin.getInstance().getScheduler().runLater(() -> {
             anticheats.forEach(anticheat -> anticheat.unexempt(player));
         }, 1);
     }

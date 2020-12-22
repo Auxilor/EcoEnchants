@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TabCompleterEnchantinfo extends AbstractTabCompleter {
-    private static final List<String> enchantsNames = EcoEnchants.getAll().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
+    private static final List<String> enchantsNames = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
 
     public TabCompleterEnchantinfo(AbstractEcoPlugin plugin) {
         super(plugin, (AbstractCommand) Bukkit.getPluginCommand("enchantinfo").getExecutor());
@@ -24,7 +24,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
 
     public static void reload() {
         enchantsNames.clear();
-        enchantsNames.addAll(EcoEnchants.getAll().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
+        enchantsNames.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
     }
 
     @Override

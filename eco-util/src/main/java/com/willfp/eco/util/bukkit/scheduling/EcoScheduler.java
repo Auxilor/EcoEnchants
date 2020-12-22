@@ -32,6 +32,11 @@ public class EcoScheduler extends PluginDependent implements Scheduler {
     }
 
     @Override
+    public int syncRepeating(Runnable runnable, long delay, long repeat) {
+        return Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, runnable, delay, repeat);
+    }
+
+    @Override
     public void cancelAll() {
         Bukkit.getScheduler().cancelTasks(this.plugin);
     }

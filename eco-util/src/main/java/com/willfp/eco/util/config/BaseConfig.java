@@ -18,16 +18,16 @@ public abstract class BaseConfig extends PluginDependent {
     private final String name;
     private final boolean removeUnused;
 
-    protected BaseConfig(String name, boolean removeUnused) {
+    protected BaseConfig(String configName, boolean removeUnused) {
         super(AbstractEcoPlugin.getInstance());
-        this.name = name + ".yml";
+        this.name = configName + ".yml";
         this.removeUnused = removeUnused;
 
-        if (!new File(plugin.getDataFolder(), name).exists()) {
+        if (!new File(plugin.getDataFolder(), this.name).exists()) {
             createFile();
         }
 
-        this.configFile = new File(plugin.getDataFolder(), name);
+        this.configFile = new File(plugin.getDataFolder(), this.name);
         this.config = YamlConfiguration.loadConfiguration(configFile);
 
         update();

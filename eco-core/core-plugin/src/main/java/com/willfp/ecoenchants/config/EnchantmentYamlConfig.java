@@ -1,7 +1,8 @@
 package com.willfp.ecoenchants.config;
 
+import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -17,28 +18,28 @@ import java.nio.charset.StandardCharsets;
 /**
  * Class implemented by enchantment configs
  */
-public abstract class EnchantmentYamlConfig {
-
+public abstract class EnchantmentYamlConfig extends PluginDependent {
     private final String name;
     public YamlConfiguration config;
     protected File configFile;
     private final File directory;
     private final Class<?> source;
-    private final EcoEnchant.EnchantmentType type;
+    private final EnchantmentType type;
 
     /**
      * Create new config yml
      *
      * @param name   The config name
-     * @param plugin The class of the main class of plugin or extension
+     * @param source The class of the main class of source or extension
      * @param type   The enchantment type
      */
-    public EnchantmentYamlConfig(String name, Class<?> plugin, EcoEnchant.EnchantmentType type) {
+    public EnchantmentYamlConfig(String name, Class<?> source, EnchantmentType type) {
+        super(EcoEnchantsPlugin.getInstance());
         this.name = name;
-        this.source = plugin;
+        this.source = source;
         this.type = type;
 
-        File basedir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), "enchants/");
+        File basedir = new File(this.plugin.getDataFolder(), "enchants/");
         if (!basedir.exists()) basedir.mkdirs();
 
         File dir = new File(basedir, type.getName() + "/");
@@ -66,9 +67,9 @@ public abstract class EnchantmentYamlConfig {
 
         InputStream in = source.getResourceAsStream(resourcePath);
 
-        File outFile = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath);
+        File outFile = new File(this.plugin.getDataFolder(), resourcePath);
         int lastIndex = resourcePath.lastIndexOf('/');
-        File outDir = new File(EcoEnchantsPlugin.getInstance().getDataFolder(), resourcePath.substring(0, Math.max(lastIndex, 0)));
+        File outDir = new File(this.plugin.getDataFolder(), resourcePath.substring(0, Math.max(lastIndex, 0)));
 
         if (!outDir.exists()) {
             outDir.mkdirs();

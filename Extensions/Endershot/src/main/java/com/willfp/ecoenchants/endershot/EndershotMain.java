@@ -10,7 +10,7 @@ public class EndershotMain extends Extension {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(ENDERSHOT, EcoEnchantsPlugin.getInstance());
+        Bukkit.getPluginManager().registerEvents(ENDERSHOT, this.plugin);
     }
 
     @Override

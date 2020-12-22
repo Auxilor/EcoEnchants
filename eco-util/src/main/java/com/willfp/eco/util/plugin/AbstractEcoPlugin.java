@@ -10,6 +10,8 @@ import com.willfp.eco.util.bukkit.meta.MetadataValueFactory;
 import com.willfp.eco.util.bukkit.scheduling.EcoScheduler;
 import com.willfp.eco.util.bukkit.scheduling.Scheduler;
 import com.willfp.eco.util.command.AbstractCommand;
+import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;
 import com.willfp.eco.util.events.armorequip.ArmorListener;
 import com.willfp.eco.util.events.armorequip.DispenserArmorListener;
@@ -20,13 +22,15 @@ import com.willfp.eco.util.extensions.loader.ExtensionLoader;
 import com.willfp.eco.util.integrations.IntegrationLoader;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
+import com.willfp.eco.util.optional.Prerequisite;
+import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.updater.UpdateChecker;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,8 +55,6 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     private final MetadataValueFactory metadataValueFactory;
     private final ExtensionLoader extensionLoader;
 
-    private final BukkitTask dropQueueCollationTask;
-
     protected boolean outdated = false;
 
     protected AbstractEcoPlugin(String pluginName, int resourceId, int bStatsId) {
@@ -66,8 +68,6 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.namespacedKeyFactory = new NamespacedKeyFactory(this);
         this.metadataValueFactory = new MetadataValueFactory(this);
         this.extensionLoader = new EcoExtensionLoader(this);
-
-        this.dropQueueCollationTask = new FastCollatedDropQueue.CollatedRunnable(this).getRunnableTask();
     }
 
     @Override
@@ -86,6 +86,8 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.getEventManager().registerEvents(new ArmorListener());
         this.getEventManager().registerEvents(new DispenserArmorListener());
         this.getEventManager().registerEvents(new EntityDeathByEntityListeners(this));
+
+        new FastCollatedDropQueue.CollatedRunnable(this);
 
         new UpdateChecker(this, resourceId).getVersion(version -> {
             DefaultArtifactVersion currentVersion = new DefaultArtifactVersion(this.getDescription().getVersion());
@@ -114,8 +116,19 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
             }
             this.getLog().info(log.toString());
         }));
+        this.getLog().info("");
+
+        Prerequisite.update();
+
+        this.getPacketAdapters().forEach(abstractPacketAdapter -> {
+            if(!abstractPacketAdapter.isPostLoad()) abstractPacketAdapter.register();
+        });
+
+        this.getListeners().forEach(listener -> this.getEventManager().registerEvents(listener));
 
         this.getCommands().forEach(AbstractCommand::register);
+
+        this.getScheduler().runLater(this::afterLoad, 1);
 
         this.enable();
     }
@@ -123,6 +136,10 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     @Override
     public final void onDisable() {
         super.onDisable();
+
+        this.getEventManager().unregisterAllEvents();
+        this.getScheduler().cancelAll();
+
         this.disable();
     }
 
@@ -133,6 +150,40 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         instance = this;
 
         this.load();
+    }
+
+    public final void afterLoad() {
+        this.getPacketAdapters().forEach(abstractPacketAdapter -> {
+            if(abstractPacketAdapter.isPostLoad()) abstractPacketAdapter.register();
+        });
+
+        if (!Prerequisite.HasPaper.isMet()) {
+            this.getLog().error("");
+            this.getLog().error("----------------------------");
+            this.getLog().error("");
+            this.getLog().error("You don't seem to be running paper!");
+            this.getLog().error("Paper is strongly recommended for all servers,");
+            this.getLog().error("and some things may not function properly without it");
+            this.getLog().error("Download Paper from &fhttps://papermc.io");
+            this.getLog().error("");
+            this.getLog().error("----------------------------");
+            this.getLog().error("");
+        }
+
+        this.postLoad();
+
+        this.reload();
+
+        this.getLog().info("Loaded &a" + this.pluginName);
+    }
+
+    public final void onReload() {
+        Configs.update();
+        DropManager.update();
+        this.getScheduler().cancelAll();
+        new FastCollatedDropQueue.CollatedRunnable(this);
+
+        this.reload();
     }
 
     public final List<IntegrationLoader> getDefaultIntegrations() {
@@ -149,9 +200,15 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
 
     public abstract void reload();
 
+    public abstract void postLoad();
+
     public abstract List<IntegrationLoader> getIntegrations();
 
     public abstract List<AbstractCommand> getCommands();
+
+    public abstract List<AbstractPacketAdapter> getPacketAdapters();
+
+    public abstract List<Listener> getListeners();
 
     public final Logger getLog() {
         return log;
@@ -181,7 +238,6 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         return outdated;
     }
 
-    @Deprecated
     public static AbstractEcoPlugin getInstance() {
         return instance;
     }

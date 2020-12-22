@@ -6,6 +6,7 @@ import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -45,7 +46,7 @@ public class LootPopulator extends BlockPopulator {
 
                 HashMap<Enchantment, Integer> toAdd = new HashMap<>();
 
-                ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.getAll());
+                ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
                 Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
 
                 double multiplier = 0.01;
@@ -82,7 +83,7 @@ public class LootPopulator extends BlockPopulator {
 
                     int level;
 
-                    if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
+                    if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
                         double enchantlevel1 = NumberUtils.randFloat(0, 1);
                         double enchantlevel2 = NumberUtils.bias(enchantlevel1, Configs.CONFIG.getDouble("enchanting-table.special-bias"));
                         double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();

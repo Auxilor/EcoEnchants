@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.display;
+package com.willfp.eco.util.packets;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -12,21 +12,26 @@ import java.util.Collections;
 
 public abstract class AbstractPacketAdapter extends PacketAdapter {
     private final PacketType type;
+    private final boolean postLoad;
 
-    protected AbstractPacketAdapter(AbstractEcoPlugin plugin, PacketType type, ListenerPriority priority) {
+    protected AbstractPacketAdapter(AbstractEcoPlugin plugin, PacketType type, ListenerPriority priority, boolean postLoad) {
         super(plugin, priority, Collections.singletonList(type));
         this.type = type;
+        this.postLoad = postLoad;
     }
 
-    protected AbstractPacketAdapter(AbstractEcoPlugin plugin, PacketType type) {
+    protected AbstractPacketAdapter(AbstractEcoPlugin plugin, PacketType type, boolean postLoad) {
         super(plugin, Collections.singletonList(type));
         this.type = type;
+        this.postLoad = postLoad;
     }
 
     public void onReceive(PacketContainer packet) {
+        // Empty rather than abstract as implementations don't need both
     }
 
     public void onSend(PacketContainer packet) {
+        // Empty rather than abstract as implementations don't need both
     }
 
     @Override
@@ -55,5 +60,9 @@ public abstract class AbstractPacketAdapter extends PacketAdapter {
         if (!ProtocolLibrary.getProtocolManager().getPacketListeners().contains(this)) {
             ProtocolLibrary.getProtocolManager().addPacketListener(this);
         }
+    }
+
+    public final boolean isPostLoad() {
+        return postLoad;
     }
 }

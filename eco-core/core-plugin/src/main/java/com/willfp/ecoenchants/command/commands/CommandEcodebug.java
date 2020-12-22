@@ -6,7 +6,6 @@ import com.willfp.eco.core.proxy.ProxyConstants;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -42,13 +41,13 @@ public class CommandEcodebug extends AbstractCommand {
             this.plugin.getLog().info("");
         }
 
-        this.plugin.getLog().info("Running Version: " + EcoEnchantsPlugin.getInstance().getDescription().getVersion());
+        this.plugin.getLog().info("Running Version: " + this.plugin.getDescription().getVersion());
         this.plugin.getLog().info("");
 
-        this.plugin.getLog().info("Loaded Extensions: " + EcoEnchantsPlugin.getInstance().getExtensionLoader().getLoadedExtensions().stream().map(extension -> extension.getName() + " v" + extension.getVersion()).collect(Collectors.joining()));
+        this.plugin.getLog().info("Loaded Extensions: " + this.plugin.getExtensionLoader().getLoadedExtensions().stream().map(extension -> extension.getName() + " v" + extension.getVersion()).collect(Collectors.joining()));
         this.plugin.getLog().info("");
 
-        this.plugin.getLog().info("EcoEnchants.getAll(): " + EcoEnchants.getAll().toString());
+        this.plugin.getLog().info("EcoEnchants.getAll(): " + EcoEnchants.values().toString());
         this.plugin.getLog().info("");
 
         this.plugin.getLog().info("Enchantment.values(): " + Arrays.toString(Enchantment.values()));
@@ -69,7 +68,7 @@ public class CommandEcodebug extends AbstractCommand {
 
 
         List<Enchantment> extern = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
-        extern.removeAll(EcoEnchants.getAll().stream().map(EcoEnchant::getEnchantment).collect(Collectors.toList()));
+        extern.removeAll(EcoEnchants.values().stream().map(EcoEnchant::getEnchantment).collect(Collectors.toList()));
         this.plugin.getLog().info("External/Vanilla Enchantments: " + extern.toString());
         this.plugin.getLog().info("");
 
@@ -90,7 +89,7 @@ public class CommandEcodebug extends AbstractCommand {
         this.plugin.getLog().info("");
 
         Set<EcoEnchant> withIssues = new HashSet<>();
-        EcoEnchants.getAll().forEach(enchant -> {
+        EcoEnchants.values().forEach(enchant -> {
             if (enchant.getRarity() == null) withIssues.add(enchant);
             if (enchant.getRawTargets().isEmpty()) withIssues.add(enchant);
         });

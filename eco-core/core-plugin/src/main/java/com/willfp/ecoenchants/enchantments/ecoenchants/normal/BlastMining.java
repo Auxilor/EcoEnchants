@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
 import org.bukkit.Particle;
@@ -33,12 +33,9 @@ public class BlastMining extends EcoEnchant {
 
         if(player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
 
-        boolean hasExploded = false;
-
         AnticheatManager.exemptPlayer(player);
 
         Set<Block> toBreak = new HashSet<>();
-
 
         for(int x = -1; x <= 1; x++) {
             for(int y = -1; y <= 1; y++) {
@@ -67,9 +64,9 @@ public class BlastMining extends EcoEnchant {
         }
 
         toBreak.forEach((block1 -> {
-            block1.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
+            block1.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
             new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, block1);
-            block1.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance());
+            block1.removeMetadata("block-ignore", this.plugin);
         }));
 
         AnticheatManager.unexemptPlayer(player);

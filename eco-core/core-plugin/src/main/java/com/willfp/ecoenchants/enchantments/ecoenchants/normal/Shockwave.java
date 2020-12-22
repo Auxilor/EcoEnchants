@@ -2,9 +2,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.eco.util.bukkit.scheduling.EcoBukkitRunnable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.AbstractArrow;
@@ -15,7 +16,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
 public class Shockwave extends EcoEnchant {
     public Shockwave() {
         super(
@@ -49,7 +49,7 @@ public class Shockwave extends EcoEnchant {
         damage *= level;
         final double finalDamage = damage;
 
-        new BukkitRunnable() {
+        new EcoBukkitRunnable(this.plugin) {
             @Override
             public void run() {
                 if(entity.isOnGround() || entity.isInBlock() || entity.isDead()) this.cancel();
@@ -59,13 +59,13 @@ public class Shockwave extends EcoEnchant {
                         .filter(entity1 -> !entity1.hasMetadata("shockwaved"))
                         .forEach((mob -> {
                             ((LivingEntity) mob).damage(finalDamage, player);
-                            mob.setMetadata("shockwaved", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
-                            Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> {
-                                mob.removeMetadata("shockwaved", EcoEnchantsPlugin.getInstance());
+                            mob.setMetadata("shockwaved", new FixedMetadataValue(this.plugin, true));
+                            Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+                                mob.removeMetadata("shockwaved", this.plugin);
                             }, 10);
                         }
                 ));
             }
-        }.runTaskTimer(EcoEnchantsPlugin.getInstance(), 4, ticks);
+        }.runTaskTimer(this.plugin, 4, ticks);
     }
 }
