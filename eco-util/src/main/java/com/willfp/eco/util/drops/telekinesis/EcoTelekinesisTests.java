@@ -8,17 +8,19 @@ import org.bukkit.entity.Player;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TelekineticTests extends PluginDependent {
+public class EcoTelekinesisTests extends PluginDependent implements TelekinesisTests {
     private final Set<ObjectBiCallable<Boolean, Player>> tests = new HashSet<>();
 
-    public TelekineticTests(AbstractEcoPlugin plugin) {
+    public EcoTelekinesisTests(AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
+    @Override
     public void registerTest(ObjectBiCallable<Boolean, Player> test) {
         tests.add(test);
     }
 
+    @Override
     public boolean testPlayer(Player player) {
         for (ObjectBiCallable<Boolean, Player> test : tests) {
             if(test.call(player)) return true;

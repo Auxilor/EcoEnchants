@@ -28,7 +28,7 @@ public class Marking extends EcoEnchant {
 
         victim.setMetadata("marked", new FixedMetadataValue(this.plugin, true));
 
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+        this.plugin.getScheduler().runLater(() -> {
             victim.removeMetadata("marked", this.plugin);
         }, ticks);
     }

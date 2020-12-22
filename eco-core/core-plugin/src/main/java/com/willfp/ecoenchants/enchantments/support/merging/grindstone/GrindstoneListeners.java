@@ -59,7 +59,7 @@ public class GrindstoneListeners extends PluginDependent implements Listener {
 
             final ItemStack finalOut = newOut;
 
-            Bukkit.getScheduler().runTask(this.plugin, () -> {
+            this.plugin.getScheduler().run(() -> {
                 inventory.setItem(2, finalOut);
             });
         }, 1);

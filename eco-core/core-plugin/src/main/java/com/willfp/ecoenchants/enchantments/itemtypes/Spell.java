@@ -53,7 +53,7 @@ public abstract class Spell extends EcoEnchant {
 
         if (runningSpell.contains(player.getUniqueId())) return;
         runningSpell.add(player.getUniqueId());
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> runningSpell.remove(player.getUniqueId()), 5);
+        this.plugin.getScheduler().runLater(() -> runningSpell.remove(player.getUniqueId()), 5);
 
         if (leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
             if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {

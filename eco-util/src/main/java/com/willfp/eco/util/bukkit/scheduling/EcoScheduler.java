@@ -27,8 +27,13 @@ public class EcoScheduler extends PluginDependent implements Scheduler {
     }
 
     @Override
-    public BukkitTask run(Callable callable) {
-        return Bukkit.getServer().getScheduler().runTask(this.plugin, callable::call);
+    public BukkitTask run(Runnable runnable) {
+        return Bukkit.getServer().getScheduler().runTask(this.plugin, runnable::run);
+    }
+
+    @Override
+    public BukkitTask runAsync(Callable callable) {
+        return Bukkit.getServer().getScheduler().runTaskAsynchronously(this.plugin, callable::call);
     }
 
     @Override

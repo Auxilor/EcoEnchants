@@ -84,7 +84,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
             entity.setHealth(health);
             entity.setMetadata("eco-target", new FixedMetadataValue(this.plugin, victim));
 
-            Bukkit.getScheduler().runTaskLater(this.plugin, entity::remove, ticksToLive);
+            this.plugin.getScheduler().runLater(entity::remove, ticksToLive);
         }
     }
 

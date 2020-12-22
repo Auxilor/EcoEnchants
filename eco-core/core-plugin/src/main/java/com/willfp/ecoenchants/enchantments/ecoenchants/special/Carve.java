@@ -41,7 +41,7 @@ public class Carve extends EcoEnchant {
                 .forEach(entity -> {
                     entity.setMetadata("carved", new FixedMetadataValue(this.plugin, true));
                     ((LivingEntity) entity).damage(damage, attacker);
-                    Bukkit.getScheduler().runTaskLater(this.plugin, () -> entity.removeMetadata("carved", this.plugin), 20);
+                    this.plugin.getScheduler().runLater(() -> entity.removeMetadata("carved", this.plugin), 20);
                 });
     }
 }

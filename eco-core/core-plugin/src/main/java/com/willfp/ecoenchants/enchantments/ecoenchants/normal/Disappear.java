@@ -19,7 +19,7 @@ public class Disappear extends EcoEnchant {
 
     @Override
     public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+        this.plugin.getScheduler().runLater(() -> {
             if(victim.getHealth() > EcoEnchants.DISAPPEAR.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "threshold"))
                 return;
 

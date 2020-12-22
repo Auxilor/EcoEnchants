@@ -64,7 +64,7 @@ public class Soulbound extends EcoEnchant {
             event.getPlayer().getInventory().addItem(itemStack);
         }));
 
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+        this.plugin.getScheduler().runLater(() -> {
             soulboundItemsMap.remove(event.getPlayer());
         }, 1);
     }

@@ -96,7 +96,7 @@ public class Precision extends EcoEnchant {
                 checksPerformed.addAndGet(1);
                 if(checksPerformed.get() > checks) this.cancel();
                 if(trident.isDead() || trident.isInBlock() || trident.isOnGround()) this.cancel();
-                Bukkit.getScheduler().runTask(this.plugin, runnable);
+                this.plugin.getScheduler().run(runnable);
             }
         }.runTaskTimer(this.plugin, 3, period);
     }

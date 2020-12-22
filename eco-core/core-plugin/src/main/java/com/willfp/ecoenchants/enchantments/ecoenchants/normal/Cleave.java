@@ -40,7 +40,7 @@ public class Cleave extends EcoEnchant {
                 .forEach(entity -> {
                     entity.setMetadata("cleaved", new FixedMetadataValue(this.plugin, true));
                     ((LivingEntity) entity).damage(damage, attacker);
-                    Bukkit.getScheduler().runTaskLater(this.plugin, () -> entity.removeMetadata("cleaved", this.plugin), 5);
+                    this.plugin.getScheduler().runLater(() -> entity.removeMetadata("cleaved", this.plugin), 5);
                 });
     }
 }

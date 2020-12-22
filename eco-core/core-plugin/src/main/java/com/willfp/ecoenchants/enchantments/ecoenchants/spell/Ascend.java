@@ -23,7 +23,7 @@ public class Ascend extends Spell {
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level") * level;
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, ticks, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "power") - 1,false,false));
         player.setMetadata(IGNORE_FALL_KEY, new FixedMetadataValue(this.plugin, true));
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> player.removeMetadata(IGNORE_FALL_KEY, this.plugin), ticks * 4L);
+        this.plugin.getScheduler().runLater(() -> player.removeMetadata(IGNORE_FALL_KEY, this.plugin), ticks * 4L);
     }
 
     @EventHandler

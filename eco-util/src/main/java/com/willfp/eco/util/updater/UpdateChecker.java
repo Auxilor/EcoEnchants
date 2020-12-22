@@ -1,7 +1,6 @@
 package com.willfp.eco.util.updater;
 
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.util.Consumer;
 
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.util.Scanner;
  * Checks spigot if a plugin is out of date
  */
 public class UpdateChecker {
-    private final Plugin plugin;
+    private final AbstractEcoPlugin plugin;
     private final int resourceId;
 
     /**
@@ -22,7 +21,7 @@ public class UpdateChecker {
      * @param plugin     The plugin to check
      * @param resourceId The resource ID of the plugin
      */
-    public UpdateChecker(Plugin plugin, int resourceId) {
+    public UpdateChecker(AbstractEcoPlugin plugin, int resourceId) {
         this.plugin = plugin;
         this.resourceId = resourceId;
     }
@@ -33,7 +32,7 @@ public class UpdateChecker {
      * @param consumer The process to run after checking
      */
     public void getVersion(final Consumer<? super String> consumer) {
-        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+        this.plugin.getScheduler().runAsync(() -> {
             try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
                 if (scanner.hasNext()) {
                     consumer.accept(scanner.next());

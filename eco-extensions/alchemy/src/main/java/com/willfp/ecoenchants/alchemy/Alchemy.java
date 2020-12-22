@@ -51,8 +51,8 @@ public class Alchemy extends EcoEnchant {
 
         entity.removePotionEffect(effect.getType());
 
-        Bukkit.getScheduler().runTask(this.plugin, () -> newEffect.apply(entity));
+        this.plugin.getScheduler().run(() -> newEffect.apply(entity));
 
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> entity.removeMetadata(newEffect.toString(), this.plugin), 1);
+        this.plugin.getScheduler().runLater(() -> entity.removeMetadata(newEffect.toString(), this.plugin), 1);
     }
 }

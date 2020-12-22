@@ -60,7 +60,7 @@ public class Shockwave extends EcoEnchant {
                         .forEach((mob -> {
                             ((LivingEntity) mob).damage(finalDamage, player);
                             mob.setMetadata("shockwaved", new FixedMetadataValue(this.plugin, true));
-                            Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+                            this.plugin.getScheduler().runLater(() -> {
                                 mob.removeMetadata("shockwaved", this.plugin);
                             }, 10);
                         }

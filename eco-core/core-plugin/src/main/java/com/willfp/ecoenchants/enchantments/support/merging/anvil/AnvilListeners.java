@@ -9,7 +9,6 @@ import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.tuplets.Pair;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -69,9 +68,8 @@ public class AnvilListeners extends PluginDependent implements Listener {
             num += 1;
             noIncreaseXpMap.put(player.getUniqueId(), num);
 
-            Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
-                noIncreaseXpMap.remove(player.getUniqueId());
-            }, 1);
+            this.plugin.getScheduler().runLater(() -> noIncreaseXpMap.remove(player.getUniqueId()), 1);
+
             // End pain
 
             int preCost = event.getInventory().getRepairCost();

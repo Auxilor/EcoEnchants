@@ -27,7 +27,7 @@ public class Weakening extends EcoEnchant {
 
         victim.setMetadata("weak", new FixedMetadataValue(this.plugin, true));
 
-        Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+        this.plugin.getScheduler().runLater(() -> {
             victim.removeMetadata("weak", this.plugin);
         }, ticks);
     }

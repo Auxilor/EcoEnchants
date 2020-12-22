@@ -55,7 +55,7 @@ public class Vein extends EcoEnchant {
 
             ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, veinBlock);
 
-            Bukkit.getScheduler().runTaskLater(this.plugin, () -> veinBlock.removeMetadata("block-ignore", this.plugin), 1);
+            this.plugin.getScheduler().runLater(() -> veinBlock.removeMetadata("block-ignore", this.plugin), 1);
         }
 
         AnticheatManager.unexemptPlayer(player);

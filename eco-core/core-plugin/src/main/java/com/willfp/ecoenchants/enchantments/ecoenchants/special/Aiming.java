@@ -6,7 +6,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Enderman;
@@ -105,7 +104,7 @@ public class Aiming extends EcoEnchant {
                 checksPerformed.addAndGet(1);
                 if(checksPerformed.get() > checks) this.cancel();
                 if(arrow.isDead() || arrow.isInBlock() || arrow.isOnGround()) this.cancel();
-                Bukkit.getScheduler().runTask(this.plugin, runnable);
+                this.plugin.getScheduler().run(runnable);
             }
         }.runTaskTimer(this.plugin, 3, period);
     }

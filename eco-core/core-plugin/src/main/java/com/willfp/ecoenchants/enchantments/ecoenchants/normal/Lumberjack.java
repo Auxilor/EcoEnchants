@@ -55,7 +55,7 @@ public class Lumberjack extends EcoEnchant {
 
             ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, treeBlock);
 
-            Bukkit.getScheduler().runTaskLater(this.plugin, () -> treeBlock.removeMetadata("block-ignore", this.plugin),1);
+            this.plugin.getScheduler().runLater(() -> treeBlock.removeMetadata("block-ignore", this.plugin),1);
         }
 
         AnticheatManager.unexemptPlayer(player);
