@@ -1,6 +1,6 @@
 package com.willfp.eco.util.drops.internal;
 
-import com.willfp.eco.util.drops.telekinesis.TelekineticTests;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -118,7 +118,7 @@ public class InternalDropQueue implements AbstractDropQueue {
      * Push the queue
      */
     public void push() {
-        if(!hasTelekinesis) hasTelekinesis = TelekineticTests.testPlayer(player);
+        if(!hasTelekinesis) hasTelekinesis = AbstractEcoPlugin.getInstance().getTelekineticTests().testPlayer(player);
 
         World world = loc.getWorld();
         assert world != null;

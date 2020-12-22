@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.integrations.mcmmo;
 
-import com.willfp.ecoenchants.integrations.Integration;
+import com.willfp.eco.util.integrations.Integration;
 import org.bukkit.event.Event;
 
 /**

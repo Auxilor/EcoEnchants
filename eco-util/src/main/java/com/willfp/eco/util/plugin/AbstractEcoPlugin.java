@@ -13,6 +13,7 @@ import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;
+import com.willfp.eco.util.drops.telekinesis.TelekineticTests;
 import com.willfp.eco.util.events.armorequip.ArmorListener;
 import com.willfp.eco.util.events.armorequip.DispenserArmorListener;
 import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityListeners;
@@ -54,6 +55,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     private final NamespacedKeyFactory namespacedKeyFactory;
     private final MetadataValueFactory metadataValueFactory;
     private final ExtensionLoader extensionLoader;
+    private final TelekineticTests telekineticTests;
 
     protected boolean outdated = false;
 
@@ -68,6 +70,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.namespacedKeyFactory = new NamespacedKeyFactory(this);
         this.metadataValueFactory = new MetadataValueFactory(this);
         this.extensionLoader = new EcoExtensionLoader(this);
+        this.telekineticTests = new TelekineticTests(this);
     }
 
     @Override
@@ -209,6 +212,10 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     public abstract List<AbstractPacketAdapter> getPacketAdapters();
 
     public abstract List<Listener> getListeners();
+
+    public final TelekineticTests getTelekineticTests() {
+        return telekineticTests;
+    }
 
     public final Logger getLog() {
         return log;

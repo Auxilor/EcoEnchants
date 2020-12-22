@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.integrations.essentials;
 
-import com.willfp.ecoenchants.integrations.Integration;
+import com.willfp.eco.util.integrations.Integration;
 
 /**
  * Interface for Essentials Integration

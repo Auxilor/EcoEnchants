@@ -1,5 +1,6 @@
 package com.willfp.eco.util.extensions;
 
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -9,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
  * Syntactically similar to Bukkit Plugins.
  */
 public abstract class Extension {
+    protected final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
+
     /**
      * Metadata containing version and name
      */

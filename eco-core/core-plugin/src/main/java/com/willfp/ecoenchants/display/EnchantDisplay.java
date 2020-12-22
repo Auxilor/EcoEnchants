@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.display;
 import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -26,7 +25,7 @@ import java.util.List;
  */
 @SuppressWarnings("DeprecatedIsStillUsed")
 public class EnchantDisplay {
-    private static final AbstractEcoPlugin plugin = EcoEnchantsPlugin.getInstance();
+    private static final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
 
     /**
      * The meta key to hide enchantments in lore

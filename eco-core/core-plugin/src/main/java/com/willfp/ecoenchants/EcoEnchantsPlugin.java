@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants;
 
+import com.willfp.eco.core.proxy.proxies.FastGetEnchantsProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.integrations.IntegrationLoader;
 import com.willfp.eco.util.interfaces.EcoRunnable;
@@ -68,7 +70,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
             this.getLog().info("&cNo extensions found");
         } else {
             this.getLog().info("Extensions Loaded:");
-            EcoEnchantsPlugin.getInstance().getExtensionLoader().getLoadedExtensions().forEach((extension) -> {
+            this.getExtensionLoader().getLoadedExtensions().forEach((extension) -> {
                 this.getLog().info("- " + extension.getName() + " v" + extension.getVersion());
             });
         }
@@ -86,6 +88,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
 
         this.getLog().info(EcoEnchants.values().size() + " Enchantments Loaded:");
         this.getLog().info(EcoEnchants.values().stream().map(ecoEnchant -> ecoEnchant.getType().getColor() + ecoEnchant.getName()).collect(Collectors.joining(", ")));
+
+        this.getTelekineticTests().registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
     }
 
     @Override
@@ -105,7 +109,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
 
     @Override
     public void load() {
-
+        // Nothing needs to be called on load
     }
 
     @Override

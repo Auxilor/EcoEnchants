@@ -32,13 +32,9 @@ allprojects {
         options.encoding = 'UTF-8'
     }
 
-    tasks.withType(Jar) {
-        destinationDirectory = file("$rootDir/bin/")
-    }
-
     processResources {
         filesNotMatching(["**/*.png", "**/models/**", "**/textures/**"]) {
-            expand projectVersion: findProperty("version")
+            expand projectVersion: project.version
         }
     }
 
@@ -46,13 +42,17 @@ allprojects {
     compileJava.dependsOn clean
 }
 
+tasks.withType(Jar) {
+    destinationDirectory = file("$rootDir/bin/")
+}
+
 clean.doLast {
     file("${rootDir}/bin").deleteDir()
 }
 
 shadowJar {
-    relocate('org.bstats.bukkit', 'com.willfp.eco.core.util.shaded.bstats')
-    relocate('org.apache.maven', 'com.willfp.eco.core.util.shaded.maven')
+    relocate('org.bstats.bukkit', 'com.willfp.eco.util.shaded.bstats')
+    relocate('org.apache.maven', 'com.willfp.eco.util.shaded.maven')
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 
@@ -62,7 +62,7 @@ jar {
 
 group = 'com.willfp'
 archivesBaseName = project.name
-version = project.version
+version = findProperty("version")
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 compileJava.options.encoding = 'UTF-8'

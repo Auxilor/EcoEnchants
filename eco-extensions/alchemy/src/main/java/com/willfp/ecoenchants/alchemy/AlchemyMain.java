@@ -1,0 +1,18 @@
+package com.willfp.ecoenchants.alchemy;
+
+import com.willfp.eco.util.extensions.Extension;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
+
+public class AlchemyMain extends Extension {
+    public static final EcoEnchant ALCHEMY = new Alchemy();
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
+}

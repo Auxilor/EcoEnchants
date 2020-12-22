@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.eco.util.injection.PluginDependent;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -34,7 +34,7 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
      * @param type   The enchantment type
      */
     public EnchantmentYamlConfig(String name, Class<?> source, EnchantmentType type) {
-        super(EcoEnchantsPlugin.getInstance());
+        super(AbstractEcoPlugin.getInstance());
         this.name = name;
         this.source = source;
         this.type = type;
