@@ -1,5 +1,5 @@
 group 'com.willfp'
-version rootProject.version
+description = 'Extension Parent'
 
 subprojects {
     dependencies {
