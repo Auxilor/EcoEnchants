@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.ecoenchants.config.configs.*;
+import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import com.willfp.ecoenchants.config.configs.Rarity;
+import com.willfp.ecoenchants.config.configs.Target;
 
 import java.util.HashSet;
 import java.util.Set;

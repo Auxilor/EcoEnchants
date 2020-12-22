@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.support.obtaining;
 
 
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -30,7 +30,7 @@ public class VillagerListeners implements Listener {
         if (!event.getRecipe().getResult().getType().equals(Material.ENCHANTED_BOOK))
             return;
 
-        if (!ConfigManager.getConfig().getBool("villager.enabled"))
+        if (!Configs.CONFIG.getBool("villager.enabled"))
             return;
 
         ItemStack result = event.getRecipe().getResult().clone();
@@ -48,7 +48,7 @@ public class VillagerListeners implements Listener {
         ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.getAll());
         Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
 
-        double multiplier = 0.01 / ConfigManager.getConfig().getDouble("villager.book-times-less-likely");
+        double multiplier = 0.01 / Configs.CONFIG.getDouble("villager.book-times-less-likely");
 
         for (EcoEnchant enchantment : enchantments) {
             if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
@@ -62,7 +62,7 @@ public class VillagerListeners implements Listener {
 
             if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
-                double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
+                double enchantlevel2 = NumberUtils.bias(enchantlevel1, Configs.CONFIG.getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
@@ -97,7 +97,7 @@ public class VillagerListeners implements Listener {
 
         if (event.getRecipe().getResult().getType().equals(Material.BOOK)) return;
 
-        if (!ConfigManager.getConfig().getBool("villager.enabled"))
+        if (!Configs.CONFIG.getBool("villager.enabled"))
             return;
 
         ItemStack result = event.getRecipe().getResult().clone();
@@ -144,7 +144,7 @@ public class VillagerListeners implements Listener {
 
             if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
-                double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
+                double enchantlevel2 = NumberUtils.bias(enchantlevel1, Configs.CONFIG.getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
@@ -157,8 +157,8 @@ public class VillagerListeners implements Listener {
 
             toAdd.put(enchantment, level);
 
-            if (ConfigManager.getConfig().getBool("villager.reduce-probability.enabled")) {
-                multiplier /= ConfigManager.getConfig().getDouble("villager.reduce-probability.factor");
+            if (Configs.CONFIG.getBool("villager.reduce-probability.enabled")) {
+                multiplier /= Configs.CONFIG.getDouble("villager.reduce-probability.factor");
             }
         }
 

@@ -1,12 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.proxy.ProxyFactory;
+import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
+import com.willfp.eco.util.VectorUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.nms.BlockBreak;
-import com.willfp.ecoenchants.util.VectorUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -47,7 +48,7 @@ public class Drill extends EcoEnchant {
 
             if (!AntigriefManager.canBreakBlock(player, block1)) continue;
 
-            BlockBreak.breakBlock(player, block1);
+            new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, block1);
             block1.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance());
         }
 

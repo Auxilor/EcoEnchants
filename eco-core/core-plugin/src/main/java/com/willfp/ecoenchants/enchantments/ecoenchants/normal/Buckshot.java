@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.util.NumberUtils;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.enchantments.Enchantment;

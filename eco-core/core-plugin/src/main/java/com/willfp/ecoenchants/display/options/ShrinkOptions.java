@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.display.options.interfaces.ThresholdedOption;
 import com.willfp.ecoenchants.display.options.interfaces.ToggleableOption;
 import com.willfp.ecoenchants.display.options.interfaces.UpdateableOption;
@@ -22,9 +22,9 @@ public class ShrinkOptions implements ThresholdedOption, ToggleableOption, Updat
 
     @Override
     public void update() {
-        threshold = ConfigManager.getConfig().getInt("lore.shrink.after-lines");
-        enabled = ConfigManager.getConfig().getBool("lore.shrink.enabled");
-        shrinkPerLine = ConfigManager.getConfig().getInt("lore.shrink.maximum-per-line");
+        threshold = Configs.CONFIG.getInt("lore.shrink.after-lines");
+        enabled = Configs.CONFIG.getBool("lore.shrink.enabled");
+        shrinkPerLine = Configs.CONFIG.getInt("lore.shrink.maximum-per-line");
     }
 
     public int getShrinkPerLine() {

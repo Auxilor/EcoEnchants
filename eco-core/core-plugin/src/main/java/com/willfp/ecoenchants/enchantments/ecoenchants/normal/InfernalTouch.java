@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.drops.DropQueue;
+import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.util.internal.DropQueue;
-import com.willfp.ecoenchants.util.tuplets.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;

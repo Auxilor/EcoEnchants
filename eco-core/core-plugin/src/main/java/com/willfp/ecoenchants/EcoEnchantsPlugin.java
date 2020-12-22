@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EcoEnchantsPlugin extends AbstractEcoPlugin {
-    protected EcoEnchantsPlugin() {
+    public EcoEnchantsPlugin() {
         super("EcoEnchants", 79573, 7666);
     }
 

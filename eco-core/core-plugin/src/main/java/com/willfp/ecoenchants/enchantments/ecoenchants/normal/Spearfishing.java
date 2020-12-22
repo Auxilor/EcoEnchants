@@ -1,12 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.proxy.ProxyFactory;
+import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
+import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.drops.DropQueue;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.NumberUtils;
-import com.willfp.ecoenchants.util.internal.DropQueue;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -46,7 +47,7 @@ public class Spearfishing extends EcoEnchant {
         Player player = (Player) event.getEntity().getShooter();
         if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
-        ItemStack item = TridentStack.getTridentStack(trident);
+        ItemStack item = new ProxyFactory<>(TridentStackProxy.class).getProxy().getTridentStack(trident);
 
         if (!EnchantChecks.item(item, this)) return;
 

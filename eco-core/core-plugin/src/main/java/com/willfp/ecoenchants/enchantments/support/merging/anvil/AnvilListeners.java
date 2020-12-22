@@ -5,11 +5,11 @@ import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.OpenInventoryProxy;
 import com.willfp.eco.core.proxy.proxies.RepairCostProxy;
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.config.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -84,7 +84,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
 
             if (!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
 
-            if (ConfigManager.getConfig().getBool("anvil.rework-cost")) {
+            if (Configs.CONFIG.getBool("anvil.rework-cost")) {
                 int repairCost = new ProxyFactory<>(RepairCostProxy.class).getProxy().getRepairCost(item);
                 int reworkCount = NumberUtils.log2(repairCost + 1);
                 if (repairCost == 0) reworkCount = 0;

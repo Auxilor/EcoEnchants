@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;
 import org.bukkit.entity.Player;
 public class Streamlining extends EcoEnchant {
     public Streamlining() {

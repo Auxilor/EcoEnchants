@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.eco.util.events.naturalexpgainevent.NaturalExpGainEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.events.naturalexpgainevent.NaturalExpGainEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 public class Intellect extends EcoEnchant {

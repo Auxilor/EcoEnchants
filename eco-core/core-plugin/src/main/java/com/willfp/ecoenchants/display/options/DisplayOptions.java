@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
 import com.willfp.ecoenchants.display.options.sorting.SorterManager;
@@ -76,22 +76,22 @@ public class DisplayOptions {
         shrinkOptions.update();
 
         sortedTypes.clear();
-        sortedTypes.addAll(ConfigManager.getConfig().getStrings("lore.type-ordering").stream()
+        sortedTypes.addAll(Configs.CONFIG.getStrings("lore.type-ordering").stream()
                 .map(typeName -> EcoEnchant.EnchantmentType.values().stream().filter(type -> type.getName().equalsIgnoreCase(typeName)).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         sortedTypes.addAll(EcoEnchant.EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).collect(Collectors.toList()));
 
         sortedRarities.clear();
-        sortedRarities.addAll(ConfigManager.getConfig().getStrings("lore.rarity-ordering").stream()
+        sortedRarities.addAll(Configs.CONFIG.getStrings("lore.rarity-ordering").stream()
                 .map(rarityName -> EnchantmentRarity.values().stream().filter(rarity -> rarity.getName().equalsIgnoreCase(rarityName)).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
 
-        boolean byType = ConfigManager.getConfig().getBool("lore.sort-by-type");
-        boolean byLength = ConfigManager.getConfig().getBool("lore.sort-by-length");
-        boolean byRarity = ConfigManager.getConfig().getBool("lore.sort-by-rarity");
+        boolean byType = Configs.CONFIG.getBool("lore.sort-by-type");
+        boolean byLength = Configs.CONFIG.getBool("lore.sort-by-length");
+        boolean byRarity = Configs.CONFIG.getBool("lore.sort-by-rarity");
         Set<SortParameters> params = new HashSet<>();
         if(byType) params.add(SortParameters.TYPE);
         if(byLength) params.add(SortParameters.LENGTH);

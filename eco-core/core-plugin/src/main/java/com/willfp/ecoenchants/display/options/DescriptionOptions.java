@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.util.StringUtils;
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.display.options.interfaces.ThresholdedOption;
 import com.willfp.ecoenchants.display.options.interfaces.ToggleableOption;
 import com.willfp.ecoenchants.display.options.interfaces.UpdateableOption;
@@ -23,9 +23,9 @@ public class DescriptionOptions implements ThresholdedOption, ToggleableOption, 
 
     @Override
     public void update() {
-        threshold = ConfigManager.getConfig().getInt("lore.describe.before-lines");
-        enabled = ConfigManager.getConfig().getBool("lore.describe.enabled");
-        color = StringUtils.translate(ConfigManager.getLang().getString("description-color"));
+        threshold = Configs.CONFIG.getInt("lore.describe.before-lines");
+        enabled = Configs.CONFIG.getBool("lore.describe.enabled");
+        color = StringUtils.translate(Configs.LANG.getString("description-color"));
     }
 
     public String getColor() {

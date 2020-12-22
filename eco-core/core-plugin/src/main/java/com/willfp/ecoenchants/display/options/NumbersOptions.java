@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.display.options.interfaces.ThresholdedOption;
 import com.willfp.ecoenchants.display.options.interfaces.UpdateableOption;
 
@@ -15,8 +15,8 @@ public class NumbersOptions implements ThresholdedOption, UpdateableOption {
 
     @Override
     public void update() {
-        useNumerals = ConfigManager.getConfig().getBool("lore.use-numerals");
-        threshold = ConfigManager.getConfig().getInt("lore.use-numbers-above-threshold");
+        useNumerals = Configs.CONFIG.getBool("lore.use-numerals");
+        threshold = Configs.CONFIG.getInt("lore.use-numbers-above-threshold");
     }
 
     public boolean useNumerals() {

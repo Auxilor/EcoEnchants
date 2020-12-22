@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
+import com.willfp.eco.util.DurabilityUtils;
+import com.willfp.eco.util.interfaces.EcoRunnable;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.util.DurabilityUtils;
-import com.willfp.ecoenchants.util.interfaces.EcoRunnable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDropItemEvent;

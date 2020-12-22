@@ -1,12 +1,13 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.proxy.ProxyFactory;
+import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
+import com.willfp.eco.util.BlockUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.nms.BlockBreak;
-import com.willfp.ecoenchants.util.BlockUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -52,7 +53,7 @@ public class Vein extends EcoEnchant {
             veinBlock.setMetadata("block-ignore", new FixedMetadataValue(EcoEnchantsPlugin.getInstance(), true));
             if (!AntigriefManager.canBreakBlock(player, veinBlock)) continue;
 
-            BlockBreak.breakBlock(player, veinBlock);
+            new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, veinBlock);
 
             Bukkit.getScheduler().runTaskLater(EcoEnchantsPlugin.getInstance(), () -> veinBlock.removeMetadata("block-ignore", EcoEnchantsPlugin.getInstance()), 1);
         }

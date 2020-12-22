@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.integrations.mcmmo;
 
-import com.willfp.ecoenchants.util.ClassUtils;
+import com.willfp.eco.util.ClassUtils;
 import org.bukkit.event.Event;
 
 import java.util.HashSet;

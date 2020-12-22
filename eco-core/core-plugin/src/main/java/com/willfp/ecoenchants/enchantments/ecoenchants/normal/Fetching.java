@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.drops.DropQueue;
+import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEvent;
-import com.willfp.ecoenchants.util.internal.DropQueue;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;

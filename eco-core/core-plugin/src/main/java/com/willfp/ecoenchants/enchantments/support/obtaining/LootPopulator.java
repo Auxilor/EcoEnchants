@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.support.obtaining;
 
 
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LootPopulator extends BlockPopulator {
     public void populate(@NotNull World world, @NotNull Random random, @NotNull Chunk chunk) {
-        if (!ConfigManager.getConfig().getBool("loot.enabled"))
+        if (!Configs.CONFIG.getBool("loot.enabled"))
             return;
 
         for (BlockState state : chunk.getTileEntities()) {
@@ -50,11 +50,11 @@ public class LootPopulator extends BlockPopulator {
 
                 double multiplier = 0.01;
                 if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
-                    multiplier /= ConfigManager.getConfig().getInt("loot.book-times-less-likely");
+                    multiplier /= Configs.CONFIG.getInt("loot.book-times-less-likely");
                 }
 
-                if (ConfigManager.getConfig().getBool("loot.reduce-probability.enabled")) {
-                    multiplier /= ConfigManager.getConfig().getDouble("loot.reduce-probability.factor");
+                if (Configs.CONFIG.getBool("loot.reduce-probability.enabled")) {
+                    multiplier /= Configs.CONFIG.getDouble("loot.reduce-probability.factor");
                 }
 
                 for (EcoEnchant enchantment : enchantments) {
@@ -84,7 +84,7 @@ public class LootPopulator extends BlockPopulator {
 
                     if (enchantment.getType().equals(EcoEnchant.EnchantmentType.SPECIAL)) {
                         double enchantlevel1 = NumberUtils.randFloat(0, 1);
-                        double enchantlevel2 = NumberUtils.bias(enchantlevel1, ConfigManager.getConfig().getDouble("enchanting-table.special-bias"));
+                        double enchantlevel2 = NumberUtils.bias(enchantlevel1, Configs.CONFIG.getDouble("enchanting-table.special-bias"));
                         double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                         level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
                     } else {
@@ -95,8 +95,8 @@ public class LootPopulator extends BlockPopulator {
 
                     toAdd.put(enchantment, level);
 
-                    if (ConfigManager.getConfig().getBool("loot.reduce-probability.enabled")) {
-                        multiplier /= ConfigManager.getConfig().getDouble("loot.reduce-probability.factor");
+                    if (Configs.CONFIG.getBool("loot.reduce-probability.enabled")) {
+                        multiplier /= Configs.CONFIG.getDouble("loot.reduce-probability.factor");
                     }
                 }
 

@@ -1,14 +1,15 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.core.proxy.ProxyFactory;
+import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
+import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.drops.DropQueue;
+import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.nms.TridentStack;
-import com.willfp.ecoenchants.util.internal.DropQueue;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -40,7 +41,7 @@ public class Telekinesis extends EcoEnchant {
 
     @Override
     protected void postUpdate() {
-        always = ConfigManager.getConfig().getBool("drops.force-dropqueue");
+        always = Configs.CONFIG.getBool("drops.force-dropqueue");
     }
 
     // For block drops
@@ -117,7 +118,7 @@ public class Telekinesis extends EcoEnchant {
         } else if(event.getKiller() instanceof Trident) {
             if(((Trident) event.getKiller()).getShooter() instanceof Player) {
                 player = (Player) ((Trident) event.getKiller()).getShooter();
-                item = TridentStack.getTridentStack((Trident) event.getKiller());
+                item =  new ProxyFactory<>(TridentStackProxy.class).getProxy().getTridentStack((Trident) event.getKiller());
             }
         }
 

@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments;
 
 
 import com.willfp.eco.util.StringUtils;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.eco.util.lambda.ObjectCallable;
 import com.willfp.eco.util.optional.Prerequisite;
@@ -218,7 +219,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return The description
      */
     public List<String> getDescription() {
-        return Arrays.asList(WordUtils.wrap(description, ConfigManager.getConfig().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
+        return Arrays.asList(WordUtils.wrap(description, Configs.CONFIG.getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
     }
 
     /**
@@ -420,11 +421,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     public static class EnchantmentType {
         private static final List<EnchantmentType> values = new ArrayList<>();
 
-        public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> ConfigManager.getLang().getString("not-curse-color"));
-        public static final EnchantmentType CURSE = new EnchantmentType("curse", false, () -> ConfigManager.getLang().getString("curse-color"));
-        public static final EnchantmentType SPECIAL = new EnchantmentType("special", () -> !ConfigManager.getConfig().getBool("types.special.allow-multiple"), () -> ConfigManager.getLang().getString("special-color"));
-        public static final EnchantmentType ARTIFACT = new EnchantmentType("artifact", () -> !ConfigManager.getConfig().getBool("types.artifact.allow-multiple"), () -> ConfigManager.getLang().getString("artifact-color"), Artifact.class);
-        public static final EnchantmentType SPELL = new EnchantmentType("spell", true, () -> ConfigManager.getLang().getString("spell-color"), Spell.class);
+        public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> Configs.LANG.getString("not-curse-color"));
+        public static final EnchantmentType CURSE = new EnchantmentType("curse", false, () -> Configs.LANG.getString("curse-color"));
+        public static final EnchantmentType SPECIAL = new EnchantmentType("special", () -> !Configs.CONFIG.getBool("types.special.allow-multiple"), () -> Configs.LANG.getString("special-color"));
+        public static final EnchantmentType ARTIFACT = new EnchantmentType("artifact", () -> !Configs.CONFIG.getBool("types.artifact.allow-multiple"), () -> Configs.LANG.getString("artifact-color"), Artifact.class);
+        public static final EnchantmentType SPELL = new EnchantmentType("spell", true, () -> Configs.LANG.getString("spell-color"), Spell.class);
 
         private boolean singular;
         private String color;

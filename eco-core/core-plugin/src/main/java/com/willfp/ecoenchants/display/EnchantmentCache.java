@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.display;
 
-import com.willfp.ecoenchants.config.ConfigManager;
+import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -45,14 +45,14 @@ public class EnchantmentCache {
             } else {
                 description = Arrays.asList(
                         WordUtils.wrap(
-                                String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
-                                ConfigManager.getConfig().getInt("lore.describe.wrap"),
+                                String.valueOf(Configs.LANG.getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
+                                Configs.CONFIG.getInt("lore.describe.wrap"),
                                 "\n", false
                         ).split("\\r?\\n")
                 );
-                name = String.valueOf(ConfigManager.getLang().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
+                name = String.valueOf(Configs.LANG.getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
                 type = enchantment.isCursed() ? EcoEnchant.EnchantmentType.CURSE : EcoEnchant.EnchantmentType.NORMAL;
-                rarity = enchantment.isTreasure() ? EnchantmentRarity.getByName(ConfigManager.getConfig().getString("rarity.vanilla-treasure-rarity")) : EnchantmentRarity.getByName(ConfigManager.getConfig().getString("rarity.vanilla-rarity"));
+                rarity = enchantment.isTreasure() ? EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-treasure-rarity")) : EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-rarity"));
             }
 
             color = type.getColor();

@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.itemtypes;
 
+import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.config.ConfigManager;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -82,13 +82,13 @@ public abstract class Spell extends EcoEnchant {
         int cooldown = getCooldown(this, player);
 
         if (cooldown > 0) {
-            String message = ConfigManager.getLang().getMessage("on-cooldown").replaceAll("%seconds%", String.valueOf(cooldown)).replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
+            String message = Configs.LANG.getMessage("on-cooldown").replaceAll("%seconds%", String.valueOf(cooldown)).replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
             player.sendMessage(message);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
             return;
         }
 
-        String message = ConfigManager.getLang().getMessage("used-spell").replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
+        String message = Configs.LANG.getMessage("used-spell").replaceAll("%name%", EnchantmentCache.getEntry(this).getRawName());
         player.sendMessage(message);
         player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
         runnable.run();
