@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.CooldownProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -26,7 +26,7 @@ public class Razor extends EcoEnchant {
         double extra = level*perLevelMultiplier + baseDamage;
         if(this.getConfig().getBool((EcoEnchants.CONFIG_LOCATION) + "decrease-if-cooldown")) {
             if(attacker instanceof Player) {
-                extra *= new ProxyFactory<>(CooldownProxy.class).getProxy().getAttackCooldown((Player) attacker);
+                extra *= ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker);
             }
         }
 

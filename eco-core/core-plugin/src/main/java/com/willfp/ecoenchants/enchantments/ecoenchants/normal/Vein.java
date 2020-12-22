@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
 import com.willfp.eco.util.BlockUtils;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -53,7 +53,7 @@ public class Vein extends EcoEnchant {
             veinBlock.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
             if (!AntigriefManager.canBreakBlock(player, veinBlock)) continue;
 
-            new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, veinBlock);
+            ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, veinBlock);
 
             Bukkit.getScheduler().runTaskLater(this.plugin, () -> veinBlock.removeMetadata("block-ignore", this.plugin), 1);
         }

@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
@@ -68,7 +67,7 @@ public class Dynamite extends Spell {
 
         toBreak.forEach((block1 -> {
             block1.setMetadata("block-ignore", new FixedMetadataValue(this.plugin, true));
-            new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, block1);
+            ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, block1);
             block1.removeMetadata("block-ignore", this.plugin);
         }));
 

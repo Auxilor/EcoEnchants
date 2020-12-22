@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -42,7 +42,7 @@ public class Splash extends EcoEnchant {
         Trident trident = (Trident) event.getEntity();
         Player player = (Player) event.getEntity().getShooter();
 
-        ItemStack item = new ProxyFactory<>(TridentStackProxy.class).getProxy().getTridentStack(trident);
+        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
 
         if (!EnchantChecks.item(item, this)) return;
         if(this.getDisabledWorlds().contains(player.getWorld())) return;

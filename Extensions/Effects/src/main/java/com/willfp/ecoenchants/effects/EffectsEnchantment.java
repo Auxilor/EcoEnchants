@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.effects;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.events.armorequip.ArmorEquipEvent;

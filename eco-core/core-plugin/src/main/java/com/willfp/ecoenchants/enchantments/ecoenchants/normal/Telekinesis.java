@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.drops.DropQueue;
 import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
@@ -119,7 +119,7 @@ public class Telekinesis extends EcoEnchant {
         } else if(event.getKiller() instanceof Trident) {
             if(((Trident) event.getKiller()).getShooter() instanceof Player) {
                 player = (Player) ((Trident) event.getKiller()).getShooter();
-                item =  new ProxyFactory<>(TridentStackProxy.class).getProxy().getTridentStack((Trident) event.getKiller());
+                item =  ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack((Trident) event.getKiller());
             }
         }
 

@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.effects;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.effects.enchants.*;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.extensions.Extension;

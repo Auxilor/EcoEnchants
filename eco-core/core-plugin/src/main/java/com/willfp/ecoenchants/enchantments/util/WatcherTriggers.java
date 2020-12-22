@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.google.common.collect.Sets;
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
@@ -93,7 +93,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         LivingEntity attacker = (LivingEntity) ((Trident) event.getDamager()).getShooter();
         Trident trident = (Trident) event.getDamager();
-        ItemStack item = new ProxyFactory<>(TridentStackProxy.class).getProxy().getTridentStack(trident);
+        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
@@ -246,7 +246,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         if (!(event.getEntity() instanceof Trident)) return;
 
         Trident trident = (Trident) event.getEntity();
-        ItemStack item = new ProxyFactory<>(TridentStackProxy.class).getProxy().getTridentStack(trident);
+        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
         EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
@@ -341,7 +341,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         Trident trident = (Trident) event.getEntity();
         LivingEntity shooter = (LivingEntity) trident.getShooter();
-        ItemStack item = new ProxyFactory<>(TridentStackProxy.class).getProxy().getTridentStack(trident);
+        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
 
         EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
             if (event.isCancelled()) return;

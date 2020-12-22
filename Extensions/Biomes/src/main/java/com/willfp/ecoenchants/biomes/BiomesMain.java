@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.biomes;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.biomes.enchants.defensive.*;
 import com.willfp.ecoenchants.biomes.enchants.offensive.*;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;

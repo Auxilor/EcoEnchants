@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.CooldownProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -28,7 +28,7 @@ public class Volatile extends EcoEnchant {
 
         Player attacker = (Player) uncastAttacker;
 
-        if (new ProxyFactory<>(CooldownProxy.class).getProxy().getAttackCooldown(attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+        if (ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown(attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
             return;
         if(!EnchantmentUtils.passedChance(this, level))
             return;

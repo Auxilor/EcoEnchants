@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.eco.util.DurabilityUtils;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @SuppressWarnings("unchecked")
 public class EnchantChecks {
-    private static final FastGetEnchantsProxy PROXY = new ProxyFactory<>(FastGetEnchantsProxy.class).getProxy();
+    private static final FastGetEnchantsProxy PROXY = ProxyUtils.getProxy(FastGetEnchantsProxy.class);
 
     /**
      * Does the specified ItemStack have a certain Enchantment present?

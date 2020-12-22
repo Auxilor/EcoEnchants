@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.precision;
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.extensions.Extension;
 import org.bukkit.Bukkit;

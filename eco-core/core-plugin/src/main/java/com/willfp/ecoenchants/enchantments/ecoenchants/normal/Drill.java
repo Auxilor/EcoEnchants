@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.VectorUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -48,7 +48,7 @@ public class Drill extends EcoEnchant {
 
             if (!AntigriefManager.canBreakBlock(player, block1)) continue;
 
-            new ProxyFactory<>(BlockBreakProxy.class).getProxy().breakBlock(player, block1);
+            ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, block1);
             block1.removeMetadata("block-ignore", this.plugin);
         }
 

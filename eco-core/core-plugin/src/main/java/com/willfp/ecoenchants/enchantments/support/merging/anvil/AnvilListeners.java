@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.eco.core.proxy.ProxyConstants;
-import com.willfp.eco.core.proxy.ProxyFactory;
 import com.willfp.eco.core.proxy.proxies.OpenInventoryProxy;
 import com.willfp.eco.core.proxy.proxies.RepairCostProxy;
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
@@ -43,7 +43,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
         if (event.getViewers().isEmpty()) return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
 
         Player player = (Player) event.getViewers().get(0);
-        if (new ProxyFactory<>(OpenInventoryProxy.class).getProxy().getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS))
+        if (ProxyUtils.getProxy(OpenInventoryProxy.class).getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS))
             return;
 
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
@@ -84,12 +84,12 @@ public class AnvilListeners extends PluginDependent implements Listener {
             if (!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
 
             if (Configs.CONFIG.getBool("anvil.rework-cost")) {
-                int repairCost = new ProxyFactory<>(RepairCostProxy.class).getProxy().getRepairCost(item);
+                int repairCost = ProxyUtils.getProxy(RepairCostProxy.class).getRepairCost(item);
                 int reworkCount = NumberUtils.log2(repairCost + 1);
                 if (repairCost == 0) reworkCount = 0;
                 reworkCount++;
                 repairCost = (int) Math.pow(2, reworkCount) - 1;
-                item = new ProxyFactory<>(RepairCostProxy.class).getProxy().setRepairCost(item, repairCost);
+                item = ProxyUtils.getProxy(RepairCostProxy.class).setRepairCost(item, repairCost);
             }
 
             int cost;
