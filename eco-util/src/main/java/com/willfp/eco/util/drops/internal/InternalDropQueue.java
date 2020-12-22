@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,82 +18,95 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InternalDropQueue implements AbstractDropQueue {
+    /**
+     * The items that the DropQueue stores.
+     */
     protected final List<ItemStack> items;
-    protected int xp;
-    protected final Player player;
-    protected Location loc;
-    protected boolean hasTelekinesis = false;
-    protected ItemStack item;
 
     /**
-     * Create a DropQueue linked to player
-     *
-     * @param player The player
+     * The experience to give.
      */
-    public InternalDropQueue(Player player) {
+    protected int xp;
+
+    /**
+     * The owner of the queue.
+     */
+    protected final Player player;
+
+    /**
+     * The location to drop the items and xp.
+     */
+    protected Location loc;
+
+    /**
+     * If the queue should be processed telekinetically.
+     */
+    protected boolean hasTelekinesis = false;
+
+    /**
+     * Create a DropQueue linked to player.
+     *
+     * @param player The player.
+     */
+    public InternalDropQueue(@NotNull final Player player) {
         this.items = new ArrayList<>();
         this.xp = 0;
         this.player = player;
         this.loc = player.getLocation();
-        this.item = player.getInventory().getItemInMainHand();
     }
 
     /**
-     * Add item to queue
+     * Add item to queue.
      *
-     * @param item The item to add
-     *
-     * @return The DropQueue
+     * @param item The item to add.
+     * @return The DropQueue.
      */
     @Override
-    public AbstractDropQueue addItem(ItemStack item) {
+    public AbstractDropQueue addItem(@NotNull final ItemStack item) {
         this.items.add(item);
         return this;
     }
 
     /**
-     * Add multiple items to queue
+     * Add multiple items to queue.
      *
-     * @param itemStacks The items to add
-     *
-     * @return The DropQueue
+     * @param itemStacks The items to add.
+     * @return The DropQueue.
      */
     @Override
-    public AbstractDropQueue addItems(Collection<ItemStack> itemStacks) {
+    public AbstractDropQueue addItems(@NotNull final Collection<ItemStack> itemStacks) {
         this.items.addAll(itemStacks);
         return this;
     }
 
     /**
-     * Add xp to queue
+     * Add xp to queue.
      *
-     * @param amount The amount to add
-     *
-     * @return The DropQueue
+     * @param amount The amount to add.
+     * @return The DropQueue.
      */
     @Override
-    public AbstractDropQueue addXP(int amount) {
+    public AbstractDropQueue addXP(final int amount) {
         this.xp += amount;
         return this;
     }
 
     /**
-     * Set location of the origin of the drops
+     * Set location of the origin of the drops.
      *
-     * @param l The location
-     *
-     * @return The DropQueue
+     * @param location The location.
+     * @return The DropQueue.
      */
     @Override
-    public AbstractDropQueue setLocation(Location l) {
-        this.loc = l;
+    public AbstractDropQueue setLocation(@NotNull final Location location) {
+        this.loc = location;
         return this;
     }
 
     /**
-     * Force the queue to act as if player has a telekinetic item
+     * Force the queue to act as if player has a telekinetic item.
      *
-     * @return The DropQueue
+     * @return The DropQueue.
      */
     @Override
     public AbstractDropQueue forceTelekinesis() {
@@ -101,32 +115,20 @@ public class InternalDropQueue implements AbstractDropQueue {
     }
 
     /**
-     * Set the queue to test specific item for telekinesis
-     * Default item is the player's held item, however for this is required for Tridents.
-     *
-     * @param item The item to test
-     *
-     * @return The DropQueue
-     */
-    @Override
-    public AbstractDropQueue setItem(ItemStack item) {
-        this.item = item;
-        return this;
-    }
-
-    /**
-     * Push the queue
+     * Push the queue.
      */
     public void push() {
-        if(!hasTelekinesis) hasTelekinesis = TelekinesisUtils.testPlayer(player);
+        if (!hasTelekinesis) {
+            hasTelekinesis = TelekinesisUtils.testPlayer(player);
+        }
 
         World world = loc.getWorld();
         assert world != null;
         loc = loc.add(0.5, 0.5, 0.5);
 
-        if(hasTelekinesis) {
+        if (hasTelekinesis) {
             HashMap<Integer, ItemStack> leftover = player.getInventory().addItem(items.toArray(new ItemStack[0]));
-            for(ItemStack drop : leftover.values()) {
+            for (ItemStack drop : leftover.values()) {
                 world.dropItem(loc, drop).setVelocity(new Vector());
             }
             if (xp > 0) {

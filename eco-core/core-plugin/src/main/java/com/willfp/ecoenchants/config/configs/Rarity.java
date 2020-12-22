@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.eco.util.config.BaseConfig;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Set;
@@ -17,39 +18,39 @@ public class Rarity extends BaseConfig {
         return config.getConfigurationSection("rarities").getKeys(false);
     }
 
-    public int getInt(String path) {
+    public int getInt(@NotNull String path) {
         return config.getInt(path);
     }
 
-    public int getInt(String path, int def) {
+    public int getInt(@NotNull String path, int def) {
         return config.getInt(path, def);
     }
 
-    public List<Integer> getInts(String path) {
+    public @NotNull List<Integer> getInts(@NotNull String path) {
         return config.getIntegerList(path);
     }
 
-    public boolean getBool(String path) {
+    public boolean getBool(@NotNull String path) {
         return config.getBoolean(path);
     }
 
-    public List<Boolean> getBools(String path) {
+    public @NotNull List<Boolean> getBools(@NotNull String path) {
         return config.getBooleanList(path);
     }
 
-    public String getString(String path) {
+    public @NotNull String getString(@NotNull String path) {
         return config.getString(path);
     }
 
-    public List<String> getStrings(String path) {
+    public @NotNull List<String> getStrings(@NotNull String path) {
         return config.getStringList(path);
     }
 
-    public double getDouble(String path) {
+    public double getDouble(@NotNull String path) {
         return config.getDouble(path);
     }
 
-    public List<Double> getDoubles(String path) {
+    public @NotNull List<Double> getDoubles(@NotNull String path) {
         return config.getDoubleList(path);
     }
 }
