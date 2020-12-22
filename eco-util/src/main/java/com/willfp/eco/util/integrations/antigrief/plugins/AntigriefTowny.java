@@ -1,10 +1,10 @@
-package com.willfp.ecoenchants.integrations.antigrief.plugins;
+package com.willfp.eco.util.integrations.antigrief.plugins;
 
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyPermission;
 import com.palmergames.bukkit.towny.object.WorldCoord;
 import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefWrapper;
+import com.willfp.eco.util.integrations.antigrief.AntigriefWrapper;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

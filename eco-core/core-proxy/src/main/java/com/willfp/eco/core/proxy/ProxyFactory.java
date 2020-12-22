@@ -1,9 +1,10 @@
 package com.willfp.eco.core.proxy;
 
-import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 public class ProxyFactory<T extends AbstractProxy> {
-    private static final HashMap<Class<? extends AbstractProxy>, Object> CACHE = new HashMap<>();
+    private static final Map<Class<? extends AbstractProxy>, Object> CACHE = new IdentityHashMap<>();
 
     private final Class<T> proxyClass;
 

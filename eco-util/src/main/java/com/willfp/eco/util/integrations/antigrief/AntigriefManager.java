@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.integrations.antigrief;
+package com.willfp.eco.util.integrations.antigrief;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;

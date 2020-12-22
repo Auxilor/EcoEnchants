@@ -87,7 +87,6 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         boolean gotSpecial = false;
 
         for (EcoEnchant enchantment : enchantments) {
-
             if (!enchantment.canEnchantItem(item))
                 continue;
             if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier)

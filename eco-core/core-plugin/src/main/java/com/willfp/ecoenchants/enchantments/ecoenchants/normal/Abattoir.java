@@ -19,7 +19,9 @@ public class Abattoir extends EcoEnchant {
 
     @Override
     public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
-        if(victim instanceof Monster) return;
+        if (victim instanceof Monster) {
+            return;
+        }
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

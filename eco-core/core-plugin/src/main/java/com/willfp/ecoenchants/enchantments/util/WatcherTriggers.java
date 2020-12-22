@@ -7,7 +7,7 @@ import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

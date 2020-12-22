@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

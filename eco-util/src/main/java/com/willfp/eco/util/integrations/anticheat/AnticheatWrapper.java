@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.integrations.anticheat;
+package com.willfp.eco.util.integrations.anticheat;
 
 import com.willfp.eco.util.integrations.Integration;
 import org.bukkit.entity.Player;

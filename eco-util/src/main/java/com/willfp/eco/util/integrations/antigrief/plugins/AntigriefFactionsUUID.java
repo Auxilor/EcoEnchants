@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.integrations.antigrief.plugins;
+package com.willfp.eco.util.integrations.antigrief.plugins;
 
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.FLocation;
@@ -6,7 +6,7 @@ import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.perms.PermissibleAction;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefWrapper;
+import com.willfp.eco.util.integrations.antigrief.AntigriefWrapper;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;

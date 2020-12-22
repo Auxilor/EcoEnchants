@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.integrations.antigrief.plugins;
+package com.willfp.eco.util.integrations.antigrief.plugins;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.LocalPlayer;
@@ -8,7 +8,7 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefWrapper;
+import com.willfp.eco.util.integrations.antigrief.AntigriefWrapper;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.World;

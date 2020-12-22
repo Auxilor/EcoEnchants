@@ -10,7 +10,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

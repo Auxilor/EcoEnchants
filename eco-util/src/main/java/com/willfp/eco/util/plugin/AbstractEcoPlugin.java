@@ -21,6 +21,18 @@ import com.willfp.eco.util.events.naturalexpgainevent.NaturalExpGainListeners;
 import com.willfp.eco.util.extensions.loader.EcoExtensionLoader;
 import com.willfp.eco.util.extensions.loader.ExtensionLoader;
 import com.willfp.eco.util.integrations.IntegrationLoader;
+import com.willfp.eco.util.integrations.anticheat.AnticheatManager;
+import com.willfp.eco.util.integrations.anticheat.plugins.AnticheatAAC;
+import com.willfp.eco.util.integrations.anticheat.plugins.AnticheatMatrix;
+import com.willfp.eco.util.integrations.anticheat.plugins.AnticheatNCP;
+import com.willfp.eco.util.integrations.anticheat.plugins.AnticheatSpartan;
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefFactionsUUID;
+import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefGriefPrevention;
+import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefKingdoms;
+import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefLands;
+import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefTowny;
+import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.eco.util.optional.Prerequisite;
@@ -191,6 +203,20 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
 
     public final List<IntegrationLoader> getDefaultIntegrations() {
         integrations.add(new IntegrationLoader("PlaceholderAPI", () -> PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI(this))));
+
+        // AntiGrief
+        integrations.add(new IntegrationLoader("WorldGuard", () -> AntigriefManager.register(new AntigriefWorldGuard())));
+        integrations.add(new IntegrationLoader("GriefPrevention", () -> AntigriefManager.register(new AntigriefGriefPrevention())));
+        integrations.add(new IntegrationLoader("FactionsUUID", () -> AntigriefManager.register(new AntigriefFactionsUUID())));
+        integrations.add(new IntegrationLoader("Towny", () -> AntigriefManager.register(new AntigriefTowny())));
+        integrations.add(new IntegrationLoader("Lands", () -> AntigriefManager.register(new AntigriefLands(this))));
+        integrations.add(new IntegrationLoader("Kingdoms", () -> AntigriefManager.register(new AntigriefKingdoms())));
+
+        // Anticheat
+        integrations.add(new IntegrationLoader("AAC", () -> AnticheatManager.register(new AnticheatAAC())));
+        integrations.add(new IntegrationLoader("Matrix", () -> AnticheatManager.register(new AnticheatMatrix())));
+        integrations.add(new IntegrationLoader("NoCheatPlus", () -> AnticheatManager.register(new AnticheatNCP())));
+        integrations.add(new IntegrationLoader("Spartan", () -> AnticheatManager.register(new AnticheatSpartan())));
         integrations.addAll(this.getIntegrations());
         return integrations;
     }
@@ -237,11 +263,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         return metadataValueFactory;
     }
 
-    public ExtensionLoader getExtensionLoader() {
+    public final ExtensionLoader getExtensionLoader() {
         return extensionLoader;
     }
 
-    public boolean isOutdated() {
+    public final boolean isOutdated() {
         return outdated;
     }
 

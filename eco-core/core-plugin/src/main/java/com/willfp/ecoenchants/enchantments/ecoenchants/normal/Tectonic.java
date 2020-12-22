@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

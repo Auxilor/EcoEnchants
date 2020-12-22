@@ -29,18 +29,6 @@ import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners
 import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
 import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
-import com.willfp.ecoenchants.integrations.anticheat.AnticheatManager;
-import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatAAC;
-import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatMatrix;
-import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatNCP;
-import com.willfp.ecoenchants.integrations.anticheat.plugins.AnticheatSpartan;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefManager;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefFactionsUUID;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefGriefPrevention;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefKingdoms;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefLands;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefTowny;
-import com.willfp.ecoenchants.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
 import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
@@ -143,22 +131,9 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     @Override
     public List<IntegrationLoader> getIntegrations() {
         return Arrays.asList(
-                // AntiGrief
                 new IntegrationLoader("WorldGuard", () -> {
-                    AntigriefManager.register(new AntigriefWorldGuard());
                     WorldguardManager.register(new WorldguardIntegrationImpl());
                 }),
-                new IntegrationLoader("GriefPrevention", () -> AntigriefManager.register(new AntigriefGriefPrevention())),
-                new IntegrationLoader("FactionsUUID", () -> AntigriefManager.register(new AntigriefFactionsUUID())),
-                new IntegrationLoader("Towny", () -> AntigriefManager.register(new AntigriefTowny())),
-                new IntegrationLoader("Lands", () -> AntigriefManager.register(new AntigriefLands(this))),
-                new IntegrationLoader("Kingdoms", () -> AntigriefManager.register(new AntigriefKingdoms())),
-
-                // AntiCheat
-                new IntegrationLoader("AAC", () -> AnticheatManager.register(new AnticheatAAC())),
-                new IntegrationLoader("Matrix", () -> AnticheatManager.register(new AnticheatMatrix())),
-                new IntegrationLoader("NoCheatPlus", () -> AnticheatManager.register(new AnticheatNCP())),
-                new IntegrationLoader("Spartan", () -> AnticheatManager.register(new AnticheatSpartan())),
 
                 // MISC
                 new IntegrationLoader("Essentials", () -> EssentialsManager.register(new IntegrationEssentials())),

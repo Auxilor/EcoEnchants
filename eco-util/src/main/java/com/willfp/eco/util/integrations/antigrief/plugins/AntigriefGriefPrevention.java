@@ -1,6 +1,6 @@
-package com.willfp.ecoenchants.integrations.antigrief.plugins;
+package com.willfp.eco.util.integrations.antigrief.plugins;
 
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefWrapper;
+import com.willfp.eco.util.integrations.antigrief.AntigriefWrapper;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import org.bukkit.Location;

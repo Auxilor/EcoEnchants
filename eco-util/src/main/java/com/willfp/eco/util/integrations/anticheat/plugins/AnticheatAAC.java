@@ -1,6 +1,6 @@
-package com.willfp.ecoenchants.integrations.anticheat.plugins;
+package com.willfp.eco.util.integrations.anticheat.plugins;
 
-import com.willfp.ecoenchants.integrations.anticheat.AnticheatWrapper;
+import com.willfp.eco.util.integrations.anticheat.AnticheatWrapper;
 import me.konsolas.aac.api.AACAPI;
 import me.konsolas.aac.api.AACExemption;
 import org.bukkit.Bukkit;

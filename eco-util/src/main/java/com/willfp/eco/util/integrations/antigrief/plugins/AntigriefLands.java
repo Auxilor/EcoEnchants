@@ -1,8 +1,8 @@
-package com.willfp.ecoenchants.integrations.antigrief.plugins;
+package com.willfp.eco.util.integrations.antigrief.plugins;
 
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.integrations.antigrief.AntigriefWrapper;
+import com.willfp.eco.util.integrations.antigrief.AntigriefWrapper;
 import me.angeschossen.lands.api.integration.LandsIntegration;
 import me.angeschossen.lands.api.land.Area;
 import me.angeschossen.lands.api.role.enums.RoleSetting;
