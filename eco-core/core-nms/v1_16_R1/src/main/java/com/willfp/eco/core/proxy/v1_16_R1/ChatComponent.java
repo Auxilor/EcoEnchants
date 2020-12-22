@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.willfp.eco.core.proxy.proxies.ChatComponentProxy;
+import com.willfp.ecoenchants.display.EnchantDisplay;
 import net.minecraft.server.v1_16_R1.ChatBaseComponent;
 import net.minecraft.server.v1_16_R1.ChatHoverable;
 import net.minecraft.server.v1_16_R1.ChatMessage;
@@ -15,7 +16,6 @@ import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 public class ChatComponent implements ChatComponentProxy {
@@ -53,11 +53,7 @@ public class ChatComponent implements ChatComponentProxy {
         String tag = json.getAsJsonObject().get("tag").toString();
         ItemStack itemStack = getFromTag(tag, id);
 
-        try {
-            itemStack = (ItemStack) Class.forName("com.willfp.ecoenchants.display.EnchantDisplay").getMethod("displayEnchantments", ItemStack.class).invoke(null, itemStack);
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        itemStack = EnchantDisplay.displayEnchantments(itemStack);
 
         json.getAsJsonObject().remove("tag");
         String newTag = toJson(itemStack);

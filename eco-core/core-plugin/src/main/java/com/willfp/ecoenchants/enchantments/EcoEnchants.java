@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.enchantments;
 
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
@@ -228,10 +230,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -244,7 +244,7 @@ public class EcoEnchants {
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
 
-    private static final Map<NamespacedKey, EcoEnchant> byKey = new HashMap<>();
+    private static final BiMap<NamespacedKey, EcoEnchant> byKey = HashBiMap.create();
 
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();

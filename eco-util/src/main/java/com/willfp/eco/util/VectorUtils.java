@@ -21,7 +21,6 @@ public class VectorUtils {
         } catch (IllegalArgumentException e) {
             return false;
         }
-
         return true;
     }
 
