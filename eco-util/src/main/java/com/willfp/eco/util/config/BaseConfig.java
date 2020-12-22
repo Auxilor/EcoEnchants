@@ -23,27 +23,27 @@ public abstract class BaseConfig extends PluginDependent {
         this.name = configName + ".yml";
         this.removeUnused = removeUnused;
 
-        if (!new File(plugin.getDataFolder(), this.name).exists()) {
+        if (!new File(this.getPlugin().getDataFolder(), this.name).exists()) {
             createFile();
         }
 
-        this.configFile = new File(plugin.getDataFolder(), this.name);
+        this.configFile = new File(this.getPlugin().getDataFolder(), this.name);
         this.config = YamlConfiguration.loadConfiguration(configFile);
 
         update();
     }
 
     private void createFile() {
-        plugin.saveResource(name, false);
+        this.getPlugin().saveResource(name, false);
     }
 
     public void update() {
         try {
             config.load(configFile);
 
-            InputStream newIn = plugin.getResource(name);
+            InputStream newIn = this.getPlugin().getResource(name);
             if (newIn == null) {
-                plugin.getLog().error(name + " is null?");
+                this.getPlugin().getLog().error(name + " is null?");
                 return;
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(newIn, StandardCharsets.UTF_8));

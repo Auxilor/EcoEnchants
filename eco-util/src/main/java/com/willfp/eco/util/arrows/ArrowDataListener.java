@@ -39,6 +39,6 @@ public class ArrowDataListener extends PluginDependent implements Listener {
         if (item.getItemMeta() == null) return;
 
         Map<Enchantment, Integer> enchantments = item.getItemMeta().getEnchants();
-        arrow.setMetadata("enchantments", plugin.getMetadataValueFactory().create(enchantments));
+        arrow.setMetadata("enchantments", this.getPlugin().getMetadataValueFactory().create(enchantments));
     }
 }

@@ -11,6 +11,7 @@ import java.util.Set;
  * Utility class for Anticheat Integrations
  */
 public class AnticheatManager {
+    private static final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
     private static final Set<AnticheatWrapper> anticheats = new HashSet<>();
 
     /**
@@ -20,7 +21,7 @@ public class AnticheatManager {
      */
     public static void register(AnticheatWrapper anticheat) {
         if (anticheat instanceof Listener) {
-            AbstractEcoPlugin.getInstance().getEventManager().registerEvents((Listener) anticheat);
+            plugin.getEventManager().registerEvents((Listener) anticheat);
         }
         anticheats.add(anticheat);
     }
@@ -41,7 +42,7 @@ public class AnticheatManager {
      * @param player The player to remove the exemption
      */
     public static void unexemptPlayer(Player player) {
-        AbstractEcoPlugin.getInstance().getScheduler().runLater(() -> {
+        plugin.getScheduler().runLater(() -> {
             anticheats.forEach(anticheat -> anticheat.unexempt(player));
         }, 1);
     }
