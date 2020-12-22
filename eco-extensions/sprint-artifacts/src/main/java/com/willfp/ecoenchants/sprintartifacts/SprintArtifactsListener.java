@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public class SprintArtifactsListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
