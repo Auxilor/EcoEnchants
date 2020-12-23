@@ -6,6 +6,7 @@ import com.willfp.eco.util.extensions.MalformedExtensionException;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.InputStream;
@@ -19,15 +20,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Concrete implementation of {@link ExtensionLoader}
+ * Concrete implementation of {@link ExtensionLoader}.
  */
 public class EcoExtensionLoader extends PluginDependent implements ExtensionLoader {
+    /**
+     * All currently loaded extensions.
+     */
     private final Set<Extension> extensions = new HashSet<>();
 
-    public EcoExtensionLoader(AbstractEcoPlugin plugin) {
+    /**
+     * Create a new extension loader and link it to a specific {@link AbstractEcoPlugin}.
+     *
+     * @param plugin The plugin to manage
+     */
+    public EcoExtensionLoader(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
+    /**
+     * Load all present extensions.
+     */
     @Override
     public void loadExtensions() {
         File dir = new File(this.getPlugin().getDataFolder(), "/extensions");
@@ -99,18 +111,29 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
         extensions.add(extension);
     }
 
+    /**
+     * Unload all existing extensions.
+     */
     @Override
     public void unloadExtensions() {
         extensions.forEach(Extension::disable);
         extensions.clear();
     }
 
+    /**
+     * Unloads, then loads all extensions.
+     */
     @Override
     public void reloadExtensions() {
         unloadExtensions();
         loadExtensions();
     }
 
+    /**
+     * Returns all loaded extensions.
+     *
+     * @return A {@link Set} of all loaded extensions.
+     */
     @Override
     public Set<Extension> getLoadedExtensions() {
         return extensions;

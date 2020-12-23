@@ -5,30 +5,30 @@ import com.willfp.eco.util.extensions.Extension;
 import java.util.Set;
 
 /**
- * Interface for extension loader
- * Some external plugins may modify extension loading for internal server purposes
+ * Interface for extension loader.
+ * Some external plugins may modify extension loading for internal server purposes.
  */
 public interface ExtensionLoader {
 
     /**
-     * Load all extensions
+     * Load all extensions.
      */
     void loadExtensions();
 
     /**
-     * Unload all loaded extensions
+     * Unload all loaded extensions.
      */
     void unloadExtensions();
 
     /**
-     * Reload all extensions
+     * Reload all extensions.
      */
     void reloadExtensions();
 
     /**
-     * Retrieve a set of all loaded extensions
+     * Retrieve a set of all loaded extensions.
      *
-     * @return An {@link Set<Extension>} of all loaded extensions
+     * @return An {@link Set<Extension>} of all loaded extensions.
      */
     Set<Extension> getLoadedExtensions();
 }
