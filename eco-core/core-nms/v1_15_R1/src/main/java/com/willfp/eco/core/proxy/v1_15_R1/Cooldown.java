@@ -4,10 +4,11 @@ import com.willfp.eco.core.proxy.proxies.CooldownProxy;
 import net.minecraft.server.v1_15_R1.EntityHuman;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class Cooldown implements CooldownProxy {
+public final class Cooldown implements CooldownProxy {
     @Override
-    public double getAttackCooldown(Player player) {
+    public double getAttackCooldown(@NotNull final Player player) {
         EntityHuman entityHuman = ((CraftPlayer) player).getHandle();
         return entityHuman.s(0);
     }

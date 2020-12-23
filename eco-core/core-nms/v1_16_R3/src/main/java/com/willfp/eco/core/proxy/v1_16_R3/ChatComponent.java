@@ -15,12 +15,13 @@ import net.minecraft.server.v1_16_R3.MojangsonParser;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-public class ChatComponent implements ChatComponentProxy {
+public final class ChatComponent implements ChatComponentProxy {
     @Override
-    public Object modifyComponent(Object object) {
+    public Object modifyComponent(@NotNull final Object object) {
         if (!(object instanceof IChatBaseComponent)) {
             return object;
         }
@@ -31,7 +32,7 @@ public class ChatComponent implements ChatComponentProxy {
         return chatComponent;
     }
 
-    public void modifyBaseComponent(IChatBaseComponent component) {
+    private void modifyBaseComponent(@NotNull final IChatBaseComponent component) {
         component.getSiblings().forEach(this::modifyBaseComponent);
         if (component instanceof ChatMessage) {
             Arrays.stream(((ChatMessage) component).getArgs())
@@ -68,7 +69,7 @@ public class ChatComponent implements ChatComponentProxy {
         ((ChatBaseComponent) component).setChatModifier(modifier);
     }
 
-    private static ItemStack getFromTag(String jsonTag, String id) {
+    private static ItemStack getFromTag(@NotNull String jsonTag, @NotNull String id) {
         id = id.replace("minecraft:", "");
         id = id.toUpperCase();
         id = id.replace("\"", "");
@@ -89,7 +90,7 @@ public class ChatComponent implements ChatComponentProxy {
         return CraftItemStack.asBukkitCopy(nmsStack);
     }
 
-    private static String toJson(ItemStack itemStack) {
+    private static String toJson(@NotNull final ItemStack itemStack) {
         return CraftItemStack.asNMSCopy(itemStack).getOrCreateTag().toString();
     }
 }

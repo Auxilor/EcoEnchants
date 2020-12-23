@@ -2,10 +2,11 @@ package com.willfp.eco.core.proxy.v1_16_R2;
 
 import com.willfp.eco.core.proxy.proxies.CooldownProxy;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class Cooldown implements CooldownProxy {
+public final class Cooldown implements CooldownProxy {
     @Override
-    public double getAttackCooldown(Player player) {
+    public double getAttackCooldown(@NotNull final Player player) {
         return player.getAttackCooldown();
     }
 }

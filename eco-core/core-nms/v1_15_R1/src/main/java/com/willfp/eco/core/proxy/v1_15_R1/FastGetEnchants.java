@@ -8,13 +8,14 @@ import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_15_R1.util.CraftNamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FastGetEnchants implements FastGetEnchantsProxy {
+public final class FastGetEnchants implements FastGetEnchantsProxy {
     @Override
-    public Map<Enchantment, Integer> getEnchantmentsOnItem(ItemStack itemStack) {
+    public Map<Enchantment, Integer> getEnchantmentsOnItem(@NotNull final ItemStack itemStack) {
         net.minecraft.server.v1_15_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
         NBTTagList enchantmentNBT = nmsStack.getEnchantments();
         HashMap<Enchantment, Integer> foundEnchantments = new HashMap<>();
@@ -31,7 +32,8 @@ public class FastGetEnchants implements FastGetEnchantsProxy {
     }
 
     @Override
-    public int getLevelOnItem(ItemStack itemStack, Enchantment enchantment) {
+    public int getLevelOnItem(@NotNull final ItemStack itemStack,
+                              @NotNull final Enchantment enchantment) {
         net.minecraft.server.v1_15_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
         NBTTagList enchantmentNBT = nmsStack.getEnchantments();
 

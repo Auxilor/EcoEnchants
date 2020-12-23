@@ -1,10 +1,11 @@
 package com.willfp.eco.core.proxy.v1_15_R1;
 
 import com.willfp.eco.core.proxy.proxies.ChatComponentProxy;
+import org.jetbrains.annotations.NotNull;
 
-public class ChatComponent implements ChatComponentProxy {
+public final class ChatComponent implements ChatComponentProxy {
     @Override
-    public Object modifyComponent(Object object) {
+    public Object modifyComponent(@NotNull final Object object) {
         return object;
     }
 }
