@@ -2,6 +2,10 @@ package com.willfp.eco.util.drops.internal;
 
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -30,7 +34,7 @@ public class FastCollatedDropQueue extends InternalDropQueue {
      *
      * @param player The player to link the queue with.
      */
-    public FastCollatedDropQueue(Player player) {
+    public FastCollatedDropQueue(@NotNull final Player player) {
         super(player);
     }
 
@@ -39,28 +43,34 @@ public class FastCollatedDropQueue extends InternalDropQueue {
      */
     @Override
     public void push() {
-        CollatedDrops fetched = COLLATED_MAP.get(player);
-        CollatedDrops collatedDrops = fetched == null ? new CollatedDrops(items, loc, xp) : fetched.addDrops(items).setLocation(loc).addXp(xp);
-        COLLATED_MAP.put(player, collatedDrops);
+        CollatedDrops fetched = COLLATED_MAP.get(getPlayer());
+        CollatedDrops collatedDrops = fetched == null ? new CollatedDrops(getItems(), getLoc(), getXp()) : fetched.addDrops(getItems()).setLocation(getLoc()).addXp(getXp());
+        COLLATED_MAP.put(this.getPlayer(), collatedDrops);
     }
 
     /**
      * The items, location, and xp linked to a player's drops.
      */
+    @ToString
     private static final class CollatedDrops {
         /**
          * A collection of all ItemStacks to be dropped at the end of the tick.
          */
+        @Getter
         private final List<ItemStack> drops;
 
         /**
          * The location to drop the items at.
          */
+        @Getter
+        @Setter
+        @Accessors(chain = true)
         private Location location;
 
         /**
          * The xp to give to the player.
          */
+        @Getter
         private int xp;
 
         private CollatedDrops(@NotNull final List<ItemStack> drops,
@@ -69,35 +79,6 @@ public class FastCollatedDropQueue extends InternalDropQueue {
             this.drops = drops;
             this.location = location;
             this.xp = xp;
-        }
-
-        /**
-         * Get the drops in the queue.
-         *
-         * @return A {@link List} of the drops to be given.
-         */
-        @NotNull
-        public List<ItemStack> getDrops() {
-            return drops;
-        }
-
-        /**
-         * Get the location to drop the items and spawn the xp.
-         *
-         * @return The location.
-         */
-        @NotNull
-        public Location getLocation() {
-            return location;
-        }
-
-        /**
-         * Get the experience to give to the player.
-         *
-         * @return The amount of experience to give.
-         */
-        public int getXp() {
-            return xp;
         }
 
         /**
@@ -112,17 +93,6 @@ public class FastCollatedDropQueue extends InternalDropQueue {
         }
 
         /**
-         * Set the location of the queue.
-         *
-         * @param loc The location to set.
-         * @return The instance of the {@link CollatedDrops}.
-         */
-        public CollatedDrops setLocation(@NotNull final Location loc) {
-            this.location = loc;
-            return this;
-        }
-
-        /**
          * Add xp to the queue.
          *
          * @param xp The amount of xp to add.
@@ -132,21 +102,13 @@ public class FastCollatedDropQueue extends InternalDropQueue {
             this.xp += xp;
             return this;
         }
-
-        @Override
-        public String toString() {
-            return "CollatedDrops{" +
-                    "drops=" + drops +
-                    ", location=" + location +
-                    ", xp=" + xp +
-                    '}';
-        }
     }
 
     public static class CollatedRunnable extends PluginDependent {
         /**
          * The {@link BukkitTask} that the runnable represents.
          */
+        @Getter
         private final BukkitTask runnableTask;
 
         /**
@@ -167,15 +129,6 @@ public class FastCollatedDropQueue extends InternalDropQueue {
                 }
                 COLLATED_MAP.clear();
             }, 0, 1);
-        }
-
-        /**
-         * Get the {@link BukkitTask} that the runnable represents.
-         *
-         * @return The linked {@link BukkitTask}.
-         */
-        public BukkitTask getRunnableTask() {
-            return runnableTask;
         }
     }
 }

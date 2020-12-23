@@ -1,5 +1,8 @@
 package com.willfp.eco.util.events.entitydeathbyentity;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -8,43 +11,47 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-class EntityDeathByEntityBuilder {
+public class EntityDeathByEntityBuilder {
+    /**
+     * The killed {@link LivingEntity}.
+     */
+    @Getter
+    @Setter
     private LivingEntity victim = null;
+
+    /**
+     * The killer.
+     */
+    @Getter
+    @Setter
     private Entity damager;
+
+    /**
+     * The associated {@link EntityDeathEvent}.
+     */
+    @Getter
+    @Setter
     private EntityDeathEvent deathEvent;
 
+    /**
+     * The drops to create.
+     */
+    @Getter
+    @Setter
     private List<ItemStack> drops;
+
+    /**
+     * The experience to drop.
+     */
+    @Getter
+    @Setter
     private int xp = 0;
 
-    public LivingEntity getVictim() {
-        return this.victim;
-    }
-
-    public void setDeathEvent(EntityDeathEvent deathEvent) {
-        this.deathEvent = deathEvent;
-    }
-
-    public void setVictim(LivingEntity victim) {
-        this.victim = victim;
-    }
-
-    public void setDamager(Entity damager) {
-        this.damager = damager;
-    }
-
-    public void setDrops(List<ItemStack> drops) {
-        this.drops = drops;
-    }
-
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
-
     public void push() {
-        if (this.victim == null) return;
-        if (this.damager == null) return;
-        if (this.drops == null) return;
-        if (this.deathEvent == null) return;
+        Validate.notNull(victim);
+        Validate.notNull(damager);
+        Validate.notNull(drops);
+        Validate.notNull(deathEvent);
 
         EntityDeathByEntityEvent event = new EntityDeathByEntityEvent(victim, damager, drops, xp, deathEvent);
 

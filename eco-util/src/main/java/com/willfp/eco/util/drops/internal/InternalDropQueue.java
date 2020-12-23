@@ -1,6 +1,8 @@
 package com.willfp.eco.util.drops.internal;
 
 import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -21,27 +23,32 @@ public class InternalDropQueue implements AbstractDropQueue {
     /**
      * The items that the DropQueue stores.
      */
-    protected final List<ItemStack> items;
+    @Getter(AccessLevel.PROTECTED)
+    private final List<ItemStack> items;
 
     /**
      * The experience to give.
      */
-    protected int xp;
+    @Getter(AccessLevel.PROTECTED)
+    private int xp;
 
     /**
      * The owner of the queue.
      */
-    protected final Player player;
+    @Getter(AccessLevel.PROTECTED)
+    private final Player player;
 
     /**
      * The location to drop the items and xp.
      */
-    protected Location loc;
+    @Getter(AccessLevel.PROTECTED)
+    private Location loc;
 
     /**
      * If the queue should be processed telekinetically.
      */
-    protected boolean hasTelekinesis = false;
+    @Getter(AccessLevel.PROTECTED)
+    private boolean hasTelekinesis = false;
 
     /**
      * Create a DropQueue linked to player.

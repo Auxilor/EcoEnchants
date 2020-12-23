@@ -16,7 +16,7 @@ public interface AbstractDropQueue {
     AbstractDropQueue addItem(@NotNull ItemStack item);
 
     /**
-     * Add multiple items to queue
+     * Add multiple items to queue.
      *
      * @param itemStacks The items to add.
      * @return The DropQueue.

@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,14 +18,29 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EntityDeathByEntityListeners extends PluginDependent implements Listener {
-    final Set<EntityDeathByEntityBuilder> events = new HashSet<>();
+    /**
+     * The events currently being built.
+     */
+    private final Set<EntityDeathByEntityBuilder> events = new HashSet<>();
 
-    public EntityDeathByEntityListeners(AbstractEcoPlugin plugin) {
+    /**
+     * Create a listener associated with an {@link AbstractEcoPlugin}.
+     *
+     * @param plugin The plugin to associate with.
+     */
+    @ApiStatus.Internal
+    public EntityDeathByEntityListeners(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
+    /**
+     * Called when an entity is damaged by another entity.
+     * Used to find the damager.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(priority = EventPriority.HIGH)
-    public void onEntityDamage(EntityDamageByEntityEvent event) {
+    public void onEntityDamage(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof LivingEntity)) return;
 
         LivingEntity victim = (LivingEntity) event.getEntity();
@@ -39,7 +56,7 @@ public class EntityDeathByEntityListeners extends PluginDependent implements Lis
     }
 
     @EventHandler
-    public void onEntityDeath(EntityDeathEvent event) {
+    public void onEntityDeath(@NotNull final EntityDeathEvent event) {
         LivingEntity victim = event.getEntity();
 
         List<ItemStack> drops = event.getDrops();

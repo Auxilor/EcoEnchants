@@ -1,29 +1,42 @@
 package com.willfp.eco.util.drops.telekinesis;
 
-import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.lambda.ObjectBiCallable;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class EcoTelekinesisTests extends PluginDependent implements TelekinesisTests {
+public class EcoTelekinesisTests implements TelekinesisTests {
+    /**
+     * Set of tests that return if the player is telekinetic.
+     */
     private final Set<ObjectBiCallable<Boolean, Player>> tests = new HashSet<>();
 
-    public EcoTelekinesisTests(AbstractEcoPlugin plugin) {
-        super(plugin);
-    }
-
+    /**
+     * Register a new test to check against.
+     *
+     * @param test The test to register, where the boolean output is if the player is telekinetic.
+     */
     @Override
-    public void registerTest(ObjectBiCallable<Boolean, Player> test) {
+    public void registerTest(@NotNull final ObjectBiCallable<Boolean, Player> test) {
         tests.add(test);
     }
 
+    /**
+     * Test the player for telekinesis.
+     * <p>
+     * If any test returns true, so does this.
+     *
+     * @param player The player to test.
+     * @return If the player is telekinetic.
+     */
     @Override
-    public boolean testPlayer(Player player) {
+    public boolean testPlayer(@NotNull final Player player) {
         for (ObjectBiCallable<Boolean, Player> test : tests) {
-            if(test.call(player)) return true;
+            if (test.call(player)) {
+                return true;
+            }
         }
 
         return false;

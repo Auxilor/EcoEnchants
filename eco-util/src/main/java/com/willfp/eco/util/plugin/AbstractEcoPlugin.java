@@ -55,7 +55,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("DeprecatedIsStillUsed")
 public abstract class AbstractEcoPlugin extends JavaPlugin {
     protected static AbstractEcoPlugin instance;
 

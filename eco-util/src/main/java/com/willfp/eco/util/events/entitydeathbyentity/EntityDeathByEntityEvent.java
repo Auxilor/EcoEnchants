@@ -1,5 +1,6 @@
 package com.willfp.eco.util.events.entitydeathbyentity;
 
+import lombok.Getter;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
@@ -14,35 +15,43 @@ import java.util.List;
  * Event triggered when entity is killed by entity.
  */
 public class EntityDeathByEntityEvent extends Event {
+    /**
+     * Internal, for bukkit.
+     */
     private static final HandlerList HANDLERS = new HandlerList();
 
     /**
-     * The {@link LivingEntity} killed
+     * The {@link LivingEntity} killed.
      */
+    @Getter
     private final LivingEntity victim;
 
     /**
-     * The {@link Entity} that killed;
+     * The {@link Entity} that killed.
      */
+    @Getter
     private final Entity damager;
 
     /**
-     * The associated {@link EntityDeathEvent}
+     * The associated {@link EntityDeathEvent}.
      */
+    @Getter
     private final EntityDeathEvent deathEvent;
 
     /**
-     * The entity drops
+     * The entity drops.
      */
+    @Getter
     private final List<ItemStack> drops;
 
     /**
-     * The xp to drop
+     * The xp to drop.
      */
+    @Getter
     private final int xp;
 
     /**
-     * Create event based off parameters
+     * Create event based off parameters.
      *
      * @param victim     The killed entity
      * @param damager    The killer
@@ -50,7 +59,11 @@ public class EntityDeathByEntityEvent extends Event {
      * @param xp         The amount of xp to drop
      * @param deathEvent The associated {@link EntityDeathEvent}
      */
-    public EntityDeathByEntityEvent(@NotNull LivingEntity victim, @NotNull Entity damager, @NotNull List<ItemStack> drops, int xp, @NotNull EntityDeathEvent deathEvent) {
+    public EntityDeathByEntityEvent(@NotNull final LivingEntity victim,
+                                    @NotNull final Entity damager,
+                                    @NotNull final List<ItemStack> drops,
+                                    final int xp,
+                                    @NotNull final EntityDeathEvent deathEvent) {
         this.victim = victim;
         this.damager = damager;
         this.drops = drops;
@@ -59,56 +72,18 @@ public class EntityDeathByEntityEvent extends Event {
     }
 
     /**
-     * Get victim
+     * Internal bukkit.
      *
-     * @return The victim
+     * @return Get the handlers.
      */
-    public LivingEntity getVictim() {
-        return this.victim;
-    }
-
-    /**
-     * Get killer
-     *
-     * @return The killer
-     */
-    public Entity getKiller() {
-        return this.damager;
-    }
-
-    /**
-     * Get xp amount
-     *
-     * @return The xp
-     */
-    public int getDroppedExp() {
-        return this.xp;
-    }
-
-    /**
-     * Get drops
-     *
-     * @return {@link List} of drops
-     */
-    public List<ItemStack> getDrops() {
-        return this.drops;
-    }
-
-    /**
-     * Get associated {@link EntityDeathEvent}
-     * Use this to modify event parameters.
-     *
-     * @return The associated {@link EntityDeathEvent}
-     */
-    public EntityDeathEvent getDeathEvent() {
-        return this.deathEvent;
-    }
-
     @Override
     public @NotNull HandlerList getHandlers() {
         return HANDLERS;
     }
 
+    /**
+     * Internal bukkit.
+     */
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
