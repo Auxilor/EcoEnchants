@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class EntityDeathByEntityBuilder {
+class EntityDeathByEntityBuilder {
     /**
      * The killed {@link LivingEntity}.
      */

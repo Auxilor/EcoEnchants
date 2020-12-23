@@ -55,6 +55,12 @@ public class EntityDeathByEntityListeners extends PluginDependent implements Lis
         this.getPlugin().getScheduler().runLater(() -> events.remove(builtEvent), 1);
     }
 
+    /**
+     * Called when an entity is killed.
+     * Used to find the killer and associate the event.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onEntityDeath(@NotNull final EntityDeathEvent event) {
         LivingEntity victim = event.getEntity();

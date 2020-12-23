@@ -1,48 +1,57 @@
 package com.willfp.eco.util.events.naturalexpgainevent;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.jetbrains.annotations.NotNull;
 
 class NaturalExpGainBuilder {
-    private final LivingEntity victim = null;
+    /**
+     * If the event has been cancelled and no experience should be given.
+     */
+    @Getter
+    @Setter
     private boolean cancelled = false;
+
+    /**
+     * The linked {@link PlayerExpChangeEvent}.
+     */
+    @Getter
+    @Setter
     private PlayerExpChangeEvent event;
-    private Location loc;
+
+    /**
+     * The location of the event.
+     */
+    @Getter
+    @Setter
+    private Location location;
+
+    /**
+     * The reason why the event was built.
+     */
+    @Getter
+    @Setter
     private BuildReason reason;
 
-    public NaturalExpGainBuilder(BuildReason reason) {
+    /**
+     * Build a new {@link NaturalExpGainEvent} given a specific reason.
+     */
+    NaturalExpGainBuilder(@NotNull final BuildReason reason) {
         this.reason = reason;
     }
 
-    public LivingEntity getVictim() {
-        return this.victim;
-    }
-
-    public void setEvent(PlayerExpChangeEvent event) {
-        this.event = event;
-    }
-
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
-    }
-
-    public void setLoc(Location location) {
-        this.loc = location;
-    }
-
-    public Location getLoc() {
-        return this.loc;
-    }
-
-    public BuildReason getReason() {
-        return reason;
-    }
-
+    /**
+     * Call the event on the server.
+     */
     public void push() {
-        if (this.event == null) return;
-        if (this.cancelled) return;
+        Validate.notNull(event);
+        if (this.cancelled) {
+            return;
+        }
 
         NaturalExpGainEvent naturalExpGainEvent = new NaturalExpGainEvent(event);
 
@@ -50,7 +59,14 @@ class NaturalExpGainBuilder {
     }
 
     public enum BuildReason {
+        /**
+         * If the event was triggered by an experience bottle.
+         */
         BOTTLE,
+
+        /**
+         * If the event was triggered by a natural experience change.
+         */
         PLAYER
     }
 }
