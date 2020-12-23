@@ -8,6 +8,7 @@ import com.willfp.eco.core.proxy.proxies.ChatComponentProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public class PacketChat extends AbstractPacketAdapter {
     public PacketChat(AbstractEcoPlugin plugin) {
@@ -15,7 +16,7 @@ public class PacketChat extends AbstractPacketAdapter {
     }
 
     @Override
-    public void onSend(PacketContainer packet) {
+    public void onSend(@NotNull PacketContainer packet) {
         for (int i = 0; i < packet.getChatComponents().size(); i++) {
             WrappedChatComponent component = packet.getChatComponents().read(i);
             if (component == null)

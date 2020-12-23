@@ -1,8 +1,10 @@
 package com.willfp.eco.util;
 
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
+import lombok.experimental.UtilityClass;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -12,16 +14,17 @@ import java.util.stream.Collectors;
 
 import static net.md_5.bungee.api.ChatColor.COLOR_CHAR;
 
+@UtilityClass
 public class StringUtils {
     /**
-     * Translate a string - converts Placeholders and Color codes
+     * Translate a string - converts Placeholders and Color codes.
      *
-     * @param message The message to translate
-     * @param player  The player to translate placeholders with respect to
-     *
-     * @return The message, translated
+     * @param message The message to translate.
+     * @param player  The player to translate placeholders with respect to.
+     * @return The message, translated.
      */
-    public static String translate(String message, @Nullable Player player) {
+    public String translate(@NotNull String message,
+                            @Nullable final Player player) {
         message = PlaceholderManager.translatePlaceholders(message, player);
         message = translateHexColorCodes(message);
         message = ChatColor.translateAlternateColorCodes('&', message);
@@ -29,15 +32,13 @@ public class StringUtils {
     }
 
     /**
-     * Translate a string without respect to a player
+     * Translate a string without respect to a player.
      *
-     * @param message The message to translate
-     *
-     * @return The message, translated
-     *
+     * @param message The message to translate.
+     * @return The message, translated.
      * @see StringUtils#translate(String, Player)
      */
-    public static String translate(String message) {
+    public String translate(@NotNull String message) {
         message = PlaceholderManager.translatePlaceholders(message, null);
         message = translateHexColorCodes(message);
         message = ChatColor.translateAlternateColorCodes('&', message);
@@ -60,15 +61,16 @@ public class StringUtils {
     }
 
     /**
-     * Internal implementation of {@link String#valueOf}
-     * Formats collections and doubles better
+     * Internal implementation of {@link String#valueOf}.
+     * Formats collections and doubles better.
      *
-     * @param object The object to convert to string
-     *
-     * @return The object stringified
+     * @param object The object to convert to string.
+     * @return The object stringified.
      */
-    public static String internalToString(@Nullable Object object) {
-        if (object == null) return "null";
+    public String internalToString(@Nullable final Object object) {
+        if (object == null) {
+            return "null";
+        }
 
         if (object instanceof Integer) {
             return ((Integer) object).toString();
@@ -79,19 +81,21 @@ public class StringUtils {
         } else if (object instanceof Collection<?>) {
             Collection<?> c = (Collection<?>) object;
             return c.stream().map(StringUtils::internalToString).collect(Collectors.joining(", "));
-        } else return String.valueOf(object);
+        } else {
+            return String.valueOf(object);
+        }
     }
 
     /**
-     * Remove a string of characters from the start of a string
+     * Remove a string of characters from the start of a string.
      *
-     * @param s      The string to remove the prefix from
-     * @param prefix The substring to remove
-     *
-     * @return The string with the prefix removed
+     * @param s      The string to remove the prefix from.
+     * @param prefix The substring to remove.
+     * @return The string with the prefix removed.
      */
-    public static String removePrefix(String s, String prefix) {
-        if (s != null && prefix != null && s.startsWith(prefix)) {
+    public String removePrefix(@NotNull final String s,
+                               @NotNull final String prefix) {
+        if (s.startsWith(prefix)) {
             return s.substring(prefix.length());
         }
         return s;

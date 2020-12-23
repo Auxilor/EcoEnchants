@@ -4,6 +4,7 @@ import com.willfp.eco.util.integrations.anticheat.AnticheatWrapper;
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class AnticheatNCP implements AnticheatWrapper {
     }
 
     @Override
-    public void exempt(Player player) {
+    public void exempt(@NotNull Player player) {
         if (!NCPExemptionManager.isExempted(player, CheckType.ALL)) {
             return;
         }
@@ -29,7 +30,7 @@ public class AnticheatNCP implements AnticheatWrapper {
     }
 
     @Override
-    public void unexempt(Player player) {
+    public void unexempt(@NotNull Player player) {
         if (exempt.remove(player.getUniqueId())) {
             NCPExemptionManager.unexempt(player, CheckType.ALL);
         }

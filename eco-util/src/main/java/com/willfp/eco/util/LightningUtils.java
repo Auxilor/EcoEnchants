@@ -1,22 +1,20 @@
 package com.willfp.eco.util;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Class containing methods for striking lightning
- */
+@UtilityClass
 public class LightningUtils {
-
     /**
-     * Strike lightning on player without fire
+     * Strike lightning on player without fire.
      *
-     * @param victim The entity to smite
-     * @param damage The damage to deal
+     * @param victim The entity to smite.
+     * @param damage The damage to deal.
      */
-    public static void strike(LivingEntity victim, double damage) {
-        if (victim == null) return;
-
+    public void strike(@NotNull final LivingEntity victim,
+                       final double damage) {
         Location loc = victim.getLocation();
 
         victim.getWorld().strikeLightningEffect(loc);

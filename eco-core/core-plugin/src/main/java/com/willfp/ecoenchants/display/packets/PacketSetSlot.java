@@ -6,6 +6,7 @@ import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.inventory.ItemFlag;
+import org.jetbrains.annotations.NotNull;
 
 public class PacketSetSlot extends AbstractPacketAdapter {
     public PacketSetSlot(AbstractEcoPlugin plugin) {
@@ -13,7 +14,7 @@ public class PacketSetSlot extends AbstractPacketAdapter {
     }
 
     @Override
-    public void onSend(PacketContainer packet) {
+    public void onSend(@NotNull PacketContainer packet) {
         packet.getItemModifier().modify(0, (item) -> {
             boolean hideEnchants = false;
 

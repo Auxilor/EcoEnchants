@@ -59,7 +59,7 @@ public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements 
     }
 
     @Override
-    public String translate(String text, Player player) {
+    public String translate(@NotNull String text, Player player) {
         return PlaceholderAPI.setPlaceholders(player, text);
     }
 }

@@ -41,6 +41,7 @@ import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrati
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.updater.UpdateChecker;
+import lombok.Getter;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
@@ -48,6 +49,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,25 +58,95 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class AbstractEcoPlugin extends JavaPlugin {
-    protected static AbstractEcoPlugin instance;
+    /**
+     * The instance of the plugin.
+     */
+    @Getter
+    private static AbstractEcoPlugin instance;
 
-    protected final String pluginName;
-    protected final int resourceId;
-    protected final int bStatsId;
+    /**
+     * The name of the plugin.
+     */
+    @Getter
+    private final String pluginName;
 
+    /**
+     * The spigot resource ID of the plugin.
+     */
+    @Getter
+    private final int resourceId;
+
+    /**
+     * The bStats resource ID of the plugin.
+     */
+    @Getter
+    private final int bStatsId;
+
+    /**
+     * Set of external plugin integrations.
+     */
     private final List<IntegrationLoader> integrations = new ArrayList<>();
 
+    /**
+     * The internal plugin logger.
+     */
+    @Getter
     private final Logger log;
+
+    /**
+     * The internal plugin scheduler.
+     */
+    @Getter
     private final Scheduler scheduler;
+
+    /**
+     * The internal plugin Event Manager.
+     */
+    @Getter
     private final EventManager eventManager;
+
+    /**
+     * The internal factory to produce {@link org.bukkit.NamespacedKey}s.
+     */
+    @Getter
     private final NamespacedKeyFactory namespacedKeyFactory;
+
+    /**
+     * The internal factory to produce {@link org.bukkit.metadata.FixedMetadataValue}s.
+     */
+    @Getter
     private final MetadataValueFactory metadataValueFactory;
+
+    /**
+     * The internal factory to produce {@link com.willfp.eco.util.bukkit.scheduling.EcoBukkitRunnable}s.
+     */
+    @Getter
     private final RunnableFactory runnableFactory;
+
+    /**
+     * The loader for all plugin extensions.
+     *
+     * @see com.willfp.eco.util.extensions.Extension
+     */
+    @Getter
     private final ExtensionLoader extensionLoader;
 
-    protected boolean outdated = false;
+    /**
+     * If the server is running an outdated version of the plugin.
+     */
+    @Getter
+    private boolean outdated = false;
 
-    protected AbstractEcoPlugin(String pluginName, int resourceId, int bStatsId) {
+    /**
+     * Create a new plugin.
+     *
+     * @param pluginName The name of the plugin.
+     * @param resourceId The spigot resource ID for the plugin.
+     * @param bStatsId   The bStats resource ID for the plugin.
+     */
+    protected AbstractEcoPlugin(@NotNull final String pluginName,
+                                final int resourceId,
+                                final int bStatsId) {
         this.pluginName = pluginName;
         this.resourceId = resourceId;
         this.bStatsId = bStatsId;
@@ -88,12 +160,15 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.extensionLoader = new EcoExtensionLoader(this);
 
         if (!Bukkit.getServicesManager().isProvidedFor(TelekinesisTests.class)) {
-            Bukkit.getServicesManager().register(TelekinesisTests.class, new EcoTelekinesisTests(this), this, ServicePriority.Normal);
+            Bukkit.getServicesManager().register(TelekinesisTests.class, new EcoTelekinesisTests(), this, ServicePriority.Normal);
         }
 
         TelekinesisUtils.update();
     }
 
+    /**
+     * Default code to be executed on plugin enable.
+     */
     @Override
     public final void onEnable() {
         super.onLoad();
@@ -113,10 +188,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
 
         new FastCollatedDropQueue.CollatedRunnable(this);
 
-        new UpdateChecker(this, resourceId).getVersion(version -> {
+        new UpdateChecker(this).getVersion(version -> {
             DefaultArtifactVersion currentVersion = new DefaultArtifactVersion(this.getDescription().getVersion());
             DefaultArtifactVersion mostRecentVersion = new DefaultArtifactVersion(version);
             if (!(currentVersion.compareTo(mostRecentVersion) > 0 || currentVersion.equals(mostRecentVersion))) {
+                this.outdated = true;
                 this.getScheduler().runTimer(() -> {
                     this.getLog().info("&c " + this.pluginName + " is out of date! (Version " + this.getDescription().getVersion() + ")");
                     this.getLog().info("&cThe newest version is &f" + version);
@@ -145,7 +221,9 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         Prerequisite.update();
 
         this.getPacketAdapters().forEach(abstractPacketAdapter -> {
-            if(!abstractPacketAdapter.isPostLoad()) abstractPacketAdapter.register();
+            if (!abstractPacketAdapter.isPostLoad()) {
+                abstractPacketAdapter.register();
+            }
         });
 
         this.getListeners().forEach(listener -> this.getEventManager().registerListener(listener));
@@ -157,6 +235,9 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.enable();
     }
 
+    /**
+     * Default code to be executed on plugin disable.
+     */
     @Override
     public final void onDisable() {
         super.onDisable();
@@ -167,6 +248,9 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.disable();
     }
 
+    /**
+     * Default code to be executed on plugin load.
+     */
     @Override
     public final void onLoad() {
         super.onLoad();
@@ -176,9 +260,12 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.load();
     }
 
+    /**
+     * Default code to be executed after the server is up.
+     */
     public final void afterLoad() {
         this.getPacketAdapters().forEach(abstractPacketAdapter -> {
-            if(abstractPacketAdapter.isPostLoad()) abstractPacketAdapter.register();
+            if (abstractPacketAdapter.isPostLoad()) abstractPacketAdapter.register();
         });
 
         if (!Prerequisite.HasPaper.isMet()) {
@@ -201,6 +288,9 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.getLog().info("Loaded &a" + this.pluginName);
     }
 
+    /**
+     * Default code to be executed on plugin reload.
+     */
     public final void onReload() {
         Configs.update();
         DropManager.update();
@@ -210,6 +300,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.reload();
     }
 
+    /**
+     * Default integrations that exist within {@link AbstractEcoPlugin}.
+     *
+     * @return The default integrations.
+     */
     public final List<IntegrationLoader> getDefaultIntegrations() {
         integrations.add(new IntegrationLoader("PlaceholderAPI", () -> PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI(this))));
 
@@ -230,57 +325,58 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         return integrations;
     }
 
+    /**
+     * The plugin-specific code to be executed on enable.
+     */
     public abstract void enable();
 
+    /**
+     * The plugin-specific code to be executed on disable.
+     */
     public abstract void disable();
 
+    /**
+     * The plugin-specific code to be executed on load.
+     */
     public abstract void load();
 
+    /**
+     * The plugin-specific code to be executed on reload.
+     */
     public abstract void reload();
 
+    /**
+     * The plugin-specific code to be executed after the server is up.
+     */
     public abstract void postLoad();
 
+    /**
+     * The plugin-specific integrations to be tested and loaded.
+     *
+     * @return A list of integrations.
+     */
     public abstract List<IntegrationLoader> getIntegrations();
 
+    /**
+     * The command to be registered.
+     *
+     * @return A list of commands.
+     */
     public abstract List<AbstractCommand> getCommands();
 
+    /**
+     * ProtocolLib packet adapters to be registered.
+     * <p>
+     * If the plugin does not require ProtocolLib this can be left empty.
+     *
+     * @return A list of packet adapters.
+     */
     public abstract List<AbstractPacketAdapter> getPacketAdapters();
 
+    /**
+     * All listeners to be registered.
+     *
+     * @return A list of all listeners.
+     */
     public abstract List<Listener> getListeners();
-
-    public final Logger getLog() {
-        return log;
-    }
-
-    public final Scheduler getScheduler() {
-        return scheduler;
-    }
-
-    public final EventManager getEventManager() {
-        return eventManager;
-    }
-
-    public final NamespacedKeyFactory getNamespacedKeyFactory() {
-        return namespacedKeyFactory;
-    }
-
-    public final MetadataValueFactory getMetadataValueFactory() {
-        return metadataValueFactory;
-    }
-
-    public final RunnableFactory getRunnableFactory() {
-        return runnableFactory;
-    }
-
-    public final ExtensionLoader getExtensionLoader() {
-        return extensionLoader;
-    }
-
-    public final boolean isOutdated() {
-        return outdated;
-    }
-
-    public static AbstractEcoPlugin getInstance() {
-        return instance;
-    }
 }

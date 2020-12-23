@@ -1,5 +1,6 @@
 package com.willfp.eco.util;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -10,26 +11,31 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Contains methods for damaging/repairing items
- */
+@UtilityClass
 public class DurabilityUtils {
     /**
-     * Damage an item in a player's inventory
-     * The slot of a held item can be obtained with {@link PlayerInventory#getHeldItemSlot()}
-     * Armor slots are 39 (helmet), 38 (chestplate), 37 (leggings), 36 (boots)
+     * Damage an item in a player's inventory.
+     * The slot of a held item can be obtained with {@link PlayerInventory#getHeldItemSlot()}.
+     * Armor slots are 39 (helmet), 38 (chestplate), 37 (leggings), 36 (boots).
      *
-     * @param player The player
-     * @param item   The item to damage
-     * @param damage The amount of damage to deal
-     * @param slot   The slot in the inventory of the item
+     * @param player The player.
+     * @param item   The item to damage.
+     * @param damage The amount of damage to deal.
+     * @param slot   The slot in the inventory of the item.
      */
-    public static void damageItem(Player player, ItemStack item, int damage, int slot) {
-        if (item == null) return;
-        if (item.getItemMeta() == null) return;
+    public void damageItem(@NotNull final Player player,
+                           @NotNull final ItemStack item,
+                           final int damage,
+                           final int slot) {
+        if (item.getItemMeta() == null) {
+            return;
+        }
 
-        if (item.getItemMeta().isUnbreakable()) return;
+        if (item.getItemMeta().isUnbreakable()) {
+            return;
+        }
 
         PlayerItemDamageEvent event3 = new PlayerItemDamageEvent(player, item, damage);
         Bukkit.getPluginManager().callEvent(event3);
@@ -55,19 +61,22 @@ public class DurabilityUtils {
     }
 
     /**
-     * Damage an item in a player's inventory without breaking it
-     * The slot of a held item can be obtained with {@link PlayerInventory#getHeldItemSlot()}
-     * Armor slots are 39 (helmet), 38 (chestplate), 37 (leggings), 36 (boots)
+     * Damage an item in a player's inventory without breaking it.
      *
-     * @param item   The item to damage
-     * @param damage The amount of damage to deal
-     * @param player The player
+     * @param item   The item to damage.
+     * @param damage The amount of damage to deal.
+     * @param player The player.
      */
-    public static void damageItemNoBreak(ItemStack item, int damage, Player player) {
-        if (item == null) return;
-        if (item.getItemMeta() == null) return;
+    public void damageItemNoBreak(@NotNull final ItemStack item,
+                                  final int damage,
+                                  @NotNull final Player player) {
+        if (item.getItemMeta() == null) {
+            return;
+        }
 
-        if (item.getItemMeta().isUnbreakable()) return;
+        if (item.getItemMeta().isUnbreakable()) {
+            return;
+        }
 
         PlayerItemDamageEvent event3 = new PlayerItemDamageEvent(player, item, damage);
         Bukkit.getPluginManager().callEvent(event3);
@@ -87,18 +96,21 @@ public class DurabilityUtils {
     }
 
     /**
-     * Repair an item in a player's inventory
-     * The slot of a held item can be obtained with {@link PlayerInventory#getHeldItemSlot()}
-     * Armor slots are 39 (helmet), 38 (chestplate), 37 (leggings), 36 (boots)
+     * Repair an item in a player's inventory.
      *
-     * @param item   The item to damage
-     * @param repair The amount of damage to heal
+     * @param item   The item to damage.
+     * @param repair The amount of damage to heal.
      */
-    public static void repairItem(ItemStack item, int repair) {
-        if (item == null) return;
-        if (item.getItemMeta() == null) return;
+    public void repairItem(@NotNull final ItemStack item,
+                           final int repair) {
+        if (item.getItemMeta() == null) {
+            return;
+        }
 
-        if (item.getItemMeta().isUnbreakable()) return;
+        if (item.getItemMeta().isUnbreakable()) {
+            return;
+        }
+
         if (item.getItemMeta() instanceof Damageable) {
             Damageable meta = (Damageable) item.getItemMeta();
             meta.setDamage(meta.getDamage() - repair);

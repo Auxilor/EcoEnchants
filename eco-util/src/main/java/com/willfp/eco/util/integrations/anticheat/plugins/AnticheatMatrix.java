@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,12 +21,12 @@ public class AnticheatMatrix implements AnticheatWrapper, Listener {
     }
 
     @Override
-    public void exempt(Player player) {
+    public void exempt(@NotNull Player player) {
         this.exempt.add(player.getUniqueId());
     }
 
     @Override
-    public void unexempt(Player player) {
+    public void unexempt(@NotNull Player player) {
         this.exempt.remove(player.getUniqueId());
     }
 

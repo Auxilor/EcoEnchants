@@ -1,9 +1,12 @@
 package com.willfp.eco.util.lambda;
 
 /**
- * Simple functional interface to run some code on demand
+ * Represents code that can be later executed.
  */
 @FunctionalInterface
 public interface Callable {
+    /**
+     * Execute the lambda.
+     */
     void call();
 }

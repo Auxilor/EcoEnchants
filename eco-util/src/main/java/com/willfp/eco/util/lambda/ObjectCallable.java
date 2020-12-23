@@ -7,5 +7,10 @@ package com.willfp.eco.util.lambda;
  */
 @FunctionalInterface
 public interface ObjectCallable<A> {
+    /**
+     * Execute the lambda.
+     *
+     * @return The return value of the specified type.
+     */
     A call();
 }

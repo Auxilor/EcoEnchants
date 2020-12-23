@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -22,7 +23,7 @@ public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
     }
 
     @Override
-    public void onSend(PacketContainer packet) {
+    public void onSend(@NotNull PacketContainer packet) {
         List<MerchantRecipe> recipes = packet.getMerchantRecipeLists().readSafely(0);
 
         recipes = recipes.stream().peek(merchantRecipe -> {

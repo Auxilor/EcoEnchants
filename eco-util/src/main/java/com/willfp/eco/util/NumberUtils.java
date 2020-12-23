@@ -1,15 +1,24 @@
 package com.willfp.eco.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.TreeMap;
 
+@UtilityClass
 public class NumberUtils {
+    /**
+     * The RNG to use.
+     */
     private static final Random RANDOM = new Random();
+
+    /**
+     * Set of roman numerals to look up.
+     */
     private static final TreeMap<Integer, String> NUMERALS = new TreeMap<>();
 
     static {
-
         NUMERALS.put(1000, "M");
         NUMERALS.put(900, "CM");
         NUMERALS.put(500, "D");
@@ -23,107 +32,102 @@ public class NumberUtils {
         NUMERALS.put(5, "V");
         NUMERALS.put(4, "IV");
         NUMERALS.put(1, "I");
-
     }
 
     /**
-     * Bias the input value according to a curve
+     * Bias the input value according to a curve.
      *
-     * @param input The input value
-     * @param bias  The bias between -1 and 1, where higher values bias input values to lower output values
-     *
-     * @return The biased output
+     * @param input The input value.
+     * @param bias  The bias between -1 and 1, where higher values bias input values to lower output values.
+     * @return The biased output.
      */
-    public static double bias(double input, double bias) {
+    public double bias(final double input,
+                              final double bias) {
         double k = Math.pow(1 - bias, 3);
 
         return (input * k) / (input * k - input + 1);
     }
 
     /**
-     * If value is above maximum, set it to maximum
+     * If value is above maximum, set it to maximum.
      *
-     * @param toChange The value to test
-     * @param limit    The maximum
-     *
-     * @return The new value
+     * @param toChange The value to test.
+     * @param limit    The maximum.
+     * @return The new value.
      */
-    public static int equalIfOver(int toChange, int limit) {
-        if (toChange > limit) {
-            toChange = limit;
-        }
-        return toChange;
+    public int equalIfOver(final int toChange,
+                                  final int limit) {
+        return Math.min(toChange, limit);
     }
 
     /**
-     * If value is above maximum, set it to maximum
+     * If value is above maximum, set it to maximum.
      *
-     * @param toChange The value to test
-     * @param limit    The maximum
-     *
-     * @return The new value
+     * @param toChange The value to test.
+     * @param limit    The maximum.
+     * @return The new value.
      */
-    public static double equalIfOver(double toChange, double limit) {
-        if (toChange > limit) {
-            toChange = limit;
-        }
-        return toChange;
+    public double equalIfOver(final double toChange,
+                                     final double limit) {
+        return Math.min(toChange, limit);
     }
 
     /**
-     * Get Roman Numeral from number
+     * Get Roman Numeral from number.
      *
-     * @param number The number to convert
-     *
-     * @return The number, converted to a roman numeral
+     * @param number The number to convert.
+     * @return The number, converted to a roman numeral.
      */
-    public static String toNumeral(int number) {
+    public String toNumeral(final int number) {
         if (number >= 1 && number <= 4096) {
             int l = NUMERALS.floorKey(number);
             if (number == l) {
                 return NUMERALS.get(number);
             }
             return NUMERALS.get(l) + toNumeral(number - l);
-        } else return String.valueOf(number);
+        } else {
+            return String.valueOf(number);
+        }
     }
 
     /**
-     * Generate random integer in range
+     * Generate random integer in range.
      *
-     * @param min Minimum
-     * @param max Maximum
-     *
-     * @return Random integer
+     * @param min Minimum.
+     * @param max Maximum.
+     * @return Random integer.
      */
-    public static int randInt(int min, int max) {
+    public int randInt(final int min,
+                              final int max) {
         return (int) ((long) min + Math.random() * ((long) max - min + 1));
     }
 
     /**
-     * Generate random double in range
+     * Generate random double in range.
      *
-     * @param min Minimum
-     * @param max Maximum
-     *
-     * @return Random double
+     * @param min Minimum.
+     * @param max Maximum.
+     * @return Random double.
      */
-    public static double randFloat(double min, double max) {
+    public double randFloat(final double min,
+                                   final double max) {
         return RANDOM.nextFloat() * (max - min) + min;
     }
 
     /**
-     * Generate random double with a triangular distribution
+     * Generate random double with a triangular distribution.
      *
-     * @param minimum Minimum
-     * @param maximum Maximum
-     * @param peak    Peak
-     *
-     * @return Random double
+     * @param minimum Minimum.
+     * @param maximum Maximum.
+     * @param peak    Peak.
+     * @return Random double.
      */
-    public static double triangularDistribution(double minimum, double maximum, double peak) {
-        double F = (peak - minimum) / (maximum - minimum);
+    public double triangularDistribution(final double minimum,
+                                                final double maximum,
+                                                final double peak) {
+        double f = (peak - minimum) / (maximum - minimum);
         double rand = Math.random();
-        if (rand < F) {
+        if (rand < f) {
             return minimum + Math.sqrt(rand * (maximum - minimum) * (peak - minimum));
         } else {
             return maximum - Math.sqrt((1 - rand) * (maximum - minimum) * (maximum - peak));
@@ -131,24 +135,22 @@ public class NumberUtils {
     }
 
     /**
-     * Get Log base 2 of a number
+     * Get Log base 2 of a number.
      *
-     * @param N The number
-     *
-     * @return The result
+     * @param N The number.
+     * @return The result.
      */
-    public static int log2(int N) {
+    public int log2(final int N) {
         return (int) (Math.log(N) / Math.log(2));
     }
 
     /**
-     * Format double to string
+     * Format double to string.
      *
-     * @param toFormat The number to format
-     *
-     * @return Formatted
+     * @param toFormat The number to format.
+     * @return Formatted.
      */
-    public static String format(double toFormat) {
+    public String format(final double toFormat) {
         DecimalFormat df = new DecimalFormat("0.00");
         String formatted = df.format(toFormat);
 
