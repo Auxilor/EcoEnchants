@@ -2,7 +2,9 @@ package com.willfp.eco.util.config;
 
 import com.willfp.eco.util.config.configs.Config;
 import com.willfp.eco.util.config.configs.Lang;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public final class Configs {
     /**
      * The {@link BaseConfig} implementation for lang.yml.
@@ -19,12 +21,8 @@ public final class Configs {
      *
      * @see BaseConfig
      */
-    public static void update() {
+    public void update() {
         LANG.update();
         CONFIG.update();
-    }
-
-    private Configs() {
-
     }
 }

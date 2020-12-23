@@ -1,14 +1,16 @@
 package com.willfp.eco.util.drops.telekinesis;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@UtilityClass
 public final class TelekinesisUtils {
     /**
      * The test service registered to bukkit.
      */
-    private static TelekinesisTests tests = Bukkit.getServicesManager().load(TelekinesisTests.class);
+    private TelekinesisTests tests = Bukkit.getServicesManager().load(TelekinesisTests.class);
 
     /**
      * Test the player for telekinesis.
@@ -18,18 +20,14 @@ public final class TelekinesisUtils {
      * @param player The player to test.
      * @return If the player is telekinetic.
      */
-    public static boolean testPlayer(@NotNull final Player player) {
+    public boolean testPlayer(@NotNull final Player player) {
         return tests.testPlayer(player);
     }
 
     /**
      * Update the test to use.
      */
-    public static void update() {
+    public void update() {
         tests = Bukkit.getServicesManager().load(TelekinesisTests.class);
-    }
-
-    private TelekinesisUtils() {
-
     }
 }

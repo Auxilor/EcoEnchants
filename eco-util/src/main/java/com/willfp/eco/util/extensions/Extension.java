@@ -1,24 +1,26 @@
 package com.willfp.eco.util.extensions;
 
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Extensions are a way of interfacing with the base plugin
- * Syntactically similar to Bukkit Plugins.
- */
 public abstract class Extension {
+    /**
+     * The {@link AbstractEcoPlugin} that this extension is for.
+     */
+    @Getter(AccessLevel.PROTECTED)
     private final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
 
     /**
-     * Metadata containing version and name
+     * Metadata containing version and name.
      */
     private ExtensionMetadata metadata = null;
 
     /**
-     * Method to validate metadata and enable extension
+     * Method to validate metadata and enable extension.
      */
     public final void enable() {
         Validate.notNull(metadata, "Metadata cannot be null!");
@@ -26,45 +28,37 @@ public abstract class Extension {
     }
 
     /**
-     * Method to disable extension
+     * Method to disable extension.
      */
     public final void disable() {
         this.onDisable();
     }
 
     /**
-     * Called on enabling Extension
+     * Called on enabling Extension.
      */
     protected abstract void onEnable();
 
     /**
-     * Called when Extension is disabled
+     * Called when Extension is disabled.
      */
     protected abstract void onDisable();
 
     /**
-     * Get instance of the owning plugin
-     * @return The instance to interface with
-     */
-    protected final AbstractEcoPlugin getPlugin() {
-        return plugin;
-    }
-
-    /**
-     * Set the metadata of the extension
+     * Set the metadata of the extension.
      * <p>
-     * Must be called before enabling
+     * Must be called before enabling.
      *
-     * @param metadata The metadata to set
+     * @param metadata The metadata to set.
      */
-    public final void setMetadata(ExtensionMetadata metadata) {
+    public final void setMetadata(@NotNull final ExtensionMetadata metadata) {
         this.metadata = metadata;
     }
 
     /**
-     * Get the name of the extension
+     * Get the name of the extension.
      *
-     * @return The name of the metadata attached to the extension
+     * @return The name of the metadata attached to the extension.
      */
     public final String getName() {
         Validate.notNull(metadata, "Metadata cannot be null!");
@@ -72,9 +66,9 @@ public abstract class Extension {
     }
 
     /**
-     * Get the version of the extension
+     * Get the version of the extension.
      *
-     * @return The version of the metadata attached to the extension
+     * @return The version of the metadata attached to the extension.
      */
     public final String getVersion() {
         Validate.notNull(metadata, "Metadata cannot be null!");
@@ -82,16 +76,30 @@ public abstract class Extension {
     }
 
     /**
-     * Wrapper for the string and version of the extension
-     * Contains versions and name
-     * Designed for internal use
+     * Wrapper for the string and version of the extension.
+     * Contains versions and name.
+     * Designed for internal use.
      */
     @ApiStatus.Internal
     public static final class ExtensionMetadata {
+        /**
+         * The version of the extension.
+         */
         private final @NotNull String version;
+
+        /**
+         * The extension's name.
+         */
         private final @NotNull String name;
 
-        public ExtensionMetadata(@NotNull String version, @NotNull String name) {
+        /**
+         * Create a new extension metadata.
+         *
+         * @param version The version for the extension to be.
+         * @param name    The name of the extension.
+         */
+        public ExtensionMetadata(@NotNull final String version,
+                                 @NotNull final String name) {
             this.version = version;
             this.name = name;
         }
