@@ -81,18 +81,6 @@ public class DropQueue {
     }
 
     /**
-     * Set the queue to test specific item for telekinesis
-     * Default item is the player's held item, however for this is required for Tridents.
-     *
-     * @param item The item to test
-     * @return The DropQueue
-     */
-    public DropQueue setItem(ItemStack item) {
-        handle.setItem(item);
-        return this;
-    }
-
-    /**
      * Push the queue
      */
     public void push() {

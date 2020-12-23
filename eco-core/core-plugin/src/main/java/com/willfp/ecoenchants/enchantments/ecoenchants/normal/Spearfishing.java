@@ -64,10 +64,17 @@ public class Spearfishing extends EcoEnchant {
         Collections.shuffle(potentialDrops, new Random(NumberUtils.randInt(0, 100000)));
         ItemStack drop = new ItemStack(potentialDrops.get(0), 1);
 
-        new DropQueue(player)
-                .addItem(drop)
-                .setItem(item)
-                .setLocation(trident.getLocation())
-                .push();
+        if (EnchantChecks.item(item, EcoEnchants.TELEKINESIS)) {
+            new DropQueue(player)
+                    .addItem(drop)
+                    .setLocation(trident.getLocation())
+                    .forceTelekinesis()
+                    .push();
+        } else {
+            new DropQueue(player)
+                    .addItem(drop)
+                    .setLocation(trident.getLocation())
+                    .push();
+        }
     }
 }
