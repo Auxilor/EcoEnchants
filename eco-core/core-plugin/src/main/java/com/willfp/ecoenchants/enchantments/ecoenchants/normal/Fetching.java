@@ -47,7 +47,7 @@ public class Fetching extends EcoEnchant {
         if(!(EnchantChecks.helmet(player, this)))
             return;
 
-        int xp = event.getDroppedExp();
+        int xp = event.getXp();
         Collection<ItemStack> drops = event.getDrops();
 
         new DropQueue(player)

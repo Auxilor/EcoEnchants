@@ -30,13 +30,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class Telekinesis extends EcoEnchant {
+    private static boolean always = false;
+
     public Telekinesis() {
         super(
                 "telekinesis", EnchantmentType.NORMAL
         );
     }
-
-    private static boolean always = false;
 
     // START OF LISTENERS
 
@@ -128,7 +128,7 @@ public class Telekinesis extends EcoEnchant {
         if (!EnchantChecks.item(item, this)) return;
         if(this.getDisabledWorlds().contains(player.getWorld())) return;
 
-        int xp = event.getDroppedExp();
+        int xp = event.getXp();
         Collection<ItemStack> drops = event.getDrops();
 
         if(entity instanceof Player && Soulbound.getSoulboundItems((Player) entity) != null) {

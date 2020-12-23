@@ -30,7 +30,7 @@ public class EntityDeathByEntityEvent extends Event {
      * The {@link Entity} that killed.
      */
     @Getter
-    private final Entity damager;
+    private final Entity killer;
 
     /**
      * The associated {@link EntityDeathEvent}.
@@ -54,18 +54,18 @@ public class EntityDeathByEntityEvent extends Event {
      * Create event based off parameters.
      *
      * @param victim     The killed entity
-     * @param damager    The killer
+     * @param killer     The killer
      * @param drops      The item drops
      * @param xp         The amount of xp to drop
      * @param deathEvent The associated {@link EntityDeathEvent}
      */
     public EntityDeathByEntityEvent(@NotNull final LivingEntity victim,
-                                    @NotNull final Entity damager,
+                                    @NotNull final Entity killer,
                                     @NotNull final List<ItemStack> drops,
                                     final int xp,
                                     @NotNull final EntityDeathEvent deathEvent) {
         this.victim = victim;
-        this.damager = damager;
+        this.killer = killer;
         this.drops = drops;
         this.xp = xp;
         this.deathEvent = deathEvent;
