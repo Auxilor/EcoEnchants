@@ -46,16 +46,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class EcoEnchantsPlugin extends AbstractEcoPlugin {
+    /**
+     * Internal constructor called by bukkit on plugin load.
+     */
     public EcoEnchantsPlugin() {
         super("EcoEnchants", 79573, 7666);
     }
 
+    /**
+     * Code executed on plugin enable.
+     */
     @Override
     public void enable() {
         this.getExtensionLoader().loadExtensions();
 
-        if(this.getExtensionLoader().getLoadedExtensions().isEmpty()) {
+        if (this.getExtensionLoader().getLoadedExtensions().isEmpty()) {
             this.getLog().info("&cNo extensions found");
         } else {
             this.getLog().info("Extensions Loaded:");
@@ -67,9 +74,9 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         this.getLog().info("");
 
         EcoEnchants.values().forEach(enchant -> {
-            if(enchant.isEnabled()) {
+            if (enchant.isEnabled()) {
                 this.getEventManager().registerListener(enchant);
-                if(enchant instanceof EcoRunnable) {
+                if (enchant instanceof EcoRunnable) {
                     this.getScheduler().syncRepeating((EcoRunnable) enchant, 5, ((EcoRunnable) enchant).getTime());
                 }
             }
@@ -81,6 +88,9 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         Bukkit.getServicesManager().load(TelekinesisTests.class).registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
     }
 
+    /**
+     * Code executed on plugin disable.
+     */
     @Override
     public void disable() {
         Bukkit.getServer().getWorlds().forEach((world -> {
@@ -96,11 +106,17 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         this.getExtensionLoader().unloadExtensions();
     }
 
+    /**
+     * Nothing is called on plugin load.
+     */
     @Override
     public void load() {
         // Nothing needs to be called on load
     }
 
+    /**
+     * Code executed on /ecoreload.
+     */
     @Override
     public void reload() {
         EcoEnchantsConfigs.updateConfigs();
@@ -116,11 +132,14 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
             HandlerList.unregisterAll(ecoEnchant);
 
             this.getScheduler().runLater(() -> {
-                if(ecoEnchant.isEnabled()) this.getEventManager().registerListener(ecoEnchant);
+                if (ecoEnchant.isEnabled()) this.getEventManager().registerListener(ecoEnchant);
             }, 1);
         }));
     }
 
+    /**
+     * Code executed after server is up.
+     */
     @Override
     public void postLoad() {
         Bukkit.getServer().getWorlds().forEach(world -> {
@@ -129,19 +148,27 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         EssentialsManager.registerEnchantments();
     }
 
+    /**
+     * EcoEnchants-specific integrations.
+     *
+     * @return A list of all integrations.
+     */
     @Override
     public List<IntegrationLoader> getIntegrations() {
         return Arrays.asList(
                 new IntegrationLoader("WorldGuard", () -> {
                     WorldguardManager.register(new WorldguardIntegrationImpl());
                 }),
-
-                // MISC
                 new IntegrationLoader("Essentials", () -> EssentialsManager.register(new IntegrationEssentials())),
                 new IntegrationLoader("mcMMO", () -> McmmoManager.registerIntegration(new McmmoIntegrationImpl()))
         );
     }
 
+    /**
+     * EcoEnchants-specific commands.
+     *
+     * @return A list of all commands.
+     */
     @Override
     public List<AbstractCommand> getCommands() {
         return Arrays.asList(
@@ -151,6 +178,11 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         );
     }
 
+    /**
+     * Packet Adapters for enchant display.
+     *
+     * @return A list of packet adapters.
+     */
     @Override
     public List<AbstractPacketAdapter> getPacketAdapters() {
         return Arrays.asList(
@@ -162,6 +194,11 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         );
     }
 
+    /**
+     * EcoEnchants-specific listeners.
+     *
+     * @return A list of all listeners.
+     */
     @Override
     public List<Listener> getListeners() {
         return Arrays.asList(
