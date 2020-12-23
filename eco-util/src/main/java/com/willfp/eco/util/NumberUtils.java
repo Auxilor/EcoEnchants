@@ -42,7 +42,7 @@ public class NumberUtils {
      * @return The biased output.
      */
     public double bias(final double input,
-                              final double bias) {
+                       final double bias) {
         double k = Math.pow(1 - bias, 3);
 
         return (input * k) / (input * k - input + 1);
@@ -56,7 +56,7 @@ public class NumberUtils {
      * @return The new value.
      */
     public int equalIfOver(final int toChange,
-                                  final int limit) {
+                           final int limit) {
         return Math.min(toChange, limit);
     }
 
@@ -68,7 +68,7 @@ public class NumberUtils {
      * @return The new value.
      */
     public double equalIfOver(final double toChange,
-                                     final double limit) {
+                              final double limit) {
         return Math.min(toChange, limit);
     }
 
@@ -98,8 +98,8 @@ public class NumberUtils {
      * @return Random integer.
      */
     public int randInt(final int min,
-                              final int max) {
-        return (int) ((long) min + Math.random() * ((long) max - min + 1));
+                       final int max) {
+        return (int) ((long) min + RANDOM.nextInt() * ((long) max - min + 1));
     }
 
     /**
@@ -110,7 +110,7 @@ public class NumberUtils {
      * @return Random double.
      */
     public double randFloat(final double min,
-                                   final double max) {
+                            final double max) {
         return RANDOM.nextFloat() * (max - min) + min;
     }
 
@@ -123,8 +123,8 @@ public class NumberUtils {
      * @return Random double.
      */
     public double triangularDistribution(final double minimum,
-                                                final double maximum,
-                                                final double peak) {
+                                         final double maximum,
+                                         final double peak) {
         double f = (peak - minimum) / (maximum - minimum);
         double rand = Math.random();
         if (rand < f) {
@@ -137,11 +137,11 @@ public class NumberUtils {
     /**
      * Get Log base 2 of a number.
      *
-     * @param N The number.
+     * @param toLog The number.
      * @return The result.
      */
-    public int log2(final int N) {
-        return (int) (Math.log(N) / Math.log(2));
+    public int log2(final int toLog) {
+        return (int) (Math.log(toLog) / Math.log(2));
     }
 
     /**
