@@ -21,7 +21,7 @@ public class ProxyFactory<T extends AbstractProxy> {
      *
      * @param proxyClass The class of the proxy interface.
      */
-    public ProxyFactory(Class<T> proxyClass) {
+    public ProxyFactory(@NotNull final Class<T> proxyClass) {
         this.proxyClass = proxyClass;
     }
 
@@ -33,7 +33,9 @@ public class ProxyFactory<T extends AbstractProxy> {
     public @NotNull T getProxy() {
         try {
             T cachedProxy = attemptCache();
-            if (cachedProxy != null) return cachedProxy;
+            if (cachedProxy != null) {
+                return cachedProxy;
+            }
 
             String className = "com.willfp.eco.core.proxy." + ProxyConstants.NMS_VERSION + "." + proxyClass.getSimpleName().replace("Proxy", "");
             final Class<?> class2 = Class.forName(className);
@@ -52,7 +54,9 @@ public class ProxyFactory<T extends AbstractProxy> {
 
     private T attemptCache() {
         Object proxy = CACHE.get(proxyClass);
-        if (proxy == null) return null;
+        if (proxy == null) {
+            return null;
+        }
 
         if (proxyClass.isInstance(proxy)) {
             return proxyClass.cast(proxy);
