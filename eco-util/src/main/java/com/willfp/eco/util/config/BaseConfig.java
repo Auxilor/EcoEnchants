@@ -44,7 +44,8 @@ public abstract class BaseConfig extends PluginDependent {
      * @param configName   The name of the config
      * @param removeUnused Whether keys not present in the default config should be removed on update.
      */
-    protected BaseConfig(String configName, boolean removeUnused) {
+    protected BaseConfig(@NotNull final String configName,
+                         final boolean removeUnused) {
         super(AbstractEcoPlugin.getInstance());
         this.name = configName + ".yml";
         this.removeUnused = removeUnused;
