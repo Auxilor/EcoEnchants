@@ -54,7 +54,7 @@ public class NaturalExpGainListeners implements Listener {
      * @param event The even to listen for.
      */
     @EventHandler
-    public void onExpBottle(ExpBottleEvent event) {
+    public void onExpBottle(@NotNull final ExpBottleEvent event) {
         NaturalExpGainBuilder builtEvent = new NaturalExpGainBuilder(NaturalExpGainBuilder.BuildReason.BOTTLE);
         builtEvent.setLocation(event.getEntity().getLocation());
 

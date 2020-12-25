@@ -24,7 +24,7 @@ public class Plasmic extends EcoEnchant {
     private static final Material[] items;
 
     static {
-        if(Prerequisite.MinVer1_16.isMet()) {
+        if(Prerequisite.MINIMUM_1_16.isMet()) {
             items = new Material[]{
                     Material.DIAMOND_HELMET,
                     Material.DIAMOND_CHESTPLATE,

@@ -23,12 +23,13 @@ public class StringUtils {
      * @param player  The player to translate placeholders with respect to.
      * @return The message, translated.
      */
-    public String translate(@NotNull String message,
+    public String translate(@NotNull final String message,
                             @Nullable final Player player) {
-        message = PlaceholderManager.translatePlaceholders(message, player);
-        message = translateHexColorCodes(message);
-        message = ChatColor.translateAlternateColorCodes('&', message);
-        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes(message));
+        String processedMessage = message;
+        processedMessage = PlaceholderManager.translatePlaceholders(processedMessage, player);
+        processedMessage = translateHexColorCodes(processedMessage);
+        processedMessage = ChatColor.translateAlternateColorCodes('&', processedMessage);
+        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes(processedMessage));
     }
 
     /**
@@ -38,11 +39,12 @@ public class StringUtils {
      * @return The message, translated.
      * @see StringUtils#translate(String, Player)
      */
-    public String translate(@NotNull String message) {
-        message = PlaceholderManager.translatePlaceholders(message, null);
-        message = translateHexColorCodes(message);
-        message = ChatColor.translateAlternateColorCodes('&', message);
-        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes(message));
+    public String translate(@NotNull final String message) {
+        String processedMessage = message;
+        processedMessage = PlaceholderManager.translatePlaceholders(processedMessage, null);
+        processedMessage = translateHexColorCodes(processedMessage);
+        processedMessage = ChatColor.translateAlternateColorCodes('&', processedMessage);
+        return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes(processedMessage));
     }
 
     private static String translateHexColorCodes(String message) {

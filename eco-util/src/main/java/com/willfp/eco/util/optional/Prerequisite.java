@@ -14,12 +14,12 @@ public class Prerequisite {
     /**
      * All existing prerequisites are registered on creation.
      */
-    private static final List<Prerequisite> values = new ArrayList<>();
+    private static final List<Prerequisite> VALUES = new ArrayList<>();
 
     /**
      * Requires the server to be running minecraft version 1.16 or higher.
      */
-    public static final Prerequisite MinVer1_16 = new Prerequisite(
+    public static final Prerequisite MINIMUM_1_16 = new Prerequisite(
             () -> !Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].contains("15"),
             "Requires minimum server version of 1.16"
     );
@@ -27,7 +27,7 @@ public class Prerequisite {
     /**
      * Requires the server to be running an implementation of paper.
      */
-    public static final Prerequisite HasPaper = new Prerequisite(
+    public static final Prerequisite HAS_PAPER = new Prerequisite(
             () -> ClassUtils.exists("com.destroystokyo.paper.event.player.PlayerElytraBoostEvent"),
             "Requires server to be running paper (or a fork)"
     );
@@ -60,7 +60,7 @@ public class Prerequisite {
         this.isMetCallable = isMetCallable;
         this.isMet = isMetCallable.call();
         this.description = description;
-        values.add(this);
+        VALUES.add(this);
     }
 
     /**
@@ -74,7 +74,7 @@ public class Prerequisite {
      * Update all prerequisites' {@link Prerequisite#isMet}.
      */
     public static void update() {
-        values.forEach(Prerequisite::refresh);
+        VALUES.forEach(Prerequisite::refresh);
     }
 
     /**

@@ -8,7 +8,7 @@ public class CrimsonArtifact extends Artifact {
     public CrimsonArtifact() {
         super(
                 "crimson_artifact",
-                Prerequisite.MinVer1_16
+                Prerequisite.MINIMUM_1_16
         );
     }
 

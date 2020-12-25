@@ -83,6 +83,8 @@ public class EntityDeathByEntityEvent extends Event {
 
     /**
      * Internal bukkit.
+     *
+     * @return The handlers.
      */
     public static HandlerList getHandlerList() {
         return HANDLERS;

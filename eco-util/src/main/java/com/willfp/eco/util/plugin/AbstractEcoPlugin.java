@@ -291,7 +291,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
             }
         });
 
-        if (!Prerequisite.HasPaper.isMet()) {
+        if (!Prerequisite.HAS_PAPER.isMet()) {
             this.getLog().error("");
             this.getLog().error("----------------------------");
             this.getLog().error("");

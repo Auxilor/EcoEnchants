@@ -68,8 +68,8 @@ public class VectorUtils {
     public Vector[] getCircle(final int radius) {
         ArrayList<Vector> circleVecs = new ArrayList<>();
 
-        int xoffset = -radius;
-        int zoffset = -radius;
+        double xoffset = -radius;
+        double zoffset = -radius;
 
         while (zoffset <= radius) {
             while (xoffset <= radius) {

@@ -39,6 +39,8 @@ class NaturalExpGainBuilder {
 
     /**
      * Build a new {@link NaturalExpGainEvent} given a specific reason.
+     *
+     * @param reason The {@link BuildReason}.
      */
     NaturalExpGainBuilder(@NotNull final BuildReason reason) {
         this.reason = reason;
