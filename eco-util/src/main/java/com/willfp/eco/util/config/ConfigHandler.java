@@ -36,7 +36,7 @@ public class ConfigHandler extends PluginDependent {
     public void callUpdate() {
         updatableClasses.forEach(clazz -> Arrays.stream(clazz.getDeclaredMethods()).forEach(method -> {
             if (method.isAnnotationPresent(ConfigUpdater.class)) {
-                if (method.getParameterTypes().length == 0) {
+                if (method.getParameterTypes().length != 0) {
                     throw new InvalidUpdateMethodException("Update method must not have parameters.");
                 }
                 if (!Modifier.isStatic(method.getModifiers())) {

@@ -240,13 +240,18 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
             }
         });
 
+
+        updatableClasses.add(Configs.class);
+        updatableClasses.add(DropManager.class);
+        updatableClasses.addAll(this.getUpdatableClasses());
+
         this.getListeners().forEach(listener -> this.getEventManager().registerListener(listener));
 
         this.getCommands().forEach(AbstractCommand::register);
 
         this.getScheduler().runLater(this::afterLoad, 1);
 
-        this.getUpdatableClasses().forEach(clazz -> this.getConfigHandler().registerUpdatableClass(clazz));
+        this.updatableClasses.forEach(clazz -> this.getConfigHandler().registerUpdatableClass(clazz));
 
         this.enable();
     }
@@ -314,7 +319,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.getScheduler().cancelAll();
         new FastCollatedDropQueue.CollatedRunnable(this);
 
-        this.reload();
+        this.onReload();
     }
 
     /**
@@ -340,17 +345,6 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         integrations.add(new IntegrationLoader("Spartan", () -> AnticheatManager.register(new AnticheatSpartan())));
         integrations.addAll(this.getIntegrations());
         return integrations;
-    }
-
-    /**
-     * Default updatable classes that exist within internal libraries.
-     *
-     * @return The default updatable classes.
-     */
-    public final List<Class<? extends Updatable>> getDefaultUpdatableClasses() {
-        updatableClasses.add(Configs.class);
-        updatableClasses.add(DropManager.class);
-        return updatableClasses;
     }
 
     /**

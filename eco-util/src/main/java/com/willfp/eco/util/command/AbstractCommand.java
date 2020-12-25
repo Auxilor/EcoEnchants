@@ -152,5 +152,6 @@ public abstract class AbstractCommand extends PluginDependent implements Command
      * @param sender The sender of the command
      * @param args   The arguments of the command
      */
-    protected abstract void onExecute(CommandSender sender, List<String> args);
+    protected abstract void onExecute(CommandSender sender,
+                                      List<String> args);
 }
