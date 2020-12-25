@@ -1,79 +1,62 @@
 package com.willfp.ecoenchants.config;
 
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.config.configs.Rarity;
 import com.willfp.ecoenchants.config.configs.Target;
+import lombok.Getter;
+import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class EcoEnchantsConfigs {
-    private static final Target TARGET = new Target();
-    private static final Rarity RARITY = new Rarity();
-    private static final Set<EnchantmentConfig> enchantmentConfigs = new HashSet<>();
+@UtilityClass
+public class EcoEnchantsConfigs implements Updatable {
+    /**
+     * target.yml.
+     */
+    public final Target TARGET = new Target();
 
     /**
-     * Update all configs
-     * Called on /ecoreload
+     * rarity.yml.
      */
-    public static void updateConfigs() {
+    public final Rarity RARITY = new Rarity();
+
+    /**
+     * All enchantment-specific configs.
+     */
+    @Getter
+    private final Set<EnchantmentConfig> enchantmentConfigs = new HashSet<>();
+
+    /**
+     * Update all configs.
+     */
+    @ConfigUpdater
+    public void updateConfigs() {
         TARGET.update();
         RARITY.update();
-        updateEnchantmentConfigs();
-    }
-
-    /**
-     * Update enchantment configs
-     */
-    public static void updateEnchantmentConfigs() {
         enchantmentConfigs.forEach((EnchantmentYamlConfig::update));
     }
 
     /**
-     * Get all enchantment configs
+     * Get EnchantmentConfig matching permission name.
      *
-     * @return Set of all enchantment configs
-     */
-    public static Set<EnchantmentConfig> getEnchantmentConfigs() {
-        return enchantmentConfigs;
-    }
-
-    /**
-     * Get EnchantmentConfig matching permission name
-     *
-     * @param permissionName The permission name to match
-     *
-     * @return The matching {@link EnchantmentConfig}
+     * @param permissionName The permission name to match.
+     * @return The matching {@link EnchantmentConfig}.
      */
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public static EnchantmentConfig getEnchantmentConfig(String permissionName) {
+    public EnchantmentConfig getEnchantmentConfig(@NotNull final String permissionName) {
         return enchantmentConfigs.stream().filter(config -> config.getName().equalsIgnoreCase(permissionName)).findFirst().get();
     }
 
     /**
-     * Adds new enchantment config yml
+     * Adds new enchantment config yml.
      *
-     * @param config The config to add
+     * @param config The config to add.
      */
-    public static void addEnchantmentConfig(EnchantmentConfig config) {
+    public void addEnchantmentConfig(@NotNull final EnchantmentConfig config) {
         enchantmentConfigs.add(config);
-    }
-
-    /**
-     * Get target.yml
-     *
-     * @return target.yml
-     */
-    public static Target getTarget() {
-        return TARGET;
-    }
-
-    /**
-     * Get rarity.yml
-     *
-     * @return rarity.yml
-     */
-    public static Rarity getRarity() {
-        return RARITY;
     }
 }

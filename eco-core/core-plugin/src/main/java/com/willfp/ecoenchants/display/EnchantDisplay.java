@@ -2,6 +2,8 @@ package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -24,7 +26,7 @@ import java.util.List;
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
 @SuppressWarnings("DeprecatedIsStillUsed")
-public class EnchantDisplay {
+public class EnchantDisplay implements Updatable {
     private static final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
 
     /**
@@ -58,6 +60,7 @@ public class EnchantDisplay {
     /**
      * Update config values
      */
+    @ConfigUpdater
     public static void update() {
         OPTIONS.update();
         EnchantmentCache.update();

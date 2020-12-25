@@ -2,9 +2,11 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.interfaces.Registerable;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 
 import java.util.HashSet;
@@ -14,7 +16,7 @@ import java.util.Set;
 /**
  * Class for storing all enchantment rarities
  */
-public class EnchantmentRarity implements Registerable {
+public class EnchantmentRarity implements Registerable, Updatable {
     private static final Set<EnchantmentRarity> rarities = new HashSet<>();
 
     private final String name;
@@ -151,17 +153,17 @@ public class EnchantmentRarity implements Registerable {
      * Update all rarities
      * Called on /ecoreload
      */
-
+    @ConfigUpdater
     public static void update() {
-        Set<String> raritiesNames = EcoEnchantsConfigs.getRarity().getRarities();
+        Set<String> raritiesNames = EcoEnchantsConfigs.RARITY.getRarities();
         raritiesNames.forEach((rarity) -> {
-            double probability = EcoEnchantsConfigs.getRarity().getDouble("rarities." + rarity + ".table-probability");
-            int minimumLevel = EcoEnchantsConfigs.getRarity().getInt("rarities." + rarity + ".minimum-level");
-            double villagerProbability = EcoEnchantsConfigs.getRarity().getDouble("rarities." + rarity + ".villager-probability");
-            double lootProbability = EcoEnchantsConfigs.getRarity().getDouble("rarities." + rarity + ".loot-probability");
+            double probability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".table-probability");
+            int minimumLevel = EcoEnchantsConfigs.RARITY.getInt("rarities." + rarity + ".minimum-level");
+            double villagerProbability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".villager-probability");
+            double lootProbability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".loot-probability");
             String customColor = null;
-            if (EcoEnchantsConfigs.getRarity().getBool("rarities." + rarity + ".custom-color.enabled")) {
-                customColor = StringUtils.translate(EcoEnchantsConfigs.getRarity().getString("rarities." + rarity + ".custom-color.color"));
+            if (EcoEnchantsConfigs.RARITY.getBool("rarities." + rarity + ".custom-color.enabled")) {
+                customColor = StringUtils.translate(EcoEnchantsConfigs.RARITY.getString("rarities." + rarity + ".custom-color.color"));
             }
 
             new EnchantmentRarity(rarity, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();

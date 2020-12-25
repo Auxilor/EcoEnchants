@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.lambda.ObjectCallable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
@@ -9,7 +11,7 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnchantmentType {
+public class EnchantmentType implements Updatable {
     private static final List<EnchantmentType> values = new ArrayList<>();
 
     public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> Configs.LANG.getString("not-curse-color"));
@@ -115,6 +117,7 @@ public class EnchantmentType {
         return requiredToExtend;
     }
 
+    @ConfigUpdater
     public static void update() {
         values.forEach(EnchantmentType::refresh);
     }

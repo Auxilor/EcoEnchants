@@ -11,6 +11,7 @@ import com.willfp.eco.util.bukkit.scheduling.EcoScheduler;
 import com.willfp.eco.util.bukkit.scheduling.RunnableFactory;
 import com.willfp.eco.util.bukkit.scheduling.Scheduler;
 import com.willfp.eco.util.command.AbstractCommand;
+import com.willfp.eco.util.config.ConfigHandler;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;
@@ -38,6 +39,7 @@ import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefTowny;
 import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.updater.UpdateChecker;
@@ -88,6 +90,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     private final List<IntegrationLoader> integrations = new ArrayList<>();
 
     /**
+     * Set of external plugin integrations.
+     */
+    private final List<Class<? extends Updatable>> updatableClasses = new ArrayList<>();
+
+    /**
      * The internal plugin logger.
      */
     @Getter
@@ -132,6 +139,12 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     private final ExtensionLoader extensionLoader;
 
     /**
+     * The handler class for updatable classes.
+     */
+    @Getter
+    private final ConfigHandler configHandler;
+
+    /**
      * If the server is running an outdated version of the plugin.
      */
     @Getter
@@ -158,6 +171,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.metadataValueFactory = new MetadataValueFactory(this);
         this.runnableFactory = new RunnableFactory(this);
         this.extensionLoader = new EcoExtensionLoader(this);
+        this.configHandler = new ConfigHandler(this);
 
         if (!Bukkit.getServicesManager().isProvidedFor(TelekinesisTests.class)) {
             Bukkit.getServicesManager().register(TelekinesisTests.class, new EcoTelekinesisTests(), this, ServicePriority.Normal);
@@ -232,6 +246,8 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
 
         this.getScheduler().runLater(this::afterLoad, 1);
 
+        this.getUpdatableClasses().forEach(clazz -> this.getConfigHandler().registerUpdatableClass(clazz));
+
         this.enable();
     }
 
@@ -265,7 +281,9 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      */
     public final void afterLoad() {
         this.getPacketAdapters().forEach(abstractPacketAdapter -> {
-            if (abstractPacketAdapter.isPostLoad()) abstractPacketAdapter.register();
+            if (abstractPacketAdapter.isPostLoad()) {
+                abstractPacketAdapter.register();
+            }
         });
 
         if (!Prerequisite.HasPaper.isMet()) {
@@ -291,9 +309,8 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     /**
      * Default code to be executed on plugin reload.
      */
-    public final void onReload() {
-        Configs.update();
-        DropManager.update();
+    public final void reload() {
+        this.getConfigHandler().callUpdate();
         this.getScheduler().cancelAll();
         new FastCollatedDropQueue.CollatedRunnable(this);
 
@@ -326,6 +343,17 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     }
 
     /**
+     * Default updatable classes that exist within internal libraries.
+     *
+     * @return The default updatable classes.
+     */
+    public final List<Class<? extends Updatable>> getDefaultUpdatableClasses() {
+        updatableClasses.add(Configs.class);
+        updatableClasses.add(DropManager.class);
+        return updatableClasses;
+    }
+
+    /**
      * The plugin-specific code to be executed on enable.
      */
     public abstract void enable();
@@ -343,7 +371,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     /**
      * The plugin-specific code to be executed on reload.
      */
-    public abstract void reload();
+    public abstract void onReload();
 
     /**
      * The plugin-specific code to be executed after the server is up.
@@ -379,4 +407,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      * @return A list of all listeners.
      */
     public abstract List<Listener> getListeners();
+
+    /**
+     * All updatable classes.
+     *
+     * @return A list of all updatable classes.
+     */
+    public abstract List<Class<? extends Updatable>> getUpdatableClasses();
 }

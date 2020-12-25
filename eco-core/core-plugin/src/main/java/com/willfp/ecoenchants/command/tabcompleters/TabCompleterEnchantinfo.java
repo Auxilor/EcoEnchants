@@ -3,6 +3,8 @@ package com.willfp.ecoenchants.command.tabcompleters;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.command.AbstractTabCompleter;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Bukkit;
@@ -16,13 +18,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class TabCompleterEnchantinfo extends AbstractTabCompleter {
+public class TabCompleterEnchantinfo extends AbstractTabCompleter implements Updatable {
     private static final List<String> enchantsNames = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
 
     public TabCompleterEnchantinfo() {
         super((AbstractCommand) Objects.requireNonNull(Bukkit.getPluginCommand("enchantinfo")).getExecutor());
     }
 
+    @ConfigUpdater
     public static void reload() {
         enchantsNames.clear();
         enchantsNames.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
@@ -32,7 +35,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
     public List<String> onTab(@NotNull CommandSender sender, @NotNull List<String> args) {
         List<String> completions = new ArrayList<>();
 
-        if (args.size() == 0) {
+        if (args.isEmpty()) {
             // Currently, this case is not ever reached
             return enchantsNames;
         }

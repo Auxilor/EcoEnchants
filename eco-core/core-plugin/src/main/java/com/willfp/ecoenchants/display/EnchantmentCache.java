@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.display;
 
 import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -15,8 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@SuppressWarnings("deprecation")
-public class EnchantmentCache {
+public class EnchantmentCache implements Updatable {
     private static final Set<CacheEntry> CACHE = new HashSet<>();
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
@@ -29,6 +30,7 @@ public class EnchantmentCache {
         return new HashSet<>(CACHE);
     }
 
+    @ConfigUpdater
     public static void update() {
         CACHE.clear();
         Arrays.asList(Enchantment.values()).parallelStream().forEach(enchantment -> {

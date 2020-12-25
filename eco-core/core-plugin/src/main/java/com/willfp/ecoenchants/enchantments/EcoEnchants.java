@@ -4,6 +4,8 @@ package com.willfp.ecoenchants.enchantments;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CrimsonArtifact;
@@ -239,7 +241,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Contains general methods for EcoEnchants
  */
 @SuppressWarnings("unused")
-public class EcoEnchants {
+public class EcoEnchants implements Updatable {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
@@ -555,6 +557,7 @@ public class EcoEnchants {
      * Update all {@link EcoEnchant}s
      * Called on /ecoreload
      */
+    @ConfigUpdater
     public static void update() {
         for (EcoEnchant ecoEnchant : new HashSet<>(values())) {
             ecoEnchant.update();
