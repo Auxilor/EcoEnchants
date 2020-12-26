@@ -14,7 +14,7 @@ public class Elevation extends BiomesEnchantment {
     }
 
     @Override
-    public boolean isValid(@NotNull Biome biome) {
+    public boolean isValid(@NotNull final Biome biome) {
         return Arrays.stream(new String[]{"mountain", "hill"}).anyMatch(biome.name().toLowerCase()::contains);
     }
 }

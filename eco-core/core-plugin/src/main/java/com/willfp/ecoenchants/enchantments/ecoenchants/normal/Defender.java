@@ -6,6 +6,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Defender extends EcoEnchant {
     public Defender() {
@@ -18,13 +19,23 @@ public class Defender extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!(victim instanceof Tameable)) return;
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!(victim instanceof Tameable)) {
+            return;
+        }
 
         Tameable pet = (Tameable) victim;
 
-        if(pet.getOwner() == null) return;
-        if(!pet.getOwner().equals(attacker)) return;
+        if (pet.getOwner() == null) {
+            return;
+        }
+        if (!pet.getOwner().equals(attacker)) {
+            return;
+        }
 
         event.setCancelled(true);
     }

@@ -28,26 +28,26 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnchantingListeners extends PluginDependent implements Listener {
-    private static final Set<Material> secondary = new ImmutableSet.Builder<Material>()
+    private static final Set<Material> SECONDARY_ENCHANTABLE = new ImmutableSet.Builder<Material>()
             .add(Material.ELYTRA)
             .add(Material.SHIELD)
             .add(Material.FLINT_AND_STEEL)
             .add(Material.SHEARS)
             .add(Material.CARROT_ON_A_STICK).build();
 
-    public static final Map<Player, int[]> currentlyEnchantingSecondary = new HashMap<>();
+    public static final Map<Player, int[]> CURRENTLY_ENCHANTING_SECONDARY = new HashMap<>();
 
-    public EnchantingListeners(AbstractEcoPlugin plugin) {
+    public EnchantingListeners(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
     @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
-        currentlyEnchantingSecondary.remove(event.getPlayer());
+    public void onPlayerLeave(@NotNull final PlayerQuitEvent event) {
+        CURRENTLY_ENCHANTING_SECONDARY.remove(event.getPlayer());
     }
 
     @EventHandler
-    public void enchantItem(EnchantItemEvent event) {
+    public void enchantItem(@NotNull final EnchantItemEvent event) {
         Player player = event.getEnchanter();
         ItemStack item = event.getItem();
         int cost = event.getExpLevelCost();
@@ -62,7 +62,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             return;
         }
 
-        if ((secondary.contains(event.getItem().getType()))) {
+        if (SECONDARY_ENCHANTABLE.contains(event.getItem().getType())) {
             try {
                 ItemStack lapis = event.getInventory().getItem(1);
                 lapis.setAmount(event.getInventory().getItem(1).getAmount() - (event.whichButton() + 1));
@@ -144,9 +144,9 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         }
         toAdd.forEach(event.getEnchantsToAdd()::putIfAbsent);
 
-        if (secondary.contains(event.getItem().getType()) && !toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY))  {
-            event.getEnchantsToAdd().put(Enchantment.DURABILITY, currentlyEnchantingSecondary.get(player)[event.whichButton()]);
-            currentlyEnchantingSecondary.remove(player);
+        if (SECONDARY_ENCHANTABLE.contains(event.getItem().getType()) && !toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY))  {
+            event.getEnchantsToAdd().put(Enchantment.DURABILITY, CURRENTLY_ENCHANTING_SECONDARY.get(player)[event.whichButton()]);
+            CURRENTLY_ENCHANTING_SECONDARY.remove(player);
         }
 
         if (gotSpecial && Configs.CONFIG.getBool("enchanting-table.notify-on-special")) {
@@ -180,7 +180,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
         }
 
-        if (!secondary.contains(event.getItem().getType()))
+        if (!SECONDARY_ENCHANTABLE.contains(event.getItem().getType()))
             return;
 
         int bonus = event.getEnchantmentBonus();
@@ -221,7 +221,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             event.getOffers()[i] = offers[i];
         }
 
-        currentlyEnchantingSecondary.remove(event.getEnchanter());
+        CURRENTLY_ENCHANTING_SECONDARY.remove(event.getEnchanter());
 
         int[] unbLevels = {
                 event.getOffers()[0].getEnchantmentLevel(),
@@ -229,6 +229,6 @@ public class EnchantingListeners extends PluginDependent implements Listener {
                 event.getOffers()[2].getEnchantmentLevel()
         };
 
-        currentlyEnchantingSecondary.put(event.getEnchanter(), unbLevels);
+        CURRENTLY_ENCHANTING_SECONDARY.put(event.getEnchanter(), unbLevels);
     }
 }

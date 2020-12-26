@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,8 +28,9 @@ import java.util.List;
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
 @SuppressWarnings("DeprecatedIsStillUsed")
+@UtilityClass
 public class EnchantDisplay implements Updatable {
-    private static final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
+    private static final AbstractEcoPlugin PLUGIN = AbstractEcoPlugin.getInstance();
 
     /**
      * The meta key to hide enchantments in lore
@@ -38,14 +41,14 @@ public class EnchantDisplay implements Updatable {
      * @deprecated Temporary fix
      */
     @Deprecated
-    public static final NamespacedKey KEY_SKIP = plugin.getNamespacedKeyFactory().create("ecoenchantlore-skip");
+    public static final NamespacedKey KEY_SKIP = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-skip");
 
     /**
      * The meta key to notify the server that an item is from a villager trade
      * <p>
      * Bit of a bodge - plan on making it better.
      */
-    public static final NamespacedKey KEY_V = plugin.getNamespacedKeyFactory().create("ecoenchantlore-v");
+    public static final NamespacedKey KEY_V = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-v");
 
     /**
      * The prefix for all enchantment lines to have in lore
@@ -75,8 +78,10 @@ public class EnchantDisplay implements Updatable {
      *
      * @return The item, with KEY_V
      */
-    public static ItemStack addV(ItemStack item) {
-        if (item == null || item.getItemMeta() == null) return item;
+    public static ItemStack addV(@Nullable final ItemStack item) {
+        if (item == null || item.getItemMeta() == null) {
+            return item;
+        }
 
         ItemMeta meta = item.getItemMeta();
         meta.getPersistentDataContainer().set(KEY_V, PersistentDataType.INTEGER, 1);
@@ -91,28 +96,33 @@ public class EnchantDisplay implements Updatable {
      *
      * @return The item, updated
      */
-    public static ItemStack revertDisplay(final ItemStack item) {
-        if (item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null)
+    public static ItemStack revertDisplay(@Nullable final ItemStack item) {
+        if (item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) {
             return item;
+        }
 
         ItemMeta meta = item.getItemMeta();
         List<String> itemLore;
 
-        if (meta.hasLore())
+        if (meta.hasLore()) {
             itemLore = meta.getLore();
-        else
+        } else {
             itemLore = new ArrayList<>();
+        }
 
-        if (itemLore == null) itemLore = new ArrayList<>();
+        if (itemLore == null) {
+            itemLore = new ArrayList<>();
+        }
 
         if (meta.getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
             meta.getPersistentDataContainer().remove(KEY_V);
         }
-        itemLore.removeIf((s) -> s.startsWith(PREFIX));
+        itemLore.removeIf(s -> s.startsWith(PREFIX));
 
         if (!meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
-            if (meta instanceof EnchantmentStorageMeta)
+            if (meta instanceof EnchantmentStorageMeta) {
                 meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
+            }
             meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         meta.getPersistentDataContainer().remove(KEY_SKIP);
@@ -122,7 +132,7 @@ public class EnchantDisplay implements Updatable {
         return item;
     }
 
-    public static ItemStack displayEnchantments(final ItemStack item) {
+    public static ItemStack displayEnchantments(@Nullable final ItemStack item) {
         return displayEnchantments(item, false);
     }
 
@@ -133,21 +143,27 @@ public class EnchantDisplay implements Updatable {
      *
      * @return The item, updated
      */
-    public static ItemStack displayEnchantments(final ItemStack item, boolean hideEnchants) {
-        if (item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()))
+    public static ItemStack displayEnchantments(@Nullable final ItemStack item,
+                                                final boolean hideEnchants) {
+
+        boolean hide = hideEnchants;
+        if (item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType())) {
             return item;
+        }
 
         if (item.getItemMeta().getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER) && hideEnchants) {
-            hideEnchants = false;
+            hide = false;
         }
 
         revertDisplay(item);
 
         ItemMeta meta = item.getItemMeta();
-        if (meta == null) return item;
+        if (meta == null) {
+            return item;
+        }
         List<String> itemLore = new ArrayList<>();
 
-        if (hideEnchants || meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
+        if (hide || meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
             meta.getPersistentDataContainer().set(KEY_SKIP, PersistentDataType.INTEGER, 1);
@@ -155,10 +171,13 @@ public class EnchantDisplay implements Updatable {
             return item;
         }
 
-        if (meta.hasLore())
+        if (meta.hasLore()) {
             itemLore = meta.getLore();
+        }
 
-        if (itemLore == null) itemLore = new ArrayList<>();
+        if (itemLore == null) {
+            itemLore = new ArrayList<>();
+        }
 
         List<String> lore = new ArrayList<>();
 
@@ -174,9 +193,7 @@ public class EnchantDisplay implements Updatable {
         enchantments.entrySet().removeIf(enchantmentIntegerEntry -> enchantmentIntegerEntry.getValue().equals(0));
 
         List<Enchantment> unsorted = new ArrayList<>();
-        enchantments.forEach((enchantment, integer) -> {
-            unsorted.add(enchantment);
-        });
+        enchantments.forEach((enchantment, integer) -> unsorted.add(enchantment));
 
         HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
 
@@ -188,12 +205,15 @@ public class EnchantDisplay implements Updatable {
         });
 
         enchantments.forEach((enchantment, level) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) == null) return;
+            if (EcoEnchants.getFromEnchantment(enchantment) == null) {
+                return;
+            }
 
             EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
 
-            if (!ecoEnchant.isEnabled())
+            if (!ecoEnchant.isEnabled()) {
                 forRemoval.add(enchantment);
+            }
         });
 
         forRemoval.forEach(enchantment -> {
@@ -217,8 +237,9 @@ public class EnchantDisplay implements Updatable {
             }
 
             lore.add(PREFIX + name);
-            if (enchantments.size() <= OPTIONS.getDescribeThreshold() && OPTIONS.isUseDescribe())
+            if (enchantments.size() <= OPTIONS.getDescribeThreshold() && OPTIONS.isUseDescribe()) {
                 lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
+            }
         });
 
         if (OPTIONS.isUseShrink() && (enchantments.size() > OPTIONS.getShrinkThreshold())) {

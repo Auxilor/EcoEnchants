@@ -227,6 +227,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -242,7 +243,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Contains general methods for EcoEnchants
  */
 @SuppressWarnings("unused")
-public class EcoEnchants implements Updatable {
+public final class EcoEnchants implements Updatable {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";

@@ -6,6 +6,7 @@ import com.willfp.eco.util.DurabilityUtils;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
@@ -13,6 +14,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,6 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Utility class to simplify enchantment fetching
  */
 @SuppressWarnings("unchecked")
+@UtilityClass
 public class EnchantChecks {
     private static final FastGetEnchantsProxy PROXY = ProxyUtils.getProxy(FastGetEnchantsProxy.class);
 
@@ -35,7 +39,8 @@ public class EnchantChecks {
      *
      * @return If the item has the queried enchantment
      */
-    public static boolean item(ItemStack item, Enchantment enchantment) {
+    public static boolean item(@Nullable final ItemStack item,
+                               @NotNull final Enchantment enchantment) {
         return getItemLevel(item, enchantment) != 0;
     }
 
@@ -47,9 +52,14 @@ public class EnchantChecks {
      *
      * @return The level of the enchantment, or 0 if not found
      */
-    public static int getItemLevel(ItemStack item, Enchantment enchantment) {
-        if (item == null) return 0;
-        if (item.getType().equals(Material.AIR)) return 0;
+    public static int getItemLevel(@Nullable final ItemStack item,
+                                   @NotNull final Enchantment enchantment) {
+        if (item == null) {
+            return 0;
+        }
+        if (item.getType().equals(Material.AIR)) {
+            return 0;
+        }
 
         return PROXY.getLevelOnItem(item, enchantment);
     }
@@ -61,14 +71,20 @@ public class EnchantChecks {
      *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
-    public static Map<EcoEnchant, Integer> getEnchantsOnItem(ItemStack item) {
-        if (item == null) return new HashMap<>();
-        if (item.getType().equals(Material.AIR)) return new HashMap<>();
+    public static Map<EcoEnchant, Integer> getEnchantsOnItem(@Nullable final ItemStack item) {
+        if (item == null) {
+            return new HashMap<>();
+        }
+        if (item.getType().equals(Material.AIR)) {
+            return new HashMap<>();
+        }
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
         for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry : PROXY.getEnchantmentsOnItem(item).entrySet()) {
             EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantmentIntegerEntry.getKey());
-            if(enchant != null) ecoEnchants.put(enchant, enchantmentIntegerEntry.getValue());
+            if (enchant != null) {
+                ecoEnchants.put(enchant, enchantmentIntegerEntry.getValue());
+            }
         }
 
         return ecoEnchants;
@@ -84,7 +100,8 @@ public class EnchantChecks {
      *
      * @return If the arrow has the queried enchantment
      */
-    public static boolean arrow(Arrow arrow, Enchantment enchantment) {
+    public static boolean arrow(@NotNull final Arrow arrow,
+                                @NotNull final Enchantment enchantment) {
         return getArrowLevel(arrow, enchantment) != 0;
     }
 
@@ -98,16 +115,24 @@ public class EnchantChecks {
      *
      * @return The level found on the arrow, or 0 if not found
      */
-    public static int getArrowLevel(Arrow arrow, Enchantment enchantment) {
-        if (arrow.getMetadata("enchantments").isEmpty()) return 0;
+    public static int getArrowLevel(@NotNull final Arrow arrow,
+                                    @NotNull final Enchantment enchantment) {
+        if (arrow.getMetadata("enchantments").isEmpty()) {
+            return 0;
+        }
 
         MetadataValue enchantmentsMetaValue = arrow.getMetadata("enchantments").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof Map))
+        if (!(enchantmentsMetaValue.value() instanceof Map)) {
             return 0;
+        }
 
         Map<Enchantment, Integer> enchantments = (Map<Enchantment, Integer>) enchantmentsMetaValue.value();
-        if (enchantments == null) return 0;
-        if (!enchantments.containsKey(enchantment)) return 0;
+        if (enchantments == null) {
+            return 0;
+        }
+        if (!enchantments.containsKey(enchantment)) {
+            return 0;
+        }
         return enchantments.get(enchantment);
     }
 
@@ -118,12 +143,15 @@ public class EnchantChecks {
      *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
-    public static Map<EcoEnchant, Integer> getEnchantsOnArrow(Arrow arrow) {
-        if (arrow.getMetadata("enchantments").isEmpty()) return new HashMap<>();
+    public static Map<EcoEnchant, Integer> getEnchantsOnArrow(@NotNull final Arrow arrow) {
+        if (arrow.getMetadata("enchantments").isEmpty()) {
+            return new HashMap<>();
+        }
 
         MetadataValue enchantmentsMetaValue = arrow.getMetadata("enchantments").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof Map))
+        if (!(enchantmentsMetaValue.value() instanceof Map)) {
             return new HashMap<>();
+        }
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
         ((Map<Enchantment, Integer>) enchantmentsMetaValue.value()).forEach(((enchantment, integer) -> {
@@ -143,7 +171,8 @@ public class EnchantChecks {
      *
      * @return If the LivingEntity has the enchantment
      */
-    public static boolean mainhand(LivingEntity entity, Enchantment enchantment) {
+    public static boolean mainhand(@NotNull final LivingEntity entity,
+                                   @NotNull final Enchantment enchantment) {
         return getMainhandLevel(entity, enchantment) != 0;
     }
 
@@ -155,9 +184,11 @@ public class EnchantChecks {
      *
      * @return The level found on the mainhand item, or 0 if not found
      */
-    public static int getMainhandLevel(LivingEntity entity, Enchantment enchantment) {
-        if (entity.getEquipment() == null)
+    public static int getMainhandLevel(@NotNull final LivingEntity entity,
+                                       @NotNull final Enchantment enchantment) {
+        if (entity.getEquipment() == null) {
             return 0;
+        }
 
         ItemStack item = entity.getEquipment().getItemInMainHand();
 
@@ -171,9 +202,10 @@ public class EnchantChecks {
      *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
-    public static Map<EcoEnchant, Integer> getEnchantsOnMainhand(LivingEntity entity) {
-        if (entity.getEquipment() == null)
+    public static Map<EcoEnchant, Integer> getEnchantsOnMainhand(@NotNull final LivingEntity entity) {
+        if (entity.getEquipment() == null) {
             return new HashMap<>();
+        }
 
         ItemStack item = entity.getEquipment().getItemInMainHand();
 
@@ -188,7 +220,8 @@ public class EnchantChecks {
      *
      * @return If the LivingEntity has the enchantment
      */
-    public static boolean offhand(LivingEntity entity, Enchantment enchantment) {
+    public static boolean offhand(@NotNull final LivingEntity entity,
+                                  @NotNull final Enchantment enchantment) {
         return getOffhandLevel(entity, enchantment) != 0;
     }
 
@@ -200,9 +233,11 @@ public class EnchantChecks {
      *
      * @return The level found on the offhand item, or 0 if not found
      */
-    public static int getOffhandLevel(LivingEntity entity, Enchantment enchantment) {
-        if (entity.getEquipment() == null)
+    public static int getOffhandLevel(@NotNull final LivingEntity entity,
+                                      @NotNull final Enchantment enchantment) {
+        if (entity.getEquipment() == null) {
             return 0;
+        }
 
         ItemStack item = entity.getEquipment().getItemInOffHand();
 
@@ -216,9 +251,10 @@ public class EnchantChecks {
      *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level
      */
-    public static Map<EcoEnchant, Integer> getEnchantsOnOffhand(LivingEntity entity) {
-        if (entity.getEquipment() == null)
+    public static Map<EcoEnchant, Integer> getEnchantsOnOffhand(@NotNull final LivingEntity entity) {
+        if (entity.getEquipment() == null) {
             return new HashMap<>();
+        }
 
         ItemStack item = entity.getEquipment().getItemInOffHand();
 
@@ -233,7 +269,8 @@ public class EnchantChecks {
      *
      * @return The cumulative total of all levels, ie 4 pieces all with level 3 returns 12
      */
-    public static int getArmorPoints(LivingEntity entity, Enchantment enchantment) {
+    public static int getArmorPoints(@NotNull final LivingEntity entity,
+                                     @NotNull final Enchantment enchantment) {
         return getArmorPoints(entity, enchantment, 0);
     }
 
@@ -248,9 +285,12 @@ public class EnchantChecks {
      *
      * @return The cumulative total of all levels, ie 4 pieces all with level 3 returns 12
      */
-    public static int getArmorPoints(LivingEntity entity, Enchantment enchantment, int damage) {
-        if (entity.getEquipment() == null)
+    public static int getArmorPoints(@NotNull final LivingEntity entity,
+                                     @NotNull final Enchantment enchantment,
+                                     final int damage) {
+        if (entity.getEquipment() == null) {
             return 0;
+        }
 
         boolean isPlayer = entity instanceof Player;
 
@@ -288,9 +328,10 @@ public class EnchantChecks {
      *
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the cumulative total levels
      */
-    public static Map<EcoEnchant, Integer> getEnchantsOnArmor(LivingEntity entity) {
-        if (entity.getEquipment() == null)
+    public static Map<EcoEnchant, Integer> getEnchantsOnArmor(@NotNull final LivingEntity entity) {
+        if (entity.getEquipment() == null) {
             return new HashMap<>();
+        }
 
         List<ItemStack> armor = Arrays.asList(entity.getEquipment().getArmorContents());
 
@@ -311,7 +352,8 @@ public class EnchantChecks {
      *
      * @return If the LivingEntity has the enchantment
      */
-    public static boolean helmet(LivingEntity entity, Enchantment enchantment) {
+    public static boolean helmet(@NotNull final LivingEntity entity,
+                                 @NotNull final Enchantment enchantment) {
         return getHelmetLevel(entity, enchantment) != 0;
     }
 
@@ -323,9 +365,11 @@ public class EnchantChecks {
      *
      * @return The level found, or 0 if not found
      */
-    public static int getHelmetLevel(LivingEntity entity, Enchantment enchantment) {
-        if (entity.getEquipment() == null)
+    public static int getHelmetLevel(@NotNull final LivingEntity entity,
+                                     @NotNull final Enchantment enchantment) {
+        if (entity.getEquipment() == null) {
             return 0;
+        }
 
         ItemStack item = entity.getEquipment().getHelmet();
 
@@ -340,7 +384,8 @@ public class EnchantChecks {
      *
      * @return If the LivingEntity has the enchantment
      */
-    public static boolean chestplate(LivingEntity entity, Enchantment enchantment) {
+    public static boolean chestplate(@NotNull final LivingEntity entity,
+                                     @NotNull final Enchantment enchantment) {
         return getChestplateLevel(entity, enchantment) != 0;
     }
 
@@ -352,9 +397,11 @@ public class EnchantChecks {
      *
      * @return The level found, or 0 if not found
      */
-    public static int getChestplateLevel(LivingEntity entity, Enchantment enchantment) {
-        if (entity.getEquipment() == null)
+    public static int getChestplateLevel(@NotNull final LivingEntity entity,
+                                         @NotNull final Enchantment enchantment) {
+        if (entity.getEquipment() == null) {
             return 0;
+        }
 
         ItemStack item = entity.getEquipment().getChestplate();
 
@@ -369,7 +416,8 @@ public class EnchantChecks {
      *
      * @return If the LivingEntity has the enchantment
      */
-    public static boolean leggings(LivingEntity entity, Enchantment enchantment) {
+    public static boolean leggings(@NotNull final LivingEntity entity,
+                                   @NotNull final Enchantment enchantment) {
         return getLeggingsLevel(entity, enchantment) != 0;
     }
 
@@ -381,9 +429,11 @@ public class EnchantChecks {
      *
      * @return The level found, or 0 if not found
      */
-    public static int getLeggingsLevel(LivingEntity entity, Enchantment enchantment) {
-        if (entity.getEquipment() == null)
+    public static int getLeggingsLevel(@NotNull final LivingEntity entity,
+                                       @NotNull final Enchantment enchantment) {
+        if (entity.getEquipment() == null) {
             return 0;
+        }
 
         ItemStack item = entity.getEquipment().getLeggings();
 
@@ -398,7 +448,8 @@ public class EnchantChecks {
      *
      * @return If the LivingEntity has the enchantment
      */
-    public static boolean boots(LivingEntity entity, Enchantment enchantment) {
+    public static boolean boots(@NotNull final LivingEntity entity,
+                                @NotNull final Enchantment enchantment) {
         return getBootsLevel(entity, enchantment) != 0;
     }
 
@@ -410,9 +461,11 @@ public class EnchantChecks {
      *
      * @return The level found, or 0 if not found
      */
-    public static int getBootsLevel(LivingEntity entity, Enchantment enchantment) {
-        if (entity.getEquipment() == null)
+    public static int getBootsLevel(@NotNull final LivingEntity entity,
+                                    @NotNull final Enchantment enchantment) {
+        if (entity.getEquipment() == null) {
             return 0;
+        }
 
         ItemStack item = entity.getEquipment().getBoots();
 

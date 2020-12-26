@@ -10,16 +10,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class EffectsEnchantment extends EcoEnchant {
-    protected EffectsEnchantment(String key, EnchantmentType type, Prerequisite... prerequisites) {
+    protected EffectsEnchantment(@NotNull final String key,
+                                 @NotNull final EnchantmentType type,
+                                 @NotNull final Prerequisite... prerequisites) {
         super(key, type, prerequisites);
     }
 
     public abstract PotionEffectType getPotionEffect();
 
     @EventHandler
-    public void onEquip(ArmorEquipEvent event) {
+    public void onEquip(@NotNull final ArmorEquipEvent event) {
         final Player player = event.getPlayer();
 
         this.getPlugin().getScheduler().runLater(() -> {
@@ -28,8 +31,10 @@ public abstract class EffectsEnchantment extends EcoEnchant {
             }
 
             int level = EnchantChecks.getArmorPoints(player, this);
-            if(this.getDisabledWorlds().contains(player.getWorld())) return;
-            if(level > 0) {
+            if (this.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+            if (level > 0) {
                 player.addPotionEffect(new PotionEffect(this.getPotionEffect(), 0x6fffffff, level - 1, false, false, true));
             }
         }, 1);
