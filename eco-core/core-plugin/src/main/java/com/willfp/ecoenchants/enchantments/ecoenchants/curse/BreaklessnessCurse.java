@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class BreaklessnessCurse extends EcoEnchant {
     public BreaklessnessCurse() {
@@ -18,9 +19,13 @@ public class BreaklessnessCurse extends EcoEnchant {
 
 
     @Override
-    public void onDamageBlock(Player player, Block block, int level, BlockDamageEvent event) {
-        if (!EnchantmentUtils.passedChance(this, level))
+    public void onDamageBlock(@NotNull final Player player,
+                              @NotNull final Block block,
+                              final int level,
+                              @NotNull final BlockDamageEvent event) {
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         event.setCancelled(true);
     }

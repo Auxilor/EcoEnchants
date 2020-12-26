@@ -43,13 +43,18 @@ public final class ChatComponent implements ChatComponentProxy {
 
         ChatHoverable hoverable = component.getChatModifier().getHoverEvent();
 
-        if (hoverable == null)
+        if (hoverable == null) {
             return;
+        }
 
         JsonObject jsonObject = hoverable.b();
         JsonElement json = hoverable.b().get("contents");
-        if (json.getAsJsonObject().get("id") == null) return;
-        if (json.getAsJsonObject().get("tag") == null) return;
+        if (json.getAsJsonObject().get("id") == null) {
+            return;
+        }
+        if (json.getAsJsonObject().get("tag") == null) {
+            return;
+        }
         String id = json.getAsJsonObject().get("id").toString();
         String tag = json.getAsJsonObject().get("tag").toString();
         ItemStack itemStack = getFromTag(tag, id);
@@ -69,21 +74,24 @@ public final class ChatComponent implements ChatComponentProxy {
         ((ChatBaseComponent) component).setChatModifier(modifier);
     }
 
-    private static ItemStack getFromTag(@NotNull String jsonTag, @NotNull String id) {
-        id = id.replace("minecraft:", "");
-        id = id.toUpperCase();
-        id = id.replace("\"", "");
-        jsonTag = jsonTag.substring(1, jsonTag.length() - 1);
-        jsonTag = jsonTag.replace("id:", "\"id\":");
-        jsonTag = jsonTag.replace("\\", "");
-        Material material = Material.getMaterial(id);
+    private static ItemStack getFromTag(@NotNull final String jsonTag,
+                                        @NotNull final String id) {
+        String processedId = id;
+        String processedJsonTag = jsonTag;
+        processedId = processedId.replace("minecraft:", "");
+        processedId = processedId.toUpperCase();
+        processedId = processedId.replace("\"", "");
+        processedJsonTag = processedJsonTag.substring(1, processedJsonTag.length() - 1);
+        processedJsonTag = processedJsonTag.replace("id:", "\"id\":");
+        processedJsonTag = processedJsonTag.replace("\\", "");
+        Material material = Material.getMaterial(processedId);
 
         assert material != null;
         ItemStack itemStack = new ItemStack(material);
         net.minecraft.server.v1_16_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
 
         try {
-            nmsStack.setTag(MojangsonParser.parse(jsonTag));
+            nmsStack.setTag(MojangsonParser.parse(processedJsonTag));
         } catch (CommandSyntaxException e) {
             e.printStackTrace();
         }

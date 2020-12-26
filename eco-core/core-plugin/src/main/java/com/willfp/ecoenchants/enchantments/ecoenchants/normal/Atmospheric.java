@@ -8,6 +8,7 @@ import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.jetbrains.annotations.NotNull;
 
 public class Atmospheric extends EcoEnchant {
     public Atmospheric() {
@@ -19,15 +20,26 @@ public class Atmospheric extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onTridentLaunch(LivingEntity shooter, Trident trident, int level, ProjectileLaunchEvent event) {
-        if(shooter.isOnGround()) return;
+    public void onTridentLaunch(@NotNull final LivingEntity shooter,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final ProjectileLaunchEvent event) {
+        if (shooter.isOnGround()) {
+            return;
+        }
 
         trident.setMetadata("shot-in-air", new FixedMetadataValue(this.getPlugin(), true));
     }
 
     @Override
-    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
-        if(!trident.hasMetadata("shot-in-air")) return;
+    public void onTridentDamage(@NotNull final LivingEntity attacker,
+                                @NotNull final LivingEntity victim,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final EntityDamageByEntityEvent event) {
+        if (!trident.hasMetadata("shot-in-air")) {
+            return;
+        }
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

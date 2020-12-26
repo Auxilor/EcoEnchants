@@ -7,6 +7,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
+
 public class Disappear extends EcoEnchant {
     public Disappear() {
         super(
@@ -17,10 +19,13 @@ public class Disappear extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
+    public void onDamageWearingArmor(@NotNull final LivingEntity victim,
+                                     final int level,
+                                     @NotNull final EntityDamageEvent event) {
         this.getPlugin().getScheduler().runLater(() -> {
-            if(victim.getHealth() > EcoEnchants.DISAPPEAR.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "threshold"))
+            if (victim.getHealth() > EcoEnchants.DISAPPEAR.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "threshold")) {
                 return;
+            }
 
             int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
             final int ticks = ticksPerLevel * level;

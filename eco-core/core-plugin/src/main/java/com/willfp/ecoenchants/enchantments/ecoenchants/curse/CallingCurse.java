@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -28,17 +29,17 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
     private final HashMap<Player, Integer> players = new HashMap<>();
 
     @EventHandler
-    public void onArmorEquip(ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(@NotNull final PlayerJoinEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
+    public void onPlayerLeave(@NotNull final PlayerQuitEvent event) {
         refresh();
     }
 
@@ -56,10 +57,14 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
     public void run() {
         players.forEach((player, level) -> {
             double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
-            if (this.getDisabledWorlds().contains(player.getWorld())) return;
+            if (this.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, distance, distance)) {
-                if (!(e instanceof Monster)) continue;
+                if (!(e instanceof Monster)) {
+                    continue;
+                }
 
                 if (e instanceof PigZombie) {
                     ((PigZombie) e).setAngry(true);

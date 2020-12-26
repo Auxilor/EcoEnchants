@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class Charge extends Spell {
     public Charge() {
@@ -12,7 +13,9 @@ public class Charge extends Spell {
     }
 
     @Override
-    public void onUse(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(@NotNull final Player player,
+                      final int level,
+                      @NotNull final PlayerInteractEvent event) {
         Vector velocity = player.getEyeLocation().getDirection().clone();
         velocity.normalize();
         velocity.multiply(level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-per-level"));

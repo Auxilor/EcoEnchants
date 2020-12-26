@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class Drill extends EcoEnchant {
     public Drill() {
@@ -24,11 +25,17 @@ public class Drill extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
-        if (block.hasMetadata("block-ignore"))
+    public void onBlockBreak(@NotNull final Player player,
+                             @NotNull final Block block,
+                             final int level,
+                             @NotNull final BlockBreakEvent event) {
+        if (block.hasMetadata("block-ignore")) {
             return;
+        }
 
-        if (player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
+        if (player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) {
+            return;
+        }
 
         int blocks = level * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "blocks-per-level");
 
@@ -43,10 +50,13 @@ public class Drill extends EcoEnchant {
                 continue;
             }
 
-            if (block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check"))
+            if (block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check")) {
                 continue;
+            }
 
-            if (!AntigriefManager.canBreakBlock(player, block1)) continue;
+            if (!AntigriefManager.canBreakBlock(player, block1)) {
+                continue;
+            }
 
             ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, block1);
             block1.removeMetadata("block-ignore", this.getPlugin());

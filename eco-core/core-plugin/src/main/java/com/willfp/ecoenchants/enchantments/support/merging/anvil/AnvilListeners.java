@@ -16,21 +16,22 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
 public class AnvilListeners extends PluginDependent implements Listener {
-    private static final HashMap<UUID, Integer> noIncreaseXpMap = new HashMap<>();
+    private static final HashMap<UUID, Integer> ANTI_REPEAT = new HashMap<>();
     private static final String ANVIL_GUI_CLASS = "net.wesjd.anvilgui.version.Wrapper" + ProxyConstants.NMS_VERSION.substring(1) + "$AnvilContainer";
 
-    public AnvilListeners(AbstractEcoPlugin plugin) {
+    public AnvilListeners(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onAnvilPrepare(PrepareAnvilEvent event) {
+    public void onAnvilPrepare(@NotNull final PrepareAnvilEvent event) {
         ItemStack left = event.getInventory().getItem(0);
         ItemStack right = event.getInventory().getItem(1);
         ItemStack out = event.getResult();
@@ -39,11 +40,14 @@ public class AnvilListeners extends PluginDependent implements Listener {
         event.setResult(null);
         event.getInventory().setItem(2, null);
 
-        if (event.getViewers().isEmpty()) return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
+        if (event.getViewers().isEmpty()) {
+            return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
+        }
 
         Player player = (Player) event.getViewers().get(0);
-        if (ProxyUtils.getProxy(OpenInventoryProxy.class).getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS))
+        if (ProxyUtils.getProxy(OpenInventoryProxy.class).getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS)) {
             return;
+        }
 
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
@@ -61,14 +65,15 @@ public class AnvilListeners extends PluginDependent implements Listener {
         this.getPlugin().getScheduler().run(() -> {
 
             // This is a disgusting bodge
-            if (!noIncreaseXpMap.containsKey(player.getUniqueId()))
-                noIncreaseXpMap.put(player.getUniqueId(), 0);
+            if (!ANTI_REPEAT.containsKey(player.getUniqueId())) {
+                ANTI_REPEAT.put(player.getUniqueId(), 0);
+            }
 
-            Integer num = noIncreaseXpMap.get(player.getUniqueId());
+            Integer num = ANTI_REPEAT.get(player.getUniqueId());
             num += 1;
-            noIncreaseXpMap.put(player.getUniqueId(), num);
+            ANTI_REPEAT.put(player.getUniqueId(), num);
 
-            this.getPlugin().getScheduler().runLater(() -> noIncreaseXpMap.remove(player.getUniqueId()), 1);
+            this.getPlugin().getScheduler().runLater(() -> ANTI_REPEAT.remove(player.getUniqueId()), 1);
 
             // End pain
 
@@ -79,12 +84,16 @@ public class AnvilListeners extends PluginDependent implements Listener {
                 return;
             }
 
-            if (!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) return;
+            if (!Objects.requireNonNull(event.getInventory().getItem(0)).getType().equals(item.getType())) {
+                return;
+            }
 
             if (Configs.CONFIG.getBool("anvil.rework-cost")) {
                 int repairCost = ProxyUtils.getProxy(RepairCostProxy.class).getRepairCost(item);
                 int reworkCount = NumberUtils.log2(repairCost + 1);
-                if (repairCost == 0) reworkCount = 0;
+                if (repairCost == 0) {
+                    reworkCount = 0;
+                }
                 reworkCount++;
                 repairCost = (int) Math.pow(2, reworkCount) - 1;
                 item = ProxyUtils.getProxy(RepairCostProxy.class).setRepairCost(item, repairCost);
@@ -92,7 +101,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
 
             int cost;
 
-            if (noIncreaseXpMap.get(player.getUniqueId()) == 1) {
+            if (ANTI_REPEAT.get(player.getUniqueId()) == 1) {
                 cost = preCost + modCost;
             } else {
                 cost = preCost;
@@ -101,8 +110,9 @@ public class AnvilListeners extends PluginDependent implements Listener {
             if (!Objects.equals(left, player.getOpenInventory().getItem(0))) {
                 return;
             }
-            if (cost == 0)
+            if (cost == 0) {
                 return;
+            }
 
             event.getInventory().setRepairCost(cost);
             event.setResult(item);

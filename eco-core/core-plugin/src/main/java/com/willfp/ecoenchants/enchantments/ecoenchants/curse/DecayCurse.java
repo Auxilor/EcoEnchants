@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Repairable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -31,49 +32,54 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
     }
 
     @EventHandler
-    public void onItemPickup(EntityPickupItemEvent event) {
-        if (!(event.getEntity() instanceof Player))
+    public void onItemPickup(@NotNull final EntityPickupItemEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
             return;
+        }
         refreshPlayer((Player) event.getEntity());
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(@NotNull final PlayerJoinEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
+    public void onPlayerLeave(@NotNull final PlayerQuitEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onInventoryDrop(EntityDropItemEvent event) {
-        if (!(event.getEntity() instanceof Player))
+    public void onInventoryDrop(@NotNull final EntityDropItemEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
             return;
+        }
         refreshPlayer((Player) event.getEntity());
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player))
+    public void onInventoryClick(@NotNull final InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) {
             return;
+        }
         refreshPlayer((Player) event.getWhoClicked());
     }
 
     private void refresh() {
         players.clear();
         this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
-            if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
+            if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this))) {
                 players.add(player);
+            }
         });
         amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
     }
 
-    private void refreshPlayer(Player player) {
+    private void refreshPlayer(@NotNull final Player player) {
         players.remove(player);
-        if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this)))
+        if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this))) {
             players.add(player);
+        }
     }
 
     @Override
@@ -81,14 +87,26 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
         players.forEach((player -> {
             for (ItemStack item : player.getInventory().getContents()) {
                 int level = EnchantChecks.getItemLevel(item, this);
-                if (level == 0) continue;
-                if (this.getDisabledWorlds().contains(player.getWorld())) return;
+                if (level == 0) {
+                    continue;
+                }
+                if (this.getDisabledWorlds().contains(player.getWorld())) {
+                    return;
+                }
 
-                if (!(item.getItemMeta() instanceof Repairable)) continue;
+                if (!(item.getItemMeta() instanceof Repairable)) {
+                    continue;
+                }
 
-                if (player.getInventory().getItemInMainHand().equals(item)) continue;
-                if (player.getInventory().getItemInOffHand().equals(item)) continue;
-                if (player.getItemOnCursor().equals(item)) continue;
+                if (player.getInventory().getItemInMainHand().equals(item)) {
+                    continue;
+                }
+                if (player.getInventory().getItemInOffHand().equals(item)) {
+                    continue;
+                }
+                if (player.getItemOnCursor().equals(item)) {
+                    continue;
+                }
 
                 DurabilityUtils.damageItemNoBreak(item, amount, player);
                 player.updateInventory();

@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.NotNull;
 
 public class Alchemy extends EcoEnchant {
     public Alchemy() {
@@ -19,21 +20,31 @@ public class Alchemy extends EcoEnchant {
     private final FixedMetadataValue metaKeyTrue = this.getPlugin().getMetadataValueFactory().create(true);
 
     @EventHandler
-    public void onPotionEffect(EntityPotionEffectEvent event) {
-        if(event.getNewEffect() == null) return;
-        if(!(event.getEntity() instanceof LivingEntity)) return;
+    public void onPotionEffect(@NotNull final EntityPotionEffectEvent event) {
+        if (event.getNewEffect() == null) {
+            return;
+        }
+        if (!(event.getEntity() instanceof LivingEntity)) {
+            return;
+        }
 
         LivingEntity entity = (LivingEntity) event.getEntity();
 
-        if(entity.hasMetadata(event.getNewEffect().toString()))
+        if (entity.hasMetadata(event.getNewEffect().toString())) {
             return;
+        }
 
         int level = EnchantChecks.getArmorPoints(entity, this);
-        if(level == 0) return;
-
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (level == 0) {
             return;
-        if(this.getDisabledWorlds().contains(entity.getWorld())) return;
+        }
+
+        if (!EnchantmentUtils.passedChance(this, level)) {
+            return;
+        }
+        if (this.getDisabledWorlds().contains(entity.getWorld())) {
+            return;
+        }
 
         PotionEffect effect = event.getNewEffect();
 

@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,13 +23,18 @@ public class Dynamite extends Spell {
     }
 
     @Override
-    public void onUse(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(@NotNull final Player player,
+                      @NotNull final int level,
+                      @NotNull final PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
-        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             return;
+        }
 
-        if (block == null) return;
+        if (block == null) {
+            return;
+        }
 
         if (block.hasMetadata("block-ignore")) {
             return;
@@ -55,10 +61,13 @@ public class Dynamite extends Spell {
                         continue;
                     }
 
-                    if (block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check"))
+                    if (block1.getType().getHardness() > block.getType().getHardness() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "hardness-check")) {
                         continue;
+                    }
 
-                    if (!AntigriefManager.canBreakBlock(player, block1)) continue;
+                    if (!AntigriefManager.canBreakBlock(player, block1)) {
+                        continue;
+                    }
 
                     toBreak.add(block1);
                 }

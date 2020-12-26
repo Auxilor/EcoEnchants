@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 public class Ascend extends Spell {
     private static final String IGNORE_FALL_KEY = "ignore-fall-damage";
@@ -18,20 +19,24 @@ public class Ascend extends Spell {
     }
 
     @Override
-    public void onUse(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(@NotNull final Player player,
+                      final int level,
+                      @NotNull final PlayerInteractEvent event) {
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level") * level;
-        player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, ticks, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "power") - 1,false,false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, ticks, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "power") - 1, false, false));
         player.setMetadata(IGNORE_FALL_KEY, new FixedMetadataValue(this.getPlugin(), true));
         this.getPlugin().getScheduler().runLater(() -> player.removeMetadata(IGNORE_FALL_KEY, this.getPlugin()), ticks * 4L);
     }
 
     @EventHandler
-    public void onFallDamage(EntityDamageEvent event) {
-        if(!event.getCause().equals(EntityDamageEvent.DamageCause.FALL))
+    public void onFallDamage(@NotNull final EntityDamageEvent event) {
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
             return;
+        }
 
-        if(!event.getEntity().hasMetadata(IGNORE_FALL_KEY))
+        if (!event.getEntity().hasMetadata(IGNORE_FALL_KEY)) {
             return;
+        }
 
         event.setCancelled(true);
     }

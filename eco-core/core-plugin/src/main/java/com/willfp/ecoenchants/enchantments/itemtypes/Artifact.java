@@ -24,6 +24,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Wrapper for Artifact enchantments
@@ -33,7 +34,8 @@ public abstract class Artifact extends EcoEnchant {
     private Particle particle;
     private Particle.DustOptions extra;
 
-    protected Artifact(String key, Prerequisite... prerequisites) {
+    protected Artifact(@NotNull final String key,
+                       @NotNull final Prerequisite... prerequisites) {
         super(key, EnchantmentType.ARTIFACT, prerequisites);
 
         if (!Prerequisite.areMet(prerequisites)) {
@@ -52,26 +54,33 @@ public abstract class Artifact extends EcoEnchant {
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent event) {
+    public void onBreak(@NotNull final BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase()))
+        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase())) {
             return;
+        }
 
-        if (!EnchantChecks.mainhand(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) {
+            return;
+        }
 
         int amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount");
         block.getWorld().spawnParticle(particle, block.getLocation().add(0.5, 0.5, 0.5), amount, 0.4, 0.4, 0.4, 0, extra, false);
     }
 
     @EventHandler
-    public void onElytra(PlayerMoveEvent event) {
+    public void onElytra(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (!player.isGliding()) return;
+        if (!player.isGliding()) {
+            return;
+        }
 
-        if (!EnchantChecks.chestplate(player, this)) return;
+        if (!EnchantChecks.chestplate(player, this)) {
+            return;
+        }
 
         Vector point1 = player.getLocation().getDirection().clone();
         point1.rotateAroundY(Math.toRadians(90));
@@ -88,14 +97,20 @@ public abstract class Artifact extends EcoEnchant {
     }
 
     @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) return;
-        if (!(event.getEntity() instanceof LivingEntity)) return;
+    public void onHit(@NotNull final EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player)) {
+            return;
+        }
+        if (!(event.getEntity() instanceof LivingEntity)) {
+            return;
+        }
 
         Player player = (Player) event.getDamager();
         LivingEntity entity = (LivingEntity) event.getEntity();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) {
+            return;
+        }
 
         double radius = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius");
 
@@ -107,7 +122,9 @@ public abstract class Artifact extends EcoEnchant {
 
         this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
             for (int i = 0; i < 3; i++) {
-                if (yAtomic.get() > entity.getHeight()) bukkitRunnable.cancel();
+                if (yAtomic.get() > entity.getHeight()) {
+                    bukkitRunnable.cancel();
+                }
                 yAtomic.addAndGet(yDelta);
                 double y = yAtomic.get();
                 double x = radius * Math.cos((y + offset) * radiusMultiplier);
@@ -120,11 +137,14 @@ public abstract class Artifact extends EcoEnchant {
     }
 
     @EventHandler
-    public void onShoot(ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof AbstractArrow))
+    public void onShoot(@NotNull final ProjectileLaunchEvent event) {
+        if (!(event.getEntity() instanceof AbstractArrow)) {
             return;
+        }
 
-        if (!(event.getEntity().getShooter() instanceof Player)) return;
+        if (!(event.getEntity().getShooter() instanceof Player)) {
+            return;
+        }
         Player player = (Player) event.getEntity().getShooter();
 
         AbstractArrow entity = (AbstractArrow) event.getEntity();
@@ -133,7 +153,9 @@ public abstract class Artifact extends EcoEnchant {
             item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack((Trident) entity);
         }
 
-        if (!EnchantChecks.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) {
+            return;
+        }
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 
@@ -146,7 +168,9 @@ public abstract class Artifact extends EcoEnchant {
         final double finalColor = color.get();
 
         this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
-            if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) bukkitRunnable.cancel();
+            if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) {
+                bukkitRunnable.cancel();
+            }
             entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
         }).runTaskTimer(4, ticks);
     }

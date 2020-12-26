@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class Blind extends EcoEnchant {
     public Blind() {
@@ -22,10 +23,15 @@ public class Blind extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
 
-        if (!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "duration-per-level");
 

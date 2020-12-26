@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class Backstab extends EcoEnchant {
     public Backstab() {
@@ -18,7 +19,10 @@ public class Backstab extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         Vector pDir = attacker.getLocation().getDirection();
         Vector eDir = victim.getLocation().getDirection();
         double xv = pDir.getX() * eDir.getZ() - pDir.getZ() * eDir.getX();
@@ -26,8 +30,9 @@ public class Backstab extends EcoEnchant {
         double angle = Math.atan2(xv, zv); // Value between -π and +π
         double angleInDegrees = (angle * 180) / Math.PI;
 
-        if(angleInDegrees > 60 || angleInDegrees < -32)
+        if (angleInDegrees > 60 || angleInDegrees < -32) {
             return;
+        }
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

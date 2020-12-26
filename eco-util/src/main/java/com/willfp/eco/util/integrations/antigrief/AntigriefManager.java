@@ -1,22 +1,25 @@
 package com.willfp.eco.util.integrations.antigrief;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@UtilityClass
 public class AntigriefManager {
-    private static final Set<AntigriefWrapper> antigriefs = new HashSet<>();
+    private final Set<AntigriefWrapper> antigriefs = new HashSet<>();
 
     /**
      * Register a new AntiGrief/Land Management integration
      *
      * @param antigrief The integration to register
      */
-    public static void register(AntigriefWrapper antigrief) {
+    public void register(@NotNull final AntigriefWrapper antigrief) {
         antigriefs.add(antigrief);
     }
 
@@ -27,7 +30,8 @@ public class AntigriefManager {
      * @param block  The block
      * @return If player can break block
      */
-    public static boolean canBreakBlock(Player player, Block block) {
+    public boolean canBreakBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canBreakBlock(player, block));
     }
 
@@ -38,7 +42,8 @@ public class AntigriefManager {
      * @param location The location
      * @return If player can create explosion
      */
-    public static boolean canCreateExplosion(Player player, Location location) {
+    public boolean canCreateExplosion(@NotNull final Player player,
+                                      @NotNull final Location location) {
         return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canCreateExplosion(player, location));
     }
 
@@ -49,7 +54,8 @@ public class AntigriefManager {
      * @param block  The block
      * @return If player can place block
      */
-    public static boolean canPlaceBlock(Player player, Block block) {
+    public boolean canPlaceBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canPlaceBlock(player, block));
     }
 
@@ -60,7 +66,8 @@ public class AntigriefManager {
      * @param victim The victim
      * @return If player can injure
      */
-    public static boolean canInjure(Player player, LivingEntity victim) {
+    public boolean canInjure(@NotNull final Player player,
+                             @NotNull final LivingEntity victim) {
         return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canInjure(player, victim));
     }
 }

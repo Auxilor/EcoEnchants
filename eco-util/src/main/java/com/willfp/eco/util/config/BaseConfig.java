@@ -2,6 +2,8 @@ package com.willfp.eco.util.config;
 
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +21,8 @@ public abstract class BaseConfig extends PluginDependent {
     /**
      * The linked {@link YamlConfiguration} where values are physically stored.
      */
-    public final YamlConfiguration config;
+    @Getter(AccessLevel.PROTECTED)
+    private final YamlConfiguration config;
 
     /**
      * The physical config file, as stored on disk.
@@ -82,8 +85,9 @@ public abstract class BaseConfig extends PluginDependent {
             YamlConfiguration newConfig = new YamlConfiguration();
             newConfig.load(reader);
 
-            if (newConfig.getKeys(true).equals(config.getKeys(true)))
+            if (newConfig.getKeys(true).equals(config.getKeys(true))) {
                 return;
+            }
 
             newConfig.getKeys(true).forEach((s -> {
                 if (!config.getKeys(true).contains(s)) {

@@ -227,6 +227,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -241,12 +242,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Contains general methods for EcoEnchants
  */
 @SuppressWarnings("unused")
+@UtilityClass
 public class EcoEnchants implements Updatable {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
 
-    private static final BiMap<NamespacedKey, EcoEnchant> byKey = HashBiMap.create();
+    private static final BiMap<NamespacedKey, EcoEnchant> BY_KEY = HashBiMap.create();
 
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();
@@ -475,7 +477,7 @@ public class EcoEnchants implements Updatable {
      * @return A list of all {@link EcoEnchant}s
      */
     public static List<EcoEnchant> values() {
-        return ImmutableList.copyOf(byKey.values());
+        return ImmutableList.copyOf(BY_KEY.values());
     }
 
     /**
@@ -485,7 +487,7 @@ public class EcoEnchants implements Updatable {
      *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
-    public static EcoEnchant getFromEnchantment(Enchantment enchantment) {
+    public static EcoEnchant getFromEnchantment(@NotNull final Enchantment enchantment) {
         return getByKey(enchantment.getKey());
     }
 
@@ -521,7 +523,7 @@ public class EcoEnchants implements Updatable {
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByKey(NamespacedKey key) {
-        return byKey.get(key);
+        return BY_KEY.get(key);
     }
 
     /**
@@ -571,8 +573,8 @@ public class EcoEnchants implements Updatable {
      * @param enchant The {@link EcoEnchant} to add
      */
     public static void addNewEcoEnchant(EcoEnchant enchant) {
-        byKey.remove(enchant.getKey());
-        byKey.put(enchant.getKey(), enchant);
+        BY_KEY.remove(enchant.getKey());
+        BY_KEY.put(enchant.getKey(), enchant);
     }
 
     /**
@@ -581,6 +583,6 @@ public class EcoEnchants implements Updatable {
      * @param enchant The {@link EcoEnchant} to remove
      */
     public static void removeEcoEnchant(EcoEnchant enchant) {
-        byKey.remove(enchant.getKey());
+        BY_KEY.remove(enchant.getKey());
     }
 }

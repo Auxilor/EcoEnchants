@@ -10,16 +10,18 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class AntigriefLands extends PluginDependent implements AntigriefWrapper {
     private final LandsIntegration landsIntegration = new LandsIntegration(this.getPlugin());
 
-    public AntigriefLands(AbstractEcoPlugin plugin) {
+    public AntigriefLands(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
     @Override
-    public boolean canBreakBlock(Player player, Block block) {
+    public boolean canBreakBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         Area area = landsIntegration.getAreaByLoc(block.getLocation());
         if (area != null) {
             return area.canSetting(player, RoleSetting.BLOCK_BREAK, false);
@@ -28,7 +30,8 @@ public class AntigriefLands extends PluginDependent implements AntigriefWrapper 
     }
 
     @Override
-    public boolean canCreateExplosion(Player player, Location location) {
+    public boolean canCreateExplosion(@NotNull final Player player,
+                                      @NotNull final Location location) {
         Area area = landsIntegration.getAreaByLoc(location);
         if (area != null) {
             return area.canSetting(player, RoleSetting.BLOCK_IGNITE, false);
@@ -37,7 +40,8 @@ public class AntigriefLands extends PluginDependent implements AntigriefWrapper 
     }
 
     @Override
-    public boolean canPlaceBlock(Player player, Block block) {
+    public boolean canPlaceBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         Area area = landsIntegration.getAreaByLoc(block.getLocation());
         if (area != null) {
             return area.canSetting(player, RoleSetting.BLOCK_PLACE, false);
@@ -46,9 +50,10 @@ public class AntigriefLands extends PluginDependent implements AntigriefWrapper 
     }
 
     @Override
-    public boolean canInjure(Player player, LivingEntity victim) {
+    public boolean canInjure(@NotNull final Player player,
+                             @NotNull final LivingEntity victim) {
         Area area = landsIntegration.getAreaByLoc(victim.getLocation());
-        if(victim instanceof Player) {
+        if (victim instanceof Player) {
             if (area != null) {
                 return area.canSetting(player, RoleSetting.ATTACK_PLAYER, false);
             }

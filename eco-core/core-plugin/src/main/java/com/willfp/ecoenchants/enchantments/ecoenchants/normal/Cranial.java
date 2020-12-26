@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Cranial extends EcoEnchant {
     public Cranial() {
         super(
@@ -17,8 +19,14 @@ public class Cranial extends EcoEnchant {
 
 
     @Override
-    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
-        if (!(trident.getLocation().getY() >= victim.getLocation().getY() + victim.getEyeHeight() - 0.22)) return;
+    public void onTridentDamage(@NotNull final LivingEntity attacker,
+                                @NotNull final LivingEntity victim,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final EntityDamageByEntityEvent event) {
+        if (trident.getLocation().getY() < victim.getLocation().getY() + victim.getEyeHeight() - 0.22) {
+            return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

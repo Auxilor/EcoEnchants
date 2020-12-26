@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -23,12 +24,19 @@ public class Bleed extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if (attacker instanceof Player && ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (attacker instanceof Player
+                && ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f
+                && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
             return;
+        }
 
-        if (!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         double bleedDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bleed-damage");
 
@@ -43,7 +51,9 @@ public class Bleed extends EcoEnchant {
 
             victim.damage(bleedDamage);
 
-            if (currentBleedCount.get() >= finalBleedCount) bukkitRunnable.cancel();
+            if (currentBleedCount.get() >= finalBleedCount) {
+                bukkitRunnable.cancel();
+            }
         }).runTaskTimer(0, 10);
     }
 }

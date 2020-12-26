@@ -18,12 +18,12 @@ public class AnticheatAAC implements AnticheatWrapper, Listener {
     }
 
     @Override
-    public void exempt(@NotNull Player player) {
+    public void exempt(@NotNull final Player player) {
         api.addExemption(player, ecoEnchantsExemption);
     }
 
     @Override
-    public void unexempt(@NotNull Player player) {
+    public void unexempt(@NotNull final Player player) {
         api.removeExemption(player, ecoEnchantsExemption);
     }
 }

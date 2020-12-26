@@ -21,17 +21,17 @@ public class AnticheatMatrix implements AnticheatWrapper, Listener {
     }
 
     @Override
-    public void exempt(@NotNull Player player) {
+    public void exempt(@NotNull final Player player) {
         this.exempt.add(player.getUniqueId());
     }
 
     @Override
-    public void unexempt(@NotNull Player player) {
+    public void unexempt(@NotNull final Player player) {
         this.exempt.remove(player.getUniqueId());
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    private void onViolate(PlayerViolationEvent event) {
+    private void onViolate(@NotNull final PlayerViolationEvent event) {
         if (!exempt.contains(event.getPlayer().getUniqueId())) {
             return;
         }

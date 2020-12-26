@@ -15,10 +15,12 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class AntigriefWorldGuard implements AntigriefWrapper {
     @Override
-    public boolean canBreakBlock(Player player, Block block) {
+    public boolean canBreakBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
@@ -30,7 +32,8 @@ public class AntigriefWorldGuard implements AntigriefWrapper {
     }
 
     @Override
-    public boolean canCreateExplosion(Player player, Location location) {
+    public boolean canCreateExplosion(@NotNull final Player player,
+                                      @NotNull final Location location) {
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
@@ -44,7 +47,8 @@ public class AntigriefWorldGuard implements AntigriefWrapper {
     }
 
     @Override
-    public boolean canPlaceBlock(Player player, Block block) {
+    public boolean canPlaceBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
@@ -56,12 +60,13 @@ public class AntigriefWorldGuard implements AntigriefWrapper {
     }
 
     @Override
-    public boolean canInjure(Player player, LivingEntity victim) {
+    public boolean canInjure(@NotNull final Player player,
+                             @NotNull final LivingEntity victim) {
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
 
-        if(victim instanceof Player) {
+        if (victim instanceof Player) {
             if (query.queryState(BukkitAdapter.adapt(victim.getLocation()), localPlayer, Flags.PVP) == StateFlag.State.DENY) {
                 return WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));
             }

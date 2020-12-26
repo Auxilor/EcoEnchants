@@ -9,7 +9,8 @@ import org.jetbrains.annotations.NotNull;
 
 public final class BlockBreak implements BlockBreakProxy {
     @Override
-    public final void breakBlock(@NotNull final Player player, @NotNull final Block block) {
+    public void breakBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         ((CraftPlayer) player).getHandle().playerInteractManager.breakBlock(new BlockPosition(block.getX(), block.getY(), block.getZ()));
     }
 }

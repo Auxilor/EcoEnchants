@@ -5,6 +5,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Criticals extends EcoEnchant {
     public Criticals() {
         super(
@@ -16,16 +18,20 @@ public class Criticals extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if (!(attacker.getFallDistance() > 0 && !attacker.isOnGround()))
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!(attacker.getFallDistance() > 0 && !attacker.isOnGround())) {
             return;
+        }
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
-        if(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-additive")) {
-            damage = damage/1.5;
+        if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-additive")) {
+            damage = damage / 1.5;
             double bonus = damage * (multiplier * level);
-            damage = damage + bonus + damage/2;
+            damage = damage + bonus + damage / 2;
             event.setDamage(damage);
         } else {
             double bonus = 1 + (multiplier * level);

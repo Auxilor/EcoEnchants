@@ -93,9 +93,15 @@ public class DisplayOptions {
         boolean byLength = Configs.CONFIG.getBool("lore.sort-by-length");
         boolean byRarity = Configs.CONFIG.getBool("lore.sort-by-rarity");
         Set<SortParameters> params = new HashSet<>();
-        if(byType) params.add(SortParameters.TYPE);
-        if(byLength) params.add(SortParameters.LENGTH);
-        if(byRarity) params.add(SortParameters.RARITY);
+        if (byType) {
+            params.add(SortParameters.TYPE);
+        }
+        if (byLength) {
+            params.add(SortParameters.LENGTH);
+        }
+        if (byRarity) {
+            params.add(SortParameters.RARITY);
+        }
 
         sorter = SorterManager.getSorter(params.toArray(new SortParameters[]{}));
     }

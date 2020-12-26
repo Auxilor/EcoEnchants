@@ -19,7 +19,7 @@ public class AnticheatNCP implements AnticheatWrapper {
     }
 
     @Override
-    public void exempt(@NotNull Player player) {
+    public void exempt(@NotNull final Player player) {
         if (!NCPExemptionManager.isExempted(player, CheckType.ALL)) {
             return;
         }
@@ -30,7 +30,7 @@ public class AnticheatNCP implements AnticheatWrapper {
     }
 
     @Override
-    public void unexempt(@NotNull Player player) {
+    public void unexempt(@NotNull final Player player) {
         if (exempt.remove(player.getUniqueId())) {
             NCPExemptionManager.unexempt(player, CheckType.ALL);
         }

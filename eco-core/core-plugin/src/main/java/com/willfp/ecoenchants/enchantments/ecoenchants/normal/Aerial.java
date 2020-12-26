@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.jetbrains.annotations.NotNull;
 
 public class Aerial extends EcoEnchant {
     public Aerial() {
@@ -20,17 +21,30 @@ public class Aerial extends EcoEnchant {
 
 
     @Override
-    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
-        if (!(event.getProjectile() instanceof Arrow)) return;
+    public void onBowShoot(@NotNull final LivingEntity shooter,
+                           @NotNull final Arrow arrow,
+                           final int level,
+                           @NotNull final EntityShootBowEvent event) {
+        if (!(event.getProjectile() instanceof Arrow)) {
+            return;
+        }
 
-        if (shooter.isOnGround()) return;
+        if (shooter.isOnGround()) {
+            return;
+        }
 
         event.getProjectile().setMetadata("shot-in-air", new FixedMetadataValue(this.getPlugin(), true));
     }
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if (!arrow.hasMetadata("shot-in-air")) return;
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!arrow.hasMetadata("shot-in-air")) {
+            return;
+        }
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

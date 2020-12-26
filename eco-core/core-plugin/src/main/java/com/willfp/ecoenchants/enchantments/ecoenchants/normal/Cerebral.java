@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Cerebral extends EcoEnchant {
     public Cerebral() {
         super(
@@ -18,10 +20,18 @@ public class Cerebral extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if (arrow.getLocation().getY() < victim.getLocation().getY() + victim.getEyeHeight() - 0.22) return;
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (arrow.getLocation().getY() < victim.getLocation().getY() + victim.getEyeHeight() - 0.22) {
+            return;
+        }
 
-        if (!EnchantChecks.arrow(arrow, this)) return;
+        if (!EnchantChecks.arrow(arrow, this)) {
+            return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

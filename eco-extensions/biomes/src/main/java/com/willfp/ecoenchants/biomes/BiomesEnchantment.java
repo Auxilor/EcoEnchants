@@ -10,53 +10,73 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class BiomesEnchantment extends EcoEnchant {
     private static final String MULTIPLIER_KEY = "multiplier";
 
-    protected BiomesEnchantment(String key, EnchantmentType type, Prerequisite... prerequisites) {
+    protected BiomesEnchantment(@NotNull final String key,
+                                @NotNull final EnchantmentType type,
+                                @NotNull final Prerequisite... prerequisites) {
         super(key, type, prerequisites);
     }
 
-    public abstract boolean isValid(Biome biome);
+    public abstract boolean isValid(@NotNull Biome biome);
 
-    private boolean isInBiome(LivingEntity entity) {
+    private boolean isInBiome(@NotNull final LivingEntity entity) {
         Biome entityBiome = entity.getLocation().getBlock().getBiome();
         return isValid(entityBiome);
     }
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if(!isInBiome(attacker))
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!isInBiome(attacker)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + MULTIPLIER_KEY);
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }
 
     @Override
-    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
-        if(!isInBiome(victim))
+    public void onDamageWearingArmor(@NotNull final LivingEntity victim,
+                                     final int level,
+                                     @NotNull final EntityDamageEvent event) {
+        if (!isInBiome(victim)) {
             return;
+        }
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "reduction-per-level");
-        double multiplier = 1 - ((reduction/100) * level);
+        double multiplier = 1 - ((reduction / 100) * level);
         event.setDamage(event.getDamage() * multiplier);
     }
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!isInBiome(attacker))
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!isInBiome(attacker)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + MULTIPLIER_KEY);
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));
     }
 
     @Override
-    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
-        if(!isInBiome(attacker))
+    public void onTridentDamage(@NotNull final LivingEntity attacker,
+                                @NotNull final LivingEntity victim,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final EntityDamageByEntityEvent event) {
+        if (!isInBiome(attacker)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + MULTIPLIER_KEY);
         event.setDamage(event.getDamage() * (1 + (level * multiplier)));

@@ -25,6 +25,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -69,7 +70,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @param type          The type of the enchantment
      * @param prerequisites Optional {@link Prerequisite}s that must be met
      */
-    protected EcoEnchant(String key, EnchantmentType type, Prerequisite... prerequisites) {
+    protected EcoEnchant(@NotNull final String key,
+                         @NotNull final EnchantmentType type,
+                         @NotNull final Prerequisite... prerequisites) {
         super(NamespacedKey.minecraft(key));
 
         this.type = type;
@@ -89,12 +92,13 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
         //WorldguardManager.registerFlag(this.getPermissionName() + "-enabled", true);
 
-        if(type.getRequiredToExtend() != null && !type.getRequiredToExtend().isInstance(this)) {
+        if (type.getRequiredToExtend() != null && !type.getRequiredToExtend().isInstance(this)) {
             return;
         }
 
-        if (!Prerequisite.areMet(prerequisites))
+        if (!Prerequisite.areMet(prerequisites)) {
             return;
+        }
 
         this.update();
         EcoEnchants.addNewEcoEnchant(this);
@@ -271,7 +275,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      *
      * @return If there are any conflicts
      */
-    public boolean conflictsWithAny(Set<? extends Enchantment> enchantments) {
+    public boolean conflictsWithAny(@NotNull final Set<? extends Enchantment> enchantments) {
         return conflicts.stream().anyMatch(enchantments::contains);
     }
 
@@ -408,7 +412,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return If conflicts
      */
     @Override
-    public boolean conflictsWith(@NotNull Enchantment enchantment) {
+    public boolean conflictsWith(@NotNull final Enchantment enchantment) {
         return conflicts.contains(enchantment);
     }
 
@@ -420,15 +424,21 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return If can be applied
      */
     @Override
-    public boolean canEnchantItem(ItemStack itemStack) {
+    public boolean canEnchantItem(@NotNull final ItemStack itemStack) {
         return targetMaterials.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof EcoEnchant)) return false;
-        if (!super.equals(o)) return false;
+    public boolean equals(@Nullable final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EcoEnchant)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         EcoEnchant enchant = (EcoEnchant) o;
         return enchant.getKey().equals(((EcoEnchant) o).getKey());
     }

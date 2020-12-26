@@ -13,6 +13,7 @@ import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CommandEnchantinfo extends AbstractCommand {
-    public CommandEnchantinfo(AbstractEcoPlugin plugin) {
+    public CommandEnchantinfo(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, "enchantinfo", "ecoenchants.enchantinfo", false);
     }
 
@@ -30,16 +31,15 @@ public class CommandEnchantinfo extends AbstractCommand {
     }
 
     @Override
-    public void onExecute(CommandSender sender, List<String> args) {
-        if (args.size() == 0) {
+    public void onExecute(@NotNull final CommandSender sender,
+                          @NotNull final List<String> args) {
+        if (args.isEmpty()) {
             sender.sendMessage(Configs.LANG.getMessage("missing-enchant"));
             return;
         }
         StringBuilder nameBuilder = new StringBuilder();
 
-        args.forEach((arg) -> {
-            nameBuilder.append(arg).append(" ");
-        });
+        args.forEach(arg -> nameBuilder.append(arg).append(" "));
         String searchName = nameBuilder.toString();
         searchName = searchName.substring(0, searchName.length() - 1);
 

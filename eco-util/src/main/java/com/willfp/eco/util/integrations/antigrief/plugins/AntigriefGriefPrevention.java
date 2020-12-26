@@ -7,10 +7,12 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class AntigriefGriefPrevention implements AntigriefWrapper {
     @Override
-    public boolean canBreakBlock(Player player, Block block) {
+    public boolean canBreakBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(block.getLocation(), false, null);
         if (claim != null) {
             return claim.allowBreak(player, block.getType()) == null;
@@ -19,7 +21,8 @@ public class AntigriefGriefPrevention implements AntigriefWrapper {
     }
 
     @Override
-    public boolean canCreateExplosion(Player player, Location location) {
+    public boolean canCreateExplosion(@NotNull final Player player,
+                                      @NotNull final Location location) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(location, false, null);
         if (claim != null) {
             return claim.areExplosivesAllowed;
@@ -28,7 +31,8 @@ public class AntigriefGriefPrevention implements AntigriefWrapper {
     }
 
     @Override
-    public boolean canPlaceBlock(Player player, Block block) {
+    public boolean canPlaceBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(block.getLocation(), false, null);
         if (claim != null) {
             return claim.allowBuild(player, block.getType()) == null;
@@ -37,9 +41,10 @@ public class AntigriefGriefPrevention implements AntigriefWrapper {
     }
 
     @Override
-    public boolean canInjure(Player player, LivingEntity victim) {
+    public boolean canInjure(@NotNull final Player player,
+                             @NotNull final LivingEntity victim) {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(victim.getLocation(), false, null);
-        if(victim instanceof Player) {
+        if (victim instanceof Player) {
             return claim == null;
         } else {
             if (claim != null && claim.ownerID != null) {

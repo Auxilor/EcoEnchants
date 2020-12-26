@@ -8,6 +8,8 @@ import org.bukkit.entity.Boss;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class BossHunter extends EcoEnchant {
     public BossHunter() {
         super(
@@ -18,8 +20,14 @@ public class BossHunter extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!(victim instanceof Boss || victim instanceof ElderGuardian)) return;
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!(victim instanceof Boss || victim instanceof ElderGuardian)) {
+            return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

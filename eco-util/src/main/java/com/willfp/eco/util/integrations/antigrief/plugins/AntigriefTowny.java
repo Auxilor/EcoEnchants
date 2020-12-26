@@ -10,35 +10,44 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class AntigriefTowny implements AntigriefWrapper {
     @Override
-    public boolean canBreakBlock(Player player, Block block) {
+    public boolean canBreakBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         return PlayerCacheUtil.getCachePermission(player, block.getLocation(), block.getType(), TownyPermission.ActionType.DESTROY);
     }
 
     @Override
-    public boolean canCreateExplosion(Player player, Location location) {
+    public boolean canCreateExplosion(@NotNull final Player player,
+                                      @NotNull final Location location) {
         return PlayerCacheUtil.getCachePermission(player, location, Material.TNT, TownyPermission.ActionType.ITEM_USE);
     }
 
     @Override
-    public boolean canPlaceBlock(Player player, Block block) {
+    public boolean canPlaceBlock(@NotNull final Player player,
+                                 @NotNull final Block block) {
         return PlayerCacheUtil.getCachePermission(player, block.getLocation(), block.getType(), TownyPermission.ActionType.BUILD);
     }
 
     @Override
-    public boolean canInjure(Player player, LivingEntity victim) {
-        if(victim instanceof Player) {
+    public boolean canInjure(@NotNull final Player player,
+                             @NotNull final LivingEntity victim) {
+        if (victim instanceof Player) {
             try {
                 Town town = WorldCoord.parseWorldCoord(victim.getLocation()).getTownBlock().getTown();
                 return town.isPVP();
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                // If exception, no town was found, thus return true.
+            }
         } else {
             try {
                 Town town = WorldCoord.parseWorldCoord(victim.getLocation()).getTownBlock().getTown();
                 return town.hasMobs();
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                // If exception, no town was found, thus return true.
+            }
         }
         return true;
     }

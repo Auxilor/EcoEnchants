@@ -5,6 +5,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Arcanic extends EcoEnchant {
     public Arcanic() {
         super(
@@ -15,13 +17,16 @@ public class Arcanic extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
-        if (!(event.getCause().equals(EntityDamageEvent.DamageCause.POISON) || event.getCause().equals(EntityDamageEvent.DamageCause.WITHER)))
+    public void onDamageWearingArmor(@NotNull final LivingEntity victim,
+                                     final int level,
+                                     @NotNull final EntityDamageEvent event) {
+        if (!(event.getCause().equals(EntityDamageEvent.DamageCause.POISON) || event.getCause().equals(EntityDamageEvent.DamageCause.WITHER))) {
             return;
+        }
 
-
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         event.setCancelled(true);
     }

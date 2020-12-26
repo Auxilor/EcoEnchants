@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+
 public class Annihilate extends EcoEnchant {
     public Annihilate() {
         super(
@@ -18,12 +20,19 @@ public class Annihilate extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         double baseMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-multiplier");
         Vector vector = attacker.getLocation().toVector().clone().subtract(victim.getLocation().toVector()).normalize().multiply(level * baseMultiplier).multiply(-1);
-        if(!VectorUtils.isFinite(vector)) return;
+        if (!VectorUtils.isFinite(vector)) {
+            return;
+        }
         vector.setY(0.2);
-        if(!VectorUtils.isFinite(vector)) return;
+        if (!VectorUtils.isFinite(vector)) {
+            return;
+        }
         victim.setVelocity(vector);
     }
 }
