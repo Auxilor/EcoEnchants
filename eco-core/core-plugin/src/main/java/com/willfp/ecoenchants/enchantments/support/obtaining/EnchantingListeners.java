@@ -19,6 +19,7 @@ import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,31 +87,45 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         boolean gotSpecial = false;
 
         for (EcoEnchant enchantment : enchantments) {
-            if (!enchantment.canEnchantItem(item))
+            if (!enchantment.canEnchantItem(item)) {
                 continue;
-            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier)
+            }
+            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier) {
                 continue;
-            if (enchantment.getRarity().getMinimumLevel() > cost)
+            }
+            if (enchantment.getRarity().getMinimumLevel() > cost) {
                 continue;
-            if (!enchantment.isEnabled())
+            }
+            if (!enchantment.isEnabled()) {
                 continue;
-            if (!enchantment.canGetFromTable())
+            }
+            if (!enchantment.canGetFromTable()) {
                 continue;
-            if (!player.hasPermission("ecoenchants.fromtable." + enchantment.getPermissionName()))
+            }
+            if (!player.hasPermission("ecoenchants.fromtable." + enchantment.getPermissionName())) {
                 continue;
+            }
 
             AtomicBoolean anyConflicts = new AtomicBoolean(false);
+
             toAdd.forEach((enchant, integer) -> {
-                if (enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
-                if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
+                if (enchantment.conflictsWithAny(toAdd.keySet())) {
+                    anyConflicts.set(true);
+                }
+                if (enchant.conflictsWith(enchantment)) {
+                    anyConflicts.set(true);
+                }
 
                 if (EcoEnchants.getFromEnchantment(enchant) != null) {
                     EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                    if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular())
+                    if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
                         anyConflicts.set(true);
+                    }
                 }
             });
-            if (anyConflicts.get()) continue;
+            if (anyConflicts.get()) {
+                continue;
+            }
 
             int level;
 
@@ -136,7 +151,9 @@ public class EnchantingListeners extends PluginDependent implements Listener {
                 break;
             }
 
-            if (enchantment.getType().equals(EnchantmentType.SPECIAL)) gotSpecial = true;
+            if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
+                gotSpecial = true;
+            }
 
             if (Configs.CONFIG.getBool("enchanting-table.reduce-probability.enabled")) {
                 multiplier /= Configs.CONFIG.getDouble("enchanting-table.reduce-probability.factor");
@@ -172,7 +189,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
     }
 
     @EventHandler
-    public void secondaryEnchant(PrepareItemEnchantEvent event) {
+    public void secondaryEnchant(@NotNull final PrepareItemEnchantEvent event) {
         int maxLevel = Configs.CONFIG.getInt("enchanting-table.maximum-obtainable-level");
 
         try {
@@ -180,8 +197,9 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
         }
 
-        if (!SECONDARY_ENCHANTABLE.contains(event.getItem().getType()))
+        if (!SECONDARY_ENCHANTABLE.contains(event.getItem().getType())) {
             return;
+        }
 
         int bonus = event.getEnchantmentBonus();
         if (bonus > 15) {
@@ -204,12 +222,20 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         bottomEnchantLevel = NumberUtils.equalIfOver(bottomEnchantLevel, maxLevel);
 
         int midUnbreakingLevel = NumberUtils.randInt(1, 3);
-        if (midUnbreakingLevel < 2) midUnbreakingLevel = 2;
-        if (midEnchantLevel < 15) midUnbreakingLevel = 1;
+        if (midUnbreakingLevel < 2) {
+            midUnbreakingLevel = 2;
+        }
+        if (midEnchantLevel < 15) {
+            midUnbreakingLevel = 1;
+        }
 
         int topUnbreakingLevel = 3;
-        if (topEnchantLevel < 20) topUnbreakingLevel = 2;
-        if (topEnchantLevel < 10) topUnbreakingLevel = 1;
+        if (topEnchantLevel < 20) {
+            topUnbreakingLevel = 2;
+        }
+        if (topEnchantLevel < 10) {
+            topUnbreakingLevel = 1;
+        }
 
         EnchantmentOffer[] offers = {
                 new EnchantmentOffer(Enchantment.DURABILITY, 1, bottomEnchantLevel),
