@@ -86,7 +86,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         this.getLog().info(EcoEnchants.values().size() + " Enchantments Loaded:");
         this.getLog().info(EcoEnchants.values().stream().map(ecoEnchant -> ecoEnchant.getType().getColor() + ecoEnchant.getName()).collect(Collectors.joining(", ")));
 
-        Bukkit.getServicesManager().load(TelekinesisTests.class).registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
+        Bukkit.getServicesManager().load(TelekinesisTests.class)
+                .registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
     }
 
     /**
@@ -124,7 +125,9 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
             HandlerList.unregisterAll(ecoEnchant);
 
             this.getScheduler().runLater(() -> {
-                if (ecoEnchant.isEnabled()) this.getEventManager().registerListener(ecoEnchant);
+                if (ecoEnchant.isEnabled()) {
+                    this.getEventManager().registerListener(ecoEnchant);
+                }
             }, 1);
         }));
     }

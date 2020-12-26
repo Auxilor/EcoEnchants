@@ -17,12 +17,12 @@ public class EcoEnchantsConfigs implements Updatable {
     /**
      * target.yml.
      */
-    public final Target TARGET = new Target();
+    public static final Target TARGET = new Target();
 
     /**
      * rarity.yml.
      */
-    public final Rarity RARITY = new Rarity();
+    public static final Rarity RARITY = new Rarity();
 
     /**
      * All enchantment-specific configs.

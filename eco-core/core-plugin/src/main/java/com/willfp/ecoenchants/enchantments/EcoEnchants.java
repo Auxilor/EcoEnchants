@@ -227,11 +227,11 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -242,7 +242,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Contains general methods for EcoEnchants
  */
 @SuppressWarnings("unused")
-@UtilityClass
 public class EcoEnchants implements Updatable {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
@@ -498,7 +497,7 @@ public class EcoEnchants implements Updatable {
      *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
-    public static EcoEnchant getByName(String name) {
+    public static EcoEnchant getByName(@NotNull final String name) {
         Optional<EcoEnchant> matching = values().stream().filter(enchant -> enchant.getName().equalsIgnoreCase(name)).findFirst();
         return matching.orElse(null);
     }
@@ -510,7 +509,7 @@ public class EcoEnchants implements Updatable {
      *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
-    public static EcoEnchant getByPermission(String permissionName) {
+    public static EcoEnchant getByPermission(@NotNull final String permissionName) {
         Optional<EcoEnchant> matching = values().stream().filter(enchant -> enchant.getPermissionName().equalsIgnoreCase(permissionName)).findFirst();
         return matching.orElse(null);
     }
@@ -522,7 +521,7 @@ public class EcoEnchants implements Updatable {
      *
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
-    public static EcoEnchant getByKey(NamespacedKey key) {
+    public static EcoEnchant getByKey(@NotNull final NamespacedKey key) {
         return BY_KEY.get(key);
     }
 
@@ -534,21 +533,24 @@ public class EcoEnchants implements Updatable {
      *
      * @return True if has, false if doesn't have.
      */
-    public static boolean hasAnyOfType(ItemStack item, EnchantmentType type) {
-        if (item == null) return false;
-
+    public static boolean hasAnyOfType(@NotNull final ItemStack item,
+                                       @NotNull final EnchantmentType type) {
         AtomicBoolean hasOfType = new AtomicBoolean(false);
 
         if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
             ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().forEach(((enchantment, integer) -> {
                 if (getFromEnchantment(enchantment) != null) {
-                    if (getFromEnchantment(enchantment).getType().equals(type)) hasOfType.set(true);
+                    if (getFromEnchantment(enchantment).getType().equals(type)) {
+                        hasOfType.set(true);
+                    }
                 }
             }));
         } else {
             item.getEnchantments().forEach(((enchantment, integer) -> {
                 if (getFromEnchantment(enchantment) != null) {
-                    if (getFromEnchantment(enchantment).getType().equals(type)) hasOfType.set(true);
+                    if (getFromEnchantment(enchantment).getType().equals(type)) {
+                        hasOfType.set(true);
+                    }
                 }
             }));
         }
@@ -572,7 +574,7 @@ public class EcoEnchants implements Updatable {
      *
      * @param enchant The {@link EcoEnchant} to add
      */
-    public static void addNewEcoEnchant(EcoEnchant enchant) {
+    public static void addNewEcoEnchant(@NotNull final EcoEnchant enchant) {
         BY_KEY.remove(enchant.getKey());
         BY_KEY.put(enchant.getKey(), enchant);
     }
@@ -582,7 +584,11 @@ public class EcoEnchants implements Updatable {
      *
      * @param enchant The {@link EcoEnchant} to remove
      */
-    public static void removeEcoEnchant(EcoEnchant enchant) {
+    public static void removeEcoEnchant(@NotNull final EcoEnchant enchant) {
         BY_KEY.remove(enchant.getKey());
+    }
+
+    private EcoEnchants() {
+        throw new UnsupportedOperationException("Utility class cannot be instantiated!");
     }
 }

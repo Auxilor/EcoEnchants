@@ -49,11 +49,14 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
 
         File[] extensionJars = dir.listFiles();
 
-        if (extensionJars == null)
+        if (extensionJars == null) {
             return;
+        }
 
         for (File extensionJar : extensionJars) {
-            if (!extensionJar.isFile()) continue;
+            if (!extensionJar.isFile()) {
+                continue;
+            }
 
             try {
                 loadExtension(extensionJar);
@@ -63,7 +66,7 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
         }
     }
 
-    private void loadExtension(File extensionJar) {
+    private void loadExtension(@NotNull final File extensionJar) {
         URL url = null;
         try {
             url = extensionJar.toURI().toURL();
@@ -102,8 +105,9 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
             e.printStackTrace();
         }
 
-        if (!(object instanceof Extension))
+        if (!(object instanceof Extension)) {
             throw new MalformedExtensionException(extensionJar.getName() + " is invalid");
+        }
 
         Extension extension = (Extension) object;
         extension.setMetadata(metadata);
