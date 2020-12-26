@@ -12,6 +12,7 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -25,27 +26,32 @@ public class Fetching extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onWolfKill(EntityDeathByEntityEvent event) {
+    public void onWolfKill(@NotNull final EntityDeathByEntityEvent event) {
         LivingEntity entity = event.getVictim();
 
-        if(entity instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "not-on-players"))
+        if (entity instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "not-on-players")) {
             return;
+        }
 
-        if(!(event.getKiller() instanceof Wolf))
+        if (!(event.getKiller() instanceof Wolf)) {
             return;
+        }
 
         Wolf wolf = (Wolf) event.getKiller();
 
-        if(!wolf.isTamed() || wolf.getOwner() == null)
+        if (!wolf.isTamed() || wolf.getOwner() == null) {
             return;
+        }
 
-        if(!(wolf.getOwner() instanceof Player))
+        if (!(wolf.getOwner() instanceof Player)) {
             return;
+        }
 
         Player player = (Player) wolf.getOwner();
 
-        if(!(EnchantChecks.helmet(player, this)))
+        if (!(EnchantChecks.helmet(player, this))) {
             return;
+        }
 
         int xp = event.getXp();
         Collection<ItemStack> drops = event.getDrops();

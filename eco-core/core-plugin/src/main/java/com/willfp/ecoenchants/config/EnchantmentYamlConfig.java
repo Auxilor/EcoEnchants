@@ -3,8 +3,11 @@ package com.willfp.ecoenchants.config;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,8 +23,12 @@ import java.nio.charset.StandardCharsets;
  */
 public abstract class EnchantmentYamlConfig extends PluginDependent {
     private final String name;
-    public YamlConfiguration config;
-    protected File configFile;
+
+    @Getter
+    private YamlConfiguration config;
+
+    @Getter(AccessLevel.PROTECTED)
+    private File configFile;
     private final File directory;
     private final Class<?> source;
     private final EnchantmentType type;
@@ -33,14 +40,18 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
      * @param source The class of the main class of source or extension
      * @param type   The enchantment type
      */
-    protected EnchantmentYamlConfig(String name, Class<?> source, EnchantmentType type) {
+    protected EnchantmentYamlConfig(@NotNull final String name,
+                                    @NotNull final Class<?> source,
+                                    @NotNull final EnchantmentType type) {
         super(AbstractEcoPlugin.getInstance());
         this.name = name;
         this.source = source;
         this.type = type;
 
         File basedir = new File(this.getPlugin().getDataFolder(), "enchants/");
-        if (!basedir.exists()) basedir.mkdirs();
+        if (!basedir.exists()) {
+            basedir.mkdirs();
+        }
 
         File dir = new File(basedir, type.getName() + "/");
         if (!dir.exists()) {
@@ -105,8 +116,9 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
             YamlConfiguration newConfig = new YamlConfiguration();
             newConfig.load(reader);
 
-            if (newConfig.getKeys(true).equals(config.getKeys(true)))
+            if (newConfig.getKeys(true).equals(config.getKeys(true))) {
                 return;
+            }
 
             newConfig.getKeys(true).forEach((s -> {
                 if (!config.getKeys(true).contains(s)) {

@@ -12,14 +12,14 @@ public class Lang extends BaseConfig {
     }
 
     public String getPrefix() {
-        return StringUtils.translate(config.getString("messages.prefix"));
+        return StringUtils.translate(this.getConfig().getString("messages.prefix"));
     }
 
     public String getNoPermission() {
-        return getPrefix() + StringUtils.translate(config.getString("messages.no-permission"));
+        return getPrefix() + StringUtils.translate(this.getConfig().getString("messages.no-permission"));
     }
 
     public String getMessage(String message) {
-        return getPrefix() + StringUtils.translate(config.getString("messages." + message));
+        return getPrefix() + StringUtils.translate(this.getConfig().getString("messages." + message));
     }
 }

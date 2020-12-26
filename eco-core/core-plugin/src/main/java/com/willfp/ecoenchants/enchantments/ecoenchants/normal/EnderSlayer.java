@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 public class EnderSlayer extends EcoEnchant {
@@ -18,7 +19,7 @@ public class EnderSlayer extends EcoEnchant {
 
     // START OF LISTENERS
 
-    private static final Set<EntityType> endMobs = new ImmutableSet.Builder<EntityType>()
+    private static final Set<EntityType> END_MOBS = new ImmutableSet.Builder<EntityType>()
             .add(EntityType.ENDERMITE)
             .add(EntityType.ENDERMAN)
             .add(EntityType.ENDER_DRAGON)
@@ -27,9 +28,13 @@ public class EnderSlayer extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if (!endMobs.contains(victim.getType()))
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!END_MOBS.contains(victim.getType())) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
 

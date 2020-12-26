@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Enderism extends EcoEnchant {
     public Enderism() {
@@ -22,9 +23,14 @@ public class Enderism extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
-        if(!attacker.getWorld().getEnvironment().equals(World.Environment.THE_END))
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!attacker.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 
@@ -32,21 +38,28 @@ public class Enderism extends EcoEnchant {
     }
 
     @EventHandler
-    public void onHit(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow))
+    public void onHit(@NotNull final EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Arrow)) {
             return;
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player))
+        }
+        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) {
             return;
+        }
 
         Player player = (Player) ((Arrow) event.getDamager()).getShooter();
         Arrow arrow = (Arrow) event.getDamager();
 
         assert player != null;
-        if(!player.getWorld().getEnvironment().equals(World.Environment.THE_END))
+        if (!player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
             return;
+        }
 
-        if (!EnchantChecks.arrow(arrow, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.arrow(arrow, this)) {
+            return;
+        }
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         int level = EnchantChecks.getArrowLevel(arrow, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

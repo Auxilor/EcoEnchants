@@ -21,7 +21,7 @@ public abstract class BaseConfig extends PluginDependent {
     /**
      * The linked {@link YamlConfiguration} where values are physically stored.
      */
-    @Getter(AccessLevel.PROTECTED)
+    @Getter(AccessLevel.PUBLIC)
     private final YamlConfiguration config;
 
     /**

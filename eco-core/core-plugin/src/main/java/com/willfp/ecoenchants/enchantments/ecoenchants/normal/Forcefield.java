@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -26,17 +27,17 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
     private final HashMap<Player, Integer> players = new HashMap<>();
 
     @EventHandler
-    public void onArmorEquip(ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(@NotNull final PlayerJoinEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
+    public void onPlayerLeave(@NotNull final PlayerQuitEvent event) {
         refresh();
     }
 
@@ -44,7 +45,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
         players.clear();
         this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
-            if(level > 0) {
+            if (level > 0) {
                 players.put(player, level);
             }
         });
@@ -53,7 +54,9 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
     @Override
     public void run() {
         players.forEach((player, level) -> {
-            if(this.getDisabledWorlds().contains(player.getWorld())) return;
+            if (this.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
             double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
             double bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
             double distance = initialDistance + (level * bonus);
@@ -61,11 +64,13 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
             final double damage = damagePerPoint * level;
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
-                if(!(e instanceof Monster)) continue;
+                if (!(e instanceof Monster)) {
+                    continue;
+                }
 
                 ((Monster) e).damage(damage);
 
-                if(NumberUtils.randFloat(0, 1) < 0.2) {
+                if (NumberUtils.randFloat(0, 1) < 0.2) {
                     EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 1);
                 }
             }

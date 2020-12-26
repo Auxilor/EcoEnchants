@@ -7,8 +7,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import lombok.ToString;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,13 +20,24 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@UtilityClass
+@SuppressWarnings("deprecation")
 public class EnchantmentCache implements Updatable {
     private static final Set<CacheEntry> CACHE = new HashSet<>();
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public static CacheEntry getEntry(Enchantment enchantment) {
+    public static CacheEntry getEntry(@NotNull final Enchantment enchantment) {
         Optional<CacheEntry> matching = CACHE.stream().filter(entry -> entry.getEnchantment().getKey().getKey().equals(enchantment.getKey().getKey())).findFirst();
-        return matching.orElse(new CacheEntry(enchantment, EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(), enchantment.getKey().getKey(), Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found"), EnchantmentType.NORMAL, EnchantmentRarity.values().stream().findFirst().get()));
+        return matching.orElse(
+                new CacheEntry(
+                        enchantment,
+                        EnchantDisplay.PREFIX + "§7" + enchantment.getKey().getKey(),
+                        enchantment.getKey().getKey(),
+                        Collections.singletonList(EnchantDisplay.PREFIX + "No Description Found"),
+                        EnchantmentType.NORMAL,
+                        EnchantmentRarity.values().stream().findFirst().get()
+                )
+        );
     }
 
     public static Set<CacheEntry> getCache() {
@@ -71,7 +85,7 @@ public class EnchantmentCache implements Updatable {
         });
     }
 
-
+    @ToString
     public static class CacheEntry {
         private final Enchantment enchantment;
         private final String name;
@@ -81,7 +95,12 @@ public class EnchantmentCache implements Updatable {
         private final EnchantmentType type;
         private final EnchantmentRarity rarity;
 
-        public CacheEntry(Enchantment enchantment, String name, String rawName, List<String> description, EnchantmentType type, EnchantmentRarity rarity) {
+        public CacheEntry(@NotNull final Enchantment enchantment,
+                          @NotNull final String name,
+                          @NotNull final String rawName,
+                          @NotNull final List<String> description,
+                          @NotNull final EnchantmentType type,
+                          @NotNull final EnchantmentRarity rarity) {
             this.enchantment = enchantment;
             this.name = name;
             this.rawName = rawName;
@@ -127,17 +146,6 @@ public class EnchantmentCache implements Updatable {
 
         public EnchantmentRarity getRarity() {
             return rarity;
-        }
-
-        @Override
-        public String toString() {
-            return "CacheEntry{" +
-                    "enchantment=" + enchantment +
-                    "§f, name='" + name + '\'' +
-                    "§f, rawName='" + rawName + '\'' +
-                    "§f, description=" + description +
-                    "§f, stringDescription='" + stringDescription + '\'' +
-                    "§f}";
         }
     }
 }

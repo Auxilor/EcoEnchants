@@ -6,6 +6,7 @@ import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,11 +17,11 @@ import java.util.Set;
  * Class for storing all enchantment rarities
  */
 public class EnchantmentTarget implements Registerable, Updatable {
-    private static final Set<EnchantmentTarget> targets = new HashSet<>();
+    private static final Set<EnchantmentTarget> REGISTERED = new HashSet<>();
     public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>());
 
     static {
-        targets.add(ALL);
+        REGISTERED.add(ALL);
     }
 
     private final String name;
@@ -32,7 +33,8 @@ public class EnchantmentTarget implements Registerable, Updatable {
      * @param name      The name of the rarity
      * @param materials The items for the target
      */
-    public EnchantmentTarget(String name, Set<Material> materials) {
+    public EnchantmentTarget(@NotNull final String name,
+                             @NotNull final Set<Material> materials) {
         this.name = name;
         materials.removeIf(Objects::isNull);
         this.materials = materials;
@@ -40,10 +42,10 @@ public class EnchantmentTarget implements Registerable, Updatable {
 
     @Override
     public void register() {
-        Optional<EnchantmentTarget> matching = targets.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
-        matching.ifPresent(targets::remove);
+        Optional<EnchantmentTarget> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+        matching.ifPresent(REGISTERED::remove);
         matching.ifPresent(enchantmentTarget -> ALL.materials.removeAll(enchantmentTarget.getMaterials()));
-        targets.add(this);
+        REGISTERED.add(this);
         ALL.materials.addAll(this.getMaterials());
     }
 
@@ -72,8 +74,8 @@ public class EnchantmentTarget implements Registerable, Updatable {
      *
      * @return The matching EnchantmentTarget, or null if not found
      */
-    public static EnchantmentTarget getByName(String name) {
-        Optional<EnchantmentTarget> matching = targets.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+    public static EnchantmentTarget getByName(@NotNull final String name) {
+        Optional<EnchantmentTarget> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         return matching.orElse(null);
     }
 
@@ -85,7 +87,7 @@ public class EnchantmentTarget implements Registerable, Updatable {
     public static void update() {
         Set<String> targetNames = EcoEnchantsConfigs.TARGET.getTargets();
         ALL.materials.clear();
-        targetNames.forEach((name) -> {
+        targetNames.forEach(name -> {
             Set<Material> materials = EcoEnchantsConfigs.TARGET.getTargetMaterials(name);
             new EnchantmentTarget(name, materials).register();
         });
@@ -97,7 +99,7 @@ public class EnchantmentTarget implements Registerable, Updatable {
      * @return A set of all rarities
      */
     public static Set<EnchantmentTarget> values() {
-        return targets;
+        return REGISTERED;
     }
 
     static {

@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -21,7 +22,9 @@ import java.util.Set;
 public class EnchantmentConfig extends EnchantmentYamlConfig {
     private final String name;
 
-    public EnchantmentConfig(String name, Class<?> plugin, EnchantmentType type) {
+    public EnchantmentConfig(@NotNull final String name,
+                             @NotNull final Class<?> plugin,
+                             @NotNull final EnchantmentType type) {
         super(name, plugin, type);
         this.name = name;
     }
@@ -30,53 +33,55 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
         return name;
     }
 
-    public int getInt(String path) {
-        return config.getInt(path);
+    public int getInt(@NotNull final String path) {
+        return this.getConfig().getInt(path);
     }
 
-    public int getInt(String path, int def) {
-        return config.getInt(path, def);
+    public int getInt(@NotNull final String path,
+                      final int def) {
+        return this.getConfig().getInt(path, def);
     }
 
-    public List<Integer> getInts(String path) {
-        return config.getIntegerList(path);
+    public List<Integer> getInts(@NotNull final String path) {
+        return this.getConfig().getIntegerList(path);
     }
 
-    public boolean getBool(String path) {
-        return config.getBoolean(path);
+    public boolean getBool(@NotNull final String path) {
+        return this.getConfig().getBoolean(path);
     }
 
-    public boolean getBool(String path, boolean def) {
-        return config.getBoolean(path, def);
+    public boolean getBool(@NotNull final String path,
+                           final boolean def) {
+        return this.getConfig().getBoolean(path, def);
     }
 
-    public List<Boolean> getBools(String path) {
-        return config.getBooleanList(path);
+    public List<Boolean> getBools(@NotNull final String path) {
+        return this.getConfig().getBooleanList(path);
     }
 
-    public String getString(String path) {
-        return config.getString(path);
+    public String getString(@NotNull final String path) {
+        return this.getConfig().getString(path);
     }
 
-    public List<String> getStrings(String path) {
-        return config.getStringList(path);
+    public List<String> getStrings(@NotNull final String path) {
+        return this.getConfig().getStringList(path);
     }
 
-    public double getDouble(String path) {
-        return config.getDouble(path);
+    public double getDouble(@NotNull final String path) {
+        return this.getConfig().getDouble(path);
     }
 
-    public List<Double> getDoubles(String path) {
-        return config.getDoubleList(path);
+    public List<Double> getDoubles(@NotNull final String path) {
+        return this.getConfig().getDoubleList(path);
     }
 
-    public ItemStack getItemStack(String path) {
-        return config.getItemStack(path);
+    public ItemStack getItemStack(@NotNull final String path) {
+        return this.getConfig().getItemStack(path);
     }
 
-    public Set<Enchantment> getEnchantments(String path) {
+    public Set<Enchantment> getEnchantments(@NotNull final String path) {
         Set<Enchantment> enchantments = new HashSet<>();
-        List<String> enchantmentKeys = config.getStringList(path);
+        List<String> enchantmentKeys = this.getConfig().getStringList(path);
         enchantmentKeys.forEach((key -> enchantments.add(Enchantment.getByKey(NamespacedKey.minecraft(key)))));
         return enchantments;
     }
@@ -87,8 +92,10 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
     }
 
     public Set<EnchantmentTarget> getTargets() {
-        List<String> targetNames = config.getStringList(EcoEnchants.GENERAL_LOCATION + "targets");
-        if (targetNames.isEmpty()) return new HashSet<>();
+        List<String> targetNames = this.getConfig().getStringList(EcoEnchants.GENERAL_LOCATION + "targets");
+        if (targetNames.isEmpty()) {
+            return new HashSet<>();
+        }
         Set<EnchantmentTarget> targets = new HashSet<>();
 
         targetNames.forEach((s -> {
@@ -102,13 +109,14 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
     }
 
     public void loadFromLang() {
-        if (!Configs.LANG.config.contains("enchantments." + this.getName()))
+        if (!Configs.LANG.getConfig().contains("enchantments." + this.getName())) {
             return;
+        }
 
-        config.set("name", Configs.LANG.getString("enchantments." + this.getName() + ".name"));
-        config.set("description", Configs.LANG.getString("enchantments." + this.getName() + ".description"));
+        this.getConfig().set("name", Configs.LANG.getString("enchantments." + this.getName() + ".name"));
+        this.getConfig().set("description", Configs.LANG.getString("enchantments." + this.getName() + ".description"));
         try {
-            this.config.save(this.configFile);
+            this.getConfig().save(this.getConfigFile());
         } catch (IOException e) {
             e.printStackTrace();
         }

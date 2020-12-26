@@ -8,6 +8,8 @@ import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -17,7 +19,7 @@ import java.util.Set;
  * Class for storing all enchantment rarities
  */
 public class EnchantmentRarity implements Registerable, Updatable {
-    private static final Set<EnchantmentRarity> rarities = new HashSet<>();
+    private static final Set<EnchantmentRarity> REGISTERED = new HashSet<>();
 
     private final String name;
     private final double probability;
@@ -36,7 +38,12 @@ public class EnchantmentRarity implements Registerable, Updatable {
      * @param lootProbability     The probability of an item in a loot chest having an enchantment with this rarity
      * @param customColor         The custom display color, or null if not enabled
      */
-    public EnchantmentRarity(String name, double probability, int minimumLevel, double villagerProbability, double lootProbability, String customColor) {
+    public EnchantmentRarity(@NotNull final String name,
+                             final double probability,
+                             final int minimumLevel,
+                             final double villagerProbability,
+                             final double lootProbability,
+                             @Nullable final String customColor) {
         this.name = name;
         this.probability = probability;
         this.minimumLevel = minimumLevel;
@@ -47,31 +54,31 @@ public class EnchantmentRarity implements Registerable, Updatable {
 
     @Override
     public void register() {
-        Optional<EnchantmentRarity> matching = rarities.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
-        matching.ifPresent(rarities::remove);
+        Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+        matching.ifPresent(REGISTERED::remove);
 
         PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
                 "rarity_" + this.getName() + "_probability",
-                (player) -> NumberUtils.format(this.probability)
+                player -> NumberUtils.format(this.probability)
         ));
         PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
                 "rarity_" + this.getName() + "_minlevel",
-                (player) -> NumberUtils.format(this.minimumLevel)
+                player -> NumberUtils.format(this.minimumLevel)
         ));
         PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
                 "rarity_" + this.getName() + "_villagerprobability",
-                (player) -> NumberUtils.format(this.villagerProbability)
+                player -> NumberUtils.format(this.villagerProbability)
         ));
         PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
                 "rarity_" + this.getName() + "_lootprobability",
-                (player) -> NumberUtils.format(this.lootProbability)
+                player -> NumberUtils.format(this.lootProbability)
         ));
         PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
                 "rarity_" + this.getName() + "_color",
-                (player) -> this.customColor
+                player -> this.customColor
         ));
 
-        rarities.add(this);
+        REGISTERED.add(this);
     }
 
     /**
@@ -144,8 +151,8 @@ public class EnchantmentRarity implements Registerable, Updatable {
      *
      * @return The matching EnchantmentRarity, or null if not found
      */
-    public static EnchantmentRarity getByName(String name) {
-        Optional<EnchantmentRarity> matching = rarities.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+    public static EnchantmentRarity getByName(@NotNull final String name) {
+        Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         return matching.orElse(null);
     }
 
@@ -156,7 +163,7 @@ public class EnchantmentRarity implements Registerable, Updatable {
     @ConfigUpdater
     public static void update() {
         Set<String> raritiesNames = EcoEnchantsConfigs.RARITY.getRarities();
-        raritiesNames.forEach((rarity) -> {
+        raritiesNames.forEach(rarity -> {
             double probability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".table-probability");
             int minimumLevel = EcoEnchantsConfigs.RARITY.getInt("rarities." + rarity + ".minimum-level");
             double villagerProbability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".villager-probability");
@@ -176,7 +183,7 @@ public class EnchantmentRarity implements Registerable, Updatable {
      * @return A set of all rarities
      */
     public static Set<EnchantmentRarity> values() {
-        return rarities;
+        return REGISTERED;
     }
 
     static {

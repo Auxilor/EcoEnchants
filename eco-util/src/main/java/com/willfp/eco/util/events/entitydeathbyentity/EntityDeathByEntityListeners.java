@@ -41,11 +41,15 @@ public class EntityDeathByEntityListeners extends PluginDependent implements Lis
      */
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamage(@NotNull final EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity)) return;
+        if (!(event.getEntity() instanceof LivingEntity)) {
+            return;
+        }
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (victim.getHealth() > event.getFinalDamage()) return;
+        if (victim.getHealth() > event.getFinalDamage()) {
+            return;
+        }
 
         EntityDeathByEntityBuilder builtEvent = new EntityDeathByEntityBuilder();
         builtEvent.setVictim(victim);
@@ -77,7 +81,9 @@ public class EntityDeathByEntityListeners extends PluginDependent implements Lis
             }
         });
 
-        if (atomicBuiltEvent.get() == null) return;
+        if (atomicBuiltEvent.get() == null) {
+            return;
+        }
 
         builtEvent = atomicBuiltEvent.get();
         events.remove(builtEvent);

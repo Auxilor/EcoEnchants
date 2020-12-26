@@ -26,7 +26,9 @@ public final class FastGetEnchants implements FastGetEnchantsProxy {
             int level = '\uffff' & compound.getShort("lvl");
 
             Enchantment found = Enchantment.getByKey(CraftNamespacedKey.fromStringOrNull(key));
-            if(found != null) foundEnchantments.put(found, level);
+            if(found != null) {
+                foundEnchantments.put(found, level);
+            }
         }
         return foundEnchantments;
     }
@@ -40,8 +42,9 @@ public final class FastGetEnchants implements FastGetEnchantsProxy {
         for (NBTBase base : enchantmentNBT) {
             NBTTagCompound compound = (NBTTagCompound) base;
             String key = compound.getString("id");
-            if(!key.equals(enchantment.getKey().toString()))
+            if(!key.equals(enchantment.getKey().toString())) {
                 continue;
+            }
 
             return '\uffff' & compound.getShort("lvl");
         }

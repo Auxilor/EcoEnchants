@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 public class Frenzy extends EcoEnchant {
     public Frenzy() {
@@ -19,15 +20,20 @@ public class Frenzy extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onFrenzyKill(EntityDeathEvent event) {
-        if (event.getEntity().getKiller() == null)
+    public void onFrenzyKill(@NotNull final EntityDeathEvent event) {
+        if (event.getEntity().getKiller() == null) {
             return;
+        }
 
         Player player = event.getEntity().getKiller();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) {
+            return;
+        }
 
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 

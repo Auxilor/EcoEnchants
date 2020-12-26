@@ -8,6 +8,8 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Electroshock extends EcoEnchant {
     public Electroshock() {
         super(
@@ -18,11 +20,15 @@ public class Electroshock extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
+    public void onDeflect(@NotNull final Player blocker,
+                          @NotNull final LivingEntity attacker,
+                          final int level,
+                          @NotNull final EntityDamageByEntityEvent event) {
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage");
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         LightningUtils.strike(attacker, damage);
     }

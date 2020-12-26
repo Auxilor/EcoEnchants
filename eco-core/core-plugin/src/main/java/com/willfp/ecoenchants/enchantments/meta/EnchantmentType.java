@@ -7,18 +7,42 @@ import com.willfp.eco.util.lambda.ObjectCallable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EnchantmentType implements Updatable {
-    private static final List<EnchantmentType> values = new ArrayList<>();
+    private static final List<EnchantmentType> REGISTERED = new ArrayList<>();
 
-    public static final EnchantmentType NORMAL = new EnchantmentType("normal", false, () -> Configs.LANG.getString("not-curse-color"));
-    public static final EnchantmentType CURSE = new EnchantmentType("curse", false, () -> Configs.LANG.getString("curse-color"));
-    public static final EnchantmentType SPECIAL = new EnchantmentType("special", () -> !Configs.CONFIG.getBool("types.special.allow-multiple"), () -> Configs.LANG.getString("special-color"));
-    public static final EnchantmentType ARTIFACT = new EnchantmentType("artifact", () -> !Configs.CONFIG.getBool("types.artifact.allow-multiple"), () -> Configs.LANG.getString("artifact-color"), Artifact.class);
-    public static final EnchantmentType SPELL = new EnchantmentType("spell", true, () -> Configs.LANG.getString("spell-color"), Spell.class);
+    public static final EnchantmentType NORMAL = new EnchantmentType(
+            "normal",
+            false,
+            () -> Configs.LANG.getString("not-curse-color")
+    );
+    public static final EnchantmentType CURSE = new EnchantmentType(
+            "curse",
+            false,
+            () -> Configs.LANG.getString("curse-color")
+    );
+    public static final EnchantmentType SPECIAL = new EnchantmentType(
+            "special",
+            () -> !Configs.CONFIG.getBool("types.special.allow-multiple"),
+            () -> Configs.LANG.getString("special-color")
+    );
+    public static final EnchantmentType ARTIFACT = new EnchantmentType(
+            "artifact",
+            () -> !Configs.CONFIG.getBool("types.artifact.allow-multiple"),
+            () -> Configs.LANG.getString("artifact-color"),
+            Artifact.class
+    );
+    public static final EnchantmentType SPELL = new EnchantmentType(
+            "spell",
+            true,
+            () -> Configs.LANG.getString("spell-color"),
+            Spell.class
+    );
 
     private boolean singular;
     private String color;
@@ -36,7 +60,9 @@ public class EnchantmentType implements Updatable {
      * @param singular Whether an item can have several enchantments of this type
      * @param color    The color for enchantments with this type in lore to have
      */
-    public EnchantmentType(String name, boolean singular, String color) {
+    public EnchantmentType(@NotNull final String name,
+                           final boolean singular,
+                           @NotNull final String color) {
         this(name, () -> singular, () -> color);
     }
 
@@ -49,7 +75,9 @@ public class EnchantmentType implements Updatable {
      * @param singular      Whether an item can have several enchantments of this type
      * @param colorCallable Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
      */
-    public EnchantmentType(String name, boolean singular, ObjectCallable<String> colorCallable) {
+    public EnchantmentType(@NotNull final String name,
+                           final boolean singular,
+                           @NotNull final ObjectCallable<String> colorCallable) {
         this(name, () -> singular, colorCallable);
     }
 
@@ -63,7 +91,10 @@ public class EnchantmentType implements Updatable {
      * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
      * @param requiredToExtend Class that all enchantments of this type must extend - or null if not required
      */
-    public EnchantmentType(String name, boolean singular, ObjectCallable<String> colorCallable, Class<? extends EcoEnchant> requiredToExtend) {
+    public EnchantmentType(@NotNull final String name,
+                           final boolean singular,
+                           @NotNull final ObjectCallable<String> colorCallable,
+                           @Nullable final Class<? extends EcoEnchant> requiredToExtend) {
         this(name, () -> singular, colorCallable, requiredToExtend);
     }
 
@@ -74,7 +105,9 @@ public class EnchantmentType implements Updatable {
      * @param singularCallable Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload
      * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
      */
-    public EnchantmentType(String name, ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable) {
+    public EnchantmentType(@NotNull final String name,
+                           @NotNull final ObjectCallable<Boolean> singularCallable,
+                           @NotNull final ObjectCallable<String> colorCallable) {
         this(name, singularCallable, colorCallable, null);
     }
 
@@ -86,14 +119,17 @@ public class EnchantmentType implements Updatable {
      * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload
      * @param requiredToExtend Class that all enchantments of this type must extend - or null if not required
      */
-    public EnchantmentType(String name, ObjectCallable<Boolean> singularCallable, ObjectCallable<String> colorCallable, Class<? extends EcoEnchant> requiredToExtend) {
+    public EnchantmentType(@NotNull final String name,
+                           @NotNull final ObjectCallable<Boolean> singularCallable,
+                           @NotNull final ObjectCallable<String> colorCallable,
+                           @Nullable final Class<? extends EcoEnchant> requiredToExtend) {
         this.name = name;
         this.singularCallable = singularCallable;
         this.colorCallable = colorCallable;
         this.requiredToExtend = requiredToExtend;
         color = colorCallable.call();
         singular = singularCallable.call();
-        values.add(this);
+        REGISTERED.add(this);
     }
 
     private void refresh() {
@@ -119,10 +155,10 @@ public class EnchantmentType implements Updatable {
 
     @ConfigUpdater
     public static void update() {
-        values.forEach(EnchantmentType::refresh);
+        REGISTERED.forEach(EnchantmentType::refresh);
     }
 
     public static List<EnchantmentType> values() {
-        return new ArrayList<>(values);
+        return new ArrayList<>(REGISTERED);
     }
 }
