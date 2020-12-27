@@ -19,28 +19,45 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TabCompleterEnchantinfo extends AbstractTabCompleter implements Updatable {
-    private static final List<String> enchantsNames = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
+    /**
+     * The cached enchantment names.
+     */
+    private static final List<String> ENCHANT_NAMES = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
 
+    /**
+     * Instantiate a new tab-completer for /enchantinfo.
+     */
     public TabCompleterEnchantinfo() {
         super((AbstractCommand) Objects.requireNonNull(Bukkit.getPluginCommand("enchantinfo")).getExecutor());
     }
 
+    /**
+     * Called on /ecoreload.
+     */
     @ConfigUpdater
     public static void reload() {
-        enchantsNames.clear();
-        enchantsNames.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
+        ENCHANT_NAMES.clear();
+        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
     }
 
+    /**
+     * The execution of the tabcompleter.
+     *
+     * @param sender The sender of the command.
+     * @param args   The arguments of the command.
+     * @return A list of tab-completions.
+     */
     @Override
-    public List<String> onTab(@NotNull CommandSender sender, @NotNull List<String> args) {
+    public List<String> onTab(@NotNull final CommandSender sender,
+                              @NotNull final List<String> args) {
         List<String> completions = new ArrayList<>();
 
         if (args.isEmpty()) {
             // Currently, this case is not ever reached
-            return enchantsNames;
+            return ENCHANT_NAMES;
         }
 
-        StringUtil.copyPartialMatches(String.join(" ", args), enchantsNames, completions);
+        StringUtil.copyPartialMatches(String.join(" ", args), ENCHANT_NAMES, completions);
 
         if (args.size() > 1) { // Remove all previous words from the candidate of completions
             ArrayList<String> finishedArgs = new ArrayList<>(args);

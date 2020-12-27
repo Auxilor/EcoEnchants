@@ -59,10 +59,6 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
         }
         this.directory = dir;
 
-        init();
-    }
-
-    private void init() {
         if (!new File(directory, name + ".yml").exists()) {
             createFile();
         }
