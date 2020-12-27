@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.util.NumberConversions;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -105,7 +106,7 @@ public abstract class Spell extends EcoEnchant {
 
         long secondsLeft = (long) Math.ceil((double) msLeft / 1000);
 
-        return new Long(secondsLeft).intValue();
+        return NumberConversions.toInt(secondsLeft);
     }
 
     public static double getCooldownMultiplier(Player player) {
