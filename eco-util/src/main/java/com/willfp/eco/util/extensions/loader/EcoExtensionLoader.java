@@ -97,12 +97,12 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
         Extension.ExtensionMetadata metadata = new Extension.ExtensionMetadata(version, name);
 
         Class<?> cls;
-        Object object = null;
+        Object object;
         try {
             cls = cl.loadClass(mainClass);
-            object = cls.newInstance();
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
+            object = cls.getConstructor().newInstance();
+        } catch (ReflectiveOperationException e) {
+            throw new Error(e);
         }
 
         if (!(object instanceof Extension)) {
