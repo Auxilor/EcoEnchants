@@ -1,19 +1,23 @@
-plugins {
-    id 'java-library'
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
-    id 'maven-publish'
-    id 'java'
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
+    }
 }
-
-dependencies {
-    implementation project(":eco-core").getSubprojects()
-    implementation project(":eco-util")
-}
-
 allprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
     apply plugin: 'com.github.johnrengelman.shadow'
+
+    jar.onlyIf { !sourceSets.main.allSource.files.isEmpty() }
+
+    compileJava.dependsOn clean
+
+    targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
 
     repositories {
         mavenCentral()
@@ -43,10 +47,6 @@ allprojects {
         maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
     }
 
-    jar {
-        onlyIf { !sourceSets.main.allSource.files.isEmpty() }
-    }
-
     dependencies {
         compileOnly 'org.jetbrains:annotations:19.0.0'
 
@@ -58,51 +58,42 @@ allprojects {
     }
 
     tasks.withType(JavaCompile) {
-        options.deprecation = true
-        options.encoding = 'UTF-8'
+        options.deprecation true
+        options.encoding 'UTF-8'
     }
 
-    processResources {
-        filesNotMatching(["**/*.png", "**/models/**", "**/textures/**"]) {
-            expand projectVersion: project.version
-        }
+    processResources.filesNotMatching(["**/*.png", "**/models/**", "**/textures/**"]) {
+        expand projectVersion: project.version
     }
+}
 
-    compileJava.options.encoding = 'UTF-8'
-    compileJava.dependsOn clean
+group 'com.willfp'
+version findProperty("version")
+
+build.dependsOn shadowJar
+
+publishing.publications {
+    maven(MavenPublication) {
+        from components.java
+    }
 }
 
 tasks.withType(Jar) {
-    destinationDirectory = file("$rootDir/bin/")
+    destinationDir file("${rootDir}/bin")
 }
+
 
 clean.doLast {
     file("${rootDir}/bin").deleteDir()
 }
 
 shadowJar {
-    relocate('org.bstats.bukkit', 'com.willfp.eco.util.shaded.bstats')
-    relocate('org.apache.maven', 'com.willfp.eco.util.shaded.maven')
+    relocate 'org.bstats.bukkit', 'com.willfp.eco.util.shaded.bstats'
+    relocate 'org.apache.maven', 'com.willfp.eco.util.shaded.maven'
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 
+
 jar {
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
-}
-
-group = 'com.willfp'
-archivesBaseName = project.name
-version = findProperty("version")
-java.sourceCompatibility = JavaVersion.VERSION_1_8
-
-compileJava.options.encoding = 'UTF-8'
-
-build.dependsOn shadowJar
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
 }
