@@ -87,16 +87,14 @@
 
     <module name="TreeWalker">
 
-        <!--
-        Checks for Javadoc comments.
-        See https://checkstyle.org/config_javadoc.html
+        <!-- Checks for Javadoc comments. -->
+        <!-- See https://checkstyle.org/config_javadoc.html -->
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocMethod"/>
         <module name="JavadocType"/>
         <module name="JavadocVariable"/>
         <module name="JavadocStyle"/>
         <module name="MissingJavadocMethod"/>
-        -->
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See https://checkstyle.org/config_naming.html -->
