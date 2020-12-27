@@ -33,5 +33,4 @@
 ## License
 *Click here to read [the entire license](https://github.com/Auxilor/EcoEnchants/blob/master/LICENSE.md).* 
 
-EcoEnchants is not freeware. In order to use it you must purchase a license on [spigotmc.org](https://spigotmc.org).
 Distributing compiled versions of the plugin is not permitted.
