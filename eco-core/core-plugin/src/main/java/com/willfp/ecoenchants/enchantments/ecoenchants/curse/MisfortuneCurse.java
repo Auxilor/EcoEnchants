@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class MisfortuneCurse extends EcoEnchant {
     public MisfortuneCurse() {
@@ -18,7 +19,7 @@ public class MisfortuneCurse extends EcoEnchant {
 
 
     @Override
-    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
         if (!EnchantmentUtils.passedChance(this, level))
             return;
 

@@ -7,6 +7,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Replenish extends EcoEnchant {
     public Replenish() {
         super(
@@ -18,7 +20,7 @@ public class Replenish extends EcoEnchant {
 
 
     @Override
-    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
         Material type = block.getType();
 
         if(!(block.getBlockData() instanceof Ageable)) return;

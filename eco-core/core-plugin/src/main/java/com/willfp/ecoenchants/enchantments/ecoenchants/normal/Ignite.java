@@ -10,6 +10,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Ignite extends EcoEnchant {
     public Ignite() {
@@ -22,20 +23,26 @@ public class Ignite extends EcoEnchant {
 
 
     @Override
-    public void onArrowHit(LivingEntity uncastShooter, int level, ProjectileHitEvent event) {
-        if (!(uncastShooter instanceof Player))
+    public void onArrowHit(@NotNull final LivingEntity uncastShooter,
+                           final int level,
+                           @NotNull final ProjectileHitEvent event) {
+        if (!(uncastShooter instanceof Player)) {
             return;
+        }
 
-        if (event.getHitBlock() == null)
+        if (event.getHitBlock() == null) {
             return;
+        }
 
         Player shooter = (Player) uncastShooter;
-        if (!AntigriefManager.canBreakBlock(shooter, event.getHitBlock()))
+        if (!AntigriefManager.canBreakBlock(shooter, event.getHitBlock())) {
             return;
+        }
 
 
-        if (!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         BlockFace face = event.getHitBlockFace();
 

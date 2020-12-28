@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class VoidAffinity extends EcoEnchant {
     public VoidAffinity() {
@@ -19,7 +20,7 @@ public class VoidAffinity extends EcoEnchant {
 
 
     @Override
-    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
+    public void onTridentDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Trident trident, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!attacker.getWorld().getEnvironment().equals(World.Environment.THE_END))
             return;
 

@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class NetherInfusion extends EcoEnchant {
     public NetherInfusion() {
         super(
@@ -17,7 +19,7 @@ public class NetherInfusion extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER))
             return;
 

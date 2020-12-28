@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Oxygenate extends EcoEnchant {
     public Oxygenate() {
         super(
@@ -18,7 +20,7 @@ public class Oxygenate extends EcoEnchant {
 
 
     @Override
-    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
         if(player.getRemainingAir() == player.getMaximumAir()) return;
 
         int oxygenLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "oxygen-per-level");

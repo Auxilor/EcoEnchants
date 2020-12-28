@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 public class Graceful extends EcoEnchant {
@@ -22,25 +23,35 @@ public class Graceful extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onFall(PlayerMoveEvent event) {
+    public void onFall(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (player.isOnGround())
+        if (player.isOnGround()) {
             return;
+        }
 
-        if(player.getVelocity().getY() > -1) return;
-
-        if(player.getLocation().clone().add(0, -3, 0).getBlock().getType().equals(Material.AIR))
+        if (player.getVelocity().getY() > -1) {
             return;
+        }
 
-        if(!EnchantChecks.boots(player, this)) return;
+        if (player.getLocation().clone().add(0, -3, 0).getBlock().getType().equals(Material.AIR)) {
+            return;
+        }
+
+        if (!EnchantChecks.boots(player, this)) {
+            return;
+        }
+
         int level = EnchantChecks.getBootsLevel(player, this);
 
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
-
-
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
             return;
+        }
+
+
+        if (!EnchantmentUtils.passedChance(this, level)) {
+            return;
+        }
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 20, 5, false, false, true));
     }

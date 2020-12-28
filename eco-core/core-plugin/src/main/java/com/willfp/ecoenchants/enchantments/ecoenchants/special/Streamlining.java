@@ -5,6 +5,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
 public class Streamlining extends EcoEnchant {
     public Streamlining() {
         super(
@@ -16,7 +18,7 @@ public class Streamlining extends EcoEnchant {
 
 
     @Override
-    public void onArmorEquip(Player player, int level, ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull Player player, int level, @NotNull ArmorEquipEvent event) {
         if(level == 0) {
             player.setWalkSpeed(0.2f);
             return;

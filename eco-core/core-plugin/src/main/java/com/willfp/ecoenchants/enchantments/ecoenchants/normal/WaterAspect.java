@@ -8,6 +8,8 @@ import org.bukkit.entity.Enderman;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class WaterAspect extends EcoEnchant {
     public WaterAspect() {
         super(
@@ -19,7 +21,7 @@ public class WaterAspect extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman))
             return;
 

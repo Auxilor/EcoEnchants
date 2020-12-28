@@ -12,6 +12,7 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class Rage extends EcoEnchant {
     public Rage() {
@@ -24,7 +25,7 @@ public class Rage extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+    public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
         if (!EnchantmentUtils.passedChance(this, level))
             return;
 

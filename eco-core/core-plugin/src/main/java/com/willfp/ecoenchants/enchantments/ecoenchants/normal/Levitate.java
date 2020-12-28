@@ -10,6 +10,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+
 public class Levitate extends EcoEnchant {
     public Levitate() {
         super(
@@ -21,7 +23,7 @@ public class Levitate extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+    public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 

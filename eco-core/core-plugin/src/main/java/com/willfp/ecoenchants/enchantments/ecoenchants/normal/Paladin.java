@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Paladin extends EcoEnchant {
     public Paladin() {
         super(
@@ -17,7 +19,7 @@ public class Paladin extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!(attacker.getVehicle() instanceof Horse)) return;
 
         double damage = event.getDamage();

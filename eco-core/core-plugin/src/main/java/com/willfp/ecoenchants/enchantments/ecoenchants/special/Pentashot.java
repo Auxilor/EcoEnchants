@@ -10,6 +10,8 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+
 public class Pentashot extends EcoEnchant {
     public Pentashot() {
         super(
@@ -21,7 +23,7 @@ public class Pentashot extends EcoEnchant {
 
 
     @Override
-    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
+    public void onBowShoot(@NotNull LivingEntity shooter, @NotNull Arrow arrow, int level, @NotNull EntityShootBowEvent event) {
         for (int i = -2; i <= 2; i += 1) {
             if(i == 0) continue;
 

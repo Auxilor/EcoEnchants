@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+
 public class Tornado extends EcoEnchant {
     public Tornado() {
         super(
@@ -17,7 +19,7 @@ public class Tornado extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         double baseVelocity = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-per-level");
         double yVelocity = baseVelocity * level;
 

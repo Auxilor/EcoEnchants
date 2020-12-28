@@ -69,7 +69,11 @@ public class EnchantmentCache implements Updatable {
                 );
                 name = String.valueOf(Configs.LANG.getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
                 type = enchantment.isCursed() ? EnchantmentType.CURSE : EnchantmentType.NORMAL;
-                rarity = enchantment.isTreasure() ? EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-treasure-rarity")) : EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-rarity"));
+                if(enchantment.isTreasure()) {
+                    rarity = EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-treasure-rarity"));
+                } else {
+                    rarity = EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-rarity"));
+                }
             }
 
             color = type.getColor();

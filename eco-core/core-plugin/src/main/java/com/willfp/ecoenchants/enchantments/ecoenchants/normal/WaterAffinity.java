@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class WaterAffinity extends EcoEnchant {
     public WaterAffinity() {
         super(
@@ -17,7 +19,7 @@ public class WaterAffinity extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!attacker.getLocation().getBlock().getType().equals(Material.WATER))
             return;
 

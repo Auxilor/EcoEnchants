@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 public class Paralyze extends EcoEnchant {
     public Paralyze() {
@@ -21,7 +22,7 @@ public class Paralyze extends EcoEnchant {
 
 
     @Override
-    public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
+    public void onDeflect(@NotNull Player blocker, @NotNull LivingEntity attacker, int level, @NotNull EntityDamageByEntityEvent event) {
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
 
         if(!EnchantmentUtils.passedChance(this, level))

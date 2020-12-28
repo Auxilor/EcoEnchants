@@ -12,20 +12,22 @@ import org.bukkit.inventory.GrindstoneInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 public class GrindstoneListeners extends PluginDependent implements Listener {
-    public GrindstoneListeners(AbstractEcoPlugin plugin) {
+    public GrindstoneListeners(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
     @EventHandler
-    public void onGrindstone(InventoryClickEvent event) {
+    public void onGrindstone(@NotNull final InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        if (player.getOpenInventory().getTopInventory().getType() != InventoryType.GRINDSTONE)
+        if (player.getOpenInventory().getTopInventory().getType() != InventoryType.GRINDSTONE) {
             return;
+        }
 
         GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();
 
@@ -39,7 +41,9 @@ public class GrindstoneListeners extends PluginDependent implements Listener {
             if (toKeep.isEmpty()) {
                 inventory.setItem(2, out);
             }
-            if (out == null) return;
+            if (out == null) {
+                return;
+            }
 
             ItemStack newOut = out.clone();
             if (newOut.getItemMeta() instanceof EnchantmentStorageMeta) {

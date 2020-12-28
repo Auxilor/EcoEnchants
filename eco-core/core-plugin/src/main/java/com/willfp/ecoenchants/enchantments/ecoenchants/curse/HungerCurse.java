@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class HungerCurse extends EcoEnchant {
     public HungerCurse() {
@@ -18,15 +19,24 @@ public class HungerCurse extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onHunger(FoodLevelChangeEvent event) {
-        if (!(event.getEntity() instanceof Player))
+    public void onHunger(@NotNull final FoodLevelChangeEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
             return;
+        }
 
         Player player = (Player) event.getEntity();
 
-        if (!EnchantChecks.helmet(player, this)) return;
-        if (event.getFoodLevel() > player.getFoodLevel()) return;
-        if (this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.helmet(player, this)) {
+            return;
+        }
+
+        if (event.getFoodLevel() > player.getFoodLevel()) {
+            return;
+        }
+
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         int delta = player.getFoodLevel() - event.getFoodLevel();
         delta *= this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "times-more-hunger");

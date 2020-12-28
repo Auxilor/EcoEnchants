@@ -11,6 +11,8 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Succession extends EcoEnchant {
     public Succession() {
         super(
@@ -22,7 +24,7 @@ public class Succession extends EcoEnchant {
 
 
     @Override
-    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
+    public void onBowShoot(@NotNull LivingEntity shooter, @NotNull Arrow arrow, int level, @NotNull EntityShootBowEvent event) {
         int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows");
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);

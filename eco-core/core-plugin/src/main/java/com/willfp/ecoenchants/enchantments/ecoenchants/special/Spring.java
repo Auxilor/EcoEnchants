@@ -6,6 +6,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Spring extends EcoEnchant {
     public Spring() {
         super(
@@ -17,14 +19,14 @@ public class Spring extends EcoEnchant {
 
 
     @Override
-    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
+    public void onDamageWearingArmor(@NotNull LivingEntity victim, int level, @NotNull EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
             event.setCancelled(true);
         }
     }
 
     @Override
-    public void onJump(Player player, int level, PlayerMoveEvent event) {
+    public void onJump(@NotNull Player player, int level, @NotNull PlayerMoveEvent event) {
         double multiplier = 0.5 + ((double) (level * level) / 4 - 0.2) / 3;
         player.setVelocity(player.getLocation().getDirection().multiply(multiplier).setY(multiplier));
     }

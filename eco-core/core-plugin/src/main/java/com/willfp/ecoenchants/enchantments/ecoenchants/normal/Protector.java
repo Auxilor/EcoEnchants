@@ -5,6 +5,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Protector extends EcoEnchant {
     public Protector() {
         super(
@@ -15,7 +17,7 @@ public class Protector extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity uncastVictim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity uncastVictim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!(uncastVictim instanceof Tameable)) return;
 
         Tameable victim = (Tameable) uncastVictim;

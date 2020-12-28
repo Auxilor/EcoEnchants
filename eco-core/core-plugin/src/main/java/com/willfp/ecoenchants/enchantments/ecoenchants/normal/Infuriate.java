@@ -12,6 +12,7 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class Infuriate extends EcoEnchant {
     public Infuriate() {
@@ -24,7 +25,7 @@ public class Infuriate extends EcoEnchant {
 
 
     @Override
-    public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
+    public void onDeflect(@NotNull Player blocker, @NotNull LivingEntity attacker, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 

@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Respirator extends EcoEnchant {
     public Respirator() {
@@ -17,7 +18,7 @@ public class Respirator extends EcoEnchant {
 
 
     @Override
-    public void onDamageWearingArmor(LivingEntity victim, int level, EntityDamageEvent event) {
+    public void onDamageWearingArmor(@NotNull LivingEntity victim, int level, @NotNull EntityDamageEvent event) {
         if(!event.getCause().equals(EntityDamageEvent.DamageCause.DRAGON_BREATH)) return;
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-less-per-level");

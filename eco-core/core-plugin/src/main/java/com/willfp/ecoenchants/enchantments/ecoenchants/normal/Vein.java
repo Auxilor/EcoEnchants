@@ -13,6 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Vein extends EcoEnchant {
 
 
     @Override
-    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
         if (block.hasMetadata("block-ignore"))
             return;
 

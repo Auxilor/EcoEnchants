@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Netheric extends EcoEnchant {
     public Netheric() {
@@ -19,7 +20,7 @@ public class Netheric extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+    public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER))
             return;
 

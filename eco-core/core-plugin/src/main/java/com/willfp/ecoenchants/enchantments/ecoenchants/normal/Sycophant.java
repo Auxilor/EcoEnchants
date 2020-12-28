@@ -7,6 +7,8 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Sycophant extends EcoEnchant {
     public Sycophant() {
         super(
@@ -18,7 +20,7 @@ public class Sycophant extends EcoEnchant {
 
 
     @Override
-    public void onDeflect(Player blocker, LivingEntity attacker, int level, EntityDamageByEntityEvent event) {
+    public void onDeflect(@NotNull Player blocker, @NotNull LivingEntity attacker, int level, @NotNull EntityDamageByEntityEvent event) {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-level");
         double amountToHeal = level * multiplier;
         double newHealth = attacker.getHealth() + amountToHeal;

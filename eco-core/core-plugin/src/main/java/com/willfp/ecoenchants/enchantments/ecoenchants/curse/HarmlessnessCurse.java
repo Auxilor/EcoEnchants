@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class HarmlessnessCurse extends EcoEnchant {
     public HarmlessnessCurse() {
@@ -17,9 +18,13 @@ public class HarmlessnessCurse extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if (!EnchantmentUtils.passedChance(this, level))
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         event.setDamage(0);
         event.setCancelled(true);

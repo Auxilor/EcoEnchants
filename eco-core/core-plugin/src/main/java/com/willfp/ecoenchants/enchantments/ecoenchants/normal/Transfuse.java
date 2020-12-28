@@ -12,6 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class Transfuse extends EcoEnchant {
 
 
     @Override
-    public void onBlockBreak(Player player, Block block, int level, BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
             return;
 

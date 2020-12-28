@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Hellish extends EcoEnchant {
     public Hellish() {
@@ -19,9 +20,14 @@ public class Hellish extends EcoEnchant {
 
 
     @Override
-    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
-        if(!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER))
+    public void onTridentDamage(@NotNull final LivingEntity attacker,
+                                @NotNull final LivingEntity victim,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final EntityDamageByEntityEvent event) {
+        if (!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

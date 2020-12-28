@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 public class IllusionAspect extends EcoEnchant {
     public IllusionAspect() {
@@ -23,14 +24,20 @@ public class IllusionAspect extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
-        if(attacker instanceof Player && ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (attacker instanceof Player
+                && ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f
+                && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
             return;
         }
 
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         victim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, level * 10 + 15, level));
         victim.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, level * 10 + 15, level));

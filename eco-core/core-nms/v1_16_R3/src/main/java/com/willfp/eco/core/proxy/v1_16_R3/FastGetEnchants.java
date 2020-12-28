@@ -26,7 +26,7 @@ public final class FastGetEnchants implements FastGetEnchantsProxy {
             int level = '\uffff' & compound.getShort("lvl");
 
             Enchantment found = Enchantment.getByKey(CraftNamespacedKey.fromStringOrNull(key));
-            if(found != null) {
+            if (found != null) {
                 foundEnchantments.put(found, level);
             }
         }

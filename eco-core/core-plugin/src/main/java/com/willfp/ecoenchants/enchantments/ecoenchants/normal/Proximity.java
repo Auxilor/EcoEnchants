@@ -5,6 +5,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Proximity extends EcoEnchant {
     public Proximity() {
         super(
@@ -16,7 +18,7 @@ public class Proximity extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         double distance = attacker.getLocation().distance(victim.getLocation());
 
         double decreaseAfter = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "when-closer-than-blocks");

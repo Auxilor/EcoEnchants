@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Horde extends EcoEnchant {
     public Horde() {
@@ -17,7 +18,10 @@ public class Horde extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         double distance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance-per-level") * level;
 
         int entitiesNearby = (int) attacker.getNearbyEntities(distance, distance, distance).stream().filter(entity -> entity instanceof LivingEntity).count();

@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Rapid extends EcoEnchant {
     public Rapid() {
@@ -18,7 +19,7 @@ public class Rapid extends EcoEnchant {
 
 
     @Override
-    public void onBowShoot(LivingEntity shooter, Arrow arrow, int level, EntityShootBowEvent event) {
+    public void onBowShoot(@NotNull LivingEntity shooter, @NotNull Arrow arrow, int level, @NotNull EntityShootBowEvent event) {
         double multiplier = 1 - ((this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-faster-per-level") / 100) * level);
 
         if (event.getForce() < multiplier)

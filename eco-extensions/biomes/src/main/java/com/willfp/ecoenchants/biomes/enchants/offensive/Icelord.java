@@ -13,7 +13,7 @@ public class Icelord extends BiomesEnchantment {
     }
 
     @Override
-    public boolean isValid(@NotNull Biome biome) {
+    public boolean isValid(@NotNull final Biome biome) {
         return Arrays.stream(new String[]{"snowy", "ice", "frozen"}).anyMatch(biome.name().toLowerCase()::contains);
     }
 }

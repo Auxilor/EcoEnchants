@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+
 public class Grapple extends EcoEnchant {
     public Grapple() {
         super(
@@ -18,11 +20,14 @@ public class Grapple extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         double baseMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-multiplier");
         Vector vector = attacker.getLocation().toVector().clone().subtract(victim.getLocation().toVector()).normalize().multiply(level * baseMultiplier);
 
-        if(VectorUtils.isFinite(vector)) {
+        if (VectorUtils.isFinite(vector)) {
             victim.setVelocity(vector);
         }
     }

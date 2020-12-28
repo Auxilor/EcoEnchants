@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Instantaneous extends EcoEnchant {
     public Instantaneous() {
         super(
@@ -18,7 +20,7 @@ public class Instantaneous extends EcoEnchant {
 
 
     @Override
-    public void onDamageBlock(Player player, Block block, int level, BlockDamageEvent event) {
+    public void onDamageBlock(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockDamageEvent event) {
         if(!EnchantmentUtils.passedChance(this, level))
             return;
 

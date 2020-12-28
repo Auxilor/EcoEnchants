@@ -23,6 +23,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class SummoningEnchantment extends EcoEnchant {
     private final SummoningType summoningType;
@@ -36,21 +37,21 @@ public abstract class SummoningEnchantment extends EcoEnchant {
     public abstract EntityType getEntity();
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!summoningType.equals(SummoningType.MELEE)) return;
 
         doSpawn(attacker, victim, level);
     }
 
     @Override
-    public void onArrowDamage(LivingEntity attacker, LivingEntity victim, Arrow arrow, int level, EntityDamageByEntityEvent event) {
+    public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!summoningType.equals(SummoningType.RANGED)) return;
 
         doSpawn(attacker, victim, level);
     }
 
     @Override
-    public void onTridentDamage(LivingEntity attacker, LivingEntity victim, Trident trident, int level, EntityDamageByEntityEvent event) {
+    public void onTridentDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Trident trident, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!summoningType.equals(SummoningType.TRIDENT)) return;
 
         doSpawn(attacker, victim, level);

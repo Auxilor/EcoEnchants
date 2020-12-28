@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 public class Tectonic extends EcoEnchant {
@@ -21,7 +22,7 @@ public class Tectonic extends EcoEnchant {
 
 
     @Override
-    public void onFallDamage(LivingEntity faller, int level, EntityDamageEvent event) {
+    public void onFallDamage(@NotNull LivingEntity faller, int level, @NotNull EntityDamageEvent event) {
 
         if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL))
             return;

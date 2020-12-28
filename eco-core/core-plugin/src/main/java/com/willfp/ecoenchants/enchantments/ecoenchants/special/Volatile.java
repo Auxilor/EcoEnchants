@@ -11,6 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Volatile extends EcoEnchant {
     public Volatile() {
@@ -23,7 +24,7 @@ public class Volatile extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(LivingEntity uncastAttacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity uncastAttacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!(uncastAttacker instanceof Player)) return;
 
         Player attacker = (Player) uncastAttacker;
