@@ -51,7 +51,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     /**
      * The display name of the enchantment.
      */
-    @Getter
     private String name;
 
     /**
@@ -285,6 +284,17 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      */
     public Enchantment getEnchantment() {
         return this;
+    }
+
+    /**
+     * Get the display name of the enchantment.
+     *
+     * @return The name.
+     */
+    @Override
+    @NotNull
+    public String getName() {
+        return name;
     }
 
     /**
