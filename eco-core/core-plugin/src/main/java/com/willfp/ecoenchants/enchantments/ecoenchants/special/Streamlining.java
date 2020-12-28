@@ -15,8 +15,10 @@ public class Streamlining extends EcoEnchant {
     }
 
     @Override
-    public void onArmorEquip(@NotNull Player player, int level, @NotNull ArmorEquipEvent event) {
-        if(level == 0) {
+    public void onArmorEquip(@NotNull final Player player,
+                             final int level,
+                             @NotNull final ArmorEquipEvent event) {
+        if (level == 0) {
             player.setWalkSpeed(0.2f);
             return;
         }

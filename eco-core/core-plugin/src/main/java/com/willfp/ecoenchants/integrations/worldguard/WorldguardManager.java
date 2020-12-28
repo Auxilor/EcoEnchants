@@ -1,23 +1,26 @@
 package com.willfp.ecoenchants.integrations.worldguard;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@UtilityClass
 public class WorldguardManager {
-    private static final Set<WorldguardWrapper> worldguardWrappers = new HashSet<>();
+    private static final Set<WorldguardWrapper> REGISTERED = new HashSet<>();
 
     /**
      * Register a new WorldGuard integration
      *
      * @param worldguard The integration to register
      */
-    public static void register(WorldguardWrapper worldguard) {
-        worldguardWrappers.add(worldguard);
+    public static void register(@NotNull final WorldguardWrapper worldguard) {
+        REGISTERED.add(worldguard);
     }
 
     /**
@@ -26,8 +29,9 @@ public class WorldguardManager {
      * @param flagName     The name of the flag
      * @param defaultValue The default value for the flag to have
      */
-    public static void registerFlag(String flagName, boolean defaultValue) {
-        worldguardWrappers.forEach(worldguardWrapper -> worldguardWrapper.registerFlag(flagName, defaultValue));
+    public static void registerFlag(@NotNull final String flagName,
+                                    final boolean defaultValue) {
+        REGISTERED.forEach(worldguardWrapper -> worldguardWrapper.registerFlag(flagName, defaultValue));
     }
 
     /**
@@ -37,10 +41,15 @@ public class WorldguardManager {
      * @param player  The player to query
      * @return If the enchantment is enabled at a player's location
      */
-    public static boolean enabledForPlayer(EcoEnchant enchant, LivingEntity player) {
-        if (!(player instanceof Player)) return true;
-        if(worldguardWrappers.isEmpty()) return true;
-        return worldguardWrappers.stream().anyMatch(worldguardWrapper -> worldguardWrapper.enabledForPlayer(enchant, (Player) player, player.getLocation()));
+    public static boolean enabledForPlayer(@NotNull final EcoEnchant enchant,
+                                           @NotNull final LivingEntity player) {
+        if (!(player instanceof Player)) {
+            return true;
+        }
+        if (REGISTERED.isEmpty()) {
+            return true;
+        }
+        return REGISTERED.stream().anyMatch(worldguardWrapper -> worldguardWrapper.enabledForPlayer(enchant, (Player) player, player.getLocation()));
     }
 
     /**
@@ -51,9 +60,15 @@ public class WorldguardManager {
      * @param location The location to query
      * @return If the enchantment is enabled at a player's location
      */
-    public static boolean enabledForPlayer(EcoEnchant enchant, LivingEntity player, Location location) {
-        if (!(player instanceof Player)) return true;
-        if(worldguardWrappers.isEmpty()) return true;
-        return worldguardWrappers.stream().anyMatch(worldguardWrapper -> worldguardWrapper.enabledForPlayer(enchant, (Player) player, location));
+    public static boolean enabledForPlayer(@NotNull final EcoEnchant enchant,
+                                           @NotNull final LivingEntity player,
+                                           @NotNull final Location location) {
+        if (!(player instanceof Player)) {
+            return true;
+        }
+        if (REGISTERED.isEmpty()) {
+            return true;
+        }
+        return REGISTERED.stream().anyMatch(worldguardWrapper -> worldguardWrapper.enabledForPlayer(enchant, (Player) player, location));
     }
 }

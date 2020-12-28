@@ -18,7 +18,7 @@ public class Voltage extends EcoEnchant {
                 "voltage", EnchantmentType.NORMAL
         );
     }
-    private static final Material[] items = {
+    private static final Material[] ITEMS = {
             Material.IRON_HELMET,
             Material.IRON_CHESTPLATE,
             Material.IRON_LEGGINGS,
@@ -36,17 +36,30 @@ public class Voltage extends EcoEnchant {
     };
 
     @Override
-    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         EntityEquipment equipment = victim.getEquipment();
-        if(equipment == null) return;
-
-        int pieces = 0;
-        for (ItemStack armorPiece : equipment.getArmorContents()) {
-            if(armorPiece == null) continue;
-            if(Arrays.asList(items).contains(armorPiece.getType())) pieces++;
+        if (equipment == null) {
+            return;
         }
 
-        if(pieces == 0) return;
+        int pieces = 0;
+
+        for (ItemStack armorPiece : equipment.getArmorContents()) {
+            if (armorPiece == null) {
+                continue;
+            }
+
+            if (Arrays.asList(ITEMS).contains(armorPiece.getType())) {
+                pieces++;
+            }
+        }
+
+        if (pieces == 0) {
+            return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

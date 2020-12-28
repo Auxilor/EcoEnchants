@@ -18,9 +18,13 @@ public class WaterAspect extends EcoEnchant {
     }
 
     @Override
-    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman))
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

@@ -21,7 +21,10 @@ public class Succession extends EcoEnchant {
     }
 
     @Override
-    public void onBowShoot(@NotNull LivingEntity shooter, @NotNull Arrow arrow, int level, @NotNull EntityShootBowEvent event) {
+    public void onBowShoot(@NotNull final LivingEntity shooter,
+                           @NotNull final Arrow arrow,
+                           final int level,
+                           @NotNull final EntityShootBowEvent event) {
         int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows");
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
@@ -30,7 +33,9 @@ public class Succession extends EcoEnchant {
             this.getPlugin().getScheduler().runLater(() -> {
                 Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
                 arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
-                if(fire) arrow1.setFireTicks(Integer.MAX_VALUE);
+                if (fire) {
+                    arrow1.setFireTicks(Integer.MAX_VALUE);
+                }
 
                 if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-arrow-damage") && shooter instanceof Player) {
                     DurabilityUtils.damageItem((Player) shooter, ((Player) shooter).getInventory().getItemInMainHand(), 1, ((Player) shooter).getInventory().getHeldItemSlot());

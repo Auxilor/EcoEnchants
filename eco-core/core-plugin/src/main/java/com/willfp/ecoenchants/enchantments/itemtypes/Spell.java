@@ -31,7 +31,7 @@ import java.util.UUID;
 public abstract class Spell extends EcoEnchant {
     private final HashMap<UUID, SpellRunnable> tracker = new HashMap<>();
     private final Set<UUID> runningSpell = new HashSet<>();
-    private static final List<Material> leftClickItems = Arrays.asList(
+    private static final List<Material> LEFT_CLICK_ITEMS = Arrays.asList(
             Material.FISHING_ROD,
             Material.BOW
     );
@@ -59,7 +59,7 @@ public abstract class Spell extends EcoEnchant {
         runningSpell.add(player.getUniqueId());
         this.getPlugin().getScheduler().runLater(() -> runningSpell.remove(player.getUniqueId()), 5);
 
-        if (leftClickItems.contains(player.getInventory().getItemInMainHand().getType())) {
+        if (LEFT_CLICK_ITEMS.contains(player.getInventory().getItemInMainHand().getType())) {
             if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
                 return;
             }

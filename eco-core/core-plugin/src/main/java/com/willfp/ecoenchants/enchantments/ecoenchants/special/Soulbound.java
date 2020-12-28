@@ -9,6 +9,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,47 +22,57 @@ public class Soulbound extends EcoEnchant {
                 "soulbound", EnchantmentType.SPECIAL
         );
     }
-    private static final HashMap<Player, List<ItemStack>> soulboundItemsMap = new HashMap<>();
+    private static final HashMap<Player, List<ItemStack>> SOULBOUND_ITEMS = new HashMap<>();
 
-    public static List<ItemStack> getSoulboundItems(Player player) {
-        return soulboundItemsMap.get(player);
+    public static List<ItemStack> getSoulboundItems(@NotNull final Player player) {
+        return SOULBOUND_ITEMS.get(player);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onSoulboundDeath(PlayerDeathEvent event) {
-        if(event.getKeepInventory()) return;
+    public void onSoulboundDeath(@NotNull final PlayerDeathEvent event) {
+        if (event.getKeepInventory()) {
+            return;
+        }
 
         Player player = event.getEntity();
         List<ItemStack> soulboundItems = new ArrayList<>(); // Stored as list to preserve duplicates
 
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         Arrays.stream(player.getInventory().getContents()).filter(Objects::nonNull).forEach((itemStack -> {
-            if(itemStack.containsEnchantment(this)) soulboundItems.add(itemStack);
+            if (itemStack.containsEnchantment(this)) {
+                soulboundItems.add(itemStack);
+            }
 
-            if(itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this))) soulboundItems.add(itemStack);
+            if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this))) {
+                soulboundItems.add(itemStack);
+            }
         }));
 
         event.getDrops().removeAll(soulboundItems);
 
-        soulboundItemsMap.remove(player);
-        soulboundItemsMap.put(player, soulboundItems);
+        SOULBOUND_ITEMS.remove(player);
+        SOULBOUND_ITEMS.put(player, soulboundItems);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onSoulboundRespawn(PlayerRespawnEvent event) {
-        if(!soulboundItemsMap.containsKey(event.getPlayer())) return;
+    public void onSoulboundRespawn(@NotNull final PlayerRespawnEvent event) {
+        if (!SOULBOUND_ITEMS.containsKey(event.getPlayer())) {
+            return;
+        }
 
-        List<ItemStack> soulboundItems = soulboundItemsMap.get(event.getPlayer());
+        List<ItemStack> soulboundItems = SOULBOUND_ITEMS.get(event.getPlayer());
 
         soulboundItems.forEach((itemStack -> {
-            if(Arrays.asList(event.getPlayer().getInventory().getContents()).contains(itemStack)) return;
+            if (Arrays.asList(event.getPlayer().getInventory().getContents()).contains(itemStack)) {
+                return;
+            }
 
             event.getPlayer().getInventory().addItem(itemStack);
         }));
 
-        this.getPlugin().getScheduler().runLater(() -> {
-            soulboundItemsMap.remove(event.getPlayer());
-        }, 1);
+        this.getPlugin().getScheduler().runLater(() -> SOULBOUND_ITEMS.remove(event.getPlayer()), 1);
     }
 }

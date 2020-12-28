@@ -47,7 +47,7 @@ public class StringUtils {
         return ChatColor.translateAlternateColorCodes('&', translateHexColorCodes(processedMessage));
     }
 
-    private static String translateHexColorCodes(String message) {
+    private static String translateHexColorCodes(@NotNull final String message) {
         Pattern hexPattern = Pattern.compile("&#" + "([A-Fa-f0-9]{6})" + "");
         Matcher matcher = hexPattern.matcher(message);
         StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
@@ -91,15 +91,15 @@ public class StringUtils {
     /**
      * Remove a string of characters from the start of a string.
      *
-     * @param s      The string to remove the prefix from.
+     * @param string The string to remove the prefix from.
      * @param prefix The substring to remove.
      * @return The string with the prefix removed.
      */
-    public String removePrefix(@NotNull final String s,
+    public String removePrefix(@NotNull final String string,
                                @NotNull final String prefix) {
-        if (s.startsWith(prefix)) {
-            return s.substring(prefix.length());
+        if (string.startsWith(prefix)) {
+            return string.substring(prefix.length());
         }
-        return s;
+        return string;
     }
 }

@@ -16,14 +16,18 @@ public class Spring extends EcoEnchant {
     }
 
     @Override
-    public void onDamageWearingArmor(@NotNull LivingEntity victim, int level, @NotNull EntityDamageEvent event) {
+    public void onDamageWearingArmor(@NotNull final LivingEntity victim,
+                                     final int level,
+                                     @NotNull final EntityDamageEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
             event.setCancelled(true);
         }
     }
 
     @Override
-    public void onJump(@NotNull Player player, int level, @NotNull PlayerMoveEvent event) {
+    public void onJump(@NotNull final Player player,
+                       final int level,
+                       @NotNull final PlayerMoveEvent event) {
         double multiplier = 0.5 + ((double) (level * level) / 4 - 0.2) / 3;
         player.setVelocity(player.getLocation().getDirection().multiply(multiplier).setY(multiplier));
     }

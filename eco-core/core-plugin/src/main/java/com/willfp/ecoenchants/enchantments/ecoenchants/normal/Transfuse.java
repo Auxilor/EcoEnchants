@@ -24,26 +24,36 @@ public class Transfuse extends EcoEnchant {
     }
 
     @Override
-    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
+    public void onBlockBreak(@NotNull final Player player,
+                             @NotNull final Block block,
+                             final int level,
+                             @NotNull final BlockBreakEvent event) {
+        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
             return;
+        }
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         event.setDropItems(false);
 
-        if(!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "works-on").stream().map(string -> Material.getMaterial(string.toUpperCase())).collect(Collectors.toList()).contains(block.getType()))
+        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "works-on").stream()
+                .map(string -> Material.getMaterial(string.toUpperCase()))
+                .collect(Collectors.toList()).contains(block.getType())) {
             return;
+        }
 
         Material material;
         double random = NumberUtils.randFloat(0, 1);
-        double band = 1/(double) this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size();
-        int selectedIndex = (int) Math.floor(random/band);
+        double band = 1 / (double) this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size();
+        int selectedIndex = (int) Math.floor(random / band);
         selectedIndex = NumberUtils.equalIfOver(selectedIndex, this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").size() - 1);
         String materialName = this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks").get(selectedIndex);
         material = Material.getMaterial(materialName.toUpperCase());
-        if(material == null) material = Material.COBBLESTONE;
+        if (material == null) {
+            material = Material.COBBLESTONE;
+        }
 
         ItemStack item = new ItemStack(material, 1);
 

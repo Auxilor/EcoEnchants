@@ -14,7 +14,7 @@ public class Tropical extends BiomesEnchantment {
     }
 
     @Override
-    public boolean isValid(@NotNull Biome biome) {
+    public boolean isValid(@NotNull final Biome biome) {
         return Arrays.stream(new String[]{"jungle"}).anyMatch(biome.name().toLowerCase()::contains);
     }
 }

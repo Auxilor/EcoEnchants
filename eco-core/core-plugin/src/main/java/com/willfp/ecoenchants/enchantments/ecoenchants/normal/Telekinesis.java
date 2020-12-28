@@ -24,6 +24,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,91 +45,130 @@ public class Telekinesis extends EcoEnchant {
 
     // For block drops
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    public void telekinesisDropItem(BlockDropItemEvent event) {
+    public void telekinesisDropItem(@NotNull final BlockDropItemEvent event) {
         Player player = event.getPlayer();
 
-        if(!always && !EnchantChecks.mainhand(player, this)) return;
-        if(this.getDisabledWorldNames().contains(player.getWorld().getName())) return;
+        if (!always && !EnchantChecks.mainhand(player, this)) {
+            return;
+        }
 
-        if (event.isCancelled()) return;
+        if (this.getDisabledWorldNames().contains(player.getWorld().getName())) {
+            return;
+        }
+
+        if (event.isCancelled()) {
+            return;
+        }
 
         Block block = event.getBlock();
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if (!AntigriefManager.canBreakBlock(player, block)) {
+            return;
+        }
 
         List<ItemStack> drops = new ArrayList<>();
-        for(Item item : event.getItems()) drops.add(item.getItemStack());
+
+        for (Item item : event.getItems()) {
+            drops.add(item.getItemStack());
+        }
 
         event.getItems().clear();
 
         DropQueue queue = new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addItems(drops);
-        if(!always) queue.forceTelekinesis();
+
+        if (!always) {
+            queue.forceTelekinesis();
+        }
+
         queue.push();
     }
 
     // For exp drops, blockdropitemevent doesn't cover xp
     @EventHandler(priority = EventPriority.HIGH)
-    public void telekinesisBreak(BlockBreakEvent event) {
+    public void telekinesisBreak(@NotNull final BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if(!always && !EnchantChecks.mainhand(player, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
-
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
+        if (!always && !EnchantChecks.mainhand(player, this)) {
             return;
+        }
 
-        if (event.isCancelled())
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
             return;
+        }
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
+        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
+            return;
+        }
 
-        if(block.getType().equals(Material.SPAWNER)) event.setExpToDrop(0);
+        if (event.isCancelled()) {
+            return;
+        }
+
+        if (!AntigriefManager.canBreakBlock(player, block)) {
+            return;
+        }
+
+        if (block.getType().equals(Material.SPAWNER)) {
+            event.setExpToDrop(0);
+        }
 
         DropQueue queue = new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addXP(event.getExpToDrop());
-        if(!always) queue.forceTelekinesis();
+
+        if (!always) {
+            queue.forceTelekinesis();
+        }
+
         queue.push();
 
         event.setExpToDrop(0);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void telekinesisKill(EntityDeathByEntityEvent event) {
+    public void telekinesisKill(@NotNull final EntityDeathByEntityEvent event) {
         Player player = null;
         LivingEntity entity = event.getVictim();
         ItemStack item = null;
 
-        if(entity instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "not-on-players"))
+        if (entity instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "not-on-players")) {
             return;
+        }
 
-        if(event.getKiller() instanceof Player) {
+        if (event.getKiller() instanceof Player) {
             player = (Player) event.getKiller();
             item = player.getInventory().getItemInMainHand();
-        } else if(event.getKiller() instanceof Arrow) {
-            if(((Arrow) event.getKiller()).getShooter() instanceof Player) {
+        } else if (event.getKiller() instanceof Arrow) {
+            if (((Arrow) event.getKiller()).getShooter() instanceof Player) {
                 player = (Player) ((Arrow) event.getKiller()).getShooter();
                 item = player.getInventory().getItemInMainHand();
             }
-        } else if(event.getKiller() instanceof Trident) {
-            if(((Trident) event.getKiller()).getShooter() instanceof Player) {
+        } else if (event.getKiller() instanceof Trident) {
+            if (((Trident) event.getKiller()).getShooter() instanceof Player) {
                 player = (Player) ((Trident) event.getKiller()).getShooter();
                 item =  ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack((Trident) event.getKiller());
             }
         }
 
-        if(player == null || item == null) return;
+        if (player == null || item == null) {
+            return;
+        }
 
-        if (!EnchantChecks.item(item, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.item(item, this)) {
+            return;
+        }
+
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         int xp = event.getXp();
         Collection<ItemStack> drops = event.getDrops();
 
-        if(entity instanceof Player && Soulbound.getSoulboundItems((Player) entity) != null) {
+        if (entity instanceof Player && Soulbound.getSoulboundItems((Player) entity) != null) {
             drops.removeAll(Soulbound.getSoulboundItems((Player) entity));
         }
 

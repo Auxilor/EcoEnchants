@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -18,27 +19,43 @@ import java.util.Optional;
 @SuppressWarnings("deprecation")
 public class SprintArtifactsListener implements Listener {
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
+    public void onPlayerMove(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if(!player.isSprinting()) return;
-        if(!player.isOnGround()) return;
+        if (!player.isSprinting()) {
+            return;
+        }
+
+        if (!player.isOnGround()) {
+            return;
+        }
 
         ItemStack boots = player.getInventory().getBoots();
-        if(boots == null) return;
+        if (boots == null) {
+            return;
+        }
         ItemMeta bootsMeta = boots.getItemMeta();
-        if(bootsMeta == null) return;
+        if (bootsMeta == null) {
+            return;
+        }
 
         Optional<EcoEnchant> matching = bootsMeta.getEnchants().keySet().stream()
                 .map(EcoEnchants::getFromEnchantment)
                 .filter(Objects::nonNull)
                 .filter(enchantment -> enchantment.getType().equals(EnchantmentType.ARTIFACT))
                 .findFirst();
-        if(!matching.isPresent()) return;
+        if (!matching.isPresent()) {
+            return;
+        }
         Artifact artifact = (Artifact) matching.get();
 
-        if (!EnchantChecks.boots(player, artifact)) return;
-        if(artifact.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.boots(player, artifact)) {
+            return;
+        }
+
+        if (artifact.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         player.getWorld().spawnParticle(artifact.getParticle(), player.getLocation().add(0, 0.1, 0), 1, 0, 0, 0, 0, artifact.getDustOptions(), true);
     }

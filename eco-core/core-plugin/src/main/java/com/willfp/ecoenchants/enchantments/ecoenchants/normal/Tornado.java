@@ -16,14 +16,15 @@ public class Tornado extends EcoEnchant {
     }
 
     @Override
-    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         double baseVelocity = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-per-level");
         double yVelocity = baseVelocity * level;
 
         Vector toAdd = new Vector(0, yVelocity, 0);
 
-        this.getPlugin().getScheduler().runLater(() -> {
-            victim.setVelocity(victim.getVelocity().clone().add(toAdd));
-        }, 1);
+        this.getPlugin().getScheduler().runLater(() -> victim.setVelocity(victim.getVelocity().clone().add(toAdd)), 1);
     }
 }

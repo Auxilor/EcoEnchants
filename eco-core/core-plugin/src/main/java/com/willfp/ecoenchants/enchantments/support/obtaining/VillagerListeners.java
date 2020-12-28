@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,12 +28,14 @@ public class VillagerListeners implements Listener {
 
     // For books
     @EventHandler
-    public void onVillagerGainBookTrade(VillagerAcquireTradeEvent event) {
-        if (!event.getRecipe().getResult().getType().equals(Material.ENCHANTED_BOOK))
+    public void onVillagerGainBookTrade(@NotNull final VillagerAcquireTradeEvent event) {
+        if (!event.getRecipe().getResult().getType().equals(Material.ENCHANTED_BOOK)) {
             return;
+        }
 
-        if (!Configs.CONFIG.getBool("villager.enabled"))
+        if (!Configs.CONFIG.getBool("villager.enabled")) {
             return;
+        }
 
         ItemStack result = event.getRecipe().getResult().clone();
         int uses = event.getRecipe().getUses();
@@ -42,7 +45,9 @@ public class VillagerListeners implements Listener {
         float priceMultiplier = event.getRecipe().getPriceMultiplier();
         List<ItemStack> ingredients = event.getRecipe().getIngredients();
 
-        if (!(result.getItemMeta() instanceof EnchantmentStorageMeta)) return;
+        if (!(result.getItemMeta() instanceof EnchantmentStorageMeta)) {
+            return;
+        }
 
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) result.getItemMeta();
 
@@ -52,12 +57,17 @@ public class VillagerListeners implements Listener {
         double multiplier = 0.01 / Configs.CONFIG.getDouble("villager.book-times-less-likely");
 
         for (EcoEnchant enchantment : enchantments) {
-            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
+            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier) {
                 continue;
-            if (!enchantment.canGetFromVillager())
+            }
+
+            if (!enchantment.canGetFromVillager()) {
                 continue;
-            if (!enchantment.isEnabled())
+            }
+
+            if (!enchantment.isEnabled()) {
                 continue;
+            }
 
             int level;
 
@@ -74,9 +84,7 @@ public class VillagerListeners implements Listener {
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             }
 
-            meta.getStoredEnchants().forEach(((enchantment1, integer) -> {
-                meta.removeStoredEnchant(enchantment1);
-            }));
+            meta.getStoredEnchants().forEach(((enchantment1, integer) -> meta.removeStoredEnchant(enchantment1)));
 
             meta.addStoredEnchant(enchantment, level, false);
             break;
@@ -91,15 +99,19 @@ public class VillagerListeners implements Listener {
 
     // For tools
     @EventHandler
-    public void onVillagerGainItemTrade(VillagerAcquireTradeEvent event) {
+    public void onVillagerGainItemTrade(@NotNull final VillagerAcquireTradeEvent event) {
 
-        if (!EnchantmentTarget.ALL.getMaterials().contains(event.getRecipe().getResult().getType()))
+        if (!EnchantmentTarget.ALL.getMaterials().contains(event.getRecipe().getResult().getType())) {
             return;
+        }
 
-        if (event.getRecipe().getResult().getType().equals(Material.BOOK)) return;
-
-        if (!Configs.CONFIG.getBool("villager.enabled"))
+        if (event.getRecipe().getResult().getType().equals(Material.BOOK)) {
             return;
+        }
+
+        if (!Configs.CONFIG.getBool("villager.enabled")) {
+            return;
+        }
 
         ItemStack result = event.getRecipe().getResult().clone();
         int uses = event.getRecipe().getUses();
@@ -109,7 +121,9 @@ public class VillagerListeners implements Listener {
         float priceMultiplier = event.getRecipe().getPriceMultiplier();
         List<ItemStack> ingredients = event.getRecipe().getIngredients();
 
-        if (result.getItemMeta() instanceof EnchantmentStorageMeta) return;
+        if (result.getItemMeta() instanceof EnchantmentStorageMeta) {
+            return;
+        }
 
         ItemMeta meta = result.getItemMeta();
 
@@ -121,25 +135,42 @@ public class VillagerListeners implements Listener {
         double multiplier = 0.01;
 
         for (EcoEnchant enchantment : enchantments) {
-            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier)
+            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier) {
                 continue;
-            if (!enchantment.canGetFromVillager())
+            }
+
+            if (!enchantment.canGetFromVillager()) {
                 continue;
-            if (!enchantment.canEnchantItem(result))
+            }
+
+            if (!enchantment.canEnchantItem(result)) {
                 continue;
-            if (!enchantment.isEnabled())
+            }
+
+            if (!enchantment.isEnabled()) {
                 continue;
+            }
 
             AtomicBoolean anyConflicts = new AtomicBoolean(false);
             toAdd.forEach((enchant, integer) -> {
-                if (enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
-                if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
+                if (enchantment.conflictsWithAny(toAdd.keySet())) {
+                    anyConflicts.set(true);
+                }
+
+                if (enchant.conflictsWith(enchantment)) {
+                    anyConflicts.set(true);
+                }
 
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular())
+
+                if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
                     anyConflicts.set(true);
+                }
             });
-            if (anyConflicts.get()) continue;
+
+            if (anyConflicts.get()) {
+                continue;
+            }
 
             int level;
 
@@ -163,9 +194,7 @@ public class VillagerListeners implements Listener {
             }
         }
 
-        toAdd.forEach(((enchantment, integer) -> {
-            meta.addEnchant(enchantment, integer, false);
-        }));
+        toAdd.forEach(((enchantment, integer) -> meta.addEnchant(enchantment, integer, false)));
 
         result.setItemMeta(meta);
 

@@ -21,22 +21,34 @@ public class Volatile extends EcoEnchant {
     }
 
     @Override
-    public void onMeleeAttack(@NotNull LivingEntity uncastAttacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!(uncastAttacker instanceof Player)) return;
+    public void onMeleeAttack(@NotNull final LivingEntity uncastAttacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!(uncastAttacker instanceof Player)) {
+            return;
+        }
 
         Player attacker = (Player) uncastAttacker;
 
-        if (ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown(attacker) != 1.0f && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged"))
+        if (ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown(attacker) != 1.0f
+                && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
             return;
-        if(!EnchantmentUtils.passedChance(this, level))
+        }
+
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         boolean fire = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "fire");
         boolean breakblocks = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "break-blocks");
 
         float power = (float) (0.5 + (level * 0.5));
 
-        if (!AntigriefManager.canCreateExplosion(attacker, event.getEntity().getLocation())) return;
+        if (!AntigriefManager.canCreateExplosion(attacker, event.getEntity().getLocation())) {
+            return;
+        }
+
         if (breakblocks && !AntigriefManager.canBreakBlock(attacker, event.getEntity().getLocation().getWorld().getBlockAt(event.getEntity().getLocation()))) {
             return;
         }

@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 public class Slicing extends EcoEnchant {
@@ -22,14 +23,20 @@ public class Slicing extends EcoEnchant {
     private final ArrayList<LivingEntity> entities = new ArrayList<>();
 
     @EventHandler
-    public void onPlayerCollide(PlayerMoveEvent event) {
+    public void onPlayerCollide(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (!player.isGliding())
+        if (!player.isGliding()) {
             return;
+        }
 
-        if (!EnchantChecks.chestplate(player, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.chestplate(player, this)) {
+            return;
+        }
+
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
             LivingEntity victim;
@@ -39,8 +46,9 @@ public class Slicing extends EcoEnchant {
                 continue;
             }
 
-            if (entities.contains(victim))
+            if (entities.contains(victim)) {
                 continue;
+            }
 
             double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
             int level = EnchantChecks.getMainhandLevel(player, this);

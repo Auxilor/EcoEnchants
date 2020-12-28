@@ -16,6 +16,7 @@ import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,31 +28,44 @@ public class Spearfishing extends EcoEnchant {
                 "spearfishing", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
-    public void onSpearfishingLand(ProjectileHitEvent event) {
-        if (event.getEntityType() != EntityType.TRIDENT)
+    public void onSpearfishingLand(@NotNull final ProjectileHitEvent event) {
+        if (event.getEntityType() != EntityType.TRIDENT) {
             return;
+        }
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if (!(event.getEntity().getShooter() instanceof Player)) {
             return;
+        }
 
-        if (!(event.getEntity() instanceof Trident)) return;
+        if (!(event.getEntity() instanceof Trident)) {
+            return;
+        }
 
         Trident trident = (Trident) event.getEntity();
 
-        if(!trident.getWorld().getBlockAt(trident.getLocation().add(0, 0.2, 0)).getType().equals(Material.WATER))
+        if (!trident.getWorld().getBlockAt(trident.getLocation().add(0, 0.2, 0)).getType().equals(Material.WATER)) {
             return;
+        }
 
         Player player = (Player) event.getEntity().getShooter();
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
 
-        if (!EnchantChecks.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) {
+            return;
+        }
 
         int level = EnchantChecks.getItemLevel(item, this);
-        if(!EnchantmentUtils.passedChance(this, level))
+
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         List<Material> potentialDrops = new ArrayList<>();
         this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "drops").forEach(material -> {

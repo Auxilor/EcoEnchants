@@ -27,17 +27,24 @@ public class Vein extends EcoEnchant {
     }
 
     @Override
-    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
-        if (block.hasMetadata("block-ignore"))
+    public void onBlockBreak(@NotNull final Player player,
+                             @NotNull final Block block,
+                             final int level,
+                             @NotNull final BlockBreakEvent event) {
+        if (block.hasMetadata("block-ignore")) {
             return;
+        }
 
-        if (player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) return;
+        if (player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) {
+            return;
+        }
 
         List<Material> materials = new ArrayList<>();
         this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks").forEach(name -> materials.add(Material.getMaterial(name.toUpperCase())));
 
-        if (!materials.contains(block.getType()))
+        if (!materials.contains(block.getType())) {
             return;
+        }
 
         int blocksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "blocks-per-level");
         int limit = level * blocksPerLevel;
@@ -48,7 +55,9 @@ public class Vein extends EcoEnchant {
 
         for (Block veinBlock : blockSet) {
             veinBlock.setMetadata("block-ignore", new FixedMetadataValue(this.getPlugin(), true));
-            if (!AntigriefManager.canBreakBlock(player, veinBlock)) continue;
+            if (!AntigriefManager.canBreakBlock(player, veinBlock)) {
+                continue;
+            }
 
             ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, veinBlock);
 

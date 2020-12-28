@@ -8,29 +8,32 @@ import com.willfp.ecoenchants.display.options.sorting.implementations.RarityType
 import com.willfp.ecoenchants.display.options.sorting.implementations.RarityTypeLengthSorter;
 import com.willfp.ecoenchants.display.options.sorting.implementations.TypeAlphabeticSorter;
 import com.willfp.ecoenchants.display.options.sorting.implementations.TypeLengthSorter;
+import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+@UtilityClass
 public class SorterManager {
-    private static final Set<EnchantmentSorter> values = new HashSet<>();
+    private static final Set<EnchantmentSorter> REGISTERED = new HashSet<>();
 
-    public static EnchantmentSorter getSorter(SortParameters... parameters) {
-        return values.stream()
+    public static EnchantmentSorter getSorter(@NotNull final SortParameters... parameters) {
+        return REGISTERED.stream()
                 .filter(enchantmentSorter -> Arrays.asList(enchantmentSorter.getParameters()).containsAll(Arrays.asList(parameters)) && enchantmentSorter.getParameters().length == parameters.length)
                 .findFirst()
                 .orElse(new AlphabeticSorter());
     }
 
     static {
-        values.add(new AlphabeticSorter());
-        values.add(new LengthSorter());
-        values.add(new TypeAlphabeticSorter());
-        values.add(new TypeLengthSorter());
-        values.add(new RarityAlphabeticSorter());
-        values.add(new RarityLengthSorter());
-        values.add(new RarityTypeAlphabeticSorter());
-        values.add(new RarityTypeLengthSorter());
+        REGISTERED.add(new AlphabeticSorter());
+        REGISTERED.add(new LengthSorter());
+        REGISTERED.add(new TypeAlphabeticSorter());
+        REGISTERED.add(new TypeLengthSorter());
+        REGISTERED.add(new RarityAlphabeticSorter());
+        REGISTERED.add(new RarityLengthSorter());
+        REGISTERED.add(new RarityTypeAlphabeticSorter());
+        REGISTERED.add(new RarityTypeLengthSorter());
     }
 }

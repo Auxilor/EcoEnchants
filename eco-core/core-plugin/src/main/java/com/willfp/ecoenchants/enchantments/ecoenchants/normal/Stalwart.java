@@ -18,9 +18,12 @@ public class Stalwart extends EcoEnchant {
     }
 
     @Override
-    public void onDamageWearingArmor(@NotNull LivingEntity victim, int level, @NotNull EntityDamageEvent event) {
-        if(!EnchantmentUtils.passedChance(this, level))
+    public void onDamageWearingArmor(@NotNull final LivingEntity victim,
+                                     final int level,
+                                     @NotNull final EntityDamageEvent event) {
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "duration-per-level");
         duration *= level;

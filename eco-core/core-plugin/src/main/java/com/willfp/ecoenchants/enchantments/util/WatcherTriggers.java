@@ -28,6 +28,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.Set;
@@ -35,59 +36,94 @@ import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 public class WatcherTriggers extends PluginDependent implements Listener {
-    public WatcherTriggers(AbstractEcoPlugin plugin) {
+    private static final Set<UUID> PREVIOUS_PLAYERS_ON_GROUND = Sets.newHashSet();
+    private static final DecimalFormat FORMAT = new DecimalFormat("0.00");
+
+
+    public WatcherTriggers(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onArrowDamage(EntityDamageByEntityEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onArrowDamage(@NotNull final EntityDamageByEntityEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (!(event.getDamager() instanceof Arrow))
+        }
+
+        if (!(event.getDamager() instanceof Arrow)) {
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        }
+
+        if (!(event.getEntity() instanceof LivingEntity)) {
             return;
-        if (((Arrow) event.getDamager()).getShooter() == null)
+        }
+
+        if (((Arrow) event.getDamager()).getShooter() == null) {
             return;
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof LivingEntity))
+        }
+
+        if (!(((Arrow) event.getDamager()).getShooter() instanceof LivingEntity)) {
             return;
+        }
 
         LivingEntity attacker = (LivingEntity) ((Arrow) event.getDamager()).getShooter();
         Arrow arrow = (Arrow) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (victim.hasMetadata("NPC")) return;
+        if (victim.hasMetadata("NPC")) {
+            return;
+        }
 
-        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) return;
+        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) {
+            return;
+        }
 
-        if (event.isCancelled()) return;
+        if (event.isCancelled()) {
+            return;
+        }
 
         EnchantChecks.getEnchantsOnArrow(arrow).forEach(((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(attacker.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(attacker.getWorld())) {
+                return;
+            }
+
             enchant.onArrowDamage(attacker, victim, arrow, level, event);
         }));
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onTridentDamage(EntityDamageByEntityEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onTridentDamage(@NotNull final EntityDamageByEntityEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (!(event.getDamager() instanceof Trident))
-            return;
+        }
 
-        if (!(((Trident) event.getDamager()).getShooter() instanceof LivingEntity))
+        if (!(event.getDamager() instanceof Trident)) {
             return;
+        }
 
-        if (((Trident) event.getDamager()).getShooter() == null)
+        if (!(((Trident) event.getDamager()).getShooter() instanceof LivingEntity)) {
             return;
+        }
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if (((Trident) event.getDamager()).getShooter() == null) {
             return;
+        }
 
-        if (event.isCancelled())
+        if (!(event.getEntity() instanceof LivingEntity)) {
             return;
+        }
+
+        if (event.isCancelled()) {
+            return;
+        }
 
         LivingEntity attacker = (LivingEntity) ((Trident) event.getDamager()).getShooter();
         Trident trident = (Trident) event.getDamager();
@@ -95,282 +131,455 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (victim.hasMetadata("NPC")) return;
+        if (victim.hasMetadata("NPC")) {
+            return;
+        }
 
-        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) return;
+        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) {
+            return;
+        }
 
         EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(attacker.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(attacker.getWorld())) {
+                return;
+            }
+
             enchant.onTridentDamage(attacker, victim, trident, level, event);
         }));
     }
 
-
-    private static final Set<UUID> prevPlayersOnGround = Sets.newHashSet();
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-
     @EventHandler(ignoreCancelled = true)
-    public void onJump(PlayerMoveEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onJump(@NotNull final PlayerMoveEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
+        }
+
         Player player = event.getPlayer();
         if (player.getVelocity().getY() > 0) {
             float jumpVelocity = 0.42f;
             if (player.hasPotionEffect(PotionEffectType.JUMP)) {
                 jumpVelocity += ((float) player.getPotionEffect(PotionEffectType.JUMP).getAmplifier() + 1) * 0.1F;
             }
-            jumpVelocity = Float.parseFloat(df.format(jumpVelocity).replace(',', '.'));
-            if (event.getPlayer().getLocation().getBlock().getType() != Material.LADDER && prevPlayersOnGround.contains(player.getUniqueId())&& !player.isOnGround() && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
+            jumpVelocity = Float.parseFloat(FORMAT.format(jumpVelocity).replace(',', '.'));
+            if (event.getPlayer().getLocation().getBlock().getType() != Material.LADDER
+                    && PREVIOUS_PLAYERS_ON_GROUND.contains(player.getUniqueId())
+                    && !player.isOnGround()
+                    && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
                 EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, level) -> {
-                    if (event.isCancelled()) return;
-                    if (!enchant.isEnabled()) return;
-                    if (enchant.getDisabledWorlds().contains(player.getWorld())) return;
+                    if (event.isCancelled()) {
+                        return;
+                    }
+
+                    if (!enchant.isEnabled()) {
+                        return;
+                    }
+
+                    if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                        return;
+                    }
+
                     enchant.onJump(player, level, event);
                 });
             }
         }
         if (player.isOnGround()) {
-            prevPlayersOnGround.add(player.getUniqueId());
+            PREVIOUS_PLAYERS_ON_GROUND.add(player.getUniqueId());
         } else {
-            prevPlayersOnGround.remove(player.getUniqueId());
+            PREVIOUS_PLAYERS_ON_GROUND.remove(player.getUniqueId());
         }
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onMeleeAttack(EntityDamageByEntityEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onMeleeAttack(@NotNull final EntityDamageByEntityEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (!(event.getDamager() instanceof LivingEntity))
-            return;
+        }
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if (!(event.getDamager() instanceof LivingEntity)) {
             return;
+        }
 
-        if (event.isCancelled())
+        if (!(event.getEntity() instanceof LivingEntity)) {
             return;
+        }
+
+        if (event.isCancelled()) {
+            return;
+        }
 
         LivingEntity attacker = (LivingEntity) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (victim.hasMetadata("NPC")) return;
+        if (victim.hasMetadata("NPC")) {
+            return;
+        }
 
-        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) return;
+        if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) {
+            return;
+        }
 
         EnchantChecks.getEnchantsOnMainhand(attacker).forEach((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(attacker.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(attacker.getWorld())) {
+                return;
+            }
+
             enchant.onMeleeAttack(attacker, victim, level, event);
         });
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onBowShoot(EntityShootBowEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onBowShoot(@NotNull final EntityShootBowEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (event.getProjectile().getType() != EntityType.ARROW)
+        }
+
+        if (event.getProjectile().getType() != EntityType.ARROW) {
             return;
+        }
 
         LivingEntity shooter = event.getEntity();
         Arrow arrow = (Arrow) event.getProjectile();
 
         EnchantChecks.getEnchantsOnMainhand(shooter).forEach((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
             enchant.onBowShoot(shooter, arrow, level, event);
         });
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onFallDamage(EntityDamageEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onFallDamage(@NotNull final EntityDamageEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL))
-            return;
+        }
 
-        if (!(event.getEntity() instanceof LivingEntity))
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
             return;
+        }
+
+        if (!(event.getEntity() instanceof LivingEntity)) {
+            return;
+        }
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
         EnchantChecks.getEnchantsOnArmor(victim).forEach((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(victim.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(victim.getWorld())) {
+                return;
+            }
+
             enchant.onFallDamage(victim, level, event);
         });
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onArrowHit(ProjectileHitEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onArrowHit(@NotNull final ProjectileHitEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (!(event.getEntity().getShooter() instanceof LivingEntity))
-            return;
+        }
 
-        if (!(event.getEntity() instanceof Arrow)) return;
-
-        if (event.getEntity().getShooter() == null)
+        if (!(event.getEntity().getShooter() instanceof LivingEntity)) {
             return;
+        }
+
+        if (!(event.getEntity() instanceof Arrow)) {
+            return;
+        }
+
+        if (event.getEntity().getShooter() == null) {
+            return;
+        }
 
         Arrow arrow = (Arrow) event.getEntity();
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
         EnchantChecks.getEnchantsOnArrow(arrow).forEach(((enchant, level) -> {
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
             enchant.onArrowHit(shooter, level, event);
         }));
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onTridentHit(ProjectileHitEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onTridentHit(@NotNull final ProjectileHitEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (!(event.getEntity().getShooter() instanceof LivingEntity))
-            return;
-        if (event.getEntity().getShooter() == null)
-            return;
+        }
 
-        if (!(event.getEntity() instanceof Trident)) return;
+        if (!(event.getEntity().getShooter() instanceof LivingEntity)) {
+            return;
+        }
+
+        if (event.getEntity().getShooter() == null) {
+            return;
+        }
+
+        if (!(event.getEntity() instanceof Trident)) {
+            return;
+        }
 
         Trident trident = (Trident) event.getEntity();
         ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
         EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
             enchant.onTridentHit(shooter, level, event);
         }));
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onBlockBreak(BlockBreakEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onBlockBreak(@NotNull final BlockBreakEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
+        }
+
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
-
-        if (event.isCancelled())
+        if (!AntigriefManager.canBreakBlock(player, block)) {
             return;
+        }
+
+        if (event.isCancelled()) {
+            return;
+        }
 
         EnchantChecks.getEnchantsOnMainhand(player).forEach((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(player.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+
             enchant.onBlockBreak(player, block, level, event);
         });
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onDamageWearingArmor(EntityDamageEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onDamageWearingArmor(@NotNull final EntityDamageEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
-        if (!(event.getEntity() instanceof LivingEntity))
+        }
+
+        if (!(event.getEntity() instanceof LivingEntity)) {
             return;
+        }
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
         EnchantChecks.getEnchantsOnArmor(victim).forEach((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(victim.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(victim.getWorld())) {
+                return;
+            }
+
             enchant.onDamageWearingArmor(victim, level, event);
         });
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onArmorEquip(ArmorEquipEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
+        }
+
         Player player = event.getPlayer();
 
-        this.getPlugin().getScheduler().runLater(() -> {
-            EcoEnchants.values().forEach((enchant -> {
-                if (event.isCancelled()) return;
-                if (!enchant.isEnabled()) return;
-                if (enchant.getDisabledWorlds().contains(player.getWorld())) return;
-                int level = EnchantChecks.getArmorPoints(player, enchant);
-                enchant.onArmorEquip(player, level, event);
-            }));
-        }, 1);
+        this.getPlugin().getScheduler().runLater(() -> EcoEnchants.values().forEach(enchant -> {
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+
+            int level = EnchantChecks.getArmorPoints(player, enchant);
+            enchant.onArmorEquip(player, level, event);
+        }), 1);
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onDamageBlock(BlockDamageEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onDamageBlock(@NotNull final BlockDamageEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
+        }
+
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (event.getBlock().getDrops(player.getInventory().getItemInMainHand()).isEmpty())
+        if (event.getBlock().getDrops(player.getInventory().getItemInMainHand()).isEmpty()) {
             return;
+        }
 
         EnchantChecks.getEnchantsOnMainhand(player).forEach((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(player.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+
             enchant.onDamageBlock(player, block, level, event);
         });
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onTridentLaunch(ProjectileLaunchEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onTridentLaunch(@NotNull final ProjectileLaunchEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
+        }
 
-        if (!(event.getEntity() instanceof Trident))
+        if (!(event.getEntity() instanceof Trident)) {
             return;
+        }
 
-        if (!(event.getEntity().getShooter() instanceof LivingEntity))
+        if (!(event.getEntity().getShooter() instanceof LivingEntity)) {
             return;
+        }
 
         Trident trident = (Trident) event.getEntity();
         LivingEntity shooter = (LivingEntity) trident.getShooter();
         ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
 
         EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) return;
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
             enchant.onTridentLaunch(shooter, trident, level, event);
         });
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onDeflect(EntityDamageByEntityEvent event) {
-        if (McmmoManager.isFake(event))
+    public void onDeflect(@NotNull final EntityDamageByEntityEvent event) {
+        if (McmmoManager.isFake(event)) {
             return;
+        }
 
-        if (!(event.getEntity() instanceof Player))
+        if (!(event.getEntity() instanceof Player)) {
             return;
+        }
 
-        if (!(event.getDamager() instanceof LivingEntity))
+        if (!(event.getDamager() instanceof LivingEntity)) {
             return;
+        }
 
         Player blocker = (Player) event.getEntity();
 
         LivingEntity attacker = (LivingEntity) event.getDamager();
 
-        if (!blocker.isBlocking()) return;
+        if (!blocker.isBlocking()) {
+            return;
+        }
 
-        if (!AntigriefManager.canInjure(blocker, attacker)) return;
+        if (!AntigriefManager.canInjure(blocker, attacker)) {
+            return;
+        }
 
-        EcoEnchants.values().forEach((enchant -> {
-            if (event.isCancelled()) return;
-            if (!enchant.isEnabled()) return;
-            if (enchant.getDisabledWorlds().contains(blocker.getWorld())) return;
+        EcoEnchants.values().forEach(enchant -> {
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(blocker.getWorld())) {
+                return;
+            }
+
             int level;
-            if (!EnchantChecks.offhand(blocker, enchant) && !EnchantChecks.mainhand(blocker, enchant)) return;
-            if (EnchantChecks.offhand(blocker, enchant)) level = EnchantChecks.getOffhandLevel(blocker, enchant);
-            else level = EnchantChecks.getMainhandLevel(blocker, enchant);
+
+            if (!EnchantChecks.offhand(blocker, enchant) && !EnchantChecks.mainhand(blocker, enchant)) {
+                return;
+            }
+
+            if (EnchantChecks.offhand(blocker, enchant)) {
+                level = EnchantChecks.getOffhandLevel(blocker, enchant);
+            } else {
+                level = EnchantChecks.getMainhandLevel(blocker, enchant);
+            }
             enchant.onDeflect(blocker, attacker, level, event);
-        }));
+        });
     }
 }

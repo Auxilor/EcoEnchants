@@ -17,7 +17,10 @@ public class Sycophant extends EcoEnchant {
     }
 
     @Override
-    public void onDeflect(@NotNull Player blocker, @NotNull LivingEntity attacker, int level, @NotNull EntityDamageByEntityEvent event) {
+    public void onDeflect(@NotNull final Player blocker,
+                          @NotNull final LivingEntity attacker,
+                          final int level,
+                          @NotNull final EntityDamageByEntityEvent event) {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-level");
         double amountToHeal = level * multiplier;
         double newHealth = attacker.getHealth() + amountToHeal;
