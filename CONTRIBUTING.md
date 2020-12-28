@@ -5,17 +5,15 @@
 - The pull request must not have any checkstyle issues.
 - Every method and field must have a javadoc attached.
 
-2. Use sonarlint (base config) if possible.
-
-3. Use lombok wherever possible.
+2. Use lombok wherever possible.
 - As of 6.0.0, EcoEnchants is now built with lombok.
 - @Getter, @Setter, @ToString, @EqualsAndHashCode, @UtilityClass are the most important.
 
-4. Use JetBrains annotations
+3. Use JetBrains annotations
 - Every parameter should be annotated with @NotNull or @Nullable
 - Use @NotNull over lombok @NonNull
 
-5. Imports
+4. Imports
 - No group (*) imports.
 - No static imports.
 
