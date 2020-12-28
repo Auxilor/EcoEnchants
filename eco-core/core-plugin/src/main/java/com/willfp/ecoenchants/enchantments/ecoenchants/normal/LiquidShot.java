@@ -22,9 +22,14 @@ public class LiquidShot extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman))
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!(victim instanceof Blaze || victim instanceof MagmaCube || victim instanceof Enderman)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

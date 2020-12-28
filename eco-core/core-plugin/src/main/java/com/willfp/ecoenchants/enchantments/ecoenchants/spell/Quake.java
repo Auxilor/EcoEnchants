@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -16,7 +17,7 @@ public class Quake extends Spell {
     }
 
     @Override
-    public void onUse(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(@NotNull Player player, int level, @NotNull PlayerInteractEvent event) {
         int radius = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "radius-per-level") * level;
         int damage = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level;
 

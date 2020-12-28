@@ -20,12 +20,17 @@ public class Instantaneous extends EcoEnchant {
 
 
     @Override
-    public void onDamageBlock(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockDamageEvent event) {
-        if(!EnchantmentUtils.passedChance(this, level))
+    public void onDamageBlock(@NotNull final Player player,
+                              @NotNull final Block block,
+                              final int level,
+                              @NotNull final BlockDamageEvent event) {
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
-        if(block.getDrops(player.getInventory().getItemInMainHand()).isEmpty())
+        if (block.getDrops(player.getInventory().getItemInMainHand()).isEmpty()) {
             return;
+        }
 
         AnticheatManager.exemptPlayer(player);
 

@@ -15,6 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.util.NumberConversions;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,14 +29,15 @@ import java.util.UUID;
  * Wrapper for Spell enchantments
  */
 public abstract class Spell extends EcoEnchant {
-    private final HashMap<UUID, SpellRunnable> cooldownTracker = new HashMap<>();
+    private final HashMap<UUID, SpellRunnable> tracker = new HashMap<>();
     private final Set<UUID> runningSpell = new HashSet<>();
     private static final List<Material> leftClickItems = Arrays.asList(
             Material.FISHING_ROD,
             Material.BOW
     );
 
-    protected Spell(String key, Prerequisite... prerequisites) {
+    protected Spell(@NotNull final String key,
+                    @NotNull final Prerequisite... prerequisites) {
         super(key, EnchantmentType.SPELL, prerequisites);
     }
 
@@ -47,10 +50,12 @@ public abstract class Spell extends EcoEnchant {
     }
 
     @EventHandler
-    public void onUseEventHandler(PlayerInteractEvent event) {
+    public void onUseEventHandler(@NotNull final PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if (runningSpell.contains(player.getUniqueId())) return;
+        if (runningSpell.contains(player.getUniqueId())) {
+            return;
+        }
         runningSpell.add(player.getUniqueId());
         this.getPlugin().getScheduler().runLater(() -> runningSpell.remove(player.getUniqueId()), 5);
 
@@ -64,19 +69,21 @@ public abstract class Spell extends EcoEnchant {
             }
         }
 
-        if (!EnchantChecks.mainhand(player, this))
+        if (!EnchantChecks.mainhand(player, this)) {
             return;
+        }
 
         int level = EnchantChecks.getMainhandLevel(player, this);
-        if (this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
-        if (!cooldownTracker.containsKey(player.getUniqueId()))
-            cooldownTracker.put(player.getUniqueId(), new SpellRunnable(this, player));
+        if (!tracker.containsKey(player.getUniqueId())) {
+            tracker.put(player.getUniqueId(), new SpellRunnable(this, player));
+        }
 
-        SpellRunnable runnable = cooldownTracker.get(player.getUniqueId());
-        runnable.setTask(() -> {
-            this.onUse(player, level, event);
-        });
+        SpellRunnable runnable = tracker.get(player.getUniqueId());
+        runnable.setTask(() -> this.onUse(player, level, event));
 
         int cooldown = getCooldown(this, player);
 
@@ -93,26 +100,42 @@ public abstract class Spell extends EcoEnchant {
         runnable.run();
     }
 
-    public abstract void onUse(Player player, int level, PlayerInteractEvent event);
+    public abstract void onUse(@NotNull Player player,
+                               int level,
+                               @NotNull PlayerInteractEvent event);
 
-    public static int getCooldown(Spell spell, Player player) {
-        if (!spell.cooldownTracker.containsKey(player.getUniqueId()))
-            spell.cooldownTracker.put(player.getUniqueId(), new SpellRunnable(spell, player));
+    public static int getCooldown(@NotNull final Spell spell,
+                                  @NotNull final Player player) {
+        if (!spell.tracker.containsKey(player.getUniqueId())) {
+            spell.tracker.put(player.getUniqueId(), new SpellRunnable(spell, player));
+        }
 
-        SpellRunnable runnable = spell.cooldownTracker.get(player.getUniqueId());
+        SpellRunnable runnable = spell.tracker.get(player.getUniqueId());
 
         long msLeft = runnable.getEndTime() - System.currentTimeMillis();
 
         long secondsLeft = (long) Math.ceil((double) msLeft / 1000);
 
-        return new Long(secondsLeft).intValue();
+        return NumberConversions.toInt(secondsLeft);
     }
 
-    public static double getCooldownMultiplier(Player player) {
-        if(player.hasPermission("ecoenchants.cooldowntime.quarter")) return 0.25;
-        if(player.hasPermission("ecoenchants.cooldowntime.third")) return 0.33;
-        if(player.hasPermission("ecoenchants.cooldowntime.half")) return 0.5;
-        if(player.hasPermission("ecoenchants.cooldowntime.75")) return 0.75;
+    public static double getCooldownMultiplier(@NotNull final Player player) {
+        if (player.hasPermission("ecoenchants.cooldowntime.quarter")) {
+            return 0.25;
+        }
+
+        if (player.hasPermission("ecoenchants.cooldowntime.third")) {
+            return 0.33;
+        }
+
+        if (player.hasPermission("ecoenchants.cooldowntime.half")) {
+            return 0.5;
+        }
+
+        if (player.hasPermission("ecoenchants.cooldowntime.75")) {
+            return 0.75;
+        }
+
         return 1;
     }
 }

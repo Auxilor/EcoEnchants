@@ -8,6 +8,8 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
 public class Indestructibility extends EcoEnchant {
     public Indestructibility() {
         super(
@@ -18,17 +20,23 @@ public class Indestructibility extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onItemDamage(PlayerItemDamageEvent event) {
+    public void onItemDamage(@NotNull final PlayerItemDamageEvent event) {
         ItemStack item = event.getItem();
 
-        if (!EnchantChecks.item(item, this)) return;
+        if (!EnchantChecks.item(item, this)) {
+            return;
+        }
 
-        if(this.getDisabledWorlds().contains(event.getPlayer().getWorld())) return;
+        if (this.getDisabledWorlds().contains(event.getPlayer().getWorld())) {
+            return;
+        }
 
         double level = EnchantChecks.getItemLevel(item, this);
-        double levelbonus = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "level-bonus");
+        double levelBonus = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "level-bonus");
 
-        if(NumberUtils.randFloat(0, 1) < (100/ (level + (1 + levelbonus))/100)) return;
+        if (NumberUtils.randFloat(0, 1) < (100 / (level + (1 + levelBonus)) / 100)) {
+            return;
+        }
 
         event.setCancelled(true);
         event.setDamage(0);

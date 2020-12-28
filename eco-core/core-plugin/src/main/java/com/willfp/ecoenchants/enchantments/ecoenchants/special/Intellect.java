@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.jetbrains.annotations.NotNull;
+
 public class Intellect extends EcoEnchant {
     public Intellect() {
         super(
@@ -17,16 +19,22 @@ public class Intellect extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onExpChange(NaturalExpGainEvent event) {
+    public void onExpChange(@NotNull final NaturalExpGainEvent event) {
         Player player = event.getExpChangeEvent().getPlayer();
 
-        if(event.getExpChangeEvent().getAmount() < 0) return;
+        if (event.getExpChangeEvent().getAmount() < 0) {
+            return;
+        }
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
-        if(level == 0) return;
+        if (level == 0) {
+            return;
+        }
 
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         event.getExpChangeEvent().setAmount((int) Math.ceil(event.getExpChangeEvent().getAmount() * (1 + (level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-point")))));
     }

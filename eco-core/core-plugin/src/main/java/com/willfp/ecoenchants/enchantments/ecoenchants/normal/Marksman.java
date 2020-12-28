@@ -9,6 +9,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Marksman extends EcoEnchant {
     public Marksman() {
         super(
@@ -19,19 +21,28 @@ public class Marksman extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onMarksmanShoot(ProjectileLaunchEvent event) {
-        if (event.getEntityType() != EntityType.ARROW)
+    public void onMarksmanShoot(@NotNull final ProjectileLaunchEvent event) {
+        if (event.getEntityType() != EntityType.ARROW) {
             return;
+        }
 
-        if (!(event.getEntity().getShooter() instanceof Player))
+        if (!(event.getEntity().getShooter() instanceof Player)) {
             return;
+        }
 
         Player player = (Player) event.getEntity().getShooter();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-        if (this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.mainhand(player, this)) {
+            return;
+        }
 
-        if (!(event.getEntity() instanceof Arrow)) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
+
+        if (!(event.getEntity() instanceof Arrow)) {
+            return;
+        }
         Arrow a = (Arrow) event.getEntity();
         a.setGravity(false);
 

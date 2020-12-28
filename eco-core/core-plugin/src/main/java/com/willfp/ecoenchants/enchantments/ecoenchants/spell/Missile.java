@@ -10,6 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.jetbrains.annotations.NotNull;
 
 public class Missile extends Spell {
     public Missile() {
@@ -17,7 +18,9 @@ public class Missile extends Spell {
     }
 
     @Override
-    public void onUse(Player player, int level, PlayerInteractEvent event) {
+    public void onUse(@NotNull final Player player,
+                      final int level,
+                      @NotNull final PlayerInteractEvent event) {
         WitherSkull skull = player.launchProjectile(WitherSkull.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
         skull.setCharged(true);
         skull.setIsIncendiary(false);
@@ -27,9 +30,14 @@ public class Missile extends Spell {
     }
 
     @EventHandler(priority = EventPriority.LOW)
-    public void onWitherSkullDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof WitherSkull)) return;
-        if (event.getDamager().getMetadata("eco-damage").isEmpty()) return;
+    public void onWitherSkullDamage(@NotNull final EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof WitherSkull)) {
+            return;
+        }
+
+        if (event.getDamager().getMetadata("eco-damage").isEmpty()) {
+            return;
+        }
 
         double multiplier = event.getDamager().getMetadata("eco-damage").get(0).asDouble();
 
@@ -37,9 +45,14 @@ public class Missile extends Spell {
     }
 
     @EventHandler
-    public void onWitherSkullExplode(EntityExplodeEvent event) {
-        if (!(event.getEntity() instanceof WitherSkull)) return;
-        if (event.getEntity().getMetadata("nobreak").isEmpty()) return;
+    public void onWitherSkullExplode(@NotNull final EntityExplodeEvent event) {
+        if (!(event.getEntity() instanceof WitherSkull)) {
+            return;
+        }
+
+        if (event.getEntity().getMetadata("nobreak").isEmpty()) {
+            return;
+        }
 
         event.setCancelled(true);
     }

@@ -19,9 +19,13 @@ public class MisfortuneCurse extends EcoEnchant {
 
 
     @Override
-    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
-        if (!EnchantmentUtils.passedChance(this, level))
+    public void onBlockBreak(@NotNull final Player player,
+                             @NotNull final Block block,
+                             final int level,
+                             @NotNull final BlockBreakEvent event) {
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         event.setDropItems(false);
     }

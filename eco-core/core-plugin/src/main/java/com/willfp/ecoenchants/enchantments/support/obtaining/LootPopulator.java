@@ -28,21 +28,32 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LootPopulator extends BlockPopulator {
-    public void populate(@NotNull World world, @NotNull Random random, @NotNull Chunk chunk) {
-        if (!Configs.CONFIG.getBool("loot.enabled"))
+    public void populate(@NotNull final World world,
+                         final @NotNull Random random,
+                         final @NotNull Chunk chunk) {
+        if (!Configs.CONFIG.getBool("loot.enabled")) {
             return;
+        }
 
         for (BlockState state : chunk.getTileEntities()) {
             Block block = state.getBlock();
-            if (!(block.getState() instanceof Chest)) continue;
+            if (!(block.getState() instanceof Chest)) {
+                continue;
+            }
 
             Chest chestState = (Chest) block.getState();
             Inventory inventory = chestState.getBlockInventory();
 
             for (ItemStack item : inventory) {
-                if (item == null) continue;
-                if (!EnchantmentTarget.ALL.getMaterials().contains(item.getType())) continue;
-                if (item.getType().equals(Material.BOOK)) continue;
+                if (item == null) {
+                    continue;
+                }
+                if (!EnchantmentTarget.ALL.getMaterials().contains(item.getType())) {
+                    continue;
+                }
+                if (item.getType().equals(Material.BOOK)) {
+                    continue;
+                }
 
                 HashMap<Enchantment, Integer> toAdd = new HashMap<>();
 
@@ -59,27 +70,43 @@ public class LootPopulator extends BlockPopulator {
                 }
 
                 for (EcoEnchant enchantment : enchantments) {
-                    if (enchantment == null || enchantment.getRarity() == null) continue;
+                    if (enchantment == null || enchantment.getRarity() == null) {
+                        continue;
+                    }
 
-                    if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getLootProbability() * multiplier)
+                    if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getLootProbability() * multiplier) {
                         continue;
-                    if (!enchantment.canGetFromLoot())
+                    }
+
+                    if (!enchantment.canGetFromLoot()) {
                         continue;
-                    if (!enchantment.canEnchantItem(item))
+                    }
+
+                    if (!enchantment.canEnchantItem(item)) {
                         continue;
-                    if (!enchantment.isEnabled())
+                    }
+
+                    if (!enchantment.isEnabled()) {
                         continue;
+                    }
 
                     AtomicBoolean anyConflicts = new AtomicBoolean(false);
                     toAdd.forEach((enchant, integer) -> {
-                        if (enchantment.conflictsWithAny(toAdd.keySet())) anyConflicts.set(true);
-                        if (enchant.conflictsWith(enchantment)) anyConflicts.set(true);
+                        if (enchantment.conflictsWithAny(toAdd.keySet())) {
+                            anyConflicts.set(true);
+                        }
+                        if (enchant.conflictsWith(enchantment)) {
+                            anyConflicts.set(true);
+                        }
 
                         EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
-                        if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular())
+                        if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
                             anyConflicts.set(true);
+                        }
                     });
-                    if (anyConflicts.get()) continue;
+                    if (anyConflicts.get()) {
+                        continue;
+                    }
 
                     int level;
 
@@ -103,15 +130,11 @@ public class LootPopulator extends BlockPopulator {
 
                 if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
                     EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
-                    toAdd.forEach(((enchantment, integer) -> {
-                        meta.addStoredEnchant(enchantment, integer, false);
-                    }));
+                    toAdd.forEach(((enchantment, integer) -> meta.addStoredEnchant(enchantment, integer, false)));
                     item.setItemMeta(meta);
                 } else {
                     ItemMeta meta = item.getItemMeta();
-                    toAdd.forEach(((enchantment, integer) -> {
-                        meta.addEnchant(enchantment, integer, false);
-                    }));
+                    toAdd.forEach(((enchantment, integer) -> meta.addEnchant(enchantment, integer, false)));
                     item.setItemMeta(meta);
                 }
             }

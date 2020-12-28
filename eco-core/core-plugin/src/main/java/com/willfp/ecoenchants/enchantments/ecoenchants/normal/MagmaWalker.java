@@ -17,6 +17,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+
 public class MagmaWalker extends EcoEnchant {
     public MagmaWalker() {
         super(
@@ -27,14 +29,24 @@ public class MagmaWalker extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onLavaWalk(PlayerMoveEvent event) {
+    public void onLavaWalk(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if(event.getTo() == null) return;
-        if(event.getFrom().getBlock().equals(event.getTo().getBlock())) return;
+        if (event.getTo() == null) {
+            return;
+        }
 
-        if (!EnchantChecks.boots(player, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (event.getFrom().getBlock().equals(event.getTo().getBlock())) {
+            return;
+        }
+
+        if (!EnchantChecks.boots(player, this)) {
+            return;
+        }
+
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         Vector[] circle = VectorUtils.getCircle(this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-radius")
                 + (this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "per-level-radius") * EnchantChecks.getBootsLevel(player, this) - 1));
@@ -46,13 +58,19 @@ public class MagmaWalker extends EcoEnchant {
 
             Block block = player.getWorld().getBlockAt(loc);
 
-            if (!AntigriefManager.canPlaceBlock(player, player.getWorld().getBlockAt(loc))) continue;
+            if (!AntigriefManager.canPlaceBlock(player, player.getWorld().getBlockAt(loc))) {
+                continue;
+            }
 
-            if(!block.getType().equals(Material.LAVA)) continue;
+            if (!block.getType().equals(Material.LAVA)) {
+                continue;
+            }
 
             Levelled data = (Levelled) block.getBlockData();
 
-            if(data.getLevel() != 0) continue;
+            if (data.getLevel() != 0) {
+                continue;
+            }
 
             block.setType(Material.OBSIDIAN);
 
@@ -70,7 +88,7 @@ public class MagmaWalker extends EcoEnchant {
 
             this.getPlugin().getScheduler().runLater(() -> {
                 if (block.getType().equals(Material.OBSIDIAN)) {
-                    if(!player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
+                    if (!player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
                         block.setType(Material.LAVA);
                         block.removeMetadata("byMagmaWalker", this.getPlugin());
                     } else {

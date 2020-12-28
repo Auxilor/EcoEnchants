@@ -19,6 +19,7 @@ import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,8 +30,13 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class InfernalTouch extends EcoEnchant {
-    private static final HashMap<Material, Pair<Material, Integer>> recipes = new HashMap<>();
-    private static final Set<Material> allowsFortune = new HashSet<>(Arrays.asList(Material.GOLD_INGOT, Material.IRON_INGOT));
+    private static final HashMap<Material, Pair<Material, Integer>> RECIPES = new HashMap<>();
+    private static final Set<Material> FORTUNE_MATERIALS = new HashSet<>(
+            Arrays.asList(
+                    Material.GOLD_INGOT,
+                    Material.IRON_INGOT
+            )
+    );
 
     public InfernalTouch() {
         super(
@@ -47,36 +53,49 @@ public class InfernalTouch extends EcoEnchant {
             }
             FurnaceRecipe furnaceRecipe = (FurnaceRecipe) recipe;
             int xp = (int) Math.ceil(furnaceRecipe.getExperience());
-            recipes.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), xp));
+            RECIPES.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), xp));
         }
     }
 
-    private static Pair<Material, Integer> getOutput(Material input) {
-        Pair<Material, Integer> toReturn = recipes.get(input);
-        if(toReturn == null) return new Pair<>(input, 0);
+    @NotNull
+    private static Pair<Material, Integer> getOutput(@NotNull final Material input) {
+        Pair<Material, Integer> toReturn = RECIPES.get(input);
+        if (toReturn == null) {
+            return new Pair<>(input, 0);
+        }
         return toReturn;
     }
 
     // START OF LISTENERS
 
     @EventHandler
-    public void infernalTouchBreak(BlockDropItemEvent event) {
+    public void infernalTouchBreak(@NotNull final BlockDropItemEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-
-        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR)
+        if (!EnchantChecks.mainhand(player, this)) {
             return;
+        }
 
-        if (event.getBlock().getState() instanceof Container)
+        if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
             return;
+        }
 
-        if (event.isCancelled())
+        if (event.getBlock().getState() instanceof Container) {
             return;
+        }
 
-        if (!AntigriefManager.canBreakBlock(player, block)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (event.isCancelled()) {
+            return;
+        }
+
+        if (!AntigriefManager.canBreakBlock(player, block)) {
+            return;
+        }
+
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         Collection<ItemStack> drops = new ArrayList<>();
 
@@ -92,7 +111,7 @@ public class InfernalTouch extends EcoEnchant {
             itemStack.setType(out.getFirst());
             experience += out.getSecond();
 
-            if(fortune > 0 && allowsFortune.contains(itemStack.getType())) {
+            if (fortune > 0 && FORTUNE_MATERIALS.contains(itemStack.getType())) {
                 itemStack.setAmount((int) Math.ceil(1 / ((double) fortune + 2) + ((double) fortune + 1) / 2));
                 experience++;
             }

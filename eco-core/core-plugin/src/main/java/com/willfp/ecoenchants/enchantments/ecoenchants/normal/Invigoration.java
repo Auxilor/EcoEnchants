@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jetbrains.annotations.NotNull;
+
 public class Invigoration extends EcoEnchant {
     public Invigoration() {
         super(
@@ -18,20 +20,25 @@ public class Invigoration extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void onInvigorationHurt(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player))
+    public void onInvigorationHurt(@NotNull final EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
             return;
+        }
 
         Player player = (Player) event.getEntity();
 
-        if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
+        if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health")) {
             return;
+        }
 
         int totalInvigorationPoints = EnchantChecks.getArmorPoints(player, this, 0);
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
-
-        if (totalInvigorationPoints == 0)
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
             return;
+        }
+
+        if (totalInvigorationPoints == 0) {
+            return;
+        }
 
         double damageReduction = totalInvigorationPoints * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "reduction-multiplier") * 0.01;
         damageReduction += 1;
@@ -39,19 +46,25 @@ public class Invigoration extends EcoEnchant {
     }
 
     @EventHandler
-    public void onInvigorationDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
+    public void onInvigorationDamage(@NotNull final EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player)) {
             return;
+        }
+
         Player player = (Player) event.getDamager();
 
-        if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health"))
+        if (player.getHealth() > this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "below-health")) {
             return;
+        }
 
         int totalInvigorationPoints = EnchantChecks.getArmorPoints(player, this, 0);
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
-
-        if (totalInvigorationPoints == 0)
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
             return;
+        }
+
+        if (totalInvigorationPoints == 0) {
+            return;
+        }
 
         double damageBonus = totalInvigorationPoints * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-multiplier") * 0.01;
         damageBonus += 1;

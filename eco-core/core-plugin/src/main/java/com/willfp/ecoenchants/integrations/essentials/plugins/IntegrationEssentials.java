@@ -19,7 +19,9 @@ public class IntegrationEssentials implements EssentialsWrapper {
             for (Enchantment enchantment : EcoEnchants.values()) {
                 ((Map<String, Enchantment>) FieldUtils.readDeclaredStaticField(Enchantments.class, "ENCHANTMENTS", true)).put(enchantment.getKey().getKey(), enchantment);
             }
-        } catch (IllegalAccessException ignored) {}
+        } catch (IllegalAccessException ignored) {
+            // Ignore reflective errors that won't happen.
+        }
     }
 
     @Override

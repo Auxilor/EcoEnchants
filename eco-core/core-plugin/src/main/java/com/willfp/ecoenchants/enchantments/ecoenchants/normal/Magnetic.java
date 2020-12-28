@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -30,17 +31,17 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
     private double bonus = 1;
 
     @EventHandler
-    public void onArmorEquip(ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(@NotNull final PlayerJoinEvent event) {
         refresh();
     }
 
     @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event) {
+    public void onPlayerLeave(@NotNull final PlayerQuitEvent event) {
         refresh();
     }
 
@@ -48,7 +49,7 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
         players.clear();
         this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
-            if(level > 0) {
+            if (level > 0) {
                 players.put(player, level);
             }
         });
@@ -60,10 +61,14 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
     public void run() {
         players.forEach((player, level) -> {
             double distance = initialDistance + (level * bonus);
-            if(this.getDisabledWorlds().contains(player.getWorld())) return;
+            if (this.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
-                if(!(e instanceof Item || e instanceof ExperienceOrb)) continue;
+                if (!(e instanceof Item || e instanceof ExperienceOrb)) {
+                    continue;
+                }
 
                 if (e instanceof Item && ((Item) e).getPickupDelay() > 0) {
                     continue;
@@ -71,7 +76,7 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
 
                 Vector vector = player.getLocation().toVector().subtract(e.getLocation().toVector()).normalize().multiply(0.1 * level);
 
-                if(VectorUtils.isFinite(vector)) {
+                if (VectorUtils.isFinite(vector)) {
                     e.setVelocity(vector);
                 }
             }

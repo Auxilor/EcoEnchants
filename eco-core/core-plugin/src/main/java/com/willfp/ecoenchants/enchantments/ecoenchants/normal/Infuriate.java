@@ -25,17 +25,23 @@ public class Infuriate extends EcoEnchant {
 
 
     @Override
-    public void onDeflect(@NotNull Player blocker, @NotNull LivingEntity attacker, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!EnchantmentUtils.passedChance(this, level))
+    public void onDeflect(@NotNull final Player blocker,
+                          @NotNull final LivingEntity attacker,
+                          final int level,
+                          @NotNull final EntityDamageByEntityEvent event) {
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         double distancePerLevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance-per-level");
         final double distance = distancePerLevel * level;
 
         for (Entity e : attacker.getWorld().getNearbyEntities(attacker.getLocation(), distance, distance, distance)) {
-            if(!(e instanceof Monster)) continue;
+            if (!(e instanceof Monster)) {
+                continue;
+            }
 
-            if(e instanceof PigZombie) {
+            if (e instanceof PigZombie) {
                 ((PigZombie) e).setAngry(true);
             }
 
@@ -43,7 +49,7 @@ public class Infuriate extends EcoEnchant {
 
             Vector vector = attacker.getLocation().toVector().clone().subtract(e.getLocation().toVector()).normalize().multiply(0.23d);
 
-            if(VectorUtils.isFinite(vector)) {
+            if (VectorUtils.isFinite(vector)) {
                 e.setVelocity(vector);
             }
         }

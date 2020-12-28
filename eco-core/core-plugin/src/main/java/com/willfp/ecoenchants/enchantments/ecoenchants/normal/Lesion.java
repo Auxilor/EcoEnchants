@@ -22,9 +22,14 @@ public class Lesion extends EcoEnchant {
 
 
     @Override
-    public void onTridentDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Trident trident, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!EnchantmentUtils.passedChance(this, level))
+    public void onTridentDamage(@NotNull final LivingEntity attacker,
+                                @NotNull final LivingEntity victim,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final EntityDamageByEntityEvent event) {
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         double bleedDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bleed-damage");
 
@@ -39,7 +44,9 @@ public class Lesion extends EcoEnchant {
 
             victim.damage(bleedDamage);
 
-            if(currentBleedCount.get() >= finalBleedCount) bukkitRunnable.cancel();
+            if (currentBleedCount.get() >= finalBleedCount) {
+                bukkitRunnable.cancel();
+            }
         }).runTaskTimer(0, 10);
     }
 }

@@ -19,13 +19,22 @@ public class Inferno extends EcoEnchant {
 
 
     @Override
-    public void onTridentLaunch(@NotNull LivingEntity shooter, @NotNull Trident trident, int level, @NotNull ProjectileLaunchEvent event) {
+    public void onTridentLaunch(@NotNull final LivingEntity shooter,
+                                @NotNull final Trident trident,
+                                final int level,
+                                final @NotNull ProjectileLaunchEvent event) {
         trident.setFireTicks(Integer.MAX_VALUE);
     }
 
     @Override
-    public void onTridentDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Trident trident, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(trident.getFireTicks() <= 0) return;
+    public void onTridentDamage(@NotNull final LivingEntity attacker,
+                                @NotNull final LivingEntity victim,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final EntityDamageByEntityEvent event) {
+        if (trident.getFireTicks() <= 0) {
+            return;
+        }
 
         victim.setFireTicks(100);
     }
