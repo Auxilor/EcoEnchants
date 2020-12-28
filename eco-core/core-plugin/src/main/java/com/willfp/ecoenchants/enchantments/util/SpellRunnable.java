@@ -32,7 +32,7 @@ public class SpellRunnable {
      * Must be set before execution.
      */
     @Setter
-    private Callable callable = () -> {
+    private Callable task = () -> {
         // Empty as must be set using this#setTask
     };
 
@@ -52,7 +52,7 @@ public class SpellRunnable {
      * Run the runnable.
      */
     public void run() {
-        callable.call();
+        task.call();
         updateEndTime();
     }
 

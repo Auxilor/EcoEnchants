@@ -57,6 +57,8 @@ public abstract class Spell extends EcoEnchant {
 
     /**
      * Get the cooldown time of the spell (in seconds).
+     *
+     * @return The time, in seconds.
      */
     public int getCooldownTime() {
         return this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown");
@@ -166,6 +168,7 @@ public abstract class Spell extends EcoEnchant {
      * Used for perks - this should be reworked as it has hardcoded permission references.
      *
      * @param player The player to query.
+     * @return The multipiler.
      */
     public static double getCooldownMultiplier(@NotNull final Player player) {
         if (player.hasPermission("ecoenchants.cooldowntime.quarter")) {

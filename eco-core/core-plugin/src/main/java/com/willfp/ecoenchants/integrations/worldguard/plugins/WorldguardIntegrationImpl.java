@@ -12,6 +12,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class WorldguardIntegrationImpl implements WorldguardWrapper {
+    /**
+     * Flag registry.
+     */
     private static final FlagRegistry REGISTRY = WorldGuard.getInstance().getFlagRegistry();
 
     @Override

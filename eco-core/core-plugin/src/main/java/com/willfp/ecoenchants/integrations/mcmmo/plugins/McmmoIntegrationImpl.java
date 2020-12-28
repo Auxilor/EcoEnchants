@@ -5,9 +5,6 @@ import com.willfp.ecoenchants.integrations.mcmmo.McmmoIntegration;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Concrete implementation of {@link McmmoIntegration}
- */
 public class McmmoIntegrationImpl implements McmmoIntegration {
     @Override
     public boolean isFake(@NotNull final Event event) {

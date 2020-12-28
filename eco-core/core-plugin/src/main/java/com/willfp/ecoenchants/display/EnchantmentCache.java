@@ -110,7 +110,7 @@ public class EnchantmentCache implements Updatable {
     }
 
     @ToString
-    public static class CacheEntry {
+    public static final class CacheEntry {
         /**
          * The enchantment that this cache is for.
          */

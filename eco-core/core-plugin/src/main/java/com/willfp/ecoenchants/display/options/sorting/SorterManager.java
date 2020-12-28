@@ -17,8 +17,19 @@ import java.util.Set;
 
 @UtilityClass
 public class SorterManager {
+    /**
+     * All registered enchantment sorters.
+     */
     private static final Set<EnchantmentSorter> REGISTERED = new HashSet<>();
 
+    /**
+     * Get a sorter based off of parameters.
+     * <p>
+     * Any combination of parameters is valid.
+     *
+     * @param parameters The parameters to find a sorter from.
+     * @return The matching sorter.
+     */
     public static EnchantmentSorter getSorter(@NotNull final SortParameters... parameters) {
         return REGISTERED.stream()
                 .filter(enchantmentSorter -> Arrays.asList(enchantmentSorter.getParameters()).containsAll(Arrays.asList(parameters)) && enchantmentSorter.getParameters().length == parameters.length)

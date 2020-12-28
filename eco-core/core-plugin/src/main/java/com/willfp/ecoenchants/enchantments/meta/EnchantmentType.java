@@ -78,7 +78,14 @@ public class EnchantmentType implements Updatable {
             Spell.class
     );
 
+    /**
+     * Lambda to fetch the color of the type.
+     */
     private final ObjectCallable<String> colorCallable;
+
+    /**
+     * Lambda to fetch the singularity of the type.
+     */
     private final ObjectCallable<Boolean> singularCallable;
 
     /**

@@ -75,7 +75,7 @@ public class EnchantmentTarget implements Registerable, Updatable {
     }
 
     /**
-     * Update all targets
+     * Update all targets.
      */
     @ConfigUpdater
     public static void update() {

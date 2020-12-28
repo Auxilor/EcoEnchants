@@ -21,27 +21,45 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Class implemented by enchantment configs
- */
 public abstract class EnchantmentYamlConfig extends PluginDependent implements ValueGetter {
+    /**
+     * The name of the config.
+     */
     private final String name;
 
+    /**
+     * The internal config that stores the values.
+     */
     @Getter
     private YamlConfiguration config;
 
+    /**
+     * The physical file of the config.
+     */
     @Getter(AccessLevel.PROTECTED)
     private File configFile;
+
+    /**
+     * The directory that the config is in.
+     */
     private final File directory;
+
+    /**
+     * The provider of the config.
+     */
     private final Class<?> source;
+
+    /**
+     * The type of the stored enchantment.
+     */
     private final EnchantmentType type;
 
     /**
-     * Create new config yml
+     * Create new enchantment config yml.
      *
-     * @param name   The config name
-     * @param source The class of the main class of source or extension
-     * @param type   The enchantment type
+     * @param name   The config name.
+     * @param source The class of the main class of source or extension.
+     * @param type   The enchantment type.
      */
     protected EnchantmentYamlConfig(@NotNull final String name,
                                     @NotNull final Class<?> source,
@@ -104,6 +122,9 @@ public abstract class EnchantmentYamlConfig extends PluginDependent implements V
         saveResource();
     }
 
+    /**
+     * Update the config. Removes unneeded config keys and adds missing ones.
+     */
     public void update() {
         try {
             config.load(configFile);
@@ -136,7 +157,6 @@ public abstract class EnchantmentYamlConfig extends PluginDependent implements V
             e.printStackTrace();
         }
     }
-
 
 
     /**
@@ -199,7 +219,7 @@ public abstract class EnchantmentYamlConfig extends PluginDependent implements V
     }
 
     /**
-     * Get a string from config.C
+     * Get a string from config.
      *
      * @param path The key to fetch the value from.
      * @return The found value, or an empty string if not found.

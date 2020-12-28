@@ -12,22 +12,25 @@ import java.util.Set;
 
 @UtilityClass
 public class WorldguardManager {
+    /**
+     * All registered WorldGuard integrations.
+     */
     private static final Set<WorldguardWrapper> REGISTERED = new HashSet<>();
 
     /**
-     * Register a new WorldGuard integration
+     * Register a new WorldGuard integration.
      *
-     * @param worldguard The integration to register
+     * @param worldguard The integration to register.
      */
     public static void register(@NotNull final WorldguardWrapper worldguard) {
         REGISTERED.add(worldguard);
     }
 
     /**
-     * Register a new StateFlag with worldguard
+     * Register a new StateFlag with worldguard.
      *
-     * @param flagName     The name of the flag
-     * @param defaultValue The default value for the flag to have
+     * @param flagName     The name of the flag.
+     * @param defaultValue The default value for the flag to have.
      */
     public static void registerFlag(@NotNull final String flagName,
                                     final boolean defaultValue) {
@@ -35,11 +38,11 @@ public class WorldguardManager {
     }
 
     /**
-     * Get if an enchant is enabled at a player's location
+     * Get if an enchant is enabled at a player's location.
      *
-     * @param enchant The enchantment to check
-     * @param player  The player to query
-     * @return If the enchantment is enabled at a player's location
+     * @param enchant The enchantment to check.
+     * @param player  The player to query.
+     * @return If the enchantment is enabled at a player's location.
      */
     public static boolean enabledForPlayer(@NotNull final EcoEnchant enchant,
                                            @NotNull final LivingEntity player) {
@@ -53,12 +56,12 @@ public class WorldguardManager {
     }
 
     /**
-     * Get if an enchant is enabled at a specific location
+     * Get if an enchant is enabled at a specific location.
      *
-     * @param enchant  The enchantment to check
-     * @param player   The player to query
-     * @param location The location to query
-     * @return If the enchantment is enabled at a player's location
+     * @param enchant  The enchantment to check.
+     * @param player   The player to query.
+     * @param location The location to query.
+     * @return If the enchantment is enabled at a player's location.
      */
     public static boolean enabledForPlayer(@NotNull final EcoEnchant enchant,
                                            @NotNull final LivingEntity player,

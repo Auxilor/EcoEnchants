@@ -8,9 +8,6 @@ import org.bukkit.enchantments.Enchantment;
 
 import java.util.Map;
 
-/**
- * Concrete implementation of {@link EssentialsWrapper}
- */
 @SuppressWarnings("unchecked")
 public class IntegrationEssentials implements EssentialsWrapper {
     @Override
