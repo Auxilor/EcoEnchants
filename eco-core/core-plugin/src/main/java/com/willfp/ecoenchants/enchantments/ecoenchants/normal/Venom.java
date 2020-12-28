@@ -17,9 +17,6 @@ public class Venom extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
         if (!EnchantmentUtils.passedChance(this, level))

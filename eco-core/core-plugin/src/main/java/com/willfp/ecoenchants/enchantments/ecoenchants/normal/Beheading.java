@@ -20,10 +20,7 @@ public class Beheading extends EcoEnchant {
         super(
                 "beheading", EnchantmentType.NORMAL
         );
-    }
-    // START OF LISTENERS
-
-    @EventHandler
+    }    @EventHandler
     public void onDeath(@NotNull final EntityDeathEvent event) {
         if (event.getEntity().getKiller() == null) {
             return;

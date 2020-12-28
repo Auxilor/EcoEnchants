@@ -16,9 +16,6 @@ public class EnderSlayer extends EcoEnchant {
                 "ender_slayer", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     private static final Set<EntityType> END_MOBS = new ImmutableSet.Builder<EntityType>()
             .add(EntityType.ENDERMITE)
             .add(EntityType.ENDERMAN)

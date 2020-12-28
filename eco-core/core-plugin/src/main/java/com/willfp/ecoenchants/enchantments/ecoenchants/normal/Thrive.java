@@ -16,9 +16,6 @@ public class Thrive extends EcoEnchant {
                 "thrive", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onArmorEquip(ArmorEquipEvent event) {
         final Player player = event.getPlayer();

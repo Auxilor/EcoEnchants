@@ -14,9 +14,6 @@ public class Freerunner extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onFallDamage(@NotNull final LivingEntity faller,
                              final int level,

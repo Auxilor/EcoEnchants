@@ -16,9 +16,6 @@ public class BossHunter extends EcoEnchant {
                 "boss_hunter", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onArrowDamage(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,

@@ -13,9 +13,6 @@ public class Wisdom extends EcoEnchant {
                 "wisdom", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onExpChange(NaturalExpGainEvent event) {
         Player player = event.getExpChangeEvent().getPlayer();

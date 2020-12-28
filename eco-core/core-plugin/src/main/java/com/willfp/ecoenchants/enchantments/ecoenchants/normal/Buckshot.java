@@ -22,9 +22,6 @@ public class Buckshot extends EcoEnchant {
                 "buckshot", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onBowShoot(@NotNull final LivingEntity shooter,
                            @NotNull final Arrow arrow,

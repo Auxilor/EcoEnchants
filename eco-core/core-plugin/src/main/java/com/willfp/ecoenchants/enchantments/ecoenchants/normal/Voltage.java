@@ -18,9 +18,6 @@ public class Voltage extends EcoEnchant {
                 "voltage", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     private static final Material[] items = {
             Material.IRON_HELMET,
             Material.IRON_CHESTPLATE,

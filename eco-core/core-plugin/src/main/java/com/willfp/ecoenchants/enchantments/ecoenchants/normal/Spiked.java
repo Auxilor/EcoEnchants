@@ -15,9 +15,6 @@ public class Spiked extends EcoEnchant {
                 "spiked", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onFish(PlayerFishEvent event) {
         if(!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY))

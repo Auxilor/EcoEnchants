@@ -27,9 +27,6 @@ public class Spearfishing extends EcoEnchant {
                 "spearfishing", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onSpearfishingLand(ProjectileHitEvent event) {
         if (event.getEntityType() != EntityType.TRIDENT)

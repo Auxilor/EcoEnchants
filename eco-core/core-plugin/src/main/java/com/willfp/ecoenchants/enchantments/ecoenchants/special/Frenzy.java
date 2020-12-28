@@ -16,10 +16,7 @@ public class Frenzy extends EcoEnchant {
         super(
                 "frenzy", EnchantmentType.SPECIAL
         );
-    }
-    // START OF LISTENERS
-
-    @EventHandler
+    }    @EventHandler
     public void onFrenzyKill(@NotNull final EntityDeathEvent event) {
         if (event.getEntity().getKiller() == null) {
             return;

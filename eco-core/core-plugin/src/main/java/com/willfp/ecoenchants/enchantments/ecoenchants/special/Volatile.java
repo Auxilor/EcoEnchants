@@ -20,9 +20,6 @@ public class Volatile extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onMeleeAttack(@NotNull LivingEntity uncastAttacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!(uncastAttacker instanceof Player)) return;

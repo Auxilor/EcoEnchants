@@ -19,9 +19,6 @@ public class Necrotic extends EcoEnchant {
                 "necrotic", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void necroticKill(@NotNull final EntityDeathEvent event) {
         if (event.getEntity().getKiller() == null) {

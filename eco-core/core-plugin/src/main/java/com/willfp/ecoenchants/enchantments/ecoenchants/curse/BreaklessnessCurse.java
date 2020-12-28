@@ -15,9 +15,6 @@ public class BreaklessnessCurse extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onDamageBlock(@NotNull final Player player,
                               @NotNull final Block block,

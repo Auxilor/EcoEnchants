@@ -13,9 +13,6 @@ public class Protector extends EcoEnchant {
                 "protector", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity uncastVictim,

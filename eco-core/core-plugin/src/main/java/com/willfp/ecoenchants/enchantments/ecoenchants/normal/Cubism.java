@@ -14,9 +14,6 @@ public class Cubism extends EcoEnchant {
                 "cubism", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,

@@ -17,9 +17,6 @@ public class Marksman extends EcoEnchant {
                 "marksman", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onMarksmanShoot(@NotNull final ProjectileLaunchEvent event) {
         if (event.getEntityType() != EntityType.ARROW) {

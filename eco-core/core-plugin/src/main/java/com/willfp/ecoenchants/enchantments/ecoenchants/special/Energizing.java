@@ -16,9 +16,6 @@ public class Energizing extends EcoEnchant {
                 "energizing", EnchantmentType.SPECIAL
         );
     }
-    // START OF LISTENERS
-
-
     @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,

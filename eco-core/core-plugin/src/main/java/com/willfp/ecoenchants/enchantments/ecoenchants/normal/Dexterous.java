@@ -18,9 +18,6 @@ public class Dexterous extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @EventHandler
     public void onDextHold(@NotNull final PlayerItemHeldEvent event) {
         Player player = event.getPlayer();

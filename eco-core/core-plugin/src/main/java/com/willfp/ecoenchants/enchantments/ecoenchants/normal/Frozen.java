@@ -19,9 +19,6 @@ public class Frozen extends EcoEnchant {
                 "frozen", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onHurt(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) {

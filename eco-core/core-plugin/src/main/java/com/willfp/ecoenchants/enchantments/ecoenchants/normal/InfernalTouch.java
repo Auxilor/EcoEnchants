@@ -65,9 +65,6 @@ public class InfernalTouch extends EcoEnchant {
         }
         return toReturn;
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void infernalTouchBreak(@NotNull final BlockDropItemEvent event) {
         Player player = event.getPlayer();

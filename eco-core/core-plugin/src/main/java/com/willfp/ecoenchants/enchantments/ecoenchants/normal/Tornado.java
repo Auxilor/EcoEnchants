@@ -15,9 +15,6 @@ public class Tornado extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         double baseVelocity = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-per-level");

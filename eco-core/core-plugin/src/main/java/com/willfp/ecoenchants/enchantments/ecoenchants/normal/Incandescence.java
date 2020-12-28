@@ -16,9 +16,6 @@ public class Incandescence extends EcoEnchant {
                 "incandescence", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onIncandescenceHurt(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) {

@@ -18,9 +18,6 @@ public class Instability extends EcoEnchant {
                 "instability", EnchantmentType.SPECIAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onInstabilityLand(@NotNull final ProjectileHitEvent event) {
         if (event.getEntityType() != EntityType.ARROW) {

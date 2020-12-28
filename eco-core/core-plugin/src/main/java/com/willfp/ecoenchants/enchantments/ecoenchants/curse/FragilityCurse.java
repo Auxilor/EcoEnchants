@@ -16,9 +16,6 @@ public class FragilityCurse extends EcoEnchant {
                 "fragility_curse", EnchantmentType.CURSE
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onItemDamage(@NotNull final PlayerItemDamageEvent event) {
         ItemStack item = event.getItem();

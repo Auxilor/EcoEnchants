@@ -16,9 +16,6 @@ public class Invigoration extends EcoEnchant {
                 "invigoration", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onInvigorationHurt(@NotNull final EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) {

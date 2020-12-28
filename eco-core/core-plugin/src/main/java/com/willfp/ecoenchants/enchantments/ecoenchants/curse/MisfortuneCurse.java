@@ -15,9 +15,6 @@ public class MisfortuneCurse extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,

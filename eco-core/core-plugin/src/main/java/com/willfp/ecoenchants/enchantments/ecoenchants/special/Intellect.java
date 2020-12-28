@@ -15,9 +15,6 @@ public class Intellect extends EcoEnchant {
                 "intellect", EnchantmentType.SPECIAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onExpChange(@NotNull final NaturalExpGainEvent event) {
         Player player = event.getExpChangeEvent().getPlayer();

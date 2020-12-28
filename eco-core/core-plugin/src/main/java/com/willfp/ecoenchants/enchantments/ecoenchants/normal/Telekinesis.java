@@ -37,9 +37,6 @@ public class Telekinesis extends EcoEnchant {
                 "telekinesis", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     protected void postUpdate() {
         always = Configs.CONFIG.getBool("drops.force-dropqueue");

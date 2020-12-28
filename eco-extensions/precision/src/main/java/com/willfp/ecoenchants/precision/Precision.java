@@ -29,9 +29,6 @@ public class Precision extends EcoEnchant {
                 "precision", EnchantmentType.SPECIAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void aimingLaunch(@NotNull final ProjectileLaunchEvent event) {
         if (!(event.getEntity().getShooter() instanceof Player)) {

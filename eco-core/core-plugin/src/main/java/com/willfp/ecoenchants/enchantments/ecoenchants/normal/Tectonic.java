@@ -18,9 +18,6 @@ public class Tectonic extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onFallDamage(@NotNull LivingEntity faller, int level, @NotNull EntityDamageEvent event) {
 

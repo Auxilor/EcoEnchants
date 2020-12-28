@@ -15,9 +15,6 @@ public class ShotAssist extends EcoEnchant {
                 "shot_assist", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Arrow))

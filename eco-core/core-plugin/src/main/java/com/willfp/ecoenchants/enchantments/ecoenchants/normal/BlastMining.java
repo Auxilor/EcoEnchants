@@ -23,9 +23,6 @@ public class BlastMining extends EcoEnchant {
                 "blast_mining", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,

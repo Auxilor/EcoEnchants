@@ -17,9 +17,6 @@ public class Stalwart extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onDamageWearingArmor(@NotNull LivingEntity victim, int level, @NotNull EntityDamageEvent event) {
         if(!EnchantmentUtils.passedChance(this, level))

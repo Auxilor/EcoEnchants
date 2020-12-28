@@ -9,8 +9,5 @@ public class PermanenceCurse extends EcoEnchant {
                 "permanence_curse", EnchantmentType.CURSE
         );
     }
-
-    // START OF LISTENERS
-
     // Listeners are in anvil listeners
 }

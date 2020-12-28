@@ -15,9 +15,6 @@ public class Inferno extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onTridentLaunch(@NotNull final LivingEntity shooter,
                                 @NotNull final Trident trident,

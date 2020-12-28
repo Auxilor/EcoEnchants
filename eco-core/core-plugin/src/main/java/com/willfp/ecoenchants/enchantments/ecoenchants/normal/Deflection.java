@@ -15,9 +15,6 @@ public class Deflection extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onDeflect(@NotNull final Player blocker,
                           @NotNull final LivingEntity attacker,

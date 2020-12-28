@@ -19,9 +19,6 @@ public class Plasmic extends EcoEnchant {
                 "plasmic", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     private static final Material[] ITEMS;
 
     static {

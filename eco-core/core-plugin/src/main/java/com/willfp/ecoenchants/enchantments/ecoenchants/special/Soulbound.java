@@ -21,9 +21,6 @@ public class Soulbound extends EcoEnchant {
                 "soulbound", EnchantmentType.SPECIAL
         );
     }
-
-    // START OF LISTENERS
-
     private static final HashMap<Player, List<ItemStack>> soulboundItemsMap = new HashMap<>();
 
     public static List<ItemStack> getSoulboundItems(Player player) {

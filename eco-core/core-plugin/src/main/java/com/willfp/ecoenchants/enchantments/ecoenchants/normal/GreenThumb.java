@@ -19,9 +19,6 @@ public class GreenThumb extends EcoEnchant {
                 "green_thumb", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onInteract(@NotNull final PlayerInteractEvent event) {
         Player player = event.getPlayer();

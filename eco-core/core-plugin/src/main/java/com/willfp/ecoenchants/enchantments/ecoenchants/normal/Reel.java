@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class Reel extends EcoEnchant {
     public Reel() {
@@ -18,27 +19,35 @@ public class Reel extends EcoEnchant {
                 "reel", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
-    public void onFish(PlayerFishEvent event) {
-        if (!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY))
+    public void onFish(@NotNull final PlayerFishEvent event) {
+        if (!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY)) {
             return;
+        }
 
-        if (!(event.getCaught() instanceof LivingEntity))
+        if (!(event.getCaught() instanceof LivingEntity)) {
             return;
+        }
 
         Player player = event.getPlayer();
 
         LivingEntity victim = (LivingEntity) event.getCaught();
 
-        if (victim.hasMetadata("NPC")) return;
+        if (victim.hasMetadata("NPC")) {
+            return;
+        }
 
-        if (!AntigriefManager.canInjure(player, victim)) return;
+        if (!AntigriefManager.canInjure(player, victim)) {
+            return;
+        }
 
-        if (!EnchantChecks.mainhand(player, this)) return;
-        if (this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.mainhand(player, this)) {
+            return;
+        }
+
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 

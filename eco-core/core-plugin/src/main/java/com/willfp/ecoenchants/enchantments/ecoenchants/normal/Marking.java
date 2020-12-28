@@ -18,9 +18,6 @@ public class Marking extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onArrowDamage(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,

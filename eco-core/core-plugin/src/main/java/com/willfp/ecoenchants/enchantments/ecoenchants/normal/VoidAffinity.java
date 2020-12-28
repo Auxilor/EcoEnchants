@@ -16,9 +16,6 @@ public class VoidAffinity extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onTridentDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Trident trident, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!attacker.getWorld().getEnvironment().equals(World.Environment.THE_END))

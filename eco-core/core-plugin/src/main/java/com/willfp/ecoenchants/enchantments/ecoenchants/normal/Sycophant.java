@@ -16,9 +16,6 @@ public class Sycophant extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onDeflect(@NotNull Player blocker, @NotNull LivingEntity attacker, int level, @NotNull EntityDamageByEntityEvent event) {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-level");

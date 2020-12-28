@@ -18,9 +18,6 @@ public class Grit extends EcoEnchant {
                 "grit", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onGritHurt(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) {

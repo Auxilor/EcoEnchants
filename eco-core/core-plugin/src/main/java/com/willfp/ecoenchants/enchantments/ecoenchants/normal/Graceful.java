@@ -19,9 +19,6 @@ public class Graceful extends EcoEnchant {
                 "graceful", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onFall(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();

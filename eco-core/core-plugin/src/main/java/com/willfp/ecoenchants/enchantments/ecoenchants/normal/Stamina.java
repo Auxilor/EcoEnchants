@@ -13,9 +13,6 @@ public class Stamina extends EcoEnchant {
                 "stamina", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onStaminaHunger(FoodLevelChangeEvent event) {
         if (!(event.getEntity() instanceof Player))

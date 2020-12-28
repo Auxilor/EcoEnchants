@@ -14,9 +14,6 @@ public class Dweller extends EcoEnchant {
                 "dweller", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,

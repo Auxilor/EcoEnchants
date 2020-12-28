@@ -19,9 +19,6 @@ public class Pentashot extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onBowShoot(@NotNull final LivingEntity shooter,
                            @NotNull final Arrow arrow,

@@ -20,9 +20,6 @@ public class Succession extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onBowShoot(@NotNull LivingEntity shooter, @NotNull Arrow arrow, int level, @NotNull EntityShootBowEvent event) {
         int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows");

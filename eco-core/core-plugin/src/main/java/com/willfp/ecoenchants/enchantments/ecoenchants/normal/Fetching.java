@@ -22,9 +22,6 @@ public class Fetching extends EcoEnchant {
                 "fetching", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler(priority = EventPriority.HIGH)
     public void onWolfKill(@NotNull final EntityDeathByEntityEvent event) {
         LivingEntity entity = event.getVictim();

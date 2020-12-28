@@ -24,9 +24,6 @@ public class Farmhand extends EcoEnchant {
                 "farmhand", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onTill(@NotNull final PlayerInteractEvent event) {
         Player player = event.getPlayer();

@@ -17,9 +17,6 @@ public class Harpoon extends EcoEnchant {
                 "harpoon", EnchantmentType.SPECIAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onFish(@NotNull final PlayerFishEvent event) {
         if (!event.getState().equals(PlayerFishEvent.State.CAUGHT_ENTITY)) {

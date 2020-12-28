@@ -16,20 +16,23 @@ public class Replenish extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
-    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
+    public void onBlockBreak(@NotNull final Player player,
+                             @NotNull final Block block,
+                             final int level,
+                             @NotNull final BlockBreakEvent event) {
         Material type = block.getType();
 
-        if(!(block.getBlockData() instanceof Ageable)) return;
-
-        if(block.getType().equals(Material.SUGAR_CANE) || block.getType().equals(Material.SWEET_BERRY_BUSH))
+        if (!(block.getBlockData() instanceof Ageable)) {
             return;
+        }
+
+        if (block.getType().equals(Material.SUGAR_CANE) || block.getType().equals(Material.SWEET_BERRY_BUSH)) {
+            return;
+        }
 
         Ageable data = (Ageable) block.getBlockData();
-        if(data.getAge() != data.getMaximumAge()) {
+        if (data.getAge() != data.getMaximumAge()) {
             event.setDropItems(false);
             event.setExpToDrop(0);
 

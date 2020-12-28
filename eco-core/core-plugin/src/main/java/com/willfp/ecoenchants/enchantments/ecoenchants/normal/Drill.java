@@ -21,9 +21,6 @@ public class Drill extends EcoEnchant {
                 "drill", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,

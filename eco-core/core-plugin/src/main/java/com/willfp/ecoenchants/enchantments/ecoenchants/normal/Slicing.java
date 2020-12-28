@@ -19,9 +19,6 @@ public class Slicing extends EcoEnchant {
                 "slicing", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     private final ArrayList<LivingEntity> entities = new ArrayList<>();
 
     @EventHandler

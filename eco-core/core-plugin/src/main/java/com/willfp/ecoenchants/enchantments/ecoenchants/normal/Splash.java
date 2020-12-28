@@ -24,9 +24,6 @@ public class Splash extends EcoEnchant {
                 "splash", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onSplashLand(ProjectileHitEvent event) {
         if (event.getEntityType() != EntityType.TRIDENT)

@@ -15,15 +15,16 @@ public class Rapid extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
-    public void onBowShoot(@NotNull LivingEntity shooter, @NotNull Arrow arrow, int level, @NotNull EntityShootBowEvent event) {
+    public void onBowShoot(@NotNull final LivingEntity shooter,
+                           @NotNull final Arrow arrow,
+                           final int level,
+                           @NotNull final EntityShootBowEvent event) {
         double multiplier = 1 - ((this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-faster-per-level") / 100) * level);
 
-        if (event.getForce() < multiplier)
+        if (event.getForce() < multiplier) {
             return;
+        }
 
         double force = 1 / event.getForce();
         event.getProjectile().setVelocity(event.getProjectile().getVelocity().multiply(force));

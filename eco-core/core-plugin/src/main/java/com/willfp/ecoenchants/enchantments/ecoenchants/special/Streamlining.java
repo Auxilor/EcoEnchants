@@ -14,9 +14,6 @@ public class Streamlining extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onArmorEquip(@NotNull Player player, int level, @NotNull ArmorEquipEvent event) {
         if(level == 0) {

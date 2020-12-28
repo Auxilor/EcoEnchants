@@ -14,9 +14,6 @@ public class Preservation extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onDamageWearingArmor(@NotNull final LivingEntity victim,
                                      final int level,

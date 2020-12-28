@@ -25,9 +25,6 @@ public class MagmaWalker extends EcoEnchant {
                 "magma_walker", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @EventHandler
     public void onLavaWalk(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();

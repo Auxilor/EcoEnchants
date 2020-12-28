@@ -19,9 +19,6 @@ public class Ignite extends EcoEnchant {
         );
     }
 
-    // START OF LISTENERS
-
-
     @Override
     public void onArrowHit(@NotNull final LivingEntity uncastShooter,
                            final int level,

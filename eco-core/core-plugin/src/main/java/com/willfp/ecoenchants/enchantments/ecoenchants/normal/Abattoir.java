@@ -15,9 +15,6 @@ public class Abattoir extends EcoEnchant {
                 "abattoir", EnchantmentType.NORMAL
         );
     }
-
-    // START OF LISTENERS
-
     @Override
     public void onTridentDamage(@NotNull final LivingEntity attacker,
                                 @NotNull final LivingEntity victim,
