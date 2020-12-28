@@ -8,9 +8,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class AnticheatAAC implements AnticheatWrapper, Listener {
+    /**
+     * AAC exemption for EcoEnchants.
+     */
     private final AACExemption ecoEnchantsExemption = new AACExemption("EcoEnchants");
-    private final AACAPI api = Bukkit.getServicesManager().load(AACAPI.class);
+
+    /**
+     * AAC api.
+     */
+    private final AACAPI api = Objects.requireNonNull(Bukkit.getServicesManager().load(AACAPI.class));
 
     @Override
     public String getPluginName() {

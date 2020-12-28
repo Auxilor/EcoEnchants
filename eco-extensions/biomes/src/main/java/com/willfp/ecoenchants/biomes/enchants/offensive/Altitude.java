@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 
 public class Altitude extends BiomesEnchantment {
+    /**
+     * Instantiate enchantment.
+     */
     public Altitude() {
         super("altitude", EnchantmentType.NORMAL);
     }

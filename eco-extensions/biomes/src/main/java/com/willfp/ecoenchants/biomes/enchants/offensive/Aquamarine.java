@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 
 public class Aquamarine extends BiomesEnchantment {
+    /**
+     * Instantiate enchantment.
+     */
     public Aquamarine() {
         super("aquamarine", EnchantmentType.NORMAL);
     }

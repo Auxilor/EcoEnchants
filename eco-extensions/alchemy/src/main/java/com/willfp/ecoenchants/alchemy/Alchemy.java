@@ -13,12 +13,23 @@ import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
 public class Alchemy extends EcoEnchant {
+    /**
+     * Instantiate Alchemy Enchantment.
+     */
     public Alchemy() {
         super("alchemy", EnchantmentType.NORMAL);
     }
 
+    /**
+     * true Metadata key.
+     */
     private final FixedMetadataValue metaKeyTrue = this.getPlugin().getMetadataValueFactory().create(true);
 
+    /**
+     * Enchantment functionality.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onPotionEffect(@NotNull final EntityPotionEffectEvent event) {
         if (event.getNewEffect() == null) {

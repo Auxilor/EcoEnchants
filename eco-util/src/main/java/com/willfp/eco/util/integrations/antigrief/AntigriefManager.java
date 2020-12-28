@@ -12,62 +12,65 @@ import java.util.Set;
 
 @UtilityClass
 public class AntigriefManager {
-    private final Set<AntigriefWrapper> antigriefs = new HashSet<>();
+    /**
+     * Registered antigriefs.
+     */
+    private final Set<AntigriefWrapper> registered = new HashSet<>();
 
     /**
-     * Register a new AntiGrief/Land Management integration
+     * Register a new AntiGrief/Land Management integration.
      *
-     * @param antigrief The integration to register
+     * @param antigrief The integration to register.
      */
     public void register(@NotNull final AntigriefWrapper antigrief) {
-        antigriefs.add(antigrief);
+        registered.add(antigrief);
     }
 
     /**
-     * Can player break block
+     * Can player break block.
      *
-     * @param player The player
-     * @param block  The block
-     * @return If player can break block
+     * @param player The player.
+     * @param block  The block.
+     * @return If player can break block.
      */
     public boolean canBreakBlock(@NotNull final Player player,
                                  @NotNull final Block block) {
-        return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canBreakBlock(player, block));
+        return registered.stream().allMatch(antigriefWrapper -> antigriefWrapper.canBreakBlock(player, block));
     }
 
     /**
-     * Can player create explosion at location
+     * Can player create explosion at location.
      *
-     * @param player   The player
-     * @param location The location
-     * @return If player can create explosion
+     * @param player   The player.
+     * @param location The location.
+     * @return If player can create explosion.
      */
     public boolean canCreateExplosion(@NotNull final Player player,
                                       @NotNull final Location location) {
-        return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canCreateExplosion(player, location));
+        return registered.stream().allMatch(antigriefWrapper -> antigriefWrapper.canCreateExplosion(player, location));
     }
 
     /**
-     * Can player place block
+     * Can player place block.
      *
-     * @param player The player
-     * @param block  The block
-     * @return If player can place block
+     * @param player The player.
+     * @param block  The block.
+     * @return If player can place block.
      */
     public boolean canPlaceBlock(@NotNull final Player player,
                                  @NotNull final Block block) {
-        return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canPlaceBlock(player, block));
+        return registered.stream().allMatch(antigriefWrapper -> antigriefWrapper.canPlaceBlock(player, block));
     }
 
     /**
-     * Can player injure living entity
+     * Can player injure living entity.
      *
-     * @param player The player
-     * @param victim The victim
-     * @return If player can injure
+     * @param player The player.
+     * @param victim The victim.
+     * @return If player can injure.
      */
     public boolean canInjure(@NotNull final Player player,
                              @NotNull final LivingEntity victim) {
-        return antigriefs.stream().allMatch(antigriefWrapper -> antigriefWrapper.canInjure(player, victim));
+        return registered.stream().allMatch(antigriefWrapper -> antigriefWrapper.canInjure(player, victim));
     }
 }

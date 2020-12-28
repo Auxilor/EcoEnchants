@@ -5,7 +5,23 @@
         "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
+    <!-- Enchantments don't need javadoc. -->
     <suppress files="[\\/]enchantments[\\/]ecoenchants[\\/]" checks="MissingJavadocMethod"/>
     <suppress files="[\\/]enchantments[\\/]ecoenchants[\\/]" checks="JavadocVariable"/>
-    <suppress files="[\\]EcoEnchants.java[\\/]" checks="JavadocVariable"/>
+
+    <!-- Extensions don't need javadoc. -->
+    <suppress files="[\\/]eco-extensions[\\/]" checks="MissingJavadocMethod"/>
+    <suppress files="[\\/]eco-extensions[\\/]" checks="JavadocVariable"/>
+
+    <!-- Fields don't need javadoc -->
+    <suppress files="EcoEnchants.java" checks="JavadocVariable"/>
+
+    <!-- Modified version of library -->
+    <suppress files="ArmorEquipEvent.java" checks="JavadocVariable"/>
+    <suppress files="ArmorEquipEvent.java" checks="MissingJavadocMethod"/>
+    <suppress files="ArmorEquipEvent.java" checks="JavadocStyle"/>
+    <suppress files="ArmorListener.java" checks="JavadocVariable"/>
+    <suppress files="ArmorListener.java" checks="MissingJavadocMethod"/>
+    <suppress files="ArmorType.java" checks="JavadocVariable"/>
+    <suppress files="ArmorType.java" checks="MissingJavadocMethod"/>
 </suppressions>

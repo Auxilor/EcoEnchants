@@ -9,12 +9,17 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * PlaceholderAPI integration
- */
 public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements PlaceholderIntegration {
+    /**
+     * The linked plugin.
+     */
     private final AbstractEcoPlugin plugin;
 
+    /**
+     * Create a new PlaceholderAPI integration.
+     *
+     * @param plugin The plugin to manage placeholders for.
+     */
     public PlaceholderIntegrationPAPI(@NotNull final AbstractEcoPlugin plugin) {
         this.plugin = plugin;
     }

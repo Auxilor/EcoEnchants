@@ -10,18 +10,22 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
-/**
- * Utility class for placeholders
- */
 @UtilityClass
 public class PlaceholderManager {
+    /**
+     * All registered placeholders.
+     */
     private static final Set<PlaceholderEntry> REGISTERED_PLACEHOLDERS = new HashSet<>();
+
+    /**
+     * All registered placeholder integrations.
+     */
     private static final Set<PlaceholderIntegration> REGISTERED_INTEGRATIONS = new HashSet<>();
 
     /**
-     * Register a new placeholder integration
+     * Register a new placeholder integration.
      *
-     * @param integration The {@link PlaceholderIntegration} to register
+     * @param integration The {@link PlaceholderIntegration} to register.
      */
     public static void addIntegration(@NotNull final PlaceholderIntegration integration) {
         integration.registerIntegration();
@@ -29,9 +33,9 @@ public class PlaceholderManager {
     }
 
     /**
-     * Register a placeholder
+     * Register a placeholder.
      *
-     * @param expansion The {@link PlaceholderEntry} to register
+     * @param expansion The {@link PlaceholderEntry} to register.
      */
     public static void registerPlaceholder(@NotNull final PlaceholderEntry expansion) {
         REGISTERED_PLACEHOLDERS.removeIf(placeholderEntry -> placeholderEntry.getIdentifier().equalsIgnoreCase(expansion.getIdentifier()));
@@ -39,11 +43,11 @@ public class PlaceholderManager {
     }
 
     /**
-     * Get the result of a placeholder with respect to a player
+     * Get the result of a placeholder with respect to a player.
      *
-     * @param player     The player to get the result from
-     * @param identifier The placeholder identifier
-     * @return The value of the placeholder
+     * @param player     The player to get the result from.
+     * @param identifier The placeholder identifier.
+     * @return The value of the placeholder.
      */
     public static String getResult(@Nullable final Player player,
                                    @NotNull final String identifier) {
@@ -59,11 +63,11 @@ public class PlaceholderManager {
     }
 
     /**
-     * Translate all placeholders with respect to a player
+     * Translate all placeholders with respect to a player.
      *
-     * @param text   The text that may contain placeholders to translate
-     * @param player The player to translate the placeholders with respect to
-     * @return The text, translated
+     * @param text   The text that may contain placeholders to translate.
+     * @param player The player to translate the placeholders with respect to.
+     * @return The text, translated.
      */
     public static String translatePlaceholders(@NotNull final String text,
                                                @Nullable final Player player) {

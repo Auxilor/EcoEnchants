@@ -4,6 +4,9 @@ import com.willfp.eco.util.extensions.Extension;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 
 public class AlchemyMain extends Extension {
+    /**
+     * Alchemy enchantment.
+     */
     public static final EcoEnchant ALCHEMY = new Alchemy();
 
     @Override

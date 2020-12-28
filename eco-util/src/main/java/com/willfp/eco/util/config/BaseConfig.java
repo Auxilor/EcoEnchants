@@ -169,7 +169,7 @@ public abstract class BaseConfig extends PluginDependent implements ValueGetter 
     }
 
     /**
-     * Get a string from config.C
+     * Get a string from config.
      *
      * @param path The key to fetch the value from.
      * @return The found value, or an empty string if not found.

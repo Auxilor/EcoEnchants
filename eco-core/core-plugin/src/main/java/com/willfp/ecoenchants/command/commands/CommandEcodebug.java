@@ -102,7 +102,7 @@ public class CommandEcodebug extends AbstractCommand {
             if (enchant.getRarity() == null) {
                 withIssues.add(enchant);
             }
-            if (enchant.getRawTargets().isEmpty()) {
+            if (enchant.getTargets().isEmpty()) {
                 withIssues.add(enchant);
             }
         });
