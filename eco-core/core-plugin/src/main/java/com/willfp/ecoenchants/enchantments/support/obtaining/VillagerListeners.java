@@ -25,8 +25,11 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class VillagerListeners implements Listener {
-
-    // For books
+    /**
+     * Called on villager gain trade.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onVillagerGainBookTrade(@NotNull final VillagerAcquireTradeEvent event) {
         if (!event.getRecipe().getResult().getType().equals(Material.ENCHANTED_BOOK)) {
@@ -61,7 +64,7 @@ public class VillagerListeners implements Listener {
                 continue;
             }
 
-            if (!enchantment.canGetFromVillager()) {
+            if (!enchantment.isAvailableFromVillager()) {
                 continue;
             }
 
@@ -97,7 +100,11 @@ public class VillagerListeners implements Listener {
         event.setRecipe(recipe);
     }
 
-    // For tools
+    /**
+     * Called on villager gain trade.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onVillagerGainItemTrade(@NotNull final VillagerAcquireTradeEvent event) {
 
@@ -139,7 +146,7 @@ public class VillagerListeners implements Listener {
                 continue;
             }
 
-            if (!enchantment.canGetFromVillager()) {
+            if (!enchantment.isAvailableFromVillager()) {
                 continue;
             }
 

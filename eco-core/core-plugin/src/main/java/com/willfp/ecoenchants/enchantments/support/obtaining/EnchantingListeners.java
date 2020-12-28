@@ -29,6 +29,9 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnchantingListeners extends PluginDependent implements Listener {
+    /**
+     * All enchantments that by default cannot be enchanted in a table but are in EcoEnchants.
+     */
     private static final Set<Material> SECONDARY_ENCHANTABLE = new ImmutableSet.Builder<Material>()
             .add(Material.ELYTRA)
             .add(Material.SHIELD)
@@ -36,17 +39,35 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             .add(Material.SHEARS)
             .add(Material.CARROT_ON_A_STICK).build();
 
+    /**
+     * All players currently enchanting a secondary item.
+     */
     public static final Map<Player, int[]> CURRENTLY_ENCHANTING_SECONDARY = new HashMap<>();
 
+    /**
+     * Instantiate enchanting listeners and link them to a specific plugin.
+     *
+     * @param plugin The plugin to link to.
+     */
     public EnchantingListeners(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
+    /**
+     * Called on player leave.
+     *
+     * @param event The event to listen to.
+     */
     @EventHandler
     public void onPlayerLeave(@NotNull final PlayerQuitEvent event) {
         CURRENTLY_ENCHANTING_SECONDARY.remove(event.getPlayer());
     }
 
+    /**
+     * Called on player enchant item.
+     *
+     * @param event The event to listen to.
+     */
     @EventHandler
     public void enchantItem(@NotNull final EnchantItemEvent event) {
         Player player = event.getEnchanter();
@@ -99,7 +120,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             if (!enchantment.isEnabled()) {
                 continue;
             }
-            if (!enchantment.canGetFromTable()) {
+            if (!enchantment.isAvailableFromTable()) {
                 continue;
             }
             if (!player.hasPermission("ecoenchants.fromtable." + enchantment.getPermissionName())) {
@@ -161,7 +182,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         }
         toAdd.forEach(event.getEnchantsToAdd()::putIfAbsent);
 
-        if (SECONDARY_ENCHANTABLE.contains(event.getItem().getType()) && !toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY))  {
+        if (SECONDARY_ENCHANTABLE.contains(event.getItem().getType()) && !toAdd.containsKey(EcoEnchants.INDESTRUCTIBILITY)) {
             event.getEnchantsToAdd().put(Enchantment.DURABILITY, CURRENTLY_ENCHANTING_SECONDARY.get(player)[event.whichButton()]);
             CURRENTLY_ENCHANTING_SECONDARY.remove(player);
         }
@@ -188,6 +209,12 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         }, 1);
     }
 
+    /**
+     * Called on prepare enchant.
+     * For secondary enchantments, generates unbreaking tooltips.
+     *
+     * @param event The event to listen to.
+     */
     @EventHandler
     public void secondaryEnchant(@NotNull final PrepareItemEnchantEvent event) {
         int maxLevel = Configs.CONFIG.getInt("enchanting-table.maximum-obtainable-level");

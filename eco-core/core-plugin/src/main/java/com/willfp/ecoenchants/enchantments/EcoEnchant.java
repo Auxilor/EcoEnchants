@@ -13,6 +13,9 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -23,9 +26,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -38,29 +39,114 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings({"unchecked", "deprecation"})
+@EqualsAndHashCode(callSuper = false)
+@SuppressWarnings("unchecked")
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
+    /**
+     * Instance of EcoEnchants for enchantments to be able to access.
+     */
+    @Getter(AccessLevel.PROTECTED)
     private final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
 
+    /**
+     * The display name of the enchantment.
+     */
+    @Getter
     private String name;
+
+    /**
+     * The description of the enchantment.
+     */
+    @Getter
     private String description;
+
+    /**
+     * The permission/config name of the enchantment.
+     */
+    @Getter
     private final String permissionName;
+
+    /**
+     * The type of the enchantment.
+     */
+    @Getter
     private final EnchantmentType type;
 
+    /**
+     * The enchantment's config.
+     */
+    @Getter
     private final EnchantmentConfig config;
 
+    /**
+     * If the enchantment can be removed in a grindstone.
+     */
+    @Getter
     private boolean grindstoneable;
-    private boolean canGetFromTable;
-    private boolean canGetFromVillager;
-    private boolean canGetFromLoot;
-    private int maxLvl;
+
+    /**
+     * If the enchantment can be obtained from an enchanting table.
+     */
+    @Getter
+    private boolean availableFromTable;
+
+    /**
+     * If the enchantment can be obtained from a villager.
+     */
+    @Getter
+    private boolean availableFromVillager;
+
+    /**
+     * If the enchantment can be obtained from a loot chest.
+     */
+    @Getter
+    private boolean availableFromLoot;
+
+    /**
+     * The maximum level for the enchantment to be obtained naturally.
+     */
+    private int maxLevel;
+
+    /**
+     * The enchantments that conflict with this enchantment.
+     */
+    @Getter
     private Set<Enchantment> conflicts;
+
+    /**
+     * The rarity of the enchantment.
+     */
+    @Getter
     private EnchantmentRarity rarity;
-    private final Set<EnchantmentTarget> target = new HashSet<>();
+
+    /**
+     * The targets of the enchantment.
+     */
+    @Getter
+    private final Set<EnchantmentTarget> targets = new HashSet<>();
+
+    /**
+     * The materials of the targets.
+     */
+    @Getter
     private final Set<Material> targetMaterials = new HashSet<>();
+
+    /**
+     * The names of the worlds that this enchantment is disabled in.
+     */
+    @Getter
     private final Set<String> disabledWorldNames = new HashSet<>();
+
+    /**
+     * The worlds that this enchantment is disabled in.
+     */
+    @Getter
     private final List<World> disabledWorlds = new ArrayList<>();
 
+    /**
+     * If the enchantment is enabled.
+     */
+    @Getter
     private boolean enabled;
 
     /**
@@ -105,18 +191,18 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
-     * Update the enchantment based off config values
-     * This can be overriden but may lead to unexpected behavior
+     * Update the enchantment based off config values.
+     * This can be overridden but may lead to unexpected behavior.
      */
     public void update() {
         config.loadFromLang();
         rarity = config.getRarity();
         conflicts = config.getEnchantments(EcoEnchants.GENERAL_LOCATION + "conflicts");
         grindstoneable = config.getBool(EcoEnchants.GENERAL_LOCATION + "grindstoneable");
-        canGetFromTable = config.getBool(EcoEnchants.OBTAINING_LOCATION + "table");
-        canGetFromVillager = config.getBool(EcoEnchants.OBTAINING_LOCATION + "villager");
-        canGetFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
-        maxLvl = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
+        availableFromTable = config.getBool(EcoEnchants.OBTAINING_LOCATION + "table");
+        availableFromVillager = config.getBool(EcoEnchants.OBTAINING_LOCATION + "villager");
+        availableFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
+        maxLevel = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
         name = StringUtils.translate(config.getString("name"));
         description = StringUtils.translate(config.getString("description"));
         disabledWorldNames.clear();
@@ -125,11 +211,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         List<String> worldNames = Bukkit.getWorlds().stream().map(World::getName).map(String::toLowerCase).collect(Collectors.toList());
         List<String> disabledExistingWorldNames = disabledWorldNames.stream().filter(s -> worldNames.contains(s.toLowerCase())).collect(Collectors.toList());
         disabledWorlds.addAll(Bukkit.getWorlds().stream().filter(world -> disabledExistingWorldNames.contains(world.getName().toLowerCase())).collect(Collectors.toList()));
-        target.clear();
+        targets.clear();
         targetMaterials.clear();
-        target.addAll(config.getTargets());
-        target.forEach(enchantmentTarget -> targetMaterials.addAll(enchantmentTarget.getMaterials()));
-        enabled = config.getBool("enabled", true);
+        targets.addAll(config.getTargets());
+        targets.forEach(enchantmentTarget -> targetMaterials.addAll(enchantmentTarget.getMaterials()));
+        enabled = config.getBool("enabled");
         EnchantmentUtils.registerPlaceholders(this);
 
         postUpdate();
@@ -140,14 +226,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
         // Unused as some enchantments may have postUpdate tasks, however most won't.
     }
 
-    @ApiStatus.Internal
-    protected AbstractEcoPlugin getPlugin() {
-        return this.plugin;
-    }
-
     /**
-     * Register the enchantment with spigot
-     * Only used internally
+     * Register the enchantment with spigot.
+     * Only used internally.
      */
     @Override
     public void register() {
@@ -179,179 +260,41 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
-     * Get if enchantment can be removed in grindstone
+     * Get description of enchantment line-wrapped.
      *
-     * @return Whether the enchantment can be removed
+     * @return The description.
      */
-    public boolean isGrindstoneable() {
-        return grindstoneable;
-    }
-
-    /**
-     * Get {@link EnchantmentType} of enchantment
-     *
-     * @return The {@link EnchantmentType}
-     */
-    public EnchantmentType getType() {
-        return this.type;
-    }
-
-    /**
-     * Get a set of all conflicts
-     *
-     * @return Conflicts
-     */
-    public Set<Enchantment> getConflicts() {
-        return this.conflicts;
-    }
-
-    /**
-     * Get if enchantment is enabled
-     *
-     * @return If enabled
-     */
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-
-    /**
-     * Get permission name of enchantment
-     *
-     * @return The permission name
-     */
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    /**
-     * Get description of enchantment
-     *
-     * @return The description
-     */
-    public List<String> getDescription() {
+    public List<String> getWrappedDescription() {
         return Arrays.asList(WordUtils.wrap(description, Configs.CONFIG.getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
     }
 
     /**
-     * Get if enchantment can be obtained from an enchanting table
+     * If enchantment conflicts with any enchantment in set.
      *
-     * @return If can be obtained
-     */
-    public boolean canGetFromTable() {
-        return canGetFromTable;
-    }
-
-    /**
-     * Get if enchantment can be obtained from a villager
-     *
-     * @return If can be obtained
-     */
-    public boolean canGetFromVillager() {
-        return canGetFromVillager;
-    }
-
-    /**
-     * Get if enchantment can be obtained from chest loot
-     *
-     * @return If can be obtained
-     */
-    public boolean canGetFromLoot() {
-        return canGetFromLoot;
-    }
-
-    /**
-     * Get {@link EnchantmentRarity} of enchantment
-     *
-     * @return The enchantment rarity
-     */
-    public EnchantmentRarity getRarity() {
-        return rarity;
-    }
-
-    /**
-     * If enchantment conflicts with any enchantment in set
-     *
-     * @param enchantments The set to test against
-     *
-     * @return If there are any conflicts
+     * @param enchantments The set to test against.
+     * @return If there are any conflicts.
      */
     public boolean conflictsWithAny(@NotNull final Set<? extends Enchantment> enchantments) {
         return conflicts.stream().anyMatch(enchantments::contains);
     }
 
     /**
-     * Get enchantment cast to {@link Enchantment}
+     * Get enchantment cast to {@link Enchantment}.
      *
-     * @return The enchantment
+     * @return The enchantment.
      */
     public Enchantment getEnchantment() {
         return this;
     }
 
     /**
-     * Get the target of enchantment
+     * Get max level of enchantment.
      *
-     * @return Set of enchantable items
-     */
-    public Set<Material> getTarget() {
-        return targetMaterials;
-    }
-
-    /**
-     * Get raw target of enchantment
-     *
-     * @return {@link com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget}
-     */
-    public Set<com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget> getRawTargets() {
-        return target;
-    }
-
-    /**
-     * Get {@link EnchantmentConfig} of enchantment
-     *
-     * @return The config
-     */
-    public EnchantmentConfig getConfig() {
-        return config;
-    }
-
-    /**
-     * Get worlds that the enchantment is disabled in
-     *
-     * @return A list of all disabled worlds
-     */
-    public List<World> getDisabledWorlds() {
-        return disabledWorlds;
-    }
-
-    /**
-     * Get world names that the enchantment is disabled in
-     *
-     * @return A list of all disabled world names
-     */
-    public Set<String> getDisabledWorldNames() {
-        return disabledWorldNames;
-    }
-
-    /**
-     * Get display name of enchantment.
-     * Not deprecated, unlike {@link Enchantment#getName()}
-     *
-     * @return The display name
-     */
-    @Override
-    public @NotNull String getName() {
-        return name;
-    }
-
-    /**
-     * Get max level of enchantment
-     *
-     * @return The max level
+     * @return The max level.
      */
     @Override
     public int getMaxLevel() {
-        return maxLvl;
+        return maxLevel;
     }
 
     /**
@@ -364,11 +307,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Do not use this method.
-     * Only here for compatibility with {@link Enchantment}
+     * Only here for compatibility with {@link Enchantment}.
      *
      * @return Returns {@link EnchantmentTarget#ALL}. Do not use.
-     *
-     * @deprecated {@link EnchantmentTarget} is not supported due to its lack of flexibility. Use {@link EcoEnchant#getTarget()} instead.
+     * @deprecated {@link EnchantmentTarget} is not supported due to its lack of flexibility. Use {@link EcoEnchant#getTargets()} instead.
      */
     @Override
     @Deprecated
@@ -377,11 +319,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
-     * Treasure enchantments do not exist in EcoEnchants
+     * Treasure enchantments do not exist in EcoEnchants.
+     *
+     * @return false.
      * @see EnchantmentType#SPECIAL
-     *
-     * @return false
-     *
      * @deprecated Treasure enchantments do not exist. Use {@link EcoEnchant#getType()} instead.
      */
     @Override
@@ -392,10 +333,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * While this method works, it is not recommended to use it.
-     * @see EnchantmentType#CURSE
      *
      * @return Returns if enchantment is cursed.
-     *
+     * @see EnchantmentType#CURSE
      * @deprecated Use {@link EcoEnchant#getType()} instead.
      */
     @Override
@@ -405,11 +345,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
-     * Get if enchantment conflicts with specified enchantment
+     * Get if enchantment conflicts with specified enchantment.
      *
-     * @param enchantment The enchantment to test against
-     *
-     * @return If conflicts
+     * @param enchantment The enchantment to test against.
+     * @return If conflicts.
      */
     @Override
     public boolean conflictsWith(@NotNull final Enchantment enchantment) {
@@ -417,34 +356,13 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
-     * If enchantment can be applied to item
+     * If enchantment can be applied to item.
      *
-     * @param itemStack The {@link ItemStack} to test against
-     *
-     * @return If can be applied
+     * @param itemStack The {@link ItemStack} to test against.
+     * @return If can be applied.
      */
     @Override
     public boolean canEnchantItem(@NotNull final ItemStack itemStack) {
         return targetMaterials.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
-    }
-
-    @Override
-    public boolean equals(@Nullable final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof EcoEnchant)) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-        EcoEnchant enchant = (EcoEnchant) o;
-        return enchant.getKey().equals(((EcoEnchant) o).getKey());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.getKey());
     }
 }

@@ -75,7 +75,7 @@ public class EnchantmentCache implements Updatable {
             List<String> description;
             if (EcoEnchants.getFromEnchantment(enchantment) != null) {
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
-                description = ecoEnchant.getDescription();
+                description = ecoEnchant.getWrappedDescription();
                 name = ecoEnchant.getName();
                 type = ecoEnchant.getType();
                 rarity = ecoEnchant.getRarity();

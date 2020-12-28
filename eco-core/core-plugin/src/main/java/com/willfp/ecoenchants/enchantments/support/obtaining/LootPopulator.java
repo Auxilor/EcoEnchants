@@ -28,9 +28,16 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LootPopulator extends BlockPopulator {
+    /**
+     * Populate a chunk's loot chests.
+     *
+     * @param world  The world to populate.
+     * @param random Bukkit parity.
+     * @param chunk  The chunk to populate.
+     */
     public void populate(@NotNull final World world,
-                         final @NotNull Random random,
-                         final @NotNull Chunk chunk) {
+                         @NotNull final Random random,
+                         @NotNull final Chunk chunk) {
         if (!Configs.CONFIG.getBool("loot.enabled")) {
             return;
         }
@@ -78,7 +85,7 @@ public class LootPopulator extends BlockPopulator {
                         continue;
                     }
 
-                    if (!enchantment.canGetFromLoot()) {
+                    if (!enchantment.isAvailableFromLoot()) {
                         continue;
                     }
 

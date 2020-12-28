@@ -84,12 +84,12 @@ public class CommandEnchantinfo extends AbstractCommand {
             allConflicts = StringUtils.translate(Configs.LANG.getString("no-conflicts"));
         }
 
-        Set<Material> targets = enchantment.getTarget();
+        Set<Material> targets = enchantment.getTargetMaterials();
 
         Set<String> applicableItemsSet = new HashSet<>();
 
         if (Configs.CONFIG.getBool("commands.enchantinfo.show-target-group")) {
-            enchantment.getRawTargets().forEach(target -> {
+            enchantment.getTargets().forEach(target -> {
                 String targetName = target.getName();
                 targetName = targetName.toLowerCase();
                 targetName = targetName.replace("_", " ");

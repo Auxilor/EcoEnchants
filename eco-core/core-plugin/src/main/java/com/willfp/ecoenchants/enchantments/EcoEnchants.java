@@ -227,6 +227,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -238,11 +239,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/**
- * Contains general methods for EcoEnchants
- */
-@SuppressWarnings("unused")
-public final class EcoEnchants implements Updatable {
+@UtilityClass
+@SuppressWarnings({"unused", "checkstyle:JavadocVariable"})
+public class EcoEnchants implements Updatable {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
@@ -471,19 +470,18 @@ public final class EcoEnchants implements Updatable {
     public static final EcoEnchant ASCEND = new Ascend();
 
     /**
-     * Get all registered {@link EcoEnchant}s
+     * Get all registered {@link EcoEnchant}s.
      *
-     * @return A list of all {@link EcoEnchant}s
+     * @return A list of all {@link EcoEnchant}s.
      */
     public static List<EcoEnchant> values() {
         return ImmutableList.copyOf(BY_KEY.values());
     }
 
     /**
-     * Gets {@link EcoEnchant} from {@link Enchantment}
+     * Gets {@link EcoEnchant} from {@link Enchantment}.
      *
-     * @param enchantment The enchantment
-     *
+     * @param enchantment The enchantment.
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getFromEnchantment(@NotNull final Enchantment enchantment) {
@@ -491,10 +489,9 @@ public final class EcoEnchants implements Updatable {
     }
 
     /**
-     * Get {@link EcoEnchant} matching display name
+     * Get {@link EcoEnchant} matching display name.
      *
-     * @param name The display name to search for
-     *
+     * @param name The display name to search for.
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByName(@NotNull final String name) {
@@ -503,10 +500,9 @@ public final class EcoEnchants implements Updatable {
     }
 
     /**
-     * Get {@link EcoEnchant} matching permission name
+     * Get {@link EcoEnchant} matching permission name.
      *
-     * @param permissionName The permission name to search for
-     *
+     * @param permissionName The permission name to search for.
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByPermission(@NotNull final String permissionName) {
@@ -515,10 +511,9 @@ public final class EcoEnchants implements Updatable {
     }
 
     /**
-     * Get {@link EcoEnchant} matching key
+     * Get {@link EcoEnchant} matching key.
      *
-     * @param key The NamespacedKey to search for
-     *
+     * @param key The NamespacedKey to search for.
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByKey(@NotNull final NamespacedKey key) {
@@ -526,11 +521,10 @@ public final class EcoEnchants implements Updatable {
     }
 
     /**
-     * Get if {@link ItemStack} has any {@link EcoEnchant} matching specified {@link EnchantmentType}
+     * Get if {@link ItemStack} has any {@link EcoEnchant} matching specified {@link EnchantmentType}.
      *
-     * @param item The {@link ItemStack} to check
-     * @param type The {@link EnchantmentType} to match
-     *
+     * @param item The {@link ItemStack} to check.
+     * @param type The {@link EnchantmentType} to match.
      * @return True if has, false if doesn't have.
      */
     public static boolean hasAnyOfType(@NotNull final ItemStack item,
@@ -554,8 +548,7 @@ public final class EcoEnchants implements Updatable {
     }
 
     /**
-     * Update all {@link EcoEnchant}s
-     * Called on /ecoreload
+     * Update all {@link EcoEnchant}s.
      */
     @ConfigUpdater
     public static void update() {
@@ -565,10 +558,11 @@ public final class EcoEnchants implements Updatable {
     }
 
     /**
-     * Add new {@link EcoEnchant} to EcoEnchants
+     * Add new {@link EcoEnchant} to EcoEnchants.
+     * <p>
      * Only for internal use, enchantments are automatically added in the constructor.
      *
-     * @param enchant The {@link EcoEnchant} to add
+     * @param enchant The {@link EcoEnchant} to add.
      */
     public static void addNewEcoEnchant(@NotNull final EcoEnchant enchant) {
         BY_KEY.remove(enchant.getKey());
@@ -576,15 +570,11 @@ public final class EcoEnchants implements Updatable {
     }
 
     /**
-     * Remove {@link EcoEnchant} from EcoEnchants
+     * Remove {@link EcoEnchant} from EcoEnchants.
      *
-     * @param enchant The {@link EcoEnchant} to remove
+     * @param enchant The {@link EcoEnchant} to remove.
      */
     public static void removeEcoEnchant(@NotNull final EcoEnchant enchant) {
         BY_KEY.remove(enchant.getKey());
-    }
-
-    private EcoEnchants() {
-        throw new UnsupportedOperationException("Utility class cannot be instantiated!");
     }
 }

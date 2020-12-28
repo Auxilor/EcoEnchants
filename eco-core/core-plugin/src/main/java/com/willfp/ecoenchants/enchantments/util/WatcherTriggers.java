@@ -36,14 +36,30 @@ import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 public class WatcherTriggers extends PluginDependent implements Listener {
+    /**
+     * For jump listeners.
+     */
     private static final Set<UUID> PREVIOUS_PLAYERS_ON_GROUND = Sets.newHashSet();
+
+    /**
+     * For jump listeners.
+     */
     private static final DecimalFormat FORMAT = new DecimalFormat("0.00");
 
-
+    /**
+     * Create new listener for watcher events.
+     *
+     * @param plugin The plugin to link the events to.
+     */
     public WatcherTriggers(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
+    /**
+     * Called when an entity shoots another entity with an arrow.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onArrowDamage(@NotNull final EntityDamageByEntityEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -99,6 +115,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         }));
     }
 
+    /**
+     * Called when an entity damages another entity with a trident throw.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onTridentDamage(@NotNull final EntityDamageByEntityEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -156,6 +177,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         }));
     }
 
+    /**
+     * Called when a player jumps.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onJump(@NotNull final PlayerMoveEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -197,6 +223,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         }
     }
 
+    /**
+     * Called when an entity attacks another entity with a melee attack.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onMeleeAttack(@NotNull final EntityDamageByEntityEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -243,6 +274,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         });
     }
 
+    /**
+     * Called when an entity shoots a bow.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onBowShoot(@NotNull final EntityShootBowEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -273,6 +309,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         });
     }
 
+    /**
+     * Called when an entity takes fall damage.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onFallDamage(@NotNull final EntityDamageEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -306,6 +347,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         });
     }
 
+    /**
+     * Called when an arrow hits a block or entity.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onArrowHit(@NotNull final ProjectileHitEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -340,6 +386,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         }));
     }
 
+    /**
+     * Called when a trident hits a block or entity.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onTridentHit(@NotNull final ProjectileHitEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -375,6 +426,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         }));
     }
 
+    /**
+     * Called when a player breaks a block.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(@NotNull final BlockBreakEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -409,6 +465,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         });
     }
 
+    /**
+     * Called when an entity takes damage wearing armor.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onDamageWearingArmor(@NotNull final EntityDamageEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -438,6 +499,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         });
     }
 
+    /**
+     * Called when an entity puts on or takes off armor with an enchantment.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -464,6 +530,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         }), 1);
     }
 
+    /**
+     * Called when a player damages a block.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onDamageBlock(@NotNull final BlockDamageEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -494,6 +565,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         });
     }
 
+    /**
+     * Called when an entity throws a trident.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onTridentLaunch(@NotNull final ProjectileLaunchEvent event) {
         if (McmmoManager.isFake(event)) {
@@ -529,6 +605,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         });
     }
 
+    /**
+     * Called when a player blocks an attack with a shield.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler(ignoreCancelled = true)
     public void onDeflect(@NotNull final EntityDamageByEntityEvent event) {
         if (McmmoManager.isFake(event)) {

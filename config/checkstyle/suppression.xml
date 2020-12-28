@@ -7,4 +7,5 @@
 <suppressions>
     <suppress files="[\\/]enchantments[\\/]ecoenchants[\\/]" checks="MissingJavadocMethod"/>
     <suppress files="[\\/]enchantments[\\/]ecoenchants[\\/]" checks="JavadocVariable"/>
+    <suppress files="[\\]EcoEnchants.java[\\/]" checks="JavadocVariable"/>
 </suppressions>
