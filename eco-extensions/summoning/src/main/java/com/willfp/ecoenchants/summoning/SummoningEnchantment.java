@@ -22,7 +22,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class SummoningEnchantment extends EcoEnchant {
@@ -111,8 +110,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
                 health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
             }
             entity.setHealth(health);
-            entity.setMetadata("eco-target", new FixedMetadataValue(this.getPlugin(), victim));
-
+            entity.setMetadata("eco-target", this.getPlugin().getMetadataValueFactory().create(victim));
             this.getPlugin().getScheduler().runLater(entity::remove, ticksToLive);
         }
     }

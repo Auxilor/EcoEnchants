@@ -7,7 +7,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.jetbrains.annotations.NotNull;
 
 public class Atmospheric extends EcoEnchant {
@@ -25,7 +24,7 @@ public class Atmospheric extends EcoEnchant {
             return;
         }
 
-        trident.setMetadata("shot-in-air", new FixedMetadataValue(this.getPlugin(), true));
+        trident.setMetadata("shot-in-air", this.getPlugin().getMetadataValueFactory().create(true));
     }
 
     @Override

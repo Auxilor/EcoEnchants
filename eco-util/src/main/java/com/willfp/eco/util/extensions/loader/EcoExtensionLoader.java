@@ -100,8 +100,8 @@ public class EcoExtensionLoader extends PluginDependent implements ExtensionLoad
         Object object = null;
         try {
             cls = cl.loadClass(mainClass);
-            object = cls.newInstance();
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            object = cls.getConstructor().newInstance();
+        } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
 

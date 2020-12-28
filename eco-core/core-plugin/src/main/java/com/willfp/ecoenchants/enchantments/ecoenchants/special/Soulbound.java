@@ -46,7 +46,7 @@ public class Soulbound extends EcoEnchant {
                 soulboundItems.add(itemStack);
             }
 
-            if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this))) {
+            if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this.getEnchantment()))) {
                 soulboundItems.add(itemStack);
             }
         }));

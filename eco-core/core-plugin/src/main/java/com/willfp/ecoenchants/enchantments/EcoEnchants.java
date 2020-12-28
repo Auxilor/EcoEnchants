@@ -539,20 +539,16 @@ public final class EcoEnchants implements Updatable {
 
         if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
             ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().forEach(((enchantment, integer) -> {
-                if (getFromEnchantment(enchantment) != null) {
-                    if (getFromEnchantment(enchantment).getType().equals(type)) {
-                        hasOfType.set(true);
-                    }
+                if (getFromEnchantment(enchantment) != null && getFromEnchantment(enchantment).getType().equals(type)) {
+                    hasOfType.set(true);
                 }
             }));
         } else {
-            item.getEnchantments().forEach(((enchantment, integer) -> {
-                if (getFromEnchantment(enchantment) != null) {
-                    if (getFromEnchantment(enchantment).getType().equals(type)) {
-                        hasOfType.set(true);
-                    }
+            item.getEnchantments().forEach((enchantment, integer) -> {
+                if (getFromEnchantment(enchantment) != null && (getFromEnchantment(enchantment).getType().equals(type))) {
+                    hasOfType.set(true);
                 }
-            }));
+            });
         }
         return hasOfType.get();
     }

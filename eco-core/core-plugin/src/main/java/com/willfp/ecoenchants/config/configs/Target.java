@@ -21,7 +21,7 @@ public class Target extends BaseConfig {
 
     public Set<Material> getTargetMaterials(@NotNull final String target) {
         Set<Material> materials = new HashSet<>();
-        this.getConfig().getStringList("targets." + target).forEach((materialName) -> {
+        this.getConfig().getStringList("targets." + target).forEach(materialName -> {
             materials.add(Material.getMaterial(materialName.toUpperCase()));
         });
 

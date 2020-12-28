@@ -9,7 +9,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.jetbrains.annotations.NotNull;
 
 public class Missile extends Spell {
@@ -24,8 +23,8 @@ public class Missile extends Spell {
         WitherSkull skull = player.launchProjectile(WitherSkull.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
         skull.setCharged(true);
         skull.setIsIncendiary(false);
-        skull.setMetadata("eco-damage", new FixedMetadataValue(this.getPlugin(), this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
-        skull.setMetadata("nobreak", new FixedMetadataValue(this.getPlugin(), true));
+        skull.setMetadata("eco-damage", this.getPlugin().getMetadataValueFactory().create(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
+        skull.setMetadata("nobreak", this.getPlugin().getMetadataValueFactory().create(true));
         skull.setShooter(player);
     }
 

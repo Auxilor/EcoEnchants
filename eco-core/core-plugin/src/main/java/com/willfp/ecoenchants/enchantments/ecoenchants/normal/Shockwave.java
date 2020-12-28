@@ -65,7 +65,7 @@ public class Shockwave extends EcoEnchant {
                     .filter(entity1 -> !entity1.hasMetadata("shockwaved"))
                     .forEach((mob -> {
                         ((LivingEntity) mob).damage(finalDamage, player);
-                        mob.setMetadata("shockwaved", new FixedMetadataValue(this.getPlugin(), true));
+                        mob.setMetadata("shockwaved", this.getPlugin().getMetadataValueFactory().create(true));
                         this.getPlugin().getScheduler().runLater(() -> mob.removeMetadata("shockwaved", this.getPlugin()), 10);
                     }
                     ));

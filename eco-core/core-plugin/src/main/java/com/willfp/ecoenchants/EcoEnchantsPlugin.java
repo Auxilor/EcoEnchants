@@ -67,9 +67,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
             this.getLog().info("&cNo extensions found");
         } else {
             this.getLog().info("Extensions Loaded:");
-            this.getExtensionLoader().getLoadedExtensions().forEach((extension) -> {
-                this.getLog().info("- " + extension.getName() + " v" + extension.getVersion());
-            });
+            this.getExtensionLoader().getLoadedExtensions().forEach(extension -> this.getLog().info("- " + extension.getName() + " v" + extension.getVersion()));
         }
 
         this.getLog().info("");

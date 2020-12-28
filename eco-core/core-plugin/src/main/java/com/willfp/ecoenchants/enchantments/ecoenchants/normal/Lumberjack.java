@@ -54,7 +54,7 @@ public class Lumberjack extends EcoEnchant {
         AnticheatManager.exemptPlayer(player);
 
         for (Block treeBlock : treeBlocks) {
-            treeBlock.setMetadata("block-ignore", new FixedMetadataValue(this.getPlugin(), true));
+            treeBlock.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
             if (!AntigriefManager.canBreakBlock(player, treeBlock)) {
                 continue;
             }

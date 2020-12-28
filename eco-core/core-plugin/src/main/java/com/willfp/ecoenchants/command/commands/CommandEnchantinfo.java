@@ -71,9 +71,7 @@ public class CommandEnchantinfo extends AbstractCommand {
         }));
 
         StringBuilder conflictNamesBuilder = new StringBuilder();
-        conflictNames.forEach((name1) -> {
-            conflictNamesBuilder.append(name1).append(", ");
-        });
+        conflictNames.forEach(name1 -> conflictNamesBuilder.append(name1).append(", "));
         String allConflicts = conflictNamesBuilder.toString();
         if (allConflicts.length() >= 2) {
             allConflicts = allConflicts.substring(0, allConflicts.length() - 2);
@@ -104,9 +102,7 @@ public class CommandEnchantinfo extends AbstractCommand {
         }
 
         StringBuilder targetNamesBuilder = new StringBuilder();
-        applicableItemsSet.forEach((name1) -> {
-            targetNamesBuilder.append(name1).append(", ");
-        });
+        applicableItemsSet.forEach(name1 -> targetNamesBuilder.append(name1).append(", "));
         String allTargets = targetNamesBuilder.toString();
         if (allTargets.length() >= 2) {
             allTargets = allTargets.substring(0, allTargets.length() - 2);

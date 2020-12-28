@@ -28,7 +28,7 @@ public class Conclude extends EcoEnchant {
         }
 
         double minhealth = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "minimum-health-per-level");
-        if (!(victim.getHealth() <= level * minhealth)) {
+        if (victim.getHealth() > level * minhealth) {
             return;
         }
 

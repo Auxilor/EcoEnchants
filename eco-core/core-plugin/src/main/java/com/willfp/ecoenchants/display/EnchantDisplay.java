@@ -35,12 +35,8 @@ public class EnchantDisplay implements Updatable {
     /**
      * The meta key to hide enchantments in lore
      * <p>
-     * Only used for parity in {@link com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot}.
-     * More robust method to be introduced
-     *
-     * @deprecated Temporary fix
+     * EcoEnchants packet lore implementation of HideEnchants.
      */
-    @Deprecated
     public static final NamespacedKey KEY_SKIP = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-skip");
 
     /**
@@ -75,7 +71,6 @@ public class EnchantDisplay implements Updatable {
      * It isn't recommended to mess with this unless you <b>really</b> know your way around EcoEnchants.
      *
      * @param item The item to modify
-     *
      * @return The item, with KEY_V
      */
     public static ItemStack addV(@Nullable final ItemStack item) {
@@ -93,7 +88,6 @@ public class EnchantDisplay implements Updatable {
      * Revert display
      *
      * @param item The item to revert
-     *
      * @return The item, updated
      */
     public static ItemStack revertDisplay(@Nullable final ItemStack item) {
@@ -140,7 +134,6 @@ public class EnchantDisplay implements Updatable {
      * Show all enchantments in item lore
      *
      * @param item The item to update
-     *
      * @return The item, updated
      */
     public static ItemStack displayEnchantments(@Nullable final ItemStack item,
@@ -245,7 +238,7 @@ public class EnchantDisplay implements Updatable {
         if (OPTIONS.isUseShrink() && (enchantments.size() > OPTIONS.getShrinkThreshold())) {
             List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, OPTIONS.getShrinkPerLine());
             List<String> newLore = new ArrayList<>();
-            partitionedCombinedLoreList.forEach((list) -> {
+            partitionedCombinedLoreList.forEach(list -> {
                 StringBuilder builder = new StringBuilder();
                 for (String s : list) {
                     builder.append(s);

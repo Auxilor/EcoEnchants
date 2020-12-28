@@ -14,7 +14,6 @@ import org.bukkit.block.data.Levelled;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -71,7 +70,7 @@ public class MagmaWalker extends EcoEnchant {
 
             block.setType(Material.OBSIDIAN);
 
-            block.setMetadata("byMagmaWalker", new FixedMetadataValue(this.getPlugin(), true));
+            block.setMetadata("byMagmaWalker", this.getPlugin().getMetadataValueFactory().create(true));
 
             long afterTicks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "remove-after-ticks");
 

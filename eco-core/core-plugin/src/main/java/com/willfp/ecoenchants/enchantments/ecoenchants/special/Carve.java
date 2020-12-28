@@ -42,7 +42,7 @@ public class Carve extends EcoEnchant {
                 .filter(entity -> entity instanceof LivingEntity)
                 .filter(entity -> !entity.equals(attacker))
                 .forEach(entity -> {
-                    entity.setMetadata("carved", new FixedMetadataValue(this.getPlugin(), true));
+                    entity.setMetadata("carved", this.getPlugin().getMetadataValueFactory().create(true));
                     ((LivingEntity) entity).damage(damage, attacker);
                     this.getPlugin().getScheduler().runLater(() -> entity.removeMetadata("carved", this.getPlugin()), 20);
                 });

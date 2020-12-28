@@ -27,7 +27,7 @@ public class Marking extends EcoEnchant {
         int ticksPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
         int ticks = ticksPerLevel * level;
 
-        victim.setMetadata("marked", new FixedMetadataValue(this.getPlugin(), true));
+        victim.setMetadata("marked", this.getPlugin().getMetadataValueFactory().create(true));
 
         this.getPlugin().getScheduler().runLater(() -> victim.removeMetadata("marked", this.getPlugin()), ticks);
     }

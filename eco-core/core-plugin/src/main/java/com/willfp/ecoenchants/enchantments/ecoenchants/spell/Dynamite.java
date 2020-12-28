@@ -75,7 +75,7 @@ public class Dynamite extends Spell {
         }
 
         toBreak.forEach((block1 -> {
-            block1.setMetadata("block-ignore", new FixedMetadataValue(this.getPlugin(), true));
+            block1.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
             ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, block1);
             block1.removeMetadata("block-ignore", this.getPlugin());
         }));

@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +23,7 @@ public class Ascend extends Spell {
                       @NotNull final PlayerInteractEvent event) {
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level") * level;
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, ticks, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "power") - 1, false, false));
-        player.setMetadata(IGNORE_FALL_KEY, new FixedMetadataValue(this.getPlugin(), true));
+        player.setMetadata(IGNORE_FALL_KEY, this.getPlugin().getMetadataValueFactory().create(true));
         this.getPlugin().getScheduler().runLater(() -> player.removeMetadata(IGNORE_FALL_KEY, this.getPlugin()), ticks * 4L);
     }
 

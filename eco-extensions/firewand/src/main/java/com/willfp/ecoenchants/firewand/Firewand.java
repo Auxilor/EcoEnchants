@@ -10,7 +10,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.jetbrains.annotations.NotNull;
 
 public class Firewand extends Spell {
@@ -24,9 +23,9 @@ public class Firewand extends Spell {
                       @NotNull final PlayerInteractEvent event) {
         SmallFireball fireball = player.launchProjectile(SmallFireball.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
         fireball.setIsIncendiary(this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "fire"));
-        fireball.setMetadata("eco-damage", new FixedMetadataValue(this.getPlugin(), this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
+        fireball.setMetadata("eco-damage", this.getPlugin().getMetadataValueFactory().create(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level));
         if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "no-explode")) {
-            fireball.setMetadata("nobreak", new FixedMetadataValue(this.getPlugin(), true));
+            fireball.setMetadata("nobreak", this.getPlugin().getMetadataValueFactory().create(true));
         }
         fireball.setShooter(player);
     }
