@@ -40,7 +40,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @EqualsAndHashCode(callSuper = false)
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "deprecation"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
     /**
      * Instance of EcoEnchants for enchantments to be able to access.
@@ -288,6 +288,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
 
     /**
      * Get the display name of the enchantment.
+     * <p>
+     * Not deprecated, unlike superclass.
      *
      * @return The name.
      */
