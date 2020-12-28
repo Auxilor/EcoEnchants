@@ -23,17 +23,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @UtilityClass
 public class AnvilMerge {
+    /**
+     * Config key for allowing unsafe levels.
+     */
     private static final String ALLOW_UNSAFE_KEY = "anvil.allow-unsafe-levels";
 
     /**
-     * Merge items in anvil
+     * Merge items in anvil.
      *
-     * @param left   The {@link ItemStack} on the left of the anvil
-     * @param right  The {@link ItemStack} in the middle of the anvil
-     * @param old    The previous {@link ItemStack} result
-     * @param name   The anvil display name
-     * @param player The player merging (for permissions)
-     *
+     * @param left   The {@link ItemStack} on the left of the anvil.
+     * @param right  The {@link ItemStack} in the middle of the anvil.
+     * @param old    The previous {@link ItemStack} result.
+     * @param name   The anvil display name.
+     * @param player The player merging (for permissions).
      * @return The result, stored as a {@link Pair} of {@link ItemStack} and {@link Integer}.
      */
     public Pair<ItemStack, Integer> doMerge(@Nullable final ItemStack left,
@@ -127,7 +129,7 @@ public class AnvilMerge {
                         && (rightLevel > enchantment.getMaxLevel() && Configs.CONFIG.getBool("anvil.allow-combining-unsafe"))
                         || ((rightLevel + 1) <= enchantment.getMaxLevel()
                         || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY))) {
-                        level++;
+                    level++;
                 }
                 rightEnchants.remove(enchantment);
             }

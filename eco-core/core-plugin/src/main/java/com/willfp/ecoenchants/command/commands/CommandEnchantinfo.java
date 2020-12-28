@@ -21,6 +21,11 @@ import java.util.List;
 import java.util.Set;
 
 public class CommandEnchantinfo extends AbstractCommand {
+    /**
+     * Instantiate a new /enchantinfo command handler.
+     *
+     * @param plugin The plugin for the commands to listen for.
+     */
     public CommandEnchantinfo(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, "enchantinfo", "ecoenchants.enchantinfo", false);
     }

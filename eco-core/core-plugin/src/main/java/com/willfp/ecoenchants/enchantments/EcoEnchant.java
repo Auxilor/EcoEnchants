@@ -64,7 +64,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     private boolean enabled;
 
     /**
-     * Create a new EcoEnchant
+     * Create a new EcoEnchant.
      *
      * @param key           The key name of the enchantment
      * @param type          The type of the enchantment

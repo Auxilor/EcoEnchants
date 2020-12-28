@@ -26,6 +26,11 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class CommandEcodebug extends AbstractCommand {
+    /**
+     * Instantiate a new /ecodebug command handler.
+     *
+     * @param plugin The plugin for the commands to listen for.
+     */
     public CommandEcodebug(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, "ecodebug", "ecoenchants.ecodebug", false);
     }

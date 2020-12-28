@@ -23,13 +23,30 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class AnvilListeners extends PluginDependent implements Listener {
+    /**
+     * Map to prevent incrementing cost several times as inventory events are fired 3 times.
+     */
     private static final HashMap<UUID, Integer> ANTI_REPEAT = new HashMap<>();
+
+    /**
+     * Class for AnvilGUI wrappers to ignore them.
+     */
     private static final String ANVIL_GUI_CLASS = "net.wesjd.anvilgui.version.Wrapper" + ProxyConstants.NMS_VERSION.substring(1) + "$AnvilContainer";
 
+    /**
+     * Instantiate anvil listeners and link them to a specific plugin.
+     *
+     * @param plugin The plugin to link to.
+     */
     public AnvilListeners(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
+    /**
+     * Called when items are placed into an anvil.
+     *
+     * @param event The event to listen to.
+     */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAnvilPrepare(@NotNull final PrepareAnvilEvent event) {
         ItemStack left = event.getInventory().getItem(0);

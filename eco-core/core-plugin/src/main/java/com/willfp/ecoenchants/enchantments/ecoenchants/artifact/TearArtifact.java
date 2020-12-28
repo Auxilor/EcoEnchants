@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.artifact;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import org.bukkit.Particle;
+import org.jetbrains.annotations.NotNull;
 
 public class TearArtifact extends Artifact {
     public TearArtifact() {
@@ -13,7 +14,7 @@ public class TearArtifact extends Artifact {
     }
 
     @Override
-    public Particle getParticle() {
+    public @NotNull Particle getParticle() {
         return Particle.DRIPPING_OBSIDIAN_TEAR;
     }
 }

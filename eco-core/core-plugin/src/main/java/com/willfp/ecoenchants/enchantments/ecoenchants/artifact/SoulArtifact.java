@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.artifact;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import org.bukkit.Particle;
+import org.jetbrains.annotations.NotNull;
 
 public class SoulArtifact extends Artifact {
     public SoulArtifact() {
@@ -13,7 +14,7 @@ public class SoulArtifact extends Artifact {
     }
 
     @Override
-    public Particle getParticle() {
+    public @NotNull Particle getParticle() {
         return Particle.SOUL;
     }
 }

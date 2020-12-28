@@ -32,6 +32,10 @@
 -->
 
 <module name="Checker">
+    <module name="SuppressionFilter">
+        <property name="file" value="config/checkstyle/suppression.xml"/>
+    </module>
+
     <!--
         If you set the basedir property below, then all reported file
         names will be relative to the specified directory. See
@@ -89,14 +93,12 @@
 
         <!-- Checks for Javadoc comments. -->
         <!-- See https://checkstyle.org/config_javadoc.html -->
-        <!--
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocMethod"/>
         <module name="JavadocType"/>
         <module name="JavadocVariable"/>
         <module name="JavadocStyle"/>
         <module name="MissingJavadocMethod"/>
-        -->
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See https://checkstyle.org/config_naming.html -->
@@ -166,7 +168,7 @@
         <!-- See https://checkstyle.org/config_design.html -->
         <!-- <module name="DesignForExtension"/> -->
         <module name="FinalClass"/>
-        <module name="HideUtilityClassConstructor"/>
+        <!-- <module name="HideUtilityClassConstructor"/> -->
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier"/>
         <module name="RequireThis"/>

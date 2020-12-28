@@ -25,13 +25,24 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Wrapper for Artifact enchantments
  * in order to reduce copying existing code between artifacts.
  */
 public abstract class Artifact extends EcoEnchant {
+    /**
+     * The artifact particle.
+     */
     private Particle particle;
+
+    /**
+     * The extra particle dust options.
+     * <p>
+     * Used for redstone particles.
+     */
+    @Nullable
     private Particle.DustOptions extra;
 
     protected Artifact(@NotNull final String key,
@@ -47,12 +58,29 @@ public abstract class Artifact extends EcoEnchant {
         this.extra = this.getDustOptions();
     }
 
+    /**
+     * Get the artifact particle.
+     *
+     * @return The artifact particle.
+     */
+    @NotNull
     public abstract Particle getParticle();
 
+    /**
+     * The extra particle dust options.
+     *
+     * @return The dust options.
+     */
+    @Nullable
     public Particle.DustOptions getDustOptions() {
         return null;
     }
 
+    /**
+     * Called on block break.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onBreak(@NotNull final BlockBreakEvent event) {
         Player player = event.getPlayer();
@@ -70,6 +98,11 @@ public abstract class Artifact extends EcoEnchant {
         block.getWorld().spawnParticle(particle, block.getLocation().add(0.5, 0.5, 0.5), amount, 0.4, 0.4, 0.4, 0, extra, false);
     }
 
+    /**
+     * Called on player fly while wearing an elytra.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onElytra(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();
@@ -96,6 +129,11 @@ public abstract class Artifact extends EcoEnchant {
         player.getWorld().spawnParticle(particle, location2, 1, 0, 0, 0, 0, extra, true);
     }
 
+    /**
+     * Called when a player hits an entity.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onHit(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player)) {
@@ -136,6 +174,11 @@ public abstract class Artifact extends EcoEnchant {
         }).runTaskTimer(0, 1);
     }
 
+    /**
+     * Called on projectile launch.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onShoot(@NotNull final ProjectileLaunchEvent event) {
         if (!(event.getEntity() instanceof AbstractArrow)) {

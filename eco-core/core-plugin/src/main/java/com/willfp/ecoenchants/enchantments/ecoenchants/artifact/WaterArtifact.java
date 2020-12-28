@@ -2,6 +2,8 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.artifact;
 
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import org.bukkit.Particle;
+import org.jetbrains.annotations.NotNull;
+
 public class WaterArtifact extends Artifact {
     public WaterArtifact() {
         super(
@@ -10,7 +12,7 @@ public class WaterArtifact extends Artifact {
     }
 
     @Override
-    public Particle getParticle() {
+    public @NotNull Particle getParticle() {
         return Particle.DRIP_WATER;
     }
 }

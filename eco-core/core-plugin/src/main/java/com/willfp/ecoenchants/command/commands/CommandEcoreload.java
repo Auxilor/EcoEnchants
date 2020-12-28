@@ -9,6 +9,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class CommandEcoreload extends AbstractCommand {
+    /**
+     * Instantiate a new /ecoreload command handler.
+     *
+     * @param plugin The plugin for the commands to listen for.
+     */
     public CommandEcoreload(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, "ecoreload", "ecoenchants.reload", false);
     }
