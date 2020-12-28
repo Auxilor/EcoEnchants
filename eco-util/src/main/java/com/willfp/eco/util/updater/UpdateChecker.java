@@ -34,7 +34,10 @@ public class UpdateChecker {
      */
     public void getVersion(@NotNull final Consumer<? super String> consumer) {
         this.getPlugin().getScheduler().runAsync(() -> {
-            try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.getPlugin().getResourceId()).openStream(); Scanner scanner = new Scanner(inputStream)) {
+            try (
+                    InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.getPlugin().getResourceId()).openStream();
+                    Scanner scanner = new Scanner(inputStream)
+            ) {
                 if (scanner.hasNext()) {
                     consumer.accept(scanner.next());
                 }

@@ -35,7 +35,9 @@ public class Pentashot extends EcoEnchant {
             velocity.rotateAroundY(radians);
 
             Arrow arrow1 = shooter.launchProjectile(Arrow.class, velocity);
-            if(EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE)) arrow1.setFireTicks(Integer.MAX_VALUE);
+            if (EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE)) {
+                arrow1.setFireTicks(Integer.MAX_VALUE);
+            }
             arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         }
     }

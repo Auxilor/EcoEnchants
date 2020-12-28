@@ -23,7 +23,7 @@ public class Reinforcement extends EcoEnchant {
         }
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "reduction-per-level");
-        double multiplier = 1 - ((reduction/100) * level);
+        double multiplier = 1 - ((reduction / 100) * level);
         event.setDamage(event.getDamage() * multiplier);
     }
 }
