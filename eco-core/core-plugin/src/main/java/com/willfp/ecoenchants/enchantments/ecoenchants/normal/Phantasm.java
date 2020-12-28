@@ -21,8 +21,14 @@ public class Phantasm extends EcoEnchant {
 
 
     @Override
-    public void onTridentDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Trident trident, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!(victim instanceof Zombie || victim instanceof Skeleton)) return;
+    public void onTridentDamage(@NotNull final LivingEntity attacker,
+                                @NotNull final LivingEntity victim,
+                                @NotNull final Trident trident,
+                                final int level,
+                                @NotNull final EntityDamageByEntityEvent event) {
+        if (!(victim instanceof Zombie || victim instanceof Skeleton)) {
+            return;
+        }
 
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

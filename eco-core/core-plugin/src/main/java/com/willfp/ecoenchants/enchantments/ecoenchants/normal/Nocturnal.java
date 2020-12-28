@@ -19,12 +19,17 @@ public class Nocturnal extends EcoEnchant {
 
 
     @Override
-    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!attacker.getWorld().getEnvironment().equals(World.Environment.NORMAL))
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!attacker.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
             return;
+        }
 
-        if(!(attacker.getWorld().getTime() > 12300 && attacker.getWorld().getTime() < 23850))
+        if (!(attacker.getWorld().getTime() > 12300 && attacker.getWorld().getTime() < 23850)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

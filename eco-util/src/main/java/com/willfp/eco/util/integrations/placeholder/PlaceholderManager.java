@@ -1,6 +1,8 @@
 package com.willfp.eco.util.integrations.placeholder;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -11,18 +13,19 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Utility class for placeholders
  */
+@UtilityClass
 public class PlaceholderManager {
-    private static final Set<PlaceholderEntry> placeholders = new HashSet<>();
-    private static final Set<PlaceholderIntegration> integrations = new HashSet<>();
+    private static final Set<PlaceholderEntry> REGISTERED_PLACEHOLDERS = new HashSet<>();
+    private static final Set<PlaceholderIntegration> REGISTERED_INTEGRATIONS = new HashSet<>();
 
     /**
      * Register a new placeholder integration
      *
      * @param integration The {@link PlaceholderIntegration} to register
      */
-    public static void addIntegration(PlaceholderIntegration integration) {
+    public static void addIntegration(@NotNull final PlaceholderIntegration integration) {
         integration.registerIntegration();
-        integrations.add(integration);
+        REGISTERED_INTEGRATIONS.add(integration);
     }
 
     /**
@@ -30,9 +33,9 @@ public class PlaceholderManager {
      *
      * @param expansion The {@link PlaceholderEntry} to register
      */
-    public static void registerPlaceholder(PlaceholderEntry expansion) {
-        placeholders.removeIf(placeholderEntry -> placeholderEntry.getIdentifier().equalsIgnoreCase(expansion.getIdentifier()));
-        placeholders.add(expansion);
+    public static void registerPlaceholder(@NotNull final PlaceholderEntry expansion) {
+        REGISTERED_PLACEHOLDERS.removeIf(placeholderEntry -> placeholderEntry.getIdentifier().equalsIgnoreCase(expansion.getIdentifier()));
+        REGISTERED_PLACEHOLDERS.add(expansion);
     }
 
     /**
@@ -42,13 +45,16 @@ public class PlaceholderManager {
      * @param identifier The placeholder identifier
      * @return The value of the placeholder
      */
-    public static String getResult(@Nullable Player player, String identifier) {
-        Optional<PlaceholderEntry> matching = placeholders.stream().filter(expansion -> expansion.getIdentifier().equalsIgnoreCase(identifier)).findFirst();
-        if (!matching.isPresent())
+    public static String getResult(@Nullable final Player player,
+                                   @NotNull final String identifier) {
+        Optional<PlaceholderEntry> matching = REGISTERED_PLACEHOLDERS.stream().filter(expansion -> expansion.getIdentifier().equalsIgnoreCase(identifier)).findFirst();
+        if (!matching.isPresent()) {
             return null;
+        }
         PlaceholderEntry entry = matching.get();
-        if (player == null && entry.requiresPlayer())
+        if (player == null && entry.requiresPlayer()) {
             return "";
+        }
         return entry.getResult(player);
     }
 
@@ -59,9 +65,10 @@ public class PlaceholderManager {
      * @param player The player to translate the placeholders with respect to
      * @return The text, translated
      */
-    public static String translatePlaceholders(String text, @Nullable Player player) {
+    public static String translatePlaceholders(@NotNull final String text,
+                                               @Nullable final Player player) {
         AtomicReference<String> translatedReference = new AtomicReference<>(text);
-        integrations.forEach(placeholderIntegration -> translatedReference.set(placeholderIntegration.translate(translatedReference.get(), player)));
+        REGISTERED_INTEGRATIONS.forEach(placeholderIntegration -> translatedReference.set(placeholderIntegration.translate(translatedReference.get(), player)));
         return translatedReference.get();
     }
 }

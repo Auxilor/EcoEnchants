@@ -9,17 +9,20 @@ import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.NotNull;
 
 public class PacketWindowItems extends AbstractPacketAdapter {
-    public PacketWindowItems(AbstractEcoPlugin plugin) {
+    public PacketWindowItems(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, PacketType.Play.Server.WINDOW_ITEMS, false);
     }
 
     @Override
-    public void onSend(@NotNull PacketContainer packet) {
-        packet.getItemListModifier().modify(0, (itemStacks) -> {
-            if (itemStacks == null) return null;
+    public void onSend(@NotNull final PacketContainer packet) {
+        packet.getItemListModifier().modify(0, itemStacks -> {
+            if (itemStacks == null) {
+                return null;
+            }
             itemStacks.forEach(item -> {
-                if (item == null)
+                if (item == null) {
                     return;
+                }
 
                 boolean hideEnchants = false;
 

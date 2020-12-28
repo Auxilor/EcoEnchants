@@ -18,12 +18,16 @@ public class Preservation extends EcoEnchant {
 
 
     @Override
-    public void onDamageWearingArmor(@NotNull LivingEntity victim, int level, @NotNull EntityDamageEvent event) {
-        if(event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) return;
+    public void onDamageWearingArmor(@NotNull final LivingEntity victim,
+                                     final int level,
+                                     @NotNull final EntityDamageEvent event) {
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
+            return;
+        }
 
         double reduction = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-less-per-level");
 
-        double multiplier = 1 - (reduction/100 * level);
+        double multiplier = 1 - ((reduction / 100) * level);
 
         event.setDamage(event.getDamage() * multiplier);
     }

@@ -22,16 +22,27 @@ public class Radiance extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         double radius = level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
         int duration = level * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "duration-per-level");
 
         for (Entity e : arrow.getNearbyEntities(radius, radius, radius)) {
-            if(e.hasMetadata("NPC")) continue;
+            if (e.hasMetadata("NPC")) {
+                continue;
+            }
 
-            if (!(e instanceof LivingEntity)) continue;
+            if (!(e instanceof LivingEntity)) {
+                continue;
+            }
             LivingEntity entity = (LivingEntity) e;
-            if(e.equals(attacker)) continue;
+
+            if (e.equals(attacker)) {
+                continue;
+            }
 
             entity.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration, 0, false, false, false));
         }

@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,21 +33,29 @@ public class Precision extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void aimingLaunch(ProjectileLaunchEvent event) {
-        if (!(event.getEntity().getShooter() instanceof Player))
+    public void aimingLaunch(@NotNull final ProjectileLaunchEvent event) {
+        if (!(event.getEntity().getShooter() instanceof Player)) {
             return;
+        }
 
-        if(!(event.getEntity() instanceof Trident))
+        if (!(event.getEntity() instanceof Trident)) {
             return;
+        }
 
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) {
+            return;
+        }
 
         Player player = (Player) event.getEntity().getShooter();
         Trident trident = (Trident) event.getEntity();
 
         ItemStack itemStack = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
-        if (!EnchantChecks.item(itemStack, this)) return;
-        if(this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (!EnchantChecks.item(itemStack, this)) {
+            return;
+        }
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
@@ -54,7 +63,7 @@ public class Precision extends EcoEnchant {
 
         final double finalDistance = level * multiplier;
         Runnable runnable = this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
-            List<LivingEntity> nearbyEntities = (List<LivingEntity>)(List<?>) Arrays.asList(trident.getNearbyEntities(finalDistance, finalDistance, finalDistance).stream()
+            List<LivingEntity> nearbyEntities = (List<LivingEntity>) (List<?>) Arrays.asList(trident.getNearbyEntities(finalDistance, finalDistance, finalDistance).stream()
                     .filter(entity -> entity instanceof LivingEntity)
                     .filter(entity -> !entity.equals(player))
                     .filter(entity -> !(entity instanceof Enderman))
@@ -64,17 +73,21 @@ public class Precision extends EcoEnchant {
                         }
                         return true;
                     }).toArray());
-            if(nearbyEntities.isEmpty()) return;
+            if (nearbyEntities.isEmpty()) {
+                return;
+            }
             LivingEntity entity = nearbyEntities.get(0);
             double dist = Double.MAX_VALUE;
-            for(LivingEntity livingEntity : nearbyEntities) {
+            for (LivingEntity livingEntity : nearbyEntities) {
                 double currentDistance = livingEntity.getLocation().distance(trident.getLocation());
-                if(currentDistance >= dist) continue;
+                if (currentDistance >= dist) {
+                    continue;
+                }
 
                 dist = currentDistance;
                 entity = livingEntity;
             }
-            if(entity != null) {
+            if (entity != null) {
                 Vector vector = entity.getEyeLocation().toVector().clone().subtract(trident.getLocation().toVector()).normalize();
                 trident.setVelocity(vector);
             }
@@ -86,8 +99,12 @@ public class Precision extends EcoEnchant {
 
         this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
             checksPerformed.addAndGet(1);
-            if(checksPerformed.get() > checks) bukkitRunnable.cancel();
-            if(trident.isDead() || trident.isInBlock() || trident.isOnGround()) bukkitRunnable.cancel();
+            if (checksPerformed.get() > checks) {
+                bukkitRunnable.cancel();
+            }
+            if (trident.isDead() || trident.isInBlock() || trident.isOnGround()) {
+                bukkitRunnable.cancel();
+            }
             this.getPlugin().getScheduler().run(runnable);
         }).runTaskTimer(3, period);
     }

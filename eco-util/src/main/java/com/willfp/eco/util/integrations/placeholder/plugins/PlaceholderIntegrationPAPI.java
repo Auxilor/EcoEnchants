@@ -7,6 +7,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * PlaceholderAPI integration
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements PlaceholderIntegration {
     private final AbstractEcoPlugin plugin;
 
-    public PlaceholderIntegrationPAPI(AbstractEcoPlugin plugin) {
+    public PlaceholderIntegrationPAPI(@NotNull final AbstractEcoPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -44,7 +45,8 @@ public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements 
     }
 
     @Override
-    public String onPlaceholderRequest(Player player, @NotNull String identifier) {
+    public String onPlaceholderRequest(@Nullable final Player player,
+                                       @NotNull final String identifier) {
         return PlaceholderManager.getResult(player, identifier);
     }
 
@@ -59,7 +61,8 @@ public class PlaceholderIntegrationPAPI extends PlaceholderExpansion implements 
     }
 
     @Override
-    public String translate(@NotNull String text, Player player) {
+    public String translate(@NotNull final String text,
+                            @Nullable final Player player) {
         return PlaceholderAPI.setPlaceholders(player, text);
     }
 }

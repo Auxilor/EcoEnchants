@@ -14,7 +14,7 @@ public class Oceanic extends BiomesEnchantment {
     }
 
     @Override
-    public boolean isValid(@NotNull Biome biome) {
+    public boolean isValid(@NotNull final Biome biome) {
         return Arrays.stream(new String[]{"ocean"}).anyMatch(biome.name().toLowerCase()::contains);
     }
 }

@@ -20,8 +20,13 @@ public class Oxygenate extends EcoEnchant {
 
 
     @Override
-    public void onBlockBreak(@NotNull Player player, @NotNull Block block, int level, @NotNull BlockBreakEvent event) {
-        if(player.getRemainingAir() == player.getMaximumAir()) return;
+    public void onBlockBreak(@NotNull final Player player,
+                             @NotNull final Block block,
+                             final int level,
+                             @NotNull final BlockBreakEvent event) {
+        if (player.getRemainingAir() == player.getMaximumAir()) {
+            return;
+        }
 
         int oxygenLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "oxygen-per-level");
         int oxygen = level * oxygenLevel;

@@ -22,11 +22,11 @@ public class Plasmic extends EcoEnchant {
 
     // START OF LISTENERS
 
-    private static final Material[] items;
+    private static final Material[] ITEMS;
 
     static {
-        if(Prerequisite.MINIMUM_1_16.isMet()) {
-            items = new Material[]{
+        if (Prerequisite.MINIMUM_1_16.isMet()) {
+            ITEMS = new Material[]{
                     Material.DIAMOND_HELMET,
                     Material.DIAMOND_CHESTPLATE,
                     Material.DIAMOND_LEGGINGS,
@@ -38,7 +38,7 @@ public class Plasmic extends EcoEnchant {
                     Material.NETHERITE_BOOTS
             };
         } else {
-            items = new Material[]{
+            ITEMS = new Material[]{
                     Material.DIAMOND_HELMET,
                     Material.DIAMOND_CHESTPLATE,
                     Material.DIAMOND_LEGGINGS,
@@ -48,17 +48,28 @@ public class Plasmic extends EcoEnchant {
     }
 
     @Override
-    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         EntityEquipment equipment = victim.getEquipment();
-        if(equipment == null) return;
+        if (equipment == null) {
+            return;
+        }
 
         int pieces = 0;
         for (ItemStack armorPiece : equipment.getArmorContents()) {
-            if(armorPiece == null) continue;
-            if(Arrays.asList(items).contains(armorPiece.getType())) pieces++;
+            if (armorPiece == null) {
+                continue;
+            }
+            if (Arrays.asList(ITEMS).contains(armorPiece.getType())) {
+                pieces++;
+            }
         }
 
-        if(pieces == 0) return;
+        if (pieces == 0) {
+            return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

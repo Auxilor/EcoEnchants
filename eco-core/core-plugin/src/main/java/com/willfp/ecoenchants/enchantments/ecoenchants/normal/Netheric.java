@@ -20,9 +20,14 @@ public class Netheric extends EcoEnchant {
 
 
     @Override
-    public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER))
+    public void onArrowDamage(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              @NotNull final Arrow arrow,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!attacker.getWorld().getEnvironment().equals(World.Environment.NETHER)) {
             return;
+        }
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

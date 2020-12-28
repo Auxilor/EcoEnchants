@@ -22,11 +22,15 @@ public class Paralyze extends EcoEnchant {
 
 
     @Override
-    public void onDeflect(@NotNull Player blocker, @NotNull LivingEntity attacker, int level, @NotNull EntityDamageByEntityEvent event) {
+    public void onDeflect(@NotNull final Player blocker,
+                          @NotNull final LivingEntity attacker,
+                          final int level,
+                          @NotNull final EntityDamageByEntityEvent event) {
         int duration = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level");
 
-        if(!EnchantmentUtils.passedChance(this, level))
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
+        }
 
         int finalDuration = duration * level;
 

@@ -9,17 +9,18 @@ import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.NotNull;
 
 public class PacketSetSlot extends AbstractPacketAdapter {
-    public PacketSetSlot(AbstractEcoPlugin plugin) {
+    public PacketSetSlot(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, PacketType.Play.Server.SET_SLOT, false);
     }
 
     @Override
-    public void onSend(@NotNull PacketContainer packet) {
-        packet.getItemModifier().modify(0, (item) -> {
+    public void onSend(@NotNull final PacketContainer packet) {
+        packet.getItemModifier().modify(0, item -> {
             boolean hideEnchants = false;
 
-            if (item == null)
-                return item;
+            if (item == null) {
+                return null;
+            }
 
             if (item.getItemMeta() != null) {
                 hideEnchants = item.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS);

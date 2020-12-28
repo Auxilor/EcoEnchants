@@ -17,12 +17,21 @@ public class Protector extends EcoEnchant {
     // START OF LISTENERS
 
     @Override
-    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity uncastVictim, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!(uncastVictim instanceof Tameable)) return;
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity uncastVictim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
+        if (!(uncastVictim instanceof Tameable)) {
+            return;
+        }
 
         Tameable victim = (Tameable) uncastVictim;
-        if(victim.getOwner() == null) return;
-        if(!victim.getOwner().equals(attacker)) return;
+        if (victim.getOwner() == null) {
+            return;
+        }
+        if (!victim.getOwner().equals(attacker)) {
+            return;
+        }
 
         event.setCancelled(true);
     }

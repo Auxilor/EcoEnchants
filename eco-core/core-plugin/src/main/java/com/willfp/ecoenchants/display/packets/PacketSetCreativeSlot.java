@@ -8,15 +8,12 @@ import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.jetbrains.annotations.NotNull;
 
 public class PacketSetCreativeSlot extends AbstractPacketAdapter {
-    public PacketSetCreativeSlot(AbstractEcoPlugin plugin) {
+    public PacketSetCreativeSlot(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, PacketType.Play.Client.SET_CREATIVE_SLOT, false);
     }
 
     @Override
-    public void onReceive(@NotNull PacketContainer packet) {
-        packet.getItemModifier().modify(0, (item) -> {
-            item = EnchantDisplay.revertDisplay(item);
-            return item;
-        });
+    public void onReceive(@NotNull final PacketContainer packet) {
+        packet.getItemModifier().modify(0, EnchantDisplay::revertDisplay);
     }
 }

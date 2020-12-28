@@ -23,9 +23,14 @@ public class Pentashot extends EcoEnchant {
 
 
     @Override
-    public void onBowShoot(@NotNull LivingEntity shooter, @NotNull Arrow arrow, int level, @NotNull EntityShootBowEvent event) {
+    public void onBowShoot(@NotNull final LivingEntity shooter,
+                           @NotNull final Arrow arrow,
+                           final int level,
+                           @NotNull final EntityShootBowEvent event) {
         for (int i = -2; i <= 2; i += 1) {
-            if(i == 0) continue;
+            if (i == 0) {
+                continue;
+            }
 
             Vector velocity = event.getProjectile().getVelocity();
 

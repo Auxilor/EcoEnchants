@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Parry extends EcoEnchant {
     public Parry() {
@@ -18,18 +19,24 @@ public class Parry extends EcoEnchant {
     // START OF LISTENERS
 
     @EventHandler
-    public void parryHit(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
+    public void parryHit(@NotNull final EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
             return;
+        }
 
-        if (event.isCancelled())
+        if (event.isCancelled()) {
             return;
+        }
 
         Player player = (Player) event.getEntity();
 
-        if (!EnchantChecks.mainhand(player, this)) return;
+        if (!EnchantChecks.mainhand(player, this)) {
+            return;
+        }
 
-        if (this.getDisabledWorlds().contains(player.getWorld())) return;
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 

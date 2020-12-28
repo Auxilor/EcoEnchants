@@ -17,7 +17,9 @@ public class Quake extends Spell {
     }
 
     @Override
-    public void onUse(@NotNull Player player, int level, @NotNull PlayerInteractEvent event) {
+    public void onUse(@NotNull final Player player,
+                      final int level,
+                      @NotNull final PlayerInteractEvent event) {
         int radius = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "radius-per-level") * level;
         int damage = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level;
 
@@ -25,11 +27,15 @@ public class Quake extends Spell {
         Collection<Entity> entities = player.getWorld().getNearbyEntities(player.getLocation(), radius, 3, radius);
 
         for (Entity entity : entities) {
-            if (entity.equals(player))
+            if (entity.equals(player)) {
                 continue;
-            if (!(entity instanceof LivingEntity)) continue;
-            if (!AntigriefManager.canInjure(player, (LivingEntity) entity))
+            }
+            if (!(entity instanceof LivingEntity)) {
                 continue;
+            }
+            if (!AntigriefManager.canInjure(player, (LivingEntity) entity)) {
+                continue;
+            }
 
             ((LivingEntity) entity).damage(damage);
         }

@@ -18,18 +18,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
-    public PacketOpenWindowMerchant(AbstractEcoPlugin plugin) {
+    public PacketOpenWindowMerchant(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, PacketType.Play.Server.OPEN_WINDOW_MERCHANT, false);
     }
 
     @Override
-    public void onSend(@NotNull PacketContainer packet) {
+    public void onSend(@NotNull final PacketContainer packet) {
         List<MerchantRecipe> recipes = packet.getMerchantRecipeLists().readSafely(0);
 
         recipes = recipes.stream().peek(merchantRecipe -> {
             try {
-                if (!EnchantmentTarget.ALL.getMaterials().contains(merchantRecipe.getResult().getType()))
+                if (!EnchantmentTarget.ALL.getMaterials().contains(merchantRecipe.getResult().getType())) {
                     return;
+                }
 
                 // Enables removing final modifier
                 Field modifiersField = Field.class.getDeclaredField("modifiers");
