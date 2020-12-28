@@ -19,5 +19,5 @@ dependencies {
     compileOnly 'com.github.angeschossen:LandsAPI:4.7.3'
     compileOnly 'fr.neatmonster:nocheatplus:3.16.1-SNAPSHOT'
     compileOnly 'com.github.jiangdashao:matrix-api-repo:317d4635fd'
-    compile fileTree(dir: '/../lib', include: ['*.jar'])
+    compileOnly fileTree(dir: '/../lib', include: ['*.jar'])
 }

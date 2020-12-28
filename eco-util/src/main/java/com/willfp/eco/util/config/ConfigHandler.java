@@ -46,6 +46,7 @@ public class ConfigHandler extends PluginDependent {
                 try {
                     method.invoke(null);
                 } catch (IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
                     throw new InvalidUpdateMethodException("Update method generated an exception.");
                 }
             }

@@ -68,6 +68,10 @@ allprojects {
         }
     }
 
+    configurations.all {
+        exclude group:"org.codehaus.plexus", module: "plexus-utils"
+    }
+
     compileJava.options.encoding = 'UTF-8'
     compileJava.dependsOn clean
 }
@@ -105,4 +109,8 @@ publishing {
             from(components.java)
         }
     }
+}
+
+configurations.all {
+    exclude group:"org.codehaus.plexus", module: "plexus-utils"
 }
