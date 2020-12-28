@@ -90,7 +90,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             if (!enchantment.canEnchantItem(item)) {
                 continue;
             }
-            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getProbability() * multiplier) {
+            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getTableProbability() * multiplier) {
                 continue;
             }
             if (enchantment.getRarity().getMinimumLevel() > cost) {

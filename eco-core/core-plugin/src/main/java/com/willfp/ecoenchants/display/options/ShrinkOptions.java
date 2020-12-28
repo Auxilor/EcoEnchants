@@ -1,33 +1,33 @@
 package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.util.config.Configs;
-import com.willfp.ecoenchants.display.options.interfaces.ThresholdedOption;
-import com.willfp.ecoenchants.display.options.interfaces.ToggleableOption;
-import com.willfp.ecoenchants.display.options.interfaces.UpdateableOption;
+import lombok.Getter;
 
-public class ShrinkOptions implements ThresholdedOption, ToggleableOption, UpdateableOption {
+public class ShrinkOptions {
+    /**
+     * The threshold above which enchantments will be shrunk.
+     */
+    @Getter
     private int threshold;
+
+    /**
+     * If shrinking is enabled.
+     */
+    @Getter
     private boolean enabled;
+
+    /**
+     * The amount of enchantments to have per-line.
+     */
+    @Getter
     private int shrinkPerLine;
 
-    @Override
-    public int getThreshold() {
-        return threshold;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
+    /**
+     * Update the options.
+     */
     public void update() {
         threshold = Configs.CONFIG.getInt("lore.shrink.after-lines");
         enabled = Configs.CONFIG.getBool("lore.shrink.enabled");
         shrinkPerLine = Configs.CONFIG.getInt("lore.shrink.maximum-per-line");
-    }
-
-    public int getShrinkPerLine() {
-        return shrinkPerLine;
     }
 }

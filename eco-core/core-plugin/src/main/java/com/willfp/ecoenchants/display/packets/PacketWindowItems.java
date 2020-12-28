@@ -9,6 +9,11 @@ import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.NotNull;
 
 public class PacketWindowItems extends AbstractPacketAdapter {
+    /**
+     * Instantiate a new listener for {@link PacketType.Play.Server#WINDOW_ITEMS}.
+     *
+     * @param plugin The plugin to listen through.
+     */
     public PacketWindowItems(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, PacketType.Play.Server.WINDOW_ITEMS, false);
     }

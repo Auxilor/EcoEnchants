@@ -25,30 +25,57 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Wrapper for Spell enchantments
- */
 public abstract class Spell extends EcoEnchant {
+    /**
+     * {@link SpellRunnable}s linked to players.
+     */
     private final HashMap<UUID, SpellRunnable> tracker = new HashMap<>();
+
+    /**
+     * Players currently running spells - prevents listener firing twice.
+     */
     private final Set<UUID> runningSpell = new HashSet<>();
+
+    /**
+     * Items that must be left-clicked to activate spells for.
+     */
     private static final List<Material> LEFT_CLICK_ITEMS = Arrays.asList(
             Material.FISHING_ROD,
             Material.BOW
     );
 
+    /**
+     * Create a new spell enchantment.
+     *
+     * @param key           The key name of the enchantment
+     * @param prerequisites Optional {@link Prerequisite}s that must be met
+     */
     protected Spell(@NotNull final String key,
                     @NotNull final Prerequisite... prerequisites) {
         super(key, EnchantmentType.SPELL, prerequisites);
     }
 
+    /**
+     * Get the cooldown time of the spell (in seconds).
+     */
     public int getCooldownTime() {
         return this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "cooldown");
     }
 
+    /**
+     * Get the sound to be played on activation.
+     *
+     * @return The sound.
+     */
     public final Sound getActivationSound() {
         return Sound.valueOf(this.getConfig().getString(EcoEnchants.CONFIG_LOCATION + "activation-sound").toUpperCase());
     }
 
+    /**
+     * Listener called on spell activation.
+     *
+     * @param event The event to listen for.
+     */
     @EventHandler
     public void onUseEventHandler(@NotNull final PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -100,10 +127,24 @@ public abstract class Spell extends EcoEnchant {
         runnable.run();
     }
 
+    /**
+     * Actual spell-specific implementations; the functionality.
+     *
+     * @param player The player who triggered the spell.
+     * @param level  The level of the spell on the item.
+     * @param event  The event that activated the spell.
+     */
     public abstract void onUse(@NotNull Player player,
                                int level,
                                @NotNull PlayerInteractEvent event);
 
+    /**
+     * Utility method to get a player's cooldown time of a specific spell.
+     *
+     * @param spell  The spell to query.
+     * @param player The player to query.
+     * @return The time left in seconds before next use.
+     */
     public static int getCooldown(@NotNull final Spell spell,
                                   @NotNull final Player player) {
         if (!spell.tracker.containsKey(player.getUniqueId())) {
@@ -119,6 +160,13 @@ public abstract class Spell extends EcoEnchant {
         return NumberConversions.toInt(secondsLeft);
     }
 
+    /**
+     * Get a multiplier for a spell cooldown.
+     * <p>
+     * Used for perks - this should be reworked as it has hardcoded permission references.
+     *
+     * @param player The player to query.
+     */
     public static double getCooldownMultiplier(@NotNull final Player player) {
         if (player.hasPermission("ecoenchants.cooldowntime.quarter")) {
             return 0.25;

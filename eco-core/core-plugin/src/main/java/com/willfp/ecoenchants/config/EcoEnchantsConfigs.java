@@ -37,7 +37,7 @@ public class EcoEnchantsConfigs implements Updatable {
     public void updateConfigs() {
         TARGET.update();
         RARITY.update();
-        enchantmentConfigs.forEach((EnchantmentYamlConfig::update));
+        enchantmentConfigs.forEach(EnchantmentYamlConfig::update);
     }
 
     /**

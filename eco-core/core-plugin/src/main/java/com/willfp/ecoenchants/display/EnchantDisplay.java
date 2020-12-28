@@ -30,34 +30,37 @@ import java.util.List;
 @SuppressWarnings("DeprecatedIsStillUsed")
 @UtilityClass
 public class EnchantDisplay implements Updatable {
+    /**
+     * Instance of EcoEnchants.
+     */
     private static final AbstractEcoPlugin PLUGIN = AbstractEcoPlugin.getInstance();
 
     /**
-     * The meta key to hide enchantments in lore
+     * The meta key to hide enchantments in lore.
      * <p>
      * EcoEnchants packet lore implementation of HideEnchants.
      */
     public static final NamespacedKey KEY_SKIP = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-skip");
 
     /**
-     * The meta key to notify the server that an item is from a villager trade
+     * The meta key to notify the server that an item is from a villager trade.
      * <p>
      * Bit of a bodge - plan on making it better.
      */
     public static final NamespacedKey KEY_V = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-v");
 
     /**
-     * The prefix for all enchantment lines to have in lore
+     * The prefix for all enchantment lines to have in lore.
      */
     public static final String PREFIX = "§w";
 
     /**
-     * The configurable options for displaying enchantments
+     * The configurable options for displaying enchantments.
      */
     public static final DisplayOptions OPTIONS = new DisplayOptions();
 
     /**
-     * Update config values
+     * Update config values.
      */
     @ConfigUpdater
     public static void update() {
@@ -70,8 +73,8 @@ public class EnchantDisplay implements Updatable {
      * <p>
      * It isn't recommended to mess with this unless you <b>really</b> know your way around EcoEnchants.
      *
-     * @param item The item to modify
-     * @return The item, with KEY_V
+     * @param item The item to modify.
+     * @return The item, with KEY_V.
      */
     public static ItemStack addV(@Nullable final ItemStack item) {
         if (item == null || item.getItemMeta() == null) {
@@ -85,10 +88,10 @@ public class EnchantDisplay implements Updatable {
     }
 
     /**
-     * Revert display
+     * Revert display.
      *
-     * @param item The item to revert
-     * @return The item, updated
+     * @param item The item to revert.
+     * @return The item, updated.
      */
     public static ItemStack revertDisplay(@Nullable final ItemStack item) {
         if (item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) {
@@ -126,19 +129,25 @@ public class EnchantDisplay implements Updatable {
         return item;
     }
 
+    /**
+     * Show all enchantments in item lore.
+     *
+     * @param item The item to update.
+     * @return The item, updated.
+     */
     public static ItemStack displayEnchantments(@Nullable final ItemStack item) {
         return displayEnchantments(item, false);
     }
 
     /**
-     * Show all enchantments in item lore
+     * Show all enchantments in item lore.
      *
-     * @param item The item to update
-     * @return The item, updated
+     * @param item         The item to update.
+     * @param hideEnchants If enchantments should be hidden.
+     * @return The item, updated.
      */
     public static ItemStack displayEnchantments(@Nullable final ItemStack item,
                                                 final boolean hideEnchants) {
-
         boolean hide = hideEnchants;
         if (item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType())) {
             return item;
@@ -222,7 +231,7 @@ public class EnchantDisplay implements Updatable {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if (OPTIONS.isUseNumerals() && item.getEnchantmentLevel(enchantment) < OPTIONS.getNumbersThreshold()) {
+                if (OPTIONS.getNumbersOptions().isUseNumerals() && item.getEnchantmentLevel(enchantment) < OPTIONS.getNumbersOptions().getThreshold()) {
                     name += " " + NumberUtils.toNumeral(level);
                 } else {
                     name += " " + level;
@@ -230,13 +239,13 @@ public class EnchantDisplay implements Updatable {
             }
 
             lore.add(PREFIX + name);
-            if (enchantments.size() <= OPTIONS.getDescribeThreshold() && OPTIONS.isUseDescribe()) {
+            if (enchantments.size() <= OPTIONS.getDescriptionOptions().getThreshold() && OPTIONS.getDescriptionOptions().isEnabled()) {
                 lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
             }
         });
 
-        if (OPTIONS.isUseShrink() && (enchantments.size() > OPTIONS.getShrinkThreshold())) {
-            List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, OPTIONS.getShrinkPerLine());
+        if (OPTIONS.getShrinkOptions().isEnabled() && (enchantments.size() > OPTIONS.getShrinkOptions().getThreshold())) {
+            List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, OPTIONS.getShrinkOptions().getShrinkPerLine());
             List<String> newLore = new ArrayList<>();
             partitionedCombinedLoreList.forEach(list -> {
                 StringBuilder builder = new StringBuilder();

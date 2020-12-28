@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.config;
 
+import com.willfp.eco.util.config.ValueGetter;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -17,11 +18,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Class implemented by enchantment configs
  */
-public abstract class EnchantmentYamlConfig extends PluginDependent {
+public abstract class EnchantmentYamlConfig extends PluginDependent implements ValueGetter {
     private final String name;
 
     @Getter
@@ -132,5 +135,113 @@ public abstract class EnchantmentYamlConfig extends PluginDependent {
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    /**
+     * Get an integer from config.
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or 0 if not found.
+     */
+    @Override
+    public int getInt(@NotNull final String path) {
+        return config.getInt(path, 0);
+    }
+
+    /**
+     * Get an integer from config with a specified default (not found) value.
+     *
+     * @param path The key to fetch the value from.
+     * @param def  The value to default to if not found.
+     * @return The found value, or the default.
+     */
+    @Override
+    public int getInt(@NotNull final String path,
+                      final int def) {
+        return config.getInt(path, def);
+    }
+
+    /**
+     * Get a list of integers from config.
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or a blank {@link java.util.ArrayList} if not found.
+     */
+    @Override
+    @NotNull
+    public List<Integer> getInts(@NotNull final String path) {
+        return config.getIntegerList(path);
+    }
+
+    /**
+     * Get a boolean from config.
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or false if not found.
+     */
+    @Override
+    public boolean getBool(@NotNull final String path) {
+        return config.getBoolean(path, false);
+    }
+
+    /**
+     * Get a list of booleans from config.
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or a blank {@link java.util.ArrayList} if not found.
+     */
+    @Override
+    @NotNull
+    public List<Boolean> getBools(@NotNull final String path) {
+        return config.getBooleanList(path);
+    }
+
+    /**
+     * Get a string from config.C
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or an empty string if not found.
+     */
+    @Override
+    @NotNull
+    public String getString(@NotNull final String path) {
+        return Objects.requireNonNull(config.getString(path, ""));
+    }
+
+    /**
+     * Get a list of strings from config.
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or a blank {@link java.util.ArrayList} if not found.
+     */
+    @Override
+    @NotNull
+    public List<String> getStrings(@NotNull final String path) {
+        return config.getStringList(path);
+    }
+
+    /**
+     * Get a decimal from config.
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or 0 if not found.
+     */
+    @Override
+    public double getDouble(@NotNull final String path) {
+        return config.getDouble(path, 0);
+    }
+
+    /**
+     * Get a list of decimals from config.
+     *
+     * @param path The key to fetch the value from.
+     * @return The found value, or a blank {@link java.util.ArrayList} if not found.
+     */
+    @Override
+    @NotNull
+    public List<Double> getDoubles(@NotNull final String path) {
+        return config.getDoubleList(path);
     }
 }

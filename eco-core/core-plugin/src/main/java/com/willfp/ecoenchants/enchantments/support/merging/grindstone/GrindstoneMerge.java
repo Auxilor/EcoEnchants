@@ -14,6 +14,14 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 @UtilityClass
 public class GrindstoneMerge {
+
+    /**
+     * Merge items in a grindstone.
+     *
+     * @param top    The item at the top of the GUI.
+     * @param bottom The item at the bottom of the GUI.
+     * @return All enchantments for the output item to have.
+     */
     public static Map<Enchantment, Integer> doMerge(@Nullable final ItemStack top,
                                                     @Nullable final ItemStack bottom) {
         Map<Enchantment, Integer> bottomEnchants = new HashMap<>();

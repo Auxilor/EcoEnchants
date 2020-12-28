@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.display;
 
+import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.config.annotations.ConfigUpdater;
 import com.willfp.eco.util.interfaces.Updatable;
@@ -7,6 +8,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.WordUtils;
@@ -23,9 +25,19 @@ import java.util.Set;
 @UtilityClass
 @SuppressWarnings("deprecation")
 public class EnchantmentCache implements Updatable {
+    /**
+     * The physical cache.
+     */
     private static final Set<CacheEntry> CACHE = new HashSet<>();
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    /**
+     * Get the {@link CacheEntry} for a specific enchantment.
+     * <p>
+     * Returns a default "broken" cache entry if not cached.
+     *
+     * @param enchantment The enchantment to query.
+     * @return The found cache entry.
+     */
     public static CacheEntry getEntry(@NotNull final Enchantment enchantment) {
         Optional<CacheEntry> matching = CACHE.stream().filter(entry -> entry.getEnchantment().getKey().getKey().equals(enchantment.getKey().getKey())).findFirst();
         return matching.orElse(
@@ -40,10 +52,18 @@ public class EnchantmentCache implements Updatable {
         );
     }
 
+    /**
+     * Get the entire cache.
+     *
+     * @return An immutable set of the cache.
+     */
     public static Set<CacheEntry> getCache() {
-        return new HashSet<>(CACHE);
+        return ImmutableSet.copyOf(CACHE);
     }
 
+    /**
+     * Update the cache.
+     */
     @ConfigUpdater
     public static void update() {
         CACHE.clear();
@@ -84,22 +104,56 @@ public class EnchantmentCache implements Updatable {
 
             String rawName = name;
             name = color + name;
-            description.replaceAll(line -> EnchantDisplay.PREFIX + EnchantDisplay.OPTIONS.getDescriptionColor() + line);
+            description.replaceAll(line -> EnchantDisplay.PREFIX + EnchantDisplay.OPTIONS.getDescriptionOptions().getColor() + line);
             CACHE.add(new CacheEntry(enchantment, name, rawName, description, type, rarity));
         });
     }
 
     @ToString
     public static class CacheEntry {
+        /**
+         * The enchantment that this cache is for.
+         */
+        @Getter
         private final Enchantment enchantment;
+
+        /**
+         * The formatted name of the enchantment.
+         */
+        @Getter
         private final String name;
+
+        /**
+         * The raw (unformatted) name of the enchantment.
+         */
+        @Getter
         private final String rawName;
+
+        /**
+         * The description, line-wrapped.
+         */
+        @Getter
         private final List<String> description;
+
+        /**
+         * The description, not line-wrapped or colorized.
+         */
+        @Getter
         private final String stringDescription;
+
+        /**
+         * The type of the enchantment.
+         */
+        @Getter
         private final EnchantmentType type;
+
+        /**
+         * The rarity of the enchantment.
+         */
+        @Getter
         private final EnchantmentRarity rarity;
 
-        public CacheEntry(@NotNull final Enchantment enchantment,
+        private CacheEntry(@NotNull final Enchantment enchantment,
                           @NotNull final String name,
                           @NotNull final String rawName,
                           @NotNull final List<String> description,
@@ -121,35 +175,7 @@ public class EnchantmentCache implements Updatable {
 
             String processedStringDescription = descriptionBuilder.toString();
             processedStringDescription = processedStringDescription.replace("§w", "");
-            this.stringDescription = processedStringDescription.replaceAll(EnchantDisplay.OPTIONS.getDescriptionColor(), "");
-        }
-
-        public Enchantment getEnchantment() {
-            return enchantment;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getRawName() {
-            return rawName;
-        }
-
-        public List<String> getDescription() {
-            return description;
-        }
-
-        public String getStringDescription() {
-            return stringDescription;
-        }
-
-        public EnchantmentType getType() {
-            return type;
-        }
-
-        public EnchantmentRarity getRarity() {
-            return rarity;
+            this.stringDescription = processedStringDescription.replaceAll(EnchantDisplay.OPTIONS.getDescriptionOptions().getColor(), "");
         }
     }
 }

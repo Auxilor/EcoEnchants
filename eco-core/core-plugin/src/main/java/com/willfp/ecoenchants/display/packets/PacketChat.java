@@ -11,6 +11,11 @@ import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public class PacketChat extends AbstractPacketAdapter {
+    /**
+     * Instantiate a new listener for {@link PacketType.Play.Server#CHAT}.
+     *
+     * @param plugin The plugin to listen through.
+     */
     public PacketChat(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, PacketType.Play.Server.CHAT, ListenerPriority.MONITOR, true);
     }

@@ -17,10 +17,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 public class GrindstoneListeners extends PluginDependent implements Listener {
+    /**
+     * Instantiate grindstone listeners and link them to a specific plugin.
+     *
+     * @param plugin The plugin to link to.
+     */
     public GrindstoneListeners(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
+    /**
+     * Called when items are grindstoned.
+     *
+     * @param event The event to listen to.
+     */
     @EventHandler
     public void onGrindstone(@NotNull final InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();

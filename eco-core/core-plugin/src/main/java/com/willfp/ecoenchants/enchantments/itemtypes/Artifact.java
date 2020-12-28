@@ -27,10 +27,6 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Wrapper for Artifact enchantments
- * in order to reduce copying existing code between artifacts.
- */
 public abstract class Artifact extends EcoEnchant {
     /**
      * The artifact particle.
@@ -45,6 +41,12 @@ public abstract class Artifact extends EcoEnchant {
     @Nullable
     private Particle.DustOptions extra;
 
+    /**
+     * Create a new artifact enchantment.
+     *
+     * @param key           The key name of the enchantment
+     * @param prerequisites Optional {@link Prerequisite}s that must be met
+     */
     protected Artifact(@NotNull final String key,
                        @NotNull final Prerequisite... prerequisites) {
         super(key, EnchantmentType.ARTIFACT, prerequisites);

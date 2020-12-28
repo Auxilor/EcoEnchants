@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.display.options.sorting.SortParameters;
 import com.willfp.ecoenchants.display.options.sorting.SorterManager;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import lombok.Getter;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,61 +17,53 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DisplayOptions {
+    /**
+     * The enchantment sorter being used.
+     */
+    @Getter
     private EnchantmentSorter sorter;
+
+    /**
+     * The description options being used.
+     */
+    @Getter
     private final DescriptionOptions descriptionOptions = new DescriptionOptions();
+
+    /**
+     * The enchantment level options being used.
+     */
+    @Getter
     private final NumbersOptions numbersOptions = new NumbersOptions();
+
+    /**
+     * The shrink options being used.
+     */
+    @Getter
     private final ShrinkOptions shrinkOptions = new ShrinkOptions();
+
+    /**
+     * The enchantment types, sorted according to config.
+     */
+    @Getter
     private final List<EnchantmentType> sortedTypes = new ArrayList<>();
+
+    /**
+     * The enchantment rarities, sorted according to config.
+     */
+    @Getter
     private final List<EnchantmentRarity> sortedRarities = new ArrayList<>();
 
+    /**
+     * Instantiate new display options.
+     */
+    @ApiStatus.Internal
     public DisplayOptions() {
         update();
     }
 
-    public String getDescriptionColor() {
-        return descriptionOptions.getColor();
-    }
-
-    public int getNumbersThreshold() {
-        return numbersOptions.getThreshold();
-    }
-
-    public boolean isUseNumerals() {
-        return numbersOptions.useNumerals();
-    }
-
-    public int getDescribeThreshold() {
-        return descriptionOptions.getThreshold();
-    }
-
-    public boolean isUseDescribe() {
-        return descriptionOptions.isEnabled();
-    }
-
-    public int getShrinkThreshold() {
-        return shrinkOptions.getThreshold();
-    }
-
-    public int getShrinkPerLine() {
-        return shrinkOptions.getShrinkPerLine();
-    }
-
-    public boolean isUseShrink() {
-        return shrinkOptions.isEnabled();
-    }
-
-    public List<EnchantmentType> getSortedTypes() {
-        return sortedTypes;
-    }
-
-    public List<EnchantmentRarity> getSortedRarities() {
-        return sortedRarities;
-    }
-
-    public EnchantmentSorter getSorter() {
-        return sorter;
-    }
-
+    /**
+     * Update all options.
+     */
     public void update() {
         descriptionOptions.update();
         numbersOptions.update();

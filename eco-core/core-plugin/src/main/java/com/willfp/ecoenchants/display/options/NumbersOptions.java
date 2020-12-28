@@ -1,25 +1,28 @@
 package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.util.config.Configs;
-import com.willfp.ecoenchants.display.options.interfaces.ThresholdedOption;
-import com.willfp.ecoenchants.display.options.interfaces.UpdateableOption;
+import lombok.Getter;
 
-public class NumbersOptions implements ThresholdedOption, UpdateableOption {
+public class NumbersOptions {
+    /**
+     * If numerals should be used.
+     * <p>
+     * If false then numbers will be used instead.
+     */
+    @Getter
     private boolean useNumerals;
+
+    /**
+     * The threshold above which numbers will be used instead.
+     */
+    @Getter
     private int threshold;
 
-    @Override
-    public int getThreshold() {
-        return threshold;
-    }
-
-    @Override
+    /**
+     * Update the options.
+     */
     public void update() {
         useNumerals = Configs.CONFIG.getBool("lore.use-numerals");
         threshold = Configs.CONFIG.getInt("lore.use-numbers-above-threshold");
-    }
-
-    public boolean useNumerals() {
-        return useNumerals;
     }
 }

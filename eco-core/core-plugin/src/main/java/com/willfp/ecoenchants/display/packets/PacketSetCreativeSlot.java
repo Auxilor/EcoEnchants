@@ -8,6 +8,11 @@ import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.jetbrains.annotations.NotNull;
 
 public class PacketSetCreativeSlot extends AbstractPacketAdapter {
+    /**
+     * Instantiate a new listener for {@link PacketType.Play.Client#SET_CREATIVE_SLOT}.
+     *
+     * @param plugin The plugin to listen through.
+     */
     public PacketSetCreativeSlot(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, PacketType.Play.Client.SET_CREATIVE_SLOT, false);
     }

@@ -8,6 +8,7 @@ import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,37 +16,66 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Class for storing all enchantment rarities
- */
 public class EnchantmentRarity implements Registerable, Updatable {
+    /**
+     * All registered rarities.
+     */
     private static final Set<EnchantmentRarity> REGISTERED = new HashSet<>();
 
+    /**
+     * The name of the rarity.
+     */
+    @Getter
     private final String name;
-    private final double probability;
+
+    /**
+     * The probability of getting an enchantment with this rarity from an enchanting table.
+     */
+    @Getter
+    private final double tableProbability;
+
+    /**
+     * The minimum xp level to get an enchantment of this rarity from an enchanting table.
+     */
+    @Getter
     private final int minimumLevel;
+
+    /**
+     * The probability of a villager obtaining an enchantment with this rarity.
+     */
+    @Getter
     private final double villagerProbability;
+
+    /**
+     * The probability of an item in a loot chest having an enchantment with this rarity.
+     */
+    @Getter
     private final double lootProbability;
+
+    /**
+     * The custom display color, or null if not enabled.
+     */
+    @Getter
     private final String customColor;
 
     /**
-     * Create new EnchantmentRarity
+     * Create new EnchantmentRarity.
      *
      * @param name                The name of the rarity
-     * @param probability         The probability
+     * @param tableProbability    The probability of getting an enchantment with this rarity from an enchanting table.
      * @param minimumLevel        The minimum xp level
      * @param villagerProbability The probability of a villager obtaining an enchantment with this rarity
      * @param lootProbability     The probability of an item in a loot chest having an enchantment with this rarity
      * @param customColor         The custom display color, or null if not enabled
      */
     public EnchantmentRarity(@NotNull final String name,
-                             final double probability,
+                             final double tableProbability,
                              final int minimumLevel,
                              final double villagerProbability,
                              final double lootProbability,
                              @Nullable final String customColor) {
         this.name = name;
-        this.probability = probability;
+        this.tableProbability = tableProbability;
         this.minimumLevel = minimumLevel;
         this.villagerProbability = villagerProbability;
         this.lootProbability = lootProbability;
@@ -59,7 +89,7 @@ public class EnchantmentRarity implements Registerable, Updatable {
 
         PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
                 "rarity_" + this.getName() + "_probability",
-                player -> NumberUtils.format(this.probability)
+                player -> NumberUtils.format(this.tableProbability)
         ));
         PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
                 "rarity_" + this.getName() + "_minlevel",
@@ -82,74 +112,19 @@ public class EnchantmentRarity implements Registerable, Updatable {
     }
 
     /**
-     * Get the name of the rarity
+     * Is custom color enabled.
      *
-     * @return The name
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Is custom color enabled
-     *
-     * @return If has enabled custom color
+     * @return If has enabled custom color.
      */
     public boolean hasCustomColor() {
         return this.customColor != null;
     }
 
     /**
-     * Get custom color
+     * Get EnchantmentRarity matching name.
      *
-     * @return The custom color
-     */
-    public String getCustomColor() {
-        return this.customColor;
-    }
-
-    /**
-     * Get the probability of obtaining enchantment with this rarity from an enchanting table
-     *
-     * @return The probability as a percentage
-     */
-    public double getProbability() {
-        return this.probability;
-    }
-
-    /**
-     * Get the probability of obtaining enchantment with this rarity from a villager
-     *
-     * @return The probability as a percentage
-     */
-    public double getVillagerProbability() {
-        return this.villagerProbability;
-    }
-
-    /**
-     * Get the probability of obtaining enchantment with this rarity from a loot chest
-     *
-     * @return The probability as a percentage
-     */
-    public double getLootProbability() {
-        return this.lootProbability;
-    }
-
-    /**
-     * Get the minimum level required to obtain enchantment with this rarity from an enchanting table
-     *
-     * @return The minimum level
-     */
-    public int getMinimumLevel() {
-        return this.minimumLevel;
-    }
-
-    /**
-     * Get EnchantmentRarity matching name
-     *
-     * @param name The name to search for
-     *
-     * @return The matching EnchantmentRarity, or null if not found
+     * @param name The name to search for.
+     * @return The matching EnchantmentRarity, or null if not found.
      */
     public static EnchantmentRarity getByName(@NotNull final String name) {
         Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
@@ -157,8 +132,7 @@ public class EnchantmentRarity implements Registerable, Updatable {
     }
 
     /**
-     * Update all rarities
-     * Called on /ecoreload
+     * Update all rarities.
      */
     @ConfigUpdater
     public static void update() {
@@ -178,9 +152,9 @@ public class EnchantmentRarity implements Registerable, Updatable {
     }
 
     /**
-     * Get all rarities
+     * Get all rarities.
      *
-     * @return A set of all rarities
+     * @return A set of all rarities.
      */
     public static Set<EnchantmentRarity> values() {
         return REGISTERED;
