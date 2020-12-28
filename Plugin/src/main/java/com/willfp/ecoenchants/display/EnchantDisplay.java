@@ -67,7 +67,6 @@ public class EnchantDisplay {
      * It isn't recommended to mess with this unless you <b>really</b> know your way around EcoEnchants.
      *
      * @param item The item to modify
-     *
      * @return The item, with KEY_V
      */
     public static ItemStack addV(ItemStack item) {
@@ -83,7 +82,6 @@ public class EnchantDisplay {
      * Revert display
      *
      * @param item The item to revert
-     *
      * @return The item, updated
      */
     public static ItemStack revertDisplay(final ItemStack item) {
@@ -125,7 +123,6 @@ public class EnchantDisplay {
      * Show all enchantments in item lore
      *
      * @param item The item to update
-     *
      * @return The item, updated
      */
     public static ItemStack displayEnchantments(final ItemStack item, boolean hideEnchants) {
