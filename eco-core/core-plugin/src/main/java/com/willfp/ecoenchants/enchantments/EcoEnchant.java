@@ -38,7 +38,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings({"unchecked", "deprecation"})
+@SuppressWarnings({"unchecked", "deprecation", "RedundantSuppression"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
     /**
      * Instance of EcoEnchants for enchantments to be able to access.
