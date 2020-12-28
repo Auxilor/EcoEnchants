@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class BaseConfig extends PluginDependent {
+public abstract class BaseConfig extends PluginDependent implements ValueGetter {
     /**
      * The linked {@link YamlConfiguration} where values are physically stored.
      */
@@ -115,6 +115,7 @@ public abstract class BaseConfig extends PluginDependent {
      * @param path The key to fetch the value from.
      * @return The found value, or 0 if not found.
      */
+    @Override
     public int getInt(@NotNull final String path) {
         return config.getInt(path, 0);
     }
@@ -126,6 +127,7 @@ public abstract class BaseConfig extends PluginDependent {
      * @param def  The value to default to if not found.
      * @return The found value, or the default.
      */
+    @Override
     public int getInt(@NotNull final String path,
                       final int def) {
         return config.getInt(path, def);
@@ -137,6 +139,7 @@ public abstract class BaseConfig extends PluginDependent {
      * @param path The key to fetch the value from.
      * @return The found value, or a blank {@link java.util.ArrayList} if not found.
      */
+    @Override
     @NotNull
     public List<Integer> getInts(@NotNull final String path) {
         return config.getIntegerList(path);
@@ -148,6 +151,7 @@ public abstract class BaseConfig extends PluginDependent {
      * @param path The key to fetch the value from.
      * @return The found value, or false if not found.
      */
+    @Override
     public boolean getBool(@NotNull final String path) {
         return config.getBoolean(path, false);
     }
@@ -158,17 +162,19 @@ public abstract class BaseConfig extends PluginDependent {
      * @param path The key to fetch the value from.
      * @return The found value, or a blank {@link java.util.ArrayList} if not found.
      */
+    @Override
     @NotNull
     public List<Boolean> getBools(@NotNull final String path) {
         return config.getBooleanList(path);
     }
 
     /**
-     * Get a string from config.
+     * Get a string from config.C
      *
      * @param path The key to fetch the value from.
      * @return The found value, or an empty string if not found.
      */
+    @Override
     @NotNull
     public String getString(@NotNull final String path) {
         return Objects.requireNonNull(config.getString(path, ""));
@@ -180,6 +186,7 @@ public abstract class BaseConfig extends PluginDependent {
      * @param path The key to fetch the value from.
      * @return The found value, or a blank {@link java.util.ArrayList} if not found.
      */
+    @Override
     @NotNull
     public List<String> getStrings(@NotNull final String path) {
         return config.getStringList(path);
@@ -191,6 +198,7 @@ public abstract class BaseConfig extends PluginDependent {
      * @param path The key to fetch the value from.
      * @return The found value, or 0 if not found.
      */
+    @Override
     public double getDouble(@NotNull final String path) {
         return config.getDouble(path, 0);
     }
@@ -201,6 +209,7 @@ public abstract class BaseConfig extends PluginDependent {
      * @param path The key to fetch the value from.
      * @return The found value, or a blank {@link java.util.ArrayList} if not found.
      */
+    @Override
     @NotNull
     public List<Double> getDoubles(@NotNull final String path) {
         return config.getDoubleList(path);
