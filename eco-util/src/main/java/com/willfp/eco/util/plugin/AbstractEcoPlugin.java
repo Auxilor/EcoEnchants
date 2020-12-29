@@ -39,7 +39,6 @@ import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefTowny;
 import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.updater.UpdateChecker;
@@ -92,7 +91,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     /**
      * Set of external plugin integrations.
      */
-    private final List<Class<? extends Updatable>> updatableClasses = new ArrayList<>();
+    private final List<Class<?>> updatableClasses = new ArrayList<>();
 
     /**
      * The internal plugin logger.
@@ -407,5 +406,5 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      *
      * @return A list of all updatable classes.
      */
-    public abstract List<Class<? extends Updatable>> getUpdatableClasses();
+    public abstract List<Class<?>> getUpdatableClasses();
 }

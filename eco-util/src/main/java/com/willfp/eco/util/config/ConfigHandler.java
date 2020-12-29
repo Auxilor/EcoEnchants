@@ -4,7 +4,6 @@ import com.willfp.eco.util.config.annotations.ConfigUpdater;
 import com.willfp.eco.util.config.annotations.InvalidUpdatableClassException;
 import com.willfp.eco.util.config.annotations.InvalidUpdateMethodException;
 import com.willfp.eco.util.injection.PluginDependent;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +18,7 @@ public class ConfigHandler extends PluginDependent {
     /**
      * A set of all classes that can be updated.
      */
-    private final Set<Class<? extends Updatable>> updatableClasses = new HashSet<>();
+    private final Set<Class<?>> updatableClasses = new HashSet<>();
 
     /**
      * Creates a new config handler and links it to an {@link AbstractEcoPlugin}.
@@ -58,7 +57,7 @@ public class ConfigHandler extends PluginDependent {
      *
      * @param updatableClass The class with an update method.
      */
-    public void registerUpdatableClass(@NotNull final Class<? extends Updatable> updatableClass) {
+    public void registerUpdatableClass(@NotNull final Class<?> updatableClass) {
         boolean isValid = false;
         for (Method method : updatableClass.getDeclaredMethods()) {
             if (Modifier.isStatic(method.getModifiers()) && method.getParameterTypes().length == 0 && method.isAnnotationPresent(ConfigUpdater.class)) {

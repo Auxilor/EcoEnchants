@@ -6,7 +6,6 @@ import com.willfp.eco.util.config.annotations.ConfigUpdater;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.interfaces.Registerable;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +15,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class EnchantmentRarity implements Registerable, Updatable {
+public class EnchantmentRarity implements Registerable {
     /**
      * All registered rarities.
      */

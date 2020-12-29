@@ -6,7 +6,6 @@ import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisTests;
 import com.willfp.eco.util.integrations.IntegrationLoader;
 import com.willfp.eco.util.interfaces.EcoRunnable;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
@@ -204,7 +203,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     }
 
     @Override
-    public List<Class<? extends Updatable>> getUpdatableClasses() {
+    public List<Class<?>> getUpdatableClasses() {
         return Arrays.asList(
                 EcoEnchantsConfigs.class,
                 EnchantmentCache.class,

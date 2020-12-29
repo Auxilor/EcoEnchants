@@ -4,7 +4,6 @@ import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.command.AbstractTabCompleter;
 import com.willfp.eco.util.config.annotations.ConfigUpdater;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Bukkit;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class TabCompleterEnchantinfo extends AbstractTabCompleter implements Updatable {
+public class TabCompleterEnchantinfo extends AbstractTabCompleter {
     /**
      * The cached enchantment names.
      */

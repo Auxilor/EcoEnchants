@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.eco.util.config.annotations.ConfigUpdater;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.config.configs.Rarity;
 import com.willfp.ecoenchants.config.configs.Target;
@@ -13,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @UtilityClass
-public class EcoEnchantsConfigs implements Updatable {
+public class EcoEnchantsConfigs {
     /**
      * target.yml.
      */

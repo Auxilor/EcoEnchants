@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.display;
 import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.config.annotations.ConfigUpdater;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -29,7 +28,7 @@ import java.util.List;
  */
 @SuppressWarnings("DeprecatedIsStillUsed")
 @UtilityClass
-public class EnchantDisplay implements Updatable {
+public class EnchantDisplay {
     /**
      * Instance of EcoEnchants.
      */
