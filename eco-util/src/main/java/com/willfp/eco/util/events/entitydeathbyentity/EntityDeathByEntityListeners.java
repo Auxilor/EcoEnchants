@@ -1,6 +1,6 @@
 package com.willfp.eco.util.events.entitydeathbyentity;
 
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;

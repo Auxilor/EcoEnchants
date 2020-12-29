@@ -1,4 +1,4 @@
-package com.willfp.eco.util.packets;
+package com.willfp.eco.util.protocollib;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;

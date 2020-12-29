@@ -1,6 +1,6 @@
 package com.willfp.eco.util.bukkit.keys;
 
-import com.willfp.eco.util.factory.PluginDependentFactory;
+import com.willfp.eco.util.internal.PluginDependentFactory;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;

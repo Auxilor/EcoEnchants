@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;

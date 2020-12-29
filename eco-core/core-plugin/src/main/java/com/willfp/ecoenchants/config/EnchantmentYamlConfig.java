@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.eco.util.config.ValueGetter;
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import lombok.AccessLevel;

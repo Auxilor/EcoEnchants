@@ -6,7 +6,7 @@ import com.willfp.eco.core.proxy.proxies.RepairCostProxy;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.tuplets.Pair;
 import org.bukkit.Material;

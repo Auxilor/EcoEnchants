@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

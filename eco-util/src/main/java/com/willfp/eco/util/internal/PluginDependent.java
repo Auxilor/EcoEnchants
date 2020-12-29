@@ -1,4 +1,4 @@
-package com.willfp.eco.util.injection;
+package com.willfp.eco.util.internal;
 
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import lombok.AccessLevel;

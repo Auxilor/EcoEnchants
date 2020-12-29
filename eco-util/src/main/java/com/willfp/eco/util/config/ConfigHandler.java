@@ -3,7 +3,7 @@ package com.willfp.eco.util.config;
 import com.willfp.eco.util.config.annotations.ConfigUpdater;
 import com.willfp.eco.util.config.annotations.InvalidUpdatableClassException;
 import com.willfp.eco.util.config.annotations.InvalidUpdateMethodException;
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.jetbrains.annotations.NotNull;
 

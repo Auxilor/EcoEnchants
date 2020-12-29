@@ -1,6 +1,5 @@
-package com.willfp.eco.util.factory;
+package com.willfp.eco.util.internal;
 
-import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;

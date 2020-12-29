@@ -1,7 +1,7 @@
 package com.willfp.eco.util.command;
 
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.Bukkit;

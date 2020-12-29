@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.display.packets;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.willfp.eco.util.packets.AbstractPacketAdapter;
+import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.inventory.ItemFlag;

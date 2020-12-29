@@ -1,7 +1,7 @@
 package com.willfp.eco.util.config;
 
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import lombok.AccessLevel;
 import lombok.Getter;

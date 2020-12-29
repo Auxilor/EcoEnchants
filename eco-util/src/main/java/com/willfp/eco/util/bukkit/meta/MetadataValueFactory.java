@@ -1,6 +1,6 @@
 package com.willfp.eco.util.bukkit.meta;
 
-import com.willfp.eco.util.factory.PluginDependentFactory;
+import com.willfp.eco.util.internal.PluginDependentFactory;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.jetbrains.annotations.NotNull;

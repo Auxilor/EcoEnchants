@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchantments.support.obtaining;
 import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;

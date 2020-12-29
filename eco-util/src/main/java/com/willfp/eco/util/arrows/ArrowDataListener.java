@@ -1,6 +1,6 @@
 package com.willfp.eco.util.arrows;
 
-import com.willfp.eco.util.injection.PluginDependent;
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

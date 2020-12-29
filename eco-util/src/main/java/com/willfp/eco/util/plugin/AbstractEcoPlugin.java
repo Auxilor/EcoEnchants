@@ -40,7 +40,7 @@ import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
 import com.willfp.eco.util.optional.Prerequisite;
-import com.willfp.eco.util.packets.AbstractPacketAdapter;
+import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.eco.util.updater.UpdateChecker;
 import lombok.Getter;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
