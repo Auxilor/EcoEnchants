@@ -19,7 +19,7 @@ public class DropQueue {
     private final AbstractDropQueue handle;
 
     /**
-     * Create {@link DropQueue} linked to player
+     * Create {@link DropQueue} linked to player.
      * <p>
      * All drops should be passed through a drop queue for telekinesis integration.
      *

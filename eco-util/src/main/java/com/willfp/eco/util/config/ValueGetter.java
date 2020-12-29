@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public interface ValueGetter {
-
     /**
      * Get an integer from config.
      *
