@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 
-import com.willfp.eco.util.lambda.Callable;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +31,7 @@ public class SpellRunnable {
      * Must be set before execution.
      */
     @Setter
-    private Callable task = () -> {
+    private Runnable task = () -> {
         // Empty as must be set using this#setTask
     };
 
@@ -52,7 +51,7 @@ public class SpellRunnable {
      * Run the runnable.
      */
     public void run() {
-        task.call();
+        task.run();
         updateEndTime();
     }
 

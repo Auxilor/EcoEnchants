@@ -1,7 +1,6 @@
 package com.willfp.eco.util.optional;
 
 import com.willfp.eco.util.ClassUtils;
-import com.willfp.eco.util.lambda.ObjectCallable;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
@@ -9,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class Prerequisite {
     /**
@@ -41,7 +41,7 @@ public class Prerequisite {
     /**
      * Retrieve if the necessary prerequisite condition is met.
      */
-    private final ObjectCallable<Boolean> isMetCallable;
+    private final Supplier<Boolean> isMetSupplier;
 
     /**
      * The description of the requirements of the prerequisite.
@@ -52,22 +52,22 @@ public class Prerequisite {
     /**
      * Create a prerequisite.
      *
-     * @param isMetCallable An {@link ObjectCallable<Boolean>} that returns if the prerequisite is met
+     * @param isMetSupplier An {@link Supplier<Boolean>} that returns if the prerequisite is met
      * @param description   The description of the prerequisite, shown to the user if it isn't
      */
-    public Prerequisite(@NotNull final ObjectCallable<Boolean> isMetCallable,
+    public Prerequisite(@NotNull final Supplier<Boolean> isMetSupplier,
                         @NotNull final String description) {
-        this.isMetCallable = isMetCallable;
-        this.isMet = isMetCallable.call();
+        this.isMetSupplier = isMetSupplier;
+        this.isMet = isMetSupplier.get();
         this.description = description;
         VALUES.add(this);
     }
 
     /**
-     * Refresh the condition set in the callable, updates {@link this#isMet}.
+     * Refresh the condition set in the supplier, updates {@link this#isMet}.
      */
     private void refresh() {
-        this.isMet = this.isMetCallable.call();
+        this.isMet = this.isMetSupplier.get();
     }
 
     /**

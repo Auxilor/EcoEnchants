@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchantments.meta;
 import com.google.common.collect.ImmutableList;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.config.annotations.ConfigUpdater;
-import com.willfp.eco.util.lambda.ObjectCallable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
@@ -13,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class EnchantmentType {
     /**
@@ -80,12 +80,12 @@ public class EnchantmentType {
     /**
      * Lambda to fetch the color of the type.
      */
-    private final ObjectCallable<String> colorCallable;
+    private final Supplier<String> colorSupplier;
 
     /**
      * Lambda to fetch the singularity of the type.
      */
-    private final ObjectCallable<Boolean> singularCallable;
+    private final Supplier<Boolean> singularSupplier;
 
     /**
      * If only one enchantment of this type is allowed on an item.
@@ -136,12 +136,12 @@ public class EnchantmentType {
      *
      * @param name          The name of the type.
      * @param singular      Whether an item can have several enchantments of this type.
-     * @param colorCallable Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
+     * @param colorSupplier Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
      */
     public EnchantmentType(@NotNull final String name,
                            final boolean singular,
-                           @NotNull final ObjectCallable<String> colorCallable) {
-        this(name, () -> singular, colorCallable);
+                           @NotNull final Supplier<String> colorSupplier) {
+        this(name, () -> singular, colorSupplier);
     }
 
     /**
@@ -151,57 +151,57 @@ public class EnchantmentType {
      *
      * @param name             The name of the type.
      * @param singular         Whether an item can have several enchantments of this type.
-     * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
+     * @param colorSupplier    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
      * @param requiredToExtend Class that all enchantments of this type must extend - or null if not required.
      */
     public EnchantmentType(@NotNull final String name,
                            final boolean singular,
-                           @NotNull final ObjectCallable<String> colorCallable,
+                           @NotNull final Supplier<String> colorSupplier,
                            @Nullable final Class<? extends EcoEnchant> requiredToExtend) {
-        this(name, () -> singular, colorCallable, requiredToExtend);
+        this(name, () -> singular, colorSupplier, requiredToExtend);
     }
 
     /**
      * Create EnchantmentType with updatable color and singularity.
      *
      * @param name             The name of the type.
-     * @param singularCallable Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload.
-     * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
+     * @param singularSupplier Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload.
+     * @param colorSupplier    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
      */
     public EnchantmentType(@NotNull final String name,
-                           @NotNull final ObjectCallable<Boolean> singularCallable,
-                           @NotNull final ObjectCallable<String> colorCallable) {
-        this(name, singularCallable, colorCallable, null);
+                           @NotNull final Supplier<Boolean> singularSupplier,
+                           @NotNull final Supplier<String> colorSupplier) {
+        this(name, singularSupplier, colorSupplier, null);
     }
 
     /**
      * Create EnchantmentType with updatable color and singularity that <b>must</b> extend a specified class.
      *
      * @param name             The name of the type.
-     * @param singularCallable Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload.
-     * @param colorCallable    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
+     * @param singularSupplier Lambda to fetch whether an item can have several enchantments of this type. Updates on /ecoreload.
+     * @param colorSupplier    Lambda to fetch the color of enchantments with this type to have. Updates on /ecoreload.
      * @param requiredToExtend Class that all enchantments of this type must extend - or null if not required.
      */
     public EnchantmentType(@NotNull final String name,
-                           @NotNull final ObjectCallable<Boolean> singularCallable,
-                           @NotNull final ObjectCallable<String> colorCallable,
+                           @NotNull final Supplier<Boolean> singularSupplier,
+                           @NotNull final Supplier<String> colorSupplier,
                            @Nullable final Class<? extends EcoEnchant> requiredToExtend) {
         this.name = name;
-        this.singularCallable = singularCallable;
-        this.colorCallable = colorCallable;
+        this.singularSupplier = singularSupplier;
+        this.colorSupplier = colorSupplier;
         this.requiredToExtend = requiredToExtend;
-        color = colorCallable.call();
-        singular = singularCallable.call();
+        color = colorSupplier.get();
+        singular = singularSupplier.get();
         REGISTERED.add(this);
     }
 
     private void refresh() {
-        this.color = colorCallable.call();
-        this.singular = singularCallable.call();
+        this.color = colorSupplier.get();
+        this.singular = singularSupplier.get();
     }
 
     /**
-     * Update callables of all types.
+     * Update suppliers of all types.
      */
     @ConfigUpdater
     public static void update() {

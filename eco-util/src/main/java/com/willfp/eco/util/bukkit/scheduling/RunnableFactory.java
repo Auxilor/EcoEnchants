@@ -1,9 +1,10 @@
 package com.willfp.eco.util.bukkit.scheduling;
 
 import com.willfp.eco.util.factory.PluginDependentFactory;
-import com.willfp.eco.util.lambda.InputCallable;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Consumer;
 
 public class RunnableFactory extends PluginDependentFactory {
     /**
@@ -18,14 +19,14 @@ public class RunnableFactory extends PluginDependentFactory {
     /**
      * Create an {@link EcoBukkitRunnable}.
      *
-     * @param callable Lambda of the code to run, where the parameter represents the instance of the runnable.
+     * @param consumer Lambda of the code to run, where the parameter represents the instance of the runnable.
      * @return The created {@link EcoBukkitRunnable}.
      */
-    public EcoBukkitRunnable create(@NotNull final InputCallable<EcoBukkitRunnable> callable) {
+    public EcoBukkitRunnable create(@NotNull final Consumer<EcoBukkitRunnable> consumer) {
         return new EcoBukkitRunnable(this.getPlugin()) {
             @Override
             public void run() {
-                callable.call(this);
+                consumer.accept(this);
             }
         };
     }

@@ -1,6 +1,5 @@
 package com.willfp.eco.util.integrations;
 
-import com.willfp.eco.util.lambda.Callable;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,7 +7,7 @@ public class IntegrationLoader {
     /**
      * The lambda to be ran if the plugin is present.
      */
-    private final Callable callable;
+    private final Runnable runnable;
 
     /**
      * The plugin to require to load the integration.
@@ -23,8 +22,8 @@ public class IntegrationLoader {
      * @param onLoad     The lambda to be ran if the plugin is present.
      */
     public IntegrationLoader(@NotNull final String pluginName,
-                             @NotNull final Callable onLoad) {
-        this.callable = onLoad;
+                             @NotNull final Runnable onLoad) {
+        this.runnable = onLoad;
         this.pluginName = pluginName;
     }
 
@@ -32,6 +31,6 @@ public class IntegrationLoader {
      * Load the integration.
      */
     public void load() {
-        callable.call();
+        runnable.run();
     }
 }

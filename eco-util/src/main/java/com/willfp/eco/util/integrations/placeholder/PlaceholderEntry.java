@@ -1,11 +1,12 @@
 package com.willfp.eco.util.integrations.placeholder;
 
-import com.willfp.eco.util.lambda.ObjectInputCallable;
 import lombok.Getter;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Function;
 
 public class PlaceholderEntry {
     /**
@@ -17,7 +18,7 @@ public class PlaceholderEntry {
     /**
      * The lambda to retrieve the output of the placeholder given a player.
      */
-    private final ObjectInputCallable<String, Player> function;
+    private final Function<Player, String> function;
 
     /**
      * If the placeholder requires a player to lookup.
@@ -31,7 +32,7 @@ public class PlaceholderEntry {
      * @param function   A lambda to get the result of the placeholder given a player.
      */
     public PlaceholderEntry(@NotNull final String identifier,
-                            @NotNull final ObjectInputCallable<String, Player> function) {
+                            @NotNull final Function<Player, String> function) {
         this(identifier, function, false);
     }
 
@@ -43,7 +44,7 @@ public class PlaceholderEntry {
      * @param requiresPlayer If the placeholder requires a player.
      */
     public PlaceholderEntry(@NotNull final String identifier,
-                            @NotNull final ObjectInputCallable<String, Player> function,
+                            @NotNull final Function<Player, String> function,
                             final boolean requiresPlayer) {
         this.identifier = identifier;
         this.function = function;
@@ -60,7 +61,7 @@ public class PlaceholderEntry {
         if (player == null) {
             Validate.isTrue(!requiresPlayer, "null player passed to requiresPlayer placeholder.");
         }
-        return this.function.call(player);
+        return this.function.apply(player);
     }
 
     /**

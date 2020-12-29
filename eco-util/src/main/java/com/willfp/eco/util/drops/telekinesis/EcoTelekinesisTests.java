@@ -1,17 +1,17 @@
 package com.willfp.eco.util.drops.telekinesis;
 
-import com.willfp.eco.util.lambda.ObjectInputCallable;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 public class EcoTelekinesisTests implements TelekinesisTests {
     /**
      * Set of tests that return if the player is telekinetic.
      */
-    private final Set<ObjectInputCallable<Boolean, Player>> tests = new HashSet<>();
+    private final Set<Function<Player, Boolean>> tests = new HashSet<>();
 
     /**
      * Register a new test to check against.
@@ -19,7 +19,7 @@ public class EcoTelekinesisTests implements TelekinesisTests {
      * @param test The test to register, where the boolean output is if the player is telekinetic.
      */
     @Override
-    public void registerTest(@NotNull final ObjectInputCallable<Boolean, Player> test) {
+    public void registerTest(@NotNull final Function<Player, Boolean> test) {
         tests.add(test);
     }
 
@@ -33,8 +33,8 @@ public class EcoTelekinesisTests implements TelekinesisTests {
      */
     @Override
     public boolean testPlayer(@NotNull final Player player) {
-        for (ObjectInputCallable<Boolean, Player> test : tests) {
-            if (test.call(player)) {
+        for (Function<Player, Boolean> test : tests) {
+            if (test.apply(player)) {
                 return true;
             }
         }
