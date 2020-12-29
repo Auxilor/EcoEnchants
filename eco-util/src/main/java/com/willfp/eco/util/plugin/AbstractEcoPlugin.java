@@ -12,6 +12,8 @@ import com.willfp.eco.util.bukkit.scheduling.RunnableFactory;
 import com.willfp.eco.util.bukkit.scheduling.Scheduler;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.config.ConfigHandler;
+import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;
 import com.willfp.eco.util.drops.telekinesis.EcoTelekinesisTests;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisTests;
@@ -37,6 +39,7 @@ import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefTowny;
 import com.willfp.eco.util.integrations.antigrief.plugins.AntigriefWorldGuard;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.integrations.placeholder.plugins.PlaceholderIntegrationPAPI;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.updater.UpdateChecker;
@@ -85,6 +88,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      * Set of external plugin integrations.
      */
     private final List<IntegrationLoader> integrations = new ArrayList<>();
+
+    /**
+     * Set of external plugin integrations.
+     */
+    private final List<Class<? extends Updatable>> updatableClasses = new ArrayList<>();
 
     /**
      * The internal plugin logger.
@@ -232,11 +240,18 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
             }
         });
 
+
+        updatableClasses.add(Configs.class);
+        updatableClasses.add(DropManager.class);
+        updatableClasses.addAll(this.getUpdatableClasses());
+
         this.getListeners().forEach(listener -> this.getEventManager().registerListener(listener));
 
         this.getCommands().forEach(AbstractCommand::register);
 
         this.getScheduler().runLater(this::afterLoad, 1);
+
+        this.updatableClasses.forEach(clazz -> this.getConfigHandler().registerUpdatableClass(clazz));
 
         this.enable();
     }
@@ -386,4 +401,11 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      * @return A list of all listeners.
      */
     public abstract List<Listener> getListeners();
+
+    /**
+     * All updatable classes.
+     *
+     * @return A list of all updatable classes.
+     */
+    public abstract List<Class<? extends Updatable>> getUpdatableClasses();
 }

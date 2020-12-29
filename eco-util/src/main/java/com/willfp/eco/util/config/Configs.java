@@ -1,13 +1,13 @@
 package com.willfp.eco.util.config;
 
-import com.willfp.eco.util.config.annotations.Updatable;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
 import com.willfp.eco.util.config.configs.Config;
 import com.willfp.eco.util.config.configs.Lang;
+import com.willfp.eco.util.interfaces.Updatable;
 import lombok.experimental.UtilityClass;
 
-@Updatable
 @UtilityClass
-public final class Configs {
+public final class Configs implements Updatable {
     /**
      * The {@link BaseConfig} implementation for lang.yml.
      */
@@ -23,6 +23,7 @@ public final class Configs {
      *
      * @see BaseConfig
      */
+    @ConfigUpdater
     public void update() {
         LANG.update();
         CONFIG.update();

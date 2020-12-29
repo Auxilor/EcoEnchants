@@ -6,17 +6,25 @@ import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisTests;
 import com.willfp.eco.util.integrations.IntegrationLoader;
 import com.willfp.eco.util.interfaces.EcoRunnable;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.eco.util.packets.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
+import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
+import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
+import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.display.packets.PacketChat;
 import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
 import com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot;
 import com.willfp.ecoenchants.display.packets.PacketSetSlot;
 import com.willfp.ecoenchants.display.packets.PacketWindowItems;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
 import com.willfp.ecoenchants.enchantments.support.merging.grindstone.GrindstoneListeners;
 import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners;
@@ -192,6 +200,20 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
                 new VillagerListeners()
+        );
+    }
+
+    @Override
+    public List<Class<? extends Updatable>> getUpdatableClasses() {
+        return Arrays.asList(
+                EcoEnchantsConfigs.class,
+                EnchantmentCache.class,
+                EnchantmentRarity.class,
+                EnchantmentTarget.class,
+                EcoEnchants.class,
+                EnchantDisplay.class,
+                TabCompleterEnchantinfo.class,
+                EnchantmentType.class
         );
     }
 }

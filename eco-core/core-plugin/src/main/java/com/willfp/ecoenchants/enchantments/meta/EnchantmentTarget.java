@@ -1,8 +1,9 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableSet;
-import com.willfp.eco.util.config.annotations.Updatable;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
 import com.willfp.eco.util.interfaces.Registerable;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -13,8 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-@Updatable
-public class EnchantmentTarget implements Registerable {
+public class EnchantmentTarget implements Registerable, Updatable {
     /**
      * All registered targets.
      */
@@ -77,6 +77,7 @@ public class EnchantmentTarget implements Registerable {
     /**
      * Update all targets.
      */
+    @ConfigUpdater
     public static void update() {
         Set<String> targetNames = EcoEnchantsConfigs.TARGET.getTargets();
         ALL.materials.clear();

@@ -1,13 +1,13 @@
 package com.willfp.eco.util.drops.internal;
 
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.config.annotations.Updatable;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 
-@Updatable
 @UtilityClass
-public final class DropManager {
+public final class DropManager implements Updatable {
     /**
      * The currently used type, or implementation, of {@link AbstractDropQueue}.
      * <p>
@@ -21,6 +21,7 @@ public final class DropManager {
      *
      * @see DropQueueType
      */
+    @ConfigUpdater
     public void update() {
         type = Configs.CONFIG.getBool("drops.collate") ? DropQueueType.COLLATED : DropQueueType.STANDARD;
     }

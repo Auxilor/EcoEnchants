@@ -3,7 +3,8 @@ package com.willfp.ecoenchants.command.tabcompleters;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.command.AbstractTabCompleter;
-import com.willfp.eco.util.config.annotations.Updatable;
+import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Bukkit;
@@ -17,8 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Updatable
-public class TabCompleterEnchantinfo extends AbstractTabCompleter {
+public class TabCompleterEnchantinfo extends AbstractTabCompleter implements Updatable {
     /**
      * The cached enchantment names.
      */
@@ -34,7 +34,8 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
     /**
      * Called on /ecoreload.
      */
-    public static void update() {
+    @ConfigUpdater
+    public static void reload() {
         ENCHANT_NAMES.clear();
         ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
     }
