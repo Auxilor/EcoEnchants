@@ -5,6 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Function;
+
 @UtilityClass
 public final class TelekinesisUtils {
     /**
@@ -22,6 +24,15 @@ public final class TelekinesisUtils {
      */
     public boolean testPlayer(@NotNull final Player player) {
         return tests.testPlayer(player);
+    }
+
+    /**
+     * Register a new test to check against.
+     *
+     * @param test The test to register, where the boolean output is if the player is telekinetic.
+     */
+    public void registerTest(@NotNull final Function<Player, Boolean> test) {
+        tests.registerTest(test);
     }
 
     /**
