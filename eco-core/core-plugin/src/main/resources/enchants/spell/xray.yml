@@ -22,7 +22,7 @@ general-config:
 
 config:
   activation-sound: ENTITY_ENDERMAN_TELEPORT
-  cooldown: 60 # In seconds
+  cooldown: 30 # In seconds
   blocks:
     - coal_ore
     - iron_ore
