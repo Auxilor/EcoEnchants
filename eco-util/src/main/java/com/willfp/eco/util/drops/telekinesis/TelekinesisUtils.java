@@ -1,8 +1,10 @@
 package com.willfp.eco.util.drops.telekinesis;
 
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.ServicePriority;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
@@ -12,7 +14,7 @@ public final class TelekinesisUtils {
     /**
      * The test service registered to bukkit.
      */
-    private TelekinesisTests tests = Bukkit.getServicesManager().load(TelekinesisTests.class);
+    private final TelekinesisTests tests;
 
     /**
      * Test the player for telekinesis.
@@ -35,10 +37,11 @@ public final class TelekinesisUtils {
         tests.registerTest(test);
     }
 
-    /**
-     * Update the test to use.
-     */
-    public void update() {
+    static {
+        if (!Bukkit.getServicesManager().isProvidedFor(TelekinesisTests.class)) {
+            Bukkit.getServicesManager().register(TelekinesisTests.class, new EcoTelekinesisTests(), AbstractEcoPlugin.getInstance(), ServicePriority.Normal);
+        }
+
         tests = Bukkit.getServicesManager().load(TelekinesisTests.class);
     }
 }

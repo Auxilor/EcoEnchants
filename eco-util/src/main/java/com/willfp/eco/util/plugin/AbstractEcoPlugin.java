@@ -15,9 +15,6 @@ import com.willfp.eco.util.config.ConfigHandler;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;
-import com.willfp.eco.util.drops.telekinesis.EcoTelekinesisTests;
-import com.willfp.eco.util.drops.telekinesis.TelekinesisTests;
-import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
 import com.willfp.eco.util.events.armorequip.ArmorListener;
 import com.willfp.eco.util.events.armorequip.DispenserArmorListener;
 import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityListeners;
@@ -48,7 +45,6 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -171,12 +167,6 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         this.runnableFactory = new RunnableFactory(this);
         this.extensionLoader = new EcoExtensionLoader(this);
         this.configHandler = new ConfigHandler(this);
-
-        if (!Bukkit.getServicesManager().isProvidedFor(TelekinesisTests.class)) {
-            Bukkit.getServicesManager().register(TelekinesisTests.class, new EcoTelekinesisTests(), this, ServicePriority.Normal);
-        }
-
-        TelekinesisUtils.update();
     }
 
     /**
