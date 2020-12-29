@@ -6,7 +6,6 @@ import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -65,18 +64,6 @@ public class Xray extends Spell {
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
 
                     if (!materials.contains(block1.getType())) {
-                        continue;
-                    }
-
-                    boolean hidden = true;
-
-                    for (BlockFace face : new BlockFace[]{BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN}) {
-                        if (block1.getRelative(face).getType() == Material.AIR) {
-                            hidden = false;
-                        }
-                    }
-
-                    if (!hidden) {
                         continue;
                     }
 
