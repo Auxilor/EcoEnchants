@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableSet;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import lombok.Getter;

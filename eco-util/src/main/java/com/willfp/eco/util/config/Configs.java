@@ -1,6 +1,6 @@
 package com.willfp.eco.util.config;
 
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.config.configs.Config;
 import com.willfp.eco.util.config.configs.Lang;
 import lombok.experimental.UtilityClass;

@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableList;
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;

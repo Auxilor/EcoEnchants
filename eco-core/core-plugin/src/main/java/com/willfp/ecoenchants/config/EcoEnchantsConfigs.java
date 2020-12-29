@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.config.configs.Rarity;
 import com.willfp.ecoenchants.config.configs.Target;

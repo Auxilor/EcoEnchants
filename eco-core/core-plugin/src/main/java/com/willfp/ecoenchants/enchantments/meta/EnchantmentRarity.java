@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.interfaces.Registerable;

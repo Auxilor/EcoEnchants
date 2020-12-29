@@ -1,4 +1,4 @@
-package com.willfp.eco.util.config.annotations;
+package com.willfp.eco.util.config.updating.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;

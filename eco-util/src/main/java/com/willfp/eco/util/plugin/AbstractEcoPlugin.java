@@ -11,7 +11,7 @@ import com.willfp.eco.util.bukkit.scheduling.EcoScheduler;
 import com.willfp.eco.util.bukkit.scheduling.RunnableFactory;
 import com.willfp.eco.util.bukkit.scheduling.Scheduler;
 import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.config.ConfigHandler;
+import com.willfp.eco.util.config.updating.ConfigHandler;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;

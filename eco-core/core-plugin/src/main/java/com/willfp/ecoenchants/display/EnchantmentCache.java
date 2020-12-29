@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;

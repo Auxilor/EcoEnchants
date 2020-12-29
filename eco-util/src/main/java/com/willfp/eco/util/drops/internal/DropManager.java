@@ -1,7 +1,7 @@
 package com.willfp.eco.util.drops.internal;
 
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 
