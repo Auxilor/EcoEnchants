@@ -128,37 +128,36 @@ public class ArmorListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void playerInteractEvent(@NotNull final PlayerInteractEvent event) {
-        if (event.useItemInHand().equals(Result.DENY)) {
+    public void playerInteractEvent(@NotNull final PlayerInteractEvent e) {
+        if (e.useItemInHand().equals(Result.DENY)) {
             return;
         }
-        if (event.getAction() == Action.PHYSICAL) {
+        if (e.getAction() == Action.PHYSICAL) {
             return;
         }
-        if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            Player player = event.getPlayer();
-            ArmorType newArmorType = ArmorType.matchType(event.getItem());
-            if (
-                    newArmorType != null
-                    && newArmorType.equals(ArmorType.HELMET)
-                    && isAirOrNull(event.getPlayer().getInventory().getHelmet())
-                    || newArmorType.equals(ArmorType.CHESTPLATE)
-                    && isAirOrNull(event.getPlayer().getInventory().getChestplate())
-                    || newArmorType.equals(ArmorType.LEGGINGS)
-                    && isAirOrNull(event.getPlayer().getInventory().getLeggings())
-                    || newArmorType.equals(ArmorType.BOOTS)
-                    && isAirOrNull(event.getPlayer().getInventory().getBoots())) {
-                ArmorEquipEvent armorEquipEvent = new ArmorEquipEvent(
-                        event.getPlayer(),
-                        ArmorEquipEvent.EquipMethod.HOTBAR,
-                        ArmorType.matchType(event.getItem()),
-                        null,
-                        event.getItem()
-                );
-                Bukkit.getPluginManager().callEvent(armorEquipEvent);
-                if (armorEquipEvent.isCancelled()) {
-                    event.setCancelled(true);
-                    player.updateInventory();
+        if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            Player player = e.getPlayer();
+            if (!e.useInteractedBlock().equals(Result.DENY)) {
+                if (e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK && !player.isSneaking()) {
+                    Material mat = e.getClickedBlock().getType();
+                }
+            }
+            ArmorType newArmorType = ArmorType.matchType(e.getItem());
+            if (newArmorType != null) {
+                if (newArmorType.equals(ArmorType.HELMET)
+                        && isAirOrNull(e.getPlayer().getInventory().getHelmet())
+                        || newArmorType.equals(ArmorType.CHESTPLATE)
+                        && isAirOrNull(e.getPlayer().getInventory().getChestplate())
+                        || newArmorType.equals(ArmorType.LEGGINGS)
+                        && isAirOrNull(e.getPlayer().getInventory().getLeggings())
+                        || newArmorType.equals(ArmorType.BOOTS)
+                        && isAirOrNull(e.getPlayer().getInventory().getBoots())) {
+                    ArmorEquipEvent armorEquipEvent = new ArmorEquipEvent(e.getPlayer(), ArmorEquipEvent.EquipMethod.HOTBAR, ArmorType.matchType(e.getItem()), null, e.getItem());
+                    Bukkit.getPluginManager().callEvent(armorEquipEvent);
+                    if (armorEquipEvent.isCancelled()) {
+                        e.setCancelled(true);
+                        player.updateInventory();
+                    }
                 }
             }
         }

@@ -50,6 +50,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Abrasion;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Aerial;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Aquatic;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Arachnid;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Arborist;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Arcanic;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Atmospheric;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Backstab;
@@ -225,6 +226,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Dynamite;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
+import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Xray;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
@@ -467,6 +469,8 @@ public class EcoEnchants {
     public static final EcoEnchant DYNAMITE = new Dynamite();
     public static final EcoEnchant CHARGE = new Charge();
     public static final EcoEnchant ASCEND = new Ascend();
+    public static final EcoEnchant ARBORIST = new Arborist();
+    public static final EcoEnchant XRAY = new Xray();
 
     /**
      * Get all registered {@link EcoEnchant}s.

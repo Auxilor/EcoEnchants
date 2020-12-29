@@ -1,5 +1,6 @@
 package com.willfp.eco.util.config;
 
+import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.injection.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import lombok.AccessLevel;
@@ -177,7 +178,7 @@ public abstract class BaseConfig extends PluginDependent implements ValueGetter 
     @Override
     @NotNull
     public String getString(@NotNull final String path) {
-        return Objects.requireNonNull(config.getString(path, ""));
+        return StringUtils.translate(Objects.requireNonNull(config.getString(path, "")));
     }
 
     /**

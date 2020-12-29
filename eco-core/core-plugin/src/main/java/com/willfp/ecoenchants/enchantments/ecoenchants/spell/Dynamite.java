@@ -23,7 +23,7 @@ public class Dynamite extends Spell {
 
     @Override
     public void onUse(@NotNull final Player player,
-                      @NotNull final int level,
+                      final int level,
                       @NotNull final PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
