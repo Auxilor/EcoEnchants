@@ -145,7 +145,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      * @return A list of all integrations.
      */
     @Override
-    public List<IntegrationLoader> getIntegrations() {
+    public List<IntegrationLoader> getIntegrationLoaders() {
         return Arrays.asList(
                 new IntegrationLoader("WorldGuard", () -> {
                     WorldguardManager.register(new WorldguardIntegrationImpl());

@@ -82,10 +82,10 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     /**
      * Set of external plugin integrations.
      */
-    private final List<IntegrationLoader> integrations = new ArrayList<>();
+    private final List<IntegrationLoader> integrationLoaders = new ArrayList<>();
 
     /**
-     * Set of external plugin integrations.
+     * Set of classes to be processed on config update.
      */
     private final List<Class<?>> updatableClasses = new ArrayList<>();
 
@@ -317,23 +317,23 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      * @return The default integrations.
      */
     public final List<IntegrationLoader> getDefaultIntegrations() {
-        integrations.add(new IntegrationLoader("PlaceholderAPI", () -> PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI(this))));
+        integrationLoaders.add(new IntegrationLoader("PlaceholderAPI", () -> PlaceholderManager.addIntegration(new PlaceholderIntegrationPAPI(this))));
 
         // AntiGrief
-        integrations.add(new IntegrationLoader("WorldGuard", () -> AntigriefManager.register(new AntigriefWorldGuard())));
-        integrations.add(new IntegrationLoader("GriefPrevention", () -> AntigriefManager.register(new AntigriefGriefPrevention())));
-        integrations.add(new IntegrationLoader("FactionsUUID", () -> AntigriefManager.register(new AntigriefFactionsUUID())));
-        integrations.add(new IntegrationLoader("Towny", () -> AntigriefManager.register(new AntigriefTowny())));
-        integrations.add(new IntegrationLoader("Lands", () -> AntigriefManager.register(new AntigriefLands(this))));
-        integrations.add(new IntegrationLoader("Kingdoms", () -> AntigriefManager.register(new AntigriefKingdoms())));
+        integrationLoaders.add(new IntegrationLoader("WorldGuard", () -> AntigriefManager.register(new AntigriefWorldGuard())));
+        integrationLoaders.add(new IntegrationLoader("GriefPrevention", () -> AntigriefManager.register(new AntigriefGriefPrevention())));
+        integrationLoaders.add(new IntegrationLoader("FactionsUUID", () -> AntigriefManager.register(new AntigriefFactionsUUID())));
+        integrationLoaders.add(new IntegrationLoader("Towny", () -> AntigriefManager.register(new AntigriefTowny())));
+        integrationLoaders.add(new IntegrationLoader("Lands", () -> AntigriefManager.register(new AntigriefLands(this))));
+        integrationLoaders.add(new IntegrationLoader("Kingdoms", () -> AntigriefManager.register(new AntigriefKingdoms())));
 
         // Anticheat
-        integrations.add(new IntegrationLoader("AAC", () -> AnticheatManager.register(new AnticheatAAC())));
-        integrations.add(new IntegrationLoader("Matrix", () -> AnticheatManager.register(new AnticheatMatrix())));
-        integrations.add(new IntegrationLoader("NoCheatPlus", () -> AnticheatManager.register(new AnticheatNCP())));
-        integrations.add(new IntegrationLoader("Spartan", () -> AnticheatManager.register(new AnticheatSpartan())));
-        integrations.addAll(this.getIntegrations());
-        return integrations;
+        integrationLoaders.add(new IntegrationLoader("AAC", () -> AnticheatManager.register(new AnticheatAAC())));
+        integrationLoaders.add(new IntegrationLoader("Matrix", () -> AnticheatManager.register(new AnticheatMatrix())));
+        integrationLoaders.add(new IntegrationLoader("NoCheatPlus", () -> AnticheatManager.register(new AnticheatNCP())));
+        integrationLoaders.add(new IntegrationLoader("Spartan", () -> AnticheatManager.register(new AnticheatSpartan())));
+        integrationLoaders.addAll(this.getIntegrationLoaders());
+        return integrationLoaders;
     }
 
     /**
@@ -366,7 +366,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      *
      * @return A list of integrations.
      */
-    public abstract List<IntegrationLoader> getIntegrations();
+    public abstract List<IntegrationLoader> getIntegrationLoaders();
 
     /**
      * The command to be registered.
