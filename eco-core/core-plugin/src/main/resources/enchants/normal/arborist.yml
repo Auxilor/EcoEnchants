@@ -32,4 +32,4 @@ config:
     - jungle_sapling
     - oak_sapling
     - spruce_sapling
-  chance-per-level: 0.03 # Chance to drop item.
+  chance-per-level: 3 # Chance to drop item.

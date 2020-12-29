@@ -3,13 +3,17 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 import com.willfp.eco.util.TeamUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Shulker;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class Xray extends Spell {
     public Xray() {
@@ -88,12 +93,36 @@ public class Xray extends Spell {
             shulker.setGlowing(true);
             shulker.setInvisible(true);
 
+            block1.setMetadata("xray-uuid", this.getPlugin().getMetadataValueFactory().create(shulker.getUniqueId()));
+
             if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "color-glow")) {
                 Team team = TeamUtils.getMaterialColorTeam(block1.getType());
                 team.addEntry(shulker.getUniqueId().toString());
             }
 
-            this.getPlugin().getScheduler().runLater(shulker::remove, ticks);
+            this.getPlugin().getScheduler().runLater(() -> {
+                shulker.remove();
+                block1.removeMetadata("xray-uuid", this.getPlugin());
+            }, ticks);
         });
+    }
+
+    @EventHandler
+    public void onBlockBreak(@NotNull final BlockBreakEvent event) {
+        Block block = event.getBlock();
+
+        if (!block.hasMetadata("xray-uuid")) {
+            return;
+        }
+
+        UUID uuid = (UUID) block.getMetadata("xray-uuid").get(0).value();
+
+        assert uuid != null;
+
+        Entity entity = Bukkit.getServer().getEntity(uuid);
+
+        if (entity != null) {
+            entity.remove();
+        }
     }
 }
