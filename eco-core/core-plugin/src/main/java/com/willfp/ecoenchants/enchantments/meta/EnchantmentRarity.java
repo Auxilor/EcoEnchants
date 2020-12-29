@@ -2,11 +2,10 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
+import com.willfp.eco.util.config.annotations.Updatable;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.interfaces.Registerable;
-import com.willfp.eco.util.interfaces.Updatable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +15,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class EnchantmentRarity implements Registerable, Updatable {
+@Updatable
+public class EnchantmentRarity implements Registerable {
     /**
      * All registered rarities.
      */
@@ -134,7 +134,6 @@ public class EnchantmentRarity implements Registerable, Updatable {
     /**
      * Update all rarities.
      */
-    @ConfigUpdater
     public static void update() {
         Set<String> raritiesNames = EcoEnchantsConfigs.RARITY.getRarities();
         raritiesNames.forEach(rarity -> {

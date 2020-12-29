@@ -2,8 +2,7 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableList;
 import com.willfp.eco.util.config.Configs;
-import com.willfp.eco.util.config.annotations.ConfigUpdater;
-import com.willfp.eco.util.interfaces.Updatable;
+import com.willfp.eco.util.config.annotations.Updatable;
 import com.willfp.eco.util.lambda.ObjectCallable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
@@ -15,7 +14,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnchantmentType implements Updatable {
+@Updatable
+public class EnchantmentType {
     /**
      * All registered types.
      */
@@ -204,7 +204,6 @@ public class EnchantmentType implements Updatable {
     /**
      * Update callables of all types.
      */
-    @ConfigUpdater
     public static void update() {
         REGISTERED.forEach(EnchantmentType::refresh);
     }
