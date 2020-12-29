@@ -22,7 +22,7 @@ general-config:
 
 config:
   activation-sound: ENTITY_ENDERMAN_TELEPORT
-  cooldown: 30 # In seconds
+  cooldown: 40 # In seconds
   blocks:
     - coal_ore
     - iron_ore
@@ -32,5 +32,5 @@ config:
     - ancient_debris
     - diamond_ore
   blocks-per-level: 3 # Blocks on all sides to scan per level
-  ticks: 20
+  ticks: 60
   color-glow: true # Color ore glow based on ore type.

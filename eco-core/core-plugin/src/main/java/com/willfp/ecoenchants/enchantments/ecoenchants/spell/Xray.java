@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
@@ -92,6 +93,7 @@ public class Xray extends Spell {
             shulker.setGravity(false);
             shulker.setGlowing(true);
             shulker.setInvisible(true);
+            shulker.setMetadata("xray-shulker", this.getPlugin().getMetadataValueFactory().create(true));
 
             block1.setMetadata("xray-uuid", this.getPlugin().getMetadataValueFactory().create(shulker.getUniqueId()));
 
@@ -115,14 +117,24 @@ public class Xray extends Spell {
             return;
         }
 
-        UUID uuid = (UUID) block.getMetadata("xray-uuid").get(0).value();
+        for (MetadataValue meta : block.getMetadata("xray-uuid")) {
+            if (!(meta.value() instanceof UUID)) {
+                continue;
+            }
 
-        assert uuid != null;
+            UUID uuid = (UUID) meta.value();
 
-        Entity entity = Bukkit.getServer().getEntity(uuid);
+            assert uuid != null;
 
-        if (entity != null) {
-            entity.remove();
+            Entity entity = Bukkit.getServer().getEntity(uuid);
+
+            if (entity != null) {
+                entity.remove();
+            }
+        }
+
+        for (Entity shulkerEntity : block.getLocation().getWorld().getNearbyEntities(block.getLocation(), 2, 2, 2, entity -> entity.hasMetadata("xray-shulker"))) {
+            shulkerEntity.remove();
         }
     }
 }
