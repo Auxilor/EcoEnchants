@@ -19,9 +19,9 @@ import java.util.HashMap;
 
 public class Forcefield extends EcoEnchant implements EcoRunnable {
     private final HashMap<Player, Integer> players = new HashMap<>();
-    private double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
-    private double bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
-    private double damagePerPoint = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
+    private double initialDistance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
+    private double bonus = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
+    private double damagePerPoint = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
 
     public Forcefield() {
         super(
@@ -52,9 +52,9 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
                 players.put(player, level);
             }
         }), 1);
-        initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
-        bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
-        damagePerPoint = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
+        initialDistance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
+        bonus = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
+        damagePerPoint = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
                 ((Monster) e).damage(damage);
 
                 if (NumberUtils.randFloat(0, 1) < 0.2) {
-                    EnchantChecks.getArmorPoints(player, EcoEnchants.FORCEFIELD, 1);
+                    EnchantChecks.getArmorPoints(player, this, 1);
                 }
             }
         });

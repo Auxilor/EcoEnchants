@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 public class CallingCurse extends EcoEnchant implements EcoRunnable {
     private final HashMap<Player, Integer> players = new HashMap<>();
-    private double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
+    private double distance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
 
     public CallingCurse() {
         super(
@@ -53,7 +53,7 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
             }
         }), 1);
 
-        distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
+        distance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
     }
 
     @Override
