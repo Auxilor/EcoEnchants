@@ -91,14 +91,14 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void disable() {
-        Bukkit.getServer().getWorlds().forEach((world -> {
+        Bukkit.getServer().getWorlds().forEach(world -> {
             List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
             populators.forEach((blockPopulator -> {
                 if (blockPopulator instanceof LootPopulator) {
                     world.getPopulators().remove(blockPopulator);
                 }
             }));
-        }));
+        });
 
 
         this.getExtensionLoader().unloadExtensions();

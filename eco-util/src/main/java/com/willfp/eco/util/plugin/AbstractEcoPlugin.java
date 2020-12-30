@@ -328,7 +328,7 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
         integrationLoaders.add(new IntegrationLoader("Kingdoms", () -> AntigriefManager.register(new AntigriefKingdoms())));
 
         // Anticheat
-        integrationLoaders.add(new IntegrationLoader("AAC", () -> AnticheatManager.register(new AnticheatAAC())));
+        integrationLoaders.add(new IntegrationLoader("AAC5", () -> AnticheatManager.register(new AnticheatAAC())));
         integrationLoaders.add(new IntegrationLoader("Matrix", () -> AnticheatManager.register(new AnticheatMatrix())));
         integrationLoaders.add(new IntegrationLoader("NoCheatPlus", () -> AnticheatManager.register(new AnticheatNCP())));
         integrationLoaders.add(new IntegrationLoader("Spartan", () -> AnticheatManager.register(new AnticheatSpartan())));
