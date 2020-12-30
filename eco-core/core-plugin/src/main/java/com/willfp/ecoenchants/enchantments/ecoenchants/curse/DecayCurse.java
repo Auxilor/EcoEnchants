@@ -109,7 +109,6 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
                 }
 
                 DurabilityUtils.damageItemNoBreak(item, amount, player);
-                player.updateInventory();
             }
         }));
     }

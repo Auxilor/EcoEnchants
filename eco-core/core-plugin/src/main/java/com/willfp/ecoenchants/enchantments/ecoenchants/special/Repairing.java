@@ -112,7 +112,6 @@ public class Repairing extends EcoEnchant implements EcoRunnable {
                 }
 
                 DurabilityUtils.repairItem(item, amount * level);
-                player.updateInventory();
             }
         }));
     }
