@@ -18,6 +18,7 @@ public class Grit extends EcoEnchant {
                 "grit", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onGritHurt(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) {
@@ -51,7 +52,7 @@ public class Grit extends EcoEnchant {
 
         int damage = (int) Math.ceil(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * totalGritPoints);
 
-        DurabilityUtils.damageItem(player, player.getInventory().getItemInMainHand(), damage, player.getInventory().getHeldItemSlot());
+        DurabilityUtils.damageItem(attacker, attacker.getInventory().getItemInMainHand(), damage, attacker.getInventory().getHeldItemSlot());
     }
 
 }
