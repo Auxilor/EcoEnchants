@@ -2,18 +2,14 @@ package com.willfp.ecoenchants.display.packets;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
-import com.willfp.eco.core.proxy.ProxyConstants;
-import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
+import com.willfp.eco.core.proxy.proxies.VillagerTradeProxy;
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,46 +28,11 @@ public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
         List<MerchantRecipe> recipes = packet.getMerchantRecipeLists().readSafely(0);
 
         recipes = recipes.stream().peek(merchantRecipe -> {
-            try {
-                if (!EnchantmentTarget.ALL.getMaterials().contains(merchantRecipe.getResult().getType())) {
-                    return;
-                }
-
-                // Enables removing final modifier
-                Field modifiersField = Field.class.getDeclaredField("modifiers");
-                modifiersField.setAccessible(true);
-
-                // Bukkit MerchantRecipe result
-                Field fResult = merchantRecipe.getClass().getSuperclass().getDeclaredField("result");
-                fResult.setAccessible(true);
-                ItemStack result = EnchantDisplay.displayEnchantments(merchantRecipe.getResult());
-                result = EnchantDisplay.addV(result);
-                fResult.set(merchantRecipe, result);
-
-                // Get NMS MerchantRecipe from CraftMerchantRecipe
-                Field fHandle = merchantRecipe.getClass().getDeclaredField("handle");
-                fHandle.setAccessible(true);
-                Object handle = fHandle.get(merchantRecipe); // NMS Recipe
-                modifiersField.setInt(fHandle, fHandle.getModifiers() & ~Modifier.FINAL); // Remove final
-
-                // NMS MerchantRecipe
-                Field fSelling = fHandle.get(merchantRecipe).getClass().getDeclaredField("sellingItem");
-                fSelling.setAccessible(true);
-                Object selling = fSelling.get(handle); // NMS Selling ItemStack
-                modifiersField.setInt(fSelling, fSelling.getModifiers() & ~Modifier.FINAL);
-
-                // Reflectively access CraftItemStack.class for respective version
-                Class<?> craftItemStack = Class.forName("org.bukkit.craftbukkit." + ProxyConstants.NMS_VERSION + ".inventory.CraftItemStack");
-
-                // Bukkit Result ItemStack from NMS Result ItemStack
-                ItemStack nmsSelling = (ItemStack) craftItemStack.getMethod("asBukkitCopy", selling.getClass()).invoke(null, selling);
-                nmsSelling = EnchantDisplay.displayEnchantments(nmsSelling);
-                nmsSelling = EnchantDisplay.addV(nmsSelling);
-                fSelling.set(handle, craftItemStack.getMethod("asNMSCopy", ItemStack.class).invoke(null, nmsSelling));
-
-            } catch (IllegalAccessException | NoSuchFieldException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException e) {
-                e.printStackTrace();
+            if (!EnchantmentTarget.ALL.getMaterials().contains(merchantRecipe.getResult().getType())) {
+                return;
             }
+
+            ProxyUtils.getProxy(VillagerTradeProxy.class).displayTradeEnchantments(merchantRecipe);
         }).collect(Collectors.toList());
 
         packet.getMerchantRecipeLists().writeSafely(0, recipes);
