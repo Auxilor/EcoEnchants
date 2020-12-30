@@ -22,6 +22,7 @@ public class BlastMining extends EcoEnchant {
                 "blast_mining", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,
