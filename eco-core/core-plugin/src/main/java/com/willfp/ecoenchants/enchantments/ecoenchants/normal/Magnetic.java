@@ -20,15 +20,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 public class Magnetic extends EcoEnchant implements EcoRunnable {
+    private double initialDistance = 1;
+    private double bonus = 1;
+    private final HashMap<Player, Integer> players = new HashMap<>();
+
     public Magnetic() {
         super(
                 "magnetic", EnchantmentType.NORMAL
         );
     }
-
-    private final HashMap<Player, Integer> players = new HashMap<>();
-    private double initialDistance = 1;
-    private double bonus = 1;
 
     @EventHandler
     public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
@@ -47,12 +47,12 @@ public class Magnetic extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
+        this.getPlugin().getScheduler().runLater(() -> this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
             if (level > 0) {
                 players.put(player, level);
             }
-        });
+        }), 1);
         initialDistance = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
         bonus = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
     }

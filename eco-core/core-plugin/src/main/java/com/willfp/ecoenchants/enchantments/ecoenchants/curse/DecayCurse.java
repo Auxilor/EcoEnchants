@@ -67,11 +67,11 @@ public class DecayCurse extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
+        this.getPlugin().getScheduler().runLater(() -> this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this))) {
                 players.add(player);
             }
-        });
+        }), 1);
         amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
     }
 

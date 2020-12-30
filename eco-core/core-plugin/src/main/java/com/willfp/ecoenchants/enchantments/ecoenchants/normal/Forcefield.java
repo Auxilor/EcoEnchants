@@ -18,13 +18,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 public class Forcefield extends EcoEnchant implements EcoRunnable {
+    private final HashMap<Player, Integer> players = new HashMap<>();
+    double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
+    double bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
+    double damagePerPoint = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
+
     public Forcefield() {
         super(
                 "forcefield", EnchantmentType.NORMAL
         );
     }
-
-    private final HashMap<Player, Integer> players = new HashMap<>();
 
     @EventHandler
     public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
@@ -43,12 +46,15 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
+        this.getPlugin().getScheduler().runLater(() -> this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
             if (level > 0) {
                 players.put(player, level);
             }
-        });
+        }), 1);
+        initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
+        bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
+        damagePerPoint = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
     }
 
     @Override
@@ -57,10 +63,7 @@ public class Forcefield extends EcoEnchant implements EcoRunnable {
             if (this.getDisabledWorlds().contains(player.getWorld())) {
                 return;
             }
-            double initialDistance = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
-            double bonus = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
             double distance = initialDistance + (level * bonus);
-            double damagePerPoint = EcoEnchants.FORCEFIELD.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
             final double damage = damagePerPoint * level;
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {

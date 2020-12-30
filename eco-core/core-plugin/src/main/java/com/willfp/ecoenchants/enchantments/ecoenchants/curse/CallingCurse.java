@@ -20,13 +20,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 public class CallingCurse extends EcoEnchant implements EcoRunnable {
+    private final HashMap<Player, Integer> players = new HashMap<>();
+    private double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
+
     public CallingCurse() {
         super(
                 "calling_curse", EnchantmentType.CURSE
         );
     }
-
-    private final HashMap<Player, Integer> players = new HashMap<>();
 
     @EventHandler
     public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
@@ -45,18 +46,19 @@ public class CallingCurse extends EcoEnchant implements EcoRunnable {
 
     private void refresh() {
         players.clear();
-        this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
+        this.getPlugin().getScheduler().runLater(() -> this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
             if (level > 0) {
                 players.put(player, level);
             }
-        });
+        }), 1);
+
+        distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
     }
 
     @Override
     public void run() {
         players.forEach((player, level) -> {
-            double distance = EcoEnchants.CALLING_CURSE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
             if (this.getDisabledWorlds().contains(player.getWorld())) {
                 return;
             }
