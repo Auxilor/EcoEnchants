@@ -3,7 +3,7 @@
 #
 
 name: "Xray"
-description: Show all nearby ores.
+description: Glow nearby ores through walls.
 enabled: true
 
 obtaining:
