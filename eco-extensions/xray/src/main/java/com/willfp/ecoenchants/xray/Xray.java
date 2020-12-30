@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
+package com.willfp.ecoenchants.xray;
 
 import com.willfp.eco.util.TeamUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;

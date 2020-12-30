@@ -1,0 +1,3 @@
+name: Xray
+main: com.willfp.ecoenchants.xray.XrayMain
+version: ${projectVersion}

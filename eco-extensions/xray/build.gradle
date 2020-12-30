@@ -1,0 +1,7 @@
+group 'com.willfp'
+version '1.0.0'
+description = 'Xray Extension'
+
+jar {
+    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
+}
