@@ -8,6 +8,7 @@ import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
@@ -79,18 +80,27 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             this.getPlugin().getScheduler().runLater(() -> {
                 ItemStack item0 = event.getInventory().getItem(0);
                 event.getInventory().setItem(0, item0);
-
             }, 1);
             return;
         }
 
         if (SECONDARY_ENCHANTABLE.contains(event.getItem().getType())) {
-            try {
-                ItemStack lapis = event.getInventory().getItem(1);
-                lapis.setAmount(event.getInventory().getItem(1).getAmount() - (event.whichButton() + 1));
+            ItemStack lapis = event.getInventory().getItem(1);
+            if (!player.getGameMode().equals(GameMode.CREATIVE)) {
+                if (lapis == null) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                if (lapis.getAmount() < event.whichButton() + 1) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                lapis.setAmount(lapis.getAmount() - (event.whichButton() + 1));
+
                 event.getInventory().setItem(1, lapis);
-            } catch (NullPointerException ignored) {
-            } // Triggered if you're in creative
+            }
         }
 
         double multiplier = 0.01;
