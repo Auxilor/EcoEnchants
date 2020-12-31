@@ -7,7 +7,7 @@ plugins {
 
 dependencies {
     implementation project(":eco-core").getSubprojects()
-    implementation project(":eco-util")
+    implementation 'com.willfp:eco:1.0.0'
 }
 
 allprojects {
@@ -85,8 +85,9 @@ clean.doLast {
 }
 
 shadowJar {
-    relocate('org.bstats.bukkit', 'com.willfp.eco.util.shaded.bstats')
-    relocate('org.apache.maven', 'com.willfp.eco.util.shaded.maven')
+    relocate('org.apache', 'com.willfp.ecoenchants.eco.shaded.apache')
+    relocate('org.bstats', 'com.willfp.ecoenchants.eco.shaded.bstats')
+    relocate('com.willfp.eco.', 'com.willfp.ecoenchants.eco.') // Dot is to prevent plugin being shaded into itself
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 

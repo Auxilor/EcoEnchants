@@ -1,7 +1,5 @@
 rootProject.name = 'parent'
 
-include ':eco-util'
-
 // Core
 include ':eco-core'
 include ':eco-core:core-nms'
