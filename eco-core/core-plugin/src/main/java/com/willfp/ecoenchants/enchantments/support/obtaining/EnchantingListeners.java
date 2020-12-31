@@ -221,8 +221,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
 
         try {
             event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), maxLevel));
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
-        }
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) { }
 
         if (!SECONDARY_ENCHANTABLE.contains(event.getItem().getType())) {
             return;
@@ -236,7 +235,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             bonus = 1;
         }
 
-        double baseLevel = (NumberUtils.randInt(1, 8) + Math.floor((double) bonus / 2) + NumberUtils.randInt(0, bonus));
+        double baseLevel = NumberUtils.randInt(1, 8) + Math.floor((double) bonus / 2) + NumberUtils.randInt(0, bonus);
 
         int bottomEnchantLevel = (int) Math.ceil(Math.max(baseLevel / 3, 1));
         int midEnchantLevel = (int) ((baseLevel * 2) / 3) + 1;

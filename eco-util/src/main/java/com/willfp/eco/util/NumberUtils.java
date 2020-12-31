@@ -3,16 +3,11 @@ package com.willfp.eco.util;
 import lombok.experimental.UtilityClass;
 
 import java.text.DecimalFormat;
-import java.util.Random;
 import java.util.TreeMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 @UtilityClass
 public class NumberUtils {
-    /**
-     * The RNG to use.
-     */
-    private static final Random RANDOM = new Random();
-
     /**
      * Set of roman numerals to look up.
      */
@@ -99,7 +94,7 @@ public class NumberUtils {
      */
     public int randInt(final int min,
                        final int max) {
-        return (int) ((long) min + RANDOM.nextInt() * ((long) max - min + 1));
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
     /**
@@ -111,7 +106,7 @@ public class NumberUtils {
      */
     public double randFloat(final double min,
                             final double max) {
-        return RANDOM.nextFloat() * (max - min) + min;
+        return ThreadLocalRandom.current().nextDouble(min, max);
     }
 
     /**
