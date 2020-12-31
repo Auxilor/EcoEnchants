@@ -11,8 +11,8 @@ import com.willfp.eco.util.bukkit.scheduling.EcoScheduler;
 import com.willfp.eco.util.bukkit.scheduling.RunnableFactory;
 import com.willfp.eco.util.bukkit.scheduling.Scheduler;
 import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.config.updating.ConfigHandler;
 import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.config.updating.ConfigHandler;
 import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.drops.internal.FastCollatedDropQueue;
 import com.willfp.eco.util.events.armorequip.ArmorListener;
@@ -78,6 +78,12 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
      */
     @Getter
     private final int bStatsId;
+
+    /**
+     * The package where proxy implementations are.
+     */
+    @Getter
+    private final String proxyPackage;
 
     /**
      * Set of external plugin integrations.
@@ -148,16 +154,19 @@ public abstract class AbstractEcoPlugin extends JavaPlugin {
     /**
      * Create a new plugin.
      *
-     * @param pluginName The name of the plugin.
-     * @param resourceId The spigot resource ID for the plugin.
-     * @param bStatsId   The bStats resource ID for the plugin.
+     * @param pluginName   The name of the plugin.
+     * @param resourceId   The spigot resource ID for the plugin.
+     * @param bStatsId     The bStats resource ID for the plugin.
+     * @param proxyPackage The package where proxy implementations are stored.
      */
     protected AbstractEcoPlugin(@NotNull final String pluginName,
                                 final int resourceId,
-                                final int bStatsId) {
+                                final int bStatsId,
+                                @NotNull final String proxyPackage) {
         this.pluginName = pluginName;
         this.resourceId = resourceId;
         this.bStatsId = bStatsId;
+        this.proxyPackage = proxyPackage;
 
         this.log = new EcoLogger(this);
         this.scheduler = new EcoScheduler(this);

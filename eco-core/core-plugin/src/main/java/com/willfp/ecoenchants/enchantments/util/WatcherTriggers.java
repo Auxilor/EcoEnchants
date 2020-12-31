@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.google.common.collect.Sets;
-import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
+import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.eco.util.internal.PluginDependent;

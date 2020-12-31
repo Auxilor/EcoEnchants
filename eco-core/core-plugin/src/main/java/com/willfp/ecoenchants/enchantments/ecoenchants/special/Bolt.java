@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.eco.core.proxy.proxies.CooldownProxy;
+import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
 import com.willfp.eco.util.LightningUtils;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;

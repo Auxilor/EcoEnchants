@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.proxy.proxies.TridentStackProxy;
+import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.drops.DropQueue;

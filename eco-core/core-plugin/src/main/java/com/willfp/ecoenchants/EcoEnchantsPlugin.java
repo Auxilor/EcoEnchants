@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.eco.core.proxy.proxies.FastGetEnchantsProxy;
+import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
@@ -52,7 +52,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
-        super("EcoEnchants", 79573, 7666);
+        super("EcoEnchants", 79573, 7666, "com.willfp.ecoenchants.proxy");
     }
 
     /**

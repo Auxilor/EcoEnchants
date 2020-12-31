@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.command.commands;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
-import com.willfp.eco.core.proxy.ProxyConstants;
+import com.willfp.eco.util.proxy.ProxyConstants;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;

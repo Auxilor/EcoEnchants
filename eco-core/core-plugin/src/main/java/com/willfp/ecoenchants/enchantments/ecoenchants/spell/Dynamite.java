@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
-import com.willfp.eco.core.proxy.proxies.BlockBreakProxy;
+import com.willfp.ecoenchants.proxy.proxies.BlockBreakProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
