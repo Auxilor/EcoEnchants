@@ -68,10 +68,6 @@ allprojects {
         }
     }
 
-    configurations.all {
-        exclude group:"org.codehaus.plexus", module: "plexus-utils"
-    }
-
     compileJava.options.encoding = 'UTF-8'
     compileJava.dependsOn clean
 }
@@ -85,7 +81,7 @@ clean.doLast {
 }
 
 shadowJar {
-    relocate('org.apache', 'com.willfp.ecoenchants.eco.shaded.apache')
+    relocate('org.apache.maven', 'com.willfp.ecoenchants.eco.shaded.maven')
     relocate('org.bstats', 'com.willfp.ecoenchants.eco.shaded.bstats')
     relocate('com.willfp.eco.', 'com.willfp.ecoenchants.eco.') // Dot is to prevent plugin being shaded into itself
     archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
@@ -110,8 +106,4 @@ publishing {
             from(components.java)
         }
     }
-}
-
-configurations.all {
-    exclude group:"org.codehaus.plexus", module: "plexus-utils"
 }
