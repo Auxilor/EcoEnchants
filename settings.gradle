@@ -1,4 +1,4 @@
-rootProject.name = 'parent'
+rootProject.name = 'EcoEnchants'
 
 // Core
 include ':eco-core'
