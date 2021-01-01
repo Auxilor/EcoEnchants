@@ -52,7 +52,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
-        super("EcoEnchants", 79573, 7666, "com.willfp.ecoenchants.proxy");
+        super("EcoEnchants", 79573, 7666, "com.willfp.ecoenchants.proxy", "&a");
     }
 
     /**
