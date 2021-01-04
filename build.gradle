@@ -7,7 +7,7 @@ plugins {
 
 dependencies {
     implementation project(":eco-core").getSubprojects()
-    implementation 'com.willfp:eco:1.0.3'
+    implementation 'com.willfp:eco:1.0.4'
 }
 
 allprojects {
