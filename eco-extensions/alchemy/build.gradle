@@ -1,7 +1,7 @@
 group 'com.willfp'
-version '3.0.0'
+version '3.0.1'
 description = 'Alchemy Extension'
 
-jar {
+shadowJar {
     archiveFileName = project.getDescription() + " v" + project.version + ".jar"
 }
