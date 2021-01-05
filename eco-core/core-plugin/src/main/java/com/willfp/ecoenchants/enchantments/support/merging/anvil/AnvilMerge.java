@@ -126,9 +126,8 @@ public class AnvilMerge {
                 if (rightLevel > level) {
                     level = rightLevel;
                 } else if (rightLevel == level
-                        && (rightLevel > enchantment.getMaxLevel() && Configs.CONFIG.getBool("anvil.allow-combining-unsafe"))
-                        || ((rightLevel + 1) <= enchantment.getMaxLevel()
-                        || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY))) {
+                        && ((rightLevel > enchantment.getMaxLevel() && Configs.CONFIG.getBool("anvil.allow-combining-unsafe"))
+                        || ((rightLevel + 1) <= enchantment.getMaxLevel() || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY)))) {
                     level++;
                 }
                 rightEnchants.remove(enchantment);
