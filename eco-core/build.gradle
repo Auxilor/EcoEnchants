@@ -3,6 +3,6 @@ version rootProject.version
 
 subprojects {
     dependencies {
-        compileOnly 'com.willfp:eco:1.0.5'
+        compileOnly 'com.willfp:eco:1.0.6'
     }
 }

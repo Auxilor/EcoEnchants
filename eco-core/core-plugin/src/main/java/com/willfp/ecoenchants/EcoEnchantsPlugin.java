@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
@@ -36,6 +35,7 @@ import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.worldguard.WorldguardManager;
 import com.willfp.ecoenchants.integrations.worldguard.plugins.WorldguardIntegrationImpl;
+import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -44,7 +44,6 @@ import org.bukkit.generator.BlockPopulator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public class EcoEnchantsPlugin extends AbstractEcoPlugin {
@@ -69,10 +68,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
             this.getExtensionLoader().getLoadedExtensions().forEach(extension -> this.getLog().info("- " + extension.getName() + " v" + extension.getVersion()));
         }
 
-        this.getLog().info("");
-
         this.getLog().info(EcoEnchants.values().size() + " Enchantments Loaded:");
-        this.getLog().info(EcoEnchants.values().stream().map(ecoEnchant -> ecoEnchant.getType().getColor() + ecoEnchant.getName()).collect(Collectors.joining(", ")));
 
         TelekinesisUtils.registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
     }
