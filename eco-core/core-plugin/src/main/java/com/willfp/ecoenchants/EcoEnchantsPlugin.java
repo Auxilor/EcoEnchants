@@ -68,7 +68,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
             this.getExtensionLoader().getLoadedExtensions().forEach(extension -> this.getLog().info("- " + extension.getName() + " v" + extension.getVersion()));
         }
 
-        this.getLog().info(EcoEnchants.values().size() + " Enchantments Loaded:");
+        this.getLog().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
         TelekinesisUtils.registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
     }
