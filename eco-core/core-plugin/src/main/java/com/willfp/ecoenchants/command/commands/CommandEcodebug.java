@@ -78,7 +78,8 @@ public class CommandEcodebug extends AbstractCommand {
 
         List<Enchantment> extern = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
         extern.removeAll(EcoEnchants.values().stream().map(EcoEnchant::getEnchantment).collect(Collectors.toList()));
-        this.getPlugin().getLog().info("External/Vanilla Enchantments: " + extern.toString());
+        String external = extern.stream().map(enchantment -> "{" + enchantment.toString() + ", Provider: " + enchantment.getClass().toString() + "}").collect(Collectors.joining(", "));
+        this.getPlugin().getLog().info("External/Vanilla Enchantments: " + external);
         this.getPlugin().getLog().info("");
 
         List<Enchantment> uncached = Arrays.stream(Enchantment.values()).collect(Collectors.toList());

@@ -5,7 +5,7 @@ subprojects {
     dependencies {
         compileOnly project(":eco-core:core-plugin")
         compileOnly project(":eco-core:core-proxy")
-        compileOnly 'com.willfp:eco:1.0.3'
+        compileOnly 'com.willfp:eco:1.0.5'
         compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
     }
 
