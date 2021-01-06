@@ -246,7 +246,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             return;
         }
 
-        if(event.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+        if (event.getCause() == EntityDamageEvent.DamageCause.THORNS) {
             return;
         }
 
