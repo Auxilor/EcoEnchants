@@ -246,6 +246,10 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             return;
         }
 
+        if(event.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+            return;
+        }
+
         LivingEntity attacker = (LivingEntity) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
