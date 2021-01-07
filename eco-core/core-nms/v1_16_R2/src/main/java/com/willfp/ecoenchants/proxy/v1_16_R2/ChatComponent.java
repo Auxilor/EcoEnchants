@@ -4,8 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.willfp.ecoenchants.proxy.proxies.ChatComponentProxy;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.proxy.proxies.ChatComponentProxy;
 import net.minecraft.server.v1_16_R2.ChatBaseComponent;
 import net.minecraft.server.v1_16_R2.ChatHoverable;
 import net.minecraft.server.v1_16_R2.ChatMessage;
@@ -14,7 +14,9 @@ import net.minecraft.server.v1_16_R2.IChatBaseComponent;
 import net.minecraft.server.v1_16_R2.MojangsonParser;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -59,7 +61,15 @@ public final class ChatComponent implements ChatComponentProxy {
         String tag = json.getAsJsonObject().get("tag").toString();
         ItemStack itemStack = getFromTag(tag, id);
 
-        itemStack = EnchantDisplay.displayEnchantments(itemStack);
+        ItemMeta meta = itemStack.getItemMeta();
+        assert meta != null;
+        boolean hideEnchants = false;
+        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+            hideEnchants = true;
+        }
+
+        itemStack = EnchantDisplay.displayEnchantments(itemStack, hideEnchants);
+        EnchantDisplay.addV(itemStack);
 
         json.getAsJsonObject().remove("tag");
         String newTag = toJson(itemStack);
