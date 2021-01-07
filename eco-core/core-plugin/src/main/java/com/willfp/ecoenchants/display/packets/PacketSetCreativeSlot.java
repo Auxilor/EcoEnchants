@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.display.packets;
 
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
@@ -14,7 +15,7 @@ public class PacketSetCreativeSlot extends AbstractPacketAdapter {
      * @param plugin The plugin to listen through.
      */
     public PacketSetCreativeSlot(@NotNull final AbstractEcoPlugin plugin) {
-        super(plugin, PacketType.Play.Client.SET_CREATIVE_SLOT, false);
+        super(plugin, PacketType.Play.Client.SET_CREATIVE_SLOT, ListenerPriority.MONITOR, true);
     }
 
     @Override
