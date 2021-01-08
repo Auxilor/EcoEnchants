@@ -6,6 +6,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class PacketSetCreativeSlot extends AbstractPacketAdapter {
@@ -19,7 +20,8 @@ public class PacketSetCreativeSlot extends AbstractPacketAdapter {
     }
 
     @Override
-    public void onReceive(@NotNull final PacketContainer packet) {
+    public void onReceive(@NotNull final PacketContainer packet,
+                          @NotNull final Player player) {
         packet.getItemModifier().modify(0, EnchantDisplay::revertDisplay);
     }
 }

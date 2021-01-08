@@ -6,6 +6,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +21,8 @@ public class PacketWindowItems extends AbstractPacketAdapter {
     }
 
     @Override
-    public void onSend(@NotNull final PacketContainer packet) {
+    public void onSend(@NotNull final PacketContainer packet,
+                       @NotNull final Player player) {
         packet.getItemListModifier().modify(0, itemStacks -> {
             if (itemStacks == null) {
                 return null;
