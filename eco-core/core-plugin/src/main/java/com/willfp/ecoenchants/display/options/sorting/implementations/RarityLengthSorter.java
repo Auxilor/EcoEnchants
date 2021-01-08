@@ -10,17 +10,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RarityLengthSorter implements EnchantmentSorter {
     @Override
     public void sortEnchantments(final @NotNull List<Enchantment> toSort) {
         List<Enchantment> sorted = new ArrayList<>();
         EnchantDisplay.OPTIONS.getSortedRarities().forEach(enchantmentRarity -> {
-            List<Enchantment> rarityEnchants = toSort.stream()
-                    .filter(enchantment -> EnchantmentCache.getEntry(enchantment).getRarity().equals(enchantmentRarity))
-                    .sorted(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()))
-                    .collect(Collectors.toList());
+            List<Enchantment> rarityEnchants = new ArrayList<>();
+            toSort.forEach(enchantment -> {
+                if (EnchantmentCache.getEntry(enchantment).getRarity().getName().equals(enchantmentRarity.getName())) {
+                    rarityEnchants.add(enchantment);
+                }
+            });
+            rarityEnchants.sort(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()));
             sorted.addAll(rarityEnchants);
         });
 

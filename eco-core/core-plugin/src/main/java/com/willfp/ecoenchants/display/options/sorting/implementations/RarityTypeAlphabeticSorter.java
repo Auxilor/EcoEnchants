@@ -21,10 +21,13 @@ public class RarityTypeAlphabeticSorter implements EnchantmentSorter {
                     .sorted((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName()))
                     .collect(Collectors.toList());
             EnchantDisplay.OPTIONS.getSortedRarities().forEach(enchantmentRarity -> {
-                List<Enchantment> rarityEnchants = typeEnchants.stream()
-                        .filter(enchantment -> EnchantmentCache.getEntry(enchantment).getRarity().equals(enchantmentRarity))
-                        .sorted((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName()))
-                        .collect(Collectors.toList());
+                List<Enchantment> rarityEnchants = new ArrayList<>();
+                typeEnchants.forEach(enchantment -> {
+                    if (EnchantmentCache.getEntry(enchantment).getRarity().getName().equals(enchantmentRarity.getName())) {
+                        rarityEnchants.add(enchantment);
+                    }
+                });
+                rarityEnchants.sort((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName()));
                 sorted.addAll(rarityEnchants);
             });
         });

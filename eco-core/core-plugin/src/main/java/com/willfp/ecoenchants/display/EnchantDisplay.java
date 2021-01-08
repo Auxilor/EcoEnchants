@@ -215,7 +215,6 @@ public class EnchantDisplay {
                 forRemoval.add(enchantment);
             }
         });
-
         forRemoval.forEach(enchantment -> {
             enchantments.remove(enchantment);
             if (meta instanceof EnchantmentStorageMeta) {

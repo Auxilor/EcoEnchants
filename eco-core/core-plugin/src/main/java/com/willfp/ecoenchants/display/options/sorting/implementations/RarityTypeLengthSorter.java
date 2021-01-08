@@ -22,11 +22,13 @@ public class RarityTypeLengthSorter implements EnchantmentSorter {
                     .sorted(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()))
                     .collect(Collectors.toList());
             EnchantDisplay.OPTIONS.getSortedRarities().forEach(enchantmentRarity -> {
-                List<Enchantment> rarityEnchants = typeEnchants.stream()
-                        .filter(enchantment -> EnchantmentCache.getEntry(enchantment).getRarity().equals(enchantmentRarity))
-                        .sorted(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()))
-                        .collect(Collectors.toList());
-                sorted.addAll(rarityEnchants);
+                List<Enchantment> rarityEnchants = new ArrayList<>();
+                typeEnchants.forEach(enchantment -> {
+                    if (EnchantmentCache.getEntry(enchantment).getRarity().getName().equals(enchantmentRarity.getName())) {
+                        rarityEnchants.add(enchantment);
+                    }
+                });
+                rarityEnchants.sort(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()));
             });
         });
 
