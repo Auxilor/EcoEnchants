@@ -11,6 +11,7 @@ import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -115,6 +116,17 @@ public abstract class Spell extends EcoEnchant {
         runnable.setTask(() -> this.onUse(player, level, event));
 
         int cooldown = getCooldown(this, player);
+
+        if (event.getClickedBlock() != null) {
+            if (event.getClickedBlock().getState() instanceof Container
+                    || event.getClickedBlock().getType() == Material.CRAFTING_TABLE
+                    || event.getClickedBlock().getType() == Material.GRINDSTONE
+                    || event.getClickedBlock().getType() == Material.ENCHANTING_TABLE
+                    || event.getClickedBlock().getType() == Material.ANVIL
+                    || event.getClickedBlock().getType() == Material.FURNACE) {
+                return;
+            }
+        }
 
         if (cooldown > 0) {
             String message = Configs.LANG.getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
