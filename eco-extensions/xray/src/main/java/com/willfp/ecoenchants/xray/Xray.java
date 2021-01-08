@@ -4,6 +4,7 @@ import com.willfp.eco.util.TeamUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -39,8 +40,12 @@ public class Xray extends Spell {
             return;
         }
 
+        Location location;
+
         if (block == null) {
-            return;
+            location = player.getLocation();
+        } else {
+            location = block.getLocation();
         }
 
         Set<Block> toReveal = new HashSet<>();
@@ -61,7 +66,7 @@ public class Xray extends Spell {
         for (int x = -size; x <= size; x++) {
             for (int y = -size; y <= size; y++) {
                 for (int z = -size; z <= size; z++) {
-                    Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
+                    Block block1 = location.getWorld().getBlockAt(location.clone().add(x, y, z));
 
                     if (!materials.contains(block1.getType())) {
                         continue;
