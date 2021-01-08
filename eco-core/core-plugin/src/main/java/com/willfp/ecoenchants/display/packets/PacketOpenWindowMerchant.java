@@ -1,13 +1,12 @@
 package com.willfp.ecoenchants.display.packets;
 
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketContainer;
-import com.willfp.ecoenchants.proxy.proxies.VillagerTradeProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.proxy.proxies.VillagerTradeProxy;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +21,7 @@ public class PacketOpenWindowMerchant extends AbstractPacketAdapter {
      * @param plugin The plugin to listen through.
      */
     public PacketOpenWindowMerchant(@NotNull final AbstractEcoPlugin plugin) {
-        super(plugin, PacketType.Play.Server.OPEN_WINDOW_MERCHANT, ListenerPriority.MONITOR, true);
+        super(plugin, PacketType.Play.Server.OPEN_WINDOW_MERCHANT, false);
     }
 
     @Override

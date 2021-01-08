@@ -1,10 +1,9 @@
 package com.willfp.ecoenchants.display.packets;
 
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketContainer;
-import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -17,7 +16,7 @@ public class PacketWindowItems extends AbstractPacketAdapter {
      * @param plugin The plugin to listen through.
      */
     public PacketWindowItems(@NotNull final AbstractEcoPlugin plugin) {
-        super(plugin, PacketType.Play.Server.WINDOW_ITEMS, ListenerPriority.MONITOR, true);
+        super(plugin, PacketType.Play.Server.WINDOW_ITEMS, false);
     }
 
     @Override
