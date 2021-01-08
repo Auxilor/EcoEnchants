@@ -26,7 +26,6 @@ import java.util.List;
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
-@SuppressWarnings("DeprecatedIsStillUsed")
 @UtilityClass
 public class EnchantDisplay {
     /**
