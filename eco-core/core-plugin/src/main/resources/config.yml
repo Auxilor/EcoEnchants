@@ -114,5 +114,5 @@ drops:
 advanced:
   lore-getter: false
   # This converts enchantments with matching names from other enchantment plugins from lore into real enchantments.
-  # This is very performance-intensive and is not recommended to be used for extended periods of time: enchantments are automatically converted.
-  # Only use this if absolutely necessary.
+  # This is experimental not recommended to be used for extended periods of time: enchantments are automatically converted.
+  # Only use this if absolutely necessary as it may cause some bugs.
