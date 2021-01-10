@@ -247,6 +247,7 @@ public class EcoEnchants {
     public static final String GENERAL_LOCATION = "general-config.";
 
     private static final BiMap<NamespacedKey, EcoEnchant> BY_KEY = HashBiMap.create();
+    private static final BiMap<String, EcoEnchant> BY_NAME = HashBiMap.create();
 
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();
@@ -496,8 +497,7 @@ public class EcoEnchants {
      * @return The matching {@link EcoEnchant}, or null if not found.
      */
     public static EcoEnchant getByName(@NotNull final String name) {
-        Optional<EcoEnchant> matching = values().stream().filter(enchant -> enchant.getName().equalsIgnoreCase(name)).findFirst();
-        return matching.orElse(null);
+        return BY_NAME.get(name);
     }
 
     /**
@@ -567,7 +567,9 @@ public class EcoEnchants {
      */
     public static void addNewEcoEnchant(@NotNull final EcoEnchant enchant) {
         BY_KEY.remove(enchant.getKey());
+        BY_NAME.inverse().remove(enchant);
         BY_KEY.put(enchant.getKey(), enchant);
+        BY_NAME.put(enchant.getName(), enchant);
     }
 
     /**
@@ -577,5 +579,6 @@ public class EcoEnchants {
      */
     public static void removeEcoEnchant(@NotNull final EcoEnchant enchant) {
         BY_KEY.remove(enchant.getKey());
+        BY_NAME.inverse().remove(enchant);
     }
 }

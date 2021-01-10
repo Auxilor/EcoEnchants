@@ -1,11 +1,13 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
+import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import lombok.experimental.UtilityClass;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -109,13 +111,13 @@ public class AnvilMerge {
         if (left.getItemMeta() instanceof EnchantmentStorageMeta) {
             leftEnchants.putAll(((EnchantmentStorageMeta) left.getItemMeta()).getStoredEnchants());
         } else {
-            leftEnchants.putAll(left.getItemMeta().getEnchants());
+            rightEnchants.putAll(ProxyUtils.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(left));
         }
 
         if (right.getItemMeta() instanceof EnchantmentStorageMeta) {
             rightEnchants.putAll(((EnchantmentStorageMeta) right.getItemMeta()).getStoredEnchants());
         } else {
-            rightEnchants.putAll(right.getItemMeta().getEnchants());
+            rightEnchants.putAll(ProxyUtils.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(right));
         }
 
         leftEnchants.forEach(((enchantment, integer) -> {

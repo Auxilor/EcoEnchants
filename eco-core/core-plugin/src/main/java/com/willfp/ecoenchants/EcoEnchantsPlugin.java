@@ -28,6 +28,7 @@ import com.willfp.ecoenchants.enchantments.support.merging.grindstone.Grindstone
 import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners;
 import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
 import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
+import com.willfp.ecoenchants.enchantments.util.HoldItemListener;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
@@ -188,7 +189,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 new GrindstoneListeners(this),
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
-                new VillagerListeners()
+                new VillagerListeners(),
+                new HoldItemListener()
         );
     }
 

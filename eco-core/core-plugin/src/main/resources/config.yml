@@ -110,3 +110,9 @@ drops:
   # When combined with collate, this massively reduces calls to getItemMeta, which can hurt performance when many enchants are on an item.
   # Without collate, the number of calls may be increased - which will further hurt performance
   # Enabling this option makes all drops go through telekinesis listeners
+
+advanced:
+  lore-getter: false
+  # This converts enchantments with matching names from other enchantment plugins from lore into real enchantments.
+  # This is very performance-intensive and is not recommended to be used for extended periods of time: enchantments are automatically converted.
+  # Only use this if absolutely necessary.

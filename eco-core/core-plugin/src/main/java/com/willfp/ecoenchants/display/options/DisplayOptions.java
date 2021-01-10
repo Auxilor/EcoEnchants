@@ -54,6 +54,12 @@ public class DisplayOptions {
     private final List<EnchantmentRarity> sortedRarities = new ArrayList<>();
 
     /**
+     * Allow reading enchantments from lore-based plugins.
+     */
+    @Getter
+    private boolean useLoreGetter = false;
+
+    /**
      * Instantiate new display options.
      */
     @ApiStatus.Internal
@@ -82,6 +88,8 @@ public class DisplayOptions {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
+
+        useLoreGetter = Configs.CONFIG.getBool("advanced.lore-getter");
 
         boolean byType = Configs.CONFIG.getBool("lore.sort-by-type");
         boolean byLength = Configs.CONFIG.getBool("lore.sort-by-length");
