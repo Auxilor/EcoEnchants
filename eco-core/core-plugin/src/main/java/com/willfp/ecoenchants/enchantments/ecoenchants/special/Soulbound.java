@@ -73,9 +73,11 @@ public class Soulbound extends EcoEnchant {
             if (!player.hasMetadata("soulbound-items")) {
                 return;
             }
+
             List<ItemStack> soulboundItems = (List<ItemStack>) player.getMetadata("soulbound-items").get(0).value();
 
             if (soulboundItems == null) {
+                player.removeMetadata("soulbound-items", this.getPlugin());
                 return;
             }
 
@@ -88,6 +90,8 @@ public class Soulbound extends EcoEnchant {
                 soulboundItem.setItemMeta(meta);
                 player.getInventory().addItem(soulboundItem);
             }
+
+            player.removeMetadata("soulbound-items", this.getPlugin());
         }, 1);
     }
 }
