@@ -67,6 +67,10 @@ public class AnvilListeners extends PluginDependent implements Listener {
             return;
         }
 
+        if (name == null) {
+            name = "";
+        }
+
         Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
         if (newOut.getFirst() == null) {
