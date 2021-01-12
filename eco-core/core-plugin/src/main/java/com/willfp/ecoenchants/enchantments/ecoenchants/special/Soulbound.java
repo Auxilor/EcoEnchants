@@ -70,6 +70,9 @@ public class Soulbound extends EcoEnchant {
         Player player = event.getPlayer();
 
         this.getPlugin().getScheduler().runLater(() -> {
+            if (!player.hasMetadata("soulbound-items")) {
+                return;
+            }
             List<ItemStack> soulboundItems = (List<ItemStack>) player.getMetadata("soulbound-items").get(0).value();
 
             if (soulboundItems == null) {
