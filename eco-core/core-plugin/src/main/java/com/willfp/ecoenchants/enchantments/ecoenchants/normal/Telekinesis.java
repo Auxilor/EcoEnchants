@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.drops.DropQueue;
@@ -8,9 +7,9 @@ import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -24,6 +23,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -168,9 +168,7 @@ public class Telekinesis extends EcoEnchant {
         int xp = event.getXp();
         Collection<ItemStack> drops = event.getDrops();
 
-        if (entity instanceof Player && Soulbound.getSoulboundItems((Player) entity) != null) {
-            drops.removeAll(Soulbound.getSoulboundItems((Player) entity));
-        }
+        drops.removeIf(itemStack -> itemStack.getItemMeta().getPersistentDataContainer().has(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER));
 
         new DropQueue(player)
                 .addItems(drops)

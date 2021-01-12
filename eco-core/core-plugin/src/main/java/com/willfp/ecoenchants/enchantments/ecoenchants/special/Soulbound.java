@@ -9,26 +9,23 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+
+@SuppressWarnings("unchecked")
 public class Soulbound extends EcoEnchant {
     public Soulbound() {
         super(
                 "soulbound", EnchantmentType.SPECIAL
         );
     }
-    private static final HashMap<Player, List<ItemStack>> SOULBOUND_ITEMS = new HashMap<>();
 
-    public static List<ItemStack> getSoulboundItems(@NotNull final Player player) {
-        return SOULBOUND_ITEMS.get(player);
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOW)
     public void onSoulboundDeath(@NotNull final PlayerDeathEvent event) {
         if (event.getKeepInventory()) {
             return;
@@ -41,7 +38,11 @@ public class Soulbound extends EcoEnchant {
             return;
         }
 
-        Arrays.stream(player.getInventory().getContents()).filter(Objects::nonNull).forEach((itemStack -> {
+        for (ItemStack itemStack : player.getInventory().getContents()) {
+            if (itemStack == null) {
+                continue;
+            }
+
             if (itemStack.containsEnchantment(this)) {
                 soulboundItems.add(itemStack);
             }
@@ -49,30 +50,41 @@ public class Soulbound extends EcoEnchant {
             if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this.getEnchantment()))) {
                 soulboundItems.add(itemStack);
             }
-        }));
+        }
 
         event.getDrops().removeAll(soulboundItems);
 
-        SOULBOUND_ITEMS.remove(player);
-        SOULBOUND_ITEMS.put(player, soulboundItems);
+        for (ItemStack itemStack : soulboundItems) {
+            ItemMeta meta = itemStack.getItemMeta();
+            assert meta != null;
+            PersistentDataContainer container = meta.getPersistentDataContainer();
+            container.set(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER, 1);
+            itemStack.setItemMeta(meta);
+        }
+
+        player.setMetadata("soulbound-items", this.getPlugin().getMetadataValueFactory().create(soulboundItems));
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onSoulboundRespawn(@NotNull final PlayerRespawnEvent event) {
-        if (!SOULBOUND_ITEMS.containsKey(event.getPlayer())) {
-            return;
-        }
+        Player player = event.getPlayer();
 
-        List<ItemStack> soulboundItems = SOULBOUND_ITEMS.get(event.getPlayer());
+        this.getPlugin().getScheduler().runLater(() -> {
+            List<ItemStack> soulboundItems = (List<ItemStack>) player.getMetadata("soulbound-items").get(0).value();
 
-        soulboundItems.forEach((itemStack -> {
-            if (Arrays.asList(event.getPlayer().getInventory().getContents()).contains(itemStack)) {
+            if (soulboundItems == null) {
                 return;
             }
 
-            event.getPlayer().getInventory().addItem(itemStack);
-        }));
+            for (ItemStack soulboundItem : soulboundItems) {
+                player.getInventory().remove(soulboundItem);
 
-        this.getPlugin().getScheduler().runLater(() -> SOULBOUND_ITEMS.remove(event.getPlayer()), 1);
+                ItemMeta meta = soulboundItem.getItemMeta();
+                assert meta != null;
+                meta.getPersistentDataContainer().remove(this.getPlugin().getNamespacedKeyFactory().create("soulbound"));
+                soulboundItem.setItemMeta(meta);
+                player.getInventory().addItem(soulboundItem);
+            }
+        }, 1);
     }
 }
