@@ -1,14 +1,14 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
-import com.willfp.eco.util.proxy.ProxyConstants;
-import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
-import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.util.proxy.ProxyConstants;
 import com.willfp.eco.util.tuplets.Pair;
+import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
+import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -54,12 +54,13 @@ public class AnvilListeners extends PluginDependent implements Listener {
         ItemStack out = event.getResult();
         String name = event.getInventory().getRenameText();
 
-        event.setResult(null);
-        event.getInventory().setItem(2, null);
 
         if (event.getViewers().isEmpty()) {
             return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
         }
+
+        event.setResult(null);
+        event.getInventory().setItem(2, null);
 
         Player player = (Player) event.getViewers().get(0);
         if (ProxyUtils.getProxy(OpenInventoryProxy.class).getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS)) {
