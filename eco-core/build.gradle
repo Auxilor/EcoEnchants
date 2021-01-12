@@ -1,8 +1,2 @@
 group 'com.willfp'
 version rootProject.version
-
-subprojects {
-    dependencies {
-        compileOnly 'com.willfp:eco:1.1.2'
-    }
-}
