@@ -9,5 +9,4 @@ dependencies {
     compileOnly 'net.ess3:EssentialsX:2.18.1'
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT'
     compileOnly 'com.gmail.nossr50.mcMMO:mcMMO:2.1.157'
-    compileOnly 'me.clip:placeholderapi:2.10.9'
 }
