@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
@@ -93,5 +94,10 @@ public class Soulbound extends EcoEnchant {
 
             player.removeMetadata("soulbound-items", this.getPlugin());
         }, 1);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onDeath(@NotNull final EntityDeathEvent event) {
+        event.getDrops().removeIf(itemStack -> itemStack.getItemMeta().getPersistentDataContainer().has(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER));
     }
 }
