@@ -128,6 +128,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Leeching;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Lesion;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Levitate;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.LiquidShot;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.LuckyCatch;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Lumberjack;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.MagmaWalker;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Magnetic;
@@ -470,6 +471,7 @@ public class EcoEnchants {
     public static final EcoEnchant CHARGE = new Charge();
     public static final EcoEnchant ASCEND = new Ascend();
     public static final EcoEnchant ARBORIST = new Arborist();
+    public static final EcoEnchant LUCKY_CATCH = new LuckyCatch();
 
     /**
      * Get all registered {@link EcoEnchant}s.
