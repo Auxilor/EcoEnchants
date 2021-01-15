@@ -37,6 +37,7 @@ public class RarityTypeLengthSorter implements EnchantmentSorter {
                     }
                 }
                 rarityEnchants.sort(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()));
+                sorted.addAll(rarityEnchants);
             });
         });
 
