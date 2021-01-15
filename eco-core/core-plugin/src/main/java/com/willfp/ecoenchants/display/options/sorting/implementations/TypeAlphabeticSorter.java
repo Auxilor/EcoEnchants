@@ -9,17 +9,24 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TypeAlphabeticSorter implements EnchantmentSorter {
     @Override
-    public void sortEnchantments(final @NotNull List<Enchantment> toSort) {
+    public void sortEnchantments(@NotNull final List<Enchantment> toSort) {
+        if (EnchantDisplay.OPTIONS.getSortedRarities().isEmpty() || EnchantDisplay.OPTIONS.getSortedTypes().isEmpty()) {
+            EnchantDisplay.update();
+        }
+
         List<Enchantment> sorted = new ArrayList<>();
         EnchantDisplay.OPTIONS.getSortedTypes().forEach(enchantmentType -> {
-            List<Enchantment> typeEnchants = toSort.stream()
-                    .filter(enchantment -> EnchantmentCache.getEntry(enchantment).getType().equals(enchantmentType))
-                    .sorted((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName()))
-                    .collect(Collectors.toList());
+            List<Enchantment> typeEnchants = new ArrayList<>();
+            for (Enchantment enchantment : toSort) {
+                if (EnchantmentCache.getEntry(enchantment).getType().equals(enchantmentType)) {
+                    typeEnchants.add(enchantment);
+                }
+            }
+
+            typeEnchants.sort((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName()));
             sorted.addAll(typeEnchants);
         });
 

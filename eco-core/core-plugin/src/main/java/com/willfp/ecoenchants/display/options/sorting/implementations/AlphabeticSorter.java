@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AlphabeticSorter implements EnchantmentSorter {
     @Override
-    public void sortEnchantments(final @NotNull List<Enchantment> toSort) {
+    public void sortEnchantments(@NotNull final List<Enchantment> toSort) {
         toSort.sort(((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName())));
     }
 

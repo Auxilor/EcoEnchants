@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class EnchantmentType {
@@ -198,6 +199,23 @@ public class EnchantmentType {
     private void refresh() {
         this.color = colorSupplier.get();
         this.singular = singularSupplier.get();
+    }
+
+    @Override
+    public boolean equals(@NotNull final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EnchantmentType)) {
+            return false;
+        }
+        EnchantmentType that = (EnchantmentType) o;
+        return Objects.equals(getName(), that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 
     /**
