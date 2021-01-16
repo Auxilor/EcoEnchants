@@ -88,7 +88,10 @@ public class Soulbound extends EcoEnchant {
                 assert meta != null;
                 meta.getPersistentDataContainer().remove(this.getPlugin().getNamespacedKeyFactory().create("soulbound"));
                 soulboundItem.setItemMeta(meta);
-                player.getInventory().addItem(soulboundItem);
+
+                if (!player.getInventory().contains(soulboundItem)) {
+                    player.getInventory().addItem(soulboundItem);
+                }
             }
 
             player.removeMetadata("soulbound-items", this.getPlugin());
