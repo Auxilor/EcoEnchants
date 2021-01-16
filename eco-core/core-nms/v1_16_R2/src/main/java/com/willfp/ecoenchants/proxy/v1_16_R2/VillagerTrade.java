@@ -9,16 +9,11 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 
 public final class VillagerTrade implements VillagerTradeProxy {
     @Override
     public void displayTradeEnchantments(@NotNull final MerchantRecipe merchantRecipe) {
         try {
-            // Enables removing final modifier
-            Field modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
-
             // Bukkit MerchantRecipe result
             Field fResult = MerchantRecipe.class.getDeclaredField("result");
             fResult.setAccessible(true);
@@ -30,11 +25,9 @@ public final class VillagerTrade implements VillagerTradeProxy {
             Field fHandle = CraftMerchantRecipe.class.getDeclaredField("handle");
             fHandle.setAccessible(true);
             net.minecraft.server.v1_16_R2.MerchantRecipe handle = (net.minecraft.server.v1_16_R2.MerchantRecipe) fHandle.get(merchantRecipe); // NMS Recipe
-            modifiersField.setInt(fHandle, fHandle.getModifiers() & ~Modifier.FINAL); // Remove final
 
             Field fSelling = net.minecraft.server.v1_16_R2.MerchantRecipe.class.getDeclaredField("sellingItem");
             fSelling.setAccessible(true);
-            modifiersField.setInt(fSelling, fSelling.getModifiers() & ~Modifier.FINAL);
 
             ItemStack selling = CraftItemStack.asBukkitCopy(handle.sellingItem);
             EnchantDisplay.displayEnchantments(selling);
