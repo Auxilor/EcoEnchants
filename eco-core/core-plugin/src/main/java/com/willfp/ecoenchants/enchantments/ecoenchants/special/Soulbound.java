@@ -65,11 +65,24 @@ public class Soulbound extends EcoEnchant {
         player.setMetadata("soulbound-items", this.getPlugin().getMetadataValueFactory().create(soulboundItems));
     }
 
+    public boolean hasEmptyInventory(Player p) {
+        for(ItemStack it : p.getInventory().getContents())
+        {
+            if(it != null) return false;
+        }
+        return true;
+    }
+	
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onSoulboundRespawn(@NotNull final PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-
+				
         this.getPlugin().getScheduler().runLater(() -> {
+			
+			if (!hasEmptyInventory(player)) {
+				return;
+			}
+		
             if (!player.hasMetadata("soulbound-items")) {
                 return;
             }
@@ -88,10 +101,8 @@ public class Soulbound extends EcoEnchant {
                 assert meta != null;
                 meta.getPersistentDataContainer().remove(this.getPlugin().getNamespacedKeyFactory().create("soulbound"));
                 soulboundItem.setItemMeta(meta);
-
-                if (!player.getInventory().contains(soulboundItem)) {
-                    player.getInventory().addItem(soulboundItem);
-                }
+                player.getInventory().addItem(soulboundItem);
+                
             }
 
             player.removeMetadata("soulbound-items", this.getPlugin());
