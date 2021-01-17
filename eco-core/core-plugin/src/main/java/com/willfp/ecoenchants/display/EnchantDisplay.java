@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -31,7 +32,7 @@ public class EnchantDisplay {
     /**
      * Instance of EcoEnchants.
      */
-    private static final AbstractEcoPlugin PLUGIN = AbstractEcoPlugin.getInstance();
+    private static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
 
     /**
      * The meta key to hide enchantments in lore.

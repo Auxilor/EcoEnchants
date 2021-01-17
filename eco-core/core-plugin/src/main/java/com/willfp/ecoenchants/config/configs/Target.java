@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.eco.util.config.BaseConfig;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +14,7 @@ public class Target extends BaseConfig {
      * Instantiate target.yml.
      */
     public Target() {
-        super("target", false);
+        super("target", false, EcoEnchantsPlugin.getInstance());
     }
 
     /**

@@ -1,12 +1,12 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
+import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

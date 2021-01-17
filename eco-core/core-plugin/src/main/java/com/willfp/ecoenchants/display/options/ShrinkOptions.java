@@ -1,9 +1,15 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import lombok.Getter;
 
 public class ShrinkOptions {
+    /**
+     * Instance of EcoEnchants.
+     */
+    public static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+
     /**
      * The threshold above which enchantments will be shrunk.
      */
@@ -26,8 +32,8 @@ public class ShrinkOptions {
      * Update the options.
      */
     public void update() {
-        threshold = Configs.CONFIG.getInt("lore.shrink.after-lines");
-        enabled = Configs.CONFIG.getBool("lore.shrink.enabled");
-        shrinkPerLine = Configs.CONFIG.getInt("lore.shrink.maximum-per-line");
+        threshold = PLUGIN.getConfigYml().getInt("lore.shrink.after-lines");
+        enabled = PLUGIN.getConfigYml().getBool("lore.shrink.enabled");
+        shrinkPerLine = PLUGIN.getConfigYml().getInt("lore.shrink.maximum-per-line");
     }
 }

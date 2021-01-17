@@ -1,8 +1,9 @@
 package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.ImmutableMap;
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -24,6 +25,11 @@ import java.util.Map;
 @UtilityClass
 @SuppressWarnings("deprecation")
 public class EnchantmentCache {
+    /**
+     * Instance of EcoEnchants.
+     */
+    public static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+
     /**
      * The physical cache.
      */
@@ -82,17 +88,17 @@ public class EnchantmentCache {
         } else {
             description = Arrays.asList(
                     WordUtils.wrap(
-                            String.valueOf(Configs.LANG.getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
-                            Configs.CONFIG.getInt("lore.describe.wrap"),
+                            String.valueOf(PLUGIN.getLangYml().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
+                            PLUGIN.getConfigYml().getInt("lore.describe.wrap"),
                             "\n", false
                     ).split("\\r?\\n")
             );
-            name = String.valueOf(Configs.LANG.getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
+            name = String.valueOf(PLUGIN.getLangYml().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
             type = enchantment.isCursed() ? EnchantmentType.CURSE : EnchantmentType.NORMAL;
             if (enchantment.isTreasure()) {
-                rarity = EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-treasure-rarity"));
+                rarity = EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-treasure-rarity"));
             } else {
-                rarity = EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-rarity"));
+                rarity = EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"));
             }
         }
 
@@ -103,7 +109,7 @@ public class EnchantmentCache {
         }
 
         if (rarity == null) {
-            rarity = EnchantmentRarity.getByName(Configs.CONFIG.getString("rarity.vanilla-rarity"));
+            rarity = EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"));
         }
 
         String rawName = name;

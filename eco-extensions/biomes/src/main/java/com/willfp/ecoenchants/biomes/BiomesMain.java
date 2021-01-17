@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.biomes;
 
 
 import com.willfp.eco.util.extensions.Extension;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.biomes.enchants.defensive.Elevation;
 import com.willfp.ecoenchants.biomes.enchants.defensive.Glacial;
 import com.willfp.ecoenchants.biomes.enchants.defensive.HeatTreated;
@@ -13,6 +14,7 @@ import com.willfp.ecoenchants.biomes.enchants.offensive.Dehydration;
 import com.willfp.ecoenchants.biomes.enchants.offensive.Icelord;
 import com.willfp.ecoenchants.biomes.enchants.offensive.Rainforest;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import org.jetbrains.annotations.NotNull;
 
 public class BiomesMain extends Extension {
     public static final EcoEnchant ELEVATION = new Elevation();
@@ -25,6 +27,10 @@ public class BiomesMain extends Extension {
     public static final EcoEnchant DEHYDRATION = new Dehydration();
     public static final EcoEnchant ICELORD = new Icelord();
     public static final EcoEnchant RAINFOREST = new Rainforest();
+
+    public BiomesMain(@NotNull final AbstractEcoPlugin plugin) {
+        super(plugin);
+    }
 
     @Override
     public void onEnable() {

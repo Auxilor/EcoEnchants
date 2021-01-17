@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
 import com.willfp.ecoenchants.display.options.sorting.SorterManager;
@@ -17,6 +18,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DisplayOptions {
+    /**
+     * Instance of EcoEnchants.
+     */
+    public static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+
     /**
      * The enchantment sorter being used.
      */
@@ -76,24 +82,24 @@ public class DisplayOptions {
         shrinkOptions.update();
 
         sortedTypes.clear();
-        sortedTypes.addAll(Configs.CONFIG.getStrings("lore.type-ordering").stream()
+        sortedTypes.addAll(PLUGIN.getConfigYml().getStrings("lore.type-ordering").stream()
                 .map(typeName -> EnchantmentType.values().stream().filter(type -> type.getName().equalsIgnoreCase(typeName)).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         sortedTypes.addAll(EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).collect(Collectors.toList()));
 
         sortedRarities.clear();
-        sortedRarities.addAll(Configs.CONFIG.getStrings("lore.rarity-ordering").stream()
+        sortedRarities.addAll(PLUGIN.getConfigYml().getStrings("lore.rarity-ordering").stream()
                 .map(rarityName -> EnchantmentRarity.values().stream().filter(rarity -> rarity.getName().equalsIgnoreCase(rarityName)).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
 
-        useLoreGetter = Configs.CONFIG.getBool("advanced.lore-getter");
+        useLoreGetter = PLUGIN.getConfigYml().getBool("advanced.lore-getter");
 
-        boolean byType = Configs.CONFIG.getBool("lore.sort-by-type");
-        boolean byLength = Configs.CONFIG.getBool("lore.sort-by-length");
-        boolean byRarity = Configs.CONFIG.getBool("lore.sort-by-rarity");
+        boolean byType = PLUGIN.getConfigYml().getBool("lore.sort-by-type");
+        boolean byLength = PLUGIN.getConfigYml().getBool("lore.sort-by-length");
+        boolean byRarity = PLUGIN.getConfigYml().getBool("lore.sort-by-rarity");
         Set<SortParameters> params = new HashSet<>();
         if (byType) {
             params.add(SortParameters.TYPE);

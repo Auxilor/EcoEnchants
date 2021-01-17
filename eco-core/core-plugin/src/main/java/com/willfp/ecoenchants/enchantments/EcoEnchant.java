@@ -2,10 +2,10 @@ package com.willfp.ecoenchants.enchantments;
 
 
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -44,7 +44,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * Instance of EcoEnchants for enchantments to be able to access.
      */
     @Getter(AccessLevel.PROTECTED)
-    private final AbstractEcoPlugin plugin = AbstractEcoPlugin.getInstance();
+    private final AbstractEcoPlugin plugin = EcoEnchantsPlugin.getInstance();
 
     /**
      * The display name of the enchantment.
@@ -262,7 +262,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * @return The description.
      */
     public List<String> getWrappedDescription() {
-        return Arrays.asList(WordUtils.wrap(description, Configs.CONFIG.getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
+        return Arrays.asList(WordUtils.wrap(description, this.getPlugin().getConfigYml().getInt("lore.describe.wrap"), "\n", false).split("\\r?\\n"));
     }
 
     /**

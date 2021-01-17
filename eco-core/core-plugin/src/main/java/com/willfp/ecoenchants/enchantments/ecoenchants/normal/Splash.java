@@ -1,12 +1,12 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;

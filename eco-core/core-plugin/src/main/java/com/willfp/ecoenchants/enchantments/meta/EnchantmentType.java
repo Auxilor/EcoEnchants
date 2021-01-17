@@ -1,8 +1,9 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableList;
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
@@ -17,6 +18,11 @@ import java.util.function.Supplier;
 
 public class EnchantmentType {
     /**
+     * Instance of EcoEnchants.
+     */
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+
+    /**
      * All registered types.
      */
     private static final List<EnchantmentType> REGISTERED = new ArrayList<>();
@@ -29,7 +35,7 @@ public class EnchantmentType {
     public static final EnchantmentType NORMAL = new EnchantmentType(
             "normal",
             false,
-            () -> Configs.LANG.getString("not-curse-color")
+            () -> PLUGIN.getLangYml().getString("not-curse-color")
     );
 
     /**
@@ -40,7 +46,7 @@ public class EnchantmentType {
     public static final EnchantmentType CURSE = new EnchantmentType(
             "curse",
             false,
-            () -> Configs.LANG.getString("curse-color")
+            () -> PLUGIN.getLangYml().getString("curse-color")
     );
 
     /**
@@ -50,8 +56,8 @@ public class EnchantmentType {
      */
     public static final EnchantmentType SPECIAL = new EnchantmentType(
             "special",
-            () -> !Configs.CONFIG.getBool("types.special.allow-multiple"),
-            () -> Configs.LANG.getString("special-color")
+            () -> !PLUGIN.getConfigYml().getBool("types.special.allow-multiple"),
+            () -> PLUGIN.getLangYml().getString("special-color")
     );
 
     /**
@@ -61,8 +67,8 @@ public class EnchantmentType {
      */
     public static final EnchantmentType ARTIFACT = new EnchantmentType(
             "artifact",
-            () -> !Configs.CONFIG.getBool("types.artifact.allow-multiple"),
-            () -> Configs.LANG.getString("artifact-color"),
+            () -> !PLUGIN.getConfigYml().getBool("types.artifact.allow-multiple"),
+            () -> PLUGIN.getLangYml().getString("artifact-color"),
             Artifact.class
     );
 
@@ -74,7 +80,7 @@ public class EnchantmentType {
     public static final EnchantmentType SPELL = new EnchantmentType(
             "spell",
             true,
-            () -> Configs.LANG.getString("spell-color"),
+            () -> PLUGIN.getLangYml().getString("spell-color"),
             Spell.class
     );
 

@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
 import com.willfp.eco.util.integrations.IntegrationLoader;
@@ -37,6 +36,8 @@ import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.worldguard.WorldguardManager;
 import com.willfp.ecoenchants.integrations.worldguard.plugins.WorldguardIntegrationImpl;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -49,10 +50,17 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     /**
+     * Instance of the plugin.
+     */
+    @Getter
+    private static EcoEnchantsPlugin instance;
+
+    /**
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
         super("EcoEnchants", 79573, 7666, "com.willfp.ecoenchants.proxy", "&a");
+        instance = this;
     }
 
     /**
@@ -126,7 +134,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     @Override
     public void postLoad() {
         Bukkit.getServer().getWorlds().forEach(world -> {
-            world.getPopulators().add(new LootPopulator());
+            world.getPopulators().add(new LootPopulator(this));
         });
         EssentialsManager.registerEnchantments();
     }
@@ -189,7 +197,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 new GrindstoneListeners(this),
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
-                new VillagerListeners(),
+                new VillagerListeners(this),
                 new HoldItemListener()
         );
     }

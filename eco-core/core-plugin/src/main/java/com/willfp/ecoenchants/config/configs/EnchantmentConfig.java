@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.eco.util.config.Configs;
 import com.willfp.ecoenchants.config.EnchantmentYamlConfig;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -86,12 +85,12 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
      * Load config values from lang.yml.
      */
     public void loadFromLang() {
-        if (!Configs.LANG.getConfig().contains("enchantments." + this.getName())) {
+        if (!this.getPlugin().getLangYml().getConfig().contains("enchantments." + this.getName())) {
             return;
         }
 
-        this.getConfig().set("name", Configs.LANG.getString("enchantments." + this.getName() + ".name"));
-        this.getConfig().set("description", Configs.LANG.getString("enchantments." + this.getName() + ".description"));
+        this.getConfig().set("name", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".name"));
+        this.getConfig().set("description", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".description"));
         try {
             this.getConfig().save(this.getConfigFile());
         } catch (IOException e) {

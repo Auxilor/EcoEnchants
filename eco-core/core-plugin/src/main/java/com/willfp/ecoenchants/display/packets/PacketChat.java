@@ -4,10 +4,10 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.ecoenchants.proxy.proxies.ChatComponentProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +33,7 @@ public class PacketChat extends AbstractPacketAdapter {
             if (component.getHandle() == null) {
                 return;
             }
+
             WrappedChatComponent newComponent = WrappedChatComponent.fromHandle(ProxyUtils.getProxy(ChatComponentProxy.class).modifyComponent(component.getHandle()));
             packet.getChatComponents().write(i, newComponent);
         }

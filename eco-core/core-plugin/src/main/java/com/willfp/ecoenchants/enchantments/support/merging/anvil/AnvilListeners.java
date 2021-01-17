@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.ProxyUtils;
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.proxy.ProxyConstants;
 import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
 import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -110,7 +109,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
                 return;
             }
 
-            if (Configs.CONFIG.getBool("anvil.rework-cost")) {
+            if (this.getPlugin().getConfigYml().getBool("anvil.rework-cost")) {
                 int repairCost = ProxyUtils.getProxy(RepairCostProxy.class).getRepairCost(item);
                 int reworkCount = NumberUtils.log2(repairCost + 1);
                 if (repairCost == 0) {

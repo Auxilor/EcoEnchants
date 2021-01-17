@@ -1,14 +1,8 @@
 package com.willfp.ecoenchants.mmo.enchants.misc;
 
-
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
-import net.mmogroup.mmolib.MMOLib;
-import net.mmogroup.mmolib.api.player.MMOPlayerData;
-import net.mmogroup.mmolib.api.stat.SharedStat;
-import net.mmogroup.mmolib.api.stat.modifier.StatModifier;
 import org.bukkit.entity.Player;
 
 public class Strengthening extends MMOEnchantment {
