@@ -11,4 +11,6 @@ subprojects {
     tasks.withType(Jar) {
         destinationDirectory = file("$rootDir/bin/")
     }
+
+    tasks.jar.enabled = false
 }
