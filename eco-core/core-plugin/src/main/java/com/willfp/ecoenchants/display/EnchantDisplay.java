@@ -56,7 +56,7 @@ public class EnchantDisplay {
     /**
      * The configurable options for displaying enchantments.
      */
-    public static final DisplayOptions OPTIONS = new DisplayOptions();
+    public static final DisplayOptions OPTIONS = new DisplayOptions(PLUGIN);
 
     /**
      * Update config values.

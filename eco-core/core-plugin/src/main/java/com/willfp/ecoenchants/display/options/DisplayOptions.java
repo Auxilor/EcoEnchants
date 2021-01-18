@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display.options;
 
+import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
 import com.willfp.ecoenchants.display.options.sorting.SorterManager;
@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import lombok.Getter;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,12 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DisplayOptions {
-    /**
-     * Instance of EcoEnchants.
-     */
-    public static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
-
+public class DisplayOptions extends PluginDependent {
     /**
      * The enchantment sorter being used.
      */
@@ -33,19 +29,19 @@ public class DisplayOptions {
      * The description options being used.
      */
     @Getter
-    private final DescriptionOptions descriptionOptions = new DescriptionOptions();
+    private final DescriptionOptions descriptionOptions = new DescriptionOptions(this.getPlugin());
 
     /**
      * The enchantment level options being used.
      */
     @Getter
-    private final NumbersOptions numbersOptions = new NumbersOptions();
+    private final NumbersOptions numbersOptions = new NumbersOptions(this.getPlugin());
 
     /**
      * The shrink options being used.
      */
     @Getter
-    private final ShrinkOptions shrinkOptions = new ShrinkOptions();
+    private final ShrinkOptions shrinkOptions = new ShrinkOptions(this.getPlugin());
 
     /**
      * The enchantment types, sorted according to config.
@@ -67,9 +63,12 @@ public class DisplayOptions {
 
     /**
      * Instantiate new display options.
+     *
+     * @param plugin EcoEnchants.
      */
     @ApiStatus.Internal
-    public DisplayOptions() {
+    public DisplayOptions(@NotNull final AbstractEcoPlugin plugin) {
+        super(plugin);
         update();
     }
 
@@ -82,24 +81,24 @@ public class DisplayOptions {
         shrinkOptions.update();
 
         sortedTypes.clear();
-        sortedTypes.addAll(PLUGIN.getConfigYml().getStrings("lore.type-ordering").stream()
+        sortedTypes.addAll(this.getPlugin().getConfigYml().getStrings("lore.type-ordering").stream()
                 .map(typeName -> EnchantmentType.values().stream().filter(type -> type.getName().equalsIgnoreCase(typeName)).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         sortedTypes.addAll(EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).collect(Collectors.toList()));
 
         sortedRarities.clear();
-        sortedRarities.addAll(PLUGIN.getConfigYml().getStrings("lore.rarity-ordering").stream()
+        sortedRarities.addAll(this.getPlugin().getConfigYml().getStrings("lore.rarity-ordering").stream()
                 .map(rarityName -> EnchantmentRarity.values().stream().filter(rarity -> rarity.getName().equalsIgnoreCase(rarityName)).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
         sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
 
-        useLoreGetter = PLUGIN.getConfigYml().getBool("advanced.lore-getter");
+        useLoreGetter = this.getPlugin().getConfigYml().getBool("advanced.lore-getter");
 
-        boolean byType = PLUGIN.getConfigYml().getBool("lore.sort-by-type");
-        boolean byLength = PLUGIN.getConfigYml().getBool("lore.sort-by-length");
-        boolean byRarity = PLUGIN.getConfigYml().getBool("lore.sort-by-rarity");
+        boolean byType = this.getPlugin().getConfigYml().getBool("lore.sort-by-type");
+        boolean byLength = this.getPlugin().getConfigYml().getBool("lore.sort-by-length");
+        boolean byRarity = this.getPlugin().getConfigYml().getBool("lore.sort-by-rarity");
         Set<SortParameters> params = new HashSet<>();
         if (byType) {
             params.add(SortParameters.TYPE);
