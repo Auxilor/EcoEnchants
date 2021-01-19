@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants;
 
 import com.willfp.eco.util.command.AbstractCommand;
+import com.willfp.eco.util.display.Display;
+import com.willfp.eco.util.display.DisplayModule;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
 import com.willfp.eco.util.integrations.IntegrationLoader;
 import com.willfp.eco.util.interfaces.EcoRunnable;
@@ -13,11 +15,6 @@ import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
-import com.willfp.ecoenchants.display.packets.PacketChat;
-import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
-import com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot;
-import com.willfp.ecoenchants.display.packets.PacketSetSlot;
-import com.willfp.ecoenchants.display.packets.PacketWindowItems;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -42,6 +39,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.generator.BlockPopulator;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +67,21 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void enable() {
+        Display.registerDisplayModule(new DisplayModule(itemStack -> {
+            ItemMeta meta = itemStack.getItemMeta();
+            if (meta == null) {
+                return itemStack;
+            }
+            boolean hideEnchants = false;
+            if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+                hideEnchants = true;
+            }
+
+            return EnchantDisplay.displayEnchantments(itemStack, hideEnchants);
+        }, 500, this.getPluginName()));
+        Display.registerRevertModule(EnchantDisplay::revertDisplay);
+        Display.registerFinalizeModule(EnchantDisplay::addV);
+
         this.getExtensionLoader().loadExtensions();
 
         if (this.getExtensionLoader().getLoadedExtensions().isEmpty()) {
@@ -95,7 +109,6 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 }
             }));
         });
-
 
         this.getExtensionLoader().unloadExtensions();
     }
@@ -176,13 +189,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public List<AbstractPacketAdapter> getPacketAdapters() {
-        return Arrays.asList(
-                new PacketChat(this),
-                new PacketOpenWindowMerchant(this),
-                new PacketSetCreativeSlot(this),
-                new PacketSetSlot(this),
-                new PacketWindowItems(this)
-        );
+        return new ArrayList<>();
     }
 
     /**
