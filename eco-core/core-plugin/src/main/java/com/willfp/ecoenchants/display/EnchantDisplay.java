@@ -9,6 +9,8 @@ import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -229,7 +231,7 @@ public class EnchantDisplay {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if (OPTIONS.getNumbersOptions().isUseNumerals() && item.getEnchantmentLevel(enchantment) < OPTIONS.getNumbersOptions().getThreshold()) {
+                if (OPTIONS.getNumbersOptions().isUseNumerals() && ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(item, enchantment) < OPTIONS.getNumbersOptions().getThreshold()) {
                     name += " " + NumberUtils.toNumeral(level);
                 } else {
                     name += " " + level;
