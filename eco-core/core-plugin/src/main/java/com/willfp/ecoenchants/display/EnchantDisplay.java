@@ -78,7 +78,7 @@ public class EnchantDisplay {
      * @return The item, with KEY_V.
      */
     public static ItemStack addV(@Nullable final ItemStack item) {
-        if (item == null || item.getItemMeta() == null) {
+        if (item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) {
             return item;
         }
 
