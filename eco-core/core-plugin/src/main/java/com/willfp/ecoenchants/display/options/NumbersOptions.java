@@ -1,9 +1,11 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.internal.PluginDependent;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
-public class NumbersOptions {
+public class NumbersOptions extends PluginDependent {
     /**
      * If numerals should be used.
      * <p>
@@ -19,10 +21,19 @@ public class NumbersOptions {
     private int threshold;
 
     /**
+     * Create new numbers options.
+     *
+     * @param plugin EcoEnchants.
+     */
+    public NumbersOptions(@NotNull final AbstractEcoPlugin plugin) {
+        super(plugin);
+    }
+
+    /**
      * Update the options.
      */
     public void update() {
-        useNumerals = Configs.CONFIG.getBool("lore.use-numerals");
-        threshold = Configs.CONFIG.getInt("lore.use-numbers-above-threshold");
+        useNumerals = this.getPlugin().getConfigYml().getBool("lore.use-numerals");
+        threshold = this.getPlugin().getConfigYml().getInt("lore.use-numbers-above-threshold");
     }
 }

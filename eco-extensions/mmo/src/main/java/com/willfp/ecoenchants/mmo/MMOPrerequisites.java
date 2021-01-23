@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.mmo;
 
-
 import com.willfp.eco.util.optional.Prerequisite;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;

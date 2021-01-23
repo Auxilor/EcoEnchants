@@ -1,14 +1,14 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.drops.DropQueue;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
+import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 public class Spearfishing extends EcoEnchant {
     public Spearfishing() {
         super(

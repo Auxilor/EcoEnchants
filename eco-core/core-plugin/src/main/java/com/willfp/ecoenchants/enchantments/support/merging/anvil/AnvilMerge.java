@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.tuplets.Pair;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -23,6 +23,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @UtilityClass
 public class AnvilMerge {
+    /**
+     * Instance of EcoEnchants.
+     */
+    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+
     /**
      * Config key for allowing unsafe levels.
      */
@@ -126,8 +131,8 @@ public class AnvilMerge {
                 if (rightLevel > level) {
                     level = rightLevel;
                 } else if (rightLevel == level
-                        && ((rightLevel > enchantment.getMaxLevel() && Configs.CONFIG.getBool("anvil.allow-combining-unsafe"))
-                        || ((rightLevel + 1) <= enchantment.getMaxLevel() || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY)))) {
+                        && ((rightLevel > enchantment.getMaxLevel() && PLUGIN.getConfigYml().getBool("anvil.allow-combining-unsafe"))
+                        || ((rightLevel + 1) <= enchantment.getMaxLevel() || PLUGIN.getConfigYml().getBool(ALLOW_UNSAFE_KEY)))) {
                     level++;
                 }
                 rightEnchants.remove(enchantment);
@@ -164,7 +169,7 @@ public class AnvilMerge {
             }
 
             if (canEnchantItem && !doesConflict.get()) {
-                if (Configs.CONFIG.getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap") && outEnchants.size() >= Configs.CONFIG.getInt("anvil.hard-cap.cap")) {
+                if (PLUGIN.getConfigYml().getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap") && outEnchants.size() >= PLUGIN.getConfigYml().getInt("anvil.hard-cap.cap")) {
                     return;
                 }
                 outEnchants.put(enchantment, integer);
@@ -189,7 +194,7 @@ public class AnvilMerge {
             }));
 
             outEnchants.forEach(((enchantment, integer) -> {
-                meta.addStoredEnchant(enchantment, integer, Configs.CONFIG.getBool("anvil.allow-existing-unsafe-levels") || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY));
+                meta.addStoredEnchant(enchantment, integer, PLUGIN.getConfigYml().getBool("anvil.allow-existing-unsafe-levels") || PLUGIN.getConfigYml().getBool(ALLOW_UNSAFE_KEY));
             }));
 
             meta.setDisplayName(name);
@@ -202,7 +207,7 @@ public class AnvilMerge {
             }));
 
             outEnchants.forEach(((enchantment, integer) -> {
-                meta.addEnchant(enchantment, integer, Configs.CONFIG.getBool("anvil.allow-existing-unsafe-levels") || Configs.CONFIG.getBool(ALLOW_UNSAFE_KEY));
+                meta.addEnchant(enchantment, integer, PLUGIN.getConfigYml().getBool("anvil.allow-existing-unsafe-levels") || PLUGIN.getConfigYml().getBool(ALLOW_UNSAFE_KEY));
             }));
 
             if (output.getItemMeta() instanceof Damageable) {
@@ -237,8 +242,8 @@ public class AnvilMerge {
             return new Pair<>(null, null);
         }
 
-        if (Configs.CONFIG.getBool("anvil.cost-exponent.enabled")) {
-            double exponent = Configs.CONFIG.getDouble("anvil.cost-exponent.exponent");
+        if (PLUGIN.getConfigYml().getBool("anvil.cost-exponent.enabled")) {
+            double exponent = PLUGIN.getConfigYml().getDouble("anvil.cost-exponent.exponent");
             int prevDelta = totalEnchantLevelDelta;
 
             double costMultiplier = Math.pow(exponent, totalEnchantLevelDelta);

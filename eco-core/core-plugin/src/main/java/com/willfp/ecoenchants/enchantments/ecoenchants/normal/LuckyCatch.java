@@ -28,6 +28,10 @@ public class LuckyCatch extends EcoEnchant {
             return;
         }
 
+        if (event.getState() == PlayerFishEvent.State.CAUGHT_ENTITY) {
+            return;
+        }
+
         int level = EnchantChecks.getItemLevel(item, this);
 
         if (this.getDisabledWorlds().contains(player.getWorld())) {

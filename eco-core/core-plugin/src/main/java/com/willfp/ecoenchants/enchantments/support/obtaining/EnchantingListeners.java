@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.support.obtaining;
 
 import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -76,7 +75,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         int cost = event.getExpLevelCost();
 
         Map<Enchantment, Integer> toAdd = event.getEnchantsToAdd();
-        if (!Configs.CONFIG.getBool("enchanting-table.enabled")) {
+        if (!this.getPlugin().getConfigYml().getBool("enchanting-table.enabled")) {
             this.getPlugin().getScheduler().runLater(() -> {
                 ItemStack item0 = event.getInventory().getItem(0);
                 event.getInventory().setItem(0, item0);
@@ -105,11 +104,11 @@ public class EnchantingListeners extends PluginDependent implements Listener {
 
         double multiplier = 0.01;
         if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
-            multiplier /= Configs.CONFIG.getInt("enchanting-table.book-times-less-likely");
+            multiplier /= this.getPlugin().getConfigYml().getInt("enchanting-table.book-times-less-likely");
         }
 
-        if (Configs.CONFIG.getBool("enchanting-table.reduce-probability.enabled")) {
-            multiplier /= Configs.CONFIG.getDouble("enchanting-table.reduce-probability.factor");
+        if (this.getPlugin().getConfigYml().getBool("enchanting-table.reduce-probability.enabled")) {
+            multiplier /= this.getPlugin().getConfigYml().getDouble("enchanting-table.reduce-probability.factor");
         }
 
         ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
@@ -164,11 +163,11 @@ public class EnchantingListeners extends PluginDependent implements Listener {
 
             if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
-                double enchantlevel2 = NumberUtils.bias(enchantlevel1, Configs.CONFIG.getDouble("enchanting-table.special-bias"));
+                double enchantlevel2 = NumberUtils.bias(enchantlevel1, this.getPlugin().getConfigYml().getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / maxLevelDouble;
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
-                int maxLevel = Configs.CONFIG.getInt("enchanting-table.maximum-obtainable-level");
+                int maxLevel = this.getPlugin().getConfigYml().getInt("enchanting-table.maximum-obtainable-level");
                 double enchantlevel1 = (cost / (double) enchantment.getRarity().getMinimumLevel()) / (maxLevel / (double) enchantment.getRarity().getMinimumLevel());
                 double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, enchantlevel1);
                 double enchantlevel3 = 1 / maxLevelDouble;
@@ -178,7 +177,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             level = NumberUtils.equalIfOver(level, enchantment.getMaxLevel());
             toAdd.put(enchantment, level);
 
-            if (Configs.CONFIG.getBool("enchanting-table.cap-amount.enabled") && toAdd.size() >= Configs.CONFIG.getInt("enchanting-table.cap-amount.limit")) {
+            if (this.getPlugin().getConfigYml().getBool("enchanting-table.cap-amount.enabled") && toAdd.size() >= this.getPlugin().getConfigYml().getInt("enchanting-table.cap-amount.limit")) {
                 break;
             }
 
@@ -186,8 +185,8 @@ public class EnchantingListeners extends PluginDependent implements Listener {
                 gotSpecial = true;
             }
 
-            if (Configs.CONFIG.getBool("enchanting-table.reduce-probability.enabled")) {
-                multiplier /= Configs.CONFIG.getDouble("enchanting-table.reduce-probability.factor");
+            if (this.getPlugin().getConfigYml().getBool("enchanting-table.reduce-probability.enabled")) {
+                multiplier /= this.getPlugin().getConfigYml().getDouble("enchanting-table.reduce-probability.factor");
             }
         }
         toAdd.forEach(event.getEnchantsToAdd()::putIfAbsent);
@@ -197,8 +196,8 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             CURRENTLY_ENCHANTING_SECONDARY.remove(player);
         }
 
-        if (gotSpecial && Configs.CONFIG.getBool("enchanting-table.notify-on-special")) {
-            player.sendMessage(Configs.LANG.getMessage("got-special"));
+        if (gotSpecial && this.getPlugin().getConfigYml().getBool("enchanting-table.notify-on-special")) {
+            player.sendMessage(this.getPlugin().getLangYml().getMessage("got-special"));
         }
 
         // Ew
@@ -227,7 +226,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
      */
     @EventHandler
     public void secondaryEnchant(@NotNull final PrepareItemEnchantEvent event) {
-        int maxLevel = Configs.CONFIG.getInt("enchanting-table.maximum-obtainable-level");
+        int maxLevel = this.getPlugin().getConfigYml().getInt("enchanting-table.maximum-obtainable-level");
 
         try {
             event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), maxLevel));

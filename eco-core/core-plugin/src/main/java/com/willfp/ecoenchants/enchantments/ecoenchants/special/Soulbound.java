@@ -2,10 +2,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
@@ -66,11 +66,24 @@ public class Soulbound extends EcoEnchant {
         player.setMetadata("soulbound-items", this.getPlugin().getMetadataValueFactory().create(soulboundItems));
     }
 
+    public boolean hasEmptyInventory(@NotNull final Player player) {
+        for (ItemStack itemStack : player.getInventory().getContents()) {
+            if (itemStack != null && itemStack.getType() != Material.AIR) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onSoulboundRespawn(@NotNull final PlayerRespawnEvent event) {
         Player player = event.getPlayer();
 
         this.getPlugin().getScheduler().runLater(() -> {
+            if (!hasEmptyInventory(player)) {
+                return;
+            }
+
             if (!player.hasMetadata("soulbound-items")) {
                 return;
             }
@@ -97,7 +110,7 @@ public class Soulbound extends EcoEnchant {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onDeath(@NotNull final EntityDeathEvent event) {
+    public void onDeath(@NotNull final PlayerDeathEvent event) {
         event.getDrops().removeIf(itemStack -> itemStack.getItemMeta().getPersistentDataContainer().has(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER));
     }
 }

@@ -13,15 +13,19 @@ import java.util.List;
 
 public class RarityLengthSorter implements EnchantmentSorter {
     @Override
-    public void sortEnchantments(final @NotNull List<Enchantment> toSort) {
+    public void sortEnchantments(@NotNull final List<Enchantment> toSort) {
+        if (EnchantDisplay.OPTIONS.getSortedRarities().isEmpty() || EnchantDisplay.OPTIONS.getSortedTypes().isEmpty()) {
+            EnchantDisplay.update();
+        }
+
         List<Enchantment> sorted = new ArrayList<>();
         EnchantDisplay.OPTIONS.getSortedRarities().forEach(enchantmentRarity -> {
             List<Enchantment> rarityEnchants = new ArrayList<>();
-            toSort.forEach(enchantment -> {
-                if (EnchantmentCache.getEntry(enchantment).getRarity().getName().equals(enchantmentRarity.getName())) {
+            for (Enchantment enchantment : toSort) {
+                if (EnchantmentCache.getEntry(enchantment).getRarity().equals(enchantmentRarity)) {
                     rarityEnchants.add(enchantment);
                 }
-            });
+            }
             rarityEnchants.sort(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()));
             sorted.addAll(rarityEnchants);
         });

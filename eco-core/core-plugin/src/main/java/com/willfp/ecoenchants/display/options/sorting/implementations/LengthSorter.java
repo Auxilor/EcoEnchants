@@ -11,7 +11,7 @@ import java.util.List;
 
 public class LengthSorter implements EnchantmentSorter {
     @Override
-    public void sortEnchantments(final @NotNull List<Enchantment> toSort) {
+    public void sortEnchantments(@NotNull final List<Enchantment> toSort) {
         toSort.sort(Comparator.comparingInt(enchantment -> EnchantmentCache.getEntry(enchantment).getRawName().length()));
     }
 

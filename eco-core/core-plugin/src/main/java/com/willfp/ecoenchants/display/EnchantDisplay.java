@@ -4,10 +4,13 @@ import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -31,7 +34,7 @@ public class EnchantDisplay {
     /**
      * Instance of EcoEnchants.
      */
-    private static final AbstractEcoPlugin PLUGIN = AbstractEcoPlugin.getInstance();
+    private static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
 
     /**
      * The meta key to hide enchantments in lore.
@@ -55,7 +58,7 @@ public class EnchantDisplay {
     /**
      * The configurable options for displaying enchantments.
      */
-    public static final DisplayOptions OPTIONS = new DisplayOptions();
+    public static final DisplayOptions OPTIONS = new DisplayOptions(PLUGIN);
 
     /**
      * Update config values.
@@ -75,7 +78,7 @@ public class EnchantDisplay {
      * @return The item, with KEY_V.
      */
     public static ItemStack addV(@Nullable final ItemStack item) {
-        if (item == null || item.getItemMeta() == null) {
+        if (item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) {
             return item;
         }
 
@@ -228,7 +231,7 @@ public class EnchantDisplay {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if (OPTIONS.getNumbersOptions().isUseNumerals() && item.getEnchantmentLevel(enchantment) < OPTIONS.getNumbersOptions().getThreshold()) {
+                if (OPTIONS.getNumbersOptions().isUseNumerals() && ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(item, enchantment) < OPTIONS.getNumbersOptions().getThreshold()) {
                     name += " " + NumberUtils.toNumeral(level);
                 } else {
                     name += " " + level;

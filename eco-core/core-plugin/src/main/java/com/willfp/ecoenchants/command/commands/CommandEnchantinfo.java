@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.command.commands;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.command.AbstractCommand;
 import com.willfp.eco.util.command.AbstractTabCompleter;
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.display.EnchantmentCache;
@@ -39,7 +38,7 @@ public class CommandEnchantinfo extends AbstractCommand {
     public void onExecute(@NotNull final CommandSender sender,
                           @NotNull final List<String> args) {
         if (args.isEmpty()) {
-            sender.sendMessage(Configs.LANG.getMessage("missing-enchant"));
+            sender.sendMessage(this.getPlugin().getLangYml().getMessage("missing-enchant"));
             return;
         }
         StringBuilder nameBuilder = new StringBuilder();
@@ -51,7 +50,7 @@ public class CommandEnchantinfo extends AbstractCommand {
         EcoEnchant enchantment = EcoEnchants.getByName(searchName);
 
         if (enchantment == null || !enchantment.isEnabled()) {
-            String message = Configs.LANG.getMessage("not-found").replace("%name%", searchName);
+            String message = this.getPlugin().getLangYml().getMessage("not-found").replace("%name%", searchName);
             sender.sendMessage(message);
             return;
         }
@@ -71,7 +70,7 @@ public class CommandEnchantinfo extends AbstractCommand {
             if (EcoEnchants.getFromEnchantment(enchantment1) != null) {
                 conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getName());
             } else {
-                conflictNames.add(Configs.LANG.getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
+                conflictNames.add(this.getPlugin().getLangYml().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
             }
         }));
 
@@ -81,14 +80,14 @@ public class CommandEnchantinfo extends AbstractCommand {
         if (allConflicts.length() >= 2) {
             allConflicts = allConflicts.substring(0, allConflicts.length() - 2);
         } else {
-            allConflicts = StringUtils.translate(Configs.LANG.getString("no-conflicts"));
+            allConflicts = StringUtils.translate(this.getPlugin().getLangYml().getString("no-conflicts"));
         }
 
         Set<Material> targets = enchantment.getTargetMaterials();
 
         Set<String> applicableItemsSet = new HashSet<>();
 
-        if (Configs.CONFIG.getBool("commands.enchantinfo.show-target-group")) {
+        if (this.getPlugin().getConfigYml().getBool("commands.enchantinfo.show-target-group")) {
             enchantment.getTargets().forEach(target -> {
                 String targetName = target.getName();
                 targetName = targetName.toLowerCase();
@@ -112,7 +111,7 @@ public class CommandEnchantinfo extends AbstractCommand {
         if (allTargets.length() >= 2) {
             allTargets = allTargets.substring(0, allTargets.length() - 2);
         } else {
-            allTargets = StringUtils.translate(Configs.LANG.getString("no-targets"));
+            allTargets = StringUtils.translate(this.getPlugin().getLangYml().getString("no-targets"));
         }
 
         String maxLevel = String.valueOf(enchantment.getMaxLevel());
@@ -122,7 +121,7 @@ public class CommandEnchantinfo extends AbstractCommand {
         final String finalTargets = allTargets;
         final String finalConflicts = allConflicts;
         final String finalMaxLevel = maxLevel;
-        Arrays.asList(Configs.LANG.getMessage("enchantinfo").split("\\r?\\n")).forEach((string -> {
+        Arrays.asList(this.getPlugin().getLangYml().getMessage("enchantinfo").split("\\r?\\n")).forEach((string -> {
             string = string.replace("%name%", finalName)
                     .replace("%description%", finalDescription)
                     .replace("%target%", finalTargets)

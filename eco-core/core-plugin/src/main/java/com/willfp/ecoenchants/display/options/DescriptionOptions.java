@@ -1,10 +1,12 @@
 package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.config.Configs;
+import com.willfp.eco.util.internal.PluginDependent;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
-public class DescriptionOptions {
+public class DescriptionOptions extends PluginDependent {
     /**
      * The threshold below which to describe enchantments.
      */
@@ -24,11 +26,20 @@ public class DescriptionOptions {
     private String color;
 
     /**
+     * Create new description options.
+     *
+     * @param plugin EcoEnchants.
+     */
+    public DescriptionOptions(@NotNull final AbstractEcoPlugin plugin) {
+        super(plugin);
+    }
+
+    /**
      * Update the options.
      */
     public void update() {
-        threshold = Configs.CONFIG.getInt("lore.describe.before-lines");
-        enabled = Configs.CONFIG.getBool("lore.describe.enabled");
-        color = StringUtils.translate(Configs.LANG.getString("description-color"));
+        threshold = this.getPlugin().getConfigYml().getInt("lore.describe.before-lines");
+        enabled = this.getPlugin().getConfigYml().getBool("lore.describe.enabled");
+        color = StringUtils.translate(this.getPlugin().getLangYml().getString("description-color"));
     }
 }

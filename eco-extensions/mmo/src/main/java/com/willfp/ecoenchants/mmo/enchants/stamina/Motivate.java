@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants.mmo.enchants.stamina;
 
-
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.mmo.integrations.mmo.MMOManager;

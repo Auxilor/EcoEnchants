@@ -1,7 +1,8 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.eco.util.command.AbstractCommand;
+import com.willfp.eco.util.display.Display;
+import com.willfp.eco.util.display.DisplayModule;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
 import com.willfp.eco.util.integrations.IntegrationLoader;
 import com.willfp.eco.util.interfaces.EcoRunnable;
@@ -14,11 +15,6 @@ import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
-import com.willfp.ecoenchants.display.packets.PacketChat;
-import com.willfp.ecoenchants.display.packets.PacketOpenWindowMerchant;
-import com.willfp.ecoenchants.display.packets.PacketSetCreativeSlot;
-import com.willfp.ecoenchants.display.packets.PacketSetSlot;
-import com.willfp.ecoenchants.display.packets.PacketWindowItems;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -37,10 +33,14 @@ import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.worldguard.WorldguardManager;
 import com.willfp.ecoenchants.integrations.worldguard.plugins.WorldguardIntegrationImpl;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.generator.BlockPopulator;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,10 +49,17 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     /**
+     * Instance of the plugin.
+     */
+    @Getter
+    private static EcoEnchantsPlugin instance;
+
+    /**
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
         super("EcoEnchants", 79573, 7666, "com.willfp.ecoenchants.proxy", "&a");
+        instance = this;
     }
 
     /**
@@ -60,6 +67,21 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void enable() {
+        Display.registerDisplayModule(new DisplayModule(itemStack -> {
+            ItemMeta meta = itemStack.getItemMeta();
+            if (meta == null) {
+                return itemStack;
+            }
+            boolean hideEnchants = false;
+            if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+                hideEnchants = true;
+            }
+
+            return EnchantDisplay.displayEnchantments(itemStack, hideEnchants);
+        }, 500, this.getPluginName()));
+        Display.registerRevertModule(EnchantDisplay::revertDisplay);
+        Display.registerFinalizeModule(EnchantDisplay::addV);
+
         this.getExtensionLoader().loadExtensions();
 
         if (this.getExtensionLoader().getLoadedExtensions().isEmpty()) {
@@ -87,7 +109,6 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 }
             }));
         });
-
 
         this.getExtensionLoader().unloadExtensions();
     }
@@ -126,7 +147,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     @Override
     public void postLoad() {
         Bukkit.getServer().getWorlds().forEach(world -> {
-            world.getPopulators().add(new LootPopulator());
+            world.getPopulators().add(new LootPopulator(this));
         });
         EssentialsManager.registerEnchantments();
     }
@@ -168,13 +189,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public List<AbstractPacketAdapter> getPacketAdapters() {
-        return Arrays.asList(
-                new PacketChat(this),
-                new PacketOpenWindowMerchant(this),
-                new PacketSetCreativeSlot(this),
-                new PacketSetSlot(this),
-                new PacketWindowItems(this)
-        );
+        return new ArrayList<>();
     }
 
     /**
@@ -189,7 +204,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 new GrindstoneListeners(this),
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
-                new VillagerListeners(),
+                new VillagerListeners(this),
                 new HoldItemListener()
         );
     }

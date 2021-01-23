@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.enchantments.support.obtaining;
 
-
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.config.Configs;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -29,6 +28,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LootPopulator extends BlockPopulator {
     /**
+     * Instance of ecoenchants.
+     */
+    private final EcoEnchantsPlugin plugin;
+
+    /**
+     * Create a new loot populator.
+     *
+     * @param plugin The plugin.
+     */
+    public LootPopulator(@NotNull final EcoEnchantsPlugin plugin) {
+        this.plugin = plugin;
+    }
+
+    /**
      * Populate a chunk's loot chests.
      *
      * @param world  The world to populate.
@@ -38,7 +51,7 @@ public class LootPopulator extends BlockPopulator {
     public void populate(@NotNull final World world,
                          @NotNull final Random random,
                          @NotNull final Chunk chunk) {
-        if (!Configs.CONFIG.getBool("loot.enabled")) {
+        if (!plugin.getConfigYml().getBool("loot.enabled")) {
             return;
         }
 
@@ -69,11 +82,11 @@ public class LootPopulator extends BlockPopulator {
 
                 double multiplier = 0.01;
                 if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
-                    multiplier /= Configs.CONFIG.getInt("loot.book-times-less-likely");
+                    multiplier /= plugin.getConfigYml().getInt("loot.book-times-less-likely");
                 }
 
-                if (Configs.CONFIG.getBool("loot.reduce-probability.enabled")) {
-                    multiplier /= Configs.CONFIG.getDouble("loot.reduce-probability.factor");
+                if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
+                    multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
                 }
 
                 for (EcoEnchant enchantment : enchantments) {
@@ -119,7 +132,7 @@ public class LootPopulator extends BlockPopulator {
 
                     if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
                         double enchantlevel1 = NumberUtils.randFloat(0, 1);
-                        double enchantlevel2 = NumberUtils.bias(enchantlevel1, Configs.CONFIG.getDouble("enchanting-table.special-bias"));
+                        double enchantlevel2 = NumberUtils.bias(enchantlevel1, plugin.getConfigYml().getDouble("enchanting-table.special-bias"));
                         double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                         level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
                     } else {
@@ -130,8 +143,8 @@ public class LootPopulator extends BlockPopulator {
 
                     toAdd.put(enchantment, level);
 
-                    if (Configs.CONFIG.getBool("loot.reduce-probability.enabled")) {
-                        multiplier /= Configs.CONFIG.getDouble("loot.reduce-probability.factor");
+                    if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
+                        multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
                     }
                 }
 

@@ -6,6 +6,7 @@ authors: [Auxilor]
 website: willfp.com
 load: STARTUP
 depend:
+  - eco
   - ProtocolLib
 softdepend:
   - WorldGuard

@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.itemtypes;
 
-import com.willfp.eco.util.config.Configs;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -129,13 +128,13 @@ public abstract class Spell extends EcoEnchant {
         }
 
         if (cooldown > 0) {
-            String message = Configs.LANG.getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
+            String message = this.getPlugin().getLangYml().getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
             player.sendMessage(message);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
             return;
         }
 
-        String message = Configs.LANG.getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
+        String message = this.getPlugin().getLangYml().getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
         player.sendMessage(message);
         player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
         runnable.run();

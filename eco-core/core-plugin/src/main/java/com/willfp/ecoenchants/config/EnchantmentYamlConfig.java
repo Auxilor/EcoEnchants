@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.config;
 
 import com.willfp.eco.util.config.ValueGetter;
 import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -64,7 +64,7 @@ public abstract class EnchantmentYamlConfig extends PluginDependent implements V
     protected EnchantmentYamlConfig(@NotNull final String name,
                                     @NotNull final Class<?> source,
                                     @NotNull final EnchantmentType type) {
-        super(AbstractEcoPlugin.getInstance());
+        super(EcoEnchantsPlugin.getInstance());
         this.name = name;
         this.source = source;
         this.type = type;

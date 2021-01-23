@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -117,6 +118,23 @@ public class EnchantmentRarity implements Registerable {
      */
     public boolean hasCustomColor() {
         return this.customColor != null;
+    }
+
+    @Override
+    public boolean equals(@NotNull final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EnchantmentRarity)) {
+            return false;
+        }
+        EnchantmentRarity that = (EnchantmentRarity) o;
+        return Objects.equals(getName(), that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 
     /**

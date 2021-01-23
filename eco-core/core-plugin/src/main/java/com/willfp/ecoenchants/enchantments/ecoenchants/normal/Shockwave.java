@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
-import com.willfp.eco.util.ProxyUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -63,7 +63,7 @@ public class Shockwave extends EcoEnchant {
                     .filter(entity1 -> entity1 != player)
                     .filter(entity1 -> !entity1.hasMetadata("shockwaved"))
                     .forEach((mob -> {
-                        ((LivingEntity) mob).damage(finalDamage, player);
+                        ((LivingEntity) mob).damage(finalDamage, entity);
                         mob.setMetadata("shockwaved", this.getPlugin().getMetadataValueFactory().create(true));
                         this.getPlugin().getScheduler().runLater(() -> mob.removeMetadata("shockwaved", this.getPlugin()), 10);
                     }

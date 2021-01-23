@@ -1,5 +1,5 @@
 group 'com.willfp'
-version '3.0.1'
+version '4.0.0'
 description = 'MMO Extension'
 
 repositories {
@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'net.Indyuce:MMOCore:1.6'
+    compileOnly 'net.Indyuce:MMOCore:1.6.2'
     compileOnly 'net.Indyuce:MMOItems:6.5'
     compileOnly 'net.Indyuce:MMOLib:1.7.3'
 }
@@ -18,6 +18,6 @@ configurations.all {
     exclude group: 'com.mojang', module: 'authlib'
 }
 
-jar {
+shadowJar {
     archiveFileName = project.getDescription() + " v" + project.version + ".jar"
 }
