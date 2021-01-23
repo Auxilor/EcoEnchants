@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +42,7 @@ public class HoldItemListener implements Listener {
             List<String> lore = meta.getLore();
 
             if (lore == null) {
-                lore = new ArrayList<>();
+                return;
             }
 
             for (String line : new ArrayList<>(lore)) {
@@ -77,8 +78,13 @@ public class HoldItemListener implements Listener {
                 }
 
                 if (enchant != null) {
-                    lore.remove(rawLine);
-                    meta.addEnchant(enchant, level, true);
+                    if (meta instanceof EnchantmentStorageMeta) {
+                        ((EnchantmentStorageMeta) meta).addStoredEnchant(enchant, level, true);
+                        lore.clear();
+                    } else {
+                        meta.addEnchant(enchant, level, true);
+                        lore.remove(rawLine);
+                    }
                 }
             }
 
