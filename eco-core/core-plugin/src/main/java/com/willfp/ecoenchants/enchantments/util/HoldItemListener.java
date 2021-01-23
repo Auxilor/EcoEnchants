@@ -60,6 +60,9 @@ public class HoldItemListener implements Listener {
             EcoEnchant enchant;
             int level;
             String[] lineSplit = line.split(" ");
+            if (lineSplit.length == 0) {
+                continue;
+            }
             if (lineSplit.length == 1) {
                 enchant = EcoEnchants.getByName(lineSplit[0]);
                 level = 1;
