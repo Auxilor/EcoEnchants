@@ -6,7 +6,7 @@ import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
+import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Material;

@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.eco.util.drops.DropQueue;
 import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -70,6 +71,9 @@ public class Telekinesis extends EcoEnchant {
 
         for (Item item : event.getItems()) {
             drops.add(item.getItemStack());
+            for (int i = 0; i < McmmoManager.getBonusDropCount(block); i++) {
+                drops.add(item.getItemStack());
+            }
         }
 
         event.getItems().clear();

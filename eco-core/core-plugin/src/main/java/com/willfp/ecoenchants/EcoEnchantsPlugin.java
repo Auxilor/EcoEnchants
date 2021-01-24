@@ -28,8 +28,6 @@ import com.willfp.ecoenchants.enchantments.util.HoldItemListener;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
-import com.willfp.ecoenchants.integrations.mcmmo.McmmoManager;
-import com.willfp.ecoenchants.integrations.mcmmo.plugins.McmmoIntegrationImpl;
 import com.willfp.ecoenchants.integrations.worldguard.WorldguardManager;
 import com.willfp.ecoenchants.integrations.worldguard.plugins.WorldguardIntegrationImpl;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
@@ -163,8 +161,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 new IntegrationLoader("WorldGuard", () -> {
                     WorldguardManager.register(new WorldguardIntegrationImpl());
                 }),
-                new IntegrationLoader("Essentials", () -> EssentialsManager.register(new IntegrationEssentials())),
-                new IntegrationLoader("mcMMO", () -> McmmoManager.registerIntegration(new McmmoIntegrationImpl()))
+                new IntegrationLoader("Essentials", () -> EssentialsManager.register(new IntegrationEssentials()))
         );
     }
 
