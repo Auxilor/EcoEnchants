@@ -22,4 +22,4 @@ general-config:
     - stone_switcher
 
 config:
-  # No config is available for this enchantment
+  drop-xp: true # If experience should be given

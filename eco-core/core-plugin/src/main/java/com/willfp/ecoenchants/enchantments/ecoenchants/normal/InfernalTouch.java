@@ -4,6 +4,7 @@ import com.willfp.eco.util.drops.DropQueue;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Bukkit;
@@ -65,6 +66,7 @@ public class InfernalTouch extends EcoEnchant {
         }
         return toReturn;
     }
+
     @EventHandler
     public void infernalTouchBreak(@NotNull final BlockDropItemEvent event) {
         Player player = event.getPlayer();
@@ -115,6 +117,10 @@ public class InfernalTouch extends EcoEnchant {
         }
 
         event.getItems().clear();
+
+        if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "drop-xp")) {
+            experience = 0;
+        }
 
         new DropQueue(player)
                 .setLocation(block.getLocation())
