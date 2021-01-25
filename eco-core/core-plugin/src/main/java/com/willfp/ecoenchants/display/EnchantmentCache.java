@@ -15,9 +15,11 @@ import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +59,7 @@ public class EnchantmentCache {
     /**
      * Get the entire cache.
      *
-     * @return An immutable set of the cache.
+     * @return An immutable map of the cache.
      */
     public static Map<NamespacedKey, CacheEntry> getCache() {
         return ImmutableMap.copyOf(CACHE);
@@ -74,6 +76,25 @@ public class EnchantmentCache {
 
     private static void updateEnchantment(@NotNull final Enchantment enchantment) {
         CACHE.remove(enchantment.getKey());
+
+        if (enchantment instanceof EnchantmentWrapper) {
+            Bukkit.getLogger().severe("Found erroneous enchantment registration!");
+            Bukkit.getLogger().severe("Enchantment " + enchantment.getKey()
+                    + " (Found in class " + enchantment.getClass().getName() + ", Path: " + enchantment.getClass().getProtectionDomain().getCodeSource().getLocation().getPath() + ")"
+            );
+            Bukkit.getLogger().severe("Tell the author to lean how enchantments are stored internally.");
+            Bukkit.getLogger().severe("Hint: Extend Enchantment instead of EnchantmentWrapper.");
+            CACHE.put(enchantment.getKey(), new CacheEntry(
+                    enchantment,
+                    "&4INVALID ENCHANTMENT",
+                    "INVALID",
+                    Collections.singletonList(EnchantDisplay.PREFIX + "INVALID ENCHANTMENT: " + enchantment.getClass().getName()),
+                    EnchantmentType.NORMAL,
+                    EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"))
+                    ));
+            return;
+        }
+
         String name;
         String color;
         EnchantmentType type;
