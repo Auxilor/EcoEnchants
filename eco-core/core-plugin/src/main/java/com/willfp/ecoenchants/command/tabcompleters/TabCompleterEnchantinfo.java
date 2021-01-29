@@ -7,6 +7,7 @@ import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
@@ -21,7 +22,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
     /**
      * The cached enchantment names.
      */
-    private static final List<String> ENCHANT_NAMES = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList());
+    private static final List<String> ENCHANT_NAMES = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).map(ChatColor::stripColor).collect(Collectors.toList());
 
     /**
      * Instantiate a new tab-completer for /enchantinfo.
@@ -36,7 +37,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
     @ConfigUpdater
     public static void reload() {
         ENCHANT_NAMES.clear();
-        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).collect(Collectors.toList()));
+        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).map(ChatColor::stripColor).collect(Collectors.toList()));
     }
 
     /**

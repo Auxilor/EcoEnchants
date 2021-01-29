@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -48,6 +49,11 @@ public class CommandEnchantinfo extends AbstractCommand {
         searchName = searchName.substring(0, searchName.length() - 1);
 
         EcoEnchant enchantment = EcoEnchants.getByName(searchName);
+
+        if (enchantment == null) {
+            String finalSearchName = searchName;
+            enchantment = EcoEnchants.values().stream().filter(ecoEnchant -> ChatColor.stripColor(ecoEnchant.getName()).equalsIgnoreCase(finalSearchName)).findFirst().orElse(null);
+        }
 
         if (enchantment == null || !enchantment.isEnabled()) {
             String message = this.getPlugin().getLangYml().getMessage("not-found").replace("%name%", searchName);
