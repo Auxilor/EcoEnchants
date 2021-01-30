@@ -50,6 +50,7 @@ permissions:
     default: op
     children:
       ecoenchants.anvil.bypasshardcap: true
+      ecoenchants.anvil.color: true
   ecoenchants.fromtable.*:
     description: Allows getting all enchantments from an enchanting table
     default: true
@@ -68,6 +69,9 @@ permissions:
     default: true
   ecoenchants.anvil.bypasshardcap:
     description: Allows bypassing the anvil hard cap
+    default: op
+  ecoenchants.anvil.color:
+    description: Allows color from anvil renames
     default: op
 
   # Perks

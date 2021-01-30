@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
+import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.tuplets.Pair;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -39,16 +40,19 @@ public class AnvilMerge {
      * @param left   The {@link ItemStack} on the left of the anvil.
      * @param right  The {@link ItemStack} in the middle of the anvil.
      * @param old    The previous {@link ItemStack} result.
-     * @param name   The anvil display name.
+     * @param itemName   The anvil display name.
      * @param player The player merging (for permissions).
      * @return The result, stored as a {@link Pair} of {@link ItemStack} and {@link Integer}.
      */
     public Pair<ItemStack, Integer> doMerge(@Nullable final ItemStack left,
                                             @Nullable final ItemStack right,
                                             @Nullable final ItemStack old,
-                                            @NotNull final String name,
+                                            @NotNull final String itemName,
                                             @NotNull final Player player) {
         // Here so it can be accessed later (scope)
+
+        // Copied to non-final string.
+        String name = itemName;
 
         int outDamage = -1;
         if (old != null && old.getItemMeta() instanceof Damageable) {
@@ -61,6 +65,12 @@ public class AnvilMerge {
 
         if (left.getEnchantments().containsKey(EcoEnchants.PERMANENCE_CURSE)) {
             return new Pair<>(null, null);
+        }
+
+        name = name.replace("§", "&");
+
+        if (player.hasPermission("ecoenchants.anvil.color")) {
+            name = StringUtils.translate(name);
         }
 
         if (!EnchantmentTarget.ALL.getMaterials().contains(left.getType()) || right == null || !EnchantmentTarget.ALL.getMaterials().contains(right.getType())) {

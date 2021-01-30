@@ -53,7 +53,6 @@ public class AnvilListeners extends PluginDependent implements Listener {
         ItemStack out = event.getResult();
         String name = event.getInventory().getRenameText();
 
-
         if (event.getViewers().isEmpty()) {
             return; // Prevent ArrayIndexOutOfBoundsException when using AnvilGUI
         }
