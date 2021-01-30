@@ -77,8 +77,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
 
             return EnchantDisplay.displayEnchantments(itemStack, hideEnchants);
         }, 500, this.getPluginName()));
+
         Display.registerRevertModule(EnchantDisplay::revertDisplay);
-        Display.registerFinalizeModule(EnchantDisplay::addV);
 
         this.getExtensionLoader().loadExtensions();
 

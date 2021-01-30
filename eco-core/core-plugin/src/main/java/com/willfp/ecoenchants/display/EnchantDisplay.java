@@ -44,13 +44,6 @@ public class EnchantDisplay {
     public static final NamespacedKey KEY_SKIP = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-skip");
 
     /**
-     * The meta key to notify the server that an item is from a villager trade.
-     * <p>
-     * Bit of a bodge - plan on making it better.
-     */
-    public static final NamespacedKey KEY_V = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-v");
-
-    /**
      * The prefix for all enchantment lines to have in lore.
      */
     public static final String PREFIX = "§w";
@@ -67,25 +60,6 @@ public class EnchantDisplay {
     public static void update() {
         OPTIONS.update();
         EnchantmentCache.update();
-    }
-
-    /**
-     * Bodge to fix hidden enchantments from villagers.
-     * <p>
-     * It isn't recommended to mess with this unless you <b>really</b> know your way around EcoEnchants.
-     *
-     * @param item The item to modify.
-     * @return The item, with KEY_V.
-     */
-    public static ItemStack addV(@Nullable final ItemStack item) {
-        if (item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) {
-            return item;
-        }
-
-        ItemMeta meta = item.getItemMeta();
-        meta.getPersistentDataContainer().set(KEY_V, PersistentDataType.INTEGER, 1);
-        item.setItemMeta(meta);
-        return item;
     }
 
     /**
@@ -112,9 +86,6 @@ public class EnchantDisplay {
             itemLore = new ArrayList<>();
         }
 
-        if (meta.getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER)) {
-            meta.getPersistentDataContainer().remove(KEY_V);
-        }
         itemLore.removeIf(s -> s.startsWith(PREFIX));
 
         if (!meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
@@ -144,21 +115,14 @@ public class EnchantDisplay {
      * Show all enchantments in item lore.
      *
      * @param item         The item to update.
-     * @param hideEnchants If enchantments should be hidden.
+     * @param hide If enchantments should be hidden.
      * @return The item, updated.
      */
     public static ItemStack displayEnchantments(@Nullable final ItemStack item,
-                                                final boolean hideEnchants) {
-        boolean hide = hideEnchants;
+                                                final boolean hide) {
         if (item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType())) {
             return item;
         }
-
-        if (item.getItemMeta().getPersistentDataContainer().has(KEY_V, PersistentDataType.INTEGER) && hideEnchants) {
-            hide = false;
-        }
-
-        revertDisplay(item);
 
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
@@ -203,9 +167,7 @@ public class EnchantDisplay {
         OPTIONS.getSorter().sortEnchantments(unsorted);
 
         enchantments.clear();
-        unsorted.forEach(enchantment -> {
-            enchantments.put(enchantment, tempEnchantments.get(enchantment));
-        });
+        unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
 
         enchantments.forEach((enchantment, level) -> {
             if (EcoEnchants.getFromEnchantment(enchantment) == null) {
