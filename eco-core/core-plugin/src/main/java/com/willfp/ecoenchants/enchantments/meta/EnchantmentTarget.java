@@ -24,10 +24,6 @@ public class EnchantmentTarget implements Registerable {
      */
     public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>());
 
-    static {
-        REGISTERED.add(ALL);
-    }
-
     /**
      * The name of the target.
      */
@@ -96,6 +92,7 @@ public class EnchantmentTarget implements Registerable {
     }
 
     static {
+        REGISTERED.add(ALL);
         update();
     }
 }
