@@ -89,9 +89,7 @@ public class EnchantDisplay {
         itemLore.removeIf(s -> s.startsWith(PREFIX));
 
         if (!meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
-            if (meta instanceof EnchantmentStorageMeta) {
-                meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS); // Thanks ShaneBee!
-            }
+            meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
             meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         meta.getPersistentDataContainer().remove(KEY_SKIP);
@@ -135,7 +133,9 @@ public class EnchantDisplay {
 
         if (hide || meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+            if (meta instanceof EnchantmentStorageMeta) {
+                meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+            }
             meta.getPersistentDataContainer().set(KEY_SKIP, PersistentDataType.INTEGER, 1);
             item.setItemMeta(meta);
             return item;
