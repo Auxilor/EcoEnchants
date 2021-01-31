@@ -124,10 +124,13 @@ public class EnchantDisplay {
             return item;
         }
 
+        revertDisplay(item);
+
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
             return item;
         }
+
         List<String> itemLore = new ArrayList<>();
 
         if (hide || meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
