@@ -112,7 +112,7 @@ public class EnchantDisplay {
     /**
      * Show all enchantments in item lore.
      *
-     * @param item         The item to update.
+     * @param item The item to update.
      * @param hide If enchantments should be hidden.
      * @return The item, updated.
      */
