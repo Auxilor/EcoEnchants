@@ -52,7 +52,13 @@ public class WorldguardManager {
         if (REGISTERED.isEmpty()) {
             return true;
         }
-        return REGISTERED.stream().anyMatch(worldguardWrapper -> worldguardWrapper.enabledForPlayer(enchant, (Player) player, player.getLocation()));
+
+        for (WorldguardWrapper worldguardWrapper : REGISTERED) {
+            if (worldguardWrapper.enabledForPlayer(enchant, (Player) player, player.getLocation())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -72,6 +78,12 @@ public class WorldguardManager {
         if (REGISTERED.isEmpty()) {
             return true;
         }
-        return REGISTERED.stream().anyMatch(worldguardWrapper -> worldguardWrapper.enabledForPlayer(enchant, (Player) player, location));
+
+        for (WorldguardWrapper worldguardWrapper : REGISTERED) {
+            if (worldguardWrapper.enabledForPlayer(enchant, (Player) player, location)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
