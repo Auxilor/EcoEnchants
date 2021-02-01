@@ -31,18 +31,13 @@ public abstract class EnchantmentYamlConfig extends PluginDependent implements V
      * The internal config that stores the values.
      */
     @Getter
-    private YamlConfiguration config;
+    private final YamlConfiguration config;
 
     /**
      * The physical file of the config.
      */
     @Getter(AccessLevel.PROTECTED)
-    private File configFile;
-
-    /**
-     * The directory that the config is in.
-     */
-    private final File directory;
+    private final File configFile;
 
     /**
      * The provider of the config.
@@ -78,13 +73,12 @@ public abstract class EnchantmentYamlConfig extends PluginDependent implements V
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        this.directory = dir;
 
-        if (!new File(directory, name + ".yml").exists()) {
+        if (!new File(dir, name + ".yml").exists()) {
             createFile();
         }
 
-        this.configFile = new File(directory, name + ".yml");
+        this.configFile = new File(dir, name + ".yml");
         this.config = YamlConfiguration.loadConfiguration(configFile);
 
         update();

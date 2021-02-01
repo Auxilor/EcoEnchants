@@ -45,9 +45,8 @@ public class EcoEnchantsConfigs {
      * @param permissionName The permission name to match.
      * @return The matching {@link EnchantmentConfig}.
      */
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public EnchantmentConfig getEnchantmentConfig(@NotNull final String permissionName) {
-        return enchantmentConfigs.stream().filter(config -> config.getName().equalsIgnoreCase(permissionName)).findFirst().get();
+        return enchantmentConfigs.stream().filter(config -> config.getName().equalsIgnoreCase(permissionName)).findFirst().orElse(null);
     }
 
     /**
