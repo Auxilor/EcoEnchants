@@ -30,6 +30,7 @@ config:
   radius: 1
   y-delta: 0.07
   radius-multiplier: 5
+    use-double-helix: false
 
   # For Arrows + Tridents
   particle-tick-delay: 2

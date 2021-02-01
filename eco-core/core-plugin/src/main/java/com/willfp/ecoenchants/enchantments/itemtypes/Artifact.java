@@ -160,6 +160,8 @@ public abstract class Artifact extends EcoEnchant {
         double radiusMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
         double offset = NumberUtils.randFloat(0, 0.75);
 
+        boolean doubleHelix = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-double-helix");
+
         this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
             for (int i = 0; i < 3; i++) {
                 if (yAtomic.get() > entity.getHeight()) {
@@ -172,6 +174,11 @@ public abstract class Artifact extends EcoEnchant {
                 Location particleLocation = entity.getLocation();
                 particleLocation.add(x, y, z);
                 entity.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
+                if (doubleHelix) {
+                    Location particleLocation2 = entity.getLocation();
+                    particleLocation2.add(-x, y, -z);
+                    entity.getWorld().spawnParticle(particle, particleLocation2, 1, 0, 0, 0, 0, extra, false);
+                }
             }
         }).runTaskTimer(0, 1);
     }
