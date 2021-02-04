@@ -81,4 +81,9 @@ public class Dynamite extends Spell {
 
         AnticheatManager.unexemptPlayer(player);
     }
+
+    @Override
+    protected boolean requiresBlockClick() {
+        return true;
+    }
 }

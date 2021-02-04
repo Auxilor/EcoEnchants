@@ -92,8 +92,14 @@ public abstract class Spell extends EcoEnchant {
             if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
                 return;
             }
+            if (requiresBlockClick() && !event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+                return;
+            }
         } else {
             if (!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
+                return;
+            }
+            if (requiresBlockClick() && !event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                 return;
             }
         }
@@ -138,6 +144,15 @@ public abstract class Spell extends EcoEnchant {
         player.sendMessage(message);
         player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
         runnable.run();
+    }
+
+    /**
+     * Get if the spell requires a block to be clicked to trigger the spell.
+     *
+     * @return If the spell requires a block to be clicked.
+     */
+    protected boolean requiresBlockClick() {
+        return false;
     }
 
     /**
