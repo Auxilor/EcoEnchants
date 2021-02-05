@@ -3,10 +3,10 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +26,10 @@ public class Aversion extends EcoEnchant {
         Enderman enderman = (Enderman) event.getEntity();
         LivingEntity target = event.getTarget();
 
+        if (event.getReason() != EntityTargetEvent.TargetReason.CLOSEST_PLAYER) {
+            return;
+        }
+
         if (target == null) {
             return;
         }
@@ -40,7 +44,6 @@ public class Aversion extends EcoEnchant {
             return;
         }
 
-        Bukkit.getLogger().info(event.getReason().name());
-        //event.setCancelled(true);
+        event.setCancelled(true);
     }
 }
