@@ -11,6 +11,7 @@ import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
+import com.willfp.ecoenchants.command.commands.CommandRandomenchant;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import com.willfp.ecoenchants.display.EnchantDisplay;
@@ -175,7 +176,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         return Arrays.asList(
                 new CommandEcodebug(this),
                 new CommandEcoreload(this),
-                new CommandEnchantinfo(this)
+                new CommandEnchantinfo(this),
+                new CommandRandomenchant(this)
         );
     }
 
