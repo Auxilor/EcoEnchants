@@ -33,6 +33,9 @@ commands:
   enchantinfo:
     description: Show information about an enchantment
     permission: ecoenchants.enchantinfo
+  randomenchant:
+    description: Adds a random enchantment to an item
+    permission: ecoenchants.randomenchant
 
 permissions:
   ecoenchants.*:
@@ -44,6 +47,7 @@ permissions:
       ecoenchants.updateannounce: true
       ecoenchants.enchantinfo: true
       ecoenchants.ecodebug: true
+      ecoenchants.randomenchant: true
       ecoenchants.anvil.*: true
   ecoenchants.anvil.*:
     description: Allows all anvil permissions
@@ -67,6 +71,9 @@ permissions:
   ecoenchants.enchantinfo:
     description: Allows the use of /enchantinfo to show enchant info
     default: true
+  ecoenchants.randomenchant:
+    description: Allows the use of /randomenchant to apply a random enchantment to an item
+    default: op
   ecoenchants.anvil.bypasshardcap:
     description: Allows bypassing the anvil hard cap
     default: op

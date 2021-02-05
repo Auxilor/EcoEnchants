@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -266,12 +267,12 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     }
 
     /**
-     * If enchantment conflicts with any enchantment in set.
+     * If enchantment conflicts with any enchantment in collection.
      *
-     * @param enchantments The set to test against.
+     * @param enchantments The collection to test against.
      * @return If there are any conflicts.
      */
-    public boolean conflictsWithAny(@NotNull final Set<? extends Enchantment> enchantments) {
+    public boolean conflictsWithAny(@NotNull final Collection<? extends Enchantment> enchantments) {
         return conflicts.stream().anyMatch(enchantments::contains);
     }
 

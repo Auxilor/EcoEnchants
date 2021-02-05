@@ -18,6 +18,9 @@ messages:
   outdated: "You are running an outdated version of &aEcoEnchants! &fCurrently running &e%ver%&f, newest version &e%newver%&f. Download at &a&lhttps://www.spigotmc.org/resources/ecoenchants.79573/"
   on-cooldown: "&fThis spell is on cooldown! Wait &a%seconds% Seconds&f to use &a%name%&f again."
   used-spell: "&fUsed &a%name%&f spell!"
+  must-hold-item: "&cYou must be holding an enchantable item!"
+  no-enchants-available: "&fNo available enchantments found for this item!"
+  applied-random-enchant: "&fAdded %enchantment% to your item!"
 
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
