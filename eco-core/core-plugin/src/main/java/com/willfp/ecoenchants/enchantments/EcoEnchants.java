@@ -53,6 +53,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Arachnid;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Arborist;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Arcanic;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Atmospheric;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Aversion;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Backstab;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Beheading;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.BlastMining;
@@ -472,6 +473,7 @@ public class EcoEnchants {
     public static final EcoEnchant ASCEND = new Ascend();
     public static final EcoEnchant ARBORIST = new Arborist();
     public static final EcoEnchant LUCKY_CATCH = new LuckyCatch();
+    public static final EcoEnchant AVERSION = new Aversion();
 
     /**
      * Get all registered {@link EcoEnchant}s.
