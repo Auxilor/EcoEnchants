@@ -25,6 +25,7 @@ general-config:
     - butchering
     - razor
     - ender_slayer
+    - introversion
   maximum-level: 5
 
 config:

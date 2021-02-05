@@ -1,16 +1,16 @@
 #
-# Ender Slayer EcoEnchant
+# Introversion EcoEnchant
 #
 
-name: "Ender Slayer"
-description: Increases damage against end mobs.
+name: "Introversion"
+description: Increases damage against players.
 enabled: true
 
 obtaining:
   table: true
   villager: true
   loot: true
-  rarity: common
+  rarity: uncommon
 
 general-config:
   targets:
@@ -24,9 +24,9 @@ general-config:
     - smite
     - defusion
     - razor
+    - ender_slayer
     - butchering
-    - introversion
   maximum-level: 5
 
 config:
-  bonus-per-level: 2.5 # Damage to creepers = base damage + (level * bonus), eg Defusion 5 will do 12.5 more damage to creepers
+  bonus-per-level: 2.5 # Damage to players = base damage + (level * bonus), eg Introversion 5 will do 12.5 more damage to players

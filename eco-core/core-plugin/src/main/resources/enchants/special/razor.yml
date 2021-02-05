@@ -24,6 +24,7 @@ general-config:
     - defusion
     - butchering
     - ender_slayer
+    - introversion
   maximum-level: 8
 
 config:

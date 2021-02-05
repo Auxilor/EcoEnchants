@@ -122,6 +122,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Inferno;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Infuriate;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Insecticide;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Instantaneous;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Introversion;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Invigoration;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Kinetic;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Launch;
@@ -474,6 +475,7 @@ public class EcoEnchants {
     public static final EcoEnchant ARBORIST = new Arborist();
     public static final EcoEnchant LUCKY_CATCH = new LuckyCatch();
     public static final EcoEnchant AVERSION = new Aversion();
+    public static final EcoEnchant INTROVERSION = new Introversion();
 
     /**
      * Get all registered {@link EcoEnchant}s.
