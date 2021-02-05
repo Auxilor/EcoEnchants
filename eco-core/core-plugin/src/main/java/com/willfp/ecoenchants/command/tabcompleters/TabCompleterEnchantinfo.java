@@ -6,7 +6,6 @@ import com.willfp.eco.util.command.AbstractTabCompleter;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.util.StringUtil;
@@ -15,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TabCompleterEnchantinfo extends AbstractTabCompleter {
@@ -26,9 +24,11 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
 
     /**
      * Instantiate a new tab-completer for /enchantinfo.
+     *
+     * @param command /enchantinfo.
      */
-    public TabCompleterEnchantinfo() {
-        super((AbstractCommand) Objects.requireNonNull(Bukkit.getPluginCommand("enchantinfo")).getExecutor());
+    public TabCompleterEnchantinfo(@NotNull final AbstractCommand command) {
+        super(command);
     }
 
     /**

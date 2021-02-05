@@ -32,7 +32,7 @@ public class CommandEnchantinfo extends AbstractCommand {
 
     @Override
     public AbstractTabCompleter getTab() {
-        return new TabCompleterEnchantinfo();
+        return new TabCompleterEnchantinfo(this);
     }
 
     @Override
