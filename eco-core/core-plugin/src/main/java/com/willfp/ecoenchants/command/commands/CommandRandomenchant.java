@@ -67,6 +67,11 @@ public class CommandRandomenchant extends AbstractCommand {
                                     }
                                 }
                             }
+                            if (this.getPlugin().getConfigYml().getBool("anvil.hard-cap.enabled")
+                                    && !player.hasPermission("ecoenchants.randomenchant.bypasshardcap")
+                                    && onItem.size() >= this.getPlugin().getConfigYml().getInt("anvil.hard-cap.cap")) {
+                                conflicts = true;
+                            }
                             if (!conflicts) {
                                 enchant = ecoEnchant;
                             }
