@@ -48,6 +48,7 @@ permissions:
       ecoenchants.enchantinfo: true
       ecoenchants.ecodebug: true
       ecoenchants.randomenchant: true
+      ecoenchants.randomenchant.bypasshardcap: true
       ecoenchants.anvil.*: true
   ecoenchants.anvil.*:
     description: Allows all anvil permissions
@@ -73,6 +74,9 @@ permissions:
     default: true
   ecoenchants.randomenchant:
     description: Allows the use of /randomenchant to apply a random enchantment to an item
+    default: op
+  ecoenchants.randomenchant.bypasshardcap:
+    description: Allows /randomenchant bypassing the anvil hard cap
     default: op
   ecoenchants.anvil.bypasshardcap:
     description: Allows bypassing the anvil hard cap

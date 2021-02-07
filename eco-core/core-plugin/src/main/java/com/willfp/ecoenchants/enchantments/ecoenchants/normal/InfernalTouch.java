@@ -111,7 +111,7 @@ public class InfernalTouch extends EcoEnchant {
             experience += out.getSecond();
 
             if (fortune > 0 && FORTUNE_MATERIALS.contains(itemStack.getType())) {
-                itemStack.setAmount((int) Math.ceil(1 / ((double) fortune + 2) + ((double) fortune + 1) / 2));
+                itemStack.setAmount((int) Math.round((Math.random() * ((double) fortune - 1)) + 1.1));
                 experience++;
             }
         }

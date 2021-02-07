@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.mmo.integrations.mmo.MMOManager;
 import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
 import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
