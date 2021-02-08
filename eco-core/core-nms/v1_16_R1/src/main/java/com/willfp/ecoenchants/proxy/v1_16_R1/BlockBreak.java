@@ -11,6 +11,9 @@ public final class BlockBreak implements BlockBreakProxy {
     @Override
     public void breakBlock(@NotNull final Player player,
                                  @NotNull final Block block) {
+        if (block.getY() > 255) {
+            return;
+        }
         ((CraftPlayer) player).getHandle().playerInteractManager.breakBlock(new BlockPosition(block.getX(), block.getY(), block.getZ()));
     }
 }
