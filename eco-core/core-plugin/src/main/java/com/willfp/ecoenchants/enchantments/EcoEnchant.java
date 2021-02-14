@@ -15,6 +15,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import lombok.AccessLevel;
 import lombok.Getter;
+import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -195,6 +196,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
     public void update() {
         config.loadFromLang();
         rarity = config.getRarity();
+        Validate.notNull(rarity, "Rarity specified in " + this.permissionName + " is invalid!");
         conflicts = config.getEnchantments(EcoEnchants.GENERAL_LOCATION + "conflicts");
         grindstoneable = config.getBool(EcoEnchants.GENERAL_LOCATION + "grindstoneable");
         availableFromTable = config.getBool(EcoEnchants.OBTAINING_LOCATION + "table");
