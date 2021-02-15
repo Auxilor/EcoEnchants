@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -29,13 +30,17 @@ public class Incandescence extends EcoEnchant {
         Player player = (Player) event.getEntity();
         LivingEntity victim = (LivingEntity) event.getDamager();
 
-        int totalIncandescencePoints = EnchantChecks.getArmorPoints(player, this, 1);
+        int totalIncandescencePoints = EnchantChecks.getArmorPoints(player, this);
 
         if (totalIncandescencePoints == 0) {
             return;
         }
 
         if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
+
+        if (!AntigriefManager.canInjure(player, victim)) {
             return;
         }
 
