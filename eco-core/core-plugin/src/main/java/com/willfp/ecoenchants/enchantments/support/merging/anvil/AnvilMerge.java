@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.tuplets.Pair;
+import com.willfp.eco.util.tuples.Pair;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;

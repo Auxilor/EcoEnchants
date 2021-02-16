@@ -5,7 +5,6 @@ import com.willfp.eco.util.DurabilityUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
-import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;

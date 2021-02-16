@@ -2,10 +2,9 @@ package com.willfp.ecoenchants.command.commands;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
-import com.willfp.eco.util.proxy.ProxyConstants;
 import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.drops.internal.DropManager;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.util.proxy.ProxyConstants;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -109,9 +108,6 @@ public class CommandEcodebug extends AbstractCommand {
             }
         });
         this.getPlugin().getLog().info("Enchantments with evident issues: " + withIssues.toString());
-        this.getPlugin().getLog().info("");
-
-        this.getPlugin().getLog().info("Drop Type: " + DropManager.getType());
         this.getPlugin().getLog().info("");
 
         this.getPlugin().getLog().info("Packets: " + ProtocolLibrary.getProtocolManager().getPacketListeners().stream()

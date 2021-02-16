@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.google.common.collect.Sets;
+import com.willfp.eco.util.TridentUtils;
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
 import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
@@ -148,7 +147,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         LivingEntity attacker = (LivingEntity) ((Trident) event.getDamager()).getShooter();
         Trident trident = (Trident) event.getDamager();
-        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
+        ItemStack item = TridentUtils.getItemStack(trident);
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
@@ -414,7 +413,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         }
 
         Trident trident = (Trident) event.getEntity();
-        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
+        ItemStack item = TridentUtils.getItemStack(trident);
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
         EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
@@ -590,7 +589,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         Trident trident = (Trident) event.getEntity();
         LivingEntity shooter = (LivingEntity) trident.getShooter();
-        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
+        ItemStack item = TridentUtils.getItemStack(trident);
 
         EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
             if (event.isCancelled()) {

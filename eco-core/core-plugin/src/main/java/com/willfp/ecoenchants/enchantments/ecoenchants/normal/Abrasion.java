@@ -1,11 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.util.DurabilityUtils;
+import com.willfp.eco.util.PlayerUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -32,7 +31,7 @@ public class Abrasion extends EcoEnchant {
         Player victim = (Player) uncastVictim;
 
         boolean notcharged = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
-        if (attacker instanceof Player && ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f && !notcharged) {
+        if (attacker instanceof Player && PlayerUtils.getAttackCooldown((Player) attacker) != 1.0f && !notcharged) {
             return;
         }
 

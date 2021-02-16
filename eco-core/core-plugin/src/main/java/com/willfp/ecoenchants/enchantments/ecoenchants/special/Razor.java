@@ -1,10 +1,9 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.eco.util.PlayerUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -26,7 +25,7 @@ public class Razor extends EcoEnchant {
         double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "base-damage");
         double extra = (level * perLevelMultiplier) + baseDamage;
         if (this.getConfig().getBool((EcoEnchants.CONFIG_LOCATION) + "decrease-if-cooldown") && attacker instanceof Player) {
-            extra *= ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker);
+            extra *= PlayerUtils.getAttackCooldown((Player) attacker);
         }
 
         event.setDamage(event.getDamage() + extra);

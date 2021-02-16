@@ -1,11 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -36,7 +35,7 @@ public class Shockwave extends EcoEnchant {
         AbstractArrow entity = (AbstractArrow) event.getEntity();
         ItemStack item = player.getInventory().getItemInMainHand();
         if (entity instanceof Trident) {
-            item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack((Trident) entity);
+            item = TridentUtils.getItemStack((Trident) entity);
         }
 
         if (!EnchantChecks.item(item, this)) {

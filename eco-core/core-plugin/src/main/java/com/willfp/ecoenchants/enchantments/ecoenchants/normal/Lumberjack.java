@@ -6,8 +6,6 @@ import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.proxy.proxies.BlockBreakProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -58,7 +56,7 @@ public class Lumberjack extends EcoEnchant {
                 continue;
             }
 
-            ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, treeBlock);
+            BlockUtils.breakBlock(player, treeBlock);
 
             this.getPlugin().getScheduler().runLater(() -> treeBlock.removeMetadata("block-ignore", this.getPlugin()), 1);
         }

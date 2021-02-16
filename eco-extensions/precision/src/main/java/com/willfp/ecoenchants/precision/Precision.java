@@ -1,12 +1,11 @@
 package com.willfp.ecoenchants.precision;
 
 
+import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.LivingEntity;
@@ -46,7 +45,7 @@ public class Precision extends EcoEnchant {
         Player player = (Player) event.getEntity().getShooter();
         Trident trident = (Trident) event.getEntity();
 
-        ItemStack itemStack = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
+        ItemStack itemStack = TridentUtils.getItemStack(trident);
         if (!EnchantChecks.item(itemStack, this)) {
             return;
         }

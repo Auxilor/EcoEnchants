@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.TridentUtils;
 import com.willfp.eco.util.drops.DropQueue;
 import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
@@ -8,8 +9,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -153,7 +152,7 @@ public class Telekinesis extends EcoEnchant {
         } else if (event.getKiller() instanceof Trident) {
             if (((Trident) event.getKiller()).getShooter() instanceof Player) {
                 player = (Player) ((Trident) event.getKiller()).getShooter();
-                item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack((Trident) event.getKiller());
+                item = TridentUtils.getItemStack((Trident) event.getKiller());
             }
         }
 

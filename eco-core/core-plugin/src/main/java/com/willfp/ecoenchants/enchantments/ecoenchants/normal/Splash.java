@@ -1,12 +1,11 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.TridentUtils;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.proxy.proxies.TridentStackProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -45,7 +44,7 @@ public class Splash extends EcoEnchant {
         Trident trident = (Trident) event.getEntity();
         Player player = (Player) event.getEntity().getShooter();
 
-        ItemStack item = ProxyUtils.getProxy(TridentStackProxy.class).getTridentStack(trident);
+        ItemStack item = TridentUtils.getItemStack(trident);
 
         if (!EnchantChecks.item(item, this)) {
             return;

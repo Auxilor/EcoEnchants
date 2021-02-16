@@ -4,8 +4,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.mmo.integrations.mmo.MMOManager;
 import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
-import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -23,7 +21,7 @@ public class Motivate extends MMOEnchantment {
         Player pVictim = (Player) victim;
 
         boolean notcharged = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
-        if (ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown(pAttacker) != 1.0f && !notcharged)
+        if (PlayerUtils.getAttackCooldown(pVictim) != 1.0f && !notcharged)
             return;
 
         double victimStamina = MMOManager.getStamina(pVictim);

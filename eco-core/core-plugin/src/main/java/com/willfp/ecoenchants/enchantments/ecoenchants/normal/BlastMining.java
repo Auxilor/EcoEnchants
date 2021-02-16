@@ -1,12 +1,11 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.BlockUtils;
 import com.willfp.eco.util.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.proxy.proxies.BlockBreakProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -72,7 +71,7 @@ public class BlastMining extends EcoEnchant {
 
         toBreak.forEach((block1 -> {
             block1.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
-            ProxyUtils.getProxy(BlockBreakProxy.class).breakBlock(player, block1);
+            BlockUtils.breakBlock(player, block1);
             block1.removeMetadata("block-ignore", this.getPlugin());
         }));
 

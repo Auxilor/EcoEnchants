@@ -1,13 +1,12 @@
 package com.willfp.ecoenchants.summoning;
 
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.PlayerUtils;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import com.willfp.ecoenchants.proxy.proxies.CooldownProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
@@ -81,7 +80,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
                          final int level) {
 
         if (summoningType.equals(SummoningType.MELEE)
-                && attacker instanceof Player && ProxyUtils.getProxy(CooldownProxy.class).getAttackCooldown((Player) attacker) != 1.0f
+                && attacker instanceof Player && PlayerUtils.getAttackCooldown((Player) attacker) != 1.0f
                 && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
             return;
         }

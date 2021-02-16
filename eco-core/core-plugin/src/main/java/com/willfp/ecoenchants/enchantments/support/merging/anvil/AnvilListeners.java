@@ -4,7 +4,7 @@ import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.proxy.ProxyConstants;
-import com.willfp.eco.util.tuplets.Pair;
+import com.willfp.eco.util.tuples.Pair;
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
 import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
