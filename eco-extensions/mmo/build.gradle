@@ -1,5 +1,5 @@
 group 'com.willfp'
-version '4.0.0'
+version '4.0.1'
 description = 'MMO Extension'
 
 repositories {
@@ -9,13 +9,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'net.Indyuce:MMOCore:1.6.2'
-    compileOnly 'net.Indyuce:MMOItems:6.5'
+    compileOnly 'net.Indyuce:MMOCore:1.7.0'
+    compileOnly 'net.Indyuce:MMOItems:6.5.4'
     compileOnly 'net.Indyuce:MMOLib:1.7.3'
 }
 
 configurations.all {
     exclude group: 'com.mojang', module: 'authlib'
+    exclude group: 'org.kitteh.pastegg'
 }
 
 shadowJar {

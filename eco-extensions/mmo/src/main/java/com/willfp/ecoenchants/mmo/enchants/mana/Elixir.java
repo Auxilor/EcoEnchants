@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.mmo.enchants.mana;
 
+import com.willfp.eco.util.PlayerUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.mmo.integrations.mmo.MMOManager;
