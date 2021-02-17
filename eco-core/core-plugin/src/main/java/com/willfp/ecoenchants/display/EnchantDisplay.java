@@ -37,13 +37,13 @@ public class EnchantDisplay extends DisplayModule {
      * EcoEnchants packet lore implementation of HideEnchants.
      */
     @Getter
-    private final NamespacedKey keySkip = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-skip");
+    private final NamespacedKey keySkip;
 
     /**
      * The configurable options for displaying enchantments.
      */
     @Getter
-    private final DisplayOptions options = new DisplayOptions(this.getPlugin());
+    private final DisplayOptions options;
 
     /**
      * Create EcoEnchants display module.
@@ -52,6 +52,8 @@ public class EnchantDisplay extends DisplayModule {
      */
     public EnchantDisplay(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, DisplayPriority.HIGH);
+        keySkip = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-skip");
+        options = new DisplayOptions(this.getPlugin());
     }
 
     /**
