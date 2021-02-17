@@ -1,11 +1,10 @@
 package com.willfp.ecoenchants;
 
+import com.willfp.eco.util.bukkit.scheduling.TimedRunnable;
 import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.display.Display;
 import com.willfp.eco.util.display.DisplayModule;
 import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
 import com.willfp.eco.util.integrations.IntegrationLoader;
-import com.willfp.eco.util.interfaces.EcoRunnable;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
@@ -38,8 +37,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.generator.BlockPopulator;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,21 +64,6 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void enable() {
-        Display.registerDisplayModule(new DisplayModule(itemStack -> {
-            ItemMeta meta = itemStack.getItemMeta();
-            if (meta == null) {
-                return itemStack;
-            }
-            boolean hideEnchants = false;
-            if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
-                hideEnchants = true;
-            }
-
-            return EnchantDisplay.displayEnchantments(itemStack, hideEnchants);
-        }, 500, this.getPluginName()));
-
-        Display.registerRevertModule(EnchantDisplay::revertDisplay);
-
         this.getExtensionLoader().loadExtensions();
 
         if (this.getExtensionLoader().getLoadedExtensions().isEmpty()) {
@@ -132,8 +115,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 if (ecoEnchant.isEnabled()) {
                     this.getEventManager().registerListener(ecoEnchant);
 
-                    if (ecoEnchant instanceof EcoRunnable) {
-                        this.getScheduler().syncRepeating((EcoRunnable) ecoEnchant, 5, ((EcoRunnable) ecoEnchant).getTime());
+                    if (ecoEnchant instanceof TimedRunnable) {
+                        this.getScheduler().syncRepeating((TimedRunnable) ecoEnchant, 5, ((TimedRunnable) ecoEnchant).getTime());
                     }
                 }
             }, 1);
@@ -204,7 +187,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
                 new VillagerListeners(this),
-                new HoldItemListener()
+                new HoldItemListener(this)
         );
     }
 
@@ -220,5 +203,11 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 TabCompleterEnchantinfo.class,
                 EnchantmentType.class
         );
+    }
+
+    @Override
+    @Nullable
+    protected DisplayModule createDisplayModule() {
+        return new EnchantDisplay(this);
     }
 }

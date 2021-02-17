@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.internal.PluginDependent;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -19,7 +21,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HoldItemListener implements Listener {
+public class HoldItemListener extends PluginDependent implements Listener {
+    /**
+     * Instantiate HoldItemListener.
+     *
+     * @param plugin Instance of EcoEnchants.
+     */
+    public HoldItemListener(@NotNull final AbstractEcoPlugin plugin) {
+        super(plugin);
+    }
 
     /**
      * On player hold item.
@@ -43,7 +53,7 @@ public class HoldItemListener implements Listener {
 
         Map<Enchantment, Integer> toAdd = new HashMap<>();
 
-        if (!EnchantDisplay.OPTIONS.isUseLoreGetter()) {
+        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUseLoreGetter()) {
             return;
         }
 

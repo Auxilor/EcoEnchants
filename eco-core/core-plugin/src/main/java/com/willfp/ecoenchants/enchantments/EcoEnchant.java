@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments;
 
 
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
@@ -41,7 +40,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings({"unchecked", "deprecation", "RedundantSuppression"})
-public abstract class EcoEnchant extends Enchantment implements Listener, Registerable, Watcher {
+public abstract class EcoEnchant extends Enchantment implements Listener, Watcher {
     /**
      * Instance of EcoEnchants for enchantments to be able to access.
      */
@@ -230,7 +229,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Regist
      * Register the enchantment with spigot.
      * Only used internally.
      */
-    @Override
     public void register() {
         try {
             Field byIdField = Enchantment.class.getDeclaredField("byKey");

@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.display.options.sorting;
 
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.sorting.implementations.AlphabeticSorter;
 import com.willfp.ecoenchants.display.options.sorting.implementations.LengthSorter;
 import com.willfp.ecoenchants.display.options.sorting.implementations.RarityAlphabeticSorter;
@@ -34,17 +35,18 @@ public class SorterManager {
         return REGISTERED.stream()
                 .filter(enchantmentSorter -> Arrays.asList(enchantmentSorter.getParameters()).containsAll(Arrays.asList(parameters)) && enchantmentSorter.getParameters().length == parameters.length)
                 .findFirst()
-                .orElse(new AlphabeticSorter());
+                .orElse(new AlphabeticSorter(EcoEnchantsPlugin.getInstance()));
     }
 
     static {
-        REGISTERED.add(new AlphabeticSorter());
-        REGISTERED.add(new LengthSorter());
-        REGISTERED.add(new TypeAlphabeticSorter());
-        REGISTERED.add(new TypeLengthSorter());
-        REGISTERED.add(new RarityAlphabeticSorter());
-        REGISTERED.add(new RarityLengthSorter());
-        REGISTERED.add(new RarityTypeAlphabeticSorter());
-        REGISTERED.add(new RarityTypeLengthSorter());
+        EcoEnchantsPlugin instance = EcoEnchantsPlugin.getInstance(); // Really dirty and janky.
+        REGISTERED.add(new AlphabeticSorter(instance));
+        REGISTERED.add(new LengthSorter(instance));
+        REGISTERED.add(new TypeAlphabeticSorter(instance));
+        REGISTERED.add(new TypeLengthSorter(instance));
+        REGISTERED.add(new RarityAlphabeticSorter(instance));
+        REGISTERED.add(new RarityLengthSorter(instance));
+        REGISTERED.add(new RarityTypeAlphabeticSorter(instance));
+        REGISTERED.add(new RarityTypeLengthSorter(instance));
     }
 }

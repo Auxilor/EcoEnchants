@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.ImmutableMap;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.eco.util.display.Display;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -88,7 +89,7 @@ public class EnchantmentCache {
                     enchantment,
                     "&4INVALID ENCHANTMENT",
                     "INVALID",
-                    Collections.singletonList(EnchantDisplay.PREFIX + "INVALID ENCHANTMENT: " + enchantment.getClass().getName()),
+                    Collections.singletonList(Display.PREFIX + "INVALID ENCHANTMENT: " + enchantment.getClass().getName()),
                     EnchantmentType.NORMAL,
                     EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"))
                     ));
@@ -135,7 +136,7 @@ public class EnchantmentCache {
 
         String rawName = name;
         name = color + name;
-        description.replaceAll(line -> EnchantDisplay.PREFIX + EnchantDisplay.OPTIONS.getDescriptionOptions().getColor() + line);
+        description.replaceAll(line -> Display.PREFIX + ((EnchantDisplay) PLUGIN.getDisplayModule()).getOptions().getDescriptionOptions().getColor() + line);
         CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, rawName, description, type, rarity));
     }
 
@@ -205,7 +206,7 @@ public class EnchantmentCache {
 
             String processedStringDescription = descriptionBuilder.toString();
             processedStringDescription = processedStringDescription.replace("§w", "");
-            this.stringDescription = processedStringDescription.replaceAll(EnchantDisplay.OPTIONS.getDescriptionOptions().getColor(), "");
+            this.stringDescription = processedStringDescription.replaceAll(((EnchantDisplay) PLUGIN.getDisplayModule()).getOptions().getDescriptionOptions().getColor(), "");
         }
     }
 }

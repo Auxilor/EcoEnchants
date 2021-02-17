@@ -2,16 +2,17 @@ package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.eco.util.display.Display;
+import com.willfp.eco.util.display.DisplayModule;
+import com.willfp.eco.util.display.DisplayPriority;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
-import lombok.experimental.UtilityClass;
+import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -19,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,116 +30,63 @@ import java.util.List;
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
-@UtilityClass
-public class EnchantDisplay {
-    /**
-     * Instance of EcoEnchants.
-     */
-    private static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
-
+public class EnchantDisplay extends DisplayModule {
     /**
      * The meta key to hide enchantments in lore.
      * <p>
      * EcoEnchants packet lore implementation of HideEnchants.
      */
-    public static final NamespacedKey KEY_SKIP = PLUGIN.getNamespacedKeyFactory().create("ecoenchantlore-skip");
-
-    /**
-     * The prefix for all enchantment lines to have in lore.
-     */
-    public static final String PREFIX = "§w";
+    @Getter
+    private final NamespacedKey keySkip = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-skip");
 
     /**
      * The configurable options for displaying enchantments.
      */
-    public static final DisplayOptions OPTIONS = new DisplayOptions(PLUGIN);
+    @Getter
+    private final DisplayOptions options = new DisplayOptions(this.getPlugin());
+
+    /**
+     * Create EcoEnchants display module.
+     *
+     * @param plugin Instance of EcoEnchants.
+     */
+    public EnchantDisplay(@NotNull final AbstractEcoPlugin plugin) {
+        super(plugin, DisplayPriority.HIGH);
+    }
 
     /**
      * Update config values.
      */
-    @ConfigUpdater
-    public static void update() {
-        OPTIONS.update();
+    public void update() {
+        options.update();
         EnchantmentCache.update();
     }
 
-    /**
-     * Revert display.
-     *
-     * @param item The item to revert.
-     * @return The item, updated.
-     */
-    public static ItemStack revertDisplay(@Nullable final ItemStack item) {
-        if (item == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType()) || item.getItemMeta() == null) {
-            return item;
+    @Override
+    protected void display(@NotNull final ItemStack itemStack) {
+        if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
+            return;
         }
 
-        ItemMeta meta = item.getItemMeta();
-        List<String> itemLore;
+        ItemMeta meta = itemStack.getItemMeta();
 
-        if (meta.hasLore()) {
-            itemLore = meta.getLore();
-        } else {
-            itemLore = new ArrayList<>();
+        assert meta != null;
+
+        boolean hide = false;
+        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+            hide = true;
         }
 
-        if (itemLore == null) {
-            itemLore = new ArrayList<>();
-        }
+        List<String> itemLore = null;
 
-        itemLore.removeIf(s -> s.startsWith(PREFIX));
-
-        if (!meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
-            meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
-        meta.getPersistentDataContainer().remove(KEY_SKIP);
-        meta.setLore(itemLore);
-        item.setItemMeta(meta);
-
-        return item;
-    }
-
-    /**
-     * Show all enchantments in item lore.
-     *
-     * @param item The item to update.
-     * @return The item, updated.
-     */
-    public static ItemStack displayEnchantments(@Nullable final ItemStack item) {
-        return displayEnchantments(item, false);
-    }
-
-    /**
-     * Show all enchantments in item lore.
-     *
-     * @param item The item to update.
-     * @param hide If enchantments should be hidden.
-     * @return The item, updated.
-     */
-    public static ItemStack displayEnchantments(@Nullable final ItemStack item,
-                                                final boolean hide) {
-        if (item == null || item.getItemMeta() == null || !EnchantmentTarget.ALL.getMaterials().contains(item.getType())) {
-            return item;
-        }
-
-        revertDisplay(item);
-
-        ItemMeta meta = item.getItemMeta();
-        if (meta == null) {
-            return item;
-        }
-
-        List<String> itemLore = new ArrayList<>();
-
-        if (hide || meta.getPersistentDataContainer().has(KEY_SKIP, PersistentDataType.INTEGER)) {
+        if (hide || meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             if (meta instanceof EnchantmentStorageMeta) {
                 meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
             }
-            meta.getPersistentDataContainer().set(KEY_SKIP, PersistentDataType.INTEGER, 1);
-            item.setItemMeta(meta);
-            return item;
+            meta.getPersistentDataContainer().set(keySkip, PersistentDataType.INTEGER, 1);
+            itemStack.setItemMeta(meta);
+            return;
         }
 
         if (meta.hasLore()) {
@@ -167,7 +115,7 @@ public class EnchantDisplay {
 
         HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
 
-        OPTIONS.getSorter().sortEnchantments(unsorted);
+        options.getSorter().sortEnchantments(unsorted);
 
         enchantments.clear();
         unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
@@ -196,21 +144,21 @@ public class EnchantDisplay {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if (OPTIONS.getNumbersOptions().isUseNumerals() && ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(item, enchantment) < OPTIONS.getNumbersOptions().getThreshold()) {
+                if (options.getNumbersOptions().isUseNumerals() && ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(itemStack, enchantment) < options.getNumbersOptions().getThreshold()) {
                     name += " " + NumberUtils.toNumeral(level);
                 } else {
                     name += " " + level;
                 }
             }
 
-            lore.add(PREFIX + name);
-            if (enchantments.size() <= OPTIONS.getDescriptionOptions().getThreshold() && OPTIONS.getDescriptionOptions().isEnabled()) {
+            lore.add(Display.PREFIX + name);
+            if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
                 lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
             }
         });
 
-        if (OPTIONS.getShrinkOptions().isEnabled() && (enchantments.size() > OPTIONS.getShrinkOptions().getThreshold())) {
-            List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, OPTIONS.getShrinkOptions().getShrinkPerLine());
+        if (options.getShrinkOptions().isEnabled() && (enchantments.size() > options.getShrinkOptions().getThreshold())) {
+            List<List<String>> partitionedCombinedLoreList = Lists.partition(lore, options.getShrinkOptions().getShrinkPerLine());
             List<String> newLore = new ArrayList<>();
             partitionedCombinedLoreList.forEach(list -> {
                 StringBuilder builder = new StringBuilder();
@@ -232,8 +180,22 @@ public class EnchantDisplay {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         lore.addAll(itemLore);
         meta.setLore(lore);
-        item.setItemMeta(meta);
+        itemStack.setItemMeta(meta);
+    }
 
-        return item;
+    @Override
+    protected void revert(@NotNull final ItemStack itemStack) {
+        if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
+            return;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+
+        if (!meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
+            meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        meta.getPersistentDataContainer().remove(keySkip);
+        itemStack.setItemMeta(meta);
     }
 }

@@ -5,7 +5,6 @@ import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
-import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-public class EnchantmentRarity implements Registerable {
+public class EnchantmentRarity {
     /**
      * All registered rarities.
      */
@@ -82,7 +81,6 @@ public class EnchantmentRarity implements Registerable {
         this.customColor = customColor;
     }
 
-    @Override
     public void register() {
         Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         matching.ifPresent(REGISTERED::remove);

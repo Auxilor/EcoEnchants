@@ -56,7 +56,7 @@ public class CommandRandomenchant extends AbstractCommand {
         for (EcoEnchant ecoEnchant : ecoEnchants) {
             if (ecoEnchant.canEnchantItem(itemStack)) {
                 if (!ecoEnchant.conflictsWithAny(onItem)) {
-                    if (!onItem.stream().anyMatch(enchantment -> enchantment.conflictsWith(ecoEnchant))) {
+                    if (onItem.stream().noneMatch(enchantment -> enchantment.conflictsWith(ecoEnchant))) {
                         if (!onItem.contains(ecoEnchant)) {
                             boolean conflicts = false;
                             for (Enchantment enchantment : onItem) {

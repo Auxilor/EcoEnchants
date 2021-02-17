@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
-import com.willfp.eco.util.interfaces.EcoRunnable;
+import com.willfp.eco.util.bukkit.scheduling.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
-public class Forcefield extends EcoEnchant implements EcoRunnable {
+public class Forcefield extends EcoEnchant implements TimedRunnable {
     private final HashMap<Player, Integer> players = new HashMap<>();
     private double initialDistance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
     private double bonus = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");

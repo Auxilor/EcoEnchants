@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants.display.options.sorting.implementations;
 
+import com.willfp.eco.util.internal.PluginDependent;
+import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
@@ -11,15 +13,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class RarityLengthSorter implements EnchantmentSorter {
+public class RarityLengthSorter extends PluginDependent implements EnchantmentSorter {
+    /**
+     * Instantiate sorter.
+     *
+     * @param plugin Instance of EcoEnchants.
+     */
+    public RarityLengthSorter(@NotNull final AbstractEcoPlugin plugin) {
+        super(plugin);
+    }
+
     @Override
     public void sortEnchantments(@NotNull final List<Enchantment> toSort) {
-        if (EnchantDisplay.OPTIONS.getSortedRarities().isEmpty() || EnchantDisplay.OPTIONS.getSortedTypes().isEmpty()) {
-            EnchantDisplay.update();
+        if (((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().getSortedRarities().isEmpty()
+                || ((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().getSortedTypes().isEmpty()) {
+            ((EnchantDisplay) this.getPlugin().getDisplayModule()).update();
         }
 
         List<Enchantment> sorted = new ArrayList<>();
-        EnchantDisplay.OPTIONS.getSortedRarities().forEach(enchantmentRarity -> {
+        ((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().getSortedRarities().forEach(enchantmentRarity -> {
             List<Enchantment> rarityEnchants = new ArrayList<>();
             for (Enchantment enchantment : toSort) {
                 if (EnchantmentCache.getEntry(enchantment).getRarity().equals(enchantmentRarity)) {

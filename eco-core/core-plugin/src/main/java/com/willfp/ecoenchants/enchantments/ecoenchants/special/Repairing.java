@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.eco.util.DurabilityUtils;
-import com.willfp.eco.util.interfaces.EcoRunnable;
+import com.willfp.eco.util.bukkit.scheduling.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Repairing extends EcoEnchant implements EcoRunnable {
+public class Repairing extends EcoEnchant implements TimedRunnable {
     private final Set<Player> players = new HashSet<>();
     private int amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
 

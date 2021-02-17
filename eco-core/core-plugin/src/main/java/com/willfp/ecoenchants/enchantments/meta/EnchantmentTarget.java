@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
-import com.willfp.eco.util.interfaces.Registerable;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -13,7 +12,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-public class EnchantmentTarget implements Registerable {
+public class EnchantmentTarget {
     /**
      * All registered targets.
      */
@@ -49,7 +48,6 @@ public class EnchantmentTarget implements Registerable {
         this.materials = materials;
     }
 
-    @Override
     public void register() {
         Optional<EnchantmentTarget> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         matching.ifPresent(REGISTERED::remove);
