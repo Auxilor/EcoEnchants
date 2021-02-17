@@ -108,6 +108,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void onReload() {
+        ((EnchantDisplay) this.getDisplayModule()).update();
         EcoEnchants.values().forEach((ecoEnchant -> {
             HandlerList.unregisterAll(ecoEnchant);
 
@@ -199,7 +200,6 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 EnchantmentRarity.class,
                 EnchantmentTarget.class,
                 EcoEnchants.class,
-                EnchantDisplay.class,
                 TabCompleterEnchantinfo.class,
                 EnchantmentType.class
         );
