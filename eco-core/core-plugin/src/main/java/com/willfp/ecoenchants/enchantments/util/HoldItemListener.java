@@ -17,9 +17,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HoldItemListener extends PluginDependent implements Listener {
     /**
@@ -69,33 +71,33 @@ public class HoldItemListener extends PluginDependent implements Listener {
 
             EcoEnchant enchant;
             int level;
-            String[] lineSplit = line.split(" ");
-            if (lineSplit.length == 0) {
+            List<String> lineSplit = new ArrayList<>(Arrays.asList(line.split(" ")));
+            if (lineSplit.size() == 0) {
                 continue;
             }
-            if (lineSplit.length == 1) {
-                enchant = EcoEnchants.getByName(lineSplit[0]);
+            if (lineSplit.size() == 1) {
+                enchant = EcoEnchants.getByName(lineSplit.get(0));
                 level = 1;
             } else {
-                String levelString = lineSplit[lineSplit.length - 1];
-                levelString = levelString.replace(" ", "");
+                EcoEnchant attemptFullLine = EcoEnchants.getByName(line);
 
-                try {
-                    level = NumberUtils.fromNumeral(levelString);
-                } catch (IllegalArgumentException e) {
-                    continue;
-                }
+                if (attemptFullLine != null) {
+                    enchant = attemptFullLine;
+                    level = 1;
+                } else {
+                    String levelString = lineSplit.get(lineSplit.size() - 1);
+                    lineSplit.remove(levelString);
+                    levelString = levelString.trim();
 
-                StringBuilder nameBuilder = new StringBuilder();
-
-                for (int i = 0; i < lineSplit.length - 1; i++) {
-                    nameBuilder.append(lineSplit[i]);
-                    if (i != lineSplit.length - 2) {
-                        nameBuilder.append(" ");
+                    try {
+                        level = NumberUtils.fromNumeral(levelString);
+                    } catch (IllegalArgumentException e) {
+                        continue;
                     }
-                }
 
-                enchant = EcoEnchants.getByName(nameBuilder.toString());
+                    String enchantName = lineSplit.stream().collect(Collectors.joining(" "));
+                    enchant = EcoEnchants.getByName(enchantName);
+                }
             }
 
             if (enchant != null) {
