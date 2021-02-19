@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class Motivate extends MMOEnchantment {
     public Motivate() {
@@ -15,7 +16,7 @@ public class Motivate extends MMOEnchantment {
     }
 
     @Override
-    public void onMeleeAttack(LivingEntity attacker, LivingEntity victim, int level, EntityDamageByEntityEvent event) {
+    public void onMeleeAttack(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, int level, @NotNull EntityDamageByEntityEvent event) {
         if(!(attacker instanceof Player && victim instanceof Player))
             return;
         Player pAttacker = (Player) attacker;

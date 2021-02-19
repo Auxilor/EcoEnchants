@@ -416,7 +416,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         ItemStack item = TridentUtils.getItemStack(trident);
         LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
 
-        EnchantChecks.getEnchantsOnItem(item).forEach(((enchant, level) -> {
+        EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
             if (!enchant.isEnabled()) {
                 return;
             }
@@ -426,7 +426,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             }
 
             enchant.onTridentHit(shooter, level, event);
-        }));
+        });
     }
 
     /**

@@ -9,6 +9,7 @@ import net.mmogroup.mmolib.api.player.MMOPlayerData;
 import net.mmogroup.mmolib.api.stat.SharedStat;
 import net.mmogroup.mmolib.api.stat.modifier.StatModifier;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class Augment extends MMOEnchantment {
     private static final String KEY = "ecoenchants_bonus_mana";
@@ -18,7 +19,7 @@ public class Augment extends MMOEnchantment {
     }
 
     @Override
-    public void onArmorEquip(Player player, int level, ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull Player player, int level, @NotNull ArmorEquipEvent event) {
         MMOPlayerData data = MMOPlayerData.get(player);
 
         data.getStatMap().getInstance(SharedStat.MAX_MANA).remove(KEY);

@@ -8,11 +8,9 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -25,24 +23,12 @@ public class Splash extends EcoEnchant {
                 "splash", EnchantmentType.NORMAL
         );
     }
-    @EventHandler
-    public void onSplashLand(@NotNull final ProjectileHitEvent event) {
-        if (event.getEntityType() != EntityType.TRIDENT) {
-            return;
-        }
 
-        if (!(event.getEntity().getShooter() instanceof Player)) {
-            return;
-        }
-
-        if (!(event.getEntity() instanceof Trident)) {
-            return;
-        }
-
-
-
+    @Override
+    public void onTridentHit(@NotNull final LivingEntity shooter,
+                             final int level,
+                             @NotNull final ProjectileHitEvent event) {
         Trident trident = (Trident) event.getEntity();
-        Player player = (Player) event.getEntity().getShooter();
 
         ItemStack item = TridentUtils.getItemStack(trident);
 
@@ -50,34 +36,34 @@ public class Splash extends EcoEnchant {
             return;
         }
 
-        if (this.getDisabledWorlds().contains(player.getWorld())) {
+        if (this.getDisabledWorlds().contains(shooter.getWorld())) {
             return;
         }
-
-        int level = EnchantChecks.getItemLevel(item, this);
 
         double radius = level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
         double damage = level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
 
-        for (Entity e : trident.getNearbyEntities(radius, radius, radius)) {
-            if (e.hasMetadata("NPC")) {
+        for (Entity victim : trident.getNearbyEntities(radius, radius, radius)) {
+            if (victim.hasMetadata("NPC")) {
                 continue;
             }
 
-            if (!(e instanceof LivingEntity)) {
+            if (!(victim instanceof LivingEntity)) {
                 continue;
             }
 
-            LivingEntity entity = (LivingEntity) e;
+            LivingEntity entity = (LivingEntity) victim;
 
-            if (e.equals(player)) {
+            if (victim.equals(shooter)) {
                 continue;
             }
 
             Bukkit.getPluginManager().callEvent(new EntityDamageByEntityEvent(trident, entity, EntityDamageEvent.DamageCause.ENTITY_ATTACK, damage));
 
-            if (!AntigriefManager.canInjure(player, entity)) {
-                continue;
+            if (shooter instanceof Player) {
+                if (!AntigriefManager.canInjure((Player) shooter, entity)) {
+                    continue;
+                }
             }
 
             entity.damage(damage, trident);
