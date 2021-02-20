@@ -22,6 +22,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
@@ -171,7 +172,19 @@ public class Telekinesis extends EcoEnchant {
         int xp = event.getXp();
         Collection<ItemStack> drops = event.getDrops();
 
-        drops.removeIf(itemStack -> itemStack.getItemMeta().getPersistentDataContainer().has(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER));
+        drops.removeIf(itemStack -> {
+            if (itemStack == null) {
+                return true;
+            }
+            ItemMeta meta = itemStack.getItemMeta();
+            if (meta == null) {
+                return false;
+            }
+            if (meta.getPersistentDataContainer() == null) {
+                return false;
+            }
+            return meta.getPersistentDataContainer().has(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER);
+        });
 
         new DropQueue(player)
                 .addItems(drops)
