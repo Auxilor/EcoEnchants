@@ -192,6 +192,21 @@ public class EnchantDisplay extends DisplayModule {
         }
 
         ItemMeta meta = itemStack.getItemMeta();
+        List<String> itemLore;
+
+        if (meta.hasLore()) {
+            itemLore = meta.getLore();
+        } else {
+            itemLore = new ArrayList<>();
+        }
+
+        if (itemLore == null) {
+            itemLore = new ArrayList<>();
+        }
+
+        itemLore.removeIf(s -> s.startsWith("§w"));
+
+        meta.setLore(itemLore);
 
         if (!meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
             meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
@@ -199,5 +214,9 @@ public class EnchantDisplay extends DisplayModule {
         }
         meta.getPersistentDataContainer().remove(keySkip);
         itemStack.setItemMeta(meta);
+
+        if (itemStack.getItemMeta() == null) {
+            return;
+        }
     }
 }
