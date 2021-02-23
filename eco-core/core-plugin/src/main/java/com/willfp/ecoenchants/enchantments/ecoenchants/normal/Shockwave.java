@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.util.TridentUtils;
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -61,6 +62,7 @@ public class Shockwave extends EcoEnchant {
                     .filter(entity1 -> entity1 instanceof LivingEntity)
                     .filter(entity1 -> entity1 != player)
                     .filter(entity1 -> !entity1.hasMetadata("shockwaved"))
+                    .filter(entity1 -> AntigriefManager.canInjure(player, (LivingEntity) entity1))
                     .forEach((mob -> {
                         ((LivingEntity) mob).damage(finalDamage, entity);
                         mob.setMetadata("shockwaved", this.getPlugin().getMetadataValueFactory().create(true));

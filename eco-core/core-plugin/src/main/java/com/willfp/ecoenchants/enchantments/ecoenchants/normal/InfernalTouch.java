@@ -80,7 +80,7 @@ public class InfernalTouch extends EcoEnchant {
             return;
         }
 
-        if (event.getBlock().getState() instanceof Container) {
+        if (event.getBlockState() instanceof Container) {
             return;
         }
 
