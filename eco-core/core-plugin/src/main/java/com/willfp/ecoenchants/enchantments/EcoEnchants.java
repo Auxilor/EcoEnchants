@@ -6,6 +6,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.BarrierArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CrimsonArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.DamageArtifact;
@@ -476,6 +477,7 @@ public class EcoEnchants {
     public static final EcoEnchant LUCKY_CATCH = new LuckyCatch();
     public static final EcoEnchant AVERSION = new Aversion();
     public static final EcoEnchant INTROVERSION = new Introversion();
+    public static final EcoEnchant BARRIER_ARTIFACT = new BarrierArtifact();
 
     /**
      * Get all registered {@link EcoEnchant}s.
