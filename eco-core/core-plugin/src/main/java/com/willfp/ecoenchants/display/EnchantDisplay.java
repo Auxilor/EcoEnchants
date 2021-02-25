@@ -65,7 +65,8 @@ public class EnchantDisplay extends DisplayModule {
     }
 
     @Override
-    protected void display(@NotNull final ItemStack itemStack) {
+    protected void display(@NotNull final ItemStack itemStack,
+                           @NotNull final Object... args) {
         if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
             return;
         }
@@ -74,10 +75,7 @@ public class EnchantDisplay extends DisplayModule {
 
         assert meta != null;
 
-        boolean hide = false;
-        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
-            hide = true;
-        }
+        boolean hide = (boolean) args[0];
 
         List<String> itemLore = null;
 
@@ -133,6 +131,7 @@ public class EnchantDisplay extends DisplayModule {
                 forRemoval.add(enchantment);
             }
         });
+
         forRemoval.forEach(enchantment -> {
             enchantments.remove(enchantment);
             if (meta instanceof EnchantmentStorageMeta) {
@@ -179,6 +178,7 @@ public class EnchantDisplay extends DisplayModule {
         if (meta instanceof EnchantmentStorageMeta) {
             meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         }
+
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         lore.addAll(itemLore);
         meta.setLore(lore);
@@ -192,31 +192,27 @@ public class EnchantDisplay extends DisplayModule {
         }
 
         ItemMeta meta = itemStack.getItemMeta();
-        List<String> itemLore;
-
-        if (meta.hasLore()) {
-            itemLore = meta.getLore();
-        } else {
-            itemLore = new ArrayList<>();
-        }
-
-        if (itemLore == null) {
-            itemLore = new ArrayList<>();
-        }
-
-        itemLore.removeIf(s -> s.startsWith("§w"));
-
-        meta.setLore(itemLore);
 
         if (!meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
             meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
             meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+
         meta.getPersistentDataContainer().remove(keySkip);
         itemStack.setItemMeta(meta);
+    }
 
-        if (itemStack.getItemMeta() == null) {
-            return;
+    @Override
+    protected Object[] generateVarArgs(@NotNull final ItemStack itemStack) {
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return new Object[0];
         }
+        boolean hideEnchants = false;
+        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+            hideEnchants = true;
+        }
+
+        return new Object[]{hideEnchants};
     }
 }
