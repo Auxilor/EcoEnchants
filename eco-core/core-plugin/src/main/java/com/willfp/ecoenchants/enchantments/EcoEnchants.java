@@ -5,6 +5,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AngerArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.BarrierArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
@@ -24,6 +25,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.LimeArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MagicArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MagmaArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MusicArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NautilusArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NetherArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.RedstoneArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SmokeArtifact;
@@ -33,6 +35,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SoulFireArtifact
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SparkleArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.TearArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.TotemArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.VillagerArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WarpedArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WaterArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.WitchArtifact;
@@ -478,6 +481,9 @@ public class EcoEnchants {
     public static final EcoEnchant AVERSION = new Aversion();
     public static final EcoEnchant INTROVERSION = new Introversion();
     public static final EcoEnchant BARRIER_ARTIFACT = new BarrierArtifact();
+    public static final EcoEnchant VILLAGER_ARTIFACT = new VillagerArtifact();
+    public static final EcoEnchant ANGER_ARTIFACT = new AngerArtifact();
+    public static final EcoEnchant NAUTILUS_ARTIFACT = new NautilusArtifact();
 
     /**
      * Get all registered {@link EcoEnchant}s.
