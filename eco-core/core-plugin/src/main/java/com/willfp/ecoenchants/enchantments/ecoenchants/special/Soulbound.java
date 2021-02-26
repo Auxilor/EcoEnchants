@@ -33,6 +33,11 @@ public class Soulbound extends EcoEnchant {
         }
 
         Player player = event.getEntity();
+		
+		if (hasEmptyInventory(player) && player.hasMetadata("soulbound-items")) {
+             return;
+        }
+		
         List<ItemStack> soulboundItems = new ArrayList<>(); // Stored as list to preserve duplicates
 
         if (this.getDisabledWorlds().contains(player.getWorld())) {
