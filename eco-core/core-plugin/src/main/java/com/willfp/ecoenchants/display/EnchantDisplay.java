@@ -209,8 +209,13 @@ public class EnchantDisplay extends DisplayModule {
             return new Object[0];
         }
         boolean hideEnchants = false;
+
         if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
             hideEnchants = true;
+        }
+
+        if (Display.isFinalized(itemStack)) {
+            hideEnchants = false;
         }
 
         return new Object[]{hideEnchants};

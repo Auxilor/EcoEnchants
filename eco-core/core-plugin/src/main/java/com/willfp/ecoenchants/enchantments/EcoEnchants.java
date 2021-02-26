@@ -33,6 +33,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SnowArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SoulArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SoulFireArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SparkleArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SweepArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.TearArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.TotemArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.VillagerArtifact;
@@ -484,6 +485,7 @@ public class EcoEnchants {
     public static final EcoEnchant VILLAGER_ARTIFACT = new VillagerArtifact();
     public static final EcoEnchant ANGER_ARTIFACT = new AngerArtifact();
     public static final EcoEnchant NAUTILUS_ARTIFACT = new NautilusArtifact();
+    public static final EcoEnchant SWEEP_ARTIFACT = new SweepArtifact();
 
     /**
      * Get all registered {@link EcoEnchant}s.
