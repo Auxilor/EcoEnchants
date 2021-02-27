@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchantments.ecoenchants.special;
+package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -12,10 +12,10 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-public class Pentashot extends EcoEnchant {
-    public Pentashot() {
+public class Manyshot extends EcoEnchant {
+    public Manyshot() {
         super(
-                "pentashot", EnchantmentType.SPECIAL
+                "tripleshot", EnchantmentType.NORMAL
         );
     }
 
@@ -24,11 +24,10 @@ public class Pentashot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -2; i <= 2; i += 1) {
+        for (int i = -(level); i < (level+1); i += 2) {
             if (i == 0) {
                 continue;
             }
-
             Vector velocity = event.getProjectile().getVelocity();
 
             float radians = (float) ((float) i * Math.toRadians(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "angle")));
