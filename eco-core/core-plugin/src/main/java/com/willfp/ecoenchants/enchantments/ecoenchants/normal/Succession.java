@@ -5,12 +5,15 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 public class Succession extends EcoEnchant {
@@ -25,13 +28,14 @@ public class Succession extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows");
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
-
-        for (int i = 1; i <= number; i++) {
+        Vector velocity = event.getProjectile().getVelocity();
+        for (int i = 1; i <= level; i++) {
             this.getPlugin().getScheduler().runLater(() -> {
-                Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
+                Arrow arrow1 = shooter.launchProjectile(Arrow.class, velocity);
+                Player player = (Player) event.getEntity();
+                player.playSound(shooter.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1f, 1f);
                 arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
                 if (fire) {
                     arrow1.setFireTicks(Integer.MAX_VALUE);

@@ -24,7 +24,10 @@ public class Tripleshot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -1; i < 2; i += 2) {
+        for (int i = -(level); i < (level+1); i += 2) {
+            if (i == 0) {
+                continue;
+            }
             Vector velocity = event.getProjectile().getVelocity();
 
             float radians = (float) ((float) i * Math.toRadians(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "angle")));

@@ -1,13 +1,13 @@
 #
-# Tripleshot EcoEnchant
+# Curse of Reversal EcoEnchant
 #
 
-name: "Tripleshot"
-description: Shoots 3 arrows.
+name: "Curse of Reversal"
+description: Arrows shoot backwards. (by chyzman)
 enabled: true
 
 obtaining:
-  table: true
+  table: false
   villager: true
   loot: true
   rarity: legendary
@@ -15,13 +15,9 @@ obtaining:
 general-config:
   targets:
     - bow
+    - crossbow
   grindstoneable: true
   disabled-in-worlds: []
   conflicts:
-    - succession
-    - pentashot
-    - buckshot
-  maximum-level: 5
 
 config:
-  angle: 11
