@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class Manyshot extends EcoEnchant {
     public Manyshot() {
         super(
-                "tripleshot", EnchantmentType.NORMAL
+                "manyshot", EnchantmentType.NORMAL
         );
     }
 
@@ -24,7 +24,7 @@ public class Manyshot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -(level); i < (level+1); i += 2) {
+        for (int i = -(level*2); i < (level*2+1); i += 2) {
             if (i == 0) {
                 continue;
             }
