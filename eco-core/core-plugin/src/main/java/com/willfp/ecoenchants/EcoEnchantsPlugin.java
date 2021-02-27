@@ -28,8 +28,6 @@ import com.willfp.ecoenchants.enchantments.util.HoldItemListener;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
-import com.willfp.ecoenchants.integrations.worldguard.WorldguardManager;
-import com.willfp.ecoenchants.integrations.worldguard.plugins.WorldguardIntegrationImpl;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.Getter;
@@ -143,9 +141,6 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     @Override
     public List<IntegrationLoader> getIntegrationLoaders() {
         return Arrays.asList(
-                new IntegrationLoader("WorldGuard", () -> {
-                    WorldguardManager.register(new WorldguardIntegrationImpl());
-                }),
                 new IntegrationLoader("Essentials", () -> EssentialsManager.register(new IntegrationEssentials()))
         );
     }
