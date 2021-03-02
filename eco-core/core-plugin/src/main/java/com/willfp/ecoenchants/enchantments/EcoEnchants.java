@@ -223,6 +223,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.special.Pentashot;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Preservation;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Prosperity;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Razor;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Reaper;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Repairing;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Spring;
@@ -486,6 +487,7 @@ public class EcoEnchants {
     public static final EcoEnchant ANGER_ARTIFACT = new AngerArtifact();
     public static final EcoEnchant NAUTILUS_ARTIFACT = new NautilusArtifact();
     public static final EcoEnchant SWEEP_ARTIFACT = new SweepArtifact();
+    public static final EcoEnchant REAPER = new Reaper();
 
     /**
      * Get all registered {@link EcoEnchant}s.
