@@ -37,66 +37,66 @@ public class CommandEcodebug extends AbstractCommand {
     @Override
     public void onExecute(@NotNull final CommandSender sender,
                           @NotNull final List<String> args) {
-        this.getPlugin().getLog().info("--------------- BEGIN DEBUG ----------------");
+        Bukkit.getLogger().info("--------------- BEGIN DEBUG ----------------");
         if (sender instanceof Player) {
             Player player = (Player) sender;
             player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand().toString());
-            this.getPlugin().getLog().info("");
+            Bukkit.getLogger().info("");
 
-            this.getPlugin().getLog().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
-            this.getPlugin().getLog().info("");
+            Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
+            Bukkit.getLogger().info("");
         }
 
-        this.getPlugin().getLog().info("Running Version: " + this.getPlugin().getDescription().getVersion());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("Running Version: " + this.getPlugin().getDescription().getVersion());
+        Bukkit.getLogger().info("");
 
-        this.getPlugin().getLog().info("Loaded Extensions: " + this.getPlugin().getExtensionLoader().getLoadedExtensions().stream()
+        Bukkit.getLogger().info("Loaded Extensions: " + this.getPlugin().getExtensionLoader().getLoadedExtensions().stream()
                 .map(extension -> extension.getName() + " v" + extension.getVersion())
                 .collect(Collectors.joining()));
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("");
 
-        this.getPlugin().getLog().info("EcoEnchants.getAll(): " + EcoEnchants.values().toString());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("EcoEnchants.getAll(): " + EcoEnchants.values().toString());
+        Bukkit.getLogger().info("");
 
-        this.getPlugin().getLog().info("Enchantment.values(): " + Arrays.toString(Enchantment.values()));
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("Enchantment.values(): " + Arrays.toString(Enchantment.values()));
+        Bukkit.getLogger().info("");
 
-        this.getPlugin().getLog().info("Enchantment Cache: " + EnchantmentCache.getCache().toString());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("Enchantment Cache: " + EnchantmentCache.getCache().toString());
+        Bukkit.getLogger().info("");
 
         try {
             Field byNameField = Enchantment.class.getDeclaredField("byName");
             byNameField.setAccessible(true);
             Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
-            this.getPlugin().getLog().info("Enchantment.byName: " + byName.toString());
+            Bukkit.getLogger().info("Enchantment.byName: " + byName.toString());
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("");
 
 
         List<Enchantment> extern = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
         extern.removeAll(EcoEnchants.values().stream().map(EcoEnchant::getEnchantment).collect(Collectors.toList()));
         extern.removeIf(enchantment -> enchantment.getClass().toString().toLowerCase().contains("craftbukkit"));
         String external = extern.stream().map(enchantment -> "{" + enchantment.toString() + ", Provider: " + enchantment.getClass().toString() + "}").collect(Collectors.joining(", "));
-        this.getPlugin().getLog().info("External Enchantments: " + external);
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("External Enchantments: " + external);
+        Bukkit.getLogger().info("");
 
         List<Enchantment> uncached = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
         uncached.removeAll(EnchantmentCache.getCache().values().stream().map(EnchantmentCache.CacheEntry::getEnchantment).collect(Collectors.toList()));
-        this.getPlugin().getLog().info("Uncached Enchantments: " + uncached.toString());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("Uncached Enchantments: " + uncached.toString());
+        Bukkit.getLogger().info("");
 
         List<Enchantment> brokenCache = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
         brokenCache.removeIf(enchantment -> !(
                 EnchantmentCache.getEntry(enchantment).getName().equalsIgnoreCase("null")
                         || EnchantmentCache.getEntry(enchantment).getRawName().equalsIgnoreCase("null")
                         || EnchantmentCache.getEntry(enchantment).getStringDescription().equalsIgnoreCase("null")));
-        this.getPlugin().getLog().info("Enchantments with broken cache: " + brokenCache.toString());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("Enchantments with broken cache: " + brokenCache.toString());
+        Bukkit.getLogger().info("");
 
-        this.getPlugin().getLog().info("Installed Plugins: " + Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toList()).toString());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("Installed Plugins: " + Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toList()).toString());
+        Bukkit.getLogger().info("");
 
         Set<EcoEnchant> withIssues = new HashSet<>();
         EcoEnchants.values().forEach(enchant -> {
@@ -107,22 +107,22 @@ public class CommandEcodebug extends AbstractCommand {
                 withIssues.add(enchant);
             }
         });
-        this.getPlugin().getLog().info("Enchantments with evident issues: " + withIssues.toString());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("Enchantments with evident issues: " + withIssues.toString());
+        Bukkit.getLogger().info("");
 
-        this.getPlugin().getLog().info("Packets: " + ProtocolLibrary.getProtocolManager().getPacketListeners().stream()
+        Bukkit.getLogger().info("Packets: " + ProtocolLibrary.getProtocolManager().getPacketListeners().stream()
                 .filter(packetListener -> packetListener.getSendingWhitelist().getPriority().equals(ListenerPriority.MONITOR))
                 .collect(Collectors.toList()).toString());
-        this.getPlugin().getLog().info("");
+        Bukkit.getLogger().info("");
 
-        this.getPlugin().getLog().info("Server Information: ");
-        this.getPlugin().getLog().info("Players Online: " + Bukkit.getServer().getOnlinePlayers().size());
-        this.getPlugin().getLog().info("Bukkit IP: " + Bukkit.getIp());
-        this.getPlugin().getLog().info("Running Version: " + Bukkit.getVersion()
+        Bukkit.getLogger().info("Server Information: ");
+        Bukkit.getLogger().info("Players Online: " + Bukkit.getServer().getOnlinePlayers().size());
+        Bukkit.getLogger().info("Bukkit IP: " + Bukkit.getIp());
+        Bukkit.getLogger().info("Running Version: " + Bukkit.getVersion()
                 + ", Bukkit Version: " + Bukkit.getBukkitVersion()
                 + ", Alt Version: " + Bukkit.getServer().getVersion()
                 + ", NMS: " + ProxyConstants.NMS_VERSION);
-        this.getPlugin().getLog().info("Motd: " + Bukkit.getServer().getMotd());
-        this.getPlugin().getLog().info("--------------- END DEBUG ----------------");
+        Bukkit.getLogger().info("Motd: " + Bukkit.getServer().getMotd());
+        Bukkit.getLogger().info("--------------- END DEBUG ----------------");
     }
 }
