@@ -127,9 +127,17 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void postLoad() {
-        Bukkit.getServer().getWorlds().forEach(world -> {
-            world.getPopulators().add(new LootPopulator(this));
-        });
+        if (this.getConfigYml().getBool("loot.enabled")) {
+            Bukkit.getServer().getWorlds().forEach(world -> {
+                List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
+                populators.forEach((blockPopulator -> {
+                    if (blockPopulator instanceof LootPopulator) {
+                        world.getPopulators().remove(blockPopulator);
+                    }
+                }));
+                world.getPopulators().add(new LootPopulator(this));
+            });
+        }
         EssentialsManager.registerEnchantments();
     }
 
