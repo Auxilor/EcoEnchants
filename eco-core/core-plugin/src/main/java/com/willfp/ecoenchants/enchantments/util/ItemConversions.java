@@ -13,6 +13,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.inventory.BlockInventoryHolder;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -56,7 +58,7 @@ public class ItemConversions extends PluginDependent implements Listener {
     }
 
     /**
-     * On player hold item.
+     * On player open inventory.
      * <p>
      * Listener for lore conversion.
      *
@@ -68,7 +70,17 @@ public class ItemConversions extends PluginDependent implements Listener {
             return;
         }
 
-        for (ItemStack itemStack : event.getInventory().getContents()) {
+        Inventory inventory = event.getInventory();
+
+        if (inventory.getHolder() == null) {
+            return;
+        }
+
+        if (!(inventory.getHolder() instanceof BlockInventoryHolder)) {
+            return;
+        }
+
+        for (ItemStack itemStack : inventory.getContents()) {
             convertLore(itemStack);
         }
     }
@@ -161,7 +173,7 @@ public class ItemConversions extends PluginDependent implements Listener {
     }
 
     /**
-     * On player hold item.
+     * On player open inventory.
      * <p>
      * Listener for hide fixer.
      *
@@ -173,7 +185,17 @@ public class ItemConversions extends PluginDependent implements Listener {
             return;
         }
 
-        for (ItemStack itemStack : event.getInventory().getContents()) {
+        Inventory inventory = event.getInventory();
+
+        if (inventory.getHolder() == null) {
+            return;
+        }
+
+        if (!(inventory.getHolder() instanceof BlockInventoryHolder)) {
+            return;
+        }
+
+        for (ItemStack itemStack : inventory.getContents()) {
             hideFixItem(itemStack);
         }
     }
