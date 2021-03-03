@@ -159,7 +159,6 @@ public abstract class Artifact extends EcoEnchant {
         double radiusMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-multiplier");
         double offset = NumberUtils.randFloat(0, 0.75);
 
-        boolean doubleHelix = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "use-double-helix");
 
         this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
             for (int i = 0; i < 3; i++) {
@@ -173,10 +172,32 @@ public abstract class Artifact extends EcoEnchant {
                 Location particleLocation = entity.getLocation();
                 particleLocation.add(x, y, z);
                 entity.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
-                if (doubleHelix) {
+                if (EnchantChecks.getMainhandLevel(player,this)>=2) {
                     Location particleLocation2 = entity.getLocation();
                     particleLocation2.add(-x, y, -z);
                     entity.getWorld().spawnParticle(particle, particleLocation2, 1, 0, 0, 0, 0, extra, false);
+                }
+                if (EnchantChecks.getMainhandLevel(player,this)>=3) {
+                    Location particleLocation3 = entity.getLocation();
+                    Location particleLocation4 = entity.getLocation();
+                    particleLocation3.add(-x, y, z);
+                    particleLocation4.add(x, y, -z);
+                    entity.getWorld().spawnParticle(particle, particleLocation3, 1, 0, 0, 0, 0, extra, false);
+                    entity.getWorld().spawnParticle(particle, particleLocation4, 1, 0, 0, 0, 0, extra, false);
+                }
+                if (EnchantChecks.getMainhandLevel(player,this)>=4) {
+                    Location particleLocation5 = entity.getLocation();
+                    Location particleLocation6 = entity.getLocation();
+                    Location particleLocation7 = entity.getLocation();
+                    Location particleLocation8 = entity.getLocation();
+                    particleLocation5.add(x, -y, z);
+                    particleLocation6.add(-x, -y, -z);
+                    particleLocation7.add(-x, -y, z);
+                    particleLocation8.add(x, -y, -z);
+                    entity.getWorld().spawnParticle(particle, particleLocation5, 1, 0, 0, 0, 0, extra, false);
+                    entity.getWorld().spawnParticle(particle, particleLocation6, 1, 0, 0, 0, 0, extra, false);
+                    entity.getWorld().spawnParticle(particle, particleLocation7, 1, 0, 0, 0, 0, extra, false);
+                    entity.getWorld().spawnParticle(particle, particleLocation8, 1, 0, 0, 0, 0, extra, false);
                 }
             }
         }).runTaskTimer(0, 1);

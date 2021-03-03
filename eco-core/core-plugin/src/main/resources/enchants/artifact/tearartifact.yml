@@ -24,13 +24,14 @@ general-config:
   grindstoneable: true
   disabled-in-worlds: []
   conflicts: []
+  maximum-level: 4
 
 config:
   # For Attack
   radius: 1
   y-delta: 0.07
   radius-multiplier: 5
-  use-double-helix: false
+
 
   # For Arrows + Tridents
   particle-tick-delay: 2
