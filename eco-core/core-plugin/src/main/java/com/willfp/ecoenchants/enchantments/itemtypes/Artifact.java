@@ -199,6 +199,22 @@ public abstract class Artifact extends EcoEnchant {
                     entity.getWorld().spawnParticle(particle, particleLocation7, 1, 0, 0, 0, 0, extra, false);
                     entity.getWorld().spawnParticle(particle, particleLocation8, 1, 0, 0, 0, 0, extra, false);
                 }
+                if (EnchantChecks.getMainhandLevel(player,this)<4) {
+                    for (int j = EnchantChecks.getMainhandLevel(player,this)-4; j>0; i-=1) {
+                        Location particleLocation5 = entity.getLocation();
+                        Location particleLocation6 = entity.getLocation();
+                        Location particleLocation7 = entity.getLocation();
+                        Location particleLocation8 = entity.getLocation();
+                        particleLocation5.add(x*j, -y, z*j);
+                        particleLocation6.add(-x*j, -y, -z*j);
+                        particleLocation7.add(-x*j, -y, z*j);
+                        particleLocation8.add(x*j, -y, -z*j);
+                        entity.getWorld().spawnParticle(particle, particleLocation5, 1, 0, 0, 0, 0, extra, false);
+                        entity.getWorld().spawnParticle(particle, particleLocation6, 1, 0, 0, 0, 0, extra, false);
+                        entity.getWorld().spawnParticle(particle, particleLocation7, 1, 0, 0, 0, 0, extra, false);
+                        entity.getWorld().spawnParticle(particle, particleLocation8, 1, 0, 0, 0, 0, extra, false);
+                    }
+                }
             }
         }).runTaskTimer(0, 1);
     }
