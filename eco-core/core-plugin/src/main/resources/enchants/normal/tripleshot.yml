@@ -1,9 +1,9 @@
 #
-# Tensioned EcoEnchant
+# Tripleshot EcoEnchant
 #
 
-name: "Tensioned"
-description: Increases bow shot strength. (by chyzman)
+name: "Tripleshot"
+description: Shoots 3 arrows.
 enabled: true
 
 obtaining:
@@ -15,10 +15,12 @@ obtaining:
 general-config:
   targets:
     - bow
-    - crossbow
   grindstoneable: true
   disabled-in-worlds: []
   conflicts:
-  maximum-level: 5
+    - succession
+    - pentashot
+    - buckshot
 
 config:
+  angle: 11

@@ -24,12 +24,10 @@ import com.willfp.ecoenchants.enchantments.support.merging.grindstone.Grindstone
 import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners;
 import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
 import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
-import com.willfp.ecoenchants.enchantments.util.HoldItemListener;
+import com.willfp.ecoenchants.enchantments.util.ItemConversions;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
-import com.willfp.ecoenchants.integrations.worldguard.WorldguardManager;
-import com.willfp.ecoenchants.integrations.worldguard.plugins.WorldguardIntegrationImpl;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.Getter;
@@ -129,9 +127,17 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void postLoad() {
-        Bukkit.getServer().getWorlds().forEach(world -> {
-            world.getPopulators().add(new LootPopulator(this));
-        });
+        if (this.getConfigYml().getBool("loot.enabled")) {
+            Bukkit.getServer().getWorlds().forEach(world -> {
+                List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
+                populators.forEach((blockPopulator -> {
+                    if (blockPopulator instanceof LootPopulator) {
+                        world.getPopulators().remove(blockPopulator);
+                    }
+                }));
+                world.getPopulators().add(new LootPopulator(this));
+            });
+        }
         EssentialsManager.registerEnchantments();
     }
 
@@ -143,9 +149,6 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     @Override
     public List<IntegrationLoader> getIntegrationLoaders() {
         return Arrays.asList(
-                new IntegrationLoader("WorldGuard", () -> {
-                    WorldguardManager.register(new WorldguardIntegrationImpl());
-                }),
                 new IntegrationLoader("Essentials", () -> EssentialsManager.register(new IntegrationEssentials()))
         );
     }
@@ -188,7 +191,7 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
                 new VillagerListeners(this),
-                new HoldItemListener(this)
+                new ItemConversions(this)
         );
     }
 

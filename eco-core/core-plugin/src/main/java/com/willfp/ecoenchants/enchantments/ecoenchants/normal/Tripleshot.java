@@ -12,10 +12,10 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-public class Manyshot extends EcoEnchant {
-    public Manyshot() {
+public class Tripleshot extends EcoEnchant {
+    public Tripleshot() {
         super(
-                "manyshot", EnchantmentType.NORMAL
+                "tripleshot", EnchantmentType.NORMAL
         );
     }
 
@@ -24,10 +24,7 @@ public class Manyshot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -(level*2); i < (level*2+1); i += 2) {
-            if (i == 0) {
-                continue;
-            }
+        for (int i = -1; i < 2; i += 2) {
             Vector velocity = event.getProjectile().getVelocity();
 
             float radians = (float) ((float) i * Math.toRadians(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "angle")));

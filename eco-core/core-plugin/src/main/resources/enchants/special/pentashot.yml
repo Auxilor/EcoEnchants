@@ -1,16 +1,16 @@
 #
-# Manyshot EcoEnchant
+# Pentashot EcoEnchant
 #
 
-name: "Manyshot"
-description: Shoots 2 extra arrows per level. (by chyzman)
+name: "Pentashot"
+description: Shoots 5 arrows.
 enabled: true
 
 obtaining:
   table: true
   villager: true
   loot: true
-  rarity: legendary
+  rarity: special
 
 general-config:
   targets:
@@ -19,9 +19,8 @@ general-config:
   disabled-in-worlds: []
   conflicts:
     - succession
-    - pentashot
+    - tripleshot
     - buckshot
-  maximum-level: 5
 
 config:
   angle: 11

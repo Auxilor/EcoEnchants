@@ -36,7 +36,7 @@ public class EcoEnchantsConfigs {
     public void updateConfigs() {
         TARGET.update();
         RARITY.update();
-        enchantmentConfigs.forEach(EnchantmentYamlConfig::update);
+        enchantmentConfigs.forEach(EnchantmentConfig::update);
     }
 
     /**

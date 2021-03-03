@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.ecoenchants.config.EnchantmentYamlConfig;
+import com.willfp.eco.util.config.ExtendableConfig;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -15,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class EnchantmentConfig extends EnchantmentYamlConfig {
+public class EnchantmentConfig extends ExtendableConfig {
     /**
      * The name of the config.
      */
@@ -32,7 +33,7 @@ public class EnchantmentConfig extends EnchantmentYamlConfig {
     public EnchantmentConfig(@NotNull final String name,
                              @NotNull final Class<?> plugin,
                              @NotNull final EnchantmentType type) {
-        super(name, plugin, type);
+        super(name, true, EcoEnchantsPlugin.getInstance(), plugin, "enchants/" + type.getName() + "/");
         this.name = name;
     }
 

@@ -30,6 +30,7 @@ import java.util.List;
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
 public class EnchantDisplay extends DisplayModule {
     /**
      * The meta key to hide enchantments in lore.
@@ -38,6 +39,15 @@ public class EnchantDisplay extends DisplayModule {
      */
     @Getter
     private final NamespacedKey keySkip;
+
+    /**
+     * The legacy V key.
+     * <p>
+     * Exists for backwards compatibility.
+     */
+    @Getter
+    @Deprecated
+    private final NamespacedKey legacyV;
 
     /**
      * The configurable options for displaying enchantments.
@@ -53,6 +63,7 @@ public class EnchantDisplay extends DisplayModule {
     public EnchantDisplay(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin, DisplayPriority.HIGH);
         keySkip = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-skip");
+        legacyV = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-v");
         options = new DisplayOptions(this.getPlugin());
     }
 
@@ -193,6 +204,15 @@ public class EnchantDisplay extends DisplayModule {
 
         ItemMeta meta = itemStack.getItemMeta();
 
+        assert meta != null;
+
+        List<String> lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
+
+        lore.removeIf(s -> s.startsWith("§w"));
+        meta.setLore(lore);
+
+        meta.getPersistentDataContainer().remove(legacyV);
+
         if (!meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
             meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
             meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -214,7 +234,15 @@ public class EnchantDisplay extends DisplayModule {
             hideEnchants = true;
         }
 
+        if (meta.getPersistentDataContainer().has(legacyV, PersistentDataType.INTEGER)) {
+            hideEnchants = false;
+        }
+
         if (Display.isFinalized(itemStack)) {
+            hideEnchants = false;
+        }
+
+        if (options.isUsingExperimentalHideFixer() && meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
             hideEnchants = false;
         }
 

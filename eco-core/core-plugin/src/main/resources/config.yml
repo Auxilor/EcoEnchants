@@ -102,17 +102,25 @@ rarity:
 
 drops:
   ### ADVANCED OPTIONS
-  collate: true
-  # Instead of directly dropping all drops and xp, some intensive enchantments (eg Telekinesis and Infernal Touch) will push to a collated queue.
-  # At the end of each tick, the queue will be pushed rather than pushing on every drop creation
-  # This will massively improve mining performance on servers.
   force-dropqueue: true
   # When combined with collate, this massively reduces calls to getItemMeta, which can hurt performance when many enchants are on an item.
   # Without collate, the number of calls may be increased - which will further hurt performance
   # Enabling this option makes all drops go through telekinesis listeners
 
 advanced:
-  lore-getter: false
-  # This converts enchantments with matching names from other enchantment plugins from lore into real enchantments.
-  # This is experimental not recommended to be used for extended periods of time: enchantments are automatically converted.
-  # Only use this if absolutely necessary as it may cause some bugs.
+  lore-getter:
+    # This converts enchantments with matching names from other enchantment plugins from lore into real enchantments.
+    # This is experimental not recommended to be used for extended periods of time: enchantments are automatically converted.
+    # Only use this if absolutely necessary as it may cause some bugs.
+    enabled: false
+    aggressive: false
+    # Aggressive mode converts all items in all inventories when opened.
+    # This will most likely have a significant performance penalty.
+  hide-fixer:
+    # Fixes some items obtained in older versions with a bug that caused enchantments to be hidden.
+    # Works both in packets to display the enchants to the client as well as changing the server-side item too.
+    # Only use this option if you've encountered this bug as it may strip HideEnchants from items that you might not expect it to.
+    enabled: false
+    aggressive: false
+    # Aggressive mode converts all items in all inventories whenever revealed.
+    # This may impact performance.

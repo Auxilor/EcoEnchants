@@ -20,7 +20,7 @@ public class Introversion extends EcoEnchant {
                               @NotNull final LivingEntity victim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (victim instanceof Player) {
+        if (!(victim instanceof Player)) {
             return;
         }
 

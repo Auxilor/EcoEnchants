@@ -6,15 +6,21 @@ import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.inventory.BlockInventoryHolder;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,13 +29,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HoldItemListener extends PluginDependent implements Listener {
+public class ItemConversions extends PluginDependent implements Listener {
     /**
-     * Instantiate HoldItemListener.
+     * Instantiate item conversions.
      *
      * @param plugin Instance of EcoEnchants.
      */
-    public HoldItemListener(@NotNull final AbstractEcoPlugin plugin) {
+    public ItemConversions(@NotNull final AbstractEcoPlugin plugin) {
         super(plugin);
     }
 
@@ -41,9 +47,45 @@ public class HoldItemListener extends PluginDependent implements Listener {
      * @param event The event to listen for.
      */
     @EventHandler
-    public void onHoldItem(@NotNull final PlayerItemHeldEvent event) {
+    public void loreConverter(@NotNull final PlayerItemHeldEvent event) {
+        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingLoreGetter()) {
+            return;
+        }
+
         ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
 
+        convertLore(itemStack);
+    }
+
+    /**
+     * On player open inventory.
+     * <p>
+     * Listener for lore conversion.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void aggressiveLoreConverter(@NotNull final InventoryOpenEvent event) {
+        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveLoreGetter()) {
+            return;
+        }
+
+        Inventory inventory = event.getInventory();
+
+        if (inventory.getHolder() == null) {
+            return;
+        }
+
+        if (!(inventory.getHolder() instanceof BlockInventoryHolder)) {
+            return;
+        }
+
+        for (ItemStack itemStack : inventory.getContents()) {
+            convertLore(itemStack);
+        }
+    }
+
+    private void convertLore(@Nullable final ItemStack itemStack) {
         if (itemStack == null) {
             return;
         }
@@ -54,10 +96,6 @@ public class HoldItemListener extends PluginDependent implements Listener {
         }
 
         Map<Enchantment, Integer> toAdd = new HashMap<>();
-
-        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUseLoreGetter()) {
-            return;
-        }
 
         List<String> lore = meta.getLore();
 
@@ -113,6 +151,73 @@ public class HoldItemListener extends PluginDependent implements Listener {
             toAdd.forEach((enchantment, integer) -> meta.addEnchant(enchantment, integer, true));
         }
         meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+    }
+
+    /**
+     * On player hold item.
+     * <p>
+     * Listener for hide fixer.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void hideFixer(@NotNull final PlayerItemHeldEvent event) {
+        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingExperimentalHideFixer()) {
+            return;
+        }
+
+        ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
+
+        hideFixItem(itemStack);
+    }
+
+    /**
+     * On player open inventory.
+     * <p>
+     * Listener for hide fixer.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void aggressiveHideFixer(@NotNull final InventoryOpenEvent event) {
+        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveExperimentalHideFixer()) {
+            return;
+        }
+
+        Inventory inventory = event.getInventory();
+
+        if (inventory.getHolder() == null) {
+            return;
+        }
+
+        if (!(inventory.getHolder() instanceof BlockInventoryHolder)) {
+            return;
+        }
+
+        for (ItemStack itemStack : inventory.getContents()) {
+            hideFixItem(itemStack);
+        }
+    }
+
+    private void hideFixItem(@Nullable final ItemStack itemStack) {
+        if (itemStack == null) {
+            return;
+        }
+
+        if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
+            return;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return;
+        }
+
+        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS);
+        }
+
         itemStack.setItemMeta(meta);
     }
 }
