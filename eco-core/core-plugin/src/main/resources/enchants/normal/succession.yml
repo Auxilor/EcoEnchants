@@ -15,13 +15,11 @@ obtaining:
 general-config:
   targets:
     - bow
+    - crossbow
   grindstoneable: true
   disabled-in-worlds: []
   conflicts:
-    - tripleshot
-    - pentashot
-    - buckshot
+  maximum-level: 2
 
 config:
-  extra-arrows: 2
   per-arrow-damage: true #If set to false, then it will only take 1 durability

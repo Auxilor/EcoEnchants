@@ -1,9 +1,9 @@
 #
-# Pentashot EcoEnchant
+# Manyshot EcoEnchant
 #
 
-name: "Pentashot"
-description: Shoots 5 arrows.
+name: "Manyshot"
+description: Shoots 2 extra arrows per level.
 enabled: true
 
 obtaining:
@@ -18,9 +18,7 @@ general-config:
   grindstoneable: true
   disabled-in-worlds: []
   conflicts:
-    - succession
-    - tripleshot
-    - buckshot
+  maximum-level: 2
 
 config:
   angle: 11

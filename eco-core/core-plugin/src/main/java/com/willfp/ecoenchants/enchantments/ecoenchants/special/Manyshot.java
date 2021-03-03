@@ -12,10 +12,10 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-public class Pentashot extends EcoEnchant {
-    public Pentashot() {
+public class Manyshot extends EcoEnchant {
+    public Manyshot() {
         super(
-                "pentashot", EnchantmentType.SPECIAL
+                "manyshot", EnchantmentType.SPECIAL
         );
     }
 
@@ -24,7 +24,7 @@ public class Pentashot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -2; i <= 2; i += 1) {
+        for (int i = -level; i <= level; i += 1) {
             if (i == 0) {
                 continue;
             }

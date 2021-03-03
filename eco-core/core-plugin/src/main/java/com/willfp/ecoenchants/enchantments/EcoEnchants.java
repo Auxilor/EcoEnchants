@@ -219,7 +219,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.special.Indestructibility
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Instability;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Intellect;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.LifeSteal;
-import com.willfp.ecoenchants.enchantments.ecoenchants.special.Pentashot;
+import com.willfp.ecoenchants.enchantments.ecoenchants.special.Manyshot;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Preservation;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Prosperity;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Razor;
@@ -324,7 +324,7 @@ public class EcoEnchants {
     public static final EcoEnchant NOCTURNAL = new Nocturnal();
     public static final EcoEnchant CONFUSION = new Confusion();
     public static final EcoEnchant ARCANIC = new Arcanic();
-    public static final EcoEnchant PENTASHOT = new Pentashot();
+    public static final EcoEnchant MANYSHOT = new Manyshot();
     public static final EcoEnchant LUMBERJACK = new Lumberjack();
     public static final EcoEnchant STONE_SWITCHER = new StoneSwitcher();
     public static final EcoEnchant MAGNETIC = new Magnetic();
