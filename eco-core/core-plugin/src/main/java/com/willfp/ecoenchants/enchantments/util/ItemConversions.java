@@ -46,8 +46,34 @@ public class ItemConversions extends PluginDependent implements Listener {
      */
     @EventHandler
     public void loreConverter(@NotNull final PlayerItemHeldEvent event) {
+        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingLoreGetter()) {
+            return;
+        }
+
         ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
 
+        convertLore(itemStack);
+    }
+
+    /**
+     * On player hold item.
+     * <p>
+     * Listener for lore conversion.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void aggressiveLoreConverter(@NotNull final InventoryOpenEvent event) {
+        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveLoreGetter()) {
+            return;
+        }
+
+        for (ItemStack itemStack : event.getInventory().getContents()) {
+            convertLore(itemStack);
+        }
+    }
+
+    private void convertLore(@Nullable final ItemStack itemStack) {
         if (itemStack == null) {
             return;
         }
@@ -58,10 +84,6 @@ public class ItemConversions extends PluginDependent implements Listener {
         }
 
         Map<Enchantment, Integer> toAdd = new HashMap<>();
-
-        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUseLoreGetter()) {
-            return;
-        }
 
         List<String> lore = meta.getLore();
 
@@ -146,7 +168,7 @@ public class ItemConversions extends PluginDependent implements Listener {
      * @param event The event to listen for.
      */
     @EventHandler
-    public void hideFixer(@NotNull final InventoryOpenEvent event) {
+    public void aggressiveHideFixer(@NotNull final InventoryOpenEvent event) {
         if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveExperimentalHideFixer()) {
             return;
         }

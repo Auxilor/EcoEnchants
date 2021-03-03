@@ -59,7 +59,13 @@ public class DisplayOptions extends PluginDependent {
      * Allow reading enchantments from lore-based plugins.
      */
     @Getter
-    private boolean useLoreGetter = false;
+    private boolean usingLoreGetter = false;
+
+    /**
+     * Allow reading enchantments from lore-based plugins aggressively.
+     */
+    @Getter
+    private boolean usingAggressiveLoreGetter = false;
 
     /**
      * If the experimental hide fixer is being used.
@@ -106,7 +112,8 @@ public class DisplayOptions extends PluginDependent {
                 .collect(Collectors.toList()));
         sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
 
-        useLoreGetter = this.getPlugin().getConfigYml().getBool("advanced.lore-getter");
+        usingLoreGetter = this.getPlugin().getConfigYml().getBool("advanced.lore-getter.enabled");
+        usingAggressiveLoreGetter = this.getPlugin().getConfigYml().getBool("advanced.lore-getter.aggressive");
         usingExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.enabled");
         usingAggressiveExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.aggressive");
 
