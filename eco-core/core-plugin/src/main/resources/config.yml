@@ -102,10 +102,6 @@ rarity:
 
 drops:
   ### ADVANCED OPTIONS
-  collate: true
-  # Instead of directly dropping all drops and xp, some intensive enchantments (eg Telekinesis and Infernal Touch) will push to a collated queue.
-  # At the end of each tick, the queue will be pushed rather than pushing on every drop creation
-  # This will massively improve mining performance on servers.
   force-dropqueue: true
   # When combined with collate, this massively reduces calls to getItemMeta, which can hurt performance when many enchants are on an item.
   # Without collate, the number of calls may be increased - which will further hurt performance
