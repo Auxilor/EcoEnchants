@@ -242,6 +242,10 @@ public class EnchantDisplay extends DisplayModule {
             hideEnchants = false;
         }
 
+        if (options.isUsingExperimentalHideFixer() && meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+            hideEnchants = false;
+        }
+
         return new Object[]{hideEnchants};
     }
 }

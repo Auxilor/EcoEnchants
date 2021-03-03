@@ -62,6 +62,18 @@ public class DisplayOptions extends PluginDependent {
     private boolean useLoreGetter = false;
 
     /**
+     * If the experimental hide fixer is being used.
+     */
+    @Getter
+    private boolean usingExperimentalHideFixer = false;
+
+    /**
+     * If the aggressive experimental hide fixer is being used.
+     */
+    @Getter
+    private boolean usingAggressiveExperimentalHideFixer = false;
+
+    /**
      * Instantiate new display options.
      *
      * @param plugin EcoEnchants.
@@ -95,6 +107,8 @@ public class DisplayOptions extends PluginDependent {
         sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
 
         useLoreGetter = this.getPlugin().getConfigYml().getBool("advanced.lore-getter");
+        usingExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.enabled");
+        usingAggressiveExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.aggressive");
 
         boolean byType = this.getPlugin().getConfigYml().getBool("lore.sort-by-type");
         boolean byLength = this.getPlugin().getConfigYml().getBool("lore.sort-by-length");
