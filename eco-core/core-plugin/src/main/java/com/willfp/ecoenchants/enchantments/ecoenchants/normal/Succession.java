@@ -25,11 +25,11 @@ public class Succession extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows-per-level");
+        int amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "extra-arrows-per-level") * level;
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
 
-        for (int i = 1; i <= level*number; i++) {
+        for (int i = 1; i <= amount; i++) {
             this.getPlugin().getScheduler().runLater(() -> {
                 Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
                 arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);

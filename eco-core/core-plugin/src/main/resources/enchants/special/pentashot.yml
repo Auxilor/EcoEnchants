@@ -21,6 +21,8 @@ general-config:
     - succession
     - tripleshot
     - buckshot
+  maximum-level: 1
 
 config:
+  side-arrows-per-level: 2 # If you want to have more levels
   angle: 11

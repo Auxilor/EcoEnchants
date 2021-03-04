@@ -24,7 +24,9 @@ public class Pentashot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -level; i <= level; i += 1) {
+        int bonusPerSide = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "side-arrows-per-level") * level;
+
+        for (int i = -bonusPerSide; i <= bonusPerSide; i += 1) {
             if (i == 0) {
                 continue;
             }
