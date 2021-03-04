@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.eco.util.PlayerUtils;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -30,8 +29,7 @@ public class Volatile extends EcoEnchant {
 
         Player attacker = (Player) uncastAttacker;
 
-        if (PlayerUtils.getAttackCooldown(attacker) != 1.0f
-                && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
+        if (!EnchantmentUtils.isFullyChargeIfRequired(this, attacker)) {
             return;
         }
 

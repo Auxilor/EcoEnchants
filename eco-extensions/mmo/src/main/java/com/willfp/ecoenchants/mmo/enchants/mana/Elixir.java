@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.mmo.enchants.mana;
 
-import com.willfp.eco.util.PlayerUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.mmo.integrations.mmo.MMOManager;
 import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;
 import org.bukkit.entity.LivingEntity;
@@ -22,9 +22,9 @@ public class Elixir extends MMOEnchantment {
         Player pAttacker = (Player) attacker;
         Player pVictim = (Player) victim;
 
-        boolean notcharged = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
-        if (PlayerUtils.getAttackCooldown(pAttacker) != 1.0f && !notcharged)
+        if (!EnchantmentUtils.isFullyChargeIfRequired(this, attacker)) {
             return;
+        }
 
         double victimMana = MMOManager.getMana(pVictim);
 

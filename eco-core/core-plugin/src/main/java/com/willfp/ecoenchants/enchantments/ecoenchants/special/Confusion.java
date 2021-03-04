@@ -31,9 +31,7 @@ public class Confusion extends EcoEnchant {
         }
         Player victim = (Player) uncastVictim;
 
-        if (attacker instanceof Player
-                && PlayerUtils.getAttackCooldown((Player) attacker) != 1.0f
-                && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
+        if (!EnchantmentUtils.isFullyChargeIfRequired(this, attacker)) {
             return;
         }
 

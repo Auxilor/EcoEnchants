@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments.util;
 
 
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.PlayerUtils;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
@@ -9,6 +10,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import lombok.experimental.UtilityClass;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 @UtilityClass
@@ -23,6 +26,24 @@ public class EnchantmentUtils {
     public static boolean passedChance(@NotNull final EcoEnchant enchantment,
                                        final int level) {
         return NumberUtils.randFloat(0, 1) < ((enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") * level) / 100);
+    }
+
+    /**
+     * If attack was fully charged if required.
+     *
+     * @param enchantment The enchantment.
+     * @param entity      The attacker.
+     * @return If was fully charged.
+     */
+    public static boolean isFullyChargeIfRequired(@NotNull final EcoEnchant enchantment,
+                                                  @NotNull final LivingEntity entity) {
+        if (entity instanceof Player) {
+        if (PlayerUtils.getAttackCooldown((Player) enchantment) != 1.0f) {
+                return enchantment.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
+            }
+        }
+
+        return true;
     }
 
     /**
