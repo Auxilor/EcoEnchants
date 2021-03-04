@@ -20,8 +20,7 @@ public class Succession extends EcoEnchant {
                 "succession", EnchantmentType.NORMAL
         );
     }
-
-    public void onBowShoot(@NotNull final LivingEntity shooter,
+    public void Projectile(@NotNull final LivingEntity shooter,
                            final int level,
                            @NotNull final ProjectileLaunchEvent event) {
 

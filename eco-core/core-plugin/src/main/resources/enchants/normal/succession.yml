@@ -19,6 +19,9 @@ general-config:
   grindstoneable: true
   disabled-in-worlds: []
   conflicts:
+    - buckshot
+    - pentashot
+    - tripleshot
   maximum-level: 2
 
 config:
