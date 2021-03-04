@@ -148,7 +148,6 @@ public abstract class Artifact extends EcoEnchant {
             point1.rotateAroundY(Math.toRadians(90));
             point1.multiply(0.4);
             Location location5 = player.getLocation().clone().add(point5);
-
             Vector point6 = player.getLocation().getDirection().clone();
             point2.rotateAroundY(Math.toRadians(-90));
             point2.multiply(0.4);
