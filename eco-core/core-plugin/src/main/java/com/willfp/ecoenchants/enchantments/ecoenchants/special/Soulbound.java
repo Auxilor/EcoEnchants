@@ -1,7 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,6 +42,17 @@ public class Soulbound extends EcoEnchant {
             return;
         }
 
+        if (player.getKiller() instanceof Player) {
+            Player killer = (Player) player.getKiller();
+            if (EnchantChecks.mainhand(killer, EcoEnchants.REAPER)) {
+                if (!(EcoEnchants.REAPER.getDisabledWorlds().contains(killer.getWorld()))) {
+                    int points = EnchantChecks.getMainhandLevel(killer, EcoEnchants.REAPER);
+                    if (EnchantmentUtils.passedChance(EcoEnchants.REAPER, points)) {
+                        return;
+                    }
+                }
+            }
+        }
         for (ItemStack itemStack : player.getInventory().getContents()) {
             if (itemStack == null) {
                 continue;
