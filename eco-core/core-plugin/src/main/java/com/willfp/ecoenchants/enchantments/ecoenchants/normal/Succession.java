@@ -26,8 +26,8 @@ public class Succession extends EcoEnchant {
                            @NotNull final ProjectileLaunchEvent event) {
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
-
-        for (int i = 1; i <= level; i++) {
+        int per = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "arrows-per-level");
+        for (int i = 1; i <= level*per; i++) {
             this.getPlugin().getScheduler().runLater(() -> {
                 Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getEntity().getVelocity());
                 arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);

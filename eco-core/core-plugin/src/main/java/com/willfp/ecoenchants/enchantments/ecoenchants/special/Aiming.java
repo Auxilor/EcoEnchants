@@ -6,10 +6,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
@@ -32,16 +29,12 @@ public class Aiming extends EcoEnchant {
             return;
         }
 
-        if (!(event.getEntity() instanceof Arrow)) {
-            return;
-        }
-
         if (event.isCancelled()) {
             return;
         }
 
         Player player = (Player) event.getEntity().getShooter();
-        Arrow arrow = (Arrow) event.getEntity();
+        Projectile arrow = event.getEntity();
 
         if (!EnchantChecks.mainhand(player, this)) {
             return;
@@ -112,7 +105,7 @@ public class Aiming extends EcoEnchant {
             if (checksPerformed.get() > checks) {
                 bukkitRunnable.cancel();
             }
-            if (arrow.isDead() || arrow.isInBlock() || arrow.isOnGround()) {
+            if (arrow.isDead() || arrow.isOnGround()) {
                 bukkitRunnable.cancel();
             }
             this.getPlugin().getScheduler().run(runnable);
