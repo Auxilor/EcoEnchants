@@ -1,25 +1,22 @@
 #
-# Manyshot Vertical EcoEnchant
+# Tripleshot but aux said im not allowed to delete it EcoEnchant
 #
 
-name: "Manyshot Vertical"
-description: Shoots 2 extra arrows.
+name: "You shouldn't have this"
+description: Srsly, u shouldn't.
 enabled: true
 
 obtaining:
-  table: true
-  villager: true
-  loot: true
-  rarity: legendary
+  table: false
+  villager: false
+  loot: false
+  rarity: unobtainable
 
 general-config:
   targets:
-    - bow
   grindstoneable: true
   disabled-in-worlds: []
   conflicts:
-    - succession
-    - buckshot
 
 config:
   angle: 11

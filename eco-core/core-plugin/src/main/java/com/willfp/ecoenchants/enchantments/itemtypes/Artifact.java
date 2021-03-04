@@ -26,6 +26,8 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public abstract class Artifact extends EcoEnchant {
     /**
      * The artifact particle.
@@ -128,6 +130,32 @@ public abstract class Artifact extends EcoEnchant {
 
         player.getWorld().spawnParticle(particle, location1, 1, 0, 0, 0, 0, extra, true);
         player.getWorld().spawnParticle(particle, location2, 1, 0, 0, 0, 0, extra, true);
+        if (EnchantChecks.getMainhandLevel(player,this)>=2) {
+            Vector point3 = player.getLocation().getDirection().clone();
+            point1.rotateAroundY(Math.toRadians(90));
+            point1.multiply(0.8);
+            Location location3 = player.getLocation().clone().add(point3);
+
+            Vector point4 = player.getLocation().getDirection().clone();
+            point2.rotateAroundY(Math.toRadians(-90));
+            point2.multiply(0.8);
+            Location location4 = player.getLocation().clone().add(point4);
+            player.getWorld().spawnParticle(particle, location3, 1, 0, 0, 0, 0, extra, true);
+            player.getWorld().spawnParticle(particle, location4, 1, 0, 0, 0, 0, extra, true);
+        }
+        if (EnchantChecks.getMainhandLevel(player,this)>=3) {
+            Vector point5 = player.getLocation().getDirection().clone();
+            point1.rotateAroundY(Math.toRadians(90));
+            point1.multiply(0.4);
+            Location location5 = player.getLocation().clone().add(point5);
+
+            Vector point6 = player.getLocation().getDirection().clone();
+            point2.rotateAroundY(Math.toRadians(-90));
+            point2.multiply(0.4);
+            Location location6 = player.getLocation().clone().add(point6);
+            player.getWorld().spawnParticle(particle, location5, 1, 0, 0, 0, 0, extra, true);
+            player.getWorld().spawnParticle(particle, location6, 1, 0, 0, 0, 0, extra, true);
+        }
     }
 
     /**
@@ -185,22 +213,6 @@ public abstract class Artifact extends EcoEnchant {
                     entity.getWorld().spawnParticle(particle, particleLocation3, 1, 0, 0, 0, 0, extra, false);
                     entity.getWorld().spawnParticle(particle, particleLocation4, 1, 0, 0, 0, 0, extra, false);
                 }
-                if (EnchantChecks.getMainhandLevel(player,this)<3) {
-                    for (int j = EnchantChecks.getMainhandLevel(player,this)-3; j>0; i-=1) {
-                        Location particleLocation5 = entity.getLocation();
-                        Location particleLocation6 = entity.getLocation();
-                        Location particleLocation7 = entity.getLocation();
-                        Location particleLocation8 = entity.getLocation();
-                        particleLocation5.add(x, -y, z);
-                        particleLocation6.add(-x, -y, -z);
-                        particleLocation7.add(-x, -y, z);
-                        particleLocation8.add(x, -y, -z);
-                        entity.getWorld().spawnParticle(particle, particleLocation5, 1, j, 0, j, 0, extra, false);
-                        entity.getWorld().spawnParticle(particle, particleLocation6, 1, -j, 0, -j, 0, extra, false);
-                        entity.getWorld().spawnParticle(particle, particleLocation7, 1, -j, 0, -j, 0, extra, false);
-                        entity.getWorld().spawnParticle(particle, particleLocation8, 1, j, 0, j, 0, extra, false);
-                    }
-                }
             }
         }).runTaskTimer(0, 1);
     }
@@ -245,7 +257,7 @@ public abstract class Artifact extends EcoEnchant {
             if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) {
                 bukkitRunnable.cancel();
             }
-            entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
-        }).runTaskTimer(4, ticks);
+            Objects.requireNonNull(entity.getLocation().getWorld()).spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
+        }).runTaskTimer(4, ticks/EnchantChecks.getMainhandLevel(player,this));
     }
 }

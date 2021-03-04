@@ -25,21 +25,6 @@ public class Tripleshot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -level; i <= level; i += 1) {
-            if (i == 0) {
-                continue;
-            }
-
-            Vector velocity = event.getProjectile().getVelocity();
-
-            float radians = (float) ((float) i * Math.toRadians(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "angle")));
-            velocity.rotateAroundZ(radians);
-
-            Arrow arrow1 = shooter.launchProjectile(Arrow.class, velocity);
-            if (EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE)) {
-                arrow1.setFireTicks(Integer.MAX_VALUE);
-            }
-            arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
-        }
+        event.setCancelled(true);
     }
 }
