@@ -223,7 +223,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.special.Pentashot;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Preservation;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Prosperity;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Razor;
-import com.willfp.ecoenchants.enchantments.ecoenchants.special.Reaper;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reaper;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Repairing;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Spring;
