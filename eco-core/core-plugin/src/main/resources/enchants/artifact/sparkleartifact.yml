@@ -24,7 +24,7 @@ general-config:
   grindstoneable: true
   disabled-in-worlds: []
   conflicts: []
-  maximum-level: 4
+  maximum-level: 3
 
 config:
   # For Attack

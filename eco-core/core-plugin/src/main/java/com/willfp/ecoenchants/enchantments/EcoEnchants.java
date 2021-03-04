@@ -324,7 +324,7 @@ public class EcoEnchants {
     public static final EcoEnchant NOCTURNAL = new Nocturnal();
     public static final EcoEnchant CONFUSION = new Confusion();
     public static final EcoEnchant ARCANIC = new Arcanic();
-    public static final EcoEnchant MANYSHOT = new Pentashot();
+    public static final EcoEnchant PENTASHOT = new Pentashot();
     public static final EcoEnchant LUMBERJACK = new Lumberjack();
     public static final EcoEnchant STONE_SWITCHER = new StoneSwitcher();
     public static final EcoEnchant MAGNETIC = new Magnetic();
