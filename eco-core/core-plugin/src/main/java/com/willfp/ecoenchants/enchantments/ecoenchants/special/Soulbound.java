@@ -44,10 +44,9 @@ public class Soulbound extends EcoEnchant {
 
         if (player.getKiller() instanceof Player) {
             Player killer = (Player) player.getKiller();
-            ItemStack item = killer.getInventory().getItemInMainHand();
-            if (EnchantChecks.item(item, EcoEnchants.REAPER)) {
-                if (!(EcoEnchants.REAPER.getDisabledWorlds().contains(player.getWorld()))) {
-                    int points = EnchantChecks.getItemLevel(item, EcoEnchants.REAPER);
+            if (EnchantChecks.mainhand(killer, EcoEnchants.REAPER)) {
+                if (!(EcoEnchants.REAPER.getDisabledWorlds().contains(killer.getWorld()))) {
+                    int points = EnchantChecks.getMainhandLevel(killer, EcoEnchants.REAPER);
                     if (EnchantmentUtils.passedChance(EcoEnchants.REAPER, points)) {
                         return;
                     }
