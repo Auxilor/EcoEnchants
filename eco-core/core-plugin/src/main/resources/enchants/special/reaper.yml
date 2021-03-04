@@ -1,0 +1,24 @@
+#
+# Reaper EcoEnchant
+#
+
+name: "Reaper"
+description: Gives you a chance to knock out things with a soulbound.
+enabled: true
+
+obtaining:
+  table: true
+  villager: false
+  loot: false
+  rarity: veryspecial
+
+general-config:
+  targets:
+    - hoe
+  grindstoneable: true
+  disabled-in-worlds: []
+  conflicts: []
+  maximum-level: 5
+
+config:
+  chance-per-level: 2
