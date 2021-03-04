@@ -27,6 +27,7 @@ public class Leeching extends EcoEnchant {
                 && !this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged")) {
             return;
         }
+
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-level");
         double amountToHeal = level * multiplier;
         double newHealth = attacker.getHealth() + amountToHeal;
