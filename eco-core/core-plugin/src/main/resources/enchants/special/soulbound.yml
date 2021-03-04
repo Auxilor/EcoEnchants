@@ -20,4 +20,4 @@ general-config:
   conflicts: []
 
 config:
-  # No config is available for this enchantment
+  remove-after: false # If soulbound should be 1-time use

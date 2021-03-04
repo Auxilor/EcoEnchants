@@ -75,6 +75,14 @@ public class Soulbound extends EcoEnchant {
             assert meta != null;
             PersistentDataContainer container = meta.getPersistentDataContainer();
             container.set(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER, 1);
+
+            if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "remove-after")) {
+                if (meta instanceof EnchantmentStorageMeta) {
+                    ((EnchantmentStorageMeta) meta).removeStoredEnchant(this);
+                }
+                meta.removeEnchant(this);
+            }
+
             itemStack.setItemMeta(meta);
         }
 
