@@ -24,3 +24,4 @@ general-config:
 
 config:
   health-per-level: 2 # Level * Health = Amount of health to heal
+  allow-not-fully-charged: false
