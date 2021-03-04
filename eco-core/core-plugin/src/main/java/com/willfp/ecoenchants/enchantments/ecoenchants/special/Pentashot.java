@@ -24,7 +24,7 @@ public class Pentashot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        for (int i = -2; i <= 2; i += 1) {
+        for (int i = -level; i <= level; i += 1) {
             if (i == 0) {
                 continue;
             }
