@@ -23,5 +23,5 @@ general-config:
     - buckshot
 
 config:
-  extra-arrows: 2
+  extra-arrows-per-level: 1
   per-arrow-damage: true #If set to false, then it will only take 1 durability
