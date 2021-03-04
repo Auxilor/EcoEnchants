@@ -19,9 +19,7 @@ public class Manyshot extends EcoEnchant {
         );
     }
 
-    @Override
     public void onBowShoot(@NotNull final LivingEntity shooter,
-                           @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
         for (int i = -level; i <= level; i += 1) {

@@ -11,6 +11,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class Succession extends EcoEnchant {
@@ -20,17 +21,15 @@ public class Succession extends EcoEnchant {
         );
     }
 
-    @Override
     public void onBowShoot(@NotNull final LivingEntity shooter,
-                           @NotNull final Arrow arrow,
                            final int level,
-                           @NotNull final EntityShootBowEvent event) {
+                           @NotNull final ProjectileLaunchEvent event) {
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
 
         for (int i = 1; i <= level; i++) {
             this.getPlugin().getScheduler().runLater(() -> {
-                Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
+                Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getEntity().getVelocity());
                 arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
                 if (fire) {
                     arrow1.setFireTicks(Integer.MAX_VALUE);

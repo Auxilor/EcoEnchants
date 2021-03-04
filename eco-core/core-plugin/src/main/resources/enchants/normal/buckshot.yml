@@ -25,4 +25,4 @@ general-config:
 
 config:
   amount-per-level: 3 # Arrows to shoot per level
-  spread-per-level: 0.2 # Spread randomness per level
+  spread-per-level: 0.1 # Spread randomness per level

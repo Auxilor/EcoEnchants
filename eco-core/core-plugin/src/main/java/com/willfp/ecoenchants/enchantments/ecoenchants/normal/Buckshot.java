@@ -13,6 +13,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,12 +23,11 @@ public class Buckshot extends EcoEnchant {
                 "buckshot", EnchantmentType.NORMAL
         );
     }
-    @Override
     public void onBowShoot(@NotNull final LivingEntity shooter,
                            @NotNull final Arrow arrow,
                            final int level,
-                           @NotNull final EntityShootBowEvent event) {
-        event.getProjectile().remove();
+                           @NotNull final ProjectileLaunchEvent event) {
+        event.getEntity().remove();
         if (shooter instanceof Player) {
             ((Player) shooter).playSound(shooter.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }
@@ -39,7 +39,7 @@ public class Buckshot extends EcoEnchant {
 
         for (int i = 0; i < number; i += 1) {
 
-            Vector velocity = event.getProjectile().getVelocity().clone();
+            Vector velocity = event.getEntity().getVelocity().clone();
 
             velocity.add(new Vector(NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread)));
 

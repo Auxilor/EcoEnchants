@@ -102,3 +102,7 @@ targets:
 
   carrot_stick:
     - carrot_on_a_stick
+
+  throwables:
+    -snowball
+    -egg
