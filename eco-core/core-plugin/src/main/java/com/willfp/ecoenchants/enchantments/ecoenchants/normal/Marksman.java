@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.jetbrains.annotations.NotNull;
@@ -19,9 +20,6 @@ public class Marksman extends EcoEnchant {
     }
     @EventHandler
     public void onMarksmanShoot(@NotNull final ProjectileLaunchEvent event) {
-        if (event.getEntityType() != EntityType.ARROW) {
-            return;
-        }
 
         if (!(event.getEntity().getShooter() instanceof Player)) {
             return;
@@ -37,10 +35,7 @@ public class Marksman extends EcoEnchant {
             return;
         }
 
-        if (!(event.getEntity() instanceof Arrow)) {
-            return;
-        }
-        Arrow a = (Arrow) event.getEntity();
+        Projectile a = event.getEntity();
         a.setGravity(false);
 
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "remove-arrow-after-ticks");
