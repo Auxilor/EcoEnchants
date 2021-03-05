@@ -10,8 +10,6 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -44,14 +42,14 @@ public class Thrive extends EcoEnchant {
 
             if (player.getHealth() >= inst.getValue()) {
                 this.getPlugin().getScheduler().runLater(() -> {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 255, false, false, false));
+                    player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                 }, 1);
             }
 
             if (points > 0) {
                 inst.addModifier(
                         new AttributeModifier(
-                                UUID.nameUUIDFromBytes("prosperity".getBytes()),
+                                UUID.nameUUIDFromBytes("thrive".getBytes()),
                                 this.getKey().getKey(),
                                 this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "health-per-point") * points,
                                 AttributeModifier.Operation.ADD_NUMBER
