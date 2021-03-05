@@ -1,14 +1,63 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public class Prosperity extends EcoEnchant {
+    private final AttributeModifier modifier = new AttributeModifier(UUID.nameUUIDFromBytes("prosperity".getBytes()), this.getKey().getKey(), 1, AttributeModifier.Operation.ADD_NUMBER);
+
     public Prosperity() {
         super(
                 "prosperity", EnchantmentType.SPECIAL
         );
     }
 
-    // Prosperity listeners are located in Thrive
+    @EventHandler
+    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
+        Player player = event.getPlayer();
+
+        this.getPlugin().getScheduler().runLater(() -> {
+            int points = EnchantChecks.getArmorPoints(player, this);
+
+            AttributeInstance inst = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+
+            assert inst != null;
+
+            if (this.getDisabledWorlds().contains(player.getWorld())) {
+                points = 0;
+            }
+
+            inst.removeModifier(modifier);
+
+            if (player.getHealth() >= inst.getValue()) {
+                this.getPlugin().getScheduler().runLater(() -> {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 255, false, false, false));
+                }, 1);
+            }
+
+            if (points > 0) {
+                inst.addModifier(
+                        new AttributeModifier(
+                                UUID.nameUUIDFromBytes("prosperity".getBytes()),
+                                this.getKey().getKey(),
+                                this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "health-per-point") * points,
+                                AttributeModifier.Operation.ADD_NUMBER
+                        )
+                );
+            }
+        }, 1);
+    }
 }

@@ -6,52 +6,58 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.UUID;
+
 public class Thrive extends EcoEnchant {
+    private final AttributeModifier modifier = new AttributeModifier(UUID.nameUUIDFromBytes("thrive".getBytes()), this.getKey().getKey(), 1, AttributeModifier.Operation.ADD_NUMBER);
+
     public Thrive() {
         super(
                 "thrive", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
-        final Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
         this.getPlugin().getScheduler().runLater(() -> {
-            int totalProsperityPoints = EnchantChecks.getArmorPoints(player, EcoEnchants.PROSPERITY, 0);
-            int totalThrivePoints = EnchantChecks.getArmorPoints(player, EcoEnchants.THRIVE, 0);
+            int points = EnchantChecks.getArmorPoints(player, this);
 
-            if (totalThrivePoints == 0 && totalProsperityPoints == 0) {
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
-                return;
+            AttributeInstance inst = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+
+            assert inst != null;
+
+            if (this.getDisabledWorlds().contains(player.getWorld())) {
+                points = 0;
             }
 
-            if (EcoEnchants.THRIVE.getDisabledWorlds().contains(player.getWorld())) {
-                return;
-            }
+            inst.removeModifier(modifier);
 
-            double thriveBonus = totalThrivePoints * EcoEnchants.THRIVE.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-point");
-            double prosperityBonus = totalProsperityPoints * EcoEnchants.PROSPERITY.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-point");
-            double bonus = thriveBonus + prosperityBonus;
-
-            boolean onMaxHealth = false;
-
-            if (player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
-                onMaxHealth = true;
-            }
-
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue() + bonus);
-            boolean finalOnMaxHealth = onMaxHealth;
-            this.getPlugin().getScheduler().runLater(() -> {
-                if (finalOnMaxHealth) {
+            if (player.getHealth() >= inst.getValue()) {
+                this.getPlugin().getScheduler().runLater(() -> {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 255, false, false, false));
-                }
-            }, 1);
+                }, 1);
+            }
+
+            if (points > 0) {
+                inst.addModifier(
+                        new AttributeModifier(
+                                UUID.nameUUIDFromBytes("prosperity".getBytes()),
+                                this.getKey().getKey(),
+                                this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "health-per-point") * points,
+                                AttributeModifier.Operation.ADD_NUMBER
+                        )
+                );
+            }
         }, 1);
     }
 }
