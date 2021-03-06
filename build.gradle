@@ -90,7 +90,7 @@ shadowJar {
 }
 
 jar {
-    archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + " " + "unshaded" + ".jar"
+    archiveFileName = findProperty("plugin-name") + " v" + findProperty("version") + ".jar"
 }
 
 group = 'com.willfp'
