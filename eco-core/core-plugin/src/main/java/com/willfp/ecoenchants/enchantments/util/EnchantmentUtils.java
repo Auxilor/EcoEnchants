@@ -38,7 +38,7 @@ public class EnchantmentUtils {
     public static boolean isFullyChargeIfRequired(@NotNull final EcoEnchant enchantment,
                                                   @NotNull final LivingEntity entity) {
         if (entity instanceof Player) {
-        if (PlayerUtils.getAttackCooldown((Player) enchantment) != 1.0f) {
+            if (PlayerUtils.getAttackCooldown((Player) entity) != 1.0f) {
                 return enchantment.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
             }
         }
