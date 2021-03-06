@@ -34,6 +34,8 @@ public class Thrive extends EcoEnchant {
 
             assert inst != null;
 
+            inst.setBaseValue(inst.getDefaultValue());
+
             if (this.getDisabledWorlds().contains(player.getWorld())) {
                 points = 0;
             }
