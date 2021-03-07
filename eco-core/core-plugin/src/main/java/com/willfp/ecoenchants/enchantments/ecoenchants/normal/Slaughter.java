@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,6 +24,10 @@ public class Slaughter extends EcoEnchant {
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
         if (victim instanceof Monster) {
+            return;
+        }
+
+        if (victim instanceof Player) {
             return;
         }
 
