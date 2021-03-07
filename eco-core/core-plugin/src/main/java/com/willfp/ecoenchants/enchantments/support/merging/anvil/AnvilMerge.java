@@ -116,6 +116,10 @@ public class AnvilMerge {
             return new Pair<>(null, null);
         }
 
+        if (left.getAmount() != right.getAmount()) {
+            return new Pair<>(null, null);
+        }
+
         HashMap<Enchantment, Integer> leftEnchants = new HashMap<>();
         HashMap<Enchantment, Integer> rightEnchants = new HashMap<>();
 
