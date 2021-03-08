@@ -12,10 +12,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -129,9 +131,18 @@ public class CommandEcodebug extends AbstractCommand {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand().toString());
+                player.sendMessage("Lore: ");
                 Bukkit.getLogger().info("");
 
                 Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
+                Bukkit.getLogger().info("Lore: ");
+                ItemMeta meta = player.getInventory().getItemInMainHand().getItemMeta();
+                if (meta != null) {
+                    for (String s : new ArrayList<>(meta.hasLore() ? meta.getLore() : new ArrayList<>())) {
+                        Bukkit.getLogger().info(s);
+                        player.sendMessage(s);
+                    }
+                }
                 Bukkit.getLogger().info("");
             }
         }
