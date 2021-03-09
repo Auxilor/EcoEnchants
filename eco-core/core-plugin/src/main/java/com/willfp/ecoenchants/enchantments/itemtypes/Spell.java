@@ -6,7 +6,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.enchantments.util.SpellRunnable;
+import com.willfp.ecoenchants.enchantments.util.SpellActivateEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -23,19 +24,20 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 public abstract class Spell extends EcoEnchant {
     /**
-     * {@link SpellRunnable}s linked to players.
+     * The cooldown end times linked to players.
      */
-    private final HashMap<UUID, SpellRunnable> tracker = new HashMap<>();
+    private final Map<UUID, Long> tracker = new HashMap<>();
 
     /**
      * Players currently running spells - prevents listener firing twice.
      */
-    private final Set<UUID> runningSpell = new HashSet<>();
+    private final Set<UUID> preventDuplicateList = new HashSet<>();
 
     /**
      * Items that must be left-clicked to activate spells for.
@@ -83,11 +85,11 @@ public abstract class Spell extends EcoEnchant {
     public void onUseEventHandler(@NotNull final PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if (runningSpell.contains(player.getUniqueId())) {
+        if (preventDuplicateList.contains(player.getUniqueId())) {
             return;
         }
-        runningSpell.add(player.getUniqueId());
-        this.getPlugin().getScheduler().runLater(() -> runningSpell.remove(player.getUniqueId()), 5);
+        preventDuplicateList.add(player.getUniqueId());
+        this.getPlugin().getScheduler().runLater(() -> preventDuplicateList.remove(player.getUniqueId()), 5);
 
         if (LEFT_CLICK_ITEMS.contains(player.getInventory().getItemInMainHand().getType())) {
             if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
@@ -115,11 +117,8 @@ public abstract class Spell extends EcoEnchant {
         }
 
         if (!tracker.containsKey(player.getUniqueId())) {
-            tracker.put(player.getUniqueId(), new SpellRunnable(this, player));
+            tracker.put(player.getUniqueId(), System.currentTimeMillis() + (long) ((this.getCooldownTime() * 1000L) * Spell.getCooldownMultiplier(player)));
         }
-
-        SpellRunnable runnable = tracker.get(player.getUniqueId());
-        runnable.setTask(() -> this.onUse(player, level, event));
 
         int cooldown = getCooldown(this, player);
 
@@ -139,13 +138,20 @@ public abstract class Spell extends EcoEnchant {
             String message = this.getPlugin().getLangYml().getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
             player.sendMessage(message);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
-            return;
-        }
+        } else {
+            tracker.remove(player.getUniqueId());
 
-        String message = this.getPlugin().getLangYml().getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
-        player.sendMessage(message);
-        player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
-        runnable.run();
+            SpellActivateEvent spellActivateEvent = new SpellActivateEvent(player, this);
+            Bukkit.getPluginManager().callEvent(spellActivateEvent);
+
+            if (!spellActivateEvent.isCancelled()) {
+                String message = this.getPlugin().getLangYml().getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
+                player.sendMessage(message);
+                player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
+
+                onUse(player, level, event);
+            }
+        }
     }
 
     /**
@@ -178,12 +184,10 @@ public abstract class Spell extends EcoEnchant {
     public static int getCooldown(@NotNull final Spell spell,
                                   @NotNull final Player player) {
         if (!spell.tracker.containsKey(player.getUniqueId())) {
-            spell.tracker.put(player.getUniqueId(), new SpellRunnable(spell, player));
+            return 0;
         }
 
-        SpellRunnable runnable = spell.tracker.get(player.getUniqueId());
-
-        long msLeft = runnable.getEndTime() - System.currentTimeMillis();
+        long msLeft = spell.tracker.get(player.getUniqueId()) - System.currentTimeMillis();
 
         long secondsLeft = (long) Math.ceil((double) msLeft / 1000);
 
