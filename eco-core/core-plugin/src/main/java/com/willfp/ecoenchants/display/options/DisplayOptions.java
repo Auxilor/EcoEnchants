@@ -86,6 +86,12 @@ public class DisplayOptions extends PluginDependent {
     private boolean usingForceHideFixer = false;
 
     /**
+     * If item must be a target.
+     */
+    @Getter
+    private boolean requireTarget = true;
+
+    /**
      * Instantiate new display options.
      *
      * @param plugin EcoEnchants.
@@ -123,6 +129,8 @@ public class DisplayOptions extends PluginDependent {
         usingExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.enabled");
         usingAggressiveExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.aggressive");
         usingForceHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.force");
+
+        requireTarget = this.getPlugin().getConfigYml().getBool("lore.require-target");
 
         boolean byType = this.getPlugin().getConfigYml().getBool("lore.sort-by-type");
         boolean byLength = this.getPlugin().getConfigYml().getBool("lore.sort-by-length");
