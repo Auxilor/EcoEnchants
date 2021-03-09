@@ -80,6 +80,12 @@ public class DisplayOptions extends PluginDependent {
     private boolean usingAggressiveExperimentalHideFixer = false;
 
     /**
+     * If all items should have hide enchants removed.
+     */
+    @Getter
+    private boolean usingForceHideFixer = false;
+
+    /**
      * Instantiate new display options.
      *
      * @param plugin EcoEnchants.
@@ -116,6 +122,7 @@ public class DisplayOptions extends PluginDependent {
         usingAggressiveLoreGetter = this.getPlugin().getConfigYml().getBool("advanced.lore-getter.aggressive");
         usingExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.enabled");
         usingAggressiveExperimentalHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.aggressive");
+        usingForceHideFixer = this.getPlugin().getConfigYml().getBool("advanced.hide-fixer.force");
 
         boolean byType = this.getPlugin().getConfigYml().getBool("lore.sort-by-type");
         boolean byLength = this.getPlugin().getConfigYml().getBool("lore.sort-by-length");

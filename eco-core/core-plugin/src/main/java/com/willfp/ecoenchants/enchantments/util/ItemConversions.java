@@ -214,8 +214,13 @@ public class ItemConversions extends PluginDependent implements Listener {
             return;
         }
 
-        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
-            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS);
+        if (((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingForceHideFixer()) {
+            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        } else {
+            if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+                meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS);
+            }
         }
 
         itemStack.setItemMeta(meta);

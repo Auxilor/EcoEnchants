@@ -30,6 +30,8 @@ lore:
   sort-by-rarity: false # Sort enchantments by rarity.
   # Any combination of the above options is valid
 
+  require-target: true # Only display items included in target.yml
+
   type-ordering: # Only used if sort-by-type is enabled - top to bottom
     - normal
     - special
@@ -124,3 +126,4 @@ advanced:
     aggressive: false
     # Aggressive mode converts all items in all inventories whenever revealed.
     # This may impact performance.
+    force: false # If **all** items should have hide enchants removed - absolute last ditch effort, most likely to break other things.
