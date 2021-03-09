@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.util.NumberConversions;
 import org.jetbrains.annotations.NotNull;
 
@@ -124,6 +125,7 @@ public abstract class Spell extends EcoEnchant {
 
         if (event.getClickedBlock() != null) {
             if (event.getClickedBlock().getState() instanceof Container
+                    || event.getClickedBlock().getState() instanceof BlockInventoryHolder
                     || event.getClickedBlock().getType() == Material.CRAFTING_TABLE
                     || event.getClickedBlock().getType() == Material.GRINDSTONE
                     || event.getClickedBlock().getType() == Material.ENCHANTING_TABLE
