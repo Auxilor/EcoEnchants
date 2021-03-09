@@ -116,10 +116,6 @@ public abstract class Spell extends EcoEnchant {
             return;
         }
 
-        if (!tracker.containsKey(player.getUniqueId())) {
-            tracker.put(player.getUniqueId(), System.currentTimeMillis() + (long) ((this.getCooldownTime() * 1000L) * Spell.getCooldownMultiplier(player)));
-        }
-
         int cooldown = getCooldown(this, player);
 
         if (event.getClickedBlock() != null) {
@@ -140,6 +136,7 @@ public abstract class Spell extends EcoEnchant {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
         } else {
             tracker.remove(player.getUniqueId());
+            tracker.put(player.getUniqueId(), System.currentTimeMillis() + (long) ((this.getCooldownTime() * 1000L) * Spell.getCooldownMultiplier(player)));
 
             SpellActivateEvent spellActivateEvent = new SpellActivateEvent(player, this);
             Bukkit.getPluginManager().callEvent(spellActivateEvent);
