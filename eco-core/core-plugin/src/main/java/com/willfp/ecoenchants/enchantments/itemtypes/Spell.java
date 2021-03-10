@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellActivateEvent;
+import com.willfp.ecoenchants.enchantments.util.SpellCancellationInterrupt;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -146,7 +147,11 @@ public abstract class Spell extends EcoEnchant {
                 player.sendMessage(message);
                 player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
 
-                onUse(player, level, event);
+                try {
+                    onUse(player, level, event);
+                } catch (SpellCancellationInterrupt ignored) {
+                    // Do nothing
+                }
             }
         }
     }
@@ -169,7 +174,7 @@ public abstract class Spell extends EcoEnchant {
      */
     public abstract void onUse(@NotNull Player player,
                                int level,
-                               @NotNull PlayerInteractEvent event);
+                               @NotNull PlayerInteractEvent event) throws SpellCancellationInterrupt;
 
     /**
      * Utility method to get a player's cooldown time of a specific spell.
