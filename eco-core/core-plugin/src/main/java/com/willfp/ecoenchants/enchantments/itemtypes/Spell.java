@@ -143,15 +143,15 @@ public abstract class Spell extends EcoEnchant {
             Bukkit.getPluginManager().callEvent(spellActivateEvent);
 
             if (!spellActivateEvent.isCancelled()) {
-                String message = this.getPlugin().getLangYml().getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
-                player.sendMessage(message);
-                player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
-
                 try {
                     onUse(player, level, event);
                 } catch (SpellCancellationInterrupt ignored) {
-                    // Do nothing
+                    return;
                 }
+
+                String message = this.getPlugin().getLangYml().getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
+                player.sendMessage(message);
+                player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
             }
         }
     }
