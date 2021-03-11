@@ -178,6 +178,10 @@ public class VillagerListeners extends PluginDependent implements Listener {
                     anyConflicts.set(true);
                 }
 
+                if (enchantment.conflictsWith(enchant)) {
+                    anyConflicts.set(true);
+                }
+
                 EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
 
                 if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
