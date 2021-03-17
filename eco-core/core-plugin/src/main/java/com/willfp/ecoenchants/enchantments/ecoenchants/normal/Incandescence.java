@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class Incandescence extends EcoEnchant {
@@ -19,6 +20,10 @@ public class Incandescence extends EcoEnchant {
     }
     @EventHandler
     public void onIncandescenceHurt(@NotNull final EntityDamageByEntityEvent event) {
+        if (event.getCause() == EntityDamageEvent.DamageCause.THORNS) {
+            return;
+        }
+
         if (!(event.getEntity() instanceof Player)) {
             return;
         }
