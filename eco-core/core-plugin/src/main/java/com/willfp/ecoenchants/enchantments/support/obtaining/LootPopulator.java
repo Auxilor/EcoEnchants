@@ -51,6 +51,10 @@ public class LootPopulator extends BlockPopulator {
     public void populate(@NotNull final World world,
                          @NotNull final Random random,
                          @NotNull final Chunk chunk) {
+        if (!plugin.getConfigYml().getBool("loot.enabled")) {
+            return;
+        }
+
         for (BlockState state : chunk.getTileEntities()) {
             Block block = state.getBlock();
             if (!(block.getState() instanceof Chest)) {
