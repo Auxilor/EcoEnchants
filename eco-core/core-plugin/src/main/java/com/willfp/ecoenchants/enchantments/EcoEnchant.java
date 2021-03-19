@@ -363,6 +363,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      */
     @Override
     public boolean conflictsWith(@NotNull final Enchantment enchantment) {
+        if (enchantment instanceof EcoEnchant) {
+            return conflicts.contains(enchantment) || ((EcoEnchant) enchantment).conflicts.contains(this);
+        }
         return conflicts.contains(enchantment);
     }
 
