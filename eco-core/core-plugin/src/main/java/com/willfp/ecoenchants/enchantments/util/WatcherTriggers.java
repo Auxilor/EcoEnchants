@@ -10,10 +10,12 @@ import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -309,6 +311,56 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             }
 
             enchant.onBowShoot(shooter, arrow, level, event);
+        });
+    }
+
+    /**
+     * Called when an entity launches a projectile.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler(ignoreCancelled = true)
+    public void onProjectileLaunch(@NotNull final ProjectileLaunchEvent event) {
+        if (McmmoManager.isFake(event)) {
+            return;
+        }
+
+        if (!(event.getEntity() instanceof AbstractArrow)) {
+            return;
+        }
+
+        if (!(event.getEntity().getShooter() instanceof Player)) {
+            return;
+        }
+
+        LivingEntity shooter = (LivingEntity) event.getEntity().getShooter();
+
+        Projectile projectile = event.getEntity();
+
+        if (shooter.getEquipment() == null) {
+            return;
+        }
+
+        ItemStack item = shooter.getEquipment().getItemInMainHand();
+
+        if (projectile instanceof Trident) {
+            item = TridentUtils.getItemStack((Trident) projectile);
+        }
+
+        EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
+            if (event.isCancelled()) {
+                return;
+            }
+
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
+            enchant.onProjectileLaunch(shooter, projectile, level, event);
         });
     }
 

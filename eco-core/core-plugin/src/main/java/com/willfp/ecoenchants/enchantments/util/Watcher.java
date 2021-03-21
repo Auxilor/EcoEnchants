@@ -5,6 +5,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
@@ -92,6 +93,21 @@ public interface Watcher {
                             @NotNull final Arrow arrow,
                             final int level,
                             @NotNull final EntityShootBowEvent event) {
+        // Empty default as enchantments only override required watchers.
+    }
+
+    /**
+     * Called when an entity shoots a projectile.
+     *
+     * @param shooter    The entity that shot the bow.
+     * @param projectile The projectile that was shot.
+     * @param level      The level of the enchantment found on the projectile.
+     * @param event      The event that called this watcher.
+     */
+    default void onProjectileLaunch(@NotNull final LivingEntity shooter,
+                                    @NotNull final Projectile projectile,
+                                    final int level,
+                                    @NotNull final ProjectileLaunchEvent event) {
         // Empty default as enchantments only override required watchers.
     }
 

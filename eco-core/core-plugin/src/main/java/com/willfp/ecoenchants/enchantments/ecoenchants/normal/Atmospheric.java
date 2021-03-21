@@ -15,6 +15,7 @@ public class Atmospheric extends EcoEnchant {
                 "atmospheric", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onTridentLaunch(@NotNull final LivingEntity shooter,
                                 @NotNull final Trident trident,

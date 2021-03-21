@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.itemtypes;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.TridentUtils;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -11,17 +10,15 @@ import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
-import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Trident;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -77,21 +74,12 @@ public abstract class Artifact extends EcoEnchant {
         return null;
     }
 
-    /**
-     * Called on block break.
-     *
-     * @param event The event to listen for.
-     */
-    @EventHandler
-    public void onBreak(@NotNull final BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
-
+    @Override
+    public void onBlockBreak(@NotNull final Player player,
+                             @NotNull final Block block,
+                             final int level,
+                             @NotNull final BlockBreakEvent event) {
         if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase())) {
-            return;
-        }
-
-        if (!EnchantChecks.mainhand(player, this)) {
             return;
         }
 
@@ -130,27 +118,11 @@ public abstract class Artifact extends EcoEnchant {
         player.getWorld().spawnParticle(particle, location2, 1, 0, 0, 0, 0, extra, true);
     }
 
-    /**
-     * Called when a player hits an entity.
-     *
-     * @param event The event to listen for.
-     */
-    @EventHandler
-    public void onHit(@NotNull final EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) {
-            return;
-        }
-        if (!(event.getEntity() instanceof LivingEntity)) {
-            return;
-        }
-
-        Player player = (Player) event.getDamager();
-        LivingEntity entity = (LivingEntity) event.getEntity();
-
-        if (!EnchantChecks.mainhand(player, this)) {
-            return;
-        }
-
+    @Override
+    public void onMeleeAttack(@NotNull final LivingEntity attacker,
+                              @NotNull final LivingEntity victim,
+                              final int level,
+                              @NotNull final EntityDamageByEntityEvent event) {
         double radius = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius");
 
         AtomicDouble yAtomic = new AtomicDouble(0);
@@ -163,51 +135,30 @@ public abstract class Artifact extends EcoEnchant {
 
         this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
             for (int i = 0; i < 3; i++) {
-                if (yAtomic.get() > entity.getHeight()) {
+                if (yAtomic.get() > victim.getHeight()) {
                     bukkitRunnable.cancel();
                 }
                 yAtomic.addAndGet(yDelta);
                 double y = yAtomic.get();
                 double x = radius * Math.cos((y + offset) * radiusMultiplier);
                 double z = radius * Math.sin((y + offset) * radiusMultiplier);
-                Location particleLocation = entity.getLocation();
+                Location particleLocation = victim.getLocation();
                 particleLocation.add(x, y, z);
-                entity.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
+                victim.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);
                 if (doubleHelix) {
-                    Location particleLocation2 = entity.getLocation();
+                    Location particleLocation2 = victim.getLocation();
                     particleLocation2.add(-x, y, -z);
-                    entity.getWorld().spawnParticle(particle, particleLocation2, 1, 0, 0, 0, 0, extra, false);
+                    victim.getWorld().spawnParticle(particle, particleLocation2, 1, 0, 0, 0, 0, extra, false);
                 }
             }
         }).runTaskTimer(0, 1);
     }
 
-    /**
-     * Called on projectile launch.
-     *
-     * @param event The event to listen for.
-     */
-    @EventHandler
-    public void onShoot(@NotNull final ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof AbstractArrow)) {
-            return;
-        }
-
-        if (!(event.getEntity().getShooter() instanceof Player)) {
-            return;
-        }
-        Player player = (Player) event.getEntity().getShooter();
-
-        AbstractArrow entity = (AbstractArrow) event.getEntity();
-        ItemStack item = player.getInventory().getItemInMainHand();
-        if (entity instanceof Trident) {
-            item = TridentUtils.getItemStack((Trident) entity);
-        }
-
-        if (!EnchantChecks.item(item, this)) {
-            return;
-        }
-
+    @Override
+    public void onProjectileLaunch(@NotNull final LivingEntity shooter,
+                                   @NotNull final Projectile projectile,
+                                   final int level,
+                                   @NotNull final ProjectileLaunchEvent event) {
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "particle-tick-delay");
 
         int noteColor;
@@ -219,10 +170,10 @@ public abstract class Artifact extends EcoEnchant {
         final double finalColor = color.get();
 
         this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
-            if (entity.isOnGround() || entity.isInBlock() || entity.isDead()) {
+            if (projectile.isOnGround() || projectile.isDead()) {
                 bukkitRunnable.cancel();
             }
-            entity.getLocation().getWorld().spawnParticle(particle, entity.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
+            projectile.getLocation().getWorld().spawnParticle(particle, projectile.getLocation(), 1, 0, 0, 0, finalColor, extra, true);
         }).runTaskTimer(4, ticks);
     }
 }
