@@ -6,6 +6,7 @@ import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -28,6 +29,10 @@ public class BlastMining extends EcoEnchant {
                              final int level,
                              @NotNull final BlockBreakEvent event) {
         if (block.hasMetadata("block-ignore")) {
+            return;
+        }
+
+        if (!EnchantmentUtils.passedChance(this, level)) {
             return;
         }
 

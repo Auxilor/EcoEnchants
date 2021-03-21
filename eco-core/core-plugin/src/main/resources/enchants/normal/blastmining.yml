@@ -20,8 +20,10 @@ general-config:
   conflicts:
     - drill
     - vein
+  maximum-level: 1
 
 config:
+  chance-per-level: 100
   disable-on-sneak: true
   enable-sound: true # Play explosion sound
   hardness-check: true # Only break blocks with hardness less than or equal to first block
