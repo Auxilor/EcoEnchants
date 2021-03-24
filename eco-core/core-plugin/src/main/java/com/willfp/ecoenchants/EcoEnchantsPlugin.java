@@ -204,7 +204,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
                 EnchantmentTarget.class,
                 EcoEnchants.class,
                 TabCompleterEnchantinfo.class,
-                EnchantmentType.class
+                EnchantmentType.class,
+                WatcherTriggers.class
         );
     }
 

@@ -2,11 +2,13 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.google.common.collect.Sets;
 import com.willfp.eco.util.TridentUtils;
+import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
 import com.willfp.eco.util.internal.PluginDependent;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -46,6 +48,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
      * For jump listeners.
      */
     private static final DecimalFormat FORMAT = new DecimalFormat("0.00");
+
+    /**
+     * If watchers should be triggered against npcs.
+     */
+    private static boolean allowOnNPC = false;
 
     /**
      * Create new listener for watcher events.
@@ -717,5 +724,13 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             }
             enchant.onDeflect(blocker, attacker, level, event);
         });
+    }
+
+    /**
+     * Update if allowed on npc.
+     */
+    @ConfigUpdater
+    public static void update() {
+        allowOnNPC = EcoEnchantsPlugin.getInstance().getConfig().getBoolean("allow-on-npc");
     }
 }

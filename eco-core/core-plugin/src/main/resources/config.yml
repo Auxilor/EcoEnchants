@@ -3,6 +3,8 @@
 # by Auxilor
 #
 
+allow-on-npc: false # If enchantments should activate against NPCs.
+
 commands:
   enchantinfo:
     show-target-group: true # Show name of target group rather than individual items
@@ -102,14 +104,11 @@ rarity:
   vanilla-treasure-rarity: legendary # Treasure enchantments do not appear in vanilla enchanting tables (Mending, Soul Speed, Frost Walker)
   # The above options *do not* affect actual enchantment rarities. They are purely for cosmetic purposes, like in item lores.
 
-drops:
-  ### ADVANCED OPTIONS
+advanced:
   force-dropqueue: true
   # When combined with collate, this massively reduces calls to getItemMeta, which can hurt performance when many enchants are on an item.
   # Without collate, the number of calls may be increased - which will further hurt performance
   # Enabling this option makes all drops go through telekinesis listeners
-
-advanced:
   lore-getter:
     # This converts enchantments with matching names from other enchantment plugins from lore into real enchantments.
     # This is experimental not recommended to be used for extended periods of time: enchantments are automatically converted.

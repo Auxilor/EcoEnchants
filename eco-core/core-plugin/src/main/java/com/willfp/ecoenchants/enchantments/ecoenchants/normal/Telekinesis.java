@@ -41,7 +41,7 @@ public class Telekinesis extends EcoEnchant {
 
     @Override
     protected void postUpdate() {
-        always = this.getPlugin().getConfigYml().getBool("drops.force-dropqueue");
+        always = this.getPlugin().getConfigYml().getBool("advanced.force-dropqueue");
     }
 
     // For block drops
