@@ -107,7 +107,6 @@ rarity:
 advanced:
   force-dropqueue: true
   # When combined with collate, this massively reduces calls to getItemMeta, which can hurt performance when many enchants are on an item.
-  # Without collate, the number of calls may be increased - which will further hurt performance
   # Enabling this option makes all drops go through telekinesis listeners
   lore-getter:
     # This converts enchantments with matching names from other enchantment plugins from lore into real enchantments.
