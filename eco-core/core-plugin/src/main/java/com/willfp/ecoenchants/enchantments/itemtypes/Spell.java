@@ -129,6 +129,12 @@ public abstract class Spell extends EcoEnchant {
                     || event.getClickedBlock().getType() == Material.FURNACE) {
                 return;
             }
+
+            if (Prerequisite.MINIMUM_1_16.isMet()) {
+                if (event.getClickedBlock().getType() == Material.SMITHING_TABLE) {
+                    return;
+                }
+            }
         }
 
         if (cooldown > 0) {
