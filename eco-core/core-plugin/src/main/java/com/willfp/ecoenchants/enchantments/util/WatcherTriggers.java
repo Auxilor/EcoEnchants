@@ -94,8 +94,10 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         Arrow arrow = (Arrow) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (victim.hasMetadata("NPC")) {
-            return;
+        if (!allowOnNPC) {
+            if (victim.hasMetadata("NPC")) {
+                return;
+            }
         }
 
         if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) {
@@ -160,8 +162,10 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (victim.hasMetadata("NPC")) {
-            return;
+        if (!allowOnNPC) {
+            if (victim.hasMetadata("NPC")) {
+                return;
+            }
         }
 
         if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) {
@@ -261,8 +265,10 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         LivingEntity attacker = (LivingEntity) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 
-        if (victim.hasMetadata("NPC")) {
-            return;
+        if (!allowOnNPC) {
+            if (victim.hasMetadata("NPC")) {
+                return;
+            }
         }
 
         if (attacker instanceof Player && !AntigriefManager.canInjure((Player) attacker, victim)) {
