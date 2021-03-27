@@ -40,6 +40,10 @@ public class Missile extends Spell {
 
         double multiplier = event.getDamager().getMetadata("eco-damage").get(0).asDouble();
 
+        if (((WitherSkull) event.getDamager()).getShooter().equals(event.getEntity())) {
+            event.setCancelled(true);
+        }
+
         event.setDamage(multiplier);
     }
 
