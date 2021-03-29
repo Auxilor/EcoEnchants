@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.jetbrains.annotations.NotNull;
@@ -74,6 +75,7 @@ public class EnchantmentConfig extends ExtendableConfig {
 
         targetNames.forEach((s -> {
             if (EnchantmentTarget.getByName(s) == null) {
+                Bukkit.getLogger().warning("Target specified in " + name + " is invalid!");
                 return;
             }
             targets.add(EnchantmentTarget.getByName(s));
