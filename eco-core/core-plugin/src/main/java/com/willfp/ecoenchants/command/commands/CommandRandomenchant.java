@@ -1,11 +1,14 @@
 package com.willfp.ecoenchants.command.commands;
 
 import com.willfp.eco.util.command.AbstractCommand;
+import com.willfp.eco.util.command.AbstractTabCompleter;
 import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.ecoenchants.command.tabcompleters.TabCompleterRandomEnchant;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -26,18 +29,39 @@ public class CommandRandomenchant extends AbstractCommand {
      * @param plugin The plugin for the commands to listen for.
      */
     public CommandRandomenchant(@NotNull final AbstractEcoPlugin plugin) {
-        super(plugin, "randomenchant", "ecoenchants.randomenchant", true);
+        super(plugin, "randomenchant", "ecoenchants.randomenchant", false);
+    }
+
+    @Override
+    public AbstractTabCompleter getTab() {
+        return new TabCompleterRandomEnchant(this);
     }
 
     @Override
     public void onExecute(@NotNull final CommandSender sender,
                           @NotNull final List<String> args) {
-        Player player = (Player) sender;
+        Player player;
+
+        if ((args.isEmpty() && sender instanceof Player) || !sender.hasPermission("ecoenchants.randomenchant.others")) {
+            player = (Player) sender;
+        } else {
+            player = Bukkit.getServer().getPlayer(args.get(0));
+        }
+
+        if (player == null) {
+            sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-player"));
+            return;
+        }
+
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         ItemMeta meta = itemStack.getItemMeta();
 
         if (itemStack.getType() == Material.AIR || meta == null || !EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
-            player.sendMessage(this.getPlugin().getLangYml().getMessage("must-hold-item"));
+            if (player.equals(sender)) {
+                player.sendMessage(this.getPlugin().getLangYml().getMessage("must-hold-item"));
+            } else {
+                sender.sendMessage(this.getPlugin().getLangYml().getMessage("must-hold-item-other"));
+            }
             return;
         }
 

@@ -75,6 +75,9 @@ permissions:
   ecoenchants.randomenchant:
     description: Allows the use of /randomenchant to apply a random enchantment to an item
     default: op
+  ecoenchants.randomenchant.others:
+    description: Allows the use of /randomenchant to apply a random enchantment to an item for another player
+    default: op
   ecoenchants.randomenchant.bypasshardcap:
     description: Allows /randomenchant bypassing the anvil hard cap
     default: op

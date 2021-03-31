@@ -20,6 +20,8 @@ messages:
   must-hold-item: "&cYou must be holding an enchantable item!"
   no-enchants-available: "&fNo available enchantments found for this item!"
   applied-random-enchant: "&fAdded %enchantment% to your item!"
+  invalid-player: "&cInvalid Player!"
+  must-hold-item-other: "&cPlayer is not holding an enchantable item!"
 
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
