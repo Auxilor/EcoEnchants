@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -26,6 +27,7 @@ public class Aiming extends EcoEnchant {
                 "aiming", EnchantmentType.SPECIAL
         );
     }
+
     @EventHandler
     public void aimingLaunch(@NotNull final ProjectileLaunchEvent event) {
         if (!(event.getEntity().getShooter() instanceof Player)) {
@@ -74,6 +76,7 @@ public class Aiming extends EcoEnchant {
                     .filter(entity -> entity instanceof LivingEntity)
                     .filter(entity -> !entity.equals(player))
                     .filter(entity -> !(entity instanceof Enderman))
+                    .filter(entity -> !AntigriefManager.canInjure(player, (LivingEntity) entity))
                     .filter(entity -> {
                         if (entity instanceof Player) {
                             return ((Player) entity).getGameMode().equals(GameMode.SURVIVAL) || ((Player) entity).getGameMode().equals(GameMode.ADVENTURE);
