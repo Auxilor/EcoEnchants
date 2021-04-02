@@ -46,7 +46,7 @@ public class EnchantmentConfig extends ExtendableConfig {
      */
     public Set<Enchantment> getEnchantments(@NotNull final String path) {
         Set<Enchantment> enchantments = new HashSet<>();
-        List<String> enchantmentKeys = this.getConfig().getStringList(path);
+        List<String> enchantmentKeys = this.getStrings(path);
         enchantmentKeys.forEach((key -> enchantments.add(Enchantment.getByKey(NamespacedKey.minecraft(key)))));
         return enchantments;
     }
@@ -67,7 +67,7 @@ public class EnchantmentConfig extends ExtendableConfig {
      * @return The targets.
      */
     public Set<EnchantmentTarget> getTargets() {
-        List<String> targetNames = this.getConfig().getStringList(EcoEnchants.GENERAL_LOCATION + "targets");
+        List<String> targetNames = this.getStrings(EcoEnchants.GENERAL_LOCATION + "targets");
         if (targetNames.isEmpty()) {
             return new HashSet<>();
         }
@@ -88,14 +88,14 @@ public class EnchantmentConfig extends ExtendableConfig {
      * Load config values from lang.yml.
      */
     public void loadFromLang() {
-        if (!this.getPlugin().getLangYml().getConfig().contains("enchantments." + this.getName())) {
+        if (!this.getPlugin().getLangYml().has("enchantments." + this.getName())) {
             return;
         }
 
-        this.getConfig().set("name", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".name"));
-        this.getConfig().set("description", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".description"));
+        this.config.set("name", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".name"));
+        this.config.set("description", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".description"));
         try {
-            this.getConfig().save(this.getConfigFile());
+            this.config.save(this.getConfigFile());
         } catch (IOException e) {
             e.printStackTrace();
         }

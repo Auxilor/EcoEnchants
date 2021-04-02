@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Target extends BaseConfig {
@@ -21,8 +22,8 @@ public class Target extends BaseConfig {
      *
      * @return Set of all names.
      */
-    public Set<String> getTargets() {
-        return this.getConfig().getConfigurationSection("targets").getKeys(false);
+    public List<String> getTargets() {
+        return this.getSubsection("targets").getKeys(false);
     }
 
     /**
@@ -33,7 +34,7 @@ public class Target extends BaseConfig {
      */
     public Set<Material> getTargetMaterials(@NotNull final String target) {
         Set<Material> materials = new HashSet<>();
-        this.getConfig().getStringList("targets." + target).forEach(materialName -> {
+        this.getStrings("targets." + target).forEach(materialName -> {
             materials.add(Material.getMaterial(materialName.toUpperCase()));
         });
 

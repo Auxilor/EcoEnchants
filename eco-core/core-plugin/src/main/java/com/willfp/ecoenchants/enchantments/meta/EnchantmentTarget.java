@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -72,7 +73,7 @@ public class EnchantmentTarget {
      */
     @ConfigUpdater
     public static void update() {
-        Set<String> targetNames = EcoEnchantsConfigs.TARGET.getTargets();
+        List<String> targetNames = EcoEnchantsConfigs.TARGET.getTargets();
         ALL.materials.clear();
         targetNames.forEach(name -> {
             Set<Material> materials = EcoEnchantsConfigs.TARGET.getTargetMaterials(name);

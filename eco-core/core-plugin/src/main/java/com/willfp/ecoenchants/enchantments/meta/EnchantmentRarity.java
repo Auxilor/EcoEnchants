@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -151,7 +152,7 @@ public class EnchantmentRarity {
      */
     @ConfigUpdater
     public static void update() {
-        Set<String> raritiesNames = EcoEnchantsConfigs.RARITY.getRarities();
+        List<String> raritiesNames = EcoEnchantsConfigs.RARITY.getRarities();
         raritiesNames.forEach(rarity -> {
             double probability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".table-probability");
             int minimumLevel = EcoEnchantsConfigs.RARITY.getInt("rarities." + rarity + ".minimum-level");
