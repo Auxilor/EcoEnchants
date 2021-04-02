@@ -59,7 +59,7 @@ public class EnchantmentUtils {
                 )
         );
 
-        enchantment.getConfig().getConfig().getKeys(true).forEach(string -> {
+        enchantment.getConfig().getKeys(true).forEach(string -> {
             String key = string.replace("\\.", "_").replace("-", "_");
             Object object = enchantment.getConfig().getConfig().get(string);
 
@@ -71,7 +71,7 @@ public class EnchantmentUtils {
             );
         });
 
-        if (enchantment.getConfig().getConfig().get(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
+        if (enchantment.getConfig().getRaw(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(
                             enchantment.getPermissionName() + "_" + "chance_per_level",
@@ -80,7 +80,7 @@ public class EnchantmentUtils {
             );
         }
 
-        if (enchantment.getConfig().getConfig().get(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
+        if (enchantment.getConfig().getRaw(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(
                             enchantment.getPermissionName() + "_" + "multiplier",
