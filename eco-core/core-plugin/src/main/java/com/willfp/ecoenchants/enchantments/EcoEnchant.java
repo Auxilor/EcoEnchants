@@ -174,8 +174,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             Bukkit.getPluginManager().addPermission(permission);
         }
 
-        //WorldguardManager.registerFlag(this.getPermissionName() + "-enabled", true);
-
         if (type.getRequiredToExtend() != null && !type.getRequiredToExtend().isInstance(this)) {
             return;
         }

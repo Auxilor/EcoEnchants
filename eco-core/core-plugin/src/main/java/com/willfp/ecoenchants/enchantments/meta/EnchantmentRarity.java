@@ -1,10 +1,7 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
-import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
-import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
-import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -85,27 +82,6 @@ public class EnchantmentRarity {
     public void register() {
         Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         matching.ifPresent(REGISTERED::remove);
-
-        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
-                "rarity_" + this.getName() + "_probability",
-                player -> NumberUtils.format(this.tableProbability)
-        ));
-        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
-                "rarity_" + this.getName() + "_minlevel",
-                player -> NumberUtils.format(this.minimumLevel)
-        ));
-        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
-                "rarity_" + this.getName() + "_villagerprobability",
-                player -> NumberUtils.format(this.villagerProbability)
-        ));
-        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
-                "rarity_" + this.getName() + "_lootprobability",
-                player -> NumberUtils.format(this.lootProbability)
-        ));
-        PlaceholderManager.registerPlaceholder(new PlaceholderEntry(
-                "rarity_" + this.getName() + "_color",
-                player -> this.customColor
-        ));
 
         REGISTERED.add(this);
     }

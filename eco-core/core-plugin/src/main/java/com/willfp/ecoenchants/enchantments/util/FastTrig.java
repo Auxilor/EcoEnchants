@@ -17,10 +17,10 @@ public class FastTrig {
     /**
      * Sin lookup table.
      */
-    private static final double[] sin = new double[modulus];
+    private static final double[] SIN_LOOKUP = new double[modulus];
 
     private static double sinLookup(final int a) {
-        return a >= 0 ? sin[a % modulus] : -sin[-a % modulus];
+        return a >= 0 ? SIN_LOOKUP[a % modulus] : -SIN_LOOKUP[-a % modulus];
     }
 
     /**
@@ -45,8 +45,8 @@ public class FastTrig {
 
 
     static {
-        for (int i = 0; i < sin.length; i++) {
-            sin[i] = Math.sin((i * Math.PI) / (precision * 180));
+        for (int i = 0; i < SIN_LOOKUP.length; i++) {
+            SIN_LOOKUP[i] = Math.sin((i * Math.PI) / (precision * 180));
         }
     }
 }

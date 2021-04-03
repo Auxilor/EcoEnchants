@@ -8,7 +8,6 @@ import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import lombok.experimental.UtilityClass;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -70,45 +69,5 @@ public class EnchantmentUtils {
                     )
             );
         });
-
-        if (enchantment.getConfig().getRaw(EcoEnchants.CONFIG_LOCATION + "chance-per-level") != null) {
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(
-                            enchantment.getPermissionName() + "_" + "chance_per_level",
-                            player -> NumberUtils.format(enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level"))
-                    )
-            );
-        }
-
-        if (enchantment.getConfig().getRaw(EcoEnchants.CONFIG_LOCATION + "multiplier") != null) {
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(
-                            enchantment.getPermissionName() + "_" + "multiplier",
-                            player -> NumberUtils.format(enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier"))
-                    )
-            );
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(
-                            enchantment.getPermissionName() + "_" + "multiplier_percentage",
-                            player -> NumberUtils.format(enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * 100)
-                    )
-            );
-        }
-
-        if (enchantment instanceof Spell) {
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(
-                            enchantment.getPermissionName() + "_" + "cooldown",
-                            player -> NumberUtils.format(Spell.getCooldown((Spell) enchantment, player)),
-                            true
-                    )
-            );
-            PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(
-                            enchantment.getPermissionName() + "_" + "cooldown_total",
-                            player -> NumberUtils.format(((Spell) enchantment).getCooldownTime())
-                    )
-            );
-        }
     }
 }
