@@ -203,6 +203,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.WaterAffinity;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.WaterAspect;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Weakening;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Wisdom;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.WoodSwitcher;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Wound;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Zeus;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Aiming;
@@ -488,6 +489,7 @@ public class EcoEnchants {
     public static final EcoEnchant NAUTILUS_ARTIFACT = new NautilusArtifact();
     public static final EcoEnchant SWEEP_ARTIFACT = new SweepArtifact();
     public static final EcoEnchant REAPER = new Reaper();
+    public static final EcoEnchant WOOD_SWITCHER = new WoodSwitcher();
 
     /**
      * Get all registered {@link EcoEnchant}s.
