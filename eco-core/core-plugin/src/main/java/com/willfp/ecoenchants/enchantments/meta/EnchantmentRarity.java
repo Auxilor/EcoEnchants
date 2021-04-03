@@ -79,7 +79,10 @@ public class EnchantmentRarity {
         this.customColor = customColor;
     }
 
-    public void register() {
+    /**
+     * Register rarity.
+     */
+    private void register() {
         Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
         matching.ifPresent(REGISTERED::remove);
 
