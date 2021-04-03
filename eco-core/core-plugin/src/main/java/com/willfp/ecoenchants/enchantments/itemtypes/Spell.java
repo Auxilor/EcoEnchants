@@ -1,5 +1,8 @@
 package com.willfp.ecoenchants.enchantments.itemtypes;
 
+import com.willfp.eco.util.StringUtils;
+import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
+import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -57,6 +60,13 @@ public abstract class Spell extends EcoEnchant {
     protected Spell(@NotNull final String key,
                     @NotNull final Prerequisite... prerequisites) {
         super(key, EnchantmentType.SPELL, prerequisites);
+
+        PlaceholderManager.registerPlaceholder(
+                new PlaceholderEntry(
+                        this.getPermissionName() + "_" + "cooldown",
+                        player -> StringUtils.internalToString(getCooldown(this, player))
+                )
+        );
     }
 
     /**
