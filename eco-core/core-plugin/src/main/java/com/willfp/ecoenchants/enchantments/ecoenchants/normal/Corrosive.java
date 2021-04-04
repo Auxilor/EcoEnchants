@@ -19,6 +19,7 @@ public class Corrosive extends EcoEnchant {
                 "corrosive", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onArrowDamage(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity uncastVictim,

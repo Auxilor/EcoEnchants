@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.util;
 
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -35,7 +35,7 @@ public class ItemConversions extends PluginDependent implements Listener {
      *
      * @param plugin Instance of EcoEnchants.
      */
-    public ItemConversions(@NotNull final AbstractEcoPlugin plugin) {
+    public ItemConversions(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

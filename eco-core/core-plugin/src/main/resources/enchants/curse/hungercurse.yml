@@ -16,9 +16,9 @@ general-config:
   targets:
     - helmet
   grindstoneable: false
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - sating
 
 config:
-  # No config is available for this enchantment
+# No config is available for this enchantment

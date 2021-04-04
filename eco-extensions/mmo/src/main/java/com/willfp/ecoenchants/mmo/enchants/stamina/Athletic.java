@@ -24,7 +24,7 @@ public class Athletic extends MMOEnchantment {
 
         data.getStatMap().getInstance(SharedStat.MAX_STAMINA).remove(KEY);
 
-        if(level == 0) {
+        if (level == 0) {
             MMOLib.plugin.getStats().runUpdates(data.getStatMap());
             return;
         }

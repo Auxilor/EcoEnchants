@@ -17,8 +17,8 @@ general-config:
     - bow
     - crossbow
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
   maximum-level: 1
 
 config:

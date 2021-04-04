@@ -23,8 +23,8 @@ general-config:
     - crossbow
     - trident
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
 
 config:
   use-orb: true # Use experience orb above player to give xp. Use if you need mending interaction.

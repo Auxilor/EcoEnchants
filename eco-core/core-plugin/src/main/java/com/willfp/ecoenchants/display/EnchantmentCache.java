@@ -1,9 +1,8 @@
 package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.ImmutableMap;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
-import com.willfp.eco.util.display.Display;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.eco.core.display.Display;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -31,7 +30,7 @@ public class EnchantmentCache {
     /**
      * Instance of EcoEnchants.
      */
-    public static final AbstractEcoPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+    public static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
 
     /**
      * The physical cache.
@@ -92,7 +91,7 @@ public class EnchantmentCache {
                     Collections.singletonList(Display.PREFIX + "INVALID ENCHANTMENT: " + enchantment.getClass().getName()),
                     EnchantmentType.NORMAL,
                     EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"))
-                    ));
+            ));
             return;
         }
 
@@ -185,11 +184,11 @@ public class EnchantmentCache {
         private final EnchantmentRarity rarity;
 
         private CacheEntry(@NotNull final Enchantment enchantment,
-                          @NotNull final String name,
-                          @NotNull final String rawName,
-                          @NotNull final List<String> description,
-                          @NotNull final EnchantmentType type,
-                          @NotNull final EnchantmentRarity rarity) {
+                           @NotNull final String name,
+                           @NotNull final String rawName,
+                           @NotNull final List<String> description,
+                           @NotNull final EnchantmentType type,
+                           @NotNull final EnchantmentRarity rarity) {
             this.enchantment = enchantment;
             this.name = name;
             this.rawName = rawName;

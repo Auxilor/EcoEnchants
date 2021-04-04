@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.eco.util.config.ExtendableConfig;
+import com.willfp.eco.core.config.ExtendableConfig;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -92,10 +92,10 @@ public class EnchantmentConfig extends ExtendableConfig {
             return;
         }
 
-        this.config.set("name", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".name"));
-        this.config.set("description", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".description"));
+        this.set("name", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".name"));
+        this.set("description", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".description"));
         try {
-            this.config.save(this.getConfigFile());
+            this.save();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableList;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
@@ -20,12 +20,6 @@ public class EnchantmentType {
      * Instance of EcoEnchants.
      */
     private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
-
-    /**
-     * All registered types.
-     */
-    private static final List<EnchantmentType> REGISTERED = new ArrayList<>();
-
     /**
      * Most enchantments are like this.
      * <p>
@@ -36,7 +30,6 @@ public class EnchantmentType {
             false,
             () -> PLUGIN.getLangYml().getString("not-curse-color")
     );
-
     /**
      * Negative enchantments.
      * <p>
@@ -47,7 +40,6 @@ public class EnchantmentType {
             false,
             () -> PLUGIN.getLangYml().getString("curse-color")
     );
-
     /**
      * Extremely powerful enchantments.
      * <p>
@@ -58,7 +50,6 @@ public class EnchantmentType {
             () -> !PLUGIN.getConfigYml().getBool("types.special.allow-multiple"),
             () -> PLUGIN.getLangYml().getString("special-color")
     );
-
     /**
      * Cosmetic enchantments.
      * <p>
@@ -70,7 +61,6 @@ public class EnchantmentType {
             () -> PLUGIN.getLangYml().getString("artifact-color"),
             Artifact.class
     );
-
     /**
      * Ability enchantments.
      * <p>
@@ -82,7 +72,10 @@ public class EnchantmentType {
             () -> PLUGIN.getLangYml().getString("spell-color"),
             Spell.class
     );
-
+    /**
+     * All registered types.
+     */
+    private static final List<EnchantmentType> REGISTERED = new ArrayList<>();
     /**
      * Lambda to fetch the color of the type.
      */
@@ -92,25 +85,11 @@ public class EnchantmentType {
      * Lambda to fetch the singularity of the type.
      */
     private final Supplier<Boolean> singularSupplier;
-
-    /**
-     * If only one enchantment of this type is allowed on an item.
-     */
-    @Getter
-    private boolean singular;
-
-    /**
-     * The color of enchantments of this type to have in lore.
-     */
-    @Getter
-    private String color;
-
     /**
      * The name of the type.
      */
     @Getter
     private final String name;
-
     /**
      * The class that all enchantments of this type must extend.
      * <p>
@@ -119,6 +98,16 @@ public class EnchantmentType {
     @Getter
     @Nullable
     private final Class<? extends EcoEnchant> requiredToExtend;
+    /**
+     * If only one enchantment of this type is allowed on an item.
+     */
+    @Getter
+    private boolean singular;
+    /**
+     * The color of enchantments of this type to have in lore.
+     */
+    @Getter
+    private String color;
 
     /**
      * Create simple EnchantmentType.
@@ -201,6 +190,23 @@ public class EnchantmentType {
         REGISTERED.add(this);
     }
 
+    /**
+     * Update suppliers of all types.
+     */
+    @ConfigUpdater
+    public static void update() {
+        REGISTERED.forEach(EnchantmentType::refresh);
+    }
+
+    /**
+     * All registered enchantment types.
+     *
+     * @return All registered types.
+     */
+    public static List<EnchantmentType> values() {
+        return ImmutableList.copyOf(REGISTERED);
+    }
+
     private void refresh() {
         this.color = colorSupplier.get();
         this.singular = singularSupplier.get();
@@ -221,22 +227,5 @@ public class EnchantmentType {
     @Override
     public int hashCode() {
         return Objects.hash(getName());
-    }
-
-    /**
-     * Update suppliers of all types.
-     */
-    @ConfigUpdater
-    public static void update() {
-        REGISTERED.forEach(EnchantmentType::refresh);
-    }
-
-    /**
-     * All registered enchantment types.
-     *
-     * @return All registered types.
-     */
-    public static List<EnchantmentType> values() {
-        return ImmutableList.copyOf(REGISTERED);
     }
 }

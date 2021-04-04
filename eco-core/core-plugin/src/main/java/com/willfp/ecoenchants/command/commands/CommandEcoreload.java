@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.command.commands;
 
-import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.command.AbstractCommand;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +13,7 @@ public class CommandEcoreload extends AbstractCommand {
      *
      * @param plugin The plugin for the commands to listen for.
      */
-    public CommandEcoreload(@NotNull final AbstractEcoPlugin plugin) {
+    public CommandEcoreload(@NotNull final EcoPlugin plugin) {
         super(plugin, "ecoreload", "ecoenchants.reload", false);
     }
 

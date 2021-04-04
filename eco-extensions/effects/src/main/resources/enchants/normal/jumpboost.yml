@@ -16,10 +16,10 @@ general-config:
   targets:
     - boots
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - spring
   maximum-level: 3
 
 config:
-  # No config is available for this enchantment
+# No config is available for this enchantment

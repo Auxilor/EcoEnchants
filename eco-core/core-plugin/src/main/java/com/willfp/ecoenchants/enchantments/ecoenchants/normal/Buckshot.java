@@ -22,6 +22,7 @@ public class Buckshot extends EcoEnchant {
                 "buckshot", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onBowShoot(@NotNull final LivingEntity shooter,
                            @NotNull final Arrow arrow,

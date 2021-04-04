@@ -16,7 +16,7 @@ general-config:
   targets:
     - trident
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - serrated
     - bladed

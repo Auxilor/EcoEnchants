@@ -1,12 +1,12 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
+import com.willfp.eco.core.events.ArmorEquipEvent;
 import com.willfp.eco.util.VectorUtils;
-import com.willfp.eco.util.bukkit.scheduling.TimedRunnable;
-import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;

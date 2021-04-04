@@ -16,8 +16,8 @@ general-config:
   targets:
     - all
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
 
 config:
   remove-after: false # If soulbound should be 1-time use

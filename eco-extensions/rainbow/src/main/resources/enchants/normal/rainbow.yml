@@ -17,7 +17,7 @@ general-config:
     - axe
     - shears
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - silk_touch
   maximum-level: 4

@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.util.drops.DropQueue;
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.tuples.Pair;
+import com.willfp.eco.core.drops.DropQueue;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.core.tuples.Pair;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -39,12 +39,6 @@ public class InfernalTouch extends EcoEnchant {
             )
     );
 
-    public InfernalTouch() {
-        super(
-                "infernal_touch", EnchantmentType.NORMAL
-        );
-    }
-
     static {
         Iterator<Recipe> iterator = Bukkit.recipeIterator();
         while (iterator.hasNext()) {
@@ -56,6 +50,12 @@ public class InfernalTouch extends EcoEnchant {
             int xp = (int) Math.ceil(furnaceRecipe.getExperience());
             RECIPES.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), xp));
         }
+    }
+
+    public InfernalTouch() {
+        super(
+                "infernal_touch", EnchantmentType.NORMAL
+        );
     }
 
     @NotNull

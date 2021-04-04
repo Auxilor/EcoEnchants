@@ -19,7 +19,7 @@ general-config:
     - leggings
     - boots
   grindstoneable: true
-  conflicts: []
+  conflicts: [ ]
   maximum-level: 4
 
 config:

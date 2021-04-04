@@ -1,9 +1,7 @@
 package com.willfp.ecoenchants.enchantments;
 
-
+import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.optional.Prerequisite;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
@@ -45,102 +43,85 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      * Instance of EcoEnchants for enchantments to be able to access.
      */
     @Getter(AccessLevel.PROTECTED)
-    private final AbstractEcoPlugin plugin = EcoEnchantsPlugin.getInstance();
-
-    /**
-     * The display name of the enchantment.
-     */
-    private String name;
-
-    /**
-     * The description of the enchantment.
-     */
-    @Getter
-    private String description;
-
+    private final EcoEnchantsPlugin plugin = EcoEnchantsPlugin.getInstance();
     /**
      * The permission/config name of the enchantment.
      */
     @Getter
     private final String permissionName;
-
     /**
      * The type of the enchantment.
      */
     @Getter
     private final EnchantmentType type;
-
     /**
      * The enchantment's config.
      */
     @Getter
     private final EnchantmentConfig config;
-
-    /**
-     * If the enchantment can be removed in a grindstone.
-     */
-    @Getter
-    private boolean grindstoneable;
-
-    /**
-     * If the enchantment can be obtained from an enchanting table.
-     */
-    @Getter
-    private boolean availableFromTable;
-
-    /**
-     * If the enchantment can be obtained from a villager.
-     */
-    @Getter
-    private boolean availableFromVillager;
-
-    /**
-     * If the enchantment can be obtained from a loot chest.
-     */
-    @Getter
-    private boolean availableFromLoot;
-
-    /**
-     * The maximum level for the enchantment to be obtained naturally.
-     */
-    private int maxLevel;
-
-    /**
-     * The enchantments that conflict with this enchantment.
-     */
-    @Getter
-    private Set<Enchantment> conflicts;
-
-    /**
-     * The rarity of the enchantment.
-     */
-    @Getter
-    private EnchantmentRarity rarity;
-
     /**
      * The targets of the enchantment.
      */
     @Getter
     private final Set<EnchantmentTarget> targets = new HashSet<>();
-
     /**
      * The materials of the targets.
      */
     @Getter
     private final Set<Material> targetMaterials = new HashSet<>();
-
     /**
      * The names of the worlds that this enchantment is disabled in.
      */
     @Getter
     private final Set<String> disabledWorldNames = new HashSet<>();
-
     /**
      * The worlds that this enchantment is disabled in.
      */
     @Getter
     private final List<World> disabledWorlds = new ArrayList<>();
-
+    /**
+     * The display name of the enchantment.
+     */
+    private String name;
+    /**
+     * The description of the enchantment.
+     */
+    @Getter
+    private String description;
+    /**
+     * If the enchantment can be removed in a grindstone.
+     */
+    @Getter
+    private boolean grindstoneable;
+    /**
+     * If the enchantment can be obtained from an enchanting table.
+     */
+    @Getter
+    private boolean availableFromTable;
+    /**
+     * If the enchantment can be obtained from a villager.
+     */
+    @Getter
+    private boolean availableFromVillager;
+    /**
+     * If the enchantment can be obtained from a loot chest.
+     */
+    @Getter
+    private boolean availableFromLoot;
+    /**
+     * The maximum level for the enchantment to be obtained naturally.
+     */
+    private int maxLevel;
+    /**
+     * The enchantments that conflict with this enchantment.
+     */
+    @Getter
+    private Set<Enchantment> conflicts;
+    /**
+     * The rarity of the enchantment.
+     */
+    @Getter
+    private EnchantmentRarity rarity;
     /**
      * If the enchantment is enabled.
      */

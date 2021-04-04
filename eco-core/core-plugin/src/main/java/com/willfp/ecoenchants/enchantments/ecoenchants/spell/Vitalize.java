@@ -12,9 +12,11 @@ public class Vitalize extends Spell {
     }
 
     @Override
-    public void onUse(@NotNull final Player player,
-                      final int level,
-                      @NotNull final PlayerInteractEvent event) {
+    public boolean onUse(@NotNull final Player player,
+                         final int level,
+                         @NotNull final PlayerInteractEvent event) {
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+
+        return true;
     }
 }

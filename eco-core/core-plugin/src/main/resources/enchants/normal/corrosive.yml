@@ -17,9 +17,9 @@ general-config:
     - bow
     - crossbow
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
   maximum-level: 2
 
 config:
-  # No config is available for this enchantment
+# No config is available for this enchantment

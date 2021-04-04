@@ -1,10 +1,9 @@
 package com.willfp.ecoenchants.enchantments;
 
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AngerArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.BarrierArtifact;
@@ -161,6 +160,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Quadrilateralism;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Radiance;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Rage;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Rapid;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reaper;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reel;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reinforcement;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Rejuvenation;
@@ -224,7 +224,6 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.special.Pentashot;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Preservation;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Prosperity;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Razor;
-import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reaper;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Repairing;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Soulbound;
 import com.willfp.ecoenchants.enchantments.ecoenchants.special.Spring;
@@ -255,10 +254,6 @@ public class EcoEnchants {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
-
-    private static final BiMap<NamespacedKey, EcoEnchant> BY_KEY = HashBiMap.create();
-    private static final BiMap<String, EcoEnchant> BY_NAME = HashBiMap.create();
-
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();
     public static final EcoEnchant INFERNAL_TOUCH = new InfernalTouch();
@@ -490,6 +485,8 @@ public class EcoEnchants {
     public static final EcoEnchant SWEEP_ARTIFACT = new SweepArtifact();
     public static final EcoEnchant REAPER = new Reaper();
     public static final EcoEnchant WOOD_SWITCHER = new WoodSwitcher();
+    private static final BiMap<NamespacedKey, EcoEnchant> BY_KEY = HashBiMap.create();
+    private static final BiMap<String, EcoEnchant> BY_NAME = HashBiMap.create();
 
     /**
      * Get all registered {@link EcoEnchant}s.

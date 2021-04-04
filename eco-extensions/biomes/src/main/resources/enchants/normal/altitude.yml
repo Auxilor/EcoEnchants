@@ -20,7 +20,7 @@ general-config:
     - axe
     - trident
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - aquamarine
     - dehydration

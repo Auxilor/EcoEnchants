@@ -16,7 +16,9 @@ public class Frenzy extends EcoEnchant {
         super(
                 "frenzy", EnchantmentType.SPECIAL
         );
-    }    @EventHandler
+    }
+
+    @EventHandler
     public void onFrenzyKill(@NotNull final EntityDeathEvent event) {
         if (event.getEntity().getKiller() == null) {
             return;

@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.command.commands;
 
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.command.AbstractCommand;
+import com.willfp.eco.core.command.AbstractTabCompleter;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.command.AbstractTabCompleter;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -26,7 +26,7 @@ public class CommandEnchantinfo extends AbstractCommand {
      *
      * @param plugin The plugin for the commands to listen for.
      */
-    public CommandEnchantinfo(@NotNull final AbstractEcoPlugin plugin) {
+    public CommandEnchantinfo(@NotNull final EcoPlugin plugin) {
         super(plugin, "enchantinfo", "ecoenchants.enchantinfo", false);
     }
 

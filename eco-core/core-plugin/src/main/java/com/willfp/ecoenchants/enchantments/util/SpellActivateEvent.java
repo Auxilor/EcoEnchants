@@ -39,6 +39,14 @@ public class SpellActivateEvent extends PlayerEvent implements Cancellable {
         this.cancelled = false;
     }
 
+    /**
+     * Bukkit parity.
+     *
+     * @return The handler list.
+     */
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
 
     @Override
     public boolean isCancelled() {
@@ -53,15 +61,6 @@ public class SpellActivateEvent extends PlayerEvent implements Cancellable {
     @NotNull
     @Override
     public HandlerList getHandlers() {
-        return HANDLERS;
-    }
-
-    /**
-     * Bukkit parity.
-     *
-     * @return The handler list.
-     */
-    public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 }

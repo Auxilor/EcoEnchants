@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.BlockUtils;
-import com.willfp.eco.util.integrations.anticheat.AnticheatManager;
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.Particle;
@@ -21,21 +21,21 @@ public class Dynamite extends Spell {
     }
 
     @Override
-    public void onUse(@NotNull final Player player,
-                      final int level,
-                      @NotNull final PlayerInteractEvent event) {
+    public boolean onUse(@NotNull final Player player,
+                         final int level,
+                         @NotNull final PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            return;
+            return false;
         }
 
         if (block == null) {
-            return;
+            return false;
         }
 
         if (block.hasMetadata("block-ignore")) {
-            return;
+            return false;
         }
 
         AnticheatManager.exemptPlayer(player);
@@ -79,6 +79,8 @@ public class Dynamite extends Spell {
         }));
 
         AnticheatManager.unexemptPlayer(player);
+
+        return true;
     }
 
     @Override

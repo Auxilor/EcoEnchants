@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.VectorUtils;
-import com.willfp.eco.util.integrations.anticheat.AnticheatManager;
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -24,6 +24,7 @@ public class MagmaWalker extends EcoEnchant {
                 "magma_walker", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onLavaWalk(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();

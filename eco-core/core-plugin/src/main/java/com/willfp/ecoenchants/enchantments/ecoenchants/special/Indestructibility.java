@@ -16,6 +16,7 @@ public class Indestructibility extends EcoEnchant {
                 "indestructibility", EnchantmentType.SPECIAL
         );
     }
+
     @EventHandler
     public void onItemDamage(@NotNull final PlayerItemDamageEvent event) {
         ItemStack item = event.getItem();

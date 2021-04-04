@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.enchantments.support.obtaining;
 
 import com.google.common.collect.ImmutableSet;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -30,6 +30,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnchantingListeners extends PluginDependent implements Listener {
     /**
+     * All players currently enchanting a secondary item.
+     */
+    public static final Map<Player, int[]> CURRENTLY_ENCHANTING_SECONDARY = new HashMap<>();
+    /**
      * All enchantments that by default cannot be enchanted in a table but are in EcoEnchants.
      */
     private static final Set<Material> SECONDARY_ENCHANTABLE = new ImmutableSet.Builder<Material>()
@@ -40,16 +44,11 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             .add(Material.CARROT_ON_A_STICK).build();
 
     /**
-     * All players currently enchanting a secondary item.
-     */
-    public static final Map<Player, int[]> CURRENTLY_ENCHANTING_SECONDARY = new HashMap<>();
-
-    /**
      * Instantiate enchanting listeners and link them to a specific plugin.
      *
      * @param plugin The plugin to link to.
      */
-    public EnchantingListeners(@NotNull final AbstractEcoPlugin plugin) {
+    public EnchantingListeners(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 
@@ -230,7 +229,8 @@ public class EnchantingListeners extends PluginDependent implements Listener {
 
         try {
             event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), maxLevel));
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) { }
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
+        }
 
         if (!SECONDARY_ENCHANTABLE.contains(event.getItem().getType())) {
             return;

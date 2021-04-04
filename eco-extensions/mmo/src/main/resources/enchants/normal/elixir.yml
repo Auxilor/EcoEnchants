@@ -17,7 +17,7 @@ general-config:
     - sword
     - axe
   grindstoneable: true
-  conflicts: []
+  conflicts: [ ]
   maximum-level: 3
 
 config:

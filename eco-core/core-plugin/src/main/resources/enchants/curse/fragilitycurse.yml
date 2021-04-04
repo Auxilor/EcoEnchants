@@ -16,7 +16,7 @@ general-config:
   targets:
     - all
   grindstoneable: false
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - unbreaking
 

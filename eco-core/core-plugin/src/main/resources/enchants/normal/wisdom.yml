@@ -23,7 +23,7 @@ general-config:
     - crossbow
     - trident
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - splash
     - intellect

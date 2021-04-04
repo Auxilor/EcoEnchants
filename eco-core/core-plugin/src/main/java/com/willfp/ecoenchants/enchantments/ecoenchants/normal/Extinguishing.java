@@ -13,6 +13,7 @@ public class Extinguishing extends EcoEnchant {
                 "extinguishing", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onDamageWearingArmor(@NotNull final LivingEntity victim,
                                      final int level,

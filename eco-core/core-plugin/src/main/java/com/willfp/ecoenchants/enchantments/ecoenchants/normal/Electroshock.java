@@ -16,6 +16,7 @@ public class Electroshock extends EcoEnchant {
                 "electroshock", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onDeflect(@NotNull final Player blocker,
                           @NotNull final LivingEntity attacker,

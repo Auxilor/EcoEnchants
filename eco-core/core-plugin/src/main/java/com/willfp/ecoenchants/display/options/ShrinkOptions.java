@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +29,7 @@ public class ShrinkOptions extends PluginDependent {
      *
      * @param plugin EcoEnchants.
      */
-    public ShrinkOptions(@NotNull final AbstractEcoPlugin plugin) {
+    public ShrinkOptions(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

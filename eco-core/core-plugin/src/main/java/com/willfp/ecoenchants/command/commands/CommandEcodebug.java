@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.command.commands;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
-import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.eco.util.proxy.ProxyConstants;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.command.AbstractCommand;
+import com.willfp.eco.core.proxy.ProxyConstants;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -32,7 +32,7 @@ public class CommandEcodebug extends AbstractCommand {
      *
      * @param plugin The plugin for the commands to listen for.
      */
-    public CommandEcodebug(@NotNull final AbstractEcoPlugin plugin) {
+    public CommandEcodebug(@NotNull final EcoPlugin plugin) {
         super(plugin, "ecodebug", "ecoenchants.ecodebug", false);
     }
 

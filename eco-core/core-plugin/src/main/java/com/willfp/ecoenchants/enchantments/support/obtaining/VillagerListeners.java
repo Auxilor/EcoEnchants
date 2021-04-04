@@ -1,9 +1,8 @@
 package com.willfp.ecoenchants.enchantments.support.obtaining;
 
-
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -31,7 +30,7 @@ public class VillagerListeners extends PluginDependent implements Listener {
      *
      * @param plugin The plugin.
      */
-    public VillagerListeners(@NotNull final AbstractEcoPlugin plugin) {
+    public VillagerListeners(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

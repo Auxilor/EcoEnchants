@@ -16,7 +16,7 @@ general-config:
   targets:
     - sword
   grindstoneable: true
-  conflicts: []
+  conflicts: [ ]
   maximum-level: 3
 
 config:

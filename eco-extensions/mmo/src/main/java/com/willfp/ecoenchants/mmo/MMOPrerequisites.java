@@ -21,7 +21,7 @@ public class MMOPrerequisites {
     );
 
     public static Prerequisite[] append(Prerequisite[] array, Prerequisite newElement) {
-        Prerequisite[] copy = new Prerequisite[array.length+1];
+        Prerequisite[] copy = new Prerequisite[array.length + 1];
         System.arraycopy(array, 0, copy, 0, array.length);
         copy[array.length] = newElement;
         return copy;

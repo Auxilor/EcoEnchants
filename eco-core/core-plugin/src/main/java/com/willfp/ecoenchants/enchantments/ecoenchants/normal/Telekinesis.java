@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.drops.DropQueue;
+import com.willfp.eco.core.events.EntityDeathByEntityEvent;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
 import com.willfp.eco.util.TridentUtils;
-import com.willfp.eco.util.drops.DropQueue;
-import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;

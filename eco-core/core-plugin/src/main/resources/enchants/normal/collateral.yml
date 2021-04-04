@@ -16,9 +16,9 @@ general-config:
   targets:
     - bow
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
   maximum-level: 4
 
 config:
-  # No config is available for this enchantment
+# No config is available for this enchantment

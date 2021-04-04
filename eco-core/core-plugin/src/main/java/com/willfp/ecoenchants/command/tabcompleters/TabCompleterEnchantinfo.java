@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.command.tabcompleters;
 
+import com.willfp.eco.core.command.AbstractCommand;
+import com.willfp.eco.core.command.AbstractTabCompleter;
+import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.command.AbstractTabCompleter;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.ChatColor;

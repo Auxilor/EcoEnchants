@@ -24,7 +24,7 @@ public class Strengthening extends MMOEnchantment {
 
         data.getStatMap().getInstance(SharedStat.ATTACK_DAMAGE).remove(KEY);
 
-        if(level == 0) {
+        if (level == 0) {
             MMOLib.plugin.getStats().runUpdates(data.getStatMap());
             return;
         }

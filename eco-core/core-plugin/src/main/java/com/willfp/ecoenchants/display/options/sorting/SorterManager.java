@@ -23,6 +23,18 @@ public class SorterManager {
      */
     private static final Set<EnchantmentSorter> REGISTERED = new HashSet<>();
 
+    static {
+        EcoEnchantsPlugin instance = EcoEnchantsPlugin.getInstance(); // Really dirty and janky.
+        REGISTERED.add(new AlphabeticSorter(instance));
+        REGISTERED.add(new LengthSorter(instance));
+        REGISTERED.add(new TypeAlphabeticSorter(instance));
+        REGISTERED.add(new TypeLengthSorter(instance));
+        REGISTERED.add(new RarityAlphabeticSorter(instance));
+        REGISTERED.add(new RarityLengthSorter(instance));
+        REGISTERED.add(new RarityTypeAlphabeticSorter(instance));
+        REGISTERED.add(new RarityTypeLengthSorter(instance));
+    }
+
     /**
      * Get a sorter based off of parameters.
      * <p>
@@ -36,17 +48,5 @@ public class SorterManager {
                 .filter(enchantmentSorter -> Arrays.asList(enchantmentSorter.getParameters()).containsAll(Arrays.asList(parameters)) && enchantmentSorter.getParameters().length == parameters.length)
                 .findFirst()
                 .orElse(new AlphabeticSorter(EcoEnchantsPlugin.getInstance()));
-    }
-
-    static {
-        EcoEnchantsPlugin instance = EcoEnchantsPlugin.getInstance(); // Really dirty and janky.
-        REGISTERED.add(new AlphabeticSorter(instance));
-        REGISTERED.add(new LengthSorter(instance));
-        REGISTERED.add(new TypeAlphabeticSorter(instance));
-        REGISTERED.add(new TypeLengthSorter(instance));
-        REGISTERED.add(new RarityAlphabeticSorter(instance));
-        REGISTERED.add(new RarityLengthSorter(instance));
-        REGISTERED.add(new RarityTypeAlphabeticSorter(instance));
-        REGISTERED.add(new RarityTypeLengthSorter(instance));
     }
 }

@@ -19,6 +19,7 @@ public class Graceful extends EcoEnchant {
                 "graceful", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onFall(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();

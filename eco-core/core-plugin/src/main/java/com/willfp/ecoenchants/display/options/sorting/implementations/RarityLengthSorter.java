@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display.options.sorting.implementations;
 
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
@@ -19,7 +19,7 @@ public class RarityLengthSorter extends PluginDependent implements EnchantmentSo
      *
      * @param plugin Instance of EcoEnchants.
      */
-    public RarityLengthSorter(@NotNull final AbstractEcoPlugin plugin) {
+    public RarityLengthSorter(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

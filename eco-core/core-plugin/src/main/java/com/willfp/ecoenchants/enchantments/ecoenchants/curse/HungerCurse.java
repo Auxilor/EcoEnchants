@@ -15,6 +15,7 @@ public class HungerCurse extends EcoEnchant {
                 "hunger_curse", EnchantmentType.CURSE
         );
     }
+
     @EventHandler
     public void onHunger(@NotNull final FoodLevelChangeEvent event) {
         if (!(event.getEntity() instanceof Player)) {

@@ -16,8 +16,8 @@ general-config:
   targets:
     - hoe
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
 
 config:
   damage: true # Damage hoe on use

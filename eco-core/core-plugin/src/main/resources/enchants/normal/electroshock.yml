@@ -17,7 +17,7 @@ general-config:
     - shield
   grindstoneable: true
 
-  conflicts: []
+  conflicts: [ ]
   maximum-level: 3
 
 config:

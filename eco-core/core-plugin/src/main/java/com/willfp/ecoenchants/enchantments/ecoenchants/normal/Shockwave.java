@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.TridentUtils;
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -21,6 +21,7 @@ public class Shockwave extends EcoEnchant {
                 "shockwave", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onShoot(@NotNull final ProjectileLaunchEvent event) {
         if (!(event.getEntity() instanceof AbstractArrow)) {

@@ -1,8 +1,8 @@
 name: EcoEnchants
 version: ${projectVersion}
 main: com.willfp.ecoenchants.EcoEnchantsPlugin
-api-version: 1.15
-authors: [Auxilor]
+api-version: 1.16
+authors: [ Auxilor ]
 website: willfp.com
 load: STARTUP
 depend:

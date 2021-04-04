@@ -4,8 +4,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -18,6 +16,7 @@ public class Marksman extends EcoEnchant {
                 "marksman", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onMarksmanShoot(@NotNull final ProjectileLaunchEvent event) {
 

@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.proxy.proxies;
 
-import com.willfp.eco.util.proxy.AbstractProxy;
+import com.willfp.eco.core.proxy.AbstractProxy;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

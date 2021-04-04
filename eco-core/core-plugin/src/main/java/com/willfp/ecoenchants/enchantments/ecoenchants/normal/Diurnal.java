@@ -14,6 +14,7 @@ public class Diurnal extends EcoEnchant {
                 "diurnal", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,

@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.util;
 
-import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
+import com.willfp.eco.core.events.ArmorEquipEvent;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;

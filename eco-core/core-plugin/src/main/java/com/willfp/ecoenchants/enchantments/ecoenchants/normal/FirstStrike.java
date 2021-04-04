@@ -14,6 +14,7 @@ public class FirstStrike extends EcoEnchant {
                 "first_strike", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,

@@ -16,6 +16,7 @@ public class FragilityCurse extends EcoEnchant {
                 "fragility_curse", EnchantmentType.CURSE
         );
     }
+
     @EventHandler
     public void onItemDamage(@NotNull final PlayerItemDamageEvent event) {
         ItemStack item = event.getItem();

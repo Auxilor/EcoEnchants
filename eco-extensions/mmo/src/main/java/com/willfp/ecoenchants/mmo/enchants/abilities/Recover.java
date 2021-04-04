@@ -18,14 +18,14 @@ public class Recover extends MMOEnchantment {
     public void onAbility(AbilityUseEvent event) {
         Player player = event.getPlayer();
 
-        if(!EnchantChecks.mainhand(player, this))
+        if (!EnchantChecks.mainhand(player, this))
             return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         double cooldown = event.getAbility().getModifier("cooldown");
 
-        if(cooldown == 0.0D) return;
+        if (cooldown == 0.0D) return;
 
         double multiplier = 1 - (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * level);
         cooldown *= multiplier;

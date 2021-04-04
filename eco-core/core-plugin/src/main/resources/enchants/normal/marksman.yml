@@ -17,8 +17,8 @@ general-config:
     - bow
     - crossbow
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
 
 config:
   remove-arrow-after-ticks: 120 #to prevent server lag, as arrows shot into the sky will not land. there are 20 ticks in a second.

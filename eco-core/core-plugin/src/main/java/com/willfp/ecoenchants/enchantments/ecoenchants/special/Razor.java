@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.eco.util.PlayerUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -25,7 +24,7 @@ public class Razor extends EcoEnchant {
         double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "base-damage");
         double extra = (level * perLevelMultiplier) + baseDamage;
         if (this.getConfig().getBool((EcoEnchants.CONFIG_LOCATION) + "decrease-if-cooldown") && attacker instanceof Player) {
-            extra *= PlayerUtils.getAttackCooldown((Player) attacker);
+            extra *= ((Player) attacker).getAttackCooldown();
         }
 
         event.setDamage(event.getDamage() + extra);

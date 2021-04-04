@@ -17,7 +17,7 @@ general-config:
     - sword
     - axe
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - knockback
     - tornado

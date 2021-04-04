@@ -27,7 +27,7 @@ public abstract class EffectsEnchantment extends EcoEnchant {
 
         this.getPlugin().getScheduler().runLater(() -> {
             if (player.hasPotionEffect(this.getPotionEffect()) && player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
-                    player.removePotionEffect(this.getPotionEffect());
+                player.removePotionEffect(this.getPotionEffect());
             }
 
             int level = EnchantChecks.getArmorPoints(player, this);

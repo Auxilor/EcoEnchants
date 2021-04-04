@@ -10,12 +10,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
+
 public class EnderSlayer extends EcoEnchant {
-    public EnderSlayer() {
-        super(
-                "ender_slayer", EnchantmentType.NORMAL
-        );
-    }
     private static final Set<EntityType> END_MOBS = new ImmutableSet.Builder<EntityType>()
             .add(EntityType.ENDERMITE)
             .add(EntityType.ENDERMAN)
@@ -23,6 +19,11 @@ public class EnderSlayer extends EcoEnchant {
             .add(EntityType.SHULKER)
             .build();
 
+    public EnderSlayer() {
+        super(
+                "ender_slayer", EnchantmentType.NORMAL
+        );
+    }
 
     @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,

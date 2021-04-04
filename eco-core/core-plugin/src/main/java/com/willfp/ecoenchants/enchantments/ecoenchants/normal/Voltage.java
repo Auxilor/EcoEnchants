@@ -13,11 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 
 public class Voltage extends EcoEnchant {
-    public Voltage() {
-        super(
-                "voltage", EnchantmentType.NORMAL
-        );
-    }
     private static final Material[] ITEMS = {
             Material.IRON_HELMET,
             Material.IRON_CHESTPLATE,
@@ -34,6 +29,12 @@ public class Voltage extends EcoEnchant {
             Material.CHAINMAIL_LEGGINGS,
             Material.CHAINMAIL_BOOTS,
     };
+
+    public Voltage() {
+        super(
+                "voltage", EnchantmentType.NORMAL
+        );
+    }
 
     @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,

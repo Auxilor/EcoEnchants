@@ -17,7 +17,7 @@ public class Siphon extends MMOEnchantment {
 
     @Override
     public void onArrowDamage(@NotNull LivingEntity attacker, @NotNull LivingEntity victim, @NotNull Arrow arrow, int level, @NotNull EntityDamageByEntityEvent event) {
-        if(!(attacker instanceof Player && victim instanceof Player))
+        if (!(attacker instanceof Player && victim instanceof Player))
             return;
         Player pAttacker = (Player) attacker;
         Player pVictim = (Player) victim;

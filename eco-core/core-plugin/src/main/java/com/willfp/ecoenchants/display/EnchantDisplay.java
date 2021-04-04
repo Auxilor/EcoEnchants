@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.Lists;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.display.Display;
+import com.willfp.eco.core.display.DisplayModule;
+import com.willfp.eco.core.display.DisplayPriority;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.display.Display;
-import com.willfp.eco.util.display.DisplayModule;
-import com.willfp.eco.util.display.DisplayPriority;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -60,7 +60,7 @@ public class EnchantDisplay extends DisplayModule {
      *
      * @param plugin Instance of EcoEnchants.
      */
-    public EnchantDisplay(@NotNull final AbstractEcoPlugin plugin) {
+    public EnchantDisplay(@NotNull final EcoPlugin plugin) {
         super(plugin, DisplayPriority.HIGH);
         keySkip = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-skip");
         legacyV = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-v");

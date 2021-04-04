@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.command.commands;
 
-import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.command.AbstractTabCompleter;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.command.AbstractCommand;
+import com.willfp.eco.core.command.AbstractTabCompleter;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterRandomEnchant;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -28,7 +28,7 @@ public class CommandRandomenchant extends AbstractCommand {
      *
      * @param plugin The plugin for the commands to listen for.
      */
-    public CommandRandomenchant(@NotNull final AbstractEcoPlugin plugin) {
+    public CommandRandomenchant(@NotNull final EcoPlugin plugin) {
         super(plugin, "randomenchant", "ecoenchants.randomenchant", false);
     }
 

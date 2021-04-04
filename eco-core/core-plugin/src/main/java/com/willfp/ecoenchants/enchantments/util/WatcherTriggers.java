@@ -1,13 +1,13 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.google.common.collect.Sets;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
+import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
 import com.willfp.eco.util.TridentUtils;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
-import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
@@ -59,8 +59,16 @@ public class WatcherTriggers extends PluginDependent implements Listener {
      *
      * @param plugin The plugin to link the events to.
      */
-    public WatcherTriggers(@NotNull final AbstractEcoPlugin plugin) {
+    public WatcherTriggers(@NotNull final EcoPlugin plugin) {
         super(plugin);
+    }
+
+    /**
+     * Update if allowed on npc.
+     */
+    @ConfigUpdater
+    public static void update() {
+        allowOnNPC = EcoEnchantsPlugin.getInstance().getConfig().getBoolean("allow-on-npc");
     }
 
     /**
@@ -581,10 +589,6 @@ public class WatcherTriggers extends PluginDependent implements Listener {
         Player player = event.getPlayer();
 
         this.getPlugin().getScheduler().runLater(() -> EcoEnchants.values().forEach(enchant -> {
-            if (event.isCancelled()) {
-                return;
-            }
-
             if (!enchant.isEnabled()) {
                 return;
             }
@@ -730,13 +734,5 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             }
             enchant.onDeflect(blocker, attacker, level, event);
         });
-    }
-
-    /**
-     * Update if allowed on npc.
-     */
-    @ConfigUpdater
-    public static void update() {
-        allowOnNPC = EcoEnchantsPlugin.getInstance().getConfig().getBoolean("allow-on-npc");
     }
 }

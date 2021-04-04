@@ -16,7 +16,7 @@ general-config:
   targets:
     - bow
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - power
     - force

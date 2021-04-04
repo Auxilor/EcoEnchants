@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
+import com.willfp.eco.core.proxy.ProxyConstants;
+import com.willfp.eco.core.tuples.Pair;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.eco.util.proxy.ProxyConstants;
-import com.willfp.eco.util.tuples.Pair;
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
 import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
@@ -37,7 +37,7 @@ public class AnvilListeners extends PluginDependent implements Listener {
      *
      * @param plugin The plugin to link to.
      */
-    public AnvilListeners(@NotNull final AbstractEcoPlugin plugin) {
+    public AnvilListeners(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

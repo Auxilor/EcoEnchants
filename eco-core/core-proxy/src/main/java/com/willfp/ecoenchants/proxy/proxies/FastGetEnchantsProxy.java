@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.proxy.proxies;
 
-import com.willfp.eco.util.proxy.AbstractProxy;
+import com.willfp.eco.core.proxy.AbstractProxy;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +18,8 @@ public interface FastGetEnchantsProxy extends AbstractProxy {
 
     /**
      * Get the level of a specified enchantment on an item.
-     * @param itemStack The item to query.
+     *
+     * @param itemStack   The item to query.
      * @param enchantment The enchantment to query.
      * @return The level found, or 0 if not present.
      */

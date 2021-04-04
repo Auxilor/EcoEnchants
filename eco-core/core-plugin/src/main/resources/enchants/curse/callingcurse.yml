@@ -19,7 +19,7 @@ general-config:
     - leggings
     - boots
   grindstoneable: false
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - mending
 

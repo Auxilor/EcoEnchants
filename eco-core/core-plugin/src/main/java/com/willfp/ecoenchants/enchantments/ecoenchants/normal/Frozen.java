@@ -19,6 +19,7 @@ public class Frozen extends EcoEnchant {
                 "frozen", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onHurt(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) {

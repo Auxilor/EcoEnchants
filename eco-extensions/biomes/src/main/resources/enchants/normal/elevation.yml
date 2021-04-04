@@ -19,7 +19,7 @@ general-config:
     - leggings
     - boots
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - glacial
     - heat_treated

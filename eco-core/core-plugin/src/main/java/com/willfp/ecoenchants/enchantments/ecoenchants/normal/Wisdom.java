@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.util.events.naturalexpgainevent.NaturalExpGainEvent;
+import com.willfp.eco.core.events.NaturalExpGainEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -15,6 +15,7 @@ public class Wisdom extends EcoEnchant {
                 "wisdom", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onExpChange(@NotNull final NaturalExpGainEvent event) {
         Player player = event.getExpChangeEvent().getPlayer();

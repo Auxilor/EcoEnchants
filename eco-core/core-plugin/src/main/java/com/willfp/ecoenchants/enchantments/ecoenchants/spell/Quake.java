@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.entity.Entity;
@@ -17,9 +17,9 @@ public class Quake extends Spell {
     }
 
     @Override
-    public void onUse(@NotNull final Player player,
-                      final int level,
-                      @NotNull final PlayerInteractEvent event) {
+    public boolean onUse(@NotNull final Player player,
+                         final int level,
+                         @NotNull final PlayerInteractEvent event) {
         int radius = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "radius-per-level") * level;
         int damage = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "damage-per-level") * level;
 
@@ -39,5 +39,7 @@ public class Quake extends Spell {
 
             ((LivingEntity) entity).damage(damage);
         }
+
+        return true;
     }
 }

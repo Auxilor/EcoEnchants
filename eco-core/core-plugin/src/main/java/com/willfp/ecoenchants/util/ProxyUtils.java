@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.util;
 
-import com.willfp.eco.util.proxy.AbstractProxy;
+import com.willfp.eco.core.proxy.AbstractProxy;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.proxy.util.ProxyFactory;
 import lombok.experimental.UtilityClass;

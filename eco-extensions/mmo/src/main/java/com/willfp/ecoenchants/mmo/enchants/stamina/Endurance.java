@@ -16,13 +16,13 @@ public class Endurance extends MMOEnchantment {
 
     @EventHandler
     public void onRegainMana(PlayerRegenResourceEvent event) {
-        if(!event.getResource().equals(PlayerResource.STAMINA))
+        if (!event.getResource().equals(PlayerResource.STAMINA))
             return;
 
         Player player = event.getPlayer();
 
         int levels = EnchantChecks.getArmorPoints(player, this);
-        if(levels == 0) return;
+        if (levels == 0) return;
 
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * levels;
         event.setAmount(event.getAmount() * (multiplier + 1));

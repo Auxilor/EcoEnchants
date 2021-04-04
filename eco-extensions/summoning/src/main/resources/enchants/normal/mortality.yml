@@ -17,7 +17,7 @@ general-config:
     - bow
     - crossbow
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - ghoul
   maximum-level: 4

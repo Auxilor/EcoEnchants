@@ -18,13 +18,15 @@ public class Ascend extends Spell {
     }
 
     @Override
-    public void onUse(@NotNull final Player player,
-                      final int level,
-                      @NotNull final PlayerInteractEvent event) {
+    public boolean onUse(@NotNull final Player player,
+                         final int level,
+                         @NotNull final PlayerInteractEvent event) {
         int ticks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level") * level;
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, ticks, this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "power") - 1, false, false));
         player.setMetadata(IGNORE_FALL_KEY, this.getPlugin().getMetadataValueFactory().create(true));
         this.getPlugin().getScheduler().runLater(() -> player.removeMetadata(IGNORE_FALL_KEY, this.getPlugin()), ticks * 4L);
+
+        return true;
     }
 
     @EventHandler

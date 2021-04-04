@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
+import com.willfp.eco.core.tuples.Pair;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.tuples.Pair;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -37,11 +37,11 @@ public class AnvilMerge {
     /**
      * Merge items in anvil.
      *
-     * @param left   The {@link ItemStack} on the left of the anvil.
-     * @param right  The {@link ItemStack} in the middle of the anvil.
-     * @param old    The previous {@link ItemStack} result.
-     * @param itemName   The anvil display name.
-     * @param player The player merging (for permissions).
+     * @param left     The {@link ItemStack} on the left of the anvil.
+     * @param right    The {@link ItemStack} in the middle of the anvil.
+     * @param old      The previous {@link ItemStack} result.
+     * @param itemName The anvil display name.
+     * @param player   The player merging (for permissions).
      * @return The result, stored as a {@link Pair} of {@link ItemStack} and {@link Integer}.
      */
     public Pair<ItemStack, Integer> doMerge(@Nullable final ItemStack left,

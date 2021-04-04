@@ -16,8 +16,8 @@ general-config:
   targets:
     - elytra
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
   maximum-level: 6
 
 config:

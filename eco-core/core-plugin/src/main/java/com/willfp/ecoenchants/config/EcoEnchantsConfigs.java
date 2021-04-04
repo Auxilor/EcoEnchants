@@ -1,9 +1,7 @@
 package com.willfp.ecoenchants.config;
 
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
+import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
-import com.willfp.ecoenchants.config.configs.Rarity;
-import com.willfp.ecoenchants.config.configs.Target;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
@@ -13,16 +11,6 @@ import java.util.Set;
 
 @UtilityClass
 public class EcoEnchantsConfigs {
-    /**
-     * target.yml.
-     */
-    public static final Target TARGET = new Target();
-
-    /**
-     * rarity.yml.
-     */
-    public static final Rarity RARITY = new Rarity();
-
     /**
      * All enchantment-specific configs.
      */
@@ -34,8 +22,6 @@ public class EcoEnchantsConfigs {
      */
     @ConfigUpdater
     public void updateConfigs() {
-        TARGET.update();
-        RARITY.update();
         enchantmentConfigs.forEach(EnchantmentConfig::update);
     }
 

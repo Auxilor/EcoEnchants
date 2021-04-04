@@ -15,6 +15,7 @@ public class Parry extends EcoEnchant {
                 "parry", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void parryHit(@NotNull final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) {

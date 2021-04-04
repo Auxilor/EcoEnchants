@@ -16,7 +16,7 @@ general-config:
   targets:
     - axe
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - carve
   maximum-level: 8

@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.BlockUtils;
 import com.willfp.eco.util.VectorUtils;
-import com.willfp.eco.util.integrations.anticheat.AnticheatManager;
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -19,6 +19,7 @@ public class Drill extends EcoEnchant {
                 "drill", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,

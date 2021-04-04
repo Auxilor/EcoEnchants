@@ -16,6 +16,7 @@ public class Invigoration extends EcoEnchant {
                 "invigoration", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onInvigorationHurt(@NotNull final EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) {

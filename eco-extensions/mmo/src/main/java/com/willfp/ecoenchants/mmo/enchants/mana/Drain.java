@@ -17,7 +17,7 @@ public class Drain extends MMOSpell {
         double amount = 1 - ((this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percentage-per-level") / 100) * level);
 
         player.getNearbyEntities(radius, radius, radius).forEach(entity -> {
-            if(!(entity instanceof Player))
+            if (!(entity instanceof Player))
                 return;
 
             Player victim = (Player) entity;

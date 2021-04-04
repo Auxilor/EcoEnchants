@@ -1,18 +1,19 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.eco.util.bukkit.scheduling.TimedRunnable;
-import com.willfp.eco.util.command.AbstractCommand;
-import com.willfp.eco.util.display.DisplayModule;
-import com.willfp.eco.util.drops.telekinesis.TelekinesisUtils;
-import com.willfp.eco.util.integrations.IntegrationLoader;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
-import com.willfp.eco.util.protocollib.AbstractPacketAdapter;
+import com.willfp.eco.core.AbstractPacketAdapter;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.command.AbstractCommand;
+import com.willfp.eco.core.display.DisplayModule;
+import com.willfp.eco.core.integrations.IntegrationLoader;
+import com.willfp.eco.util.TelekinesisUtils;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
 import com.willfp.ecoenchants.command.commands.CommandRandomenchant;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
+import com.willfp.ecoenchants.config.configs.RarityYml;
+import com.willfp.ecoenchants.config.configs.TargetYml;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -25,6 +26,7 @@ import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners
 import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
 import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
 import com.willfp.ecoenchants.enchantments.util.ItemConversions;
+import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
@@ -42,7 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class EcoEnchantsPlugin extends AbstractEcoPlugin {
+public class EcoEnchantsPlugin extends EcoPlugin {
     /**
      * Instance of the plugin.
      */
@@ -50,11 +52,26 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
     private static EcoEnchantsPlugin instance;
 
     /**
+     * Rarity.yml.
+     */
+    @Getter
+    private final RarityYml rarityYml;
+
+    /**
+     * Target.yml.
+     */
+    @Getter
+    private final TargetYml targetYml;
+
+    /**
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
         super("EcoEnchants", 79573, 7666, "com.willfp.ecoenchants.proxy", "&a");
         instance = this;
+
+        rarityYml = new RarityYml(this);
+        targetYml = new TargetYml(this);
     }
 
     /**
@@ -65,13 +82,13 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
         this.getExtensionLoader().loadExtensions();
 
         if (this.getExtensionLoader().getLoadedExtensions().isEmpty()) {
-            this.getLog().info("&cNo extensions found");
+            this.getLogger().info("&cNo extensions found");
         } else {
-            this.getLog().info("Extensions Loaded:");
-            this.getExtensionLoader().getLoadedExtensions().forEach(extension -> this.getLog().info("- " + extension.getName() + " v" + extension.getVersion()));
+            this.getLogger().info("Extensions Loaded:");
+            this.getExtensionLoader().getLoadedExtensions().forEach(extension -> this.getLogger().info("- " + extension.getName() + " v" + extension.getVersion()));
         }
 
-        this.getLog().info(EcoEnchants.values().size() + " Enchantments Loaded");
+        this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
         TelekinesisUtils.registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
     }
@@ -106,6 +123,8 @@ public class EcoEnchantsPlugin extends AbstractEcoPlugin {
      */
     @Override
     public void onReload() {
+        targetYml.update();
+        rarityYml.update();
         ((EnchantDisplay) this.getDisplayModule()).update();
         EcoEnchants.values().forEach((ecoEnchant -> {
             HandlerList.unregisterAll(ecoEnchant);

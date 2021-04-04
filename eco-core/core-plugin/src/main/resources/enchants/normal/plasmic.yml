@@ -16,7 +16,7 @@ general-config:
   targets:
     - sword
   grindstoneable: true
-  disabled-in-worlds: []
+  disabled-in-worlds: [ ]
   conflicts:
     - voltage
   maximum-level: 5

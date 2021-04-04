@@ -1,13 +1,12 @@
 package com.willfp.ecoenchants.enchantments.itemtypes;
 
 import com.google.common.util.concurrent.AtomicDouble;
+import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.enchantments.util.FastTrig;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
@@ -141,8 +140,8 @@ public abstract class Artifact extends EcoEnchant {
                 }
                 yAtomic.addAndGet(yDelta);
                 double y = yAtomic.get();
-                double x = radius * FastTrig.cos((y + offset) * radiusMultiplier);
-                double z = radius * FastTrig.sin((y + offset) * radiusMultiplier);
+                double x = radius * NumberUtils.fastCos((y + offset) * radiusMultiplier);
+                double z = radius * NumberUtils.fastSin((y + offset) * radiusMultiplier);
                 Location particleLocation = victim.getLocation();
                 particleLocation.add(x, y, z);
                 victim.getWorld().spawnParticle(particle, particleLocation, 1, 0, 0, 0, 0, extra, false);

@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +22,7 @@ public class GrindstoneListeners extends PluginDependent implements Listener {
      *
      * @param plugin The plugin to link to.
      */
-    public GrindstoneListeners(@NotNull final AbstractEcoPlugin plugin) {
+    public GrindstoneListeners(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

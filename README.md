@@ -31,6 +31,7 @@
 [![Compatibility](https://i.imgur.com/mlAGlKn.png)]()
 
 ## License
-*Click here to read [the entire license](https://github.com/Auxilor/EcoEnchants/blob/master/LICENSE.md).* 
+
+*Click here to read [the entire license](https://github.com/Auxilor/EcoEnchants/blob/master/LICENSE.md).*
 
 Distributing compiled versions of the plugin is not permitted.

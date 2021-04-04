@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class Abrasion extends EcoEnchant {
     public Abrasion() {
         super(

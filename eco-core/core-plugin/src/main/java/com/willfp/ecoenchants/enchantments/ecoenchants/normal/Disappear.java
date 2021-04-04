@@ -15,6 +15,7 @@ public class Disappear extends EcoEnchant {
                 "disappear", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onDamageWearingArmor(@NotNull final LivingEntity victim,
                                      final int level,

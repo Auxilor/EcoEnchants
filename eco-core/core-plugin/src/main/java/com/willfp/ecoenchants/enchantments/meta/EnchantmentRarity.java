@@ -1,8 +1,9 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
+import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
-import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.config.configs.RarityYml;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,36 +20,35 @@ public class EnchantmentRarity {
      */
     private static final Set<EnchantmentRarity> REGISTERED = new HashSet<>();
 
+    static {
+        update();
+    }
+
     /**
      * The name of the rarity.
      */
     @Getter
     private final String name;
-
     /**
      * The probability of getting an enchantment with this rarity from an enchanting table.
      */
     @Getter
     private final double tableProbability;
-
     /**
      * The minimum xp level to get an enchantment of this rarity from an enchanting table.
      */
     @Getter
     private final int minimumLevel;
-
     /**
      * The probability of a villager obtaining an enchantment with this rarity.
      */
     @Getter
     private final double villagerProbability;
-
     /**
      * The probability of an item in a loot chest having an enchantment with this rarity.
      */
     @Getter
     private final double lootProbability;
-
     /**
      * The custom display color, or null if not enabled.
      */
@@ -77,6 +77,47 @@ public class EnchantmentRarity {
         this.villagerProbability = villagerProbability;
         this.lootProbability = lootProbability;
         this.customColor = customColor;
+    }
+
+    /**
+     * Get EnchantmentRarity matching name.
+     *
+     * @param name The name to search for.
+     * @return The matching EnchantmentRarity, or null if not found.
+     */
+    public static EnchantmentRarity getByName(@NotNull final String name) {
+        Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+        return matching.orElse(null);
+    }
+
+    /**
+     * Update all rarities.
+     */
+    @ConfigUpdater
+    public static void update() {
+        RarityYml rarityYml = EcoEnchantsPlugin.getInstance().getRarityYml();
+        List<String> raritiesNames = rarityYml.getRarities();
+        raritiesNames.forEach(rarity -> {
+            double probability = rarityYml.getDouble("rarities." + rarity + ".table-probability");
+            int minimumLevel = rarityYml.getInt("rarities." + rarity + ".minimum-level");
+            double villagerProbability = rarityYml.getDouble("rarities." + rarity + ".villager-probability");
+            double lootProbability = rarityYml.getDouble("rarities." + rarity + ".loot-probability");
+            String customColor = null;
+            if (rarityYml.getBool("rarities." + rarity + ".custom-color.enabled")) {
+                customColor = StringUtils.translate(rarityYml.getString("rarities." + rarity + ".custom-color.color"));
+            }
+
+            new EnchantmentRarity(rarity, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();
+        });
+    }
+
+    /**
+     * Get all rarities.
+     *
+     * @return A set of all rarities.
+     */
+    public static Set<EnchantmentRarity> values() {
+        return REGISTERED;
     }
 
     /**
@@ -113,49 +154,5 @@ public class EnchantmentRarity {
     @Override
     public int hashCode() {
         return Objects.hash(getName());
-    }
-
-    /**
-     * Get EnchantmentRarity matching name.
-     *
-     * @param name The name to search for.
-     * @return The matching EnchantmentRarity, or null if not found.
-     */
-    public static EnchantmentRarity getByName(@NotNull final String name) {
-        Optional<EnchantmentRarity> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
-        return matching.orElse(null);
-    }
-
-    /**
-     * Update all rarities.
-     */
-    @ConfigUpdater
-    public static void update() {
-        List<String> raritiesNames = EcoEnchantsConfigs.RARITY.getRarities();
-        raritiesNames.forEach(rarity -> {
-            double probability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".table-probability");
-            int minimumLevel = EcoEnchantsConfigs.RARITY.getInt("rarities." + rarity + ".minimum-level");
-            double villagerProbability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".villager-probability");
-            double lootProbability = EcoEnchantsConfigs.RARITY.getDouble("rarities." + rarity + ".loot-probability");
-            String customColor = null;
-            if (EcoEnchantsConfigs.RARITY.getBool("rarities." + rarity + ".custom-color.enabled")) {
-                customColor = StringUtils.translate(EcoEnchantsConfigs.RARITY.getString("rarities." + rarity + ".custom-color.color"));
-            }
-
-            new EnchantmentRarity(rarity, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();
-        });
-    }
-
-    /**
-     * Get all rarities.
-     *
-     * @return A set of all rarities.
-     */
-    public static Set<EnchantmentRarity> values() {
-        return REGISTERED;
-    }
-
-    static {
-        update();
     }
 }

@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
 import com.google.common.collect.ImmutableSet;
-import com.willfp.eco.util.config.updating.annotations.ConfigUpdater;
-import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
+import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
@@ -15,21 +15,24 @@ import java.util.Set;
 
 public class EnchantmentTarget {
     /**
+     * Target containing the materials from all other targets.
+     */
+    public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>());
+    /**
      * All registered targets.
      */
     private static final Set<EnchantmentTarget> REGISTERED = new HashSet<>();
 
-    /**
-     * Target containing the materials from all other targets.
-     */
-    public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>());
+    static {
+        REGISTERED.add(ALL);
+        update();
+    }
 
     /**
      * The name of the target.
      */
     @Getter
     private final String name;
-
     /**
      * The materials of the target.
      */
@@ -49,14 +52,6 @@ public class EnchantmentTarget {
         this.materials = materials;
     }
 
-    public void register() {
-        Optional<EnchantmentTarget> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
-        matching.ifPresent(REGISTERED::remove);
-        matching.ifPresent(enchantmentTarget -> ALL.getMaterials().removeAll(enchantmentTarget.getMaterials()));
-        REGISTERED.add(this);
-        ALL.getMaterials().addAll(this.getMaterials());
-    }
-
     /**
      * Get EnchantmentTarget matching name.
      *
@@ -73,10 +68,10 @@ public class EnchantmentTarget {
      */
     @ConfigUpdater
     public static void update() {
-        List<String> targetNames = EcoEnchantsConfigs.TARGET.getTargets();
+        List<String> targetNames = EcoEnchantsPlugin.getInstance().getTargetYml().getTargets();
         ALL.materials.clear();
         targetNames.forEach(name -> {
-            Set<Material> materials = EcoEnchantsConfigs.TARGET.getTargetMaterials(name);
+            Set<Material> materials = EcoEnchantsPlugin.getInstance().getTargetYml().getTargetMaterials(name);
             new EnchantmentTarget(name, materials).register();
         });
     }
@@ -90,8 +85,11 @@ public class EnchantmentTarget {
         return ImmutableSet.copyOf(REGISTERED);
     }
 
-    static {
-        REGISTERED.add(ALL);
-        update();
+    private void register() {
+        Optional<EnchantmentTarget> matching = REGISTERED.stream().filter(rarity -> rarity.getName().equalsIgnoreCase(name)).findFirst();
+        matching.ifPresent(REGISTERED::remove);
+        matching.ifPresent(enchantmentTarget -> ALL.getMaterials().removeAll(enchantmentTarget.getMaterials()));
+        REGISTERED.add(this);
+        ALL.getMaterials().addAll(this.getMaterials());
     }
 }

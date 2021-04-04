@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display.options;
 
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
 import com.willfp.ecoenchants.display.options.sorting.SorterManager;
@@ -20,41 +20,35 @@ import java.util.stream.Collectors;
 
 public class DisplayOptions extends PluginDependent {
     /**
-     * The enchantment sorter being used.
-     */
-    @Getter
-    private EnchantmentSorter sorter;
-
-    /**
      * The description options being used.
      */
     @Getter
     private final DescriptionOptions descriptionOptions = new DescriptionOptions(this.getPlugin());
-
     /**
      * The enchantment level options being used.
      */
     @Getter
     private final NumbersOptions numbersOptions = new NumbersOptions(this.getPlugin());
-
     /**
      * The shrink options being used.
      */
     @Getter
     private final ShrinkOptions shrinkOptions = new ShrinkOptions(this.getPlugin());
-
     /**
      * The enchantment types, sorted according to config.
      */
     @Getter
     private final List<EnchantmentType> sortedTypes = new ArrayList<>();
-
     /**
      * The enchantment rarities, sorted according to config.
      */
     @Getter
     private final List<EnchantmentRarity> sortedRarities = new ArrayList<>();
-
+    /**
+     * The enchantment sorter being used.
+     */
+    @Getter
+    private EnchantmentSorter sorter;
     /**
      * Allow reading enchantments from lore-based plugins.
      */
@@ -97,7 +91,7 @@ public class DisplayOptions extends PluginDependent {
      * @param plugin EcoEnchants.
      */
     @ApiStatus.Internal
-    public DisplayOptions(@NotNull final AbstractEcoPlugin plugin) {
+    public DisplayOptions(@NotNull final EcoPlugin plugin) {
         super(plugin);
         update();
     }

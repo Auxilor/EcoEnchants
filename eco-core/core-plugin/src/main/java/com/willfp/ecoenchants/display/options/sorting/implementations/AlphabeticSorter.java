@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display.options.sorting.implementations;
 
-import com.willfp.eco.util.internal.PluginDependent;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
@@ -16,7 +16,7 @@ public class AlphabeticSorter extends PluginDependent implements EnchantmentSort
      *
      * @param plugin Instance of EcoEnchants.
      */
-    public AlphabeticSorter(@NotNull final AbstractEcoPlugin plugin) {
+    public AlphabeticSorter(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

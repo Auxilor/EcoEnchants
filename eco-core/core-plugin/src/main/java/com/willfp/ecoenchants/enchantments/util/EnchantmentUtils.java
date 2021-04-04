@@ -1,11 +1,9 @@
 package com.willfp.ecoenchants.enchantments.util;
 
-
+import com.willfp.eco.core.integrations.placeholder.PlaceholderEntry;
+import com.willfp.eco.core.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.PlayerUtils;
 import com.willfp.eco.util.StringUtils;
-import com.willfp.eco.util.integrations.placeholder.PlaceholderEntry;
-import com.willfp.eco.util.integrations.placeholder.PlaceholderManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import lombok.experimental.UtilityClass;
@@ -37,7 +35,7 @@ public class EnchantmentUtils {
     public static boolean isFullyChargeIfRequired(@NotNull final EcoEnchant enchantment,
                                                   @NotNull final LivingEntity entity) {
         if (entity instanceof Player) {
-            if (PlayerUtils.getAttackCooldown((Player) entity) != 1.0f) {
+            if (((Player) entity).getAttackCooldown() != 1.0f) {
                 return enchantment.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "allow-not-fully-charged");
             }
         }
@@ -60,7 +58,7 @@ public class EnchantmentUtils {
 
         enchantment.getConfig().getKeys(true).forEach(string -> {
             String key = string.replace("\\.", "_").replace("-", "_");
-            Object object = enchantment.getConfig().getRaw(string);
+            Object object = enchantment.getConfig().get(string);
 
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(

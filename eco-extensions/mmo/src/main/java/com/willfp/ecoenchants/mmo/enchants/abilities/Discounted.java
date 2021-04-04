@@ -18,13 +18,13 @@ public class Discounted extends MMOEnchantment {
     public void onAbility(AbilityUseEvent event) {
         Player player = event.getPlayer();
 
-        if(!EnchantChecks.mainhand(player, this))
+        if (!EnchantChecks.mainhand(player, this))
             return;
 
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         double cost = event.getAbility().getModifier("mana");
-        if(cost == 0.0D) return;
+        if (cost == 0.0D) return;
 
         double multiplier = 1 - (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * level);
         cost *= multiplier;

@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.util.drops.DropQueue;
-import com.willfp.eco.util.events.entitydeathbyentity.EntityDeathByEntityEvent;
+import com.willfp.eco.core.drops.DropQueue;
+import com.willfp.eco.core.events.EntityDeathByEntityEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -22,6 +22,7 @@ public class Fetching extends EcoEnchant {
                 "fetching", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler(priority = EventPriority.HIGH)
     public void onWolfKill(@NotNull final EntityDeathByEntityEvent event) {
         LivingEntity entity = event.getVictim();

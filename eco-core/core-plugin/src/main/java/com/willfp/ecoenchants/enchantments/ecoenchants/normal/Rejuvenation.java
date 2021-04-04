@@ -15,6 +15,7 @@ public class Rejuvenation extends EcoEnchant {
                 "rejuvenation", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onRejuvenationHeal(@NotNull final EntityRegainHealthEvent event) {
         if (!(event.getEntity() instanceof Player)) {

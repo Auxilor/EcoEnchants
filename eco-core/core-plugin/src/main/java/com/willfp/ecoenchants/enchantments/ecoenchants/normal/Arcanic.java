@@ -13,6 +13,7 @@ public class Arcanic extends EcoEnchant {
                 "arcanic", EnchantmentType.NORMAL
         );
     }
+
     @Override
     public void onDamageWearingArmor(@NotNull final LivingEntity victim,
                                      final int level,

@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.util.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -18,6 +18,7 @@ public class Incandescence extends EcoEnchant {
                 "incandescence", EnchantmentType.NORMAL
         );
     }
+
     @EventHandler
     public void onIncandescenceHurt(@NotNull final EntityDamageByEntityEvent event) {
         if (event.getCause() == EntityDamageEvent.DamageCause.THORNS) {
@@ -50,8 +51,8 @@ public class Incandescence extends EcoEnchant {
         }
 
         this.getPlugin().getScheduler().runLater(() -> victim.setFireTicks(totalIncandescencePoints
-                * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-point")
-                + this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-ticks")),
+                        * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-point")
+                        + this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "initial-ticks")),
                 1);
     }
 }

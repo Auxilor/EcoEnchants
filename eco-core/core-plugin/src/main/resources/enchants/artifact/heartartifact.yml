@@ -22,8 +22,8 @@ general-config:
     - crossbow
     - trident
   grindstoneable: true
-  disabled-in-worlds: []
-  conflicts: []
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
 
 config:
   # For Attack
