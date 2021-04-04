@@ -112,23 +112,17 @@ public class EnchantChecks {
      */
     public static int getArrowLevel(@NotNull final Arrow arrow,
                                     @NotNull final Enchantment enchantment) {
-        if (arrow.getMetadata("enchantments").isEmpty()) {
+        if (arrow.getMetadata("shot-from").isEmpty()) {
             return 0;
         }
 
-        MetadataValue enchantmentsMetaValue = arrow.getMetadata("enchantments").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof Map)) {
+        MetadataValue enchantmentsMetaValue = arrow.getMetadata("shot-from").get(0);
+        if (!(enchantmentsMetaValue.value() instanceof ItemStack)) {
             return 0;
         }
 
-        Map<Enchantment, Integer> enchantments = (Map<Enchantment, Integer>) enchantmentsMetaValue.value();
-        if (enchantments == null) {
-            return 0;
-        }
-        if (!enchantments.containsKey(enchantment)) {
-            return 0;
-        }
-        return enchantments.get(enchantment);
+        ItemStack shotFrom = (ItemStack) enchantmentsMetaValue.value();
+        return getItemLevel(shotFrom, enchantment);
     }
 
     /**
