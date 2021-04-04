@@ -204,7 +204,7 @@ public class EnchantmentCache {
             });
 
             String processedStringDescription = descriptionBuilder.toString();
-            processedStringDescription = processedStringDescription.replace("§w", "");
+            processedStringDescription = processedStringDescription.replace(Display.PREFIX, "");
             this.stringDescription = processedStringDescription.replaceAll(((EnchantDisplay) PLUGIN.getDisplayModule()).getOptions().getDescriptionOptions().getColor(), "");
         }
     }

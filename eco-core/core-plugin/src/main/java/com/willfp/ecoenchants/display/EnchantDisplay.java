@@ -200,12 +200,6 @@ public class EnchantDisplay extends DisplayModule {
 
     @Override
     protected void revert(@NotNull final ItemStack itemStack) {
-        if (options.isRequireTarget()) {
-            if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
-                return;
-            }
-        }
-
         ItemMeta meta = itemStack.getItemMeta();
 
         assert meta != null;
@@ -230,7 +224,7 @@ public class EnchantDisplay extends DisplayModule {
     protected Object[] generateVarArgs(@NotNull final ItemStack itemStack) {
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) {
-            return new Object[0];
+            return new Object[]{false};
         }
         boolean hideEnchants = false;
 
