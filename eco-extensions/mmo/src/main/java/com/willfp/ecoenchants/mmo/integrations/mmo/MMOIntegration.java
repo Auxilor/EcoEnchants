@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.mmo.integrations.mmo;
 
 
-import com.willfp.eco.util.integrations.Integration;
+import com.willfp.eco.core.integrations.Integration;
 import org.bukkit.entity.Player;
 
 public interface MMOIntegration extends Integration {

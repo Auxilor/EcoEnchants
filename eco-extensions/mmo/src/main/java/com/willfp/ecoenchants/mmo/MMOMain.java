@@ -1,20 +1,12 @@
 package com.willfp.ecoenchants.mmo;
 
-import com.willfp.eco.util.extensions.Extension;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.extensions.Extension;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.mmo.enchants.abilities.Discounted;
-import com.willfp.ecoenchants.mmo.enchants.abilities.Recover;
 import com.willfp.ecoenchants.mmo.enchants.mana.Augment;
 import com.willfp.ecoenchants.mmo.enchants.mana.Drain;
-import com.willfp.ecoenchants.mmo.enchants.mana.Elixir;
-import com.willfp.ecoenchants.mmo.enchants.mana.Siphon;
-import com.willfp.ecoenchants.mmo.enchants.mana.Spirituality;
 import com.willfp.ecoenchants.mmo.enchants.misc.Strengthening;
 import com.willfp.ecoenchants.mmo.enchants.stamina.Athletic;
-import com.willfp.ecoenchants.mmo.enchants.stamina.Endurance;
-import com.willfp.ecoenchants.mmo.enchants.stamina.Fortitude;
-import com.willfp.ecoenchants.mmo.enchants.stamina.Motivate;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +24,7 @@ public class MMOMain extends Extension {
     public static final EcoEnchant ATHLETIC = new Athletic();
     public static final EcoEnchant STRENGTHENING = new Strengthening();
 
-    public MMOMain(@NotNull final AbstractEcoPlugin plugin) {
+    public MMOMain(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

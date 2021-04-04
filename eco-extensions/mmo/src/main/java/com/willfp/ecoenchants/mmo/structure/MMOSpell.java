@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.mmo.structure;
 
-import com.willfp.eco.util.optional.Prerequisite;
+import com.willfp.eco.core.Prerequisite;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import com.willfp.ecoenchants.mmo.MMOPrerequisites;
 

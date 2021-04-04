@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
+import com.willfp.eco.core.scheduling.RunnableTask;
 import com.willfp.eco.util.VectorUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -14,7 +15,6 @@ import org.bukkit.block.data.Levelled;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -75,7 +75,7 @@ public class MagmaWalker extends EcoEnchant {
 
             long afterTicks = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "remove-after-ticks");
 
-            BukkitRunnable replace = this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
+            RunnableTask replace = this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
                 if (block.getType().equals(Material.OBSIDIAN) && !player.getWorld().getBlockAt(player.getLocation().add(0, -1, 0)).equals(block)) {
                     block.setType(Material.LAVA);
                     block.removeMetadata("byMagmaWalker", this.getPlugin());
@@ -89,7 +89,7 @@ public class MagmaWalker extends EcoEnchant {
                         block.setType(Material.LAVA);
                         block.removeMetadata("byMagmaWalker", this.getPlugin());
                     } else {
-                        replace.runTaskTimer(this.getPlugin(), afterTicks, afterTicks);
+                        replace.runTaskTimer(afterTicks, afterTicks);
                     }
                 }
             }, afterTicks);

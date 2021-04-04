@@ -12,7 +12,7 @@ public class Drain extends MMOSpell {
     }
 
     @Override
-    public void onUse(Player player, int level, PlayerInteractEvent event) {
+    public boolean onUse(Player player, int level, PlayerInteractEvent event) {
         double radius = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "radius-per-level") * level;
         double amount = 1 - ((this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percentage-per-level") / 100) * level);
 
@@ -23,5 +23,7 @@ public class Drain extends MMOSpell {
             Player victim = (Player) entity;
             MMOManager.setMana(victim, MMOManager.getMana(player) * amount);
         });
+
+        return true;
     }
 }

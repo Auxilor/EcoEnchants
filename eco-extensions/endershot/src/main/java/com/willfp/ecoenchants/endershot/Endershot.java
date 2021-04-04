@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.endershot;
 
-import com.willfp.eco.util.integrations.mcmmo.McmmoManager;
+import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;

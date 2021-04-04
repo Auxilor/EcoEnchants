@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.mmo.enchants.misc;
 
-import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
+import com.willfp.eco.core.events.ArmorEquipEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.mmo.structure.MMOEnchantment;

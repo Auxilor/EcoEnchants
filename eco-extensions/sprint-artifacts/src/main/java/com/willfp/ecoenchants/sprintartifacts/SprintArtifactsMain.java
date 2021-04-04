@@ -1,12 +1,12 @@
 package com.willfp.ecoenchants.sprintartifacts;
 
-import com.willfp.eco.util.extensions.Extension;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.extensions.Extension;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 public class SprintArtifactsMain extends Extension {
-    public SprintArtifactsMain(@NotNull final AbstractEcoPlugin plugin) {
+    public SprintArtifactsMain(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

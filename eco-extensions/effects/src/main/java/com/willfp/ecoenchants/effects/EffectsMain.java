@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.effects;
 
-
-import com.willfp.eco.util.extensions.Extension;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.extensions.Extension;
 import com.willfp.ecoenchants.effects.enchants.JumpBoost;
 import com.willfp.ecoenchants.effects.enchants.NightVision;
 import com.willfp.ecoenchants.effects.enchants.Regeneration;
@@ -18,7 +17,7 @@ public class EffectsMain extends Extension {
     public static final EcoEnchant SPEED = new Speed();
     public static final EcoEnchant WATER_BREATHING = new WaterBreathing();
 
-    public EffectsMain(@NotNull final AbstractEcoPlugin plugin) {
+    public EffectsMain(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.mmo.integrations.mmo;
 
-import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -14,7 +13,6 @@ public class MMOManager {
     }
 
     private static MMOIntegration getIntegration() {
-        Validate.notEmpty(integrations, "There must be an existing mmo integration!");
         return integrations.stream().findFirst().get();
     }
 

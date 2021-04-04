@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.biomes;
 
-
-import com.willfp.eco.util.extensions.Extension;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.extensions.Extension;
 import com.willfp.ecoenchants.biomes.enchants.defensive.Elevation;
 import com.willfp.ecoenchants.biomes.enchants.defensive.Glacial;
 import com.willfp.ecoenchants.biomes.enchants.defensive.HeatTreated;
@@ -28,7 +27,7 @@ public class BiomesMain extends Extension {
     public static final EcoEnchant ICELORD = new Icelord();
     public static final EcoEnchant RAINFOREST = new Rainforest();
 
-    public BiomesMain(@NotNull final AbstractEcoPlugin plugin) {
+    public BiomesMain(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

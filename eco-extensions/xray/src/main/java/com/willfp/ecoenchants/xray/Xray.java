@@ -31,13 +31,13 @@ public class Xray extends Spell {
     }
 
     @Override
-    public void onUse(@NotNull final Player player,
+    public boolean onUse(@NotNull final Player player,
                       final int level,
                       @NotNull final PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            return;
+            return false;
         }
 
         Location location;
@@ -99,6 +99,8 @@ public class Xray extends Spell {
                 block1.removeMetadata("xray-uuid", this.getPlugin());
             }, ticks);
         });
+
+        return true;
     }
 
     @EventHandler

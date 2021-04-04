@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.summoning;
 
+import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.optional.Prerequisite;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;

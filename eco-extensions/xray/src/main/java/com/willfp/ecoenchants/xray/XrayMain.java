@@ -1,14 +1,14 @@
 package com.willfp.ecoenchants.xray;
 
-import com.willfp.eco.util.extensions.Extension;
-import com.willfp.eco.util.plugin.AbstractEcoPlugin;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.extensions.Extension;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.jetbrains.annotations.NotNull;
 
 public class XrayMain extends Extension {
     public static final EcoEnchant XRAY = new Xray();
 
-    public XrayMain(@NotNull final AbstractEcoPlugin plugin) {
+    public XrayMain(@NotNull final EcoPlugin plugin) {
         super(plugin);
     }
 

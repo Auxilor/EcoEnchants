@@ -18,7 +18,7 @@ public class Firewand extends Spell {
     }
 
     @Override
-    public void onUse(@NotNull final Player player,
+    public boolean onUse(@NotNull final Player player,
                       final int level,
                       @NotNull final PlayerInteractEvent event) {
         SmallFireball fireball = player.launchProjectile(SmallFireball.class, player.getEyeLocation().getDirection().multiply(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity")));
@@ -28,6 +28,8 @@ public class Firewand extends Spell {
             fireball.setMetadata("nobreak", this.getPlugin().getMetadataValueFactory().create(true));
         }
         fireball.setShooter(player);
+
+        return true;
     }
 
     @EventHandler(priority = EventPriority.LOW)

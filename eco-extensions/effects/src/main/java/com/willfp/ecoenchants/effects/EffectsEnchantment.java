@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.effects;
 
-
-import com.willfp.eco.util.events.armorequip.ArmorEquipEvent;
-import com.willfp.eco.util.optional.Prerequisite;
+import com.willfp.eco.core.Prerequisite;
+import com.willfp.eco.core.events.ArmorEquipEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
