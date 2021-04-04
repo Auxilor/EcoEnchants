@@ -20,6 +20,12 @@ public class EnchantmentType {
      * Instance of EcoEnchants.
      */
     private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
+
+    /**
+     * All registered types.
+     */
+    private static final List<EnchantmentType> REGISTERED = new ArrayList<>();
+
     /**
      * Most enchantments are like this.
      * <p>
@@ -30,6 +36,7 @@ public class EnchantmentType {
             false,
             () -> PLUGIN.getLangYml().getString("not-curse-color")
     );
+
     /**
      * Negative enchantments.
      * <p>
@@ -40,6 +47,7 @@ public class EnchantmentType {
             false,
             () -> PLUGIN.getLangYml().getString("curse-color")
     );
+
     /**
      * Extremely powerful enchantments.
      * <p>
@@ -50,6 +58,7 @@ public class EnchantmentType {
             () -> !PLUGIN.getConfigYml().getBool("types.special.allow-multiple"),
             () -> PLUGIN.getLangYml().getString("special-color")
     );
+
     /**
      * Cosmetic enchantments.
      * <p>
@@ -61,6 +70,7 @@ public class EnchantmentType {
             () -> PLUGIN.getLangYml().getString("artifact-color"),
             Artifact.class
     );
+
     /**
      * Ability enchantments.
      * <p>
@@ -72,10 +82,7 @@ public class EnchantmentType {
             () -> PLUGIN.getLangYml().getString("spell-color"),
             Spell.class
     );
-    /**
-     * All registered types.
-     */
-    private static final List<EnchantmentType> REGISTERED = new ArrayList<>();
+
     /**
      * Lambda to fetch the color of the type.
      */
@@ -85,11 +92,13 @@ public class EnchantmentType {
      * Lambda to fetch the singularity of the type.
      */
     private final Supplier<Boolean> singularSupplier;
+
     /**
      * The name of the type.
      */
     @Getter
     private final String name;
+
     /**
      * The class that all enchantments of this type must extend.
      * <p>
@@ -98,11 +107,13 @@ public class EnchantmentType {
     @Getter
     @Nullable
     private final Class<? extends EcoEnchant> requiredToExtend;
+
     /**
      * If only one enchantment of this type is allowed on an item.
      */
     @Getter
     private boolean singular;
+
     /**
      * The color of enchantments of this type to have in lore.
      */
