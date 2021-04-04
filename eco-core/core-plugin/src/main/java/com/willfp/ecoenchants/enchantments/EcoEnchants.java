@@ -254,6 +254,10 @@ public class EcoEnchants {
     public static final String CONFIG_LOCATION = "config.";
     public static final String OBTAINING_LOCATION = "obtaining.";
     public static final String GENERAL_LOCATION = "general-config.";
+
+    private static final BiMap<NamespacedKey, EcoEnchant> BY_KEY = HashBiMap.create();
+    private static final BiMap<String, EcoEnchant> BY_NAME = HashBiMap.create();
+
     public static final EcoEnchant TELEKINESIS = new Telekinesis();
     public static final EcoEnchant MARKSMAN = new Marksman();
     public static final EcoEnchant INFERNAL_TOUCH = new InfernalTouch();
@@ -485,8 +489,6 @@ public class EcoEnchants {
     public static final EcoEnchant SWEEP_ARTIFACT = new SweepArtifact();
     public static final EcoEnchant REAPER = new Reaper();
     public static final EcoEnchant WOOD_SWITCHER = new WoodSwitcher();
-    private static final BiMap<NamespacedKey, EcoEnchant> BY_KEY = HashBiMap.create();
-    private static final BiMap<String, EcoEnchant> BY_NAME = HashBiMap.create();
 
     /**
      * Get all registered {@link EcoEnchant}s.
