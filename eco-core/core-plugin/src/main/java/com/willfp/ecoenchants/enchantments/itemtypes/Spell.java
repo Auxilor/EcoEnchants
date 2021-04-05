@@ -11,6 +11,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellActivateEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -146,6 +147,10 @@ public abstract class Spell extends EcoEnchant {
         }
         preventDuplicateList.add(player.getUniqueId());
         this.getPlugin().getScheduler().runLater(() -> preventDuplicateList.remove(player.getUniqueId()), 5);
+
+        if (player.getGameMode() == GameMode.SPECTATOR) {
+            return;
+        }
 
         if (LEFT_CLICK_ITEMS.contains(player.getInventory().getItemInMainHand().getType())) {
             if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
