@@ -146,7 +146,7 @@ public abstract class Spell extends EcoEnchant {
             return;
         }
         preventDuplicateList.add(player.getUniqueId());
-        this.getPlugin().getScheduler().runLater(() -> preventDuplicateList.remove(player.getUniqueId()), 5);
+        this.getPlugin().getScheduler().runLater(() -> preventDuplicateList.remove(player.getUniqueId()), 2);
 
         if (player.getGameMode() == GameMode.SPECTATOR) {
             return;
