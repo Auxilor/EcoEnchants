@@ -3,8 +3,7 @@ package com.willfp.ecoenchants.enchantments;
 import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
-import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import com.willfp.ecoenchants.config.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -142,8 +141,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
 
         this.type = type;
         this.permissionName = key.replace("_", "");
-        EcoEnchantsConfigs.addEnchantmentConfig(new EnchantmentConfig(this.permissionName, this.getClass(), this.type));
-        this.config = EcoEnchantsConfigs.getEnchantmentConfig(this.permissionName);
+        this.config = new EnchantmentConfig(this.permissionName, this.getClass(), this.type);
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
             Permission permission = new Permission(

@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.config.configs;
+package com.willfp.ecoenchants.config;
 
 import com.willfp.eco.core.config.ExtendableConfig;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;

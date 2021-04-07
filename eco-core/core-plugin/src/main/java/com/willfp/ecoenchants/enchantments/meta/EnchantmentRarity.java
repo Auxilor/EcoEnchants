@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchantments.meta;
 import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.config.configs.RarityYml;
+import com.willfp.ecoenchants.config.RarityYml;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

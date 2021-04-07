@@ -11,9 +11,8 @@ import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
 import com.willfp.ecoenchants.command.commands.CommandRandomenchant;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
-import com.willfp.ecoenchants.config.EcoEnchantsConfigs;
-import com.willfp.ecoenchants.config.configs.RarityYml;
-import com.willfp.ecoenchants.config.configs.TargetYml;
+import com.willfp.ecoenchants.config.RarityYml;
+import com.willfp.ecoenchants.config.TargetYml;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -217,7 +216,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     @Override
     public List<Class<?>> getUpdatableClasses() {
         return Arrays.asList(
-                EcoEnchantsConfigs.class,
                 EnchantmentCache.class,
                 EnchantmentRarity.class,
                 EnchantmentTarget.class,
