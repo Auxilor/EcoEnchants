@@ -161,6 +161,7 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Radiance;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Rage;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Rapid;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reaper;
+import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Rebounding;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reel;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Reinforcement;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Rejuvenation;
@@ -489,6 +490,7 @@ public class EcoEnchants {
     public static final EcoEnchant SWEEP_ARTIFACT = new SweepArtifact();
     public static final EcoEnchant REAPER = new Reaper();
     public static final EcoEnchant WOOD_SWITCHER = new WoodSwitcher();
+    public static final EcoEnchant REBOUNDING = new Rebounding();
 
     /**
      * Get all registered {@link EcoEnchant}s.
