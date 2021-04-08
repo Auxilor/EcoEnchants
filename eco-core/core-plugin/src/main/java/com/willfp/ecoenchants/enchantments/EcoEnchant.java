@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchantments;
 import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.ecoenchants.config.EnchantmentConfig;
+import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
