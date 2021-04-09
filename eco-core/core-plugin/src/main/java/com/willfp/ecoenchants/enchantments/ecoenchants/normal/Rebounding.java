@@ -35,7 +35,7 @@ public class Rebounding extends EcoEnchant {
         LivingEntity victim = (LivingEntity) event.getEntity();
         LivingEntity attacker = (LivingEntity) event.getDamager();
 
-        int level = EnchantChecks.getArmorPoints(attacker, this);
+        int level = EnchantChecks.getArmorPoints(victim, this);
 
         if (level == 0) {
             return;
