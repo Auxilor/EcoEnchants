@@ -170,6 +170,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      * This can be overridden but may lead to unexpected behavior.
      */
     public void update() {
+        config.update();
         config.loadFromLang();
         rarity = config.getRarity();
         Validate.notNull(rarity, "Rarity specified in " + this.permissionName + " is invalid!");
