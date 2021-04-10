@@ -132,23 +132,17 @@ public class EnchantChecks {
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level.
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnArrow(@NotNull final Arrow arrow) {
-        if (arrow.getMetadata("enchantments").isEmpty()) {
+        if (arrow.getMetadata("shot-from").isEmpty()) {
             return new HashMap<>();
         }
 
-        MetadataValue enchantmentsMetaValue = arrow.getMetadata("enchantments").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof Map)) {
+        MetadataValue enchantmentsMetaValue = arrow.getMetadata("shot-from").get(0);
+        if (!(enchantmentsMetaValue.value() instanceof ItemStack)) {
             return new HashMap<>();
         }
 
-        Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
-        ((Map<Enchantment, Integer>) enchantmentsMetaValue.value()).forEach(((enchantment, integer) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                ecoEnchants.put(EcoEnchants.getFromEnchantment(enchantment), integer);
-            }
-        }));
-
-        return ecoEnchants;
+        ItemStack shotFrom = (ItemStack) enchantmentsMetaValue.value();
+        return getEnchantsOnItem(shotFrom);
     }
 
     /**
