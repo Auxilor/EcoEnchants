@@ -74,9 +74,10 @@ public class Aiming extends EcoEnchant {
         Runnable runnable = this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
             List<LivingEntity> nearbyEntities = (List<LivingEntity>) (List<?>) Arrays.asList(arrow.getNearbyEntities(finalDistance, finalDistance, finalDistance).stream()
                     .filter(entity -> entity instanceof LivingEntity)
+                    .map(entity -> (LivingEntity) entity)
                     .filter(entity -> !entity.equals(player))
                     .filter(entity -> !(entity instanceof Enderman))
-                    .filter(entity -> !AntigriefManager.canInjure(player, (LivingEntity) entity))
+                    .filter(entity -> AntigriefManager.canInjure(player, entity))
                     .filter(entity -> {
                         if (entity instanceof Player) {
                             return ((Player) entity).getGameMode().equals(GameMode.SURVIVAL) || ((Player) entity).getGameMode().equals(GameMode.ADVENTURE);
