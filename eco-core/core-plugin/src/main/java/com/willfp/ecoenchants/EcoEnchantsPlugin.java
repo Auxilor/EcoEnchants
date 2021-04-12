@@ -9,6 +9,7 @@ import com.willfp.eco.util.TelekinesisUtils;
 import com.willfp.ecoenchants.command.commands.CommandEcodebug;
 import com.willfp.ecoenchants.command.commands.CommandEcoreload;
 import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
+import com.willfp.ecoenchants.command.commands.CommandGiverandombook;
 import com.willfp.ecoenchants.command.commands.CommandRandomenchant;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.RarityYml;
@@ -182,7 +183,8 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 new CommandEcodebug(this),
                 new CommandEcoreload(this),
                 new CommandEnchantinfo(this),
-                new CommandRandomenchant(this)
+                new CommandRandomenchant(this),
+                new CommandGiverandombook(this)
         );
     }
 

@@ -36,6 +36,9 @@ commands:
   randomenchant:
     description: Adds a random enchantment to an item
     permission: ecoenchants.randomenchant
+  giverandombook:
+    description: Gives a book containing a random enchantment
+    permission: ecoenchants.randombook
 
 permissions:
   ecoenchants.*:
@@ -49,6 +52,7 @@ permissions:
       ecoenchants.ecodebug: true
       ecoenchants.randomenchant: true
       ecoenchants.randomenchant.bypasshardcap: true
+      ecoenchants.randombook: true
       ecoenchants.anvil.*: true
   ecoenchants.anvil.*:
     description: Allows all anvil permissions
@@ -72,6 +76,9 @@ permissions:
   ecoenchants.enchantinfo:
     description: Allows the use of /enchantinfo to show enchant info
     default: true
+  ecoenchants.randombook:
+    description: Allows the use of /giverandombook to give a book with a random enchantment
+    default: op
   ecoenchants.randomenchant:
     description: Allows the use of /randomenchant to apply a random enchantment to an item
     default: op
