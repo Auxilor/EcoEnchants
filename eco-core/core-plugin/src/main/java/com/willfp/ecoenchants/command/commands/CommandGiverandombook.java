@@ -53,6 +53,8 @@ public class CommandGiverandombook extends AbstractCommand {
         meta.addStoredEnchant(enchantment, level, true);
         itemStack.setItemMeta(meta);
 
+        player.getInventory().addItem(itemStack);
+
         String message = this.getPlugin().getLangYml().getMessage("gave-random-book");
         message = message.replace("%enchantment%", EnchantmentCache.getEntry(enchantment).getName() + " " + NumberUtils.toNumeral(level) + "§r");
         sender.sendMessage(message);
