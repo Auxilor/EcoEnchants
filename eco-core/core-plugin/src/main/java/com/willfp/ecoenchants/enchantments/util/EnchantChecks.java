@@ -306,13 +306,11 @@ public class EnchantChecks {
             return new HashMap<>();
         }
 
-        List<ItemStack> armor = Arrays.asList(entity.getEquipment().getArmorContents());
-
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
 
-        armor.forEach((itemStack -> {
+        for (ItemStack itemStack : entity.getEquipment().getArmorContents()) {
             ecoEnchants.putAll(EnchantChecks.getEnchantsOnItem(itemStack));
-        }));
+        }
 
         return ecoEnchants;
     }
