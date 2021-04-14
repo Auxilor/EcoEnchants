@@ -24,4 +24,4 @@ general-config:
   maximum-level: 2
 
 config:
-  velocity-multiplier: 1.2
+  velocity-multiplier: 1.5

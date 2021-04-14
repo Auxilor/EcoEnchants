@@ -46,7 +46,7 @@ public class Rebounding extends EcoEnchant {
         }
 
         Vector vector = attacker.getLocation().toVector().clone().subtract(victim.getLocation().toVector()).normalize()
-                .multiply((-level * (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-multiplier") - 1)) + 1);
+                .multiply((level * (this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-multiplier") - 1)) + 1);
 
         if (!VectorUtils.isFinite(vector)) {
             return;
