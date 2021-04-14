@@ -21,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
+import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.util.NumberConversions;
 import org.jetbrains.annotations.NotNull;
 
@@ -90,10 +91,10 @@ public abstract class Spell extends EcoEnchant {
     /**
      * Get a multiplier for a spell cooldown.
      * <p>
-     * Used for perks - this should be reworked as it has hardcoded permission references.
+     * Used for perks..
      *
      * @param player The player to query.
-     * @return The multipiler.
+     * @return The multiplier.
      */
     public static double getCooldownMultiplier(@NotNull final Player player) {
         if (player.hasPermission("ecoenchants.cooldowntime.quarter")) {
@@ -110,6 +111,18 @@ public abstract class Spell extends EcoEnchant {
 
         if (player.hasPermission("ecoenchants.cooldowntime.75")) {
             return 0.75;
+        }
+
+        String prefix = "ecoenchants.cooldowntime.";
+        for (PermissionAttachmentInfo permissionAttachmentInfo : player.getEffectivePermissions()) {
+            String permission = permissionAttachmentInfo.getPermission();
+            if (permission.startsWith(prefix)) {
+                try {
+                    return Double.parseDouble(permission.substring(permission.lastIndexOf(".") + 1)) / 100;
+                } catch (NumberFormatException e) {
+                    return 1;
+                }
+            }
         }
 
         return 1;
