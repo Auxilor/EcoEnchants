@@ -162,6 +162,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         }
 
         this.update();
+
+        if (!this.isEnabled() && this.getPlugin().getConfigYml().getBool("advanced.hard-disable.enabled")) {
+            return;
+        }
+
         EcoEnchants.addNewEcoEnchant(this);
     }
 

@@ -125,3 +125,8 @@ advanced:
     # Aggressive mode converts all items in all inventories whenever revealed.
     # This may impact performance.
     force: false # If **all** items should have hide enchants removed - absolute last ditch effort, most likely to break other things.
+  hard-disable:
+    # Fixes potential problems with other plugins where the enchantments are still present when disabled.
+    # Enabling this prevents the enchantments from being registered with the server at all when disabled.
+    # There may be some unknown problems with this, but will fix bugs with plugins such as Slimefun.
+    enabled: false
