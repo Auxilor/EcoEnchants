@@ -10,7 +10,6 @@ import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
 import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -580,7 +579,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
 
         Player player = event.getPlayer();
 
-        this.getPlugin().getScheduler().runLater(() -> EcoEnchants.values().forEach(enchant -> {
+        this.getPlugin().getScheduler().runLater(() -> EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, integer) -> {
             if (!enchant.isEnabled()) {
                 return;
             }
@@ -589,8 +588,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
                 return;
             }
 
-            int level = EnchantChecks.getArmorPoints(player, enchant);
-            enchant.onArmorEquip(player, level, event);
+            enchant.onArmorEquip(player, integer, event);
         }), 1);
     }
 
