@@ -9,31 +9,23 @@ import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
 import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Trident;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -708,7 +700,11 @@ public class WatcherTriggers extends PluginDependent implements Listener {
             return;
         }
 
-        EcoEnchants.values().forEach(enchant -> {
+        Map<EcoEnchant, Integer> enchants = blocker.getInventory().getItemInMainHand().getType() == Material.SHIELD
+                ? EnchantChecks.getEnchantsOnMainhand(blocker)
+                : EnchantChecks.getEnchantsOnOffhand(blocker);
+
+        enchants.forEach((enchant, level) -> {
             if (event.isCancelled()) {
                 return;
             }
@@ -721,17 +717,6 @@ public class WatcherTriggers extends PluginDependent implements Listener {
                 return;
             }
 
-            int level;
-
-            if (!EnchantChecks.offhand(blocker, enchant) && !EnchantChecks.mainhand(blocker, enchant)) {
-                return;
-            }
-
-            if (EnchantChecks.offhand(blocker, enchant)) {
-                level = EnchantChecks.getOffhandLevel(blocker, enchant);
-            } else {
-                level = EnchantChecks.getMainhandLevel(blocker, enchant);
-            }
             enchant.onDeflect(blocker, attacker, level, event);
         });
     }
