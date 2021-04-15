@@ -129,4 +129,5 @@ advanced:
     # Fixes potential problems with other plugins where the enchantments are still present when disabled.
     # Enabling this prevents the enchantments from being registered with the server at all when disabled.
     # There may be some unknown problems with this, but will fix bugs with plugins such as Slimefun.
+    # Hard disabled enchantments will not update on /ecoreload. You will have to restart your server.
     enabled: false
