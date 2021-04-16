@@ -4,11 +4,23 @@ import com.willfp.eco.core.AbstractPacketAdapter;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.command.AbstractCommand;
 import com.willfp.eco.core.integrations.IntegrationLoader;
-import com.willfp.ecoskills.classes.SkillClasses;
 import com.willfp.ecoskills.command.CommandClasses;
 import com.willfp.ecoskills.command.CommandEsreload;
+import com.willfp.ecoskills.enchantments.EcoEnchants;
+import com.willfp.ecoskills.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoskills.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoskills.enchantments.meta.EnchantmentType;
+import com.willfp.ecoskills.enchantments.support.merging.anvil.AnvilListeners;
+import com.willfp.ecoskills.enchantments.support.merging.grindstone.GrindstoneListeners;
+import com.willfp.ecoskills.enchantments.support.obtaining.EnchantingListeners;
+import com.willfp.ecoskills.enchantments.support.obtaining.LootPopulator;
+import com.willfp.ecoskills.enchantments.support.obtaining.VillagerListeners;
+import com.willfp.ecoskills.enchantments.util.ItemConversions;
+import com.willfp.ecoskills.enchantments.util.WatcherTriggers;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
+import org.bukkit.generator.BlockPopulator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +56,7 @@ public class EcoSkillsPlugin extends EcoPlugin {
             this.getExtensionLoader().getLoadedExtensions().forEach(extension -> this.getLogger().info("- " + extension.getName() + " v" + extension.getVersion()));
         }
 
-        this.getLogger().info(SkillClasses.values().size() + " Classes Loaded");
+        this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
     }
 
     /**
@@ -52,6 +64,15 @@ public class EcoSkillsPlugin extends EcoPlugin {
      */
     @Override
     public void disable() {
+        Bukkit.getServer().getWorlds().forEach(world -> {
+            List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
+            populators.forEach((blockPopulator -> {
+                if (blockPopulator instanceof LootPopulator) {
+                    world.getPopulators().remove(blockPopulator);
+                }
+            }));
+        });
+
         this.getExtensionLoader().unloadExtensions();
     }
 
@@ -92,7 +113,7 @@ public class EcoSkillsPlugin extends EcoPlugin {
     }
 
     /**
-     * Ec0oSkills-specific commands.
+     * EcoEnchants-specific commands.
      *
      * @return A list of all commands.
      */
@@ -105,7 +126,7 @@ public class EcoSkillsPlugin extends EcoPlugin {
     }
 
     /**
-     * Packet Adapters display.
+     * Packet Adapters for enchant display.
      *
      * @return A list of packet adapters.
      */
@@ -115,21 +136,30 @@ public class EcoSkillsPlugin extends EcoPlugin {
     }
 
     /**
-     * EcoSkills-specific listeners.
+     * EcoEnchants-specific listeners.
      *
      * @return A list of all listeners.
      */
     @Override
     public List<Listener> getListeners() {
         return Arrays.asList(
-
+                new EnchantingListeners(this),
+                new GrindstoneListeners(this),
+                new AnvilListeners(this),
+                new WatcherTriggers(this),
+                new VillagerListeners(this),
+                new ItemConversions(this)
         );
     }
 
     @Override
     public List<Class<?>> getUpdatableClasses() {
         return Arrays.asList(
-
+                EnchantmentRarity.class,
+                EnchantmentTarget.class,
+                EcoEnchants.class,
+                EnchantmentType.class,
+                WatcherTriggers.class
         );
     }
 }

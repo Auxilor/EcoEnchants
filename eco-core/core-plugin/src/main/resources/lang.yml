@@ -1,5 +1,191 @@
+# INFO: Use the permission name of enchantments if you want to add them to this file (ie damageartifact, not damage_artifact)
+
 messages:
-  prefix: "&3&lEcoSkills &r&8» &r"
+  prefix: "&a&lEcoEnchants &r&8» &r"
   no-permission: "&cYou don't have permission to do this!"
   not-player: "&cThis command must be run by a player"
   reloaded: "Reloaded!"
+  got-special: "You got a &dSpecial &fenchantment!"
+  skip-added: "&aAdded &flore skip to item!"
+  skip-removed: "&cRemoved &flore skip from item!"
+  missing-enchant: "&cYou must specify an enchantment!"
+  not-found: "&cCannot find an enchantment matching name: &f%name%."
+  enchantinfo: |
+    %name%: &r%description%
+    &9Max Level: &r%maxlevel%
+    &9Can be applied to: &r%target%
+    &9Conflicts with: &r%conflicts%
+  on-cooldown: "&fThis spell is on cooldown! Wait &a%seconds% Seconds&f to use &a%name%&f again."
+  used-spell: "&fUsed &a%name%&f spell!"
+  must-hold-item: "&cYou must be holding an enchantable item!"
+  no-enchants-available: "&fNo available enchantments found for this item!"
+  applied-random-enchant: "&fAdded %enchantment% to your item!"
+  gave-random-book: "&fGave %enchantment% book!"
+  received-random-book: "&fYou have received a %enchantment% book!"
+  invalid-player: "&cInvalid Player!"
+  requires-player: "&cRequires a Player!"
+  must-hold-item-other: "&cPlayer is not holding an enchantable item!"
+
+no-targets: "&cCannot be applied"
+no-conflicts: "&cNo conflicts"
+
+curse-color: "&c"
+not-curse-color: "&7"
+special-color: "&d"
+artifact-color: "&e"
+spell-color: "&9"
+
+description-color: "&8"
+
+enchantments:
+  protection:
+    name: "Protection"
+    description: Reduces most types of damage.
+
+  fire_protection:
+    name: "Fire Protection"
+    description: Reduces fire damage and burn time.
+
+  feather_falling:
+    name: "Feather Falling"
+    description: Reduces fall damage.
+
+  blast_protection:
+    name: "Blast Protection"
+    description: Reduces explosion damage and knockback.
+
+  projectile_protection:
+    name: "Projectile Protection"
+    description: Reduces projectile damage.
+
+  respiration:
+    name: "Respiration"
+    description: Extends underwater breathing time.
+
+  aqua_affinity:
+    name: "Aqua Affinity"
+    description: Increases underwater mining speed.
+
+  thorns:
+    name: "Thorns"
+    description: Reflects some of the damage taken when hit.
+
+  depth_strider:
+    name: "Depth Strider"
+    description: Increases underwater movement speed.
+
+  frost_walker:
+    name: "Frost Walker"
+    description: Turns water beneath the player into ice.
+
+  binding_curse:
+    name: "Curse of Binding"
+    description: Items cannot be removed from armor slots.
+
+  sharpness:
+    name: "Sharpness"
+    description: Increases damage.
+
+  smite:
+    name: "Smite"
+    description: Increases damage against undead mobs.
+
+  bane_of_arthropods:
+    name: "Bane of Arthropods"
+    description: Increases damage and slows arthropod mobs.
+
+  knockback:
+    name: "Knockback"
+    description: Increases knockback.
+
+  fire_aspect:
+    name: "Fire Aspect"
+    description: Sets target on fire.
+
+  looting:
+    name: "Looting"
+    description: Increases mob loot.
+
+  sweeping:
+    name: "Sweeping Edge"
+    description: Increases sweeping attack damage.
+
+  efficiency:
+    name: "Efficiency"
+    description: Increases mining speed.
+
+  silk_touch:
+    name: "Silk Touch"
+    description: Mined blocks drop themselves exactly.
+
+  unbreaking:
+    name: "Unbreaking"
+    description: Increases item durability.
+
+  fortune:
+    name: "Fortune"
+    description: Increases certain block drops.
+
+  power:
+    name: "Power"
+    description: Increases arrow damage.
+
+  punch:
+    name: "Punch"
+    description: Increases arrow knockback.
+
+  flame:
+    name: "Flame"
+    description: Arrows set target on fire.
+
+  infinity:
+    name: "Infinity"
+    description: Shooting consumes no regular arrows.
+
+  luck_of_the_sea:
+    name: "Luck of the Sea"
+    description: Increases rate of good loot.
+
+  lure:
+    name: "Lure"
+    description: Decreases fishing wait time.
+
+  loyalty:
+    name: "Loyalty"
+    description: Trident returns after being thrown.
+
+  impaling:
+    name: "Impaling"
+    description: Trident deals additional damage to ocean mobs.
+
+  riptide:
+    name: "Riptide"
+    description: Trident launches player when thrown in water or while raining.
+
+  channeling:
+    name: "Channeling"
+    description: Strikes lightning where trident lands during thunderstorms.
+
+  multishot:
+    name: "Multishot"
+    description: Shoots 3 arrows.
+
+  quick_charge:
+    name: "Quick Charge"
+    description: Decreases crossbow charging time.
+
+  piercing:
+    name: "Piercing"
+    description: Arrows pass through multiple entities.
+
+  mending:
+    name: "Mending"
+    description: Repair the item while gaining XP orbs.
+
+  vanishing_curse:
+    name: "Curse of Vanishing"
+    description: Item destroyed on death.
+
+  soul_speed:
+    name: "Soul Speed"
+    description: Increases walking speed on soul sand and soul soil.
