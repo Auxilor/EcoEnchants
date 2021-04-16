@@ -1,0 +1,34 @@
+#
+# Transfuse EcoEnchant
+#
+
+name: "Transfuse"
+description: Breaking stone can drop as random ore.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - pickaxe
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - stone_switcher
+    - silk_touch
+  maximum-level: 7
+
+config:
+  blocks:
+    - diamond_ore
+    - gold_ore
+    - lapis_ore
+    - redstone_ore
+    - iron_ore
+  chance-per-level: 0.03 # Chance for drop to be switched
+  works-on:
+    - stone

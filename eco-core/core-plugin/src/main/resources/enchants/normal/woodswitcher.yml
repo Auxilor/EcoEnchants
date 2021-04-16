@@ -1,0 +1,32 @@
+#
+# Wood Switcher EcoEnchant
+#
+
+name: "Wood Switcher"
+description: Breaking logs can drop as other logs.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - axe
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - silk_touch
+  maximum-level: 6
+
+config:
+  blocks:
+    - oak_log
+    - birch_log
+    - spruce_log
+    - jungle_log
+    - acacia_log
+    - dark_oak_log
+  chance-per-level: 10 # Chance for drop to be switched

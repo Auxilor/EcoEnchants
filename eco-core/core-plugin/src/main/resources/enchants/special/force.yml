@@ -1,0 +1,29 @@
+#
+# Force EcoEnchant
+#
+
+name: "Force"
+description: Massively increases arrow damage.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: veryspecial
+
+general-config:
+  targets:
+    - bow
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - power
+    - revenant
+    - insecticide
+    - slaughter
+    - settle
+  maximum-level: 8
+
+config:
+  multiplier: 0.25 # Formula is (multiplier * (level + 6) + 1)*damage | Default functions as power 5 + level, eg force 2 = power 7

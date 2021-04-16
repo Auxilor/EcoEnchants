@@ -1,0 +1,26 @@
+#
+# Marking EcoEnchant
+#
+
+name: "Marking"
+description: Increases subsequent damage dealt to opponent.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - bow
+    - crossbow
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 4
+
+config:
+  ticks-per-level: 15 # Ticks to weaken player for per level
+  multiplier-while-weak: 1.25 # Times more damage to deal while weakened

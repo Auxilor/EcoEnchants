@@ -1,0 +1,24 @@
+#
+# Lucky Catch EcoEnchant
+#
+
+name: "Lucky Catch"
+description: Chance to double fishing drops.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - rod
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 3
+
+config:
+  chance-per-level: 15

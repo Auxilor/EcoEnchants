@@ -1,0 +1,28 @@
+#
+# Tornado EcoEnchant
+#
+
+name: "Tornado"
+description: Knocks your opponent into the air.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - sword
+    - axe
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - knockback
+    - grapple
+    - annihilate
+  maximum-level: 2
+
+config:
+  velocity-per-level: 0.25

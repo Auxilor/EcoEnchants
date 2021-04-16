@@ -1,0 +1,31 @@
+#
+# Elevation EcoEnchant
+#
+
+name: "Elevation"
+description: Take less damage in hilly biomes.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - glacial
+    - heat_treated
+    - oceanic
+    - tropical
+  maximum-level: 3
+
+config:
+  reduction-per-level: 2 # As percentage

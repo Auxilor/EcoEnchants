@@ -1,0 +1,24 @@
+#
+# Protector EcoEnchant
+#
+
+name: "Protector"
+description: Prevents damaging your own pets.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: uncommon
+
+general-config:
+  targets:
+    - sword
+    - axe
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+
+config:
+# No config available for this enchantment

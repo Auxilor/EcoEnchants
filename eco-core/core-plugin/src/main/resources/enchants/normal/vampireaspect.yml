@@ -1,0 +1,25 @@
+#
+# Vampire Aspect EcoEnchant
+#
+
+name: "Vampire Aspect"
+description: Chance to apply wither to your opponent.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  targets:
+    - sword
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 2
+
+config:
+  chance-per-level: 3 #chance of withering opponent per level
+  allow-not-fully-charged: false #dont require sword attack to be at full charge

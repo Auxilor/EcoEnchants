@@ -1,0 +1,26 @@
+#
+# Magma Walker EcoEnchant
+#
+
+name: "Magma Walker"
+description: Turns lava beneath the player into obsidian.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 2
+
+config:
+  remove-after-ticks: 40
+  initial-radius: 2
+  per-level-radius: 1

@@ -1,0 +1,24 @@
+#
+# Curse of Hunger EcoEnchant
+#
+
+name: "Curse of Hunger"
+description: Increases hunger loss.
+enabled: true
+
+obtaining:
+  table: false
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - helmet
+  grindstoneable: false
+  disabled-in-worlds: [ ]
+  conflicts:
+    - sating
+
+config:
+# No config is available for this enchantment

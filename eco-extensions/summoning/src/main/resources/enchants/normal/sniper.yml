@@ -1,0 +1,28 @@
+#
+# Sniper EcoEnchant
+#
+
+name: "Sniper"
+description: Spawns skeletons to attack your target.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - trident
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - crawler
+  maximum-level: 3
+
+config:
+  mobs-per-level: 2 # Amount of mobs to spawn per level
+  ticks-to-live-per-level: 40 # Ticks for mob to live per level
+  health-per-level: 4 # Health for mobs to have per level
+  chance-per-level: 5 # Chance to spawn mobs per level

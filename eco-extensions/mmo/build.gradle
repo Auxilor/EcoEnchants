@@ -1,0 +1,24 @@
+group 'com.willfp'
+version '5.0.0'
+description = 'MMO Extension'
+
+repositories {
+    maven {
+        url 'https://mvn.lumine.io/repository/maven-public/'
+    }
+}
+
+dependencies {
+    compileOnly 'net.Indyuce:MMOCore:1.7.0'
+    compileOnly 'net.Indyuce:MMOItems:6.5.4'
+    compileOnly 'net.Indyuce:MMOLib:1.7.3'
+}
+
+configurations.all {
+    exclude group: 'com.mojang', module: 'authlib'
+    exclude group: 'org.kitteh.pastegg'
+}
+
+shadowJar {
+    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
+}

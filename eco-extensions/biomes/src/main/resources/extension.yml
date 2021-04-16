@@ -1,0 +1,3 @@
+name: Biomes
+main: com.willfp.ecoenchants.biomes.BiomesMain
+version: ${projectVersion}

@@ -1,0 +1,26 @@
+#
+# Curse of Decay EcoEnchant
+#
+
+name: "Curse of Decay"
+description: Automatically damages items when not held.
+enabled: true
+
+obtaining:
+  table: false
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - all
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - mending
+    - repairing
+
+config:
+  repeat-ticks: 100 # How often (in ticks) to repair items
+  multiplier: 1

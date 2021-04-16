@@ -1,0 +1,23 @@
+#
+# Aversion EcoEnchant
+#
+
+name: "Aversion"
+description: Prevents angering endermen by looking at them.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - helmet
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+
+config:
+# No config is available for this enchantment.

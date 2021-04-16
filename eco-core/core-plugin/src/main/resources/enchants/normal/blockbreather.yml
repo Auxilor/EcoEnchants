@@ -1,0 +1,24 @@
+#
+# Block Breather EcoEnchant
+#
+
+name: "Block Breather"
+description: Chance to ignore suffocation damage.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  targets:
+    - helmet
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 3
+
+config:
+  chance-per-level: 15

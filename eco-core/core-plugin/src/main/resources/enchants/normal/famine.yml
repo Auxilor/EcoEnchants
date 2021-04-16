@@ -1,0 +1,25 @@
+#
+# Famine EcoEnchant
+#
+
+name: "Famine"
+description: Chance of giving your opponent hunger.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  targets:
+    - sword
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 8
+
+config:
+  allow-not-fully-charged: false
+  chance-per-level: 1.5

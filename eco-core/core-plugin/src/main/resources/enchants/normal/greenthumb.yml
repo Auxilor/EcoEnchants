@@ -1,0 +1,23 @@
+#
+# Green Thumb EcoEnchant
+#
+
+name: "Green Thumb"
+description: Left clicking dirt turns it to grass.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: rare
+
+general-config:
+  targets:
+    - hoe
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+
+config:
+  damage: true # Damage hoe on use

@@ -1,0 +1,25 @@
+#
+# Jump Boost EcoEnchant
+#
+
+name: "Jump Boost"
+description: Gives you permanent jump boost.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - spring
+  maximum-level: 3
+
+config:
+# No config is available for this enchantment

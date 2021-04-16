@@ -1,0 +1,25 @@
+#
+# Reaper EcoEnchant
+#
+
+name: "Reaper"
+description: Chance to prevent your opponents soulbound from working.
+enabled: true
+
+obtaining:
+  table: true
+  villager: false
+  loot: false
+  rarity: legendary
+
+general-config:
+  targets:
+    - sword
+    - axe
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 3
+
+config:
+  chance-per-level: 2

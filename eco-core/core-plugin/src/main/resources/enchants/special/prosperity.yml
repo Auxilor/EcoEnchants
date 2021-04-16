@@ -1,0 +1,28 @@
+#
+# Prosperity EcoEnchant
+#
+
+name: "Prosperity"
+description: Massively increases maximum health.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: veryspecial
+
+general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - thrive
+  maximum-level: 3
+
+config:
+  health-per-point: 2

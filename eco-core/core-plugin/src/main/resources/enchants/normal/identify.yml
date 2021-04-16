@@ -1,0 +1,25 @@
+#
+# Identify EcoEnchant
+#
+
+name: "Identify"
+description: Chance to give your attacker glowing.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - shield
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 2
+
+config:
+  chance-per-level: 10
+  ticks-per-level: 10

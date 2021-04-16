@@ -1,0 +1,27 @@
+#
+# Rebounding EcoEnchant
+#
+
+name: "Rebounding"
+description: Deal knockback to entities that attack you.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 2
+
+config:
+  velocity-multiplier: 1.07

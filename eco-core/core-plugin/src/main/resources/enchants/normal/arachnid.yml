@@ -1,0 +1,30 @@
+#
+# Arachnid EcoEnchant
+#
+
+name: "Arachnid"
+description: Increases damage against spiders.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: common
+
+general-config:
+  targets:
+    - trident
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - serrated
+    - bladed
+    - phantasm
+    - pacify
+    - abattoir
+    - impaling
+  maximum-level: 5
+
+config:
+  multiplier: 0.4 # Formula is (multiplier * (level + 1) + 1)*damage | Power is 0.25

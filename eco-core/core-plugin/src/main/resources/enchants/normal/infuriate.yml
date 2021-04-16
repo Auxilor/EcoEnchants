@@ -1,0 +1,25 @@
+#
+# Infuriate EcoEnchant
+#
+
+name: "Infuriate"
+description: Chance to cause nearby mobs to attack your opponent.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - shield
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 7
+
+config:
+  chance-per-level: 2
+  distance-per-level: 2

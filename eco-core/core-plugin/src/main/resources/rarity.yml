@@ -1,0 +1,68 @@
+rarities:
+  # Table Probability is the chance of getting enchantment as a percentage from an enchanting table
+  # Minimum Level is the minimum xp level you have to be to get the enchantment
+  # You can add more rarities by following the pattern.
+  # Remember, enchantments are more likely to be high-level the closer they are to maximum-obtainable-level
+  # Villager probability is the chance of a villager having this trade as a percentage. Vanilla default for all enchantments is 2.7%, however you can choose this per-rarity.
+  # Loot probability is the chance of an item in a loot chest having this enchantment as a percentage
+
+  # Custom Color is a custom name color for all enchantments of rarity to have
+  # This is disabled by default.
+  # Curses override this, and always display in their specified color.
+
+  common:
+    table-probability: 30
+    minimum-level: 1
+    villager-probability: 10.5
+    loot-probability: 12
+    custom-color:
+      enabled: false
+      color: "&7"
+  uncommon:
+    table-probability: 20
+    minimum-level: 5
+    villager-probability: 9
+    loot-probability: 16
+    custom-color:
+      enabled: false
+      color: "&a"
+  rare:
+    table-probability: 20
+    minimum-level: 15
+    villager-probability: 7.5
+    loot-probability: 18
+    custom-color:
+      enabled: false
+      color: "&9"
+  epic:
+    table-probability: 10
+    minimum-level: 16
+    villager-probability: 6
+    loot-probability: 20
+    custom-color:
+      enabled: false
+      color: "&5"
+  legendary:
+    table-probability: 8
+    minimum-level: 20
+    villager-probability: 4.5
+    loot-probability: 15
+    custom-color:
+      enabled: false
+      color: "&6"
+  special:
+    table-probability: 2
+    minimum-level: 30
+    villager-probability: 3
+    loot-probability: 5
+    custom-color:
+      enabled: false
+      color: "&d"
+  veryspecial:
+    table-probability: 1
+    minimum-level: 30
+    villager-probability: 1.5
+    loot-probability: 2
+    custom-color:
+      enabled: false
+      color: "&4"

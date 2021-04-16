@@ -1,0 +1,30 @@
+#
+# Forcefield EcoEnchant
+#
+
+name: "Forcefield"
+description: Damages all nearby monsters.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 2
+
+config:
+  initial-distance: 1.5 # Initial range
+  bonus-per-level: 0.3 # Bonus range per level (Level 1 also includes bonus)
+  damage-per-level: 0.5
+  repeat-ticks: 20 # Damage nearby mobs every few ticks. Lower values lead to more damage and may cause lag

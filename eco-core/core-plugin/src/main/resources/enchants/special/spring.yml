@@ -1,0 +1,24 @@
+#
+# Spring EcoEnchant
+#
+
+name: "Spring"
+description: Increases jump height and distance.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  targets:
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 3
+
+config:
+# No config is available for this enchantment

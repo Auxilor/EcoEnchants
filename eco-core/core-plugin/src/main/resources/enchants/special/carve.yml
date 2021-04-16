@@ -1,0 +1,26 @@
+#
+# Carve EcoEnchant
+#
+
+name: "Carve"
+description: Heavily damage all entities around attacked entity.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: special
+
+general-config:
+  targets:
+    - axe
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts:
+    - cleave
+  maximum-level: 8
+
+config:
+  damage-percentage-per-level: 10
+  radius-per-level: 0.5

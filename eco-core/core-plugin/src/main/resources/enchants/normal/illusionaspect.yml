@@ -1,0 +1,25 @@
+#
+# Illusion Aspect EcoEnchant
+#
+
+name: "Illusion Aspect"
+description: Chance to blind and nauseate opponent.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  targets:
+    - sword
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 2
+
+config:
+  chance-per-level: 3 #chance of illusioning opponent per level
+  allow-not-fully-charged: false #dont require sword attack to be at full charge

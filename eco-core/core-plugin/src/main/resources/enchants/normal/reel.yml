@@ -1,0 +1,24 @@
+#
+# Reel EcoEnchant
+#
+
+name: "Reel"
+description: Pulls entities towards you.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  targets:
+    - rod
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: [ ]
+  maximum-level: 2
+
+config:
+  velocity-multiplier: 0.75
