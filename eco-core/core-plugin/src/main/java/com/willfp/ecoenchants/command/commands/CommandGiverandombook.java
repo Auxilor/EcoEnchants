@@ -6,6 +6,7 @@ import com.willfp.eco.core.command.AbstractTabCompleter;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterRandomEnchant;
 import com.willfp.ecoenchants.display.EnchantmentCache;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -15,7 +16,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandGiverandombook extends AbstractCommand {
     /**
@@ -48,7 +51,13 @@ public class CommandGiverandombook extends AbstractCommand {
 
         ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) itemStack.getItemMeta();
-        Enchantment enchantment = Enchantment.values()[NumberUtils.randInt(0, Enchantment.values().length - 1)];
+        List<Enchantment> allowed = Arrays.stream(Enchantment.values()).filter(enchantment -> {
+            if (enchantment instanceof EcoEnchant) {
+                return ((EcoEnchant) enchantment).isEnabled();
+            }
+            return true;
+        }).collect(Collectors.toList());
+        Enchantment enchantment = allowed.get(NumberUtils.randInt(0, allowed.size() - 1));
         int level = NumberUtils.randInt(1, enchantment.getMaxLevel());
         meta.addStoredEnchant(enchantment, level, true);
         itemStack.setItemMeta(meta);
