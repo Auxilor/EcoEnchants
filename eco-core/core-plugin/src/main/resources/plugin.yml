@@ -1,6 +1,6 @@
-name: EcoEnchants
+name: EcoSkills
 version: ${projectVersion}
-main: com.willfp.ecoenchants.EcoEnchantsPlugin
+main: com.willfp.ecoskills.EcoSkillsPlugin
 api-version: 1.16
 authors: [ Auxilor ]
 website: willfp.com
@@ -8,103 +8,20 @@ load: STARTUP
 depend:
   - eco
   - ProtocolLib
-softdepend:
-  - WorldGuard
-  - GriefPrevention
-  - Towny
-  - FactionsUUID
-  - Lands
-  - Kingdoms
-  - NoCheatPlus
-  - AAC
-  - Matrix
-  - Spartan
-  - Essentials
-  - PlaceholderAPI
-  - mcMMO
+softdepend: []
 
 commands:
-  ecoreload:
+  esreload:
     description: Reloads config
-    permission: ecoenchants.reload
-  ecodebug:
-    description: Debug information
-    permission: ecoenchants.ecodebug
-  enchantinfo:
-    description: Show information about an enchantment
-    permission: ecoenchants.enchantinfo
-  randomenchant:
-    description: Adds a random enchantment to an item
-    permission: ecoenchants.randomenchant
-  giverandombook:
-    description: Gives a book containing a random enchantment
-    permission: ecoenchants.randombook
+    permission: ecoskills.reload
 
 permissions:
-  ecoenchants.*:
-    description: All ecoenchants permissions
+  ecoskills.*:
+    description: All ecoskills permissions
     default: op
     children:
-      ecoenchants.fromtable.*: true
       ecoenchants.reload: true
-      ecoenchants.updateannounce: true
-      ecoenchants.enchantinfo: true
-      ecoenchants.ecodebug: true
-      ecoenchants.randomenchant: true
-      ecoenchants.randomenchant.bypasshardcap: true
-      ecoenchants.randombook: true
-      ecoenchants.anvil.*: true
-  ecoenchants.anvil.*:
-    description: Allows all anvil permissions
-    default: op
-    children:
-      ecoenchants.anvil.bypasshardcap: true
-      ecoenchants.anvil.color: true
-  ecoenchants.fromtable.*:
-    description: Allows getting all enchantments from an enchanting table
-    default: true
 
-  ecoenchants.updateannounce:
-    description: Informs admins of a new update
-    default: op
-  ecoenchants.reload:
+  ecoskills.reload:
     description: Allows reloading the config
     default: op
-  ecoenchants.ecodebug:
-    description: Allows the use of /ecodebug to print verbose debug information to console
-    default: op
-  ecoenchants.enchantinfo:
-    description: Allows the use of /enchantinfo to show enchant info
-    default: true
-  ecoenchants.randombook:
-    description: Allows the use of /giverandombook to give a book with a random enchantment
-    default: op
-  ecoenchants.randomenchant:
-    description: Allows the use of /randomenchant to apply a random enchantment to an item
-    default: op
-  ecoenchants.randomenchant.others:
-    description: Allows the use of /randomenchant to apply a random enchantment to an item for another player
-    default: op
-  ecoenchants.randomenchant.bypasshardcap:
-    description: Allows /randomenchant bypassing the anvil hard cap
-    default: op
-  ecoenchants.anvil.bypasshardcap:
-    description: Allows bypassing the anvil hard cap
-    default: op
-  ecoenchants.anvil.color:
-    description: Allows color from anvil renames
-    default: op
-
-  # Perks
-  ecoenchants.cooldowntime.half:
-    description: Halves the cooldown time on spells
-    default: false
-  ecoenchants.cooldowntime.third:
-    description: Thirds the cooldown time on spells
-    default: false
-  ecoenchants.cooldowntime.quarter:
-    description: Quarters the cooldown time on spells
-    default: false
-  ecoenchants.cooldowntime.75:
-    description: Reduces the cooldown time on spells by 25%
-    default: false
