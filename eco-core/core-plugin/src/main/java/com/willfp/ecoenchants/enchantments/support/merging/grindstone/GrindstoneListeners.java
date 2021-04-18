@@ -3,6 +3,8 @@ package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -70,10 +72,15 @@ public class GrindstoneListeners extends PluginDependent implements Listener {
                 newOut.setItemMeta(meta);
             }
 
-            final ItemStack finalOut = newOut;
-
             this.getPlugin().getScheduler().run(() -> {
-                inventory.setItem(2, finalOut);
+                inventory.setItem(2, newOut);
+                if (!toKeep.isEmpty()) {
+                    for (Entity entity : player.getNearbyEntities(10, 10, 10)) {
+                        if (entity.getType() == EntityType.EXPERIENCE_ORB) {
+                            entity.remove();
+                        }
+                    }
+                }
             });
         }, 1);
     }
