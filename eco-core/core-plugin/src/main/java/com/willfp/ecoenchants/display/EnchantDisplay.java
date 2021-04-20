@@ -88,7 +88,22 @@ public class EnchantDisplay extends DisplayModule {
 
         assert meta != null;
 
-        boolean hide = (boolean) args[0];
+        boolean hideEnchants = false;
+
+        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+            hideEnchants = true;
+        }
+
+        if (meta.getPersistentDataContainer().has(legacyV, PersistentDataType.INTEGER)
+                || (options.isUsingExperimentalHideFixer() && options.isUsingForceHideFixer())) {
+            hideEnchants = false;
+        }
+
+        if (options.isUsingExperimentalHideFixer() && meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+            hideEnchants = false;
+        }
+
+        boolean hide = hideEnchants;
 
         List<String> itemLore = null;
 
@@ -218,36 +233,5 @@ public class EnchantDisplay extends DisplayModule {
 
         meta.getPersistentDataContainer().remove(keySkip);
         itemStack.setItemMeta(meta);
-    }
-
-    @Override
-    protected Object[] generateVarArgs(@NotNull final ItemStack itemStack) {
-        ItemMeta meta = itemStack.getItemMeta();
-        if (meta == null) {
-            return new Object[]{false};
-        }
-        boolean hideEnchants = false;
-
-        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
-            hideEnchants = true;
-        }
-
-        if (meta.getPersistentDataContainer().has(legacyV, PersistentDataType.INTEGER)) {
-            hideEnchants = false;
-        }
-
-        if (Display.isFinalized(itemStack)) {
-            hideEnchants = false;
-        }
-
-        if (options.isUsingExperimentalHideFixer() && options.isUsingForceHideFixer()) {
-            hideEnchants = false;
-        }
-
-        if (options.isUsingExperimentalHideFixer() && meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
-            hideEnchants = false;
-        }
-
-        return new Object[]{hideEnchants};
     }
 }
