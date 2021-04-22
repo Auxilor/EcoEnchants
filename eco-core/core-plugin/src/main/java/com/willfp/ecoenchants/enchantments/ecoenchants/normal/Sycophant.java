@@ -23,10 +23,10 @@ public class Sycophant extends EcoEnchant {
                           @NotNull final EntityDamageByEntityEvent event) {
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "health-per-level");
         double amountToHeal = level * multiplier;
-        double newHealth = attacker.getHealth() + amountToHeal;
-        if (newHealth > attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
-            newHealth = attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double newHealth = blocker.getHealth() + amountToHeal;
+        if (newHealth > blocker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+            newHealth = blocker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         }
-        attacker.setHealth(newHealth);
+        blocker.setHealth(newHealth);
     }
 }
