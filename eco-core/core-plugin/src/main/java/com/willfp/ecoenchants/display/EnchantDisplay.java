@@ -200,6 +200,10 @@ public class EnchantDisplay extends DisplayModule {
 
     @Override
     protected void revert(@NotNull final ItemStack itemStack) {
+        if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
+            return;
+        }
+
         ItemMeta meta = itemStack.getItemMeta();
 
         assert meta != null;
