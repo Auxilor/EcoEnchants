@@ -5,10 +5,10 @@
 # Set custom max levels for vanilla enchantments.
 # To do this, add each enchantment like this:
 # - "<key>:4"
-# For example, to allow efficiency 5 and protection 6, you would do this:
+# For example, to allow efficiency 6 and protection 5, you would do this:
 # max-levels:
-#   - "efficiency:5"
-#   - "protection:6"
+#   - "efficiency:6"
+#   - "protection:5"
 #
 # Currently, it is *not* possible to modify the enchantment levels from enchanting tables.
 # It will work with anvils however, but since it is still possible to get enchantments at their vanilla
