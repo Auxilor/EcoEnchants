@@ -48,6 +48,10 @@ public class ItemConversions extends PluginDependent implements Listener {
      */
     @EventHandler
     public void loreConverter(@NotNull final PlayerItemHeldEvent event) {
+        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
+            return;
+        }
+
         if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingLoreGetter()) {
             return;
         }
@@ -66,6 +70,10 @@ public class ItemConversions extends PluginDependent implements Listener {
      */
     @EventHandler
     public void aggressiveLoreConverter(@NotNull final InventoryOpenEvent event) {
+        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
+            return;
+        }
+
         if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveLoreGetter()) {
             return;
         }
@@ -163,6 +171,10 @@ public class ItemConversions extends PluginDependent implements Listener {
      */
     @EventHandler
     public void hideFixer(@NotNull final PlayerItemHeldEvent event) {
+        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
+            return;
+        }
+
         if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingExperimentalHideFixer()) {
             return;
         }
@@ -181,6 +193,10 @@ public class ItemConversions extends PluginDependent implements Listener {
      */
     @EventHandler
     public void aggressiveHideFixer(@NotNull final InventoryOpenEvent event) {
+        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
+            return;
+        }
+
         if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveExperimentalHideFixer()) {
             return;
         }
