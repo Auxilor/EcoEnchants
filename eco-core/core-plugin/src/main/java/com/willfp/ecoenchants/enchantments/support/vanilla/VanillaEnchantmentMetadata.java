@@ -7,5 +7,5 @@ public class VanillaEnchantmentMetadata {
     /**
      * The maximum level for the enchantment.
      */
-    private final int maxLevel;
+    private Integer maxLevel = null;
 }

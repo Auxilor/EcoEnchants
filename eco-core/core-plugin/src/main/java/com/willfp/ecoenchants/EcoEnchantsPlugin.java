@@ -14,6 +14,7 @@ import com.willfp.ecoenchants.command.commands.CommandRandomenchant;
 import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
 import com.willfp.ecoenchants.config.RarityYml;
 import com.willfp.ecoenchants.config.TargetYml;
+import com.willfp.ecoenchants.config.VanillaEnchantsYml;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -64,6 +65,12 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     private final TargetYml targetYml;
 
     /**
+     * VanillaEnchants.yml.
+     */
+    @Getter
+    private final VanillaEnchantsYml vanillaEnchantsYml;
+
+    /**
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
@@ -72,6 +79,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
         rarityYml = new RarityYml(this);
         targetYml = new TargetYml(this);
+        vanillaEnchantsYml = new VanillaEnchantsYml(this);
     }
 
     /**
