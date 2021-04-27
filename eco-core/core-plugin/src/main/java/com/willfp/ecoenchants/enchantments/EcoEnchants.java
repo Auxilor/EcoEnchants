@@ -236,12 +236,12 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Dynamite;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Missile;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
-import com.willfp.ecoenchants.enchantments.itemtypes.VanillaEcoEnchantWrapper;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
@@ -579,6 +579,8 @@ public class EcoEnchants {
         for (EcoEnchant ecoEnchant : new HashSet<>(values())) {
             ecoEnchant.update();
         }
+
+        ProxyUtils.getProxy(EcoCraftEnchantmentManagerProxy.class).registerNewCraftEnchantments();
     }
 
     /**
@@ -603,15 +605,5 @@ public class EcoEnchants {
     public static void removeEcoEnchant(@NotNull final EcoEnchant enchant) {
         BY_KEY.remove(enchant.getKey());
         BY_NAME.inverse().remove(enchant);
-    }
-
-    static {
-        for (Enchantment value : Enchantment.values()) {
-            if (value instanceof EcoEnchant || value instanceof EnchantmentWrapper) {
-                continue;
-            }
-
-            new VanillaEcoEnchantWrapper(value);
-        }
     }
 }

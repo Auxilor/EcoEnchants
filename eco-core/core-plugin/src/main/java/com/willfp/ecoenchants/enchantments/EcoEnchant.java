@@ -241,7 +241,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             Map<NamespacedKey, Enchantment> byKey = (Map<NamespacedKey, Enchantment>) byIdField.get(null);
             Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
             byKey.remove(this.getKey());
-            byName.remove(this.getDisplayName());
+            byName.remove(this.getName());
 
             Map<String, Enchantment> byNameClone = new HashMap<>(byName);
             for (Map.Entry<String, Enchantment> entry : byNameClone.entrySet()) {
