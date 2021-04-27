@@ -14,8 +14,8 @@
     <suppress files="[\\/]eco-extensions[\\/]" checks="JavadocVariable"/>
 
     <!-- NMS doesn't need javadoc. -->
-    <suppress files="[\\/]eco-nms[\\/]" checks="MissingJavadocMethod"/>
-    <suppress files="[\\/]eco-nms[\\/]" checks="JavadocVariable"/>
+    <suppress files="[\\/]core-nms[\\/]" checks="MissingJavadocMethod"/>
+    <suppress files="[\\/]core-nms[\\/]" checks="JavadocVariable"/>
 
     <!-- Fields don't need javadoc -->
     <suppress files="EcoEnchants.java" checks="JavadocVariable"/>
