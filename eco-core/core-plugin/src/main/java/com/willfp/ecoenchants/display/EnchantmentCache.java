@@ -103,7 +103,7 @@ public class EnchantmentCache {
         if (EcoEnchants.getFromEnchantment(enchantment) != null) {
             EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
             description = ecoEnchant.getWrappedDescription();
-            name = ecoEnchant.getName();
+            name = ecoEnchant.getDisplayName();
             type = ecoEnchant.getType();
             rarity = ecoEnchant.getRarity();
         } else {

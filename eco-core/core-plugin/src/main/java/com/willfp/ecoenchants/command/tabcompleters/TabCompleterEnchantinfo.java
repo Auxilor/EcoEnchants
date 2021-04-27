@@ -20,7 +20,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
     /**
      * The cached enchantment names.
      */
-    private static final List<String> ENCHANT_NAMES = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).map(ChatColor::stripColor).collect(Collectors.toList());
+    private static final List<String> ENCHANT_NAMES = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getDisplayName).map(ChatColor::stripColor).collect(Collectors.toList());
 
     /**
      * Instantiate a new tab-completer for /enchantinfo.
@@ -37,7 +37,7 @@ public class TabCompleterEnchantinfo extends AbstractTabCompleter {
     @ConfigUpdater
     public static void reload() {
         ENCHANT_NAMES.clear();
-        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getName).map(ChatColor::stripColor).collect(Collectors.toList()));
+        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getDisplayName).map(ChatColor::stripColor).collect(Collectors.toList()));
     }
 
     /**

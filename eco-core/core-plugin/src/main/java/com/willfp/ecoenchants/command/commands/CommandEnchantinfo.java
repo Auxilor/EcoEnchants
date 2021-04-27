@@ -52,7 +52,7 @@ public class CommandEnchantinfo extends AbstractCommand {
 
         if (enchantment == null) {
             String finalSearchName = searchName;
-            enchantment = EcoEnchants.values().stream().filter(ecoEnchant -> ChatColor.stripColor(ecoEnchant.getName()).equalsIgnoreCase(finalSearchName)).findFirst().orElse(null);
+            enchantment = EcoEnchants.values().stream().filter(ecoEnchant -> ChatColor.stripColor(ecoEnchant.getDisplayName()).equalsIgnoreCase(finalSearchName)).findFirst().orElse(null);
         }
 
         if (enchantment == null || !enchantment.isEnabled()) {
@@ -74,7 +74,7 @@ public class CommandEnchantinfo extends AbstractCommand {
 
         conflicts.forEach((enchantment1 -> {
             if (EcoEnchants.getFromEnchantment(enchantment1) != null) {
-                conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getName());
+                conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getDisplayName());
             } else {
                 conflictNames.add(this.getPlugin().getLangYml().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
             }

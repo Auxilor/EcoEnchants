@@ -592,7 +592,7 @@ public class EcoEnchants {
         BY_KEY.remove(enchant.getKey());
         BY_NAME.inverse().remove(enchant);
         BY_KEY.put(enchant.getKey(), enchant);
-        BY_NAME.put(enchant.getName(), enchant);
+        BY_NAME.put(enchant.getDisplayName(), enchant);
     }
 
     /**

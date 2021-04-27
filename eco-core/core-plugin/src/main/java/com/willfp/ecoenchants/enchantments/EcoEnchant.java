@@ -43,84 +43,102 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      */
     @Getter(AccessLevel.PROTECTED)
     private final EcoEnchantsPlugin plugin = EcoEnchantsPlugin.getInstance();
+
     /**
      * The permission/config name of the enchantment.
      */
     @Getter
     private final String permissionName;
+
     /**
      * The type of the enchantment.
      */
     @Getter
     private final EnchantmentType type;
+
     /**
      * The enchantment's config.
      */
     @Getter
     private final EnchantmentConfig config;
+
     /**
      * The targets of the enchantment.
      */
     @Getter
     private final Set<EnchantmentTarget> targets = new HashSet<>();
+
     /**
      * The materials of the targets.
      */
     @Getter
     private final Set<Material> targetMaterials = new HashSet<>();
+
     /**
      * The names of the worlds that this enchantment is disabled in.
      */
     @Getter
     private final Set<String> disabledWorldNames = new HashSet<>();
+
     /**
      * The worlds that this enchantment is disabled in.
      */
     @Getter
     private final List<World> disabledWorlds = new ArrayList<>();
+
     /**
      * The display name of the enchantment.
      */
-    private String name;
+    @Getter
+    private String displayName;
+
     /**
      * The description of the enchantment.
      */
     @Getter
     private String description;
+
     /**
      * If the enchantment can be removed in a grindstone.
      */
     @Getter
     private boolean grindstoneable;
+
     /**
      * If the enchantment can be obtained from an enchanting table.
      */
     @Getter
     private boolean availableFromTable;
+
     /**
      * If the enchantment can be obtained from a villager.
      */
     @Getter
     private boolean availableFromVillager;
+
     /**
      * If the enchantment can be obtained from a loot chest.
      */
     @Getter
     private boolean availableFromLoot;
+
     /**
      * The maximum level for the enchantment to be obtained naturally.
      */
     private int maxLevel;
+
     /**
      * The enchantments that conflict with this enchantment.
      */
     @Getter
     private Set<Enchantment> conflicts;
+
     /**
      * The rarity of the enchantment.
      */
     @Getter
     private EnchantmentRarity rarity;
+
     /**
      * If the enchantment is enabled.
      */
@@ -187,7 +205,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         availableFromVillager = config.getBool(EcoEnchants.OBTAINING_LOCATION + "villager");
         availableFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
         maxLevel = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
-        name = StringUtils.translate(config.getString("name"));
+        displayName = StringUtils.translate(config.getString("name"));
         description = StringUtils.translate(config.getString("description"));
         disabledWorldNames.clear();
         disabledWorldNames.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "disabled-in-worlds"));
@@ -223,7 +241,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             Map<NamespacedKey, Enchantment> byKey = (Map<NamespacedKey, Enchantment>) byIdField.get(null);
             Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
             byKey.remove(this.getKey());
-            byName.remove(this.getName());
+            byName.remove(this.getDisplayName());
 
             Map<String, Enchantment> byNameClone = new HashMap<>(byName);
             for (Map.Entry<String, Enchantment> entry : byNameClone.entrySet()) {
@@ -271,16 +289,15 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     }
 
     /**
-     * Get the display name of the enchantment.
-     * <p>
-     * Not deprecated, unlike superclass.
+     * Get the internal name of the enchantment.
      *
      * @return The name.
+     * @deprecated Exists for parity.
      */
-    @Override
     @NotNull
+    @Deprecated
     public String getName() {
-        return name;
+        return this.getKey().getKey().toUpperCase();
     }
 
     /**
