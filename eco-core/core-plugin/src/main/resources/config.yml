@@ -131,3 +131,8 @@ advanced:
     # There may be some unknown problems with this, but will fix bugs with plugins such as Slimefun.
     # Hard disabled enchantments will not update on /ecoreload. You will have to restart your server.
     enabled: false
+  dual-registration:
+    # Fixes potential plugin conflicts/serialization issues when updating from a version before 7.3.0.
+    # Registers byName both the internal enchantment name (new method) and the display name (old method).
+    # There may be potential bugs with having duplicate enchantments, so enable this only if you need it.
+    enabled: false

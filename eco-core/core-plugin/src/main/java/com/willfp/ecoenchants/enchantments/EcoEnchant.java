@@ -242,12 +242,17 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
             byKey.remove(this.getKey());
             byName.remove(this.getName());
+            byName.remove(this.getDisplayName());
 
             Map<String, Enchantment> byNameClone = new HashMap<>(byName);
             for (Map.Entry<String, Enchantment> entry : byNameClone.entrySet()) {
                 if (entry.getValue().getKey().equals(this.getKey())) {
                     byName.remove(entry.getKey());
                 }
+            }
+
+            if (this.getPlugin().getConfigYml().getBool("advanced.dual-registration.enabled")) {
+                byName.put(this.getDisplayName(), this);
             }
 
             Field f = Enchantment.class.getDeclaredField("acceptingNew");
