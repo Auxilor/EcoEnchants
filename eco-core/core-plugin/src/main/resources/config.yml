@@ -135,4 +135,4 @@ advanced:
     # Fixes potential plugin conflicts/serialization issues when updating from a version before 7.3.0.
     # Registers byName both the internal enchantment name (new method) and the display name (old method).
     # There may be potential bugs with having duplicate enchantments, so enable this only if you need it.
-    enabled: false
+    enabled: true
