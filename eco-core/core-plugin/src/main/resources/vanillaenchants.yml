@@ -1,6 +1,7 @@
 #
 # Allows for modifying certain aspects of vanilla enchantments
 #
+enabled: false # There may be potential conflicts if modifying vanilla enchantments.
 
 # Set custom max levels for vanilla enchantments.
 # To do this, add each enchantment like this:

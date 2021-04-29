@@ -61,7 +61,8 @@ public class VanillaEnchantments {
         MAP.clear();
         MAP.putAll(map);
 
-
-        ProxyUtils.getProxy(EcoCraftEnchantmentManagerProxy.class).registerNewCraftEnchantments();
+        if (PLUGIN.getVanillaEnchantsYml().getBool("enabled")) {
+            ProxyUtils.getProxy(EcoCraftEnchantmentManagerProxy.class).registerNewCraftEnchantments();
+        }
     }
 }
