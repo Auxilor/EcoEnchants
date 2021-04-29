@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.proxy.v1_16_R2;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantmentMetadata;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantments;
 import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy;
-import com.willfp.ecoenchants.proxy.v1_16_R2.vanilla.EcoCraftEnchantment;
+import com.willfp.ecoenchants.proxy.v1_16_R2.enchants.EcoCraftEnchantment;
 import net.minecraft.server.v1_16_R2.Enchantment;
 import net.minecraft.server.v1_16_R2.IRegistry;
 import org.bukkit.NamespacedKey;

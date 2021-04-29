@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.proxy.v1_16_R2.vanilla;
+package com.willfp.ecoenchants.proxy.v1_16_R2.enchants;
 
 import com.willfp.ecoenchants.enchantments.support.vanilla.EcoCraftEnchantmentWrapper;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantmentMetadata;
