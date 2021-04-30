@@ -6,6 +6,7 @@ import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -41,7 +42,8 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             .add(Material.SHIELD)
             .add(Material.FLINT_AND_STEEL)
             .add(Material.SHEARS)
-            .add(Material.CARROT_ON_A_STICK).build();
+            .add(Material.CARROT_ON_A_STICK)
+            .add(Material.PLAYER_HEAD).build();
 
     /**
      * Instantiate enchanting listeners and link them to a specific plugin.
@@ -233,6 +235,10 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         }
 
         if (!SECONDARY_ENCHANTABLE.contains(event.getItem().getType())) {
+            return;
+        }
+
+        if (!EnchantmentTarget.ALL.getMaterials().contains(event.getItem().getType())) {
             return;
         }
 
