@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.proxy.v1_16_R3.enchants;
 
-import com.willfp.ecoenchants.enchantments.support.vanilla.EcoCraftEnchantmentWrapper;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantmentMetadata;
 import net.minecraft.server.v1_16_R3.Enchantment;
 import org.bukkit.NamespacedKey;
@@ -12,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public class EcoCraftEnchantment extends CraftEnchantment implements EcoCraftEnchantmentWrapper {
+public class EcoCraftEnchantment extends CraftEnchantment {
     private final VanillaEnchantmentMetadata metadata;
 
     public EcoCraftEnchantment(@NotNull final Enchantment target,
