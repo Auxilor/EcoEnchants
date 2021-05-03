@@ -59,7 +59,7 @@ public class Forcefield extends EcoEnchant implements TimedRunnable {
 
     @Override
     public void run() {
-        players.forEach((player, level) -> {
+        new HashMap<>(players).forEach((player, level) -> {
             if (this.getDisabledWorlds().contains(player.getWorld())) {
                 return;
             }
