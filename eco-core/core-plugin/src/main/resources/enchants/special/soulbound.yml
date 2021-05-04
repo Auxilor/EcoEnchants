@@ -21,3 +21,4 @@ general-config:
 
 config:
   remove-after: false # If soulbound should be 1-time use
+  on-books: true # If soulbound should work on books

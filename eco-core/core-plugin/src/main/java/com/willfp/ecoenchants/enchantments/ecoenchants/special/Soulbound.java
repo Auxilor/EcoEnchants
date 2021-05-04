@@ -63,8 +63,10 @@ public class Soulbound extends EcoEnchant {
                 soulboundItems.add(itemStack);
             }
 
-            if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this.getEnchantment()))) {
-                soulboundItems.add(itemStack);
+            if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "on-books")) {
+                if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this.getEnchantment()))) {
+                    soulboundItems.add(itemStack);
+                }
             }
         }
 
@@ -77,8 +79,10 @@ public class Soulbound extends EcoEnchant {
             container.set(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER, 1);
 
             if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "remove-after")) {
-                if (meta instanceof EnchantmentStorageMeta) {
-                    ((EnchantmentStorageMeta) meta).removeStoredEnchant(this);
+                if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "on-books")) {
+                    if (meta instanceof EnchantmentStorageMeta) {
+                        ((EnchantmentStorageMeta) meta).removeStoredEnchant(this);
+                    }
                 }
                 meta.removeEnchant(this);
             }
