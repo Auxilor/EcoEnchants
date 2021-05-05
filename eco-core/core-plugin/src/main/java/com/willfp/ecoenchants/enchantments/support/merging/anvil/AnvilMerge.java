@@ -152,6 +152,14 @@ public class AnvilMerge {
                 rightEnchants.remove(enchantment);
             }
 
+            if (PLUGIN.getConfigYml().getBool("anvil.hard-cap.enabled")) {
+                if (!player.hasPermission("ecoenchants.anvil.bypasshardcap")) {
+                    if (outEnchants.size() >= PLUGIN.getConfigYml().getInt("anvil.hard-cap.cap")) {
+                        return;
+                    }
+                }
+            }
+
             outEnchants.put(enchantment, level);
         }));
 
@@ -182,10 +190,15 @@ public class AnvilMerge {
                 canEnchantItem = true;
             }
 
-            if (canEnchantItem && !doesConflict.get()) {
-                if (PLUGIN.getConfigYml().getBool("anvil.hard-cap.enabled") && !player.hasPermission("ecoenchants.anvil.bypasshardcap") && outEnchants.size() >= PLUGIN.getConfigYml().getInt("anvil.hard-cap.cap")) {
-                    return;
+            if (PLUGIN.getConfigYml().getBool("anvil.hard-cap.enabled")) {
+                if (!player.hasPermission("ecoenchants.anvil.bypasshardcap")) {
+                    if (outEnchants.size() >= PLUGIN.getConfigYml().getInt("anvil.hard-cap.cap")) {
+                        doesConflict.set(true);
+                    }
                 }
+            }
+
+            if (canEnchantItem && !doesConflict.get()) {
                 outEnchants.put(enchantment, integer);
             }
         }));
