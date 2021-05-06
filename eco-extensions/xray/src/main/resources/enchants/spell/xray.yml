@@ -31,6 +31,7 @@ config:
     - lapis_ore
     - ancient_debris
     - diamond_ore
+    - emerald_ore
   blocks-per-level: 3 # Blocks on all sides to scan per level
   ticks: 60
   color-glow: true # Color ore glow based on ore type.
