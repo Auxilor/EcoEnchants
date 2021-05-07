@@ -14,4 +14,4 @@ enabled: false # There may be potential conflicts if modifying vanilla enchantme
 # Currently, it is *not* possible to modify the enchantment levels from enchanting tables.
 # It will work with anvils however, but since it is still possible to get enchantments at their vanilla
 # max levels, then it isn't recommended to lower the max level of a vanilla enchantment, only to raise it.
-max-levels: [ ]
+max-levels: []

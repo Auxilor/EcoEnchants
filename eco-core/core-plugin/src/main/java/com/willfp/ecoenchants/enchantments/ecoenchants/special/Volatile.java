@@ -1,5 +1,4 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
-
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
