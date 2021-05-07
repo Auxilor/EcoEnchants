@@ -32,8 +32,8 @@ public class Xray extends Spell {
 
     @Override
     public boolean onUse(@NotNull final Player player,
-                      final int level,
-                      @NotNull final PlayerInteractEvent event) {
+                         final int level,
+                         @NotNull final PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
 
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
