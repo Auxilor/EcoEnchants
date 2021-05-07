@@ -138,7 +138,7 @@ advanced:
     enabled: true
   level-clamp:
     # Helps reverse players who have illegal above-max-level enchantments.
-    # Any enchantments above their max level will be set to the max level in order to prevent illegal items.
+    # When holding an item, any enchantments above their max level will be set to the max level in order to prevent illegal items.
     # Players with ecoenchants.bypasslevelclamp permission will be ignored.
     # This may impact performance.
     enabled: true
