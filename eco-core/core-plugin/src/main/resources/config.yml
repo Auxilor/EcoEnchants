@@ -141,4 +141,4 @@ advanced:
     # When holding an item, any enchantments above their max level will be set to the max level in order to prevent illegal items.
     # Players with ecoenchants.bypasslevelclamp permission will be ignored.
     # This may impact performance.
-    enabled: true
+    enabled: false
