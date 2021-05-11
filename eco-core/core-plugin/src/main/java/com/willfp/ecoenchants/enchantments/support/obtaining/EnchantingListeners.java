@@ -204,7 +204,9 @@ public class EnchantingListeners extends PluginDependent implements Listener {
         // Ew
         this.getPlugin().getScheduler().runLater(() -> {
             ItemStack item0 = event.getInventory().getItem(0);
-            assert item0 != null;
+            if (item0 == null) {
+                return;
+            }
             if (item0.getItemMeta() instanceof EnchantmentStorageMeta) {
                 EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item0.getItemMeta();
                 for (Enchantment enchantment : meta.getStoredEnchants().keySet()) {
