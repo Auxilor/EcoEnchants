@@ -80,24 +80,26 @@ public class CommandRandomenchant extends AbstractCommand {
         for (EcoEnchant ecoEnchant : ecoEnchants) {
             if (ecoEnchant.canEnchantItem(itemStack)) {
                 if (!ecoEnchant.conflictsWithAny(onItem)) {
-                    if (onItem.stream().noneMatch(enchantment -> enchantment.conflictsWith(ecoEnchant))) {
-                        if (!onItem.contains(ecoEnchant)) {
-                            boolean conflicts = false;
-                            for (Enchantment enchantment : onItem) {
-                                if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                                    EcoEnchant ecoEnchantOnItem = EcoEnchants.getFromEnchantment(enchantment);
-                                    if (ecoEnchantOnItem.getType().equals(ecoEnchant.getType()) && ecoEnchantOnItem.getType().isSingular()) {
-                                        conflicts = true;
+                    if (ecoEnchant.isEnabled()) {
+                        if (onItem.stream().noneMatch(enchantment -> enchantment.conflictsWith(ecoEnchant))) {
+                            if (!onItem.contains(ecoEnchant)) {
+                                boolean conflicts = false;
+                                for (Enchantment enchantment : onItem) {
+                                    if (EcoEnchants.getFromEnchantment(enchantment) != null) {
+                                        EcoEnchant ecoEnchantOnItem = EcoEnchants.getFromEnchantment(enchantment);
+                                        if (ecoEnchantOnItem.getType().equals(ecoEnchant.getType()) && ecoEnchantOnItem.getType().isSingular()) {
+                                            conflicts = true;
+                                        }
                                     }
                                 }
-                            }
-                            if (this.getPlugin().getConfigYml().getBool("anvil.hard-cap.enabled")
-                                    && !player.hasPermission("ecoenchants.randomenchant.bypasshardcap")
-                                    && onItem.size() >= this.getPlugin().getConfigYml().getInt("anvil.hard-cap.cap")) {
-                                conflicts = true;
-                            }
-                            if (!conflicts) {
-                                enchant = ecoEnchant;
+                                if (this.getPlugin().getConfigYml().getBool("anvil.hard-cap.enabled")
+                                        && !player.hasPermission("ecoenchants.randomenchant.bypasshardcap")
+                                        && onItem.size() >= this.getPlugin().getConfigYml().getInt("anvil.hard-cap.cap")) {
+                                    conflicts = true;
+                                }
+                                if (!conflicts) {
+                                    enchant = ecoEnchant;
+                                }
                             }
                         }
                     }
