@@ -241,4 +241,58 @@ public class ItemConversions extends PluginDependent implements Listener {
 
         itemStack.setItemMeta(meta);
     }
+
+    /**
+     * On player hold item.
+     * <p>
+     * Listener for hide fixer.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void levelClamp(@NotNull final PlayerItemHeldEvent event) {
+        if (!this.getPlugin().getConfigYml().getBool("advanced.level-clamp.enabled")) {
+            return;
+        }
+
+        if (event.getPlayer().hasPermission("ecoenchants.bypasslevelclamp")) {
+            return;
+        }
+
+        ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
+
+        clampItemLevels(itemStack);
+    }
+
+    private void clampItemLevels(@Nullable final ItemStack itemStack) {
+        if (itemStack == null) {
+            return;
+        }
+
+        if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
+            return;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return;
+        }
+
+        if (meta instanceof EnchantmentStorageMeta) {
+            new HashMap<>(((EnchantmentStorageMeta) meta).getStoredEnchants()).forEach((enchantment, integer) -> {
+                if (integer > enchantment.getMaxLevel()) {
+                    ((EnchantmentStorageMeta) meta).removeStoredEnchant(enchantment);
+                    ((EnchantmentStorageMeta) meta).addStoredEnchant(enchantment, enchantment.getMaxLevel(), true);
+                }
+            });
+        } else {
+            new HashMap<>(meta.getEnchants()).forEach((enchantment, integer) -> {
+                if (integer > enchantment.getMaxLevel()) {
+                    meta.removeEnchant(enchantment);
+                }
+            });
+        }
+
+        itemStack.setItemMeta(meta);
+    }
 }

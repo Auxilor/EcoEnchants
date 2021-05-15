@@ -136,3 +136,9 @@ advanced:
     # Registers byName both the internal enchantment name (new method) and the display name (old method).
     # There may be potential bugs with having duplicate enchantments, so enable this only if you need it.
     enabled: true
+  level-clamp:
+    # Helps reverse players who have illegal above-max-level enchantments.
+    # When holding an item, any enchantments above their max level will be set to the max level in order to prevent illegal items.
+    # Players with ecoenchants.bypasslevelclamp permission will be ignored.
+    # This may impact performance.
+    enabled: false

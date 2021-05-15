@@ -53,6 +53,7 @@ permissions:
       ecoenchants.randomenchant: true
       ecoenchants.randomenchant.bypasshardcap: true
       ecoenchants.randombook: true
+      ecoenchants.bypasslevelclamp: true
       ecoenchants.anvil.*: true
   ecoenchants.anvil.*:
     description: Allows all anvil permissions
@@ -93,6 +94,9 @@ permissions:
     default: op
   ecoenchants.anvil.color:
     description: Allows color from anvil renames
+    default: op
+  ecoenchants.bypasslevelclamp:
+    description: Allows bypassing the advanced level clamp option
     default: op
 
   # Perks
