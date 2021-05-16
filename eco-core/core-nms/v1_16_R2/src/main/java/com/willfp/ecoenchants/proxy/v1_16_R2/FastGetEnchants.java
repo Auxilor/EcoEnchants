@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.proxy.v1_16_R2;
 
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
+import net.minecraft.server.v1_16_R2.Items;
+import net.minecraft.server.v1_16_R2.ItemEnchantedBook;
 import net.minecraft.server.v1_16_R2.NBTBase;
 import net.minecraft.server.v1_16_R2.NBTTagCompound;
 import net.minecraft.server.v1_16_R2.NBTTagList;
@@ -17,7 +19,7 @@ public final class FastGetEnchants implements FastGetEnchantsProxy {
     @Override
     public Map<Enchantment, Integer> getEnchantmentsOnItem(@NotNull final ItemStack itemStack) {
         net.minecraft.server.v1_16_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
-        NBTTagList enchantmentNBT = nmsStack.getEnchantments();
+        NBTTagList enchantmentNBT = nmsStack.getItem() == Items.ENCHANTED_BOOK ? ItemEnchantedBook.d(nmsStack) : nmsStack.getEnchantments();
         HashMap<Enchantment, Integer> foundEnchantments = new HashMap<>();
 
         for (NBTBase base : enchantmentNBT) {
@@ -37,7 +39,7 @@ public final class FastGetEnchants implements FastGetEnchantsProxy {
     public int getLevelOnItem(@NotNull final ItemStack itemStack,
                               @NotNull final Enchantment enchantment) {
         net.minecraft.server.v1_16_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
-        NBTTagList enchantmentNBT = nmsStack.getEnchantments();
+        NBTTagList enchantmentNBT = nmsStack.getItem() == Items.ENCHANTED_BOOK ? ItemEnchantedBook.d(nmsStack) : nmsStack.getEnchantments();
 
         for (NBTBase base : enchantmentNBT) {
             NBTTagCompound compound = (NBTTagCompound) base;
