@@ -17,7 +17,8 @@ import java.util.Map;
 
 public final class FastGetEnchants implements FastGetEnchantsProxy {
     @Override
-    public Map<Enchantment, Integer> getEnchantmentsOnItem(@NotNull final ItemStack itemStack, boolean checkStored) {
+    public Map<Enchantment, Integer> getEnchantmentsOnItem(@NotNull final ItemStack itemStack,
+                                                           final boolean checkStored) {
         net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
         NBTTagList enchantmentNBT = checkStored && nmsStack.getItem() == Items.ENCHANTED_BOOK ? ItemEnchantedBook.d(nmsStack) : nmsStack.getEnchantments();
         HashMap<Enchantment, Integer> foundEnchantments = new HashMap<>();
@@ -38,7 +39,7 @@ public final class FastGetEnchants implements FastGetEnchantsProxy {
     @Override
     public int getLevelOnItem(@NotNull final ItemStack itemStack,
                               @NotNull final Enchantment enchantment,
-                              boolean checkStored) {
+                              final boolean checkStored) {
         net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
         NBTTagList enchantmentNBT = checkStored && nmsStack.getItem() == Items.ENCHANTED_BOOK ? ItemEnchantedBook.d(nmsStack) : nmsStack.getEnchantments();
 

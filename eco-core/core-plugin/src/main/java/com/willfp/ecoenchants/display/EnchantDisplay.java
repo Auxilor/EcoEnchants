@@ -112,14 +112,9 @@ public class EnchantDisplay extends DisplayModule {
 
         List<String> lore = new ArrayList<>();
 
-        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>();
         List<Enchantment> forRemoval = new ArrayList<>();
 
-        if (meta instanceof EnchantmentStorageMeta) {
-            enchantments.putAll(((EnchantmentStorageMeta) meta).getStoredEnchants());
-        } else {
-            enchantments.putAll(meta.getEnchants());
-        }
+        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(ProxyUtils.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(itemStack, true));
 
         enchantments.entrySet().removeIf(enchantmentIntegerEntry -> enchantmentIntegerEntry.getValue().equals(0));
 
