@@ -153,7 +153,7 @@ public class EnchantDisplay extends DisplayModule {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if (options.getNumbersOptions().isUseNumerals() && ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(itemStack, enchantment, true) < options.getNumbersOptions().getThreshold()) {
+                if (options.getNumbersOptions().isUseNumerals() && level < options.getNumbersOptions().getThreshold()) {
                     name += " " + NumberUtils.toNumeral(level);
                 } else {
                     name += " " + level;
