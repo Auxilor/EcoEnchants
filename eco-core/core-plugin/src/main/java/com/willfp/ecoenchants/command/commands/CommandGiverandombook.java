@@ -4,9 +4,10 @@ import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.command.AbstractCommand;
 import com.willfp.eco.core.command.AbstractTabCompleter;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.ecoenchants.command.tabcompleters.TabCompleterRandomEnchant;
+import com.willfp.ecoenchants.command.tabcompleters.TabCompleterGiverandombook;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -32,7 +33,7 @@ public class CommandGiverandombook extends AbstractCommand {
 
     @Override
     public AbstractTabCompleter getTab() {
-        return new TabCompleterRandomEnchant(this);
+        return new TabCompleterGiverandombook(this);
     }
 
     @Override
@@ -44,6 +45,8 @@ public class CommandGiverandombook extends AbstractCommand {
         }
         Player player = Bukkit.getServer().getPlayer(args.get(0));
 
+        EnchantmentRarity rarity = args.size() >= 2 ? EnchantmentRarity.getByName(args.get(1).toLowerCase()) : null;
+
         if (player == null) {
             sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-player"));
             return;
@@ -51,9 +54,18 @@ public class CommandGiverandombook extends AbstractCommand {
 
         ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) itemStack.getItemMeta();
+
         List<Enchantment> allowed = Arrays.stream(Enchantment.values()).filter(enchantment -> {
             if (enchantment instanceof EcoEnchant) {
                 return ((EcoEnchant) enchantment).isEnabled();
+            }
+            return true;
+        }).filter(enchantment -> {
+            if (rarity != null) {
+                if (!(enchantment instanceof EcoEnchant)) {
+                    return false;
+                }
+                return ((EcoEnchant) enchantment).getRarity().equals(rarity);
             }
             return true;
         }).collect(Collectors.toList());
