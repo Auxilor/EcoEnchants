@@ -15,6 +15,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.Tag;
 import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,6 +26,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.util.NumberConversions;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,6 +43,33 @@ public abstract class Spell extends EcoEnchant {
             Material.FISHING_ROD,
             Material.BOW
     );
+
+    /**
+     * Items that don't cause spells to activate when right clicked.
+     */
+    private static final List<Material> BLACKLIST_CLICKED_BLOCKS = new ArrayList<>(Arrays.asList(
+            Material.CRAFTING_TABLE,
+            Material.GRINDSTONE,
+            Material.ENCHANTING_TABLE,
+            Material.ANVIL,
+            Material.FURNACE,
+            Material.SMITHING_TABLE,
+            Material.LEVER,
+            Material.REPEATER,
+            Material.COMPARATOR,
+            Material.RESPAWN_ANCHOR,
+            Material.NOTE_BLOCK,
+            Material.ITEM_FRAME
+    ));
+
+    static {
+        BLACKLIST_CLICKED_BLOCKS.addAll(Tag.BUTTONS.getValues());
+        BLACKLIST_CLICKED_BLOCKS.addAll(Tag.BEDS.getValues());
+        BLACKLIST_CLICKED_BLOCKS.addAll(Tag.DOORS.getValues());
+        BLACKLIST_CLICKED_BLOCKS.addAll(Tag.FENCE_GATES.getValues());
+        BLACKLIST_CLICKED_BLOCKS.addAll(Tag.TRAPDOORS.getValues());
+    }
+
     /**
      * The cooldown end times linked to players.
      */
@@ -195,12 +224,7 @@ public abstract class Spell extends EcoEnchant {
         if (event.getClickedBlock() != null) {
             if (event.getClickedBlock().getState() instanceof Container
                     || event.getClickedBlock().getState() instanceof BlockInventoryHolder
-                    || event.getClickedBlock().getType() == Material.CRAFTING_TABLE
-                    || event.getClickedBlock().getType() == Material.GRINDSTONE
-                    || event.getClickedBlock().getType() == Material.ENCHANTING_TABLE
-                    || event.getClickedBlock().getType() == Material.ANVIL
-                    || event.getClickedBlock().getType() == Material.FURNACE
-                    || event.getClickedBlock().getType() == Material.SMITHING_TABLE) {
+                    || BLACKLIST_CLICKED_BLOCKS.contains(event.getClickedBlock().getType())) {
                 return;
             }
         }
