@@ -38,7 +38,7 @@ public class Cleave extends EcoEnchant {
                 .filter(entity -> !entity.equals(attacker))
                 .forEach(entity -> {
                     entity.setMetadata("cleaved", this.getPlugin().getMetadataValueFactory().create(true));
-                    ((LivingEntity) entity).damage(damage, attacker);
+                    this.getPlugin().getScheduler().run(() -> ((LivingEntity) entity).damage(damage, attacker));
                     this.getPlugin().getScheduler().runLater(() -> entity.removeMetadata("cleaved", this.getPlugin()), 5);
                 });
     }

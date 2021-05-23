@@ -20,7 +20,7 @@ public class Carve extends EcoEnchant {
                               @NotNull final LivingEntity victim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (victim.hasMetadata("carved")) {
+        if (victim.hasMetadata("cleaved")) {
             return;
         }
 
@@ -37,9 +37,9 @@ public class Carve extends EcoEnchant {
                 .filter(entity -> entity instanceof LivingEntity)
                 .filter(entity -> !entity.equals(attacker))
                 .forEach(entity -> {
-                    entity.setMetadata("carved", this.getPlugin().getMetadataValueFactory().create(true));
-                    ((LivingEntity) entity).damage(damage, attacker);
-                    this.getPlugin().getScheduler().runLater(() -> entity.removeMetadata("carved", this.getPlugin()), 20);
+                    entity.setMetadata("cleaved", this.getPlugin().getMetadataValueFactory().create(true));
+                    this.getPlugin().getScheduler().run(() -> ((LivingEntity) entity).damage(damage, attacker));
+                    this.getPlugin().getScheduler().runLater(() -> entity.removeMetadata("cleaved", this.getPlugin()), 20);
                 });
     }
 }
