@@ -265,6 +265,8 @@ public abstract class Spell extends EcoEnchant {
      * @param player The player who triggered the spell.
      * @param level  The level of the spell on the item.
      * @param event  The event that activated the spell.
+     *
+     * @return If the spell should be activated.
      */
     public abstract boolean onUse(@NotNull Player player,
                                   int level,

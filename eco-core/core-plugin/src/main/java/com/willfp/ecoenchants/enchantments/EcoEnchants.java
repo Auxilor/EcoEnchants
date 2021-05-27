@@ -238,8 +238,6 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Quake;
 import com.willfp.ecoenchants.enchantments.ecoenchants.spell.Vitalize;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantments;
-import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
