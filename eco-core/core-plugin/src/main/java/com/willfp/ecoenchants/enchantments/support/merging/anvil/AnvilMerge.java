@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
+import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -120,22 +122,10 @@ public class AnvilMerge {
             return new Pair<>(null, null);
         }
 
-        HashMap<Enchantment, Integer> leftEnchants = new HashMap<>();
-        HashMap<Enchantment, Integer> rightEnchants = new HashMap<>();
-
         Map<Enchantment, Integer> outEnchants = new HashMap<>();
 
-        if (left.getItemMeta() instanceof EnchantmentStorageMeta) {
-            leftEnchants.putAll(((EnchantmentStorageMeta) left.getItemMeta()).getStoredEnchants());
-        } else {
-            leftEnchants.putAll(left.getItemMeta().getEnchants());
-        }
-
-        if (right.getItemMeta() instanceof EnchantmentStorageMeta) {
-            rightEnchants.putAll(((EnchantmentStorageMeta) right.getItemMeta()).getStoredEnchants());
-        } else {
-            rightEnchants.putAll(right.getItemMeta().getEnchants());
-        }
+        HashMap<Enchantment, Integer> leftEnchants = new HashMap<>(ProxyUtils.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(left, true));
+        HashMap<Enchantment, Integer> rightEnchants = new HashMap<>(ProxyUtils.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(right, true));
 
         leftEnchants.forEach(((enchantment, integer) -> {
             int level = integer;

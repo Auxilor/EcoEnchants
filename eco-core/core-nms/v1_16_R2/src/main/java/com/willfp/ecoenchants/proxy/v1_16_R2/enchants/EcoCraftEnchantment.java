@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.proxy.v1_16_R2.enchants;
 
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantmentMetadata;
 import net.minecraft.server.v1_16_R2.Enchantment;
 import org.bukkit.NamespacedKey;
@@ -23,6 +24,11 @@ public class EcoCraftEnchantment extends CraftEnchantment {
     @Override
     public int getMaxLevel() {
         return metadata.getMaxLevel() == null ? this.getHandle().getMaxLevel() : metadata.getMaxLevel();
+    }
+
+    @Override
+    public boolean conflictsWith(@NotNull final org.bukkit.enchantments.Enchantment other) {
+        return EcoEnchants.getFromEnchantment(other) == null ? super.conflictsWith(other) : other.conflictsWith(other);
     }
 
     public void register() {
