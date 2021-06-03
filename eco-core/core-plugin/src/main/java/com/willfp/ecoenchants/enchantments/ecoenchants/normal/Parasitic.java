@@ -28,6 +28,8 @@ public class Parasitic extends EcoEnchant {
         if (newHealth > attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
             newHealth = attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         }
-        attacker.setHealth(newHealth);
+		if (attacker.getHealth() > 0) {
+			attacker.setHealth(newHealth);
+		}
     }
 }
