@@ -29,3 +29,6 @@ config:
   hardness-check: true # Only break blocks with hardness less than or equal to first block
   blacklisted-blocks:
     - bedrock
+    - end_portal_frame
+    - end_portal
+    - end_gateway
