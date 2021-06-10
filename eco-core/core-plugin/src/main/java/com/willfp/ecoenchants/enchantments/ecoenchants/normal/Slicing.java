@@ -53,7 +53,7 @@ public class Slicing extends EcoEnchant {
             }
 
             double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");
-            int level = EnchantChecks.getMainhandLevel(player, this);
+            int level = EnchantChecks.getChestplateLevel(player, this);
             victim.damage(level * damage, player);
             entities.add(victim);
 
