@@ -26,6 +26,7 @@ config:
   blocks:
     - coal_ore
     - iron_ore
+    - copper_ore
     - gold_ore
     - redstone_ore
     - lapis_ore

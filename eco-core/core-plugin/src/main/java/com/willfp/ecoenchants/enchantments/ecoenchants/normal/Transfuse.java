@@ -14,8 +14,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.stream.Collectors;
-
 public class Transfuse extends EcoEnchant {
     public Transfuse() {
         super(
@@ -38,9 +36,7 @@ public class Transfuse extends EcoEnchant {
 
         event.setDropItems(false);
 
-        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "works-on").stream()
-                .map(string -> Material.getMaterial(string.toUpperCase()))
-                .collect(Collectors.toList()).contains(block.getType())) {
+        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "works-on").contains(block.getType().toString().toLowerCase())) {
             return;
         }
 

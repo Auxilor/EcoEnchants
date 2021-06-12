@@ -29,6 +29,7 @@ config:
     - lapis_ore
     - redstone_ore
     - iron_ore
+    - copper_ore
   chance-per-level: 0.03 # Chance for drop to be switched
   works-on:
     - stone

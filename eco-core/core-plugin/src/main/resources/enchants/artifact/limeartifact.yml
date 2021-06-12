@@ -43,5 +43,6 @@ config:
     - lapis_ore
     - redstone_ore
     - iron_ore
+    - copper_ore
     - obsidian
     - ancient_debris

@@ -37,9 +37,8 @@ public class Vein extends EcoEnchant {
         }
 
         List<Material> materials = new ArrayList<>();
-        this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks").forEach(name -> materials.add(Material.getMaterial(name.toUpperCase())));
 
-        if (!materials.contains(block.getType())) {
+        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks").contains(block.getType().toString().toLowerCase())) {
             return;
         }
 

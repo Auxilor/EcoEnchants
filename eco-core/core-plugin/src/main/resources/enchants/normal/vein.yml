@@ -28,6 +28,7 @@ config:
   whitelisted-blocks:
     - coal_ore
     - iron_ore
+    - copper_ore
     - gold_ore
     - ancient_debris
     - lapis_ore
