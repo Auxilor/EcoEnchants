@@ -24,19 +24,16 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings({"unchecked", "deprecation", "RedundantSuppression"})
+@SuppressWarnings({"deprecation", "RedundantSuppression"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Watcher {
     /**
      * Instance of EcoEnchants for enchantments to be able to access.
@@ -233,36 +230,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      * Only used internally.
      */
     public void register() {
-        try {
-            Field byIdField = Enchantment.class.getDeclaredField("byKey");
-            Field byNameField = Enchantment.class.getDeclaredField("byName");
-            byIdField.setAccessible(true);
-            byNameField.setAccessible(true);
-            Map<NamespacedKey, Enchantment> byKey = (Map<NamespacedKey, Enchantment>) byIdField.get(null);
-            Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
-            byKey.remove(this.getKey());
-            byName.remove(this.getName());
-            byName.remove(this.getDisplayName());
-
-            Map<String, Enchantment> byNameClone = new HashMap<>(byName);
-            for (Map.Entry<String, Enchantment> entry : byNameClone.entrySet()) {
-                if (entry.getValue().getKey().equals(this.getKey())) {
-                    byName.remove(entry.getKey());
-                }
-            }
-
-            if (this.getPlugin().getConfigYml().getBool("advanced.dual-registration.enabled")) {
-                byName.put(this.getDisplayName(), this);
-            }
-
-            Field f = Enchantment.class.getDeclaredField("acceptingNew");
-            f.setAccessible(true);
-            f.set(null, true);
-            f.setAccessible(false);
-
-            Enchantment.registerEnchantment(this);
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {
-        }
+        EnchantmentUtils.register(this);
     }
 
     /**
