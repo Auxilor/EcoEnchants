@@ -143,6 +143,11 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     private boolean enabled;
 
     /**
+     * Custom option flags for the enchantment.
+     */
+    private final List<String> flags = new ArrayList<>();
+
+    /**
      * Create a new EcoEnchant.
      *
      * @param key           The key name of the enchantment
@@ -215,6 +220,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         targets.addAll(config.getTargets());
         targets.forEach(enchantmentTarget -> targetMaterials.addAll(enchantmentTarget.getMaterials()));
         enabled = config.getBool("enabled");
+        flags.clear();
+        flags.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "flags"));
         EnchantmentUtils.registerPlaceholders(this);
 
         postUpdate();
@@ -253,12 +260,13 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     }
 
     /**
-     * Get enchantment cast to {@link Enchantment}.
+     * If enchantment has specified flag.
      *
-     * @return The enchantment.
+     * @param flag The flag.
+     * @return If the enchantment has the flag.
      */
-    public Enchantment getEnchantment() {
-        return this;
+    public boolean hasFlag(@NotNull final String flag) {
+        return this.flags.contains(flag);
     }
 
     /**
