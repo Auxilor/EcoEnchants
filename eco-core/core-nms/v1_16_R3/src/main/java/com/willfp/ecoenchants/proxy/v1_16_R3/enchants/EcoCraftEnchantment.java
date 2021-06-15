@@ -18,7 +18,7 @@ public class EcoCraftEnchantment extends CraftEnchantment {
 
     @Override
     public int getMaxLevel() {
-        return metadata.getMaxLevel() == null ? this.getHandle().getMaxLevel() : metadata.getMaxLevel();
+        return metadata.maxLevel() == null ? this.getHandle().getMaxLevel() : metadata.maxLevel();
     }
 
     @Override
