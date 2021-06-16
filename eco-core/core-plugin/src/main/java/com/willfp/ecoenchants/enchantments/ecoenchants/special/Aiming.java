@@ -30,20 +30,17 @@ public class Aiming extends EcoEnchant {
 
     @EventHandler
     public void aimingLaunch(@NotNull final ProjectileLaunchEvent event) {
-        if (!(event.getEntity().getShooter() instanceof Player)) {
+        if (!(event.getEntity().getShooter() instanceof Player player)) {
             return;
         }
 
-        if (!(event.getEntity() instanceof Arrow)) {
+        if (!(event.getEntity() instanceof Arrow arrow)) {
             return;
         }
 
         if (event.isCancelled()) {
             return;
         }
-
-        Player player = (Player) event.getEntity().getShooter();
-        Arrow arrow = (Arrow) event.getEntity();
 
         if (!EnchantChecks.mainhand(player, this)) {
             return;

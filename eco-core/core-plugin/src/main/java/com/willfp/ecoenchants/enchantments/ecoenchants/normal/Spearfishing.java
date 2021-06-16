@@ -35,21 +35,17 @@ public class Spearfishing extends EcoEnchant {
             return;
         }
 
-        if (!(event.getEntity().getShooter() instanceof Player)) {
+        if (!(event.getEntity().getShooter() instanceof Player player)) {
             return;
         }
 
-        if (!(event.getEntity() instanceof Trident)) {
+        if (!(event.getEntity() instanceof Trident trident)) {
             return;
         }
-
-        Trident trident = (Trident) event.getEntity();
 
         if (!trident.getWorld().getBlockAt(trident.getLocation().add(0, 0.2, 0)).getType().equals(Material.WATER)) {
             return;
         }
-
-        Player player = (Player) event.getEntity().getShooter();
 
         if (this.getDisabledWorlds().contains(player.getWorld())) {
             return;

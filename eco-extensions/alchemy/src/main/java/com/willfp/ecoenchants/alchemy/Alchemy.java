@@ -35,11 +35,9 @@ public class Alchemy extends EcoEnchant {
         if (event.getNewEffect() == null) {
             return;
         }
-        if (!(event.getEntity() instanceof LivingEntity)) {
+        if (!(event.getEntity() instanceof LivingEntity entity)) {
             return;
         }
-
-        LivingEntity entity = (LivingEntity) event.getEntity();
 
         if (entity.hasMetadata(event.getNewEffect().toString())) {
             return;

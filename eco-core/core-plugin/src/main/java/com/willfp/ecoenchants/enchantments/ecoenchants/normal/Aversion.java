@@ -19,11 +19,10 @@ public class Aversion extends EcoEnchant {
 
     @EventHandler
     public void onEndermanTarget(@NotNull final EntityTargetLivingEntityEvent event) {
-        if (!(event.getEntity() instanceof Enderman)) {
+        if (!(event.getEntity() instanceof Enderman enderman)) {
             return;
         }
 
-        Enderman enderman = (Enderman) event.getEntity();
         LivingEntity target = event.getTarget();
 
         if (event.getReason() != EntityTargetEvent.TargetReason.CLOSEST_PLAYER) {

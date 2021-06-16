@@ -57,11 +57,9 @@ public class VillagerListeners extends PluginDependent implements Listener {
         float priceMultiplier = event.getRecipe().getPriceMultiplier();
         List<ItemStack> ingredients = event.getRecipe().getIngredients();
 
-        if (!(result.getItemMeta() instanceof EnchantmentStorageMeta)) {
+        if (!(result.getItemMeta() instanceof EnchantmentStorageMeta meta)) {
             return;
         }
-
-        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) result.getItemMeta();
 
         ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
         Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis

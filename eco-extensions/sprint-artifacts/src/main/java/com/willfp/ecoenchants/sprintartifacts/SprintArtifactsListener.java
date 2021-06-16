@@ -44,7 +44,7 @@ public class SprintArtifactsListener implements Listener {
                 .filter(Objects::nonNull)
                 .filter(enchantment -> enchantment.getType().equals(EnchantmentType.ARTIFACT))
                 .findFirst();
-        if (!matching.isPresent()) {
+        if (matching.isEmpty()) {
             return;
         }
         Artifact artifact = (Artifact) matching.get();

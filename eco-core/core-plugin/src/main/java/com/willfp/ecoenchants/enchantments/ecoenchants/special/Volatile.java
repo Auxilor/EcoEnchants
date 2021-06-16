@@ -22,11 +22,9 @@ public class Volatile extends EcoEnchant {
                               @NotNull final LivingEntity victim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (!(uncastAttacker instanceof Player)) {
+        if (!(uncastAttacker instanceof Player attacker)) {
             return;
         }
-
-        Player attacker = (Player) uncastAttacker;
 
         if (!EnchantmentUtils.isFullyChargeIfRequired(this, attacker)) {
             return;

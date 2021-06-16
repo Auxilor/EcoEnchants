@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ItemConversions extends PluginDependent implements Listener {
     /**
@@ -141,7 +140,7 @@ public class ItemConversions extends PluginDependent implements Listener {
                         continue;
                     }
 
-                    String enchantName = lineSplit.stream().collect(Collectors.joining(" "));
+                    String enchantName = String.join(" ", lineSplit);
                     enchant = EcoEnchants.getByName(enchantName);
                 }
             }

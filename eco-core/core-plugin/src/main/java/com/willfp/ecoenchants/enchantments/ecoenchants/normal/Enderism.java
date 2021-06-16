@@ -36,15 +36,12 @@ public class Enderism extends EcoEnchant {
 
     @EventHandler
     public void onHit(@NotNull final EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Arrow)) {
+        if (!(event.getDamager() instanceof Arrow arrow)) {
             return;
         }
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) {
+        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player player)) {
             return;
         }
-
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-        Arrow arrow = (Arrow) event.getDamager();
 
         assert player != null;
         if (!player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {

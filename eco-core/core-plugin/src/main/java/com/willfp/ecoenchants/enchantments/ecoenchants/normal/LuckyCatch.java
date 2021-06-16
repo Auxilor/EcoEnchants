@@ -40,15 +40,13 @@ public class LuckyCatch extends EcoEnchant {
 
         Entity caught = event.getCaught();
 
-        if (!(caught instanceof Item)) {
+        if (!(caught instanceof Item caughtItem)) {
             return;
         }
 
         if (!EnchantmentUtils.passedChance(this, level)) {
             return;
         }
-
-        Item caughtItem = (Item) caught;
 
         caughtItem.getItemStack().setAmount(caughtItem.getItemStack().getAmount() * 2);
     }

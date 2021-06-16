@@ -112,11 +112,9 @@ public class Xray extends Spell {
         }
 
         for (MetadataValue meta : block.getMetadata("xray-uuid")) {
-            if (!(meta.value() instanceof UUID)) {
+            if (!(meta.value() instanceof UUID uuid)) {
                 continue;
             }
-
-            UUID uuid = (UUID) meta.value();
 
             assert uuid != null;
 

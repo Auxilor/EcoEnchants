@@ -144,10 +144,9 @@ public class EnchantmentRarity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof EnchantmentRarity)) {
+        if (!(o instanceof EnchantmentRarity that)) {
             return false;
         }
-        EnchantmentRarity that = (EnchantmentRarity) o;
         return Objects.equals(getName(), that.getName());
     }
 

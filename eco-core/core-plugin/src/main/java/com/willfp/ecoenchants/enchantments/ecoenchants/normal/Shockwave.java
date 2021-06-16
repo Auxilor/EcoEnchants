@@ -24,17 +24,14 @@ public class Shockwave extends EcoEnchant {
 
     @EventHandler
     public void onShoot(@NotNull final ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof AbstractArrow)) {
+        if (!(event.getEntity() instanceof AbstractArrow entity)) {
             return;
         }
 
-        if (!(event.getEntity().getShooter() instanceof Player)) {
+        if (!(event.getEntity().getShooter() instanceof Player player)) {
             return;
         }
 
-        Player player = (Player) event.getEntity().getShooter();
-
-        AbstractArrow entity = (AbstractArrow) event.getEntity();
         ItemStack item = player.getInventory().getItemInMainHand();
         if (entity instanceof Trident) {
             item = TridentUtils.getItemStack((Trident) entity);

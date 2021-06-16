@@ -19,11 +19,10 @@ public class Protector extends EcoEnchant {
                               @NotNull final LivingEntity uncastVictim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (!(uncastVictim instanceof Tameable)) {
+        if (!(uncastVictim instanceof Tameable victim)) {
             return;
         }
 
-        Tameable victim = (Tameable) uncastVictim;
         if (victim.getOwner() == null) {
             return;
         }

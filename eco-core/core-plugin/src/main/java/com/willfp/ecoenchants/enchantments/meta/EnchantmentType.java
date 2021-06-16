@@ -228,10 +228,9 @@ public class EnchantmentType {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof EnchantmentType)) {
+        if (!(o instanceof EnchantmentType that)) {
             return false;
         }
-        EnchantmentType that = (EnchantmentType) o;
         return Objects.equals(getName(), that.getName());
     }
 

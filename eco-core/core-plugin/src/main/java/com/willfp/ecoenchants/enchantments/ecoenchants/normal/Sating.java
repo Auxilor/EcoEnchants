@@ -18,11 +18,9 @@ public class Sating extends EcoEnchant {
 
     @EventHandler
     public void onSatingHunger(@NotNull final FoodLevelChangeEvent event) {
-        if (!(event.getEntity() instanceof Player)) {
+        if (!(event.getEntity() instanceof Player player)) {
             return;
         }
-
-        Player player = (Player) event.getEntity();
 
         if (!EnchantChecks.helmet(player, this)) {
             return;

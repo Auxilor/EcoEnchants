@@ -31,11 +31,9 @@ public class Endershot extends EcoEnchant {
         if (event.getProjectile().getType() != EntityType.ARROW) {
             return;
         }
-        if (!(event.getEntity() instanceof Player)) {
+        if (!(event.getEntity() instanceof Player player)) {
             return;
         }
-
-        Player player = (Player) event.getEntity();
 
         if (!player.isSneaking()) {
             return;

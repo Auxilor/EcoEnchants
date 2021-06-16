@@ -25,11 +25,9 @@ public class Instability extends EcoEnchant {
             return;
         }
 
-        if (!(event.getEntity().getShooter() instanceof Player)) {
+        if (!(event.getEntity().getShooter() instanceof Player player)) {
             return;
         }
-
-        Player player = (Player) event.getEntity().getShooter();
 
         if (!EnchantChecks.mainhand(player, this)) {
             return;

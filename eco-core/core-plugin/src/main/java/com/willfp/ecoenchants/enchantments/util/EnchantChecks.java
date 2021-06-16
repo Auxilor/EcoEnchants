@@ -116,11 +116,10 @@ public class EnchantChecks {
         }
 
         MetadataValue enchantmentsMetaValue = arrow.getMetadata("shot-from").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof ItemStack)) {
+        if (!(enchantmentsMetaValue.value() instanceof ItemStack shotFrom)) {
             return 0;
         }
 
-        ItemStack shotFrom = (ItemStack) enchantmentsMetaValue.value();
         return getItemLevel(shotFrom, enchantment);
     }
 
@@ -136,11 +135,10 @@ public class EnchantChecks {
         }
 
         MetadataValue enchantmentsMetaValue = arrow.getMetadata("shot-from").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof ItemStack)) {
+        if (!(enchantmentsMetaValue.value() instanceof ItemStack shotFrom)) {
             return new HashMap<>();
         }
 
-        ItemStack shotFrom = (ItemStack) enchantmentsMetaValue.value();
         return getEnchantsOnItem(shotFrom);
     }
 

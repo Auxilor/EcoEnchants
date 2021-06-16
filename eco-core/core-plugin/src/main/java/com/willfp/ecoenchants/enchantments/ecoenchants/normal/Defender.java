@@ -21,11 +21,9 @@ public class Defender extends EcoEnchant {
                               @NotNull final Arrow arrow,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (!(victim instanceof Tameable)) {
+        if (!(victim instanceof Tameable pet)) {
             return;
         }
-
-        Tameable pet = (Tameable) victim;
 
         if (pet.getOwner() == null) {
             return;

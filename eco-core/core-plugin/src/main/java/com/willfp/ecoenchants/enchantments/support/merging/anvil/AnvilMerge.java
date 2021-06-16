@@ -220,8 +220,7 @@ public class AnvilMerge {
 
         ItemStack output = left.clone();
 
-        if (output.getItemMeta() instanceof EnchantmentStorageMeta) {
-            EnchantmentStorageMeta meta = (EnchantmentStorageMeta) output.getItemMeta();
+        if (output.getItemMeta() instanceof EnchantmentStorageMeta meta) {
             meta.getStoredEnchants().forEach(((enchantment, integer) -> {
                 meta.removeStoredEnchant(enchantment);
             }));

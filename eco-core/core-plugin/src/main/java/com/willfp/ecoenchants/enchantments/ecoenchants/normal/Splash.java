@@ -48,11 +48,9 @@ public class Splash extends EcoEnchant {
                 continue;
             }
 
-            if (!(victim instanceof LivingEntity)) {
+            if (!(victim instanceof LivingEntity entity)) {
                 continue;
             }
-
-            LivingEntity entity = (LivingEntity) victim;
 
             if (victim.equals(shooter)) {
                 continue;

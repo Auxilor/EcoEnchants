@@ -25,10 +25,9 @@ public class Confusion extends EcoEnchant {
                               @NotNull final LivingEntity uncastVictim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (!(uncastVictim instanceof Player)) {
+        if (!(uncastVictim instanceof Player victim)) {
             return;
         }
-        Player victim = (Player) uncastVictim;
 
         if (!EnchantmentUtils.isFullyChargeIfRequired(this, attacker)) {
             return;

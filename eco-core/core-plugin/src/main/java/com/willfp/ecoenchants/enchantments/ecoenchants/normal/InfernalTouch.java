@@ -43,10 +43,9 @@ public class InfernalTouch extends EcoEnchant {
         Iterator<Recipe> iterator = Bukkit.recipeIterator();
         while (iterator.hasNext()) {
             Recipe recipe = iterator.next();
-            if (!(recipe instanceof FurnaceRecipe)) {
+            if (!(recipe instanceof FurnaceRecipe furnaceRecipe)) {
                 continue;
             }
-            FurnaceRecipe furnaceRecipe = (FurnaceRecipe) recipe;
             int xp = (int) Math.ceil(furnaceRecipe.getExperience());
             RECIPES.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), xp));
         }

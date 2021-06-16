@@ -33,11 +33,9 @@ public class Marking extends EcoEnchant {
 
     @EventHandler
     public void onHitWhileMarked(@NotNull final EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity)) {
+        if (!(event.getEntity() instanceof LivingEntity victim)) {
             return;
         }
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
 
         if (!victim.hasMetadata("marked")) {
             return;

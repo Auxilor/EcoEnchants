@@ -41,12 +41,11 @@ public class CommandEcodebug extends AbstractCommand {
                           @NotNull final List<String> args) {
         if (!args.isEmpty() && args.get(0).equalsIgnoreCase("full")) {
             Bukkit.getLogger().info("--------------- BEGIN DEBUG ----------------");
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
-                player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand().toString());
+            if (sender instanceof Player player) {
+                player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand());
                 Bukkit.getLogger().info("");
 
-                Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
+                Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand());
                 Bukkit.getLogger().info("");
             }
 
@@ -87,7 +86,7 @@ public class CommandEcodebug extends AbstractCommand {
 
             List<Enchantment> uncached = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
             uncached.removeAll(EnchantmentCache.getCache().values().stream().map(EnchantmentCache.CacheEntry::getEnchantment).collect(Collectors.toList()));
-            Bukkit.getLogger().info("Uncached Enchantments: " + uncached.toString());
+            Bukkit.getLogger().info("Uncached Enchantments: " + uncached);
             Bukkit.getLogger().info("");
 
             List<Enchantment> brokenCache = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
@@ -95,10 +94,10 @@ public class CommandEcodebug extends AbstractCommand {
                     EnchantmentCache.getEntry(enchantment).getName().equalsIgnoreCase("null")
                             || EnchantmentCache.getEntry(enchantment).getRawName().equalsIgnoreCase("null")
                             || EnchantmentCache.getEntry(enchantment).getStringDescription().equalsIgnoreCase("null")));
-            Bukkit.getLogger().info("Enchantments with broken cache: " + brokenCache.toString());
+            Bukkit.getLogger().info("Enchantments with broken cache: " + brokenCache);
             Bukkit.getLogger().info("");
 
-            Bukkit.getLogger().info("Installed Plugins: " + Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toList()).toString());
+            Bukkit.getLogger().info("Installed Plugins: " + Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(Plugin::getName).collect(Collectors.toList()));
             Bukkit.getLogger().info("");
 
             Set<EcoEnchant> withIssues = new HashSet<>();
@@ -110,12 +109,12 @@ public class CommandEcodebug extends AbstractCommand {
                     withIssues.add(enchant);
                 }
             });
-            Bukkit.getLogger().info("Enchantments with evident issues: " + withIssues.toString());
+            Bukkit.getLogger().info("Enchantments with evident issues: " + withIssues);
             Bukkit.getLogger().info("");
 
             Bukkit.getLogger().info("Packets: " + ProtocolLibrary.getProtocolManager().getPacketListeners().stream()
                     .filter(packetListener -> packetListener.getSendingWhitelist().getPriority().equals(ListenerPriority.MONITOR))
-                    .collect(Collectors.toList()).toString());
+                    .collect(Collectors.toList()));
             Bukkit.getLogger().info("");
 
             Bukkit.getLogger().info("Server Information: ");
@@ -128,13 +127,12 @@ public class CommandEcodebug extends AbstractCommand {
             Bukkit.getLogger().info("Motd: " + Bukkit.getServer().getMotd());
             Bukkit.getLogger().info("--------------- END DEBUG ----------------");
         } else {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
-                player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand().toString());
+            if (sender instanceof Player player) {
+                player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand());
                 player.sendMessage("Lore: ");
                 Bukkit.getLogger().info("");
 
-                Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand().toString());
+                Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand());
                 Bukkit.getLogger().info("Lore: ");
                 ItemMeta meta = player.getInventory().getItemInMainHand().getItemMeta();
                 if (meta != null) {

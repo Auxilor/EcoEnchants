@@ -24,13 +24,11 @@ public class Spiked extends EcoEnchant {
             return;
         }
 
-        if (!(event.getCaught() instanceof LivingEntity)) {
+        if (!(event.getCaught() instanceof LivingEntity victim)) {
             return;
         }
 
         Player player = event.getPlayer();
-
-        LivingEntity victim = (LivingEntity) event.getCaught();
 
         if (victim.hasMetadata("NPC")) {
             return;

@@ -31,11 +31,9 @@ public class Weakening extends EcoEnchant {
 
     @EventHandler
     public void onDamage(@NotNull final EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof LivingEntity)) {
+        if (!(event.getEntity() instanceof LivingEntity victim)) {
             return;
         }
-
-        LivingEntity victim = (LivingEntity) event.getEntity();
 
         if (!victim.hasMetadata("weak")) {
             return;

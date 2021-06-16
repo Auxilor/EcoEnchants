@@ -24,7 +24,7 @@ public class ShotAssist extends EcoEnchant {
             return;
         }
 
-        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player)) {
+        if (!(((Arrow) event.getDamager()).getShooter() instanceof Player player)) {
             return;
         }
 
@@ -35,8 +35,6 @@ public class ShotAssist extends EcoEnchant {
         if (event.isCancelled()) {
             return;
         }
-
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
 
         assert player != null;
 

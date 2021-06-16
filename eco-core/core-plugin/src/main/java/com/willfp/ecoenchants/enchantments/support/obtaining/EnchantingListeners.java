@@ -207,8 +207,7 @@ public class EnchantingListeners extends PluginDependent implements Listener {
             if (item0 == null) {
                 return;
             }
-            if (item0.getItemMeta() instanceof EnchantmentStorageMeta) {
-                EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item0.getItemMeta();
+            if (item0.getItemMeta() instanceof EnchantmentStorageMeta meta) {
                 for (Enchantment enchantment : meta.getStoredEnchants().keySet()) {
                     meta.removeStoredEnchant(enchantment);
                 }

@@ -32,10 +32,9 @@ public class Radiance extends EcoEnchant {
                 continue;
             }
 
-            if (!(e instanceof LivingEntity)) {
+            if (!(e instanceof LivingEntity entity)) {
                 continue;
             }
-            LivingEntity entity = (LivingEntity) e;
 
             if (e.equals(attacker)) {
                 continue;

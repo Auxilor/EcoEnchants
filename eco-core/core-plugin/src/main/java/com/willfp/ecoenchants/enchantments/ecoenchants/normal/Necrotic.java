@@ -26,12 +26,11 @@ public class Necrotic extends EcoEnchant {
             return;
         }
 
-        if (!(event.getEntity() instanceof WitherSkeleton)) {
+        if (!(event.getEntity() instanceof WitherSkeleton victim)) {
             return;
         }
 
         Player player = event.getEntity().getKiller();
-        WitherSkeleton victim = (WitherSkeleton) event.getEntity();
 
         if (!EnchantChecks.mainhand(player, this)) {
             return;

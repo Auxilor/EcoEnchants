@@ -23,7 +23,7 @@ public class Replenish extends EcoEnchant {
                              @NotNull final BlockBreakEvent event) {
         Material type = block.getType();
 
-        if (!(block.getBlockData() instanceof Ageable)) {
+        if (!(block.getBlockData() instanceof Ageable data)) {
             return;
         }
 
@@ -31,7 +31,6 @@ public class Replenish extends EcoEnchant {
             return;
         }
 
-        Ageable data = (Ageable) block.getBlockData();
         if (data.getAge() != data.getMaximumAge()) {
             event.setDropItems(false);
             event.setExpToDrop(0);

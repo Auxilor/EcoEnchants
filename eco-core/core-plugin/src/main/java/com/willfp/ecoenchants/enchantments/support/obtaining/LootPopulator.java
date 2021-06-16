@@ -57,11 +57,10 @@ public class LootPopulator extends BlockPopulator {
 
         for (BlockState state : chunk.getTileEntities()) {
             Block block = state.getBlock();
-            if (!(block.getState() instanceof Chest)) {
+            if (!(block.getState() instanceof Chest chestState)) {
                 continue;
             }
 
-            Chest chestState = (Chest) block.getState();
             Inventory inventory = chestState.getBlockInventory();
 
             for (ItemStack item : inventory) {
@@ -148,8 +147,7 @@ public class LootPopulator extends BlockPopulator {
                     }
                 }
 
-                if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
-                    EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+                if (item.getItemMeta() instanceof EnchantmentStorageMeta meta) {
                     toAdd.forEach(((enchantment, integer) -> meta.addStoredEnchant(enchantment, integer, false)));
                     item.setItemMeta(meta);
                 } else {

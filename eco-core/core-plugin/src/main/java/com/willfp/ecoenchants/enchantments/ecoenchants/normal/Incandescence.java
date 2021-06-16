@@ -25,16 +25,13 @@ public class Incandescence extends EcoEnchant {
             return;
         }
 
-        if (!(event.getEntity() instanceof Player)) {
+        if (!(event.getEntity() instanceof Player player)) {
             return;
         }
 
-        if (!(event.getDamager() instanceof LivingEntity)) {
+        if (!(event.getDamager() instanceof LivingEntity victim)) {
             return;
         }
-
-        Player player = (Player) event.getEntity();
-        LivingEntity victim = (LivingEntity) event.getDamager();
 
         int totalIncandescencePoints = EnchantChecks.getArmorPoints(player, this);
 

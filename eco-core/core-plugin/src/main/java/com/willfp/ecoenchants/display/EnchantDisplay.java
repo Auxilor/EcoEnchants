@@ -225,11 +225,8 @@ public class EnchantDisplay extends DisplayModule {
         if (meta == null) {
             return new Object[]{false};
         }
-        boolean hideEnchants = false;
 
-        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
-            hideEnchants = true;
-        }
+        boolean hideEnchants = meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS);
 
         if (meta.getPersistentDataContainer().has(legacyV, PersistentDataType.INTEGER)) {
             hideEnchants = false;

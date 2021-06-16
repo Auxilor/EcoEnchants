@@ -22,16 +22,13 @@ public class Frozen extends EcoEnchant {
 
     @EventHandler
     public void onHurt(@NotNull final EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player)) {
+        if (!(event.getEntity() instanceof Player player)) {
             return;
         }
 
-        if (!(event.getDamager() instanceof LivingEntity)) {
+        if (!(event.getDamager() instanceof LivingEntity victim)) {
             return;
         }
-
-        Player player = (Player) event.getEntity();
-        LivingEntity victim = (LivingEntity) event.getDamager();
 
         final int points = EnchantChecks.getArmorPoints(player, this, 0);
 

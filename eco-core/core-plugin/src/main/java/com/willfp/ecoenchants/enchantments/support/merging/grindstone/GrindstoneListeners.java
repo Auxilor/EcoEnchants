@@ -58,8 +58,7 @@ public class GrindstoneListeners extends PluginDependent implements Listener {
             }
 
             ItemStack newOut = out.clone();
-            if (newOut.getItemMeta() instanceof EnchantmentStorageMeta) {
-                EnchantmentStorageMeta meta = (EnchantmentStorageMeta) newOut.getItemMeta();
+            if (newOut.getItemMeta() instanceof EnchantmentStorageMeta meta) {
                 toKeep.forEach(((enchantment, integer) -> {
                     meta.addStoredEnchant(enchantment, integer, true);
                 }));

@@ -31,21 +31,17 @@ public class Fetching extends EcoEnchant {
             return;
         }
 
-        if (!(event.getKiller() instanceof Wolf)) {
+        if (!(event.getKiller() instanceof Wolf wolf)) {
             return;
         }
-
-        Wolf wolf = (Wolf) event.getKiller();
 
         if (!wolf.isTamed() || wolf.getOwner() == null) {
             return;
         }
 
-        if (!(wolf.getOwner() instanceof Player)) {
+        if (!(wolf.getOwner() instanceof Player player)) {
             return;
         }
-
-        Player player = (Player) wolf.getOwner();
 
         if (!(EnchantChecks.helmet(player, this))) {
             return;
