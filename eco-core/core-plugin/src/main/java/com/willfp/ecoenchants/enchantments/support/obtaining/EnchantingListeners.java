@@ -229,6 +229,10 @@ public class EnchantingListeners extends PluginDependent implements Listener {
      */
     @EventHandler
     public void secondaryEnchant(@NotNull final PrepareItemEnchantEvent event) {
+        if (!this.getPlugin().getConfigYml().getBool("enchanting-table.enabled")) {
+            return;
+        }
+
         int maxLevel = this.getPlugin().getConfigYml().getInt("enchanting-table.maximum-obtainable-level");
 
         try {
