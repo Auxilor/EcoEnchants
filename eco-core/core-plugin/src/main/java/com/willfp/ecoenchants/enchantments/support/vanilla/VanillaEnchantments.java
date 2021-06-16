@@ -51,9 +51,7 @@ public class VanillaEnchantments {
                 ));
 
         for (Enchantment enchantment : enchantments) {
-            VanillaEnchantmentMetadata metadata = new VanillaEnchantmentMetadata();
-
-            metadata.setMaxLevel(maxLevels.get(enchantment));
+            VanillaEnchantmentMetadata metadata = new VanillaEnchantmentMetadata(maxLevels.get(enchantment));
 
             map.put(enchantment, metadata);
         }
