@@ -30,7 +30,6 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MusicArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NautilusArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NetherArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.RedstoneArtifact;
-import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SkulkArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SmokeArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SnowArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SoulArtifact;
@@ -502,7 +501,6 @@ public class EcoEnchants {
     public static final EcoEnchant COPPER_ARTIFACT = new CopperArtifact();
     public static final EcoEnchant GLOW_ARTIFACT = new GlowArtifact();
     public static final EcoEnchant LIGHT_ARTIFACT = new LightArtifact();
-    public static final EcoEnchant SKULK_ARTIFACT = new SkulkArtifact();
     public static final EcoEnchant SPARK_ARTIFACT = new SparkArtifact();
     public static final EcoEnchant SPORE_ARTIFACT = new SporeArtifact();
     public static final EcoEnchant WAX_ARTIFACT = new WaxArtifact();

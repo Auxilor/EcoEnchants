@@ -35,7 +35,7 @@ public abstract class Artifact extends EcoEnchant {
      * Used for redstone particles.
      */
     @Nullable
-    private Particle.DustOptions extra;
+    private Object extra;
 
     /**
      * Create a new artifact enchantment.
@@ -70,7 +70,7 @@ public abstract class Artifact extends EcoEnchant {
      * @return The dust options.
      */
     @Nullable
-    public Particle.DustOptions getDustOptions() {
+    public Object getDustOptions() {
         return null;
     }
 
