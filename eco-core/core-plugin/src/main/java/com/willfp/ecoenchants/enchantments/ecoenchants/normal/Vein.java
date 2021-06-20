@@ -13,6 +13,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +38,7 @@ public class Vein extends EcoEnchant {
             return;
         }
 
-        List<Material> materials = new ArrayList<>();
+        List<Material> materials = Collections.singletonList(block.getType());
 
         if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks").contains(block.getType().toString().toLowerCase())) {
             return;
