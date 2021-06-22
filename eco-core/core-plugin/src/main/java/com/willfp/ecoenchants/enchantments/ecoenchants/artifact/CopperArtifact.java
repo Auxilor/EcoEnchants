@@ -9,7 +9,7 @@ public class CopperArtifact extends Artifact {
     public CopperArtifact() {
         super(
                 "copper_artifact",
-                Prerequisite.v1_17
+                Prerequisite.HAS_1_17
         );
     }
 

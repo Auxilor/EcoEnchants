@@ -9,7 +9,7 @@ public class SporeArtifact extends Artifact {
     public SporeArtifact() {
         super(
                 "spore_artifact",
-                Prerequisite.v1_17
+                Prerequisite.HAS_1_17
         );
     }
 

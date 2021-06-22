@@ -9,7 +9,7 @@ public class LightArtifact extends Artifact {
     public LightArtifact() {
         super(
                 "light_artifact",
-                Prerequisite.v1_17
+                Prerequisite.HAS_1_17
         );
     }
 

@@ -9,7 +9,7 @@ public class GlowArtifact extends Artifact {
     public GlowArtifact() {
         super(
                 "glow_artifact",
-                Prerequisite.v1_17
+                Prerequisite.HAS_1_17
         );
     }
 

@@ -9,7 +9,7 @@ public class SparkArtifact extends Artifact {
     public SparkArtifact() {
         super(
                 "spark_artifact",
-                Prerequisite.v1_17
+                Prerequisite.HAS_1_17
         );
     }
 

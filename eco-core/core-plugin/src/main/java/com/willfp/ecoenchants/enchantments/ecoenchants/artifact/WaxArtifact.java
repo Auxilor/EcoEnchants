@@ -9,7 +9,7 @@ public class WaxArtifact extends Artifact {
     public WaxArtifact() {
         super(
                 "wax_artifact",
-                Prerequisite.v1_17
+                Prerequisite.HAS_1_17
         );
     }
 
