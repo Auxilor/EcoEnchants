@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchantments.util;
 
-import com.google.common.collect.Sets;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.core.events.PlayerJumpEvent;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
 import com.willfp.eco.util.TridentUtils;
@@ -29,28 +29,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
 import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
-@SuppressWarnings("deprecation")
 public class WatcherTriggers extends PluginDependent implements Listener {
-    /**
-     * For jump listeners.
-     */
-    private static final Set<UUID> PREVIOUS_PLAYERS_ON_GROUND = Sets.newHashSet();
-
-    /**
-     * For jump listeners.
-     */
-    private static final DecimalFormat FORMAT = new DecimalFormat("0.00");
-
     /**
      * If watchers should be triggered against npcs.
      */
@@ -197,44 +181,28 @@ public class WatcherTriggers extends PluginDependent implements Listener {
      * @param event The event to listen for.
      */
     @EventHandler(ignoreCancelled = true)
-    public void onJump(@NotNull final PlayerMoveEvent event) {
+    public void onJump(@NotNull final PlayerJumpEvent event) {
         if (McmmoManager.isFake(event)) {
             return;
         }
 
         Player player = event.getPlayer();
-        if (player.getVelocity().getY() > 0) {
-            float jumpVelocity = 0.42f;
-            if (player.hasPotionEffect(PotionEffectType.JUMP)) {
-                jumpVelocity += ((float) player.getPotionEffect(PotionEffectType.JUMP).getAmplifier() + 1) * 0.1F;
+
+        EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, level) -> {
+            if (event.isCancelled()) {
+                return;
             }
-            jumpVelocity = Float.parseFloat(FORMAT.format(jumpVelocity).replace(',', '.'));
-            if (event.getPlayer().getLocation().getBlock().getType() != Material.LADDER
-                    && PREVIOUS_PLAYERS_ON_GROUND.contains(player.getUniqueId())
-                    && !player.isOnGround()
-                    && Float.compare((float) player.getVelocity().getY(), jumpVelocity) == 0) {
-                EnchantChecks.getEnchantsOnArmor(player).forEach((enchant, level) -> {
-                    if (event.isCancelled()) {
-                        return;
-                    }
 
-                    if (!enchant.isEnabled()) {
-                        return;
-                    }
-
-                    if (enchant.getDisabledWorlds().contains(player.getWorld())) {
-                        return;
-                    }
-
-                    enchant.onJump(player, level, event);
-                });
+            if (!enchant.isEnabled()) {
+                return;
             }
-        }
-        if (player.isOnGround()) {
-            PREVIOUS_PLAYERS_ON_GROUND.add(player.getUniqueId());
-        } else {
-            PREVIOUS_PLAYERS_ON_GROUND.remove(player.getUniqueId());
-        }
+
+            if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+
+            enchant.onJump(player, level, event);
+        });
     }
 
     /**
