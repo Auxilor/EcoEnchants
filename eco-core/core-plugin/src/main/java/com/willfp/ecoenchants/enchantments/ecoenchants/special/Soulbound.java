@@ -17,7 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
-import org.bukkit.entity.Arrow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,19 +42,18 @@ public class Soulbound extends EcoEnchant {
             return;
         }
 
-        if (!(event.getEntity() instanceof Arrow)) {
-            if (player.getKiller() != null) {
-                Player killer = player.getKiller();
-                int reaperLevel = EnchantChecks.getMainhandLevel(killer, EcoEnchants.REAPER);
-                if (reaperLevel > 0) {
-                    if (!(EcoEnchants.REAPER.getDisabledWorlds().contains(killer.getWorld()))) {
-                        if (EnchantmentUtils.passedChance(EcoEnchants.REAPER, reaperLevel)) {
-                            return;
-                        }
+        if (player.getKiller() != null) {
+            Player killer = player.getKiller();
+            int reaperLevel = EnchantChecks.getMainhandLevel(killer, EcoEnchants.REAPER);
+            if (reaperLevel > 0) {
+                if (!(EcoEnchants.REAPER.getDisabledWorlds().contains(killer.getWorld()))) {
+                    if (EnchantmentUtils.passedChance(EcoEnchants.REAPER, reaperLevel)) {
+                        return;
                     }
                 }
             }
         }
+
         for (ItemStack itemStack : player.getInventory().getContents()) {
             if (itemStack == null) {
                 continue;
@@ -66,7 +64,7 @@ public class Soulbound extends EcoEnchant {
             }
 
             if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "on-books")) {
-                if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this))) {
+                if (itemStack.getItemMeta() instanceof EnchantmentStorageMeta && (((EnchantmentStorageMeta) itemStack.getItemMeta()).getStoredEnchants().containsKey(this.getEnchantment()))) {
                     soulboundItems.add(itemStack);
                 }
             }
