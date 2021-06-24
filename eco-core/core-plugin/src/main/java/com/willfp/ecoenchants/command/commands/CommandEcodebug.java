@@ -79,7 +79,7 @@ public class CommandEcodebug extends AbstractCommand {
 
             List<Enchantment> extern = Arrays.stream(Enchantment.values()).collect(Collectors.toList());
             extern.removeAll(new ArrayList<>(EcoEnchants.values()));
-            extern.removeIf(enchantment -> enchantment.getClass().toString().toLowerCase().contains("CraftEnchantment"));
+            extern.removeIf(enchantment -> enchantment.getClass().toString().toLowerCase().contains("craftenchantment"));
             String external = extern.stream().map(enchantment -> "{" + enchantment.toString() + ", Provider: " + enchantment.getClass().toString() + "}").collect(Collectors.joining(", "));
             Bukkit.getLogger().info("External Enchantments: " + external);
             Bukkit.getLogger().info("");
