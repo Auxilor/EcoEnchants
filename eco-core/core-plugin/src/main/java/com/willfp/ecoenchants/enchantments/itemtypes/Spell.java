@@ -51,7 +51,6 @@ public abstract class Spell extends EcoEnchant {
             Material.CRAFTING_TABLE,
             Material.GRINDSTONE,
             Material.ENCHANTING_TABLE,
-            Material.ANVIL,
             Material.FURNACE,
             Material.SMITHING_TABLE,
             Material.LEVER,
@@ -59,7 +58,9 @@ public abstract class Spell extends EcoEnchant {
             Material.COMPARATOR,
             Material.RESPAWN_ANCHOR,
             Material.NOTE_BLOCK,
-            Material.ITEM_FRAME
+            Material.ITEM_FRAME,
+            Material.CHEST,
+            Material.BARREL
     ));
 
     static {
@@ -68,6 +69,8 @@ public abstract class Spell extends EcoEnchant {
         BLACKLIST_CLICKED_BLOCKS.addAll(Tag.DOORS.getValues());
         BLACKLIST_CLICKED_BLOCKS.addAll(Tag.FENCE_GATES.getValues());
         BLACKLIST_CLICKED_BLOCKS.addAll(Tag.TRAPDOORS.getValues());
+        BLACKLIST_CLICKED_BLOCKS.addAll(Tag.ANVIL.getValues());
+        BLACKLIST_CLICKED_BLOCKS.addAll(Tag.SHULKER_BOXES.getValues());
     }
 
     /**
