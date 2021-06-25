@@ -60,7 +60,8 @@ public abstract class Spell extends EcoEnchant {
             Material.NOTE_BLOCK,
             Material.ITEM_FRAME,
             Material.CHEST,
-            Material.BARREL
+            Material.BARREL,
+            Material.BEACON
     ));
 
     static {
