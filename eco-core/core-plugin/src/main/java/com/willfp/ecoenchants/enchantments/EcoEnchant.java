@@ -322,7 +322,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     @Override
     @Deprecated
     public boolean isTreasure() {
-        return false;
+        return this.type.equals(EnchantmentType.SPECIAL);
     }
 
     /**
