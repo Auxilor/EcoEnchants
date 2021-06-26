@@ -61,7 +61,16 @@ public abstract class Spell extends EcoEnchant {
             Material.ITEM_FRAME,
             Material.CHEST,
             Material.BARREL,
-            Material.BEACON
+            Material.BEACON,
+            Material.LECTERN,
+            Material.FLETCHING_TABLE,
+            Material.SMITHING_TABLE,
+            Material.STONECUTTER,
+            Material.SMOKER,
+            Material.BLAST_FURNACE,
+            Material.BREWING_STAND,
+            Material.DISPENSER,
+            Material.DROPPER
     ));
 
     static {
