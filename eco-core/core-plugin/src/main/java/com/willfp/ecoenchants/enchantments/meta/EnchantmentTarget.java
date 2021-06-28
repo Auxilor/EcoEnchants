@@ -25,7 +25,7 @@ public class EnchantmentTarget {
 
     static {
         REGISTERED.add(ALL);
-        update();
+        update(EcoEnchantsPlugin.getInstance());
     }
 
     /**
@@ -67,11 +67,11 @@ public class EnchantmentTarget {
      * Update all targets.
      */
     @ConfigUpdater
-    public static void update() {
-        List<String> targetNames = EcoEnchantsPlugin.getInstance().getTargetYml().getTargets();
+    public static void update(@NotNull final EcoEnchantsPlugin plugin) {
+        List<String> targetNames = plugin.getTargetYml().getTargets();
         ALL.materials.clear();
         targetNames.forEach(name -> {
-            Set<Material> materials = EcoEnchantsPlugin.getInstance().getTargetYml().getTargetMaterials(name);
+            Set<Material> materials = plugin.getTargetYml().getTargetMaterials(name);
             new EnchantmentTarget(name, materials).register();
         });
     }

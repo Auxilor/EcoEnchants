@@ -21,7 +21,7 @@ public class EnchantmentRarity {
     private static final Set<EnchantmentRarity> REGISTERED = new HashSet<>();
 
     static {
-        update();
+        update(EcoEnchantsPlugin.getInstance());
     }
 
     /**
@@ -94,8 +94,8 @@ public class EnchantmentRarity {
      * Update all rarities.
      */
     @ConfigUpdater
-    public static void update() {
-        RarityYml rarityYml = EcoEnchantsPlugin.getInstance().getRarityYml();
+    public static void update(@NotNull final EcoEnchantsPlugin plugin) {
+        RarityYml rarityYml = plugin.getRarityYml();
         List<String> raritiesNames = rarityYml.getRarities();
         raritiesNames.forEach(rarity -> {
             double probability = rarityYml.getDouble("rarities." + rarity + ".table-probability");

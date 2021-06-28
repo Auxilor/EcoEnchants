@@ -1,11 +1,13 @@
 package com.willfp.ecoenchants.enchantments.support.vanilla;
 
+import com.willfp.eco.core.EcoPlugin;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,11 +17,6 @@ import java.util.stream.Collectors;
 
 @UtilityClass
 public class VanillaEnchantments {
-    /**
-     * Instance of EcoEnchants.
-     */
-    private static final EcoEnchantsPlugin PLUGIN = EcoEnchantsPlugin.getInstance();
-
     /**
      * Vanilla Enchantment Metadata Map.
      */
@@ -37,14 +34,14 @@ public class VanillaEnchantments {
     /**
      * Update the map.
      */
-    public static void update() {
+    public static void update(@NotNull final EcoEnchantsPlugin plugin) {
         Map<Enchantment, VanillaEnchantmentMetadata> map = new HashMap<>();
 
         List<Enchantment> enchantments = Arrays.stream(Enchantment.values())
                 .filter(enchantment -> enchantment.getClass().getName().contains("CraftEnchantment"))
                 .collect(Collectors.toList());
 
-        Map<Enchantment, Integer> maxLevels = PLUGIN.getVanillaEnchantsYml().getStrings("max-levels").stream()
+        Map<Enchantment, Integer> maxLevels = plugin.getVanillaEnchantsYml().getStrings("max-levels").stream()
                 .collect(Collectors.toMap(
                         s -> Enchantment.getByKey(NamespacedKey.minecraft(s.split(":")[0].toLowerCase())),
                         s1 -> Integer.parseInt(s1.split(":")[1])
@@ -59,7 +56,7 @@ public class VanillaEnchantments {
         MAP.clear();
         MAP.putAll(map);
 
-        if (PLUGIN.getVanillaEnchantsYml().getBool("enabled")) {
+        if (plugin.getVanillaEnchantsYml().getBool("enabled")) {
             ProxyUtils.getProxy(EcoCraftEnchantmentManagerProxy.class).registerNewCraftEnchantments();
         }
     }
