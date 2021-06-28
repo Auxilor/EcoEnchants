@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AngerArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.BarrierArtifact;
@@ -586,12 +587,12 @@ public class EcoEnchants {
      * Update all {@link EcoEnchant}s.
      */
     @ConfigUpdater
-    public static void update() {
+    public static void update(@NotNull final EcoEnchantsPlugin plugin) {
         for (EcoEnchant ecoEnchant : new HashSet<>(values())) {
             ecoEnchant.update();
         }
 
-        VanillaEnchantments.update();
+        VanillaEnchantments.update(plugin);
     }
 
     /**
