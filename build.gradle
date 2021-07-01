@@ -48,7 +48,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly 'com.willfp:eco:5.5.1'
+        compileOnly 'com.willfp:eco:5.6.0'
 
         compileOnly 'org.jetbrains:annotations:19.0.0'
 
