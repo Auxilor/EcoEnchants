@@ -74,7 +74,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
-        super("EcoEnchants", 79573, 7666, "com.willfp.ecoenchants.proxy", "&a");
+        super(79573, 7666, "com.willfp.ecoenchants.proxy", "&a");
         instance = this;
 
         rarityYml = new RarityYml(this);

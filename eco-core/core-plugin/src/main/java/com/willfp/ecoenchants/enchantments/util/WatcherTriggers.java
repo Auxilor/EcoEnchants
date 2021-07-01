@@ -54,7 +54,7 @@ public class WatcherTriggers extends PluginDependent implements Listener {
      */
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {
-        allowOnNPC = plugin.getConfig().getBoolean("allow-on-npc");
+        allowOnNPC = plugin.getConfigYml().getBool("allow-on-npc");
     }
 
     /**
