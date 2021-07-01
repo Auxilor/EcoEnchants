@@ -119,14 +119,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     }
 
     /**
-     * Nothing is called on plugin load.
-     */
-    @Override
-    public void load() {
-        // Nothing needs to be called on load
-    }
-
-    /**
      * Code executed on /ecoreload.
      */
     @Override
@@ -197,16 +189,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     }
 
     /**
-     * Packet Adapters for enchant display.
-     *
-     * @return A list of packet adapters.
-     */
-    @Override
-    public List<AbstractPacketAdapter> getPacketAdapters() {
-        return new ArrayList<>();
-    }
-
-    /**
      * EcoEnchants-specific listeners.
      *
      * @return A list of all listeners.
@@ -240,5 +222,10 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     @Nullable
     protected DisplayModule createDisplayModule() {
         return new EnchantDisplay(this);
+    }
+
+    @Override
+    protected String getMinimumEcoVersion() {
+        return "5.6.0";
     }
 }
