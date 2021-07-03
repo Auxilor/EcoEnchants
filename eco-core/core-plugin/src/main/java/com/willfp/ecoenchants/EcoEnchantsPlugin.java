@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.eco.core.AbstractPacketAdapter;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.command.AbstractCommand;
 import com.willfp.eco.core.display.DisplayModule;

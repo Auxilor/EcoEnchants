@@ -288,6 +288,7 @@ public class ItemConversions extends PluginDependent implements Listener {
             new HashMap<>(meta.getEnchants()).forEach((enchantment, integer) -> {
                 if (integer > enchantment.getMaxLevel()) {
                     meta.removeEnchant(enchantment);
+                    meta.addEnchant(enchantment, enchantment.getMaxLevel(), true);
                 }
             });
         }
