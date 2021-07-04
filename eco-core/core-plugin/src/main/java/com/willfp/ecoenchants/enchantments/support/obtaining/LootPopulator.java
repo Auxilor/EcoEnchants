@@ -88,6 +88,8 @@ public class LootPopulator extends BlockPopulator {
                     multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
                 }
 
+                int cap = 0;
+
                 for (EcoEnchant enchantment : enchantments) {
                     if (enchantment == null || enchantment.getRarity() == null) {
                         continue;
@@ -144,6 +146,16 @@ public class LootPopulator extends BlockPopulator {
 
                     if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
                         multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
+                    }
+
+                    if (!enchantment.hasFlag("hard-cap-ignore")) {
+                        cap++;
+                    }
+
+                    if (plugin.getConfigYml().getBool("anvil.hard-cap.enabled")) {
+                        if (cap >= plugin.getConfigYml().getInt("anvil.hard-cap.cap")) {
+                            break;
+                        }
                     }
                 }
 
