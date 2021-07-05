@@ -24,21 +24,9 @@ softdepend:
   - mcMMO
 
 commands:
-  ecoreload:
-    description: Reloads config
-    permission: ecoenchants.command.reload
-  ecodebug:
-    description: Debug information
-    permission: ecoenchants.command.debug
   enchantinfo:
     description: Show information about an enchantment
     permission: ecoenchants.command.enchantinfo
-  randomenchant:
-    description: Adds a random enchantment to an item
-    permission: ecoenchants.command.randomenchant
-  giverandombook:
-    description: Gives a book containing a random enchantment
-    permission: ecoenchants.command.giverandombook
   ecoenchants:
     description: Master command for other subcommands.
     permission: ecoenchants.command.ecoenchants
