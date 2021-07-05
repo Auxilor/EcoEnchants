@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
 import org.bukkit.entity.Player;
@@ -16,11 +17,15 @@ public class Charge extends Spell {
     public boolean onUse(@NotNull final Player player,
                          final int level,
                          @NotNull final PlayerInteractEvent event) {
+        AnticheatManager.exemptPlayer(player);
+
         Vector velocity = player.getEyeLocation().getDirection().clone();
         velocity.normalize();
         velocity.multiply(level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-per-level"));
         velocity.setY(player.getEyeLocation().getDirection().clone().getY() + 0.2);
         player.setVelocity(velocity);
+
+        this.getPlugin().getScheduler().runLater(() -> AnticheatManager.unexemptPlayer(player), 10);
 
         return true;
     }

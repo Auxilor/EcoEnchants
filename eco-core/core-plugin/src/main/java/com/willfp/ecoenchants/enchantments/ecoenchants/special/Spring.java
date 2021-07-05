@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
@@ -28,7 +29,11 @@ public class Spring extends EcoEnchant {
     public void onJump(@NotNull final Player player,
                        final int level,
                        @NotNull final PlayerMoveEvent event) {
+        AnticheatManager.exemptPlayer(player);
+
         double multiplier = 0.5 + ((double) (level * level) / 4 - 0.2) / 3;
         player.setVelocity(player.getLocation().getDirection().multiply(multiplier).setY(multiplier));
+
+        this.getPlugin().getScheduler().runLater(() -> AnticheatManager.unexemptPlayer(player), 10);
     }
 }
