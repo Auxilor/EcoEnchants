@@ -5,7 +5,7 @@ import com.willfp.eco.core.PluginDependent;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-public class NumbersOptions extends PluginDependent {
+public class NumbersOptions extends PluginDependent<EcoPlugin> {
     /**
      * If numerals should be used.
      * <p>

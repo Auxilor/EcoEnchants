@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class EnchantingListeners extends PluginDependent implements Listener {
+public class EnchantingListeners extends PluginDependent<EcoPlugin> implements Listener {
     /**
      * All players currently enchanting a secondary item.
      */

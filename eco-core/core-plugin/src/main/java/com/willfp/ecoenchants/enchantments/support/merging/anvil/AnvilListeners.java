@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AnvilListeners extends PluginDependent implements Listener {
+public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listener {
     /**
      * Map to prevent incrementing cost several times as inventory events are fired 3 times.
      */

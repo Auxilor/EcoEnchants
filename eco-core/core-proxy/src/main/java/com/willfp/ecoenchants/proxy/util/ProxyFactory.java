@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
-public class ProxyFactory<T extends AbstractProxy> extends PluginDependent {
+public class ProxyFactory<T extends AbstractProxy> extends PluginDependent<EcoPlugin> {
     /**
      * Cached proxy implementations in order to not perform expensive reflective class-finding.
      */

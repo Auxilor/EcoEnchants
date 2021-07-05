@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.display.options.sorting.implementations;
 
-import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
-import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
@@ -12,25 +11,25 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RarityTypeAlphabeticSorter extends PluginDependent implements EnchantmentSorter {
+public class RarityTypeAlphabeticSorter extends PluginDependent<EcoEnchantsPlugin> implements EnchantmentSorter {
     /**
      * Instantiate sorter.
      *
      * @param plugin Instance of EcoEnchants.
      */
-    public RarityTypeAlphabeticSorter(@NotNull final EcoPlugin plugin) {
+    public RarityTypeAlphabeticSorter(@NotNull final EcoEnchantsPlugin plugin) {
         super(plugin);
     }
 
     @Override
     public void sortEnchantments(@NotNull final List<Enchantment> toSort) {
-        if (((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().getSortedRarities().isEmpty()
-                || ((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().getSortedTypes().isEmpty()) {
-            ((EnchantDisplay) this.getPlugin().getDisplayModule()).update();
+        if (this.getPlugin().getDisplayModule().getOptions().getSortedRarities().isEmpty()
+                || this.getPlugin().getDisplayModule().getOptions().getSortedTypes().isEmpty()) {
+            this.getPlugin().getDisplayModule().update();
         }
 
         List<Enchantment> sorted = new ArrayList<>();
-        ((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().getSortedTypes().forEach(enchantmentType -> {
+        this.getPlugin().getDisplayModule().getOptions().getSortedTypes().forEach(enchantmentType -> {
             List<Enchantment> typeEnchants = new ArrayList<>();
             for (Enchantment enchantment : toSort) {
                 if (EnchantmentCache.getEntry(enchantment).getType().equals(enchantmentType)) {
@@ -39,7 +38,7 @@ public class RarityTypeAlphabeticSorter extends PluginDependent implements Encha
             }
             typeEnchants.sort((enchantment1, enchantment2) -> EnchantmentCache.getEntry(enchantment1).getRawName().compareToIgnoreCase(EnchantmentCache.getEntry(enchantment2).getRawName()));
 
-            ((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().getSortedRarities().forEach(enchantmentRarity -> {
+            this.getPlugin().getDisplayModule().getOptions().getSortedRarities().forEach(enchantmentRarity -> {
                 List<Enchantment> rarityEnchants = new ArrayList<>();
                 for (Enchantment enchantment : typeEnchants) {
                     if (EnchantmentCache.getEntry(enchantment).getRarity().equals(enchantmentRarity)) {

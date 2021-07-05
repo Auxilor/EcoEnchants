@@ -26,19 +26,22 @@ softdepend:
 commands:
   ecoreload:
     description: Reloads config
-    permission: ecoenchants.reload
+    permission: ecoenchants.command.reload
   ecodebug:
     description: Debug information
-    permission: ecoenchants.ecodebug
+    permission: ecoenchants.command.debug
   enchantinfo:
     description: Show information about an enchantment
-    permission: ecoenchants.enchantinfo
+    permission: ecoenchants.command.enchantinfo
   randomenchant:
     description: Adds a random enchantment to an item
-    permission: ecoenchants.randomenchant
+    permission: ecoenchants.command.randomenchant
   giverandombook:
     description: Gives a book containing a random enchantment
-    permission: ecoenchants.randombook
+    permission: ecoenchants.command.giverandombook
+  ecoenchants:
+    description: Master command for other subcommands.
+    permission: ecoenchants.command.ecoenchants
 
 permissions:
   ecoenchants.*:
@@ -46,21 +49,27 @@ permissions:
     default: op
     children:
       ecoenchants.fromtable.*: true
-      ecoenchants.reload: true
       ecoenchants.updateannounce: true
-      ecoenchants.enchantinfo: true
-      ecoenchants.ecodebug: true
-      ecoenchants.randomenchant: true
-      ecoenchants.randomenchant.bypasshardcap: true
-      ecoenchants.randombook: true
       ecoenchants.bypasslevelclamp: true
       ecoenchants.anvil.*: true
+      ecoenchants.command.*: true
   ecoenchants.anvil.*:
     description: Allows all anvil permissions
     default: op
     children:
       ecoenchants.anvil.bypasshardcap: true
       ecoenchants.anvil.color: true
+  ecoenchants.command.*:
+    description: Allows all commands
+    default: op
+    children:
+      ecoenchants.command.reload: true
+      ecoenchants.command.debug: true
+      ecoenchants.command.enchantinfo: true
+      ecoenchants.command.randomenchant: true
+      ecoenchants.command.randomenchant.bypasshardcap: true
+      ecoenchants.command.giverandombook: true
+      ecoenchants.command.ecoenchants: true
   ecoenchants.fromtable.*:
     description: Allows getting all enchantments from an enchanting table
     default: true
@@ -68,27 +77,30 @@ permissions:
   ecoenchants.updateannounce:
     description: Informs admins of a new update
     default: op
-  ecoenchants.reload:
+  ecoenchants.command.reload:
     description: Allows reloading the config
     default: op
-  ecoenchants.ecodebug:
-    description: Allows the use of /ecodebug to print verbose debug information to console
+  ecoenchants.command.debug:
+    description: Allows the use of /ecoenchants debug to print verbose debug information to console
     default: op
-  ecoenchants.enchantinfo:
+  ecoenchants.command.enchantinfo:
     description: Allows the use of /enchantinfo to show enchant info
     default: true
-  ecoenchants.randombook:
-    description: Allows the use of /giverandombook to give a book with a random enchantment
+  ecoenchants.command.giverandombook:
+    description: Allows the use of /ecoenchants giverandombook to give a book with a random enchantment
     default: op
-  ecoenchants.randomenchant:
-    description: Allows the use of /randomenchant to apply a random enchantment to an item
+  ecoenchants.command.randomenchant:
+    description: Allows the use of /ecoenchants randomenchant to apply a random enchantment to an item
     default: op
-  ecoenchants.randomenchant.others:
-    description: Allows the use of /randomenchant to apply a random enchantment to an item for another player
+  ecoenchants.command.randomenchant.others:
+    description: Allows the use of /ecoenchants randomenchant to apply a random enchantment to an item for another player
     default: op
-  ecoenchants.randomenchant.bypasshardcap:
-    description: Allows /randomenchant bypassing the anvil hard cap
+  ecoenchants.command.randomenchant.bypasshardcap:
+    description: Allows /ecoenchants randomenchant bypassing the anvil hard cap
     default: op
+  ecoenchants.command.ecoenchants:
+    description: Allows the use of /ecoenchants
+    default: true
   ecoenchants.anvil.bypasshardcap:
     description: Allows bypassing the anvil hard cap
     default: op

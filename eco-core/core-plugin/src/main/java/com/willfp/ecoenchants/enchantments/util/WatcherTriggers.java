@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-public class WatcherTriggers extends PluginDependent implements Listener {
+public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Listener {
     /**
      * If watchers should be triggered against npcs.
      */

@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-public class GrindstoneListeners extends PluginDependent implements Listener {
+public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements Listener {
     /**
      * Instantiate grindstone listeners and link them to a specific plugin.
      *

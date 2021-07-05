@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class VillagerListeners extends PluginDependent implements Listener {
+public class VillagerListeners extends PluginDependent<EcoPlugin> implements Listener {
     /**
      * Create new villager listeners.
      *

@@ -6,7 +6,7 @@ import com.willfp.eco.util.StringUtils;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-public class DescriptionOptions extends PluginDependent {
+public class DescriptionOptions extends PluginDependent<EcoPlugin> {
     /**
      * The threshold below which to describe enchantments.
      */

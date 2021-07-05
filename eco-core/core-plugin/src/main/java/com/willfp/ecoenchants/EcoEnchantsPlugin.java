@@ -1,16 +1,13 @@
 package com.willfp.ecoenchants;
 
 import com.willfp.eco.core.EcoPlugin;
-import com.willfp.eco.core.command.AbstractCommand;
+import com.willfp.eco.core.command.impl.PluginCommand;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.integrations.IntegrationLoader;
 import com.willfp.eco.util.TelekinesisUtils;
-import com.willfp.ecoenchants.command.commands.CommandEcodebug;
-import com.willfp.ecoenchants.command.commands.CommandEcoreload;
-import com.willfp.ecoenchants.command.commands.CommandEnchantinfo;
-import com.willfp.ecoenchants.command.commands.CommandGiverandombook;
-import com.willfp.ecoenchants.command.commands.CommandRandomenchant;
-import com.willfp.ecoenchants.command.tabcompleters.TabCompleterEnchantinfo;
+import com.willfp.ecoenchants.command.CommandEcoEnchants;
+import com.willfp.ecoenchants.command.CommandEnchantinfo;
+import com.willfp.ecoenchants.command.CommandGiverandombook;
 import com.willfp.ecoenchants.config.RarityYml;
 import com.willfp.ecoenchants.config.TargetYml;
 import com.willfp.ecoenchants.config.VanillaEnchantsYml;
@@ -81,9 +78,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         vanillaEnchantsYml = new VanillaEnchantsYml(this);
     }
 
-    /**
-     * Code executed on plugin enable.
-     */
     @Override
     public void enable() {
         this.getExtensionLoader().loadExtensions();
@@ -100,9 +94,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         TelekinesisUtils.registerTest(player -> ProxyUtils.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
     }
 
-    /**
-     * Code executed on plugin disable.
-     */
     @Override
     public void disable() {
         Bukkit.getServer().getWorlds().forEach(world -> {
@@ -117,9 +108,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         this.getExtensionLoader().unloadExtensions();
     }
 
-    /**
-     * Code executed on /ecoreload.
-     */
     @Override
     public void onReload() {
         targetYml.update();
@@ -140,9 +128,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         }));
     }
 
-    /**
-     * Code executed after server is up.
-     */
     @Override
     public void postLoad() {
         if (this.getConfigYml().getBool("loot.enabled")) {
@@ -159,11 +144,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         EssentialsManager.registerEnchantments();
     }
 
-    /**
-     * EcoEnchants-specific integrations.
-     *
-     * @return A list of all integrations.
-     */
     @Override
     public List<IntegrationLoader> getIntegrationLoaders() {
         return Arrays.asList(
@@ -171,19 +151,11 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         );
     }
 
-    /**
-     * EcoEnchants-specific commands.
-     *
-     * @return A list of all commands.
-     */
     @Override
-    public List<AbstractCommand> getCommands() {
+    public List<PluginCommand> getPluginCommands() {
         return Arrays.asList(
-                new CommandEcodebug(this),
-                new CommandEcoreload(this),
                 new CommandEnchantinfo(this),
-                new CommandRandomenchant(this),
-                new CommandGiverandombook(this)
+                new CommandEcoEnchants(this)
         );
     }
 
@@ -211,7 +183,8 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 EnchantmentRarity.class,
                 EnchantmentTarget.class,
                 EcoEnchants.class,
-                TabCompleterEnchantinfo.class,
+                CommandGiverandombook.class,
+                CommandEnchantinfo.class,
                 EnchantmentType.class,
                 WatcherTriggers.class
         );
@@ -225,6 +198,11 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     protected String getMinimumEcoVersion() {
-        return "5.6.0";
+        return "5.7.0";
+    }
+
+    @Override
+    public EnchantDisplay getDisplayModule() {
+        return (EnchantDisplay) super.getDisplayModule();
     }
 }

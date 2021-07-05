@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemConversions extends PluginDependent implements Listener {
+public class ItemConversions extends PluginDependent<EcoPlugin> implements Listener {
     /**
      * Instantiate item conversions.
      *

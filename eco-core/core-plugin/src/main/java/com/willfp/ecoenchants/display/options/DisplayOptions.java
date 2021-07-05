@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DisplayOptions extends PluginDependent {
+public class DisplayOptions extends PluginDependent<EcoPlugin> {
     /**
      * The description options being used.
      */

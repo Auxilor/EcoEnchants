@@ -5,7 +5,7 @@ import com.willfp.eco.core.PluginDependent;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-public class ShrinkOptions extends PluginDependent {
+public class ShrinkOptions extends PluginDependent<EcoPlugin> {
     /**
      * The threshold above which enchantments will be shrunk.
      */
