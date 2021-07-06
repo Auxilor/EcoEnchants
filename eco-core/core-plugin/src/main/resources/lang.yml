@@ -4,6 +4,7 @@ messages:
   prefix: "&a&lEcoEnchants &r&8» &r"
   no-permission: "&cYou don't have permission to do this!"
   not-player: "&cThis command must be run by a player"
+  invalid-command: "&cUnknown subcommand!"
   reloaded: "Reloaded!"
   got-special: "You got a &dSpecial &fenchantment!"
   skip-added: "&aAdded &flore skip to item!"

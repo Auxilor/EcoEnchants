@@ -23,7 +23,7 @@ public class CommandEcoEnchants extends PluginCommand {
     @Override
     public CommandHandler getHandler() {
         return (sender, args) -> {
-
+            sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-command"));
         };
     }
 }
