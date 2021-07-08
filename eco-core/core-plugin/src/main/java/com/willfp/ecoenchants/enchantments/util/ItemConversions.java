@@ -8,7 +8,9 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -260,10 +262,11 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
 
         ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
 
-        clampItemLevels(itemStack);
+        clampItemLevels(itemStack, event.getPlayer());
     }
 
-    private void clampItemLevels(@Nullable final ItemStack itemStack) {
+    private void clampItemLevels(@Nullable final ItemStack itemStack,
+                                 @NotNull final Player player) {
         if (itemStack == null) {
             return;
         }
@@ -294,5 +297,11 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
         }
 
         itemStack.setItemMeta(meta);
+
+        if (this.getPlugin().getConfigYml().getBool("advanced.level-clamp.delete-item")) {
+            itemStack.setType(Material.AIR);
+            itemStack.setItemMeta(new ItemStack(Material.AIR).getItemMeta());
+            this.getPlugin().getLogger().warning(player.getName() + " has/had an illegal item!");
+        }
     }
 }
