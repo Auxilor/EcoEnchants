@@ -41,6 +41,7 @@ permissions:
       ecoenchants.bypasslevelclamp: true
       ecoenchants.anvil.*: true
       ecoenchants.command.*: true
+      ecoenchants.allowillegal: true
   ecoenchants.anvil.*:
     description: Allows all anvil permissions
     default: op
@@ -97,6 +98,9 @@ permissions:
     default: op
   ecoenchants.bypasslevelclamp:
     description: Allows bypassing the advanced level clamp option
+    default: op
+  ecoenchants.allowillegal:
+    description: Don't remove illegal items when remove-illegal is enabled.
     default: op
 
   # Perks

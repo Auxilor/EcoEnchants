@@ -144,3 +144,11 @@ advanced:
     enabled: false
     # If the item should be deleted rather than have the enchantment level capped.
     delete-item: false
+  remove-illegal:
+    # Helps reverse players who have enchantments on illegal items.
+    # When holding an item, any enchantments present on the item that shouldn't be will be removed.
+    # Players with ecoenchants.allowillegal permission will be ignored.
+    # This may impact performance.
+    enabled: false
+    # If the item should be deleted rather than have the enchantment removed.
+    delete-item: false

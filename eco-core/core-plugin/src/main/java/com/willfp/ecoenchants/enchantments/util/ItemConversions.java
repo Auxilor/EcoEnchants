@@ -304,4 +304,71 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             this.getPlugin().getLogger().warning(player.getName() + " has/had an illegal item!");
         }
     }
+
+    /**
+     * On player hold item.
+     * <p>
+     * Listener for hide fixer.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void removeDisallowed(@NotNull final PlayerItemHeldEvent event) {
+        if (!this.getPlugin().getConfigYml().getBool("advanced.remove-illegal.enabled")) {
+            return;
+        }
+
+        if (event.getPlayer().hasPermission("ecoenchants.allowillegal")) {
+            return;
+        }
+
+        ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
+
+        clampItemLevels(itemStack, event.getPlayer());
+    }
+
+    private void removeDisallowed(@Nullable final ItemStack itemStack,
+                                  @NotNull final Player player) {
+        if (itemStack == null) {
+            return;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return;
+        }
+
+        if (meta instanceof EnchantmentStorageMeta) {
+            return;
+        }
+
+        boolean illegal = false;
+
+        EcoEnchant illegalEnchant = null;
+
+        for (Enchantment enchantment : meta.getEnchants().keySet()) {
+            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
+                EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantment);
+
+                if (!enchant.getTargetMaterials().contains(itemStack.getType())) {
+                    illegal = true;
+                    illegalEnchant = enchant;
+                }
+            }
+        }
+
+        if (!illegal) {
+            return;
+        }
+
+        if (this.getPlugin().getConfigYml().getBool("advanced.remove-illegal.delete-item")) {
+            itemStack.setType(Material.AIR);
+            itemStack.setItemMeta(new ItemStack(Material.AIR).getItemMeta());
+            itemStack.setItemMeta(meta);
+        } else {
+            meta.removeEnchant(illegalEnchant);
+        }
+
+        this.getPlugin().getLogger().warning(player.getName() + " has/had an illegal item!");
+    }
 }
