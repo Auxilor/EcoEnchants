@@ -30,7 +30,9 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MagmaArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MusicArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NautilusArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.NetherArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.RainArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.RedstoneArtifact;
+import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SlimeArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SmokeArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SnowArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.SoulArtifact;
@@ -505,6 +507,8 @@ public class EcoEnchants {
     public static final EcoEnchant SPARK_ARTIFACT = new SparkArtifact();
     public static final EcoEnchant SPORE_ARTIFACT = new SporeArtifact();
     public static final EcoEnchant WAX_ARTIFACT = new WaxArtifact();
+    public static final EcoEnchant RAIN_ARTIFACT = new RainArtifact();
+    public static final EcoEnchant SLIME_ARTIFACT = new SlimeArtifact();
 
     /**
      * Get all registered {@link EcoEnchant}s.
