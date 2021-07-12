@@ -120,7 +120,7 @@ public class LootPopulator extends BlockPopulator {
                             anyConflicts.set(true);
                         }
 
-                        EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
+                        EcoEnchant ecoEnchant = (EcoEnchant) enchant;
                         if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
                             anyConflicts.set(true);
                         }

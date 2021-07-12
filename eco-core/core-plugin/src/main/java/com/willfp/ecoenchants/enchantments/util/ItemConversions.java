@@ -347,9 +347,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
         EcoEnchant illegalEnchant = null;
 
         for (Enchantment enchantment : meta.getEnchants().keySet()) {
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantment);
-
+            if (enchantment instanceof EcoEnchant enchant) {
                 if (!enchant.getTargetMaterials().contains(itemStack.getType())) {
                     illegal = true;
                     illegalEnchant = enchant;

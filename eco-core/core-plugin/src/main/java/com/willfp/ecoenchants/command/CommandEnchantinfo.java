@@ -80,15 +80,16 @@ public class CommandEnchantinfo extends PluginCommand {
             Set<Enchantment> conflicts = enchantment.getConflicts();
 
             new HashSet<>(conflicts).forEach(enchantment1 -> {
-                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment1);
-                if (ecoEnchant != null && !ecoEnchant.isEnabled()) {
-                    conflicts.remove(enchantment1);
+                if (enchantment1 instanceof EcoEnchant ecoEnchant) {
+                    if (!ecoEnchant.isEnabled()) {
+                        conflicts.remove(enchantment1);
+                    }
                 }
             });
 
             conflicts.forEach((enchantment1 -> {
-                if (EcoEnchants.getFromEnchantment(enchantment1) != null) {
-                    conflictNames.add(EcoEnchants.getFromEnchantment(enchantment1).getDisplayName());
+                if (enchantment1 instanceof EcoEnchant enchant) {
+                    conflictNames.add(enchant.getDisplayName());
                 } else {
                     conflictNames.add(this.getPlugin().getLangYml().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
                 }

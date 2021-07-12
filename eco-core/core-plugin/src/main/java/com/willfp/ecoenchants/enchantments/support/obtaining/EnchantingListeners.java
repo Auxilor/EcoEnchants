@@ -147,8 +147,7 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
                     anyConflicts.set(true);
                 }
 
-                if (EcoEnchants.getFromEnchantment(enchant) != null) {
-                    EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
+                if (enchant instanceof EcoEnchant ecoEnchant) {
                     if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
                         anyConflicts.set(true);
                     }

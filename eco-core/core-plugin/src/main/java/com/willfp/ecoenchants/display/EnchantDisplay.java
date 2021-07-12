@@ -8,7 +8,6 @@ import com.willfp.eco.core.display.DisplayPriority;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
@@ -129,11 +128,9 @@ public class EnchantDisplay extends DisplayModule {
         unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
 
         enchantments.forEach((enchantment, level) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) == null) {
+            if (!(enchantment instanceof EcoEnchant ecoEnchant)) {
                 return;
             }
-
-            EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
 
             if (!ecoEnchant.isEnabled()) {
                 forRemoval.add(enchantment);

@@ -165,7 +165,7 @@ public class AnvilMerge {
             AtomicBoolean doesConflict = new AtomicBoolean(false);
 
             EnchantmentType.values().forEach(enchantmentType -> {
-                EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantment);
+                EcoEnchant enchant = (EcoEnchant) enchantment;
                 if (enchant == null) {
                     return;
                 }
@@ -258,12 +258,12 @@ public class AnvilMerge {
         AtomicInteger inEnchantLevels = new AtomicInteger();
 
         outEnchants.forEach(((enchantment, integer) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (enchantment instanceof EcoEnchant) {
                 outEnchantLevels.addAndGet(integer);
             }
         }));
         leftEnchants.forEach(((enchantment, integer) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
+            if (enchantment instanceof EcoEnchant) {
                 outEnchantLevels.addAndGet(integer);
             }
         }));

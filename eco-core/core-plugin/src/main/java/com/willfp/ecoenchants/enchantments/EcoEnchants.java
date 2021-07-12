@@ -524,9 +524,11 @@ public class EcoEnchants {
      *
      * @param enchantment The enchantment.
      * @return The matching {@link EcoEnchant}, or null if not found.
+     * @deprecated Use a typecast.
      */
+    @Deprecated
     public static EcoEnchant getFromEnchantment(@NotNull final Enchantment enchantment) {
-        return getByKey(enchantment.getKey());
+        return enchantment instanceof EcoEnchant ? (EcoEnchant) enchantment : null;
     }
 
     /**
@@ -573,13 +575,13 @@ public class EcoEnchants {
 
         if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
             ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().forEach(((enchantment, integer) -> {
-                if (getFromEnchantment(enchantment) != null && getFromEnchantment(enchantment).getType().equals(type)) {
+                if (enchantment instanceof EcoEnchant ecoEnchant && ecoEnchant.getType().equals(type)) {
                     hasOfType.set(true);
                 }
             }));
         } else {
             item.getEnchantments().forEach((enchantment, integer) -> {
-                if (getFromEnchantment(enchantment) != null && (getFromEnchantment(enchantment).getType().equals(type))) {
+                if (enchantment instanceof EcoEnchant ecoEnchant && ecoEnchant.getType().equals(type)) {
                     hasOfType.set(true);
                 }
             });

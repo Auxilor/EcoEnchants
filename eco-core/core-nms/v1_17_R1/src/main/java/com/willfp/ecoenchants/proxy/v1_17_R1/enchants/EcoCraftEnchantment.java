@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.proxy.v1_17_R1.enchants;
 
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantmentMetadata;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -23,7 +23,7 @@ public class EcoCraftEnchantment extends CraftEnchantment {
 
     @Override
     public boolean conflictsWith(@NotNull final org.bukkit.enchantments.Enchantment other) {
-        return EcoEnchants.getFromEnchantment(other) == null ? super.conflictsWith(other) : other.conflictsWith(this);
+        return other instanceof EcoEnchant ? other.conflictsWith(this) : super.conflictsWith(other);
     }
 
     public void register() {

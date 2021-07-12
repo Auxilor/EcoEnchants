@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import lombok.experimental.UtilityClass;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -46,8 +45,7 @@ public class GrindstoneMerge {
         }
 
         bottomEnchants.forEach(((enchantment, integer) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
+            if (enchantment instanceof EcoEnchant ecoEnchant) {
                 if (!ecoEnchant.isGrindstoneable()) {
                     toKeep.putIfAbsent(enchantment, integer);
                 }
@@ -58,8 +56,7 @@ public class GrindstoneMerge {
             }
         }));
         topEnchants.forEach(((enchantment, integer) -> {
-            if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
+            if (enchantment instanceof EcoEnchant ecoEnchant) {
                 if (!ecoEnchant.isGrindstoneable()) {
                     toKeep.putIfAbsent(enchantment, integer);
                 }

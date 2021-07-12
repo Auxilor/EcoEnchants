@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.eco.util.DurabilityUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
@@ -77,8 +76,7 @@ public class EnchantChecks {
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
         for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry : PROXY.getEnchantmentsOnItem(item).entrySet()) {
-            EcoEnchant enchant = EcoEnchants.getFromEnchantment(enchantmentIntegerEntry.getKey());
-            if (enchant != null) {
+            if (enchantmentIntegerEntry.getKey() instanceof EcoEnchant enchant) {
                 ecoEnchants.put(enchant, enchantmentIntegerEntry.getValue());
             }
         }

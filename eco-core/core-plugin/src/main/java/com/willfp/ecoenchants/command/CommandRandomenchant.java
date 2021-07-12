@@ -81,8 +81,7 @@ public class CommandRandomenchant extends Subcommand {
                                 if (!onItem.contains(ecoEnchant)) {
                                     boolean conflicts = false;
                                     for (Enchantment enchantment : onItem) {
-                                        if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-                                            EcoEnchant ecoEnchantOnItem = EcoEnchants.getFromEnchantment(enchantment);
+                                        if (enchantment instanceof EcoEnchant ecoEnchantOnItem) {
                                             if (ecoEnchantOnItem.getType().equals(ecoEnchant.getType()) && ecoEnchantOnItem.getType().isSingular()) {
                                                 conflicts = true;
                                             }

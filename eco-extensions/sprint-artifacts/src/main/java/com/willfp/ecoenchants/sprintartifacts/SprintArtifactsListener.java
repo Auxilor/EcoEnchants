@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.sprintartifacts;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
@@ -40,7 +39,7 @@ public class SprintArtifactsListener implements Listener {
         }
 
         Optional<EcoEnchant> matching = bootsMeta.getEnchants().keySet().stream()
-                .map(EcoEnchants::getFromEnchantment)
+                .map(enchant -> (EcoEnchant) enchant)
                 .filter(Objects::nonNull)
                 .filter(enchantment -> enchantment.getType().equals(EnchantmentType.ARTIFACT))
                 .findFirst();

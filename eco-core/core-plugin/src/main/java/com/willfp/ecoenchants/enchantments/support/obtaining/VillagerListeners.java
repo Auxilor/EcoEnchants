@@ -179,7 +179,7 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
                     anyConflicts.set(true);
                 }
 
-                EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchant);
+                EcoEnchant ecoEnchant = enchant;
 
                 if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
                     anyConflicts.set(true);

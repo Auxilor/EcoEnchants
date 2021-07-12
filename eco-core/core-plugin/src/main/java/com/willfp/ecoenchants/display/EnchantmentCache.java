@@ -5,7 +5,6 @@ import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.eco.core.display.Display;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import lombok.Getter;
@@ -100,8 +99,7 @@ public class EnchantmentCache {
         EnchantmentType type;
         EnchantmentRarity rarity;
         List<String> description;
-        if (EcoEnchants.getFromEnchantment(enchantment) != null) {
-            EcoEnchant ecoEnchant = EcoEnchants.getFromEnchantment(enchantment);
+        if (enchantment instanceof EcoEnchant ecoEnchant) {
             description = ecoEnchant.getWrappedDescription();
             name = ecoEnchant.getDisplayName();
             type = ecoEnchant.getType();
