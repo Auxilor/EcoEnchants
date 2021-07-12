@@ -2,10 +2,10 @@ package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.eco.core.config.ExtendableConfig;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
-import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -25,17 +25,24 @@ public class EnchantmentConfig extends ExtendableConfig {
     private final String name;
 
     /**
+     * The enchantment.
+     */
+    @Getter
+    private final EcoEnchant enchant;
+
+    /**
      * Instantiate a new config for an enchantment.
      *
-     * @param name   The name of the config.
-     * @param plugin The provider of the enchantment.
-     * @param type   The {@link EnchantmentType} of the enchantment.
+     * @param name    The name of the config.
+     * @param plugin  The provider of the enchantment.
+     * @param enchant The enchantment.
      */
     public EnchantmentConfig(@NotNull final String name,
                              @NotNull final Class<?> plugin,
-                             @NotNull final EnchantmentType type) {
-        super(name, true, EcoEnchantsPlugin.getInstance(), plugin, "enchants/" + type.getName() + "/");
+                             @NotNull final EcoEnchant enchant) {
+        super(name, true, EcoEnchantsPlugin.getInstance(), plugin, "enchants/" + enchant.getType().getName() + "/");
         this.name = name;
+        this.enchant = enchant;
     }
 
     /**
@@ -88,14 +95,19 @@ public class EnchantmentConfig extends ExtendableConfig {
      * Load config values from lang.yml.
      */
     public void loadFromLang() {
-        if (!this.getPlugin().getLangYml().has("enchantments." + this.getName())) {
+        if (!this.getPlugin().getLangYml().has("enchantments." + this.getEnchant().getKey().getKey())) {
             return;
         }
 
-        this.set("name", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".name"));
-        this.set("description", this.getPlugin().getLangYml().getString("enchantments." + this.getName() + ".description"));
+        this.set("name", this.getPlugin().getLangYml().getString("enchantments." + this.getEnchant().getKey().getKey() + ".name"));
+        this.set("description", this.getPlugin().getLangYml().getString("enchantments." + this.getEnchant().getKey().getKey() + ".description"));
+
+        this.getPlugin().getLangYml().set("enchantments." + this.getEnchant().getKey().getKey(), null);
+
         try {
             this.save();
+            this.getPlugin().getLangYml().save();
+            this.getPlugin().getLangYml().clearCache();
         } catch (IOException e) {
             e.printStackTrace();
         }
