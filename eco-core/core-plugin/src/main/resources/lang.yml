@@ -26,6 +26,7 @@ messages:
   invalid-player: "&cInvalid Player!"
   requires-player: "&cRequires a Player!"
   must-hold-item-other: "&cPlayer is not holding an enchantable item!"
+  link-to-locale: "The locale has been successfully exported! Get it here: %url%"
 
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"

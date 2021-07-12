@@ -58,6 +58,7 @@ permissions:
       ecoenchants.command.randomenchant: true
       ecoenchants.command.randomenchant.bypasshardcap: true
       ecoenchants.command.giverandombook: true
+      ecoenchants.command.exportlocale: true
       ecoenchants.command.ecoenchants: true
   ecoenchants.fromtable.*:
     description: Allows getting all enchantments from an enchanting table
@@ -86,6 +87,9 @@ permissions:
     default: op
   ecoenchants.command.randomenchant.bypasshardcap:
     description: Allows /ecoenchants randomenchant bypassing the anvil hard cap
+    default: op
+  ecoenchants.command.exportlocale:
+    description: Allows the use of /ecoenchants exportlocale to export all language config to hastebin.
     default: op
   ecoenchants.command.ecoenchants:
     description: Allows the use of /ecoenchants
