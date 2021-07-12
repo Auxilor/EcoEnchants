@@ -11,14 +11,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.StringReader;
 
-public class CommandExportLocale extends Subcommand {
+public class CommandLocaleExport extends Subcommand {
     /**
-     * Instantiate a new /ecoenchants debug command handler.
+     * Instantiate a new /ecoenchants locale export command handler.
      *
      * @param plugin The plugin for the commands to listen for.
      */
-    public CommandExportLocale(@NotNull final EcoEnchantsPlugin plugin) {
-        super(plugin, "exportlocale", "ecoenchants.command.exportlocale", false);
+    public CommandLocaleExport(@NotNull final EcoEnchantsPlugin plugin) {
+        super(plugin, "export", "ecoenchants.command.locale.export", false);
     }
 
     @Override
@@ -34,8 +34,7 @@ public class CommandExportLocale extends Subcommand {
 
             sender.sendMessage(
                     this.getPlugin().getLangYml().getMessage("link-to-locale").replace(
-                            "%url%",
-                            "https://hastebin.com/raw/" + paste.getHastebinToken()
+                            "%token%", paste.getHastebinToken()
                     )
             );
         };

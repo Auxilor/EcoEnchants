@@ -26,7 +26,10 @@ messages:
   invalid-player: "&cInvalid Player!"
   requires-player: "&cRequires a Player!"
   must-hold-item-other: "&cPlayer is not holding an enchantable item!"
-  link-to-locale: "The locale has been successfully exported! Get it here: %url%"
+  link-to-locale: "The locale has been successfully exported! Your token is: %token%"
+  downloaded-locale: "Locale downloaded! Reload config to enact changes."
+  invalid-locale: "&cYou must supply a valid locale! Check the wiki for more information."
+  specify-locale-subcommand: "&cYou must specify whether to export or download a locale!"
 
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"

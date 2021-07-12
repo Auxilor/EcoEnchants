@@ -58,8 +58,15 @@ permissions:
       ecoenchants.command.randomenchant: true
       ecoenchants.command.randomenchant.bypasshardcap: true
       ecoenchants.command.giverandombook: true
-      ecoenchants.command.exportlocale: true
+      ecoenchants.command.locale.*: true
       ecoenchants.command.ecoenchants: true
+  ecoenchants.command.locale.*:
+    description: Allows managing locale features
+    default: op
+    children:
+      ecoenchants.command.locale.download: true
+      ecoenchants.command.locale.export: true
+      ecoenchants.command.locale: true
   ecoenchants.fromtable.*:
     description: Allows getting all enchantments from an enchanting table
     default: true
@@ -88,8 +95,14 @@ permissions:
   ecoenchants.command.randomenchant.bypasshardcap:
     description: Allows /ecoenchants randomenchant bypassing the anvil hard cap
     default: op
-  ecoenchants.command.exportlocale:
-    description: Allows the use of /ecoenchants exportlocale to export all language config to hastebin.
+  ecoenchants.command.locale:
+    description: Allows the use of /ecoenchants locale to manage locale i18n
+    default: op
+  ecoenchants.command.locale.download:
+    description: Allows the use of /ecoenchants locale download to download locales
+    default: op
+  ecoenchants.command.locale.export:
+    description: Allows the use of /ecoenchants locale export to export locales
     default: op
   ecoenchants.command.ecoenchants:
     description: Allows the use of /ecoenchants

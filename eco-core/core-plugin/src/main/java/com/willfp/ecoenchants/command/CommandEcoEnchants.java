@@ -18,7 +18,7 @@ public class CommandEcoEnchants extends PluginCommand {
                 .addSubcommand(new CommandReload(plugin))
                 .addSubcommand(new CommandGiverandombook(plugin))
                 .addSubcommand(new CommandRandomenchant(plugin))
-                .addSubcommand(new CommandExportLocale(plugin));
+                .addSubcommand(new CommandLocale(plugin));
     }
 
     @Override
