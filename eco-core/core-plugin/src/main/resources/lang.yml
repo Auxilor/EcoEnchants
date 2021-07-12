@@ -1,4 +1,4 @@
-# INFO: Use the permission name of enchantments if you want to add them to this file (ie damageartifact, not damage_artifact)
+# INFO: Use the key name of enchantments if you want to add them to this file
 
 messages:
   prefix: "&a&lEcoEnchants &r&8» &r"
