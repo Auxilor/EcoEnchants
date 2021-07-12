@@ -5,16 +5,15 @@ import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.TabCompleteHandler;
 import com.willfp.eco.core.command.impl.Subcommand;
 import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.eco.core.items.builder.EnchantedBookBuilder;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -64,9 +63,6 @@ public class CommandGiverandombook extends Subcommand {
                 return;
             }
 
-            ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
-            EnchantmentStorageMeta meta = (EnchantmentStorageMeta) itemStack.getItemMeta();
-
             List<Enchantment> allowed = Arrays.stream(Enchantment.values()).filter(enchantment -> {
                 if (enchantment instanceof EcoEnchant) {
                     return ((EcoEnchant) enchantment).isEnabled();
@@ -81,10 +77,13 @@ public class CommandGiverandombook extends Subcommand {
                 }
                 return true;
             }).collect(Collectors.toList());
+
             Enchantment enchantment = allowed.get(NumberUtils.randInt(0, allowed.size() - 1));
             int level = NumberUtils.randInt(1, enchantment.getMaxLevel());
-            meta.addStoredEnchant(enchantment, level, true);
-            itemStack.setItemMeta(meta);
+
+            ItemStack itemStack = new EnchantedBookBuilder()
+                    .addStoredEnchantment(enchantment, level)
+                    .build();
 
             for (ItemStack stack : player.getInventory().addItem(itemStack).values()) {
                 player.getWorld().dropItem(player.getLocation(), stack);
