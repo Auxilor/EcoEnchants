@@ -161,7 +161,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
 
         this.type = type;
         this.permissionName = key.replace("_", "");
-        this.config = new EnchantmentConfig(this.permissionName, this.getClass(), this.type);
+        this.config = new EnchantmentConfig(this.permissionName, this.getClass(), this);
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
             Permission permission = new Permission(
