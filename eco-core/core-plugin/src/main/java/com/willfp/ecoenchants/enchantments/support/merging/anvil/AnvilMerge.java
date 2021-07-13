@@ -51,7 +51,14 @@ public class AnvilMerge {
                                             @Nullable final ItemStack old,
                                             @NotNull final String itemName,
                                             @NotNull final Player player) {
-        // Here so it can be accessed later (scope)
+        /*
+        If you're currently looking at this code,
+        pray to whatever god you have that any changes
+        don't cause things to break.
+
+        I have no idea how this code works, it does - and it scares me.
+        I'll just pretend that I understand it and never look at it again.
+         */
 
         // Copied to non-final string.
         String name = itemName;

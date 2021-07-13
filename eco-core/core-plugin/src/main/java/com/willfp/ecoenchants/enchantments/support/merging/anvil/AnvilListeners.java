@@ -48,6 +48,20 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAnvilPrepare(@NotNull final PrepareAnvilEvent event) {
+        /*
+        This code is almost as bad as AnvilMerge#doMerge
+        Inventory events fire three times so I have to do weird workarounds
+        I also don't know how any of this works - so many things are null
+
+        Do I know when the items are changed? No
+        Do I know when the experience and name is set? No
+        Do I know when the merge has failed? No
+        But it works and I won't touch it.
+
+        I wrote this code in July 2020 and I'm amazed that it holds up.
+         */
+
+
         ItemStack left = event.getInventory().getItem(0);
         ItemStack right = event.getInventory().getItem(1);
         ItemStack out = event.getResult();
