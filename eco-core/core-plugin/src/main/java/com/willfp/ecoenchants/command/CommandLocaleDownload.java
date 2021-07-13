@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.io.StringReader;
 
 public class CommandLocaleDownload extends Subcommand {
@@ -31,6 +32,13 @@ public class CommandLocaleDownload extends Subcommand {
 
             for (String key : configuration.getKeys(true)) {
                 this.getPlugin().getLangYml().set(key, configuration.get(key));
+            }
+
+            try {
+                this.getPlugin().getLangYml().save();
+                this.getPlugin().getLangYml().clearCache();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             sender.sendMessage(this.getPlugin().getLangYml().getMessage("downloaded-locale"));
