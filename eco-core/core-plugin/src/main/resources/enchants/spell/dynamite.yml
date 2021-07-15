@@ -28,3 +28,4 @@ config:
     - bedrock
   base-bonus: 2 # Base extra blocks on all sides to break (1 = 3x3x3, 2 = 5x5x5, 3 = 7x7x7)
   per-level-bonus: 1 # Extra blocks on all sides per level
+  not-while-sneaking: true

@@ -242,6 +242,12 @@ public abstract class Spell extends EcoEnchant {
             }
         }
 
+        if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "not-while-sneaking")) {
+            if (player.isSneaking()) {
+                return;
+            }
+        }
+
         if (cooldown > 0) {
             String message = this.getPlugin().getLangYml().getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
             player.sendMessage(message);

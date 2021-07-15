@@ -25,3 +25,4 @@ config:
   cooldown: 90 # In seconds
   power: 25 # Level of levitation to give
   ticks-per-level: 6
+  not-while-sneaking: false

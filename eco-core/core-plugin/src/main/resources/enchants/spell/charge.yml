@@ -24,3 +24,4 @@ config:
   activation-sound: ENTITY_FIREWORK_ROCKET_LAUNCH
   cooldown: 40 # In seconds
   velocity-per-level: 1.5
+  not-while-sneaking: false

@@ -26,3 +26,4 @@ config:
   cooldown: 40 # In seconds
   velocity: 3
   damage-per-level: 8
+  not-while-sneaking: false

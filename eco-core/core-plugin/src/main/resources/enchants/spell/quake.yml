@@ -25,3 +25,4 @@ config:
   cooldown: 40 # In seconds
   damage-per-level: 3
   radius-per-level: 2
+  not-while-sneaking: false
