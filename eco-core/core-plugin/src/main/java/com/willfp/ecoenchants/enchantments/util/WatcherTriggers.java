@@ -51,6 +51,8 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
 
     /**
      * Update if allowed on npc.
+     *
+     * @param plugin Instance of EcoEnchants.
      */
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {

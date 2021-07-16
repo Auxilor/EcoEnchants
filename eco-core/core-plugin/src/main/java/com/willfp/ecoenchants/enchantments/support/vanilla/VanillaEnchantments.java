@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.support.vanilla;
 
-import com.willfp.eco.core.EcoPlugin;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy;
 import com.willfp.ecoenchants.util.ProxyUtils;
@@ -33,6 +32,8 @@ public class VanillaEnchantments {
 
     /**
      * Update the map.
+     *
+     * @param plugin Instance of EcoEnchants.
      */
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {
         Map<Enchantment, VanillaEnchantmentMetadata> map = new HashMap<>();

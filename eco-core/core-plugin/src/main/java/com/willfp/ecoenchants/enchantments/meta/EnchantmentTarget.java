@@ -65,6 +65,8 @@ public class EnchantmentTarget {
 
     /**
      * Update all targets.
+     *
+     * @param plugin Instance of EcoEnchants.
      */
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {

@@ -92,6 +92,8 @@ public class EnchantmentRarity {
 
     /**
      * Update all rarities.
+     *
+     * @param plugin Instance of EcoEnchants.
      */
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {

@@ -591,6 +591,8 @@ public class EcoEnchants {
 
     /**
      * Update all {@link EcoEnchant}s.
+     *
+     * @param plugin Instance of EcoEnchants.
      */
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {

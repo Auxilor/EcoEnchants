@@ -133,7 +133,7 @@ public class EnchantmentCache {
 
         String rawName = name;
         name = color + name;
-        description.replaceAll(line -> Display.PREFIX + ((EnchantDisplay) PLUGIN.getDisplayModule()).getOptions().getDescriptionOptions().getColor() + line);
+        description.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
         CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, rawName, description, type, rarity));
     }
 

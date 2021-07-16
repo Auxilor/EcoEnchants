@@ -112,7 +112,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     public void onReload() {
         targetYml.update();
         rarityYml.update();
-        ((EnchantDisplay) this.getDisplayModule()).update();
+        this.getDisplayModule().update();
         EcoEnchants.values().forEach((ecoEnchant -> {
             HandlerList.unregisterAll(ecoEnchant);
 
