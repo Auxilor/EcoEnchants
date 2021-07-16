@@ -203,7 +203,7 @@ public class EnchantmentCache {
 
             String processedStringDescription = descriptionBuilder.toString();
             processedStringDescription = processedStringDescription.replace(Display.PREFIX, "");
-            this.stringDescription = processedStringDescription.replaceAll(((EnchantDisplay) PLUGIN.getDisplayModule()).getOptions().getDescriptionOptions().getColor(), "");
+            this.stringDescription = processedStringDescription.replaceAll(PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor(), "");
         }
     }
 }
