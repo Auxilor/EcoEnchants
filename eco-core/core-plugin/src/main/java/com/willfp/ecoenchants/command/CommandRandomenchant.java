@@ -38,7 +38,7 @@ public class CommandRandomenchant extends Subcommand {
         return (sender, args) -> {
             Player player;
 
-            if ((args.isEmpty() && sender instanceof Player) || !sender.hasPermission("ecoenchants.randomenchant.others")) {
+            if ((args.isEmpty() && sender instanceof Player) || !sender.hasPermission("ecoenchants.command.randomenchant.others")) {
                 player = (Player) sender;
             } else {
                 player = Bukkit.getServer().getPlayer(args.get(0));
@@ -88,7 +88,7 @@ public class CommandRandomenchant extends Subcommand {
                                         }
                                     }
                                     if (this.getPlugin().getConfigYml().getBool("anvil.hard-cap.enabled")
-                                            && !player.hasPermission("ecoenchants.randomenchant.bypasshardcap")
+                                            && !player.hasPermission("ecoenchants.command.randomenchant.bypasshardcap")
                                             && onItem.size() >= this.getPlugin().getConfigYml().getInt("anvil.hard-cap.cap")) {
                                         conflicts = true;
                                     }
@@ -127,7 +127,7 @@ public class CommandRandomenchant extends Subcommand {
 
             List<String> playerNames = Bukkit.getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList());
 
-            if (args.isEmpty() || !sender.hasPermission("ecoenchants.randomenchant.others")) {
+            if (args.isEmpty() || !sender.hasPermission("ecoenchants.command.randomenchant.others")) {
                 // Currently, this case is not ever reached
                 return playerNames;
             }
