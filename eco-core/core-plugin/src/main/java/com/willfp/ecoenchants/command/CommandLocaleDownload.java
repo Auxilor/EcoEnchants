@@ -4,6 +4,8 @@ import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.impl.Subcommand;
 import com.willfp.eco.core.web.Paste;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +39,12 @@ public class CommandLocaleDownload extends Subcommand {
             try {
                 this.getPlugin().getLangYml().save();
                 this.getPlugin().getLangYml().clearCache();
+
+                for (EcoEnchant value : EcoEnchants.values()) {
+                    value.getConfig().loadFromLang();
+                    value.getConfig().save();
+                    value.getConfig().clearCache();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
