@@ -25,7 +25,7 @@ public class CommandLocaleDownload extends Subcommand {
     @Override
     public CommandHandler getHandler() {
         return (sender, args) -> {
-            if (args.size() == 0) {
+            if (args.isEmpty()) {
                 sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-locale"));
             }
 
