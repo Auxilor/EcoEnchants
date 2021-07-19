@@ -7,7 +7,6 @@ import com.willfp.eco.core.config.ConfigUpdater;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AngerArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
-import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.BarrierArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CopperArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CrimsonArtifact;
@@ -493,7 +492,6 @@ public class EcoEnchants {
     public static final EcoEnchant LUCKY_CATCH = new LuckyCatch();
     public static final EcoEnchant AVERSION = new Aversion();
     public static final EcoEnchant INTROVERSION = new Introversion();
-    public static final EcoEnchant BARRIER_ARTIFACT = new BarrierArtifact();
     public static final EcoEnchant VILLAGER_ARTIFACT = new VillagerArtifact();
     public static final EcoEnchant ANGER_ARTIFACT = new AngerArtifact();
     public static final EcoEnchant NAUTILUS_ARTIFACT = new NautilusArtifact();
