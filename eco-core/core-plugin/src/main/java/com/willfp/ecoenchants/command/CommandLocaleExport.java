@@ -26,8 +26,8 @@ public class CommandLocaleExport extends Subcommand {
         return (sender, args) -> {
             YamlConfiguration configuration = YamlConfiguration.loadConfiguration(new StringReader(this.getPlugin().getLangYml().toPlaintext()));
             for (EcoEnchant enchant : EcoEnchants.values()) {
-                configuration.set("enchantments." + enchant.getKey().getKey() + ".name", enchant.getDisplayName());
-                configuration.set("enchantments." + enchant.getKey().getKey() + ".description", enchant.getDescription());
+                configuration.set("enchantments." + enchant.getKey().getKey() + ".name", enchant.getConfig().getHandle().getString("name"));
+                configuration.set("enchantments." + enchant.getKey().getKey() + ".description", enchant.getConfig().getHandle().getString("description"));
             }
 
             Paste paste = new Paste(configuration.saveToString());
