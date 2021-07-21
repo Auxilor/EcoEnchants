@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display;
 
 import com.google.common.collect.ImmutableMap;
-import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.core.display.Display;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;

@@ -4,7 +4,6 @@ import com.willfp.eco.core.drops.DropQueue;
 import com.willfp.eco.core.events.EntityDeathByEntityEvent;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
-import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -150,10 +149,10 @@ public class Telekinesis extends EcoEnchant {
                 player = (Player) ((Arrow) event.getKiller()).getShooter();
                 item = player.getInventory().getItemInMainHand();
             }
-        } else if (event.getKiller() instanceof Trident) {
-            if (((Trident) event.getKiller()).getShooter() instanceof Player) {
-                player = (Player) ((Trident) event.getKiller()).getShooter();
-                item = TridentUtils.getItemStack((Trident) event.getKiller());
+        } else if (event.getKiller() instanceof Trident trident) {
+            if (trident.getShooter() instanceof Player) {
+                player = (Player) trident.getShooter();
+                item = trident.getItem();
             }
         }
 

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -30,7 +29,7 @@ public class Splash extends EcoEnchant {
                              @NotNull final ProjectileHitEvent event) {
         Trident trident = (Trident) event.getEntity();
 
-        ItemStack item = TridentUtils.getItemStack(trident);
+        ItemStack item = trident.getItem();
 
         if (!EnchantChecks.item(item, this)) {
             return;

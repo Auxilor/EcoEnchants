@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.drops.DropQueue;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -51,7 +50,7 @@ public class Spearfishing extends EcoEnchant {
             return;
         }
 
-        ItemStack item = TridentUtils.getItemStack(trident);
+        ItemStack item = trident.getItem();
 
         if (!EnchantChecks.item(item, this)) {
             return;

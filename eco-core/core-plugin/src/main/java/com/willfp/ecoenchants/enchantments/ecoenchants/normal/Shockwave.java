@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -33,8 +32,8 @@ public class Shockwave extends EcoEnchant {
         }
 
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (entity instanceof Trident) {
-            item = TridentUtils.getItemStack((Trident) entity);
+        if (entity instanceof Trident trident) {
+            item = trident.getItem();
         }
 
         if (!EnchantChecks.item(item, this)) {
