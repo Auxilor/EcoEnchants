@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants.precision;
 
-
-import com.willfp.eco.util.TridentUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -43,7 +41,7 @@ public class Precision extends EcoEnchant {
             return;
         }
 
-        ItemStack itemStack = TridentUtils.getItemStack(trident);
+        ItemStack itemStack = trident.getItem();
         if (!EnchantChecks.item(itemStack, this)) {
             return;
         }
