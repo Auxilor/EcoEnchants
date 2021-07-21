@@ -33,5 +33,4 @@
 ## Other
 
 - All drops **must** be sent through a DropQueue - calls to World#dropItem will get your PR rejected.
-- EcoEnchants is built with java 8. Usage of J9+ will get your PR rejected.
 - Any non-plugin-specific changes **must** be made to eco-util, or core-proxy, rather than core-plugin.

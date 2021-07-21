@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.meta;
 
-import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.RarityYml;
@@ -106,7 +106,7 @@ public class EnchantmentRarity {
             double lootProbability = rarityYml.getDouble("rarities." + rarity + ".loot-probability");
             String customColor = null;
             if (rarityYml.getBool("rarities." + rarity + ".custom-color.enabled")) {
-                customColor = StringUtils.translate(rarityYml.getString("rarities." + rarity + ".custom-color.color"));
+                customColor = StringUtils.format(rarityYml.getString("rarities." + rarity + ".custom-color.color"));
             }
 
             new EnchantmentRarity(rarity, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();

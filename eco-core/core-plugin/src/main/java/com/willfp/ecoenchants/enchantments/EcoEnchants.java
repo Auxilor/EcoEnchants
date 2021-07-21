@@ -248,7 +248,6 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantments;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
@@ -515,18 +514,6 @@ public class EcoEnchants {
      */
     public static List<EcoEnchant> values() {
         return ImmutableList.copyOf(BY_KEY.values());
-    }
-
-    /**
-     * Gets {@link EcoEnchant} from {@link Enchantment}.
-     *
-     * @param enchantment The enchantment.
-     * @return The matching {@link EcoEnchant}, or null if not found.
-     * @deprecated Use a typecast.
-     */
-    @Deprecated
-    public static EcoEnchant getFromEnchantment(@NotNull final Enchantment enchantment) {
-        return enchantment instanceof EcoEnchant ? (EcoEnchant) enchantment : null;
     }
 
     /**

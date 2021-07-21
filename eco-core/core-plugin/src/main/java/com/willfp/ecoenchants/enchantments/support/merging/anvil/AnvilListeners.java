@@ -7,7 +7,6 @@ import com.willfp.eco.core.tuples.Pair;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
 import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -75,7 +74,7 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
         event.getInventory().setItem(2, null);
 
         Player player = (Player) event.getViewers().get(0);
-        if (ProxyUtils.getProxy(OpenInventoryProxy.class).getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS)) {
+        if (this.getPlugin().getProxy(OpenInventoryProxy.class).getOpenInventory(player).getClass().toString().equals(ANVIL_GUI_CLASS)) {
             return;
         }
 
@@ -123,14 +122,14 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
             }
 
             if (this.getPlugin().getConfigYml().getBool("anvil.rework-cost")) {
-                int repairCost = ProxyUtils.getProxy(RepairCostProxy.class).getRepairCost(item);
+                int repairCost = this.getPlugin().getProxy(RepairCostProxy.class).getRepairCost(item);
                 int reworkCount = NumberUtils.log2(repairCost + 1);
                 if (repairCost == 0) {
                     reworkCount = 0;
                 }
                 reworkCount++;
                 repairCost = (int) Math.pow(2, reworkCount) - 1;
-                item = ProxyUtils.getProxy(RepairCostProxy.class).setRepairCost(item, repairCost);
+                item = this.getPlugin().getProxy(RepairCostProxy.class).setRepairCost(item, repairCost);
             }
 
             int cost;

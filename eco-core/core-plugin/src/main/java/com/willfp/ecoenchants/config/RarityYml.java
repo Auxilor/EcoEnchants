@@ -1,12 +1,12 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.eco.core.EcoPlugin;
-import com.willfp.eco.core.config.BaseConfig;
+import com.willfp.eco.core.config.yaml.YamlBaseConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class RarityYml extends BaseConfig {
+public class RarityYml extends YamlBaseConfig {
     /**
      * Instantiate rarity.yml.
      *

@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
@@ -39,8 +38,8 @@ public class SprintArtifactsListener implements Listener {
         }
 
         Optional<EcoEnchant> matching = bootsMeta.getEnchants().keySet().stream()
+                .filter(enchantment -> enchantment instanceof EcoEnchant)
                 .map(enchant -> (EcoEnchant) enchant)
-                .filter(Objects::nonNull)
                 .filter(enchantment -> enchantment.getType().equals(EnchantmentType.ARTIFACT))
                 .findFirst();
         if (matching.isEmpty()) {

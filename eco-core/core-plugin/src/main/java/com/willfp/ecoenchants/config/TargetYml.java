@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.config;
 
 import com.willfp.eco.core.EcoPlugin;
-import com.willfp.eco.core.config.BaseConfig;
+import com.willfp.eco.core.config.yaml.YamlBaseConfig;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class TargetYml extends BaseConfig {
+public class TargetYml extends YamlBaseConfig {
     /**
      * Instantiate target.yml.
      *

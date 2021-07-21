@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.support.vanilla;
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -58,7 +57,7 @@ public class VanillaEnchantments {
         MAP.putAll(map);
 
         if (plugin.getVanillaEnchantsYml().getBool("enabled")) {
-            ProxyUtils.getProxy(EcoCraftEnchantmentManagerProxy.class).registerNewCraftEnchantments();
+            plugin.getProxy(EcoCraftEnchantmentManagerProxy.class).registerNewCraftEnchantments();
         }
     }
 }

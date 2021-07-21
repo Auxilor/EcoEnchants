@@ -4,7 +4,7 @@ import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.TabCompleteHandler;
 import com.willfp.eco.core.command.impl.PluginCommand;
-import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -101,7 +101,7 @@ public class CommandEnchantinfo extends PluginCommand {
             if (allConflicts.length() >= 2) {
                 allConflicts = allConflicts.substring(0, allConflicts.length() - 2);
             } else {
-                allConflicts = StringUtils.translate(this.getPlugin().getLangYml().getString("no-conflicts"));
+                allConflicts = StringUtils.format(this.getPlugin().getLangYml().getString("no-conflicts"));
             }
 
             Set<Material> targets = enchantment.getTargetMaterials();
@@ -132,7 +132,7 @@ public class CommandEnchantinfo extends PluginCommand {
             if (allTargets.length() >= 2) {
                 allTargets = allTargets.substring(0, allTargets.length() - 2);
             } else {
-                allTargets = StringUtils.translate(this.getPlugin().getLangYml().getString("no-targets"));
+                allTargets = StringUtils.format(this.getPlugin().getLangYml().getString("no-targets"));
             }
 
             String maxLevel = String.valueOf(enchantment.getMaxLevel());

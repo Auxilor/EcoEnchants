@@ -161,7 +161,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
 
         this.type = type;
         this.permissionName = key.replace("_", "");
-        this.config = new EnchantmentConfig(this.permissionName, this.getClass(), this);
+        this.config = new EnchantmentConfig(this.permissionName, this.getClass(), this, this.getPlugin());
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
             Permission permission = new Permission(
@@ -197,7 +197,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      * This can be overridden but may lead to unexpected behavior.
      */
     public void update() {
-        config.update();
         config.loadFromLang();
         rarity = config.getRarity();
         Validate.notNull(rarity, "Rarity specified in " + this.permissionName + " is invalid!");
@@ -207,8 +206,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         availableFromVillager = config.getBool(EcoEnchants.OBTAINING_LOCATION + "villager");
         availableFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
         maxLevel = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
-        displayName = StringUtils.translate(config.getString("name"));
-        description = StringUtils.translate(config.getString("description"));
+        displayName = StringUtils.format(config.getString("name"));
+        description = StringUtils.format(config.getString("description"));
         disabledWorldNames.clear();
         disabledWorldNames.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "disabled-in-worlds"));
         disabledWorlds.clear();

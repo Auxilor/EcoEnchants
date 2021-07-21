@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.config.configs;
 
-import com.willfp.eco.core.config.ExtendableConfig;
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.config.yaml.YamlExtendableConfig;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -17,7 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class EnchantmentConfig extends ExtendableConfig {
+public class EnchantmentConfig extends YamlExtendableConfig {
     /**
      * The name of the config.
      */
@@ -31,6 +32,12 @@ public class EnchantmentConfig extends ExtendableConfig {
     private final EcoEnchant enchant;
 
     /**
+     * Instance of EcoEnchants.
+     */
+    @Getter
+    private final EcoPlugin plugin;
+
+    /**
      * Instantiate a new config for an enchantment.
      *
      * @param name    The name of the config.
@@ -38,11 +45,13 @@ public class EnchantmentConfig extends ExtendableConfig {
      * @param enchant The enchantment.
      */
     public EnchantmentConfig(@NotNull final String name,
-                             @NotNull final Class<?> plugin,
-                             @NotNull final EcoEnchant enchant) {
-        super(name, true, EcoEnchantsPlugin.getInstance(), plugin, "enchants/" + enchant.getType().getName() + "/");
+                             @NotNull final Class<?> source,
+                             @NotNull final EcoEnchant enchant,
+                             @NotNull final EcoPlugin plugin) {
+        super(name, true, EcoEnchantsPlugin.getInstance(), source, "enchants/" + enchant.getType().getName() + "/");
         this.name = name;
         this.enchant = enchant;
+        this.plugin = plugin;
     }
 
     /**

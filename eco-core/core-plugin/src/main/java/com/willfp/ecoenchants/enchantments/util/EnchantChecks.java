@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchantments.util;
 
 
 import com.willfp.eco.util.DurabilityUtils;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -27,7 +27,7 @@ public class EnchantChecks {
     /**
      * Proxy instance of FastGetEnchants.
      */
-    private static final FastGetEnchantsProxy PROXY = ProxyUtils.getProxy(FastGetEnchantsProxy.class);
+    private static final FastGetEnchantsProxy PROXY = EcoEnchantsPlugin.getInstance().getProxy(FastGetEnchantsProxy.class);
 
     /**
      * Does the specified ItemStack have a certain Enchantment present?

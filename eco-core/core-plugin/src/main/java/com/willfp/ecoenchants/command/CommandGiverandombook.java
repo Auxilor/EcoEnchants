@@ -4,7 +4,7 @@ import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.TabCompleteHandler;
 import com.willfp.eco.core.command.impl.Subcommand;
-import com.willfp.eco.core.config.ConfigUpdater;
+import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.EnchantmentCache;

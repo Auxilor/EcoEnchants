@@ -10,7 +10,6 @@ import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
-import com.willfp.ecoenchants.util.ProxyUtils;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -113,7 +112,7 @@ public class EnchantDisplay extends DisplayModule {
 
         List<Enchantment> forRemoval = new ArrayList<>();
 
-        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(ProxyUtils.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(itemStack, true));
+        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(this.getPlugin().getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(itemStack, true));
 
         enchantments.entrySet().removeIf(enchantmentIntegerEntry -> enchantmentIntegerEntry.getValue().equals(0));
 
