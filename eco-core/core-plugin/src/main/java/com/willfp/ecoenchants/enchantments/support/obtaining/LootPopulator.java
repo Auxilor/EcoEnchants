@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -74,7 +75,7 @@ public class LootPopulator extends BlockPopulator {
                     continue;
                 }
 
-                HashMap<Enchantment, Integer> toAdd = new HashMap<>();
+                Map<Enchantment, Integer> toAdd = new HashMap<>();
 
                 ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
                 Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis

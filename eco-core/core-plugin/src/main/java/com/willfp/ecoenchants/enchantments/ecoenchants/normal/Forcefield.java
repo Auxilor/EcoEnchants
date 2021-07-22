@@ -16,9 +16,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Forcefield extends EcoEnchant implements TimedRunnable {
-    private final HashMap<Player, Integer> players = new HashMap<>();
+    private final Map<Player, Integer> players = new HashMap<>();
     private double initialDistance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");
     private double bonus = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-level");
     private double damagePerPoint = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-per-level");

@@ -28,10 +28,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 public class InfernalTouch extends EcoEnchant {
-    private static final HashMap<Material, Pair<Material, Integer>> RECIPES = new HashMap<>();
+    private static final Map<Material, Pair<Material, Integer>> RECIPES = new HashMap<>();
     private static final Set<Material> FORTUNE_MATERIALS = new HashSet<>(
             Arrays.asList(
                     Material.GOLD_INGOT,

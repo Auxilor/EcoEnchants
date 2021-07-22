@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
@@ -119,7 +120,7 @@ public class EnchantDisplay extends DisplayModule {
         List<Enchantment> unsorted = new ArrayList<>();
         enchantments.forEach((enchantment, integer) -> unsorted.add(enchantment));
 
-        HashMap<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
+        Map<Enchantment, Integer> tempEnchantments = new HashMap<>(enchantments);
 
         options.getSorter().sortEnchantments(unsorted);
 

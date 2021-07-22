@@ -21,7 +21,7 @@ public final class FastGetEnchants implements FastGetEnchantsProxy {
                                                            final boolean checkStored) {
         net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(itemStack);
         NBTTagList enchantmentNBT = checkStored && nmsStack.getItem() == Items.ENCHANTED_BOOK ? ItemEnchantedBook.d(nmsStack) : nmsStack.getEnchantments();
-        HashMap<Enchantment, Integer> foundEnchantments = new HashMap<>();
+        Map<Enchantment, Integer> foundEnchantments = new HashMap<>();
 
         for (NBTBase base : enchantmentNBT) {
             NBTTagCompound compound = (NBTTagCompound) base;

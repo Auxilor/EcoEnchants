@@ -18,9 +18,10 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Magnetic extends EcoEnchant implements TimedRunnable {
-    private final HashMap<Player, Integer> players = new HashMap<>();
+    private final Map<Player, Integer> players = new HashMap<>();
     private double initialDistance = 1;
     private double bonus = 1;
 
