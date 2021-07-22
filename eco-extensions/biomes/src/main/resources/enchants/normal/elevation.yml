@@ -13,6 +13,7 @@ obtaining:
   rarity: rare
 
 general-config:
+  flags: []
   targets:
     - helmet
     - chestplate

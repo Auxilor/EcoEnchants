@@ -13,6 +13,7 @@ obtaining:
   rarity: veryspecial
 
 general-config:
+  flags: []
   targets:
     - trident
   grindstoneable: true

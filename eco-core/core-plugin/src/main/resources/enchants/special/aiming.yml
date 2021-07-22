@@ -13,6 +13,7 @@ obtaining:
   rarity: special
 
 general-config:
+  flags: []
   targets:
     - bow
   grindstoneable: true

@@ -13,6 +13,7 @@ obtaining:
   rarity: legendary
 
 general-config:
+  flags: []
   targets:
     - helmet
   grindstoneable: true
