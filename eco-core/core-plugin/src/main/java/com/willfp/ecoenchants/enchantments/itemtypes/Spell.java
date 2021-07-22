@@ -41,7 +41,9 @@ public abstract class Spell extends EcoEnchant {
      */
     private static final List<Material> LEFT_CLICK_ITEMS = Arrays.asList(
             Material.FISHING_ROD,
-            Material.BOW
+            Material.BOW,
+            Material.CROSSBOW,
+            Material.TRIDENT
     );
 
     /**
