@@ -27,4 +27,4 @@ config:
   activation-sound: ENTITY_PLAYER_LEVELUP
   cooldown: 450 # In seconds
   not-while-sneaking: false
-  spawn-heart-particle: true
+  spawn-heart-particles: true
