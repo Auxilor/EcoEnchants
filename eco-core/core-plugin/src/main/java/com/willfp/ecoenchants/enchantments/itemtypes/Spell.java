@@ -10,6 +10,8 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.SpellActivateEvent;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -252,7 +254,14 @@ public abstract class Spell extends EcoEnchant {
 
         if (cooldown > 0) {
             String message = this.getPlugin().getLangYml().getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
-            player.sendMessage(message);
+            if (this.getPlugin().getConfigYml().getBool("types.special.cooldown-in-actionbar")) {
+                player.spigot().sendMessage(
+                        ChatMessageType.ACTION_BAR,
+                        TextComponent.fromLegacyText(message)
+                );
+            } else {
+                player.sendMessage(message);
+            }
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
         } else {
             SpellActivateEvent spellActivateEvent = new SpellActivateEvent(player, this);
@@ -286,7 +295,6 @@ public abstract class Spell extends EcoEnchant {
      * @param player The player who triggered the spell.
      * @param level  The level of the spell on the item.
      * @param event  The event that activated the spell.
-     *
      * @return If the spell should be activated.
      */
     public abstract boolean onUse(@NotNull Player player,

@@ -96,6 +96,7 @@ loot:
 types:
   special:
     allow-multiple: false # Allow multiple special enchantments on a single item
+    cooldown-in-actionbar: true # Show cooldown messages in the action bar rather than in chat
   artifact:
     allow-multiple: false # Allow multiple artifacts on a single item (can cause lag!)
 
