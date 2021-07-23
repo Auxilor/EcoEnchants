@@ -4,6 +4,7 @@ import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockDamageEvent;
@@ -26,6 +27,14 @@ public class Instantaneous extends EcoEnchant {
         }
 
         if (block.getDrops(player.getInventory().getItemInMainHand()).isEmpty()) {
+            return;
+        }
+
+        if (block.getType().getHardness() > 100) {
+            return;
+        }
+
+        if (block.getType() == Material.BEDROCK) {
             return;
         }
 
