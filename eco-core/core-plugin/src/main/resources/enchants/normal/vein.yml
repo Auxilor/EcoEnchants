@@ -39,3 +39,10 @@ config:
     - gilded_blackstone
     - nether_gold_ore
     - glowstone
+    - deepslate_coal_ore
+    - deepslate_iron_ore
+    - deepslate_copper_ore
+    - deepslate_gold_ore
+    - deepslate_lapis_ore
+    - deepslate_diamond_ore
+    - deepslate_redstone_ore
