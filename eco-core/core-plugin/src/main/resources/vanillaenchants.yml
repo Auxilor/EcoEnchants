@@ -15,3 +15,13 @@ enabled: false # There may be potential conflicts if modifying vanilla enchantme
 # It will work with anvils however, but since it is still possible to get enchantments at their vanilla
 # max levels, then it isn't recommended to lower the max level of a vanilla enchantment, only to raise it.
 max-levels: []
+
+# Set custom conflicts for vanilla enchantments.
+# To do this, add each enchantment like this:
+# - "<key>:<conflict 1 key>:<conflict 2 key>:<conflict 3 key>..... etc"
+# For example, to make mending conflict with efficiency and sharpness, you would do this:
+# conflicts:
+#   - "mending:efficiency:sharpness"
+#
+# Beware that this will *override* conflicts, not add to them.
+conflicts: []

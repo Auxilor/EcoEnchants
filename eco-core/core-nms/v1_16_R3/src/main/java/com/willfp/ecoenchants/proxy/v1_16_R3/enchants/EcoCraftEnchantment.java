@@ -23,7 +23,11 @@ public class EcoCraftEnchantment extends CraftEnchantment {
 
     @Override
     public boolean conflictsWith(@NotNull final org.bukkit.enchantments.Enchantment other) {
-        return other instanceof EcoEnchant ? other.conflictsWith(this) : super.conflictsWith(other);
+        if (other instanceof EcoEnchant) {
+            return other.conflictsWith(this);
+        }
+
+        return metadata.conflicts() == null ? super.conflictsWith(other) : metadata.conflicts().contains(other.getKey());
     }
 
     public void register() {

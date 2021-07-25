@@ -9,8 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @UtilityClass
@@ -47,8 +49,22 @@ public class VanillaEnchantments {
                         s1 -> Integer.parseInt(s1.split(":")[1])
                 ));
 
+        Map<Enchantment, Set<NamespacedKey>> conflicts = plugin.getVanillaEnchantsYml().getStrings("conflicts").stream()
+                .collect(Collectors.toMap(
+                        s -> Enchantment.getByKey(NamespacedKey.minecraft(s.split(":")[0].toLowerCase())),
+                        s1 -> {
+                            String[] split = s1.split(":");
+                            Set<NamespacedKey> keys = new HashSet<>();
+                            for (int i = 1; i < split.length; i++) {
+                                keys.add(NamespacedKey.minecraft(split[i]));
+                            }
+
+                            return keys;
+                        }
+                ));
+
         for (Enchantment enchantment : enchantments) {
-            VanillaEnchantmentMetadata metadata = new VanillaEnchantmentMetadata(maxLevels.get(enchantment));
+            VanillaEnchantmentMetadata metadata = new VanillaEnchantmentMetadata(maxLevels.get(enchantment), conflicts.get(enchantment));
 
             map.put(enchantment, metadata);
         }
