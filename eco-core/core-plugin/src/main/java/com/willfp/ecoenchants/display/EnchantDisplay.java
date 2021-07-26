@@ -9,6 +9,7 @@ import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
@@ -233,11 +234,11 @@ public class EnchantDisplay extends DisplayModule {
             hideEnchants = false;
         }
 
-        if (options.isUsingExperimentalHideFixer() && options.isUsingForceHideFixer()) {
+        if (ItemConversionOptions.isUsingExperimentalHideFixer() && ItemConversionOptions.isUsingForceHideFixer()) {
             hideEnchants = false;
         }
 
-        if (options.isUsingExperimentalHideFixer() && meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+        if (ItemConversionOptions.isUsingExperimentalHideFixer() && meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
             hideEnchants = false;
         }
 
