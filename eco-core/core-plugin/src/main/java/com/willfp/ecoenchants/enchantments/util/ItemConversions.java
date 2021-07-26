@@ -1,12 +1,10 @@
 package com.willfp.ecoenchants.enchantments.util;
 
-import com.willfp.eco.core.EcoPlugin;
-import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -30,16 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemConversions extends PluginDependent<EcoPlugin> implements Listener {
-    /**
-     * Instantiate item conversions.
-     *
-     * @param plugin Instance of EcoEnchants.
-     */
-    public ItemConversions(@NotNull final EcoPlugin plugin) {
-        super(plugin);
-    }
-
+public class ItemConversions implements Listener {
     /**
      * On player hold item.
      * <p>
@@ -49,11 +38,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
      */
     @EventHandler
     public void loreConverter(@NotNull final PlayerItemHeldEvent event) {
-        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
-            return;
-        }
-
-        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingLoreGetter()) {
+        if (!ItemConversionOptions.isUsingLoreGetter()) {
             return;
         }
 
@@ -71,11 +56,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
      */
     @EventHandler
     public void aggressiveLoreConverter(@NotNull final InventoryOpenEvent event) {
-        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
-            return;
-        }
-
-        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveLoreGetter()) {
+        if (!ItemConversionOptions.isUsingAggressiveLoreGetter()) {
             return;
         }
 
@@ -172,11 +153,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
      */
     @EventHandler
     public void hideFixer(@NotNull final PlayerItemHeldEvent event) {
-        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
-            return;
-        }
-
-        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingExperimentalHideFixer()) {
+        if (!ItemConversionOptions.isUsingExperimentalHideFixer()) {
             return;
         }
 
@@ -194,11 +171,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
      */
     @EventHandler
     public void aggressiveHideFixer(@NotNull final InventoryOpenEvent event) {
-        if (this.getPlugin().getDisplayModule() == null) { // If plugin hasn't finished loading.
-            return;
-        }
-
-        if (!((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingAggressiveExperimentalHideFixer()) {
+        if (!ItemConversionOptions.isUsingAggressiveExperimentalHideFixer()) {
             return;
         }
 
@@ -231,7 +204,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        if (((EnchantDisplay) this.getPlugin().getDisplayModule()).getOptions().isUsingForceHideFixer()) {
+        if (ItemConversionOptions.isUsingForceHideFixer()) {
             meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
             meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         } else {
@@ -252,7 +225,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
      */
     @EventHandler
     public void levelClamp(@NotNull final PlayerItemHeldEvent event) {
-        if (!this.getPlugin().getConfigYml().getBool("advanced.level-clamp.enabled")) {
+        if (!ItemConversionOptions.isUsingLevelClamp()) {
             return;
         }
 
@@ -298,10 +271,10 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
 
         itemStack.setItemMeta(meta);
 
-        if (this.getPlugin().getConfigYml().getBool("advanced.level-clamp.delete-item")) {
+        if (ItemConversionOptions.isUsingLevelClampDelete()) {
             itemStack.setType(Material.AIR);
             itemStack.setItemMeta(new ItemStack(Material.AIR).getItemMeta());
-            this.getPlugin().getLogger().warning(player.getName() + " has/had an illegal item!");
+            Bukkit.getLogger().warning(player.getName() + " has/had an illegal item!");
         }
     }
 
@@ -314,7 +287,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
      */
     @EventHandler
     public void removeDisallowed(@NotNull final PlayerItemHeldEvent event) {
-        if (!this.getPlugin().getConfigYml().getBool("advanced.remove-illegal.enabled")) {
+        if (!ItemConversionOptions.isRemovingIllegal()) {
             return;
         }
 
@@ -359,7 +332,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        if (this.getPlugin().getConfigYml().getBool("advanced.remove-illegal.delete-item")) {
+        if (ItemConversionOptions.isDeletingIllegal()) {
             itemStack.setType(Material.AIR);
             itemStack.setItemMeta(new ItemStack(Material.AIR).getItemMeta());
             itemStack.setItemMeta(meta);
@@ -367,6 +340,6 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             meta.removeEnchant(illegalEnchant);
         }
 
-        this.getPlugin().getLogger().warning(player.getName() + " has/had an illegal item!");
+        Bukkit.getLogger().warning(player.getName() + " has/had an illegal item!");
     }
 }
