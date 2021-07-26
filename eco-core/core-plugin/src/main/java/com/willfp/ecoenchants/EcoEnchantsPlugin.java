@@ -88,13 +88,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     protected void handleReload() {
-        long startTime = System.currentTimeMillis();
-
         this.getDisplayModule().update();
-
-        Bukkit.getLogger().info(System.currentTimeMillis() - startTime + "ms");
-
-        long time1 = System.currentTimeMillis();
         for (EcoEnchant enchant : EcoEnchants.values()) {
             HandlerList.unregisterAll(enchant);
             this.getScheduler().runLater(() -> {
@@ -107,7 +101,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 }
             }, 1);
         }
-        Bukkit.getLogger().info(System.currentTimeMillis() - time1 + "ms");
     }
 
     @Override
