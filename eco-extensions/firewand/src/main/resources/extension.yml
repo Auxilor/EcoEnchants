@@ -1,3 +1,4 @@
 name: Firewand
 main: com.willfp.ecoenchants.firewand.FirewandMain
 version: ${projectVersion}
+author: Auxilor

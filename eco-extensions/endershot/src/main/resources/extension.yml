@@ -1,3 +1,4 @@
 name: Endershot
 main: com.willfp.ecoenchants.endershot.EndershotMain
 version: ${projectVersion}
+author: Auxilor

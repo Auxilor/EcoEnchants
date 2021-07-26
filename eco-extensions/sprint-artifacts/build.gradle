@@ -1,5 +1,5 @@
 group 'com.willfp'
-version '5.2.0'
+version '5.2.1'
 description = 'Sprint Artifacts Extension'
 
 shadowJar {

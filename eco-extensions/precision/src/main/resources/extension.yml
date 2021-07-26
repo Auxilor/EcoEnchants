@@ -1,3 +1,4 @@
 name: Precision
 main: com.willfp.ecoenchants.precision.PrecisionMain
 version: ${projectVersion}
+author: Auxilor

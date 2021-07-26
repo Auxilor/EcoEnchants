@@ -1,3 +1,4 @@
 name: Rainbow
 main: com.willfp.ecoenchants.rainbow.RainbowMain
 version: ${projectVersion}
+author: Auxilor
