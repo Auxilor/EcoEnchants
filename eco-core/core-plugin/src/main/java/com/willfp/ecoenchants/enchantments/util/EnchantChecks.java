@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 
+import com.willfp.eco.util.ArrowUtils;
 import com.willfp.eco.util.DurabilityUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -12,7 +13,6 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.MetadataValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -109,16 +109,13 @@ public class EnchantChecks {
      */
     public static int getArrowLevel(@NotNull final Arrow arrow,
                                     @NotNull final Enchantment enchantment) {
-        if (arrow.getMetadata("shot-from").isEmpty()) {
+        ItemStack bow = ArrowUtils.getBow(arrow);
+
+        if (bow == null) {
             return 0;
         }
 
-        MetadataValue enchantmentsMetaValue = arrow.getMetadata("shot-from").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof ItemStack shotFrom)) {
-            return 0;
-        }
-
-        return getItemLevel(shotFrom, enchantment);
+        return getItemLevel(bow, enchantment);
     }
 
     /**
@@ -128,16 +125,13 @@ public class EnchantChecks {
      * @return A {@link HashMap} of all EcoEnchants, where the key represents the level.
      */
     public static Map<EcoEnchant, Integer> getEnchantsOnArrow(@NotNull final Arrow arrow) {
-        if (arrow.getMetadata("shot-from").isEmpty()) {
+        ItemStack bow = ArrowUtils.getBow(arrow);
+
+        if (bow == null) {
             return new HashMap<>();
         }
 
-        MetadataValue enchantmentsMetaValue = arrow.getMetadata("shot-from").get(0);
-        if (!(enchantmentsMetaValue.value() instanceof ItemStack shotFrom)) {
-            return new HashMap<>();
-        }
-
-        return getEnchantsOnItem(shotFrom);
+        return getEnchantsOnItem(bow);
     }
 
     /**
