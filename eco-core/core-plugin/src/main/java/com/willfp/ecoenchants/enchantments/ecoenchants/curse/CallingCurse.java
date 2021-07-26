@@ -47,12 +47,14 @@ public class CallingCurse extends EcoEnchant implements TimedRunnable {
 
     private void refresh() {
         players.clear();
-        this.getPlugin().getScheduler().runLater(() -> this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
-            int level = EnchantChecks.getArmorPoints(player, this, 0);
-            if (level > 0) {
-                players.put(player, level);
+        this.getPlugin().getScheduler().runLater(() -> {
+            for (Player player : this.getPlugin().getServer().getOnlinePlayers()) {
+                int level = EnchantChecks.getArmorPoints(player, this, 0);
+                if (level > 0) {
+                    players.put(player, level);
+                }
             }
-        }), 1);
+        }, 1);
 
         distance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "distance");
     }

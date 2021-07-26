@@ -11,6 +11,7 @@ import com.willfp.ecoenchants.config.RarityYml;
 import com.willfp.ecoenchants.config.TargetYml;
 import com.willfp.ecoenchants.config.VanillaEnchantsYml;
 import com.willfp.ecoenchants.display.EnchantDisplay;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
 import com.willfp.ecoenchants.enchantments.support.merging.grindstone.GrindstoneListeners;
@@ -25,12 +26,11 @@ import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssenti
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.generator.BlockPopulator;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -81,46 +81,35 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     protected void handleDisable() {
-        Bukkit.getServer().getWorlds().forEach(world -> {
-            List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
-            populators.forEach((blockPopulator -> {
-                if (blockPopulator instanceof LootPopulator) {
-                    world.getPopulators().remove(blockPopulator);
-                }
-            }));
-        });
+        for (World world : Bukkit.getServer().getWorlds()) {
+            world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
+        }
     }
 
     @Override
     protected void handleReload() {
         this.getDisplayModule().update();
-        EcoEnchants.values().forEach((ecoEnchant -> {
-            HandlerList.unregisterAll(ecoEnchant);
-
+        for (EcoEnchant enchant : EcoEnchants.values()) {
+            HandlerList.unregisterAll(enchant);
             this.getScheduler().runLater(() -> {
-                if (ecoEnchant.isEnabled()) {
-                    this.getEventManager().registerListener(ecoEnchant);
+                if (enchant.isEnabled()) {
+                    this.getEventManager().registerListener(enchant);
 
-                    if (ecoEnchant instanceof TimedRunnable) {
-                        this.getScheduler().syncRepeating((TimedRunnable) ecoEnchant, 5, ((TimedRunnable) ecoEnchant).getTime());
+                    if (enchant instanceof TimedRunnable) {
+                        this.getScheduler().syncRepeating((TimedRunnable) enchant, 5, ((TimedRunnable) enchant).getTime());
                     }
                 }
             }, 1);
-        }));
+        }
     }
 
     @Override
     protected void handleAfterLoad() {
         if (this.getConfigYml().getBool("loot.enabled")) {
-            Bukkit.getServer().getWorlds().forEach(world -> {
-                List<BlockPopulator> populators = new ArrayList<>(world.getPopulators());
-                populators.forEach((blockPopulator -> {
-                    if (blockPopulator instanceof LootPopulator) {
-                        world.getPopulators().remove(blockPopulator);
-                    }
-                }));
+            for (World world : Bukkit.getServer().getWorlds()) {
+                world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
                 world.getPopulators().add(new LootPopulator(this));
-            });
+            }
         }
         EssentialsManager.registerEnchantments();
     }
@@ -148,7 +137,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
                 new VillagerListeners(this),
-                new ItemConversions(this)
+                new ItemConversions()
         );
     }
 
