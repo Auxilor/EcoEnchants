@@ -62,6 +62,12 @@ public class ItemConversionOptions {
     @Getter
     private boolean deletingIllegal = false;
 
+    /**
+     * If disabled enchantments should be removed entirely.
+     */
+    @Getter
+    private boolean removeDisabled = false;
+
     public void reload(@NotNull final EcoPlugin plugin) {
         usingLoreGetter = plugin.getConfigYml().getBool("advanced.lore-getter.enabled");
         usingAggressiveLoreGetter = plugin.getConfigYml().getBool("advanced.lore-getter.aggressive");
@@ -72,6 +78,7 @@ public class ItemConversionOptions {
         usingLevelClampDelete = plugin.getConfigYml().getBool("advanced.level-clamp.delete-item");
         removingIllegal = plugin.getConfigYml().getBool("advanced.remove-illegal.enabled");
         deletingIllegal = plugin.getConfigYml().getBool("advanced.remove-illegal.delete-item");
+        removeDisabled = plugin.getConfigYml().getBool("advanced.remove-invalid.remove-disabled");
     }
 
     static {

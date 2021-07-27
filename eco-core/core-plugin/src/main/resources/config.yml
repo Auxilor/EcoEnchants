@@ -154,3 +154,10 @@ advanced:
     enabled: false
     # If the item should be deleted rather than have the enchantment removed.
     delete-item: false
+  remove-invalid:
+    # Remove invalid / disabled enchantments from items server-side
+    # Useful if you're disabling enchantments permanently and don't mind removing them from existing players
+    # Also helps remove deleted enchantments or enchantments from old plugins
+    enabled: false
+    # If disabled enchantments should be removed
+    remove-disabled: false

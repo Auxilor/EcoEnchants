@@ -1,9 +1,12 @@
 package com.willfp.ecoenchants.enchantments.util;
 
+import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -28,7 +31,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemConversions implements Listener {
+public class ItemConversions extends PluginDependent<EcoPlugin> implements Listener {
+    /**
+     * Pass an {@link EcoPlugin} in order to interface with it.
+     *
+     * @param plugin The plugin to manage.
+     */
+    protected ItemConversions(@NotNull EcoPlugin plugin) {
+        super(plugin);
+    }
+
     /**
      * On player hold item.
      * <p>
@@ -341,5 +353,66 @@ public class ItemConversions implements Listener {
         }
 
         Bukkit.getLogger().warning(player.getName() + " has/had an illegal item!");
+    }
+
+
+    /**
+     * On player hold item.
+     * <p>
+     * Listener for conversion.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void invalidRemover(@NotNull final PlayerItemHeldEvent event) {
+        if (!ItemConversionOptions.isRemoveDisabled()) {
+            return;
+        }
+
+        ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
+
+        fixInvalid(itemStack);
+    }
+
+    private void fixInvalid(@Nullable final ItemStack itemStack) {
+        if (itemStack == null) {
+            return;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return;
+        }
+
+        Map<Enchantment, Integer> enchants = this.getPlugin().getProxy(FastGetEnchantsProxy.class)
+                .getEnchantmentsOnItem(itemStack, true);
+
+        for (Enchantment enchantment : enchants.keySet()) {
+            if (enchantment instanceof EcoEnchant enchant) {
+                if (!enchant.isEnabled()) {
+                    enchants.remove(enchantment);
+                }
+            }
+        }
+
+        if (meta instanceof EnchantmentStorageMeta storageMeta) {
+            storageMeta.getStoredEnchants().forEach((enchantment, integer) -> {
+                storageMeta.removeStoredEnchant(enchantment);
+            });
+
+            enchants.forEach((enchantment, integer) -> {
+                storageMeta.addStoredEnchant(enchantment, integer, true);
+            });
+        } else {
+            meta.getEnchants().forEach((enchantment, integer) -> {
+                meta.removeEnchant(enchantment);
+            });
+
+            enchants.forEach((enchantment, integer) -> {
+                meta.addEnchant(enchantment, integer, true);
+            });
+        }
+
+        itemStack.setItemMeta(meta);
     }
 }

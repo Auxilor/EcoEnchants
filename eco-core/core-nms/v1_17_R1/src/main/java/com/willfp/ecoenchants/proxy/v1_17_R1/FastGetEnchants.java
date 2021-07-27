@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.item.ItemEnchantedBook;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_17_R1.util.CraftNamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -13,7 +14,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public final class FastGetEnchants implements FastGetEnchantsProxy {
     @Override

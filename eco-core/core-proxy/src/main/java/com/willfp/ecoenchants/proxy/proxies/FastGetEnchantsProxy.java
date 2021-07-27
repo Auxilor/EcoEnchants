@@ -22,7 +22,7 @@ public interface FastGetEnchantsProxy extends AbstractProxy {
     /**
      * Get all enchantments on an {@link ItemStack}.
      *
-     * @param itemStack The item to query.
+     * @param itemStack   The item to query.
      * @param checkStored Check stored enchantments in the enchanted book if true.
      * @return A map of all enchantments, where the value represents the level present.
      */
@@ -36,7 +36,7 @@ public interface FastGetEnchantsProxy extends AbstractProxy {
      * @return The level found, or 0 if not present.
      */
     default int getLevelOnItem(@NotNull ItemStack itemStack,
-                                @NotNull Enchantment enchantment) {
+                               @NotNull Enchantment enchantment) {
         return getLevelOnItem(itemStack, enchantment, false);
     }
 

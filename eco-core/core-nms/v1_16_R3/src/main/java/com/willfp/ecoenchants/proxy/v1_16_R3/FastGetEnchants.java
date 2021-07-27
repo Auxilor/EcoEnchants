@@ -1,11 +1,13 @@
 package com.willfp.ecoenchants.proxy.v1_16_R3;
 
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
-import net.minecraft.server.v1_16_R3.Items;
 import net.minecraft.server.v1_16_R3.ItemEnchantedBook;
+import net.minecraft.server.v1_16_R3.Items;
 import net.minecraft.server.v1_16_R3.NBTBase;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.minecraft.server.v1_16_R3.NBTTagList;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_16_R3.util.CraftNamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -13,7 +15,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public final class FastGetEnchants implements FastGetEnchantsProxy {
     @Override
