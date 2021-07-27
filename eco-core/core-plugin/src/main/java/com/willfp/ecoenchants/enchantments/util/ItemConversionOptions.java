@@ -78,7 +78,7 @@ public class ItemConversionOptions {
         usingLevelClampDelete = plugin.getConfigYml().getBool("advanced.level-clamp.delete-item");
         removingIllegal = plugin.getConfigYml().getBool("advanced.remove-illegal.enabled");
         deletingIllegal = plugin.getConfigYml().getBool("advanced.remove-illegal.delete-item");
-        removeDisabled = plugin.getConfigYml().getBool("advanced.remove-invalid.remove-disabled");
+        removeDisabled = plugin.getConfigYml().getBool("advanced.remove-invalid.enabled");
     }
 
     static {

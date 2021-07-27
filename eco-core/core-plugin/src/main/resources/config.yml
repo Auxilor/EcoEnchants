@@ -159,5 +159,3 @@ advanced:
     # Useful if you're disabling enchantments permanently and don't mind removing them from existing players
     # Also helps remove deleted enchantments or enchantments from old plugins
     enabled: false
-    # If disabled enchantments should be removed
-    remove-disabled: false
