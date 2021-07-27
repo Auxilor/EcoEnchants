@@ -137,7 +137,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
                 new VillagerListeners(this),
-                new ItemConversions()
+                new ItemConversions(this)
         );
     }
 

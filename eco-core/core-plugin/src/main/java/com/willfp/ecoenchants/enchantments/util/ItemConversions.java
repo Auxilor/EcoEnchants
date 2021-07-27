@@ -37,7 +37,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
      *
      * @param plugin The plugin to manage.
      */
-    protected ItemConversions(@NotNull EcoPlugin plugin) {
+    public ItemConversions(@NotNull EcoPlugin plugin) {
         super(plugin);
     }
 
