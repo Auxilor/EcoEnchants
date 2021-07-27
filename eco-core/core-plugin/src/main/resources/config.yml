@@ -54,6 +54,7 @@ lore:
     enabled: false
     before-lines: 5 # Describe before or equal to number of enchantments
     wrap: 30 # Word wrap after number of characters
+    at-bottom: false # If descriptions should be shown after all enchantments rather than under each one
 
   # Ensure that describe and shrink have no overlap as this may cause errors
 

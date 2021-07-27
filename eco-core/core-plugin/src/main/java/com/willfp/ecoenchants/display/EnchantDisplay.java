@@ -7,7 +7,6 @@ import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.display.DisplayPriority;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
@@ -112,8 +111,6 @@ public class EnchantDisplay extends DisplayModule {
 
         List<String> lore = new ArrayList<>();
 
-        List<Enchantment> forRemoval = new ArrayList<>();
-
         LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(this.getPlugin().getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(itemStack, true));
 
         enchantments.entrySet().removeIf(enchantmentIntegerEntry -> enchantmentIntegerEntry.getValue().equals(0));
@@ -129,25 +126,6 @@ public class EnchantDisplay extends DisplayModule {
         unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
 
         enchantments.forEach((enchantment, level) -> {
-            if (!(enchantment instanceof EcoEnchant ecoEnchant)) {
-                return;
-            }
-
-            if (!ecoEnchant.isEnabled()) {
-                forRemoval.add(enchantment);
-            }
-        });
-
-        forRemoval.forEach(enchantment -> {
-            enchantments.remove(enchantment);
-            if (meta instanceof EnchantmentStorageMeta) {
-                ((EnchantmentStorageMeta) meta).removeStoredEnchant(enchantment);
-            } else {
-                meta.removeEnchant(enchantment);
-            }
-        });
-
-        enchantments.forEach((enchantment, level) -> {
             String name = EnchantmentCache.getEntry(enchantment).getName();
 
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
@@ -159,8 +137,10 @@ public class EnchantDisplay extends DisplayModule {
             }
 
             lore.add(Display.PREFIX + name);
-            if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
-                lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
+            if (!options.getDescriptionOptions().isShowingAtBottom()) {
+                if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
+                    lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
+                }
             }
         });
 
@@ -179,6 +159,14 @@ public class EnchantDisplay extends DisplayModule {
             });
             lore.clear();
             lore.addAll(newLore);
+        }
+
+        if (options.getDescriptionOptions().isShowingAtBottom()) {
+            if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
+                for (Enchantment enchantment : enchantments.keySet()) {
+                    lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
+                }
+            }
         }
 
         if (meta instanceof EnchantmentStorageMeta) {

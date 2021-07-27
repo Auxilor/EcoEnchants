@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
-import com.willfp.eco.util.StringUtils;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +25,12 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
     private String color;
 
     /**
+     * If enchantment descriptions should be at the bottom of the enchantment lore rather than under each enchantment.
+     */
+    @Getter
+    private boolean showingAtBottom;
+
+    /**
      * Create new description options.
      *
      * @param plugin EcoEnchants.
@@ -40,6 +45,7 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
     public void update() {
         threshold = this.getPlugin().getConfigYml().getInt("lore.describe.before-lines");
         enabled = this.getPlugin().getConfigYml().getBool("lore.describe.enabled");
-        color = StringUtils.format(this.getPlugin().getLangYml().getString("description-color"));
+        color = this.getPlugin().getLangYml().getString("description-color");
+        showingAtBottom = this.getPlugin().getConfigYml().getBool("lore.describe.at-bottom");
     }
 }

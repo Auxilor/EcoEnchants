@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.config.yaml.YamlExtendableConfig;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -48,7 +47,7 @@ public class EnchantmentConfig extends YamlExtendableConfig {
                              @NotNull final Class<?> source,
                              @NotNull final EcoEnchant enchant,
                              @NotNull final EcoPlugin plugin) {
-        super(name, true, EcoEnchantsPlugin.getInstance(), source, "enchants/" + enchant.getType().getName() + "/");
+        super(name, true, plugin, source, "enchants/" + enchant.getType().getName() + "/");
         this.name = name;
         this.enchant = enchant;
         this.plugin = plugin;
