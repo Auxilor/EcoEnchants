@@ -42,6 +42,8 @@ spell-color: "&9"
 
 description-color: "&8"
 
+special-particle-color: "#FF69B4"
+
 enchantments:
   protection:
     name: "Protection"

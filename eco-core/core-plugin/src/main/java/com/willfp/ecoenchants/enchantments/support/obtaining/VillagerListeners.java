@@ -7,7 +7,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.VillagerAcquireTradeEvent;
@@ -66,6 +70,8 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
 
         double multiplier = 0.01 / this.getPlugin().getConfigYml().getDouble("villager.book-times-less-likely");
 
+        EcoEnchant applied = null;
+
         for (EcoEnchant enchantment : enchantments) {
             if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier) {
                 continue;
@@ -97,7 +103,13 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
             meta.getStoredEnchants().forEach(((enchantment1, integer) -> meta.removeStoredEnchant(enchantment1)));
 
             meta.addStoredEnchant(enchantment, level, false);
+
+            applied = enchantment;
             break;
+        }
+
+        if (applied == null) {
+            return;
         }
 
         result.setItemMeta(meta);
@@ -105,6 +117,10 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         MerchantRecipe recipe = new MerchantRecipe(result, uses, maxUses, experienceReward, villagerExperience, priceMultiplier);
         recipe.setIngredients(ingredients);
         event.setRecipe(recipe);
+
+        if (applied.getType().equals(EnchantmentType.SPECIAL)) {
+            showParticles(event.getEntity());
+        }
     }
 
     /**
@@ -217,5 +233,36 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         MerchantRecipe recipe = new MerchantRecipe(result, uses, maxUses, experienceReward, villagerExperience, priceMultiplier);
         recipe.setIngredients(ingredients);
         event.setRecipe(recipe);
+
+        if (toAdd.keySet().stream().anyMatch(enchant -> enchant.getType().equals(EnchantmentType.SPELL))) {
+            showParticles(event.getEntity());
+        }
+    }
+
+    private void showParticles(@NotNull final Entity villager) {
+        Particle.DustOptions extra = new Particle.DustOptions(
+                Color.fromRGB(Integer.parseInt(
+                        this.getPlugin().getLangYml().getString("special-particle-color").substring(1),
+                        16
+                )),
+                1.0f
+        );
+
+        Location location = villager.getLocation().clone();
+
+        location.add(0, 1, 0);
+
+        int limit = NumberUtils.randInt(8, 13);
+
+        for (int i = 0; i < limit; i++) {
+            Location spawnLoc = location.clone();
+            spawnLoc.add(
+                    NumberUtils.randFloat(-1.2, 1.2),
+                    NumberUtils.randFloat(-0.3, 1.2),
+                    NumberUtils.randFloat(-1.2, 1.2)
+            );
+
+            spawnLoc.getWorld().spawnParticle(Particle.REDSTONE, spawnLoc, 1, 0, 0, 0, 0, extra, true);
+        }
     }
 }
