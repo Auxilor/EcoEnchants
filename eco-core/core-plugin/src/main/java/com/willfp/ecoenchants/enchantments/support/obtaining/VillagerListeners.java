@@ -118,8 +118,10 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         recipe.setIngredients(ingredients);
         event.setRecipe(recipe);
 
-        if (applied.getType().equals(EnchantmentType.SPECIAL)) {
-            showParticles(event.getEntity());
+        if (this.getPlugin().getConfigYml().getBool("villager.notify-on-special")) {
+            if (applied.getType().equals(EnchantmentType.SPECIAL)) {
+                showParticles(event.getEntity());
+            }
         }
     }
 
@@ -234,8 +236,10 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         recipe.setIngredients(ingredients);
         event.setRecipe(recipe);
 
-        if (toAdd.keySet().stream().anyMatch(enchant -> enchant.getType().equals(EnchantmentType.SPELL))) {
-            showParticles(event.getEntity());
+        if (this.getPlugin().getConfigYml().getBool("villager.notify-on-special")) {
+            if (toAdd.keySet().stream().anyMatch(enchant -> enchant.getType().equals(EnchantmentType.SPELL))) {
+                showParticles(event.getEntity());
+            }
         }
     }
 

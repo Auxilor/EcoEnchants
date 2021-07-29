@@ -81,6 +81,7 @@ enchanting-table:
 villager:
   enabled: true #Enable EcoEnchants through villagers
   book-times-less-likely: 7 # Times less likely to get an enchantment from a book with a villager. Recommended to be higher as books can only have one enchantment on them.
+  notify-on-special: true # Show particles when the villager unlocks a special enchantment trade
 
   reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added. Does not apply to books as they only ever contain one enchantment.
     enabled: true # Enable reduction
