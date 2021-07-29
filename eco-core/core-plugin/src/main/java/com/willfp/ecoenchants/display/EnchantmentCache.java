@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.display;
 import com.google.common.collect.ImmutableMap;
 import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.core.display.Display;
+import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -107,12 +108,12 @@ public class EnchantmentCache {
         } else {
             description = Arrays.asList(
                     WordUtils.wrap(
-                            String.valueOf(PLUGIN.getLangYml().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description")),
+                            PLUGIN.getLangYml().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".description"),
                             PLUGIN.getConfigYml().getInt("lore.describe.wrap"),
                             "\n", false
                     ).split("\\r?\\n")
             );
-            name = String.valueOf(PLUGIN.getLangYml().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name"));
+            name = PLUGIN.getLangYml().getString("enchantments." + enchantment.getKey().getKey().toLowerCase() + ".name");
             type = enchantment.isCursed() ? EnchantmentType.CURSE : EnchantmentType.NORMAL;
             if (enchantment.isTreasure()) {
                 rarity = EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-treasure-rarity"));
@@ -132,7 +133,11 @@ public class EnchantmentCache {
         }
 
         String rawName = name;
-        name = color + name;
+        if (color.contains("{}")) {
+            name = StringUtils.format(color.replace("{}", name));
+        } else {
+            name = color + name;
+        }
         description.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
         CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, rawName, description, type, rarity));
     }

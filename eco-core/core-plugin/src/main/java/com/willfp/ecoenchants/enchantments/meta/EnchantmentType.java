@@ -34,7 +34,7 @@ public class EnchantmentType {
     public static final EnchantmentType NORMAL = new EnchantmentType(
             "normal",
             false,
-            () -> PLUGIN.getLangYml().getString("not-curse-color")
+            () -> PLUGIN.getLangYml().getString("normal-color", false)
     );
 
     /**
@@ -45,7 +45,7 @@ public class EnchantmentType {
     public static final EnchantmentType CURSE = new EnchantmentType(
             "curse",
             false,
-            () -> PLUGIN.getLangYml().getString("curse-color")
+            () -> PLUGIN.getLangYml().getString("curse-color", false)
     );
 
     /**
@@ -56,7 +56,7 @@ public class EnchantmentType {
     public static final EnchantmentType SPECIAL = new EnchantmentType(
             "special",
             () -> !PLUGIN.getConfigYml().getBool("types.special.allow-multiple"),
-            () -> PLUGIN.getLangYml().getString("special-color")
+            () -> PLUGIN.getLangYml().getString("special-color", false)
     );
 
     /**
@@ -67,7 +67,7 @@ public class EnchantmentType {
     public static final EnchantmentType ARTIFACT = new EnchantmentType(
             "artifact",
             () -> !PLUGIN.getConfigYml().getBool("types.artifact.allow-multiple"),
-            () -> PLUGIN.getLangYml().getString("artifact-color"),
+            () -> PLUGIN.getLangYml().getString("artifact-color", false),
             Artifact.class
     );
 
@@ -79,7 +79,7 @@ public class EnchantmentType {
     public static final EnchantmentType SPELL = new EnchantmentType(
             "spell",
             true,
-            () -> PLUGIN.getLangYml().getString("spell-color"),
+            () -> PLUGIN.getLangYml().getString("spell-color", false),
             Spell.class
     );
 

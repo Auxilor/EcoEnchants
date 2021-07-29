@@ -35,8 +35,8 @@ no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
 
 curse-color: "&c"
-not-curse-color: "&7"
-special-color: "&d"
+normal-color: "&7"
+special-color: "<gradient:f953c6>{}</gradient:b91d73>"
 artifact-color: "&e"
 spell-color: "&9"
 
