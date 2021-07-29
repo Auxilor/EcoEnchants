@@ -134,10 +134,13 @@ public class EnchantmentCache {
 
         String rawName = name;
         if (color.contains("{}")) {
-            name = StringUtils.format(color.replace("{}", name));
+            name = color.replace("{}", name);
         } else {
             name = color + name;
         }
+
+        name = StringUtils.format(name);
+
         description.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
         CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, rawName, description, type, rarity));
     }
