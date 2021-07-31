@@ -25,7 +25,7 @@ anvil:
 
 lore:
   use-numerals: true
-  use-numbers-above-threshold: 10 #After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
+  use-numbers-above-threshold: 10 # After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
 
   sort-by-type: false # Sort enchantments by type
   sort-by-length: false # Sort enchantments by length
@@ -64,11 +64,14 @@ lore:
     maximum-per-line: 2 # Maximum number of enchantments to have in 1 line
 
 enchanting-table:
-  enabled: true #Enable EcoEnchants through an enchanting table
-  book-times-less-likely: 2 #Times less likely to get an EcoEnchant on a book to balance them out. Don't recommend editing.
-  maximum-obtainable-level: 30 #Max level for enchanting table. Vanilla default is 30, change if you have a plugin that edits this.
+  enabled: true # Enable EcoEnchants through an enchanting table
+  book-times-less-likely: 2 # Times less likely to get an EcoEnchant on a book to balance them out. Don't recommend editing.
+  maximum-obtainable-level: 30 # Max level for enchanting table. Vanilla default is 30, change if you have a plugin that edits this.
   special-bias: 0.7 # Value between 0-1 dictating rarity of high-level special enchantments. 0 is no extra bias, 1 is only level 1.
-  notify-on-special: true # Tell player in chat when they get a special enchantment
+  notify-on-special: # Tell player in chat and make a sound when they get a special enchantment
+    enabled: true
+    sound: ENTITY_PLAYER_LEVELUP
+    pitch: 1.5
 
   cap-amount: # Prevent getting above a certain amount of enchantments
     enabled: true # Enable capping
@@ -79,7 +82,7 @@ enchanting-table:
     factor: 2.2 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
 
 villager:
-  enabled: true #Enable EcoEnchants through villagers
+  enabled: true # Enable EcoEnchants through villagers
   book-times-less-likely: 7 # Times less likely to get an enchantment from a book with a villager. Recommended to be higher as books can only have one enchantment on them.
   notify-on-special: true # Show particles when the villager unlocks a special enchantment trade
 
@@ -88,7 +91,7 @@ villager:
     factor: 5 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
 
 loot:
-  enabled: true #Enable EcoEnchants through loot chests
+  enabled: true # Enable EcoEnchants through loot chests
   book-times-less-likely: 2
 
   reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added. Does not apply to books as they only ever contain one enchantment.

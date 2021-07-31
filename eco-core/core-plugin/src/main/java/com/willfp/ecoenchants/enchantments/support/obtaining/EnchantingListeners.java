@@ -10,6 +10,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
 import org.bukkit.entity.Player;
@@ -196,7 +197,17 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
             CURRENTLY_ENCHANTING_SECONDARY.remove(player);
         }
 
-        if (gotSpecial && this.getPlugin().getConfigYml().getBool("enchanting-table.notify-on-special")) {
+        if (gotSpecial && this.getPlugin().getConfigYml().getBool("enchanting-table.notify-on-special.enabled")) {
+            String soundName = this.getPlugin().getConfigYml().getString("enchanting-table.notify-on-special.sound").toUpperCase();
+            Sound sound = Sound.valueOf(soundName);
+            float pitch = (float) this.getPlugin().getConfigYml().getDouble("enchanting-table.notify-on-special.pitch");
+            player.playSound(
+                    player.getLocation(),
+                    sound,
+                    1.0f,
+                    pitch
+            );
+
             player.sendMessage(this.getPlugin().getLangYml().getMessage("got-special"));
         }
 
