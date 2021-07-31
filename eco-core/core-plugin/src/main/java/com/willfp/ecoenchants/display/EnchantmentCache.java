@@ -124,12 +124,13 @@ public class EnchantmentCache {
 
         color = type.getColor();
 
-        if (rarity != null && rarity.hasCustomColor() && type != EnchantmentType.CURSE) {
-            color = rarity.getCustomColor();
-        }
 
         if (rarity == null) {
             rarity = EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"));
+        }
+
+        if (rarity.hasCustomColor() && type != EnchantmentType.CURSE) {
+            color = rarity.getCustomColor();
         }
 
         String rawName = name;
