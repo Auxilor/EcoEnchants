@@ -65,7 +65,7 @@ public class EnchantmentUtils {
         );
 
         enchantment.getConfig().getKeys(true).forEach(string -> {
-            String key = string.replace("\\.", "_").replace("-", "_");
+            String key = string.replace(".", "_").replace("-", "_");
             Object object = enchantment.getConfig().get(string);
 
             PlaceholderManager.registerPlaceholder(
