@@ -261,9 +261,9 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         for (int i = 0; i < limit; i++) {
             Location spawnLoc = location.clone();
             spawnLoc.add(
-                    NumberUtils.randFloat(-1.2, 1.2),
-                    NumberUtils.randFloat(-0.3, 1.2),
-                    NumberUtils.randFloat(-1.2, 1.2)
+                    NumberUtils.randFloat(-2, 2),
+                    NumberUtils.randFloat(-0.3, 1.6),
+                    NumberUtils.randFloat(-2, 2)
             );
 
             spawnLoc.getWorld().spawnParticle(Particle.REDSTONE, spawnLoc, 1, 0, 0, 0, 0, extra, true);

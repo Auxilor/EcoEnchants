@@ -8,8 +8,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import org.bukkit.Color;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentOffer;
@@ -207,6 +210,33 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
                     1.0f,
                     pitch
             );
+
+            if (this.getPlugin().getConfigYml().getBool("enchanting-table.notify-on-special.show-particles")) {
+                Particle.DustOptions extra = new Particle.DustOptions(
+                        Color.fromRGB(Integer.parseInt(
+                                this.getPlugin().getLangYml().getString("special-particle-color").substring(1),
+                                16
+                        )),
+                        1.0f
+                );
+
+                Location location = player.getLocation().clone();
+
+                location.add(0, 1, 0);
+
+                int limit = NumberUtils.randInt(8, 13);
+
+                for (int i = 0; i < limit; i++) {
+                    Location spawnLoc = location.clone();
+                    spawnLoc.add(
+                            NumberUtils.randFloat(-2, 2),
+                            NumberUtils.randFloat(-0.3, 1.6),
+                            NumberUtils.randFloat(-2, 2)
+                    );
+
+                    spawnLoc.getWorld().spawnParticle(Particle.REDSTONE, spawnLoc, 1, 0, 0, 0, 0, extra, true);
+                }
+            }
 
             player.sendMessage(this.getPlugin().getLangYml().getMessage("got-special"));
         }
