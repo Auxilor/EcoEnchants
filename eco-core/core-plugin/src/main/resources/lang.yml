@@ -37,8 +37,8 @@ no-conflicts: "&cNo conflicts"
 curse-color: "&c"
 normal-color: "&7"
 special-color: "<gradient:FB57EC>{}</gradient:EF1DEC>&d"
-artifact-color: "&e"
-spell-color: "&9"
+artifact-color: "<gradient:CAC531>{}</gradient:F3F9A7>&e"
+spell-color: "<gradient:0575E6>{}</gradient:021B79>&9"
 
 description-color: "&8"
 
