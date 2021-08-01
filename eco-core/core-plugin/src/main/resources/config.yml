@@ -73,6 +73,7 @@ enchanting-table:
     sound: ENTITY_PLAYER_LEVELUP
     pitch: 1.5
     show-particles: true
+    particle-amount: 26
 
   cap-amount: # Prevent getting above a certain amount of enchantments
     enabled: true # Enable capping

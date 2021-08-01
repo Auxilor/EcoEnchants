@@ -224,7 +224,7 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
 
                 location.add(0, 1, 0);
 
-                int limit = NumberUtils.randInt(8, 13);
+                int limit = this.getPlugin().getConfigYml().getInt("enchanting-table.notify-on-special.particle-amount");
 
                 for (int i = 0; i < limit; i++) {
                     Location spawnLoc = location.clone();
