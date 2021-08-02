@@ -118,7 +118,7 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         recipe.setIngredients(ingredients);
         event.setRecipe(recipe);
 
-        if (this.getPlugin().getConfigYml().getBool("villager.notify-on-special")) {
+        if (this.getPlugin().getConfigYml().getBool("villager.notify-on-special.enabled")) {
             if (applied.getType().equals(EnchantmentType.SPECIAL)) {
                 showParticles(event.getEntity());
             }
@@ -236,7 +236,7 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         recipe.setIngredients(ingredients);
         event.setRecipe(recipe);
 
-        if (this.getPlugin().getConfigYml().getBool("villager.notify-on-special")) {
+        if (this.getPlugin().getConfigYml().getBool("villager.notify-on-special.enabled")) {
             if (toAdd.keySet().stream().anyMatch(enchant -> enchant.getType().equals(EnchantmentType.SPELL))) {
                 showParticles(event.getEntity());
             }
@@ -256,7 +256,7 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
 
         location.add(0, 1, 0);
 
-        int limit = NumberUtils.randInt(8, 13);
+        int limit = this.getPlugin().getConfigYml().getInt("villager.notify-on-special.particle-amount");
 
         for (int i = 0; i < limit; i++) {
             Location spawnLoc = location.clone();
