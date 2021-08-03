@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -387,7 +388,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
         Map<Enchantment, Integer> enchants = this.getPlugin().getProxy(FastGetEnchantsProxy.class)
                 .getEnchantmentsOnItem(itemStack, true);
 
-        for (Enchantment enchantment : enchants.keySet()) {
+        for (Enchantment enchantment : new HashSet<>(enchants.keySet())) {
             if (enchantment instanceof EcoEnchant enchant) {
                 if (!enchant.isEnabled()) {
                     enchants.remove(enchantment);
