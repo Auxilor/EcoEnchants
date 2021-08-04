@@ -1,0 +1,4 @@
+name: Intimidation
+main: com.willfp.ecoenchants.intimidation.IntimidationMain
+version: ${projectVersion}
+author: Auxilor

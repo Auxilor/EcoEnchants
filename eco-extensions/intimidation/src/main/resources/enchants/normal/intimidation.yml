@@ -1,0 +1,25 @@
+#
+# Intimidation EcoEnchant
+#
+
+name: "Intimidation"
+description: Decrease the chance of hostile mobs being aggravated at you.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: legendary
+
+general-config:
+  flags: []
+  targets:
+    - helmet
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: []
+  maximum-level: 4
+
+config:
+  chance-per-level: 20
