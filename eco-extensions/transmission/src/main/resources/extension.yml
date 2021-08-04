@@ -1,0 +1,4 @@
+name: Transmission
+main: com.willfp.ecoenchants.transmission.TransmissionMain
+version: ${projectVersion}
+author: Auxilor
