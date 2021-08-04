@@ -3,7 +3,7 @@
 #
 
 name: "Curse of Harmlessness"
-description: Chance for attacks to do nothing.
+description: '&a%value%%&r chance for attacks to do nothing.'
 enabled: true
 
 obtaining:

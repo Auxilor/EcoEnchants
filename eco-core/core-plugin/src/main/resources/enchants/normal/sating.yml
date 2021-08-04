@@ -3,7 +3,7 @@
 #
 
 name: "Sating"
-description: Reduces hunger loss.
+description: Reduces hunger loss by &a%value%%&r.
 enabled: true
 
 obtaining:

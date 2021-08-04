@@ -3,7 +3,7 @@
 #
 
 name: "Transfuse"
-description: Breaking stone can drop as random ore.
+description: '&a%value%%&r chance for stone to drop as random ore.'
 enabled: true
 
 obtaining:

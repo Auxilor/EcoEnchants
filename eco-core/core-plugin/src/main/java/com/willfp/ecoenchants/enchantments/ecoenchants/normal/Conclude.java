@@ -17,6 +17,11 @@ public class Conclude extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
+    @Override
     public void onTridentDamage(@NotNull final LivingEntity attacker,
                                 @NotNull final LivingEntity victim,
                                 @NotNull final Trident trident,

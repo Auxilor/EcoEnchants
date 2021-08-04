@@ -3,7 +3,7 @@
 #
 
 name: "Finishing"
-description: Chance to instantly kill entities on low health.
+description: '&a%value%%&r chance to instantly kill entities on low health.'
 enabled: true
 
 obtaining:

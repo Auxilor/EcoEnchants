@@ -3,7 +3,7 @@
 #
 
 name: "Paralyze"
-description: Chance to give your attacker mining fatigue.
+description: '&a%value%%&r chance to give your attacker mining fatigue.'
 enabled: true
 
 obtaining:

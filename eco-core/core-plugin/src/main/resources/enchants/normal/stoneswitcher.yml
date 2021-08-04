@@ -3,7 +3,7 @@
 #
 
 name: "Stone Switcher"
-description: Breaking stone can drop as variants.
+description: '&a%value%%&r for stone to drop as variants.'
 enabled: true
 
 obtaining:

@@ -16,6 +16,11 @@ public class MisfortuneCurse extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
+    @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,
                              final int level,

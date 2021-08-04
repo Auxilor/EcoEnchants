@@ -3,7 +3,7 @@
 #
 
 name: "Wood Switcher"
-description: Breaking logs can drop as other logs.
+description: Breaking logs have a &a%value%%&r chance to drop as other logs.
 enabled: true
 
 obtaining:

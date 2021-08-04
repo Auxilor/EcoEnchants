@@ -3,7 +3,7 @@
 #
 
 name: "Illusion Aspect"
-description: Chance to blind and nauseate opponent.
+description: '&a%value%%&r chance to blind and nauseate opponent.'
 enabled: true
 
 obtaining:

@@ -28,6 +28,11 @@ public class Spearfishing extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
     @EventHandler
     public void onSpearfishingLand(@NotNull final ProjectileHitEvent event) {
         if (event.getEntityType() != EntityType.TRIDENT) {

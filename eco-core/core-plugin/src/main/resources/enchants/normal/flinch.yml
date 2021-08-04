@@ -3,7 +3,7 @@
 #
 
 name: "Flinch"
-description: Chance to blind your attacker.
+description: '&a%value%%&r chance to blind your attacker.'
 enabled: true
 
 obtaining:

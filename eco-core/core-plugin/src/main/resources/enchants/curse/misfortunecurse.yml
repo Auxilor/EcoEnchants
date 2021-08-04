@@ -3,7 +3,7 @@
 #
 
 name: "Curse of Misfortune"
-description: Chance for blocks to not drop items.
+description: '&a%value%%&r chance for blocks to not drop items.'
 enabled: true
 
 obtaining:

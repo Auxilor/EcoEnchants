@@ -3,7 +3,7 @@
 #
 
 name: "Blind"
-description: Chance of blinding your opponent.
+description: '&a%value%%&r chance of blinding your opponent.'
 enabled: true
 
 obtaining:

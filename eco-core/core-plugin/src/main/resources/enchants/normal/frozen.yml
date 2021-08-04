@@ -3,7 +3,7 @@
 #
 
 name: "Frozen"
-description: Chance to give your attacker slowness.
+description: '&a%value%%&r chance to give your attacker slowness.'
 enabled: true
 
 obtaining:

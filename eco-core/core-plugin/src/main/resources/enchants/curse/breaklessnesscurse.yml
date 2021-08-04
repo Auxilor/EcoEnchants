@@ -3,7 +3,7 @@
 #
 
 name: "Curse of Breaklessness"
-description: Chance to prevent block breaking.
+description: '&a%value%%&r chance to prevent block breaking.'
 enabled: true
 
 obtaining:

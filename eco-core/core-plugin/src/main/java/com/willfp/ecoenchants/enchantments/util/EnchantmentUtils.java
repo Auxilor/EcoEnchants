@@ -34,6 +34,18 @@ public class EnchantmentUtils {
     }
 
     /**
+     * If the enchantment has successfully passed its specified chance.
+     *
+     * @param enchantment The enchantment to query.
+     * @param level       The level to base the chance off of.
+     * @return If the enchantment should then be executed.
+     */
+    public static String chancePlaceholder(@NotNull final EcoEnchant enchantment,
+                                           final int level) {
+        return NumberUtils.format(enchantment.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "chance-per-level") * level);
+    }
+
+    /**
      * If attack was fully charged if required.
      *
      * @param enchantment The enchantment.

@@ -3,7 +3,7 @@
 #
 
 name: "Dullness"
-description: Chance of giving your opponent weakness.
+description: '&a%value%%&r chance of giving your opponent weakness.'
 enabled: true
 
 obtaining:

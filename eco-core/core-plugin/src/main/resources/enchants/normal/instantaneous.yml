@@ -3,7 +3,7 @@
 #
 
 name: "Instantaneous"
-description: Chance of instantly breaking blocks.
+description: '&a%value%%&r chance to instantly break blocks.'
 enabled: true
 
 obtaining:

@@ -3,7 +3,7 @@
 #
 
 name: "Ignite"
-description: Chance to light hit block on fire.
+description: '&a%value%%&r chance to light hit block on fire.'
 enabled: true
 
 obtaining:

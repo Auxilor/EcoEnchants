@@ -3,7 +3,7 @@
 #
 
 name: "Levitate"
-description: Chance of applying levitation to your opponent.
+description: '&a%value%%&r chance of applying levitation to your opponent.'
 enabled: true
 
 obtaining:

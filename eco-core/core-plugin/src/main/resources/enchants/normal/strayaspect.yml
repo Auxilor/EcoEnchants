@@ -3,7 +3,7 @@
 #
 
 name: "Stray Aspect"
-description: Chance of slowing your opponent.
+description: '&a%value%%&r chance of slowing your opponent.'
 enabled: true
 
 obtaining:

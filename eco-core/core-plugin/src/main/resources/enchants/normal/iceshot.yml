@@ -3,7 +3,7 @@
 #
 
 name: "Ice Shot"
-description: Chance of freezing your opponent.
+description: '&a%value%%&r chance of freezing your opponent.'
 enabled: true
 
 obtaining:

@@ -3,7 +3,7 @@
 #
 
 name: "Disable"
-description: Chance of giving your opponent extreme mining fatigue.
+description: '&a%value%%&r chance of giving your opponent extreme mining fatigue.'
 enabled: true
 
 obtaining:

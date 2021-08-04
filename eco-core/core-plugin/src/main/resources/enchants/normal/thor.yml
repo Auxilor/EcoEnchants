@@ -3,7 +3,7 @@
 #
 
 name: "Thor"
-description: Chance of striking lightning on your opponent.
+description: '&a%value%%&r chance of striking lightning on your opponent.'
 enabled: true
 
 obtaining:

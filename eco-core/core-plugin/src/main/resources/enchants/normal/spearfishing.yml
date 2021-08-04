@@ -3,7 +3,7 @@
 #
 
 name: "Spearfishing"
-description: Chance of dropping fish when tridenting water.
+description: '&a%value%%&r chance of dropping fish when tridenting water.'
 enabled: true
 
 obtaining:

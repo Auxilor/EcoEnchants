@@ -3,7 +3,7 @@
 #
 
 name: "Graceful"
-description: Chance of getting slow falling just above hitting the ground.
+description: '&a%value%%&r chance of getting slow falling just above hitting the ground.'
 enabled: true
 
 obtaining:

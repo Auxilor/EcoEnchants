@@ -3,7 +3,7 @@
 #
 
 name: "Block Breather"
-description: Chance to ignore suffocation damage.
+description: '&a%value%%&r chance to ignore suffocation damage.'
 enabled: true
 
 obtaining:

@@ -3,7 +3,7 @@
 #
 
 name: "Beheading"
-description: Chance of getting player or mob head.
+description: '&a%value%%&r chance of getting player or mob head.'
 enabled: true
 
 obtaining:

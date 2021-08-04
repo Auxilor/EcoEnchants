@@ -3,7 +3,7 @@
 #
 
 name: "Stalwart"
-description: Chance to get resistance for a short time when taking damage.
+description: '&a%value%%&r chance to get resistance for a short time when taking damage.'
 enabled: true
 
 obtaining:

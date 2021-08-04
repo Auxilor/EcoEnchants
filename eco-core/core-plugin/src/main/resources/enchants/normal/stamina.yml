@@ -3,7 +3,7 @@
 #
 
 name: "Stamina"
-description: Decreases hunger loss while sprinting.
+description: Decreases hunger loss by &a%value%%&r while sprinting.
 enabled: true
 
 obtaining:

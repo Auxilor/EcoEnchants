@@ -3,7 +3,7 @@
 #
 
 name: "Volatile"
-description: Explosive sword attacks.
+description: '&a%value%%&r chance to have explosive sword attacks.'
 enabled: true
 
 obtaining:

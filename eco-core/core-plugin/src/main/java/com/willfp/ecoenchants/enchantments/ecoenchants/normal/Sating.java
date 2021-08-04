@@ -16,6 +16,11 @@ public class Sating extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
     @EventHandler
     public void onSatingHunger(@NotNull final FoodLevelChangeEvent event) {
         if (!(event.getEntity() instanceof Player player)) {

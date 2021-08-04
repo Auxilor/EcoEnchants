@@ -3,7 +3,7 @@
 #
 
 name: "Extinguishing"
-description: Chance to remove fire when taking fire damage.
+description: '&a%value%%&r chance to remove fire when taking fire damage.'
 enabled: true
 
 obtaining:

@@ -20,6 +20,11 @@ public class Necrotic extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
     @EventHandler
     public void necroticKill(@NotNull final EntityDeathEvent event) {
         if (event.getEntity().getKiller() == null) {

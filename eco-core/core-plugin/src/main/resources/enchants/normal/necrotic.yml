@@ -3,7 +3,7 @@
 #
 
 name: "Necrotic"
-description: Wither skeletons have a higher chance to drop skulls.
+description: Wither skeletons have a &a%value%%&r higher chance to drop skulls.
 enabled: true
 
 obtaining:

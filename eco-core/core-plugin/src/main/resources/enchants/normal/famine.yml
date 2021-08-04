@@ -3,7 +3,7 @@
 #
 
 name: "Famine"
-description: Chance of giving your opponent hunger.
+description: '&a%value%%&r chance of giving your opponent hunger.'
 enabled: true
 
 obtaining:

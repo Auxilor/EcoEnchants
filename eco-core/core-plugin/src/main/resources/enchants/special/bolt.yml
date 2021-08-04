@@ -3,7 +3,7 @@
 #
 
 name: "Bolt"
-description: Chance of striking powerful lightning on your opponent.
+description: '&a%value%%&r chance of striking powerful lightning on your opponent.'
 enabled: true
 
 obtaining:

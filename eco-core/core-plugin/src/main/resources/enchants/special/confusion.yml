@@ -3,7 +3,7 @@
 #
 
 name: "Confusion"
-description: Chance to shuffle your opponents hotbar.
+description: '&a%value%%&r chance to shuffle your opponents hotbar.'
 enabled: true
 
 obtaining:

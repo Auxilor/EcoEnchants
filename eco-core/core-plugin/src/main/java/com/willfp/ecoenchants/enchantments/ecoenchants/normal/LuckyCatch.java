@@ -19,6 +19,11 @@ public class LuckyCatch extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
     @EventHandler
     public void onFish(@NotNull final PlayerFishEvent event) {
         Player player = event.getPlayer();

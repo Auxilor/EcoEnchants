@@ -3,7 +3,7 @@
 #
 
 name: "Lesion"
-description: Causes your opponent to bleed, damaging them repeatedly.
+description: '&a%value%%&r chance to your opponent to bleed, damaging them repeatedly.'
 enabled: true
 
 obtaining:

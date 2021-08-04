@@ -17,6 +17,11 @@ public class VampireAspect extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
+    @Override
     public void onMeleeAttack(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,
                               final int level,

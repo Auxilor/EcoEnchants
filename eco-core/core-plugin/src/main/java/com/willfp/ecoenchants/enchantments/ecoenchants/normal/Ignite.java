@@ -20,6 +20,11 @@ public class Ignite extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
+    @Override
     public void onArrowHit(@NotNull final LivingEntity uncastShooter,
                            final int level,
                            @NotNull final ProjectileHitEvent event) {

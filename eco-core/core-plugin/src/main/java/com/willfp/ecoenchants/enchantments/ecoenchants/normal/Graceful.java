@@ -20,6 +20,11 @@ public class Graceful extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
     @EventHandler
     public void onFall(@NotNull final PlayerMoveEvent event) {
         Player player = event.getPlayer();

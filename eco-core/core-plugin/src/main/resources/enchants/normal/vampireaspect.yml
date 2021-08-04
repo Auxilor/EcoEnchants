@@ -3,7 +3,7 @@
 #
 
 name: "Vampire Aspect"
-description: Chance to apply wither to your opponent.
+description: '&a%value%%&r chance to apply wither to your opponent.'
 enabled: true
 
 obtaining:

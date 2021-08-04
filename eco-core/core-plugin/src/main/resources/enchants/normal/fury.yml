@@ -3,7 +3,7 @@
 #
 
 name: "Fury"
-description: Chance of angering nearby monsters towards your opponent.
+description: '&a%value%%&r chance of angering nearby monsters towards your opponent.'
 enabled: true
 
 obtaining:

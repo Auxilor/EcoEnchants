@@ -3,7 +3,7 @@
 #
 
 name: "Electroshock"
-description: Chance to strike lightning on your attacker.
+description: '&a%value%%&r chance to strike lightning on your attacker.'
 enabled: true
 
 obtaining:

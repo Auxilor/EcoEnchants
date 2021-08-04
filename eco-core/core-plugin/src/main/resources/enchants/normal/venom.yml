@@ -3,7 +3,7 @@
 #
 
 name: "Venom"
-description: Chance of withering your opponent.
+description: '&a%value%%&r Chance of withering your opponent.'
 enabled: true
 
 obtaining:

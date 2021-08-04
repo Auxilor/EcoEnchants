@@ -3,7 +3,7 @@
 #
 
 name: "Zeus"
-description: Chance to strike lightning on your opponent.
+description: '&a%value%%&r chance to strike lightning on your opponent.'
 enabled: true
 
 obtaining:

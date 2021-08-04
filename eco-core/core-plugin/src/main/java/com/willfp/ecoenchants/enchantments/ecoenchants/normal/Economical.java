@@ -17,6 +17,11 @@ public class Economical extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
     @EventHandler
     public void onElytraBoost(@NotNull final PlayerElytraBoostEvent event) {
         if (!EnchantChecks.chestplate(event.getPlayer(), this)) {

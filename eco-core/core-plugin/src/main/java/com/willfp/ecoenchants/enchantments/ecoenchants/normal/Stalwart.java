@@ -18,6 +18,11 @@ public class Stalwart extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
+    @Override
     public void onDamageWearingArmor(@NotNull final LivingEntity victim,
                                      final int level,
                                      @NotNull final EntityDamageEvent event) {

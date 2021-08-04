@@ -18,6 +18,11 @@ public class Venom extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
+    @Override
     public void onArrowDamage(@NotNull final LivingEntity attacker,
                               @NotNull final LivingEntity victim,
                               @NotNull final Arrow arrow,

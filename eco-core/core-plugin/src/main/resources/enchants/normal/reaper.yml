@@ -3,7 +3,7 @@
 #
 
 name: "Reaper"
-description: Chance to prevent your opponents soulbound from working.
+description: '&a%value%%&r chance to prevent your opponents soulbound from working.'
 enabled: true
 
 obtaining:

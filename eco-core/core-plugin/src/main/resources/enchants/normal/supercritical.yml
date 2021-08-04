@@ -3,7 +3,7 @@
 #
 
 name: "Supercritical"
-description: Small chance to deal extreme damage.
+description: '&a%value%%&r chance to deal extreme damage.'
 enabled: true
 
 obtaining:

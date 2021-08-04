@@ -16,6 +16,11 @@ public class Stamina extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
     @EventHandler
     public void onStaminaHunger(@NotNull final FoodLevelChangeEvent event) {
         if (!(event.getEntity() instanceof Player player)) {

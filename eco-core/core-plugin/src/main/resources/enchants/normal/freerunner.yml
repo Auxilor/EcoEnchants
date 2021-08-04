@@ -3,7 +3,7 @@
 #
 
 name: "Freerunner"
-description: Chance to ignore fall damage.
+description: '&a%value%%&r chance to ignore fall damage.'
 enabled: true
 
 obtaining:
