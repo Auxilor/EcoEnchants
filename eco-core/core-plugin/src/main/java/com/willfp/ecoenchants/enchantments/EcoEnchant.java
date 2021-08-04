@@ -208,7 +208,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         maxLevel = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
         displayName = config.getString("name");
         description = config.getString("description", false);
-        description = description.replace("&r", this.getPlugin().getDisplayModule().getOptions().getDescriptionOptions().getColor() + "&r");
+        description = description.replace("&r", this.getPlugin().getLangYml().getString("description-color") + "&r");
         description = StringUtils.format(description);
         disabledWorldNames.clear();
         disabledWorldNames.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "disabled-in-worlds"));
