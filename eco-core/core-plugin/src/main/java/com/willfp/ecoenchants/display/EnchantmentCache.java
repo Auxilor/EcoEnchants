@@ -18,6 +18,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -88,7 +89,7 @@ public class EnchantmentCache {
                     enchantment,
                     "&4INVALID ENCHANTMENT",
                     "INVALID",
-                    Collections.singletonList(Display.PREFIX + "INVALID ENCHANTMENT: " + enchantment.getClass().getName()),
+                    new HashMap<>(Map.of(1, Collections.singletonList(Display.PREFIX + "INVALID ENCHANTMENT: " + enchantment.getClass().getName()))),
                     EnchantmentType.NORMAL,
                     EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"))
             ));
@@ -143,10 +144,32 @@ public class EnchantmentCache {
         name = StringUtils.format(name);
 
         description.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
-        CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, rawName, description, type, rarity));
+
+
+        Map<Integer, List<String>> levelDescription = new HashMap<>();
+
+        if (enchantment instanceof EcoEnchant ecoEnchant) {
+            for (int i = 1; i <= ecoEnchant.getMaxLevel(); i++) {
+                List<String> levelDesc = new ArrayList<>();
+                for (String s : ecoEnchant.getWrappedDescription()) {
+                    levelDesc.add(s.replace("%value%", ecoEnchant.getPlaceholder(i)));
+                }
+
+                levelDescription.put(
+                        i,
+                        levelDesc
+                );
+            }
+        } else {
+            for (int i = 1; i <= enchantment.getMaxLevel(); i++) {
+                levelDescription.put(i, description);
+            }
+        }
+        CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, rawName, levelDescription, type, rarity));
     }
 
     @ToString
+    @SuppressWarnings("DeprecatedIsStillUsed")
     public static final class CacheEntry {
         /**
          * The enchantment that this cache is for.
@@ -169,14 +192,12 @@ public class EnchantmentCache {
         /**
          * The description, line-wrapped.
          */
-        @Getter
-        private final List<String> description;
+        private final Map<Integer, List<String>> description;
 
         /**
          * The description, not line-wrapped or colorized.
          */
-        @Getter
-        private final String stringDescription;
+        private final Map<Integer, String> stringDescription;
 
         /**
          * The type of the enchantment.
@@ -193,7 +214,7 @@ public class EnchantmentCache {
         private CacheEntry(@NotNull final Enchantment enchantment,
                            @NotNull final String name,
                            @NotNull final String rawName,
-                           @NotNull final List<String> description,
+                           @NotNull final Map<Integer, List<String>> description,
                            @NotNull final EnchantmentType type,
                            @NotNull final EnchantmentRarity rarity) {
             this.enchantment = enchantment;
@@ -202,17 +223,94 @@ public class EnchantmentCache {
             this.description = description;
             this.type = type;
             this.rarity = rarity;
+            this.stringDescription = new HashMap<>();
 
-            StringBuilder descriptionBuilder = new StringBuilder();
+            for (Integer level : description.keySet()) {
+                StringBuilder descriptionBuilder = new StringBuilder();
 
-            description.forEach(s -> {
-                descriptionBuilder.append(s);
-                descriptionBuilder.append(" ");
-            });
+                for (String s : description.get(level)) {
+                    descriptionBuilder.append(s);
+                    descriptionBuilder.append(" ");
+                }
 
-            String processedStringDescription = descriptionBuilder.toString();
-            processedStringDescription = processedStringDescription.replace(Display.PREFIX, "");
-            this.stringDescription = processedStringDescription.replaceAll(PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor(), "");
+                String processedStringDescription = descriptionBuilder.toString();
+                processedStringDescription = processedStringDescription.replace(Display.PREFIX, "");
+                stringDescription.put(level, processedStringDescription.replaceAll(PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor(), ""));
+            }
+        }
+
+        /**
+         * Get the description of an enchantment at a certain level.
+         *
+         * @param level The level.
+         * @return The description, wrapped and formatted.
+         */
+        public List<String> getDescription(final int level) {
+            List<String> description = this.description.get(level);
+            if (description == null) {
+                if (enchantment instanceof EcoEnchant enchant) {
+                    List<String> levelDesc = new ArrayList<>();
+                    for (String s : enchant.getWrappedDescription()) {
+                        levelDesc.add(s.replace("%value%", enchant.getPlaceholder(level)));
+                    }
+
+                    this.description.put(
+                            level,
+                            levelDesc
+                    );
+                } else {
+                    this.description.put(level, this.description.get(0));
+                }
+
+                return getDescription(level);
+            } else {
+                return description;
+            }
+        }
+
+        /**
+         * Get the description of an enchantment at a certain level.
+         *
+         * @param level The level.
+         * @return The description, unwrapped and unformatted.
+         */
+        public String getStringDescription(final int level) {
+            String stringDesc = this.stringDescription.get(level);
+            if (stringDesc == null) {
+                StringBuilder descriptionBuilder = new StringBuilder();
+
+                for (String s : description.get(level)) {
+                    descriptionBuilder.append(s);
+                    descriptionBuilder.append(" ");
+                }
+
+                String processedStringDescription = descriptionBuilder.toString();
+                processedStringDescription = processedStringDescription.replace(Display.PREFIX, "");
+                stringDescription.put(level, processedStringDescription.replaceAll(PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor(), ""));
+                return getStringDescription(level);
+            } else {
+                return stringDesc;
+            }
+        }
+
+        /**
+         * Get the description of an enchantment at level 1.
+         *
+         * @return The description, wrapped and formatted.
+         */
+        @Deprecated
+        public List<String> getDescription() {
+            return getDescription(1);
+        }
+
+        /**
+         * Get the description of an enchantment at level 1.
+         *
+         * @return The description, unwrapped and unformatted.
+         */
+        @Deprecated
+        public String getStringDescription() {
+            return getStringDescription(1);
         }
     }
 }

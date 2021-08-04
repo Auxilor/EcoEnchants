@@ -139,7 +139,7 @@ public class EnchantDisplay extends DisplayModule {
             lore.add(Display.PREFIX + name);
             if (!options.getDescriptionOptions().isShowingAtBottom()) {
                 if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
-                    lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
+                    lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription(level));
                 }
             }
         });
@@ -163,8 +163,8 @@ public class EnchantDisplay extends DisplayModule {
 
         if (options.getDescriptionOptions().isShowingAtBottom()) {
             if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
-                for (Enchantment enchantment : enchantments.keySet()) {
-                    lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription());
+                for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
+                    lore.addAll(EnchantmentCache.getEntry(entry.getKey()).getDescription(entry.getValue()));
                 }
             }
         }

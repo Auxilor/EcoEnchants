@@ -239,6 +239,16 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     }
 
     /**
+     * Format the %value% placeholder in description lore.
+     *
+     * @param level The level of the enchantment.
+     * @return The placeholder.
+     */
+    public String getPlaceholder(final int level) {
+        return "unknown";
+    }
+
+    /**
      * Get description of enchantment line-wrapped.
      *
      * @return The description.
