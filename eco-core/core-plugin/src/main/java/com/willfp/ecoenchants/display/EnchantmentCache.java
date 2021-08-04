@@ -145,13 +145,12 @@ public class EnchantmentCache {
 
         description.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
 
-
         Map<Integer, List<String>> levelDescription = new HashMap<>();
 
         if (enchantment instanceof EcoEnchant ecoEnchant) {
             for (int i = 1; i <= ecoEnchant.getMaxLevel(); i++) {
                 List<String> levelDesc = new ArrayList<>();
-                for (String s : ecoEnchant.getWrappedDescription()) {
+                for (String s : description) {
                     levelDesc.add(s.replace("%value%", ecoEnchant.getPlaceholder(i)));
                 }
 
@@ -169,7 +168,6 @@ public class EnchantmentCache {
     }
 
     @ToString
-    @SuppressWarnings("DeprecatedIsStillUsed")
     public static final class CacheEntry {
         /**
          * The enchantment that this cache is for.
@@ -250,7 +248,9 @@ public class EnchantmentCache {
             if (description == null) {
                 if (enchantment instanceof EcoEnchant enchant) {
                     List<String> levelDesc = new ArrayList<>();
-                    for (String s : enchant.getWrappedDescription()) {
+                    List<String> defDesc = enchant.getWrappedDescription();
+                    defDesc.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
+                    for (String s : defDesc) {
                         levelDesc.add(s.replace("%value%", enchant.getPlaceholder(level)));
                     }
 
