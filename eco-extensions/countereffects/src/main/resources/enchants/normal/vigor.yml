@@ -1,0 +1,28 @@
+#
+# Vigor EcoEnchant
+#
+
+name: "Vigor"
+description: Chance to not get affected by nausea.
+enabled: true
+
+obtaining:
+  table: true
+  villager: true
+  loot: true
+  rarity: epic
+
+general-config:
+  flags: []
+  targets:
+    - helmet
+    - chestplate
+    - leggings
+    - boots
+  grindstoneable: true
+  disabled-in-worlds: [ ]
+  conflicts: []
+  maximum-level: 2
+
+config:
+  chance-per-level: 12.5
