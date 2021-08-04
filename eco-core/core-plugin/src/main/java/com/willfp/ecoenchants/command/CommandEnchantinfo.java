@@ -138,7 +138,7 @@ public class CommandEnchantinfo extends PluginCommand {
             String maxLevel = String.valueOf(enchantment.getMaxLevel());
 
             final String finalName = EnchantmentCache.getEntry(enchantment).getName();
-            final String finalDescription = EnchantmentCache.getEntry(enchantment).getStringDescription();
+            final String finalDescription = EnchantmentCache.getEntry(enchantment).getStringDescription(1);
             final String finalTargets = allTargets;
             final String finalConflicts = allConflicts;
             final String finalMaxLevel = maxLevel;

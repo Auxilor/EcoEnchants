@@ -93,7 +93,7 @@ public class CommandDebug extends Subcommand {
                 brokenCache.removeIf(enchantment -> !(
                         EnchantmentCache.getEntry(enchantment).getName().equalsIgnoreCase("null")
                                 || EnchantmentCache.getEntry(enchantment).getRawName().equalsIgnoreCase("null")
-                                || EnchantmentCache.getEntry(enchantment).getStringDescription().equalsIgnoreCase("null")));
+                                || EnchantmentCache.getEntry(enchantment).getStringDescription(1).equalsIgnoreCase("null")));
                 Bukkit.getLogger().info("Enchantments with broken cache: " + brokenCache);
                 Bukkit.getLogger().info("");
 
