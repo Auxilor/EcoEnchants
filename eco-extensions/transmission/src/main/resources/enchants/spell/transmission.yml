@@ -1,8 +1,8 @@
 #
-# Firewand EcoEnchant
+# Transmission EcoEnchant
 #
 
-name: "Firewand"
+name: "Transmission"
 description: Teleports you in the direction you are looking
 enabled: true
 
