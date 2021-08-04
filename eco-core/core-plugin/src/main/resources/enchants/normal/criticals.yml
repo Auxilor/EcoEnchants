@@ -3,7 +3,7 @@
 #
 
 name: "Criticals"
-description: Increases critical damage by &c%value%%&8.
+description: Increases critical damage by &c%value%%&r.
 enabled: true
 
 obtaining:
