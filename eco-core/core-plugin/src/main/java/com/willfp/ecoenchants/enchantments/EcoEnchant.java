@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.eco.core.Prerequisite;
+import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -206,7 +207,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         availableFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
         maxLevel = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
         displayName = config.getString("name");
-        description = config.getString("description");
+        description = config.getString("description", false);
+        description = description.replace("&r", this.getPlugin().getDisplayModule().getOptions().getDescriptionOptions().getColor() + "&r");
+        description = StringUtils.format(description);
         disabledWorldNames.clear();
         disabledWorldNames.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "disabled-in-worlds"));
         disabledWorlds.clear();
