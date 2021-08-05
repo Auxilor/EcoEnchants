@@ -3,7 +3,7 @@
 #
 
 name: "Atmospheric"
-description: Increases trident damage when you are in air.
+description: Increases trident damage by &a%value%%&r when you are in air.
 enabled: true
 
 obtaining:

@@ -3,7 +3,7 @@
 #
 
 name: "Curse of Calling"
-description: Angers all nearby mobs.
+description: Angers all mobs within &a%value%&r blocks.
 enabled: true
 
 obtaining:

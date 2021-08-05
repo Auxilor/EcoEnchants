@@ -3,7 +3,7 @@
 #
 
 name: "Aquatic"
-description: Trident deals additional damage when shot from water.
+description: Trident deals &a%value%%&r more damage when shot from water.
 enabled: true
 
 obtaining:

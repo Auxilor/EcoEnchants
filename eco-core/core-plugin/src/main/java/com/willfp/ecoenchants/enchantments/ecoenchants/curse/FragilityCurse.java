@@ -17,6 +17,14 @@ public class FragilityCurse extends EcoEnchant {
         );
     }
 
+    @Override
+    public String getPlaceholder(final int level) {
+        return NumberUtils.format((
+                this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "minimum-extra-durability")
+                        + this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "maximum-extra-durability")
+        ) / 2D);
+    }
+
     @EventHandler
     public void onItemDamage(@NotNull final PlayerItemDamageEvent event) {
         ItemStack item = event.getItem();

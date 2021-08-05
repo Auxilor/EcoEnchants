@@ -3,7 +3,7 @@
 #
 
 name: "Abrasion"
-description: Damages your opponents armor.
+description: Damages your opponents armor by &a%value%&r.
 enabled: true
 
 obtaining:

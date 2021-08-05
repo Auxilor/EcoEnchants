@@ -3,7 +3,7 @@
 #
 
 name: "Curse of Hunger"
-description: Increases hunger loss.
+description: Increases hunger loss by &a%value%&rx.
 enabled: true
 
 obtaining:

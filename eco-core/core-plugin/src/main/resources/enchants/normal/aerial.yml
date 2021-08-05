@@ -3,7 +3,7 @@
 #
 
 name: "Aerial"
-description: Increases arrow damage when shot while in air.
+description: Increases arrow damage by &a%value%%&r when shot while in air.
 enabled: true
 
 obtaining:

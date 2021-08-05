@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -14,6 +15,11 @@ public class Arachnid extends EcoEnchant {
         super(
                 "arachnid", EnchantmentType.NORMAL
         );
+    }
+
+    @Override
+    public String getPlaceholder(final int level) {
+        return NumberUtils.format(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier") * 100 * (level + 1));
     }
 
     @Override

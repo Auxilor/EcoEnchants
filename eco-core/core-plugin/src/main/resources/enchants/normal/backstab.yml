@@ -3,7 +3,7 @@
 #
 
 name: "Backstab"
-description: Increases damage when behind opponent.
+description: Deal &a%value%%&r more damage from behind.
 enabled: true
 
 obtaining:

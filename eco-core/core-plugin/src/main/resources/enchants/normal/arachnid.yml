@@ -3,7 +3,7 @@
 #
 
 name: "Arachnid"
-description: Increases damage against spiders.
+description: Increases damage against spiders by &a%value%%&r.
 enabled: true
 
 obtaining:

@@ -3,7 +3,7 @@
 #
 
 name: "Curse of Fragility"
-description: Decreases item durability.
+description: Decreases item durability by &a%value%&r times.
 enabled: true
 
 obtaining:

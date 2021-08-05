@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
+import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -14,6 +15,11 @@ public class HungerCurse extends EcoEnchant {
         super(
                 "hunger_curse", EnchantmentType.CURSE
         );
+    }
+
+    @Override
+    public String getPlaceholder(final int level) {
+        return NumberUtils.format(this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "times-more-hunger"));
     }
 
     @EventHandler

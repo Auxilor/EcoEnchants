@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
 import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.VectorUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -28,6 +29,11 @@ public class CallingCurse extends EcoEnchant implements TimedRunnable {
         super(
                 "calling_curse", EnchantmentType.CURSE
         );
+    }
+
+    @Override
+    public String getPlaceholder(final int level) {
+        return NumberUtils.format(distance);
     }
 
     @EventHandler
