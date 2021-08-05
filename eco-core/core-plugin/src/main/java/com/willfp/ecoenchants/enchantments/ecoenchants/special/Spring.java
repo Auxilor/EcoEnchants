@@ -34,6 +34,6 @@ public class Spring extends EcoEnchant {
         double multiplier = 0.5 + ((double) (level * level) / 4 - 0.2) / 3;
         player.setVelocity(player.getLocation().getDirection().multiply(multiplier).setY(multiplier));
 
-        this.getPlugin().getScheduler().runLater(() -> AnticheatManager.unexemptPlayer(player), 10);
+        this.getPlugin().getScheduler().runLater(() -> AnticheatManager.unexemptPlayer(player), 100);
     }
 }
