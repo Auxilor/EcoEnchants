@@ -27,6 +27,7 @@ public class CommandLocaleDownload extends Subcommand {
         return (sender, args) -> {
             if (args.isEmpty()) {
                 sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-locale"));
+                return;
             }
 
             Paste paste = Paste.getFromHastebin(args.get(0));
