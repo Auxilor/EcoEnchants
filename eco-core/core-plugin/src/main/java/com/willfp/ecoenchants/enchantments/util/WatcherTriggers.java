@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.util;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.core.config.updating.ConfigUpdater;
+import com.willfp.eco.core.events.ArmorChangeEvent;
 import com.willfp.eco.core.events.ArmorEquipEvent;
 import com.willfp.eco.core.events.PlayerJumpEvent;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
@@ -532,6 +533,7 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
      * @param event The event to listen for.
      */
     @EventHandler(ignoreCancelled = true)
+    @Deprecated
     public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
         if (McmmoManager.isFake(event)) {
             return;
@@ -551,6 +553,34 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             int level = EnchantChecks.getArmorPoints(player, enchant);
             enchant.onArmorEquip(player, level, event);
         }), 1);
+    }
+
+    /**
+     * Called when an entity puts on or takes off armor with an enchantment.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler(ignoreCancelled = true)
+    @Deprecated
+    public void onArmorChange(@NotNull final ArmorChangeEvent event) {
+        if (McmmoManager.isFake(event)) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+
+        EcoEnchants.values().forEach(enchant -> {
+            if (!enchant.isEnabled()) {
+                return;
+            }
+
+            if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+
+            int level = EnchantChecks.getArmorPoints(player, enchant);
+            enchant.onArmorEquip(player, level, event);
+        });
     }
 
     /**

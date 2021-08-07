@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.core.events.ArmorChangeEvent;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -31,7 +31,7 @@ public class Forcefield extends EcoEnchant implements TimedRunnable {
     }
 
     @EventHandler
-    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull final ArmorChangeEvent event) {
         refresh();
     }
 

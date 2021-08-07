@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.effects;
 
 import com.willfp.eco.core.Prerequisite;
-import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.core.events.ArmorChangeEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
@@ -21,21 +21,19 @@ public abstract class EffectsEnchantment extends EcoEnchant {
     public abstract PotionEffectType getPotionEffect();
 
     @EventHandler
-    public void onEquip(@NotNull final ArmorEquipEvent event) {
+    public void onEquip(@NotNull final ArmorChangeEvent event) {
         final Player player = event.getPlayer();
 
-        this.getPlugin().getScheduler().runLater(() -> {
-            if (player.hasPotionEffect(this.getPotionEffect()) && player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
-                player.removePotionEffect(this.getPotionEffect());
-            }
+        if (player.hasPotionEffect(this.getPotionEffect()) && player.getPotionEffect(this.getPotionEffect()).getDuration() >= 1639) {
+            player.removePotionEffect(this.getPotionEffect());
+        }
 
-            int level = EnchantChecks.getArmorPoints(player, this);
-            if (this.getDisabledWorlds().contains(player.getWorld())) {
-                return;
-            }
-            if (level > 0) {
-                player.addPotionEffect(new PotionEffect(this.getPotionEffect(), 0x6fffffff, level - 1, false, false, true));
-            }
-        }, 1);
+        int level = EnchantChecks.getArmorPoints(player, this);
+        if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
+        if (level > 0) {
+            player.addPotionEffect(new PotionEffect(this.getPotionEffect(), 0x6fffffff, level - 1, false, false, true));
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.core.events.ArmorChangeEvent;
 import com.willfp.eco.util.VectorUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -32,7 +32,7 @@ public class Magnetic extends EcoEnchant implements TimedRunnable {
     }
 
     @EventHandler
-    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull final ArmorChangeEvent event) {
         refresh();
     }
 

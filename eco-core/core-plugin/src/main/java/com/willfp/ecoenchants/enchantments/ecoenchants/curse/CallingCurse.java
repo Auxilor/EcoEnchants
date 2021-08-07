@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.curse;
 
-import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.core.events.ArmorChangeEvent;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.VectorUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -37,7 +37,7 @@ public class CallingCurse extends EcoEnchant implements TimedRunnable {
     }
 
     @EventHandler
-    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull final ArmorChangeEvent event) {
         refresh();
     }
 

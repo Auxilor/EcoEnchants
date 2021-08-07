@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.util;
 
+import com.willfp.eco.core.events.ArmorChangeEvent;
 import com.willfp.eco.core.events.ArmorEquipEvent;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
@@ -185,9 +186,23 @@ public interface Watcher {
      * @param level  The level of the enchantment found on the player's armor.
      * @param event  The event that called this watcher.
      */
+    @Deprecated
     default void onArmorEquip(@NotNull final Player player,
                               final int level,
                               @NotNull final ArmorEquipEvent event) {
+        // Empty default as enchantments only override required watchers.
+    }
+
+    /**
+     * Called when an entity puts on or takes off armor with an enchantment.
+     *
+     * @param player The player that equipped the armor.
+     * @param level  The level of the enchantment found on the player's armor.
+     * @param event  The event that called this watcher.
+     */
+    default void onArmorEquip(@NotNull final Player player,
+                              final int level,
+                              @NotNull final ArmorChangeEvent event) {
         // Empty default as enchantments only override required watchers.
     }
 

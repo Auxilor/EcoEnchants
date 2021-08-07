@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
-import com.willfp.eco.core.events.ArmorEquipEvent;
+import com.willfp.eco.core.events.ArmorChangeEvent;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -24,7 +24,7 @@ public class Prosperity extends EcoEnchant {
     }
 
     @EventHandler
-    public void onArmorEquip(@NotNull final ArmorEquipEvent event) {
+    public void onArmorEquip(@NotNull final ArmorChangeEvent event) {
         Player player = event.getPlayer();
 
         this.getPlugin().getScheduler().runLater(() -> {
