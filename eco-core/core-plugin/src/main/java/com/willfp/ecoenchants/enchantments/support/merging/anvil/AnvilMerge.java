@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.core.tuples.Pair;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
@@ -7,7 +8,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import lombok.experimental.UtilityClass;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -130,8 +130,8 @@ public class AnvilMerge {
 
         Map<Enchantment, Integer> outEnchants = new HashMap<>();
 
-        HashMap<Enchantment, Integer> leftEnchants = new HashMap<>(PLUGIN.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(left, true));
-        HashMap<Enchantment, Integer> rightEnchants = new HashMap<>(PLUGIN.getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(right, true));
+        HashMap<Enchantment, Integer> leftEnchants = new HashMap<>(FastItemStack.wrap(left).getEnchantmentsOnItem(true));
+        HashMap<Enchantment, Integer> rightEnchants = new HashMap<>(FastItemStack.wrap(right).getEnchantmentsOnItem(true));
 
         leftEnchants.forEach(((enchantment, integer) -> {
             int level = integer;

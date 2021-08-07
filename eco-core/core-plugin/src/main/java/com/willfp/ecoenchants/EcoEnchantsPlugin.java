@@ -3,6 +3,7 @@ package com.willfp.ecoenchants;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.command.impl.PluginCommand;
 import com.willfp.eco.core.display.DisplayModule;
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.core.integrations.IntegrationLoader;
 import com.willfp.eco.util.TelekinesisUtils;
 import com.willfp.ecoenchants.command.CommandEcoEnchants;
@@ -23,7 +24,6 @@ import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
 import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
-import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -76,7 +76,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     protected void handleEnable() {
         this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
-        TelekinesisUtils.registerTest(player -> this.getProxy(FastGetEnchantsProxy.class).getLevelOnItem(player.getInventory().getItemInMainHand(), EcoEnchants.TELEKINESIS) > 0);
+        TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getLevelOnItem(EcoEnchants.TELEKINESIS, false) > 0);
     }
 
     @Override

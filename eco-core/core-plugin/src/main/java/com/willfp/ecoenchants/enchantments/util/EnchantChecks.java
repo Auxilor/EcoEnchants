@@ -1,11 +1,10 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.util.ArrowUtils;
 import com.willfp.eco.util.DurabilityUtils;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -24,11 +23,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @UtilityClass
 public class EnchantChecks {
-    /**
-     * Proxy instance of FastGetEnchants.
-     */
-    private static final FastGetEnchantsProxy PROXY = EcoEnchantsPlugin.getInstance().getProxy(FastGetEnchantsProxy.class);
-
     /**
      * Does the specified ItemStack have a certain Enchantment present?
      *
@@ -57,7 +51,7 @@ public class EnchantChecks {
             return 0;
         }
 
-        return PROXY.getLevelOnItem(item, enchantment);
+        return FastItemStack.wrap(item).getLevelOnItem(enchantment, false);
     }
 
     /**
@@ -75,7 +69,7 @@ public class EnchantChecks {
         }
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
-        for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry : PROXY.getEnchantmentsOnItem(item).entrySet()) {
+        for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry : FastItemStack.wrap(item).getEnchantmentsOnItem(false).entrySet()) {
             if (enchantmentIntegerEntry.getKey() instanceof EcoEnchant enchant) {
                 ecoEnchants.put(enchant, enchantmentIntegerEntry.getValue());
             }

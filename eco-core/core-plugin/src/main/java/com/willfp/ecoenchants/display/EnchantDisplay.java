@@ -5,11 +5,11 @@ import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.display.Display;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.display.DisplayPriority;
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
-import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -84,12 +84,11 @@ public class EnchantDisplay extends DisplayModule {
         }
 
         ItemMeta meta = itemStack.getItemMeta();
+        FastItemStack fastItemStack = FastItemStack.wrap(itemStack);
 
         assert meta != null;
 
         boolean hide = (boolean) args[0];
-
-        List<String> itemLore = null;
 
         if (hide || meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -101,17 +100,11 @@ public class EnchantDisplay extends DisplayModule {
             return;
         }
 
-        if (meta.hasLore()) {
-            itemLore = meta.getLore();
-        }
-
-        if (itemLore == null) {
-            itemLore = new ArrayList<>();
-        }
+        List<String> itemLore = fastItemStack.getLore();
 
         List<String> lore = new ArrayList<>();
 
-        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(this.getPlugin().getProxy(FastGetEnchantsProxy.class).getEnchantmentsOnItem(itemStack, true));
+        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(fastItemStack.getEnchantmentsOnItem(true));
 
         enchantments.entrySet().removeIf(enchantmentIntegerEntry -> enchantmentIntegerEntry.getValue().equals(0));
 
@@ -175,8 +168,8 @@ public class EnchantDisplay extends DisplayModule {
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         lore.addAll(itemLore);
-        meta.setLore(lore);
         itemStack.setItemMeta(meta);
+        fastItemStack.setLore(lore);
     }
 
     @Override
@@ -184,15 +177,17 @@ public class EnchantDisplay extends DisplayModule {
         if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
             return;
         }
+        FastItemStack fastItemStack = FastItemStack.wrap(itemStack);
+
+        List<String> lore = fastItemStack.getLore();
+
+        lore.removeIf(s -> s.startsWith("§w"));
+
+        fastItemStack.setLore(lore);
 
         ItemMeta meta = itemStack.getItemMeta();
 
         assert meta != null;
-
-        List<String> lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
-
-        lore.removeIf(s -> s.startsWith("§w"));
-        meta.setLore(lore);
 
         meta.getPersistentDataContainer().remove(legacyV);
 

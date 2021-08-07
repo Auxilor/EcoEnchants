@@ -2,11 +2,11 @@ package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
-import com.willfp.ecoenchants.proxy.proxies.FastGetEnchantsProxy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -385,8 +385,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        Map<Enchantment, Integer> enchants = this.getPlugin().getProxy(FastGetEnchantsProxy.class)
-                .getEnchantmentsOnItem(itemStack, true);
+        Map<Enchantment, Integer> enchants = FastItemStack.wrap(itemStack).getEnchantmentsOnItem(true);
 
         for (Enchantment enchantment : new HashSet<>(enchants.keySet())) {
             if (enchantment instanceof EcoEnchant enchant) {
