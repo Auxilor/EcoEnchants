@@ -253,27 +253,31 @@ public abstract class Spell extends EcoEnchant {
         }
 
         if (cooldown > 0) {
-            if (this.getPlugin().getConfigYml().getBool("types.special.cooldown-in-actionbar")) {
-                String message = this.getPlugin().getLangYml().getString("messages.on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
+            if (!this.hasFlag("no-cooldown-message")) {
+                if (this.getPlugin().getConfigYml().getBool("types.special.cooldown-in-actionbar")) {
+                    String message = this.getPlugin().getLangYml().getString("messages.on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
 
-                player.spigot().sendMessage(
-                        ChatMessageType.ACTION_BAR,
-                        TextComponent.fromLegacyText(message)
-                );
-            } else {
-                String message = this.getPlugin().getLangYml().getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
-                player.sendMessage(message);
+                    player.spigot().sendMessage(
+                            ChatMessageType.ACTION_BAR,
+                            TextComponent.fromLegacyText(message)
+                    );
+                } else {
+                    String message = this.getPlugin().getLangYml().getMessage("on-cooldown").replace("%seconds%", String.valueOf(cooldown)).replace("%name%", EnchantmentCache.getEntry(this).getRawName());
+                    player.sendMessage(message);
+                }
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
             }
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 0.5f);
         } else {
             SpellActivateEvent spellActivateEvent = new SpellActivateEvent(player, this);
             Bukkit.getPluginManager().callEvent(spellActivateEvent);
 
             if (!spellActivateEvent.isCancelled()) {
                 if (onUse(player, level, event)) {
-                    String message = this.getPlugin().getLangYml().getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
-                    player.sendMessage(message);
-                    player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
+                    if (!this.hasFlag("no-use-message")) {
+                        String message = this.getPlugin().getLangYml().getMessage("used-spell").replace("%name%", EnchantmentCache.getEntry(this).getRawName());
+                        player.sendMessage(message);
+                        player.playSound(player.getLocation(), this.getActivationSound(), SoundCategory.PLAYERS, 1, 1);
+                    }
 
                     tracker.remove(player.getUniqueId());
                     tracker.put(player.getUniqueId(), System.currentTimeMillis() + (long) ((this.getCooldownTime() * 1000L) * Spell.getCooldownMultiplier(player)));
