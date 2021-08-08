@@ -1,0 +1,7 @@
+group 'com.willfp'
+version '1.0.0'
+description = 'Soft Touch Extension'
+
+shadowJar {
+    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
+}

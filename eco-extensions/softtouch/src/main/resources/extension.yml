@@ -1,0 +1,4 @@
+name: Soft Touch
+main: com.willfp.ecoenchants.softtouch.SoftTouchMain
+version: ${projectVersion}
+author: Auxilor
