@@ -28,7 +28,7 @@ general-config:
   maximum-level: 5
 
 config:
-  base-multiplier: 1.25 # Percent more damage to do as base
-  multiplier: 0.25 # 1 + (Level * Multiplier) is multiplied with the damage
-  # To explain, Bladed V would be 2.5x more damage: 1.25 + (5*0.25)
+  base-multiplier: 1.5 # Percent more damage to do as base
+  multiplier: 0.5 # 1 + (Level * Multiplier) is multiplied with the damage
+  # To explain, Bladed V would be 4x more damage: 1.5 + (5*0.5)
   # By default, Bladed I acts like Serrated VI
