@@ -260,7 +260,9 @@ public class EnchantmentCache {
                             levelDesc
                     );
                 } else {
-                    this.description.put(level, this.description.get(0));
+                    List<String> baseDesc = this.description.get(1);
+                    this.description.put(level, baseDesc);
+                    return baseDesc;
                 }
 
                 return getDescription(level);
