@@ -23,8 +23,8 @@ general-config:
 
 config:
   chance-per-level: 10
-  spawner-name:
+  name:
     - "&a%type%&f Spawner"
-  spawner-lore:
+  lore:
     - "&a%type%&f Spawner"
     - "&fCan be placed anywhere in the world"

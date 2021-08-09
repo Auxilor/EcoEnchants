@@ -34,6 +34,7 @@ public class SoftTouch extends EcoEnchant {
         return EnchantmentUtils.chancePlaceholder(this, level);
     }
 
+    @SuppressWarnings("checkstyle:OperatorWrap")
     @Override
     public void onBlockBreak(@NotNull final Player player,
                              @NotNull final Block block,
@@ -60,12 +61,13 @@ public class SoftTouch extends EcoEnchant {
         meta.getPersistentDataContainer().set(this.getPlugin().getNamespacedKeyFactory().create("softtouch"), PersistentDataType.STRING, type.name());
 
         String entityName = displayNicely(type);
-        meta.setDisplayName(
-                this.getConfig().getString(EcoEnchants.CONFIG_LOCATION + "spawner-name")
-                        .replace("%type%", entityName)
-        );
 
-        List<String> lore = this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "spawner-lore");
+        String name = this.getConfig().getString(EcoEnchants.CONFIG_LOCATION + "name");
+        name = name.replace("%type%", entityName);
+        name = name.replace("[", "").replace("]", "");
+        meta.setDisplayName(name);
+
+        List<String> lore = this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "lore");
         lore.replaceAll(s -> s.replace("%type%", entityName));
         meta.setLore(lore);
 
@@ -111,7 +113,7 @@ public class SoftTouch extends EcoEnchant {
     }
 
     private String displayNicely(@NotNull final EntityType type) {
-        String name = type.name();
+        String name = type.name().toLowerCase();
         name = name.replace("_", "");
         name = StringUtils.capitalize(name);
         return name;
