@@ -158,7 +158,11 @@ public class EnchantDisplay extends DisplayModule {
         }
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        lore.addAll(itemLore);
+        if (this.getOptions().isAboveLore()) {
+            lore.addAll(itemLore);
+        } else {
+            lore.addAll(0, itemLore);
+        }
         itemStack.setItemMeta(meta);
         fastItemStack.setLore(lore);
     }

@@ -62,6 +62,12 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
     private boolean requireTarget = true;
 
     /**
+     * If enchants should be displayed above lore.
+     */
+    @Getter
+    private boolean aboveLore = true;
+
+    /**
      * Instantiate new display options.
      *
      * @param plugin EcoEnchants.
@@ -96,6 +102,7 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
         sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
 
         requireTarget = this.getPlugin().getConfigYml().getBool("lore.require-target");
+        aboveLore = this.getPlugin().getConfigYml().getBool("lore.above-other-lore");
 
         boolean byType = this.getPlugin().getConfigYml().getBool("lore.sort-by-type");
         boolean byLength = this.getPlugin().getConfigYml().getBool("lore.sort-by-length");

@@ -27,6 +27,8 @@ lore:
   use-numerals: true
   use-numbers-above-threshold: 10 # After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
 
+  above-other-lore: true # If enchantments should be displayed above other lore
+
   # If above max level enchantments should be formatted differently
   # Format is available in lang.yml
   above-max-level:
