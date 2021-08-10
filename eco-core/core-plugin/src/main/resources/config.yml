@@ -12,7 +12,7 @@ commands:
 anvil:
   rework-cost: false # Use vanilla rework penalty
   allow-unsafe-levels: false # Allow unsafe enchantments like Sharpness 6 by combining 2 Sharp 5.
-  allow-combining-unsafe: true # Allow further combining unsafe levels, eg Sharp 6 + Sharp 6 = Sharp 7.
+  allow-combining-unsafe: false # Allow further combining unsafe levels, eg Sharp 6 + Sharp 6 = Sharp 7.
   allow-existing-unsafe-levels: true # Allow combining existing unsafe enchantments like Sharpness 6
 
   cost-exponent: # Increase value of each extra level by the exponent^levels
@@ -26,6 +26,12 @@ anvil:
 lore:
   use-numerals: true
   use-numbers-above-threshold: 10 # After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
+
+  # If above max level enchantments should be formatted differently
+  # Format is available in lang.yml
+  above-max-level:
+    reformat: true
+
 
   sort-by-type: false # Sort enchantments by type
   sort-by-length: false # Sort enchantments by length
