@@ -263,12 +263,12 @@ public class EnchantmentCache {
                 if (level > enchantment.getMaxLevel() && PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isReformatAboveMaxLevel()) {
                     String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
                     if (color.contains("{}")) {
-                        appendedName = color.replace("{}", name);
+                        appendedName = color.replace("{}", appendedName);
                     } else {
-                        appendedName = color + name;
+                        appendedName = color + appendedName;
                     }
 
-                    appendedName = StringUtils.format(name);
+                    appendedName = StringUtils.format(appendedName);
                 }
                 return appendedName;
             }
