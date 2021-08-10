@@ -40,6 +40,8 @@ special-color: "<gradient:FB57EC>{}</gradient:EF1DEC>&d"
 artifact-color: "<gradient:CAC531>{}</gradient:F3F9A7>&e"
 spell-color: "<gradient:0575E6>{}</gradient:021B79>&9"
 
+above-max-level-color: "<gradient:#1D976C>{}</gradient:#93F9B9>"
+
 description-color: "&8"
 
 special-particle-color: "#FF69B4"

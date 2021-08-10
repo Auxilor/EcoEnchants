@@ -6,7 +6,6 @@ import com.willfp.eco.core.display.Display;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.display.DisplayPriority;
 import com.willfp.eco.core.fast.FastItemStack;
-import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
@@ -119,15 +118,7 @@ public class EnchantDisplay extends DisplayModule {
         unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
 
         enchantments.forEach((enchantment, level) -> {
-            String name = EnchantmentCache.getEntry(enchantment).getName();
-
-            if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
-                if (options.getNumbersOptions().isUseNumerals() && level < options.getNumbersOptions().getThreshold()) {
-                    name += " " + NumberUtils.toNumeral(level);
-                } else {
-                    name += " " + level;
-                }
-            }
+            String name = EnchantmentCache.getEntry(enchantment).getNameWithLevel(level);
 
             lore.add(Display.PREFIX + name);
             if (!options.getDescriptionOptions().isShowingAtBottom()) {

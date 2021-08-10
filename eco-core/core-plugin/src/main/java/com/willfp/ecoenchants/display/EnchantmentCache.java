@@ -3,8 +3,10 @@ package com.willfp.ecoenchants.display;
 import com.google.common.collect.ImmutableMap;
 import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.core.display.Display;
+import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.display.options.NumbersOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -236,6 +238,42 @@ public class EnchantmentCache {
                 processedStringDescription = processedStringDescription.replace(Display.PREFIX, "");
                 stringDescription.put(level, processedStringDescription.replaceAll(PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor(), ""));
             }
+        }
+
+        /**
+         * Get enchantment with level.
+         *
+         * @param level The level.
+         * @return The name with the level.
+         */
+        public String getNameWithLevel(final int level) {
+            if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
+                String numberString = " ";
+
+                NumbersOptions numbersOptions = PLUGIN.getDisplayModule().getOptions().getNumbersOptions();
+
+                if (numbersOptions.isUseNumerals() && level < numbersOptions.getThreshold()) {
+                    numberString += NumberUtils.toNumeral(level);
+                } else {
+                    numberString += level;
+                }
+
+                String appendedName = name + numberString;
+
+                if (level > enchantment.getMaxLevel() && PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isReformatAboveMaxLevel()) {
+                    String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
+                    if (color.contains("{}")) {
+                        appendedName = color.replace("{}", name);
+                    } else {
+                        appendedName = color + name;
+                    }
+
+                    appendedName = StringUtils.format(name);
+                }
+                return appendedName;
+            }
+
+            return name;
         }
 
         /**

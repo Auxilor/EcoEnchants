@@ -35,6 +35,11 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
     @Getter
     private final ShrinkOptions shrinkOptions = new ShrinkOptions(this.getPlugin());
     /**
+     * The max level options being used.
+     */
+    @Getter
+    private final MaxLevelOptions maxLevelOptions = new MaxLevelOptions(this.getPlugin());
+    /**
      * The enchantment types, sorted according to config.
      */
     @Getter
@@ -74,6 +79,7 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
         descriptionOptions.update();
         numbersOptions.update();
         shrinkOptions.update();
+        maxLevelOptions.update();
 
         sortedTypes.clear();
         sortedTypes.addAll(this.getPlugin().getConfigYml().getStrings("lore.type-ordering").stream()
