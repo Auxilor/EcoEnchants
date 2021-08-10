@@ -33,6 +33,6 @@ public class MaxLevelOptions extends PluginDependent<EcoPlugin> {
      */
     public void update() {
         reformatAboveMaxLevel = this.getPlugin().getConfigYml().getBool("lore.above-max-level.reformat");
-        aboveMaxLevelFormat = this.getPlugin().getLangYml().getString("above-max-level-color", false);
+        aboveMaxLevelFormat = this.getPlugin().getLangYml().getBukkitHandle().getString("above-max-level-color");
     }
 }
