@@ -33,6 +33,7 @@ lore:
   # Format is available in lang.yml
   above-max-level:
     reformat: true
+    numbers-only: # If only the numbers should be reformatted
 
 
   sort-by-type: false # Sort enchantments by type

@@ -260,15 +260,25 @@ public class EnchantmentCache {
 
                 if (level > enchantment.getMaxLevel() && PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isReformatAboveMaxLevel()) {
                     String clone = rawName;
+                    if (PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isNumbersOnly()) {
+                        String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
+                        if (color.contains("{}")) {
+                            numberString = color.replace("{}", numberString);
+                        } else {
+                            numberString = color + numberString;
+                        }
 
-                    String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
-                    if (color.contains("{}")) {
-                        clone = color.replace("{}", clone);
+                        return StringUtils.format(clone + numberString);
                     } else {
-                        clone = color + clone;
-                    }
+                        String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
+                        if (color.contains("{}")) {
+                            clone = color.replace("{}", clone);
+                        } else {
+                            clone = color + clone;
+                        }
 
-                    return StringUtils.format(clone + numberString);
+                        return StringUtils.format(clone + numberString);
+                    }
                 } else {
                     return name + numberString;
                 }

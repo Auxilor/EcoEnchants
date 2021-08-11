@@ -20,6 +20,12 @@ public class MaxLevelOptions extends PluginDependent<EcoPlugin> {
     private String aboveMaxLevelFormat;
 
     /**
+     * If only the numbers should be formatted.
+     */
+    @Getter
+    private boolean numbersOnly;
+
+    /**
      * Create new description options.
      *
      * @param plugin EcoEnchants.
@@ -33,6 +39,7 @@ public class MaxLevelOptions extends PluginDependent<EcoPlugin> {
      */
     public void update() {
         reformatAboveMaxLevel = this.getPlugin().getConfigYml().getBool("lore.above-max-level.reformat");
+        numbersOnly = this.getPlugin().getConfigYml().getBool("lore.above-max-level.numbers-only");
         aboveMaxLevelFormat = this.getPlugin().getLangYml().getBukkitHandle().getString("above-max-level-color");
     }
 }
