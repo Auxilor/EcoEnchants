@@ -172,17 +172,15 @@ public class EnchantDisplay extends DisplayModule {
         if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
             return;
         }
-        FastItemStack fastItemStack = FastItemStack.wrap(itemStack);
-
-        List<String> lore = fastItemStack.getLore();
-
-        lore.removeIf(s -> s.startsWith("§w"));
-
-        fastItemStack.setLore(lore);
 
         ItemMeta meta = itemStack.getItemMeta();
 
         assert meta != null;
+
+        List<String> lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
+
+        lore.removeIf(s -> s.startsWith("§w"));
+        meta.setLore(lore);
 
         meta.getPersistentDataContainer().remove(legacyV);
 
