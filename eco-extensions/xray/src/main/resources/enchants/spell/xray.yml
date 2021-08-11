@@ -34,6 +34,15 @@ config:
     - ancient_debris
     - diamond_ore
     - emerald_ore
+    - deepslate_emerald_ore
+    - nether_gold_ore
+    - deepslate_gold_ore
+    - deepslate_diamond_ore
+    - deepslate_redstone_ore
+    - deepslate_iron_ore
+    - deepslate_coal_ore
+    - deepslate_lapis_ore
+    - deepslate_copper_ore
   blocks-per-level: 3 # Blocks on all sides to scan per level
   ticks: 60
   color-glow: true # Color ore glow based on ore type.
