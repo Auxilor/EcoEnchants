@@ -7,10 +7,15 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -78,12 +83,30 @@ public class BlastMining extends EcoEnchant {
                 }
             }
         }
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        ItemMeta beforeMeta = itemStack.getItemMeta();
+        assert beforeMeta != null;
+        beforeMeta.setUnbreakable(true);
+        itemStack.setItemMeta(beforeMeta);
+        int blocks = toBreak.size();
 
         toBreak.forEach((block1 -> {
             block1.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
             BlockUtils.breakBlock(player, block1);
             block1.removeMetadata("block-ignore", this.getPlugin());
         }));
+
+        ItemMeta afterMeta = itemStack.getItemMeta();
+        assert afterMeta != null;
+        afterMeta.setUnbreakable(false);
+        itemStack.setItemMeta(afterMeta);
+        PlayerItemDamageEvent mockEvent = new PlayerItemDamageEvent(player, itemStack, blocks);
+        Bukkit.getPluginManager().callEvent(mockEvent);
+
+        ItemMeta wayAfterMeta = itemStack.getItemMeta();
+        assert wayAfterMeta != null;
+        ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
+        itemStack.setItemMeta(wayAfterMeta);
 
         AnticheatManager.unexemptPlayer(player);
     }
