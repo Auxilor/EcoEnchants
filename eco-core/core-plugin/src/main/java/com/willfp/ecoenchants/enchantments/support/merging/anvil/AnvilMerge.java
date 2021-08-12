@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.eco.core.fast.FastItemStack;
-import com.willfp.eco.core.tuples.Pair;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -43,13 +42,13 @@ public class AnvilMerge {
      * @param old      The previous {@link ItemStack} result.
      * @param itemName The anvil display name.
      * @param player   The player merging (for permissions).
-     * @return The result, stored as a {@link Pair} of {@link ItemStack} and {@link Integer}.
+     * @return The result.
      */
-    public Pair<ItemStack, Integer> doMerge(@Nullable final ItemStack left,
-                                            @Nullable final ItemStack right,
-                                            @Nullable final ItemStack old,
-                                            @NotNull final String itemName,
-                                            @NotNull final Player player) {
+    public AnvilResult doMerge(@Nullable final ItemStack left,
+                               @Nullable final ItemStack right,
+                               @Nullable final ItemStack old,
+                               @NotNull final String itemName,
+                               @NotNull final Player player) {
         /*
         If you're currently looking at this code,
         pray to whatever god you have that any changes
@@ -68,11 +67,11 @@ public class AnvilMerge {
         }
 
         if (left == null) {
-            return new Pair<>(null, null);
+            return AnvilResult.FAIL;
         }
 
         if (left.getEnchantments().containsKey(EcoEnchants.PERMANENCE_CURSE)) {
-            return new Pair<>(null, null);
+            return AnvilResult.FAIL;
         }
 
         name = name.replace("§", "&");
@@ -96,24 +95,24 @@ public class AnvilMerge {
                     int leftDamage = ((Damageable) meta).getDamage();
 
                     if (outDamage >= leftDamage || outDamage == -1) {
-                        return new Pair<>(null, null);
+                        return AnvilResult.FAIL;
                     } else {
                         ((Damageable) outMeta).setDamage(outDamage);
                     }
                 } else {
-                    return new Pair<>(null, null);
+                    return AnvilResult.FAIL;
                 }
                 if (right == null) {
-                    return new Pair<>(null, null);
+                    return AnvilResult.FAIL;
                 }
             }
 
             out.setItemMeta(outMeta);
 
             if (out.equals(left)) {
-                return new Pair<>(null, null);
+                return AnvilResult.FAIL;
             }
-            return new Pair<>(out, 0);
+            return new AnvilResult(out, 0);
         }
 
         if (left.getItemMeta() instanceof Damageable && right.getItemMeta() instanceof EnchantmentStorageMeta) {
@@ -121,11 +120,11 @@ public class AnvilMerge {
         }
 
         if (!left.getType().equals(right.getType()) && !(right.getItemMeta() instanceof EnchantmentStorageMeta)) {
-            return new Pair<>(null, null);
+            return AnvilResult.FAIL;
         }
 
         if (left.getAmount() != right.getAmount()) {
-            return new Pair<>(null, null);
+            return AnvilResult.FAIL;
         }
 
         Map<Enchantment, Integer> outEnchants = new HashMap<>();
@@ -219,7 +218,7 @@ public class AnvilMerge {
             int leftDamage = ((Damageable) left.getItemMeta()).getDamage();
 
             if (outDamage == leftDamage) {
-                return new Pair<>(null, null);
+                return AnvilResult.FAIL;
             }
         }
 
@@ -276,7 +275,7 @@ public class AnvilMerge {
         totalEnchantLevelDelta = Math.abs(outEnchantLevels.intValue() - inEnchantLevels.intValue());
 
         if (output.equals(left)) {
-            return new Pair<>(null, null);
+            return AnvilResult.FAIL;
         }
 
         if (PLUGIN.getConfigYml().getBool("anvil.cost-exponent.enabled")) {
@@ -292,6 +291,6 @@ public class AnvilMerge {
             }
         }
 
-        return new Pair<>(output, totalEnchantLevelDelta);
+        return new AnvilResult(output, totalEnchantLevelDelta);
     }
 }

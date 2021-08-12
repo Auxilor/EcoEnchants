@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.core.proxy.ProxyConstants;
-import com.willfp.eco.core.tuples.Pair;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
 import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
@@ -83,19 +82,20 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
             name = "";
         }
 
-        Pair<ItemStack, Integer> newOut = AnvilMerge.doMerge(left, right, out, name, player);
+        AnvilResult newOut = AnvilMerge.doMerge(left, right, out, name, player);
 
-        if (newOut.getFirst() == null) {
-            newOut.setFirst(new ItemStack(Material.AIR, 0));
+        if (newOut.result() == null) {
+            newOut = new AnvilResult(new ItemStack(Material.AIR, 0), newOut.xp());
         }
 
         int modCost;
-        if (newOut.getSecond() == null) {
+        if (newOut.xp() == null) {
             modCost = 0;
         } else {
-            modCost = newOut.getSecond();
+            modCost = newOut.xp();
         }
 
+        AnvilResult finalNewOut = newOut;
         this.getPlugin().getScheduler().run(() -> {
 
             // This is a disgusting bodge
@@ -112,7 +112,7 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
             // End pain
 
             int preCost = event.getInventory().getRepairCost();
-            ItemStack item = newOut.getFirst();
+            ItemStack item = finalNewOut.result();
 
             if (event.getInventory().getItem(0) == null) {
                 return;
@@ -151,7 +151,6 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
             event.getInventory().setRepairCost(cost);
             event.setResult(item);
             event.getInventory().setItem(2, item);
-            player.updateInventory();
         });
     }
 }
