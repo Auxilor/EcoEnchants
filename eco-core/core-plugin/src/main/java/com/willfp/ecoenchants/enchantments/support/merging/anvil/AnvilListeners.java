@@ -6,6 +6,7 @@ import com.willfp.eco.core.proxy.ProxyConstants;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
 import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -145,6 +146,11 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
                 return;
             }
             if (cost == 0) {
+                return;
+            }
+
+            if (event.getInventory().getItem(1) == null
+                    && !Objects.equals(event.getInventory().getItem(0), item)) {
                 return;
             }
 
