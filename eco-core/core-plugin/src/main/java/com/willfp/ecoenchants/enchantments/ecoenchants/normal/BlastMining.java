@@ -83,9 +83,11 @@ public class BlastMining extends EcoEnchant {
                 }
             }
         }
+
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         ItemMeta beforeMeta = itemStack.getItemMeta();
         assert beforeMeta != null;
+        boolean hadUnbreak = beforeMeta.isUnbreakable();
         beforeMeta.setUnbreakable(true);
         itemStack.setItemMeta(beforeMeta);
         int blocks = toBreak.size();
@@ -98,15 +100,17 @@ public class BlastMining extends EcoEnchant {
 
         ItemMeta afterMeta = itemStack.getItemMeta();
         assert afterMeta != null;
-        afterMeta.setUnbreakable(false);
+        afterMeta.setUnbreakable(hadUnbreak);
         itemStack.setItemMeta(afterMeta);
         PlayerItemDamageEvent mockEvent = new PlayerItemDamageEvent(player, itemStack, blocks);
         Bukkit.getPluginManager().callEvent(mockEvent);
 
-        ItemMeta wayAfterMeta = itemStack.getItemMeta();
-        assert wayAfterMeta != null;
-        ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
-        itemStack.setItemMeta(wayAfterMeta);
+        if (!hadUnbreak) {
+            ItemMeta wayAfterMeta = itemStack.getItemMeta();
+            assert wayAfterMeta != null;
+            ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
+            itemStack.setItemMeta(wayAfterMeta);
+        }
 
         AnticheatManager.unexemptPlayer(player);
     }
