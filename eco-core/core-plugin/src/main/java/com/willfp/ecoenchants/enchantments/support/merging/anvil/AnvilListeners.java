@@ -2,11 +2,13 @@ package com.willfp.ecoenchants.enchantments.support.merging.anvil;
 
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.core.proxy.ProxyConstants;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy;
 import com.willfp.ecoenchants.proxy.proxies.RepairCostProxy;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -148,8 +150,15 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
                 return;
             }
 
+            /*
+            This is a weird anti-dupe bodge. Don't look into it.
+             */
+            ItemStack l = event.getInventory().getItem(0);
+            Map<Enchantment, Integer> leftEnchants = l == null ? new HashMap<>() : FastItemStack.wrap(l).getEnchantmentsOnItem(true);
+            Map<Enchantment, Integer> outEnchants = item == null ? new HashMap<>() : FastItemStack.wrap(item).getEnchantmentsOnItem(true);
+
             if (event.getInventory().getItem(1) == null
-                    && !Objects.equals(event.getInventory().getItem(0), item)) {
+                    && !leftEnchants.equals(outEnchants)) {
                 return;
             }
 
