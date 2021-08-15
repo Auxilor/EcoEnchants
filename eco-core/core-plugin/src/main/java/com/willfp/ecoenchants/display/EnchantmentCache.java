@@ -298,10 +298,12 @@ public class EnchantmentCache {
                 if (enchantment instanceof EcoEnchant enchant) {
                     List<String> levelDesc = new ArrayList<>();
                     List<String> defDesc = enchant.getWrappedDescription();
+                    defDesc.replaceAll(line -> line.replace("§r", "§r" + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor()));
                     defDesc.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
                     for (String s : defDesc) {
                         levelDesc.add(s.replace("%value%", enchant.getPlaceholder(level)));
                     }
+                    levelDesc = StringUtils.formatList(levelDesc);
 
                     this.description.put(
                             level,
