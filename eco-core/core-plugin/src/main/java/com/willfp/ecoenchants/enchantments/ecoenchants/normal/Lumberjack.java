@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -86,6 +87,11 @@ public class Lumberjack extends EcoEnchant {
             assert wayAfterMeta != null;
             ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
             itemStack.setItemMeta(wayAfterMeta);
+            if (((Damageable) wayAfterMeta).getDamage() >= itemStack.getType().getMaxDurability()) {
+                PlayerItemBreakEvent breakEvent = new PlayerItemBreakEvent(player, itemStack);
+                Bukkit.getPluginManager().callEvent(breakEvent);
+                itemStack.setAmount(0);
+            }
         }
 
         AnticheatManager.unexemptPlayer(player);
