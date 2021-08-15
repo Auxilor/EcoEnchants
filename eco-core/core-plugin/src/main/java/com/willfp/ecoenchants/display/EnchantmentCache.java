@@ -305,7 +305,7 @@ public class EnchantmentCache {
 
                     this.description.put(
                             level,
-                            levelDesc
+                            StringUtils.formatList(levelDesc)
                     );
                 } else {
                     List<String> baseDesc = this.description.get(1);
