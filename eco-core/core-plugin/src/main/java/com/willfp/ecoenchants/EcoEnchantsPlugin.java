@@ -22,8 +22,8 @@ import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
 import com.willfp.ecoenchants.enchantments.util.ItemConversions;
 import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
-import com.willfp.ecoenchants.integrations.essentials.EssentialsManager;
-import com.willfp.ecoenchants.integrations.essentials.plugins.IntegrationEssentials;
+import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
+import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -111,13 +111,14 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 world.getPopulators().add(new LootPopulator(this));
             }
         }
-        EssentialsManager.registerEnchantments();
+        RegistrationManager.registerEnchantments();
     }
 
     @Override
     protected List<IntegrationLoader> loadIntegrationLoaders() {
         return Arrays.asList(
-                new IntegrationLoader("Essentials", () -> EssentialsManager.register(new IntegrationEssentials()))
+                new IntegrationLoader("Essentials", () -> RegistrationManager.register(new IntegrationEssentials())),
+                new IntegrationLoader("ShopGUIPlus", () -> RegistrationManager.register(new IntegrationShopGUIPlus()))
         );
     }
 

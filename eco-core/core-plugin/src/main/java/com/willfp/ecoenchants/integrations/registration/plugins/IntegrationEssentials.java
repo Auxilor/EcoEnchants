@@ -1,16 +1,16 @@
-package com.willfp.ecoenchants.integrations.essentials.plugins;
+package com.willfp.ecoenchants.integrations.registration.plugins;
 
 import com.earth2me.essentials.Enchantments;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import com.willfp.ecoenchants.integrations.essentials.EssentialsWrapper;
+import com.willfp.ecoenchants.integrations.registration.RegistrationWrapper;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public class IntegrationEssentials implements EssentialsWrapper {
+public class IntegrationEssentials implements RegistrationWrapper {
     @Override
     public void registerAllEnchantments() {
         try {
