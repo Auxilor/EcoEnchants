@@ -415,4 +415,92 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
 
         itemStack.setItemMeta(meta);
     }
+
+    /**
+     * On player hold item.
+     * <p>
+     * Listener for conversion.
+     *
+     * @param event The event to listen for.
+     */
+    @EventHandler
+    public void hardCapClamp(@NotNull final PlayerItemHeldEvent event) {
+        if (!ItemConversionOptions.isUsingHardCapClamp()) {
+            return;
+        }
+
+
+        if (!this.getPlugin().getConfigYml().getBool("anvil.hard-cap.enabled")) {
+            return;
+        }
+
+        if (event.getPlayer().hasPermission("ecoenchants.anvil.bypasshardcap")) {
+            return;
+        }
+
+        ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
+
+        clampHardCap(itemStack);
+    }
+
+    private void clampHardCap(@Nullable final ItemStack itemStack) {
+        if (itemStack == null) {
+            return;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return;
+        }
+
+        Map<Enchantment, Integer> enchants = FastItemStack.wrap(itemStack).getEnchantmentsOnItem(true);
+        Map<Enchantment, Integer> replacement = new HashMap<>();
+
+        int i = 0;
+        for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
+            if (i >= this.getPlugin().getConfigYml().getInt("anvil.hard-cap.cap")) {
+                return;
+            }
+
+            Enchantment enchantment = entry.getKey();
+            if (enchantment instanceof EcoEnchant enchant) {
+                if (!enchant.hasFlag("hard-cap-ignore")) {
+                    i++;
+                    replacement.put(entry.getKey(), entry.getValue());
+                }
+            } else {
+                i++;
+                replacement.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
+            Enchantment enchantment = entry.getKey();
+            if (enchantment instanceof EcoEnchant enchant) {
+                if (enchant.hasFlag("hard-cap-ignore")) {
+                    replacement.put(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+
+        if (meta instanceof EnchantmentStorageMeta storageMeta) {
+            storageMeta.getStoredEnchants().forEach((enchantment, integer) -> {
+                storageMeta.removeStoredEnchant(enchantment);
+            });
+
+            replacement.forEach((enchantment, integer) -> {
+                storageMeta.addStoredEnchant(enchantment, integer, true);
+            });
+        } else {
+            meta.getEnchants().forEach((enchantment, integer) -> {
+                meta.removeEnchant(enchantment);
+            });
+
+            replacement.forEach((enchantment, integer) -> {
+                meta.addEnchant(enchantment, integer, true);
+            });
+        }
+
+        itemStack.setItemMeta(meta);
+    }
 }

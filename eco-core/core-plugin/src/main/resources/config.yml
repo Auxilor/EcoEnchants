@@ -176,3 +176,8 @@ advanced:
     # Useful if you're disabling enchantments permanently and don't mind removing them from existing players
     # Also helps remove deleted enchantments or enchantments from old plugins
     enabled: false
+  hard-cap-clamp:
+    # Helps reverse players who have items with more enchants than the hard cap.
+    # Players with ecoenchants.anvil.bypasshardcap permission will be ignored.
+    # This may impact performance.
+    enabled: false

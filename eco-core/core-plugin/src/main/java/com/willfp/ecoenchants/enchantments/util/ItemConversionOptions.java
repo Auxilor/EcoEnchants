@@ -63,11 +63,22 @@ public class ItemConversionOptions {
     private boolean deletingIllegal = false;
 
     /**
+     * If hard cap clamp is enabled.
+     */
+    @Getter
+    private boolean usingHardCapClamp = false;
+
+    /**
      * If disabled enchantments should be removed entirely.
      */
     @Getter
     private boolean removeDisabled = false;
 
+    /**
+     * Reload the options.
+     *
+     * @param plugin Instance of ecoenchants.
+     */
     public void reload(@NotNull final EcoPlugin plugin) {
         usingLoreGetter = plugin.getConfigYml().getBool("advanced.lore-getter.enabled");
         usingAggressiveLoreGetter = plugin.getConfigYml().getBool("advanced.lore-getter.aggressive");
@@ -79,6 +90,7 @@ public class ItemConversionOptions {
         removingIllegal = plugin.getConfigYml().getBool("advanced.remove-illegal.enabled");
         deletingIllegal = plugin.getConfigYml().getBool("advanced.remove-illegal.delete-item");
         removeDisabled = plugin.getConfigYml().getBool("advanced.remove-disabled.enabled");
+        usingHardCapClamp = plugin.getConfigYml().getBool("advanced.hard-cap-clamp.enabled");
     }
 
     static {
