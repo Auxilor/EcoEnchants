@@ -117,8 +117,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     @Override
     protected List<IntegrationLoader> loadIntegrationLoaders() {
         return Arrays.asList(
-                new IntegrationLoader("Essentials", () -> RegistrationManager.register(new IntegrationEssentials())),
-                new IntegrationLoader("ShopGUIPlus", () -> RegistrationManager.register(new IntegrationShopGUIPlus()))
+                new IntegrationLoader("Essentials", () -> RegistrationManager.register(new IntegrationEssentials()))
         );
     }
 
