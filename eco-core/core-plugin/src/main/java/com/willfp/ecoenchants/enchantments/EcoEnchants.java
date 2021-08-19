@@ -143,7 +143,6 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Levitate;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.LiquidShot;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.LuckyCatch;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Lumberjack;
-import com.willfp.ecoenchants.enchantments.ecoenchants.normal.MagmaWalker;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Magnetic;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Marking;
 import com.willfp.ecoenchants.enchantments.ecoenchants.normal.Marksman;
@@ -276,7 +275,6 @@ public class EcoEnchants {
     public static final EcoEnchant DEXTEROUS = new Dexterous();
     public static final EcoEnchant BEHEADING = new Beheading();
     public static final EcoEnchant NECROTIC = new Necrotic();
-    public static final EcoEnchant MAGMA_WALKER = new MagmaWalker();
     public static final EcoEnchant TECTONIC = new Tectonic();
     public static final EcoEnchant EVASION = new Evasion();
     public static final EcoEnchant SUCCESSION = new Succession();
