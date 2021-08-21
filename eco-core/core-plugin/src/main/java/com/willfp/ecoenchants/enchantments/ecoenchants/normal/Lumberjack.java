@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -59,7 +60,7 @@ public class Lumberjack extends EcoEnchant {
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         ItemMeta beforeMeta = itemStack.getItemMeta();
         assert beforeMeta != null;
-        boolean hadUnbreak = beforeMeta.isUnbreakable();
+        boolean hadUnbreak = beforeMeta.isUnbreakable() || player.getGameMode() == GameMode.CREATIVE;
         beforeMeta.setUnbreakable(true);
         itemStack.setItemMeta(beforeMeta);
         int blocks = treeBlocks.size();
