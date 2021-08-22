@@ -19,6 +19,10 @@ public class Proximity extends EcoEnchant {
                               @NotNull final LivingEntity victim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
+        if (!attacker.getWorld().equals(victim.getWorld())) {
+            return;
+        }
+
         double distance = attacker.getLocation().distance(victim.getLocation());
 
         double decreaseAfter = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "when-closer-than-blocks");
