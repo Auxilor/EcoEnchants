@@ -10,6 +10,7 @@ import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Silverfish;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -71,6 +72,14 @@ public class Forcefield extends EcoEnchant implements TimedRunnable {
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
                 if (!(e instanceof Monster)) {
+                    continue;
+                }
+
+                if (e instanceof Silverfish) {
+                    continue;
+                }
+
+                if (e.getCustomName() != null || e.isCustomNameVisible()) {
                     continue;
                 }
 
