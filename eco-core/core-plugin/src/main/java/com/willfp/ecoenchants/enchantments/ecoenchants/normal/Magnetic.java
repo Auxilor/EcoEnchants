@@ -65,8 +65,11 @@ public class Magnetic extends EcoEnchant implements TimedRunnable {
             if (this.getDisabledWorlds().contains(player.getWorld())) {
                 return;
             }
-            if(player.isSneaking()) {
-                return;
+
+            if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-while-sneaking")) {
+                if (player.isSneaking()) {
+                    return;
+                }
             }
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
