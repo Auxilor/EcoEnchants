@@ -65,6 +65,9 @@ public class Magnetic extends EcoEnchant implements TimedRunnable {
             if (this.getDisabledWorlds().contains(player.getWorld())) {
                 return;
             }
+            if(player.isSneaking()) {
+                return;
+            }
 
             for (Entity e : player.getWorld().getNearbyEntities(player.getLocation(), distance, 2.0d, distance)) {
                 if (!(e instanceof Item || e instanceof ExperienceOrb)) {
@@ -74,6 +77,7 @@ public class Magnetic extends EcoEnchant implements TimedRunnable {
                 if (e instanceof Item && ((Item) e).getPickupDelay() > 0) {
                     continue;
                 }
+
 
                 Vector vector = player.getLocation().toVector().subtract(e.getLocation().toVector()).normalize().multiply(0.1 * level);
 
