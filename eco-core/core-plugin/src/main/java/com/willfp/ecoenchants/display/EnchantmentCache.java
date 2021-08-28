@@ -20,6 +20,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -207,6 +208,9 @@ public class EnchantmentCache {
         @Getter
         private final EnchantmentType type;
 
+        /**
+         * The requirement lore.
+         */
         @Getter
         private final List<String> requirementLore;
 
@@ -251,38 +255,38 @@ public class EnchantmentCache {
         }
 
         /**
-         * Get the name with the level for a player.
+         * Get the name with the level.
          *
          * @param level  The level.
-         * @param player The player.
-         * @return The name with the level for the player.
+         * @return The name with the level.
          */
-        public String getNameWithLevel(final int level,
-                                       @NotNull final Player player) {
-            String name = getNameWithLevel(level);
-            if (enchantment instanceof EcoEnchant enchant) {
-                boolean meets = enchant.doesPlayerMeetRequirement(player);
-                if (meets) {
-                    return name;
-                }
-
-                String color = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor();
-                if (color.contains("{}")) {
-                    name = name.replace("{}", name);
-                } else {
-                    name = color + name;
-                }
-            }
-            return name;
+        public String getNameWithLevel(final int level) {
+            return getNameWithLevel(level, null);
         }
 
         /**
          * Get enchantment with level.
          *
          * @param level The level.
+         * @param player The player.
          * @return The name with the level.
          */
-        public String getNameWithLevel(final int level) {
+        public String getNameWithLevel(final int level,
+                                       @Nullable final Player player) {
+            String unformattedName = rawName;
+            String formattedName = name;
+            if (enchantment instanceof EcoEnchant enchant && player != null) {
+                if (!enchant.doesPlayerMeetRequirements(player)) {
+                    String color = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor();
+                    if (color.contains("{}")) {
+                        unformattedName = color.replace("{}", unformattedName);
+                        formattedName = color.replace("{}", formattedName);
+                    } else {
+                        unformattedName = color + unformattedName;
+                        formattedName = color + formattedName;
+                    }
+                }
+            }
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
                 String numberString = " ";
 
@@ -303,9 +307,9 @@ public class EnchantmentCache {
                             numberString = color + numberString;
                         }
 
-                        return name + StringUtils.format(numberString);
+                        return formattedName + StringUtils.format(numberString);
                     } else {
-                        String clone = rawName;
+                        String clone = unformattedName;
                         String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
                         if (color.contains("{}")) {
                             clone = color.replace("{}", clone);
@@ -315,10 +319,10 @@ public class EnchantmentCache {
                         return StringUtils.format(clone + numberString);
                     }
                 } else {
-                    return name + numberString;
+                    return formattedName + numberString;
                 }
             } else {
-                return name;
+                return formattedName;
             }
         }
 

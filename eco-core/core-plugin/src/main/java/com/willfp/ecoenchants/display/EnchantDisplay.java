@@ -8,9 +8,11 @@ import com.willfp.eco.core.display.DisplayPriority;
 import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
+import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -76,7 +78,6 @@ public class EnchantDisplay extends DisplayModule {
         EnchantmentCache.update();
     }
 
-    @SuppressWarnings("checkstyle:OperatorWrap")
     @Override
     protected void display(@NotNull final ItemStack itemStack,
                            @Nullable final Player player,
@@ -135,9 +136,13 @@ public class EnchantDisplay extends DisplayModule {
                 }
             }
 
-            if (player != null) {
-                requirementLore.addAll(StringUtils.formatList(EnchantmentCache.getEntry(enchantment).getRequirementLore(), player));
+            if (player != null && enchantment instanceof EcoEnchant ecoEnchant) {
+                if (!ecoEnchant.doesPlayerMeetRequirements(player)) {
+                    requirementLore.addAll(StringUtils.formatList(EnchantmentCache.getEntry(enchantment).getRequirementLore(), player));
+                }
             }
+
+            Bukkit.getLogger().info((player == null) + " name: " + name + " requirementLore " + requirementLore);
         });
 
         if (options.getShrinkOptions().isEnabled() && (enchantments.size() > options.getShrinkOptions().getThreshold())) {

@@ -255,10 +255,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
                 continue;
             }
 
-            this.requirements.put(requirement, split.subList(1, split.size() - 1));
+            this.requirements.put(requirement, split.subList(1, split.size()));
         }
         requirementLore.clear();
-        requirementLore.addAll(config.getStrings("requirements.not-met-lore", false));
+        requirementLore.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "requirements.not-met-lore", false));
 
         postUpdate();
         this.register();
@@ -294,7 +294,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      * @param player The player.
      * @return If the requirements are met.
      */
-    public boolean doesPlayerMeetRequirement(@NotNull final Player player) {
+    public boolean doesPlayerMeetRequirements(@NotNull final Player player) {
         if (cachedRequirements.containsKey(player.getUniqueId())) {
             return cachedRequirements.get(player.getUniqueId());
         }
