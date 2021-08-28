@@ -18,6 +18,9 @@ general-config:
     - axe
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts:
     - silk_touch
   maximum-level: 6

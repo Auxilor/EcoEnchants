@@ -18,6 +18,9 @@ general-config:
     - pickaxe
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts:
     - transfuse
     - silk_touch

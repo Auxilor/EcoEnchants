@@ -19,6 +19,9 @@ general-config:
     - carrot_stick
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts: [ ]
   maximum-level: 3
 

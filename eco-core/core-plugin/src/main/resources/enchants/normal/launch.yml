@@ -18,6 +18,9 @@ general-config:
     - elytra
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts: [ ]
   maximum-level: 8
 

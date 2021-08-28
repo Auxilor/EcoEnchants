@@ -22,6 +22,9 @@ general-config:
     - trident
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts:
     - altitude
     - dehydration

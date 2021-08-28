@@ -25,6 +25,9 @@ general-config:
     - sword
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts:
     - splash
     - wisdom

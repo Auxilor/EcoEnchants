@@ -21,6 +21,9 @@ general-config:
     - boots
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts:
     - elevation
     - heat_treated

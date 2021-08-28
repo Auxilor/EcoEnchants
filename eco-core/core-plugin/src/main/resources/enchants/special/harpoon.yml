@@ -18,6 +18,9 @@ general-config:
     - rod
   grindstoneable: true
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts:
     - spiked
   maximum-level: 3

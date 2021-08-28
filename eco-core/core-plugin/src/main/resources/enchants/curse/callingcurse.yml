@@ -21,6 +21,9 @@ general-config:
     - boots
   grindstoneable: false
   disabled-in-worlds: [ ]
+  requirements:
+    list: []
+    not-met-lore: []
   conflicts:
     - mending
 
