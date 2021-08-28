@@ -12,7 +12,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -141,8 +140,6 @@ public class EnchantDisplay extends DisplayModule {
                     requirementLore.addAll(StringUtils.formatList(EnchantmentCache.getEntry(enchantment).getRequirementLore(), player));
                 }
             }
-
-            Bukkit.getLogger().info((player == null) + " name: " + name + " requirementLore " + requirementLore);
         });
 
         if (options.getShrinkOptions().isEnabled() && (enchantments.size() > options.getShrinkOptions().getThreshold())) {

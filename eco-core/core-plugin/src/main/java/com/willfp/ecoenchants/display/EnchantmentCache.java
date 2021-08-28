@@ -92,10 +92,10 @@ public class EnchantmentCache {
             CACHE.put(enchantment.getKey(), new CacheEntry(
                     enchantment,
                     "&4INVALID ENCHANTMENT",
-                    "INVALID",
                     new HashMap<>(Map.of(1, Collections.singletonList(Display.PREFIX + "INVALID ENCHANTMENT: " + enchantment.getClass().getName()))),
                     EnchantmentType.NORMAL,
-                    EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity"))
+                    EnchantmentRarity.getByName(PLUGIN.getConfigYml().getString("rarity.vanilla-rarity")),
+                    "&7"
             ));
             return;
         }
@@ -138,15 +138,6 @@ public class EnchantmentCache {
             color = rarity.getCustomColor();
         }
 
-        String rawName = name;
-        if (color.contains("{}")) {
-            name = color.replace("{}", name);
-        } else {
-            name = color + name;
-        }
-
-        name = StringUtils.format(name);
-
         description.replaceAll(line -> line.replace("§r", "§r" + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor()));
         description.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
 
@@ -169,7 +160,7 @@ public class EnchantmentCache {
                 levelDescription.put(i, description);
             }
         }
-        CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, rawName, levelDescription, type, rarity));
+        CACHE.put(enchantment.getKey(), new CacheEntry(enchantment, name, levelDescription, type, rarity, color));
     }
 
     @ToString
@@ -181,16 +172,15 @@ public class EnchantmentCache {
         private final Enchantment enchantment;
 
         /**
-         * The formatted name of the enchantment.
+         * The name of the enchantment.
          */
-        @Getter
         private final String name;
 
         /**
-         * The raw (unformatted) name of the enchantment.
+         * The default color of the enchantment.
          */
         @Getter
-        private final String rawName;
+        private final String color;
 
         /**
          * The description, line-wrapped.
@@ -222,16 +212,16 @@ public class EnchantmentCache {
 
         private CacheEntry(@NotNull final Enchantment enchantment,
                            @NotNull final String name,
-                           @NotNull final String rawName,
                            @NotNull final Map<Integer, List<String>> description,
                            @NotNull final EnchantmentType type,
-                           @NotNull final EnchantmentRarity rarity) {
+                           @NotNull final EnchantmentRarity rarity,
+                           @NotNull final String color) {
             this.enchantment = enchantment;
             this.name = name;
-            this.rawName = rawName;
             this.description = description;
             this.type = type;
             this.rarity = rarity;
+            this.color = color;
             this.stringDescription = new HashMap<>();
             this.requirementLore = new ArrayList<>();
             if (enchantment instanceof EcoEnchant ecoEnchant) {
@@ -257,7 +247,7 @@ public class EnchantmentCache {
         /**
          * Get the name with the level.
          *
-         * @param level  The level.
+         * @param level The level.
          * @return The name with the level.
          */
         public String getNameWithLevel(final int level) {
@@ -267,14 +257,14 @@ public class EnchantmentCache {
         /**
          * Get enchantment with level.
          *
-         * @param level The level.
+         * @param level  The level.
          * @param player The player.
          * @return The name with the level.
          */
         public String getNameWithLevel(final int level,
                                        @Nullable final Player player) {
-            String unformattedName = rawName;
             String formattedName = name;
+            String unformattedName = name;
             if (enchantment instanceof EcoEnchant enchant && player != null) {
                 if (!enchant.doesPlayerMeetRequirements(player)) {
                     String color = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor();
@@ -287,6 +277,12 @@ public class EnchantmentCache {
                     }
                 }
             }
+            if (color.contains("{}")) {
+                formattedName = color.replace("{}", formattedName);
+            } else {
+                formattedName = color + formattedName;
+            }
+            formattedName = StringUtils.format(formattedName);
             if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
                 String numberString = " ";
 
@@ -403,6 +399,31 @@ public class EnchantmentCache {
         @Deprecated
         public String getStringDescription() {
             return getStringDescription(1);
+        }
+
+        /**
+         * Get the unformatted name of the enchantment.
+         *
+         * @return The raw name.
+         */
+        public String getRawName() {
+            return name;
+        }
+
+        /**
+         * Get the formatted name of the enchantment.
+         *
+         * @return The name.
+         */
+        public String getName() {
+            String formattedName = name;
+            if (color.contains("{}")) {
+                formattedName = color.replace("{}", formattedName);
+            } else {
+                formattedName = color + formattedName;
+            }
+
+            return StringUtils.format(formattedName);
         }
     }
 }
