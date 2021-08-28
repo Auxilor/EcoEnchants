@@ -27,7 +27,7 @@ public class Replenish extends EcoEnchant {
             return;
         }
 
-        if (block.getType().equals(Material.SUGAR_CANE) || block.getType().equals(Material.SWEET_BERRY_BUSH)) {
+        if (block.getType().equals(Material.SUGAR_CANE) || block.getType().equals(Material.SWEET_BERRY_BUSH) || block.getType().equals(Material.GLOW_BERRIES)) {
             return;
         }
 
