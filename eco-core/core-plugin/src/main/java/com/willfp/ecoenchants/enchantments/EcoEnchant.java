@@ -6,6 +6,8 @@ import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.enchantments.meta.requirements.EnchantmentRequirement;
+import com.willfp.ecoenchants.enchantments.meta.requirements.EnchantmentRequirements;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import lombok.AccessLevel;
@@ -17,6 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
@@ -26,10 +29,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @SuppressWarnings({"deprecation", "RedundantSuppression"})
@@ -147,6 +153,22 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     private final List<String> flags = new ArrayList<>();
 
     /**
+     * All the requirements needed in order to use the enchantment.
+     */
+    private final Map<EnchantmentRequirement, List<String>> requirements = new HashMap<>();
+
+    /**
+     * Cached players to see if they meet requirements.
+     */
+    private final Map<UUID, Boolean> cachedRequirements = new HashMap<>();
+
+    /**
+     * The requirement lore shown if the player doesn't meet the requirements.
+     */
+    @Getter
+    private final List<String> requirementLore = new ArrayList<>();
+
+    /**
      * Create a new EcoEnchant.
      *
      * @param key           The key name of the enchantment
@@ -221,9 +243,27 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         flags.clear();
         flags.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "flags"));
         EnchantmentUtils.registerPlaceholders(this);
+        for (String req : config.getStrings(EcoEnchants.GENERAL_LOCATION + "requirements.list", false)) {
+            List<String> split = Arrays.asList(req.split(":"));
+            if (split.size() < 2) {
+                continue;
+            }
+
+            EnchantmentRequirement requirement = EnchantmentRequirements.getByID(split.get(0).toLowerCase());
+
+            if (requirement == null) {
+                continue;
+            }
+
+            this.requirements.put(requirement, split.subList(1, split.size() - 1));
+        }
+        requirementLore.clear();
+        requirementLore.addAll(config.getStrings("requirements.not-met-lore", false));
 
         postUpdate();
         this.register();
+
+        this.getPlugin().getScheduler().runTimer(this.cachedRequirements::clear, 3000, 3000);
     }
 
     protected void postUpdate() {
@@ -246,6 +286,28 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      */
     public String getPlaceholder(final int level) {
         return "unknown";
+    }
+
+    /**
+     * Does the player meet the requirements to use this enchantment.
+     *
+     * @param player The player.
+     * @return If the requirements are met.
+     */
+    public boolean doesPlayerMeetRequirement(@NotNull final Player player) {
+        if (cachedRequirements.containsKey(player.getUniqueId())) {
+            return cachedRequirements.get(player.getUniqueId());
+        }
+
+        for (Map.Entry<EnchantmentRequirement, List<String>> entry : requirements.entrySet()) {
+            if (!entry.getKey().doesPlayerMeet(player, entry.getValue())) {
+                cachedRequirements.put(player.getUniqueId(), false);
+                return false;
+            }
+        }
+
+        cachedRequirements.put(player.getUniqueId(), true);
+        return true;
     }
 
     /**

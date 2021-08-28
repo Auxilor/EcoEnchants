@@ -18,6 +18,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -206,6 +207,9 @@ public class EnchantmentCache {
         @Getter
         private final EnchantmentType type;
 
+        @Getter
+        private final List<String> requirementLore;
+
         /**
          * The rarity of the enchantment.
          */
@@ -225,6 +229,12 @@ public class EnchantmentCache {
             this.type = type;
             this.rarity = rarity;
             this.stringDescription = new HashMap<>();
+            this.requirementLore = new ArrayList<>();
+            if (enchantment instanceof EcoEnchant ecoEnchant) {
+                for (String s : ecoEnchant.getRequirementLore()) {
+                    requirementLore.add(Display.PREFIX + s);
+                }
+            }
 
             for (Integer level : description.keySet()) {
                 StringBuilder descriptionBuilder = new StringBuilder();
@@ -238,6 +248,32 @@ public class EnchantmentCache {
                 processedStringDescription = processedStringDescription.replace(Display.PREFIX, "");
                 stringDescription.put(level, processedStringDescription.replaceAll(PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor(), ""));
             }
+        }
+
+        /**
+         * Get the name with the level for a player.
+         *
+         * @param level  The level.
+         * @param player The player.
+         * @return The name with the level for the player.
+         */
+        public String getNameWithLevel(final int level,
+                                       @NotNull final Player player) {
+            String name = getNameWithLevel(level);
+            if (enchantment instanceof EcoEnchant enchant) {
+                boolean meets = enchant.doesPlayerMeetRequirement(player);
+                if (meets) {
+                    return name;
+                }
+
+                String color = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor();
+                if (color.contains("{}")) {
+                    name = name.replace("{}", name);
+                } else {
+                    name = color + name;
+                }
+            }
+            return name;
         }
 
         /**

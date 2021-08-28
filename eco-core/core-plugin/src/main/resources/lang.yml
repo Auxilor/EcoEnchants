@@ -34,6 +34,8 @@ messages:
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
 
+missing-requirements-format: "&m"
+
 curse-color: "&c"
 normal-color: "&7"
 special-color: "<gradient:FB57EC>{}</gradient:EF1DEC>&d"

@@ -6,18 +6,21 @@ import com.willfp.eco.core.display.Display;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.display.DisplayPriority;
 import com.willfp.eco.core.fast.FastItemStack;
+import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,8 +76,10 @@ public class EnchantDisplay extends DisplayModule {
         EnchantmentCache.update();
     }
 
+    @SuppressWarnings("checkstyle:OperatorWrap")
     @Override
     protected void display(@NotNull final ItemStack itemStack,
+                           @Nullable final Player player,
                            @NotNull final Object... args) {
         if (options.isRequireTarget()) {
             if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
@@ -102,6 +107,7 @@ public class EnchantDisplay extends DisplayModule {
         List<String> itemLore = fastItemStack.getLore();
 
         List<String> lore = new ArrayList<>();
+        List<String> requirementLore = new ArrayList<>();
 
         LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(fastItemStack.getEnchantmentsOnItem(true));
 
@@ -118,13 +124,19 @@ public class EnchantDisplay extends DisplayModule {
         unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
 
         enchantments.forEach((enchantment, level) -> {
-            String name = EnchantmentCache.getEntry(enchantment).getNameWithLevel(level);
+            String name = player == null
+                    ? EnchantmentCache.getEntry(enchantment).getNameWithLevel(level)
+                    : EnchantmentCache.getEntry(enchantment).getNameWithLevel(level, player);
 
             lore.add(Display.PREFIX + name);
             if (!options.getDescriptionOptions().isShowingAtBottom()) {
                 if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
                     lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription(level));
                 }
+            }
+
+            if (player != null) {
+                requirementLore.addAll(StringUtils.formatList(EnchantmentCache.getEntry(enchantment).getRequirementLore(), player));
             }
         });
 
@@ -158,6 +170,7 @@ public class EnchantDisplay extends DisplayModule {
         } else {
             lore.addAll(0, itemLore);
         }
+        lore.addAll(requirementLore);
         itemStack.setItemMeta(meta);
         fastItemStack.setLore(lore);
 
