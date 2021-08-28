@@ -40,6 +40,10 @@ public class HungerCurse extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         int delta = player.getFoodLevel() - event.getFoodLevel();
         delta *= this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "times-more-hunger");
 

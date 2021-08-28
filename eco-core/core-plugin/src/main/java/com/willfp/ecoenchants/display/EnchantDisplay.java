@@ -136,7 +136,7 @@ public class EnchantDisplay extends DisplayModule {
             }
 
             if (player != null && enchantment instanceof EcoEnchant ecoEnchant) {
-                if (!ecoEnchant.doesPlayerMeetRequirements(player)) {
+                if (!ecoEnchant.areRequirementsMet(player)) {
                     requirementLore.addAll(StringUtils.formatList(EnchantmentCache.getEntry(enchantment).getRequirementLore(), player));
                 }
             }

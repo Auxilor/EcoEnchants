@@ -33,6 +33,10 @@ public class FragilityCurse extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(event.getPlayer())) {
+            return;
+        }
+
         if (this.getDisabledWorlds().contains(event.getPlayer().getWorld())) {
             return;
         }

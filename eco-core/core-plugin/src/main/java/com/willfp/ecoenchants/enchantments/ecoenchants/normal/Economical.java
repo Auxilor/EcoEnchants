@@ -33,6 +33,9 @@ public class Economical extends EcoEnchant {
         if (this.getDisabledWorlds().contains(event.getPlayer().getWorld())) {
             return;
         }
+        if (!this.areRequirementsMet(event.getPlayer())) {
+            return;
+        }
         event.setShouldConsume(false);
     }
 }

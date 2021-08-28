@@ -72,6 +72,10 @@ public class InfernalTouch extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!EnchantChecks.mainhand(player, this)) {
             return;
         }

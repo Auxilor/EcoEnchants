@@ -29,6 +29,10 @@ public class Indestructibility extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(event.getPlayer())) {
+            return;
+        }
+
         double level = EnchantChecks.getItemLevel(item, this);
         double levelBonus = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "level-bonus");
 

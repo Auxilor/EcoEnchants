@@ -43,6 +43,10 @@ public class Spearfishing extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!(event.getEntity() instanceof Trident trident)) {
             return;
         }

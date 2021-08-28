@@ -51,7 +51,9 @@ public class Magnetic extends EcoEnchant implements TimedRunnable {
         this.getPlugin().getScheduler().runLater(() -> this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             int level = EnchantChecks.getArmorPoints(player, this, 0);
             if (level > 0) {
-                players.put(player, level);
+                if (this.areRequirementsMet(player)) {
+                    players.put(player, level);
+                }
             }
         }), 1);
         initialDistance = EcoEnchants.MAGNETIC.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "initial-distance");

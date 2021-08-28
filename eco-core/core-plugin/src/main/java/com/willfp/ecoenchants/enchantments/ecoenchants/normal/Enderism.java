@@ -43,8 +43,11 @@ public class Enderism extends EcoEnchant {
             return;
         }
 
-        assert player != null;
         if (!player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
+            return;
+        }
+
+        if (!this.areRequirementsMet(player)) {
             return;
         }
 

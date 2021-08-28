@@ -29,6 +29,10 @@ public class Instability extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!EnchantChecks.mainhand(player, this)) {
             return;
         }

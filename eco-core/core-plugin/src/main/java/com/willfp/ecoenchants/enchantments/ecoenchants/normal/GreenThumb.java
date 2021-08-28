@@ -28,6 +28,10 @@ public class GreenThumb extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (event.getClickedBlock() == null) {
             return;
         }

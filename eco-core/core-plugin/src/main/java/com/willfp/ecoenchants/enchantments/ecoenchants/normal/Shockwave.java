@@ -31,6 +31,10 @@ public class Shockwave extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         ItemStack item = player.getInventory().getItemInMainHand();
         if (entity instanceof Trident trident) {
             item = trident.getItem();

@@ -46,6 +46,10 @@ public class Aiming extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         if (this.getDisabledWorlds().contains(player.getWorld())) {

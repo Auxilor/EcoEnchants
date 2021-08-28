@@ -43,6 +43,10 @@ public class Fetching extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!(EnchantChecks.helmet(player, this))) {
             return;
         }

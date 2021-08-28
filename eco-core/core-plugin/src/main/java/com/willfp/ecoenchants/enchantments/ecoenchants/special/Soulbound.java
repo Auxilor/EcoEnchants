@@ -42,6 +42,10 @@ public class Soulbound extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (player.getKiller() != null) {
             Player killer = player.getKiller();
             int reaperLevel = EnchantChecks.getMainhandLevel(killer, EcoEnchants.REAPER);

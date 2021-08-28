@@ -35,6 +35,10 @@ public class Frozen extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         final int points = EnchantChecks.getArmorPoints(player, this, 0);
 
         if (points == 0) {

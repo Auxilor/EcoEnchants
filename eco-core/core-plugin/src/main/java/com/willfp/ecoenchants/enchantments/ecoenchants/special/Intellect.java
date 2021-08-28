@@ -24,6 +24,10 @@ public class Intellect extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         int level = EnchantChecks.getMainhandLevel(player, this);
 
         if (level == 0) {

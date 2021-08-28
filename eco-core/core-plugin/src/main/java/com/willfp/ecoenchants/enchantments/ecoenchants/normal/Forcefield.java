@@ -52,7 +52,9 @@ public class Forcefield extends EcoEnchant implements TimedRunnable {
             for (Player player : this.getPlugin().getServer().getOnlinePlayers()) {
                 int level = EnchantChecks.getArmorPoints(player, this, 0);
                 if (level > 0) {
-                    players.put(player, level);
+                    if (this.areRequirementsMet(player)) {
+                        players.put(player, level);
+                    }
                 }
             }
         }, 1);

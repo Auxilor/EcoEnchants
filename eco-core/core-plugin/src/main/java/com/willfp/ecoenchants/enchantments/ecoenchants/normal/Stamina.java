@@ -31,6 +31,10 @@ public class Stamina extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!EnchantChecks.boots(player, this)) {
             return;
         }

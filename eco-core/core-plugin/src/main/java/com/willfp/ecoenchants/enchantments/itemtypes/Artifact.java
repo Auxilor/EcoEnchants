@@ -100,6 +100,10 @@ public abstract class Artifact extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!EnchantChecks.chestplate(player, this)) {
             return;
         }

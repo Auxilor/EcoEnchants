@@ -48,7 +48,7 @@ public class Telekinesis extends EcoEnchant {
     public void telekinesisDropItem(@NotNull final BlockDropItemEvent event) {
         Player player = event.getPlayer();
 
-        if (!always && !EnchantChecks.mainhand(player, this)) {
+        if (!always && !(EnchantChecks.mainhand(player, this)) && this.areRequirementsMet(player)) {
             return;
         }
 
@@ -94,7 +94,7 @@ public class Telekinesis extends EcoEnchant {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!always && !EnchantChecks.mainhand(player, this)) {
+        if (!always && !(EnchantChecks.mainhand(player, this)) && this.areRequirementsMet(player)) {
             return;
         }
 

@@ -33,6 +33,10 @@ public class LuckyCatch extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (event.getState() == PlayerFishEvent.State.CAUGHT_ENTITY) {
             return;
         }

@@ -35,6 +35,10 @@ public class Launch extends EcoEnchant {
 
         Player player = event.getPlayer();
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!player.isGliding()) {
             return;
         }

@@ -19,6 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -291,10 +292,14 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     /**
      * Does the player meet the requirements to use this enchantment.
      *
-     * @param player The player.
+     * @param entity The entity.
      * @return If the requirements are met.
      */
-    public boolean doesPlayerMeetRequirements(@NotNull final Player player) {
+    public boolean areRequirementsMet(@NotNull final LivingEntity entity) {
+        if (!(entity instanceof Player player)) {
+            return true;
+        }
+
         if (cachedRequirements.containsKey(player.getUniqueId())) {
             return cachedRequirements.get(player.getUniqueId());
         }

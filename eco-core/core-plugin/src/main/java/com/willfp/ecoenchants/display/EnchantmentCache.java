@@ -266,7 +266,7 @@ public class EnchantmentCache {
             String formattedName = name;
             String unformattedName = name;
             if (enchantment instanceof EcoEnchant enchant && player != null) {
-                if (!enchant.doesPlayerMeetRequirements(player)) {
+                if (!enchant.areRequirementsMet(player)) {
                     String color = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor();
                     if (color.contains("{}")) {
                         unformattedName = color.replace("{}", unformattedName);

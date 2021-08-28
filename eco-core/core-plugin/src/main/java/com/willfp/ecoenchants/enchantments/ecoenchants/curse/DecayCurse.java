@@ -69,7 +69,9 @@ public class DecayCurse extends EcoEnchant implements TimedRunnable {
         players.clear();
         this.getPlugin().getScheduler().runLater(() -> this.getPlugin().getServer().getOnlinePlayers().forEach(player -> {
             if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this))) {
-                players.add(player);
+                if (this.areRequirementsMet(player)) {
+                    players.add(player);
+                }
             }
         }), 1);
         amount = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "multiplier");
@@ -78,7 +80,9 @@ public class DecayCurse extends EcoEnchant implements TimedRunnable {
     private void refreshPlayer(@NotNull final Player player) {
         players.remove(player);
         if (Arrays.stream(player.getInventory().getContents()).parallel().anyMatch(item -> EnchantChecks.item(item, this))) {
-            players.add(player);
+            if (this.areRequirementsMet(player)) {
+                players.add(player);
+            }
         }
     }
 

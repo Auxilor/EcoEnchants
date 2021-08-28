@@ -27,6 +27,10 @@ public class Sating extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!EnchantChecks.helmet(player, this)) {
             return;
         }

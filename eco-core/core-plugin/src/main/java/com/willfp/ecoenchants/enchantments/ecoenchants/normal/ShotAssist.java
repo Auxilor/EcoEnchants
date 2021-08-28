@@ -36,6 +36,10 @@ public class ShotAssist extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         assert player != null;
 
         int points = EnchantChecks.getArmorPoints(player, this, 0);

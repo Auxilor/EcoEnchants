@@ -32,6 +32,10 @@ public class Reel extends EcoEnchant {
 
         Player player = event.getPlayer();
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (victim.hasMetadata("NPC")) {
             return;
         }

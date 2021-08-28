@@ -19,8 +19,11 @@ public class Marksman extends EcoEnchant {
 
     @EventHandler
     public void onMarksmanShoot(@NotNull final ProjectileLaunchEvent event) {
-
         if (!(event.getEntity().getShooter() instanceof Player player)) {
+            return;
+        }
+
+        if (!this.areRequirementsMet(player)) {
             return;
         }
 

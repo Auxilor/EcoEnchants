@@ -27,6 +27,10 @@ public class Thrive extends EcoEnchant {
     public void onArmorEquip(@NotNull final ArmorChangeEvent event) {
         Player player = event.getPlayer();
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         int points = EnchantChecks.getArmorPoints(player, this);
 
         AttributeInstance inst = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);

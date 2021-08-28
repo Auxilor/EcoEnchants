@@ -35,6 +35,10 @@ public class Beheading extends EcoEnchant {
 
         Player player = event.getEntity().getKiller();
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         LivingEntity victim = event.getEntity();
 
         if (!EnchantChecks.mainhand(player, this)) {

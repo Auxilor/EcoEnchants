@@ -33,6 +33,10 @@ public class Graceful extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (player.getVelocity().getY() > -1) {
             return;
         }

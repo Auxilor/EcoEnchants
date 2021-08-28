@@ -113,6 +113,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(attacker)) {
+                return;
+            }
+
             enchant.onArrowDamage(attacker, victim, arrow, level, event);
         }));
     }
@@ -173,6 +177,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(attacker)) {
+                return;
+            }
+
             enchant.onTridentDamage(attacker, victim, trident, level, event);
         }));
     }
@@ -200,6 +208,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             }
 
             if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+
+            if (!enchant.areRequirementsMet(player)) {
                 return;
             }
 
@@ -257,6 +269,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(attacker)) {
+                return;
+            }
+
             enchant.onMeleeAttack(attacker, victim, level, event);
         });
     }
@@ -289,6 +305,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             }
 
             if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
+            if (!enchant.areRequirementsMet(shooter)) {
                 return;
             }
 
@@ -342,6 +362,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(shooter)) {
+                return;
+            }
+
             enchant.onProjectileLaunch(shooter, projectile, level, event);
         });
     }
@@ -375,6 +399,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             }
 
             if (enchant.getDisabledWorlds().contains(victim.getWorld())) {
+                return;
+            }
+
+            if (!enchant.areRequirementsMet(victim)) {
                 return;
             }
 
@@ -414,6 +442,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(shooter)) {
+                return;
+            }
+
             enchant.onArrowHit(shooter, level, event);
         }));
     }
@@ -449,6 +481,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             }
 
             if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
+            if (!enchant.areRequirementsMet(shooter)) {
                 return;
             }
 
@@ -491,6 +527,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(player)) {
+                return;
+            }
+
             enchant.onBlockBreak(player, block, level, event);
         });
     }
@@ -523,6 +563,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(victim)) {
+                return;
+            }
+
             enchant.onDamageWearingArmor(victim, level, event);
         });
     }
@@ -550,6 +594,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(player)) {
+                return;
+            }
+
             int level = EnchantChecks.getArmorPoints(player, enchant);
             enchant.onArmorEquip(player, level, event);
         }), 1);
@@ -561,7 +609,6 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
      * @param event The event to listen for.
      */
     @EventHandler(ignoreCancelled = true)
-    @Deprecated
     public void onArmorChange(@NotNull final ArmorChangeEvent event) {
         if (McmmoManager.isFake(event)) {
             return;
@@ -575,6 +622,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             }
 
             if (enchant.getDisabledWorlds().contains(player.getWorld())) {
+                return;
+            }
+
+            if (!enchant.areRequirementsMet(player)) {
                 return;
             }
 
@@ -614,6 +665,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
                 return;
             }
 
+            if (!enchant.areRequirementsMet(player)) {
+                return;
+            }
+
             enchant.onDamageBlock(player, block, level, event);
         });
     }
@@ -639,6 +694,7 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
 
         LivingEntity shooter = (LivingEntity) trident.getShooter();
         ItemStack item = trident.getItem();
+        assert shooter != null;
 
         EnchantChecks.getEnchantsOnItem(item).forEach((enchant, level) -> {
             if (event.isCancelled()) {
@@ -650,6 +706,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             }
 
             if (enchant.getDisabledWorlds().contains(shooter.getWorld())) {
+                return;
+            }
+
+            if (!enchant.areRequirementsMet(shooter)) {
                 return;
             }
 
@@ -698,6 +758,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             }
 
             if (enchant.getDisabledWorlds().contains(blocker.getWorld())) {
+                return;
+            }
+
+            if (!enchant.areRequirementsMet(blocker)) {
                 return;
             }
 

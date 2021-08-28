@@ -29,6 +29,10 @@ public class Grit extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(attacker)) {
+            return;
+        }
+
         if (!AntigriefManager.canInjure(attacker, player)) {
             return;
         }

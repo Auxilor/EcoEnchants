@@ -37,6 +37,10 @@ public class Necrotic extends EcoEnchant {
 
         Player player = event.getEntity().getKiller();
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!EnchantChecks.mainhand(player, this)) {
             return;
         }

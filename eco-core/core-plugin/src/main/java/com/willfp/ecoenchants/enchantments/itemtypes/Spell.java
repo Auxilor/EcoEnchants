@@ -252,6 +252,10 @@ public abstract class Spell extends EcoEnchant {
             }
         }
 
+        if (!this.areRequirementsMet(player)) {
+            return;
+        }
+
         if (cooldown > 0) {
             if (!this.hasFlag("no-cooldown-message")) {
                 if (this.getPlugin().getConfigYml().getBool("types.special.cooldown-in-actionbar")) {

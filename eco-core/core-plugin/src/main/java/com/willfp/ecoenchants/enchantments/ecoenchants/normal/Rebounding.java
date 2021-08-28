@@ -32,6 +32,10 @@ public class Rebounding extends EcoEnchant {
             return;
         }
 
+        if (!this.areRequirementsMet(victim)) {
+            return;
+        }
+
         int level = EnchantChecks.getArmorPoints(victim, this);
 
         if (level == 0) {
