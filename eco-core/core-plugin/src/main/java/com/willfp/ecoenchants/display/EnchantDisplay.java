@@ -173,19 +173,11 @@ public class EnchantDisplay extends DisplayModule {
             lore.addAll(0, itemLore);
         }
         lore.addAll(requirementLore);
-        itemStack.setItemMeta(meta);
         fastItemStack.setLore(lore);
-
-        ItemMeta meta2 = itemStack.getItemMeta();
-        assert meta2 != null;
-
-        if (meta2 instanceof EnchantmentStorageMeta) {
-            meta2.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        if (meta instanceof EnchantmentStorageMeta) {
+            fastItemStack.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
-
-        meta2.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-        itemStack.setItemMeta(meta2);
+        fastItemStack.addItemFlags(ItemFlag.HIDE_ENCHANTS);
     }
 
     @Override
