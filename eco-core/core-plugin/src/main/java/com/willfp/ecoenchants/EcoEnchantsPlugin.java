@@ -101,6 +101,11 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 }
             }, 1);
         }
+        this.getScheduler().runTimer(() -> {
+            for (EcoEnchant enchant : EcoEnchants.values()) {
+                enchant.clearCachedRequirements();
+            }
+        }, 300, 300);
     }
 
     @Override

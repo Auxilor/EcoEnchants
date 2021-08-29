@@ -263,8 +263,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
 
         postUpdate();
         this.register();
-        this.cachedRequirements.clear();
-        this.getPlugin().getScheduler().runTimer(this.cachedRequirements::clear, 300, 300);
+        this.clearCachedRequirements();
     }
 
     protected void postUpdate() {
@@ -277,6 +276,13 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      */
     public void register() {
         EnchantmentUtils.register(this);
+    }
+
+    /**
+     * Clear requirements cache.
+     */
+    public void clearCachedRequirements() {
+        this.cachedRequirements.clear();
     }
 
     /**
