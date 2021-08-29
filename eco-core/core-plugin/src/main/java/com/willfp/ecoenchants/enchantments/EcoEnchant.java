@@ -263,8 +263,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
 
         postUpdate();
         this.register();
-
-        this.getPlugin().getScheduler().runTimer(this.cachedRequirements::clear, 3000, 3000);
+        this.cachedRequirements.clear();
+        this.getPlugin().getScheduler().runTimer(this.cachedRequirements::clear, 300, 300);
     }
 
     protected void postUpdate() {
