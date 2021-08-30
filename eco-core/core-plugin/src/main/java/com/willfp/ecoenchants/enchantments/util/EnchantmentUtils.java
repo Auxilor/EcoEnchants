@@ -1,22 +1,33 @@
 package com.willfp.ecoenchants.enchantments.util;
 
+import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.core.integrations.placeholder.PlaceholderManager;
+import com.willfp.eco.util.BlockUtils;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerItemBreakEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @UtilityClass
 @SuppressWarnings({"unchecked", "deprecation"})
@@ -129,6 +140,54 @@ public class EnchantmentUtils {
 
             Enchantment.registerEnchantment(enchantment);
         } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        }
+    }
+
+    /**
+     * Rehandle breaking in a fast way that doesn't call Player#updateInventory.
+     *
+     * @param player  The player.
+     * @param toBreak The blocks to break.
+     * @param plugin  Instance of EcoEnchants, required for meta.
+     */
+    public static void rehandleBreaking(@NotNull final Player player,
+                                        @NotNull final Set<Block> toBreak,
+                                        @NotNull final EcoPlugin plugin) {
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        ItemMeta beforeMeta = itemStack.getItemMeta();
+        assert beforeMeta != null;
+        boolean hadUnbreak = beforeMeta.isUnbreakable() || player.getGameMode() == GameMode.CREATIVE;
+        beforeMeta.setUnbreakable(true);
+        itemStack.setItemMeta(beforeMeta);
+        int blocks = toBreak.size();
+
+        for (Block block : toBreak) {
+            block.setMetadata("block-ignore", plugin.getMetadataValueFactory().create(true));
+            BlockUtils.breakBlock(player, block);
+            block.removeMetadata("block-ignore", plugin);
+        }
+
+        ItemMeta afterMeta = itemStack.getItemMeta();
+        assert afterMeta != null;
+        afterMeta.setUnbreakable(hadUnbreak);
+        itemStack.setItemMeta(afterMeta);
+        PlayerItemDamageEvent mockEvent = new PlayerItemDamageEvent(player, itemStack, blocks);
+        Bukkit.getPluginManager().callEvent(mockEvent);
+        int unbLevel = EnchantChecks.getItemLevel(itemStack, Enchantment.DURABILITY);
+        double cancelChance = (100 / (double) (unbLevel + 1));
+
+        if (hadUnbreak || NumberUtils.randFloat(0, 100) > cancelChance) {
+            return;
+        }
+
+        ItemMeta wayAfterMeta = itemStack.getItemMeta();
+        assert wayAfterMeta != null;
+        ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
+        itemStack.setItemMeta(wayAfterMeta);
+        if (((Damageable) wayAfterMeta).getDamage() >= itemStack.getType().getMaxDurability()) {
+            PlayerItemBreakEvent breakEvent = new PlayerItemBreakEvent(player, itemStack);
+            Bukkit.getPluginManager().callEvent(breakEvent);
+            itemStack.setAmount(0);
         }
     }
 }

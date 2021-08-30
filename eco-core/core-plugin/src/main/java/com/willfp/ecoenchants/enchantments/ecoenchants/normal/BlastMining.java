@@ -2,23 +2,15 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.BlockUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.PlayerItemBreakEvent;
-import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -52,8 +44,6 @@ public class BlastMining extends EcoEnchant {
         if (player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) {
             return;
         }
-
-        AnticheatManager.exemptPlayer(player);
 
         Set<Block> toBreak = new HashSet<>();
 
@@ -91,39 +81,8 @@ public class BlastMining extends EcoEnchant {
             }
         }
 
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
-        ItemMeta beforeMeta = itemStack.getItemMeta();
-        assert beforeMeta != null;
-        boolean hadUnbreak = beforeMeta.isUnbreakable() || player.getGameMode() == GameMode.CREATIVE;
-        beforeMeta.setUnbreakable(true);
-        itemStack.setItemMeta(beforeMeta);
-        int blocks = toBreak.size();
-
-        toBreak.forEach((block1 -> {
-            block1.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
-            BlockUtils.breakBlock(player, block1);
-            block1.removeMetadata("block-ignore", this.getPlugin());
-        }));
-
-        ItemMeta afterMeta = itemStack.getItemMeta();
-        assert afterMeta != null;
-        afterMeta.setUnbreakable(hadUnbreak);
-        itemStack.setItemMeta(afterMeta);
-        PlayerItemDamageEvent mockEvent = new PlayerItemDamageEvent(player, itemStack, blocks);
-        Bukkit.getPluginManager().callEvent(mockEvent);
-
-        if (!hadUnbreak) {
-            ItemMeta wayAfterMeta = itemStack.getItemMeta();
-            assert wayAfterMeta != null;
-            ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
-            itemStack.setItemMeta(wayAfterMeta);
-            if (((Damageable) wayAfterMeta).getDamage() >= itemStack.getType().getMaxDurability()) {
-                PlayerItemBreakEvent breakEvent = new PlayerItemBreakEvent(player, itemStack);
-                Bukkit.getPluginManager().callEvent(breakEvent);
-                itemStack.setAmount(0);
-            }
-        }
-
+        AnticheatManager.exemptPlayer(player);
+        EnchantmentUtils.rehandleBreaking(player, toBreak, this.getPlugin());
         AnticheatManager.unexemptPlayer(player);
     }
 }

@@ -6,14 +6,13 @@ import com.willfp.eco.util.BlockUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -48,20 +47,10 @@ public class Vein extends EcoEnchant {
         int limit = level * blocksPerLevel;
 
         Set<Block> blockSet = BlockUtils.getVein(block, materials, limit);
+        blockSet.removeIf(block1 -> !AntigriefManager.canBreakBlock(player, block1));
 
         AnticheatManager.exemptPlayer(player);
-
-        for (Block veinBlock : blockSet) {
-            veinBlock.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
-            if (!AntigriefManager.canBreakBlock(player, veinBlock)) {
-                continue;
-            }
-
-            BlockUtils.breakBlock(player, veinBlock);
-
-            this.getPlugin().getScheduler().runLater(() -> veinBlock.removeMetadata("block-ignore", this.getPlugin()), 1);
-        }
-
+        EnchantmentUtils.rehandleBreaking(player, blockSet, this.getPlugin());
         AnticheatManager.unexemptPlayer(player);
     }
 }
