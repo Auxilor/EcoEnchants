@@ -12,6 +12,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -122,7 +123,6 @@ public class EnchantDisplay extends DisplayModule {
 
         enchantments.clear();
         unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
-
         enchantments.forEach((enchantment, level) -> {
             String name = player == null
                     ? EnchantmentCache.getEntry(enchantment).getNameWithLevel(level)
@@ -176,16 +176,11 @@ public class EnchantDisplay extends DisplayModule {
         itemStack.setItemMeta(meta);
         fastItemStack.setLore(lore);
 
-        ItemMeta meta2 = itemStack.getItemMeta();
-        assert meta2 != null;
-
-        if (meta2 instanceof EnchantmentStorageMeta) {
-            meta2.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        FastItemStack fis = FastItemStack.wrap(itemStack);
+        fis.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        if (meta instanceof EnchantmentStorageMeta) {
+            fis.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         }
-
-        meta2.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-        itemStack.setItemMeta(meta2);
     }
 
     @Override
