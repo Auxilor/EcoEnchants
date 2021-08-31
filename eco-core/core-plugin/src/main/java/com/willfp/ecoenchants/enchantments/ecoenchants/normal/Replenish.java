@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.Prerequisite;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Material;
@@ -27,8 +28,14 @@ public class Replenish extends EcoEnchant {
             return;
         }
 
-        if (block.getType().equals(Material.SUGAR_CANE) || block.getType().equals(Material.SWEET_BERRY_BUSH) || block.getType().equals(Material.GLOW_BERRIES)) {
+        if (block.getType() == Material.SUGAR_CANE || block.getType() == Material.SWEET_BERRY_BUSH) {
             return;
+        }
+
+        if (Prerequisite.HAS_1_17.isMet()) {
+            if (block.getType() == Material.GLOW_BERRIES) {
+                return;
+            }
         }
 
         if (data.getAge() != data.getMaximumAge()) {
