@@ -26,4 +26,4 @@ general-config:
     - silk_touch
 
 config:
-  drop-xp: true
+  # No config is available for this enchantment

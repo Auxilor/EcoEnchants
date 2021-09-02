@@ -4,10 +4,10 @@ package com.willfp.ecoenchants.autosell;
 import com.willfp.eco.core.drops.DropQueue;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
-import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import net.brcdev.shopgui.ShopGuiPlusApi;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -16,6 +16,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +28,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Autosell extends EcoEnchant {
+    private final Set<BlockDropItemEvent> noRepeat = new HashSet<>();
+
     private static final Set<Material> FORTUNE_MATERIALS = new HashSet<>(
             Arrays.asList(
                     Material.GOLD_INGOT,
@@ -40,8 +43,12 @@ public class Autosell extends EcoEnchant {
         );
     }
 
-    @EventHandler
-    public void infernalTouchBreak(@NotNull final BlockDropItemEvent event) {
+    @EventHandler(priority = EventPriority.LOW)
+    public void autosellHandler(@NotNull final BlockDropItemEvent event) {
+        if (noRepeat.contains(event)) {
+            return;
+        }
+
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
@@ -73,13 +80,21 @@ public class Autosell extends EcoEnchant {
             return;
         }
 
+        BlockDropItemEvent dropEvent = new BlockDropItemEvent(block, block.getState(), player, event.getItems());
+        noRepeat.add(dropEvent);
+
+        Bukkit.getPluginManager().callEvent(dropEvent);
+
+        if (dropEvent.getItems().isEmpty() || dropEvent.isCancelled()) {
+            return;
+        }
+
         Collection<ItemStack> drops = new ArrayList<>();
 
-        for (Item item : event.getItems()) {
+        for (Item item : dropEvent.getItems()) {
             drops.add(item.getItemStack());
         }
 
-        int experience = 0;
         int fortune = EnchantChecks.getMainhandLevel(player, Enchantment.LOOT_BONUS_BLOCKS);
 
         for (ItemStack itemStack : drops) {
@@ -97,16 +112,12 @@ public class Autosell extends EcoEnchant {
             drops.remove(itemStack);
         }
 
+        dropEvent.getItems().clear();
         event.getItems().clear();
-
-        if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "drop-xp")) {
-            experience = 0;
-        }
 
         new DropQueue(player)
                 .setLocation(block.getLocation())
                 .addItems(drops)
-                .addXP(experience)
                 .push();
     }
 }
