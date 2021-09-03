@@ -13,6 +13,7 @@ messages:
   not-found: "&cCannot find an enchantment matching name: &f%name%."
   enchantinfo: |
     %name%: &r%description%
+    &9Rarity: &r%rarity%
     &9Max Level: &r%maxlevel%
     &9Can be applied to: &r%target%
     &9Conflicts with: &r%conflicts%

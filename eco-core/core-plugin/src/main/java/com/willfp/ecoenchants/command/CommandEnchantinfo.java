@@ -9,6 +9,7 @@ import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -139,12 +140,14 @@ public class CommandEnchantinfo extends PluginCommand {
 
             final String finalName = EnchantmentCache.getEntry(enchantment).getName();
             final String finalDescription = EnchantmentCache.getEntry(enchantment).getStringDescription(1);
+            final EnchantmentRarity finalRarity = enchantment.getRarity();
             final String finalTargets = allTargets;
             final String finalConflicts = allConflicts;
             final String finalMaxLevel = maxLevel;
             Arrays.asList(this.getPlugin().getLangYml().getMessage("enchantinfo").split("\\r?\\n")).forEach((string -> {
                 string = string.replace("%name%", finalName)
                         .replace("%description%", finalDescription)
+                        .replace("%rarity%", finalRarity.getName())
                         .replace("%target%", finalTargets)
                         .replace("%conflicts%", finalConflicts)
                         .replace("%maxlevel%", finalMaxLevel);
