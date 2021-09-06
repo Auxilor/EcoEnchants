@@ -23,5 +23,9 @@ max-levels: []
 # conflicts:
 #   - "mending:efficiency:sharpness"
 #
+# If you want to remove all conflicts, set the list to 'none':
+# conflicts:
+#   - "mending:none"
+#
 # Beware that this will *override* conflicts, not add to them.
 conflicts: []

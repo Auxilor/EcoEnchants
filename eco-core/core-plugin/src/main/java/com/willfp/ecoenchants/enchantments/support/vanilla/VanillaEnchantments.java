@@ -59,6 +59,8 @@ public class VanillaEnchantments {
                                 keys.add(NamespacedKey.minecraft(split[i]));
                             }
 
+                            keys.removeIf(key -> key.getKey().equalsIgnoreCase("none"));
+
                             return keys;
                         }
                 ));
