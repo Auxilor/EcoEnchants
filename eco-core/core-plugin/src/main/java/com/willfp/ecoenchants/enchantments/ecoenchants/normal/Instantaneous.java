@@ -18,6 +18,11 @@ public class Instantaneous extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return EnchantmentUtils.chancePlaceholder(this, level);
+    }
+
+    @Override
     public void onDamageBlock(@NotNull final Player player,
                               @NotNull final Block block,
                               final int level,
