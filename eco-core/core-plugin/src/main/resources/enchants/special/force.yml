@@ -30,4 +30,5 @@ general-config:
   maximum-level: 8
 
 config:
+  disable-on-players: false # Should this enchantment only boost damage on mobs
   multiplier: 0.25 # Formula is (multiplier * (level + 6) + 1)*damage | Default functions as power 5 + level, eg force 2 = power 7
