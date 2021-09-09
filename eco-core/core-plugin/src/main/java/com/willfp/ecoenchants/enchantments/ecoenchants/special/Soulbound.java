@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -97,9 +97,10 @@ public class Soulbound extends EcoEnchant {
         player.setMetadata("soulbound-items", this.getPlugin().getMetadataValueFactory().create(soulboundItems));
     }
 
-    public boolean hasEmptyInventory(@NotNull final Player player) {
+    public boolean hasSoulboundItems(@NotNull final Player player) {
+        final NamespacedKey soulbound = this.getPlugin().getNamespacedKeyFactory().create("soulbound");
         for (ItemStack itemStack : player.getInventory().getContents()) {
-            if (itemStack != null && itemStack.getType() != Material.AIR) {
+            if (itemStack != null && itemStack.getItemMeta().getPersistentDataContainer().has(soulbound, PersistentDataType.INTEGER)) {
                 return false;
             }
         }
@@ -111,7 +112,7 @@ public class Soulbound extends EcoEnchant {
         Player player = event.getPlayer();
 
         this.getPlugin().getScheduler().runLater(() -> {
-            if (!hasEmptyInventory(player)) {
+            if (!hasSoulboundItems(player)) {
                 return;
             }
 
@@ -142,6 +143,7 @@ public class Soulbound extends EcoEnchant {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(@NotNull final PlayerDeathEvent event) {
-        event.getDrops().removeIf(itemStack -> itemStack.getItemMeta().getPersistentDataContainer().has(this.getPlugin().getNamespacedKeyFactory().create("soulbound"), PersistentDataType.INTEGER));
+        final NamespacedKey soulbound = this.getPlugin().getNamespacedKeyFactory().create("soulbound");
+        event.getDrops().removeIf(itemStack -> itemStack.getItemMeta().getPersistentDataContainer().has(soulbound, PersistentDataType.INTEGER));
     }
 }
