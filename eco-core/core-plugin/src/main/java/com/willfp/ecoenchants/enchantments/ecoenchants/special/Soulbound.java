@@ -111,7 +111,7 @@ public class Soulbound extends EcoEnchant {
     public void onSoulboundRespawn(@NotNull final PlayerRespawnEvent event) {
         Player player = event.getPlayer();
 
-        this.getPlugin().getScheduler().runLater(() -> {
+        this.getPlugin().getScheduler().run(() -> {
             if (!hasSoulboundItems(player)) {
                 return;
             }
@@ -138,7 +138,7 @@ public class Soulbound extends EcoEnchant {
             }
 
             player.removeMetadata("soulbound-items", this.getPlugin());
-        }, 1);
+        });
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
