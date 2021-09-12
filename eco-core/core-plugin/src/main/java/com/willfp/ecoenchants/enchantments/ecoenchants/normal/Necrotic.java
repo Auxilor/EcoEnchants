@@ -55,6 +55,10 @@ public class Necrotic extends EcoEnchant {
             return;
         }
 
+        if (!event.getEntity().getMetadata("eco-target").isEmpty()) {
+            return;
+        }
+
         ItemStack item = new ItemStack(Material.WITHER_SKELETON_SKULL, 1);
 
         new DropQueue(player)
