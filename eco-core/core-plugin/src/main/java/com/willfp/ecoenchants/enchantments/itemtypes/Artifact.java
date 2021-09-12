@@ -155,7 +155,7 @@ public abstract class Artifact extends EcoEnchant {
                     victim.getWorld().spawnParticle(particle, particleLocation2, 1, 0, 0, 0, 0, extra, false);
                 }
             }
-        }).runTaskTimer(0, 1);
+        }).runTaskTimerAsynchronously(0, 1);
     }
 
     @Override
