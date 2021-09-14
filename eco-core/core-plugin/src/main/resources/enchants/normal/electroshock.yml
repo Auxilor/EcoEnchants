@@ -22,5 +22,6 @@ general-config:
   maximum-level: 3
 
 config:
+  local-lightning-sound: false # Should be lightning sound played locally
   chance-per-level: 5
   damage: 4

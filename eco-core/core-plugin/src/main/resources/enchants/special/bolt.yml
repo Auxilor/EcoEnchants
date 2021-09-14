@@ -25,6 +25,7 @@ general-config:
   maximum-level: 4
 
 config:
+  local-lightning-sound: false # Should be lightning sound played locally
   chance-per-level: 5
   allow-not-fully-charged: false # dont require sword attack to be at full charge
   lightning-damage: 8
