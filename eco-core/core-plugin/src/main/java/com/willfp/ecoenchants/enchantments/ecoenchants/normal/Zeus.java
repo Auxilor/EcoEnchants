@@ -34,6 +34,7 @@ public class Zeus extends EcoEnchant {
 
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "lightning-damage");
 
-        LightningUtils.strike(victim, damage);
+        boolean silent = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "local-lightning-sound");
+        LightningUtils.strike(victim, damage, silent);
     }
 }

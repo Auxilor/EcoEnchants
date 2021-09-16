@@ -33,6 +33,7 @@ public class Electroshock extends EcoEnchant {
             return;
         }
 
-        LightningUtils.strike(attacker, damage);
+        boolean silent = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "local-lightning-sound");
+        LightningUtils.strike(attacker, damage, silent);
     }
 }

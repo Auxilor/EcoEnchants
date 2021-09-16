@@ -36,6 +36,7 @@ public class Thor extends EcoEnchant {
 
         double damage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "lightning-damage");
 
-        LightningUtils.strike(victim, damage);
+        boolean silent = this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "local-lightning-sound");
+        LightningUtils.strike(attacker, damage, silent);
     }
 }
