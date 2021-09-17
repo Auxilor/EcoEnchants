@@ -12,7 +12,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -79,7 +78,7 @@ public class EnchantDisplay extends DisplayModule {
     }
 
     @Override
-    protected void display(@NotNull final ItemStack itemStack,
+    public void display(@NotNull final ItemStack itemStack,
                            @Nullable final Player player,
                            @NotNull final Object... args) {
         if (options.isRequireTarget()) {
@@ -184,7 +183,7 @@ public class EnchantDisplay extends DisplayModule {
     }
 
     @Override
-    protected void revert(@NotNull final ItemStack itemStack) {
+    public void revert(@NotNull final ItemStack itemStack) {
         if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
             return;
         }
@@ -211,7 +210,7 @@ public class EnchantDisplay extends DisplayModule {
     }
 
     @Override
-    protected Object[] generateVarArgs(@NotNull final ItemStack itemStack) {
+    public Object[] generateVarArgs(@NotNull final ItemStack itemStack) {
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) {
             return new Object[]{false};
