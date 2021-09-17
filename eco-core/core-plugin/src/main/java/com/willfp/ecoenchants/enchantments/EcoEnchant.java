@@ -1,13 +1,13 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.eco.core.Prerequisite;
+import com.willfp.eco.core.requirement.Requirement;
+import com.willfp.eco.core.requirement.Requirements;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.enchantments.meta.requirements.EnchantmentRequirement;
-import com.willfp.ecoenchants.enchantments.meta.requirements.EnchantmentRequirements;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import lombok.AccessLevel;
@@ -156,7 +156,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     /**
      * All the requirements needed in order to use the enchantment.
      */
-    private final Map<EnchantmentRequirement, List<String>> requirements = new HashMap<>();
+    private final Map<Requirement, List<String>> requirements = new HashMap<>();
 
     /**
      * Cached players to see if they meet requirements.
@@ -250,11 +250,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
                 continue;
             }
 
-            EnchantmentRequirement requirement = EnchantmentRequirements.getByID(split.get(0).toLowerCase());
-
-            if (requirement == null) {
-                continue;
-            }
+            Requirement requirement = Requirements.getByID(split.get(0).toLowerCase());
 
             this.requirements.put(requirement, split.subList(1, split.size()));
         }
@@ -310,7 +306,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             return cachedRequirements.get(player.getUniqueId());
         }
 
-        for (Map.Entry<EnchantmentRequirement, List<String>> entry : requirements.entrySet()) {
+        for (Map.Entry<Requirement, List<String>> entry : requirements.entrySet()) {
             if (!entry.getKey().doesPlayerMeet(player, entry.getValue())) {
                 cachedRequirements.put(player.getUniqueId(), false);
                 return false;
