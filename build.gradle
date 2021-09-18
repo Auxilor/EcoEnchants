@@ -24,6 +24,7 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
         maven { url 'https://oss.sonatype.org/content/groups/public/' }
         maven { url 'https://maven.enginehub.org/repo/' }
+        maven { url 'https://repo.essentialsx.net/releases/' }
         maven { url 'https://ci.ender.zone/plugin/repository/project/' }
         maven { url 'https://ci.ender.zone/plugin/repository/everything/' }
         maven { url 'https://repo.md-5.net/content/repositories/snapshots/' }

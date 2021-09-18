@@ -6,7 +6,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot:1.17-R0.1-SNAPSHOT'
     compileOnly 'commons-io:commons-io:2.8.0'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.0-SNAPSHOT'
-    compileOnly 'net.ess3:EssentialsX:2.18.1'
+    compileOnly 'net.essentialsx:EssentialsX:2.19.0'
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4-SNAPSHOT'
 }
