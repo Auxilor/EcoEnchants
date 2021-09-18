@@ -238,7 +238,10 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         disabledWorldNames.clear();
         disabledWorldNames.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "disabled-in-worlds"));
         disabledWorlds.clear();
-        List<String> worldNames = Bukkit.getWorlds().stream().map(World::getName).map(String::toLowerCase).collect(Collectors.toList());
+        List<String> worldNames = new ArrayList<>();
+        for (World world : Bukkit.getWorlds()) {
+            worldNames.add(world.getName().toLowerCase());
+        }
         List<String> disabledExistingWorldNames = disabledWorldNames.stream().filter(s -> worldNames.contains(s.toLowerCase())).collect(Collectors.toList());
         disabledWorlds.addAll(Bukkit.getWorlds().stream().filter(world -> disabledExistingWorldNames.contains(world.getName().toLowerCase())).collect(Collectors.toList()));
         targets.clear();
