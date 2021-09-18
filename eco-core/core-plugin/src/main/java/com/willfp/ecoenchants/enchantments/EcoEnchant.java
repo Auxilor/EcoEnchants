@@ -5,13 +5,16 @@ import com.willfp.eco.core.requirement.Requirement;
 import com.willfp.eco.core.requirement.Requirements;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
+import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
+import com.willfp.ecoenchants.enchantments.util.PaperHelper;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import lombok.AccessLevel;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
@@ -19,9 +22,11 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -140,7 +145,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      * The rarity of the enchantment.
      */
     @Getter
-    private EnchantmentRarity rarity;
+    private EnchantmentRarity enchantmentRarity;
 
     /**
      * If the enchantment is enabled.
@@ -220,8 +225,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      */
     public void update() {
         config.loadFromLang();
-        rarity = config.getRarity();
-        Validate.notNull(rarity, "Rarity specified in " + this.permissionName + " is invalid!");
+        enchantmentRarity = config.getRarity();
+        Validate.notNull(enchantmentRarity, "Rarity specified in " + this.permissionName + " is invalid!");
         conflicts = config.getEnchantments(EcoEnchants.GENERAL_LOCATION + "conflicts");
         grindstoneable = config.getBool(EcoEnchants.GENERAL_LOCATION + "grindstoneable");
         availableFromTable = config.getBool(EcoEnchants.OBTAINING_LOCATION + "table");
@@ -438,5 +443,111 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     @Override
     public boolean canEnchantItem(@NotNull final ItemStack itemStack) {
         return targetMaterials.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
+    }
+
+    /**
+     * Paper parity.
+     * <p>
+     * You should use EnchantmentCache instead.
+     *
+     * @param level The level.
+     * @return The display name.
+     * @deprecated Use {@link EnchantmentCache#getEntry(Enchantment)} instead.
+     */
+    @Deprecated
+    @Override
+    public @NotNull Component displayName(final int level) {
+        return PaperHelper.toComponent(EnchantmentCache.getEntry(this).getNameWithLevel(level));
+    }
+
+    /**
+     * Paper parity.
+     * <p>
+     * You should use {@link EcoEnchant#isAvailableFromVillager()} instead.
+     *
+     * @return If tradeable.
+     * @deprecated Use {@link EcoEnchant#isAvailableFromVillager()} instead.
+     */
+    @Deprecated
+    @Override
+    public boolean isTradeable() {
+        return this.isAvailableFromVillager();
+    }
+
+    /**
+     * Paper parity.
+     * <p>
+     * You should use {@link EcoEnchant#isAvailableFromLoot()} instead.
+     *
+     * @return If discoverable.
+     * @deprecated Use {@link EcoEnchant#isAvailableFromLoot()} instead.
+     */
+    @Deprecated
+    @Override
+    public boolean isDiscoverable() {
+        return this.isAvailableFromLoot();
+    }
+
+    /**
+     * Paper parity.
+     * <p>
+     * EcoEnchants has its own systems for everything like this. Will always return 0.
+     *
+     * @param level          The level.
+     * @param entityCategory The category.
+     * @return 0
+     * @deprecated EcoEnchants has its own systems for this.
+     */
+    @Deprecated
+    @Override
+    public float getDamageIncrease(final int level,
+                                   @NotNull final EntityCategory entityCategory) {
+        return 0;
+    }
+
+    /**
+     * Paper parity.
+     * <p>
+     * EcoEnchants has its own systems for targets.
+     * <p>
+     * Use {@link EcoEnchant#getTargets()} instead.
+     *
+     * @return An empty set.
+     * @deprecated Use {@link EcoEnchant#getTargets()}.
+     */
+    @Deprecated
+    @Override
+    public @NotNull Set<EquipmentSlot> getActiveSlots() {
+        return new HashSet<>();
+    }
+
+    /**
+     * Paper parity.
+     * <p>
+     * eco / EcoEnchants recodes display entirely.
+     *
+     * @return A translation key.
+     * @deprecated Useless method, all items will be display differently using eco.
+     */
+    @Deprecated
+    @Override
+    public @NotNull String translationKey() {
+        return "ecoenchants:enchantment." + this.getKey().getKey();
+    }
+
+    /**
+     * Paper parity.
+     * <p>
+     * EcoEnchants has its own systems for rarity.
+     * <p>
+     * Use {@link EcoEnchant#getEnchantmentRarity()} instead.
+     *
+     * @return {@link io.papermc.paper.enchantments.EnchantmentRarity#COMMON}.
+     * @deprecated Use {@link EcoEnchant#getEnchantmentRarity()}.
+     */
+    @Deprecated
+    @Override
+    public @NotNull io.papermc.paper.enchantments.EnchantmentRarity getRarity() {
+        return io.papermc.paper.enchantments.EnchantmentRarity.COMMON;
     }
 }

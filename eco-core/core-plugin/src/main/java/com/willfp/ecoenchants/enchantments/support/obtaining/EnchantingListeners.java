@@ -125,10 +125,10 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
             if (!enchantment.canEnchantItem(item)) {
                 continue;
             }
-            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getTableProbability() * multiplier) {
+            if (NumberUtils.randFloat(0, 1) > enchantment.getEnchantmentRarity().getTableProbability() * multiplier) {
                 continue;
             }
-            if (enchantment.getRarity().getMinimumLevel() > cost) {
+            if (enchantment.getEnchantmentRarity().getMinimumLevel() > cost) {
                 continue;
             }
             if (!enchantment.isEnabled()) {
@@ -172,7 +172,7 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
                 int maxLevel = this.getPlugin().getConfigYml().getInt("enchanting-table.maximum-obtainable-level");
-                double enchantlevel1 = (cost / (double) enchantment.getRarity().getMinimumLevel()) / (maxLevel / (double) enchantment.getRarity().getMinimumLevel());
+                double enchantlevel1 = (cost / (double) enchantment.getEnchantmentRarity().getMinimumLevel()) / (maxLevel / (double) enchantment.getEnchantmentRarity().getMinimumLevel());
                 double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, enchantlevel1);
                 double enchantlevel3 = 1 / maxLevelDouble;
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);

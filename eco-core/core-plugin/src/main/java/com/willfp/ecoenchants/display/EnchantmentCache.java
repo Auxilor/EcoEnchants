@@ -109,7 +109,7 @@ public class EnchantmentCache {
             description = StringUtils.formatList(ecoEnchant.getWrappedDescription());
             name = ecoEnchant.getDisplayName();
             type = ecoEnchant.getType();
-            rarity = ecoEnchant.getRarity();
+            rarity = ecoEnchant.getEnchantmentRarity();
         } else {
             description = Arrays.asList(
                     WordUtils.wrap(

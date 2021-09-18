@@ -73,7 +73,7 @@ public class CommandGiverandombook extends Subcommand {
                     if (!(enchantment instanceof EcoEnchant)) {
                         return false;
                     }
-                    return ((EcoEnchant) enchantment).getRarity().equals(rarity);
+                    return ((EcoEnchant) enchantment).getEnchantmentRarity().equals(rarity);
                 }
                 return true;
             }).collect(Collectors.toList());

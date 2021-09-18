@@ -73,7 +73,7 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         EcoEnchant applied = null;
 
         for (EcoEnchant enchantment : enchantments) {
-            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier) {
+            if (NumberUtils.randFloat(0, 1) > enchantment.getEnchantmentRarity().getVillagerProbability() * multiplier) {
                 continue;
             }
 
@@ -167,7 +167,7 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
         double multiplier = 0.01;
 
         for (EcoEnchant enchantment : enchantments) {
-            if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getVillagerProbability() * multiplier) {
+            if (NumberUtils.randFloat(0, 1) > enchantment.getEnchantmentRarity().getVillagerProbability() * multiplier) {
                 continue;
             }
 

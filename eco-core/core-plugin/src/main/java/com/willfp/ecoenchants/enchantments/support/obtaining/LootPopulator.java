@@ -92,11 +92,11 @@ public class LootPopulator extends BlockPopulator {
                 int cap = 0;
 
                 for (EcoEnchant enchantment : enchantments) {
-                    if (enchantment == null || enchantment.getRarity() == null) {
+                    if (enchantment == null || enchantment.getEnchantmentRarity() == null) {
                         continue;
                     }
 
-                    if (NumberUtils.randFloat(0, 1) > enchantment.getRarity().getLootProbability() * multiplier) {
+                    if (NumberUtils.randFloat(0, 1) > enchantment.getEnchantmentRarity().getLootProbability() * multiplier) {
                         continue;
                     }
 

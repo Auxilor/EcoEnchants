@@ -102,7 +102,7 @@ public class CommandDebug extends Subcommand {
 
                 Set<EcoEnchant> withIssues = new HashSet<>();
                 EcoEnchants.values().forEach(enchant -> {
-                    if (enchant.getRarity() == null) {
+                    if (enchant.getEnchantmentRarity() == null) {
                         withIssues.add(enchant);
                     }
                     if (enchant.getTargets().isEmpty()) {
