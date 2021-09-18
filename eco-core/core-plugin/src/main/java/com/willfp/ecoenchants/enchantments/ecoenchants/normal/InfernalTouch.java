@@ -69,6 +69,9 @@ public class InfernalTouch extends EcoEnchant {
 
     @EventHandler
     public void infernalTouchBreak(@NotNull final BlockDropItemEvent event) {
+
+        System.out.println("Drop event");
+
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
