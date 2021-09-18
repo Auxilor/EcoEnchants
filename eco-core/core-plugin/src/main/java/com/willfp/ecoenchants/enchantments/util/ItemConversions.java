@@ -32,6 +32,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 public class ItemConversions extends PluginDependent<EcoPlugin> implements Listener {
     /**
      * Pass an {@link EcoPlugin} in order to interface with it.

@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "deprecation"})
 public class CommandDebug extends Subcommand {
     /**
      * Instantiate a new /ecoenchants debug command handler.
@@ -102,7 +102,7 @@ public class CommandDebug extends Subcommand {
 
                 Set<EcoEnchant> withIssues = new HashSet<>();
                 EcoEnchants.values().forEach(enchant -> {
-                    if (enchant.getRarity() == null) {
+                    if (enchant.getEnchantmentRarity() == null) {
                         withIssues.add(enchant);
                     }
                     if (enchant.getTargets().isEmpty()) {

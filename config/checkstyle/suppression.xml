@@ -19,7 +19,6 @@
 
     <!-- Fields don't need javadoc -->
     <suppress files="EcoEnchants.java" checks="JavadocVariable"/>
-    <suppress files="EnchantmentRequirements.java" checks="JavadocVariable"/>
 
     <!-- Modified version of library -->
     <suppress files="ArmorEquipEvent.java" checks="JavadocVariable"/>
