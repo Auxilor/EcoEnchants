@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+@SuppressWarnings("deprecation")
 public abstract class Spell extends EcoEnchant {
     /**
      * Items that must be left-clicked to activate spells for.

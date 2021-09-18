@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "deprecation"})
 public class CommandDebug extends Subcommand {
     /**
      * Instantiate a new /ecoenchants debug command handler.
