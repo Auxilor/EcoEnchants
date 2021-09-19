@@ -1,9 +1,9 @@
 #
-# Ignite EcoEnchant
+# Dousing EcoEnchant
 #
 
-name: "Ignite"
-description: '&a%value%%&r chance to light hit block on fire.'
+name: "Dousing"
+description: '&a%value%%&r chance to put out fire on block.'
 enabled: true
 
 obtaining:
@@ -20,10 +20,10 @@ general-config:
   grindstoneable: true
   disabled-in-worlds: [ ]
   requirements:
-    list: []
-    not-met-lore: []
+    list: [ ]
+    not-met-lore: [ ]
   conflicts:
-    - dousing
+    - ignite
   maximum-level: 8
 
 config:
