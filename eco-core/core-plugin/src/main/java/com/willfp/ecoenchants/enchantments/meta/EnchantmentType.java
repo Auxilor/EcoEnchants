@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class EnchantmentType {
@@ -199,6 +200,17 @@ public class EnchantmentType {
         color = colorSupplier.get();
         singular = singularSupplier.get();
         REGISTERED.add(this);
+    }
+
+    /**
+     * Get EnchantmentType matching name.
+     *
+     * @param name The name to search for.
+     * @return The matching EnchantmentType, or null if not found.
+     */
+    public static EnchantmentType getByName(@NotNull final String name) {
+        Optional<EnchantmentType> matching = REGISTERED.stream().filter(enchantmentType -> enchantmentType.getName().equalsIgnoreCase(name)).findFirst();
+        return matching.orElse(null);
     }
 
     /**

@@ -10,6 +10,7 @@ import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -28,6 +29,7 @@ public class CommandGiverandombook extends Subcommand {
      * The cached enchantment names.
      */
     private static final List<String> RARITY_NAMES = EnchantmentRarity.values().stream().map(EnchantmentRarity::getName).collect(Collectors.toList());
+    private static final List<String> TYPE_NAMES = EnchantmentType.values().stream().map(EnchantmentType::getName).collect(Collectors.toList());
 
     /**
      * Instantiate a new command handler.
@@ -58,6 +60,9 @@ public class CommandGiverandombook extends Subcommand {
 
             EnchantmentRarity rarity = args.size() >= 2 ? EnchantmentRarity.getByName(args.get(1).toLowerCase()) : null;
 
+            EnchantmentType type = rarity == null && args.size() >= 2 ? EnchantmentType.getByName(args.get(1).toLowerCase()) : null;
+
+
             if (player == null) {
                 sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-player"));
                 return;
@@ -70,10 +75,16 @@ public class CommandGiverandombook extends Subcommand {
                 return true;
             }).filter(enchantment -> {
                 if (rarity != null) {
-                    if (!(enchantment instanceof EcoEnchant)) {
+                    if (!(enchantment instanceof EcoEnchant ecoEnchant)) {
                         return false;
                     }
-                    return ((EcoEnchant) enchantment).getEnchantmentRarity().equals(rarity);
+                    return ecoEnchant.getEnchantmentRarity().equals(rarity);
+                }
+                else if (type != null) {
+                    if (!(enchantment instanceof EcoEnchant ecoEnchant)) {
+                        return false;
+                    }
+                    return ecoEnchant.getType().equals(type);
                 }
                 return true;
             }).collect(Collectors.toList());
@@ -117,6 +128,7 @@ public class CommandGiverandombook extends Subcommand {
 
             if (args.size() == 2) {
                 StringUtil.copyPartialMatches(String.join(" ", args.get(1)), RARITY_NAMES, completions);
+                StringUtil.copyPartialMatches(String.join(" ", args.get(1)), TYPE_NAMES, completions);
             }
 
             Collections.sort(completions);
