@@ -7,8 +7,8 @@
 <h4 align="center">Source code for EcoEnchants, a premium spigot plugin.</h4>
 
 <p align="center">
-    <a href="https://www.spigotmc.org/resources/ecoenchants.79573/">
-        <img alt="spigot" src="https://img.shields.io/badge/spigot-ecoenchants-brightgreen?style=for-the-badge"/>
+    <a href="https://polymart.org/resource/1-16-1-17-ecoenchants.490">
+        <img alt="spigot" src="https://img.shields.io/badge/polymart-ecoenchants-brightgreen?style=for-the-badge"/>
     </a>
     <a href="https://bstats.org/plugin/bukkit/EcoEnchants" alt="bstats servers">
         <img src="https://img.shields.io/bstats/servers/7666?color=brightgreen&style=for-the-badge"/>
