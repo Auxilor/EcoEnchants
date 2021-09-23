@@ -36,7 +36,11 @@ public class Buckshot extends EcoEnchant {
         int numberPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount-per-level");
         int number = numberPerLevel * level;
         double spread = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "spread-per-level");
-        spread *= level;
+        if (level < this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "maximum-level")) {
+            spread *= level;
+        } else {
+            spread *= this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "maximum-level");
+        }
 
         for (int i = 0; i < number; i += 1) {
 
