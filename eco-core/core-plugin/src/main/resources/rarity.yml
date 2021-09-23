@@ -66,3 +66,11 @@ rarities:
     custom-color:
       enabled: false
       color: "&4"
+  artifact:
+    table-probability: 5
+    minimum-level: 1
+    villager-probability: 9
+    loot-probability: 5
+    custom-color:
+      enabled: false
+      color: "&8"
