@@ -10,7 +10,7 @@ obtaining:
   table: true
   villager: true
   loot: true
-  rarity: epic
+  rarity: artifact
 
 general-config:
   flags: []
@@ -43,10 +43,18 @@ config:
   amount: 10
   on-blocks:
     - diamond_ore
+    - deepslate_diamond_ore
     - gold_ore
+    - deepslate_gold_ore
     - lapis_ore
+    - deepslate_lapis_ore
     - redstone_ore
+    - deepslate_redstone_ore
     - iron_ore
+    - deepslate_iron_ore
     - copper_ore
+    - deepslate_copper_ore
+    - emerald_ore
+    - deepslate_emerald_ore
     - obsidian
     - ancient_debris
