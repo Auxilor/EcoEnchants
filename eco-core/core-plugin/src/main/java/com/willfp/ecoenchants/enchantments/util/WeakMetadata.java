@@ -6,10 +6,20 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 public class WeakMetadata {
+
     /**
-     * Weak metadata to prevent memory leaks.
+     * Summoned entities by the summoning enchantments.
      * <p>
-     * Thanks Akiranya for the change!
+     * K: summoned entity
+     * V: the target of the summoned entity
      */
-    public static final Map<Entity, Object> WEAK_META = new WeakHashMap<>();
+    public final static Map<Entity, Object> SUMMONED_ENTITY_MEMORY = new WeakHashMap<>();
+
+    /**
+     * Victim entities which the summoned entities target at.
+     * <p>
+     * K: entity which the summoned entities target at
+     * V: nothing (passing null is fine)
+     */
+    public final static Map<Entity, Object> SUMMONED_ENTITY_TARGET = new WeakHashMap<>();
 }
