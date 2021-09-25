@@ -83,7 +83,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
             return;
         }
 
-        if (WeakMetadata.ECO_TARGET.containsKey(victim)) {
+        if (WeakMetadata.WEAK_META.containsKey(victim)) {
             return;
         }
 
@@ -103,24 +103,24 @@ public abstract class SummoningEnchantment extends EcoEnchant {
                 health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
             }
             entity.setHealth(health);
-            WeakMetadata.ECO_TARGET.put(entity, victim);
+            WeakMetadata.WEAK_META.put(entity, victim);
             this.getPlugin().getScheduler().runLater(entity::remove, ticksToLive);
         }
     }
 
     @EventHandler
     public void onSwitchTarget(@NotNull final EntityTargetEvent event) {
-        if (!WeakMetadata.ECO_TARGET.containsKey(event.getEntity())) {
+        if (!WeakMetadata.WEAK_META.containsKey(event.getEntity())) {
             return;
         }
 
-        LivingEntity target = (LivingEntity) WeakMetadata.ECO_TARGET.get(event.getEntity());
+        LivingEntity target = (LivingEntity) WeakMetadata.WEAK_META.get(event.getEntity());
         event.setTarget(target);
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onDropItem(@NotNull final EntityDeathEvent event) {
-        if (!WeakMetadata.ECO_TARGET.containsKey(event.getEntity())) {
+        if (!WeakMetadata.WEAK_META.containsKey(event.getEntity())) {
             return;
         }
 
