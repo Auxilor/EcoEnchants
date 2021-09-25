@@ -6,14 +6,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
+import com.willfp.ecoenchants.enchantments.util.WeakMetadata;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
-import org.bukkit.entity.Trident;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -86,7 +83,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
             return;
         }
 
-        if (!victim.getMetadata("eco-target").isEmpty()) {
+        if (WeakMetadata.ECO_TARGET.containsKey(victim)) {
             return;
         }
 
@@ -106,24 +103,24 @@ public abstract class SummoningEnchantment extends EcoEnchant {
                 health = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
             }
             entity.setHealth(health);
-            entity.setMetadata("eco-target", this.getPlugin().getMetadataValueFactory().create(victim));
+            WeakMetadata.ECO_TARGET.put(entity, victim);
             this.getPlugin().getScheduler().runLater(entity::remove, ticksToLive);
         }
     }
 
     @EventHandler
     public void onSwitchTarget(@NotNull final EntityTargetEvent event) {
-        if (event.getEntity().getMetadata("eco-target").isEmpty()) {
+        if (!WeakMetadata.ECO_TARGET.containsKey(event.getEntity())) {
             return;
         }
 
-        LivingEntity target = (LivingEntity) event.getEntity().getMetadata("eco-target").get(0).value();
+        LivingEntity target = (LivingEntity) WeakMetadata.ECO_TARGET.get(event.getEntity());
         event.setTarget(target);
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onDropItem(@NotNull final EntityDeathEvent event) {
-        if (event.getEntity().getMetadata("eco-target").isEmpty()) {
+        if (!WeakMetadata.ECO_TARGET.containsKey(event.getEntity())) {
             return;
         }
 

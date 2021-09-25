@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
+import com.willfp.ecoenchants.enchantments.util.WeakMetadata;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkeleton;
@@ -55,7 +56,7 @@ public class Necrotic extends EcoEnchant {
             return;
         }
 
-        if (!event.getEntity().getMetadata("eco-target").isEmpty()) {
+        if (WeakMetadata.ECO_TARGET.containsKey(event.getEntity())) {
             return;
         }
 
