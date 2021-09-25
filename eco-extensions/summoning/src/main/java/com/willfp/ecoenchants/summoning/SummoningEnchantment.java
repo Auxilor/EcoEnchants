@@ -83,7 +83,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
             return;
         }
 
-        if (WeakMetadata.ECO_TARGET.containsKey(victim)) {
+        if (WeakMetadata.ECO_TARGET.containsKey(victim) || WeakMetadata.ECO_VICTIM.containsKey(victim)) {
             return;
         }
 
@@ -104,6 +104,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
             }
             entity.setHealth(health);
             WeakMetadata.ECO_TARGET.put(entity, victim);
+            WeakMetadata.ECO_VICTIM.put(victim, null);
             this.getPlugin().getScheduler().runLater(entity::remove, ticksToLive);
         }
     }
