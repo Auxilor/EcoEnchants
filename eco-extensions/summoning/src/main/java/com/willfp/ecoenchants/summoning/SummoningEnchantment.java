@@ -83,7 +83,7 @@ public abstract class SummoningEnchantment extends EcoEnchant {
             return;
         }
 
-        if (WeakMetadata.SUMMONED_ENTITY_MEMORY.containsKey(victim)  || WeakMetadata.SUMMONED_ENTITY_TARGET.containsKey(victim)) {
+        if (WeakMetadata.SUMMONED_ENTITY_MEMORY.containsKey(victim) || WeakMetadata.SUMMONED_ENTITY_TARGET.containsKey(victim)) {
             return;
         }
 
