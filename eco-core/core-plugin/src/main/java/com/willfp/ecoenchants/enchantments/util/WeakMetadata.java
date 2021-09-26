@@ -5,6 +5,9 @@ import org.bukkit.entity.Entity;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+/**
+ * Author: Akiranya (Nailm)
+ */
 public class WeakMetadata {
 
     /**
