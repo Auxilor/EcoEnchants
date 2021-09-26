@@ -39,7 +39,7 @@ public class Buckshot extends EcoEnchant {
         double spread = Math.abs(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "spread-per-level"));
         spread *= level;
 
-        for (int i = 0; i < number; i += 1) {
+        for (int i = 0; i < number; i++) {
             Vector velocity = event.getProjectile().getVelocity().clone();
 
             velocity.add(new Vector(NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread)));
