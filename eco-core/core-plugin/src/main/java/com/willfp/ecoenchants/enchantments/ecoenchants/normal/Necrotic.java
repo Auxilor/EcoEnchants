@@ -56,7 +56,7 @@ public class Necrotic extends EcoEnchant {
             return;
         }
 
-        if (WeakMetadata.WEAK_META.containsKey(event.getEntity())) {
+        if (WeakMetadata.SUMMONED_ENTITY_MEMORY.containsKey(event.getEntity())) {
             return;
         }
 
