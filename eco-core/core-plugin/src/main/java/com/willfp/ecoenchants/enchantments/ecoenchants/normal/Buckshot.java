@@ -33,17 +33,13 @@ public class Buckshot extends EcoEnchant {
             ((Player) shooter).playSound(shooter.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }
 
-        int numberPerLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount-per-level");
-        int number = numberPerLevel * level;
-        double spread = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "spread-per-level");
-        if (level < this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "maximum-level")) {
-            spread *= level;
-        } else {
-            spread *= this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "maximum-level");
-        }
+        int number = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "amount-per-level");
+        number *= level;
+
+        double spread = Math.abs(this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "spread-per-level"));
+        spread *= level;
 
         for (int i = 0; i < number; i += 1) {
-
             Vector velocity = event.getProjectile().getVelocity().clone();
 
             velocity.add(new Vector(NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread), NumberUtils.randFloat(-spread, spread)));
