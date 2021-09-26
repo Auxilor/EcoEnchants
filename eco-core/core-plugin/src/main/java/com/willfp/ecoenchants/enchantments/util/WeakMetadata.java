@@ -8,7 +8,7 @@ import java.util.WeakHashMap;
 /**
  * Weak metadata to prevent memory leaks.
  * <p>
- * Author: Akiranya (Nailm)
+ * @author Akiranya (Nailm)
  */
 public class WeakMetadata {
 
@@ -18,7 +18,7 @@ public class WeakMetadata {
      * <p>K: summoned entity
      * <p>V: the target of the summoned entity
      */
-    public final static Map<Entity, Object> SUMMONED_ENTITY_MEMORY = new WeakHashMap<>();
+    public static final Map<Entity, Object> SUMMONED_ENTITY_MEMORY = new WeakHashMap<>();
 
     /**
      * Victim entities which the summoned entities target at.
@@ -26,5 +26,5 @@ public class WeakMetadata {
      * <p>K: entity which the summoned entities target at
      * <p>V: nothing (passing null is fine)
      */
-    public final static Map<Entity, Object> SUMMONED_ENTITY_TARGET = new WeakHashMap<>();
+    public static final Map<Entity, Object> SUMMONED_ENTITY_TARGET = new WeakHashMap<>();
 }
