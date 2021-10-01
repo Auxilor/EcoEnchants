@@ -66,6 +66,10 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
         ItemStack left = event.getInventory().getItem(0);
         ItemStack right = event.getInventory().getItem(1);
         ItemStack out = event.getResult();
+        // Allow other plugin to use event anvil
+        if (out == null) {
+            return;
+        }
         String name = event.getInventory().getRenameText();
 
         if (event.getViewers().isEmpty()) {
