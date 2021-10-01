@@ -39,11 +39,11 @@ missing-requirements-format: "&m"
 
 curse-color: "&c"
 normal-color: "&7"
-special-color: "<gradient:FB57EC>{}</gradient:EF1DEC>&d"
-artifact-color: "<gradient:CAC531>{}</gradient:F3F9A7>&e"
-spell-color: "<gradient:0575E6>{}</gradient:1e3fba>&9"
+special-color: "<gradient:#FB57EC:#EF1DEC>"
+artifact-color: "<gradient:#CAC531:#F3F9A7>"
+spell-color: "<gradient:#0575E6:#1E3FBA>"
 
-above-max-level-color: "<gradient:#1D976C>{}</gradient:#93F9B9>"
+above-max-level-color: "<gradient:#1D976C:#93F9B9>"
 
 description-color: "&8"
 
