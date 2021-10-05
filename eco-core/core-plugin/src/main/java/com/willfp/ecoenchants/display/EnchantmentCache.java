@@ -22,6 +22,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.border.MatteBorder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -263,27 +264,15 @@ public class EnchantmentCache {
          */
         public String getNameWithLevel(final int level,
                                        @Nullable final Player player) {
-            String formattedName = name;
-            String unformattedName = name;
+            String processed = name;
+
             if (enchantment instanceof EcoEnchant enchant && player != null) {
                 if (!enchant.areRequirementsMet(player)) {
-                    String color = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor();
-                    if (color.contains("{}")) {
-                        unformattedName = color.replace("{}", unformattedName);
-                        formattedName = color.replace("{}", formattedName);
-                    } else {
-                        unformattedName = color + unformattedName;
-                        formattedName = color + formattedName;
-                    }
+                    processed = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor() + processed;
                 }
             }
-            if (color.contains("{}")) {
-                formattedName = color.replace("{}", formattedName);
-            } else {
-                formattedName = color + formattedName;
-            }
-            formattedName = StringUtils.format(formattedName);
-            if (!(enchantment.getMaxLevel() == 1 && level == 1)) {
+
+            if (!(enchantment.getMaxLevel() == 1 && level == 1) && level != 0) {
                 String numberString = " ";
 
                 NumbersOptions numbersOptions = PLUGIN.getDisplayModule().getOptions().getNumbersOptions();
@@ -296,30 +285,21 @@ public class EnchantmentCache {
 
                 if (level > enchantment.getMaxLevel() && PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isReformatAboveMaxLevel()) {
                     if (PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isNumbersOnly()) {
-                        String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
-                        if (color.contains("{}")) {
-                            numberString = color.replace("{}", numberString);
-                        } else {
-                            numberString = color + numberString;
-                        }
+                        String aboveMaxLevel = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
 
-                        return formattedName + StringUtils.format(numberString);
+                        processed = processed + aboveMaxLevel + numberString;
                     } else {
-                        String clone = unformattedName;
-                        String color = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
-                        if (color.contains("{}")) {
-                            clone = color.replace("{}", clone);
-                        } else {
-                            clone = color + clone;
-                        }
-                        return StringUtils.format(clone + numberString);
+                        String aboveMaxLevel = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
+                        processed = aboveMaxLevel + processed + numberString;
                     }
                 } else {
-                    return formattedName + numberString;
+                    processed = processed + numberString;
                 }
-            } else {
-                return formattedName;
             }
+
+            processed = color + processed;
+            processed = StringUtils.format(processed, StringUtils.FormatOption.WITHOUT_PLACEHOLDERS);
+            return processed;
         }
 
         /**
@@ -416,14 +396,7 @@ public class EnchantmentCache {
          * @return The name.
          */
         public String getName() {
-            String formattedName = name;
-            if (color.contains("{}")) {
-                formattedName = color.replace("{}", formattedName);
-            } else {
-                formattedName = color + formattedName;
-            }
-
-            return StringUtils.format(formattedName);
+            return getNameWithLevel(0);
         }
     }
 }

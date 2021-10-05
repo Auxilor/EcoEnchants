@@ -35,7 +35,7 @@ messages:
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
 
-missing-requirements-format: "&m"
+missing-requirements-format: "<strikethrough>"
 
 curse-color: "&c"
 normal-color: "&7"
