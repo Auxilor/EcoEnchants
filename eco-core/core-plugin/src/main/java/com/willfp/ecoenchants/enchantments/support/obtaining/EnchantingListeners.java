@@ -3,7 +3,9 @@ package com.willfp.ecoenchants.enchantments.support.obtaining;
 import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
+import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
@@ -29,6 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -37,17 +41,12 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
     /**
      * All players currently enchanting a secondary item.
      */
-    public static final Map<Player, int[]> CURRENTLY_ENCHANTING_SECONDARY = new HashMap<>();
+    private static final Map<Player, int[]> CURRENTLY_ENCHANTING_SECONDARY = new HashMap<>();
+
     /**
      * All enchantments that by default cannot be enchanted in a table but are in EcoEnchants.
      */
-    private static final Set<Material> SECONDARY_ENCHANTABLE = new ImmutableSet.Builder<Material>()
-            .add(Material.ELYTRA)
-            .add(Material.SHIELD)
-            .add(Material.FLINT_AND_STEEL)
-            .add(Material.SHEARS)
-            .add(Material.CARROT_ON_A_STICK)
-            .add(Material.PLAYER_HEAD).build();
+    private static final Set<Material> SECONDARY_ENCHANTABLE = new HashSet<>();
 
     /**
      * Instantiate enchanting listeners and link them to a specific plugin.
@@ -56,6 +55,14 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
      */
     public EnchantingListeners(@NotNull final EcoPlugin plugin) {
         super(plugin);
+    }
+
+    @ConfigUpdater
+    public static void update(@NotNull final EcoEnchantsPlugin plugin) {
+        SECONDARY_ENCHANTABLE.clear();
+        for (String string : plugin.getTargetYml().getStrings("extra-enchantable-items", false)) {
+            SECONDARY_ENCHANTABLE.add(Material.matchMaterial(string.toUpperCase()));
+        }
     }
 
     /**

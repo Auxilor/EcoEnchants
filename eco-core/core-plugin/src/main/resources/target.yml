@@ -1,3 +1,11 @@
+extra-enchantable-items:
+  - elytra
+  - shield
+  - flint_and_steel
+  - shears
+  - carrot_on_a_stick
+  - player_head
+
 targets:
   axe:
     - wooden_axe
