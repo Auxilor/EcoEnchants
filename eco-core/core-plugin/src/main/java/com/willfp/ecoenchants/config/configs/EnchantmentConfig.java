@@ -63,7 +63,9 @@ public class EnchantmentConfig extends YamlExtendableConfig {
         Set<Enchantment> enchantments = new HashSet<>();
         List<String> enchantmentKeys = this.getStrings(path);
         for (String key : enchantmentKeys) {
-            enchantments.add(Enchantment.getByKey(NamespacedKey.minecraft(key)));
+            if (Enchantment.getByKey(NamespacedKey.minecraft(key)) != null) {
+                enchantments.add(Enchantment.getByKey(NamespacedKey.minecraft(key)));
+		    }        
         }
         return enchantments;
     }
