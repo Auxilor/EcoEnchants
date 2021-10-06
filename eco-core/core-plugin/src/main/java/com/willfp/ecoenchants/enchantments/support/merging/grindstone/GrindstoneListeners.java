@@ -49,17 +49,17 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
         if (event.getSlotType() != InventoryType.SlotType.RESULT) {
             return;
         }
-		
+
         GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();
-		
+
         ItemStack top = inventory.getItem(0);
         ItemStack bottom = inventory.getItem(1);
-		ItemStack out = inventory.getItem(2);
+        ItemStack out = inventory.getItem(2);
                
         if (out == null) {
             return;
         }
-		
+
         this.getPlugin().getScheduler().runLater(() -> {        
             Set<Enchantment> enchants = new HashSet<>();
             if (top != null) {
@@ -69,7 +69,7 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
                 enchants.addAll(bottom.getEnchantments().keySet());
             }
             enchants.removeIf(enchantment -> !(enchantment instanceof EcoEnchant));
-			if (!enchants.isEmpty()) {
+            if (!enchants.isEmpty()) {
                 Location loc = player.getLocation().clone().add(
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1),
