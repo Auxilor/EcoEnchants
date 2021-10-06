@@ -65,7 +65,7 @@ public class EnchantmentConfig extends YamlExtendableConfig {
         for (String key : enchantmentKeys) {
             if (Enchantment.getByKey(NamespacedKey.minecraft(key)) != null) {
                 enchantments.add(Enchantment.getByKey(NamespacedKey.minecraft(key)));
-		    }        
+            }
         }
         return enchantments;
     }
