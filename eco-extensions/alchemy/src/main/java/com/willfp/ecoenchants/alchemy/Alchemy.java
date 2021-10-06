@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent.Cause;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +37,9 @@ public class Alchemy extends EcoEnchant {
             return;
         }
         if (!(event.getEntity() instanceof LivingEntity entity)) {
+            return;
+        }
+        if (!(event.getCause() == Cause.POTION_DRINK) && !(event.getCause() == Cause.POTION_SPLASH) ) {
             return;
         }
 
