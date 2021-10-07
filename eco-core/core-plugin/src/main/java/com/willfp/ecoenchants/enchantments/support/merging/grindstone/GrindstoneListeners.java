@@ -46,37 +46,21 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
         if (player.getOpenInventory().getTopInventory().getType() != InventoryType.GRINDSTONE) {
             return;
         }
+        if (event.getSlotType() != InventoryType.SlotType.RESULT) {
+            return;
+        }
 
         GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();
 
-        this.getPlugin().getScheduler().runLater(() -> {
-            ItemStack top = inventory.getItem(0);
-            ItemStack bottom = inventory.getItem(1);
-            ItemStack out = inventory.getItem(2);
+        ItemStack top = inventory.getItem(0);
+        ItemStack bottom = inventory.getItem(1);
+        ItemStack out = inventory.getItem(2);
+               
+        if (out == null) {
+            return;
+        }
 
-            Map<Enchantment, Integer> toKeep = GrindstoneMerge.doMerge(top, bottom);
-
-            if (toKeep.isEmpty()) {
-                inventory.setItem(2, out);
-            }
-            if (out == null) {
-                return;
-            }
-
-            ItemStack newOut = out.clone();
-            if (newOut.getItemMeta() instanceof EnchantmentStorageMeta meta) {
-                toKeep.forEach(((enchantment, integer) -> {
-                    meta.addStoredEnchant(enchantment, integer, true);
-                }));
-                newOut.setItemMeta(meta);
-            } else {
-                ItemMeta meta = newOut.getItemMeta();
-                toKeep.forEach(((enchantment, integer) -> {
-                    meta.addEnchant(enchantment, integer, true);
-                }));
-                newOut.setItemMeta(meta);
-            }
-
+        this.getPlugin().getScheduler().runLater(() -> {        
             Set<Enchantment> enchants = new HashSet<>();
             if (top != null) {
                 enchants.addAll(top.getEnchantments().keySet());
@@ -91,21 +75,9 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1)
                 );
-
                 ExperienceOrb orb = (ExperienceOrb) loc.getWorld().spawnEntity(loc, EntityType.EXPERIENCE_ORB);
                 orb.setExperience(enchants.size() * 15);
             }
-
-            this.getPlugin().getScheduler().run(() -> {
-                inventory.setItem(2, newOut);
-                if (!toKeep.isEmpty()) {
-                    for (Entity entity : player.getNearbyEntities(10, 10, 10)) {
-                        if (entity.getType() == EntityType.EXPERIENCE_ORB) {
-                            entity.remove();
-                        }
-                    }
-                }
-            });
         }, 1);
     }
 }
