@@ -156,4 +156,9 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     public EnchantDisplay getDisplayModule() {
         return (EnchantDisplay) super.getDisplayModule();
     }
+
+    @Override
+    public String getMinimumEcoVersion() {
+        return "6.10.0";
+    }
 }
