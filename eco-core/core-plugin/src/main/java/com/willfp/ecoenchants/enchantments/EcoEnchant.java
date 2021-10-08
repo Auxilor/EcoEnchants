@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments;
 import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.core.requirement.Requirement;
 import com.willfp.eco.core.requirement.Requirements;
+import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.display.EnchantmentCache;
@@ -10,7 +11,6 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
-import com.willfp.ecoenchants.enchantments.util.PaperHelper;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -460,7 +460,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     @Deprecated
     @Override
     public @NotNull Component displayName(final int level) {
-        return PaperHelper.toComponent(EnchantmentCache.getEntry(this).getNameWithLevel(level));
+        return StringUtils.toComponent(EnchantmentCache.getEntry(this).getNameWithLevel(level));
     }
 
     /**
