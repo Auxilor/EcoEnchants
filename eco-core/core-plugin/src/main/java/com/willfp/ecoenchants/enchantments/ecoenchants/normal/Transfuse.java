@@ -39,11 +39,11 @@ public class Transfuse extends EcoEnchant {
             return;
         }
 
-        event.setDropItems(false);
-
         if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "works-on").contains(block.getType().toString().toLowerCase())) {
             return;
         }
+        
+        event.setDropItems(false);
 
         Material material;
         double random = NumberUtils.randFloat(0, 1);
