@@ -1,9 +1,11 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +27,12 @@ public class Tornado extends EcoEnchant {
 
         Vector toAdd = new Vector(0, yVelocity, 0);
 
-        this.getPlugin().getScheduler().runLater(() -> victim.setVelocity(victim.getVelocity().clone().add(toAdd)), 1);
+        this.getPlugin().getScheduler().runLater(() -> {
+            if (victim instanceof Player player) {
+                AnticheatManager.exemptPlayer(player);
+                this.getPlugin().getScheduler().runLater(() -> AnticheatManager.unexemptPlayer(player), this.getConfig().getInt("time-to-exempt"));
+            }
+            victim.setVelocity(victim.getVelocity().clone().add(toAdd));
+        }, 1);
     }
 }
