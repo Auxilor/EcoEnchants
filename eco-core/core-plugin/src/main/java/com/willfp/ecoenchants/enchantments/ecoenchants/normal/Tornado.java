@@ -27,18 +27,12 @@ public class Tornado extends EcoEnchant {
 
         Vector toAdd = new Vector(0, yVelocity, 0);
 
-        if (victim instanceof Player pVictim) {
-            AnticheatManager.exemptPlayer(pVictim);
-
-            this.getPlugin().getScheduler().runLater(() -> {
-                AnticheatManager.unexemptPlayer(pVictim);
-            }, 40);
-        }
-
-        this.getPlugin().getScheduler().run(() -> {
+        this.getPlugin().getScheduler().runLater(() -> {
+            if (victim instanceof Player player) {
+                AnticheatManager.exemptPlayer(player);
+                this.getPlugin().getScheduler().runLater(() -> AnticheatManager.unexemptPlayer(player), this.getConfig().getInt("time-to-exempt"));
+            }
             victim.setVelocity(victim.getVelocity().clone().add(toAdd));
-        });
-
-        this.getPlugin().getScheduler().runLater(() -> victim.setVelocity(victim.getVelocity().clone().add(toAdd)), 1);
+        }, 1);
     }
 }
