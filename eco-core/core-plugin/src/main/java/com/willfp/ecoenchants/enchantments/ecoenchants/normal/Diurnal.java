@@ -20,11 +20,12 @@ public class Diurnal extends EcoEnchant {
                               @NotNull final LivingEntity victim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
+
         if (!attacker.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
             return;
         }
 
-        if (!(attacker.getWorld().getTime() < 12300 && attacker.getWorld().getTime() > 23850)) {
+        if (!(attacker.getWorld().getTime() < 12000 && attacker.getWorld().getTime() > 0)) {
             return;
         }
 
