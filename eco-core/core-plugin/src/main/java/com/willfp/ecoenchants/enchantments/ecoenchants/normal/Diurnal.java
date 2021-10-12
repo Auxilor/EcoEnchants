@@ -24,7 +24,9 @@ public class Diurnal extends EcoEnchant {
             return;
         }
 
-        if (!(attacker.getWorld().getTime() < 12000 && attacker.getWorld().getTime() > 0)) {
+        long time = attacker.getWorld().getTime();
+
+        if (time > 12300 && time < 23850) {
             return;
         }
 
