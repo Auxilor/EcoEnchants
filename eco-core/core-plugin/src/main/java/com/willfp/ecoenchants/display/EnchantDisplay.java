@@ -184,8 +184,10 @@ public class EnchantDisplay extends DisplayModule {
 
     @Override
     public void revert(@NotNull final ItemStack itemStack) {
-        if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
-            return;
+        if (options.isRequireTarget()) {
+            if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
+                return;
+            }
         }
 
         FastItemStack fast = FastItemStack.wrap(itemStack);
@@ -211,6 +213,12 @@ public class EnchantDisplay extends DisplayModule {
 
     @Override
     public Object[] generateVarArgs(@NotNull final ItemStack itemStack) {
+        if (options.isRequireTarget()) {
+            if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
+                return new Object[]{false};
+            }
+        }
+
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) {
             return new Object[]{false};
