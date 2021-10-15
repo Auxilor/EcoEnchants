@@ -2,6 +2,8 @@ package com.willfp.ecoenchants.command;
 
 import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.impl.Subcommand;
+import com.willfp.eco.core.config.interfaces.Config;
+import com.willfp.eco.core.config.yaml.YamlTransientConfig;
 import com.willfp.eco.core.web.Paste;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -31,7 +33,13 @@ public class CommandLocaleDownload extends Subcommand {
             }
 
             Paste paste = Paste.getFromHastebin(args.get(0));
-            YamlConfiguration configuration = YamlConfiguration.loadConfiguration(new StringReader(paste.getContents()));
+            if (paste == null) {
+                sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-locale"));
+                return;
+            }
+
+            String contents = paste.getContents();
+            Config configuration = new YamlTransientConfig(contents);
 
             for (String key : configuration.getKeys(true)) {
                 this.getPlugin().getLangYml().set(key, configuration.get(key));
