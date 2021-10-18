@@ -28,7 +28,6 @@ import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.HandlerList;
@@ -48,25 +47,21 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     /**
      * Rarity.yml.
      */
-    @Getter
     private final RarityYml rarityYml;
 
     /**
      * Target.yml.
      */
-    @Getter
     private final TargetYml targetYml;
 
     /**
      * VanillaEnchants.yml.
      */
-    @Getter
     private final VanillaEnchantsYml vanillaEnchantsYml;
 
     /**
      * The data handler.
      */
-    @Getter
     private final DataHandler dataHandler;
 
     /**
@@ -186,5 +181,41 @@ public class EcoEnchantsPlugin extends EcoPlugin {
      */
     public static EcoEnchantsPlugin getInstance() {
         return instance;
+    }
+
+    /**
+     * Get rarity.yml.
+     *
+     * @return rarity.yml.
+     */
+    public RarityYml getRarityYml() {
+        return this.rarityYml;
+    }
+
+    /**
+     * Get target.yml.
+     *
+     * @return target.yml.
+     */
+    public TargetYml getTargetYml() {
+        return this.targetYml;
+    }
+
+    /**
+     * Get vanillaenchants.yml.
+     *
+     * @return vanillaenchants.yml.
+     */
+    public VanillaEnchantsYml getVanillaEnchantsYml() {
+        return this.vanillaEnchantsYml;
+    }
+
+    /**
+     * Get the data handler.
+     *
+     * @return The data handler.
+     */
+    public DataHandler getDataHandler() {
+        return this.dataHandler;
     }
 }
