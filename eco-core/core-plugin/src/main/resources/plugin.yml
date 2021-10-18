@@ -66,6 +66,7 @@ permissions:
       ecoenchants.command.giverandombook: true
       ecoenchants.command.locale.*: true
       ecoenchants.command.ecoenchants: true
+      ecoenchants.command.toggledescriptions: true
   ecoenchants.command.locale.*:
     description: Allows managing locale features
     default: op
@@ -110,6 +111,9 @@ permissions:
   ecoenchants.command.locale.export:
     description: Allows the use of /ecoenchants locale export to export locales
     default: op
+  ecoenchants.command.toggledescriptions:
+    description: Allows the use of /ecoenchants toggledescriptions
+    default: true
   ecoenchants.command.ecoenchants:
     description: Allows the use of /ecoenchants
     default: true

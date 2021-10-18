@@ -31,9 +31,8 @@ messages:
   downloaded-locale: "Locale downloaded! Reload config to enact changes."
   invalid-locale: "&cYou must supply a valid locale! Check the wiki for more information."
   specify-locale-subcommand: "&cYou must specify whether to export or download a locale!"
-  descriptions-enabled:
-    true: "&fYou have successfully &aenabled &fenchantment descriptions!"
-    false: "&fYou have successfully &cdisabled &fenchantment descriptions!"
+  enabled-descriptions: "&fYou have successfully &aenabled &fenchantment descriptions!"
+  disabled-descriptions: "&fYou have successfully &cdisabled &fenchantment descriptions!"
   descriptions-disabled: "&cEnchantment descriptions are disabled on this server."
 
 no-targets: "&cCannot be applied"

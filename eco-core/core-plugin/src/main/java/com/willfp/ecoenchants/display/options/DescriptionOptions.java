@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
-import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.data.storage.PlayerProfile;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -53,13 +53,15 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
     }
 
     /**
-     * Get description state for a player
+     * Get if descriptions are enabled for a player.
      *
-     * @param player - a player to get the state for.
+     * @param player The player.
      */
-    public boolean playerEnabled(@Nullable final Player player) {
-        if (player == null) return true;
-        return ((EcoEnchantsPlugin) this.getPlugin()).getDataYml().isDescriptionEnabled(player);
-    }
+    public boolean enabledForPlayer(@Nullable final Player player) {
+        if (player == null) {
+            return true;
+        }
 
+        return PlayerProfile.getProfile(player).read("descriptions", true);
+    }
 }
