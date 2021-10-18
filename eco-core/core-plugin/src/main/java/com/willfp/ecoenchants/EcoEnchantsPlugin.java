@@ -43,7 +43,6 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     /**
      * Instance of the plugin.
      */
-    @Getter
     private static EcoEnchantsPlugin instance;
 
     /**
@@ -176,5 +175,16 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     @Override
     public String getMinimumEcoVersion() {
         return "6.10.0";
+    }
+
+    /**
+     * Get the instance of EcoEnchants.
+     * <p>
+     * Bad practice to use this.
+     *
+     * @return The instance.
+     */
+    public static EcoEnchantsPlugin getInstance() {
+        return instance;
     }
 }
