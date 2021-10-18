@@ -11,6 +11,9 @@ import com.willfp.ecoenchants.command.CommandEnchantinfo;
 import com.willfp.ecoenchants.config.RarityYml;
 import com.willfp.ecoenchants.config.TargetYml;
 import com.willfp.ecoenchants.config.VanillaEnchantsYml;
+import com.willfp.ecoenchants.data.storage.DataHandler;
+import com.willfp.ecoenchants.data.storage.MySQLDataHandler;
+import com.willfp.ecoenchants.data.storage.YamlDataHandler;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -61,6 +64,12 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     private final VanillaEnchantsYml vanillaEnchantsYml;
 
     /**
+     * The data handler.
+     */
+    @Getter
+    private final DataHandler dataHandler;
+
+    /**
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
@@ -70,6 +79,8 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         rarityYml = new RarityYml(this);
         targetYml = new TargetYml(this);
         vanillaEnchantsYml = new VanillaEnchantsYml(this);
+        dataHandler = this.getConfigYml().getBool("mysql.enabled")
+                ? new MySQLDataHandler(this) : new YamlDataHandler(this);
     }
 
     @Override
