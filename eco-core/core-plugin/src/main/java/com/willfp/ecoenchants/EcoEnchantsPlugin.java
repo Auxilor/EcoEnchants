@@ -8,6 +8,7 @@ import com.willfp.eco.core.integrations.IntegrationLoader;
 import com.willfp.eco.util.TelekinesisUtils;
 import com.willfp.ecoenchants.command.CommandEcoEnchants;
 import com.willfp.ecoenchants.command.CommandEnchantinfo;
+import com.willfp.ecoenchants.config.DataYml;
 import com.willfp.ecoenchants.config.RarityYml;
 import com.willfp.ecoenchants.config.TargetYml;
 import com.willfp.ecoenchants.config.VanillaEnchantsYml;
@@ -34,6 +35,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,6 +60,12 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     private final TargetYml targetYml;
 
     /**
+     * Data.yml.
+     */
+    @Getter
+    private final DataYml dataYml;
+
+    /**
      * VanillaEnchants.yml.
      */
     @Getter
@@ -78,6 +86,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
         rarityYml = new RarityYml(this);
         targetYml = new TargetYml(this);
+        dataYml = new DataYml(this);
         vanillaEnchantsYml = new VanillaEnchantsYml(this);
         dataHandler = this.getConfigYml().getBool("mysql.enabled")
                 ? new MySQLDataHandler(this) : new YamlDataHandler(this);
@@ -92,6 +101,11 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     protected void handleDisable() {
+        try {
+            this.dataYml.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         for (World world : Bukkit.getServer().getWorlds()) {
             world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
         }
