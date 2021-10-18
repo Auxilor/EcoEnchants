@@ -30,3 +30,4 @@ general-config:
 
 config:
   velocity-per-level: 0.25
+  time-to-exempt: 60 #In ticks. Time to exempt hit player from being detected by your Anti-Cheat for flying (The higher max velocity is - the higher should be this value)
