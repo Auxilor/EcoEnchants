@@ -65,6 +65,13 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
         ItemStack left = event.getInventory().getItem(0);
         ItemStack right = event.getInventory().getItem(1);
         ItemStack out = event.getResult();
+        
+        if (out==null || out.getType()==Material.AIR){
+            // Event can't be cancelled so other plugins sets output item as null when they wish to cancel PrepareAnvilEvent
+            // to not change 3rd party plugin expected behavior event should be ignored when result item is null
+            return; 
+        }
+        
         String name = event.getInventory().getRenameText();
 
         if (event.getViewers().isEmpty()) {
