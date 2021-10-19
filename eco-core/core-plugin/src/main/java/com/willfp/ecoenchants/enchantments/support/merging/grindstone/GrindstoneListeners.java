@@ -6,7 +6,6 @@ import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.Location;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -16,12 +15,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.GrindstoneInventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements Listener {
@@ -60,7 +56,8 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
             return;
         }
 
-        this.getPlugin().getScheduler().runLater(() -> {        
+        this.getPlugin().getScheduler().runLater(() -> {
+            if (inventory.getItem(2) != null || event.isCancelled()) return;
             Set<Enchantment> enchants = new HashSet<>();
             if (top != null) {
                 enchants.addAll(top.getEnchantments().keySet());
@@ -80,4 +77,5 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
             }
         }, 1);
     }
+
 }
