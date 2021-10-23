@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class TargetYml extends YamlBaseConfig {
@@ -39,6 +40,8 @@ public class TargetYml extends YamlBaseConfig {
         this.getStrings("targets." + target).forEach(materialName -> {
             materials.add(Material.getMaterial(materialName.toUpperCase()));
         });
+
+        materials.removeIf(Objects::isNull);
 
         return materials;
     }
