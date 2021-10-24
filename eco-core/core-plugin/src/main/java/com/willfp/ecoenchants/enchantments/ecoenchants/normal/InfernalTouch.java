@@ -24,10 +24,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -101,7 +101,7 @@ public class InfernalTouch extends EcoEnchant {
             return;
         }
 
-        Collection<ItemStack> drops = new ArrayList<>();
+        List<ItemStack> drops = new ArrayList<>();
 
         for (Item item : event.getItems()) {
             drops.add(item.getItemStack());
@@ -121,15 +121,18 @@ public class InfernalTouch extends EcoEnchant {
             }
         }
 
-        event.getItems().clear();
-
         if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "drop-xp")) {
             experience = 0;
         }
 
+        int i = 0;
+        for (Item item : event.getItems()) {
+            item.setItemStack(drops.get(i));
+            i++;
+        }
+
         new DropQueue(player)
                 .setLocation(block.getLocation())
-                .addItems(drops)
                 .addXP(experience)
                 .push();
     }
