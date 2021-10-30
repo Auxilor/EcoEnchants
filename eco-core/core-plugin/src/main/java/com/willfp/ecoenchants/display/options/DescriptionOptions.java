@@ -2,8 +2,11 @@ package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
+import com.willfp.ecoenchants.data.storage.PlayerProfile;
 import lombok.Getter;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class DescriptionOptions extends PluginDependent<EcoPlugin> {
     /**
@@ -47,5 +50,18 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
         enabled = this.getPlugin().getConfigYml().getBool("lore.describe.enabled");
         color = this.getPlugin().getLangYml().getString("description-color");
         showingAtBottom = this.getPlugin().getConfigYml().getBool("lore.describe.at-bottom");
+    }
+
+    /**
+     * Get if descriptions are enabled for a player.
+     *
+     * @param player The player.
+     */
+    public boolean enabledForPlayer(@Nullable final Player player) {
+        if (player == null) {
+            return true;
+        }
+
+        return PlayerProfile.getProfile(player).read("descriptions", true);
     }
 }

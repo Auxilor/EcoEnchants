@@ -3,6 +3,18 @@
 # by Auxilor
 #
 
+mysql:
+  enabled: false # Set to false, data.yml will be used instead.
+  host: localhost
+  port: 3306
+  database: database
+  user: username
+  password: passy
+
+autosave:
+  log: true # If auto-save messages should be sent to console
+  async: false # If saves should be performed asynchronously. May cause bugs without MySQL
+
 allow-on-npc: false # If enchantments should activate against NPCs.
 
 commands:

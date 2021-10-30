@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,8 +80,8 @@ public class EnchantDisplay extends DisplayModule {
 
     @Override
     public void display(@NotNull final ItemStack itemStack,
-                           @Nullable final Player player,
-                           @NotNull final Object... args) {
+                        @Nullable final Player player,
+                        @NotNull final Object... args) {
         if (options.isRequireTarget()) {
             if (!EnchantmentTarget.ALL.getMaterials().contains(itemStack.getType())) {
                 return;
@@ -129,7 +130,10 @@ public class EnchantDisplay extends DisplayModule {
 
             lore.add(Display.PREFIX + name);
             if (!options.getDescriptionOptions().isShowingAtBottom()) {
-                if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
+                if (enchantments.size() <= options.getDescriptionOptions().getThreshold()
+                        && options.getDescriptionOptions().isEnabled()
+                        && options.getDescriptionOptions().enabledForPlayer(player)
+                ) {
                     lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription(level));
                 }
             }
@@ -159,7 +163,10 @@ public class EnchantDisplay extends DisplayModule {
         }
 
         if (options.getDescriptionOptions().isShowingAtBottom()) {
-            if (enchantments.size() <= options.getDescriptionOptions().getThreshold() && options.getDescriptionOptions().isEnabled()) {
+            if (enchantments.size() <= options.getDescriptionOptions().getThreshold()
+                    && options.getDescriptionOptions().isEnabled()
+                    && options.getDescriptionOptions().enabledForPlayer(player)
+            ) {
                 for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
                     lore.addAll(EnchantmentCache.getEntry(entry.getKey()).getDescription(entry.getValue()));
                 }
@@ -200,14 +207,22 @@ public class EnchantDisplay extends DisplayModule {
 
         assert meta != null;
 
-        meta.getPersistentDataContainer().remove(legacyV);
+        PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
-        if (!meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
+        // Fixes weird bug. Apparently nullable.
+        //noinspection ConstantConditions
+        if (pdc == null) {
+            return;
+        }
+
+        pdc.remove(legacyV);
+
+        if (!pdc.has(keySkip, PersistentDataType.INTEGER)) {
             meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
             meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 
-        meta.getPersistentDataContainer().remove(keySkip);
+        pdc.remove(keySkip);
         itemStack.setItemMeta(meta);
     }
 
