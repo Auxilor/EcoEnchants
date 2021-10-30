@@ -33,7 +33,7 @@ class PlayerProfile private constructor(
                     Type.INT -> data[key] = handler.read(uuid, key, 0)
                     Type.DOUBLE -> data[key] = handler.read(uuid, key, 0.0)
                     Type.STRING -> data[key] = handler.read(uuid, key, "Unknown")
-                    Type.BOOLEAN -> data[key] = handler.read(uuid, key, false)
+                    Type.BOOLEAN -> data[key] = handler.read(uuid, key, true)
                 }
             }
 
@@ -50,7 +50,7 @@ class PlayerProfile private constructor(
                             Type.INT -> handler.write(uuid, key, profile.read(key, 0))
                             Type.DOUBLE -> handler.write(uuid, key, profile.read(key, 0.0))
                             Type.STRING -> handler.write(uuid, key, profile.read(key, "Unknown Value"))
-                            Type.BOOLEAN -> handler.write(uuid, key, profile.read(key, false))
+                            Type.BOOLEAN -> handler.write(uuid, key, profile.read(key, true))
                         }
                     }
                 }
