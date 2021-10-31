@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
+import com.sk89q.worldguard.blacklist.target.ItemMatcher;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
@@ -15,9 +16,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.GrindstoneInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements Listener {
@@ -56,24 +60,32 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
             return;
         }
 
+        Map<Enchantment, Integer> toKeep = GrindstoneMerge.doMerge(top, bottom);
+
         this.getPlugin().getScheduler().runLater(() -> {
-            if (inventory.getItem(2) != null || event.isCancelled()) return;
-            Set<Enchantment> enchants = new HashSet<>();
-            if (top != null) {
-                enchants.addAll(top.getEnchantments().keySet());
+            if (inventory.getItem(2) != null || event.isCancelled()) {
+                return;
             }
-            if (bottom != null) {
-                enchants.addAll(bottom.getEnchantments().keySet());
+
+            ItemMeta outMeta = out.getItemMeta();
+            assert outMeta != null;
+
+            if (outMeta instanceof EnchantmentStorageMeta storageMeta) {
+                toKeep.forEach((enchant, level) -> storageMeta.addStoredEnchant(enchant, level, true));
+                out.setItemMeta(storageMeta);
+            } else {
+                toKeep.forEach((enchant, level) -> outMeta.addEnchant(enchant, level, true));
+                out.setItemMeta(outMeta);
             }
-            enchants.removeIf(enchantment -> !(enchantment instanceof EcoEnchant));
-            if (!enchants.isEmpty()) {
+
+            if (!toKeep.isEmpty()) {
                 Location loc = player.getLocation().clone().add(
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1)
                 );
                 ExperienceOrb orb = (ExperienceOrb) loc.getWorld().spawnEntity(loc, EntityType.EXPERIENCE_ORB);
-                orb.setExperience(enchants.size() * 15);
+                orb.setExperience(toKeep.size() * 15);
             }
         }, 1);
     }
