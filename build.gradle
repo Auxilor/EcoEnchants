@@ -1,13 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
-    }
-}
-
 plugins {
     id 'java-library'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
@@ -24,7 +14,6 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
     apply plugin: 'com.github.johnrengelman.shadow'
-    apply plugin: 'kotlin'
 
     repositories {
         mavenCentral()
@@ -61,10 +50,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly 'com.willfp:eco:6.9.4'
-
-        compileOnly 'org.jetbrains:annotations:19.0.0'
-        compileOnly 'org.jetbrains.kotlin:kotlin-stdlib:1.5.21'
+        compileOnly 'com.willfp:eco:6.12.0'
 
         compileOnly 'org.projectlombok:lombok:1.18.20'
         annotationProcessor 'org.projectlombok:lombok:1.18.20'
