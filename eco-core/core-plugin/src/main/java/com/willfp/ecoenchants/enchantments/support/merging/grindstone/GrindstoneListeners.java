@@ -55,7 +55,7 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
         ItemStack top = inventory.getItem(0);
         ItemStack bottom = inventory.getItem(1);
         ItemStack out = inventory.getItem(2);
-               
+
         if (out == null) {
             return;
         }
