@@ -2,7 +2,8 @@ package com.willfp.ecoenchants.display.options;
 
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
-import com.willfp.ecoenchants.data.storage.PlayerProfile;
+import com.willfp.eco.core.data.PlayerProfile;
+import com.willfp.ecoenchants.command.CommandToggleDescriptions;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -62,6 +63,6 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
             return true;
         }
 
-        return PlayerProfile.getProfile(player).read("descriptions", true);
+        return PlayerProfile.load(player).read(CommandToggleDescriptions.DESCRIPTIONS_KEY);
     }
 }

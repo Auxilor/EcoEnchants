@@ -5,6 +5,7 @@ import com.willfp.eco.core.command.impl.Subcommand;
 import com.willfp.eco.core.data.PlayerProfile;
 import com.willfp.eco.core.data.keys.PersistentDataKey;
 import com.willfp.eco.core.data.keys.PersistentDataKeyType;
+import com.willfp.eco.util.NamespacedKeyUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -13,8 +14,8 @@ public class CommandToggleDescriptions extends Subcommand {
     /**
      * Persistent data key for descriptions.
      */
-    private final PersistentDataKey<Boolean> descriptionsKey = new PersistentDataKey<>(
-            this.getPlugin().getNamespacedKeyFactory().create("descriptions_enabled"),
+    public static final PersistentDataKey<Boolean> DESCRIPTIONS_KEY = new PersistentDataKey<>(
+            NamespacedKeyUtils.create("ecoenchants", "descriptions_enabled"),
             PersistentDataKeyType.BOOLEAN,
             true
     );
@@ -37,9 +38,9 @@ public class CommandToggleDescriptions extends Subcommand {
             }
             Player player = (Player) sender;
             PlayerProfile profile = PlayerProfile.load(player);
-            boolean currentStatus = profile.read(descriptionsKey);
+            boolean currentStatus = profile.read(DESCRIPTIONS_KEY);
             currentStatus = !currentStatus;
-            profile.write(descriptionsKey, currentStatus);
+            profile.write(DESCRIPTIONS_KEY, currentStatus);
             if (currentStatus) {
                 player.sendMessage(this.getPlugin().getLangYml().getMessage("enabled-descriptions"));
             } else {
