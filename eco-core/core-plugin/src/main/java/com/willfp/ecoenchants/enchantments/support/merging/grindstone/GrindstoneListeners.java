@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
-import com.sk89q.worldguard.blacklist.target.ItemMatcher;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
@@ -55,38 +54,76 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
         ItemStack top = inventory.getItem(0);
         ItemStack bottom = inventory.getItem(1);
         ItemStack out = inventory.getItem(2);
-               
+
         if (out == null) {
             return;
         }
 
-        Map<Enchantment, Integer> toKeep = GrindstoneMerge.doMerge(top, bottom);
+        Map<Enchantment, Integer> merged = GrindstoneMerge.doMerge(top, bottom);
+        ItemMeta meta = out.getItemMeta();
+        for (Enchantment enchantment : merged.keySet()) {
+            if (meta instanceof EnchantmentStorageMeta storageMeta) {
+                storageMeta.addStoredEnchant(enchantment, merged.get(enchantment), true);
+            } else {
+                meta.addEnchant(enchantment, merged.get(enchantment), true);
+            }
+        }
+        out.setItemMeta(meta);
 
         this.getPlugin().getScheduler().runLater(() -> {
-            if (inventory.getItem(2) != null || event.isCancelled()) {
-                return;
+            if (inventory.getItem(2) != null || event.isCancelled()) return;
+            Set<Enchantment> enchants = new HashSet<>();
+            if (top != null) {
+                enchants.addAll(top.getEnchantments().keySet());
             }
-
-            ItemMeta outMeta = out.getItemMeta();
-            assert outMeta != null;
-
-            if (outMeta instanceof EnchantmentStorageMeta storageMeta) {
-                toKeep.forEach((enchant, level) -> storageMeta.addStoredEnchant(enchant, level, true));
-                out.setItemMeta(storageMeta);
-            } else {
-                toKeep.forEach((enchant, level) -> outMeta.addEnchant(enchant, level, true));
-                out.setItemMeta(outMeta);
+            if (bottom != null) {
+                enchants.addAll(bottom.getEnchantments().keySet());
             }
-
-            if (!toKeep.isEmpty()) {
+            enchants.removeIf(enchantment -> !(enchantment instanceof EcoEnchant) || merged.containsKey(enchantment));
+            if (!enchants.isEmpty()) {
                 Location loc = player.getLocation().clone().add(
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1)
                 );
                 ExperienceOrb orb = (ExperienceOrb) loc.getWorld().spawnEntity(loc, EntityType.EXPERIENCE_ORB);
-                orb.setExperience(toKeep.size() * 15);
+                orb.setExperience(enchants.size() * 15);
             }
+        }, 1);
+    }
+
+    /**
+     * An additional grindstone listener for isGrindstoneable check.
+     *
+     * @param event The event to listen to.
+     */
+    @EventHandler
+    public void onGrindstoneFix(@NotNull final InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        if (player.getOpenInventory().getTopInventory().getType() != InventoryType.GRINDSTONE) {
+            return;
+        }
+        this.getPlugin().getScheduler().runLater(() -> {
+            GrindstoneInventory inventory = (GrindstoneInventory) player.getOpenInventory().getTopInventory();
+
+            ItemStack top = inventory.getItem(0);
+            ItemStack bottom = inventory.getItem(1);
+            ItemStack out = inventory.getItem(2);
+
+            if (out == null) {
+                return;
+            }
+
+            Map<Enchantment, Integer> merged = GrindstoneMerge.doMerge(top, bottom);
+            ItemMeta meta = out.getItemMeta();
+            for (Enchantment enchantment : merged.keySet()) {
+                if (meta instanceof EnchantmentStorageMeta storageMeta) {
+                    storageMeta.addStoredEnchant(enchantment, merged.get(enchantment), true);
+                } else {
+                    meta.addEnchant(enchantment, merged.get(enchantment), true);
+                }
+            }
+            out.setItemMeta(meta);
         }, 1);
     }
 
