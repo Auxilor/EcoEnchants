@@ -52,6 +52,8 @@ allprojects {
     dependencies {
         compileOnly 'com.willfp:eco:6.12.0'
 
+        compileOnly 'org.jetbrains:annotations:19.0.0'
+
         compileOnly 'org.projectlombok:lombok:1.18.20'
         annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
