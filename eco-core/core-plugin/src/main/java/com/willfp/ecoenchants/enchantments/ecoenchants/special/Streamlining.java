@@ -23,6 +23,6 @@ public class Streamlining extends EcoEnchant {
             return;
         }
 
-        player.setWalkSpeed((float) (0.2f - (level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "speed-per-level"))));
+        player.setWalkSpeed((float) (0.2f + (level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "speed-per-level"))));
     }
 }
