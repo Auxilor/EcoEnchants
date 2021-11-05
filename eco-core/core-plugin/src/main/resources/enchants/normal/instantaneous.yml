@@ -29,3 +29,9 @@ general-config:
 
 config:
   chance-per-level: 3
+  blacklisted-blocks:
+    - BEDROCK
+    - OBSIDIAN
+    - END_PORTAL
+    - END_PORTAL_GATE
+    - NETHER_PORTAL
