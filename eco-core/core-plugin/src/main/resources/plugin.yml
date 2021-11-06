@@ -9,19 +9,8 @@ depend:
   - eco
   - ProtocolLib
 softdepend:
-  - WorldGuard
-  - GriefPrevention
-  - Towny
-  - FactionsUUID
-  - Lands
-  - Kingdoms
-  - NoCheatPlus
-  - AAC
-  - Matrix
-  - Spartan
   - Essentials
-  - PlaceholderAPI
-  - mcMMO
+  - MythicMobs
 
 commands:
   enchantinfo:
