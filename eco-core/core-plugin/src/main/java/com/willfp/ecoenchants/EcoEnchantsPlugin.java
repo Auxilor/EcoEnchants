@@ -22,7 +22,8 @@ import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
 import com.willfp.ecoenchants.enchantments.util.ItemConversions;
 import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
-import com.willfp.ecoenchants.integrations.mythicmobs.IntegrationMythicMobs;
+import com.willfp.ecoenchants.integrations.mythicmobs.MythicMobsManager;
+import com.willfp.ecoenchants.integrations.mythicmobs.plugins.IntegrationMythicMobs;
 import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
 import org.bukkit.Bukkit;
@@ -119,7 +120,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     protected List<IntegrationLoader> loadIntegrationLoaders() {
         return Arrays.asList(
                 new IntegrationLoader("Essentials", () -> RegistrationManager.register(new IntegrationEssentials())),
-                new IntegrationLoader("MythicMobs", IntegrationMythicMobs::init)
+                new IntegrationLoader("MythicMobs", () -> MythicMobsManager.register(new IntegrationMythicMobs()))
         );
     }
 

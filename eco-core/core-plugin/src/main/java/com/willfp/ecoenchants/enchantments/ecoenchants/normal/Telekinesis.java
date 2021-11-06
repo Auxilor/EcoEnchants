@@ -8,8 +8,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import com.willfp.ecoenchants.integrations.mythicmobs.IntegrationMythicMobs;
-import io.lumine.xikage.mythicmobs.MythicMobs;
+import com.willfp.ecoenchants.integrations.mythicmobs.MythicMobsManager;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -143,7 +142,9 @@ public class Telekinesis extends EcoEnchant {
             return;
         }
 
-        if (!IntegrationMythicMobs.canDropItems(entity)) return;
+        if (!MythicMobsManager.canDropItems(entity)) {
+            return;
+        }
 
         if (event.getKiller() instanceof Player) {
             player = (Player) event.getKiller();
@@ -160,6 +161,7 @@ public class Telekinesis extends EcoEnchant {
             }
         }
 
+        //noinspection ConstantConditions
         if (player == null || item == null) {
             return;
         }
@@ -183,6 +185,7 @@ public class Telekinesis extends EcoEnchant {
             if (meta == null) {
                 return false;
             }
+            //noinspection ConstantConditions
             if (meta.getPersistentDataContainer() == null) {
                 return false;
             }
