@@ -39,6 +39,7 @@ allprojects {
         maven { url 'https://repo.mikeprimm.com/' }
         maven { url 'https://maven.sk89q.com/repo/' }
         maven { url 'https://github.com/factions-site/repo/raw/public/' }
+        maven { url 'https://mvn.lumine.io/repository/maven-public/' }
     }
 
     jar {

@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.entity.LivingEntity;
@@ -35,7 +36,6 @@ public class Famine extends EcoEnchant {
             return;
         }
 
-        victim.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, level * 40, level));
-        victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, level * 40, level));
+        victim.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, level * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION+"ticks-per-level"), level));
     }
 }
