@@ -4,6 +4,7 @@ import com.sk89q.worldguard.blacklist.target.ItemMatcher;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
+import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.Location;
 import org.bukkit.enchantments.Enchantment;
@@ -20,9 +21,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements Listener {
     /**
@@ -60,7 +59,19 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
             return;
         }
 
+        List<Enchantment> removed = new ArrayList<>();
+
+        if (top != null) {
+            removed.addAll(top.getEnchantments().keySet());
+        }
+
+        if (bottom != null) {
+            removed.addAll(bottom.getEnchantments().keySet());
+        }
+
         Map<Enchantment, Integer> toKeep = GrindstoneMerge.doMerge(top, bottom);
+
+        removed.removeAll(toKeep.keySet());
 
         this.getPlugin().getScheduler().runLater(() -> {
             if (inventory.getItem(2) != null || event.isCancelled()) {
@@ -78,14 +89,15 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
                 out.setItemMeta(outMeta);
             }
 
-            if (!toKeep.isEmpty()) {
+            if (!removed.isEmpty()) {
+
                 Location loc = player.getLocation().clone().add(
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1)
                 );
                 ExperienceOrb orb = (ExperienceOrb) loc.getWorld().spawnEntity(loc, EntityType.EXPERIENCE_ORB);
-                orb.setExperience(toKeep.size() * 15);
+                orb.setExperience(removed.size() * 15);
             }
         }, 1);
     }
