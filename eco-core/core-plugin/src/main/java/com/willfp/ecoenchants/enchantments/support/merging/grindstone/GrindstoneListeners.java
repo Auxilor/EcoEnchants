@@ -1,11 +1,8 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
-import com.sk89q.worldguard.blacklist.target.ItemMatcher;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
-import com.willfp.eco.util.StringUtils;
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import org.bukkit.Location;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
@@ -21,7 +18,9 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements Listener {
     /**
@@ -90,7 +89,6 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
             }
 
             if (!removed.isEmpty()) {
-
                 Location loc = player.getLocation().clone().add(
                         NumberUtils.randFloat(-1, 1),
                         NumberUtils.randFloat(-1, 1),
@@ -101,5 +99,4 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
             }
         }, 1);
     }
-
 }
