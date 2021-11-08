@@ -6,6 +6,8 @@ import org.jetbrains.annotations.NotNull;
 
 public interface MythicMobsWrapper extends Integration {
     /**
+     * If an entity can drop items.
+     *
      * @param entity The entity.
      * @see MythicMobsManager#canDropItems(Entity)
      */

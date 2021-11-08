@@ -6,6 +6,7 @@ import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
 public class IntegrationMythicMobs implements MythicMobsWrapper {
+    @Override
     public boolean canDropItems(@NotNull final Entity entity) {
         if (!MythicMobs.inst().getAPIHelper().isMythicMob(entity)) {
             return true;
