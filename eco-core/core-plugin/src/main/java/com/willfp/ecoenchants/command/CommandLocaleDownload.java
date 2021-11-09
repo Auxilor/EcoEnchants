@@ -8,11 +8,9 @@ import com.willfp.eco.core.web.Paste;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 public class CommandLocaleDownload extends Subcommand {
     /**

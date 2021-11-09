@@ -22,7 +22,9 @@ public class Bladed extends EcoEnchant {
                                 @NotNull final Trident trident,
                                 final int level,
                                 @NotNull final EntityDamageByEntityEvent event) {
-        if (victim instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-players")) return;
+        if (victim instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-players")) {
+            return;
+        }
         double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "base-multiplier");
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");

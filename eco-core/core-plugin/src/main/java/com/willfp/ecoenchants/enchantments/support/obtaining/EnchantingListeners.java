@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.support.obtaining;
 
-import com.google.common.collect.ImmutableSet;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.core.config.updating.ConfigUpdater;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -57,6 +55,11 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
         super(plugin);
     }
 
+    /**
+     * Update from config.
+     *
+     * @param plugin Instance of EcoEnchants.
+     */
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {
         SECONDARY_ENCHANTABLE.clear();

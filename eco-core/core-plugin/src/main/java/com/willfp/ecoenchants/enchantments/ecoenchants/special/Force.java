@@ -22,7 +22,9 @@ public class Force extends EcoEnchant {
                               @NotNull final Arrow arrow,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (victim instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-players")) return;
+        if (victim instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-players")) {
+            return;
+        }
         double damage = event.getDamage();
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double bonus = (multiplier * (level + 6)) + 1;

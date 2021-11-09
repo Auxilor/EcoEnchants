@@ -40,6 +40,7 @@ public class EnchantmentConfig extends YamlExtendableConfig {
      * Instantiate a new config for an enchantment.
      *
      * @param name    The name of the config.
+     * @param source  The class in the jar where the config is contained.
      * @param plugin  The provider of the enchantment.
      * @param enchant The enchantment.
      */

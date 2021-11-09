@@ -9,6 +9,7 @@ public interface MythicMobsWrapper extends Integration {
      * If an entity can drop items.
      *
      * @param entity The entity.
+     * @return If can drop items.
      * @see MythicMobsManager#canDropItems(Entity)
      */
     boolean canDropItems(@NotNull Entity entity);

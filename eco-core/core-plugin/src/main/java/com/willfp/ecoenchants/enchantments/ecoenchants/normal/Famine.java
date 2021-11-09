@@ -36,6 +36,6 @@ public class Famine extends EcoEnchant {
             return;
         }
 
-        victim.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, level * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION+"ticks-per-level"), level));
+        victim.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, level * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "ticks-per-level"), level));
     }
 }

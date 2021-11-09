@@ -20,7 +20,9 @@ public class Razor extends EcoEnchant {
                               @NotNull final LivingEntity victim,
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
-        if (victim instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-players")) return;
+        if (victim instanceof Player && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-players")) {
+            return;
+        }
         double perLevelMultiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double baseDamage = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "base-damage");
         double extra = (level * perLevelMultiplier) + baseDamage;

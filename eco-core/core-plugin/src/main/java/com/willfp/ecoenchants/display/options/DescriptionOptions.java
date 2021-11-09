@@ -57,6 +57,7 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
      * Get if descriptions are enabled for a player.
      *
      * @param player The player.
+     * @return If enabled.
      */
     public boolean enabledForPlayer(@Nullable final Player player) {
         if (player == null) {

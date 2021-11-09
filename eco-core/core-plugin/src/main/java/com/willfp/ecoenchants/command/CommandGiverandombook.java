@@ -29,6 +29,10 @@ public class CommandGiverandombook extends Subcommand {
      * The cached enchantment names.
      */
     private static final List<String> RARITY_NAMES = EnchantmentRarity.values().stream().map(EnchantmentRarity::getName).collect(Collectors.toList());
+
+    /**
+     * The cached type names.
+     */
     private static final List<String> TYPE_NAMES = EnchantmentType.values().stream().map(EnchantmentType::getName).collect(Collectors.toList());
 
     /**
@@ -79,8 +83,7 @@ public class CommandGiverandombook extends Subcommand {
                         return false;
                     }
                     return ecoEnchant.getEnchantmentRarity().equals(rarity);
-                }
-                else if (type != null) {
+                } else if (type != null) {
                     if (!(enchantment instanceof EcoEnchant ecoEnchant)) {
                         return false;
                     }

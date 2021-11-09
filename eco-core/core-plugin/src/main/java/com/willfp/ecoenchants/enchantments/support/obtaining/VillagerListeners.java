@@ -8,7 +8,6 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
