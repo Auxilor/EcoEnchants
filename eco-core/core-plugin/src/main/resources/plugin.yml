@@ -26,7 +26,6 @@ permissions:
     default: op
     children:
       ecoenchants.fromtable.*: true
-      ecoenchants.updateannounce: true
       ecoenchants.bypasslevelclamp: true
       ecoenchants.anvil.*: true
       ecoenchants.command.*: true
@@ -61,9 +60,6 @@ permissions:
     description: Allows getting all enchantments from an enchanting table
     default: true
 
-  ecoenchants.updateannounce:
-    description: Informs admins of a new update
-    default: op
   ecoenchants.command.reload:
     description: Allows reloading the config
     default: op
