@@ -79,7 +79,7 @@ public abstract class Artifact extends EcoEnchant {
                              @NotNull final Block block,
                              final int level,
                              @NotNull final BlockBreakEvent event) {
-        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks").contains(block.getType().name().toLowerCase())) {
+        if (!this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "on-blocks", false).contains(block.getType().name().toLowerCase())) {
             return;
         }
 

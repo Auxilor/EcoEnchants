@@ -60,7 +60,7 @@ public class BlastMining extends EcoEnchant {
                     }
                     Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(x, y, z));
 
-                    if (this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
+                    if (this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks", false).contains(block1.getType().name().toLowerCase())) {
                         continue;
                     }
 
