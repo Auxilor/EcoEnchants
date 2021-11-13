@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lumberjack extends EcoEnchant {
-    private final List<Material> materials = new ArrayList<>();
+    private List<Material> materials;
 
     public Lumberjack() {
         super(
@@ -28,7 +28,7 @@ public class Lumberjack extends EcoEnchant {
 
     @Override
     protected void postUpdate() {
-        materials.clear();
+        materials = new ArrayList<>();
         for (String string : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks", false)) {
             Material match = Material.getMaterial(string.toUpperCase());
             if (match != null) {
