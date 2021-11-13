@@ -72,7 +72,7 @@ public class Spearfishing extends EcoEnchant {
         }
 
         List<Material> potentialDrops = new ArrayList<>();
-        this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "drops").forEach(material -> {
+        this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "drops", false).forEach(material -> {
             potentialDrops.add(Material.getMaterial(material.toUpperCase()));
         });
 

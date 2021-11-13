@@ -53,7 +53,7 @@ public class Arborist extends EcoEnchant {
 
         List<Material> materials = new ArrayList<>();
 
-        for (String materialName : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "items")) {
+        for (String materialName : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "items", false)) {
             Material material = Material.getMaterial(materialName.toUpperCase());
             if (material != null) {
                 materials.add(material);

@@ -18,10 +18,23 @@ import java.util.List;
 import java.util.Set;
 
 public class Lumberjack extends EcoEnchant {
+    private final List<Material> materials = new ArrayList<>();
+
     public Lumberjack() {
         super(
                 "lumberjack", EnchantmentType.NORMAL
         );
+    }
+
+    @Override
+    protected void postUpdate() {
+        materials.clear();
+        for (String string : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks", false)) {
+            Material match = Material.getMaterial(string.toUpperCase());
+            if (match != null) {
+                materials.add(match);
+            }
+        }
     }
 
     @Override
@@ -36,9 +49,6 @@ public class Lumberjack extends EcoEnchant {
         if (player.isSneaking() && this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "disable-on-sneak")) {
             return;
         }
-
-        List<Material> materials = new ArrayList<>();
-        this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks").forEach(name -> materials.add(Material.getMaterial(name.toUpperCase())));
 
         if (!materials.contains(block.getType())) {
             return;

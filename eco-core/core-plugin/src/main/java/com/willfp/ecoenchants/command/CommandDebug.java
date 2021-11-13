@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-@SuppressWarnings({"unchecked", "deprecation"})
+@SuppressWarnings("deprecation")
 public class CommandDebug extends Subcommand {
     /**
      * Instantiate a new /ecoenchants debug command handler.
