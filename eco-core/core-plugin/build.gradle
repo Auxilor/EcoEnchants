@@ -9,9 +9,5 @@ dependencies {
     compileOnly 'net.essentialsx:EssentialsX:2.19.0'
     compileOnly 'io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4-SNAPSHOT'
-    compileOnly 'org.jetbrains.exposed:exposed-core:0.34.1'
-    compileOnly 'org.jetbrains.exposed:exposed-dao:0.34.1'
-    compileOnly 'org.jetbrains.exposed:exposed-jdbc:0.34.1'
-    compileOnly 'mysql:mysql-connector-java:5.1.48'
     compileOnly 'io.lumine.xikage:MythicMobs:4.9.1'
 }
