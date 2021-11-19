@@ -62,7 +62,7 @@ public class SoftTouch extends EcoEnchant {
 
         String entityName = displayNicely(type);
 
-        String name = this.getConfig().getString(EcoEnchants.CONFIG_LOCATION + "name");
+        String name = this.getConfig().getFormattedString(EcoEnchants.CONFIG_LOCATION + "name");
         name = name.replace("%type%", entityName);
         name = name.replace("[", "").replace("]", "");
         meta.setDisplayName(name);

@@ -157,7 +157,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     public String getMinimumEcoVersion() {
-        return "6.12.0";
+        return "6.13.11";
     }
 
     /**

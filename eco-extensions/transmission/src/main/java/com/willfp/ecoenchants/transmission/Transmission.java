@@ -27,7 +27,7 @@ public class Transmission extends Spell {
         Location end = player.getEyeLocation().clone().add(vector);
 
         if (player.rayTraceBlocks(distance) != null) {
-            player.sendMessage(this.getPlugin().getLangYml().getPrefix() + this.getConfig().getString(EcoEnchants.CONFIG_LOCATION + "block-in-path"));
+            player.sendMessage(this.getPlugin().getLangYml().getPrefix() + this.getConfig().getFormattedString(EcoEnchants.CONFIG_LOCATION + "block-in-path"));
             return false;
         }
 
