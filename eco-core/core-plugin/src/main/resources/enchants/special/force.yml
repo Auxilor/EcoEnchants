@@ -27,7 +27,7 @@ general-config:
     - insecticide
     - slaughter
     - settle
-  maximum-level: 8
+  maximum-level: 4
 
 config:
   disable-on-players: false # Should this enchantment only boost damage on mobs
