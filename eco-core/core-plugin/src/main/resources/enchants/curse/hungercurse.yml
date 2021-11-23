@@ -25,4 +25,4 @@ general-config:
     - sating
 
 config:
-# No config is available for this enchantment
+  times-more-hunger: 2
