@@ -33,11 +33,17 @@ public class CommandLocaleExport extends Subcommand {
             Paste paste = new Paste(configuration.saveToString());
 
             paste.getHastebinToken(token -> {
-                sender.sendMessage(
-                        this.getPlugin().getLangYml().getMessage("link-to-locale").replace(
-                                "%token%", token
-                        )
-                );
+                if (token.length() > 15) {
+                    sender.sendMessage(
+                            this.getPlugin().getLangYml().getMessage("export-failed")
+                    );
+                } else {
+                    sender.sendMessage(
+                            this.getPlugin().getLangYml().getMessage("link-to-locale").replace(
+                                    "%token%", token
+                            )
+                    );
+                }
             });
         };
     }

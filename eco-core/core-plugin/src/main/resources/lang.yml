@@ -34,6 +34,7 @@ messages:
   enabled-descriptions: "&fYou have successfully &aenabled &fenchantment descriptions!"
   disabled-descriptions: "&fYou have successfully &cdisabled &fenchantment descriptions!"
   descriptions-disabled: "&cEnchantment descriptions are disabled on this server."
+  export-failed: "&cExporting the locale failed. Try again later!"
 
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
