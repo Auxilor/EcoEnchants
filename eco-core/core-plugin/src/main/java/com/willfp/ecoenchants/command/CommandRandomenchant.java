@@ -43,7 +43,7 @@ public class CommandRandomenchant extends Subcommand {
             } else if (!args.isEmpty()) {
                 player = Bukkit.getServer().getPlayer(args.get(0));
             } else {
-                player = null
+                player = null;
             }
 
             if (player == null) {
