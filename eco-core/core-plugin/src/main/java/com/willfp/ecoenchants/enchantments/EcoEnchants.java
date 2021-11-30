@@ -22,7 +22,6 @@ import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.HeartArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.HoneyArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.InkArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.LavaArtifact;
-import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.LightArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.LimeArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MagicArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.MagmaArtifact;
@@ -497,7 +496,6 @@ public class EcoEnchants {
     public static final EcoEnchant REBOUNDING = new Rebounding();
     public static final EcoEnchant COPPER_ARTIFACT = new CopperArtifact();
     public static final EcoEnchant GLOW_ARTIFACT = new GlowArtifact();
-    public static final EcoEnchant LIGHT_ARTIFACT = new LightArtifact();
     public static final EcoEnchant SPARK_ARTIFACT = new SparkArtifact();
     public static final EcoEnchant SPORE_ARTIFACT = new SporeArtifact();
     public static final EcoEnchant WAX_ARTIFACT = new WaxArtifact();
