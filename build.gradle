@@ -99,7 +99,7 @@ jar {
 group = 'com.willfp'
 archivesBaseName = project.name
 version = findProperty("version")
-java.sourceCompatibility = JavaVersion.VERSION_16
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 compileJava.options.encoding = 'UTF-8'
 
