@@ -13,6 +13,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -44,7 +47,7 @@ public class LootPopulator extends BlockPopulator {
     }
 
     /**
-     * Populate a chunk's loot chests.
+     * Populate a chunk's loot chests and minecarts with chests.
      *
      * @param world  The world to populate.
      * @param random Bukkit parity.
@@ -57,119 +60,134 @@ public class LootPopulator extends BlockPopulator {
             return;
         }
 
+        for (Entity entity: chunk.getEntities()) {
+            if (!(entity instanceof StorageMinecart minecart)) {
+                continue;
+            }
+            modifyInventory(minecart.getInventory());
+        }
+
         for (BlockState state : chunk.getTileEntities()) {
             Block block = state.getBlock();
             if (!(block.getState() instanceof Chest chestState)) {
                 continue;
             }
-
             Inventory inventory = chestState.getBlockInventory();
+            modifyInventory(inventory);
+        }
+    }
 
-            for (ItemStack item : inventory) {
-                if (item == null) {
+    /**
+     * Modify given inventory with EcoEnchants enchantments
+     *
+     * @param inventory The target inventory
+     */
+    public void modifyInventory(Inventory inventory) {
+        for (ItemStack item : inventory) {
+            if (item == null) {
+                continue;
+            }
+            if (!EnchantmentTarget.ALL.getMaterials().contains(item.getType())) {
+                continue;
+            }
+            if (item.getType().equals(Material.BOOK)) {
+                continue;
+            }
+
+            Map<Enchantment, Integer> toAdd = new HashMap<>();
+
+            ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
+            Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
+
+            double multiplier = 0.01;
+            if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
+                multiplier /= plugin.getConfigYml().getInt("loot.book-times-less-likely");
+            }
+
+            if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
+                multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
+            }
+
+            int cap = 0;
+
+            for (EcoEnchant enchantment : enchantments) {
+                if (enchantment == null || enchantment.getEnchantmentRarity() == null) {
                     continue;
                 }
-                if (!EnchantmentTarget.ALL.getMaterials().contains(item.getType())) {
+
+                if (NumberUtils.randFloat(0, 1) > enchantment.getEnchantmentRarity().getLootProbability() * multiplier) {
                     continue;
                 }
-                if (item.getType().equals(Material.BOOK)) {
+
+                if (!enchantment.isAvailableFromLoot()) {
                     continue;
                 }
 
-                Map<Enchantment, Integer> toAdd = new HashMap<>();
-
-                ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
-                Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
-
-                double multiplier = 0.01;
-                if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
-                    multiplier /= plugin.getConfigYml().getInt("loot.book-times-less-likely");
+                if (!enchantment.canEnchantItem(item)) {
+                    continue;
                 }
+
+                if (!enchantment.isEnabled()) {
+                    continue;
+                }
+
+                AtomicBoolean anyConflicts = new AtomicBoolean(false);
+                toAdd.forEach((enchant, integer) -> {
+                    if (enchantment.conflictsWithAny(toAdd.keySet())) {
+                        anyConflicts.set(true);
+                    }
+                    if (enchant.conflictsWith(enchantment)) {
+                        anyConflicts.set(true);
+                    }
+
+                    EcoEnchant ecoEnchant = (EcoEnchant) enchant;
+                    if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
+                        anyConflicts.set(true);
+                    }
+                });
+                if (anyConflicts.get()) {
+                    continue;
+                }
+
+                int level;
+
+                if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
+                    double enchantlevel1 = NumberUtils.randFloat(0, 1);
+                    double enchantlevel2 = NumberUtils.bias(enchantlevel1, plugin.getConfigYml().getDouble("enchanting-table.special-bias"));
+                    double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
+                    level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
+                } else {
+                    double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, 1);
+                    double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
+                    level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
+                }
+
+                toAdd.put(enchantment, level);
 
                 if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
                     multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
                 }
 
-                int cap = 0;
-
-                for (EcoEnchant enchantment : enchantments) {
-                    if (enchantment == null || enchantment.getEnchantmentRarity() == null) {
-                        continue;
-                    }
-
-                    if (NumberUtils.randFloat(0, 1) > enchantment.getEnchantmentRarity().getLootProbability() * multiplier) {
-                        continue;
-                    }
-
-                    if (!enchantment.isAvailableFromLoot()) {
-                        continue;
-                    }
-
-                    if (!enchantment.canEnchantItem(item)) {
-                        continue;
-                    }
-
-                    if (!enchantment.isEnabled()) {
-                        continue;
-                    }
-
-                    AtomicBoolean anyConflicts = new AtomicBoolean(false);
-                    toAdd.forEach((enchant, integer) -> {
-                        if (enchantment.conflictsWithAny(toAdd.keySet())) {
-                            anyConflicts.set(true);
-                        }
-                        if (enchant.conflictsWith(enchantment)) {
-                            anyConflicts.set(true);
-                        }
-
-                        EcoEnchant ecoEnchant = (EcoEnchant) enchant;
-                        if (enchantment.getType().equals(ecoEnchant.getType()) && ecoEnchant.getType().isSingular()) {
-                            anyConflicts.set(true);
-                        }
-                    });
-                    if (anyConflicts.get()) {
-                        continue;
-                    }
-
-                    int level;
-
-                    if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
-                        double enchantlevel1 = NumberUtils.randFloat(0, 1);
-                        double enchantlevel2 = NumberUtils.bias(enchantlevel1, plugin.getConfigYml().getDouble("enchanting-table.special-bias"));
-                        double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
-                        level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
-                    } else {
-                        double enchantlevel2 = NumberUtils.triangularDistribution(0, 1, 1);
-                        double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
-                        level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
-                    }
-
-                    toAdd.put(enchantment, level);
-
-                    if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
-                        multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
-                    }
-
-                    if (!enchantment.hasFlag("hard-cap-ignore")) {
-                        cap++;
-                    }
-
-                    if (plugin.getConfigYml().getBool("anvil.hard-cap.enabled")) {
-                        if (cap >= plugin.getConfigYml().getInt("anvil.hard-cap.cap")) {
-                            break;
-                        }
-                    }
+                if (!enchantment.hasFlag("hard-cap-ignore")) {
+                    cap++;
                 }
 
-                if (item.getItemMeta() instanceof EnchantmentStorageMeta meta) {
-                    toAdd.forEach(((enchantment, integer) -> meta.addStoredEnchant(enchantment, integer, false)));
-                    item.setItemMeta(meta);
-                } else {
-                    ItemMeta meta = item.getItemMeta();
-                    toAdd.forEach(((enchantment, integer) -> meta.addEnchant(enchantment, integer, false)));
-                    item.setItemMeta(meta);
+                if (plugin.getConfigYml().getBool("anvil.hard-cap.enabled")) {
+                    if (cap >= plugin.getConfigYml().getInt("anvil.hard-cap.cap")) {
+                        break;
+                    }
                 }
+            }
+
+            if (item.getItemMeta() instanceof EnchantmentStorageMeta meta) {
+                toAdd.forEach(((enchantment, integer) -> meta.addStoredEnchant(enchantment, integer, false)));
+                item.setItemMeta(meta);
+            } else {
+                ItemMeta meta = item.getItemMeta();
+                toAdd.forEach(((enchantment, integer) -> meta.addEnchant(enchantment, integer, false)));
+                item.setItemMeta(meta);
             }
         }
     }
+
 }
