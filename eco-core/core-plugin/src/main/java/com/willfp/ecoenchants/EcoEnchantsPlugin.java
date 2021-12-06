@@ -30,10 +30,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class EcoEnchantsPlugin extends EcoPlugin {
@@ -151,8 +153,9 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     }
 
     @Override
+    @NotNull
     public EnchantDisplay getDisplayModule() {
-        return (EnchantDisplay) super.getDisplayModule();
+        return (EnchantDisplay) Objects.requireNonNull(super.getDisplayModule());
     }
 
     @Override
