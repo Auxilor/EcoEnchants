@@ -445,7 +445,15 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      */
     @Override
     public boolean canEnchantItem(@NotNull final ItemStack itemStack) {
-        return targetMaterials.contains(itemStack.getType()) || itemStack.getType().equals(Material.BOOK) || itemStack.getType().equals(Material.ENCHANTED_BOOK);
+        if (this.type.isSingular() && EcoEnchants.hasAnyOfType(itemStack, this.type)) {
+            return false;
+        }
+
+        if (itemStack.getType() == Material.BOOK || itemStack.getType() == Material.ENCHANTED_BOOK) {
+            return true;
+        }
+
+        return targetMaterials.contains(itemStack.getType());
     }
 
     /**
