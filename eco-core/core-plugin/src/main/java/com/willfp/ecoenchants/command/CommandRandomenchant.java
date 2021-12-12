@@ -40,8 +40,10 @@ public class CommandRandomenchant extends Subcommand {
 
             if ((args.isEmpty() && sender instanceof Player) || !sender.hasPermission("ecoenchants.command.randomenchant.others")) {
                 player = (Player) sender;
-            } else {
+            } else if (!args.isEmpty()) {
                 player = Bukkit.getServer().getPlayer(args.get(0));
+            } else {
+                player = null;
             }
 
             if (player == null) {
