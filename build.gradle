@@ -73,6 +73,9 @@ allprojects {
         }
     }
 
+    java.sourceCompatibility = JavaVersion.VERSION_17
+    java.targetCompatibility = JavaVersion.VERSION_17
+
     compileJava.options.encoding = 'UTF-8'
     compileJava.dependsOn clean
 
@@ -99,7 +102,6 @@ jar {
 group = 'com.willfp'
 archivesBaseName = project.name
 version = findProperty("version")
-java.sourceCompatibility = JavaVersion.VERSION_17
 
 compileJava.options.encoding = 'UTF-8'
 
