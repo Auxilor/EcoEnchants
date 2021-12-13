@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.eco.core.Prerequisite;
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.core.requirement.Requirement;
 import com.willfp.eco.core.requirement.Requirements;
 import com.willfp.eco.util.StringUtils;
@@ -446,6 +447,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     @Override
     public boolean canEnchantItem(@NotNull final ItemStack itemStack) {
         if (this.type.isSingular() && EcoEnchants.hasAnyOfType(itemStack, this.type)) {
+            if (FastItemStack.wrap(itemStack).getLevelOnItem(this, true) > 0) {
+                return true;
+            }
             return false;
         }
 
