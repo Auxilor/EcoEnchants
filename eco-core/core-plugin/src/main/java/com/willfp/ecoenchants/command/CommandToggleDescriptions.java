@@ -1,14 +1,16 @@
 package com.willfp.ecoenchants.command;
 
-import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.impl.Subcommand;
 import com.willfp.eco.core.data.PlayerProfile;
 import com.willfp.eco.core.data.keys.PersistentDataKey;
 import com.willfp.eco.core.data.keys.PersistentDataKeyType;
 import com.willfp.eco.util.NamespacedKeyUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class CommandToggleDescriptions extends Subcommand {
     /**
@@ -30,22 +32,21 @@ public class CommandToggleDescriptions extends Subcommand {
     }
 
     @Override
-    public CommandHandler getHandler() {
-        return (sender, args) -> {
-            if (!((EcoEnchantsPlugin) this.getPlugin()).getDisplayModule().getOptions().getDescriptionOptions().isEnabled()) {
-                sender.sendMessage(this.getPlugin().getLangYml().getMessage("descriptions-disabled"));
-                return;
-            }
-            Player player = (Player) sender;
-            PlayerProfile profile = PlayerProfile.load(player);
-            boolean currentStatus = profile.read(DESCRIPTIONS_KEY);
-            currentStatus = !currentStatus;
-            profile.write(DESCRIPTIONS_KEY, currentStatus);
-            if (currentStatus) {
-                player.sendMessage(this.getPlugin().getLangYml().getMessage("enabled-descriptions"));
-            } else {
-                player.sendMessage(this.getPlugin().getLangYml().getMessage("disabled-descriptions"));
-            }
-        };
+    public void onExecute(@NotNull final CommandSender sender,
+                          @NotNull final List<String> args) {
+        if (!((EcoEnchantsPlugin) this.getPlugin()).getDisplayModule().getOptions().getDescriptionOptions().isEnabled()) {
+            sender.sendMessage(this.getPlugin().getLangYml().getMessage("descriptions-disabled"));
+            return;
+        }
+        Player player = (Player) sender;
+        PlayerProfile profile = PlayerProfile.load(player);
+        boolean currentStatus = profile.read(DESCRIPTIONS_KEY);
+        currentStatus = !currentStatus;
+        profile.write(DESCRIPTIONS_KEY, currentStatus);
+        if (currentStatus) {
+            player.sendMessage(this.getPlugin().getLangYml().getMessage("enabled-descriptions"));
+        } else {
+            player.sendMessage(this.getPlugin().getLangYml().getMessage("disabled-descriptions"));
+        }
     }
 }

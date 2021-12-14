@@ -1,14 +1,15 @@
 package com.willfp.ecoenchants.command;
 
-import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.impl.Subcommand;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class CommandDebug extends Subcommand {
@@ -22,23 +23,22 @@ public class CommandDebug extends Subcommand {
     }
 
     @Override
-    public CommandHandler getHandler() {
-        return (sender, args) -> {
-            Player player = (Player) sender;
-            player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand());
-            player.sendMessage("Lore: ");
-            Bukkit.getLogger().info("");
+    public void onExecute(@NotNull final CommandSender sender,
+                          @NotNull final List<String> args) {
+        Player player = (Player) sender;
+        player.sendMessage("Held Item: " + player.getInventory().getItemInMainHand());
+        player.sendMessage("Lore: ");
+        Bukkit.getLogger().info("");
 
-            Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand());
-            Bukkit.getLogger().info("Lore: ");
-            ItemMeta meta = player.getInventory().getItemInMainHand().getItemMeta();
-            if (meta != null) {
-                for (String s : new ArrayList<>(meta.hasLore() ? meta.getLore() : new ArrayList<>())) {
-                    Bukkit.getLogger().info(s);
-                    player.sendMessage(s);
-                }
+        Bukkit.getLogger().info("Held Item: " + player.getInventory().getItemInMainHand());
+        Bukkit.getLogger().info("Lore: ");
+        ItemMeta meta = player.getInventory().getItemInMainHand().getItemMeta();
+        if (meta != null) {
+            for (String s : new ArrayList<>(meta.hasLore() ? meta.getLore() : new ArrayList<>())) {
+                Bukkit.getLogger().info(s);
+                player.sendMessage(s);
             }
-            Bukkit.getLogger().info("");
-        };
+        }
+        Bukkit.getLogger().info("");
     }
 }

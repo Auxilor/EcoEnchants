@@ -1,16 +1,18 @@
 package com.willfp.ecoenchants.command;
 
-import com.willfp.eco.core.command.CommandHandler;
 import com.willfp.eco.core.command.impl.Subcommand;
+import com.willfp.eco.core.config.ConfigType;
+import com.willfp.eco.core.config.TransientConfig;
 import com.willfp.eco.core.config.interfaces.Config;
-import com.willfp.eco.core.config.yaml.YamlTransientConfig;
 import com.willfp.eco.core.web.Paste;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CommandLocaleDownload extends Subcommand {
     /**
@@ -23,40 +25,39 @@ public class CommandLocaleDownload extends Subcommand {
     }
 
     @Override
-    public CommandHandler getHandler() {
-        return (sender, args) -> {
-            if (args.isEmpty()) {
-                sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-locale"));
-                return;
+    public void onExecute(@NotNull final CommandSender sender,
+                          @NotNull final List<String> args) {
+        if (args.isEmpty()) {
+            sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-locale"));
+            return;
+        }
+
+        Paste paste = Paste.getFromHastebin(args.get(0));
+        if (paste == null) {
+            sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-locale"));
+            return;
+        }
+
+        String contents = paste.getContents();
+        Config configuration = new TransientConfig(contents, ConfigType.YAML);
+
+        for (String key : configuration.getKeys(true)) {
+            this.getPlugin().getLangYml().set(key, configuration.get(key));
+        }
+
+        try {
+            this.getPlugin().getLangYml().save();
+            this.getPlugin().getLangYml().clearCache();
+
+            for (EcoEnchant value : EcoEnchants.values()) {
+                value.getConfig().loadFromLang();
+                value.getConfig().save();
+                value.getConfig().clearCache();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            Paste paste = Paste.getFromHastebin(args.get(0));
-            if (paste == null) {
-                sender.sendMessage(this.getPlugin().getLangYml().getMessage("invalid-locale"));
-                return;
-            }
-
-            String contents = paste.getContents();
-            Config configuration = new YamlTransientConfig(contents);
-
-            for (String key : configuration.getKeys(true)) {
-                this.getPlugin().getLangYml().set(key, configuration.get(key));
-            }
-
-            try {
-                this.getPlugin().getLangYml().save();
-                this.getPlugin().getLangYml().clearCache();
-
-                for (EcoEnchant value : EcoEnchants.values()) {
-                    value.getConfig().loadFromLang();
-                    value.getConfig().save();
-                    value.getConfig().clearCache();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            sender.sendMessage(this.getPlugin().getLangYml().getMessage("downloaded-locale"));
-        };
+        sender.sendMessage(this.getPlugin().getLangYml().getMessage("downloaded-locale"));
     }
 }

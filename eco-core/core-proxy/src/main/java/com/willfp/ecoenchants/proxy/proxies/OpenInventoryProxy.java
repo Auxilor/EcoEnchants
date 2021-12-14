@@ -1,10 +1,9 @@
 package com.willfp.ecoenchants.proxy.proxies;
 
-import com.willfp.eco.core.proxy.AbstractProxy;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public interface OpenInventoryProxy extends AbstractProxy {
+public interface OpenInventoryProxy {
     /**
      * Get the NMS inventory container for a player's inventory view.
      *
