@@ -49,7 +49,7 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
     public void update() {
         threshold = this.getPlugin().getConfigYml().getInt("lore.describe.before-lines");
         enabled = this.getPlugin().getConfigYml().getBool("lore.describe.enabled");
-        color = this.getPlugin().getLangYml().getString("description-color");
+        color = this.getPlugin().getLangYml().getFormattedString("description-color");
         showingAtBottom = this.getPlugin().getConfigYml().getBool("lore.describe.at-bottom");
     }
 

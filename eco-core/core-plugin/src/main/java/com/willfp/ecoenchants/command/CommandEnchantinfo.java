@@ -91,7 +91,7 @@ public class CommandEnchantinfo extends PluginCommand {
             if (enchantment1 instanceof EcoEnchant enchant) {
                 conflictNames.add(enchant.getDisplayName());
             } else {
-                conflictNames.add(this.getPlugin().getLangYml().getString("enchantments." + enchantment1.getKey().getKey() + ".name"));
+                conflictNames.add(this.getPlugin().getLangYml().getFormattedString("enchantments." + enchantment1.getKey().getKey() + ".name"));
             }
         }));
 
@@ -101,7 +101,7 @@ public class CommandEnchantinfo extends PluginCommand {
         if (allConflicts.length() >= 2) {
             allConflicts = allConflicts.substring(0, allConflicts.length() - 2);
         } else {
-            allConflicts = this.getPlugin().getLangYml().getString("no-conflicts");
+            allConflicts = this.getPlugin().getLangYml().getFormattedString("no-conflicts");
         }
 
         Set<Material> targets = enchantment.getTargetMaterials();
@@ -132,7 +132,7 @@ public class CommandEnchantinfo extends PluginCommand {
         if (allTargets.length() >= 2) {
             allTargets = allTargets.substring(0, allTargets.length() - 2);
         } else {
-            allTargets = this.getPlugin().getLangYml().getString("no-targets");
+            allTargets = this.getPlugin().getLangYml().getFormattedString("no-targets");
         }
 
         String maxLevel = String.valueOf(enchantment.getMaxLevel());

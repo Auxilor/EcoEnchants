@@ -260,7 +260,7 @@ public abstract class Spell extends EcoEnchant {
         if (cooldown > 0) {
             if (!this.hasFlag("no-cooldown-message")) {
                 if (this.getPlugin().getConfigYml().getBool("types.special.cooldown-in-actionbar")) {
-                    String message = this.getPlugin().getLangYml().getString("messages.on-cooldown")
+                    String message = this.getPlugin().getLangYml().getFormattedString("messages.on-cooldown")
                             .replace("%seconds%", String.valueOf(cooldown))
                             .replace("%name%", EnchantmentCache.getEntry(this).getRawName());
 
