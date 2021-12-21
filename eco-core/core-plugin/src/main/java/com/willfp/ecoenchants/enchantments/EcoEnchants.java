@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.willfp.eco.core.config.updating.ConfigUpdater;
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AngerArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
@@ -247,13 +248,11 @@ import com.willfp.ecoenchants.enchantments.support.vanilla.VanillaEnchantments;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @UtilityClass
 @SuppressWarnings({"unused", "checkstyle:JavadocVariable"})
@@ -552,22 +551,11 @@ public class EcoEnchants {
      */
     public static boolean hasAnyOfType(@NotNull final ItemStack item,
                                        @NotNull final EnchantmentType type) {
-        AtomicBoolean hasOfType = new AtomicBoolean(false);
-
-        if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
-            ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().forEach(((enchantment, integer) -> {
-                if (enchantment instanceof EcoEnchant ecoEnchant && ecoEnchant.getType().equals(type)) {
-                    hasOfType.set(true);
-                }
-            }));
-        } else {
-            item.getEnchantments().forEach((enchantment, integer) -> {
-                if (enchantment instanceof EcoEnchant ecoEnchant && ecoEnchant.getType().equals(type)) {
-                    hasOfType.set(true);
-                }
-            });
-        }
-        return hasOfType.get();
+        return FastItemStack.wrap(item).getEnchantmentsOnItem(true).keySet()
+                .stream()
+                .filter(enchantment -> enchantment instanceof EcoEnchant)
+                .map(enchantment -> (EcoEnchant) enchantment)
+                .anyMatch(ecoEnchant -> ecoEnchant.getType().equals(type));
     }
 
     /**
