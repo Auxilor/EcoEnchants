@@ -138,6 +138,7 @@ public class EnchantmentCache {
         }
 
         description.replaceAll(line -> line.replace("§r", "§r" + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor()));
+        description.replaceAll(line -> line.replace("&r", "&r" + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor()));
         description.replaceAll(line -> Display.PREFIX + PLUGIN.getDisplayModule().getOptions().getDescriptionOptions().getColor() + line);
 
         Map<Integer, List<String>> levelDescription = new HashMap<>();
