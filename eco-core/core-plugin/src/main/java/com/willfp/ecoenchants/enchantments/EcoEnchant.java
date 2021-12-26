@@ -447,10 +447,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     @Override
     public boolean canEnchantItem(@NotNull final ItemStack itemStack) {
         if (this.type.isSingular() && EcoEnchants.hasAnyOfType(itemStack, this.type)) {
-            if (FastItemStack.wrap(itemStack).getLevelOnItem(this, true) > 0) {
-                return true;
-            }
-            return false;
+            return FastItemStack.wrap(itemStack).getLevelOnItem(this, true) > 0;
         }
 
         if (itemStack.getType() == Material.BOOK || itemStack.getType() == Material.ENCHANTED_BOOK) {
