@@ -25,6 +25,8 @@ general-config:
     - succession
     - pentashot
     - buckshot
+  maximum-level: 1
 
 config:
+  chance-per-level: 100 # Not chance-based by default
   angle: 11

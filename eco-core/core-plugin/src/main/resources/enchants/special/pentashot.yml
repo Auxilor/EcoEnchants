@@ -28,5 +28,6 @@ general-config:
   maximum-level: 1
 
 config:
+  chance-per-level: 100 # Not chance-based by default
   side-arrows-per-level: 2 # If you want to have more levels
   angle: 11
