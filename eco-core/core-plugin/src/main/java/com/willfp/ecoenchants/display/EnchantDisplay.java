@@ -138,12 +138,14 @@ public class EnchantDisplay extends DisplayModule {
                         && options.getDescriptionOptions().isEnabled()
                         && options.getDescriptionOptions().enabledForPlayer(player)
                 ) {
-                    lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription(level));
+                    if (enchantment instanceof EcoEnchant enchant && !enchant.hasFlag("hide-in-lore"))  {
+                        lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription(level));
+                    }
                 }
             }
 
             if (player != null && enchantment instanceof EcoEnchant ecoEnchant) {
-                if (!ecoEnchant.areRequirementsMet(player)) {
+                if (!ecoEnchant.areRequirementsMet(player) && !ecoEnchant.hasFlag("hide-in-lore")) {
                     requirementLore.addAll(StringUtils.formatList(EnchantmentCache.getEntry(enchantment).getRequirementLore(), player));
                 }
             }
@@ -172,7 +174,9 @@ public class EnchantDisplay extends DisplayModule {
                     && options.getDescriptionOptions().enabledForPlayer(player)
             ) {
                 for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
-                    lore.addAll(EnchantmentCache.getEntry(entry.getKey()).getDescription(entry.getValue()));
+                    if (entry.getKey() instanceof EcoEnchant enchant && !enchant.hasFlag("hide-in-lore"))  {
+                        lore.addAll(EnchantmentCache.getEntry(entry.getKey()).getDescription(entry.getValue()));
+                    }
                 }
             }
         }
