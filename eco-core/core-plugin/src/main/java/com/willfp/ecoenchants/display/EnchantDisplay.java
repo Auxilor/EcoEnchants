@@ -128,7 +128,9 @@ public class EnchantDisplay extends DisplayModule {
                     ? EnchantmentCache.getEntry(enchantment).getNameWithLevel(level)
                     : EnchantmentCache.getEntry(enchantment).getNameWithLevel(level, player);
 
-            lore.add(Display.PREFIX + name);
+            if (enchantment instanceof EcoEnchant enchant && !enchant.hasFlag("hide-in-lore")) {
+                lore.add(Display.PREFIX + name);
+            }
             if (!options.getDescriptionOptions().isShowingAtBottom()) {
                 if (enchantments.size() <= options.getDescriptionOptions().getThreshold()
                         && options.getDescriptionOptions().isEnabled()
