@@ -124,6 +124,10 @@ public class EnchantDisplay extends DisplayModule {
         enchantments.clear();
         unsorted.forEach(enchantment -> enchantments.put(enchantment, tempEnchantments.get(enchantment)));
         enchantments.forEach((enchantment, level) -> {
+            if (enchantment instanceof EcoEnchant ecoEnchant && ecoEnchant.hasFlag("hide-in-lore")) {
+                return;
+            }
+
             String name = player == null
                     ? EnchantmentCache.getEntry(enchantment).getNameWithLevel(level)
                     : EnchantmentCache.getEntry(enchantment).getNameWithLevel(level, player);
