@@ -65,19 +65,16 @@ public class Beheading extends EcoEnchant {
             meta.setOwningPlayer((Player) victim);
             item.setItemMeta(meta);
         } else {
-            item = getHead(event.getEntityType());
-            if (item == null) {
-                if (event.getEntityType().equals(EntityType.ZOMBIE)) {
-                    item = new ItemStack(Material.ZOMBIE_HEAD, 1);
-                } else if (event.getEntityType().equals(EntityType.SKELETON)) {
-                    item = new ItemStack(Material.SKELETON_SKULL, 1);
-                } else if (event.getEntityType().equals(EntityType.CREEPER)) {
-                    item = new ItemStack(Material.CREEPER_HEAD, 1);
-                } else if (event.getEntityType().equals(EntityType.ENDER_DRAGON)) {
-                    item = new ItemStack(Material.DRAGON_HEAD, 1);
-                } else {
-                    return;
-                }
+            if (event.getEntityType().equals(EntityType.ZOMBIE)) {
+                item = new ItemStack(Material.ZOMBIE_HEAD, 1);
+            } else if (event.getEntityType().equals(EntityType.SKELETON)) {
+                item = new ItemStack(Material.SKELETON_SKULL, 1);
+            } else if (event.getEntityType().equals(EntityType.CREEPER)) {
+                item = new ItemStack(Material.CREEPER_HEAD, 1);
+            } else if (event.getEntityType().equals(EntityType.ENDER_DRAGON)) {
+                item = new ItemStack(Material.DRAGON_HEAD, 1);
+            } else {
+                return;
             }
         }
 
