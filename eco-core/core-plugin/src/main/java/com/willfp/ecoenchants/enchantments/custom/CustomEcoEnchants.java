@@ -29,6 +29,8 @@ public class CustomEcoEnchants {
             EnchantmentUtils.unregister(enchant);
         }
 
+        VALUES.clear();
+
         for (Config cfg : plugin.getCustomEnchantsYml().getSubsections("enchants")) {
             VALUES.add(new CustomEcoEnchant(cfg));
         }

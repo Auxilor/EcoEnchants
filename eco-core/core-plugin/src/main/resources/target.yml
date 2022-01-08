@@ -8,7 +8,7 @@ extra-enchantable-items:
 
 targets:
   axe:
-    - target:hands
+    - slot:hands
     - wooden_axe
     - stone_axe
     - iron_axe
@@ -21,7 +21,7 @@ targets:
     - enchanted_book
 
   pickaxe:
-    - target:hands
+    - slot:hands
     - wooden_pickaxe
     - stone_pickaxe
     - iron_pickaxe
@@ -30,7 +30,7 @@ targets:
     - netherite_pickaxe
 
   hoe:
-    - target:hands
+    - slot:hands
     - wooden_hoe
     - stone_hoe
     - iron_hoe
@@ -39,7 +39,7 @@ targets:
     - netherite_hoe
 
   shovel:
-    - target:hands
+    - slot:hands
     - wooden_shovel
     - stone_shovel
     - iron_shovel
@@ -48,7 +48,7 @@ targets:
     - netherite_shovel
 
   sword:
-    - target:hands
+    - slot:hands
     - wooden_sword
     - stone_sword
     - iron_sword
@@ -57,7 +57,7 @@ targets:
     - netherite_sword
 
   helmet:
-    - target:armor
+    - slot:armor
     - turtle_helmet
     - leather_helmet
     - chainmail_helmet
@@ -67,7 +67,7 @@ targets:
     - netherite_helmet
 
   chestplate:
-    - target:armor
+    - slot:armor
     - leather_chestplate
     - chainmail_chestplate
     - iron_chestplate
@@ -76,7 +76,7 @@ targets:
     - netherite_chestplate
 
   leggings:
-    - target:armor
+    - slot:armor
     - leather_leggings
     - chainmail_leggings
     - iron_leggings
@@ -85,7 +85,7 @@ targets:
     - netherite_leggings
 
   boots:
-    - target:armor
+    - slot:armor
     - leather_boots
     - chainmail_boots
     - iron_boots
@@ -94,37 +94,37 @@ targets:
     - netherite_boots
 
   elytra:
-    - target:armor
+    - slot:armor
     - elytra
 
   bow:
-    - target:hands
+    - slot:hands
     - bow
 
   crossbow:
-    - target:hands
+    - slot:hands
     - crossbow
 
   shears:
-    - target:hands
+    - slot:hands
     - shears
 
   trident:
-    - target:hands
+    - slot:hands
     - trident
 
   shield:
-    - target:hands
+    - slot:hands
     - shield
 
   rod:
-    - target:hands
+    - slot:hands
     - fishing_rod
 
   flintandsteel:
-    - target:hands
+    - slot:hands
     - flint_and_steel
 
   carrot_stick:
-    - target:hands
+    - slot:hands
     - carrot_on_a_stick
