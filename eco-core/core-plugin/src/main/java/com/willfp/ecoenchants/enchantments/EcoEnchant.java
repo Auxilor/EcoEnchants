@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments;
 
 import com.willfp.eco.core.Prerequisite;
+import com.willfp.eco.core.config.interfaces.Config;
 import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.core.requirement.Requirement;
 import com.willfp.eco.core.requirement.Requirements;
@@ -33,6 +34,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -176,21 +178,25 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     @Getter
     private final List<String> requirementLore = new ArrayList<>();
 
-    /**
-     * Create a new EcoEnchant.
-     *
-     * @param key           The key name of the enchantment
-     * @param type          The type of the enchantment
-     * @param prerequisites Optional {@link Prerequisite}s that must be met
-     */
     protected EcoEnchant(@NotNull final String key,
                          @NotNull final EnchantmentType type,
+                         @Nullable final Config overrideConfig,
                          @NotNull final Prerequisite... prerequisites) {
         super(NamespacedKey.minecraft(key));
 
         this.type = type;
         this.permissionName = key.replace("_", "");
-        this.config = generateConfig();
+        this.config = new EnchantmentConfig(
+                Objects.requireNonNullElseGet(overrideConfig, () -> new BaseEnchantmentConfig(
+                        this.permissionName,
+                        this.getClass(),
+                        this,
+                        this.getPlugin()
+                )),
+                this.permissionName,
+                this,
+                this.getPlugin()
+        );
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
             Permission permission = new Permission(
@@ -221,18 +227,17 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         EcoEnchants.addNewEcoEnchant(this);
     }
 
-    protected EnchantmentConfig generateConfig() {
-        return new EnchantmentConfig(
-                new BaseEnchantmentConfig(
-                        this.permissionName,
-                        this.getClass(),
-                        this,
-                        this.getPlugin()
-                ),
-                this.permissionName,
-                this,
-                this.getPlugin()
-        );
+    /**
+     * Create a new EcoEnchant.
+     *
+     * @param key           The key name of the enchantment
+     * @param type          The type of the enchantment
+     * @param prerequisites Optional {@link Prerequisite}s that must be met
+     */
+    protected EcoEnchant(@NotNull final String key,
+                         @NotNull final EnchantmentType type,
+                         @NotNull final Prerequisite... prerequisites) {
+        this(key, type, null, prerequisites);
     }
 
     /**
