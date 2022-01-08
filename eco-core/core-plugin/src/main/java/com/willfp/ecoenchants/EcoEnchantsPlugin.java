@@ -137,10 +137,14 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     protected List<IntegrationLoader> loadIntegrationLoaders() {
-        return Arrays.asList(
+        List<IntegrationLoader> loaders = new ArrayList<>(Arrays.asList(
                 new IntegrationLoader("Essentials", () -> RegistrationManager.register(new IntegrationEssentials())),
                 new IntegrationLoader("MythicMobs", () -> MythicMobsManager.register(new IntegrationMythicMobs()))
-        );
+        ));
+
+        loaders.addAll(LibReforge.getIntegrationLoaders());
+
+        return loaders;
     }
 
     @Override
