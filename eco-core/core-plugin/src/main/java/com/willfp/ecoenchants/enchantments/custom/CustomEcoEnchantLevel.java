@@ -8,6 +8,7 @@ import com.willfp.libreforge.conditions.ConfiguredCondition;
 import com.willfp.libreforge.effects.ConfiguredEffect;
 import com.willfp.libreforge.effects.Effects;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -59,5 +60,12 @@ public class CustomEcoEnchantLevel implements Holder {
     @Override
     public Set<ConfiguredEffect> getEffects() {
         return effects;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomEcoEnchantLevel{" +
+                "parent=" + parent +
+                '}';
     }
 }

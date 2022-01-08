@@ -582,4 +582,9 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     public @NotNull io.papermc.paper.enchantments.EnchantmentRarity getRarity() {
         return io.papermc.paper.enchantments.EnchantmentRarity.COMMON;
     }
+
+    @Override
+    public String toString() {
+        return "EcoEnchant{" + this.getKey() + "}";
+    }
 }
