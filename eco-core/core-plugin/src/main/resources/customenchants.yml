@@ -1,5 +1,6 @@
 enchants:
   - id: demo
+    type: normal
     name: "Demo Custom Enchantment"
     description: Test
 
