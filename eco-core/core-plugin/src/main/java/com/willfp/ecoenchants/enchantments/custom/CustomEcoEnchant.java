@@ -29,7 +29,7 @@ public class CustomEcoEnchant extends EcoEnchant {
      */
     public CustomEcoEnchant(@NotNull final Config config) {
         super(
-                config.getString("id"), EnchantmentType.getByName(config.getString("type"))
+                config.getString("id"), EnchantmentType.getByName(config.getString("type").toUpperCase())
         );
         this.config = config;
 
