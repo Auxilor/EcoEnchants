@@ -120,11 +120,22 @@ public class EnchantmentConfig extends ConfigWrapper<Config> {
         this.getPlugin().getLangYml().set("enchantments." + this.getEnchant().getKey().getKey(), null);
 
         try {
+            this.save();
+            this.getPlugin().getLangYml().save();
+            this.getPlugin().getLangYml().clearCache();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Save if savable config.
+     */
+    public void save() {
+        try {
             if (this.getHandle() instanceof LoadableConfig loadableConfig) {
                 loadableConfig.save();
             }
-            this.getPlugin().getLangYml().save();
-            this.getPlugin().getLangYml().clearCache();
         } catch (IOException e) {
             e.printStackTrace();
         }
