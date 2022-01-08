@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchants;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AngerArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.AshArtifact;
 import com.willfp.ecoenchants.enchantments.ecoenchants.artifact.CloudsArtifact;
@@ -565,6 +566,8 @@ public class EcoEnchants {
      */
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {
+        CustomEcoEnchants.update(plugin);
+
         for (EcoEnchant ecoEnchant : new HashSet<>(values())) {
             ecoEnchant.update();
         }

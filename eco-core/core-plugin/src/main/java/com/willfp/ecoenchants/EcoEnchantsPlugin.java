@@ -8,12 +8,15 @@ import com.willfp.eco.core.integrations.IntegrationLoader;
 import com.willfp.eco.util.TelekinesisUtils;
 import com.willfp.ecoenchants.command.CommandEcoEnchants;
 import com.willfp.ecoenchants.command.CommandEnchantinfo;
+import com.willfp.ecoenchants.config.CustomEnchantsYml;
 import com.willfp.ecoenchants.config.RarityYml;
 import com.willfp.ecoenchants.config.TargetYml;
 import com.willfp.ecoenchants.config.VanillaEnchantsYml;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.custom.CustomEnchantEnableListeners;
+import com.willfp.ecoenchants.enchantments.custom.CustomEnchantLookup;
 import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
 import com.willfp.ecoenchants.enchantments.support.merging.grindstone.GrindstoneListeners;
 import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners;
@@ -26,6 +29,7 @@ import com.willfp.ecoenchants.integrations.mythicmobs.MythicMobsManager;
 import com.willfp.ecoenchants.integrations.mythicmobs.plugins.IntegrationMythicMobs;
 import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
+import com.willfp.libreforge.LibReforge;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.HandlerList;
@@ -33,6 +37,7 @@ import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -60,19 +65,29 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     private final VanillaEnchantsYml vanillaEnchantsYml;
 
     /**
+     * CustomEnchants.yml.
+     */
+    private final CustomEnchantsYml customEnchantsYml;
+
+    /**
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
         super(490, 7666, "com.willfp.ecoenchants.proxy", "&a", true);
+        LibReforge.init(this);
         instance = this;
 
         rarityYml = new RarityYml(this);
         targetYml = new TargetYml(this);
         vanillaEnchantsYml = new VanillaEnchantsYml(this);
+        customEnchantsYml = new CustomEnchantsYml(this);
+
+        LibReforge.registerJavaHolderProvider(player -> new ArrayList<>(CustomEnchantLookup.provideLevels(player)));
     }
 
     @Override
     protected void handleEnable() {
+        LibReforge.enable(this);
         this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
         TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getLevelOnItem(EcoEnchants.TELEKINESIS, false) > 0);
@@ -80,6 +95,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     protected void handleDisable() {
+        LibReforge.disable(this);
         for (World world : Bukkit.getServer().getWorlds()) {
             world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
         }
@@ -87,6 +103,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
 
     @Override
     protected void handleReload() {
+        LibReforge.reload(this);
         this.getDisplayModule().update();
         for (EcoEnchant enchant : EcoEnchants.values()) {
             HandlerList.unregisterAll(enchant);
@@ -142,7 +159,8 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 new AnvilListeners(this),
                 new WatcherTriggers(this),
                 new VillagerListeners(this),
-                new ItemConversions(this)
+                new ItemConversions(this),
+                new CustomEnchantEnableListeners(this)
         );
     }
 
@@ -199,5 +217,14 @@ public class EcoEnchantsPlugin extends EcoPlugin {
      */
     public VanillaEnchantsYml getVanillaEnchantsYml() {
         return this.vanillaEnchantsYml;
+    }
+
+    /**
+     * Get customenchants.yml
+     *
+     * @return customenchants.yml.
+     */
+    public CustomEnchantsYml getCustomEnchantsYml() {
+        return customEnchantsYml;
     }
 }

@@ -6,6 +6,7 @@ import com.willfp.eco.core.requirement.Requirement;
 import com.willfp.eco.core.requirement.Requirements;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
+import com.willfp.ecoenchants.config.configs.BaseEnchantmentConfig;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.display.EnchantmentCache;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -189,7 +190,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
 
         this.type = type;
         this.permissionName = key.replace("_", "");
-        this.config = new EnchantmentConfig(this.permissionName, this.getClass(), this, this.getPlugin());
+        this.config = generateConfig();
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable." + permissionName) == null) {
             Permission permission = new Permission(
@@ -209,7 +210,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             return;
         }
 
-        enabled = config.getBool("enabled");
+        enabled = Objects.requireNonNullElse(config.getBoolOrNull("enabled"), true);
 
         if (!this.isEnabled() && this.getPlugin().getConfigYml().getBool("advanced.hard-disable.enabled")) {
             return;
@@ -218,6 +219,20 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         this.update();
 
         EcoEnchants.addNewEcoEnchant(this);
+    }
+
+    protected EnchantmentConfig generateConfig() {
+        return new EnchantmentConfig(
+                new BaseEnchantmentConfig(
+                        this.permissionName,
+                        this.getClass(),
+                        this,
+                        this.getPlugin()
+                ),
+                this.permissionName,
+                this,
+                this.getPlugin()
+        );
     }
 
     /**

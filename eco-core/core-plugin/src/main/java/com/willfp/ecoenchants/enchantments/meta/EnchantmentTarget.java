@@ -17,7 +17,7 @@ public class EnchantmentTarget {
     /**
      * Target containing the materials from all other targets.
      */
-    public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>());
+    public static final EnchantmentTarget ALL = new EnchantmentTarget("all", new HashSet<>(), Slot.ANY);
     /**
      * All registered targets.
      */
@@ -33,11 +33,18 @@ public class EnchantmentTarget {
      */
     @Getter
     private final String name;
+
     /**
      * The materials of the target.
      */
     @Getter
     private final Set<Material> materials;
+
+    /**
+     * The slot to check for custom enchants.
+     */
+    @Getter
+    private final Slot slot;
 
     /**
      * Create new rarity.
@@ -46,10 +53,12 @@ public class EnchantmentTarget {
      * @param materials The items for the target
      */
     public EnchantmentTarget(@NotNull final String name,
-                             @NotNull final Set<Material> materials) {
+                             @NotNull final Set<Material> materials,
+                             @NotNull final Slot slot) {
         this.name = name;
         materials.removeIf(Objects::isNull);
         this.materials = materials;
+        this.slot = slot;
     }
 
     /**
@@ -74,7 +83,7 @@ public class EnchantmentTarget {
         ALL.materials.clear();
         targetNames.forEach(name -> {
             Set<Material> materials = plugin.getTargetYml().getTargetMaterials(name);
-            new EnchantmentTarget(name, materials).register();
+            new EnchantmentTarget(name, materials, plugin.getTargetYml().getSlot(name)).register();
         });
     }
 
@@ -93,5 +102,25 @@ public class EnchantmentTarget {
         matching.ifPresent(enchantmentTarget -> ALL.getMaterials().removeAll(enchantmentTarget.getMaterials()));
         REGISTERED.add(this);
         ALL.getMaterials().addAll(this.getMaterials());
+    }
+
+    /**
+     * Enchant slots.
+     */
+    public enum Slot {
+        /**
+         * In hands.
+         */
+        HANDS,
+
+        /**
+         * In armor.
+         */
+        ARMOR,
+
+        /**
+         * In inventory.
+         */
+        ANY
     }
 }

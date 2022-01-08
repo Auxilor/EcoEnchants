@@ -11,6 +11,10 @@ depend:
 softdepend:
   - Essentials
   - MythicMobs
+  - EcoSkills
+  - AureliumSkills
+libraries:
+  - 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
 
 commands:
   enchantinfo:

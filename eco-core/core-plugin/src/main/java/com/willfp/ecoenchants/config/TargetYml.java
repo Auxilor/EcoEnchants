@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.config;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.config.BaseConfig;
 import com.willfp.eco.core.config.ConfigType;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,5 +46,23 @@ public class TargetYml extends BaseConfig {
         materials.removeIf(Objects::isNull);
 
         return materials;
+    }
+
+    /**
+     * Get the slot for a target name.
+     *
+     * @param target The target.
+     * @return The slot, or {@link com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget.Slot#ANY}
+     */
+    public EnchantmentTarget.Slot getSlot(@NotNull final String target) {
+        for (String str : this.getStrings("targets." + target)) {
+            if (str.startsWith("slot:")) {
+                return EnchantmentTarget.Slot.valueOf(
+                        str.replace("slot:", "").toUpperCase()
+                );
+            }
+        }
+
+        return EnchantmentTarget.Slot.ANY;
     }
 }

@@ -1,0 +1,28 @@
+enchants:
+  - id: demo
+    name: "Demo Custom Enchantment"
+    description: Damages your opponents armor by &a%value%&r.
+
+    obtaining:
+      table: true
+      villager: true
+      loot: true
+      rarity: legendary
+
+    general-config:
+      flags: [ ]
+      targets:
+        - sword
+        - axe
+      grindstoneable: true
+      disabled-in-worlds: [ ]
+      requirements:
+        list: [ ]
+        not-met-lore: [ ]
+      conflicts: [ ]
+
+    levels:
+      - effects: [ ]
+        conditions: [ ]
+      - effects: [ ]
+        conditions: [ ]

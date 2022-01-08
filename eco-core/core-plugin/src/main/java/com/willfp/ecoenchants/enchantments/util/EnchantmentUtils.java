@@ -144,6 +144,41 @@ public class EnchantmentUtils {
     }
 
     /**
+     * Unregister enchantment with the server.
+     *
+     * @param enchantment The enchantment.
+     */
+    public static void unregister(@NotNull final Enchantment enchantment) {
+        try {
+            Field byIdField = Enchantment.class.getDeclaredField("byKey");
+            Field byNameField = Enchantment.class.getDeclaredField("byName");
+            byIdField.setAccessible(true);
+            byNameField.setAccessible(true);
+            Map<NamespacedKey, Enchantment> byKey = (Map<NamespacedKey, Enchantment>) byIdField.get(null);
+            Map<String, Enchantment> byName = (Map<String, Enchantment>) byNameField.get(null);
+            byKey.remove(enchantment.getKey());
+            byName.remove(enchantment.getName());
+
+            if (enchantment instanceof EcoEnchant) {
+                byName.remove(((EcoEnchant) enchantment).getDisplayName());
+            }
+
+            Map<String, Enchantment> byNameClone = new HashMap<>(byName);
+            for (Map.Entry<String, Enchantment> entry : byNameClone.entrySet()) {
+                if (entry.getValue().getKey().equals(enchantment.getKey())) {
+                    byName.remove(entry.getKey());
+                }
+            }
+
+            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+            f.setAccessible(true);
+            f.set(null, true);
+            f.setAccessible(false);
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        }
+    }
+
+    /**
      * Rehandle breaking in a fast way that doesn't call Player#updateInventory.
      *
      * @param player  The player.

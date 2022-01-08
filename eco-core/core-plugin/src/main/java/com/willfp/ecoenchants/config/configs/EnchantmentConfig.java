@@ -1,8 +1,9 @@
 package com.willfp.ecoenchants.config.configs;
 
 import com.willfp.eco.core.EcoPlugin;
-import com.willfp.eco.core.config.ConfigType;
-import com.willfp.eco.core.config.ExtendableConfig;
+import com.willfp.eco.core.config.interfaces.Config;
+import com.willfp.eco.core.config.interfaces.LoadableConfig;
+import com.willfp.eco.core.config.wrapper.ConfigWrapper;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
@@ -18,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class EnchantmentConfig extends ExtendableConfig {
+public class EnchantmentConfig extends ConfigWrapper<Config> {
     /**
      * The name of the config.
      */
@@ -40,16 +41,16 @@ public class EnchantmentConfig extends ExtendableConfig {
     /**
      * Instantiate a new config for an enchantment.
      *
-     * @param name    The name of the config.
-     * @param source  The class in the jar where the config is contained.
-     * @param plugin  The provider of the enchantment.
-     * @param enchant The enchantment.
+     * @param handle  The handle.
+     * @param name    The config name.
+     * @param enchant The enchant.
+     * @param plugin  Instance of EcoEnchants.
      */
-    public EnchantmentConfig(@NotNull final String name,
-                             @NotNull final Class<?> source,
+    public EnchantmentConfig(@NotNull final Config handle,
+                             @NotNull final String name,
                              @NotNull final EcoEnchant enchant,
                              @NotNull final EcoPlugin plugin) {
-        super(name, true, plugin, source, "enchants/" + enchant.getType().getName() + "/", ConfigType.YAML);
+        super(handle);
         this.name = name;
         this.enchant = enchant;
         this.plugin = plugin;
@@ -119,7 +120,9 @@ public class EnchantmentConfig extends ExtendableConfig {
         this.getPlugin().getLangYml().set("enchantments." + this.getEnchant().getKey().getKey(), null);
 
         try {
-            this.save();
+            if (this.getHandle() instanceof LoadableConfig loadableConfig) {
+                loadableConfig.save();
+            }
             this.getPlugin().getLangYml().save();
             this.getPlugin().getLangYml().clearCache();
         } catch (IOException e) {

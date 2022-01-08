@@ -46,12 +46,17 @@ allprojects {
         onlyIf { !sourceSets.main.allSource.files.isEmpty() }
     }
 
+    shadowJar {
+        relocate('com.willfp.libreforge', 'com.willfp.ecoenchants.libreforge')
+    }
+
     compileJava {
         onlyIf { !sourceSets.main.allSource.files.isEmpty() }
     }
 
     dependencies {
         compileOnly 'com.willfp:eco:6.17.1'
+        implementation 'com.willfp:libreforge:2.13.0'
 
         compileOnly 'org.jetbrains:annotations:19.0.0'
 
