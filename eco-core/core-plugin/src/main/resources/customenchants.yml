@@ -1,19 +1,19 @@
 enchants:
-  - id: demo
+  - id: escape
     type: normal
-    name: "Demo Custom Enchantment"
-    description: Test
+    name: "Escape"
+    description: Gain a short burst of speed after taking damage
 
     obtaining:
       table: true
       villager: true
       loot: true
-      rarity: legendary
+      rarity: epic
 
     general-config:
       flags: [ ]
       targets:
-        - pickaxe
+        - boots
       grindstoneable: true
       disabled-in-worlds: [ ]
       requirements:
@@ -23,11 +23,22 @@ enchants:
 
     levels:
       - effects:
-          - id: give_money
+          - id: potion_effect
             args:
-              amount: 50
+              effect: speed
+              level: 1
+              duration: 30
+              apply_to_player: true
             triggers:
-              - mine_block
+              - take_damage
         conditions: [ ]
-      - effects: [ ]
+      - effects:
+          - id: potion_effect
+            args:
+              effect: speed
+              level: 2
+              duration: 30
+              apply_to_player: true
+            triggers:
+              - take_damage
         conditions: [ ]
