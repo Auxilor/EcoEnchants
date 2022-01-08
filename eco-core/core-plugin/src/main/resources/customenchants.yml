@@ -1,7 +1,7 @@
 enchants:
   - id: demo
     name: "Demo Custom Enchantment"
-    description: Damages your opponents armor by &a%value%&r.
+    description: Test
 
     obtaining:
       table: true
@@ -12,8 +12,7 @@ enchants:
     general-config:
       flags: [ ]
       targets:
-        - sword
-        - axe
+        - pickaxe
       grindstoneable: true
       disabled-in-worlds: [ ]
       requirements:
@@ -22,7 +21,12 @@ enchants:
       conflicts: [ ]
 
     levels:
-      - effects: [ ]
+      - effects:
+          - id: give_money
+            args:
+              amount: 50
+            triggers:
+              - mine_block
         conditions: [ ]
       - effects: [ ]
         conditions: [ ]
