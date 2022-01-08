@@ -75,7 +75,8 @@ public abstract class Spell extends EcoEnchant {
             Material.BLAST_FURNACE,
             Material.BREWING_STAND,
             Material.DISPENSER,
-            Material.DROPPER
+            Material.DROPPER,
+            Material.FIRE
     ));
 
     static {

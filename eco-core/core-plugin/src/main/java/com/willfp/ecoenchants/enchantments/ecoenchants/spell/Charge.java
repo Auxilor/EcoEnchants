@@ -23,10 +23,26 @@ public class Charge extends Spell {
         velocity.normalize();
         velocity.multiply(level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "velocity-per-level"));
         velocity.setY(player.getEyeLocation().getDirection().clone().getY() + 0.2);
-        player.setVelocity(velocity);
+        player.setVelocity(safenVector(velocity));
 
         this.getPlugin().getScheduler().runLater(() -> AnticheatManager.unexemptPlayer(player), 10);
 
         return true;
+    }
+
+    private Vector safenVector(@NotNull final Vector vector) {
+        if (Math.abs(vector.getX()) > 4) {
+            vector.setX(vector.getX() < 0 ? -3.9 : 3.9);
+        }
+
+        if (Math.abs(vector.getY()) > 4) {
+            vector.setY(vector.getY() < 0 ? -3.9 : 3.9);
+        }
+
+        if (Math.abs(vector.getZ()) > 4) {
+            vector.setZ(vector.getZ() < 0 ? -3.9 : 3.9);
+        }
+
+        return vector;
     }
 }
