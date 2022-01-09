@@ -15,6 +15,7 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml;
 import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchantRequirementListeners;
 import com.willfp.ecoenchants.enchantments.custom.CustomEnchantEnableListeners;
 import com.willfp.ecoenchants.enchantments.custom.CustomEnchantLookup;
 import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
@@ -164,7 +165,8 @@ public class EcoEnchantsPlugin extends EcoPlugin {
                 new WatcherTriggers(this),
                 new VillagerListeners(this),
                 new ItemConversions(this),
-                new CustomEnchantEnableListeners(this)
+                new CustomEnchantEnableListeners(this),
+                new CustomEcoEnchantRequirementListeners(this)
         );
     }
 
