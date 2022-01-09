@@ -13,6 +13,7 @@ softdepend:
   - MythicMobs
   - EcoSkills
   - AureliumSkills
+  - mcMMO
 libraries:
   - 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
 
