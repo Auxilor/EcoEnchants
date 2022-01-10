@@ -30,5 +30,5 @@ general-config:
 config:
   # Each level of invigoration on each piece of armor counts as a point, so if a player is wearing 4 pieces of armor all with Invigoration 3, then that would be 12 points
   reduction-multiplier: 5 # In percent, so default is take 5% less damage per point
-  damage-multiplier: 2.5 # In percent, so default is deal 5% more damage per point
+  damage-multiplier: 2.5 # In percent, so default is deal 2.5% more damage per point
   below-health: 5 # Activates below specified health
