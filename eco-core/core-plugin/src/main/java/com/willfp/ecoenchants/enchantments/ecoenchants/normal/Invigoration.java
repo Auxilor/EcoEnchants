@@ -41,7 +41,7 @@ public class Invigoration extends EcoEnchant {
         }
 
         double damageReduction = totalInvigorationPoints * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "reduction-multiplier") * 0.01;
-        damageReduction += 1;
+        damageReduction -= 1;
         event.setDamage(event.getDamage() * damageReduction);
     }
 
