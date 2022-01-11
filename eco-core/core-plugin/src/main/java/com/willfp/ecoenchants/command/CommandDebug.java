@@ -2,18 +2,14 @@ package com.willfp.ecoenchants.command;
 
 import com.willfp.eco.core.command.impl.Subcommand;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
-import com.willfp.libreforge.LibReforgeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class CommandDebug extends Subcommand {
