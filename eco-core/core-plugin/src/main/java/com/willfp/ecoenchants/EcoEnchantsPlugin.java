@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.command.impl.PluginCommand;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.fast.FastItemStack;
@@ -30,7 +29,7 @@ import com.willfp.ecoenchants.integrations.mythicmobs.MythicMobsManager;
 import com.willfp.ecoenchants.integrations.mythicmobs.plugins.IntegrationMythicMobs;
 import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
-import com.willfp.libreforge.LibReforge;
+import com.willfp.libreforge.LibReforgePlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.HandlerList;
@@ -44,7 +43,7 @@ import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class EcoEnchantsPlugin extends EcoPlugin {
+public class EcoEnchantsPlugin extends LibReforgePlugin {
     /**
      * Instance of the plugin.
      */
@@ -74,8 +73,7 @@ public class EcoEnchantsPlugin extends EcoPlugin {
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
-        super(490, 7666, "com.willfp.ecoenchants.proxy", "&a", true);
-        LibReforge.init(this);
+        super(490, 7666, "&a", "com.willfp.ecoenchants.proxy");
         instance = this;
 
         rarityYml = new RarityYml(this);
@@ -83,28 +81,25 @@ public class EcoEnchantsPlugin extends EcoPlugin {
         vanillaEnchantsYml = new VanillaEnchantsYml(this);
         customEnchantsYml = new CustomEnchantsYml(this);
 
-        LibReforge.registerJavaHolderProvider(player -> new ArrayList<>(CustomEnchantLookup.provideLevels(player)));
+        this.registerJavaHolderProvider(player -> new ArrayList<>(CustomEnchantLookup.provideLevels(player)));
     }
 
     @Override
-    protected void handleEnable() {
-        LibReforge.enable(this);
+    public void handleEnableAdditional() {
         this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
         TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getLevelOnItem(EcoEnchants.TELEKINESIS, false) > 0);
     }
 
     @Override
-    protected void handleDisable() {
-        LibReforge.disable(this);
+    public void handleDisableAdditional() {
         for (World world : Bukkit.getServer().getWorlds()) {
             world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
         }
     }
 
     @Override
-    protected void handleReload() {
-        LibReforge.reload(this);
+    public void handleReloadAdditional() {
         this.getDisplayModule().update();
         for (EcoEnchant enchant : EcoEnchants.values()) {
             HandlerList.unregisterAll(enchant);
@@ -137,15 +132,12 @@ public class EcoEnchantsPlugin extends EcoPlugin {
     }
 
     @Override
-    protected List<IntegrationLoader> loadIntegrationLoaders() {
-        List<IntegrationLoader> loaders = new ArrayList<>(Arrays.asList(
+    @NotNull
+    public List<IntegrationLoader> loadAdditionalIntegrations() {
+        return Arrays.asList(
                 new IntegrationLoader("Essentials", () -> RegistrationManager.register(new IntegrationEssentials())),
                 new IntegrationLoader("MythicMobs", () -> MythicMobsManager.register(new IntegrationMythicMobs()))
-        ));
-
-        loaders.addAll(LibReforge.getIntegrationLoaders());
-
-        return loaders;
+        );
     }
 
     @Override
