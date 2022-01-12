@@ -176,7 +176,7 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
 
     @Override
     public String getMinimumEcoVersion() {
-        return "6.17.0";
+        return "6.19.0";
     }
 
     /**
