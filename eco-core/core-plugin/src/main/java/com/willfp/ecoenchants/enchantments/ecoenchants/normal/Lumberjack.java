@@ -29,7 +29,7 @@ public class Lumberjack extends EcoEnchant {
     @Override
     protected void postUpdate() {
         materials = new ArrayList<>();
-        for (String string : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks", false)) {
+        for (String string : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "whitelisted-blocks")) {
             Material match = Material.getMaterial(string.toUpperCase());
             if (match != null) {
                 materials.add(match);

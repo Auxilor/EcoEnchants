@@ -67,7 +67,7 @@ public class SoftTouch extends EcoEnchant {
         name = name.replace("[", "").replace("]", "");
         meta.setDisplayName(name);
 
-        List<String> lore = this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "lore", false);
+        List<String> lore = this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "lore");
         lore.replaceAll(s -> s.replace("%type%", entityName));
         meta.setLore(lore);
 

@@ -45,7 +45,7 @@ public class Instantaneous extends EcoEnchant {
 
         List<Material> blacklist = new ArrayList<>();
 
-        for (String s : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks", false)) {
+        for (String s : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks")) {
             blacklist.add(Material.getMaterial(s));
         }
 

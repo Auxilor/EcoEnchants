@@ -255,7 +255,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         availableFromLoot = config.getBool(EcoEnchants.OBTAINING_LOCATION + "loot");
         maxLevel = config.getInt(EcoEnchants.GENERAL_LOCATION + "maximum-level", 1);
         displayName = config.getFormattedString("name");
-        description = config.getString("description", false);
+        description = config.getString("description");
         disabledWorldNames.clear();
         disabledWorldNames.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "disabled-in-worlds"));
         disabledWorlds.clear();
@@ -273,7 +273,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         flags.clear();
         flags.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "flags"));
         EnchantmentUtils.registerPlaceholders(this);
-        for (String req : config.getStrings(EcoEnchants.GENERAL_LOCATION + "requirements.list", false)) {
+        for (String req : config.getStrings(EcoEnchants.GENERAL_LOCATION + "requirements.list")) {
             List<String> split = Arrays.asList(req.split(":"));
             if (split.size() < 2) {
                 continue;
@@ -284,7 +284,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             this.requirements.put(requirement, split.subList(1, split.size()));
         }
         requirementLore.clear();
-        requirementLore.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "requirements.not-met-lore", false));
+        requirementLore.addAll(config.getStrings(EcoEnchants.GENERAL_LOCATION + "requirements.not-met-lore"));
 
         postUpdate();
         this.register();

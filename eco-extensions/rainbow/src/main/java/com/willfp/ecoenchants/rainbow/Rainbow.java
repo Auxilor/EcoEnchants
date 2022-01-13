@@ -48,7 +48,7 @@ public class Rainbow extends EcoEnchant {
 
         List<Material> materials = new ArrayList<>();
 
-        for (String materialName : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "items", false)) {
+        for (String materialName : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "items")) {
             Material material = Material.getMaterial(materialName.toUpperCase());
             if (material != null) {
                 materials.add(material);

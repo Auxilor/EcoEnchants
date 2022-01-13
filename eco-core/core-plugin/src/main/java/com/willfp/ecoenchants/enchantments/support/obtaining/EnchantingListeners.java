@@ -63,7 +63,7 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
     @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {
         SECONDARY_ENCHANTABLE.clear();
-        for (String string : plugin.getTargetYml().getStrings("extra-enchantable-items", false)) {
+        for (String string : plugin.getTargetYml().getStrings("extra-enchantable-items")) {
             SECONDARY_ENCHANTABLE.add(Material.matchMaterial(string.toUpperCase()));
         }
     }

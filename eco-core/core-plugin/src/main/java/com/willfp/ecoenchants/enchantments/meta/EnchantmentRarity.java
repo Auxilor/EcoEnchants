@@ -105,7 +105,7 @@ public class EnchantmentRarity {
             double lootProbability = rarityYml.getDouble("rarities." + rarity + ".loot-probability");
             String customColor = null;
             if (rarityYml.getBool("rarities." + rarity + ".custom-color.enabled")) {
-                customColor = rarityYml.getString("rarities." + rarity + ".custom-color.color", false);
+                customColor = rarityYml.getString("rarities." + rarity + ".custom-color.color");
             }
 
             new EnchantmentRarity(rarity, probability, minimumLevel, villagerProbability, lootProbability, customColor).register();

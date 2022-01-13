@@ -47,7 +47,7 @@ public class Drill extends EcoEnchant {
             Block block1 = block.getWorld().getBlockAt(block.getLocation().clone().add(simplified));
             block1.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
 
-            if (this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks", false).contains(block1.getType().name().toLowerCase())) {
+            if (this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blacklisted-blocks").contains(block1.getType().name().toLowerCase())) {
                 continue;
             }
 

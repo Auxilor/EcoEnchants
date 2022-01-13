@@ -56,7 +56,7 @@ public class Xray extends Spell {
 
         List<Material> materials = new ArrayList<>();
 
-        for (String materialName : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks", false)) {
+        for (String materialName : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "blocks")) {
             Material material = Material.getMaterial(materialName.toUpperCase());
             if (material != null) {
                 materials.add(material);
