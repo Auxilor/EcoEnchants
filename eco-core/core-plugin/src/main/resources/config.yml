@@ -181,3 +181,8 @@ advanced:
     # Players with ecoenchants.anvil.bypasshardcap permission will be ignored.
     # This may impact performance.
     enabled: false
+  rehandle-breaking:
+    # Helps with server performance under load by preventing updateInventory packets from being processed.
+    # Can cause bugs with unbreakable items / durability from other plugins: enable if performance is an issue
+    # with enchantments like Blast Mining and Lumberjack.
+    enabled: false

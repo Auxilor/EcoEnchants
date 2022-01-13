@@ -188,41 +188,49 @@ public class EnchantmentUtils {
     public static void rehandleBreaking(@NotNull final Player player,
                                         @NotNull final Set<Block> toBreak,
                                         @NotNull final EcoPlugin plugin) {
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
-        ItemMeta beforeMeta = itemStack.getItemMeta();
-        assert beforeMeta != null;
-        boolean hadUnbreak = beforeMeta.isUnbreakable() || player.getGameMode() == GameMode.CREATIVE;
-        beforeMeta.setUnbreakable(true);
-        itemStack.setItemMeta(beforeMeta);
-        int blocks = toBreak.size();
+        if (plugin.getConfigYml().getBool("advanced.rehandle-breaking.enabled")) {
+            ItemStack itemStack = player.getInventory().getItemInMainHand();
+            ItemMeta beforeMeta = itemStack.getItemMeta();
+            assert beforeMeta != null;
+            boolean hadUnbreak = beforeMeta.isUnbreakable() || player.getGameMode() == GameMode.CREATIVE;
+            beforeMeta.setUnbreakable(true);
+            itemStack.setItemMeta(beforeMeta);
+            int blocks = toBreak.size();
 
-        for (Block block : toBreak) {
-            block.setMetadata("block-ignore", plugin.getMetadataValueFactory().create(true));
-            BlockUtils.breakBlock(player, block);
-            block.removeMetadata("block-ignore", plugin);
-        }
+            for (Block block : toBreak) {
+                block.setMetadata("block-ignore", plugin.getMetadataValueFactory().create(true));
+                BlockUtils.breakBlock(player, block);
+                block.removeMetadata("block-ignore", plugin);
+            }
 
-        ItemMeta afterMeta = itemStack.getItemMeta();
-        assert afterMeta != null;
-        afterMeta.setUnbreakable(hadUnbreak);
-        itemStack.setItemMeta(afterMeta);
-        PlayerItemDamageEvent mockEvent = new PlayerItemDamageEvent(player, itemStack, blocks);
-        Bukkit.getPluginManager().callEvent(mockEvent);
-        int unbLevel = EnchantChecks.getItemLevel(itemStack, Enchantment.DURABILITY);
-        double cancelChance = (100 / (double) (unbLevel + 1));
+            ItemMeta afterMeta = itemStack.getItemMeta();
+            assert afterMeta != null;
+            afterMeta.setUnbreakable(hadUnbreak);
+            itemStack.setItemMeta(afterMeta);
+            PlayerItemDamageEvent mockEvent = new PlayerItemDamageEvent(player, itemStack, blocks);
+            Bukkit.getPluginManager().callEvent(mockEvent);
+            int unbLevel = EnchantChecks.getItemLevel(itemStack, Enchantment.DURABILITY);
+            double cancelChance = (100 / (double) (unbLevel + 1));
 
-        if (hadUnbreak || NumberUtils.randFloat(0, 100) > cancelChance) {
-            return;
-        }
+            if (hadUnbreak || NumberUtils.randFloat(0, 100) > cancelChance) {
+                return;
+            }
 
-        ItemMeta wayAfterMeta = itemStack.getItemMeta();
-        assert wayAfterMeta != null;
-        ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
-        itemStack.setItemMeta(wayAfterMeta);
-        if (((Damageable) wayAfterMeta).getDamage() >= itemStack.getType().getMaxDurability()) {
-            PlayerItemBreakEvent breakEvent = new PlayerItemBreakEvent(player, itemStack);
-            Bukkit.getPluginManager().callEvent(breakEvent);
-            itemStack.setAmount(0);
+            ItemMeta wayAfterMeta = itemStack.getItemMeta();
+            assert wayAfterMeta != null;
+            ((Damageable) wayAfterMeta).setDamage(((Damageable) wayAfterMeta).getDamage() + mockEvent.getDamage());
+            itemStack.setItemMeta(wayAfterMeta);
+            if (((Damageable) wayAfterMeta).getDamage() >= itemStack.getType().getMaxDurability()) {
+                PlayerItemBreakEvent breakEvent = new PlayerItemBreakEvent(player, itemStack);
+                Bukkit.getPluginManager().callEvent(breakEvent);
+                itemStack.setAmount(0);
+            }
+        } else {
+            for (Block block : toBreak) {
+                block.setMetadata("block-ignore", plugin.getMetadataValueFactory().create(true));
+                BlockUtils.breakBlock(player, block);
+                block.removeMetadata("block-ignore", plugin);
+            }
         }
     }
 }
