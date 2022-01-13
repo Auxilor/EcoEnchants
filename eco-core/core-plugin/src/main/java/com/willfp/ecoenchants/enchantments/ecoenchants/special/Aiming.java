@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -60,7 +59,7 @@ public class Aiming extends EcoEnchant {
 
         double distance = level * multiplier;
         double force = arrow.getVelocity().clone().length() / 3;
-        force = NumberUtils.equalIfOver(force, 1);
+        force = Math.min(force, 1);
 
         if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "require-full-force") && force < 0.9) {
             return;

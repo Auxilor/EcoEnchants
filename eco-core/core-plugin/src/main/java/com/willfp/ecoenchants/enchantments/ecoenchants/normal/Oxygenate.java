@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -28,7 +27,7 @@ public class Oxygenate extends EcoEnchant {
         int oxygenLevel = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "oxygen-per-level");
         int oxygen = level * oxygenLevel;
         int newOxygen = player.getRemainingAir() + oxygen;
-        newOxygen = NumberUtils.equalIfOver(newOxygen, player.getMaximumAir());
+        newOxygen = Math.min(newOxygen, player.getMaximumAir());
 
         player.setRemainingAir(newOxygen);
     }

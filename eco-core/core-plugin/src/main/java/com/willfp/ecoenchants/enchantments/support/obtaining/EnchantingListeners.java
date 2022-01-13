@@ -188,7 +188,7 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             }
 
-            level = NumberUtils.equalIfOver(level, enchantment.getMaxLevel());
+            level = Math.min(level, enchantment.getMaxLevel());
             toAdd.put(enchantment, level);
 
             if (this.getPlugin().getConfigYml().getBool("enchanting-table.cap-amount.enabled") && toAdd.size() >= this.getPlugin().getConfigYml().getInt("enchanting-table.cap-amount.limit")) {
@@ -285,7 +285,7 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
         int maxLevel = this.getPlugin().getConfigYml().getInt("enchanting-table.maximum-obtainable-level");
 
         try {
-            event.getOffers()[2].setCost(NumberUtils.equalIfOver(event.getOffers()[2].getCost(), maxLevel));
+            event.getOffers()[2].setCost(Math.min(event.getOffers()[2].getCost(), maxLevel));
         } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
         }
 
@@ -315,7 +315,7 @@ public class EnchantingListeners extends PluginDependent<EcoPlugin> implements L
         midEnchantLevel *= (int) Math.ceil((double) maxLevel / 30);
         topEnchantLevel *= (int) Math.ceil((double) maxLevel / 30);
 
-        bottomEnchantLevel = NumberUtils.equalIfOver(bottomEnchantLevel, maxLevel);
+        bottomEnchantLevel = Math.min(bottomEnchantLevel, maxLevel);
 
         int midUnbreakingLevel = NumberUtils.randInt(1, 3);
         if (midUnbreakingLevel < 2) {
