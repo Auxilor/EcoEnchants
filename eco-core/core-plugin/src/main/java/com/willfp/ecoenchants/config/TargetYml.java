@@ -3,7 +3,9 @@ package com.willfp.ecoenchants.config;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.config.BaseConfig;
 import com.willfp.eco.core.config.ConfigType;
+import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,6 +64,20 @@ public class TargetYml extends BaseConfig {
                 );
             }
         }
+        EcoEnchantsPlugin.getInstance().getLogger().warning("");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("WARNING! could not found slot for target " + target);
+        EcoEnchantsPlugin.getInstance().getLogger().warning("Go to your target.yml config in EcoEnchants/ folder ");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("And add a slot for " + target);
+        EcoEnchantsPlugin.getInstance().getLogger().warning("Example: ");
+        EcoEnchantsPlugin.getInstance().getLogger().warning(target+":");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("  - slot:hands");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("  - material1");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("  - material2");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("  - material3");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("Otherwise, you will have Custom Enchantments broken!");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("");
+        EcoEnchantsPlugin.getInstance().getLogger().warning("");
 
         return EnchantmentTarget.Slot.ANY;
     }
