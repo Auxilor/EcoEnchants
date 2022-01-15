@@ -119,8 +119,8 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
         requireTarget = this.getPlugin().getConfigYml().getBool("lore.require-target");
         aboveLore = this.getPlugin().getConfigYml().getBool("lore.above-other-lore");
 
-        lorePrefix = this.getPlugin().getConfigYml().getStrings("lore.prefix").stream().map(s -> Display.PREFIX + StringUtils.format(s, StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)).collect(Collectors.toList());
-        loreSuffix = this.getPlugin().getConfigYml().getStrings("lore.suffix").stream().map(s -> Display.PREFIX + StringUtils.format(s, StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)).collect(Collectors.toList());
+        lorePrefix = this.getPlugin().getConfigYml().getFormattedStrings("lore.prefix").stream().map(s -> Display.PREFIX + s).collect(Collectors.toList());
+        loreSuffix = this.getPlugin().getConfigYml().getFormattedStrings("lore.suffix").stream().map(s -> Display.PREFIX + s).collect(Collectors.toList());
 
         boolean byType = this.getPlugin().getConfigYml().getBool("lore.sort-by-type");
         boolean byLength = this.getPlugin().getConfigYml().getBool("lore.sort-by-length");
