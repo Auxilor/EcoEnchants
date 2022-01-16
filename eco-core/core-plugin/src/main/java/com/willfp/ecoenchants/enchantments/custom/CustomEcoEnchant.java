@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchantments.custom;
 
 import com.willfp.eco.core.config.interfaces.Config;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class CustomEcoEnchant extends EcoEnchant {
     /**
@@ -32,6 +34,27 @@ public class CustomEcoEnchant extends EcoEnchant {
         for (Config levelConfig : config.getSubsections("levels")) {
             levels.put(i, new CustomEcoEnchantLevel(this, levelConfig));
             i++;
+        }
+    }
+
+    @Override
+    protected void postUpdate() {
+        for (EnchantmentTarget target : this.getTargets()) {
+            if (target.getSlot() == null) {
+                Logger logger = this.getPlugin().getLogger();
+                logger.warning("");
+                logger.warning("Problem with target " + target.getName() + "!");
+                logger.warning("Go to target.yml and specify a slot for enchants to activate on!");
+                logger.warning("Example:");
+                logger.warning(target.getName() + ":");
+                logger.warning("  - slot:hands");
+                logger.warning("  - material1");
+                logger.warning("  - material2");
+                logger.warning("");
+                logger.warning("Read the wiki to see available slots!");
+                logger.warning("Custom Enchantment " + this.getKey().getKey() + " will not work until then");
+                logger.warning("");
+            }
         }
     }
 
