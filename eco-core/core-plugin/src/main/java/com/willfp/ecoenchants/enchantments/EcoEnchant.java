@@ -53,7 +53,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     /**
      * Instance of EcoEnchants for enchantments to be able to access.
      */
-    @Getter(AccessLevel.PROTECTED)
+    @Getter
     private final EcoEnchantsPlugin plugin = EcoEnchantsPlugin.getInstance();
 
     /**
