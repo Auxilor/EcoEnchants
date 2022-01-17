@@ -6,6 +6,7 @@ subprojects {
         compileOnly project(":eco-core:core-plugin")
         compileOnly project(":eco-core:core-proxy")
         compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
+        compileOnly 'com.willfp:libreforge:3.3.0'
     }
 
     tasks.withType(Jar) {
