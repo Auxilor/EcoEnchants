@@ -47,6 +47,10 @@ public class SprintArtifactsListener implements Listener {
         }
         Artifact artifact = (Artifact) matching.get();
 
+        if (!artifact.areRequirementsMet(player)) {
+            return;
+        }
+
         if (!EnchantChecks.boots(player, artifact)) {
             return;
         }
