@@ -28,7 +28,7 @@ public class Buckshot extends EcoEnchant {
                            @NotNull final Arrow arrow,
                            final int level,
                            @NotNull final EntityShootBowEvent event) {
-        event.getProjectile().remove();
+        this.getPlugin().getScheduler().runLater(1, () -> event.getProjectile().remove());
         if (shooter instanceof Player) {
             ((Player) shooter).playSound(shooter.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }
