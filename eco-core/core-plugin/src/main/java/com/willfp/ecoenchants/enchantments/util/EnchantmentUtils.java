@@ -82,6 +82,7 @@ public class EnchantmentUtils {
     public static void registerPlaceholders(@NotNull final EcoEnchant enchantment) {
         PlaceholderManager.registerPlaceholder(
                 new PlaceholderEntry(
+                        enchantment.getPlugin(),
                         enchantment.getPermissionName() + "_" + "enabled",
                         player -> String.valueOf(enchantment.isEnabled())
                 )
@@ -93,6 +94,7 @@ public class EnchantmentUtils {
 
             PlaceholderManager.registerPlaceholder(
                     new PlaceholderEntry(
+                            enchantment.getPlugin(),
                             enchantment.getPermissionName() + "_" + key,
                             player -> StringUtils.internalToString(object)
                     )

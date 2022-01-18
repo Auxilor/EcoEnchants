@@ -11,6 +11,7 @@ import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
+import com.willfp.libreforge.LibReforgeUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.AbstractArrow;
@@ -732,7 +733,9 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        if (!(event.getDamager() instanceof LivingEntity attacker)) {
+        LivingEntity attacker = LibReforgeUtils.tryAsPlayer(event.getDamager());
+
+        if (attacker == null) {
             return;
         }
 
