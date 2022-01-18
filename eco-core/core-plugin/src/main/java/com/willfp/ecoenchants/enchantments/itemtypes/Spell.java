@@ -110,6 +110,7 @@ public abstract class Spell extends EcoEnchant {
 
         PlaceholderManager.registerPlaceholder(
                 new PlaceholderEntry(
+                        this.getPlugin(),
                         this.getPermissionName() + "_" + "cooldown",
                         player -> StringUtils.internalToString(getCooldown(this, player))
                 )
