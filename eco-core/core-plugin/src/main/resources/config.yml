@@ -72,9 +72,9 @@ lore:
     after-lines: 9 # Collapse after number of enchantments
     maximum-per-line: 2 # Maximum number of enchantments to have in 1 line
 
-  prefix: # Lines used above the enchantments
-    - ""
+  prefix: [] # Lines used above the enchantments
   suffix: [] # Lines used below the enchantments
+  prefix-on-books: false # If the prefix/suffix should work on books as well as items
 
 enchanting-table:
   enabled: true # Enable EcoEnchants through an enchanting table

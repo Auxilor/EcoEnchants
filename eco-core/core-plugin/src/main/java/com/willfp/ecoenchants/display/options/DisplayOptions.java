@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.display.options;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.core.display.Display;
-import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.display.options.sorting.EnchantmentSorter;
 import com.willfp.ecoenchants.display.options.sorting.SortParameters;
 import com.willfp.ecoenchants.display.options.sorting.SorterManager;
@@ -13,7 +12,11 @@ import lombok.Getter;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DisplayOptions extends PluginDependent<EcoPlugin> {
@@ -71,15 +74,22 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
     private boolean aboveLore = true;
 
     /**
-     * Lore prefix (above enchantments)
+     * Lore prefix (above enchantments).
      */
     @Getter
     private List<String> lorePrefix;
+
     /**
-     * Lore suffix (below enchantments)
+     * Lore suffix (below enchantments).
      */
     @Getter
     private List<String> loreSuffix;
+
+    /**
+     * If prefix/suffix should show on books.
+     */
+    @Getter
+    private boolean prefixOnBooks;
 
     /**
      * Instantiate new display options.
@@ -121,6 +131,7 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
 
         lorePrefix = this.getPlugin().getConfigYml().getFormattedStrings("lore.prefix").stream().map(s -> Display.PREFIX + s).collect(Collectors.toList());
         loreSuffix = this.getPlugin().getConfigYml().getFormattedStrings("lore.suffix").stream().map(s -> Display.PREFIX + s).collect(Collectors.toList());
+        prefixOnBooks = this.getPlugin().getConfigYml().getBool("lore.prefix-on-books");
 
         boolean byType = this.getPlugin().getConfigYml().getBool("lore.sort-by-type");
         boolean byLength = this.getPlugin().getConfigYml().getBool("lore.sort-by-length");
