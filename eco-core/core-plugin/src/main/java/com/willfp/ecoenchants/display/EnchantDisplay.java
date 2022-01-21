@@ -12,6 +12,7 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -174,6 +175,13 @@ public class EnchantDisplay extends DisplayModule {
                 for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
                     lore.addAll(EnchantmentCache.getEntry(entry.getKey()).getDescription(entry.getValue()));
                 }
+            }
+        }
+
+        if (itemStack.getType() != Material.ENCHANTED_BOOK) {
+            if (!enchantments.isEmpty()) {
+                lore.addAll(0, options.getLorePrefix());
+                lore.addAll(options.getLoreSuffix());
             }
         }
 

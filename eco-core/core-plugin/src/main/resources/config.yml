@@ -72,6 +72,10 @@ lore:
     after-lines: 9 # Collapse after number of enchantments
     maximum-per-line: 2 # Maximum number of enchantments to have in 1 line
 
+  prefix: # Lines used above the enchantments
+    - ""
+  suffix: [] # Lines used below the enchantments
+
 enchanting-table:
   enabled: true # Enable EcoEnchants through an enchanting table
   book-times-less-likely: 2 # Times less likely to get an EcoEnchant on a book to balance them out. Don't recommend editing.
