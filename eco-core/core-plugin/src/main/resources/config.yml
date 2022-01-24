@@ -129,14 +129,14 @@ rarity:
 
 use-faster-move-trigger: true # Disable if you want move trigger to detect sub-1-block movements
 
-cooldown:
+cooldown: # For custom enchantments
   in-actionbar: true
   sound:
     enabled: true
     sound: "BLOCK_NOTE_BLOCK_PLING"
     pitch: 0.5
 
-cannot-afford:
+cannot-afford: # For custom enchantments
   in-actionbar: true
   sound:
     enabled: true
