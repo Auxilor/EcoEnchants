@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.util.DurabilityUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -28,6 +29,12 @@ public class Corrosive extends EcoEnchant {
                               @NotNull final EntityDamageByEntityEvent event) {
         if (!(uncastVictim instanceof Player victim)) {
             return;
+        }
+
+        if (attacker instanceof Player player) {
+            if (!AntigriefManager.canInjure(player, uncastVictim)) {
+                return;
+            }
         }
 
         ArrayList<ItemStack> armor = new ArrayList<>(Arrays.asList(victim.getInventory().getArmorContents()));
