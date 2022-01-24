@@ -7,16 +7,9 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Intellect extends EcoEnchant {
-
-    private static final List<Player> toPrevent = new ArrayList<>();
-
     public Intellect() {
         super(
                 "intellect", EnchantmentType.SPECIAL
@@ -45,18 +38,6 @@ public class Intellect extends EcoEnchant {
             return;
         }
 
-        int newValue = toPrevent.contains(player) ? event.getExpChangeEvent().getAmount() :
-        (int) Math.ceil(event.getExpChangeEvent().getAmount() *
-                (1 + (level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-point"))));
-
-        event.getExpChangeEvent().setAmount(newValue);
-
-        if (newValue > player.getExpToLevel()) {
-            if (!toPrevent.contains(player)){
-                toPrevent.add(player);
-            }
-        } else {
-            toPrevent.remove(player);
-        }
+        event.getExpChangeEvent().setAmount((int) Math.ceil(event.getExpChangeEvent().getAmount() * (1 + (level * this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "bonus-per-point")))));
     }
 }
