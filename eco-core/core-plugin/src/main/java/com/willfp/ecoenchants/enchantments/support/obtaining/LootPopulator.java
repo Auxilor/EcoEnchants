@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.obtaining;
 
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
@@ -26,9 +27,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class LootPopulator extends BlockPopulator {
@@ -89,8 +92,10 @@ public class LootPopulator extends BlockPopulator {
         }
 
         Map<Enchantment, Integer> toAdd = new HashMap<>();
+        List<Enchantment> existing = FastItemStack.wrap(item).getEnchantmentsOnItem(true)
+                .keySet().stream().filter(enchant -> !(enchant instanceof EcoEnchant)).collect(Collectors.toList());
 
-        ArrayList<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
+        List<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());
         Collections.shuffle(enchantments); // Prevent list bias towards early enchantments like telekinesis
 
         double multiplier = 0.01;
@@ -126,6 +131,11 @@ public class LootPopulator extends BlockPopulator {
             }
 
             AtomicBoolean anyConflicts = new AtomicBoolean(false);
+
+            if (enchantment.conflictsWithAny(existing)) {
+                anyConflicts.set(true);
+            }
+
             toAdd.forEach((enchant, integer) -> {
                 if (enchantment.conflictsWithAny(toAdd.keySet())) {
                     anyConflicts.set(true);
