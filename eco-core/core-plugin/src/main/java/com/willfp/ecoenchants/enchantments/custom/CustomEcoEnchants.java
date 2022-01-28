@@ -24,7 +24,6 @@ public class CustomEcoEnchants {
      *
      * @param plugin Instance of EcoEnchants.
      */
-    @ConfigUpdater
     public static void update(@NotNull final EcoEnchantsPlugin plugin) {
         for (EcoEnchant enchant : VALUES) {
             EcoEnchants.removeEcoEnchant(enchant);
