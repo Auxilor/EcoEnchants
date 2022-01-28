@@ -208,12 +208,6 @@ public class EnchantDisplay extends DisplayModule {
             }
         }
 
-        FastItemStack fast = FastItemStack.wrap(itemStack);
-
-        List<String> lore = fast.getLore();
-        lore.removeIf(s -> s.startsWith("§w"));
-        fast.setLore(lore);
-
         ItemMeta meta = itemStack.getItemMeta();
 
         assert meta != null;
