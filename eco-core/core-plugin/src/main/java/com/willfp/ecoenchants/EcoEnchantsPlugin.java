@@ -29,6 +29,7 @@ import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.mythicmobs.MythicMobsManager;
 import com.willfp.ecoenchants.integrations.mythicmobs.plugins.IntegrationMythicMobs;
 import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
+import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationCMI;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
 import com.willfp.libreforge.LibReforgePlugin;
 import org.bukkit.Bukkit;
@@ -130,7 +131,6 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
                 world.getPopulators().add(new LootPopulator(this));
             }
         }
-        RegistrationManager.registerEnchantments();
     }
 
     @Override
@@ -138,6 +138,7 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
     public List<IntegrationLoader> loadAdditionalIntegrations() {
         return Arrays.asList(
                 new IntegrationLoader("Essentials", () -> RegistrationManager.register(new IntegrationEssentials())),
+                new IntegrationLoader("CMI", () -> RegistrationManager.register(new IntegrationCMI())),
                 new IntegrationLoader("MythicMobs", () -> MythicMobsManager.register(new IntegrationMythicMobs()))
         );
     }

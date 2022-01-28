@@ -16,6 +16,8 @@ softdepend:
   - mcMMO
   - Jobs
   - Vault
+  - CMI
+  - CMILib
 libraries:
   - 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
 
