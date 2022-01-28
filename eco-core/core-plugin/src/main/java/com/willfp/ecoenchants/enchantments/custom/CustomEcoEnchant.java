@@ -81,4 +81,9 @@ public class CustomEcoEnchant extends EcoEnchant {
     public int getMaxLevel() {
         return this.levels.size();
     }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

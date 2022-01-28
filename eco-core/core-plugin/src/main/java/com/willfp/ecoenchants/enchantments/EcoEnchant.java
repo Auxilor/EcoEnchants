@@ -15,7 +15,6 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
-import lombok.AccessLevel;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang.Validate;
@@ -154,7 +153,6 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
     /**
      * If the enchantment is enabled.
      */
-    @Getter
     private boolean enabled;
 
     /**
@@ -373,6 +371,15 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
      */
     public boolean hasFlag(@NotNull final String flag) {
         return this.flags.contains(flag);
+    }
+
+    /**
+     * If enchantment is enabled.
+     *
+     * @return If enabled.
+     */
+    public boolean isEnabled() {
+        return enabled;
     }
 
     /**
