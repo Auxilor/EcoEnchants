@@ -15,6 +15,7 @@ import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchantRequirementListeners;
+import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchants;
 import com.willfp.ecoenchants.enchantments.custom.CustomEnchantEnableListeners;
 import com.willfp.ecoenchants.enchantments.custom.CustomEnchantLookup;
 import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
@@ -87,6 +88,7 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
     @Override
     public void handleEnableAdditional() {
         this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
+        CustomEcoEnchants.update(this);
 
         TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getLevelOnItem(EcoEnchants.TELEKINESIS, false) > 0);
     }
