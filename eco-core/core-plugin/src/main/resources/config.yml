@@ -128,6 +128,7 @@ rarity:
   # The above options *do not* affect actual enchantment rarities. They are purely for cosmetic purposes, like in item lores.
 
 use-faster-move-trigger: true # Disable if you want move trigger to detect sub-1-block movements
+raytrace-distance: 80 # The distance that alt_click should check for a location
 
 cooldown: # For custom enchantments
   in-actionbar: true
