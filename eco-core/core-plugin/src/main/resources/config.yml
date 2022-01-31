@@ -129,6 +129,7 @@ rarity:
 
 use-faster-move-trigger: true # Disable if you want move trigger to detect sub-1-block movements
 raytrace-distance: 80 # The distance that alt_click should check for a location
+block-item-drop-place-check: true # If the block_item_drop trigger should only fire on naturally placed blocks (prevents dupes)
 
 cooldown: # For custom enchantments
   in-actionbar: true
