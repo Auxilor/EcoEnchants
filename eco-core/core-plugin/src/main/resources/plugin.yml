@@ -20,6 +20,7 @@ softdepend:
   - CMILib
 libraries:
   - 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
+  - 'com.github.ben-manes.caffeine:caffeine:3.0.5'
 
 commands:
   enchantinfo:
