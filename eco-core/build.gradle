@@ -3,6 +3,6 @@ version rootProject.version
 
 subprojects {
     dependencies {
-        implementation 'com.willfp:libreforge:3.10.3'
+        implementation 'com.willfp:libreforge:3.11.0'
     }
 }
