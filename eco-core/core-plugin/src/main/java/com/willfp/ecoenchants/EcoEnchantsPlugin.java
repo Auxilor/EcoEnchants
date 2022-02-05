@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants;
 
 import com.willfp.eco.core.command.impl.PluginCommand;
+import com.willfp.eco.core.config.interfaces.Config;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.core.integrations.IntegrationLoader;
@@ -15,7 +16,6 @@ import com.willfp.ecoenchants.display.EnchantDisplay;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchantRequirementListeners;
-import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchants;
 import com.willfp.ecoenchants.enchantments.custom.CustomEnchantEnableListeners;
 import com.willfp.ecoenchants.enchantments.custom.CustomEnchantLookup;
 import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
@@ -32,6 +32,7 @@ import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationCMI;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
 import com.willfp.libreforge.LibReforgePlugin;
+import com.willfp.libreforge.chains.EffectChains;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.HandlerList;
@@ -88,6 +89,10 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
 
     @Override
     public void handleEnableAdditional() {
+        for (Config config : customEnchantsYml.getSubsections("chains")) {
+            EffectChains.compile(config, "Custom Enchant Chains");
+        }
+
         this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
         TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getLevelOnItem(EcoEnchants.TELEKINESIS, false) > 0);
