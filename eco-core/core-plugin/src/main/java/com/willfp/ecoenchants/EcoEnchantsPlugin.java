@@ -89,10 +89,6 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
 
     @Override
     public void handleEnableAdditional() {
-        for (Config config : customEnchantsYml.getSubsections("chains")) {
-            EffectChains.compile(config, "Custom Enchant Chains");
-        }
-
         this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
         TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getLevelOnItem(EcoEnchants.TELEKINESIS, false) > 0);
