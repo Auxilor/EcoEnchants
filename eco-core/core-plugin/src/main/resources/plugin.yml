@@ -18,6 +18,8 @@ softdepend:
   - Vault
   - CMI
   - CMILib
+  - DeluxeSellwands
+  - ShopGUIPlus
 
 commands:
   enchantinfo:
