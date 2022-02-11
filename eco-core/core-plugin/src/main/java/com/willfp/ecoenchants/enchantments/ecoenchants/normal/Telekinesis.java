@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class Telekinesis extends EcoEnchant {
     private static boolean always = false;
@@ -163,6 +164,10 @@ public class Telekinesis extends EcoEnchant {
 
         //noinspection ConstantConditions
         if (player == null || item == null) {
+            return;
+        }
+
+        if (Objects.equals(player, entity)) {
             return;
         }
 
