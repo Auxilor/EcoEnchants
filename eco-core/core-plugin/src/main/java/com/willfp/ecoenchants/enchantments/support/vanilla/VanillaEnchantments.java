@@ -40,8 +40,7 @@ public class VanillaEnchantments {
         Map<Enchantment, VanillaEnchantmentMetadata> map = new HashMap<>();
 
         List<Enchantment> enchantments = Arrays.stream(Enchantment.values())
-                .filter(enchantment -> enchantment.getClass().getName().contains("CraftEnchantment"))
-                .collect(Collectors.toList());
+                .filter(enchantment -> enchantment.getClass().getName().contains("CraftEnchantment")).toList();
 
         Map<Enchantment, Integer> maxLevels = plugin.getVanillaEnchantsYml().getStrings("max-levels").stream()
                 .collect(Collectors.toMap(

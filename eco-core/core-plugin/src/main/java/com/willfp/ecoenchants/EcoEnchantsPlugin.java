@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants;
 
 import com.willfp.eco.core.command.impl.PluginCommand;
-import com.willfp.eco.core.config.interfaces.Config;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.core.integrations.IntegrationLoader;
@@ -32,7 +31,6 @@ import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationCMI;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
 import com.willfp.libreforge.LibReforgePlugin;
-import com.willfp.libreforge.chains.EffectChains;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.HandlerList;

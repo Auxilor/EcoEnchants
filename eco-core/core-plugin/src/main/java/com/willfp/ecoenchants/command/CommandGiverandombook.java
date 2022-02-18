@@ -49,7 +49,7 @@ public class CommandGiverandombook extends Subcommand {
     @ConfigUpdater
     public static void reload() {
         RARITY_NAMES.clear();
-        RARITY_NAMES.addAll(EnchantmentRarity.values().stream().map(EnchantmentRarity::getName).collect(Collectors.toList()));
+        RARITY_NAMES.addAll(EnchantmentRarity.values().stream().map(EnchantmentRarity::getName).toList());
     }
 
     @Override
@@ -89,7 +89,7 @@ public class CommandGiverandombook extends Subcommand {
                 return ecoEnchant.getType().equals(type);
             }
             return true;
-        }).collect(Collectors.toList());
+        }).toList();
 
         Enchantment enchantment = allowed.get(NumberUtils.randInt(0, allowed.size() - 1));
         int level = NumberUtils.randInt(1, enchantment.getMaxLevel());

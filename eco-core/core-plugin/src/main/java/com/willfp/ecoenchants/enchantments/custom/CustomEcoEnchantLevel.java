@@ -8,7 +8,6 @@ import com.willfp.libreforge.conditions.ConfiguredCondition;
 import com.willfp.libreforge.effects.ConfiguredEffect;
 import com.willfp.libreforge.effects.Effects;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;

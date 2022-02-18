@@ -75,8 +75,7 @@ public class Farmhand extends EcoEnchant {
         }
 
         if (!this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-block-damage")) {
-
-            DurabilityUtils.damageItem(player, player.getInventory().getItemInMainHand(), 1, player.getInventory().getHeldItemSlot());
+            DurabilityUtils.damageItem(player, player.getInventory().getItemInMainHand(), 1);
         }
 
         for (Vector vec : vecs) {

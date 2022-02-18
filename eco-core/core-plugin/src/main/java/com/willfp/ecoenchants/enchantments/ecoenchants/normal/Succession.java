@@ -38,7 +38,7 @@ public class Succession extends EcoEnchant {
                 }
 
                 if (this.getConfig().getBool(EcoEnchants.CONFIG_LOCATION + "per-arrow-damage") && shooter instanceof Player) {
-                    DurabilityUtils.damageItem((Player) shooter, ((Player) shooter).getInventory().getItemInMainHand(), 1, ((Player) shooter).getInventory().getHeldItemSlot());
+                    DurabilityUtils.damageItem((Player) shooter, ((Player) shooter).getInventory().getItemInMainHand(), 1);
                 }
             }, i * 2L);
         }

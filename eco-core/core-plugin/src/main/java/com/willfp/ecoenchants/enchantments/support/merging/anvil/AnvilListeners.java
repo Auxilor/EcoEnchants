@@ -155,8 +155,8 @@ public class AnvilListeners extends PluginDependent<EcoPlugin> implements Listen
             This is a weird anti-dupe bodge. Don't look into it.
              */
             ItemStack l = event.getInventory().getItem(0);
-            Map<Enchantment, Integer> leftEnchants = l == null ? new HashMap<>() : FastItemStack.wrap(l).getEnchantmentsOnItem(true);
-            Map<Enchantment, Integer> outEnchants = item == null ? new HashMap<>() : FastItemStack.wrap(item).getEnchantmentsOnItem(true);
+            Map<Enchantment, Integer> leftEnchants = l == null ? new HashMap<>() : FastItemStack.wrap(l).getEnchants(true);
+            Map<Enchantment, Integer> outEnchants = item == null ? new HashMap<>() : FastItemStack.wrap(item).getEnchants(true);
 
             if (event.getInventory().getItem(1) == null
                     && !leftEnchants.equals(outEnchants)) {

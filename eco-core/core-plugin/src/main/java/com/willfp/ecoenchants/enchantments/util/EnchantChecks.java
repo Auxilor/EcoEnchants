@@ -69,7 +69,7 @@ public class EnchantChecks {
         }
 
         Map<EcoEnchant, Integer> ecoEnchants = new HashMap<>();
-        for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry : FastItemStack.wrap(item).getEnchantmentsOnItem(false).entrySet()) {
+        for (Map.Entry<Enchantment, Integer> enchantmentIntegerEntry : FastItemStack.wrap(item).getEnchants(false).entrySet()) {
             if (enchantmentIntegerEntry.getKey() instanceof EcoEnchant enchant) {
                 ecoEnchants.put(enchant, enchantmentIntegerEntry.getValue());
             }
@@ -259,18 +259,7 @@ public class EnchantChecks {
                 armorPoints.addAndGet(getItemLevel(itemStack, enchantment));
                 if (damage > 0 && isPlayer) {
                     Player player = (Player) entity;
-                    if (itemStack.equals(entity.getEquipment().getHelmet())) {
-                        DurabilityUtils.damageItem(player, player.getInventory().getHelmet(), level, 39);
-                    }
-                    if (itemStack.equals(entity.getEquipment().getChestplate())) {
-                        DurabilityUtils.damageItem(player, player.getInventory().getChestplate(), level, 38);
-                    }
-                    if (itemStack.equals(entity.getEquipment().getLeggings())) {
-                        DurabilityUtils.damageItem(player, player.getInventory().getLeggings(), level, 37);
-                    }
-                    if (itemStack.equals(entity.getEquipment().getBoots())) {
-                        DurabilityUtils.damageItem(player, player.getInventory().getBoots(), level, 36);
-                    }
+                    DurabilityUtils.damageItem(player, itemStack, level);
                 }
             }
         }));

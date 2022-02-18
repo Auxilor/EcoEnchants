@@ -49,18 +49,8 @@ public class Abrasion extends EcoEnchant {
                 continue;
             }
 
-            if (armorPiece.equals(victim.getInventory().getHelmet())) {
-                DurabilityUtils.damageItem(victim, victim.getInventory().getHelmet(), level, 39);
-            }
-            if (armorPiece.equals(victim.getInventory().getChestplate())) {
-                DurabilityUtils.damageItem(victim, victim.getInventory().getChestplate(), level, 38);
-            }
-            if (armorPiece.equals(victim.getInventory().getLeggings())) {
-                DurabilityUtils.damageItem(victim, victim.getInventory().getLeggings(), level, 37);
-            }
-            if (armorPiece.equals(victim.getInventory().getBoots())) {
-                DurabilityUtils.damageItem(victim, victim.getInventory().getBoots(), level, 36);
-            }
+            DurabilityUtils.damageItem(victim, armorPiece, level);
+
         }
     }
 }

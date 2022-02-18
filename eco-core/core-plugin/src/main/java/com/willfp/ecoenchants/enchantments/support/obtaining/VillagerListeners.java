@@ -167,7 +167,7 @@ public class VillagerListeners extends PluginDependent<EcoPlugin> implements Lis
 
         Map<EcoEnchant, Integer> toAdd = new HashMap<>();
 
-        Set<Enchantment> onItem = FastItemStack.wrap(result).getEnchantmentsOnItem(false).keySet();
+        Set<Enchantment> onItem = FastItemStack.wrap(result).getEnchants(false).keySet();
 
         double multiplier = 0.01;
 

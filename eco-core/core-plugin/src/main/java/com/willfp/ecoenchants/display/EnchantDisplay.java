@@ -110,7 +110,7 @@ public class EnchantDisplay extends DisplayModule {
         List<String> lore = new ArrayList<>();
         List<String> requirementLore = new ArrayList<>();
 
-        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(fastItemStack.getEnchantmentsOnItem(true));
+        LinkedHashMap<Enchantment, Integer> enchantments = new LinkedHashMap<>(fastItemStack.getEnchants(true));
 
         enchantments.entrySet().removeIf(enchantmentIntegerEntry -> enchantmentIntegerEntry.getValue().equals(0));
 

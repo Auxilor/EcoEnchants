@@ -3,8 +3,6 @@ package com.willfp.ecoenchants.enchantments;
 import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.core.config.interfaces.Config;
 import com.willfp.eco.core.fast.FastItemStack;
-import com.willfp.eco.core.requirement.Requirement;
-import com.willfp.eco.core.requirement.Requirements;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.configs.BaseEnchantmentConfig;
@@ -15,6 +13,8 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.Watcher;
+import com.willfp.ecoenchants.enchantments.util.requirements.Requirement;
+import com.willfp.ecoenchants.enchantments.util.requirements.Requirements;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang.Validate;
@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @SuppressWarnings({"deprecation", "RedundantSuppression"})
 public abstract class EcoEnchant extends Enchantment implements Listener, Watcher {
@@ -261,8 +260,8 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         for (World world : Bukkit.getWorlds()) {
             worldNames.add(world.getName().toLowerCase());
         }
-        List<String> disabledExistingWorldNames = disabledWorldNames.stream().filter(s -> worldNames.contains(s.toLowerCase())).collect(Collectors.toList());
-        disabledWorlds.addAll(Bukkit.getWorlds().stream().filter(world -> disabledExistingWorldNames.contains(world.getName().toLowerCase())).collect(Collectors.toList()));
+        List<String> disabledExistingWorldNames = disabledWorldNames.stream().filter(s -> worldNames.contains(s.toLowerCase())).toList();
+        disabledWorlds.addAll(Bukkit.getWorlds().stream().filter(world -> disabledExistingWorldNames.contains(world.getName().toLowerCase())).toList());
         targets.clear();
         targetMaterials.clear();
         targets.addAll(config.getTargets());
@@ -334,7 +333,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
         }
 
         for (Map.Entry<Requirement, List<String>> entry : requirements.entrySet()) {
-            if (!entry.getKey().doesPlayerMeet(player, entry.getValue())) {
+            if (!entry.getKey().isMetBy(player, entry.getValue())) {
                 cachedRequirements.put(player.getUniqueId(), false);
                 return false;
             }

@@ -555,7 +555,7 @@ public class EcoEnchants {
      */
     public static boolean hasAnyOfType(@NotNull final ItemStack item,
                                        @NotNull final EnchantmentType type) {
-        return FastItemStack.wrap(item).getEnchantmentsOnItem(true).keySet()
+        return FastItemStack.wrap(item).getEnchants(true).keySet()
                 .stream()
                 .filter(enchantment -> enchantment instanceof EcoEnchant)
                 .map(enchantment -> (EcoEnchant) enchantment)

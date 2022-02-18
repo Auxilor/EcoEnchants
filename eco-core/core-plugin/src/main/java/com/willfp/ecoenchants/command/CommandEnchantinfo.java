@@ -46,7 +46,7 @@ public class CommandEnchantinfo extends PluginCommand {
     @ConfigUpdater
     public static void reload() {
         ENCHANT_NAMES.clear();
-        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getDisplayName).map(ChatColor::stripColor).collect(Collectors.toList()));
+        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getDisplayName).map(ChatColor::stripColor).toList());
     }
 
     @Override

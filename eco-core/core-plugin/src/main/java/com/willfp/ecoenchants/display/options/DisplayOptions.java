@@ -115,16 +115,14 @@ public class DisplayOptions extends PluginDependent<EcoPlugin> {
         sortedTypes.clear();
         sortedTypes.addAll(this.getPlugin().getConfigYml().getStrings("lore.type-ordering").stream()
                 .map(typeName -> EnchantmentType.values().stream().filter(type -> type.getName().equalsIgnoreCase(typeName)).findFirst().orElse(null))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
-        sortedTypes.addAll(EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).collect(Collectors.toList()));
+                .filter(Objects::nonNull).toList());
+        sortedTypes.addAll(EnchantmentType.values().stream().filter(enchantmentType -> !sortedTypes.contains(enchantmentType)).toList());
 
         sortedRarities.clear();
         sortedRarities.addAll(this.getPlugin().getConfigYml().getStrings("lore.rarity-ordering").stream()
                 .map(rarityName -> EnchantmentRarity.values().stream().filter(rarity -> rarity.getName().equalsIgnoreCase(rarityName)).findFirst().orElse(null))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
-        sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).collect(Collectors.toList()));
+                .filter(Objects::nonNull).toList());
+        sortedRarities.addAll(EnchantmentRarity.values().stream().filter(enchantmentRarity -> !sortedRarities.contains(enchantmentRarity)).toList());
 
         requireTarget = this.getPlugin().getConfigYml().getBool("lore.require-target");
         aboveLore = this.getPlugin().getConfigYml().getBool("lore.above-other-lore");
