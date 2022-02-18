@@ -20,7 +20,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class CustomEnchantLookup {
     /**
