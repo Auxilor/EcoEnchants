@@ -116,3 +116,15 @@ publishing {
         }
     }
 }
+
+task buyThePlugins {
+    dependsOn subprojects.build
+
+    doLast {
+        println 'If you like the plugin, please consider buying it on Spigot or Polymart!'
+        println 'Spigot: https://www.spigotmc.org/resources/authors/auxilor.507394/'
+        println 'Polymart: https://polymart.org/user/auxilor.1107/'
+        println 'Buying gives you access to support and the plugin auto-updater, and it allows me to keep developing plugins.'
+    }
+}
+build.finalizedBy buyThePlugins
