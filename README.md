@@ -16,7 +16,7 @@
     <a href="https://bstats.org/plugin/bukkit/EcoEnchants" alt="bstats players">
         <img src="https://img.shields.io/bstats/players/7666?color=brightgreen&style=for-the-badge"/>
     </a>
-    <a href="https://ecoenchants.willfp.com/" alt="Docs (gitbook)">
+    <a href="https://plugins.auxilor.io/ecoenchants/why-ecoenchants" alt="Docs (gitbook)">
         <img src="https://img.shields.io/badge/docs-gitbook-brightgreen?style=for-the-badge&logo=appveyor"/>
     </a>
     <a href="https://discord.gg/ZcwpSsE/" alt="Discord">
