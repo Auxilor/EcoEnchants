@@ -20,7 +20,7 @@ public class CommandToggleDescriptions extends Subcommand {
             NamespacedKeyUtils.create("ecoenchants", "descriptions_enabled"),
             PersistentDataKeyType.BOOLEAN,
             true
-    );
+    ).player();
 
     /**
      * Instantiate a new command handler.
