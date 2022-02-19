@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
-import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.core.drops.DropQueue;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.core.tuples.Pair;
@@ -52,9 +51,7 @@ public class InfernalTouch extends EcoEnchant {
             RECIPES.put(furnaceRecipe.getInput().getType(), new Pair<>(furnaceRecipe.getResult().getType(), xp));
         }
 
-        if (Prerequisite.HAS_1_17.isMet()) {
-            FORTUNE_MATERIALS.add(Material.COPPER_INGOT);
-        }
+        FORTUNE_MATERIALS.add(Material.COPPER_INGOT);
     }
 
     public InfernalTouch() {
