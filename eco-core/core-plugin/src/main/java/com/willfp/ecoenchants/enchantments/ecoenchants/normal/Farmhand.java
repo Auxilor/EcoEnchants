@@ -6,7 +6,10 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -70,7 +73,7 @@ public class Farmhand extends EcoEnchant {
         }
     }
 
-    private void damageItem(Player player, ItemStack item, int damage) {
+    private void damageItem(@NotNull Player player, @NotNull ItemStack item, @NotNull int damage) {
         if (item.getItemMeta() == null || item.getItemMeta().isUnbreakable() ||
                 item.getType() == Material.CARVED_PUMPKIN || item.getType() == Material.PLAYER_HEAD ||
                 !(item.getItemMeta() instanceof Damageable)) return;
