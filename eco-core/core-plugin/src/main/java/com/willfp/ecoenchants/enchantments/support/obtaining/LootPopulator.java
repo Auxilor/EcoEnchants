@@ -67,7 +67,7 @@ public class LootPopulator extends BlockPopulator {
             if (!(entity instanceof StorageMinecart minecart)) {
                 continue;
             }
-            modifyInventory(minecart.getInventory());
+            modifyInventory(minecart.getInventory(), chunk);
         }
 
         for (BlockState state : chunk.getTileEntities()) {
@@ -76,7 +76,7 @@ public class LootPopulator extends BlockPopulator {
                 continue;
             }
             Inventory inventory = chestState.getBlockInventory();
-            modifyInventory(inventory);
+            modifyInventory(inventory, chunk);
         }
     }
 
@@ -194,14 +194,19 @@ public class LootPopulator extends BlockPopulator {
     }
 
     /**
-     * Modify given inventory with EcoEnchants enchantments
+     * Modify given inventory with EcoEnchants enchantments.
      *
-     * @param inventory The target inventory
+     * @param inventory The target inventory.
+     * @param chunk     The chunk.
      */
-    public void modifyInventory(@NotNull final Inventory inventory) {
-        for (ItemStack item : inventory) {
-            this.plugin.getScheduler().runLater(1, () -> modifyItem(item));
-        }
+    public void modifyInventory(@NotNull final Inventory inventory,
+                                @NotNull final Chunk chunk) {
+        this.plugin.getScheduler().runLater(1, () -> {
+            if (chunk.isLoaded()) {
+                for (ItemStack item : inventory) {
+                    modifyItem(item);
+                }
+            }
+        });
     }
-
 }
