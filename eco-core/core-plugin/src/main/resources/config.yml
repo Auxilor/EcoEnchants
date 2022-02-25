@@ -155,6 +155,17 @@ cannot-afford-type:
 point-names: # If you have point names that look ugly (eg g_souls) then you can map them to nice names to be shown to players.
   example_point: "Nicely Formatted Point"
 
+potions:
+  icon:
+    permanent: true
+    triggered: true
+  ambient:
+    permanent: false
+    triggered: true
+  particles:
+    permanent: false
+    triggered: true
+
 advanced:
   force-dropqueue: true
   # When combined with collate, this massively reduces calls to getItemMeta, which can hurt performance when many enchants are on an item.
