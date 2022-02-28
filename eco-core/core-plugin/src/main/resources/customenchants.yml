@@ -22,7 +22,7 @@ enchants:
   - id: escape
     type: normal
     name: "Escape"
-    description: Gain a short burst of speed after taking damage
+    description: Gain a short burst of speed %value% after taking damage
 
     obtaining:
       table: true
@@ -52,6 +52,7 @@ enchants:
             triggers:
               - take_damage
         conditions: [ ]
+        value-placeholder: I
       - effects:
           - id: potion_effect
             args:
@@ -62,3 +63,4 @@ enchants:
             triggers:
               - take_damage
         conditions: [ ]
+        value-placeholder: II
