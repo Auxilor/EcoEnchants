@@ -31,6 +31,12 @@ public class CustomEcoEnchantLevel implements Holder {
     private final Set<ConfiguredEffect> effects = new HashSet<>();
 
     /**
+     * The value placeholder.
+     */
+    @Getter
+    private final String valuePlaceholder;
+
+    /**
      * Create custom EcoEnchant level.
      *
      * @param parent The parent.
@@ -47,6 +53,8 @@ public class CustomEcoEnchantLevel implements Holder {
         for (Config cfg : config.getSubsections("conditions")) {
             conditions.add(Conditions.compile(cfg, "Custom EcoEnchant ID " + parent.getKey().getKey()));
         }
+
+        this.valuePlaceholder = config.getString("value-placeholder");
     }
 
     @NotNull

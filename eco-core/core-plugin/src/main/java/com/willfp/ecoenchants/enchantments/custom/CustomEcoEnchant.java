@@ -38,6 +38,11 @@ public class CustomEcoEnchant extends EcoEnchant {
     }
 
     @Override
+    public String getPlaceholder(final int level) {
+        return this.getLevel(level).getValuePlaceholder();
+    }
+
+    @Override
     protected void postUpdate() {
         for (EnchantmentTarget target : this.getTargets()) {
             if (target.getSlot() == null) {
