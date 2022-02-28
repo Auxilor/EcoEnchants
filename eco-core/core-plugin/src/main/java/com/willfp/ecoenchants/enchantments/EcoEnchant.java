@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.config.configs.BaseEnchantmentConfig;
 import com.willfp.ecoenchants.config.configs.EnchantmentConfig;
 import com.willfp.ecoenchants.display.EnchantmentCache;
+import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentRarity;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -205,7 +206,7 @@ public abstract class EcoEnchant extends Enchantment implements Listener, Watche
             Bukkit.getPluginManager().addPermission(permission);
         }
 
-        if (type.getRequiredToExtend() != null && !type.getRequiredToExtend().isInstance(this)) {
+        if (type.getRequiredToExtend() != null && !type.getRequiredToExtend().isInstance(this) && !(this instanceof CustomEcoEnchant)) {
             return;
         }
 

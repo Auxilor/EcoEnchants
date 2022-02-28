@@ -1,8 +1,6 @@
 package com.willfp.ecoenchants.sprintartifacts;
 
-import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.itemtypes.Artifact;
-import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,15 +35,14 @@ public class SprintArtifactsListener implements Listener {
             return;
         }
 
-        Optional<EcoEnchant> matching = bootsMeta.getEnchants().keySet().stream()
-                .filter(enchantment -> enchantment instanceof EcoEnchant)
-                .map(enchant -> (EcoEnchant) enchant)
-                .filter(enchantment -> enchantment.getType().equals(EnchantmentType.ARTIFACT))
+        Optional<Artifact> matching = bootsMeta.getEnchants().keySet().stream()
+                .filter(enchantment -> enchantment instanceof Artifact)
+                .map(enchant -> (Artifact) enchant)
                 .findFirst();
         if (matching.isEmpty()) {
             return;
         }
-        Artifact artifact = (Artifact) matching.get();
+        Artifact artifact = matching.get();
 
         if (!artifact.areRequirementsMet(player)) {
             return;
