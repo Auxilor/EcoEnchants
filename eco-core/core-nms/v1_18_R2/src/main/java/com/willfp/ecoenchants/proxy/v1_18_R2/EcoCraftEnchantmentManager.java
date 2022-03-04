@@ -16,8 +16,8 @@ public final class EcoCraftEnchantmentManager implements EcoCraftEnchantmentMana
     public void registerNewCraftEnchantments() {
         Map<org.bukkit.enchantments.Enchantment, VanillaEnchantmentMetadata> metadataMap = VanillaEnchantments.getMetadataMap();
 
-        for (Enchantment enchantment : IRegistry.Y) {
-            NamespacedKey key = CraftNamespacedKey.fromMinecraft(IRegistry.Y.b(enchantment));
+        for (Enchantment enchantment : IRegistry.V) {
+            NamespacedKey key = CraftNamespacedKey.fromMinecraft(IRegistry.V.b(enchantment));
             VanillaEnchantmentMetadata metadata = metadataMap.get(org.bukkit.enchantments.Enchantment.getByKey(key));
             new EcoCraftEnchantment(enchantment, metadata).register();
         }
