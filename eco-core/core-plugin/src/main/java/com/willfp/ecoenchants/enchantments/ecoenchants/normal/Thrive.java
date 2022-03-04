@@ -37,19 +37,19 @@ public class Thrive extends EcoEnchant {
 
         assert inst != null;
 
-        inst.setBaseValue(inst.getDefaultValue());
-
         if (this.getDisabledWorlds().contains(player.getWorld())) {
             points = 0;
         }
-
-        inst.removeModifier(modifier);
 
         if (player.getHealth() >= inst.getValue()) {
             this.getPlugin().getScheduler().runLater(() -> {
                 player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
             }, 1);
         }
+
+        inst.setBaseValue(inst.getDefaultValue());
+
+        inst.removeModifier(modifier);
 
         if (points > 0) {
             inst.addModifier(
