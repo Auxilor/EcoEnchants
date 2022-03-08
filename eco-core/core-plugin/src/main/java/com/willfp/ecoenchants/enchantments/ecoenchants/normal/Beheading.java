@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 import com.willfp.eco.core.drops.DropQueue;
 import com.willfp.eco.core.items.builder.SkullBuilder;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
@@ -90,13 +91,12 @@ public class Beheading extends EcoEnchant {
         event.setDroppedExp(0);
     }
 
-    ItemStack getHead(@NotNull final EntityType type) {
-        for (String s : this.getConfig().getStrings("custom-heads")) {
+    private ItemStack getHead(@NotNull final EntityType type) {
+        for (String s : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "custom-heads")) {
             String[] split = s.split("::");
-            if (!type.name().equalsIgnoreCase(split[0])) {
-                continue;
+            if (type.name().equalsIgnoreCase(split[0])) {
+                return new SkullBuilder().setSkullTexture(split[1]).build();
             }
-            return new SkullBuilder().setSkullTexture(split[1]).build();
         }
         return null;
     }
