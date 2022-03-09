@@ -95,7 +95,13 @@ public class Beheading extends EcoEnchant {
         for (String s : this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "custom-heads")) {
             String[] split = s.split("::");
             if (type.name().equalsIgnoreCase(split[0])) {
-                return new SkullBuilder().setSkullTexture(split[1]).build();
+                SkullBuilder builder = new SkullBuilder().setSkullTexture(split[1]);
+
+                if (split.length >= 3) {
+                    builder.setDisplayName(split[2]);
+                }
+
+                return builder.build();
             }
         }
         return null;
