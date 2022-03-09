@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -9,6 +10,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +33,10 @@ public class Pentashot extends EcoEnchant {
 
         int bonusPerSide = this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "side-arrows-per-level") * level;
 
+        if (shooter instanceof Player player) {
+            AnticheatManager.exemptPlayer(player);
+        }
+
         for (int i = -bonusPerSide; i <= bonusPerSide; i += 1) {
             if (i == 0) {
                 continue;
@@ -46,6 +52,10 @@ public class Pentashot extends EcoEnchant {
                 arrow1.setFireTicks(Integer.MAX_VALUE);
             }
             arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
+        }
+
+        if (shooter instanceof Player player) {
+            AnticheatManager.unexemptPlayer(player);
         }
     }
 }

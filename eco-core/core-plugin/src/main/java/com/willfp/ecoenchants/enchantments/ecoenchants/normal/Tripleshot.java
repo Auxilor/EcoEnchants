@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
@@ -9,6 +10,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +31,10 @@ public class Tripleshot extends EcoEnchant {
             return;
         }
 
+        if (shooter instanceof Player player) {
+            AnticheatManager.exemptPlayer(player);
+        }
+
         for (int i = -1; i < 2; i += 2) {
             Vector velocity = event.getProjectile().getVelocity();
 
@@ -40,6 +46,10 @@ public class Tripleshot extends EcoEnchant {
                 arrow1.setFireTicks(Integer.MAX_VALUE);
             }
             arrow1.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
+        }
+
+        if (shooter instanceof Player player) {
+            AnticheatManager.unexemptPlayer(player);
         }
     }
 }

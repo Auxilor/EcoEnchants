@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
+import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.util.DurabilityUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -29,6 +30,10 @@ public class Succession extends EcoEnchant {
 
         boolean fire = EnchantChecks.mainhand(shooter, Enchantment.ARROW_FIRE);
 
+        if (shooter instanceof Player player) {
+            AnticheatManager.exemptPlayer(player);
+        }
+
         for (int i = 1; i <= amount; i++) {
             this.getPlugin().getScheduler().runLater(() -> {
                 Arrow arrow1 = shooter.launchProjectile(Arrow.class, event.getProjectile().getVelocity());
@@ -41,6 +46,9 @@ public class Succession extends EcoEnchant {
                     DurabilityUtils.damageItem((Player) shooter, ((Player) shooter).getInventory().getItemInMainHand(), 1);
                 }
             }, (long) i * this.getConfig().getInt(EcoEnchants.CONFIG_LOCATION + "delay-between-arrows"));
+        }
+        if (shooter instanceof Player player) {
+            AnticheatManager.unexemptPlayer(player);
         }
     }
 }
