@@ -210,7 +210,9 @@ public class EnchantDisplay extends DisplayModule {
 
         ItemMeta meta = itemStack.getItemMeta();
 
-        assert meta != null;
+        if (meta == null) {
+            return;
+        }
 
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
