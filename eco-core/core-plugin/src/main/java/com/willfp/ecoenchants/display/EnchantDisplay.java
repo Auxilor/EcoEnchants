@@ -64,7 +64,7 @@ public class EnchantDisplay extends DisplayModule {
      * @param plugin Instance of EcoEnchants.
      */
     public EnchantDisplay(@NotNull final EcoPlugin plugin) {
-        super(plugin, DisplayPriority.HIGH);
+        super(plugin, DisplayPriority.LOW);
         keySkip = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-skip");
         legacyV = this.getPlugin().getNamespacedKeyFactory().create("ecoenchantlore-v");
         options = new DisplayOptions(this.getPlugin());
