@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchantments.util;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.integrations.placeholder.PlaceholderManager;
 import com.willfp.eco.core.placeholder.PlayerPlaceholder;
-import com.willfp.eco.util.BlockUtils;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
@@ -185,7 +184,7 @@ public class EnchantmentUtils {
                                         @NotNull final EcoPlugin plugin) {
         for (Block block : toBreak) {
             block.setMetadata("block-ignore", plugin.getMetadataValueFactory().create(true));
-            BlockUtils.breakBlock(player, block);
+            player.breakBlock(block);
             block.removeMetadata("block-ignore", plugin);
         }
     }

@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.spell;
 
 import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.BlockUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.itemtypes.Spell;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -72,11 +72,7 @@ public class Dynamite extends Spell {
             }
         }
 
-        toBreak.forEach((block1 -> {
-            block1.setMetadata("block-ignore", this.getPlugin().getMetadataValueFactory().create(true));
-            BlockUtils.breakBlock(player, block1);
-            block1.removeMetadata("block-ignore", this.getPlugin());
-        }));
+        EnchantmentUtils.rehandleBreaking(player, toBreak, this.getPlugin());
 
         AnticheatManager.unexemptPlayer(player);
 

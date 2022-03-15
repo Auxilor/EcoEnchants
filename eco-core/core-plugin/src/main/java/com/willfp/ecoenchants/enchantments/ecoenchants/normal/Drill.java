@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchantments.ecoenchants.normal;
 
 import com.willfp.eco.core.integrations.anticheat.AnticheatManager;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
-import com.willfp.eco.util.BlockUtils;
 import com.willfp.eco.util.VectorUtils;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -64,7 +63,7 @@ public class Drill extends EcoEnchant {
                 continue;
             }
 
-            BlockUtils.breakBlock(player, block1);
+            player.breakBlock(block1);
             block1.removeMetadata("block-ignore", this.getPlugin());
         }
 
