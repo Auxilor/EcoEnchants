@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.eco.core.EcoPlugin;
-import com.willfp.eco.core.integrations.placeholder.PlaceholderEntry;
 import com.willfp.eco.core.integrations.placeholder.PlaceholderManager;
+import com.willfp.eco.core.placeholder.PlayerPlaceholder;
 import com.willfp.eco.util.BlockUtils;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.eco.util.StringUtils;
@@ -74,7 +74,7 @@ public class EnchantmentUtils {
      */
     public static void registerPlaceholders(@NotNull final EcoEnchant enchantment) {
         PlaceholderManager.registerPlaceholder(
-                new PlaceholderEntry(
+                new PlayerPlaceholder(
                         enchantment.getPlugin(),
                         enchantment.getPermissionName() + "_" + "enabled",
                         player -> String.valueOf(enchantment.isEnabled())
@@ -86,10 +86,10 @@ public class EnchantmentUtils {
             Object object = enchantment.getConfig().get(string);
 
             PlaceholderManager.registerPlaceholder(
-                    new PlaceholderEntry(
+                    new PlayerPlaceholder(
                             enchantment.getPlugin(),
                             enchantment.getPermissionName() + "_" + key,
-                            player -> StringUtils.internalToString(object)
+                            player -> StringUtils.toNiceString(object)
                     )
             );
         });
