@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import com.willfp.eco.core.EcoPlugin;
+import com.willfp.eco.core.config.updating.ConfigUpdater;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
@@ -79,6 +80,7 @@ public class ItemConversionOptions {
      *
      * @param plugin Instance of ecoenchants.
      */
+    @ConfigUpdater
     public void reload(@NotNull final EcoPlugin plugin) {
         usingLoreGetter = plugin.getConfigYml().getBool("advanced.lore-getter.enabled");
         usingAggressiveLoreGetter = plugin.getConfigYml().getBool("advanced.lore-getter.aggressive");

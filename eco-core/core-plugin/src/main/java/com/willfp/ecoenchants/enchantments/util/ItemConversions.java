@@ -247,7 +247,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
+        ItemStack itemStack = event.getPlayer().getInventory().getItemInMainHand();
 
         clampItemLevels(itemStack, event.getPlayer());
     }
@@ -267,15 +267,17 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        if (meta instanceof EnchantmentStorageMeta) {
-            new HashMap<>(((EnchantmentStorageMeta) meta).getStoredEnchants()).forEach((enchantment, integer) -> {
+        Map<Enchantment, Integer> levels = FastItemStack.wrap(itemStack).getEnchants(true);
+
+        if (meta instanceof EnchantmentStorageMeta storageMeta) {
+            levels.forEach((enchantment, integer) -> {
                 if (integer > enchantment.getMaxLevel()) {
-                    ((EnchantmentStorageMeta) meta).removeStoredEnchant(enchantment);
-                    ((EnchantmentStorageMeta) meta).addStoredEnchant(enchantment, enchantment.getMaxLevel(), true);
+                    storageMeta.removeStoredEnchant(enchantment);
+                    storageMeta.addStoredEnchant(enchantment, enchantment.getMaxLevel(), true);
                 }
             });
         } else {
-            new HashMap<>(meta.getEnchants()).forEach((enchantment, integer) -> {
+            levels.forEach((enchantment, integer) -> {
                 if (integer > enchantment.getMaxLevel()) {
                     meta.removeEnchant(enchantment);
                     meta.addEnchant(enchantment, enchantment.getMaxLevel(), true);
@@ -287,7 +289,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
 
         if (ItemConversionOptions.isUsingLevelClampDelete()) {
             itemStack.setType(Material.AIR);
-            itemStack.setItemMeta(new ItemStack(Material.AIR).getItemMeta());
+            itemStack.setAmount(0);
             Bukkit.getLogger().warning(player.getName() + " has/had an illegal item!");
         }
     }
