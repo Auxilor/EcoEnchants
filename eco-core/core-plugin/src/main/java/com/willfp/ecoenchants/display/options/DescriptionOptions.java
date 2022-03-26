@@ -35,6 +35,12 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
     private boolean showingAtBottom;
 
     /**
+     * If descriptions should only be shown on books.
+     */
+    @Getter
+    private boolean onlyOnBooks;
+
+    /**
      * Create new description options.
      *
      * @param plugin EcoEnchants.
@@ -51,6 +57,7 @@ public class DescriptionOptions extends PluginDependent<EcoPlugin> {
         enabled = this.getPlugin().getConfigYml().getBool("lore.describe.enabled");
         color = this.getPlugin().getLangYml().getFormattedString("description-color");
         showingAtBottom = this.getPlugin().getConfigYml().getBool("lore.describe.at-bottom");
+        onlyOnBooks = this.getPlugin().getConfigYml().getBool("lore.describe.only-on-books");
     }
 
     /**

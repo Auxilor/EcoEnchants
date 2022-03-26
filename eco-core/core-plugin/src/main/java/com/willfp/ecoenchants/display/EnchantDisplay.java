@@ -138,6 +138,10 @@ public class EnchantDisplay extends DisplayModule {
                         && options.getDescriptionOptions().isEnabled()
                         && options.getDescriptionOptions().enabledForPlayer(player)
                 ) {
+                    if (options.getDescriptionOptions().isOnlyOnBooks() && !(meta instanceof EnchantmentStorageMeta)) {
+                        return;
+                    }
+
                     lore.addAll(EnchantmentCache.getEntry(enchantment).getDescription(level));
                 }
             }

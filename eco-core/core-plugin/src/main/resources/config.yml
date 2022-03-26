@@ -35,7 +35,6 @@ lore:
     reformat: true
     numbers-only: true # If only the numbers should be reformatted
 
-
   sort-by-type: false # Sort enchantments by type
   sort-by-length: false # Sort enchantments by length
   sort-by-rarity: false # Sort enchantments by rarity.
@@ -64,6 +63,7 @@ lore:
     before-lines: 5 # Describe before or equal to number of enchantments
     wrap: 30 # Word wrap after number of characters
     at-bottom: false # If descriptions should be shown after all enchantments rather than under each one
+    only-on-books: false # If descriptions should only be shown on books
 
   # Ensure that describe and shrink have no overlap as this may cause errors
 
