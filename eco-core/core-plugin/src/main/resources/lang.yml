@@ -36,6 +36,7 @@ messages:
   descriptions-disabled: "&cEnchantment descriptions are disabled on this server."
   export-failed: "&cExporting the locale failed. Try again later!"
   cannot-afford-type: "&cYou can't afford to do this! &fCost: &a%cost% %type%"
+  cannot-transmit: "&cYou can't transmit here!"
 
 no-targets: "&cCannot be applied"
 no-conflicts: "&cNo conflicts"
