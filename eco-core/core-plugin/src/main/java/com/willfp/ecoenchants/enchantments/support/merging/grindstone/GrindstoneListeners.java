@@ -78,7 +78,10 @@ public class GrindstoneListeners extends PluginDependent<EcoPlugin> implements L
             }
 
             ItemMeta outMeta = out.getItemMeta();
-            assert outMeta != null;
+
+            if (outMeta == null) {
+                return;
+            }
 
             if (outMeta instanceof EnchantmentStorageMeta storageMeta) {
                 toKeep.forEach((enchant, level) -> storageMeta.addStoredEnchant(enchant, level, true));
