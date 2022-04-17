@@ -27,6 +27,6 @@ public class RequirementsOptions extends PluginDependent<EcoPlugin> {
      * Update the options.
      */
     public void update() {
-        requirementColor = this.getPlugin().getLangYml().getBukkitHandle().getString("missing-requirements-format", "");
+        requirementColor = this.getPlugin().getLangYml().getString("missing-requirements-format");
     }
 }

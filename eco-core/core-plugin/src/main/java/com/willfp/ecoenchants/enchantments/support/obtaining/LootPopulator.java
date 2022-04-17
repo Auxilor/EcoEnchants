@@ -92,7 +92,7 @@ public class LootPopulator extends BlockPopulator {
         }
 
         Map<Enchantment, Integer> toAdd = new HashMap<>();
-        List<Enchantment> existing = FastItemStack.wrap(item).getEnchantmentsOnItem(true)
+        List<Enchantment> existing = FastItemStack.wrap(item).getEnchants(true)
                 .keySet().stream().filter(enchant -> !(enchant instanceof EcoEnchant)).collect(Collectors.toList());
 
         List<EcoEnchant> enchantments = new ArrayList<>(EcoEnchants.values());

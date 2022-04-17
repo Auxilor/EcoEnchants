@@ -122,7 +122,6 @@ public class EnchantmentConfig extends ConfigWrapper<Config> {
         try {
             this.save();
             this.getPlugin().getLangYml().save();
-            this.getPlugin().getLangYml().clearCache();
         } catch (IOException e) {
             e.printStackTrace();
         }

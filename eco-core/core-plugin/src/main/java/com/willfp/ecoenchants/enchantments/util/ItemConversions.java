@@ -388,7 +388,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        Map<Enchantment, Integer> enchants = FastItemStack.wrap(itemStack).getEnchantmentsOnItem(true);
+        Map<Enchantment, Integer> enchants = FastItemStack.wrap(itemStack).getEnchants(true);
 
         for (Enchantment enchantment : new HashSet<>(enchants.keySet())) {
             if (enchantment instanceof EcoEnchant enchant) {
@@ -456,7 +456,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        Map<Enchantment, Integer> enchants = FastItemStack.wrap(itemStack).getEnchantmentsOnItem(true);
+        Map<Enchantment, Integer> enchants = FastItemStack.wrap(itemStack).getEnchants(true);
         Map<Enchantment, Integer> replacement = new HashMap<>();
 
         int i = 0;
