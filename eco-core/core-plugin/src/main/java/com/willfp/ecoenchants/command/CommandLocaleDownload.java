@@ -51,7 +51,6 @@ public class CommandLocaleDownload extends Subcommand {
             for (EcoEnchant value : EcoEnchants.values()) {
                 value.getConfig().loadFromLang();
                 value.getConfig().save();
-                value.getConfig().clearCache();
             }
         } catch (IOException e) {
             e.printStackTrace();
