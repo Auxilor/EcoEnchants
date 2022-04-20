@@ -51,7 +51,7 @@ public class EnchantChecks {
             return 0;
         }
 
-        return FastItemStack.wrap(item).getLevelOnItem(enchantment, false);
+        return FastItemStack.wrap(item).getEnchantmentLevel(enchantment, false);
     }
 
     /**

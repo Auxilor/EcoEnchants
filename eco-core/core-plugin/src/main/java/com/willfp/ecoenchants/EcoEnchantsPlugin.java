@@ -89,7 +89,7 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
     public void handleEnableAdditional() {
         this.getLogger().info(EcoEnchants.values().size() + " Enchantments Loaded");
 
-        TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getLevelOnItem(EcoEnchants.TELEKINESIS, false) > 0);
+        TelekinesisUtils.registerTest(player -> FastItemStack.wrap(player.getInventory().getItemInMainHand()).getEnchantmentLevel(EcoEnchants.TELEKINESIS, false) > 0);
     }
 
     @Override
