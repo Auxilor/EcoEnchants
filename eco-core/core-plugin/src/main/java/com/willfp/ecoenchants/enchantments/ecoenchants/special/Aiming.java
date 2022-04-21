@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants.enchantments.ecoenchants.special;
 
+import com.willfp.eco.core.entities.Entities;
+import com.willfp.eco.core.entities.TestableEntity;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -15,16 +17,23 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @SuppressWarnings({"unchecked", "unused"})
 public class Aiming extends EcoEnchant {
+    private final List<TestableEntity> targets = new ArrayList<>();
+
     public Aiming() {
         super(
                 "aiming", EnchantmentType.SPECIAL
         );
+        targets.clear();
+        targets.addAll(this.getConfig().getStrings(EcoEnchants.CONFIG_LOCATION + "targets").stream().map(
+                Entities::lookup
+        ).toList());
     }
 
     @EventHandler
@@ -74,6 +83,7 @@ public class Aiming extends EcoEnchant {
         Runnable runnable = this.getPlugin().getRunnableFactory().create(bukkitRunnable -> {
             List<LivingEntity> nearbyEntities = (List<LivingEntity>) (List<?>) Arrays.asList(arrow.getNearbyEntities(finalDistance, finalDistance, finalDistance).stream()
                     .filter(entity -> entity instanceof LivingEntity)
+                    .filter(entity -> this.targets.stream().anyMatch(target -> target.matches(entity)))
                     .map(entity -> (LivingEntity) entity)
                     .filter(entity -> !entity.equals(player))
                     .filter(entity -> !(entity instanceof Enderman))

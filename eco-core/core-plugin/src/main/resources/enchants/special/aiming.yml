@@ -30,3 +30,20 @@ config:
   require-full-force: true # Require full bow pull (works with rapid) If true, then scale-on-force is irrelevant.
   check-ticks: 10 # Ticks between rotations
   checks-per-level: 2 # Amount of times to rotate arrow per level (prevents "floating")
+  targets: # List of entity lookups (https://plugins.auxilor.io/all-plugins/the-entity-lookup-system)
+    - "zombie"
+    - "creeper"
+    - "player"
+    - "skeleton"
+    - "spider"
+    - "wither"
+    - "ender_dragon"
+    - "wither_skeleton"
+    - "husk"
+    - "piglin"
+    - "hoglin"
+    - "pig"
+    - "chicken"
+    - "cow"
+    - "cave_spider"
+    - "horse"
