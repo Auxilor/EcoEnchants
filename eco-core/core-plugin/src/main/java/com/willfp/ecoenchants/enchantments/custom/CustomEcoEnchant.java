@@ -32,7 +32,7 @@ public class CustomEcoEnchant extends EcoEnchant {
 
         int i = 1;
         for (Config levelConfig : config.getSubsections("levels")) {
-            levels.put(i, new CustomEcoEnchantLevel(this, levelConfig));
+            levels.put(i, new CustomEcoEnchantLevel(this, levelConfig, i));
             i++;
         }
     }
@@ -90,5 +90,10 @@ public class CustomEcoEnchant extends EcoEnchant {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    static {
+        new ConditionInEcoEnchantWorld();
+        new ConditionHasEcoEnchantRequirements();
     }
 }

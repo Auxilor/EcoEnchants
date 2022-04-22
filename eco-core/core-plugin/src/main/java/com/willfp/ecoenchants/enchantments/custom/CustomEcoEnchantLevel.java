@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.enchantments.custom;
 
+import com.willfp.eco.core.config.BuildableConfig;
 import com.willfp.eco.core.config.interfaces.Config;
+import com.willfp.eco.core.placeholder.StaticPlaceholder;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.libreforge.Holder;
 import com.willfp.libreforge.conditions.Conditions;
@@ -37,14 +39,24 @@ public class CustomEcoEnchantLevel implements Holder {
     private final String valuePlaceholder;
 
     /**
+     * The level.
+     */
+    private final int level;
+
+    /**
      * Create custom EcoEnchant level.
      *
      * @param parent The parent.
      * @param config The config.
+     * @param level  The level.
      */
     public CustomEcoEnchantLevel(@NotNull final EcoEnchant parent,
-                                 @NotNull final Config config) {
+                                 @NotNull final Config config,
+                                 final int level) {
         this.parent = parent;
+        this.level = level;
+
+        config.injectPlaceholders(new StaticPlaceholder("level", () -> String.valueOf(level)));
 
         for (Config cfg : config.getSubsections("effects")) {
             effects.add(Effects.compile(cfg, "Custom EcoEnchant ID " + parent.getKey().getKey()));
@@ -53,6 +65,20 @@ public class CustomEcoEnchantLevel implements Holder {
         for (Config cfg : config.getSubsections("conditions")) {
             conditions.add(Conditions.compile(cfg, "Custom EcoEnchant ID " + parent.getKey().getKey()));
         }
+
+        conditions.add(Conditions.compile(
+                new BuildableConfig()
+                        .add("args.enchant", parent.getKey().toString())
+                        .add("id", "in_ecoenchant_world"),
+                "EcoEnchants Internals (world) - If you see this message, report it as a bug!"
+        ));
+
+        conditions.add(Conditions.compile(
+                new BuildableConfig()
+                        .add("args.enchant", parent.getKey().toString())
+                        .add("id", "has_ecoenchant_requirements"),
+                "EcoEnchants Internals (requirements) - If you see this message, report it as a bug!"
+        ));
 
         this.valuePlaceholder = config.getString("value-placeholder");
     }
@@ -71,8 +97,9 @@ public class CustomEcoEnchantLevel implements Holder {
 
     @Override
     public String toString() {
-        return "CustomEcoEnchantLevel{" +
-                "parent=" + parent +
-                '}';
+        return "CustomEcoEnchantLevel{"
+                + "parent=" + parent
+                + ",level=" + level
+                + '}';
     }
 }
