@@ -68,14 +68,14 @@ public class CustomEcoEnchantLevel implements Holder {
 
         conditions.add(Conditions.compile(
                 new BuildableConfig()
-                        .add("args.enchant", parent.getKey().toString())
+                        .add("args.enchant", parent.getKey().getKey())
                         .add("id", "in_ecoenchant_world"),
                 "EcoEnchants Internals (world) - If you see this message, report it as a bug!"
         ));
 
         conditions.add(Conditions.compile(
                 new BuildableConfig()
-                        .add("args.enchant", parent.getKey().toString())
+                        .add("args.enchant", parent.getKey().getKey())
                         .add("id", "has_ecoenchant_requirements"),
                 "EcoEnchants Internals (requirements) - If you see this message, report it as a bug!"
         ));
