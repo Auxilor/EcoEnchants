@@ -22,7 +22,7 @@ enchants:
   - id: escape
     type: normal
     name: "Escape"
-    description: Gain a short burst of speed %value% after taking damage
+    description: This is an example custom enchantment from customenchants.yml file
 
     obtaining:
       table: true
