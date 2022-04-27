@@ -8,6 +8,7 @@ import com.willfp.eco.core.events.ArmorEquipEvent;
 import com.willfp.eco.core.events.PlayerJumpEvent;
 import com.willfp.eco.core.integrations.antigrief.AntigriefManager;
 import com.willfp.eco.core.integrations.mcmmo.McmmoManager;
+import com.willfp.eco.util.PlayerUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
@@ -733,7 +734,7 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
-        LivingEntity attacker = LibReforgeUtils.tryAsPlayer(event.getDamager());
+        LivingEntity attacker = PlayerUtils.tryAsPlayer(event.getDamager());
 
         if (attacker == null) {
             return;
