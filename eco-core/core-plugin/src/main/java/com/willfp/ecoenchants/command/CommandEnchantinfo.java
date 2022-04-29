@@ -26,27 +26,12 @@ import java.util.stream.Collectors;
 
 public class CommandEnchantinfo extends PluginCommand {
     /**
-     * The cached enchantment names.
-     */
-    private static final List<String> ENCHANT_NAMES = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled)
-            .map(EcoEnchant::getDisplayName).map(ChatColor::stripColor).collect(Collectors.toList());
-
-    /**
      * Instantiate a new /enchantinfo command handler.
      *
      * @param plugin The plugin for the commands to listen for.
      */
     public CommandEnchantinfo(@NotNull final EcoPlugin plugin) {
         super(plugin, "enchantinfo", "ecoenchants.command.enchantinfo", false);
-    }
-
-    /**
-     * Called on reload.
-     */
-    @ConfigUpdater
-    public static void reload() {
-        ENCHANT_NAMES.clear();
-        ENCHANT_NAMES.addAll(EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getDisplayName).map(ChatColor::stripColor).toList());
     }
 
     @Override
@@ -159,12 +144,14 @@ public class CommandEnchantinfo extends PluginCommand {
                                     @NotNull final List<String> args) {
         List<String> completions = new ArrayList<>();
 
+        List<String> names = EcoEnchants.values().stream().filter(EcoEnchant::isEnabled).map(EcoEnchant::getDisplayName).map(ChatColor::stripColor).toList();
+
         if (args.isEmpty()) {
             // Currently, this case is not ever reached
-            return ENCHANT_NAMES;
+            return names;
         }
 
-        StringUtil.copyPartialMatches(String.join(" ", args), ENCHANT_NAMES, completions);
+        StringUtil.copyPartialMatches(String.join(" ", args), names, completions);
 
         if (args.size() > 1) { // Remove all previous words from the candidate of completions
             ArrayList<String> finishedArgs = new ArrayList<>(args);
