@@ -12,13 +12,12 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
@@ -88,20 +87,16 @@ public class EnchantDisplay extends DisplayModule {
             }
         }
 
-        ItemMeta meta = itemStack.getItemMeta();
         FastItemStack fastItemStack = FastItemStack.wrap(itemStack);
-
-        assert meta != null;
 
         boolean hide = (boolean) args[0];
 
-        if (hide || meta.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            if (meta instanceof EnchantmentStorageMeta) {
-                meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        if (hide || fastItemStack.getPersistentDataContainer().has(keySkip, PersistentDataType.INTEGER)) {
+            fastItemStack.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            if (itemStack.getType() == Material.ENCHANTED_BOOK) {
+                fastItemStack.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
             }
-            meta.getPersistentDataContainer().set(keySkip, PersistentDataType.INTEGER, 1);
-            itemStack.setItemMeta(meta);
+            fastItemStack.getPersistentDataContainer().set(keySkip, PersistentDataType.INTEGER, 1);
             return;
         }
 
@@ -138,7 +133,7 @@ public class EnchantDisplay extends DisplayModule {
                         && options.getDescriptionOptions().isEnabled()
                         && options.getDescriptionOptions().enabledForPlayer(player)
                 ) {
-                    if (options.getDescriptionOptions().isOnlyOnBooks() && !(meta instanceof EnchantmentStorageMeta)) {
+                    if (options.getDescriptionOptions().isOnlyOnBooks() && itemStack.getType() != Material.ENCHANTED_BOOK) {
                         return;
                     }
 
@@ -181,7 +176,7 @@ public class EnchantDisplay extends DisplayModule {
             }
         }
 
-        if (!(meta instanceof EnchantmentStorageMeta && !options.isPrefixOnBooks())) {
+        if (!(itemStack.getType() == Material.ENCHANTED_BOOK && !options.isPrefixOnBooks())) {
             if (!enchantments.isEmpty()) {
                 lore.addAll(0, options.getLorePrefix());
                 lore.addAll(options.getLoreSuffix());
@@ -194,13 +189,11 @@ public class EnchantDisplay extends DisplayModule {
             lore.addAll(0, itemLore);
         }
         lore.addAll(requirementLore);
-        itemStack.setItemMeta(meta);
-        fastItemStack.setLore(lore);
 
-        FastItemStack fis = FastItemStack.wrap(itemStack);
-        fis.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        if (meta instanceof EnchantmentStorageMeta) {
-            fis.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        fastItemStack.setLore(lore);
+        fastItemStack.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        if (itemStack.getType() == Material.ENCHANTED_BOOK) {
+            fastItemStack.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         }
     }
 
@@ -212,13 +205,9 @@ public class EnchantDisplay extends DisplayModule {
             }
         }
 
-        ItemMeta meta = itemStack.getItemMeta();
+        FastItemStack fastItemStack = FastItemStack.wrap(itemStack);
 
-        if (meta == null) {
-            return;
-        }
-
-        PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        PersistentDataContainer pdc = fastItemStack.getPersistentDataContainer();
 
         // Fixes weird bug. Apparently nullable.
         //noinspection ConstantConditions
@@ -229,12 +218,11 @@ public class EnchantDisplay extends DisplayModule {
         pdc.remove(legacyV);
 
         if (!pdc.has(keySkip, PersistentDataType.INTEGER)) {
-            meta.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-            meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+            fastItemStack.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+            fastItemStack.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 
         pdc.remove(keySkip);
-        itemStack.setItemMeta(meta);
     }
 
     @Override
@@ -245,14 +233,15 @@ public class EnchantDisplay extends DisplayModule {
             }
         }
 
-        ItemMeta meta = itemStack.getItemMeta();
-        if (meta == null) {
+        FastItemStack fastItemStack = FastItemStack.wrap(itemStack);
+
+        if (!itemStack.hasItemMeta()) {
             return new Object[]{false};
         }
 
-        boolean hideEnchants = meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS);
+        boolean hideEnchants = fastItemStack.hasItemFlag(ItemFlag.HIDE_ENCHANTS) || fastItemStack.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS);
 
-        if (meta.getPersistentDataContainer().has(legacyV, PersistentDataType.INTEGER)) {
+        if (fastItemStack.getPersistentDataContainer().has(legacyV, PersistentDataType.INTEGER)) {
             hideEnchants = false;
         }
 
@@ -264,7 +253,7 @@ public class EnchantDisplay extends DisplayModule {
             hideEnchants = false;
         }
 
-        if (ItemConversionOptions.isUsingExperimentalHideFixer() && meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && meta.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
+        if (ItemConversionOptions.isUsingExperimentalHideFixer() && fastItemStack.hasItemFlag(ItemFlag.HIDE_ENCHANTS) && fastItemStack.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)) {
             hideEnchants = false;
         }
 
