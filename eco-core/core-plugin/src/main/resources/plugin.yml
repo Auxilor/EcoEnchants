@@ -18,8 +18,7 @@ softdepend:
   - Vault
   - CMI
   - CMILib
-  - DeluxeSellwands
-  - ShopGUIPlus
+  - EcoArmor
 
 commands:
   enchantinfo:
