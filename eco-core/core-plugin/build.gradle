@@ -10,7 +10,6 @@ dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.4-SNAPSHOT'
     compileOnly 'io.lumine:Mythic:5.0.1'
-    compileOnly 'io.lumine:LumineUtils:1.16.1-SNAPSHOT'
     compileOnly 'com.github.ben-manes.caffeine:caffeine:3.0.5'
     compileOnly fileTree(dir: '../../lib', include: ['*.jar'])
 }
