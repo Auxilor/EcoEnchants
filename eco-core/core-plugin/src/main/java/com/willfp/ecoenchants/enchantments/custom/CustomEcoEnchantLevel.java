@@ -11,6 +11,7 @@ import com.willfp.libreforge.effects.ConfiguredEffect;
 import com.willfp.libreforge.effects.Effects;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -101,5 +102,11 @@ public class CustomEcoEnchantLevel implements Holder {
                 + "parent=" + parent
                 + ",level=" + level
                 + '}';
+    }
+
+    @Nullable
+    @Override
+    public String getId() {
+        return this.parent.getKey().getKey() + "_" + this.level;
     }
 }
