@@ -14,6 +14,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.jetbrains.annotations.NotNull;
@@ -38,6 +39,11 @@ public abstract class SummoningEnchantment extends EcoEnchant {
                               final int level,
                               @NotNull final EntityDamageByEntityEvent event) {
         if (!summoningType.equals(SummoningType.MELEE)) {
+            return;
+        }
+
+        if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
+            && this.getConfig().getBool("config.ignore-sweep-attacks")) {
             return;
         }
 
