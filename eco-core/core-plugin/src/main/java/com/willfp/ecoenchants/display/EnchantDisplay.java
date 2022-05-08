@@ -9,6 +9,7 @@ import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.util.StringUtils;
 import com.willfp.ecoenchants.display.options.DisplayOptions;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
+import com.willfp.ecoenchants.enchantments.custom.CustomEcoEnchant;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.util.ItemConversionOptions;
 import lombok.Getter;
@@ -142,6 +143,10 @@ public class EnchantDisplay extends DisplayModule {
             }
 
             if (player != null && enchantment instanceof EcoEnchant ecoEnchant) {
+                if (ecoEnchant instanceof CustomEcoEnchant custom) {
+                    requirementLore.addAll(custom.getLevel(level).getNotMetLines(player));
+                }
+
                 if (!ecoEnchant.areRequirementsMet(player)) {
                     requirementLore.addAll(StringUtils.formatList(EnchantmentCache.getEntry(enchantment).getRequirementLore(), player));
                 }
