@@ -462,7 +462,7 @@ public class ItemConversions extends PluginDependent<EcoPlugin> implements Liste
         int i = 0;
         for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
             if (i >= this.getPlugin().getConfigYml().getInt("anvil.hard-cap.cap")) {
-                return;
+                break;
             }
 
             Enchantment enchantment = entry.getKey();
