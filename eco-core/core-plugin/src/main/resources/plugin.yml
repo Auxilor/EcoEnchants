@@ -19,6 +19,7 @@ softdepend:
   - CMI
   - CMILib
   - EcoArmor
+  - TMMobcoins
 
 commands:
   enchantinfo:
