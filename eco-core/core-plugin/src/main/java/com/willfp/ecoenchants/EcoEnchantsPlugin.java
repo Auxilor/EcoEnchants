@@ -74,7 +74,6 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
      * Internal constructor called by bukkit on plugin load.
      */
     public EcoEnchantsPlugin() {
-        super(490, 7666, "&a", "com.willfp.ecoenchants.proxy");
         instance = this;
 
         rarityYml = new RarityYml(this);
