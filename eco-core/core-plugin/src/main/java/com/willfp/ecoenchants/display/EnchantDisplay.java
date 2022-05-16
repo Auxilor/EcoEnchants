@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * All methods and fields pertaining to showing players the enchantments on their items.
@@ -144,7 +145,7 @@ public class EnchantDisplay extends DisplayModule {
 
             if (player != null && enchantment instanceof EcoEnchant ecoEnchant) {
                 if (ecoEnchant instanceof CustomEcoEnchant custom) {
-                    requirementLore.addAll(custom.getLevel(level).getNotMetLines(player));
+                    requirementLore.addAll(custom.getLevel(level).getNotMetLines(player).stream().map(l -> Display.PREFIX + l).toList());
                 }
 
                 if (!ecoEnchant.areRequirementsMet(player)) {
