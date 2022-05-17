@@ -197,7 +197,11 @@ public class EnchantDisplay extends DisplayModule {
         lore.addAll(requirementLore);
 
         fastItemStack.setLore(lore);
-        fastItemStack.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        if (itemStack.getType() == Material.ENCHANTED_BOOK) {
+            fastItemStack.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_POTION_EFFECTS);
+        } else {
+            fastItemStack.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         if (itemStack.getType() == Material.ENCHANTED_BOOK) {
             fastItemStack.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         }
