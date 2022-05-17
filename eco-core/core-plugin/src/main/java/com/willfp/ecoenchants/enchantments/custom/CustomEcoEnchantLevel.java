@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants.enchantments.custom;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.willfp.eco.core.config.BuildableConfig;
 import com.willfp.eco.core.config.interfaces.Config;
 import com.willfp.eco.core.placeholder.StaticPlaceholder;
@@ -10,16 +12,16 @@ import com.willfp.libreforge.conditions.ConfiguredCondition;
 import com.willfp.libreforge.effects.ConfiguredEffect;
 import com.willfp.libreforge.effects.Effects;
 import lombok.Getter;
-import lombok.val;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class CustomEcoEnchantLevel implements Holder {
     /**
@@ -112,20 +114,38 @@ public class CustomEcoEnchantLevel implements Holder {
     @NotNull
     @Override
     public List<String> getNotMetLines(@NotNull final Player player) {
-        List<String> lines = new ArrayList<>();
+        return NotMetLineCacheEntry.CACHE.get(new NotMetLineCacheEntry(player.getUniqueId(), this.getId()), (entry) -> {
+            List<String> lines = new ArrayList<>();
 
-        for (ConfiguredCondition condition : this.getConditions()) {
-            if (!condition.isMet(player)) {
-                lines.addAll(Objects.requireNonNullElse(condition.getNotMetLines(), new ArrayList<>()));
+            for (ConfiguredCondition condition : this.getConditions()) {
+                if (!condition.isMet(player)) {
+                    lines.addAll(Objects.requireNonNullElse(condition.getNotMetLines(), new ArrayList<>()));
+                }
             }
-        }
 
-        return lines;
+            return lines;
+        });
     }
 
     @NotNull
     @Override
     public String getId() {
         return this.parent.getKey().getKey() + "_" + this.level;
+    }
+
+    /**
+     * Cache for not met lines.
+     *
+     * @param uuid     The UUID.
+     * @param holderID The holder ID.
+     */
+    private record NotMetLineCacheEntry(@NotNull UUID uuid,
+                                        @NotNull String holderID) {
+        /**
+         * The cache.
+         */
+        static final Cache<NotMetLineCacheEntry, List<String>> CACHE = Caffeine.newBuilder()
+                .expireAfterWrite(1, TimeUnit.SECONDS)
+                .build();
     }
 }
