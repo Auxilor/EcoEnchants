@@ -48,6 +48,7 @@ allprojects {
 
     shadowJar {
         relocate('com.willfp.libreforge', 'com.willfp.ecoenchants.libreforge')
+        relocate('org.joml', 'com.willfp.ecoenchants.libreforge.joml')
     }
 
     compileJava {
