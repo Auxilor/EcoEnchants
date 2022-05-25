@@ -3,7 +3,7 @@ version rootProject.version
 
 subprojects {
     dependencies {
-        implementation 'com.willfp:libreforge:3.50.1'
+        implementation 'com.willfp:libreforge:3.51.0'
         implementation 'org.joml:joml:1.10.4'
     }
 }
