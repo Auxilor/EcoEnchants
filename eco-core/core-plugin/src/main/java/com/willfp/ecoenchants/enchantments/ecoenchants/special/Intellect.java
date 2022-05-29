@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryType;
 import org.jetbrains.annotations.NotNull;
 
 public class Intellect extends EcoEnchant {
@@ -35,6 +36,10 @@ public class Intellect extends EcoEnchant {
         }
 
         if (this.getDisabledWorlds().contains(player.getWorld())) {
+            return;
+        }
+
+        if (player.getOpenInventory().getTopInventory().getType() == InventoryType.GRINDSTONE) {
             return;
         }
 
