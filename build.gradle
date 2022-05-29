@@ -49,6 +49,8 @@ allprojects {
     shadowJar {
         relocate('com.willfp.libreforge', 'com.willfp.ecoenchants.libreforge')
         relocate('org.joml', 'com.willfp.ecoenchants.libreforge.joml')
+        relocate("com.github.benmanes.caffeine", "com.willfp.ecoenchants.caffeine")
+
     }
 
     compileJava {
@@ -65,6 +67,8 @@ allprojects {
 
         testCompileOnly 'org.projectlombok:lombok:1.18.22'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+        implementation("com.github.ben-manes.caffeine:caffeine:3.1.0")
     }
 
     tasks.withType(JavaCompile) {
