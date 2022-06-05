@@ -41,9 +41,9 @@ public class Thrive extends EcoEnchant {
             points = 0;
         }
 
-        if (player.getHealth() >= inst.getValue()) {
+        if (player.getHealth() >= inst.getValue() && player.getHealth() >= 20) {
             this.getPlugin().getScheduler().runLater(() -> {
-                player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                player.setHealth(Math.min(player.getHealth(), player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
             }, 1);
         }
 
