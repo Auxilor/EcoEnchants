@@ -25,4 +25,5 @@ general-config:
   maximum-level: 3
 
 config:
+  disable-on-sneak: false
 # No config is available for this enchantment
