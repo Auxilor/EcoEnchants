@@ -11,15 +11,19 @@ depend:
 softdepend:
   - Essentials
   - MythicMobs
-  - EcoSkills
   - AureliumSkills
   - mcMMO
   - Jobs
   - Vault
   - CMI
   - CMILib
-  - EcoArmor
   - TMMobcoins
+  - EcoBosses
+  - Talismans
+  - EcoArmor
+  - EcoItems
+  - EcoSkills
+  - Boosters
 
 commands:
   enchantinfo:
