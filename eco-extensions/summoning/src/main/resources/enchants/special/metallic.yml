@@ -31,3 +31,4 @@ config:
   health-per-level: 4 # Health for mobs to have per level
   chance-per-level: 5 # Chance to spawn mobs per level
   allow-not-fully-charged: false # don't require sword attack to be at full charge
+  ignore-sweep-attacks: true # Ignore sweep attacks
