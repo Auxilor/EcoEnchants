@@ -27,7 +27,9 @@ public class Deflection extends EcoEnchant {
         if (attacker.hasMetadata("cleaved") || attacker.hasMetadata("carved")) {
             return;
         }
-
+        if (attacker.equals(blocker)){
+            return;
+        }
         double perlevel = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "percent-deflected-per-level");
         double damagePercent = (perlevel / 100) * level;
         double damage = event.getDamage() * damagePercent;
