@@ -23,6 +23,7 @@ import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners
 import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
 import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
 import com.willfp.ecoenchants.enchantments.util.ItemConversions;
+import com.willfp.ecoenchants.enchantments.util.LazyHealthFixListener;
 import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
 import com.willfp.ecoenchants.enchantments.util.WatcherTriggers;
 import com.willfp.ecoenchants.integrations.mythicmobs.MythicMobsManager;
@@ -158,7 +159,8 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
                 new VillagerListeners(this),
                 new ItemConversions(this),
                 new CustomEnchantEnableListeners(this),
-                new CustomEcoEnchantRequirementListeners(this)
+                new CustomEcoEnchantRequirementListeners(this),
+                new LazyHealthFixListener(this)
         );
     }
 
