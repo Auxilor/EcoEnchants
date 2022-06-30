@@ -207,3 +207,7 @@ enchantments:
   soul_speed:
     name: "Soul Speed"
     description: Increases walking speed on soul sand and soul soil.
+
+  swift_sneak:
+    name: "Swift Sneak"
+    description: Increases speed while sneaking.
