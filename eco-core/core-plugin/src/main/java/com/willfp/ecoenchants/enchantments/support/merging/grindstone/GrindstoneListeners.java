@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 import com.willfp.eco.core.EcoPlugin;
 import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.util.NumberUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;

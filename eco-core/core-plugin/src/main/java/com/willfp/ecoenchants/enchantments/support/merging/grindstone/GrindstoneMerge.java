@@ -1,7 +1,9 @@
 package com.willfp.ecoenchants.enchantments.support.merging.grindstone;
 
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -22,26 +24,10 @@ public class GrindstoneMerge {
      */
     public static Map<Enchantment, Integer> doMerge(@Nullable final ItemStack top,
                                                     @Nullable final ItemStack bottom) {
-        Map<Enchantment, Integer> bottomEnchants = new HashMap<>();
-        Map<Enchantment, Integer> topEnchants = new HashMap<>();
+        Map<Enchantment, Integer> bottomEnchants = FastItemStack.wrap(bottom).getEnchants(true);
+        Map<Enchantment, Integer> topEnchants = FastItemStack.wrap(top).getEnchants(true);
 
         Map<Enchantment, Integer> toKeep = new HashMap<>();
-
-        if (top != null) {
-            if (top.getItemMeta() instanceof EnchantmentStorageMeta) {
-                topEnchants = new HashMap<>(((EnchantmentStorageMeta) top.getItemMeta()).getStoredEnchants());
-            } else {
-                topEnchants = new HashMap<>(top.getEnchantments());
-            }
-        }
-
-        if (bottom != null) {
-            if (bottom.getItemMeta() instanceof EnchantmentStorageMeta) {
-                bottomEnchants = new HashMap<>(((EnchantmentStorageMeta) bottom.getItemMeta()).getStoredEnchants());
-            } else {
-                bottomEnchants = new HashMap<>(bottom.getEnchantments());
-            }
-        }
 
         bottomEnchants.forEach(((enchantment, integer) -> {
             if (enchantment instanceof EcoEnchant ecoEnchant) {
