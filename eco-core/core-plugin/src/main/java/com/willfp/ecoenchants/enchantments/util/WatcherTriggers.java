@@ -740,6 +740,10 @@ public class WatcherTriggers extends PluginDependent<EcoPlugin> implements Liste
             return;
         }
 
+        if (attacker.equals(blocker)) {
+            return;
+        }
+
         if (!blocker.isBlocking()) {
             return;
         }
