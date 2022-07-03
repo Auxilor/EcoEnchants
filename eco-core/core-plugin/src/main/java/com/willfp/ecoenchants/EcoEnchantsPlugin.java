@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants;
 
+import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.core.command.impl.PluginCommand;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.fast.FastItemStack;
@@ -22,6 +23,7 @@ import com.willfp.ecoenchants.enchantments.support.merging.grindstone.Grindstone
 import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners;
 import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
 import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
+import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.ItemConversions;
 import com.willfp.ecoenchants.enchantments.util.LazyHealthFixListener;
 import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
@@ -33,7 +35,10 @@ import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationCMI;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
 import com.willfp.libreforge.LibReforgePlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
@@ -179,7 +184,7 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
     @NotNull
     @Override
     public String getMinimumEcoVersion() {
-        return "6.35.1";
+        return "6.37.1";
     }
 
     /**
