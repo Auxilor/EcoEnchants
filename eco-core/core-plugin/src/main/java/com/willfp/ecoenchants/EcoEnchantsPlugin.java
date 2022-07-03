@@ -176,6 +176,7 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
         return (EnchantDisplay) Objects.requireNonNull(super.getDisplayModule());
     }
 
+    @NotNull
     @Override
     public String getMinimumEcoVersion() {
         return "6.35.1";
