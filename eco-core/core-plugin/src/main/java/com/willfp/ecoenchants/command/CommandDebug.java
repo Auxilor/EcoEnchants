@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.command;
 
 import com.willfp.eco.core.command.impl.Subcommand;
+import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
