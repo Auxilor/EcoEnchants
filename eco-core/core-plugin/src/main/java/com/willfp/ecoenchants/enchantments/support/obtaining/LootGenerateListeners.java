@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchantments.support.obtaining;
 
+import com.willfp.eco.core.PluginDependent;
 import com.willfp.eco.core.fast.FastItemStack;
 import com.willfp.eco.util.NumberUtils;
 import com.willfp.ecoenchants.EcoEnchantsPlugin;
@@ -7,17 +8,11 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentTarget;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
-import org.bukkit.Chunk;
 import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Chest;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.minecart.StorageMinecart;
-import org.bukkit.generator.BlockPopulator;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.world.LootGenerateEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,54 +24,27 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("deprecation")
-public class LootPopulator extends BlockPopulator {
-    /**
-     * Instance of ecoenchants.
-     */
-    private final EcoEnchantsPlugin plugin;
-
+public class LootGenerateListeners extends PluginDependent<EcoEnchantsPlugin> implements Listener {
     /**
      * Create a new loot populator.
      *
-     * @param plugin The plugin.
+     * @param plugin The this.getPlugin().
      */
-    public LootPopulator(@NotNull final EcoEnchantsPlugin plugin) {
-        this.plugin = plugin;
+    public LootGenerateListeners(@NotNull final EcoEnchantsPlugin plugin) {
+        super(plugin);
     }
 
-    /**
-     * Populate a chunk's loot chests and minecarts with chests.
-     *
-     * @param world  The world to populate.
-     * @param random Bukkit parity.
-     * @param chunk  The chunk to populate.
-     */
-    public void populate(@NotNull final World world,
-                         @NotNull final Random random,
-                         @NotNull final Chunk chunk) {
-        if (!plugin.getConfigYml().getBool("loot.enabled")) {
+    @EventHandler
+    public void onGenerate(@NotNull final LootGenerateEvent event) {
+        if (!this.getPlugin().getConfigYml().getBool("loot.enabled")) {
             return;
         }
 
-        for (Entity entity : chunk.getEntities()) {
-            if (!(entity instanceof StorageMinecart minecart)) {
-                continue;
-            }
-            modifyInventory(minecart.getInventory(), chunk);
-        }
-
-        for (BlockState state : chunk.getTileEntities()) {
-            Block block = state.getBlock();
-            if (!(block.getState() instanceof Chest chestState)) {
-                continue;
-            }
-            Inventory inventory = chestState.getBlockInventory();
-            modifyInventory(inventory, chunk);
+        for (ItemStack itemStack : event.getLoot()) {
+            modifyItem(itemStack);
         }
     }
 
@@ -100,11 +68,11 @@ public class LootPopulator extends BlockPopulator {
 
         double multiplier = 0.01;
         if (item.getType().equals(Material.BOOK) || item.getType().equals(Material.ENCHANTED_BOOK)) {
-            multiplier /= plugin.getConfigYml().getInt("loot.book-times-less-likely");
+            multiplier /= this.getPlugin().getConfigYml().getInt("loot.book-times-less-likely");
         }
 
-        if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
-            multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
+        if (this.getPlugin().getConfigYml().getBool("loot.reduce-probability.enabled")) {
+            multiplier /= this.getPlugin().getConfigYml().getDouble("loot.reduce-probability.factor");
         }
 
         int cap = 0;
@@ -157,7 +125,7 @@ public class LootPopulator extends BlockPopulator {
 
             if (enchantment.getType().equals(EnchantmentType.SPECIAL)) {
                 double enchantlevel1 = NumberUtils.randFloat(0, 1);
-                double enchantlevel2 = NumberUtils.bias(enchantlevel1, plugin.getConfigYml().getDouble("enchanting-table.special-bias"));
+                double enchantlevel2 = NumberUtils.bias(enchantlevel1, this.getPlugin().getConfigYml().getDouble("enchanting-table.special-bias"));
                 double enchantlevel3 = 1 / (double) enchantment.getMaxLevel();
                 level = (int) Math.ceil(enchantlevel2 / enchantlevel3);
             } else {
@@ -168,16 +136,16 @@ public class LootPopulator extends BlockPopulator {
 
             toAdd.put(enchantment, level);
 
-            if (plugin.getConfigYml().getBool("loot.reduce-probability.enabled")) {
-                multiplier /= plugin.getConfigYml().getDouble("loot.reduce-probability.factor");
+            if (this.getPlugin().getConfigYml().getBool("loot.reduce-probability.enabled")) {
+                multiplier /= this.getPlugin().getConfigYml().getDouble("loot.reduce-probability.factor");
             }
 
             if (!enchantment.hasFlag("hard-cap-ignore")) {
                 cap++;
             }
 
-            if (plugin.getConfigYml().getBool("anvil.hard-cap.enabled")) {
-                if (cap >= plugin.getConfigYml().getInt("anvil.hard-cap.cap")) {
+            if (this.getPlugin().getConfigYml().getBool("anvil.hard-cap.enabled")) {
+                if (cap >= this.getPlugin().getConfigYml().getInt("anvil.hard-cap.cap")) {
                     break;
                 }
             }
@@ -191,22 +159,5 @@ public class LootPopulator extends BlockPopulator {
             toAdd.forEach(((enchantment, integer) -> meta.addEnchant(enchantment, integer, false)));
             item.setItemMeta(meta);
         }
-    }
-
-    /**
-     * Modify given inventory with EcoEnchants enchantments.
-     *
-     * @param inventory The target inventory.
-     * @param chunk     The chunk.
-     */
-    public void modifyInventory(@NotNull final Inventory inventory,
-                                @NotNull final Chunk chunk) {
-        this.plugin.getScheduler().runLater(1, () -> {
-            if (chunk.isLoaded()) {
-                for (ItemStack item : inventory) {
-                    modifyItem(item);
-                }
-            }
-        });
     }
 }

@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants;
 
-import com.willfp.eco.core.Prerequisite;
 import com.willfp.eco.core.command.impl.PluginCommand;
 import com.willfp.eco.core.display.DisplayModule;
 import com.willfp.eco.core.fast.FastItemStack;
@@ -21,9 +20,8 @@ import com.willfp.ecoenchants.enchantments.custom.CustomEnchantLookup;
 import com.willfp.ecoenchants.enchantments.support.merging.anvil.AnvilListeners;
 import com.willfp.ecoenchants.enchantments.support.merging.grindstone.GrindstoneListeners;
 import com.willfp.ecoenchants.enchantments.support.obtaining.EnchantingListeners;
-import com.willfp.ecoenchants.enchantments.support.obtaining.LootPopulator;
+import com.willfp.ecoenchants.enchantments.support.obtaining.LootGenerateListeners;
 import com.willfp.ecoenchants.enchantments.support.obtaining.VillagerListeners;
-import com.willfp.ecoenchants.enchantments.util.EnchantmentUtils;
 import com.willfp.ecoenchants.enchantments.util.ItemConversions;
 import com.willfp.ecoenchants.enchantments.util.LazyHealthFixListener;
 import com.willfp.ecoenchants.enchantments.util.TimedRunnable;
@@ -34,11 +32,6 @@ import com.willfp.ecoenchants.integrations.registration.RegistrationManager;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationCMI;
 import com.willfp.ecoenchants.integrations.registration.plugins.IntegrationEssentials;
 import com.willfp.libreforge.LibReforgePlugin;
-import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.World;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
@@ -98,13 +91,6 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
     }
 
     @Override
-    public void handleDisableAdditional() {
-        for (World world : Bukkit.getServer().getWorlds()) {
-            world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
-        }
-    }
-
-    @Override
     public void handleReloadAdditional() {
         this.getDisplayModule().update();
         for (EcoEnchant enchant : EcoEnchants.values()) {
@@ -124,16 +110,6 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
                 enchant.clearCachedRequirements();
             }
         }, 300, 300);
-    }
-
-    @Override
-    protected void handleAfterLoad() {
-        if (this.getConfigYml().getBool("loot.enabled")) {
-            for (World world : Bukkit.getServer().getWorlds()) {
-                world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
-                world.getPopulators().add(new LootPopulator(this));
-            }
-        }
     }
 
     @Override
@@ -165,7 +141,8 @@ public class EcoEnchantsPlugin extends LibReforgePlugin {
                 new ItemConversions(this),
                 new CustomEnchantEnableListeners(this),
                 new CustomEcoEnchantRequirementListeners(this),
-                new LazyHealthFixListener(this)
+                new LazyHealthFixListener(this),
+                new LootGenerateListeners(this)
         );
     }
 
