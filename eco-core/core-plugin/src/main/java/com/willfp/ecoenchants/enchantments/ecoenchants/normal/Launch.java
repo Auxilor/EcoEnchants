@@ -4,11 +4,13 @@ import com.willfp.ecoenchants.enchantments.EcoEnchant;
 import com.willfp.ecoenchants.enchantments.EcoEnchants;
 import com.willfp.ecoenchants.enchantments.meta.EnchantmentType;
 import com.willfp.ecoenchants.enchantments.util.EnchantChecks;
+import com.willfp.ecoenchants.enchantments.util.VelocityChecks;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 public class Launch extends EcoEnchant {
@@ -54,7 +56,12 @@ public class Launch extends EcoEnchant {
         int level = EnchantChecks.getChestplateLevel(player, this);
         double multiplier = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "multiplier");
         double boost = 1 + (multiplier * level);
+        Vector vector = player.getVelocity().multiply(boost);
 
-        this.getPlugin().getScheduler().run(() -> player.setVelocity(player.getVelocity().multiply(boost)));
+        if (VelocityChecks.isUnsafeVelocity(vector)) {
+            return;
+        }
+
+        this.getPlugin().getScheduler().run(() -> player.setVelocity(vector));
     }
 }
