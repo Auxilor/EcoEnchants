@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchantments.util;
 
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 public class VelocityChecks {
     /**
@@ -9,7 +10,7 @@ public class VelocityChecks {
      * @param vel The velocity.
      * @return If unsafe.
      */
-    public static boolean isUnsafeVelocity(Vector vel) {
+    public static boolean isUnsafeVelocity(@NotNull final Vector vel) {
         final double x = vel.getX();
         final double y = vel.getY();
         final double z = vel.getZ();
