@@ -75,7 +75,7 @@ public class CustomEnchantEnableListeners extends PluginDependent<EcoPlugin> imp
 
             for (CustomEcoEnchantLevel level : enchant.getLevels()) {
                 for (ConfiguredEffect effect : level.getEffects()) {
-                    effect.getEffect().disableForPlayer(player);
+                    effect.disableFor(player);
                 }
             }
         }
