@@ -87,7 +87,9 @@ public class Forcefield extends EcoEnchant implements TimedRunnable {
 
                 ((Monster) e).damage(damage);
 
-                if (NumberUtils.randFloat(0, 1) < 0.2) {
+                double damageChance = this.getConfig().getDouble(EcoEnchants.CONFIG_LOCATION + "damage-chance");
+
+                if (NumberUtils.randFloat(0, 1) < damageChance) {
                     EnchantChecks.getArmorPoints(player, this, 1);
                 }
             }

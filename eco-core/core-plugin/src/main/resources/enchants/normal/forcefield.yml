@@ -32,3 +32,4 @@ config:
   bonus-per-level: 0.3 # Bonus range per level (Level 1 also includes bonus)
   damage-per-level: 0.5
   repeat-ticks: 20 # Damage nearby mobs every few ticks. Lower values lead to more damage and may cause lag
+  damage-chance: 0.2 # The chance for armor to be damaged every damage tick
