@@ -30,6 +30,8 @@ config:
   hardness-check: true # Only break blocks with hardness less than or equal to first block
   blacklisted-blocks:
     - bedrock
+    - end_portal_frame
+    - end_portal
   base-bonus: 2 # Base extra blocks on all sides to break (1 = 3x3x3, 2 = 5x5x5, 3 = 7x7x7)
   per-level-bonus: 1 # Extra blocks on all sides per level
   not-while-sneaking: true
