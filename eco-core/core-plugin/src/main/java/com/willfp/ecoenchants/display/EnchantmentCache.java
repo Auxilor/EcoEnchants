@@ -22,6 +22,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.JProgressBar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -263,42 +264,45 @@ public class EnchantmentCache {
          */
         public String getNameWithLevel(final int level,
                                        @Nullable final Player player) {
-            String processed = name;
+            StringBuilder builder = new StringBuilder();
+            builder.append(name);
 
             if (enchantment instanceof EcoEnchant enchant && player != null) {
                 if (!enchant.areRequirementsMet(player)) {
-                    processed = PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor() + processed;
+                    builder.insert(0, PLUGIN.getDisplayModule().getOptions().getRequirementsOptions().getRequirementColor());
                 }
             }
 
             if (!(enchantment.getMaxLevel() == 1 && level == 1) && level != 0) {
-                String numberString = " ";
+                StringBuilder numberString = new StringBuilder();
+                numberString.append(" ");
 
                 NumbersOptions numbersOptions = PLUGIN.getDisplayModule().getOptions().getNumbersOptions();
 
                 if (numbersOptions.isUseNumerals() && level < numbersOptions.getThreshold()) {
-                    numberString += NumberUtils.toNumeral(level);
+                    numberString.append(NumberUtils.toNumeral(level));
                 } else {
-                    numberString += level;
+                    numberString.append(level);
                 }
 
                 if (level > enchantment.getMaxLevel() && PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isReformatAboveMaxLevel()) {
                     if (PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().isNumbersOnly()) {
                         String aboveMaxLevel = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
 
-                        processed = processed + aboveMaxLevel + numberString;
+                        builder.append(aboveMaxLevel)
+                                .append(numberString);
                     } else {
                         String aboveMaxLevel = PLUGIN.getDisplayModule().getOptions().getMaxLevelOptions().getAboveMaxLevelFormat();
-                        processed = aboveMaxLevel + processed + numberString;
+                        builder.append(aboveMaxLevel)
+                                .append(numberString);
                     }
                 } else {
-                    processed = processed + numberString;
+                    builder.append(numberString);
                 }
             }
 
-            processed = color + processed;
-            processed = StringUtils.format(processed, StringUtils.FormatOption.WITHOUT_PLACEHOLDERS);
-            return processed;
+            builder.insert(0, color);
+            return StringUtils.format(builder.toString(), StringUtils.FormatOption.WITHOUT_PLACEHOLDERS);
         }
 
         /**
