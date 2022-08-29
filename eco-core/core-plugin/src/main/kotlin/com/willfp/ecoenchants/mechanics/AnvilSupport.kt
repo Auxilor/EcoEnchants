@@ -4,6 +4,7 @@ import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
+import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -56,14 +57,9 @@ class AnvilSupport(
     fun onAnvilPrepare(@NotNull event: PrepareAnvilEvent) {
         val player = event.viewers.getOrNull(0) as? Player ?: return
 
-        // TODO: Implement proxies
-        /*
-        if (this.getPlugin().getProxy(OpenInventoryProxy::class.java).getOpenInventory(player).getClass().toString()
-                .equals(ANVIL_GUI_CLASS)
-        ) {
+        if (this.plugin.getProxy(OpenInventoryProxy::class.java).getOpenInventory(player)::class.java.toString() == anvilGuiClass) {
             return
         }
-         */
 
         if (antiRepeat.contains(player.uniqueId)) {
             return

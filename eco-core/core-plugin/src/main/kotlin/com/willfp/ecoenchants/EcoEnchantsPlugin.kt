@@ -12,6 +12,7 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
+import com.willfp.ecoenchants.enchants.registerVanillaEnchants
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
@@ -36,13 +37,13 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
 
     override fun handleEnableAdditional() {
         copyConfigs("enchants")
-
         registerHolderProvider { it.heldEnchantLevels }
     }
 
     override fun handleReloadAdditional() {
         // Load hardcoded enchantments
         EnchantmentTelekinesis(this)
+        registerVanillaEnchants(this)
 
         logger.info(EcoEnchants.values().size.toString() + " Enchants Loaded")
     }

@@ -121,18 +121,26 @@ object EcoEnchants {
      */
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
     internal fun addNewEnchant(enchant: EcoEnchant) {
-        removeEnchant(enchant)
+        BY_KEY[enchant.id] = enchant
+        BY_NAME[ChatColor.stripColor(enchant.displayName)] = enchant
 
+        register(enchant)
+    }
+
+    /**
+     * Register a new [Enchantment] with the server.
+     *
+     * @param enchantment The [Enchantment] to add.
+     */
+    @JvmStatic
+    fun register(enchantment: Enchantment) {
         Enchantment::class.java.getDeclaredField("acceptingNew")
             .apply {
                 isAccessible = true
                 set(null, true)
             }
 
-        BY_KEY[enchant.id] = enchant
-        BY_NAME[ChatColor.stripColor(enchant.displayName)] = enchant
-
-        Enchantment.registerEnchantment(enchant)
+        Enchantment.registerEnchantment(enchantment)
         EnchantRegistrations.registerEnchantments()
     }
 }

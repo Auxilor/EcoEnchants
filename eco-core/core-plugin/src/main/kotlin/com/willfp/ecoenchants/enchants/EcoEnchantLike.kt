@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
@@ -65,5 +66,17 @@ class VanillaEcoEnchantLike(
 
     override fun hashCode(): Int {
         return Objects.hash(this.enchant)
+    }
+}
+
+fun registerVanillaEnchants(plugin: EcoEnchantsPlugin) {
+    for (vanilla in plugin.vanillaEnchantsYml.getKeys(false)) {
+        if (plugin.vanillaEnchantsYml.has("$vanilla.max-level")) {
+            plugin.getProxy(EcoCraftEnchantmentManagerProxy::class.java).registerNewCraftEnchantment(
+                Enchantment.getByKey(NamespacedKey.minecraft(vanilla))!!,
+                plugin.vanillaEnchantsYml.getInt("$vanilla.max-level"),
+                plugin.vanillaEnchantsYml.getStrings("$vanilla.conflicts").map { NamespacedKey.minecraft(it) }
+            )
+        }
     }
 }
