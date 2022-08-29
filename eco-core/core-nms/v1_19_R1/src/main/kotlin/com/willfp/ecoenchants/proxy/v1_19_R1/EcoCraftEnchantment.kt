@@ -4,7 +4,7 @@ import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import net.minecraft.world.item.enchantment.Enchantment
 import org.bukkit.NamespacedKey
-import org.bukkit.craftbukkit.v1_17_R1.enchantments.CraftEnchantment
+import org.bukkit.craftbukkit.v1_19_R1.enchantments.CraftEnchantment
 
 class EcoCraftEnchantment(
     target: Enchantment,

@@ -14,6 +14,9 @@ class EcoCraftEnchantmentManager : EcoCraftEnchantmentManagerProxy {
             val key = org.bukkit.craftbukkit.v1_19_R1.util.CraftNamespacedKey.fromMinecraft(
                 net.minecraft.core.IRegistry.W.b(enchant)
             )
+            if (key.key != enchantment.key.key) {
+                continue
+            }
             EcoCraftEnchantment(enchant, maxLevel, conflicts).register()
         }
     }
