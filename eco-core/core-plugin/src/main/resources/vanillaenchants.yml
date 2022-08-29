@@ -1,31 +1,236 @@
-#
-# Allows for modifying certain aspects of vanilla enchantments
-#
-enabled: false # There may be potential conflicts if modifying vanilla enchantments.
+# Rarity option does not affect vanilla enchantments.
+# The option is there for the display option to sort by rarity.
 
-# Set custom max levels for vanilla enchantments.
-# To do this, add each enchantment like this:
-# - "<key>:4"
-# For example, to allow efficiency 6 and protection 5, you would do this:
-# max-levels:
-#   - "efficiency:6"
-#   - "protection:5"
-#
-# Currently, it is *not* possible to modify the enchantment levels from enchanting tables.
-# It will work with anvils however, but since it is still possible to get enchantments at their vanilla
-# max levels, then it isn't recommended to lower the max level of a vanilla enchantment, only to raise it.
-max-levels: []
+protection:
+  name: "Protection"
+  description: Reduces most types of damage.
+  type: normal
+  rarity: common
 
-# Set custom conflicts for vanilla enchantments.
-# To do this, add each enchantment like this:
-# - "<key>:<conflict 1 key>:<conflict 2 key>:<conflict 3 key>..... etc"
-# For example, to make mending conflict with efficiency and sharpness, you would do this:
-# conflicts:
-#   - "mending:efficiency:sharpness"
-#
-# If you want to remove all conflicts, set the list to 'none':
-# conflicts:
-#   - "mending:none"
-#
-# Beware that this will *override* conflicts, not add to them.
-conflicts: []
+fire_protection:
+  name: "Fire Protection"
+  description: Reduces fire damage and burn time.
+  type: normal
+  rarity: common
+
+feather_falling:
+  name: "Feather Falling"
+  description: Reduces fall damage.
+  type: normal
+  rarity: common
+
+blast_protection:
+  name: "Blast Protection"
+  type: normal
+  description: Reduces explosion damage and knockback.
+  rarity: common
+
+projectile_protection:
+  name: "Projectile Protection"
+  description: Reduces projectile damage.
+  type: normal
+  rarity: common
+
+respiration:
+  name: "Respiration"
+  description: Extends underwater breathing time.
+  type: normal
+  rarity: common
+
+aqua_affinity:
+  name: "Aqua Affinity"
+  description: Increases underwater mining speed.
+  type: normal
+  rarity: common
+
+thorns:
+  name: "Thorns"
+  description: Reflects some of the damage taken when hit.
+  type: normal
+  rarity: common
+
+depth_strider:
+  name: "Depth Strider"
+  description: Increases underwater movement speed.
+  type: normal
+  rarity: common
+
+frost_walker:
+  name: "Frost Walker"
+  description: Turns water beneath the player into ice.
+  type: normal
+  rarity: common
+
+binding_curse:
+  name: "Curse of Binding"
+  description: Items cannot be removed from armor slots.
+  type: curse
+  rarity: common
+
+sharpness:
+  name: "Sharpness"
+  description: Increases damage.
+  type: normal
+  rarity: common
+
+smite:
+  name: "Smite"
+  description: Increases damage against undead mobs.
+  type: normal
+  rarity: common
+
+bane_of_arthropods:
+  name: "Bane of Arthropods"
+  description: Increases damage and slows arthropod mobs.
+  type: normal
+  rarity: common
+
+knockback:
+  name: "Knockback"
+  description: Increases knockback.
+  type: normal
+  rarity: common
+
+fire_aspect:
+  name: "Fire Aspect"
+  description: Sets target on fire.
+  type: normal
+  rarity: common
+
+looting:
+  name: "Looting"
+  description: Increases mob loot.
+  type: normal
+  rarity: common
+
+sweeping:
+  name: "Sweeping Edge"
+  description: Increases sweeping attack damage.
+  type: normal
+  rarity: common
+
+efficiency:
+  name: "Efficiency"
+  description: Increases mining speed.
+  type: normal
+  rarity: common
+
+silk_touch:
+  name: "Silk Touch"
+  description: Mined blocks drop themselves exactly.
+  type: normal
+  rarity: common
+
+unbreaking:
+  name: "Unbreaking"
+  description: Increases item durability.
+  type: normal
+  rarity: common
+
+fortune:
+  name: "Fortune"
+  description: Increases certain block drops.
+  type: normal
+  rarity: common
+
+power:
+  name: "Power"
+  description: Increases arrow damage.
+  type: normal
+  rarity: common
+
+punch:
+  name: "Punch"
+  description: Increases arrow knockback.
+  type: normal
+  rarity: common
+
+flame:
+  name: "Flame"
+  description: Arrows set target on fire.
+  type: normal
+  rarity: common
+
+infinity:
+  name: "Infinity"
+  description: Shooting consumes no regular arrows.
+  type: normal
+  rarity: common
+
+luck_of_the_sea:
+  name: "Luck of the Sea"
+  description: Increases rate of good loot.
+  type: normal
+  rarity: common
+
+lure:
+  name: "Lure"
+  description: Decreases fishing wait time.
+  type: normal
+  rarity: common
+
+loyalty:
+  name: "Loyalty"
+  description: Trident returns after being thrown.
+  type: normal
+  rarity: common
+
+impaling:
+  name: "Impaling"
+  description: Trident deals additional damage to ocean mobs.
+  type: normal
+  rarity: common
+
+riptide:
+  name: "Riptide"
+  description: Trident launches player when thrown in water or while raining.
+  type: normal
+  rarity: common
+
+channeling:
+  name: "Channeling"
+  description: Strikes lightning where trident lands during thunderstorms.
+  type: normal
+  rarity: common
+
+multishot:
+  name: "Multishot"
+  description: Shoots 3 arrows.
+  type: normal
+  rarity: common
+
+quick_charge:
+  name: "Quick Charge"
+  description: Decreases crossbow charging time.
+  type: normal
+  rarity: common
+
+piercing:
+  name: "Piercing"
+  description: Arrows pass through multiple entities.
+  type: normal
+  rarity: common
+
+mending:
+  name: "Mending"
+  description: Repair the item while gaining XP orbs.
+  type: normal
+  rarity: common
+
+vanishing_curse:
+  name: "Curse of Vanishing"
+  description: Item destroyed on death.
+  type: curse
+  rarity: common
+
+soul_speed:
+  name: "Soul Speed"
+  description: Increases walking speed on soul sand and soul soil.
+  type: normal
+  rarity: common
+
+swift_sneak:
+  name: "Swift Sneak"
+  description: Increases speed while sneaking.
+  type: normal
+  rarity: common

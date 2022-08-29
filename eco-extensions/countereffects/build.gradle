@@ -1,7 +1,0 @@
-group 'com.willfp'
-version '1.1.0'
-description = 'CounterEffects Extension'
-
-shadowJar {
-    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
-}

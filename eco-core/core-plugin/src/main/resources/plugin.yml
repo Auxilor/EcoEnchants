@@ -9,15 +9,12 @@ depend:
   - eco
   - ProtocolLib
 softdepend:
-  - Essentials
-  - MythicMobs
-  - AureliumSkills
-  - mcMMO
-  - Jobs
   - Vault
-  - CMI
-  - CMILib
+  - AureliumSkills
+  - PlayerPoints
+  - Jobs
   - TMMobcoins
+  - Reforges
   - EcoBosses
   - Talismans
   - EcoArmor
@@ -26,112 +23,50 @@ softdepend:
   - Boosters
 
 commands:
-  enchantinfo:
-    description: Show information about an enchantment
-    permission: ecoenchants.command.enchantinfo
   ecoenchants:
-    description: Master command for other subcommands.
+    description: Base Command
     permission: ecoenchants.command.ecoenchants
+  enchantinfo:
+    description: Show info about an enchant
+    permission: ecoenchants.command.enchantinfo
 
 permissions:
   ecoenchants.*:
     description: All ecoenchants permissions
     default: op
     children:
-      ecoenchants.fromtable.*: true
-      ecoenchants.bypasslevelclamp: true
-      ecoenchants.anvil.*: true
       ecoenchants.command.*: true
-      ecoenchants.allowillegal: true
-  ecoenchants.anvil.*:
-    description: Allows all anvil permissions
-    default: op
-    children:
-      ecoenchants.anvil.bypasshardcap: true
-      ecoenchants.anvil.color: true
+      ecoenchants.anvil.*: true
+      ecoenchants.fromtable.*: true
   ecoenchants.command.*:
-    description: Allows all commands
+    description: All commands
     default: op
     children:
       ecoenchants.command.reload: true
-      ecoenchants.command.debug: true
-      ecoenchants.command.enchantinfo: true
-      ecoenchants.command.randomenchant: true
-      ecoenchants.command.randomenchant.bypasshardcap: true
-      ecoenchants.command.giverandombook: true
-      ecoenchants.command.locale.*: true
       ecoenchants.command.ecoenchants: true
       ecoenchants.command.toggledescriptions: true
-  ecoenchants.command.locale.*:
-    description: Allows managing locale features
+      ecoenchants.command.enchantinfo: true
+  ecoenchants.anvil.*:
+    description: All anvil perks
     default: op
     children:
-      ecoenchants.command.locale.download: true
-      ecoenchants.command.locale.export: true
-      ecoenchants.command.locale: true
+      ecoenchants.anvil.color: true
   ecoenchants.fromtable.*:
     description: Allows getting all enchantments from an enchanting table
     default: true
 
+  ecoenchants.anvil.color:
+    description: Allows using color codes in anvils
+    default: op
   ecoenchants.command.reload:
     description: Allows reloading the config
     default: op
-  ecoenchants.command.debug:
-    description: Allows the use of /ecoenchants debug to print verbose debug information to console
-    default: op
-  ecoenchants.command.enchantinfo:
-    description: Allows the use of /enchantinfo to show enchant info
-    default: true
-  ecoenchants.command.giverandombook:
-    description: Allows the use of /ecoenchants giverandombook to give a book with a random enchantment
-    default: op
-  ecoenchants.command.randomenchant:
-    description: Allows the use of /ecoenchants randomenchant to apply a random enchantment to an item
-    default: op
-  ecoenchants.command.randomenchant.others:
-    description: Allows the use of /ecoenchants randomenchant to apply a random enchantment to an item for another player
-    default: op
-  ecoenchants.command.randomenchant.bypasshardcap:
-    description: Allows /ecoenchants randomenchant bypassing the anvil hard cap
-    default: op
-  ecoenchants.command.locale:
-    description: Allows the use of /ecoenchants locale to manage locale i18n
-    default: op
-  ecoenchants.command.locale.download:
-    description: Allows the use of /ecoenchants locale download to download locales
-    default: op
-  ecoenchants.command.locale.export:
-    description: Allows the use of /ecoenchants locale export to export locales
-    default: op
-  ecoenchants.command.toggledescriptions:
-    description: Allows the use of /ecoenchants toggledescriptions
-    default: true
   ecoenchants.command.ecoenchants:
-    description: Allows the use of /ecoenchants
+    description: Allows the use of /ecoenchants.
     default: true
-  ecoenchants.anvil.bypasshardcap:
-    description: Allows bypassing the anvil hard cap
-    default: op
-  ecoenchants.anvil.color:
-    description: Allows color from anvil renames
-    default: op
-  ecoenchants.bypasslevelclamp:
-    description: Allows bypassing the advanced level clamp option
-    default: op
-  ecoenchants.allowillegal:
-    description: Don't remove illegal items when remove-illegal is enabled.
-    default: op
-
-  # Perks
-  ecoenchants.cooldowntime.half:
-    description: Halves the cooldown time on spells
-    default: false
-  ecoenchants.cooldowntime.third:
-    description: Thirds the cooldown time on spells
-    default: false
-  ecoenchants.cooldowntime.quarter:
-    description: Quarters the cooldown time on spells
-    default: false
-  ecoenchants.cooldowntime.75:
-    description: Reduces the cooldown time on spells by 25%
-    default: false
+  ecoenchants.command.toggledescriptions:
+    description: Allows the use of /ecoenchants toggledescriptions.
+    default: true
+  ecoenchants.command.enchantinfo:
+    description: Allows the use of /enchantinfo.
+    default: true

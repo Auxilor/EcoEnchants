@@ -1,4 +1,0 @@
-name: CounterEffects
-main: com.willfp.ecoenchants.countereffects.CounterEffectsMain
-version: ${projectVersion}
-author: Auxilor

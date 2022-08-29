@@ -1,7 +1,0 @@
-group 'com.willfp'
-version '5.2.4'
-description = 'Sprint Artifacts Extension'
-
-shadowJar {
-    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
-}

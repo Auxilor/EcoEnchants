@@ -1,4 +1,0 @@
-name: Citizen
-main: com.willfp.ecoenchants.citizen.CitizenMain
-version: ${projectVersion}
-author: Auxilor

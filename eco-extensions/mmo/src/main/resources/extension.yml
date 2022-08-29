@@ -1,3 +1,0 @@
-name: MMO
-main: com.willfp.ecoenchants.mmo.MMOMain
-version: ${projectVersion}

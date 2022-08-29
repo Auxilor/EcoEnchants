@@ -3,142 +3,106 @@
 # by Auxilor
 #
 
-allow-on-npc: false # If enchantments should activate against NPCs.
+# If the hand slot shouldn't work in the players offhand
+no-offhand: false # Restart your server after this option, doesn't work with /ecoenchants reload
 
-commands:
-  enchantinfo:
-    show-target-group: true # Show name of target group rather than individual items
-
-anvil:
-  rework-cost: false # Use vanilla rework penalty
-  allow-unsafe-levels: false # Allow unsafe enchantments like Sharpness 6 by combining 2 Sharp 5.
-  allow-combining-unsafe: false # Allow further combining unsafe levels, eg Sharp 6 + Sharp 6 = Sharp 7.
-  allow-existing-unsafe-levels: true # Allow combining existing unsafe enchantments like Sharpness 6
-
-  cost-exponent: # Increase value of each extra level by the exponent^levels
-    enabled: true # Use exponent
-    exponent: 0.95 # Exponent. Beware that slight changes to this value may cause huge changes in cost.
-
-  hard-cap: # Completely limit the amount of enchantments that can be placed on an item
-    enabled: false # Enable a hard cap
-    cap: 10 # Most enchantments allowed on an item
-
-lore:
-  use-numerals: true
-  use-numbers-above-threshold: 10 # After level 10, enchantments will display as Name Number, eg: Sharpness 25 instead of Sharpness XXV
-
-  above-other-lore: true # If enchantments should be displayed above other lore
-
-  # If above max level enchantments should be formatted differently
-  # Format is available in lang.yml
-  above-max-level:
-    reformat: true
-    numbers-only: true # If only the numbers should be reformatted
-
-  sort-by-type: false # Sort enchantments by type
-  sort-by-length: false # Sort enchantments by length
-  sort-by-rarity: false # Sort enchantments by rarity.
-  # Any combination of the above options is valid
-
-  require-target: true # Only display items included in target.yml
-
-  type-ordering: # Only used if sort-by-type is enabled - top to bottom
-    - normal
-    - special
-    - artifact
-    - spell
-    - curse
-
-  rarity-ordering: # Only used if sort-by-rarity is enabled - top to bottom
-    - common
-    - uncommon
-    - rare
-    - epic
-    - legendary
-    - special
-    - veryspecial
-
-  describe: # Describe enchantments in lore
-    enabled: false
-    before-lines: 5 # Describe before or equal to number of enchantments
-    wrap: 30 # Word wrap after number of characters
-    at-bottom: false # If descriptions should be shown after all enchantments rather than under each one
-    only-on-books: false # If descriptions should only be shown on books
-
-  # Ensure that describe and shrink have no overlap as this may cause errors
-
-  shrink: # Collapse large amount of enchantments
-    enabled: true
-    after-lines: 9 # Collapse after number of enchantments
-    maximum-per-line: 2 # Maximum number of enchantments to have in 1 line
-
-  prefix: [] # Lines used above the enchantments
-  suffix: [] # Lines used below the enchantments
-  prefix-on-books: false # If the prefix/suffix should work on books as well as items
-
+# Options for enchanting items in the enchanting table
 enchanting-table:
-  enabled: true # Enable EcoEnchants through an enchanting table
-  book-times-less-likely: 2 # Times less likely to get an EcoEnchant on a book to balance them out. Don't recommend editing.
-  maximum-obtainable-level: 30 # Max level for enchanting table. Vanilla default is 30, change if you have a plugin that edits this.
-  special-bias: 0.7 # Value between 0-1 dictating rarity of high-level special enchantments. 0 is no extra bias, 1 is only level 1.
-  notify-on-special: # Tell player in chat and make a sound when they get a special enchantment
-    enabled: true
-    sound: ENTITY_PLAYER_LEVELUP
-    pitch: 1.5
-    show-particles: true
-    particle-amount: 26
+  enabled: true # If custom enchantments should be available from enchanting tables
+  book-multiplier: 0.5 # Multiplier applied to the chance of getting an enchantment on a book (to balance enchant numbers)
+  maximum-obtainable-level: 30 # The max level for the enchanting table. EcoEnchants doesn't change the limit, but if you have a plugin that does, adjust this to match.
+  cap: 5 # The maximum amount of enchantments to get at any given time
+  reduction: 2.2 # The chance to get each subsequent enchantment is divided by this number, e.g. 2nd enchant is 2.2x less likely than 1st, 3rd is 2.2x less likely again, etc
 
-  cap-amount: # Prevent getting above a certain amount of enchantments
-    enabled: true # Enable capping
-    limit: 5 # Cap at amount
-
-  reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added
-    enabled: true # Enable reduction
-    factor: 2.2 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
-
+# Options for obtaining custom enchants from villagers
 villager:
-  enabled: true # Enable EcoEnchants through villagers
-  book-times-less-likely: 7 # Times less likely to get an enchantment from a book with a villager. Recommended to be higher as books can only have one enchantment on them.
-  notify-on-special: # Show particles when the villager unlocks a special enchantment trade
-    enabled: true
-    particle-amount: 14
+  enabled: true # If custom enchantments should be available from villagers
+  book-multiplier: 0.14 # Multiplier applied to the chance of getting an enchantment on a book (to balance enchant numbers)
+  reduction: 5 # The chance to get each subsequent enchantment is divided by this number, e.g. 2nd enchant is 5x less likely than 1st, 3rd is 5x less likely again, etc
 
-  reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added. Does not apply to books as they only ever contain one enchantment.
-    enabled: true # Enable reduction
-    factor: 5 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
-
+# Options for obtaining custom enchants in natural loot
 loot:
-  enabled: true # Enable EcoEnchants through loot chests
-  book-times-less-likely: 2
+  enabled: true # If custom enchantments should be available from natural loot
+  book-multiplier: 0.5 # Multiplier applied to the chance of getting an enchantment on a book (to balance enchant numbers)
+  reduction: 7.5 # The chance to get each subsequent enchantment is divided by this number, e.g. 2nd enchant is 7.5x less likely than 1st, 3rd is 7.5x less likely again, etc
 
-  reduce-probability: # Reduce probability of adding new enchantment by factor after each enchantment added. Does not apply to books as they only ever contain one enchantment.
-    enabled: true # Enable reduction
-    factor: 7.5 # Factor to reduce probability by. Done as compound, so second pass is (factor) times less likely than first, third less likely than second, etc
+# Options for merging items in an anvil
+anvil:
+  cost-exponent: 0.95 # The exponent for each enchant level to prevent constant "Too Expensive!" problems
+  enchant-limit: -1 # The limit for the amount of enchantments on an item (-1 to disable)
+  use-rework-penalty: true # If the rework penalty should be applied
 
-types:
-  special:
-    allow-multiple: false # Allow multiple special enchantments on a single item
-    cooldown-in-actionbar: true # Show cooldown messages in the action bar rather than in chat
-  artifact:
-    allow-multiple: false # Allow multiple artifacts on a single item (can cause lag!)
+# Options for how enchantments are displayed on items
+display:
+  numerals:
+    enabled: true # If numerals should be used for the enchantment levels
+    threshold: 10 # Above this, numbers will be used instead of numerals
 
-rarity:
-  vanilla-rarity: uncommon # Vanilla enchantments do not have an EcoEnchants rarity - what rarity should they have?
-  vanilla-treasure-rarity: legendary # Treasure enchantments do not appear in vanilla enchanting tables (Mending, Soul Speed, Frost Walker)
-  # The above options *do not* affect actual enchantment rarities. They are purely for cosmetic purposes, like in item lores.
+  above-max-level:
+    enabled: true # If enchantments above their max level should have a custom format
+    format: "<gradient:#1D976C:#93F9B9>" # The format to apply
+    level-only: true # If only the level should be formatted
 
-use-faster-move-trigger: true # Disable if you want move trigger to detect sub-1-block movements
-raytrace-distance: 80 # The distance that alt_click should check for a location
-block-item-drop-place-check: true # If the block_item_drop trigger should only fire on naturally placed blocks (prevents dupes)
+  sort:
+    type: false # If enchantments should be sorted by time
+    type-order: # The order for types to be sorted in. Types not in this list will not be displayed if type sorting is enabled.
+      - normal
+      - special
+      - curse
 
-cooldown: # For custom enchantments
+    length: false # If enchantments should be sorted by length
+
+    rarity: false # If enchantments should be sorted by rarity
+    rarity-order: # The order for rarities to be sorted in. Rarities not in this list will not be displayed if rarity sorting is enabled.
+      - common
+      - uncommon
+      - rare
+      - epic
+      - legendary
+      - special
+      - veryspecial
+
+  collapse:
+    enabled: true # If enchantments should be collapsed in lore
+    threshold: 9 # Above this amount, enchantments will be collapsed
+    per-line: 2 # The amount of enchantments to put in each line
+    delimiter: ", " # The delimiter between enchantments
+
+  descriptions:
+    enabled: true # If enchantment descriptions should be shown in lore
+    threshold: 5 # Above this amount, enchantment descriptions will not be shown
+    word-wrap: 30 # Number of characters to have on each line
+    format: "&8"
+
+# Options for the /enchantinfo GUI
+enchantinfo:
+  rows: 3 # How many rows for the GUI
+  mask: # The background material
+    items:
+      - black_stained_glass_pane
+    pattern: # 1 for the first item, 2 for the second item, etc
+      - "111111111"
+      - "111101111"
+      - "111111111"
+  item:
+    row: 2
+    column: 5
+    show-max-level: true # Whether the book should be the max level or level 1
+    lore: # The description is automatically appended
+      - ""
+      - "&fMax Level: &a%max_level%"
+      - "&fRarity: &a%rarity%"
+      - "&fApplicable to: &a%targets%"
+      - "&fConflicts with: &a%conflicts%"
+
+cooldown:
   in-actionbar: true
   sound:
     enabled: true
     sound: "BLOCK_NOTE_BLOCK_PLING"
     pitch: 0.5
 
-cannot-afford: # For custom enchantments
+cannot-afford:
   in-actionbar: true
   sound:
     enabled: true
@@ -155,6 +119,10 @@ cannot-afford-type:
 point-names: # If you have point names that look ugly (eg g_souls) then you can map them to nice names to be shown to players.
   example_point: "Nicely Formatted Point"
 
+use-faster-move-trigger: true # Disable if you want move trigger to detect sub-1-block movements
+raytrace-distance: 80 # The distance that alt_click should check for a location
+block-item-drop-place-check: true # If the block_item_drop trigger should only fire on naturally placed blocks (prevents dupes)
+
 potions:
   icon:
     permanent: true
@@ -165,62 +133,3 @@ potions:
   particles:
     permanent: false
     triggered: true
-
-advanced:
-  force-dropqueue: true
-  # When combined with collate, this massively reduces calls to getItemMeta, which can hurt performance when many enchants are on an item.
-  # Enabling this option makes all drops go through telekinesis listeners
-  lore-getter:
-    # This converts enchantments with matching names from other enchantment plugins from lore into real enchantments.
-    # This is experimental not recommended to be used for extended periods of time: enchantments are automatically converted.
-    # Only use this if absolutely necessary as it may cause some bugs.
-    enabled: false
-    aggressive: false
-    # Aggressive mode converts all items in all inventories when opened.
-    # This will most likely have a significant performance penalty.
-  hide-fixer:
-    # Fixes some items obtained in older versions with a bug that caused enchantments to be hidden.
-    # Works both in packets to display the enchants to the client as well as changing the server-side item too.
-    # Only use this option if you've encountered this bug as it may strip HideEnchants from items that you might not expect it to.
-    enabled: false
-    aggressive: false
-    # Aggressive mode converts all items in all inventories whenever revealed.
-    # This may impact performance.
-    force: false # If **all** items should have hide enchants removed - absolute last ditch effort, most likely to break other things.
-  hard-disable:
-    # Fixes potential problems with other plugins where the enchantments are still present when disabled.
-    # Enabling this prevents the enchantments from being registered with the server at all when disabled.
-    # There may be some unknown problems with this, but will fix bugs with plugins such as Slimefun.
-    # Hard disabled enchantments will not update on /ecoreload. You will have to restart your server.
-    enabled: false
-  dual-registration:
-    # Fixes potential plugin conflicts/serialization issues when updating from a version before 7.3.0.
-    # Registers byName both the internal enchantment name (new method) and the display name (old method).
-    # There may be potential bugs with having duplicate enchantments, so enable this only if you need it.
-    enabled: true
-  level-clamp:
-    # Helps reverse players who have illegal above-max-level enchantments.
-    # When holding an item, any enchantments above their max level will be set to the max level in order to prevent illegal items.
-    # Players with ecoenchants.bypasslevelclamp permission will be ignored.
-    # This may impact performance.
-    enabled: false
-    # If the item should be deleted rather than have the enchantment level capped.
-    delete-item: false
-  remove-illegal:
-    # Helps reverse players who have enchantments on illegal items.
-    # When holding an item, any enchantments present on the item that shouldn't be will be removed.
-    # Players with ecoenchants.allowillegal permission will be ignored.
-    # This may impact performance.
-    enabled: false
-    # If the item should be deleted rather than have the enchantment removed.
-    delete-item: false
-  remove-disabled:
-    # Remove invalid / disabled enchantments from items server-side
-    # Useful if you're disabling enchantments permanently and don't mind removing them from existing players
-    # Also helps remove deleted enchantments or enchantments from old plugins
-    enabled: false
-  hard-cap-clamp:
-    # Helps reverse players who have items with more enchants than the hard cap.
-    # Players with ecoenchants.anvil.bypasshardcap permission will be ignored.
-    # This may impact performance.
-    enabled: false

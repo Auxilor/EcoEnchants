@@ -1,4 +1,0 @@
-name: Sprint Artifacts
-main: com.willfp.ecoenchants.sprintartifacts.SprintArtifactsMain
-version: ${projectVersion}
-author: Auxilor

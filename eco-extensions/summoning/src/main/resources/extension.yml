@@ -1,4 +1,0 @@
-name: Summoning
-main: com.willfp.ecoenchants.summoning.SummoningMain
-version: ${projectVersion}
-author: Auxilor

@@ -1,4 +1,0 @@
-name: Autosell
-main: com.willfp.ecoenchants.autosell.AutosellMain
-version: ${projectVersion}
-author: Auxilor

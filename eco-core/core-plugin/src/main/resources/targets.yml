@@ -1,0 +1,171 @@
+# These are extra items that cannot normally be enchanted in an enchanting table,
+# add items to this list to be able to enchant them.
+
+extra-enchantable-items:
+  - "*elytra"
+  - "*shield"
+  - "*flint_and_steel"
+  - "*shears"
+  - "*carrot_on_a_stick"
+  - "*player_head"
+
+# A target consists of items and a slot.
+# The slot is either hands, armor, or any.
+# Hands means the enchant will activate on hands, armor
+# means it will only work on armor, and any
+# means it will activate whenever its on the player.
+
+targets:
+  - id: pickaxe
+    display-name: "Pickaxes"
+    slot: hands
+    items:
+      - "*wooden_pickaxe"
+      - "*stone_pickaxe"
+      - "*iron_pickaxe"
+      - "*golden_pickaxe"
+      - "*diamond_pickaxe"
+      - "*netherite_pickaxe"
+
+  - id: axe
+    display-name: "Axes"
+    slot: hands
+    items:
+      - "*wooden_axe"
+      - "*stone_axe"
+      - "*iron_axe"
+      - "*golden_axe"
+      - "*diamond_axe"
+      - "*netherite_axe"
+
+  - id: hoe
+    display-name: "Hoes"
+    slot: hands
+    items:
+      - "*wooden_hoe"
+      - "*stone_hoe"
+      - "*iron_hoe"
+      - "*golden_hoe"
+      - "*diamond_hoe"
+      - "*netherite_hoe"
+
+  - id: shovel
+    display-name: "Shovels"
+    slot: hands
+    items:
+      - "*wooden_shovel"
+      - "*stone_shovel"
+      - "*iron_shovel"
+      - "*golden_shovel"
+      - "*diamond_shovel"
+      - "*netherite_shovel"
+
+  - id: sword
+    display-name: "Swords"
+    slot: hands
+    items:
+      - "*wooden_sword"
+      - "*stone_sword"
+      - "*iron_sword"
+      - "*golden_sword"
+      - "*diamond_sword"
+      - "*netherite_sword"
+
+  - id: helmet
+    display-name: "Helmets"
+    slot: armor
+    items:
+      - "*turtle_helmet"
+      - "*leather_helmet"
+      - "*chainmail_helmet"
+      - "*iron_helmet"
+      - "*golden_helmet"
+      - "*diamond_helmet"
+      - "*netherite_helmet"
+
+  - id: chestplate
+    display-name: "Chestplates"
+    slot: armor
+    items:
+      - "*leather_chestplate"
+      - "*chainmail_chestplate"
+      - "*iron_chestplate"
+      - "*golden_chestplate"
+      - "*diamond_chestplate"
+      - "*netherite_chestplate"
+
+  - id: leggings
+    display-name: "Leggings"
+    slot: armor
+    items:
+      - "*leather_leggings"
+      - "*chainmail_leggings"
+      - "*iron_leggings"
+      - "*golden_leggings"
+      - "*diamond_leggings"
+      - "*netherite_leggings"
+
+  - id: boots
+    display-name: "Boots"
+    slot: armor
+    items:
+      - "*leather_boots"
+      - "*chainmail_boots"
+      - "*iron_boots"
+      - "*golden_boots"
+      - "*diamond_boots"
+      - "*netherite_boots"
+
+  - id: trident
+    display-name: "Tridents"
+    slot: hands
+    items:
+      - "*trident"
+
+  - id: bow
+    display-name: "Bows"
+    slot: hands
+    items:
+      - "*bow"
+
+  - id: crossbow
+    display-name: "Crossbows"
+    slot: hands
+    items:
+      - "*crossbow"
+
+  - id: shears
+    display-name: "Shears"
+    slot: hands
+    items:
+      - "*shears"
+
+  - id: shield
+    display-name: "Shields"
+    slot: hands
+    items:
+      - "*shield"
+
+  - id: fishing_rod
+    display-name: "Fishing Rods"
+    slot: hands
+    items:
+      - "*fishing_rod"
+
+  - id: flint_and_steel
+    display-name: "Flint and Steels"
+    slot: hands
+    items:
+      - "*flint_and_steel"
+
+  - id: carrot_on_a_stick
+    display-name: "Carrots on Sticks"
+    slot: hands
+    items:
+      - "*carrot_on_a_stick"
+
+  - id: elytra
+    display-name: "Elytra"
+    slot: armor
+    items:
+      - "*elytra"

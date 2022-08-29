@@ -1,0 +1,18 @@
+display-name: "Telekinesis"
+description: "among us"
+type: normal
+
+targets:
+  - pickaxe
+  - sword
+  - axe
+conflicts: []
+rarity: common
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+conditions: [ ]
+not-on-players: true

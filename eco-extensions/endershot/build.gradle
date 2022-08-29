@@ -1,7 +1,0 @@
-group 'com.willfp'
-version '5.1.0'
-description = 'Endershot Extension'
-
-shadowJar {
-    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
-}

@@ -1,4 +1,0 @@
-name: Alchemy
-main: com.willfp.ecoenchants.alchemy.AlchemyMain
-version: ${projectVersion}
-author: Auxilor

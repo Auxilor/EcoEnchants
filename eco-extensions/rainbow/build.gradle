@@ -1,7 +1,0 @@
-group 'com.willfp'
-version '2.1.0'
-description = 'Rainbow Extension'
-
-shadowJar {
-    archiveFileName = project.getDescription() + " v" + project.version + ".jar"
-}
