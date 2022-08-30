@@ -1,0 +1,20 @@
+display-name: Curse of Hunger
+description: Increases hunger loss
+placeholder: '%level%'
+type: Curse
+
+targets:
+- helmet
+conflicts: []
+rarity: common
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: hunger_multiplier
+    args:
+      multiplier: 1.5 * %level%
+conditions: []
