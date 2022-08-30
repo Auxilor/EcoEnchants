@@ -20,4 +20,6 @@ effects:
       damage: 1
       interval: 15
       amount: "2 * %level%"
+    triggers:
+      - melee_attack
 conditions: [ ]

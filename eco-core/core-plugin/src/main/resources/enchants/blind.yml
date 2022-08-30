@@ -22,4 +22,6 @@ effects:
       level: 1
       duration: "20 * %level%"
       apply_to_player: false
+    triggers:
+      - melee_attack
 conditions: [ ]
