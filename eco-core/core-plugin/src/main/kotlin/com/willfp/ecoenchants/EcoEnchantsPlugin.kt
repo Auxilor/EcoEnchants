@@ -33,6 +33,7 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
 
     init {
         instance = this
+        EcoEnchants.update(this)
     }
 
     override fun handleEnableAdditional() {
