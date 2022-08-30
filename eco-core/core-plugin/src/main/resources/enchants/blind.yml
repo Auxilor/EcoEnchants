@@ -1,0 +1,25 @@
+display-name: Blind
+description: "%placeholder%% chance of blinding your opponent"
+placeholder: '%level%'
+type: Normal
+
+targets:
+- bow
+- crossbow
+conflicts: []
+rarity: legendary
+max-level: 6
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: potion_effect
+    args:
+      chance: %level%
+      effect: blindness
+      level: 1
+      duration: 20 * %level%
+      apply_to_player: false
+conditions: []

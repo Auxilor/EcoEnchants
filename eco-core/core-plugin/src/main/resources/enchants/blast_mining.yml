@@ -6,8 +6,8 @@ type: Normal
 targets:
 - pickaxe
 conflicts: []
-rarity: common
-max-level: 1
+rarity: legendary
+max-level: 3
 
 tradeable: true
 discoverable: true
