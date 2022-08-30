@@ -1,11 +1,10 @@
-display-name: Aerial
-description: Deal %placeholder%% more arrow damage when you are in air
+display-name: Atmospheric
+description: Deal %placeholder%% more trident damage when you are in air
 placeholder: '10*%level%'
 type: normal
 
 targets:
-- bow
-- crossbow
+- tridents
 conflicts: []
 rarity: epic
 max-level: 3
