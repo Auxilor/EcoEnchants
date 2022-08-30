@@ -95,6 +95,13 @@ enchantinfo:
       - "&fApplicable to: &a%targets%"
       - "&fConflicts with: &a%conflicts%"
 
+# Options for converting lore-based enchants (from other plugins) with EcoEnchants enchantments
+# with the same names. If you're switching over from another plugin and don't want your players to
+# lose their enchantments, just switch this on.
+lore-conversion:
+  enabled: false # If lore conversion should be enabled
+  aggressive: false # Will convert all items in all inventories when opened, likely to use a lot of performance
+
 cooldown:
   in-actionbar: true
   sound:
