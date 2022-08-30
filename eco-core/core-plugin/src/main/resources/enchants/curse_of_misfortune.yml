@@ -1,0 +1,25 @@
+display-name: Curse of Misfortune
+description: Chance of blocks to not drop items
+placeholder: '%level%'
+type: Curse
+
+targets:
+- hoe
+- shovel
+- pickaxe
+- axe
+conflicts: []
+rarity: legendary
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: cancel_event
+    args:
+      chance: 15*%level%
+    triggers:
+      - block_item_drop
+conditions: []
