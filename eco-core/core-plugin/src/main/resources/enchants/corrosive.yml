@@ -1,12 +1,12 @@
-display-name: Corrosive
-description: Damages your opponents armor
-placeholder: '%level%'
-type: Normal
+display-name: "Corrosive"
+description: "Deals &a%placeholder% &8damage to your opponents armor"
+placeholder: "%level%"
+type: normal
 
 targets:
-- bow
-- crossbow
-conflicts: []
+  - bow
+  - crossbow
+conflicts: [ ]
 rarity: legendary
 max-level: 2
 
@@ -20,4 +20,4 @@ effects:
       damage: "%level%"
     triggers:
       - melee_attack
-conditions: []
+conditions: [ ]

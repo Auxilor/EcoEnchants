@@ -1,11 +1,11 @@
-display-name: Confusion
-description: "%placeholder%% chance to shuffle your opponents hotbar"
-placeholder: '2*%level%'
+display-name: "Confusion"
+description: "&a%placeholder%% &8chance to shuffle your opponents hotbar"
+placeholder: "2 * %level%"
 type: Special
 
 targets:
-- sword
-conflicts: []
+  - sword
+conflicts: [ ]
 rarity: special
 max-level: 4
 
@@ -16,7 +16,7 @@ enchantable: true
 effects:
   - id: shuffle_hotbar
     args:
-      chance: 2 * %level%
+      chance: "2 * %level%"
     triggers:
       - melee_attack
-conditions: []
+conditions: [ ]

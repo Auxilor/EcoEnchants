@@ -1,11 +1,11 @@
-display-name: Bladed
-description: Trident deals %placeholder%% additional damage
-placeholder: '0.5*%level%'
-type: Special
+display-name: "Bladed"
+description: "Trident deals &a%placeholder%% &8more damage"
+placeholder: "0.5 * %level%"
+type: special
 
 targets:
-- trident
-conflicts: []
+  - trident
+conflicts: [ ]
 rarity: veryspecial
 max-level: 5
 
@@ -16,7 +16,7 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: 1 + 0.5 * %level%
+      multiplier: "1 + 0.5 * %level%"
     triggers:
       - trident_attack
-conditions: []
+conditions: [ ]

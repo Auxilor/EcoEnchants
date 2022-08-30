@@ -1,10 +1,10 @@
-display-name: Blast Mining
-description: "%placeholder%% chance to mine blocks in a 3x3 area"
-placeholder: '20 * %level%'
-type: Normal
+display-name: "Blast Mining"
+description: "&a%placeholder%% &8chance to mine blocks in a 3x3 area"
+placeholder: "20 * %level%"
+type: normal
 
 targets:
-- pickaxe
+  - pickaxe
 conflicts:
   - drill
   - vein
@@ -18,12 +18,11 @@ enchantable: true
 effects:
   - id: mine_radius
     args:
-      chance: 20 * %level%
+      chance: "20 * %level%"
       radius: 1
-      blacklisted_blocks: []
+      blacklisted_blocks: [ ]
       check_hardness: true
       disable_on_sneak: true
-      whitelist: [ ]
     triggers:
       - mine_block
-conditions: []
+conditions: [ ]

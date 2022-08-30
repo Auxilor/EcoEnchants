@@ -1,13 +1,13 @@
-display-name: Abrasion
-description: Damages your opponents armor by %placeholder%.
-placeholder: '%level%'
-type: Normal
+display-name: "Abrasion"
+description: "Deals &a%placeholder% &8damage to your opponents armor"
+placeholder: "%level%"
+type: normal
 
 targets:
-- sword
-- axe
+  - sword
+  - axe
 
-conflicts: []
+conflicts: [ ]
 rarity: legendary
 max-level: 2
 
@@ -21,4 +21,4 @@ effects:
       damage: "%level%"
     triggers:
       - melee_attack
-conditions: []
+conditions: [ ]
