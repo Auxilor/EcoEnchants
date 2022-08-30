@@ -1,0 +1,27 @@
+display-name: Blast Mining
+description: "%placeholder%% chance to mine blocks in a 3x3 area"
+placeholder: '20 * %level%'
+type: Normal
+
+targets:
+- pickaxe
+conflicts: []
+rarity: common
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: mine_radius
+    args:
+      chance: 20 * %level%
+      radius: 1
+      blacklisted_blocks: []
+      check_hardness: true
+      disable_on_sneak: true
+      whitelist: [ ]
+    triggers:
+      - mine_block
+conditions: []
