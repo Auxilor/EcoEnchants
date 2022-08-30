@@ -5,7 +5,9 @@ type: Normal
 
 targets:
 - pickaxe
-conflicts: []
+conflicts:
+  - drill
+  - vein
 rarity: legendary
 max-level: 3
 

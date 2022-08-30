@@ -5,7 +5,13 @@ type: normal
 
 targets:
 - trident
-conflicts: []
+conflicts:
+  - serrated
+  - bladed
+  - phantasm
+  - pacify
+  - arachnid
+  - impaling
 rarity: common
 max-level: 5
 
