@@ -1,0 +1,23 @@
+display-name: Bleed
+description: Causes your opponent to bleed, damaging them repeatedly
+placeholder: '1.5 * %level%'
+type: normal
+
+targets:
+- sword
+conflicts: []
+rarity: legendary
+max-level: 7
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: bleed
+    args:
+      chance: 1.5 * %level%
+      damage: 1
+      interval: 15
+      amount: 2 * %level%
+conditions: []

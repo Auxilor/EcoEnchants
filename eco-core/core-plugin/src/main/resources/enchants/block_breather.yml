@@ -1,0 +1,25 @@
+display-name: Block Breather
+description: "%placeholder%% chance to ignore suffocation damage"
+placeholder: '%level%*15'
+type: Normal
+
+targets:
+- helmet
+conflicts: []
+rarity: common
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: cancel_event
+    args:
+      chance: "%level% * 15"
+    triggers:
+      - take_damage
+    filters:
+      damageCause:
+        - SUFFOCATION
+conditions: []

@@ -116,6 +116,36 @@ targets:
       - "*diamond_boots"
       - "*netherite_boots"
 
+  - id: armor
+    display-name: "Armor"
+    slot: armor
+    items:
+      - "*leather_boots"
+      - "*chainmail_boots"
+      - "*iron_boots"
+      - "*golden_boots"
+      - "*diamond_boots"
+      - "*netherite_boots"
+      - "*leather_leggings"
+      - "*chainmail_leggings"
+      - "*iron_leggings"
+      - "*golden_leggings"
+      - "*diamond_leggings"
+      - "*netherite_leggings"
+      - "*turtle_helmet"
+      - "*leather_helmet"
+      - "*chainmail_helmet"
+      - "*iron_helmet"
+      - "*golden_helmet"
+      - "*diamond_helmet"
+      - "*netherite_helmet"
+      - "*leather_chestplate"
+      - "*chainmail_chestplate"
+      - "*iron_chestplate"
+      - "*golden_chestplate"
+      - "*diamond_chestplate"
+      - "*netherite_chestplate"
+
   - id: trident
     display-name: "Tridents"
     slot: hands
