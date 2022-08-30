@@ -4,9 +4,16 @@ placeholder: "%level% * 10"
 type: Normal
 
 targets:
-  - swords
-  - axes
-conflicts: []
+  - sword
+  - axe
+conflicts:
+  - sharpness
+  - bane_of_arthropods
+  - smite
+  - butchering
+  - razor
+  - ender_slayer
+  - introversion
 rarity: common
 max-level: 5
 
