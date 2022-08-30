@@ -1,0 +1,24 @@
+display-name: Aerial
+description: Deal %placeholder%% more arrow damage when you are in air
+placeholder: '10*%level%'
+type: normal
+
+targets:
+- bow
+- crossbow
+conflicts: []
+rarity: epic
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: 1 + 0.1 * %level%
+    triggers:
+      - trident_attack
+conditions:
+  - id: in_air
