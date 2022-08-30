@@ -1,11 +1,11 @@
-display-name: Arcanic
-description: "%placeholder%% chance to ignore potion damage"
-placeholder: '%level% * 8'
-type: Normal
+display-name: "Arcanic"
+description: "&a%placeholder%% &8chance to ignore potion damage"
+placeholder: "%level% * 8"
+type: normal
 
 targets:
-- armor
-conflicts: []
+  - armor
+conflicts: [ ]
 rarity: epic
 max-level: 6
 
@@ -23,4 +23,4 @@ effects:
       damageCause:
         - poison
         - magic
-conditions: []
+conditions: [ ]

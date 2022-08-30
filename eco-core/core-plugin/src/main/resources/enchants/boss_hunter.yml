@@ -1,12 +1,12 @@
-display-name: Boss Hunter
-description: Deal %placeholder%% more damage against bosses
-placeholder: '10 * %level%'
-type: Normal
+display-name: "Boss Hunter"
+description: "Deal &a%placeholder%% &8more damage against bosses"
+placeholder: "10 * %level%"
+type: normal
 
 targets:
-- bow
-- crossbow
-conflicts: []
+  - bow
+  - crossbow
+conflicts: [ ]
 rarity: rare
 max-level: 8
 
@@ -17,9 +17,9 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: 1 + 0.1 * %level%
+      multiplier: "1 + 0.1 * %level%"
     triggers:
       - bow_attack
     filters:
       onlyBosses: true
-conditions: []
+conditions: [ ]

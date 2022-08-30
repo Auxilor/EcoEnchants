@@ -11,6 +11,7 @@ import com.willfp.ecoenchants.config.TypesYml
 import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.enchants.EcoEnchants
+import com.willfp.ecoenchants.enchants.LoreConversion
 import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
 import com.willfp.ecoenchants.enchants.registerVanillaEnchants
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
@@ -33,6 +34,7 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
 
     init {
         instance = this
+        EcoEnchants.update(this)
     }
 
     override fun handleEnableAdditional() {
@@ -54,7 +56,8 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
             VillagerSupport(this),
             EnchantingTableSupport(this),
             LootSupport(this),
-            AnvilSupport(this)
+            AnvilSupport(this),
+            LoreConversion(this)
         )
     }
 

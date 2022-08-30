@@ -1,12 +1,12 @@
 display-name: "Telekinesis"
-description: "among us"
+description: "Drops and experience go directly into your inventory"
 type: normal
 
 targets:
   - pickaxe
   - sword
   - axe
-conflicts: []
+conflicts: [ ]
 rarity: common
 max-level: 1
 

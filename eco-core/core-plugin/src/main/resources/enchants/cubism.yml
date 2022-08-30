@@ -1,12 +1,12 @@
-display-name: Cubism
-description: Deal %placeholder%% more against slimes and magma cubes
-placeholder: '5*%level%'
-type: Normal
+display-name: "Cubism"
+description: "Deal &a%placeholder%% &8more against slimes and magma cubes"
+placeholder: "5 * %level%"
+type: normal
 
 targets:
-- sword
-- axe
-conflicts: []
+  - sword
+  - axe
+conflicts: [ ]
 rarity: rare
 max-level: 7
 
@@ -17,11 +17,11 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: 1 + 0.05 * %level%
+      multiplier: "1 + 0.05 * %level%"
     triggers:
       - melee_attack
     filters:
       entities:
         - slime
         - magma_cube
-conditions: []
+conditions: [ ]

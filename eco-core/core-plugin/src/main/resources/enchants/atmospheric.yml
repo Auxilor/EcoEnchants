@@ -1,11 +1,11 @@
-display-name: Atmospheric
-description: Deal %placeholder%% more trident damage when you are in air
-placeholder: '10*%level%'
+display-name: "Atmospheric"
+description: "Deal &a%placeholder%% &8more trident damage when you are in air"
+placeholder: "10 * %level%"
 type: normal
 
 targets:
-- trident
-conflicts: []
+  - trident
+conflicts: [ ]
 rarity: epic
 max-level: 3
 
@@ -16,7 +16,7 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: 1 + 0.1 * %level%
+      multiplier: "1 + 0.1 * %level%"
     triggers:
       - bow_attack
 conditions:

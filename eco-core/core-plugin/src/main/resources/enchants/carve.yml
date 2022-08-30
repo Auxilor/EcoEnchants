@@ -1,10 +1,10 @@
-display-name: Carve
-description: "%placeholder%% chance to heavily damage all entities around attacked entity"
-placeholder: '10*%level%'
+display-name: "Carve"
+description: "&a%placeholder%% &8chance to heavily damage nearby entities when you swing"
+placeholder: "10 * %level%"
 type: special
 
 targets:
-- axe
+  - axe
 conflicts:
   - cleave
 rarity: special
@@ -17,12 +17,12 @@ enchantable: true
 effects:
   - id: damage_nearby_entities
     args:
-      chance: "10*%level%"
+      chance: "10 * %level%"
       damage: 2
-      radius: "0.5*%level%"
-      entities: []
+      radius: "0.5 * %level%"
+      entities: [ ]
       damage_as_player: true
       damage_self: false
     triggers:
       - melee_attack
-conditions: []
+conditions: [ ]

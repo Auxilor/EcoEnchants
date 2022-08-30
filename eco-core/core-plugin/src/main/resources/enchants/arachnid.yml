@@ -1,10 +1,10 @@
-display-name: Arachnid
-description: Increases damage against spiders
-placeholder: '30*%level%'
-type: Normal
+display-name: "Arachnid"
+description: "Increases damage against spiders"
+placeholder: "30 * %level%"
+type: normal
 
 targets:
-- trident
+  - trident
 conflicts:
   - serrated
   - bladed
@@ -22,11 +22,11 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: 1 + 0.3 * %level%
+      multiplier: "1 + 0.3 * %level%"
     triggers:
       - trident_attack
     filters:
       entities:
         - spider
         - cave_spider
-conditions: []
+conditions: [ ]

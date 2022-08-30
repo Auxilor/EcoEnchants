@@ -1,12 +1,12 @@
-display-name: Aerial
-description: Deal %placeholder%% more arrow damage when you are in air
-placeholder: '10*%level%'
+display-name: "Aerial"
+description: "Deal &a%placeholder%% &8more arrow damage when you are in air"
+placeholder: "10 * %level%"
 type: normal
 
 targets:
-- bow
-- crossbow
-conflicts: []
+  - bow
+  - crossbow
+conflicts: [ ]
 rarity: epic
 max-level: 3
 
@@ -17,7 +17,7 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: 1 + 0.1 * %level%
+      multiplier: "1 + 0.1 * %level%"
     triggers:
       - bow_attack
 conditions:

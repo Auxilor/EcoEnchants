@@ -1,11 +1,11 @@
-display-name: Block Breather
-description: "%placeholder%% chance to ignore suffocation damage"
-placeholder: '%level%*15'
-type: Normal
+display-name: "Block Breather"
+description: "&a%placeholder%% &8chance to ignore suffocation damage"
+placeholder: "%level% * 15"
+type: normal
 
 targets:
-- helmet
-conflicts: []
+  - helmet
+conflicts: [ ]
 rarity: common
 max-level: 3
 
@@ -21,5 +21,5 @@ effects:
       - take_damage
     filters:
       damageCause:
-        - SUFFOCATION
-conditions: []
+        - suffocation
+conditions: [ ]

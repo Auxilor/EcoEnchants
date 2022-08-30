@@ -1,12 +1,12 @@
-display-name: Criticals
-description: Increases critical damage by %placeholder%
-placeholder: '10*%level%'
-type: Normal
+display-name: "Criticals"
+description: "Increases critical damage by &a%placeholder%%"
+placeholder: "10 * %level%"
+type: normal
 
 targets:
-- sword
-- axe
-conflicts: []
+  - sword
+  - axe
+conflicts: [ ]
 rarity: epic
 max-level: 3
 
@@ -17,7 +17,7 @@ enchantable: true
 effects:
   - id: crit_multiplier
     args:
-      multiplier: 1 + 0.1*%level%
+      multiplier: "1 + 0.1 * %level%"
     triggers:
       - melee_attack
-conditions: []
+conditions: [ ]
