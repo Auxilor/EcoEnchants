@@ -6,7 +6,7 @@ type: Curse
 targets:
 - helmet
 conflicts: []
-rarity: common
+rarity: legendary
 max-level: 1
 
 tradeable: true
