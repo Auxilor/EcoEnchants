@@ -1,0 +1,26 @@
+display-name: Arcanic
+description: "%placeholder%% chance to ignore potion damage"
+placeholder: '%level% * 8'
+type: Normal
+
+targets:
+- armor
+conflicts: []
+rarity: epic
+max-level: 6
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: cancel_event
+    args:
+      chance: "%level% * 8"
+    triggers:
+      - take_damage
+    filters:
+      damageCause:
+        - poison
+        - magic
+conditions: []

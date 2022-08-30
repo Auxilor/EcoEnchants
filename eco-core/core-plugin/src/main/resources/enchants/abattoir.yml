@@ -1,0 +1,41 @@
+display-name: Abattoir
+description: Tridents deal %placeholder%% more damage against passive mobs
+placeholder: '30 * %level%)'
+type: normal
+
+targets:
+- trident
+conflicts:
+  - serrated
+  - bladed
+  - phantasm
+  - pacify
+  - arachnid
+  - impaling
+rarity: common
+max-level: 5
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: 1 + 0.3 * %level%
+    triggers:
+      - trident_attack
+    filters:
+      entities:
+        - cow
+        - sheep
+        - pig
+        - horse
+        - parrot
+        - cat
+        - ocelots
+        - fox
+        - villager
+        - axolotl
+        - chicken
+conditions: []
