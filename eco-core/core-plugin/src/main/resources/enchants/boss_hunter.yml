@@ -1,13 +1,13 @@
 display-name: Boss Hunter
-description: Increases damage against bosses
-placeholder: '%level%'
+description: Deal %placeholder%% more damage against bosses
+placeholder: '10 * %level%'
 type: Normal
 
 targets:
 - bow
 - crossbow
 conflicts: []
-rarity: common
+rarity: rare
 max-level: 8
 
 tradeable: true
