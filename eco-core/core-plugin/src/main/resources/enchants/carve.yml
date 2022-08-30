@@ -4,7 +4,7 @@ placeholder: '10*%level%'
 type: special
 
 targets:
-- axes
+- axe
 conflicts:
   - cleave
 rarity: special

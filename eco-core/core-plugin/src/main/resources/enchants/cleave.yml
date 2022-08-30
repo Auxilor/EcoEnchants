@@ -4,7 +4,7 @@ placeholder: '5*%level%'
 type: Normal
 
 targets:
-- axes
+- axe
 conflicts:
   - carve
 rarity: common
