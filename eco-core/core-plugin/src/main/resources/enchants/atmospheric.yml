@@ -4,7 +4,7 @@ placeholder: '10*%level%'
 type: normal
 
 targets:
-- tridents
+- trident
 conflicts: []
 rarity: epic
 max-level: 3
