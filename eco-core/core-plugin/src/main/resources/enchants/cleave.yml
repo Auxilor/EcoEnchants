@@ -7,7 +7,7 @@ targets:
 - axe
 conflicts:
   - carve
-rarity: common
+rarity: rare
 max-level: 8
 
 tradeable: true
