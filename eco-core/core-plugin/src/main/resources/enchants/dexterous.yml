@@ -18,6 +18,4 @@ effects:
   - id: attack_speed_multiplier
     args:
       multiplier: "1 + 0.1 * %level%"
-    triggers:
-      - melee_attack
 conditions: []
