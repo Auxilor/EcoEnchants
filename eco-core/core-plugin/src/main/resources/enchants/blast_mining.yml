@@ -1,6 +1,6 @@
 display-name: "Blast Mining"
 description: "&a%placeholder%% &8chance to mine blocks in a 3x3 area"
-placeholder: "20 * %level%"
+placeholder: "5 * %level%"
 type: normal
 
 targets:
@@ -28,7 +28,9 @@ effects:
           check_hardness: true
           disable_on_sneak: true
     args:
-      chance: "20 * %level%"
+      chance: "5 * %level%"
+      cooldown: 0.05
+      send_cooldown_message: false
     triggers:
       - mine_block
 conditions: [ ]
