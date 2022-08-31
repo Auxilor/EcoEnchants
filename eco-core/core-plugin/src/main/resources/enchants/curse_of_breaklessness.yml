@@ -1,0 +1,25 @@
+display-name: Curse of Breaklessness
+description: Chance to prevent block breaking
+placeholder: '%level%'
+type: Curse
+
+targets:
+- axe
+- hoe
+- pickaxe
+- shovel
+conflicts: []
+rarity: legendary
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: cancel_event
+    args:
+      chance: 15*%level%
+    triggers:
+      - mine_block
+conditions: []

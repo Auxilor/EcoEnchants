@@ -1,0 +1,33 @@
+display-name: "Defusion"
+description: "&8Deal &a%placeholder%% &8more damage against creepers"
+placeholder: "%level% * 10"
+type: Normal
+
+targets:
+  - sword
+  - axe
+conflicts:
+  - sharpness
+  - bane_of_arthropods
+  - smite
+  - butchering
+  - razor
+  - ender_slayer
+  - introversion
+rarity: common
+max-level: 5
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: "1 + 0.1 * %level%"
+    triggers:
+      - melee_attack
+    filters:
+      entities:
+        - creeper
+conditions: []
