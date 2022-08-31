@@ -140,7 +140,16 @@ abstract class EcoEnchant(
         // and that way the enchantment isn't registered.
         if (!config.getBool("dont-register")) {
             register()
+            doOnInit()
         }
+    }
+
+    private fun doOnInit() {
+        onInit()
+    }
+
+    protected open fun onInit() {
+        // Override when needed
     }
 
     private fun register() {
@@ -159,26 +168,46 @@ abstract class EcoEnchant(
     }
 
     override fun getUnformattedDescription(level: Int): String {
-        val placeholderValue = NumberUtils.evaluateExpression(
-            config.getString("placeholder"),
-            null,
-            object : PlaceholderInjectable {
-                override fun getPlaceholderInjections(): List<InjectablePlaceholder> {
-                    return listOf(
-                        StaticPlaceholder(
-                            "level",
-                        ) { level.toString() }
-                    )
-                }
+        // Fetch custom placeholders other than %placeholder%
+        val uncompiledPlaceholders = config.getSubsection("placeholders").getKeys(false).associateWith {
+            config.getString("placeholders.$it")
+        }.toMutableMap()
 
-                override fun clearInjectedPlaceholders() {
-                    // Do nothing
-                }
-            }
-        )
+        // Add %placeholder% placeholder in
+        uncompiledPlaceholders["placeholder"] = config.getString("placeholder")
 
-        return config.getString("description")
-            .replace("%placeholder%", NumberUtils.format(placeholderValue))
+        // Evaluate each placeholder
+        val placeholders = uncompiledPlaceholders.map { (id, expr) ->
+            DescriptionPlaceholder(
+                id,
+                NumberUtils.evaluateExpression(
+                    expr,
+                    null,
+                    object : PlaceholderInjectable {
+                        override fun getPlaceholderInjections(): List<InjectablePlaceholder> {
+                            return listOf(
+                                StaticPlaceholder(
+                                    "level",
+                                ) { level.toString() }
+                            )
+                        }
+
+                        override fun clearInjectedPlaceholders() {
+                            // Do nothing
+                        }
+                    }
+                )
+            )
+        }
+
+        // Apply placeholders to description
+        val rawDescription = config.getString("description")
+        var description = rawDescription
+        for (placeholder in placeholders) {
+            description = description.replace("%${placeholder.id}%", NumberUtils.format(placeholder.value))
+        }
+
+        return description
     }
 
     @Deprecated(

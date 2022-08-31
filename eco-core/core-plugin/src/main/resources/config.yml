@@ -3,9 +3,6 @@
 # by Auxilor
 #
 
-# If the hand slot shouldn't work in the players offhand
-no-offhand: false # Restart your server after this option, doesn't work with /ecoenchants reload
-
 # Options for enchanting items in the enchanting table
 enchanting-table:
   enabled: true # If custom enchantments should be available from enchanting tables

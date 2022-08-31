@@ -1,0 +1,24 @@
+display-name: "Repairing"
+description: "Automatically gain &a%amount%&8 durability every &a%frequency% &8seconds"
+type: normal
+placeholders:
+  frequency: "1.5"
+  amount: "%level%"
+
+targets:
+  - pickaxe
+  - sword
+  - axe
+conflicts: [ ]
+rarity: common
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+conditions: [ ]
+
+repair-per-level: 1 # The amount of durability to add on each item
+frequency: 30 # How often to repair the item (in ticks, doesn't support %level%)
+not-while-holding: true # If items shouldn't be repaired while they are being held

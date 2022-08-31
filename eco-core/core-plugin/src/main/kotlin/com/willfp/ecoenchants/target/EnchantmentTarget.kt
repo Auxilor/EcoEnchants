@@ -5,6 +5,7 @@ import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
@@ -66,8 +67,23 @@ internal object AllEnchantmentTarget : EnchantmentTarget {
     }
 }
 
-enum class TargetSlot {
-    HANDS,
-    ARMOR,
-    ANY
+enum class TargetSlot(
+    private val itemSlotGetter: (Player) -> Collection<Int>
+) {
+    HANDS({
+        listOf(
+            it.inventory.heldItemSlot,
+            45
+        )
+    }),
+
+    ARMOR({
+        listOf(5, 6, 7, 8)
+    }),
+
+    ANY({
+        (0..45).toList()
+    });
+
+    fun getItemSlots(player: Player): Collection<Int> = itemSlotGetter(player)
 }

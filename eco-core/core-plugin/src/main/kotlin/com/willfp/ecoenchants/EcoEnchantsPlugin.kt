@@ -12,6 +12,8 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.LoreConversion
+import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
+import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
 import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
 import com.willfp.ecoenchants.enchants.registerVanillaEnchants
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
@@ -45,6 +47,9 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
     override fun handleReloadAdditional() {
         // Load hardcoded enchantments
         EnchantmentTelekinesis(this)
+        EnchantmentPermanenceCurse(this)
+        EnchantmentRepairing(this)
+
         registerVanillaEnchants(this)
 
         logger.info(EcoEnchants.values().size.toString() + " Enchants Loaded")
