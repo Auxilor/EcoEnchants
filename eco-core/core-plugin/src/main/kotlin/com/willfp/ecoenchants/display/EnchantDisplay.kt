@@ -28,10 +28,6 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         props: DisplayProperties,
         vararg args: Any
     ) {
-        if (!itemStack.isEnchantable) {
-            return
-        }
-
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 

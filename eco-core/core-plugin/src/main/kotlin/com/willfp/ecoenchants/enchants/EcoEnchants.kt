@@ -100,15 +100,18 @@ object EcoEnchants {
     }
 
     /**
-     * Remove [EcoEnchant] from EcoEnchants.
+     * Remove [Enchantment] from EcoEnchants.
      *
-     * @param enchant The [EcoEnchant] to remove.
+     * @param enchant The [Enchantment] to remove.
      */
     @JvmStatic
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
-    fun removeEnchant(enchant: EcoEnchant) {
-        BY_KEY.remove(enchant.id)
-        BY_NAME.remove(enchant.id)
+    fun removeEnchant(enchant: Enchantment) {
+        if (enchant is EcoEnchant) {
+            BY_KEY.remove(enchant.id)
+            BY_NAME.remove(ChatColor.stripColor(enchant.displayName))
+            EnchantRegistrations.removeEnchant(enchant)
+        }
 
         Enchantment::class.java.getDeclaredField("byKey")
             .apply {
@@ -121,8 +124,6 @@ object EcoEnchants {
                 isAccessible = true
                 (get(null) as MutableMap<String, Enchantment>).apply { remove(enchant.name) }
             }
-
-        EnchantRegistrations.removeEnchant(enchant)
     }
 
     /**
@@ -134,10 +135,10 @@ object EcoEnchants {
      */
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
     internal fun addNewEnchant(enchant: EcoEnchant) {
+        register(enchant)
+
         BY_KEY[enchant.id] = enchant
         BY_NAME[ChatColor.stripColor(enchant.displayName)] = enchant
-
-        register(enchant)
     }
 
     /**
@@ -153,9 +154,7 @@ object EcoEnchants {
                 set(null, true)
             }
 
-        if (enchantment is EcoEnchant) {
-            removeEnchant(enchantment)
-        }
+        removeEnchant(enchantment)
 
         Enchantment.registerEnchantment(enchantment)
         EnchantRegistrations.registerEnchantments()

@@ -11,10 +11,15 @@ import java.util.concurrent.TimeUnit
 // The Int is the inventory slot ID
 typealias SlotProvider = (Player) -> Map<Int, ItemInSlot>
 
-data class ItemInSlot(
+data class ItemInSlot internal constructor(
     val item: ItemStack,
-    val slot: TargetSlot
-)
+    val slot: Collection<TargetSlot>
+) {
+    constructor(
+        item: ItemStack,
+        slot: TargetSlot
+    ) : this(item, listOf(slot))
+}
 
 private data class HeldEnchant(
     val enchant: EcoEnchant,
@@ -52,7 +57,16 @@ object EnchantLookup {
         return itemCache.get(player) {
             val found = mutableMapOf<Int, ItemInSlot>()
             for (provider in slotProviders) {
-                found.putAll(provider(player))
+                val fromProvider = provider(player)
+                for ((slot, item) in fromProvider) {
+                    // Basically a multimap
+                    val current = found[slot]
+                    if (current == null) {
+                        found[slot] = item
+                    } else {
+                        found[slot] = ItemInSlot(item.item, listOf(current.slot, item.slot).flatten())
+                    }
+                }
             }
 
             found
@@ -70,11 +84,6 @@ object EnchantLookup {
                 for ((slotID, inSlot) in provide(this)) {
                     val (item, slot) = inSlot
 
-                    // Prevent repeating slot IDs found in multiple TargetSlots (e.g. HANDS and ANY)
-                    if (found.containsKey(slotID)) {
-                        continue
-                    }
-
                     val enchants = item.fast().enchants
 
                     for ((enchant, level) in enchants) {
@@ -82,7 +91,14 @@ object EnchantLookup {
                             continue
                         }
 
-                        if (slot !in enchant.slots) {
+                        if (slot.none { it in enchant.slots }) {
+                            continue
+                        }
+
+                        val held = HeldEnchant(enchant, level)
+
+                        // Prevent repeating slot IDs found in multiple TargetSlots (e.g. HANDS and ANY)
+                        if (held in found.getOrDefault(slotID, mutableListOf())) {
                             continue
                         }
 
@@ -216,6 +232,7 @@ object EnchantLookup {
     fun Player.clearEnchantCache() {
         itemCache.invalidate(player)
         enchantCache.invalidate(player)
+        enchantLevelCache.invalidate(player)
     }
 
     init {
