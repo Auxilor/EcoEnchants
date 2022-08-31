@@ -11,7 +11,7 @@ max-level: 1
 
 tradeable: true
 discoverable: true
-enchantable: true
+enchantable: false
 
 effects:
   - id: hunger_multiplier

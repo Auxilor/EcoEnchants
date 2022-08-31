@@ -38,16 +38,29 @@ object EcoEnchants {
     }
 
     /**
+     * Get [EcoEnchant] matching id.
+     *
+     * @param id The id to search for.
+     * @return The matching [EcoEnchant], or null if not found.
+     */
+    @JvmStatic
+    fun getByID(id: String?): EcoEnchant? {
+        return if (id == null) {
+            null
+        } else BY_KEY[id]
+    }
+
+    /**
      * Get [EcoEnchant] matching key.
      *
      * @param key The key to search for.
      * @return The matching [EcoEnchant], or null if not found.
      */
     @JvmStatic
-    fun getByKey(key: String?): EcoEnchant? {
+    fun getByKey(key: NamespacedKey?): EcoEnchant? {
         return if (key == null) {
             null
-        } else BY_KEY[key]
+        } else getByID(key.key)
     }
 
     /**

@@ -1,0 +1,15 @@
+display-name: "Curse of Permanence"
+description: "Prevents modifying this item in an anvil"
+type: curse
+
+targets:
+  - all
+conflicts: [ ]
+rarity: legendary
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: false
+
+conditions: [ ]

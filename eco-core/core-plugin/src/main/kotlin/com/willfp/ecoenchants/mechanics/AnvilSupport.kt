@@ -4,6 +4,7 @@ import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
+import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -141,6 +142,14 @@ class AnvilSupport(
         } else {
             ChatColor.stripColor(itemName)
         }.let { if (it.isNullOrEmpty()) left.fast().displayName else it }
+
+        val permanenceCurse = EcoEnchants.getByID("permanence_curse")
+
+        if (permanenceCurse != null) {
+            if (left.fast().getEnchants(true).containsKey(permanenceCurse)) {
+                return FAIL
+            }
+        }
 
         if (right == null || right.type == Material.AIR) {
             if (left.fast().displayName == formattedItemName) {
