@@ -129,10 +129,22 @@ abstract class EcoEnchant(
                 "Allows getting $id from an Enchanting Table",
                 PermissionDefault.TRUE
             )
+
+            if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*") == null) {
+                Bukkit.getPluginManager().addPermission(
+                    Permission(
+                        "ecoenchants.fromtable.*",
+                        "Allows getting all enchantments from an Enchanting Table",
+                        PermissionDefault.TRUE
+                    )
+                )
+            }
+
             permission.addParent(
                 Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*")!!,
                 true
             )
+
             Bukkit.getPluginManager().addPermission(permission)
         }
 

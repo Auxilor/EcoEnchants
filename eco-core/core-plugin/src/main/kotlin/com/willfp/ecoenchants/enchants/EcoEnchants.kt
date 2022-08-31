@@ -153,6 +153,10 @@ object EcoEnchants {
                 set(null, true)
             }
 
+        if (enchantment is EcoEnchant) {
+            removeEnchant(enchantment)
+        }
+
         Enchantment.registerEnchantment(enchantment)
         EnchantRegistrations.registerEnchantments()
     }
