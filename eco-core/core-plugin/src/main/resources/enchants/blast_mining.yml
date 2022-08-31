@@ -16,13 +16,19 @@ discoverable: true
 enchantable: true
 
 effects:
-  - id: mine_radius
+  - effects:
+      - id: create_explosion
+        args:
+          power: 0
+          amount: 1
+      - id: mine_radius
+        args:
+          radius: 1
+          blacklisted_blocks: [ ]
+          check_hardness: true
+          disable_on_sneak: true
     args:
       chance: "20 * %level%"
-      radius: 1
-      blacklisted_blocks: [ ]
-      check_hardness: true
-      disable_on_sneak: true
     triggers:
       - mine_block
 conditions: [ ]
