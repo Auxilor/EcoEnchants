@@ -1,7 +1,7 @@
-display-name: Curse of Breaklessness
-description: Chance to prevent block breaking
-placeholder: '%level%'
-type: Curse
+display-name: "Curse of Breaklessness"
+description: "Gives a &a%placeholder%%&8 chance to fail to break blocks"
+placeholder: "15 * %level%"
+type: curse
 
 targets:
 - axe
@@ -19,7 +19,7 @@ enchantable: true
 effects:
   - id: cancel_event
     args:
-      chance: 15*%level%
+      chance: "15 * %level%"
     triggers:
       - mine_block
 conditions: []

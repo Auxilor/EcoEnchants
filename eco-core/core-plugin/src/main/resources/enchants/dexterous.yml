@@ -1,7 +1,7 @@
 display-name: "Dexterous"
-description: "&8Increases attack speed by &a%placeholder%%"
-placeholder: '%level% * 10'
-type: Normal
+description: "Increases attack speed by &a%placeholder%%"
+placeholder: "%level% * 10"
+type: normal
 
 targets:
   - sword

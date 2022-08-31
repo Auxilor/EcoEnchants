@@ -1,7 +1,7 @@
-display-name: Curse of Hunger
-description: Increases hunger loss
-placeholder: '%level%'
-type: Curse
+display-name: "Curse of Hunger"
+description: "Increases hunger loss by &a%placeholder%%"
+placeholder: "50 * %level%"
+type: curse
 
 targets:
 - helmet
@@ -16,5 +16,5 @@ enchantable: true
 effects:
   - id: hunger_multiplier
     args:
-      multiplier: 1.5 * %level%
+      multiplier: "1 + 0.5 * %level%"
 conditions: []

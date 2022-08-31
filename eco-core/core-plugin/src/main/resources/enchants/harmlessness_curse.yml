@@ -1,7 +1,7 @@
-display-name: Curse of Harmlessness
-description: Chance for attacks to do nothing
-placeholder: '%level%'
-type: Curse
+display-name: "Curse of Harmlessness"
+description: "Gives a &a%placeholder%% &8chance for attacks to do nothing"
+placeholder: "15 * %level%"
+type: curse
 
 targets:
 - sword
@@ -17,7 +17,7 @@ enchantable: true
 effects:
   - id: cancel_event
     args:
-      chance: 15*%level%
+      chance: "15 * %level%"
     triggers:
       - melee_attack
 conditions: []

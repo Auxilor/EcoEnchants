@@ -1,7 +1,7 @@
-display-name: Curse of Misfortune
-description: Chance of blocks to not drop items
-placeholder: '%level%'
-type: Curse
+display-name: "Curse of Misfortune"
+description: "Gives a &a%placeholder%% &8chance for blocks to not drop items"
+placeholder: "15 * %level%"
+type: curse
 
 targets:
 - hoe
@@ -19,7 +19,7 @@ enchantable: true
 effects:
   - id: cancel_event
     args:
-      chance: 15*%level%
+      chance: "15 * %level%"
     triggers:
       - block_item_drop
 conditions: []
