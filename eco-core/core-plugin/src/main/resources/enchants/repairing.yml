@@ -6,9 +6,7 @@ placeholders:
   amount: "%level%"
 
 targets:
-  - pickaxe
-  - sword
-  - axe
+  - all
 conflicts: [ ]
 rarity: common
 max-level: 1
