@@ -9,7 +9,7 @@ targets:
   - all
 conflicts: [ ]
 rarity: veryspecial
-max-level: 1
+max-level: 3
 
 tradeable: true
 discoverable: true
