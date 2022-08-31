@@ -1,6 +1,6 @@
 display-name: "Repairing"
 description: "Automatically gain &a%amount%&8 durability every &a%frequency% &8seconds"
-type: normal
+type: special
 placeholders:
   frequency: "1.5"
   amount: "%level%"
@@ -8,7 +8,7 @@ placeholders:
 targets:
   - all
 conflicts: [ ]
-rarity: common
+rarity: veryspecial
 max-level: 1
 
 tradeable: true
