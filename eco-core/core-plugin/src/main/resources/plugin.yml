@@ -51,9 +51,6 @@ permissions:
     default: op
     children:
       ecoenchants.anvil.color: true
-  ecoenchants.fromtable.*:
-    description: Allows getting all enchantments from an enchanting table
-    default: true
 
   ecoenchants.anvil.color:
     description: Allows using color codes in anvils
