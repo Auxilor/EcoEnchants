@@ -269,7 +269,7 @@ abstract class EcoEnchant(
     override fun canEnchantItem(item: ItemStack): Boolean {
         if (
             item.fast().getEnchants(true).keys
-                .filterIsInstance<EcoEnchant>()
+                .map { it.wrap() }
                 .count { it.type == this.type } >= this.type.limit
         ) {
             return false

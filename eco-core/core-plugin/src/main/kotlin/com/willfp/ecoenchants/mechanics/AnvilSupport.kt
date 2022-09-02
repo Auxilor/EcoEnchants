@@ -5,6 +5,7 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.enchants.EcoEnchants
+import com.willfp.ecoenchants.enchants.wrap
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -58,7 +59,9 @@ class AnvilSupport(
     fun onAnvilPrepare(@NotNull event: PrepareAnvilEvent) {
         val player = event.viewers.getOrNull(0) as? Player ?: return
 
-        if (this.plugin.getProxy(OpenInventoryProxy::class.java).getOpenInventory(player)::class.java.toString() == anvilGuiClass) {
+        if (this.plugin.getProxy(OpenInventoryProxy::class.java)
+                .getOpenInventory(player)::class.java.toString() == anvilGuiClass
+        ) {
             return
         }
 
@@ -102,7 +105,8 @@ class AnvilSupport(
 
             val cost = oldCost + price
 
-            if (cost == 0) {
+            // Cost could be less than zero at times, so I include that here.
+            if (cost <= 0) {
                 return@run
             }
 
@@ -156,7 +160,8 @@ class AnvilSupport(
                 return FAIL
             }
 
-            left.fast().displayName = formattedItemName.let { "§o$it" } // Not a great way to make it italic, but it works
+            left.fast().displayName =
+                formattedItemName.let { "§o$it" } // Not a great way to make it italic, but it works
 
             return AnvilResult(left, 0)
         }
@@ -175,7 +180,8 @@ class AnvilSupport(
         val outEnchants = leftEnchants.toMutableMap()
 
         for ((enchant, level) in rightEnchants) {
-            if (enchant.canEnchantItem(left) && !outEnchants.containsKey(enchant)) {
+            // Running .wrap() to use EcoEnchantLike canEnchantItem logic
+            if (enchant.wrap().canEnchantItem(left) && !outEnchants.containsKey(enchant)) {
                 if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                     outEnchants[enchant] = level
                 }

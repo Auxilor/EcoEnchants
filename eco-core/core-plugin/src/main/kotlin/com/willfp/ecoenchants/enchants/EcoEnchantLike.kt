@@ -1,14 +1,17 @@
 package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.inventory.ItemStack
 import java.util.*
 
 interface EcoEnchantLike {
@@ -19,6 +22,9 @@ interface EcoEnchantLike {
     val rarity: EnchantmentRarity
 
     fun getUnformattedDescription(level: Int): String
+
+    // Includes all extra logic not found in vanilla canEnchantItem
+    fun canEnchantItem(item: ItemStack): Boolean
 }
 
 private val ecoEnchantLikes = Caffeine.newBuilder()
@@ -54,6 +60,27 @@ class VanillaEcoEnchantLike(
 
     override fun getUnformattedDescription(level: Int): String {
         return plugin.vanillaEnchantsYml.getString("${enchant.key.key}.description")
+    }
+
+    override fun canEnchantItem(item: ItemStack): Boolean {
+        // Yes this code is copied from EcoEnchant, but I can't be bothered to abstract it properly
+        if (
+            item.fast().getEnchants(true).keys
+                .map { it.wrap() }
+                .count { it.type == this.type } >= this.type.limit
+        ) {
+            return false
+        }
+
+        if (item.fast().getEnchants(true).any { (enchant, _) -> enchant.conflictsWithDeep(this.enchant) }) {
+            return false
+        }
+
+        if (item.type == Material.BOOK || item.type == Material.ENCHANTED_BOOK) {
+            return true
+        }
+
+        return enchant.canEnchantItem(item)
     }
 
     override fun equals(other: Any?): Boolean {
