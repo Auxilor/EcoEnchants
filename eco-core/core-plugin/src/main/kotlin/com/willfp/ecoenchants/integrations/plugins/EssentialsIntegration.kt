@@ -13,16 +13,16 @@ class EssentialsIntegration: EnchantRegistrationIntegration {
         for (enchantment in EcoEnchants.values()) {
             // why aren't you using the api you PRd in
             // because essentials named mending to repairing etc
-            Enchantments::class.java.getDeclaredField("ENCHANTMENTS")
-                .apply {
-                    isAccessible = true
-                    (get(null) as MutableMap<String, Enchantment>).apply {
-                        put(enchantment.id, enchantment)
-                        put(enchantment.id.replace("_",""), enchantment)
+            for (field in arrayOf("ENCHANTMENTS", "ALIASENCHANTMENTS")) {
+                Enchantments::class.java.getDeclaredField(field)
+                    .apply {
+                        isAccessible = true
+                        (get(null) as MutableMap<String, Enchantment>).apply {
+                            put(enchantment.id, enchantment)
+                            put(enchantment.id.replace("_",""), enchantment)
+                        }
                     }
-                }
-
-            Enchantments.registerEnchantment(enchantment.id, enchantment)
+            }
         }
     }
 
