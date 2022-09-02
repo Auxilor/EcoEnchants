@@ -27,16 +27,16 @@ class EssentialsIntegration: EnchantRegistrationIntegration {
     }
 
     override fun removeEnchant(enchantment: EcoEnchant) {
-        Enchantments::class.java.getDeclaredField("ENCHANTMENTS")
-            .apply {
-                isAccessible = true
-                (get(null) as MutableMap<String, Enchantment>).apply {
-                    for (enchant in values.filterIsInstance<EcoEnchant>()) {
+        for (field in arrayOf("ENCHANTMENTS", "ALIASENCHANTMENTS")) {
+            Enchantments::class.java.getDeclaredField(field)
+                .apply {
+                    isAccessible = true
+                    (get(null) as MutableMap<String, Enchantment>).apply {
                         remove(enchantment.id)
                         remove(enchantment.id.replace("_",""))
                     }
                 }
-            }
+        }
     }
 
     override fun getPluginName() = "Essentials"
