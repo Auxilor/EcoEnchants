@@ -50,13 +50,8 @@ class AnvilSupport(
             ProxyConstants.NMS_VERSION.substring(1) +
             "\$AnvilContainer"
 
-    /**
-     * Called when items are placed into an anvil.
-     *
-     * @param event The event to listen to.
-     */
     @EventHandler(priority = EventPriority.HIGHEST)
-    fun onAnvilPrepare(@NotNull event: PrepareAnvilEvent) {
+    fun onAnvilPrepare(event: PrepareAnvilEvent) {
         val player = event.viewers.getOrNull(0) as? Player ?: return
 
         if (this.plugin.getProxy(OpenInventoryProxy::class.java)

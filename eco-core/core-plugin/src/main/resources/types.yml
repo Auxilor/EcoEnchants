@@ -7,13 +7,16 @@ types:
     format: "&7" # The format of enchantments of this type in display
     limit: -1 # The maximum amount of enchants of this type on an item (-1 to disable)
     high-level-bias: 0 # The bias against getting high levels of enchants with this type. Between 0-1, 0 is no bias, 1 is only level 1.
+    no-grindstone: false # If enchants of this type should not be removable in the grindstone
 
   - id: curse
     format: "&c"
     limit: -1
     high-level-bias: 0
+    no-grindstone: true # If enchants of this type should not be removable in the grindstone
 
   - id: special
     format: "<gradient:#FB57EC:#EF1DEC>"
     limit: 1
     high-level-bias: 0.7
+    no-grindstone: false # If enchants of this type should not be removable in the grindstone

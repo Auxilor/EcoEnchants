@@ -16,7 +16,7 @@ interface EnchantRegistrationIntegration : Integration {
 object EnchantRegistrations {
     private val registered = mutableSetOf<EnchantRegistrationIntegration>()
 
-    fun register(@NotNull integration: EnchantRegistrationIntegration) {
+    fun register(integration: EnchantRegistrationIntegration) {
         registered.add(integration)
     }
 

@@ -21,6 +21,7 @@ import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
 import com.willfp.ecoenchants.mechanics.AnvilSupport
 import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
+import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.target.ActiveEnchantUpdateListeners
@@ -62,7 +63,8 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
             EnchantingTableSupport(this),
             LootSupport(this),
             AnvilSupport(this),
-            LoreConversion(this)
+            LoreConversion(this),
+            GrindstoneSupport(this)
         )
     }
 

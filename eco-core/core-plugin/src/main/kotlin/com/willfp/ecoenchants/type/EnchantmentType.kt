@@ -12,6 +12,7 @@ class EnchantmentType(
     val format = config.getString("format")
     val limit = config.getInt("limit").infiniteIfNegative()
     val highLevelBias = config.getDouble("high-level-bias")
+    val noGrindstone = config.getBool("no-grindstone")
 
     init {
         EnchantmentTypes.addNewType(this)
