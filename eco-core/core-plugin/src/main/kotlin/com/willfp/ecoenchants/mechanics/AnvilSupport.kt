@@ -162,7 +162,9 @@ class AnvilSupport(
         }
 
         if (left.type != right.type) {
-            return FAIL
+            if (right.type != Material.ENCHANTED_BOOK) {
+                return FAIL
+            }
         }
 
         left.fast().displayName = formattedItemName.let { "§o$it" } // Same again, it works though
