@@ -15,7 +15,7 @@ max-level: 1 # The max level of the enchantment
 tradeable: true # If the enchantment can be obtained from villagers
 discoverable: true # If the enchantment can generate naturally in chests
 enchantable: true # If the enchantment can be obtained from enchanting tables
-grindstoneable: true
+
 
 effects:
   - effects:
