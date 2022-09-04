@@ -1,0 +1,21 @@
+# Read more about chains: https://plugins.auxilor.io/effects/configuring-an-effect#effect-chains
+
+chains:
+  - id: example_chain
+    effects:
+      - id: teleport
+      - id: potion_effect
+        args:
+          effect: blindness
+          level: 3
+          duration: 30
+          apply_to_player: true
+      - id: send_message
+        args:
+          message: "&fYou have been teleported!"
+          action_bar: true
+      - id: play_sound
+        args:
+          sound: entity_dragon_fireball_explode
+          pitch: 1.5
+          volume: 4
