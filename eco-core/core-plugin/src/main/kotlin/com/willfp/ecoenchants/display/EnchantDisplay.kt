@@ -31,11 +31,8 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 
-        if (
-            fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
-            || fast.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)
-            || pdc.has(internalHideEnchants, PersistentDataType.INTEGER)
-        ) {
+        // Args represent hide enchants
+        if (args[0] == true) {
             fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
             if (itemStack.type == Material.ENCHANTED_BOOK) {
                 fast.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
@@ -110,5 +107,16 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         }
 
         pdc.remove(internalHideEnchants)
+    }
+
+    override fun generateVarArgs(itemStack: ItemStack): Array<Any> {
+        val fast = itemStack.fast()
+        val pdc = fast.persistentDataContainer
+
+        return arrayOf(
+            fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
+                    || fast.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)
+                    || pdc.has(internalHideEnchants, PersistentDataType.INTEGER)
+        )
     }
 }
