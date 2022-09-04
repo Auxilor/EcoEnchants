@@ -1,0 +1,30 @@
+display-name: "Wound"
+description: "&a%chance%%&r chance to cause your opponent to bleed, getting &a%damage% &rrepetitive damage for &a%duration%s&r."
+placeholders:
+  chance: "%level% * 3"
+  duration: "(%level% * 5.0) / 20.0"
+  damage: "1"
+type: normal
+
+targets:
+  - bow 
+  - crossbow
+conflicts:
+  - sharpness
+rarity: legendary
+max-level: 7
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: bleed
+    args:
+      amount: "%level% * 5"
+      chance: "3 * %level%"
+      damage: 1
+    triggers:
+      - bow_attack
+
+conditions: [ ]
