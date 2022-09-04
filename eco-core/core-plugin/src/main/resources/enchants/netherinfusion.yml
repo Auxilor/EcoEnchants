@@ -1,0 +1,31 @@
+display-name: "Nether Infusion" 
+description: "Increases damage dealt when in the nether by &a%placeholder%%&8." 
+placeholder: "%level% * 2"
+placeholders: [ ]
+type: normal
+
+targets: 
+  - sword
+  - axe
+  - bow
+  - crossbow
+conflicts:
+  - end_infusion
+rarity: epic
+max-level: 5
+
+tradeable: true 
+discoverable: true
+enchantable: true 
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: "0.02 * %level%"
+
+conditions:
+  - id: in_world
+    args:
+      world: the_nether
+
+#Enchant re-created by: btjt97

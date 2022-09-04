@@ -1,0 +1,25 @@
+display-name: "Thrive" 
+description: "Increases maximum health." 
+placeholder: [ ]
+placeholders: [ ]
+type: normal
+
+targets: 
+  - armor
+conflicts:
+  - prosperity
+rarity: epic
+max-level: 2
+
+tradeable: true 
+discoverable: true
+enchantable: true 
+
+effects:
+  - id: bonus_health
+    args:
+      health: "1 * %level%"
+
+conditions: [ ]
+
+#Enchant re-created by: btjt97

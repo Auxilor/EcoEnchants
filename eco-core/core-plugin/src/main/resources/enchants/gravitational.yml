@@ -1,0 +1,27 @@
+display-name: "Gravitational" 
+description: "Negates levitation effect." 
+placeholder: [ ]
+placeholders: [ ]
+type: special
+
+targets: 
+  - armor
+conflicts: [ ]
+rarity: veryspecial
+max-level: 1 
+
+tradeable: false 
+discoverable: false 
+enchantable: true 
+
+effects:
+  - id: remove_potion_effect
+    args:
+      effect: LEVITATION
+      apply_to_player: true
+    triggers:
+      - take_damage
+
+conditions: [ ]
+
+#Enchant created by: btjt97

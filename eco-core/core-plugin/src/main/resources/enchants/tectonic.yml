@@ -1,0 +1,29 @@
+display-name: "Tectonic"
+description: "Damage all entities around when taking fall damage."
+placeholder: [ ]
+placeholders: [ ]
+type: normal
+
+targets:
+  - boots
+conflicts:
+  - fether_falling
+rarity: epic
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_nearby_entities
+    args:
+      damage: "1 + 1 * %level%"
+      radius: "3 + 2 * %level%"
+      entities: [ ]
+      damage_as_player: true
+      damage_self: false
+    triggers:
+      - fall_damage
+
+#Enchant re-created by: btjt97

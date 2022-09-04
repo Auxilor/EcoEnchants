@@ -1,0 +1,30 @@
+display-name: "Stalwart" 
+description: "Gives a &a%placeholder%%&8 to gain reistance for a short time." 
+placeholder: "2 * %level%"
+placeholders: [ ]
+type: normal
+
+targets: 
+  - armor
+conflicts: [ ]
+rarity: epic
+max-level: 2
+
+tradeable: true 
+discoverable: true
+enchantable: true 
+
+effects:
+  - id: potion_effect
+    args:
+      chance: "2 * %level%"
+      effect: DAMAGE_RESISTANCE
+      level: 1
+      duration: "5 * %level%"
+      apply_to_player: true
+    triggers:
+      - take_entity_damage
+
+conditions: [ ]
+
+#Enchant re-created by: btjt97

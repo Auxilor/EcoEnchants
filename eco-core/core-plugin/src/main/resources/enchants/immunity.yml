@@ -1,0 +1,27 @@
+display-name: "Immunity" 
+description: "Negates poison damage." 
+placeholder: [ ]
+placeholders: [ ]
+type: special
+
+targets: 
+  - armor
+conflicts: [ ]
+rarity: veryspecial
+max-level: 1 
+
+tradeable: false 
+discoverable: false 
+enchantable: true 
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: 0
+    filters:
+      damageCause:
+        - poison
+
+conditions: [ ]
+
+#Enchant created by: btjt97

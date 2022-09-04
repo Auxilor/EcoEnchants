@@ -1,0 +1,26 @@
+display-name: "Smelting" 
+description: "Automatically smelts mined blocks." 
+placeholder: [ ]
+placeholders: [ ]
+type: normal
+
+targets: 
+  - axe
+  - shovel
+  - pickaxe
+conflicts: [ ]
+rarity: veryspecial
+max-level: 1
+
+tradeable: true 
+discoverable: true
+enchantable: true 
+
+effects:
+  - id: autosmelt
+    args:
+      drop_xp: true
+
+conditions: [ ]
+
+#Enchant re-created by: btjt97
