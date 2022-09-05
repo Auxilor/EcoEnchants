@@ -1,6 +1,6 @@
 display-name: "Rapid"
 description: "Lets you shoot full speed arrows with the bow at &a%placeholder%%&r tension"
-placeholder: "1 - (15 * %level%)"
+placeholder: "100 - (15 * %level%)"
 type: normal
 
 targets:
