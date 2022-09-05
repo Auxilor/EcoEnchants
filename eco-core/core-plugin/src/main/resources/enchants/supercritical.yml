@@ -1,0 +1,27 @@
+display-name: "Supercritical"
+description: "Gives a &a%chance%%&r chance to deal &a%damage%x&r damage"
+placeholders:
+  chance: "%level% / 2"
+  damage: "2 + floor(%level%/2)"
+type: normal
+
+targets:
+  - sword
+  - axe
+conflicts: [ ]
+rarity: uncommon
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      chance: "%level% / 200"
+      multiplier: "2 + floor(%level%/2)"
+    triggers:
+      - melee_attack
+
+conditions: [ ]
