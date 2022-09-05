@@ -1,7 +1,12 @@
 package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.fast.fast
+import com.willfp.eco.core.placeholder.InjectablePlaceholder
+import com.willfp.eco.core.placeholder.PlaceholderInjectable
+import com.willfp.eco.core.placeholder.StaticPlaceholder
+import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -15,16 +20,59 @@ import org.bukkit.inventory.ItemStack
 import java.util.*
 
 interface EcoEnchantLike {
+    val config: Config
     val type: EnchantmentType
     val displayName: String
     val unformattedDisplayName: String
     val enchant: Enchantment
     val rarity: EnchantmentRarity
 
-    fun getUnformattedDescription(level: Int): String
-
     // Includes all extra logic not found in vanilla canEnchantItem
     fun canEnchantItem(item: ItemStack): Boolean
+
+    // Method body goes here
+    fun getUnformattedDescription(level: Int): String {
+        // Fetch custom placeholders other than %placeholder%
+        val uncompiledPlaceholders = config.getSubsection("placeholders").getKeys(false).associateWith {
+            config.getString("placeholders.$it")
+        }.toMutableMap()
+
+        // Add %placeholder% placeholder in
+        uncompiledPlaceholders["placeholder"] = config.getString("placeholder")
+
+        // Evaluate each placeholder
+        val placeholders = uncompiledPlaceholders.map { (id, expr) ->
+            DescriptionPlaceholder(
+                id,
+                NumberUtils.evaluateExpression(
+                    expr,
+                    null,
+                    object : PlaceholderInjectable {
+                        override fun getPlaceholderInjections(): List<InjectablePlaceholder> {
+                            return listOf(
+                                StaticPlaceholder(
+                                    "level",
+                                ) { level.toString() }
+                            )
+                        }
+
+                        override fun clearInjectedPlaceholders() {
+                            // Do nothing
+                        }
+                    }
+                )
+            )
+        }
+
+        // Apply placeholders to description
+        val rawDescription = config.getString("description")
+        var description = rawDescription
+        for (placeholder in placeholders) {
+            description = description.replace("%${placeholder.id}%", NumberUtils.format(placeholder.value))
+        }
+
+        return description
+    }
 }
 
 private val ecoEnchantLikes = Caffeine.newBuilder()
@@ -47,6 +95,8 @@ class VanillaEcoEnchantLike(
     override val enchant: Enchantment,
     private val plugin: EcoEnchantsPlugin
 ) : EcoEnchantLike {
+    override val config = plugin.vanillaEnchantsYml.getSubsection(enchant.key.key)
+
     override val type: EnchantmentType =
         EnchantmentTypes.getByID(plugin.vanillaEnchantsYml.getString("${enchant.key.key}.type"))
             ?: EnchantmentTypes.values().first()
@@ -57,10 +107,6 @@ class VanillaEcoEnchantLike(
 
     override val displayName = plugin.vanillaEnchantsYml.getFormattedString("${enchant.key.key}.name")
     override val unformattedDisplayName = plugin.vanillaEnchantsYml.getString("${enchant.key.key}.name")
-
-    override fun getUnformattedDescription(level: Int): String {
-        return plugin.vanillaEnchantsYml.getString("${enchant.key.key}.description")
-    }
 
     override fun canEnchantItem(item: ItemStack): Boolean {
         // Yes this code is copied from EcoEnchant, but I can't be bothered to abstract it properly

@@ -1,6 +1,6 @@
 display-name: "Lifesteal"
 description: "Heals &a%placeholder%%&r of damage dealt"
-placeholder: "%placeholder% * 10"
+placeholder: "%level% * 10"
 type: normal
 
 targets:

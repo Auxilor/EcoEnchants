@@ -1,5 +1,5 @@
 display-name: "Blind"
-description: "&a%placeholder%% &rchance of blinding your opponent"
+description: "Gives a &a%placeholder%%&r chance of blinding your opponent"
 placeholder: "%level%"
 type: normal
 

@@ -44,7 +44,7 @@ abstract class EcoEnchant(
     configProvider: (EcoEnchant) -> Config,
     protected val plugin: EcoEnchantsPlugin
 ) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike {
-    internal val config by lazy { configProvider(this) }
+    override val config by lazy { configProvider(this) }
     override val enchant by lazy { this }
 
     private val levels = Caffeine.newBuilder()
@@ -177,49 +177,6 @@ abstract class EcoEnchant(
 
     fun registerListener(listener: Listener) {
         this.plugin.eventManager.registerListener(listener)
-    }
-
-    override fun getUnformattedDescription(level: Int): String {
-        // Fetch custom placeholders other than %placeholder%
-        val uncompiledPlaceholders = config.getSubsection("placeholders").getKeys(false).associateWith {
-            config.getString("placeholders.$it")
-        }.toMutableMap()
-
-        // Add %placeholder% placeholder in
-        uncompiledPlaceholders["placeholder"] = config.getString("placeholder")
-
-        // Evaluate each placeholder
-        val placeholders = uncompiledPlaceholders.map { (id, expr) ->
-            DescriptionPlaceholder(
-                id,
-                NumberUtils.evaluateExpression(
-                    expr,
-                    null,
-                    object : PlaceholderInjectable {
-                        override fun getPlaceholderInjections(): List<InjectablePlaceholder> {
-                            return listOf(
-                                StaticPlaceholder(
-                                    "level",
-                                ) { level.toString() }
-                            )
-                        }
-
-                        override fun clearInjectedPlaceholders() {
-                            // Do nothing
-                        }
-                    }
-                )
-            )
-        }
-
-        // Apply placeholders to description
-        val rawDescription = config.getString("description")
-        var description = rawDescription
-        for (placeholder in placeholders) {
-            description = description.replace("%${placeholder.id}%", NumberUtils.format(placeholder.value))
-        }
-
-        return description
     }
 
     @Deprecated(

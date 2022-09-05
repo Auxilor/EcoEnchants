@@ -1,5 +1,5 @@
 display-name: "Quake"
-description: "Gives &a%damage%&r damage to all entities in a radius of &a%radius%&r blocks"
+description: "Gives &a%damage%&r damage to all entities in a &a%radius%&r block radius"
 placeholders:
   radius: "2 + %level%"
   damage: "3 * %level%"
