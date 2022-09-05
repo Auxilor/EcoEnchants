@@ -1,0 +1,31 @@
+display-name: "End Affinity"
+description: "Increases damage dealt in the end by &a%placeholder%%"
+placeholder: "20 + %level% * 10"
+type: normal
+
+targets:
+  - sword
+  - bow
+  - trident
+conflicts:
+  - nether_affinity
+rarity: epic
+max-level: 4
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: "1.2 + %level% * 0.1"
+    triggers:
+      - melee_attack
+      - bow_attack
+      - trident_attack
+
+conditions:
+  - id: in_world
+    args:
+      world: world_the_end
