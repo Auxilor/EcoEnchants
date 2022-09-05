@@ -24,7 +24,7 @@ class EnchantmentRapid(
         private val enchant: EcoEnchant
     ) : Listener {
         @EventHandler(
-            priority = EventPriority.HIGH,
+            priority = EventPriority.LOW,
             ignoreCancelled = true
         )
         fun handle(event: EntityShootBowEvent) {

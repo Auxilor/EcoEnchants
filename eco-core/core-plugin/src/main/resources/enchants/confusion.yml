@@ -1,7 +1,7 @@
 display-name: "Confusion"
 description: "&a%placeholder%% &rchance to shuffle your opponents hotbar"
 placeholder: "2 * %level%"
-type: Special
+type: special
 
 targets:
   - sword
