@@ -1,0 +1,16 @@
+display-name: "Replenish"
+description: "Crops are replanted automatically"
+type: normal
+
+targets:
+  - hoe
+conflicts: [ ]
+rarity: legendary
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+conditions: [ ]
+
