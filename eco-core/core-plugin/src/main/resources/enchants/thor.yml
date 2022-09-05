@@ -1,7 +1,7 @@
 display-name: "Thor"
 description: "Gives a &a%chance%%&r chance to strike &a%bolts%&r lightning bolts on your opponent"
 placeholders:
-  chance: "%level% * 1"
+  chance: "%level%"
   bolts: "ceil(%level% / 2)"
 type: normal
 
@@ -20,7 +20,7 @@ effects:
   - id: strike_lightning
     args:
       amount: "ceil(%level% / 2)"
-      chance: "1 * %level%"
+      chance: "%level%"
     triggers:
       - bow_attack
 
