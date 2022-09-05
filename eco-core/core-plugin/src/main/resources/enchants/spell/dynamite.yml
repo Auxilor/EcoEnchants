@@ -1,0 +1,51 @@
+display-name: "Dynamite" # The name of the enchantment in-game
+description: "Mines blocks in a large area." # The description of the enchantment
+type: spell # The enchantment type, from types.yml
+
+
+
+targets: # The items that the enchantment can be applied to, see targets.yml
+  - pickaxe
+rarity: legendary # The rarity of the enchantment, see rarity.yml
+max-level: 2 # The max level of the enchantment
+
+tradeable: true # If the enchantment can be obtained from villagers
+discoverable: true # If the enchantment can generate naturally in chests
+enchantable: true # If the enchantment can be obtained from enchanting tables
+
+
+effects:
+  - effects:
+    - id: create_explosion
+      args:
+        power: "2 * %level%" 
+        amount: 1  
+    - id: mine_radius
+      args:
+        radius: "2 * %level%"
+        blacklisted_blocks:
+          - obsidian
+          - barrier
+          - bedrock
+        check_hardness: false 
+        disable_on_sneak: true 
+    - id: send_message
+      args:
+        message: "&a&lEcoenchants &8» &rUsed &aDynamite &fspell !"
+        action_bar: false   
+    - id: play_sound
+      args:
+        sound: ENTITY_DRAGON_FIREBALL_EXPLODE
+        pitch: 1
+        volume: 1  
+    - id: break_block        
+    args:
+      run-type: normal
+      cooldown: 60
+      send_cooldown_message: true
+    triggers:
+      - alt_click      
+conditions: 
+  - id: is_sneaking
+    args:
+      inverse: true     

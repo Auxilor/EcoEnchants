@@ -1,0 +1,38 @@
+display-name: "Charge" # The name of the enchantment in-game
+description: "Launches you in the direction you're looking." #The description of the enchantment
+type: spell # The enchantment type, from types.yml
+
+
+
+targets: # The items that the enchantment can be applied to, see targets.yml
+  - sword
+rarity: legendary # The rarity of the enchantment, see rarity.yml
+max-level: 2 # The max level of the enchantment
+
+tradeable: true # If the enchantment can be obtained from villagers
+discoverable: true # If the enchantment can generate naturally in chests
+enchantable: true # If the enchantment can be obtained from enchanting tables
+
+
+effects:
+  - effects:
+      - id: pull_to_location
+        args:
+          velocity: "1.5 * %level%"
+      - id: play_sound
+        args:
+          sound: ENTITY_FIREWORK_ROCKET_LAUNCH
+          pitch: 2
+          volume: 1
+      - id: send_message
+        args:
+          message: "&a&lEcoenchants &8» &rUsed &aCharge &fspell !"
+          action_bar: false             
+    args:
+      run-type: normal
+      cooldown: 40
+      send_cooldown_message: true
+    triggers:
+      - alt_click
+
+conditions: [ ]

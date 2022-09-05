@@ -15,8 +15,15 @@ types:
     high-level-bias: 0
     no-grindstone: true # If enchants of this type should not be removable in the grindstone
 
+  - id: spell
+    format: "<gradient:#0575E6:#1E3FBA>"
+    limit: 1
+    high-level-bias: 0.5
+    no-grindstone: false # If enchants of this type should not be removable in the grindstone
+
   - id: special
     format: "<gradient:#FB57EC:#EF1DEC>"
     limit: 1
     high-level-bias: 0.7
     no-grindstone: false # If enchants of this type should not be removable in the grindstone
+
