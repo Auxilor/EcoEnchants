@@ -1,12 +1,12 @@
 display-name: "Water Affinity"
 description: "Increases damage dealt when in water by &a%placeholder%%"
-placeholder: "(1.0 + (%level% * 0.02)) * 100.0"  
+placeholder: "(1.0 + (%level% * 0.02)) * 100.0"
 type: normal
 
 targets:
-    - sword
+  - sword
 conflicts:
-    - fire_aspect
+  - fire_aspect
 rarity: epic
 max-level: 7
 
@@ -21,5 +21,5 @@ effects:
     triggers:
       - melee_attack
 
-conditions: 
+conditions:
   - id: in_water

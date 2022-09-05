@@ -1,14 +1,16 @@
 display-name: "Carve"
-description: "&a%placeholder%% &8chance to heavily damage nearby entities when you swing"
-placeholder: "10 * %level%"
-type: special
+description: "Give &a%damage%&8 damage to entities within &a%radius%&8 blocks when you swing"
+placeholders:
+  radius: "1 + %level%"
+  damage: "%level% * 2"
+type: normal
 
 targets:
   - axe
 conflicts:
   - cleave
-rarity: special
-max-level: 8
+rarity: legendary
+max-level: 4
 
 tradeable: true
 discoverable: true
@@ -17,10 +19,8 @@ enchantable: true
 effects:
   - id: damage_nearby_entities
     args:
-      chance: "10 * %level%"
-      damage: 2
+      damage: "%level% * 2"
       radius: "0.5 * %level%"
-      entities: [ ]
       damage_as_player: true
       damage_self: false
     triggers:
