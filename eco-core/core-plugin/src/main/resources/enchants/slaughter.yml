@@ -1,17 +1,14 @@
-display-name: "Abattoir"
-description: "Tridents deal &a%placeholder%% &rmore damage against passive mobs"
-placeholder: "30 * %level%"
+display-name: "Slaughter"
+description: "Gives a &a%placeholder%&r bonus to melee damage against passive mobs"
+placeholder: "2.5 * %level%"
 type: normal
 
 targets:
-  - trident
+  - sword
 conflicts:
-  - serrated
-  - bladed
-  - phantasm
-  - pacify
-  - arachnid
-  - impaling
+  - sharpness
+  - smite
+  - bane_of_arthropods
 rarity: common
 max-level: 5
 
@@ -22,9 +19,9 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: "1 + 0.3 * %level%"
+      multiplier: "2.5 * %level%"
     triggers:
-      - trident_attack
+      - melee_attack
     filters:
       entities:
         - cow

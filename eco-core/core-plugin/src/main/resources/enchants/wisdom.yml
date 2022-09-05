@@ -12,9 +12,7 @@ targets:
   - bow
   - crossbow
   - trident
-conflicts:
-  - splash
-  - intellect
+conflicts: [ ]
 rarity: uncommon
 max-level: 3
 
