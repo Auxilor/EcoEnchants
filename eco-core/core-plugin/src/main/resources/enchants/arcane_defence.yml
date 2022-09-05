@@ -1,13 +1,13 @@
-display-name: "Arcanic"
+display-name: "Arcane Defence"
 description: "&a%placeholder%% &8chance to ignore potion damage"
-placeholder: "%level% * 8"
+placeholder: "%level% * 4"
 type: normal
 
 targets:
   - armor
 conflicts: [ ]
 rarity: epic
-max-level: 6
+max-level: 5
 
 tradeable: true
 discoverable: true
@@ -16,7 +16,7 @@ enchantable: true
 effects:
   - id: cancel_event
     args:
-      chance: "%level% * 8"
+      chance: "%level% * 4"
     triggers:
       - take_damage
     filters:
