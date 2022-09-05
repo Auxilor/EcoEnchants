@@ -4,8 +4,8 @@ placeholder: "30 + 20 * %level%"
 type: normal
 
 targets:
-  - bow
-  - crossbow
+  - sword
+  - axe
 conflicts: [ ]
 rarity: uncommon
 max-level: 5
