@@ -1,0 +1,34 @@
+display-name: "Transmission"
+description: "Teleports you &a%placeholder%&8 blocks forward"
+placeholder: "3 + %level% * 2"
+type: spell
+
+targets:
+  - sword
+conflicts: [ ]
+rarity: legendary
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - effects:
+      - id: transmission
+        args:
+          distance: "3 + %level% * 2"
+
+      - id: play_sound
+        args:
+          sound: entity_enderman_teleport
+          pitch: 1.2
+          volume: 1
+
+    args:
+      cooldown: 90
+      send_cooldown_message: true
+    triggers:
+      - alt_click
+
+conditions: [ ]
