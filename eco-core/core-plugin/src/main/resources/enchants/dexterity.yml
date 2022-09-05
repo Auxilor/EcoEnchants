@@ -1,4 +1,4 @@
-display-name: "Dexterous"
+display-name: "Dexterity"
 description: "Increases attack speed by &a%placeholder%%"
 placeholder: "%level% * 10"
 type: normal
