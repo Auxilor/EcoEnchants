@@ -175,19 +175,19 @@ class AnvilSupport(
         val outEnchants = leftEnchants.toMutableMap()
 
         for ((enchant, level) in rightEnchants) {
-            // Running .wrap() to use EcoEnchantLike canEnchantItem logic
-            if (enchant.wrap().canEnchantItem(left) && !outEnchants.containsKey(enchant)) {
-                if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
-                    outEnchants[enchant] = level
-                }
-            }
-
             if (outEnchants.containsKey(enchant)) {
                 val currentLevel = outEnchants[enchant]!!
                 outEnchants[enchant] = if (level == currentLevel) {
                     min(enchant.maxLevel, level + 1)
                 } else {
                     max(level, currentLevel)
+                }
+            } else {
+                // Running .wrap() to use EcoEnchantLike canEnchantItem logic
+                if (enchant.wrap().canEnchantItem(left)) {
+                    if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+                        outEnchants[enchant] = level
+                    }
                 }
             }
         }
