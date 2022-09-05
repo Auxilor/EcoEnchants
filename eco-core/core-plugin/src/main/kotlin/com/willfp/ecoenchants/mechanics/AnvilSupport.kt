@@ -17,7 +17,6 @@ import org.bukkit.event.inventory.PrepareAnvilEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.Damageable
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
-import org.jetbrains.annotations.NotNull
 import java.util.*
 import kotlin.math.abs
 import kotlin.math.max
@@ -90,15 +89,24 @@ class AnvilSupport(
 
             val oldLeft = event.inventory.getItem(0)
 
+            if (result == FAIL) {
+                return@run
+            }
+
             if (oldLeft == null || oldLeft.type != outItem.type) {
                 return@run
             }
 
-            if (result == FAIL || left == old) {
+            if (left == old) {
                 return@run
             }
 
-            val cost = oldCost + price
+            var cost = oldCost + price
+
+            // Unbelievably specific edge case
+            if (oldCost == -price) {
+                cost = price
+            }
 
             // Cost could be less than zero at times, so I include that here.
             if (cost <= 0) {
