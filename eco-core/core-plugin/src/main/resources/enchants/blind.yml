@@ -24,4 +24,5 @@ effects:
       apply_to_player: false
     triggers:
       - melee_attack
+
 conditions: [ ]

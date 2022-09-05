@@ -1,0 +1,26 @@
+display-name: "First Strike"
+description: "Deal &a%placeholder%% &8more damage against victims on max health"
+placeholder: "30 + 20 * %level%"
+type: normal
+
+targets:
+  - bow
+  - crossbow
+conflicts: [ ]
+rarity: uncommon
+max-level: 5
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: "1.3 + 0.2 * %level%"
+    triggers:
+      - melee_attack
+    filters:
+      onMaxHealth: true
+
+conditions: [ ]

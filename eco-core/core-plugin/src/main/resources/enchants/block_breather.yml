@@ -22,4 +22,5 @@ effects:
     filters:
       damageCause:
         - suffocation
+
 conditions: [ ]

@@ -19,5 +19,6 @@ effects:
       multiplier: "1 + 0.05 * %level%"
     triggers:
       - trident_attack
+
 conditions:
   - id: in_water

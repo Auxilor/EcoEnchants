@@ -21,4 +21,5 @@ effects:
       damage: "%level%"
     triggers:
       - melee_attack
+
 conditions: [ ]

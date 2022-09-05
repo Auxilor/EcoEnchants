@@ -22,4 +22,5 @@ effects:
       chance: "15 * %level%"
     triggers:
       - mine_block
+
 conditions: []

@@ -33,4 +33,5 @@ effects:
       send_cooldown_message: false
     triggers:
       - mine_block
+
 conditions: [ ]

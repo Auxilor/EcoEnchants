@@ -22,4 +22,5 @@ effects:
       - bow_attack
     filters:
       onlyBosses: true
+
 conditions: [ ]

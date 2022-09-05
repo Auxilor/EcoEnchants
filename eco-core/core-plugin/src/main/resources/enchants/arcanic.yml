@@ -23,4 +23,5 @@ effects:
       damageCause:
         - poison
         - magic
+
 conditions: [ ]

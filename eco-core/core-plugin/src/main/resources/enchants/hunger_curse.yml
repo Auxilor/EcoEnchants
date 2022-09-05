@@ -17,4 +17,5 @@ effects:
   - id: hunger_multiplier
     args:
       multiplier: "1 + 0.5 * %level%"
+
 conditions: []

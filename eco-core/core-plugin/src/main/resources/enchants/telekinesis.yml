@@ -15,4 +15,5 @@ discoverable: true
 enchantable: true
 
 conditions: [ ]
+
 not-on-players: true

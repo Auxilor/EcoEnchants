@@ -22,4 +22,5 @@ effects:
       amount: "2 * %level%"
     triggers:
       - melee_attack
+
 conditions: [ ]

@@ -19,4 +19,5 @@ effects:
       chance: "2 * %level%"
     triggers:
       - melee_attack
+
 conditions: [ ]

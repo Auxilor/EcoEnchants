@@ -29,4 +29,5 @@ effects:
       entities:
         - spider
         - cave_spider
+
 conditions: [ ]

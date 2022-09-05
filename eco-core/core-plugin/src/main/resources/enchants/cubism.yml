@@ -24,4 +24,5 @@ effects:
       entities:
         - slime
         - magma_cube
+
 conditions: [ ]

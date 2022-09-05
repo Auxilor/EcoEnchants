@@ -25,4 +25,5 @@ effects:
       damage_self: false
     triggers:
       - melee_attack
+
 conditions: [ ]

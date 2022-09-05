@@ -30,4 +30,5 @@ effects:
     filters:
       entities:
         - creeper
+
 conditions: []
