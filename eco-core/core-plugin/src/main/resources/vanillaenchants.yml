@@ -90,7 +90,7 @@ binding_curse:
 
 sharpness:
   name: "Sharpness"
-  description: "Gives a &a%placeholder%&r bonus to melee damage"
+  description: "Deals &a%placeholder%&r bonus melee damage"
   placeholder: "0.5 * %level% + 1"
   type: normal
   rarity: common
