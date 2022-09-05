@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchants.impl
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
+import com.willfp.ecoenchants.target.EnchantLookup.hasEnchantActive
 import org.bukkit.Material
 import org.bukkit.block.data.Ageable
 import org.bukkit.event.EventHandler
@@ -16,10 +17,11 @@ class EnchantmentReplenish(
     force = false
 ) {
     init {
-        this.registerListener(ReplenishHandler(plugin))
+        this.registerListener(ReplenishHandler(this, plugin))
     }
 
     private class ReplenishHandler(
+        private val enchant: EcoEnchant,
         private val plugin: EcoEnchantsPlugin
     ) : Listener {
         @EventHandler(
@@ -27,6 +29,11 @@ class EnchantmentReplenish(
         )
         fun handle(event: BlockBreakEvent) {
             val player = event.player
+
+            if (!player.hasEnchantActive(enchant)) {
+                return
+            }
+
             val block = event.block
             val type = block.type
 
