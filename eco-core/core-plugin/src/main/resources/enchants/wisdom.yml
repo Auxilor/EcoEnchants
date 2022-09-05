@@ -1,5 +1,5 @@
 display-name: "Wisdom"
-description: "&8Increases dropped experience by &a%placeholder%%"
+description: "&rIncreases dropped experience by &a%placeholder%%"
 placeholder: "100 + %level% * 20"
 type: normal
 

@@ -1,5 +1,5 @@
 display-name: "Abrasion"
-description: "Deals &a%placeholder% &8damage to your opponents armor"
+description: "Deals &a%placeholder% &rdamage to your opponents armor"
 placeholder: "%level%"
 type: normal
 

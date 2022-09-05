@@ -1,5 +1,5 @@
 display-name: "Thor"
-description: "Gives a &a%chance%%&8 chance to strike &a%bolts%&8 lightning bolts on your opponent"
+description: "Gives a &a%chance%%&r chance to strike &a%bolts%&r lightning bolts on your opponent"
 placeholders:
   chance: "%level% * 1"
   bolts: "ceil(%level% / 2)"

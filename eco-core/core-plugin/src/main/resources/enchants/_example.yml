@@ -5,7 +5,7 @@
 # _example.yml is not loaded.
 
 display-name: "Example" # The name of the enchantment in-game
-description: "Gives a &a%placeholder%%&8 and a &a+%damage%&8 bonus to damage" # The description of the enchantment
+description: "Gives a &a%placeholder%%&r and a &a+%damage%&r bonus to damage" # The description of the enchantment
 placeholder: "%level% * 20" # The placeholder to show in the enchantment description (optional, can only use custom placeholders)
 placeholders: # Extra placeholders to show in the enchantment description (optional)
   damage: "%level% * 2" # Here, %damage% would be the extra placeholder to use

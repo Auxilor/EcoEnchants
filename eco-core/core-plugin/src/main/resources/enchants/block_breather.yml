@@ -1,5 +1,5 @@
 display-name: "Block Breather"
-description: "&a%placeholder%% &8chance to ignore suffocation damage"
+description: "&a%placeholder%% &rchance to ignore suffocation damage"
 placeholder: "%level% * 15"
 type: normal
 

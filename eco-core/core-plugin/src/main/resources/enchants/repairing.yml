@@ -1,5 +1,5 @@
 display-name: "Repairing"
-description: "Automatically gain &a%amount%&8 durability every &a%frequency% &8seconds"
+description: "Automatically gain &a%amount%&r durability every &a%frequency% &rseconds"
 type: special
 placeholders:
   frequency: "1.5"

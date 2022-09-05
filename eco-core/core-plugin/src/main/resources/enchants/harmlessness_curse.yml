@@ -1,5 +1,5 @@
 display-name: "Curse of Harmlessness"
-description: "Gives a &a%placeholder%% &8chance for attacks to do nothing"
+description: "Gives a &a%placeholder%% &rchance for attacks to do nothing"
 placeholder: "15 * %level%"
 type: curse
 

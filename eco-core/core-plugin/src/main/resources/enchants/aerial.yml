@@ -1,5 +1,5 @@
 display-name: "Aerial"
-description: "Deal &a%placeholder%% &8more arrow damage when you are in air"
+description: "Deal &a%placeholder%% &rmore arrow damage when you are in air"
 placeholder: "10 * %level%"
 type: normal
 

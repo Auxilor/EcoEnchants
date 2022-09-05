@@ -1,5 +1,5 @@
 display-name: "Boss Hunter"
-description: "Deal &a%placeholder%% &8more damage against bosses"
+description: "Deal &a%placeholder%% &rmore damage against bosses"
 placeholder: "10 * %level%"
 type: normal
 

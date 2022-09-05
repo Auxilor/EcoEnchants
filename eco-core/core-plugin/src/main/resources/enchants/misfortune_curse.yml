@@ -1,5 +1,5 @@
 display-name: "Curse of Misfortune"
-description: "Gives a &a%placeholder%% &8chance for blocks to not drop items"
+description: "Gives a &a%placeholder%% &rchance for blocks to not drop items"
 placeholder: "15 * %level%"
 type: curse
 

@@ -1,5 +1,5 @@
 display-name: "Carve"
-description: "Give &a%damage%&8 damage to entities within &a%radius%&8 blocks when you swing"
+description: "Give &a%damage%&r damage to entities within &a%radius%&r blocks when you swing"
 placeholders:
   radius: "1 + %level%"
   damage: "%level% * 2"

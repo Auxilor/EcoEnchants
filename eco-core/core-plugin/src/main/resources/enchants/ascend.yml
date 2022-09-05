@@ -1,5 +1,5 @@
 display-name: "Ascend"
-description: "Levitates you in the air for &a%placeholder%&8 seconds"
+description: "Levitates you in the air for &a%placeholder%&r seconds"
 placeholder: "%level% / 4"
 type: spell
 

@@ -1,5 +1,5 @@
 display-name: "Atmospheric"
-description: "Deal &a%placeholder%% &8more trident damage when you are in air"
+description: "Deal &a%placeholder%% &rmore trident damage when you are in air"
 placeholder: "10 * %level%"
 type: normal
 

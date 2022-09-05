@@ -1,5 +1,5 @@
 display-name: "Blast Mining"
-description: "&a%placeholder%% &8chance to mine blocks in a 3x3 area"
+description: "&a%placeholder%% &rchance to mine blocks in a 3x3 area"
 placeholder: "5 * %level%"
 type: special
 

@@ -1,5 +1,5 @@
 display-name: "Bleed"
-description: "&a%placeholder%% &8chance to cause your opponent to bleed, damaging them repeatedly"
+description: "&a%placeholder%% &rchance to cause your opponent to bleed, damaging them repeatedly"
 placeholder: "1.5 * %level%"
 type: normal
 

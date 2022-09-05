@@ -1,5 +1,5 @@
 display-name: "Curse of Breaklessness"
-description: "Gives a &a%placeholder%%&8 chance to fail to break blocks"
+description: "Gives a &a%placeholder%%&r chance to fail to break blocks"
 placeholder: "15 * %level%"
 type: curse
 

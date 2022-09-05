@@ -1,5 +1,5 @@
 display-name: "Aquatic"
-description: "Trident deals &a%placeholder%% &8additional damage when shot from water"
+description: "Trident deals &a%placeholder%% &radditional damage when shot from water"
 placeholder: "5 * %level%"
 type: normal
 

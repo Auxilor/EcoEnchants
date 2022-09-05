@@ -1,5 +1,5 @@
 display-name: "Thrive"
-description: "Gives &a%placeholder%&8 bonus health"
+description: "Gives &a%placeholder%&r bonus health"
 placeholder: "%level% * 2"
 type: normal
 

@@ -1,5 +1,5 @@
 display-name: "Defusion"
-description: "&8Deal &a%placeholder%% &8more damage against creepers"
+description: "&rDeal &a%placeholder%% &rmore damage against creepers"
 placeholder: "%level% * 10"
 type: Normal
 

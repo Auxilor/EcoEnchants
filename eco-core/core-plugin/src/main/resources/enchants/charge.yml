@@ -1,5 +1,5 @@
 display-name: "Charge"
-description: "Launches you forwards at &a%placeholder%x&8 speed"
+description: "Launches you forwards at &a%placeholder%x&r speed"
 placeholder: "5 * %level%"
 type: spell
 

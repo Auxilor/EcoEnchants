@@ -1,5 +1,5 @@
 display-name: "Bladed"
-description: "Trident deals &a%placeholder%% &8more damage"
+description: "Trident deals &a%placeholder%% &rmore damage"
 placeholder: "0.5 * %level%"
 type: special
 

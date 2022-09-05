@@ -1,5 +1,5 @@
 display-name: "First Strike"
-description: "Deal &a%placeholder%% &8more damage against victims on max health"
+description: "Deal &a%placeholder%% &rmore damage against victims on max health"
 placeholder: "30 + 20 * %level%"
 type: normal
 

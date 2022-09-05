@@ -1,5 +1,5 @@
 display-name: "Butchering"
-description: "Deal &a%placeholder%% &8more damage against passive mobs"
+description: "Deal &a%placeholder%% &rmore damage against passive mobs"
 placeholder: "25 * %level%"
 type: normal
 

@@ -1,5 +1,5 @@
 display-name: "Rapid"
-description: "Lets you shoot full speed arrows with the bow at &a%placeholder%%&8 tension"
+description: "Lets you shoot full speed arrows with the bow at &a%placeholder%%&r tension"
 placeholder: "1 - (15 * %level%)"
 type: normal
 

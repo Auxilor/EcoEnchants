@@ -1,5 +1,5 @@
 display-name: "Abattoir"
-description: "Tridents deal &a%placeholder%% &8more damage against passive mobs"
+description: "Tridents deal &a%placeholder%% &rmore damage against passive mobs"
 placeholder: "30 * %level%"
 type: normal
 
