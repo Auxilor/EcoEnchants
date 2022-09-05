@@ -1,10 +1,10 @@
 display-name: "Rocket Saver"
 description: "Gives a &a%placeholder%%&r chance to not consume fireworks when boosting"
 placeholder: "%level% * 20"
-type: elytra
+type: normal
 
 targets:
-  - armor
+  - elytra
 conflicts: [ ]
 rarity: rare
 max-level: 3
