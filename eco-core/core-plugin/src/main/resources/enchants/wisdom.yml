@@ -26,7 +26,5 @@ effects:
   - id: xp_multiplier
     args:
       multiplier: "1.0 + (%level% * 0.2)"
-    triggers:
-      - gain_xp
 
 conditions: [ ]
