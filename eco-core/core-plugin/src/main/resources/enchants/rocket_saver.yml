@@ -1,0 +1,21 @@
+display-name: "Rocket Saver"
+description: "Gives a &a%placeholder%%&r chance to not consume fireworks when boosting"
+placeholder: "%level% * 20"
+type: elytra
+
+targets:
+  - armor
+conflicts: [ ]
+rarity: rare
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: elytra_boost_save_chance
+    args:
+      chance: "%level% * 0.2"
+
+conditions: [ ]
