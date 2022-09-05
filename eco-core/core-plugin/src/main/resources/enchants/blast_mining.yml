@@ -1,14 +1,12 @@
 display-name: "Blast Mining"
 description: "&a%placeholder%% &8chance to mine blocks in a 3x3 area"
 placeholder: "5 * %level%"
-type: normal
+type: special
 
 targets:
   - pickaxe
-conflicts:
-  - drill
-  - vein
-rarity: legendary
+conflicts: [ ]
+rarity: special
 max-level: 3
 
 tradeable: true
