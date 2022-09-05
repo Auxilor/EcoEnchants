@@ -15,6 +15,7 @@ import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import com.willfp.ecoenchants.target.EnchantmentTargets
@@ -233,6 +234,10 @@ abstract class EcoEnchant(
         }
 
         if (item.fast().getEnchants(true).any { (enchant, _) -> enchant.conflictsWithDeep(this) }) {
+            return false
+        }
+
+        if (item.fast().getEnchants(true).size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
             return false
         }
 

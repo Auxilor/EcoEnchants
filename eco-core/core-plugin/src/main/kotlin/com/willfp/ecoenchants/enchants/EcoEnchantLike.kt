@@ -8,6 +8,7 @@ import com.willfp.eco.core.placeholder.PlaceholderInjectable
 import com.willfp.eco.core.placeholder.StaticPlaceholder
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
@@ -119,6 +120,10 @@ class VanillaEcoEnchantLike(
         }
 
         if (item.fast().getEnchants(true).any { (enchant, _) -> enchant.conflictsWithDeep(this.enchant) }) {
+            return false
+        }
+
+        if (item.fast().getEnchants(true).size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
             return false
         }
 
