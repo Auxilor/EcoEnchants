@@ -171,7 +171,7 @@ fortune:
 power:
   name: "Power"
   description: "Gives a &a%placeholder%%&r bonus to arrow damage"
-  placeholder: "0.25 * (%level% + 1)"
+  placeholder: "25 * (%level% + 1)"
   type: normal
   rarity: common
 
