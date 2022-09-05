@@ -1,13 +1,13 @@
 display-name: "Wound"
-description: "&a%chance%%&r chance to cause your opponent to bleed, getting &a%damage% &rrepetitive damage for &a%duration%s&r."
+description: "Gives a &a%chance%%&8 chance to give your opponent &a%damage% &8damage for &a%duration%&8 seconds"
 placeholders:
   chance: "%level% * 3"
-  duration: "(%level% * 5.0) / 20.0"
+  duration: "0.75 * (%level% + 2)"
   damage: "1"
 type: normal
 
 targets:
-  - bow 
+  - bow
   - crossbow
 conflicts:
   - sharpness
@@ -21,9 +21,10 @@ enchantable: true
 effects:
   - id: bleed
     args:
-      amount: "%level% * 5"
       chance: "3 * %level%"
+      amount: "%level% + 2"
       damage: 1
+      interval: 15
     triggers:
       - bow_attack
 

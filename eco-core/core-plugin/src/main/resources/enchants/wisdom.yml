@@ -1,6 +1,6 @@
 display-name: "Wisdom"
-description: "&8Increases dropped experience by &a%placeholder%%&r."
-placeholder: "(1.0 + (%level% * 0.02)) * 100.0"  
+description: "&8Increases dropped experience by &a%placeholder%%"
+placeholder: "100 + %level% * 20"
 type: normal
 
 targets:
@@ -25,7 +25,7 @@ enchantable: true
 effects:
   - id: xp_multiplier
     args:
-      multiplier: "1.0 + (%level% * 0.02)"
+      multiplier: "1.0 + (%level% * 0.2)"
     triggers:
       - gain_xp
 
