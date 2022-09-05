@@ -13,6 +13,7 @@ import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.LoreConversion
 import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
+import com.willfp.ecoenchants.enchants.impl.EnchantmentRapid
 import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
 import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
 import com.willfp.ecoenchants.enchants.registerVanillaEnchants
@@ -50,6 +51,7 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
         EnchantmentTelekinesis(this)
         EnchantmentPermanenceCurse(this)
         EnchantmentRepairing(this)
+        EnchantmentRapid(this)
 
         registerVanillaEnchants(this)
 

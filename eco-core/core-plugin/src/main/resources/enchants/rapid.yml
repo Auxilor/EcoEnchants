@@ -1,0 +1,18 @@
+display-name: "Rapid"
+description: "Lets you shoot full speed arrows with the bow at &a%placeholder%%&8 tension"
+placeholder: "1 - (15 * %level%)"
+type: normal
+
+targets:
+  - bow
+conflicts: [ ]
+rarity: epic
+max-level: 6
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+conditions: [ ]
+
+percent-faster-per-level: 15
