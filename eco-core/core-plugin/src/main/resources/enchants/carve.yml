@@ -7,8 +7,7 @@ type: normal
 
 targets:
   - axe
-conflicts:
-  - cleave
+conflicts: [ ]
 rarity: legendary
 max-level: 4
 
