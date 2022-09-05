@@ -61,6 +61,12 @@ fun EcoEnchantLike.getFormattedName(level: Int): String {
     }
 }
 
+private val resetTags = arrayOf(
+    "<reset>",
+    "&r",
+    "§r"
+)
+
 fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> {
     val plugin = EcoEnchantsPlugin.instance
 
@@ -68,7 +74,10 @@ fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> {
         val descriptionFormat = plugin.configYml.getString("display.descriptions.format")
         val wrap = plugin.configYml.getInt("display.descriptions.word-wrap")
 
-        val description = this.getUnformattedDescription(level)
+        var description = this.getUnformattedDescription(level)
+        for (tag in resetTags) {
+            description = description.replace(tag, tag + descriptionFormat)
+        }
 
         WordUtils.wrap(description, wrap, "\n", false)
             .lines()

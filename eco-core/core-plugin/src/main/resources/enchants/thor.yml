@@ -1,0 +1,27 @@
+display-name: "Thor"
+description: "Gives a &a%chance%%&8 chance to strike &a%bolts%&8 lightning bolts on your opponent"
+placeholders:
+  chance: "%level% * 1"
+  bolts: "ceil(%level% / 2)"
+type: normal
+
+targets:
+  - bow 
+  - crossbow
+conflicts: []
+rarity: epic
+max-level: 6
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: strike_lightning
+    args:
+      amount: "ceil(%level% / 2)"
+      chance: "1 * %level%"
+    triggers:
+      - bow_attack
+
+conditions: [ ]
