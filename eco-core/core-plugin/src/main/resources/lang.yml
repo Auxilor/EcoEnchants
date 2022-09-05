@@ -4,7 +4,7 @@ messages:
   not-player: "&cThis command must be run by a player"
   invalid-command: "&cUnknown subcommand!"
   reloaded: "Reloaded! Took %time%ms"
-  on-cooldown: "&fThis spell is on cooldown! Wait &a%seconds% Seconds&f to use &a%name%&f again."
+  on-cooldown: "&cThis effect is on cooldown! &fTime left: &a%seconds% seconds"
   invalid-player: "&cInvalid Player!"
   requires-player: "&cRequires a Player!"
   cannot-afford-type: "&cYou can't afford to do this! &fCost: &a%cost% %type%"
