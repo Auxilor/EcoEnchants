@@ -6,6 +6,8 @@ type: normal
 targets:
   - sword
   - axe
+  - bow
+  - crossbow
 conflicts: [ ]
 rarity: rare
 max-level: 7
@@ -20,6 +22,7 @@ effects:
       multiplier: "1 + 0.05 * %level%"
     triggers:
       - melee_attack
+      - bow_attack
     filters:
       entities:
         - slime

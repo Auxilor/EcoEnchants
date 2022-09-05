@@ -1,12 +1,13 @@
-display-name: "Atmospheric"
-description: "Deal &a%placeholder%% &rmore trident damage when you are in air"
+display-name: "Jumpshot"
+description: "Deal &a%placeholder%%&r more damage in the air"
 placeholder: "10 * %level%"
 type: normal
 
 targets:
-  - trident
+  - bow
+  - crossbow
 conflicts: [ ]
-rarity: epic
+rarity: uncommon
 max-level: 3
 
 tradeable: true

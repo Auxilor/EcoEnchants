@@ -1,5 +1,5 @@
 display-name: "Confusion"
-description: "&a%placeholder%% &rchance to shuffle your opponents hotbar"
+description: "Gives a &a%placeholder%% &rchance to shuffle your opponents hotbar"
 placeholder: "2 * %level%"
 type: special
 

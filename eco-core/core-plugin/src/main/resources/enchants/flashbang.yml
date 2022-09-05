@@ -1,0 +1,37 @@
+display-name: "Flashbang"
+description: "Gives a &a%placeholder%%&r chance of blinding your opponent"
+placeholder: "%level%"
+type: normal
+
+targets:
+  - bow
+  - crossbow
+conflicts: [ ]
+rarity: rare
+max-level: 6
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - effects:
+      - id: potion_effect
+        args:
+          effect: blindness
+          level: 3
+          duration: 30
+          apply_to_player: false
+      - id: play_sound
+        args:
+          sound: entity_dragon_fireball_explode
+          pitch: 1.5
+          volume: 4
+        mutators:
+          - id: victim_as_player
+    args:
+      chance: "%level%"
+    triggers:
+      - bow_attack
+
+conditions: [ ]

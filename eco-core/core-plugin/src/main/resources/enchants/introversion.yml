@@ -1,5 +1,5 @@
-display-name: "Slaughter"
-description: "Gives a &a%placeholder%&r bonus to melee damage against passive mobs"
+display-name: "Introversion"
+description: "Gives a &a%placeholder%&r bonus to melee damage against players"
 placeholder: "2.5 * %level%"
 type: normal
 
@@ -9,7 +9,7 @@ conflicts:
   - sharpness
   - smite
   - bane_of_arthropods
-  - introversion
+  - slaughter
 rarity: common
 max-level: 5
 
@@ -25,16 +25,6 @@ effects:
       - melee_attack
     filters:
       entities:
-        - cow
-        - sheep
-        - pig
-        - horse
-        - parrot
-        - cat
-        - ocelots
-        - fox
-        - villager
-        - axolotl
-        - chicken
+        - player
 
 conditions: [ ]
