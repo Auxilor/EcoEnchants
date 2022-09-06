@@ -1,6 +1,6 @@
 display-name: "Thrive"
 description: "Gives &a%placeholder%&r bonus health"
-placeholder: "%level% * 2"
+placeholder: "%level%"
 type: normal
 
 targets:
@@ -16,6 +16,6 @@ enchantable: true
 effects:
   - id: bonus_health
     args:
-      health: "%level% * 2"
+      health: "%level%"
 
 conditions: [ ]
