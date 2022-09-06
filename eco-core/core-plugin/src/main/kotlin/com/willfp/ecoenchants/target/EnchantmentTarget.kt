@@ -73,12 +73,12 @@ enum class TargetSlot(
     HANDS({
         listOf(
             it.inventory.heldItemSlot,
-            45
+            40
         )
     }),
 
     ARMOR({
-        listOf(5, 6, 7, 8)
+        (36..39).toList()
     }),
 
     ANY({
