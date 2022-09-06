@@ -18,6 +18,6 @@ effects:
     args:
       drop_xp: true
     triggers:
-      - block_drop_item
+      - block_item_drop
 
 conditions: [ ]
