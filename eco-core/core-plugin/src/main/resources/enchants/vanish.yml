@@ -3,7 +3,7 @@ description: "Gives a &a%chance%%&r chance to disappear for &a%seconds%&r second
 placeholders:
   chance: "2 * %level%"
   seconds: "0.5 + floor(%level% / 4)"
-type: spell
+type: normal
 
 targets:
   - armor
