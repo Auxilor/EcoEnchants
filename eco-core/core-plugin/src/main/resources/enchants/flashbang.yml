@@ -20,7 +20,7 @@ effects:
         args:
           effect: blindness
           level: 3
-          duration: 30
+          duration: 50
           apply_to_player: false
       - id: play_sound
         args:
