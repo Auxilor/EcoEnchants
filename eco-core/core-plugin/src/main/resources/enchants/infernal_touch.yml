@@ -1,0 +1,23 @@
+display-name: "Infernal Touch"
+description: "Automatically smelts mined blocks"
+type: normal
+
+targets:
+  - pickaxe
+conflicts:
+  - silk_touch
+rarity: legendary
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: autosmelt
+    args:
+      drop_xp: true
+    triggers:
+      - block_drop_item
+
+conditions: [ ]
