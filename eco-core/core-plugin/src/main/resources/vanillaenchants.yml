@@ -275,6 +275,6 @@ soul_speed:
 swift_sneak:
   name: "Swift Sneak"
   description: "Reduces sneaking movement slowdown by &a%placeholder%%"
-  placeholder: "((%level% * 15) < 100) * (%level% * 15) + (100 < %level% * 15) * 100"
+  placeholder: "min(%level% * 15, 100)"
   type: normal
   rarity: common
