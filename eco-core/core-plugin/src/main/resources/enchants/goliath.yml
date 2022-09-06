@@ -1,5 +1,5 @@
 display-name: "Goliath"
-description: "Deal &a%placeholder%% &rmore damage for the amount of times more health your opponent has than you, up to &a%limit%%"
+description: "Deal &a%damage%% &rmore damage for the amount of times more health your opponent has than you, up to &a%limit%%"
 placeholders:
   damage: "50 + %level% * 10"
   limit: "20 + %level% * 15"
