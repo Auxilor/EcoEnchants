@@ -1,0 +1,25 @@
+display-name: "Goliath"
+description: "Deal &a%placeholder%% &rmore damage for the amount of times more health your opponent has than you, up to &a%limit%%"
+placeholders:
+  damage: "50 + %level% * 10"
+  limit: "20 + %level% * 15"
+type: normal
+
+targets:
+  - sword
+conflicts: [ ]
+rarity: rare
+max-level: 6
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: "1 + min((%victim_health% / %player_health%) * (0.5 + %level% * 0.1), 0.2 + %level% * 0.15)"
+    triggers:
+      - melee_attack
+
+conditions: [ ]

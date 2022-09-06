@@ -21,6 +21,6 @@ effects:
     triggers:
       - melee_attack
     filters:
-      onMaxHealth: true
+      on_max_health: true
 
 conditions: [ ]
