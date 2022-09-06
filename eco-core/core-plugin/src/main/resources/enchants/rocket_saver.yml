@@ -16,6 +16,6 @@ enchantable: true
 effects:
   - id: elytra_boost_save_chance
     args:
-      chance: "%level% * 0.2"
+      chance: "%level% * 20"
 
 conditions: [ ]
