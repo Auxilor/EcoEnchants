@@ -1,5 +1,5 @@
 display-name: "Goliath"
-description: "Deal &a%damage%x &rmore damage for the amount of times more health your opponent has than you, up to &a%limit%x"
+description: "Deal &a%damage%x &rmore damage for each times your opponent has more health than you, up to &a%limit%x"
 placeholders:
   damage: "0.5 + %level% * 0.1"
   limit: "1.6 + %level% * 0.4"
@@ -18,7 +18,7 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: "1 + min(max((%victim_health% / %player_health%), 1) * (0.5 + %level% * 0.1), 1.6 + %level% * 0.4)"
+      multiplier: "1 + min(max(%victim_health% / %player_health% - 1, 0) * (0.5 + %level% * 0.1), 1.6 + %level% * 0.4)"
     triggers:
       - melee_attack
 
