@@ -127,7 +127,7 @@ class VanillaEcoEnchantLike(
             return false
         }
 
-        if (item.type == Material.BOOK || item.type == Material.ENCHANTED_BOOK) {
+        if (item.type == Material.ENCHANTED_BOOK) {
             return true
         }
 
