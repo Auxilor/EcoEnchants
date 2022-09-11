@@ -103,7 +103,11 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         val pdc = fast.persistentDataContainer
 
         if (!pdc.has(internalHideEnchants, PersistentDataType.INTEGER)) {
-            fast.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS)
+            fast.removeItemFlags(ItemFlag.HIDE_ENCHANTS)
+
+            if (itemStack.type == Material.ENCHANTED_BOOK) {
+                fast.removeItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
+            }
         }
 
         pdc.remove(internalHideEnchants)
