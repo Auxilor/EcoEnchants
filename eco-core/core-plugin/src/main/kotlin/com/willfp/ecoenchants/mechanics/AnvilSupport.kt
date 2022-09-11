@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.enchants.wrap
 import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy
 import org.bukkit.ChatColor
 import org.bukkit.Material
+import org.bukkit.Tag
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -19,6 +20,7 @@ import org.bukkit.inventory.meta.Damageable
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import java.util.*
 import kotlin.math.abs
+import kotlin.math.ceil
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow
@@ -169,9 +171,31 @@ class AnvilSupport(
             return AnvilResult(left, 0)
         }
 
+        val leftMeta = left.itemMeta
+        val rightMeta = right.itemMeta
+
+        var unitRepairCost = 0
+
+        // Unit repair
         if (left.type != right.type) {
-            if (right.type != Material.ENCHANTED_BOOK) {
-                return FAIL
+            if (right.type.canUnitRepair(left.type) && leftMeta is Damageable) {
+                val perUnit = ceil(left.type.maxDurability / 4.0).toInt()
+
+                val max = ceil(leftMeta.damage.toDouble() / perUnit).toInt()
+                val toDeduct = min(max, right.amount)
+
+                unitRepairCost = toDeduct
+
+                if (toDeduct <= 0) {
+                    return FAIL
+                } else {
+                    leftMeta.damage -= toDeduct * perUnit
+                    right.amount -= toDeduct
+                }
+            } else {
+                if (right.type != Material.ENCHANTED_BOOK) {
+                    return FAIL
+                }
             }
         }
 
@@ -200,10 +224,8 @@ class AnvilSupport(
             }
         }
 
-        val leftMeta = left.itemMeta
-        val rightMeta = right.itemMeta
-
-        if (leftMeta is Damageable && rightMeta is Damageable) {
+        // Item repair - extra check for unit repair cost to prevent weird damage
+        if (leftMeta is Damageable && rightMeta is Damageable && unitRepairCost == 0) {
             val maxDamage = left.type.maxDurability.toInt()
             val leftDurability = maxDamage - leftMeta.damage
             val rightDurability = maxDamage - rightMeta.damage
@@ -233,8 +255,141 @@ class AnvilSupport(
         left.itemMeta = leftMeta
 
         val enchantLevelDiff = abs(leftEnchants.values.sum() - outEnchants.values.sum())
-        val xpCost = plugin.configYml.getDouble("anvil.cost-exponent").pow(enchantLevelDiff) * enchantLevelDiff
+        val xpCost =
+            plugin.configYml.getDouble("anvil.cost-exponent").pow(enchantLevelDiff) * enchantLevelDiff + unitRepairCost
 
         return AnvilResult(left, xpCost.roundToInt())
     }
+}
+
+
+private val repair = mapOf<Collection<Material>, Collection<Material>>(
+    Pair(
+        Tag.PLANKS.values,
+        listOf(
+            Material.WOODEN_SWORD,
+            Material.WOODEN_PICKAXE,
+            Material.WOODEN_AXE,
+            Material.WOODEN_SHOVEL,
+            Material.WOODEN_HOE,
+            Material.SHIELD
+        )
+    ),
+    Pair(
+        listOf(Material.LEATHER),
+        listOf(
+            Material.LEATHER_HELMET,
+            Material.LEATHER_CHESTPLATE,
+            Material.LEATHER_LEGGINGS,
+            Material.LEATHER_BOOTS
+        )
+    ),
+    Pair(
+        listOf(
+            Material.COBBLESTONE,
+            Material.COBBLED_DEEPSLATE,
+            Material.BLACKSTONE
+        ),
+        listOf(
+            Material.STONE_SWORD,
+            Material.STONE_PICKAXE,
+            Material.STONE_AXE,
+            Material.STONE_SHOVEL,
+            Material.STONE_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.IRON_INGOT
+        ),
+        listOf(
+            Material.IRON_HELMET,
+            Material.IRON_CHESTPLATE,
+            Material.IRON_LEGGINGS,
+            Material.IRON_BOOTS,
+            Material.CHAINMAIL_HELMET,
+            Material.CHAINMAIL_CHESTPLATE,
+            Material.CHAINMAIL_LEGGINGS,
+            Material.CHAINMAIL_BOOTS,
+            Material.IRON_SWORD,
+            Material.IRON_PICKAXE,
+            Material.IRON_AXE,
+            Material.IRON_SHOVEL,
+            Material.IRON_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.GOLD_INGOT
+        ),
+        listOf(
+            Material.GOLDEN_HELMET,
+            Material.GOLDEN_CHESTPLATE,
+            Material.GOLDEN_LEGGINGS,
+            Material.GOLDEN_BOOTS,
+            Material.GOLDEN_SWORD,
+            Material.GOLDEN_PICKAXE,
+            Material.GOLDEN_AXE,
+            Material.GOLDEN_SHOVEL,
+            Material.GOLDEN_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.DIAMOND
+        ),
+        listOf(
+            Material.DIAMOND_HELMET,
+            Material.DIAMOND_CHESTPLATE,
+            Material.DIAMOND_LEGGINGS,
+            Material.DIAMOND_BOOTS,
+            Material.DIAMOND_SWORD,
+            Material.DIAMOND_PICKAXE,
+            Material.DIAMOND_AXE,
+            Material.DIAMOND_SHOVEL,
+            Material.DIAMOND_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.NETHERITE_INGOT
+        ),
+        listOf(
+            Material.NETHERITE_HELMET,
+            Material.NETHERITE_CHESTPLATE,
+            Material.NETHERITE_LEGGINGS,
+            Material.NETHERITE_BOOTS,
+            Material.NETHERITE_SWORD,
+            Material.NETHERITE_PICKAXE,
+            Material.NETHERITE_AXE,
+            Material.NETHERITE_SHOVEL,
+            Material.NETHERITE_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.SCUTE
+        ),
+        listOf(
+            Material.TURTLE_HELMET
+        )
+    ),
+    Pair(
+        listOf(
+            Material.PHANTOM_MEMBRANE
+        ),
+        listOf(
+            Material.ELYTRA
+        )
+    )
+)
+
+fun Material.canUnitRepair(other: Material): Boolean {
+    for ((units, repairable) in repair) {
+        if (this in units) {
+            return other in repairable
+        }
+    }
+
+    return false
 }
