@@ -35,7 +35,7 @@ class VillagerSupport(
 
         var multiplier = 0.01
 
-        if (result.type == Material.BOOK || result.type == Material.ENCHANTED_BOOK) {
+        if (result.type == Material.ENCHANTED_BOOK) {
             multiplier *= plugin.configYml.getDouble("villager.book-multiplier")
         }
 

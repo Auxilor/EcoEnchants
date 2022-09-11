@@ -67,8 +67,12 @@ class EnchantingTableSupport(
             }
         }
 
+        if (item.type == Material.BOOK) {
+            item.type = Material.ENCHANTED_BOOK
+        }
+
         var multiplier = 0.01
-        if (item.type == Material.BOOK || item.type == Material.ENCHANTED_BOOK) {
+        if (item.type == Material.ENCHANTED_BOOK) {
             multiplier *= plugin.configYml.getDouble("enchanting-table.book-multiplier")
         }
 
@@ -163,7 +167,8 @@ class EnchantingTableSupport(
 
         val levelScale = ceil(maxObtainableLevel / 30.0).toInt()
 
-        val bottomEnchantLevel = (ceil((baseLevel / 3).coerceAtLeast(1.0)).toInt() * levelScale).coerceAtMost(maxObtainableLevel)
+        val bottomEnchantLevel =
+            (ceil((baseLevel / 3).coerceAtLeast(1.0)).toInt() * levelScale).coerceAtMost(maxObtainableLevel)
         val midEnchantLevel = ((baseLevel * 2 / 3).toInt() + 1) * levelScale
         val topEnchantLevel = baseLevel.coerceAtLeast(bonus * 2.0).toInt() * levelScale
 

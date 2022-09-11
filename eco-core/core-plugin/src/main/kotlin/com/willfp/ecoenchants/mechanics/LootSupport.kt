@@ -38,7 +38,7 @@ class LootSupport(
 
         var multiplier = 0.01
 
-        if (item.type == Material.BOOK || item.type == Material.ENCHANTED_BOOK) {
+        if (item.type == Material.ENCHANTED_BOOK) {
             multiplier *= plugin.configYml.getDouble("loot.book-multiplier")
         }
 
