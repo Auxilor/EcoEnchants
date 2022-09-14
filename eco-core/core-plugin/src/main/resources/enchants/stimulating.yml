@@ -28,8 +28,8 @@ effects:
 
       - id: play_sound
         args:
-          sound: entity_ender_dragon_growl
-          pitch: 1
+          sound: entity_allay_death
+          pitch: 1.2
           volume: 1
 
     args:
