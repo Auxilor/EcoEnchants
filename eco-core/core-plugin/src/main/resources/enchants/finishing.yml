@@ -17,7 +17,7 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: "1 + ((1 - %victim_health% / %victim_max_health%) * 100 * 0.002 * %level%)"
+      multiplier: "1 + ((1 - %victim_health% / %victim_max_health%) * 0.2 * %level%)"
     triggers:
       - melee_attack
 
