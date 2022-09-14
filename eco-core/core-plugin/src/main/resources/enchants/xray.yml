@@ -42,8 +42,8 @@ effects:
 
       - id: play_sound
         args:
-          sound: entity_ender_dragon_growl
-          pitch: 1
+          sound: entity_enderman_teleport
+          pitch: 0.8
           volume: 1
 
     args:
