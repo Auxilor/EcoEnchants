@@ -21,7 +21,8 @@ effects:
         args:
           effects:
             - id: multiply_all_stats
-              multiplier: "1 + 0.1 * %level%"
+              args:
+                multiplier: "1 + 0.1 * %level%"
           conditions: [ ]
           duration: "3 * %level% * 20"
 
