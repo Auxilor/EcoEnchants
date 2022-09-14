@@ -1,7 +1,7 @@
 display-name: "Streamlining"
 description: "Gives a &a%placeholder%%&r boost to movement speed"
-placeholder: "%level% * 20"
-type: special
+placeholder: "%level% * 5"
+type: normal
 
 targets:
   - boots
@@ -16,6 +16,6 @@ enchantable: true
 effects:
   - id: movement_speed_multiplier
     args:
-      multiplier: "1 + %level% * 0.2"
+      multiplier: "1 + %level% * 0.05"
 
 conditions: [ ]
