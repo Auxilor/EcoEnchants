@@ -1,10 +1,6 @@
 # Rarity option does not affect vanilla enchantments.
 # The option is there for the display option to sort by rarity.
 
-# If you enable custom max levels for a vanilla enchant you have to also specify conflicts,
-# if you don't the enchantment will have no conflicts at all, and vice-versa; changing conflicts
-# will require you to specify the max level.
-
 protection:
   name: "Protection"
   description: "Reduces incoming damage by &a%placeholder%%"

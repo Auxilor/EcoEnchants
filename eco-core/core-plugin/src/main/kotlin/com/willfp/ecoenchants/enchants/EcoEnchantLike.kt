@@ -14,6 +14,7 @@ import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.ecoenchants.vanilla.VanillaEnchantmentData
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
@@ -147,13 +148,21 @@ class VanillaEcoEnchantLike(
     }
 }
 
+private val enchantmentOptions = arrayOf(
+    "max-level",
+    "conflicts"
+)
+
 fun registerVanillaEnchants(plugin: EcoEnchantsPlugin) {
     for (vanilla in plugin.vanillaEnchantsYml.getKeys(false)) {
-        if (plugin.vanillaEnchantsYml.has("$vanilla.max-level")) {
+        if (enchantmentOptions.any { plugin.vanillaEnchantsYml.has("$vanilla.$it") }) {
             plugin.getProxy(EcoCraftEnchantmentManagerProxy::class.java).registerNewCraftEnchantment(
                 Enchantment.getByKey(NamespacedKey.minecraft(vanilla))!!,
-                plugin.vanillaEnchantsYml.getInt("$vanilla.max-level"),
-                plugin.vanillaEnchantsYml.getStrings("$vanilla.conflicts").map { NamespacedKey.minecraft(it) }
+                VanillaEnchantmentData(
+                    plugin.vanillaEnchantsYml.getIntOrNull("$vanilla.max-level"),
+                    plugin.vanillaEnchantsYml.getStringsOrNull("$vanilla.conflicts")
+                        ?.map { NamespacedKey.minecraft(it) }
+                )
             )
         }
     }
