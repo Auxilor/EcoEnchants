@@ -2,7 +2,7 @@ display-name: "Xray"
 description: "Makes ores within &a%radius%&r blocks shine through walls for &a%seconds%&r seconds"
 placeholders:
   seconds: "1 + %level%"
-  radius: "8 + 2 * %level%"
+  radius: "3 + 2 * %level%"
 type: spell
 
 targets:
@@ -47,7 +47,7 @@ effects:
           volume: 1
 
     args:
-      cooldown: 180
+      cooldown: 90
       send_cooldown_message: true
     triggers:
       - alt_click
