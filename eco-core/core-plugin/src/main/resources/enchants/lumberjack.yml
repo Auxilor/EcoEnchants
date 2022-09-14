@@ -1,0 +1,38 @@
+display-name: "Lumberjack"
+description: "Chop down up to &a%placeholder%&r blocks of a tree at once"
+placeholder: "4 * %level%"
+type: normal
+
+targets:
+  - axe
+conflicts: [ ]
+rarity: rare
+max-level: 6
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: mine_vein
+    args:
+      limit: "4 * %level%"
+      blocks:
+        - oak_wood
+        - dark_oak_wood
+        - acacia_wood
+        - jungle_wood
+        - birch_wood
+        - crimson_stem
+        - spruce_wood
+        - warped_stem
+        - oak_log
+        - dark_oak_log
+        - acacia_log
+        - jungle_log
+        - birch_log
+        - spruce_log
+    triggers:
+      - mine_block
+
+conditions: [ ]

@@ -5,7 +5,8 @@ type: special
 
 targets:
   - pickaxe
-conflicts: [ ]
+conflicts:
+  - veinminer
 rarity: special
 max-level: 3
 

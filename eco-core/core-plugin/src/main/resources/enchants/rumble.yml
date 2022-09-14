@@ -1,4 +1,4 @@
-display-name: "Quake"
+display-name: "Rumble"
 description: "Gives &a%damage%&r damage to all entities in a &a%radius%&r block radius"
 placeholders:
   radius: "2 + %level%"
