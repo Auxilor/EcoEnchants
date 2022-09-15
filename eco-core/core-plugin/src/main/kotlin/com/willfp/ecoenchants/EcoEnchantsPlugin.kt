@@ -86,7 +86,10 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
         )
     }
 
-    override fun createDisplayModule(): DisplayModule {
+    override fun createDisplayModule(): DisplayModule? {
+        if (configYml.getBoolOrNull("display.enabled") == false) {
+            return null
+        }
         return EnchantDisplay(this)
     }
 

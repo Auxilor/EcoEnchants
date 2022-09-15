@@ -31,6 +31,8 @@ anvil:
 
 # Options for how enchantments are displayed on items
 display:
+  enabled: true # Setting this to false will disable all visual item modifications
+
   numerals:
     enabled: true # If numerals should be used for the enchantment levels
     threshold: 10 # Above this, numbers will be used instead of numerals
