@@ -5,8 +5,6 @@ import com.willfp.eco.core.command.impl.Subcommand
 import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.util.NumberUtils
-import com.willfp.eco.util.toNiceString
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
@@ -50,7 +48,7 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : Subcommand(
             return
         }
 
-        val allowed = Arrays.stream(Enchantment.values()).filter { enchantment: Enchantment ->
+        val filteredEnchantments = Arrays.stream(Enchantment.values()).filter { enchantment: Enchantment ->
             if (enchantment is com.willfp.ecoenchants.enchants.EcoEnchant) {
                 if (rarity != null) {
                     return@filter enchantment.rarity == rarity
@@ -63,10 +61,21 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : Subcommand(
             false
         }.collect(toList())
 
-        val enchantment = allowed[NumberUtils.randInt(0, allowed.size - 1)]
-        val level = NumberUtils.randInt(1, enchantment.maxLevel)
+        if (filteredEnchantments.isEmpty()) {
+            sender.sendMessage(plugin.langYml.getMessage("no-enchantments"))
+            return
+        }
+
+        //Handle the case where there is only one enchantment to avoid rand exception
+        val randEnchant: Enchantment = if (filteredEnchantments.size == 1) {
+            filteredEnchantments[0]
+        } else {
+            filteredEnchantments[NumberUtils.randInt(0, filteredEnchantments.size - 1)]
+        }
+
+        val level = NumberUtils.randInt(randEnchant.startLevel, randEnchant.maxLevel)
         val itemStack = EnchantedBookBuilder()
-            .addStoredEnchantment(enchantment, level)
+            .addStoredEnchantment(randEnchant, level)
             .build()
 
         //Add the item to the player's inventory if there is space, otherwise drop it at their feet
@@ -77,21 +86,21 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : Subcommand(
         }
 
         var message = plugin.langYml.getMessage("gave-random-book")
-        //Player replacement doesn't work for some reason
+        //Player replacement doesn't work for some reason with %player%
         message = message.replace(
-            "%player%",
-            player.name.toString() + "§r"
+            "%targetplayer%",
+            player.name + "§r"
         )
         message = message.replace(
             "%enchantment%",
-            PlainTextComponentSerializer.plainText().serialize(enchantment.displayName(level)) + "§r"
+            PlainTextComponentSerializer.plainText().serialize(randEnchant.displayName(level)) + "§r"
         )
         sender.sendMessage(message)
 
         var message2 = plugin.langYml.getMessage("received-random-book")
         message2 = message2.replace(
             "%enchantment%",
-            PlainTextComponentSerializer.plainText().serialize(enchantment.displayName(level)) + "§r"
+            PlainTextComponentSerializer.plainText().serialize(randEnchant.displayName(level)) + "§r"
         )
         player.sendMessage(message2)
     }
