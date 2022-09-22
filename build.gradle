@@ -51,6 +51,8 @@ allprojects {
 
         compileOnly 'org.jetbrains:annotations:23.0.0'
         compileOnly 'com.github.ben-manes.caffeine:caffeine:3.0.6'
+        compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+        compileOnly 'com.mojang:datafixerupper:5.0.28'
 
         compileOnly 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10'
     }

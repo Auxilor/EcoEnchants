@@ -5,11 +5,13 @@ import com.willfp.eco.core.command.impl.Subcommand
 import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.util.NumberUtils
-import com.willfp.ecoenchants.enchants.EcoEnchants
+import com.willfp.eco.util.toNiceString
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.Player
 import org.bukkit.util.StringUtil
 import java.util.*
 import java.util.stream.Collectors.toList
@@ -75,16 +77,21 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : Subcommand(
         }
 
         var message = plugin.langYml.getMessage("gave-random-book")
+        //Player replacement doesn't work for some reason
+        message = message.replace(
+            "%player%",
+            player.name.toString() + "§r"
+        )
         message = message.replace(
             "%enchantment%",
-            enchantment.displayName(level).toString() + "§r"
+            PlainTextComponentSerializer.plainText().serialize(enchantment.displayName(level)) + "§r"
         )
         sender.sendMessage(message)
 
         var message2 = plugin.langYml.getMessage("received-random-book")
         message2 = message2.replace(
             "%enchantment%",
-            enchantment.displayName(level).toString() + "§r"
+            PlainTextComponentSerializer.plainText().serialize(enchantment.displayName(level)) + "§r"
         )
         player.sendMessage(message2)
     }
@@ -92,7 +99,8 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : Subcommand(
     override fun tabComplete( sender: CommandSender, args: List<String>): List<String> {
         val completions = mutableListOf<String>()
 
-        val playerNames = EcoEnchants.values().mapNotNull { ChatColor.stripColor(it.displayName) }
+        //Create a list of online players for auto-completion
+        val playerNames = Bukkit.getServer().onlinePlayers.stream().map(Player::getName).collect(toList())
 
         if (args.isEmpty()) {
             // Currently, this case is not ever reached
