@@ -12,6 +12,8 @@ messages:
   enabled-descriptions: "&fYou have successfully &aenabled &fenchantment descriptions!"
   disabled-descriptions: "&fYou have successfully &cdisabled &fenchantment descriptions!"
   descriptions-disabled: "&cEnchantment descriptions are disabled on this server."
+  gave-random-book: "&fYou have successfully &agiven &f%player% a %enchantment% book!"
+  received-random-book: "&fYou have received a random book!"
   not-found: "&cCannot find an enchantment matching name: &f%name%."
   missing-enchant: "&cYou must specify an enchantment!"
 
