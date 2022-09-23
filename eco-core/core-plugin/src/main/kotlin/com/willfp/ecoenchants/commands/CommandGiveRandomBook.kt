@@ -21,6 +21,16 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : Subcommand(
     false
 ) {
 
+    /**
+     * Cache the rarities for tab completion
+     */
+    private var RARITY_NAMES: List<String> = com.willfp.ecoenchants.rarity.EnchantmentRarities.keySet().toList()
+
+    /**
+     * Cache the type names for tab completion
+     */
+    private var TYPE_NAMES: List<String> = com.willfp.ecoenchants.type.EnchantmentTypes.keySet().toList()
+
     override fun onExecute(
         sender: CommandSender,
         args: List<String>
@@ -137,30 +147,5 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : Subcommand(
 
         completions.sort()
         return completions
-    }
-
-    companion object {
-        /**
-         * Cache the rarities for tab completion
-         */
-        private var RARITY_NAMES: List<String> = com.willfp.ecoenchants.rarity.EnchantmentRarities.values().map { it.id }
-
-        /**
-         * Cache the type names for tab completion
-         */
-        private var TYPE_NAMES: List<String> = com.willfp.ecoenchants.type.EnchantmentTypes.values().map { it.id }
-
-
-        /**
-         * Called on /reload.
-         */
-        @ConfigUpdater
-        fun reload() {
-            //Clear and re-cache rarities
-            RARITY_NAMES = com.willfp.ecoenchants.rarity.EnchantmentRarities.values().map { it.id }
-
-            //Clear and re-cache types
-            TYPE_NAMES = com.willfp.ecoenchants.type.EnchantmentTypes.values().map { it.id }
-        }
     }
 }
