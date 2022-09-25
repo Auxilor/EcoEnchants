@@ -44,7 +44,7 @@ object EnchantInfo {
                                 plugin.configYml.getStrings("enchantinfo.item.lore")
                                     .map {
                                         it.replace("%max_level%", enchant.maxLevel.toString())
-                                            .replace("%rarity%", enchant.rarity.displayName)
+                                            .replace("%rarity%", enchant.enchantmentRarity.displayName)
                                             .replace(
                                                 "%targets%",
                                                 enchant.targets.joinToString(", ") { target -> target.displayName }

@@ -1,9 +1,12 @@
 package com.willfp.ecoenchants.target
 
+import com.github.benmanes.caffeine.cache.Caffeine
 import com.google.common.collect.ImmutableSet
+import com.willfp.eco.core.items.HashedItem
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import java.util.concurrent.TimeUnit
 
 object EnchantmentTargets {
     private val BY_ID = mutableMapOf<String, EnchantmentTarget>()
@@ -38,7 +41,9 @@ object EnchantmentTargets {
     }
 
     val ItemStack.isEnchantable: Boolean
-        get() = getForItem(this).isNotEmpty() || this.type == Material.BOOK || this.type == Material.ENCHANTED_BOOK
+        get() = enchantableCache.get(HashedItem.of(this)) {
+            getForItem(this).isNotEmpty() || this.type == Material.BOOK || this.type == Material.ENCHANTED_BOOK
+        }
 
     /**
      * Get all targets.
@@ -77,7 +82,8 @@ object EnchantmentTargets {
     /**
      * Add new [EnchantmentTarget] to EcoEnchants.
      *
-     * Only for internal use, targets are automatically added in the constructor.
+     * Only for internal use, targets are automatically added in the
+     * constructor.
      *
      * @param target The [EnchantmentTarget] to add.
      */
@@ -86,3 +92,7 @@ object EnchantmentTargets {
         BY_ID[target.id] = target
     }
 }
+
+private val enchantableCache = Caffeine.newBuilder()
+    .expireAfterWrite(5, TimeUnit.SECONDS)
+    .build<HashedItem, Boolean>()

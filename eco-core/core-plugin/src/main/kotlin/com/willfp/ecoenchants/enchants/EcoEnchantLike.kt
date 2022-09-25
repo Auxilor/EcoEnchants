@@ -27,7 +27,7 @@ interface EcoEnchantLike {
     val displayName: String
     val unformattedDisplayName: String
     val enchant: Enchantment
-    val rarity: EnchantmentRarity
+    val enchantmentRarity: EnchantmentRarity
 
     // Includes all extra logic not found in vanilla canEnchantItem
     fun canEnchantItem(item: ItemStack): Boolean
@@ -103,7 +103,7 @@ class VanillaEcoEnchantLike(
         EnchantmentTypes.getByID(plugin.vanillaEnchantsYml.getString("${enchant.key.key}.type"))
             ?: EnchantmentTypes.values().first()
 
-    override val rarity: EnchantmentRarity =
+    override val enchantmentRarity: EnchantmentRarity =
         EnchantmentRarities.getByID(plugin.vanillaEnchantsYml.getString("${enchant.key.key}.rarity"))
             ?: EnchantmentRarities.values().first()
 

@@ -64,7 +64,7 @@ abstract class EcoEnchant(
 
     override val type = EnchantmentTypes.getByID(config.getString("type")) ?: EnchantmentTypes.values().first()
 
-    override val rarity =
+    override val enchantmentRarity =
         EnchantmentRarities.getByID(config.getString("rarity")) ?: EnchantmentRarities.values().first()
 
     private val conflictNames = config.getStrings("conflicts")
