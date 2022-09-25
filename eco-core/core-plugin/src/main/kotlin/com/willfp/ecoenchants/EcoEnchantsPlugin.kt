@@ -95,9 +95,7 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
     }
 
     companion object {
-        /**
-         * Instance of EcoEnchants.
-         */
+        /** Instance of EcoEnchants. */
         @JvmStatic
         lateinit var instance: EcoEnchantsPlugin
             private set

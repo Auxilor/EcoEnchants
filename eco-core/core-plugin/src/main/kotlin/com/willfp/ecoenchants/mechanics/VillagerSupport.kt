@@ -50,7 +50,7 @@ class VillagerSupport(
                 continue
             }
 
-            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.rarity.villagerChance * multiplier) {
+            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.villagerChance * multiplier) {
                 continue
             }
 

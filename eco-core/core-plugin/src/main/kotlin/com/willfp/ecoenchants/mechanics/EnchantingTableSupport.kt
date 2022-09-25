@@ -91,11 +91,11 @@ class EnchantingTableSupport(
                 continue
             }
 
-            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.rarity.tableChance * multiplier) {
+            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.tableChance * multiplier) {
                 continue
             }
 
-            if (enchantment.rarity.minimumLevel > cost) {
+            if (enchantment.enchantmentRarity.minimumLevel > cost) {
                 continue
             }
 

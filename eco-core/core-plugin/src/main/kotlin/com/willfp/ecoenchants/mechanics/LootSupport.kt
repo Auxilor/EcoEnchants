@@ -53,7 +53,7 @@ class LootSupport(
                 continue
             }
 
-            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.rarity.lootChance * multiplier) {
+            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.lootChance * multiplier) {
                 continue
             }
 

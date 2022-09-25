@@ -71,6 +71,8 @@ display:
     word-wrap: 32 # Number of characters to have on each line
     format: "&8"
 
+  require-enchantable: true # If EcoEnchants should not display on non-enchantable items.
+
 # Options for the /enchantinfo GUI
 enchantinfo:
   rows: 3 # How many rows for the GUI
