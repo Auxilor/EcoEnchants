@@ -28,11 +28,15 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         props: DisplayProperties,
         vararg args: Any
     ) {
+        if (!itemStack.isEnchantable && plugin.configYml.getBool("display.require-enchantable")) {
+            return
+        }
+
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 
-        // Args represent hide enchants
-        if (args[0] == true) {
+        // Args represent hide enchants - adding extra check ported from 8.x.x
+        if (args[0] == true || pdc.has(internalHideEnchants, PersistentDataType.INTEGER)) {
             fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
             if (itemStack.type == Material.ENCHANTED_BOOK) {
                 fast.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
@@ -99,6 +103,10 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
     }
 
     override fun revert(itemStack: ItemStack) {
+        if (!itemStack.isEnchantable && plugin.configYml.getBool("display.require-enchantable")) {
+            return
+        }
+
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 
@@ -115,12 +123,12 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
 
     override fun generateVarArgs(itemStack: ItemStack): Array<Any> {
         val fast = itemStack.fast()
-        val pdc = fast.persistentDataContainer
 
+        // I'm not including the internal hide enchants check here because... I don't know why.
+        // I'm copying over from 8.x.x because I know it worked then.
         return arrayOf(
             fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
                     || fast.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)
-                    || pdc.has(internalHideEnchants, PersistentDataType.INTEGER)
         )
     }
 }

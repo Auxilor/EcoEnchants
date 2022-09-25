@@ -7,7 +7,7 @@ import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.Objects
 
 interface EnchantmentTarget {
     val id: String
@@ -26,7 +26,7 @@ interface EnchantmentTarget {
 }
 
 class ConfiguredEnchantmentTarget(
-    private val config: Config
+    config: Config
 ) : EnchantmentTarget {
     override val id = config.getString("id")
     override val displayName = config.getFormattedString("display-name")
