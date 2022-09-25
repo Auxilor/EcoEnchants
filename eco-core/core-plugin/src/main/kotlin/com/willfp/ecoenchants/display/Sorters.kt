@@ -100,7 +100,7 @@ object RaritySorter : EnchantmentSorter {
 
         for (rarity in rarities) {
             for (enchantment in children.getSafely(0).sort(enchantments, children.drop(1))) {
-                if (rarity != enchantment.wrap().rarity) {
+                if (rarity != enchantment.wrap().enchantmentRarity) {
                     continue
                 }
 
