@@ -4,6 +4,7 @@ import com.willfp.eco.core.display.Display
 import com.willfp.eco.core.display.DisplayModule
 import com.willfp.eco.core.display.DisplayPriority
 import com.willfp.eco.core.display.DisplayProperties
+import com.willfp.eco.core.fast.FastItemStack
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.commands.CommandToggleDescriptions.Companion.seesEnchantmentDescriptions
@@ -15,11 +16,15 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.set
 
 @Suppress("DEPRECATION")
 class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plugin, DisplayPriority.HIGH) {
-    private val internalHideEnchants =
+    private val hideStateKey =
         plugin.namespacedKeyFactory.create("ecoenchantlore-skip") // Same for backwards compatibility
 
     override fun display(
@@ -35,14 +40,16 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 
-        // Args represent hide enchants - adding extra check ported from 8.x.x
-        if (args[0] == true || pdc.has(internalHideEnchants, PersistentDataType.INTEGER)) {
+        // Args represent hide enchants
+        if (args[0] == true) {
             fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
             if (itemStack.type == Material.ENCHANTED_BOOK) {
                 fast.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS)
             }
-            pdc.set(internalHideEnchants, PersistentDataType.INTEGER, 1)
+            pdc.set(hideStateKey, PersistentDataType.INTEGER, 1)
             return
+        } else {
+            pdc.set(hideStateKey, PersistentDataType.INTEGER, 0)
         }
 
         val lore = fast.lore
@@ -110,7 +117,7 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 
-        if (!pdc.has(internalHideEnchants, PersistentDataType.INTEGER)) {
+        if (pdc.hideState != 1) {
             fast.removeItemFlags(ItemFlag.HIDE_ENCHANTS)
 
             if (itemStack.type == Material.ENCHANTED_BOOK) {
@@ -118,17 +125,25 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
             }
         }
 
-        pdc.remove(internalHideEnchants)
+        pdc.remove(hideStateKey)
     }
 
     override fun generateVarArgs(itemStack: ItemStack): Array<Any> {
         val fast = itemStack.fast()
 
-        // I'm not including the internal hide enchants check here because... I don't know why.
-        // I'm copying over from 8.x.x because I know it worked then.
-        return arrayOf(
-            fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
-                    || fast.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)
-        )
+        return when (fast.hideState) {
+            1 -> arrayOf(true)
+            0 -> arrayOf(false)
+            else -> arrayOf(
+                fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
+                        || fast.hasItemFlag(ItemFlag.HIDE_POTION_EFFECTS)
+            )
+        }
     }
+
+    private val FastItemStack.hideState: Int
+        get() = this.persistentDataContainer.hideState
+
+    private val PersistentDataContainer.hideState: Int
+        get() = this.get(hideStateKey, PersistentDataType.INTEGER) ?: -1
 }
