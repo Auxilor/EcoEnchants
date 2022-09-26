@@ -18,10 +18,9 @@ discoverable: true
 enchantable: true
 
 effects:
-  - id: damage_victim
+  - id: add_damage
     args:
       damage: "2.5 * %level%"
-      use_source: false # If the player should be marked as the damager, will trigger melee_damage and run listeners: set to false if you don't know what this means
     triggers:
       - melee_attack
     filters:
