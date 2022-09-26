@@ -1,0 +1,17 @@
+display-name: "Soulbound"
+description: "Keep this item on death"
+type: special
+
+targets:
+  - all
+conflicts: [ ]
+rarity: veryspecial
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+conditions: [ ]
+
+single-use: false # If soulbound should be removed from the items after death

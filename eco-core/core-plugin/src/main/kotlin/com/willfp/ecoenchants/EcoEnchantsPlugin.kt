@@ -16,6 +16,7 @@ import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
 import com.willfp.ecoenchants.enchants.impl.EnchantmentRapid
 import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
 import com.willfp.ecoenchants.enchants.impl.EnchantmentReplenish
+import com.willfp.ecoenchants.enchants.impl.EnchantmentSoulbound
 import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
 import com.willfp.ecoenchants.enchants.registerVanillaEnchants
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
@@ -54,6 +55,7 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
         EnchantmentRepairing(this)
         EnchantmentRapid(this)
         EnchantmentReplenish(this)
+        EnchantmentSoulbound(this)
 
         registerVanillaEnchants(this)
 

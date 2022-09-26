@@ -6,11 +6,7 @@ import com.willfp.eco.core.config.TransientConfig
 import com.willfp.eco.core.config.config
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.fast.fast
-import com.willfp.eco.core.placeholder.InjectablePlaceholder
-import com.willfp.eco.core.placeholder.PlaceholderInjectable
 import com.willfp.eco.core.placeholder.PlayerStaticPlaceholder
-import com.willfp.eco.core.placeholder.StaticPlaceholder
-import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
@@ -36,7 +32,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.permissions.Permission
 import org.bukkit.permissions.PermissionDefault
 import java.io.File
-import java.util.*
+import java.util.Objects
 
 
 @Suppress("DEPRECATION")
@@ -45,7 +41,7 @@ abstract class EcoEnchant(
     configProvider: (EcoEnchant) -> Config,
     protected val plugin: EcoEnchantsPlugin
 ) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike {
-    override val config by lazy { configProvider(this) }
+    final override val config by lazy { configProvider(this) }
     override val enchant by lazy { this }
 
     private val levels = Caffeine.newBuilder()
@@ -153,7 +149,9 @@ abstract class EcoEnchant(
         // and that way the enchantment isn't registered.
         if (!config.getBool("dont-register")) {
             register()
-            doOnInit()
+            if (plugin.isEnabled) {
+                doOnInit()
+            }
         }
     }
 
