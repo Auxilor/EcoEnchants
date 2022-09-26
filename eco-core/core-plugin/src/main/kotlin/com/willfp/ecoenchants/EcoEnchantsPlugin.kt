@@ -49,14 +49,6 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
     }
 
     override fun handleReloadAdditional() {
-        // Load hardcoded enchantments
-        EnchantmentTelekinesis(this)
-        EnchantmentPermanenceCurse(this)
-        EnchantmentRepairing(this)
-        EnchantmentRapid(this)
-        EnchantmentReplenish(this)
-        EnchantmentSoulbound(this)
-
         registerVanillaEnchants(this)
 
         logger.info(EcoEnchants.values().size.toString() + " Enchants Loaded")

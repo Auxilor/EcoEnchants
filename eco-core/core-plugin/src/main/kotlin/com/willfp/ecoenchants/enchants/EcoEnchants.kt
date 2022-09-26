@@ -4,6 +4,12 @@ import com.google.common.collect.HashBiMap
 import com.google.common.collect.ImmutableSet
 import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
+import com.willfp.ecoenchants.enchants.impl.EnchantmentRapid
+import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
+import com.willfp.ecoenchants.enchants.impl.EnchantmentReplenish
+import com.willfp.ecoenchants.enchants.impl.EnchantmentSoulbound
+import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.target.EnchantmentTargets
@@ -97,6 +103,8 @@ object EcoEnchants {
                 LibReforgeEcoEnchant(id, config, plugin)
             }
         }
+
+        registerHardcodedEnchantments(plugin)
     }
 
     /**
@@ -129,7 +137,8 @@ object EcoEnchants {
     /**
      * Add new [EcoEnchant] to EcoEnchants.
      *
-     * Only for internal use, enchants are automatically added in the constructor.
+     * Only for internal use, enchants are automatically added in the
+     * constructor.
      *
      * @param enchant The [EcoEnchant] to add.
      */
@@ -158,5 +167,15 @@ object EcoEnchants {
 
         Enchantment.registerEnchantment(enchantment)
         EnchantRegistrations.registerEnchantments()
+    }
+
+    /** Register the hardcoded enchantments. */
+    private fun registerHardcodedEnchantments(plugin: EcoEnchantsPlugin) {
+        EnchantmentTelekinesis(plugin)
+        EnchantmentPermanenceCurse(plugin)
+        EnchantmentRepairing(plugin)
+        EnchantmentRapid(plugin)
+        EnchantmentReplenish(plugin)
+        EnchantmentSoulbound(plugin)
     }
 }
