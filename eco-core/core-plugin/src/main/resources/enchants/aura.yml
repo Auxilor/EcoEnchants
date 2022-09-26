@@ -26,5 +26,6 @@ effects:
             multiplier: "1 - %level% * 0.1"
           triggers:
             - take_damage
+      conditions: []
 
 conditions: [ ]

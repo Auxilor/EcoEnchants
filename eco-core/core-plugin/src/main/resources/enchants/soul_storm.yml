@@ -23,6 +23,10 @@ effects:
             - id: damage_multiplier
               args:
                 multiplier: "1.5 + 0.5 * %level%"
+              triggers:
+                - bow_attack
+                - melee_attack
+                - trident_attack
             - id: bonus_health
               args:
                 health: -6
