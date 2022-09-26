@@ -20,7 +20,5 @@ effects:
         arrows: 1
     triggers:
       - shoot_bow
-    filters:
-      onlyBosses: true
 
 conditions: [ ]

@@ -21,6 +21,6 @@ effects:
     triggers:
       - bow_attack
     filters:
-      onlyBosses: true
+      only_bosses: true
 
 conditions: [ ]
