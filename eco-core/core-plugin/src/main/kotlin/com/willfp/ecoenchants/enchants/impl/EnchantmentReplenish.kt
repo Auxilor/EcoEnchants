@@ -16,7 +16,7 @@ class EnchantmentReplenish(
     plugin,
     force = false
 ) {
-    init {
+    override fun onInit() {
         this.registerListener(ReplenishHandler(this, plugin))
     }
 

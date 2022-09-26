@@ -16,7 +16,7 @@ class EnchantmentRapid(
     plugin,
     force = false
 ) {
-    init {
+    override fun onInit() {
         this.registerListener(RapidHandler(this))
     }
 

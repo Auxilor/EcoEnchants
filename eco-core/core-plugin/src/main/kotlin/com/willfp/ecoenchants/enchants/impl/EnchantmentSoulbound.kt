@@ -27,7 +27,7 @@ class EnchantmentSoulbound(
     plugin,
     force = false
 ) {
-    init {
+    override fun onInit() {
         this.registerListener(SoulboundHandler(plugin, this))
     }
 

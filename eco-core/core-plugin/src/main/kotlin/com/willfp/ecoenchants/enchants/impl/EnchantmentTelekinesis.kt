@@ -25,7 +25,7 @@ class EnchantmentTelekinesis(
     plugin,
     force = false
 ) {
-    init {
+    override fun onInit() {
         this.registerListener(TelekinesisHandler(this))
         TelekinesisUtils.registerTest { it.hasEnchantActive(this) }
     }
