@@ -2,7 +2,7 @@ display-name: "Aura"
 description: "Players within &a%blocks%%&r blocks of you take &a%reduction%%&r less damage"
 placeholders:
   reduction: "%level% * 10"
-  radius: "2 + %level% * 2"
+  radius: "3 + %level% * 2"
 type: special
 
 targets:
@@ -19,7 +19,7 @@ enchantable: true
 effects:
   - id: add_permanent_holder_in_radius
     args:
-      radius: "2 + %level% * 2"
+      radius: "3 + %level% * 2"
       effects:
         - id: damage_multiplier
           args:
