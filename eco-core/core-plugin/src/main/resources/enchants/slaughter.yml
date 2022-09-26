@@ -18,9 +18,9 @@ discoverable: true
 enchantable: true
 
 effects:
-  - id: damage_multiplier
+  - id: add_damage
     args:
-      multiplier: "2.5 * %level%"
+      damage: "2.5 * %level%"
     triggers:
       - melee_attack
     filters:
