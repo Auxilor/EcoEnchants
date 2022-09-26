@@ -94,5 +94,5 @@ object EnchantmentTargets {
 }
 
 private val enchantableCache = Caffeine.newBuilder()
-    .expireAfterWrite(5, TimeUnit.SECONDS)
+    .expireAfterAccess(5, TimeUnit.SECONDS)
     .build<HashedItem, Boolean>()
