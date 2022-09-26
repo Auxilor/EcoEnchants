@@ -1,0 +1,30 @@
+display-name: "Aura"
+description: "Players within &a%blocks%%&r blocks of you take &a%reduction%%&r less damage"
+placeholders:
+  reduction: "%level% * 10"
+  radius: "2 + %level% * 2"
+type: special
+
+targets:
+  - chestplate
+  - leggings
+conflicts: [ ]
+rarity: special
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: add_permanent_holder_in_radius
+    args:
+      radius: "2 + %level% * 2"
+      effects:
+        - id: damage_multiplier
+          args:
+            multiplier: "1 - %level% * 0.1"
+          triggers:
+            - take_damage
+
+conditions: [ ]
