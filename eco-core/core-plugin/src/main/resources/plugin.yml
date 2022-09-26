@@ -45,6 +45,7 @@ permissions:
       ecoenchants.command.reload: true
       ecoenchants.command.ecoenchants: true
       ecoenchants.command.toggledescriptions: true
+      ecoenchants.command.giverandombook: true
       ecoenchants.command.enchantinfo: true
   ecoenchants.anvil.*:
     description: All anvil perks
@@ -57,6 +58,9 @@ permissions:
     default: op
   ecoenchants.command.reload:
     description: Allows reloading the config
+    default: op
+  ecoenchants.command.giverandombook:
+    description: Allows giving random books
     default: op
   ecoenchants.command.ecoenchants:
     description: Allows the use of /ecoenchants.
