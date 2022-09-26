@@ -39,11 +39,11 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
 
     init {
         instance = this
+        copyConfigs("enchants")
         EcoEnchants.update(this)
     }
 
     override fun handleEnableAdditional() {
-        copyConfigs("enchants")
         registerHolderProvider { it.heldEnchantLevels }
     }
 
