@@ -14,5 +14,6 @@ class CommandEcoEnchants(plugin: EcoPlugin) : PluginCommand(plugin, "ecoenchants
     init {
         addSubcommand(CommandReload(plugin))
             .addSubcommand(CommandToggleDescriptions(plugin))
+            .addSubcommand(CommandGiveRandomBook(plugin))
     }
 }
