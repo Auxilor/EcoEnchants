@@ -1,0 +1,28 @@
+display-name: "Stun"
+description: "Gives a &a%placeholder%%&r chance to stun attacked mobs for &a1&r second"
+placeholder: "2.5 + 2.5 * %level%"
+type: normal
+
+targets:
+  - sword
+  - bow
+  - trident
+  - crossbow
+conflicts: [ ]
+rarity: rare
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: strip_ai
+    args:
+      duration: 40
+    triggers:
+      - melee_attack
+      - bow_attack
+      - trident_attack
+
+conditions: [ ]
