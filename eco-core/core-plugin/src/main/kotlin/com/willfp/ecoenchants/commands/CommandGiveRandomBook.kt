@@ -47,17 +47,17 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
                 return
             }
 
-        val level = (minLevel..maxLevel).random()
+        val level = (minLevel..maxLevel.coerceAtMost(enchantment.maxLevel)).random()
 
         player.inventory.addItem(EnchantedBookBuilder()
-            .addStoredEnchantment(enchantment, level.coerceAtMost(enchantment.maxLevel))
+            .addStoredEnchantment(enchantment, level)
             .build()).values.forEach {
                 player.world.dropItem(player.location, it)
             }
         sender.sendMessage(plugin.langYml.getMessage("random-book-given")
             .replace("%playername%", player.name)
             .replace("%enchantment%", enchantment.wrap()
-                .getFormattedName(level.coerceAtMost(enchantment.maxLevel))))
+                .getFormattedName(level)))
     }
 
     override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {
