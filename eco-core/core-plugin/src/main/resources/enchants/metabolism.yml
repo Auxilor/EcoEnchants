@@ -1,0 +1,21 @@
+display-name: "Metabolism"
+description: "Increases the hunger gained by eating food by &a%placeholder%%"
+placeholder: "%level% * 12.5"
+type: normal
+
+targets:
+  - chestplate
+conflicts: [ ]
+rarity: legendary
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: food_multiplier
+    args:
+      multiplier: "1 * %level% * 0.125"
+
+conditions: [ ]
