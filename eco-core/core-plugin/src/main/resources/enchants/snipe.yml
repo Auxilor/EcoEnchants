@@ -19,7 +19,7 @@ enchantable: true
 effects:
   - id: damage_multiplier
     args:
-      multiplier: "1 + (%distance% / (11 - ceil(%level / 2))) * 0.01 * %level%"
+      multiplier: "1 + (%distance% / (11 - ceil(%level% / 2))) * 0.01 * %level%"
     triggers:
       - bow_attack
 
