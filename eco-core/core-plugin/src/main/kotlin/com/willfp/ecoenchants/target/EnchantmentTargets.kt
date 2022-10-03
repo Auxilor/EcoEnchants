@@ -4,6 +4,8 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.google.common.collect.ImmutableSet
 import com.willfp.eco.core.items.HashedItem
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.enchants.EcoEnchant
+import com.willfp.ecoenchants.enchants.EcoEnchants
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import java.util.concurrent.TimeUnit
@@ -43,6 +45,11 @@ object EnchantmentTargets {
     val ItemStack.isEnchantable: Boolean
         get() = enchantableCache.get(HashedItem.of(this)) {
             getForItem(this).isNotEmpty() || this.type == Material.BOOK || this.type == Material.ENCHANTED_BOOK
+        }
+
+    val ItemStack.applicableEnchantments: List<EcoEnchant>
+        get() = canEnchantCache.get(HashedItem.of(this)) {
+            EcoEnchants.values().filter { it.canEnchantItem(this) }
         }
 
     /**
@@ -96,3 +103,7 @@ object EnchantmentTargets {
 private val enchantableCache = Caffeine.newBuilder()
     .expireAfterAccess(5, TimeUnit.SECONDS)
     .build<HashedItem, Boolean>()
+
+private val canEnchantCache = Caffeine.newBuilder()
+    .expireAfterAccess(5, TimeUnit.SECONDS)
+    .build<HashedItem, List<EcoEnchant>>()

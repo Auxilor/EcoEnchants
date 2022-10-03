@@ -47,6 +47,7 @@ permissions:
       ecoenchants.command.toggledescriptions: true
       ecoenchants.command.giverandombook: true
       ecoenchants.command.enchantinfo: true
+      ecoenchants.command.gui: true
   ecoenchants.anvil.*:
     description: All anvil perks
     default: op
@@ -70,4 +71,7 @@ permissions:
     default: true
   ecoenchants.command.enchantinfo:
     description: Allows the use of /enchantinfo.
+    default: true
+  ecoenchants.command.gui:
+    description: Allows the use of /ecoenchants gui.
     default: true

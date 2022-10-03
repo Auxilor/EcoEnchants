@@ -65,8 +65,11 @@ abstract class EcoEnchant(
 
     private val conflictNames = config.getStrings("conflicts")
 
+    val conflictsWithEverything = conflictNames.containsIgnoreCase("all")
+
     val conflicts: Collection<Enchantment>
-        get() = conflictNames.mapNotNull { getByKey(NamespacedKey.minecraft(it)) }
+        get() = if (conflictsWithEverything) values().toList()
+        else conflictNames.mapNotNull { getByKey(NamespacedKey.minecraft(it)) }
 
     constructor(
         config: Config,

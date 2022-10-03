@@ -84,10 +84,6 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
         return EnchantDisplay(this)
     }
 
-    override fun getMinimumEcoVersion(): String {
-        return "6.38.0"
-    }
-
     companion object {
         /** Instance of EcoEnchants. */
         @JvmStatic

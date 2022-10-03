@@ -87,12 +87,67 @@ enchantinfo:
     row: 2
     column: 5
     show-max-level: true # Whether the book should be the max level or level 1
+    line-wrap-format: "&a" # Color for line wrapping
     lore: # The description is automatically appended
       - ""
       - "&fMax Level: &a%max_level%"
       - "&fRarity: &a%rarity%"
       - "&fApplicable to: &a%targets%"
       - "&fConflicts with: &a%conflicts%"
+
+  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  custom-slots: [ ]
+
+# Options for the enchant GUI.
+enchant-gui:
+  rows: 6 # How many rows to have in the GUI
+  title: "Enchant GUI" # The title of the GUI
+
+  mask: # The background material
+    items:
+      - black_stained_glass_pane
+    pattern: # 1 for the first item, 2 for the second item, etc
+      - "111101111"
+      - "111111111"
+      - "100000001"
+      - "100000001"
+      - "100000001"
+      - "111111111"
+
+  # Options for the info item
+  info:
+    item: player_head name:"&aHow do I use this?" texture:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjcwNWZkOTRhMGM0MzE5MjdmYjRlNjM5YjBmY2ZiNDk3MTdlNDEyMjg1YTAyYjQzOWUwMTEyZGEyMmIyZTJlYyJ9fX0=
+    lore:
+      - "&fPlace an item in the slot at the top,"
+      - "&fand all the enchantments you can add"
+      - "&fto to this item will show up in the"
+      - "&farea below!"
+    row: 1
+    column: 9
+
+  item-row: 1 # The row for the slot to drop in the item
+  item-column: 5 # The column
+
+  # Options for the page change buttons
+  page-change:
+    forwards:
+      item: arrow name:"&fNext Page" # The item. Will not show if on the last page.
+      row: 6
+      column: 6
+    backwards:
+      item: arrow name:"&fPrevious Page" # The item. Will not show if on the first page.
+      row: 6
+      column: 4
+
+  # Options for the area where the enchantments are shown
+  enchant-area:
+    width: 7 # The width of the enchantment area
+    height: 3 # The height of the enchantment area
+    row: 3 # The row of the top-left corner of the area
+    column: 2 # The column of the top-left corner of the area
+
+  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  custom-slots: [ ]
 
 # Options for converting lore-based enchants (from other plugins) with EcoEnchants enchantments
 # with the same names. If you're switching over from another plugin and don't want your players to

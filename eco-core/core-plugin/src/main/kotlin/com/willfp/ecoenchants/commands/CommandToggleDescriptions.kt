@@ -42,7 +42,7 @@ class CommandToggleDescriptions(plugin: EcoPlugin) : Subcommand(
             NamespacedKeyUtils.create("ecoenchants", "descriptions_enabled"),
             PersistentDataKeyType.BOOLEAN,
             true
-        ).player()
+        )
 
         val Player.seesEnchantmentDescriptions: Boolean
             get() = this.profile.read(descriptionsKey)

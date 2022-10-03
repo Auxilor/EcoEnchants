@@ -100,23 +100,26 @@ fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> {
             i++
         }
 
-        /** Replace reset tags with description format. */
+        // Replace reset tags with description format
         for (tag in resetTags) {
             description = description.replace(tag, tag + descriptionFormat)
         }
 
-        /** Wrap the lines. */
+        // Wrap the lines
         val wrapped = WordUtils.wrap(description, wrap, "\n", false)
             .lines()
-            .map { StringUtils.format(descriptionFormat + it) }
+            .map {
+                // Swap back in placeholders
+                var string = it
+                for ((mock, id) in mockPlaceholderIDs) {
+                    string = string.replace(mock, mockPlaceholderMap[id] ?: "")
+                }
 
-        /** Swap back in the original placeholder. */
-        wrapped.map {
-            var string = it
-            for ((mock, id) in mockPlaceholderIDs) {
-                string = string.replace(mock, mockPlaceholderMap[id] ?: "")
+                StringUtils.format(
+                    descriptionFormat + string
+                )
             }
-            string
-        }
+
+        wrapped
     }
 }

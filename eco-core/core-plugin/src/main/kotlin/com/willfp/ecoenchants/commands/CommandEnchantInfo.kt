@@ -1,16 +1,16 @@
 package com.willfp.ecoenchants.commands
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.command.impl.PluginCommand
+import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.EnchantInfo
+import com.willfp.ecoenchants.enchants.EnchantGUI
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.util.StringUtil
 
 
-class CommandEnchantInfo(plugin: EcoPlugin) : PluginCommand(
+class CommandEnchantInfo(plugin: EcoEnchantsPlugin) : PluginCommand(
     plugin, "enchantinfo", "ecoenchants.command.enchantinfo", true
 ) {
     override fun onExecute(sender: CommandSender, args: List<String>) {
@@ -35,7 +35,7 @@ class CommandEnchantInfo(plugin: EcoPlugin) : PluginCommand(
             return
         }
 
-        EnchantInfo.open(sender, plugin, enchantment)
+        EnchantGUI.openInfoGUI(sender, enchantment, plugin as EcoEnchantsPlugin)
     }
 
     override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {

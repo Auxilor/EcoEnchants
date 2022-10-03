@@ -20,3 +20,4 @@ messages:
 
 all: "All"
 no-conflicts: "No Conflicts"
+all-conficts: "All Other Enchantments"

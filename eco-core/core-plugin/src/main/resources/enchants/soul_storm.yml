@@ -1,5 +1,5 @@
 display-name: "Soul Storm"
-description: "Gives a &a%bonus%%&r to attack damage for &a%seconds%&r seconds at the expense of &a3&r hearts"
+description: "Gives a &a%bonus%% bonus&r to attack damage for &a%seconds%&r seconds at the expense of &a3&r hearts"
 placeholders:
   bonus: "150 + 50 * %level%"
   seconds: "15 + 5 * %level%"
