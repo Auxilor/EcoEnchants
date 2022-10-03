@@ -1,0 +1,21 @@
+display-name: "Superior"
+description: "Gives a &a%placeholder%%&r boost to all stats"
+placeholder: "%level% * 2"
+type: special
+
+targets:
+  - armor
+conflicts: [ ]
+rarity: veryspecial
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: multiply_all_stats
+    args:
+      multiplier: "1 + 0.02 * %level%"
+
+conditions: [ ]
