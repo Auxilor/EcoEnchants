@@ -18,6 +18,12 @@ effects:
     triggers:
       - bow_attack
 
+  - id: play_sound
+    args:
+      sound: entity_enderman_teleport
+      pitch: 1.2
+      volume: 10
+
 conditions: [ ]
 
 mutators:
