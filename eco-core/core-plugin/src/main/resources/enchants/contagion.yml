@@ -1,7 +1,7 @@
 display-name: "Contagion"
 description: "Gives a &a%placeholder%%&r chance to spawn a cloud of poison around where your trident lands"
 placeholder: "5 * %level%"
-type: special
+type: normal
 
 targets:
   - trident

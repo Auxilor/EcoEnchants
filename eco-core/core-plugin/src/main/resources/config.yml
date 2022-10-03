@@ -114,6 +114,9 @@ enchant-gui:
       - "100000001"
       - "111111111"
 
+  # Empty item to show when there is no enchanted book
+  empty-item: gray_stained_glass_pane name:""
+
   # Options for the info item
   info:
     item: player_head name:"&aHow do I use this?" texture:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjcwNWZkOTRhMGM0MzE5MjdmYjRlNjM5YjBmY2ZiNDk3MTdlNDEyMjg1YTAyYjQzOWUwMTEyZGEyMmIyZTJlYyJ9fX0=

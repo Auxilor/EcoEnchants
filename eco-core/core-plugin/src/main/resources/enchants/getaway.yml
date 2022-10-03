@@ -1,6 +1,6 @@
 display-name: "Getaway"
-description: "Gain a &a%placeholder%%&r bonus to movement speed below &a20%&r health"
-placeholder: "%level%"
+description: "Gain a &a%placeholder%x&r bonus to movement speed below &a20%&r health"
+placeholder: "1 + 0.1 * level%"
 type: normal
 
 targets:

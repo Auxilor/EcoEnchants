@@ -25,6 +25,7 @@ import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.apache.commons.lang.WordUtils
+import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -177,16 +178,18 @@ object EnchantGUI {
 private class EnchantmentScrollPane(
     private val plugin: EcoEnchantsPlugin
 ) : GUIComponent {
+    private val defaultSlot = slot(Items.lookup(plugin.configYml.getString("enchant-gui.empty-item")))
+
     override fun getSlotAt(row: Int, column: Int, player: Player, menu: Menu): Slot? {
         val index = column + ((row - 1) * columns) - 1
         val page = menu.getPage(player)
 
-        val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: return null
+        val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: return defaultSlot
         if (enchants.isEmpty()) {
-            return null
+            return defaultSlot
         }
 
-        val enchant = enchants.getOrNull(index + size * (page - 1)) ?: return null
+        val enchant = enchants.getOrNull(index + size * (page - 1)) ?: return defaultSlot
 
         return enchant.getInformationSlot(plugin)
     }
@@ -217,13 +220,32 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                     1
                 )
                 .addLoreLines {
+                    // This is horrific and I should refactor it.
+                    val wrappableMap = mutableMapOf<String, String>()
+
+                    fun String.toWrappable(): String {
+                        val unspaced = this.replace(" ", "{_}")
+                        val uncolored = ChatColor.stripColor(unspaced)!!
+
+                        wrappableMap[uncolored] = this
+                        return uncolored
+                    }
+
+                    fun String.replaceInWrappable(): String {
+                        var processed = this
+                        for ((wrappable, original) in wrappableMap) {
+                            processed = processed.replace(wrappable, original)
+                        }
+                        return processed
+                    }
+
                     plugin.configYml.getStrings("enchantinfo.item.lore")
                         .map {
                             it.replace("%max_level%", enchant.maxLevel.toString())
-                                .replace("%rarity%", enchant.enchantmentRarity.displayName)
+                                .replace("%rarity%", enchant.enchantmentRarity.displayName.toWrappable())
                                 .replace(
                                     "%targets%",
-                                    enchant.targets.joinToString(", ") { target -> target.displayName }
+                                    enchant.targets.joinToString(", ") { target -> target.displayName.toWrappable() }
                                 )
                                 .replace(
                                     "%conflicts%",
@@ -231,16 +253,15 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                                         plugin.langYml.getFormattedString("all-conflicts")
                                     } else {
                                         enchant.conflicts.joinToString(", ") { conflict ->
-                                            // Jank to prevent line-wrap on long enchantment names
-                                            conflict.wrap().getFormattedName(0).replace(" ", "{_}")
+                                            conflict.wrap().getFormattedName(0).toWrappable()
                                         }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
                                     }
                                 )
                         }
                         .flatMap {
-                            WordUtils.wrap(it, 60, "\n", false)
+                            WordUtils.wrap(it, 40, "\n", false)
                                 .lines()
-                                .map { s -> s.replace("{_}", " ") }
+                                .map { s -> s.replaceInWrappable() }
                                 .mapIndexed { index, s ->
                                     if (index == 0) s
                                     else StringUtils.format(
