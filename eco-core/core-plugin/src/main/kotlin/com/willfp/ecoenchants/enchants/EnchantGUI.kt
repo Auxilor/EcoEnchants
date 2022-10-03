@@ -255,11 +255,11 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                                         enchant.conflicts.joinToString(", ") { conflict ->
                                             conflict.wrap().getFormattedName(0).toWrappable()
                                         }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
-                                    }
+                                    }.toWrappable()
                                 )
                         }
                         .flatMap {
-                            WordUtils.wrap(it, 45, "\n", false)
+                            WordUtils.wrap(it, 40, "\n", false)
                                 .lines()
                                 .map { s -> s.replaceInWrappable() }
                                 .mapIndexed { index, s ->
