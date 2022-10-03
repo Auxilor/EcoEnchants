@@ -4,10 +4,7 @@ placeholder: "3 * %level%"
 type: normal
 
 targets:
-  - helmet
-  - chestplate
-  - leggings
-  - boots
+  - armor
 conflicts:
   - sorcery
   - chemist

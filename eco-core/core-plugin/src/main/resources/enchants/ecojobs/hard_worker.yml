@@ -1,24 +1,24 @@
-display-name: "Superior"
-description: "Gives a &a%placeholder%%&r boost to all stats"
+display-name: "Hard Worker"
+description: "Gives a &a%placeholder%%&r boost to job experience"
 placeholder: "%level% * 2"
-type: special
+type: normal
 
 targets:
   - armor
 conflicts: [ ]
-rarity: veryspecial
-max-level: 2
+rarity: legendary
+max-level: 3
 
 tradeable: true
 discoverable: true
 enchantable: true
 
 effects:
-  - id: multiply_all_stats
+  - id: job_xp_multiplier
     args:
       multiplier: "1 + 0.02 * %level%"
 
 conditions: [ ]
 
 dependencies:
-  - EcoSkills
+  - EcoJobs
