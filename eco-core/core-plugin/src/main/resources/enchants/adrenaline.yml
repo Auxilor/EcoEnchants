@@ -1,0 +1,27 @@
+display-name: "Adrenaline"
+description: "Gain strength for &a%placeholder%&r seconds when blocking hits"
+placeholder: "1 + %level% / 2"
+type: normal
+
+targets:
+  - shield
+conflicts: [ ]
+rarity: epic
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: potion_effect
+    args:
+      effect: increase_damage
+      level: 2
+      duration: "20 + 10 * %level%"
+      apply-to-player: true
+      cooldown: 10
+    triggers:
+      - shield_block
+
+conditions: [ ]

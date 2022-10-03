@@ -12,12 +12,6 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.LoreConversion
-import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
-import com.willfp.ecoenchants.enchants.impl.EnchantmentRapid
-import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
-import com.willfp.ecoenchants.enchants.impl.EnchantmentReplenish
-import com.willfp.ecoenchants.enchants.impl.EnchantmentSoulbound
-import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
 import com.willfp.ecoenchants.enchants.registerVanillaEnchants
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
@@ -37,6 +31,8 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
     val rarityYml = RarityYml(this)
     val typesYml = TypesYml(this)
     val vanillaEnchantsYml = VanillaEnchantsYml(this)
+    var isLoaded = false
+        private set
 
     init {
         instance = this
@@ -46,6 +42,10 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
 
     override fun handleEnableAdditional() {
         registerHolderProvider { it.heldEnchantLevels }
+    }
+
+    override fun handleAfterLoad() {
+        isLoaded = true
     }
 
     override fun handleReloadAdditional() {

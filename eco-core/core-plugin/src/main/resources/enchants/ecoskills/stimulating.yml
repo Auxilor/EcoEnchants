@@ -1,0 +1,44 @@
+display-name: "Stimulating"
+description: "Gives a &a%bonus%%&r to all stats for &a%seconds%%&r seconds"
+placeholders:
+  bonus: "10 * %level%"
+  seconds: "3 * %level%"
+type: spell
+
+targets:
+  - sword
+conflicts: [ ]
+rarity: legendary
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - effects:
+      - id: add_holder
+        args:
+          effects:
+            - id: multiply_all_stats
+              args:
+                multiplier: "1 + 0.1 * %level%"
+          conditions: [ ]
+          duration: "3 * %level% * 20"
+
+      - id: play_sound
+        args:
+          sound: entity_allay_death
+          pitch: 1.2
+          volume: 1
+
+    args:
+      cooldown: 180
+      send_cooldown_message: true
+    triggers:
+      - alt_click
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills

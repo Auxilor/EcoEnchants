@@ -6,7 +6,7 @@ import com.willfp.libreforge.Holder
 import com.willfp.libreforge.conditions.ConfiguredCondition
 import com.willfp.libreforge.effects.ConfiguredEffect
 import com.willfp.libreforge.effects.Effects
-import java.util.*
+import java.util.Objects
 
 class LibReforgeEcoEnchant(
     id: String,
@@ -20,9 +20,9 @@ class LibReforgeEcoEnchant(
     private val effects: Set<ConfiguredEffect>
 
     init {
-        effects = config.getSubsections("effects").mapNotNull {
+        effects = if (plugin.isLoaded) config.getSubsections("effects").mapNotNull {
             Effects.compile(it, "Enchantment $id")
-        }.toSet()
+        }.toSet() else emptySet()
     }
 
     override fun createLevel(level: Int): EcoEnchantLevel =

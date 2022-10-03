@@ -108,6 +108,8 @@ abstract class EcoEnchant(
     )
 
     init {
+        checkDependencies()
+
         config.injectPlaceholders(
             PlayerStaticPlaceholder(
                 "level"
@@ -116,9 +118,9 @@ abstract class EcoEnchant(
             }
         )
 
-        conditions = config.getSubsections("conditions").mapNotNull {
+        conditions = if (plugin.isLoaded) config.getSubsections("conditions").mapNotNull {
             Conditions.compile(it, "Enchantment $id")
-        }.toSet()
+        }.toSet() else emptySet()
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.$id") == null) {
             val permission = Permission(
@@ -152,6 +154,21 @@ abstract class EcoEnchant(
             if (plugin.isEnabled) {
                 doOnInit()
             }
+        }
+    }
+
+    private fun checkDependencies() {
+        val missingPlugins = mutableListOf<String>()
+
+        for (dependency in config.getStrings("dependencies")) {
+            if (!Bukkit.getPluginManager().plugins.map { it.name }.containsIgnoreCase(dependency)) {
+                missingPlugins += dependency
+            }
+        }
+
+        if (missingPlugins.isNotEmpty()) {
+            config.set("dont-register", true) // Just in case.
+            throw MissingDependencyException(missingPlugins)
         }
     }
 

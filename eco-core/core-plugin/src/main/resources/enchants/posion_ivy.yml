@@ -1,0 +1,30 @@
+display-name: "Poison Ivy"
+description: "Poisons attackers for &a%seconds%&r seconds for each heart of damage dealt, up to &a%limit%&r seconds"
+placeholders:
+  seconds: "0.5 * %level%"
+  limit: "4 + %level%"
+type: normal
+
+targets:
+  - leggings
+conflicts:
+  - thorns
+rarity: epic
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: potion_effect
+    args:
+      effect: poison
+      level: 1
+      duration: "min(10 * %level% * %v% / 2, 80 + %level% * 20 * %v% / 2)"
+      apply_to_player: false
+
+    triggers:
+      - take_entity_damage
+
+conditions: [ ]

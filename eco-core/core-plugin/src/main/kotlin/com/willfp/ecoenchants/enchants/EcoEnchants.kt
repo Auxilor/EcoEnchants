@@ -100,7 +100,15 @@ object EcoEnchants {
 
         for ((id, config) in plugin.fetchConfigs("enchants")) {
             if (config.has("effects")) {
-                LibReforgeEcoEnchant(id, config, plugin)
+                try {
+                    LibReforgeEcoEnchant(
+                        id,
+                        config,
+                        plugin
+                    )
+                } catch (e: MissingDependencyException) {
+                    promptPluginInstall(plugin, id, e.plugins.toMutableList())
+                }
             }
         }
 
@@ -170,7 +178,9 @@ object EcoEnchants {
     }
 
     /** Register the hardcoded enchantments. */
-    private fun registerHardcodedEnchantments(plugin: EcoEnchantsPlugin) {
+    private fun registerHardcodedEnchantments(
+        plugin: EcoEnchantsPlugin
+    ) {
         EnchantmentTelekinesis(plugin)
         EnchantmentPermanenceCurse(plugin)
         EnchantmentRepairing(plugin)
