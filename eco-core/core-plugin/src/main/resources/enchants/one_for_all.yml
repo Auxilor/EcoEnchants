@@ -1,0 +1,25 @@
+display-name: "One for All"
+description: "Increases damage by &a%placeholder%%&r but conflicts with all other enchantments"
+placeholder: "500"
+type: special
+
+targets:
+  - sword
+  - axe
+conflicts:
+  - everything
+rarity: veryspecial
+max-level: 1
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: damage_multiplier
+    args:
+      multiplier: 5
+    triggers:
+      - melee_attack
+
+conditions: [ ]
