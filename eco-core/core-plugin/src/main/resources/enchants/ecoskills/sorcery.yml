@@ -1,0 +1,28 @@
+display-name: "Sorcery"
+description: "Gives a &a%placeholder%%&r boost to Enchanting experience"
+placeholder: "10 * %level%"
+type: normal
+
+targets:
+  - helmet
+conflicts:
+  - enriched_plating
+  - chemist
+rarity: uncommon
+max-level: 5
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: skill_xp_multiplier
+    args:
+      multiplier: "1 + 0.1 * %level%"
+      skills:
+        - enchanting
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills

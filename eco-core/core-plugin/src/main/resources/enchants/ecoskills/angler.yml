@@ -1,0 +1,26 @@
+display-name: "Angler"
+description: "Gives a &a%placeholder%%&r boost to Fishing experience"
+placeholder: "8 * %level%"
+type: normal
+
+targets:
+  - fishing_rod
+conflicts: [ ]
+rarity: uncommon
+max-level: 2
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: skill_xp_multiplier
+    args:
+      multiplier: "1 + 0.05 * %level%"
+      skills:
+        - fishing
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills

@@ -1,0 +1,26 @@
+display-name: "Combatant"
+description: "Gives a &a%placeholder%%&r boost to Combat experience"
+placeholder: "10 + 2.5 * %level%"
+type: normal
+
+targets:
+  - pickaxe
+conflicts: [ ]
+rarity: uncommon
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: skill_xp_multiplier
+    args:
+      multiplier: "1.1 + 0.025 * %level%"
+      skills:
+        - combat
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills

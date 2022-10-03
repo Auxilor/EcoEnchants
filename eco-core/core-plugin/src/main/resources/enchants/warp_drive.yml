@@ -22,7 +22,9 @@ effects:
     args:
       sound: entity_enderman_teleport
       pitch: 1.2
-      volume: 10
+      volume: 2
+    triggers:
+      - bow_attack
 
 conditions: [ ]
 

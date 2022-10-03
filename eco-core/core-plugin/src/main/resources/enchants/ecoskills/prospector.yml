@@ -1,0 +1,26 @@
+display-name: "Prospector"
+description: "Gives a &a%placeholder%%&r boost to Mining experience"
+placeholder: "3 * %level%"
+type: normal
+
+targets:
+  - pickaxe
+conflicts: [ ]
+rarity: uncommon
+max-level: 5
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: skill_xp_multiplier
+    args:
+      multiplier: "1 + 0.03 * %level%"
+      skills:
+        - mining
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills

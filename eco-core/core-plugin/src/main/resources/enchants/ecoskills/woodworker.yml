@@ -1,0 +1,26 @@
+display-name: "Woodworker"
+description: "Gives a &a%placeholder%%&r boost to Woodcutting experience"
+placeholder: "4 * %level%"
+type: normal
+
+targets:
+  - axe
+conflicts: [ ]
+rarity: uncommon
+max-level: 4
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: skill_xp_multiplier
+    args:
+      multiplier: "1 + 0.04 * %level%"
+      skills:
+        - woodcutting
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills
