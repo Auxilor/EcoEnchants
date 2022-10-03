@@ -8,7 +8,7 @@ targets:
   - crossbow
 conflicts: [ ]
 rarity: rare
-max-level: 3
+max-level: 7
 
 tradeable: true
 discoverable: true
