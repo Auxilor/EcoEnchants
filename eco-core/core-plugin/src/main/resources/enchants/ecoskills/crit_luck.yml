@@ -1,0 +1,25 @@
+display-name: "Crit Luck"
+description: "Gives &a+%placeholder%&r %ecoskills_crit_chance_name%"
+placeholder: "4 * %level%"
+type: spell
+
+targets:
+  - sword
+conflicts: [ ]
+rarity: common
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: add_stat
+    args:
+      stat: crit_chance
+      amount: "4 * %level%"
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills
