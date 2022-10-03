@@ -65,8 +65,9 @@ abstract class EcoEnchant(
 
     private val conflictNames = config.getStrings("conflicts")
 
-    val conflictsWithEverything = conflictNames.containsIgnoreCase("all")
-            || conflictNames.containsIgnoreCase("everything")
+    val conflictsWithEverything: Boolean
+        get() = conflictNames.containsIgnoreCase("all")
+                || conflictNames.containsIgnoreCase("everything")
 
     val conflicts: Collection<Enchantment>
         get() = if (conflictsWithEverything) values().toList()
@@ -228,7 +229,7 @@ abstract class EcoEnchant(
     }
 
     fun conflictsWithDirectly(other: Enchantment): Boolean {
-        return conflictNames.containsIgnoreCase(other.key.key)
+        return conflictNames.containsIgnoreCase(other.key.key) || conflictsWithEverything
     }
 
     override fun conflictsWith(other: Enchantment): Boolean {

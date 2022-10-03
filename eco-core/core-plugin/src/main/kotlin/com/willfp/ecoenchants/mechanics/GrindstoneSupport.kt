@@ -49,7 +49,6 @@ class GrindstoneSupport(
             val toKeep = mutableMapOf<Enchantment, Int>()
 
             for ((enchant, level) in topEnchants) {
-                println("Enchantment $enchant can grindstone? ${enchant.wrap().type.noGrindstone}")
                 if (enchant.wrap().type.noGrindstone) {
                     toKeep[enchant] = level
                 }

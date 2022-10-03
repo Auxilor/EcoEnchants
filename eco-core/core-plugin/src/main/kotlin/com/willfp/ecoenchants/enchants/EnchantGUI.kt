@@ -7,6 +7,7 @@ import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
 import com.willfp.eco.core.gui.menu.MenuLayer
+import com.willfp.eco.core.gui.onRender
 import com.willfp.eco.core.gui.page.Page
 import com.willfp.eco.core.gui.page.PageChanger
 import com.willfp.eco.core.gui.slot
@@ -152,7 +153,6 @@ object EnchantGUI {
                 setSlot(
                     plugin.configYml.getInt("enchantinfo.item.row"),
                     plugin.configYml.getInt("enchantinfo.item.column"),
-
                     enchant.getInformationSlot(plugin)
                 )
 
