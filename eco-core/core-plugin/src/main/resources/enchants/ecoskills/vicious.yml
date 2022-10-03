@@ -18,8 +18,6 @@ effects:
     args:
       stat: ferocity
       amount: "5 + 5 * %level%"
-    triggers:
-      - alt_click
 
 conditions: [ ]
 

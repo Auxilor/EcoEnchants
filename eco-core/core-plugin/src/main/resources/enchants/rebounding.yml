@@ -17,6 +17,7 @@ effects:
   - id: damage_victim
     args:
       damage: "%v% * (0.2 + %level% * 0.1)"
+      use-source: false
     triggers:
       - shield_block
 
