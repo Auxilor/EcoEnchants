@@ -1,12 +1,12 @@
 display-name: "Forceful Crit"
 description: "Gives &a+%placeholder%&r %ecoskills_crit_damage_name%"
 placeholder: "3 + 2 * %level%"
-type: spell
+type: normal
 
 targets:
   - sword
 conflicts: [ ]
-rarity: common
+rarity: rare
 max-level: 6
 
 tradeable: true

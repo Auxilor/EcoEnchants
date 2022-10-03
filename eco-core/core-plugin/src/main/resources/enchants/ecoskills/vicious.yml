@@ -1,12 +1,12 @@
 display-name: "Vicious"
 description: "Gives &a+%placeholder%&r %ecoskills_ferocity_name%"
 placeholder: "5 + 5 * %level%"
-type: spell
+type: normal
 
 targets:
   - sword
 conflicts: [ ]
-rarity: epic
+rarity: legendary
 max-level: 3
 
 tradeable: true

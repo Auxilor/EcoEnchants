@@ -1,12 +1,12 @@
 display-name: "Crit Luck"
 description: "Gives &a+%placeholder%&r %ecoskills_crit_chance_name%"
 placeholder: "4 * %level%"
-type: spell
+type: normal
 
 targets:
   - sword
 conflicts: [ ]
-rarity: common
+rarity: uncommon
 max-level: 3
 
 tradeable: true
