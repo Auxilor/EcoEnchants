@@ -259,7 +259,7 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                                 )
                         }
                         .flatMap {
-                            WordUtils.wrap(it, 40, "\n", false)
+                            WordUtils.wrap(it, 45, "\n", false)
                                 .lines()
                                 .map { s -> s.replaceInWrappable() }
                                 .mapIndexed { index, s ->
