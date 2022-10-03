@@ -7,6 +7,7 @@ import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
 import com.willfp.eco.core.gui.menu.MenuLayer
+import com.willfp.eco.core.gui.page.Page
 import com.willfp.eco.core.gui.page.PageChanger
 import com.willfp.eco.core.gui.slot
 import com.willfp.eco.core.gui.slot.ConfigSlot
@@ -74,8 +75,14 @@ object EnchantGUI {
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
                 if (atCaptive.isEmpty || atCaptive == null) {
                     menu.addState(player, "enchants", emptyList<EcoEnchant>())
+                } else if (atCaptive.type == Material.BOOK) {
+                    menu.addState(player, "enchants", EcoEnchants.values().sortForDisplay())
                 } else {
                     menu.addState(player, "enchants", atCaptive.applicableEnchantments.sortForDisplay())
+                }
+
+                if (menu.getPage(player) > menu.getMaxPage(player)) {
+                    menu.addState(player, Page.PAGE_KEY, 1)
                 }
             }
 
@@ -105,11 +112,13 @@ object EnchantGUI {
                 val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: emptyList()
                 val total = enchants.size
                 val perPage = pane.size
-                if (total == 0) {
-                    1
+
+                val pages = if (total == 0) {
+                    0
                 } else {
                     ceil(total.toDouble() / perPage).toInt()
                 }
+                pages
             }
 
             onClose { event, menu ->
@@ -229,7 +238,7 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                                 )
                         }
                         .flatMap {
-                            WordUtils.wrap(it, 40, "\n", false)
+                            WordUtils.wrap(it, 60, "\n", false)
                                 .lines()
                                 .map { s -> s.replace("{_}", " ") }
                                 .mapIndexed { index, s ->

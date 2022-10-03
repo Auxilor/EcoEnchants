@@ -1,5 +1,5 @@
 display-name: "Stimulating"
-description: "Gives a &a%bonus%%&r bonus to all stats for &a%seconds%%&r seconds"
+description: "Gives a &a%bonus%%&r bonus to all stats for &a%seconds%&r seconds"
 placeholders:
   bonus: "10 * %level%"
   seconds: "3 * %level%"

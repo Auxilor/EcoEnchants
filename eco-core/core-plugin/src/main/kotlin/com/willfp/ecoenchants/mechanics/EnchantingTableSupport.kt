@@ -18,7 +18,8 @@ import org.bukkit.event.Listener
 import org.bukkit.event.enchantment.EnchantItemEvent
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import java.util.*
+import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import java.util.UUID
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.min
@@ -35,7 +36,7 @@ class EnchantingTableSupport(
     @EventHandler
     fun onEnchant(event: EnchantItemEvent) {
         val player = event.enchanter
-        val item = event.item
+        val item = event.item.clone()
         val cost = event.expLevelCost
         val toAdd = event.enchantsToAdd
 
@@ -137,6 +138,21 @@ class EnchantingTableSupport(
             toAdd[Enchantment.DURABILITY] =
                 ExtraItemSupport.currentlyEnchantingExtraItem[player.uniqueId]!![event.whichButton()]
             ExtraItemSupport.currentlyEnchantingExtraItem.remove(player.uniqueId)
+        }
+
+        // I remember writing this back in 8.x.x and deleting it during the recode
+        // It's here because books don't work with this event, for some reason
+        if (item.type == Material.ENCHANTED_BOOK) {
+            plugin.scheduler.run {
+                if (!event.isCancelled) {
+                    val postEnchantItem = event.inventory.getItem(0)
+                    val meta = postEnchantItem?.itemMeta as? EnchantmentStorageMeta
+                    for ((enchant, level) in event.enchantsToAdd) {
+                        meta?.addStoredEnchant(enchant, level, true)
+                    }
+                    postEnchantItem?.itemMeta = meta
+                }
+            }
         }
     }
 
