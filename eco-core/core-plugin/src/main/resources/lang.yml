@@ -14,7 +14,7 @@ messages:
   descriptions-disabled: "&cEnchantment descriptions are disabled on this server."
   not-found: "&cCannot find an enchantment matching name: &f%name%."
   missing-enchant: "&cYou must specify an enchantment!"
-  random-book-given: "&fYou have been given &a%playername%&f a &r%enchantment%&f random book!"
+  gave-random-book: "&fGave &a%player%&f a random book (&r%enchantment%&f)!"
   no-enchantments-found: "&cNo enchantments found!"
   invalid-levels: "&cMinimum level can't be higher than maximum level!"
 
