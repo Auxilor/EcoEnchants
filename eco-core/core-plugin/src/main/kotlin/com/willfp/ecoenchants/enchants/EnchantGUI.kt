@@ -250,16 +250,16 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                                 .replace(
                                     "%conflicts%",
                                     if (enchant.conflictsWithEverything) {
-                                        plugin.langYml.getFormattedString("all-conflicts")
+                                        plugin.langYml.getFormattedString("all-conflicts").toWrappable()
                                     } else {
                                         enchant.conflicts.joinToString(", ") { conflict ->
                                             conflict.wrap().getFormattedName(0).toWrappable()
-                                        }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
-                                    }.toWrappable()
+                                        }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts").toWrappable() }
+                                    }
                                 )
                         }
                         .flatMap {
-                            WordUtils.wrap(it, 40, "\n", false)
+                            WordUtils.wrap(it, 45, "\n", false)
                                 .lines()
                                 .map { s -> s.replaceInWrappable() }
                                 .mapIndexed { index, s ->
