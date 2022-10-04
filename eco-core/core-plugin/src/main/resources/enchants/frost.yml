@@ -1,0 +1,26 @@
+display-name: "Frost"
+description: "Gives a &a%chance%%&r chance to make your opponent feel as if they've been frozen for &a%seconds%&r seconds"
+placeholders:
+  chance: "3 + 2 * %level%"
+  seconds: "2 + %level%"
+type: normal
+
+targets:
+  - bow
+conflicts: [ ]
+rarity: legendary
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: set_freeze_ticks
+    args:
+      ticks: "60 + 20 * %level%"
+      chance: "3 + 2 * %level%"
+    triggers:
+      - bow_attack
+
+conditions: [ ]

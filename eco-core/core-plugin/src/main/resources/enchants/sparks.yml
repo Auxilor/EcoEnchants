@@ -16,30 +16,32 @@ discoverable: true
 enchantable: true
 
 effects:
-  - id: smite
+  - effects:
+      - id: smite
+        args:
+          damage: "1 + 1 * %level%"
+          silent: true
+
+      - id: particle_animation
+        args:
+          particle: electric_spark
+          particle-amount: 10
+          animation: ground_spiral
+          tick-multiplier: 1
+          entity: victim
+          use-eye-location: false
+          particle_args:
+            scalar: 5.5
+            distance-scalar: 0.3
+            duration: 25
+        mutators:
+          - id: location_to_victim
+
     args:
       chance: "25 + 5 * %level%"
-      damage: "1 + 1 * %level%"
-      silent: true
     triggers:
       - catch_entity
 
-  - id: particle_animation
-    args:
-      particle: electric_spark
-      particle-amount: 10
-      animation: ground_spiral
-      tick-multiplier: 1
-      entity: victim
-      use-eye-location: false
-      particle_args:
-        scalar: 5.5
-        distance-scalar: 0.3
-        duration: 25
-    triggers:
-      - catch_entity
-    mutators:
-      - id: location_to_victim
 
 conditions:
   - id: is_storm

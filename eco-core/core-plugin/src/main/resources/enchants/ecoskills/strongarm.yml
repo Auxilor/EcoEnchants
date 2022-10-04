@@ -1,6 +1,6 @@
 display-name: "Strongarm"
 description: "Gives &a+%placeholder%&r %ecoskills_strength_name%"
-placeholder: "20 + 10 * %level%"
+placeholder: "2 + 4 * %level%"
 type: normal
 
 targets:

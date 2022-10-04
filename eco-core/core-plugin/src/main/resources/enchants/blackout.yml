@@ -22,6 +22,7 @@ effects:
       level: 1
       duration: "80 + ceil(%level% / 2) * 20"
       apply-to-player: false
+      chance: "6 + %level%"
     triggers:
       - melee_attack
 

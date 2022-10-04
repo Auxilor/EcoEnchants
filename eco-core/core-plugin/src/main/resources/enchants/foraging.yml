@@ -1,0 +1,25 @@
+display-name: "Foraging"
+description: "Gives a &a%placeholder%%&r boost to apple drops from leaves"
+placeholder: "ceil(((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100)"
+type: normal
+
+targets:
+  - shears
+conflicts: [ ]
+rarity: common
+max-level: 4
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: multiply_drops
+    args:
+      on_items:
+        - apple
+      fortune: "%level%"
+    triggers:
+      - block_item_drop
+
+conditions: [ ]
