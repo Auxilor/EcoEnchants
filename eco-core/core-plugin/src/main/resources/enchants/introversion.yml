@@ -10,6 +10,7 @@ conflicts:
   - smite
   - bane_of_arthropods
   - slaughter
+  - brightness
 rarity: common
 max-level: 5
 
