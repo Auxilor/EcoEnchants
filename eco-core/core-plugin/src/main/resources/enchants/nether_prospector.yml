@@ -20,8 +20,9 @@ effects:
     args:
       on_items:
         - ancient_debris
-        - netherite_scrap
       fortune: "%level%"
+    filters:
+      player_placed: false
     triggers:
       - block_item_drop
 
