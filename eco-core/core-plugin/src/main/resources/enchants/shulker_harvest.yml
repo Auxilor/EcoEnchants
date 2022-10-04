@@ -1,6 +1,6 @@
 display-name: "Shulker Harvest"
 description: "Gives a &a%placeholder%%&r boost to shulker drops"
-placeholder: "((1 / (%level% + 4)) + ((%level% + 3) / 2)) * 100 - 100"
+placeholder: "ceil(((1 / (%level% + 4)) + ((%level% + 3) / 2)) * 100 - 100)"
 type: normal
 
 targets:

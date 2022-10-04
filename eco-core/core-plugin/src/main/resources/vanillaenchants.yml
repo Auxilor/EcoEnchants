@@ -160,7 +160,7 @@ unbreaking:
 fortune:
   name: "Fortune"
   description: "Gives a &a%placeholder%%&r boost to certain block drops"
-  placeholder: "((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100"
+  placeholder: "ceil(((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100)"
   type: normal
   rarity: rare
 
