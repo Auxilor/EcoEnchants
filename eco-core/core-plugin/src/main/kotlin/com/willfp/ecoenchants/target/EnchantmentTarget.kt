@@ -58,9 +58,14 @@ internal object AllEnchantmentTarget : EnchantmentTarget {
     override val id = "all"
     override val displayName = EcoEnchantsPlugin.instance.langYml.getFormattedString("all")
     override val slot = TargetSlot.ANY
-    override val items = EnchantmentTargets.values()
-        .filterNot { it == this }
-        .flatMap { it.items }
+    override var items = emptyList<TestableItem>()
+        private set
+
+    fun updateItems() {
+        items = EnchantmentTargets.values()
+                .filterNot { it == this }
+                .flatMap { it.items }
+    }
 
     override fun equals(other: Any?): Boolean {
         return other is AllEnchantmentTarget

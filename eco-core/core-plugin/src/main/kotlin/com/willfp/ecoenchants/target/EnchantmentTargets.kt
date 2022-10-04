@@ -74,6 +74,8 @@ object EnchantmentTargets {
         for (config in plugin.targetsYml.getSubsections("targets")) {
             ConfiguredEnchantmentTarget(config)
         }
+
+        AllEnchantmentTarget.updateItems()
     }
 
     /**

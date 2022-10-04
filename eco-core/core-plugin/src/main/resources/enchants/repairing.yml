@@ -7,7 +7,8 @@ placeholders:
 
 targets:
   - all
-conflicts: [ ]
+conflicts:
+  - mending
 rarity: veryspecial
 max-level: 3
 
