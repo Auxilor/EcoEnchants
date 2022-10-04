@@ -1,0 +1,25 @@
+display-name: "Neptune"
+description: "Gives &a+%placeholder%&r %ecoskills_crit_damage_name%"
+placeholder: "20 + 10 * %level%"
+type: normal
+
+targets:
+  - trident
+conflicts: [ ]
+rarity: legendary
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: add_stat
+    args:
+      stat: crit_damage
+      amount: "20 + 10 * %level%"
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills

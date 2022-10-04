@@ -1,0 +1,25 @@
+display-name: "Strong"
+description: "Gives &a+%placeholder%&r %ecoskills_strength_name%"
+placeholder: "-1 + 4 * %level%"
+type: normal
+
+targets:
+  - sword
+conflicts: [ ]
+rarity: rare
+max-level: 4
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: add_stat
+    args:
+      stat: strength
+      amount: "-1 + 4 * %level%"
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills

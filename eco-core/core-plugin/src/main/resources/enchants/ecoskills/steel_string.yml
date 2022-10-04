@@ -1,0 +1,26 @@
+display-name: "Steel String"
+description: "Gives &a+%placeholder%&r %ecoskills_strength_name%"
+placeholder: "3 + 2 * %level%"
+type: normal
+
+targets:
+  - bow
+  - crossbow
+conflicts: [ ]
+rarity: rare
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: add_stat
+    args:
+      stat: strength
+      amount: "3 + 2 * %level%"
+
+conditions: [ ]
+
+dependencies:
+  - EcoSkills
