@@ -7,7 +7,6 @@ import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
 import com.willfp.eco.core.gui.menu.MenuLayer
-import com.willfp.eco.core.gui.onRender
 import com.willfp.eco.core.gui.page.Page
 import com.willfp.eco.core.gui.page.PageChanger
 import com.willfp.eco.core.gui.slot
@@ -75,9 +74,7 @@ object EnchantGUI {
 
             onRender { player, menu ->
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
-                if (atCaptive.isEmpty || atCaptive == null) {
-                    menu.addState(player, "enchants", emptyList<EcoEnchant>())
-                } else if (atCaptive.type == Material.BOOK) {
+                if (atCaptive.isEmpty || atCaptive == null || atCaptive.type == Material.BOOK) {
                     menu.addState(player, "enchants", EcoEnchants.values().sortForDisplay())
                 } else {
                     menu.addState(player, "enchants", atCaptive.applicableEnchantments.sortForDisplay())
