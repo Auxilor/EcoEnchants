@@ -17,14 +17,14 @@ fire_protection:
     damage: "%level% * 8"
     time: "%level% * 15"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 feather_falling:
   name: "Feather Falling"
   description: "Reduces fall damage by &a%placeholder%%"
   placeholder: "%level% * 12"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 blast_protection:
   name: "Blast Protection"
@@ -33,14 +33,14 @@ blast_protection:
     damage: "%level% * 8"
     knockback: "%level% * 15"
   type: normal
-  rarity: common
+  rarity: rare
 
 projectile_protection:
   name: "Projectile Protection"
   description: "Reduces incoming projectile damage by &a%placeholder%%"
   placeholder: "%level% * 8"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 respiration:
   name: "Respiration"
@@ -49,40 +49,40 @@ respiration:
     seconds: "15 * %level%"
     chance: "%level% / (%level% + 1)"
   type: normal
-  rarity: common
+  rarity: rare
 
 aqua_affinity:
   name: "Aqua Affinity"
   description: "Removes underwater mining speed penalty"
   type: normal
-  rarity: common
+  rarity: rare
 
 thorns:
   name: "Thorns"
   description: "Gives a &a%placeholder%%&r chance to reflect some incoming damage to the attacker"
   placeholder: "%level% * 15"
   type: normal
-  rarity: common
+  rarity: epic
 
 depth_strider:
   name: "Depth Strider"
   description: "Reduces underwater movement slowdown by &a%placeholder%%"
   placeholder: "%level% * 33.333333"
   type: normal
-  rarity: common
+  rarity: rare
 
 frost_walker:
   name: "Frost Walker"
   description: "Turns water within a &a%placeholder%&r block radius of the player into ice"
   placeholder: "%level% + 2"
   type: normal
-  rarity: common
+  rarity: rare
 
 binding_curse:
   name: "Curse of Binding"
   description: Items cannot be removed from armor slots
   type: curse
-  rarity: common
+  rarity: epic
 
 sharpness:
   name: "Sharpness"
@@ -96,7 +96,7 @@ smite:
   description: "Gives a &a%placeholder%&r bonus to melee damage against undead mobs"
   placeholder: "2.5 * %level%"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 bane_of_arthropods:
   name: "Bane of Arthropods"
@@ -105,21 +105,21 @@ bane_of_arthropods:
     damage: "2.5 * %level%"
     seconds: "0.5 * %level%"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 knockback:
   name: "Knockback"
   description: "Gives a &a%placeholder%%&r bonus to attack knockback"
   placeholder: "%level% * 85 + 20"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 fire_aspect:
   name: "Fire Aspect"
   description: "Sets opponents on fire for &a4&r seconds, dealing &a%placeholder%&r damage each fire tick"
   placeholder: "(%level% * 4) - 1"
   type: normal
-  rarity: common
+  rarity: rare
 
 looting:
   name: "Looting"
@@ -128,14 +128,14 @@ looting:
     common: "%level%"
     rare: "%level%"
   type: normal
-  rarity: common
+  rarity: rare
 
 sweeping:
   name: "Sweeping Edge"
   description: "Increases sweeping attack damage by &a%placeholder%%"
   placeholder: "%level% / (%level% + 1)"
   type: normal
-  rarity: common
+  rarity: rare
 
 efficiency:
   name: "Efficiency"
@@ -148,21 +148,21 @@ silk_touch:
   name: "Silk Touch"
   description: "Mined blocks drop themselves exactly"
   type: normal
-  rarity: common
+  rarity: epic
 
 unbreaking:
   name: "Unbreaking"
   description: "Increases item durability &a%placeholder%x"
   placeholder: "%level% + 1"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 fortune:
   name: "Fortune"
   description: "Gives a &a%placeholder%%&r boost to certain block drops"
   placeholder: "((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100"
   type: normal
-  rarity: common
+  rarity: rare
 
 power:
   name: "Power"
@@ -176,71 +176,71 @@ punch:
   description: "Increases arrow knockback by &a%placeholder%&r blocks"
   placeholder: "3 * %level%"
   type: normal
-  rarity: common
+  rarity: rare
 
 flame:
   name: "Flame"
   description: "Arrows set target on fire, dealing &a5&r fire damage"
   type: normal
-  rarity: common
+  rarity: rare
 
 infinity:
   name: "Infinity"
   description: Stops regular arrows from being consumed when shot
   type: normal
-  rarity: common
+  rarity: epic
 
 luck_of_the_sea:
   name: "Luck of the Sea"
   description: "Increases chance of getting treasure loot by &a%placeholder%%"
   placeholder: "2 * %level%"
   type: normal
-  rarity: common
+  rarity: rare
 
 lure:
   name: "Lure"
   description: "Decreases fishing wait time by &a%placeholder%&r seconds"
   placeholder: "%level% * 5"
   type: normal
-  rarity: common
+  rarity: rare
 
 loyalty:
   name: "Loyalty"
   description: Trident returns after being thrown
   type: normal
-  rarity: common
+  rarity: uncommon
 
 impaling:
   name: "Impaling"
   description: "Deals &a%placeholder%&r additional damage to ocean mobs"
   placeholder: "%level% * 2.5"
   type: normal
-  rarity: common
+  rarity: rare
 
 riptide:
   name: "Riptide"
   description: Trident launches player when thrown in water or while raining
   type: normal
-  rarity: common
+  rarity: rare
 
 channeling:
   name: "Channeling"
   description: Strikes lightning where trident lands during thunderstorms
   type: normal
-  rarity: common
+  rarity: epic
 
 multishot:
   name: "Multishot"
   description: Shoots 3 arrows instead of 1
   type: normal
-  rarity: common
+  rarity: rare
 
 quick_charge:
   name: "Quick Charge"
   description: "Decreases crossbow charging time by &a%placeholder%&r seconds"
   placeholder: "%level% * 0.25"
   type: normal
-  rarity: common
+  rarity: uncommon
 
 piercing:
   name: "Piercing"
@@ -253,24 +253,24 @@ mending:
   name: "Mending"
   description: Repair the item while gaining XP orbs
   type: normal
-  rarity: common
+  rarity: rare
 
 vanishing_curse:
   name: "Curse of Vanishing"
   description: Item destroyed on death
   type: curse
-  rarity: common
+  rarity: epic
 
 soul_speed:
   name: "Soul Speed"
   description: "Increases walking speed on soul sand and soul soil by &a%placeholder%%"
   placeholder: "(%level% * 0.105) + 1.3"
   type: normal
-  rarity: common
+  rarity: epic
 
 swift_sneak:
   name: "Swift Sneak"
   description: "Reduces sneaking movement slowdown by &a%placeholder%%"
   placeholder: "min(%level% * 15, 100)"
   type: normal
-  rarity: common
+  rarity: epic
