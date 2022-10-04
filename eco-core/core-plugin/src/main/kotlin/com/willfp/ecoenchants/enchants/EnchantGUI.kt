@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchants
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.eco.core.drops.DropQueue
+import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
@@ -77,7 +78,11 @@ object EnchantGUI {
                 if (atCaptive.isEmpty || atCaptive == null || atCaptive.type == Material.BOOK) {
                     menu.addState(player, "enchants", EcoEnchants.values().sortForDisplay())
                 } else {
-                    menu.addState(player, "enchants", atCaptive.applicableEnchantments.sortForDisplay())
+                    menu.addState(
+                        player,
+                        "enchants",
+                        atCaptive.applicableEnchantments.sortForDisplay().subtract(atCaptive.fast().enchants.keys)
+                    )
                 }
 
                 if (menu.getPage(player) > menu.getMaxPage(player)) {
