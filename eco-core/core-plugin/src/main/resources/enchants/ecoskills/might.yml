@@ -1,4 +1,4 @@
-display-name: "Strong"
+display-name: "Might"
 description: "Gives &a+%placeholder%&r %ecoskills_strength_name%"
 placeholder: "-1 + 4 * %level%"
 type: normal
