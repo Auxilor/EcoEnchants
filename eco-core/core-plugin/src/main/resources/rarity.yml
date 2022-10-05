@@ -54,10 +54,3 @@ rarities:
     minimum-level: 30
     villager-chance: 1.5
     loot-chance: 2
-
-  - id: artifact
-    display-name: "Artifact"
-    table-chance: 5
-    minimum-level: 1
-    villager-chance: 9
-    loot-chance: 5
