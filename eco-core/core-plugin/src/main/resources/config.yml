@@ -31,7 +31,9 @@ anvil:
 
 # Options for how enchantments are displayed on items
 display:
-  enabled: true # If you disable display, enchantments will not show up on items. Only disable if you are handling display elsewhere.
+  # If you disable display, enchantments will not show up on items. Only disable if you are handling display elsewhere.
+  # Changing this will require a server restart.
+  enabled: true
 
   numerals:
     enabled: true # If numerals should be used for the enchantment levels
