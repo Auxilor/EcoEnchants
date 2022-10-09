@@ -8,6 +8,7 @@ import org.bukkit.block.data.Ageable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.inventory.ItemStack
 
 class EnchantmentReplenish(
     plugin: EcoEnchantsPlugin
@@ -53,6 +54,20 @@ class EnchantmentReplenish(
 
             if (data !is Ageable) {
                 return
+            }
+
+            if (enchant.config.getBool("consume-seeds")) {
+                val item = ItemStack(
+                    if (type == Material.WHEAT) {
+                        Material.WHEAT_SEEDS
+                    } else type
+                )
+
+                val hasSeeds = player.inventory.removeItem(item).isEmpty()
+
+                if (!hasSeeds) {
+                    return
+                }
             }
 
             if (data.age != data.maximumAge) {

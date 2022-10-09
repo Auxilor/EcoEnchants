@@ -14,3 +14,4 @@ enchantable: true
 
 conditions: [ ]
 
+consume-seeds: true # If seeds should be consumed in replanting
