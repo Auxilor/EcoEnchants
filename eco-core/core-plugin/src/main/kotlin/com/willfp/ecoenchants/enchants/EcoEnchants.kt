@@ -107,10 +107,12 @@ object EcoEnchants {
                         plugin
                     )
                 } catch (e: MissingDependencyException) {
-                    promptPluginInstall(plugin, id, e.plugins.toMutableList())
+                    addPluginPrompt(plugin, e.plugins.toMutableList())
                 }
             }
         }
+
+        sendPrompts(plugin)
 
         registerHardcodedEnchantments(plugin)
     }

@@ -8,28 +8,26 @@ class MissingDependencyException(
     override val message = "Missing the following plugins: ${plugins.joinToString(", ")}"
 }
 
-fun promptPluginInstall(plugin: EcoEnchantsPlugin, enchant: String, plugins: MutableList<String>) {
+// Plugin names mapped to enchants not installed.
+private val prompts = mutableMapOf<String, Int>()
+
+fun addPluginPrompt(plugin: EcoEnchantsPlugin, plugins: MutableList<String>) {
     if (!plugin.isLoaded) {
         return
     }
 
-    val formatted = StringBuilder()
+    for (pluginName in plugins) {
+        prompts[pluginName] = prompts.getOrDefault(pluginName, 0) + 1
+    }
+}
 
-    when (plugins.size) {
-        1 -> formatted.append(plugins.first())
-        2 -> formatted.append(plugins[0])
-            .append(" and ")
-            .append(plugins[1])
-        else -> {
-            val last = plugins.removeLast()
-            formatted.append(plugins.joinToString(", "))
-                .append(", and ")
-                .append(last)
+fun sendPrompts(plugin: EcoEnchantsPlugin) {
+    for ((pl, amount) in prompts) {
+        plugin.logger.apply {
+            warning("$amount enchantments were not loaded because they need $pl to be installed")
+            warning("Either download $pl or delete the folder with their names (/plugins/EcoEnchants/enchants/) to remove this message!")
         }
     }
 
-    plugin.logger.apply {
-        warning("Can't load the $enchant enchantment because you need $formatted installed")
-        warning("Either download $formatted or delete the folders with their names (/plugins/EcoEnchants/enchants/) to remove this message!")
-    }
+    prompts.clear()
 }
