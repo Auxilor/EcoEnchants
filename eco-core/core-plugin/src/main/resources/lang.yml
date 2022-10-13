@@ -17,6 +17,13 @@ messages:
   gave-random-book: "&fGave &a%player%&f a random book (&r%enchantment%&f)!"
   no-enchantments-found: "&cNo enchantments found!"
   invalid-levels: "&cMinimum level can't be higher than maximum level!"
+  must-specify-lrcdb-id: "&cYou must specify the ID of the config to download! Not sure what this means? Go to &alrcdb.auxilor.io"
+  lrcdb-import-error: "&cError importing config: &f%message%"
+  lrcdb-import-success: "&fImported &a%name%&f! Reload the plugin to install it"
+  must-specify-config-name: "&cYou must specify the config name!"
+  invalid-config-name: "&cInvalid config name!"
+  lrcdb-export-error: "&cError exporting config: &f%message%"
+  lrcdb-export-success: "&fExported &a%name%&f! View it on &alrcdb.auxilor.io&f, or share your config ID: &f%id%"
 
 all: "All"
 no-conflicts: "No Conflicts"

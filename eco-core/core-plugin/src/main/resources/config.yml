@@ -200,5 +200,3 @@ potions:
   particles:
     permanent: false
     triggered: true
-
-share-configs: true # If your configs are allowed to be used to gather data and improve the plugin. Nothing identifying (IP, Name, etc) is shared.

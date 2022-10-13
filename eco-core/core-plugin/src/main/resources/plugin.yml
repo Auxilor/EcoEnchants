@@ -48,6 +48,8 @@ permissions:
       ecoenchants.command.giverandombook: true
       ecoenchants.command.enchantinfo: true
       ecoenchants.command.gui: true
+      ecoenchants.command.import: true
+      ecoenchants.command.export: true
   ecoenchants.anvil.*:
     description: All anvil perks
     default: op
@@ -75,3 +77,9 @@ permissions:
   ecoenchants.command.gui:
     description: Allows the use of /ecoenchants gui.
     default: true
+  ecoenchants.command.import:
+    description: Allows the use of /ecoenchants import.
+    default: op
+  ecoenchants.command.export:
+    description: Allows the use of /ecoenchants export.
+    default: op
