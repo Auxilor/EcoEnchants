@@ -11,7 +11,7 @@ class MissingDependencyException(
 // Plugin names mapped to enchants not installed.
 private val prompts = mutableMapOf<String, Int>()
 
-fun addPluginPrompt(plugin: EcoEnchantsPlugin, plugins: MutableList<String>) {
+fun addPluginPrompt(plugin: EcoEnchantsPlugin, plugins: List<String>) {
     if (!plugin.isLoaded) {
         return
     }
