@@ -32,7 +32,11 @@ data class DisplayableEnchant(
     val level: Int
 )
 
-fun EcoEnchantLike.getFormattedName(level: Int): String {
+@JvmOverloads
+fun EcoEnchantLike.getFormattedName(
+    level: Int,
+    showNotMet: Boolean = false
+): String {
     val plugin = EcoEnchantsPlugin.instance
 
     return DisplayCache.nameCache.get(DisplayableEnchant(this, level)) {
@@ -44,20 +48,22 @@ fun EcoEnchantLike.getFormattedName(level: Int): String {
         val number = if (numerals) NumberUtils.toNumeral(level) else level.toString()
         val dontShowNumber = (level == 1 && this.enchant.maxLevel == 1) || level < 1
 
+        val notMetFormat = if (showNotMet) plugin.configYml.getString("display.not-met.format") else ""
+
         if (plugin.configYml.getBool("display.above-max-level.enabled") && level > this.enchant.maxLevel) {
             val format = plugin.configYml.getString("display.above-max-level.format")
             val levelOnly = plugin.configYml.getBool("display.above-max-level.level-only")
 
             if (levelOnly) {
-                StringUtils.format("$typeFormat$name $format$number")
+                StringUtils.format("$notMetFormat$typeFormat$name $format$number")
             } else {
-                StringUtils.format("$format$name $number")
+                StringUtils.format("$notMetFormat$format$name $number")
             }
         } else {
             if (dontShowNumber) {
-                StringUtils.format("$typeFormat$name")
+                StringUtils.format("$notMetFormat$typeFormat$name")
             } else {
-                StringUtils.format("$typeFormat$name $number")
+                StringUtils.format("$notMetFormat$typeFormat$name $number")
             }
         }
     }

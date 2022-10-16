@@ -73,11 +73,17 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         val notMetLines = mutableListOf<String>()
 
         for ((enchant, level) in enchants) {
+            var showNotMet = false
             if (player != null && enchant is EcoEnchant) {
-                notMetLines.addAll(enchant.getLevel(level).getNotMetLines(player).map { Display.PREFIX + it })
+                val enchantNotMetLines = enchant.getLevel(level).getNotMetLines(player).map { Display.PREFIX + it }
+                notMetLines.addAll(enchantNotMetLines)
+                if (enchantNotMetLines.isNotEmpty()) {
+                    showNotMet = true
+                }
             }
 
-            formattedNames[DisplayableEnchant(enchant.wrap(), level)] = enchant.wrap().getFormattedName(level)
+            formattedNames[DisplayableEnchant(enchant.wrap(), level)] =
+                enchant.wrap().getFormattedName(level, showNotMet = showNotMet)
         }
 
         if (shouldCollapse) {

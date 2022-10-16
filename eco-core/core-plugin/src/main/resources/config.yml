@@ -39,6 +39,10 @@ display:
     enabled: true # If numerals should be used for the enchantment levels
     threshold: 10 # Above this, numbers will be used instead of numerals
 
+  # Options for not met lines: https://plugins.auxilor.io/effects/configuring-a-condition#example-condition-config
+  not-met:
+    format: "<strikethrough>" # Enchantments with any not-met-lines active will have this format added to them
+
   above-max-level:
     enabled: true # If enchantments above their max level should have a custom format
     format: "<gradient:#1D976C:#93F9B9>" # The format to apply
