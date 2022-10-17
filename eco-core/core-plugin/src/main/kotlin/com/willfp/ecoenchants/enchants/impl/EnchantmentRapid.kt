@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityShootBowEvent
+import kotlin.math.min
 
 class EnchantmentRapid(
     plugin: EcoEnchantsPlugin
@@ -38,8 +39,12 @@ class EnchantmentRapid(
                 return
             }
 
-            val force = 1 / event.force
-            event.projectile.velocity = event.projectile.velocity.multiply(force)
+            val force = min(1.0 / event.force, Double.MAX_VALUE)
+            var velocity = event.projectile.velocity.multiply(force)
+            if (velocity.length() > 3) {
+                velocity = velocity.normalize().multiply(3)
+            }
+            event.projectile.velocity = velocity
         }
     }
 }
