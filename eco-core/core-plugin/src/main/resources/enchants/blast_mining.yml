@@ -23,7 +23,14 @@ effects:
       - id: mine_radius
         args:
           radius: 1
-          blacklisted_blocks: [ ]
+          blacklisted_blocks:
+            - bedrock
+            - obsidian
+            - crying_obsidian
+            - chest
+            - barrel
+            - barrier
+            - reinforced_deepslate
           check_hardness: true
           disable_on_sneak: true
     args:

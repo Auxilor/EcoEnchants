@@ -10,6 +10,4 @@ import org.bukkit.enchantments.Enchantment
 class TypesYml(plugin: EcoPlugin) : BaseConfig("types", plugin, true, ConfigType.YAML)
 class TargetsYml(plugin: EcoPlugin) : BaseConfig("targets", plugin, true, ConfigType.YAML)
 class RarityYml(plugin: EcoPlugin) : BaseConfig("rarity", plugin, true, ConfigType.YAML)
-class VanillaEnchantsYml(plugin: EcoPlugin) : ExtendableConfig("vanillaenchants", true, plugin,
-    plugin.javaClass, "", ConfigType.YAML, *Enchantment.values().filter { it !is EcoEnchant }
-        .map { it.key.key.lowercase() }.toTypedArray())
+class VanillaEnchantsYml(plugin: EcoPlugin) : BaseConfig("vanillaenchants", plugin, false, ConfigType.YAML)

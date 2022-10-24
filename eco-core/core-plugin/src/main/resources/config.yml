@@ -188,7 +188,14 @@ cannot-afford-type:
     sound: "BLOCK_NOTE_BLOCK_PLING"
     pitch: 0.5
 
-point-names: # If you have point names that look ugly (eg g_souls) then you can map them to nice names to be shown to players.
+cannot-afford-price:
+  in-actionbar: true
+  sound:
+    enabled: true
+    sound: "BLOCK_NOTE_BLOCK_PLING"
+    pitch: 0.5
+
+point-names: # If you have point names that look ugly (eg souls) then you can map them to nice names to be shown to players.
   example_point: "Nicely Formatted Point"
 
 use-faster-move-trigger: true # Disable if you want move trigger to detect sub-1-block movements

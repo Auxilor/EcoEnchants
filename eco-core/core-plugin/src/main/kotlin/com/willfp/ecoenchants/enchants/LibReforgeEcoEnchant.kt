@@ -20,9 +20,10 @@ class LibReforgeEcoEnchant(
     private val effects: Set<ConfiguredEffect>
 
     init {
-        effects = if (plugin.isLoaded) config.getSubsections("effects").mapNotNull {
-            Effects.compile(it, "Enchantment $id")
-        }.toSet() else emptySet()
+        effects = if (plugin.isLoaded) Effects.compile(
+            config.getSubsections("effects"),
+            "Enchantment $id"
+        ) else emptySet()
     }
 
     override fun createLevel(level: Int): EcoEnchantLevel =

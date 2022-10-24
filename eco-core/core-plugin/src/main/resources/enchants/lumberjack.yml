@@ -32,6 +32,24 @@ effects:
         - jungle_log
         - birch_log
         - spruce_log
+    filters:
+      blocks:
+        - oak_wood
+        - dark_oak_wood
+        - acacia_wood
+        - jungle_wood
+        - birch_wood
+        - mangrove_wood
+        - crimson_stem
+        - spruce_wood
+        - warped_stem
+        - oak_log
+        - dark_oak_log
+        - acacia_log
+        - jungle_log
+        - birch_log
+        - spruce_log
+        - mangrove_log
     triggers:
       - mine_block
 

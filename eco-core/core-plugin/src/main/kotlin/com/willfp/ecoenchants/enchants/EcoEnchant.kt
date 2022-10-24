@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.config.ConfigType
-import com.willfp.eco.core.config.TransientConfig
 import com.willfp.eco.core.config.config
 import com.willfp.eco.core.config.interfaces.Config
+import com.willfp.eco.core.config.readConfig
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.placeholder.PlayerStaticPlaceholder
 import com.willfp.eco.util.StringUtils
@@ -99,13 +99,8 @@ abstract class EcoEnchant(
                     .walk()
                     .firstOrNull { file -> file.nameWithoutExtension == id }
 
-                if (file == null) {
-                    // If config is deleted, don't register it
-                    config {
-                        "dont-register" to true
-                    }
-                } else {
-                    TransientConfig(file, ConfigType.YAML)
+                file?.readConfig(ConfigType.YAML) ?: config {
+                    "dont-register" to true
                 }
             }
         },
@@ -123,9 +118,10 @@ abstract class EcoEnchant(
             }
         )
 
-        conditions = if (plugin.isLoaded) config.getSubsections("conditions").mapNotNull {
-            Conditions.compile(it, "Enchantment $id")
-        }.toSet() else emptySet()
+        conditions = if (plugin.isLoaded) Conditions.compile(
+            config.getSubsections("conditions"),
+            "Enchantment $id"
+        ) else emptySet()
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.$id") == null) {
             val permission = Permission(

@@ -76,9 +76,9 @@ object EnchantGUI {
             onRender { player, menu ->
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
                 if (atCaptive.isEmpty || atCaptive == null || atCaptive.type == Material.BOOK) {
-                    menu.addState(player, "enchants", EcoEnchants.values().sortForDisplay())
+                    menu.setState(player, "enchants", EcoEnchants.values().sortForDisplay())
                 } else {
-                    menu.addState(
+                    menu.setState(
                         player,
                         "enchants",
                         atCaptive.applicableEnchantments.sortForDisplay()
@@ -88,7 +88,7 @@ object EnchantGUI {
                 }
 
                 if (menu.getPage(player) > menu.getMaxPage(player)) {
-                    menu.addState(player, Page.PAGE_KEY, 1)
+                    menu.setState(player, Page.PAGE_KEY, 1)
                 }
             }
 
