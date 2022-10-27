@@ -18,26 +18,6 @@ effects:
   - id: mine_vein
     args:
       limit: "2 + 3 * %level%"
-      blocks:
-        - coal_ore
-        - iron_ore
-        - copper_ore
-        - gold_ore
-        - ancient_debris
-        - lapis_ore
-        - diamond_ore
-        - redstone_ore
-        - nether_quartz_ore
-        - gilded_blackstone
-        - nether_gold_ore
-        - glowstone
-        - deepslate_coal_ore
-        - deepslate_iron_ore
-        - deepslate_copper_ore
-        - deepslate_gold_ore
-        - deepslate_lapis_ore
-        - deepslate_diamond_ore
-        - deepslate_redstone_ore
     filters:
       blocks:
         - coal_ore
