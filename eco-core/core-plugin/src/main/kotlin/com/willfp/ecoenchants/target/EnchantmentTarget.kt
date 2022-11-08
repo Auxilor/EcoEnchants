@@ -63,8 +63,8 @@ internal object AllEnchantmentTarget : EnchantmentTarget {
 
     fun updateItems() {
         items = EnchantmentTargets.values()
-                .filterNot { it == this }
-                .flatMap { it.items }
+            .filterNot { it == this }
+            .flatMap { it.items }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -75,6 +75,18 @@ internal object AllEnchantmentTarget : EnchantmentTarget {
 enum class TargetSlot(
     private val itemSlotGetter: (Player) -> Collection<Int>
 ) {
+    HAND({
+        listOf(
+            it.inventory.heldItemSlot
+        )
+    }),
+
+    OFFHAND({
+        listOf(
+            40 // Offhand slot.
+        )
+    }),
+
     HANDS({
         listOf(
             it.inventory.heldItemSlot,

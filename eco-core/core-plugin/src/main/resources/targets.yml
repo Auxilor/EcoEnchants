@@ -10,15 +10,18 @@ extra-enchantable-items:
   - "*player_head"
 
 # A target consists of items and a slot.
-# The slot is either hands, armor, or any.
-# Hands means the enchant will activate on hands, armor
-# means it will only work on armor, and any
-# means it will activate whenever its on the player.
+# The slot is either hands, hand, offhand, armor, or any.
+
+# hands: Enchant will activate in both hands
+# hand: Enchant will activate only in main hand
+# offhand: Enchant will activate only in off hand
+# armor: Enchant will activate only on armor
+# any: Enchant will activate whenever it's in your inventory
 
 targets:
   - id: pickaxe
     display-name: "Pickaxes"
-    slot: hands
+    slot: hand
     items:
       - "*wooden_pickaxe"
       - "*stone_pickaxe"
@@ -29,7 +32,7 @@ targets:
 
   - id: axe
     display-name: "Axes"
-    slot: hands
+    slot: hand
     items:
       - "*wooden_axe"
       - "*stone_axe"
@@ -40,7 +43,7 @@ targets:
 
   - id: hoe
     display-name: "Hoes"
-    slot: hands
+    slot: hand
     items:
       - "*wooden_hoe"
       - "*stone_hoe"
@@ -51,7 +54,7 @@ targets:
 
   - id: shovel
     display-name: "Shovels"
-    slot: hands
+    slot: hand
     items:
       - "*wooden_shovel"
       - "*stone_shovel"
@@ -62,7 +65,7 @@ targets:
 
   - id: sword
     display-name: "Swords"
-    slot: hands
+    slot: hand
     items:
       - "*wooden_sword"
       - "*stone_sword"
@@ -148,49 +151,49 @@ targets:
 
   - id: trident
     display-name: "Tridents"
-    slot: hands
+    slot: hand
     items:
       - "*trident"
 
   - id: bow
     display-name: "Bows"
-    slot: hands
+    slot: hand
     items:
       - "*bow"
 
   - id: crossbow
     display-name: "Crossbows"
-    slot: hands
+    slot: hand
     items:
       - "*crossbow"
 
   - id: shears
     display-name: "Shears"
-    slot: hands
+    slot: hand
     items:
       - "*shears"
 
   - id: shield
     display-name: "Shields"
-    slot: hands
+    slot: offhand
     items:
       - "*shield"
 
   - id: fishing_rod
     display-name: "Fishing Rods"
-    slot: hands
+    slot: hand
     items:
       - "*fishing_rod"
 
   - id: flint_and_steel
     display-name: "Flint and Steels"
-    slot: hands
+    slot: hand
     items:
       - "*flint_and_steel"
 
   - id: carrot_on_a_stick
     display-name: "Carrots on Sticks"
-    slot: hands
+    slot: hand
     items:
       - "*carrot_on_a_stick"
 
