@@ -62,6 +62,10 @@ class EnchantmentTelekinesis(
             val player = event.player
             val block = event.block
 
+            if (!player.hasEnchantActive(enchant)) {
+                return
+            }
+
             if (!AntigriefManager.canBreakBlock(player, block)) {
                 return
             }
