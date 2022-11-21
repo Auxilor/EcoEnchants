@@ -33,6 +33,10 @@ class VillagerSupport(
 
         val enchants = result.fast().getEnchants(true)
 
+        if (NumberUtils.randFloat(0.0, 100.0) < plugin.configYml.getDouble("villager.pass-through-chance")) {
+            return
+        }
+
         var multiplier = 0.01
 
         if (result.type == Material.ENCHANTED_BOOK) {
@@ -78,14 +82,27 @@ class VillagerSupport(
 
             multiplier /= this.plugin.configYml.getDouble("villager.reduction")
 
-            enchants[enchantment] = level
+            if (result.type == Material.ENCHANTED_BOOK) {
+                // Only allow one enchantment
+                enchants.clear()
+                enchants[enchantment] = level
+                break
+            } else {
+                enchants[enchantment] = level
+            }
         }
 
         val meta = result.itemMeta
         if (meta is EnchantmentStorageMeta) {
-            enchants.forEach { (enchant, level) -> meta.addStoredEnchant(enchant, level, true) }
+            for ((enchant, level) in enchants) {
+                meta.removeStoredEnchant(enchant)
+                meta.addStoredEnchant(enchant, level, true)
+            }
         } else {
-            enchants.forEach { (enchant, level) -> meta.addEnchant(enchant, level, true) }
+            for ((enchant, level) in enchants) {
+                meta.removeEnchant(enchant)
+                meta.addEnchant(enchant, level, true)
+            }
         }
         result.itemMeta = meta
 

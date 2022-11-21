@@ -14,6 +14,7 @@ enchanting-table:
 # Options for obtaining custom enchants from villagers
 villager:
   enabled: true # If custom enchantments should be available from villagers
+  pass-through-chance: 25 # The chance to leave the book as-is with a vanilla/no enchantment applied.
   book-multiplier: 0.14 # Multiplier applied to the chance of getting an enchantment on a book (to balance enchant numbers)
   reduction: 5 # The chance to get each subsequent enchantment is divided by this number, e.g. 2nd enchant is 5x less likely than 1st, 3rd is 5x less likely again, etc
 
