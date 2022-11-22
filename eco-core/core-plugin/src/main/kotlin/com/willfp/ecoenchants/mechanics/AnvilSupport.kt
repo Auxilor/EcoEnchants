@@ -225,7 +225,8 @@ class AnvilSupport(
         }
 
         // Item repair - extra check for unit repair cost to prevent weird damage
-        if (leftMeta is Damageable && rightMeta is Damageable && unitRepairCost == 0) {
+        // Enchanted books seem to be damageable? Not quite sure why. Anyway, there's an extra check.
+        if (leftMeta is Damageable && rightMeta is Damageable && unitRepairCost == 0 && rightMeta !is EnchantmentStorageMeta) {
             val maxDamage = left.type.maxDurability.toInt()
             val leftDurability = maxDamage - leftMeta.damage
             val rightDurability = maxDamage - rightMeta.damage
