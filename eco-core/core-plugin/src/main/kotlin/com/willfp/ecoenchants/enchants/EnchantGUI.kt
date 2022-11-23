@@ -167,7 +167,7 @@ object EnchantGUI {
                     )
                 )
 
-                for (config in plugin.configYml.getSubsections("level-gui.custom-slots")) {
+                for (config in plugin.configYml.getSubsections("enchantinfo.custom-slots")) {
                     setSlot(
                         config.getInt("row"),
                         config.getInt("column"),
