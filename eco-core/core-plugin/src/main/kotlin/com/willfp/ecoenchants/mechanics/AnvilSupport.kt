@@ -51,7 +51,7 @@ class AnvilSupport(
             ProxyConstants.NMS_VERSION.substring(1) +
             "\$AnvilContainer"
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     fun onAnvilPrepare(event: PrepareAnvilEvent) {
         val player = event.viewers.getOrNull(0) as? Player ?: return
 
@@ -67,73 +67,71 @@ class AnvilSupport(
 
         antiRepeat.add(player.uniqueId)
 
-        this.plugin.scheduler.run {
-            antiRepeat.remove(player.uniqueId)
+        antiRepeat.remove(player.uniqueId)
 
-            val left = event.inventory.getItem(0)?.clone()
-            val old = left?.clone()
-            val right = event.inventory.getItem(1)?.clone()
+        val left = event.inventory.getItem(0)?.clone()
+        val old = left?.clone()
+        val right = event.inventory.getItem(1)?.clone()
 
-            event.result = null
-            event.inventory.setItem(2, null)
+        event.result = null
+        event.inventory.setItem(2, null)
 
-            val result = doMerge(
-                left,
-                right,
-                event.inventory.renameText ?: "",
-                player
-            )
+        val result = doMerge(
+            left,
+            right,
+            event.inventory.renameText ?: "",
+            player
+        )
 
-            val price = result.xp ?: 0
-            val outItem = result.result ?: ItemStack(Material.AIR)
+        val price = result.xp ?: 0
+        val outItem = result.result ?: ItemStack(Material.AIR)
 
-            val oldCost = event.inventory.repairCost
+        val oldCost = event.inventory.repairCost
 
-            val oldLeft = event.inventory.getItem(0)
+        val oldLeft = event.inventory.getItem(0)
 
-            if (result == FAIL) {
-                return@run
-            }
-
-            if (oldLeft == null || oldLeft.type != outItem.type) {
-                return@run
-            }
-
-            if (left == old) {
-                return@run
-            }
-
-            var cost = oldCost + price
-
-            // Unbelievably specific edge case
-            if (oldCost == -price) {
-                cost = price
-            }
-
-            // Cost could be less than zero at times, so I include that here.
-            if (cost <= 0) {
-                return@run
-            }
-
-            /*
-            Transplanted anti-dupe bodge from pre-recode.
-             */
-            val leftEnchants = left?.fast()?.getEnchants(true) ?: emptyMap()
-            val outEnchants = outItem.fast().getEnchants(true)
-
-            if (event.inventory.getItem(1) == null && leftEnchants != outEnchants) {
-                return@run
-            }
-
-            if (plugin.configYml.getBool("anvil.use-rework-penalty")) {
-                val repairCost = outItem.fast().repairCost
-                outItem.fast().repairCost = (repairCost + 1) * 2 - 1
-            }
-
-            event.inventory.repairCost = cost
-            event.result = outItem
-            event.inventory.setItem(2, outItem)
+        if (result == FAIL) {
+            return
         }
+
+        if (oldLeft == null || oldLeft.type != outItem.type) {
+            return
+        }
+
+        if (left == old) {
+            return
+        }
+
+        var cost = oldCost + price
+
+        // Unbelievably specific edge case
+        if (oldCost == -price) {
+            cost = price
+        }
+
+        // Cost could be less than zero at times, so I include that here.
+        if (cost <= 0) {
+            return
+        }
+
+        /*
+        Transplanted anti-dupe bodge from pre-recode.
+         */
+        val leftEnchants = left?.fast()?.getEnchants(true) ?: emptyMap()
+        val outEnchants = outItem.fast().getEnchants(true)
+
+        if (event.inventory.getItem(1) == null && leftEnchants != outEnchants) {
+            return
+        }
+
+        if (plugin.configYml.getBool("anvil.use-rework-penalty")) {
+            val repairCost = outItem.fast().repairCost
+            outItem.fast().repairCost = (repairCost + 1) * 2 - 1
+        }
+
+        event.inventory.repairCost = cost
+        event.result = outItem
+        event.inventory.setItem(2, outItem)
     }
 
     private fun doMerge(
