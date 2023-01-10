@@ -94,8 +94,12 @@ class VillagerSupport(
 
         val meta = result.itemMeta
         if (meta is EnchantmentStorageMeta) {
-            for ((enchant, level) in enchants) {
+            // Remove existing enchants
+            for (enchant in meta.storedEnchants.keys) {
                 meta.removeStoredEnchant(enchant)
+            }
+
+            for ((enchant, level) in enchants) {
                 meta.addStoredEnchant(enchant, level, true)
             }
         } else {
