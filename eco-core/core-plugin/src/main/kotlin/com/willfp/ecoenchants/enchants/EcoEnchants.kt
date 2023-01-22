@@ -17,11 +17,13 @@ import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.ChatColor
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.event.Listener
 
 @Suppress("UNUSED")
 object EcoEnchants {
     private val BY_KEY = HashBiMap.create<String, EcoEnchant>()
     private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
+    private val HARDCODE_LISTENERS = mutableListOf<Listener>()
 
     /**
      * Get all registered [EcoEnchant]s.
@@ -128,6 +130,9 @@ object EcoEnchants {
         if (enchant is EcoEnchant) {
             BY_KEY.remove(enchant.id)
             BY_NAME.remove(ChatColor.stripColor(enchant.displayName))
+            enchant.internalListeners.forEach {
+                EcoEnchantsPlugin.instance.eventManager.unregisterListener(it)
+            }
             EnchantRegistrations.removeEnchant(enchant)
         }
 

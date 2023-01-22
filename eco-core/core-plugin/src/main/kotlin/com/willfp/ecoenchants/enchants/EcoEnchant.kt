@@ -43,6 +43,7 @@ abstract class EcoEnchant(
 ) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike {
     final override val config by lazy { configProvider(this) }
     override val enchant by lazy { this }
+    val internalListeners = mutableListOf<Listener>()
 
     private val levels = Caffeine.newBuilder()
         .build<Int, EcoEnchantLevel>()
@@ -194,6 +195,7 @@ abstract class EcoEnchant(
 
     fun registerListener(listener: Listener) {
         this.plugin.eventManager.registerListener(listener)
+        internalListeners.add(listener)
     }
 
     @Deprecated(
