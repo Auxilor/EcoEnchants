@@ -80,14 +80,9 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
 
                 val enchantNotMetLines = enchantLevel.getNotMetLines(player).map { Display.PREFIX + it }
                 notMetLines.addAll(enchantNotMetLines)
-                if (enchantNotMetLines.isNotEmpty()) {
-                    showNotMet = true
-                }
 
-                if (!showNotMet && !enchantLevel.conditions.isMet(player)) { // I know it's slow! I'll fix it.
-                    if (enchantLevel.conditions.any { it.notMetEffects.isNotEmpty() }) {
-                        showNotMet = true
-                    }
+                if (enchantNotMetLines.isNotEmpty() || enchantLevel.showAnyNotMet(player)) {
+                    showNotMet = true
                 }
             }
 
