@@ -58,9 +58,13 @@ class EnchantmentReplenish(
 
             if (enchant.config.getBool("consume-seeds")) {
                 val item = ItemStack(
-                    if (type == Material.WHEAT) {
-                        Material.WHEAT_SEEDS
-                    } else type
+                    when (type) {
+                        Material.WHEAT -> Material.WHEAT_SEEDS
+                        Material.POTATOES -> Material.POTATO
+                        Material.CARROTS -> Material.CARROT
+                        Material.BEETROOTS -> Material.BEETROOT_SEEDS
+                        else -> type
+                    }
                 )
 
                 val hasSeeds = player.inventory.removeItem(item).isEmpty()
