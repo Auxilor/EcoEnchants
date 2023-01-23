@@ -65,6 +65,11 @@ abstract class EcoEnchant(
 
     private val conflictNames = config.getStrings("conflicts")
 
+    private val _listeners = mutableListOf<Listener>()
+
+    val listeners: List<Listener>
+        get() = this._listeners
+
     val conflictsWithEverything: Boolean
         get() = conflictNames.containsIgnoreCase("all")
                 || conflictNames.containsIgnoreCase("everything")
@@ -194,6 +199,7 @@ abstract class EcoEnchant(
 
     fun registerListener(listener: Listener) {
         this.plugin.eventManager.registerListener(listener)
+        this._listeners += listener
     }
 
     @Deprecated(

@@ -17,6 +17,7 @@ import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.ChatColor
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.event.Listener
 
 @Suppress("UNUSED")
 object EcoEnchants {
@@ -96,6 +97,10 @@ object EcoEnchants {
 
         for (enchant in values()) {
             removeEnchant(enchant)
+
+            for (listener in enchant.listeners) {
+                plugin.eventManager.unregisterListener(listener)
+            }
         }
 
         for ((id, config) in plugin.fetchConfigs("enchants")) {
