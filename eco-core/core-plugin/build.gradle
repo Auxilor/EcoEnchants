@@ -8,6 +8,13 @@ dependencies {
     compileOnly 'net.essentialsx:EssentialsX:2.19.0'
 }
 
+task createJar(type: org.gradle.jvm.tasks.Jar) {
+    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    into 'lib'
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
+build.finalizedBy createJar
 build.dependsOn publishToMavenLocal
 
 publishing {
