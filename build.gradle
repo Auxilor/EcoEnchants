@@ -46,7 +46,7 @@ allprojects {
 
     dependencies {
         compileOnly 'com.willfp:eco:6.44.0'
-        implementation 'com.willfp:libreforge:3.129.4'
+        implementation 'com.willfp:libreforge:3.129.5'
         implementation 'org.joml:joml:1.10.4'
 
         compileOnly 'org.jetbrains:annotations:23.0.0'
