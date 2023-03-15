@@ -1,0 +1,24 @@
+display-name: "Indestructibility"
+description: "Gives a %placeholder%% chance not to break item."
+placeholder: "ceil(100-(100/(%level% + 4)))"
+type: special
+
+targets:
+  - all
+conflicts:
+  - unbreaking
+rarity: veryspecial
+max-level: 3
+
+tradeable: true
+discoverable: true
+enchantable: true
+
+effects:
+  - id: cancel_event
+    args:
+      chance: "100-(100/(%level% + 4))"
+    triggers:
+      - damage_item
+
+conditions: [ ]
