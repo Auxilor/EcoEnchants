@@ -2,10 +2,6 @@ package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.libreforge.lrcdb.CommandExport
-import com.willfp.libreforge.lrcdb.CommandImport
-import com.willfp.libreforge.lrcdb.ExportableConfig
 import org.bukkit.command.CommandSender
 
 class CommandEcoEnchants(plugin: EcoEnchantsPlugin) :
@@ -21,14 +17,5 @@ class CommandEcoEnchants(plugin: EcoEnchantsPlugin) :
             .addSubcommand(CommandToggleDescriptions(plugin))
             .addSubcommand(CommandGiveRandomBook(plugin))
             .addSubcommand(CommandGUI(plugin))
-            .addSubcommand(CommandImport("enchants", plugin))
-            .addSubcommand(CommandExport(plugin) {
-                EcoEnchants.values().map {
-                    ExportableConfig(
-                        it.id,
-                        it.config
-                    )
-                }
-            })
     }
 }

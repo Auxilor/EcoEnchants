@@ -1,0 +1,25 @@
+name: ${pluginName}
+version: ${version}
+main: com.willfp.ecoenchants.EcoEnchantsPlugin
+api-version: 1.19
+
+dependencies:
+  - name: eco
+    required: true
+    bootstrap: false
+
+  - name: libreforge
+    required: false
+    bootstrap: false
+
+  - name: CMI
+    required: false
+    bootstrap: false
+
+  - name: EssentialsX
+    required: false
+    bootstrap: false
+
+load-after:
+  - name: eco
+    bootstrap: false

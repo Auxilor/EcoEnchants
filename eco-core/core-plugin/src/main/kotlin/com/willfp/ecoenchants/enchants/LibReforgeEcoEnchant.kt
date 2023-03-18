@@ -3,9 +3,11 @@ package com.willfp.ecoenchants.enchants
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.libreforge.Holder
-import com.willfp.libreforge.conditions.ConfiguredCondition
-import com.willfp.libreforge.effects.ConfiguredEffect
+import com.willfp.libreforge.ViolationContext
+import com.willfp.libreforge.conditions.ConditionList
+import com.willfp.libreforge.effects.EffectList
 import com.willfp.libreforge.effects.Effects
+import com.willfp.libreforge.loader.LibreforgePlugin
 import java.util.Objects
 
 class LibReforgeEcoEnchant(
@@ -17,26 +19,27 @@ class LibReforgeEcoEnchant(
     config,
     plugin
 ) {
-    private val effects: Set<ConfiguredEffect>
+    private val effects: EffectList
 
     init {
         effects = if (plugin.isLoaded) Effects.compile(
             config.getSubsections("effects"),
-            "Enchantment $id"
-        ) else emptySet()
+            ViolationContext(plugin, "Enchantment $id")
+        ) else EffectList(emptyList())
     }
 
     override fun createLevel(level: Int): EcoEnchantLevel =
-        EcoEnchantLevel(this, level, effects, conditions)
+        EcoEnchantLevel(this, level, effects, conditions, plugin)
 }
 
 class EcoEnchantLevel(
     parent: EcoEnchant,
     level: Int,
-    override val effects: Set<ConfiguredEffect>,
-    override val conditions: Set<ConfiguredCondition>
+    override val effects: EffectList,
+    override val conditions: ConditionList,
+    plugin: LibreforgePlugin
 ) : Holder {
-    override val id = "${parent.id}_$level"
+    override val id =  plugin.createNamespacedKey("${parent.id}_$level")
 
     override fun equals(other: Any?): Boolean {
         if (other !is EcoEnchantLevel) {
@@ -47,7 +50,7 @@ class EcoEnchantLevel(
     }
 
     override fun toString(): String {
-        return id
+        return id.toString()
     }
 
     override fun hashCode(): Int {

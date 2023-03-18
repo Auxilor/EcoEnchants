@@ -4,12 +4,14 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchantLevel
+import com.willfp.libreforge.ItemProvidedHolder
+import com.willfp.libreforge.ProvidedHolder
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.concurrent.TimeUnit
 
 // The Int is the inventory slot ID
-typealias SlotProvider = (Player) -> Map<Int, ItemInSlot>
+typealias SlotProvider = (Player) -> Map<ItemInNumericSlot, ItemInSlot>
 
 data class ItemInSlot internal constructor(
     val item: ItemStack,
@@ -21,6 +23,11 @@ data class ItemInSlot internal constructor(
     ) : this(item, listOf(slot))
 }
 
+data class ItemInNumericSlot internal constructor(
+    val item: ItemStack,
+    val slot: Int
+)
+
 private data class HeldEnchant(
     val enchant: EcoEnchant,
     val level: Int
@@ -31,21 +38,21 @@ object EnchantLookup {
 
     private val itemCache = Caffeine.newBuilder()
         .expireAfterWrite(2, TimeUnit.SECONDS)
-        .build<Player, Map<Int, ItemInSlot>>()
+        .build<Player, Map<ItemInNumericSlot, ItemInSlot>>()
 
     private val enchantCache = Caffeine.newBuilder()
         .expireAfterWrite(2, TimeUnit.SECONDS)
-        .build<Player, Map<Int, Collection<HeldEnchant>>>()
+        .build<Player, Map<ItemInNumericSlot, Collection<HeldEnchant>>>()
 
     // Higher frequency cache as less intensive
     private val enchantLevelCache = Caffeine.newBuilder()
         .expireAfterWrite(200, TimeUnit.MILLISECONDS)
-        .build<Player, Map<EcoEnchant, Int>>()
+        .build<Player, Map<ItemInNumericSlot, Map<EcoEnchant, Int>>>()
 
     @JvmStatic
     fun registerProvider(provider: SlotProvider) {
         slotProviders.add {
-            val found = mutableMapOf<Int, ItemInSlot>()
+            val found = mutableMapOf<ItemInNumericSlot, ItemInSlot>()
             for ((slot, inSlot) in provider(it)) {
                 found[slot] = inSlot
             }
@@ -53,14 +60,16 @@ object EnchantLookup {
         }
     }
 
-    private fun provide(player: Player): Map<Int, ItemInSlot> {
+    private fun provide(player: Player): Map<ItemInNumericSlot, ItemInSlot> {
         return itemCache.get(player) {
-            val found = mutableMapOf<Int, ItemInSlot>()
+            val found = mutableMapOf<ItemInNumericSlot, ItemInSlot>()
+
             for (provider in slotProviders) {
                 val fromProvider = provider(player)
                 for ((slot, item) in fromProvider) {
                     // Basically a multimap
                     val current = found[slot]
+
                     if (current == null) {
                         found[slot] = item
                     } else {
@@ -76,10 +85,10 @@ object EnchantLookup {
     /**
      * The inventory slot IDs mapped to HeldEnchants found in that slot.
      */
-    private val Player.slotHeldEnchants: Map<Int, Collection<HeldEnchant>>
+    private val Player.slotHeldEnchants: Map<ItemInNumericSlot, Collection<HeldEnchant>>
         get() {
             return enchantCache.get(this) {
-                val found = mutableMapOf<Int, MutableCollection<HeldEnchant>>()
+                val found = mutableMapOf<ItemInNumericSlot, MutableCollection<HeldEnchant>>()
 
                 for ((slotID, inSlot) in provide(this)) {
                     val (item, slot) = inSlot
@@ -113,15 +122,27 @@ object EnchantLookup {
         }
 
     /**
-     * All EcoEnchants mapped to their IDs, regardless of conditions.
+     * Slot IDs mapped to HeldEnchants found in that slot.
      */
-    val Player.heldEnchants: Map<EcoEnchant, Int>
+    private val Player.slotIDHeldEnchants: Map<Int, Collection<HeldEnchant>>
+        get() {
+            return this.slotHeldEnchants.mapKeys { it.key.slot }
+        }
+
+    /**
+     * All slots holding EcoEnchants mapped to their IDs, regardless of conditions.
+     */
+    val Player.heldEnchantsInSlots: Map<ItemInNumericSlot, Map<EcoEnchant, Int>>
         get() {
             return enchantLevelCache.get(this) {
-                val found = mutableMapOf<EcoEnchant, Int>()
+                val found = mutableMapOf<ItemInNumericSlot, MutableMap<EcoEnchant, Int>>()
 
-                for ((enchant, level) in it.slotHeldEnchants.values.flatten()) {
-                    found[enchant] = found.getOrDefault(enchant, 0) + level
+                for ((inSlot, enchants) in this.slotHeldEnchants) {
+                    val map = mutableMapOf<EcoEnchant, Int>()
+                    for ((enchant, level) in enchants) {
+                        map[enchant] = level
+                    }
+                    found[inSlot] = map
                 }
 
                 found
@@ -129,13 +150,52 @@ object EnchantLookup {
         }
 
     /**
+     * All EcoEnchants mapped to their IDs, regardless of conditions.
+     */
+    val Player.heldEnchants: Map<EcoEnchant, Int>
+        get() {
+            val found = mutableMapOf<EcoEnchant, Int>()
+            for ((_, enchants) in this.heldEnchantsInSlots) {
+                for ((enchant, level) in enchants) {
+                    found[enchant] = level
+                }
+            }
+
+            return found
+        }
+
+    /**
+     * All slots mapped to EcoEnchants mapped to their IDs, respecting conditions.
+     */
+    val Player.activeEnchantsInSlots: Map<ItemInNumericSlot, Map<EcoEnchant, Int>>
+        get() {
+            val found = mutableMapOf<ItemInNumericSlot, MutableMap<EcoEnchant, Int>>()
+            for ((slot, enchants) in this.heldEnchantsInSlots) {
+                val inSlot = mutableMapOf<EcoEnchant, Int>()
+                for ((enchant, level) in enchants) {
+                    if (enchant.getLevel(level).conditions.all { it.isMet(this) }) {
+                        inSlot[enchant] = level
+                    }
+                }
+                found[slot] = inSlot
+            }
+
+            return found
+        }
+
+    /**
      * All EcoEnchants mapped to their IDs, respecting conditions.
      */
     val Player.activeEnchants: Map<EcoEnchant, Int>
         get() {
-            return this.heldEnchants.filter { (enchant, level) ->
-                enchant.getLevel(level).conditions.all { it.isMet(this) }
+            val found = mutableMapOf<EcoEnchant, Int>()
+            for ((_, enchants) in this.activeEnchantsInSlots) {
+                for ((enchant, level) in enchants) {
+                    found[enchant] = level
+                }
             }
+
+            return found
         }
 
     /**
@@ -162,7 +222,7 @@ object EnchantLookup {
      * @return The level, or 0 if not found.
      */
     fun Player.getEnchantLevelInSlot(enchant: EcoEnchant, slot: Int): Int {
-        val inSlot = this.slotHeldEnchants[slot] ?: return 0
+        val inSlot = this.slotIDHeldEnchants[slot] ?: return 0
         val heldEnchant = inSlot.firstOrNull { it.enchant == enchant } ?: return 0
         return heldEnchant.level
     }
@@ -222,9 +282,18 @@ object EnchantLookup {
         return this.getActiveEnchantLevelInSlot(enchant, slot) > 0
     }
 
-    val Player.heldEnchantLevels: List<EcoEnchantLevel>
-        get() = this.heldEnchants
-            .map { (enchant, level) -> enchant.getLevel(level) }
+    val Player.heldEnchantLevels: List<ProvidedHolder<ItemStack>>
+        get() {
+            val found = mutableListOf<ProvidedHolder<ItemStack>>()
+
+            for ((slot, enchants) in this.heldEnchantsInSlots) {
+                for ((enchant, level) in enchants) {
+                    found.add(ItemProvidedHolder(enchant.getLevel(level), slot.item))
+                }
+            }
+
+            return found
+        }
 
     /**
      * Clear item and enchant cache.
@@ -238,11 +307,13 @@ object EnchantLookup {
     init {
         fun createProvider(slot: TargetSlot): SlotProvider {
             return { player: Player ->
-                val found = mutableMapOf<Int, ItemInSlot>()
+                val found = mutableMapOf<ItemInNumericSlot, ItemInSlot>()
 
                 for (slotID in slot.getItemSlots(player)) {
                     val item = player.inventory.getItem(slotID) ?: continue
-                    found[slotID] = ItemInSlot(item, slot)
+                    found[
+                            ItemInNumericSlot(item, slotID)
+                    ] = ItemInSlot(item, slot)
                 }
 
                 found

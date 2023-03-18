@@ -17,8 +17,10 @@ import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.target.TargetSlot
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.libreforge.ViolationContext
+import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.conditions.Conditions
-import com.willfp.libreforge.conditions.ConfiguredCondition
+import com.willfp.libreforge.effects.EffectList
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -50,7 +52,7 @@ abstract class EcoEnchant(
     override val displayName = config.getFormattedString("display-name")
     override val unformattedDisplayName = config.getString("display-name")
 
-    val conditions: Set<ConfiguredCondition>
+    val conditions: ConditionList
 
     val targets = config.getStrings("targets")
         .mapNotNull { EnchantmentTargets.getByID(it) }
@@ -125,8 +127,8 @@ abstract class EcoEnchant(
 
         conditions = if (plugin.isLoaded) Conditions.compile(
             config.getSubsections("conditions"),
-            "Enchantment $id"
-        ) else emptySet()
+            ViolationContext(plugin, "Enchantment $id")
+        ) else ConditionList(emptyList())
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.$id") == null) {
             val permission = Permission(
@@ -195,7 +197,7 @@ abstract class EcoEnchant(
     }
 
     open fun createLevel(level: Int) =
-        EcoEnchantLevel(this, level, emptySet(), conditions)
+        EcoEnchantLevel(this, level, EffectList(emptyList()), conditions, plugin)
 
     fun registerListener(listener: Listener) {
         this.plugin.eventManager.registerListener(listener)
