@@ -7,6 +7,7 @@ import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.effects.EffectList
 import com.willfp.libreforge.effects.Effects
+import com.willfp.libreforge.effects.emptyEffectList
 import com.willfp.libreforge.loader.LibreforgePlugin
 import java.util.Objects
 
@@ -25,7 +26,7 @@ class LibReforgeEcoEnchant(
         effects = if (plugin.isLoaded) Effects.compile(
             config.getSubsections("effects"),
             ViolationContext(plugin, "Enchantment $id")
-        ) else EffectList(emptyList())
+        ) else emptyEffectList()
     }
 
     override fun createLevel(level: Int): EcoEnchantLevel =

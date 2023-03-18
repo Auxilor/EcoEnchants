@@ -20,7 +20,9 @@ import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.conditions.Conditions
+import com.willfp.libreforge.conditions.emptyConditionList
 import com.willfp.libreforge.effects.EffectList
+import com.willfp.libreforge.effects.emptyEffectList
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -128,7 +130,7 @@ abstract class EcoEnchant(
         conditions = if (plugin.isLoaded) Conditions.compile(
             config.getSubsections("conditions"),
             ViolationContext(plugin, "Enchantment $id")
-        ) else ConditionList(emptyList())
+        ) else emptyConditionList()
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.$id") == null) {
             val permission = Permission(
@@ -197,7 +199,7 @@ abstract class EcoEnchant(
     }
 
     open fun createLevel(level: Int) =
-        EcoEnchantLevel(this, level, EffectList(emptyList()), conditions, plugin)
+        EcoEnchantLevel(this, level, emptyEffectList(), conditions, plugin)
 
     fun registerListener(listener: Listener) {
         this.plugin.eventManager.registerListener(listener)
