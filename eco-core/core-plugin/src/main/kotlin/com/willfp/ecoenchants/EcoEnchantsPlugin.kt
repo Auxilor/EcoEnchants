@@ -21,10 +21,12 @@ import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
+import com.willfp.ecoenchants.target.EnchantLookup.clearEnchantCache
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderProvider
+import com.willfp.libreforge.registerPlayerRefreshFunction
 import org.bukkit.event.Listener
 
 class EcoEnchantsPlugin : LibreforgePlugin() {
@@ -47,6 +49,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
     override fun handleEnable() {
         registerHolderProvider { it.heldEnchantLevels }
+        registerPlayerRefreshFunction { it.clearEnchantCache() }
     }
 
     override fun handleAfterLoad() {
