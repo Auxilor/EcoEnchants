@@ -21,7 +21,6 @@ import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
-import com.willfp.ecoenchants.target.ActiveEnchantUpdateListeners
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
@@ -62,7 +61,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
     override fun loadListeners(): List<Listener> {
         return listOf(
-            ActiveEnchantUpdateListeners(this),
             VillagerSupport(this),
             EnchantingTableSupport(this),
             LootSupport(this),

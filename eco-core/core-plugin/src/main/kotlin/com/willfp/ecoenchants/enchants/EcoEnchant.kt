@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.config.ConfigType
 import com.willfp.eco.core.config.config
 import com.willfp.eco.core.config.interfaces.Config
@@ -43,7 +44,7 @@ import java.util.Objects
 abstract class EcoEnchant(
     val id: String,
     configProvider: (EcoEnchant) -> Config,
-    protected val plugin: EcoEnchantsPlugin
+    protected val plugin: EcoPlugin
 ) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike {
     final override val config by lazy { configProvider(this) }
     override val enchant by lazy { this }
@@ -84,19 +85,19 @@ abstract class EcoEnchant(
 
     constructor(
         config: Config,
-        plugin: EcoEnchantsPlugin
+        plugin: EcoPlugin
     ) : this(config.getString("id"), { config }, plugin)
 
     constructor(
         id: String,
         config: Config,
-        plugin: EcoEnchantsPlugin
+        plugin: EcoPlugin
     ) : this(id, { config }, plugin)
 
     @JvmOverloads
     constructor(
         id: String,
-        plugin: EcoEnchantsPlugin,
+        plugin: EcoPlugin,
         force: Boolean = true
     ) : this(
         id,
@@ -127,10 +128,10 @@ abstract class EcoEnchant(
             }
         )
 
-        conditions = if (plugin.isLoaded) Conditions.compile(
+        conditions = Conditions.compile(
             config.getSubsections("conditions"),
             ViolationContext(plugin, "Enchantment $id")
-        ) else emptyConditionList()
+        )
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.$id") == null) {
             val permission = Permission(

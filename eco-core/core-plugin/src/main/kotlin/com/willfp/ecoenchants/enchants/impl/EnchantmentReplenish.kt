@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchants.impl
 
+import com.willfp.eco.core.EcoPlugin
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.target.EnchantLookup.hasEnchantActive
@@ -27,7 +28,7 @@ class EnchantmentReplenish(
 
     private class ReplenishHandler(
         private val enchant: EcoEnchant,
-        private val plugin: EcoEnchantsPlugin
+        private val plugin: EcoPlugin
     ) : Listener {
         @EventHandler(
             ignoreCancelled = true
