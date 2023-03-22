@@ -4,7 +4,6 @@ main: com.willfp.ecoenchants.EcoEnchantsPlugin
 api-version: 1.17
 authors: [ Auxilor ]
 website: willfp.com
-load: STARTUP
 depend:
   - eco
 softdepend:
