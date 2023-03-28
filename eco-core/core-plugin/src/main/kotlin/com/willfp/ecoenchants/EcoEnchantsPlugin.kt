@@ -58,8 +58,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
     override fun handleReload() {
         registerVanillaEnchants(this)
-
-        logger.info(EcoEnchants.values().size.toString() + " Enchants Loaded")
     }
 
     override fun loadListeners(): List<Listener> {
