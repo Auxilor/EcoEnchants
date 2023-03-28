@@ -282,9 +282,9 @@ object EnchantLookup {
         return this.getActiveEnchantLevelInSlot(enchant, slot) > 0
     }
 
-    val Player.heldEnchantLevels: List<ProvidedHolder<ItemStack>>
+    val Player.heldEnchantLevels: List<ItemProvidedHolder>
         get() {
-            val found = mutableListOf<ProvidedHolder<ItemStack>>()
+            val found = mutableListOf<ItemProvidedHolder>()
 
             for ((slot, enchants) in this.heldEnchantsInSlots) {
                 for ((enchant, level) in enchants) {
