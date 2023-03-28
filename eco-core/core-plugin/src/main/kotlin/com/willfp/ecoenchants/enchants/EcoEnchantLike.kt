@@ -58,6 +58,10 @@ interface EcoEnchantLike {
                             )
                         }
 
+                        override fun addInjectablePlaceholder(p0: MutableIterable<InjectablePlaceholder>) {
+                            // Do nothing
+                        }
+
                         override fun clearInjectedPlaceholders() {
                             // Do nothing
                         }
@@ -100,11 +104,11 @@ class VanillaEcoEnchantLike(
     override val config = plugin.vanillaEnchantsYml.getSubsection(enchant.key.key)
 
     override val type: EnchantmentType =
-        EnchantmentTypes.getByID(plugin.vanillaEnchantsYml.getString("${enchant.key.key}.type"))
+        EnchantmentTypes[plugin.vanillaEnchantsYml.getString("${enchant.key.key}.type")]
             ?: EnchantmentTypes.values().first()
 
     override val enchantmentRarity: EnchantmentRarity =
-        EnchantmentRarities.getByID(plugin.vanillaEnchantsYml.getString("${enchant.key.key}.rarity"))
+        EnchantmentRarities[plugin.vanillaEnchantsYml.getString("${enchant.key.key}.rarity")]
             ?: EnchantmentRarities.values().first()
 
     override val displayName = plugin.vanillaEnchantsYml.getFormattedString("${enchant.key.key}.name")

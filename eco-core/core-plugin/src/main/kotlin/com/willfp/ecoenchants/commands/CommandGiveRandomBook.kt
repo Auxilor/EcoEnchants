@@ -36,7 +36,7 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
         val filterName = args.getOrNull(1)
 
         val filter = if (filterName != null) {
-            EnchantmentTypes.getByID(filterName) ?: EnchantmentRarities.getByID(filterName)
+            EnchantmentTypes[filterName] ?: EnchantmentRarities[filterName]
         } else null
 
         val minLevel = args.getOrNull(2)?.toIntOrNull() ?: 1

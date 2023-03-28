@@ -1,5 +1,5 @@
-name: EcoEnchants
-version: ${projectVersion}
+name: ${pluginName}
+version: ${version}
 main: com.willfp.ecoenchants.EcoEnchantsPlugin
 api-version: 1.17
 authors: [ Auxilor ]
@@ -7,18 +7,8 @@ website: willfp.com
 depend:
   - eco
 softdepend:
-  - Vault
-  - AureliumSkills
-  - PlayerPoints
-  - Jobs
-  - TMMobcoins
-  - Reforges
-  - EcoBosses
-  - Talismans
-  - EcoArmor
-  - EcoItems
-  - EcoSkills
-  - Boosters
+  - CMI
+  - EssentialsX
 
 commands:
   ecoenchants:
@@ -46,8 +36,6 @@ permissions:
       ecoenchants.command.giverandombook: true
       ecoenchants.command.enchantinfo: true
       ecoenchants.command.gui: true
-      ecoenchants.command.import: true
-      ecoenchants.command.export: true
   ecoenchants.anvil.*:
     description: All anvil perks
     default: op
@@ -75,9 +63,3 @@ permissions:
   ecoenchants.command.gui:
     description: Allows the use of /ecoenchants gui.
     default: true
-  ecoenchants.command.import:
-    description: Allows the use of /ecoenchants import.
-    default: op
-  ecoenchants.command.export:
-    description: Allows the use of /ecoenchants export.
-    default: op

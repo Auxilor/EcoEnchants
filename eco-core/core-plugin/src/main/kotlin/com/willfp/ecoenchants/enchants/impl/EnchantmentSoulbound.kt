@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants.enchants.impl
 
+import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.data.keys.PersistentDataKey
 import com.willfp.eco.core.data.keys.PersistentDataKeyType
 import com.willfp.eco.core.data.profile
@@ -32,7 +33,7 @@ class EnchantmentSoulbound(
     }
 
     private class SoulboundHandler(
-        private val plugin: EcoEnchantsPlugin,
+        private val plugin: EcoPlugin,
         private val enchant: EcoEnchant
     ) : Listener {
         private val savedSoulboundItems = PersistentDataKey(

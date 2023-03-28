@@ -62,7 +62,7 @@ object TypeSorter : EnchantmentSorter {
     fun update(plugin: EcoEnchantsPlugin) {
         types.clear()
         types.addAll(plugin.configYml.getStrings("display.sort.type-order").mapNotNull {
-            EnchantmentTypes.getByID(it)
+            EnchantmentTypes[it]
         })
     }
 
@@ -91,7 +91,7 @@ object RaritySorter : EnchantmentSorter {
     fun update(plugin: EcoEnchantsPlugin) {
         rarities.clear()
         rarities.addAll(plugin.configYml.getStrings("display.sort.rarity-order").mapNotNull {
-            EnchantmentRarities.getByID(it)
+            EnchantmentRarities[it]
         })
     }
 

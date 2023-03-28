@@ -21,12 +21,18 @@ import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
-import com.willfp.ecoenchants.target.ActiveEnchantUpdateListeners
+import com.willfp.ecoenchants.target.EnchantLookup.clearEnchantCache
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
-import com.willfp.libreforge.LibReforgePlugin
+import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.libreforge.integrations.ecoenchants.impl.TriggerEnchantType
+import com.willfp.libreforge.loader.LibreforgePlugin
+import com.willfp.libreforge.loader.configs.ConfigCategory
+import com.willfp.libreforge.registerHolderProvider
+import com.willfp.libreforge.registerPlayerRefreshFunction
+import com.willfp.libreforge.triggers.Triggers
 import org.bukkit.event.Listener
 
-class EcoEnchantsPlugin : LibReforgePlugin() {
+class EcoEnchantsPlugin : LibreforgePlugin() {
     val targetsYml = TargetsYml(this)
     val rarityYml = RarityYml(this)
     val typesYml = TypesYml(this)
@@ -36,19 +42,24 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
 
     init {
         instance = this
-        copyConfigs("enchants")
-        EcoEnchants.update(this)
     }
 
-    override fun handleEnableAdditional() {
+    override fun loadConfigCategories(): List<ConfigCategory> {
+        return listOf(
+            EcoEnchants
+        )
+    }
+
+    override fun handleEnable() {
         registerHolderProvider { it.heldEnchantLevels }
+        registerPlayerRefreshFunction { it.clearEnchantCache() }
     }
 
     override fun handleAfterLoad() {
         isLoaded = true
     }
 
-    override fun handleReloadAdditional() {
+    override fun handleReload() {
         registerVanillaEnchants(this)
 
         logger.info(EcoEnchants.values().size.toString() + " Enchants Loaded")
@@ -56,7 +67,6 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
 
     override fun loadListeners(): List<Listener> {
         return listOf(
-            ActiveEnchantUpdateListeners(this),
             VillagerSupport(this),
             EnchantingTableSupport(this),
             LootSupport(this),
@@ -66,7 +76,7 @@ class EcoEnchantsPlugin : LibReforgePlugin() {
         )
     }
 
-    override fun loadAdditionalIntegrations(): List<IntegrationLoader> {
+    override fun loadIntegrationLoaders(): List<IntegrationLoader> {
         return listOf(
             IntegrationLoader("Essentials") { EnchantRegistrations.register(EssentialsIntegration()) },
             IntegrationLoader("CMI") { EnchantRegistrations.register(CMIIntegration()) }

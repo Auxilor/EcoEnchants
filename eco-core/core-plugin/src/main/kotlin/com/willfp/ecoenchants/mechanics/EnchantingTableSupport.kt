@@ -175,7 +175,7 @@ class EnchantingTableSupport(
         perfectly, it's effectively 1:1 with vanilla if memory serves, so I'm not going to rewrite it.
          */
 
-        event.offers.getOrNull(2)?.cost = min(event.offers[2].cost, maxObtainableLevel)
+        event.offers.getOrNull(2)?.cost = min(event.offers[2]?.cost ?: 0, maxObtainableLevel)
 
         val bonus = event.enchantmentBonus.coerceIn(1..15)
 
@@ -215,9 +215,9 @@ class EnchantingTableSupport(
         }
 
         ExtraItemSupport.currentlyEnchantingExtraItem[event.enchanter.uniqueId] = arrayOf(
-            event.offers[0].enchantmentLevel,
-            event.offers[1].enchantmentLevel,
-            event.offers[2].enchantmentLevel
+            event.offers[0]?.enchantmentLevel ?: 0,
+            event.offers[1]?.enchantmentLevel ?: 0,
+            event.offers[2]?.enchantmentLevel ?: 0
         )
     }
 }

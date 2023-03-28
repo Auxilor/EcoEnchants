@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.config.ConfigType
 import com.willfp.eco.core.config.config
 import com.willfp.eco.core.config.interfaces.Config
@@ -17,8 +18,12 @@ import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.target.TargetSlot
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.libreforge.ViolationContext
+import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.conditions.Conditions
-import com.willfp.libreforge.conditions.ConfiguredCondition
+import com.willfp.libreforge.conditions.emptyConditionList
+import com.willfp.libreforge.effects.EffectList
+import com.willfp.libreforge.effects.emptyEffectList
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -39,7 +44,7 @@ import java.util.Objects
 abstract class EcoEnchant(
     val id: String,
     configProvider: (EcoEnchant) -> Config,
-    protected val plugin: EcoEnchantsPlugin
+    protected val plugin: EcoPlugin
 ) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike {
     final override val config by lazy { configProvider(this) }
     override val enchant by lazy { this }
@@ -50,18 +55,18 @@ abstract class EcoEnchant(
     override val displayName = config.getFormattedString("display-name")
     override val unformattedDisplayName = config.getString("display-name")
 
-    val conditions: Set<ConfiguredCondition>
+    val conditions: ConditionList
 
     val targets = config.getStrings("targets")
-        .mapNotNull { EnchantmentTargets.getByID(it) }
+        .mapNotNull { EnchantmentTargets[it] }
 
     val slots: Set<TargetSlot>
         get() = targets.map { it.slot }.toSet()
 
-    override val type = EnchantmentTypes.getByID(config.getString("type")) ?: EnchantmentTypes.values().first()
+    override val type = EnchantmentTypes[config.getString("type")] ?: EnchantmentTypes.values().first()
 
     override val enchantmentRarity =
-        EnchantmentRarities.getByID(config.getString("rarity")) ?: EnchantmentRarities.values().first()
+        EnchantmentRarities[config.getString("rarity")] ?: EnchantmentRarities.values().first()
 
     private val conflictNames = config.getStrings("conflicts")
 
@@ -80,19 +85,19 @@ abstract class EcoEnchant(
 
     constructor(
         config: Config,
-        plugin: EcoEnchantsPlugin
+        plugin: EcoPlugin
     ) : this(config.getString("id"), { config }, plugin)
 
     constructor(
         id: String,
         config: Config,
-        plugin: EcoEnchantsPlugin
+        plugin: EcoPlugin
     ) : this(id, { config }, plugin)
 
     @JvmOverloads
     constructor(
         id: String,
-        plugin: EcoEnchantsPlugin,
+        plugin: EcoPlugin,
         force: Boolean = true
     ) : this(
         id,
@@ -123,10 +128,10 @@ abstract class EcoEnchant(
             }
         )
 
-        conditions = if (plugin.isLoaded) Conditions.compile(
+        conditions = Conditions.compile(
             config.getSubsections("conditions"),
-            "Enchantment $id"
-        ) else emptySet()
+            ViolationContext(plugin, "Enchantment $id")
+        )
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.$id") == null) {
             val permission = Permission(
@@ -195,7 +200,7 @@ abstract class EcoEnchant(
     }
 
     open fun createLevel(level: Int) =
-        EcoEnchantLevel(this, level, emptySet(), conditions)
+        EcoEnchantLevel(this, level, emptyEffectList(), conditions, plugin)
 
     fun registerListener(listener: Listener) {
         this.plugin.eventManager.registerListener(listener)

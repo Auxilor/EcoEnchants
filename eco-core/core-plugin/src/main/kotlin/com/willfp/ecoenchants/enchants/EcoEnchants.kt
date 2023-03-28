@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchants
 
 import com.google.common.collect.HashBiMap
 import com.google.common.collect.ImmutableSet
+import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
@@ -14,13 +15,15 @@ import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.libreforge.loader.LibreforgePlugin
+import com.willfp.libreforge.loader.configs.ConfigCategory
 import org.bukkit.ChatColor
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.Listener
 
 @Suppress("UNUSED")
-object EcoEnchants {
+object EcoEnchants : ConfigCategory("enchant", "enchants") {
     private val BY_KEY = HashBiMap.create<String, EcoEnchant>()
     private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
 
@@ -83,18 +86,8 @@ object EcoEnchants {
         } else BY_NAME[name]
     }
 
-    /**
-     * Update all [EcoEnchant]s.
-     *
-     * @param plugin Instance of EcoEnchants.
-     */
-    @JvmStatic
-    @ConfigUpdater
-    fun update(plugin: EcoEnchantsPlugin) {
-        EnchantmentRarities.update(plugin)
-        EnchantmentTargets.update(plugin)
-        EnchantmentTypes.update(plugin)
 
+    override fun clear(plugin: LibreforgePlugin) {
         for (enchant in values()) {
             removeEnchant(enchant)
 
@@ -102,24 +95,37 @@ object EcoEnchants {
                 plugin.eventManager.unregisterListener(listener)
             }
         }
+    }
 
-        for ((id, config) in plugin.fetchConfigs("enchants")) {
-            if (config.has("effects")) {
-                try {
-                    LibReforgeEcoEnchant(
-                        id,
-                        config,
-                        plugin
-                    )
-                } catch (e: MissingDependencyException) {
-                    addPluginPrompt(plugin, e.plugins)
-                }
-            }
-        }
+    override fun beforeReload(plugin: LibreforgePlugin) {
+        plugin as EcoEnchantsPlugin
+
+        EnchantmentRarities.update(plugin)
+        EnchantmentTargets.update(plugin)
+        EnchantmentTypes.update(plugin)
+    }
+
+    override fun afterReload(plugin: LibreforgePlugin) {
+        plugin as EcoEnchantsPlugin
 
         sendPrompts(plugin)
-
         registerHardcodedEnchantments(plugin)
+    }
+
+    override fun acceptConfig(plugin: LibreforgePlugin, id: String, config: Config) {
+        plugin as EcoEnchantsPlugin
+
+        if (config.has("effects")) {
+            try {
+                LibReforgeEcoEnchant(
+                    id,
+                    config,
+                    plugin
+                )
+            } catch (e: MissingDependencyException) {
+                addPluginPrompt(plugin, e.plugins)
+            }
+        }
     }
 
     /**
@@ -157,7 +163,6 @@ object EcoEnchants {
      *
      * @param enchant The [EcoEnchant] to add.
      */
-    @Suppress("UNCHECKED_CAST", "DEPRECATION")
     internal fun addNewEnchant(enchant: EcoEnchant) {
         register(enchant)
 
