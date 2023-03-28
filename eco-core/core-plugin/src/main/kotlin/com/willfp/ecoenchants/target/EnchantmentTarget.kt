@@ -4,12 +4,13 @@ import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
+import com.willfp.eco.core.registry.Registrable
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.Objects
 
-interface EnchantmentTarget {
+interface EnchantmentTarget : Registrable {
     val id: String
     val displayName: String
     val slot: TargetSlot
@@ -22,6 +23,10 @@ interface EnchantmentTarget {
             }
         }
         return false
+    }
+
+    override fun getID(): String {
+        return this.id
     }
 }
 
@@ -36,10 +41,6 @@ class ConfiguredEnchantmentTarget(
     override val items = config.getStrings("items")
         .map { Items.lookup(it) }
         .filterNot { it is EmptyTestableItem }
-
-    init {
-        EnchantmentTargets.addNewTarget(this)
-    }
 
     override fun equals(other: Any?): Boolean {
         if (other !is EnchantmentTarget) {

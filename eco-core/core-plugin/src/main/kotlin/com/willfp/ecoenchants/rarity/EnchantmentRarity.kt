@@ -1,12 +1,13 @@
 package com.willfp.ecoenchants.rarity
 
 import com.willfp.eco.core.config.interfaces.Config
+import com.willfp.eco.core.registry.Registrable
 import java.util.*
 
 @Suppress("DEPRECATION")
 class EnchantmentRarity(
     internal val config: Config
-) {
+) : Registrable {
     val id = config.getString("id")
     val displayName = config.getFormattedString("display-name")
     val tableChance = config.getDouble("table-chance")
@@ -14,8 +15,8 @@ class EnchantmentRarity(
     val villagerChance = config.getDouble("villager-chance")
     val lootChance = config.getDouble("loot-chance")
 
-    init {
-        EnchantmentRarities.addNewRarity(this)
+    override fun getID(): String {
+        return id
     }
 
     override fun equals(other: Any?): Boolean {

@@ -58,15 +58,15 @@ abstract class EcoEnchant(
     val conditions: ConditionList
 
     val targets = config.getStrings("targets")
-        .mapNotNull { EnchantmentTargets.getByID(it) }
+        .mapNotNull { EnchantmentTargets[it] }
 
     val slots: Set<TargetSlot>
         get() = targets.map { it.slot }.toSet()
 
-    override val type = EnchantmentTypes.getByID(config.getString("type")) ?: EnchantmentTypes.values().first()
+    override val type = EnchantmentTypes[config.getString("type")] ?: EnchantmentTypes.values().first()
 
     override val enchantmentRarity =
-        EnchantmentRarities.getByID(config.getString("rarity")) ?: EnchantmentRarities.values().first()
+        EnchantmentRarities[config.getString("rarity")] ?: EnchantmentRarities.values().first()
 
     private val conflictNames = config.getStrings("conflicts")
 
