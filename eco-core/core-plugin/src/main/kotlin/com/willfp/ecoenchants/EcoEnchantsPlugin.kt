@@ -23,13 +23,10 @@ import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.target.EnchantLookup.clearEnchantCache
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
-import com.willfp.ecoenchants.type.EnchantmentTypes
-import com.willfp.libreforge.integrations.ecoenchants.impl.TriggerEnchantType
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerPlayerRefreshFunction
-import com.willfp.libreforge.triggers.Triggers
 import org.bukkit.event.Listener
 
 class EcoEnchantsPlugin : LibreforgePlugin() {
