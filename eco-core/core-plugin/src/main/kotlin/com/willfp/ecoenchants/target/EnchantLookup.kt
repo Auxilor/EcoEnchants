@@ -4,6 +4,7 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchantLevel
+import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import com.willfp.libreforge.ItemProvidedHolder
 import com.willfp.libreforge.ProvidedHolder
 import org.bukkit.entity.Player
@@ -173,7 +174,9 @@ object EnchantLookup {
             for ((slot, enchants) in this.heldEnchantsInSlots) {
                 val inSlot = mutableMapOf<EcoEnchant, Int>()
                 for ((enchant, level) in enchants) {
-                    if (enchant.getLevel(level).conditions.all { it.isMet(this) }) {
+                    val enchantLevel = enchant.getLevel(level)
+                    val providedHolder = ItemProvidedHolder(enchantLevel, slot.item)
+                    if (enchantLevel.conditions.areMet(this, providedHolder)) {
                         inSlot[enchant] = level
                     }
                 }
@@ -239,7 +242,11 @@ object EnchantLookup {
             return 0
         }
 
-        if (enchant.getLevel(level).conditions.any { !it.isMet(this) }) {
+        val enchantLevel = enchant.getLevel(level)
+        val item = this.inventory.getItem(slot) ?: return 0
+        val providedHolder = ItemProvidedHolder(enchantLevel, item)
+
+        if (!enchantLevel.conditions.areMet(this, providedHolder)) {
             return 0
         }
 
