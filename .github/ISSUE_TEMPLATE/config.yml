@@ -1,8 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Auxilor Community Discord
+  - name: Discord
     url: https://discord.gg/ZcwpSsE/
-    about: Join the Auxilor discord to get help from support staff and the general community!
-  - name: The most common issues people have
-    url: https://github.com/Auxilor/eco/issues/78
-    about: Check the list of known common issues to see if your issue has already been solved
+    about: Issues have moved to Discord, please join the server to get help!

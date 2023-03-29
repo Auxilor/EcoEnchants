@@ -25,4 +25,15 @@ publishing {
             artifactId = rootProject.name
         }
     }
+
+    repositories {
+        maven {
+            name = "auxilor"
+            url = uri("https://repo.auxilor.io/repository/maven-releases/")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
 }

@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
     kotlin("jvm") version "1.7.10"
     id("com.github.johnrengelman.shadow") version "8.0.0"
-    id("com.willfp.libreforge.gradle") version "1.0.0"
+    id("com.willfp.libreforge-gradle-plugin") version "1.0.0"
 }
 
 group = "com.willfp"
@@ -33,6 +33,7 @@ allprojects {
 
         maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://jitpack.io")
+        maven("https://repo.auxilor.io/repository/maven-public/")
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://repo.codemc.org/repository/nms/")
         maven("https://repo.essentialsx.net/releases/")
