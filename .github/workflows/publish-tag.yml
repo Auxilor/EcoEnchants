@@ -2,9 +2,10 @@ name: Publish Packages
 on:
   workflow_dispatch:
   release:
-    types: [created]
-  tag:
-    types: [created]
+    types: [ created ]
+  push:
+    tags:
+      - '*'
 
 jobs:
   publish:
