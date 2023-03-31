@@ -32,8 +32,8 @@ allprojects {
         mavenCentral()
 
         maven("https://repo.papermc.io/repository/maven-public/")
-        maven("https://jitpack.io")
         maven("https://repo.auxilor.io/repository/maven-public/")
+        maven("https://jitpack.io")
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://repo.codemc.org/repository/nms/")
         maven("https://repo.essentialsx.net/releases/")
