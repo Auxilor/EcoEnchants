@@ -57,8 +57,6 @@ object LengthSorter : EnchantmentSorter {
 object TypeSorter : EnchantmentSorter {
     private val types = mutableListOf<EnchantmentType>()
 
-    @JvmStatic
-    @ConfigUpdater
     fun update(plugin: EcoEnchantsPlugin) {
         types.clear()
         types.addAll(plugin.configYml.getStrings("display.sort.type-order").mapNotNull {
@@ -86,8 +84,6 @@ object TypeSorter : EnchantmentSorter {
 object RaritySorter : EnchantmentSorter {
     private val rarities = mutableListOf<EnchantmentRarity>()
 
-    @JvmStatic
-    @ConfigUpdater
     fun update(plugin: EcoEnchantsPlugin) {
         rarities.clear()
         rarities.addAll(plugin.configYml.getStrings("display.sort.rarity-order").mapNotNull {
