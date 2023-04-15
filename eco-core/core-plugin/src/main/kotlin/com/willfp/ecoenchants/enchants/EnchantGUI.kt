@@ -21,6 +21,7 @@ import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEmpty
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.formatEco
+import com.willfp.eco.util.toNiceString
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.getFormattedName
@@ -261,6 +262,12 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                                         }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts").toWrappable() }
                                     }
                                 )
+                                .replace("%tradeable%", plugin.langYml
+                                    .getFormattedString(this.isTradeable.yesOrNo))
+                                .replace("%discoverable%", plugin.langYml
+                                    .getFormattedString(this.isDiscoverable.yesOrNo))
+                                .replace("%enchantable%", plugin.langYml
+                                    .getFormattedString(this.isEnchantable.yesOrNo))
                         }
                         .flatMap {
                             WordUtils.wrap(it, 45, "\n", false)
@@ -278,4 +285,9 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                 .build()
         )
     }
+}
+
+val Boolean.yesOrNo: String
+    get() {
+    return if (this) "yes" else "no"
 }
