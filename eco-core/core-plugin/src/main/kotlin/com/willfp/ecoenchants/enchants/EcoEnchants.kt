@@ -27,6 +27,8 @@ object EcoEnchants : ConfigCategory("enchant", "enchants") {
     private val BY_KEY = HashBiMap.create<String, EcoEnchant>()
     private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
 
+    override val shouldPreload = true
+
     /**
      * Get all registered [EcoEnchant]s.
      *

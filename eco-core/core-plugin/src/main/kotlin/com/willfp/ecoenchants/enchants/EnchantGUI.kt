@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.config.base.LangYml
 import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
@@ -262,12 +263,9 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                                         }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts").toWrappable() }
                                     }
                                 )
-                                .replace("%tradeable%", plugin.langYml
-                                    .getFormattedString(this.isTradeable.yesOrNo))
-                                .replace("%discoverable%", plugin.langYml
-                                    .getFormattedString(this.isDiscoverable.yesOrNo))
-                                .replace("%enchantable%", plugin.langYml
-                                    .getFormattedString(this.isEnchantable.yesOrNo))
+                                .replace("%tradeable%", this.isTradeable.parseYesOrNo(plugin.langYml))
+                                .replace("%discoverable%", this.isDiscoverable.parseYesOrNo(plugin.langYml))
+                                .replace("%enchantable%", this.isEnchantable.parseYesOrNo(plugin.langYml))
                         }
                         .flatMap {
                             WordUtils.wrap(it, 45, "\n", false)
@@ -287,7 +285,6 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
     }
 }
 
-val Boolean.yesOrNo: String
-    get() {
-    return if (this) "yes" else "no"
+fun Boolean.parseYesOrNo(langYml: LangYml): String {
+    return if (this)  langYml.getFormattedString("yes") else langYml.getFormattedString("no")
 }

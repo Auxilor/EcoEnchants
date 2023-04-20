@@ -18,6 +18,7 @@ import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.target.TargetSlot
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.libreforge.SilentViolationContext
 import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.conditions.Conditions
@@ -44,7 +45,7 @@ import java.util.Objects
 abstract class EcoEnchant(
     val id: String,
     configProvider: (EcoEnchant) -> Config,
-    protected val plugin: EcoPlugin
+    protected val plugin: EcoEnchantsPlugin
 ) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike {
     final override val config by lazy { configProvider(this) }
     override val enchant by lazy { this }
@@ -85,19 +86,19 @@ abstract class EcoEnchant(
 
     constructor(
         config: Config,
-        plugin: EcoPlugin
+        plugin: EcoEnchantsPlugin
     ) : this(config.getString("id"), { config }, plugin)
 
     constructor(
         id: String,
         config: Config,
-        plugin: EcoPlugin
+        plugin: EcoEnchantsPlugin
     ) : this(id, { config }, plugin)
 
     @JvmOverloads
     constructor(
         id: String,
-        plugin: EcoPlugin,
+        plugin: EcoEnchantsPlugin,
         force: Boolean = true
     ) : this(
         id,
@@ -130,7 +131,8 @@ abstract class EcoEnchant(
 
         conditions = Conditions.compile(
             config.getSubsections("conditions"),
-            ViolationContext(plugin, "Enchantment $id")
+            if (plugin.isLoaded) ViolationContext(plugin, "Enchantment $id")
+            else SilentViolationContext
         )
 
         if (Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.$id") == null) {
