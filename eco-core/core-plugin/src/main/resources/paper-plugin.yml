@@ -2,6 +2,7 @@ name: ${pluginName}
 version: ${version}
 main: com.willfp.ecoenchants.EcoEnchantsPlugin
 api-version: 1.19
+load: STARTUP
 
 dependencies:
   - name: eco
