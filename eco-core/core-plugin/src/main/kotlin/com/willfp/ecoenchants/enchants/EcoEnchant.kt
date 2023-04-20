@@ -171,7 +171,7 @@ abstract class EcoEnchant(
     }
 
     private fun checkDependencies() {
-        val missingPlugins = mutableListOf<String>()
+        val missingPlugins = mutableSetOf<String>()
 
         for (dependency in config.getStrings("dependencies")) {
             if (!Bukkit.getPluginManager().plugins.map { it.name }.containsIgnoreCase(dependency)) {

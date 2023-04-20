@@ -4,7 +4,7 @@ import com.willfp.eco.core.EcoPlugin
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 
 class MissingDependencyException(
-    val plugins: List<String>
+    val plugins: Set<String>
 ) : Exception() {
     override val message = "Missing the following plugins: ${plugins.joinToString(", ")}"
 }
@@ -12,7 +12,7 @@ class MissingDependencyException(
 // Plugin names mapped to enchants that aren't installed.
 private val prompts = mutableMapOf<String, Int>()
 
-fun addPluginPrompt(plugin: EcoEnchantsPlugin, plugins: List<String>) {
+fun addPluginPrompt(plugin: EcoEnchantsPlugin, plugins: Set<String>) {
     if (!plugin.isLoaded) {
         return
     }
