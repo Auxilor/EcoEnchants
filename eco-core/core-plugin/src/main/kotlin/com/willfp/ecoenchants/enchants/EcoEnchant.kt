@@ -121,14 +121,6 @@ abstract class EcoEnchant(
     init {
         checkDependencies()
 
-        config.injectPlaceholders(
-            PlayerStaticPlaceholder(
-                "level"
-            ) { p ->
-                p.getEnchantLevel(this).toString()
-            }
-        )
-
         conditions = Conditions.compile(
             config.getSubsections("conditions"),
             if (plugin.isLoaded) ViolationContext(plugin, "Enchantment $id")

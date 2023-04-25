@@ -8,7 +8,7 @@ import java.util.Objects
 
 class EcoEnchantLevel(
     parent: EcoEnchant,
-    level: Int,
+    val level: Int,
     override val effects: EffectList,
     override val conditions: ConditionList,
     plugin: EcoPlugin

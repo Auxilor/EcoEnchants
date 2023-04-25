@@ -10,6 +10,7 @@ import com.willfp.ecoenchants.config.TargetsYml
 import com.willfp.ecoenchants.config.TypesYml
 import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.EnchantDisplay
+import com.willfp.ecoenchants.enchants.EcoEnchantLevel
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.LoreConversion
 import com.willfp.ecoenchants.enchants.registerVanillaEnchants
@@ -23,8 +24,10 @@ import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.target.EnchantLookup.clearEnchantCache
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
+import com.willfp.libreforge.NamedValue
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
+import com.willfp.libreforge.registerHolderPlaceholderProvider
 import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerPlayerRefreshFunction
 import org.bukkit.event.Listener
@@ -50,6 +53,12 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleEnable() {
         registerHolderProvider { it.heldEnchantLevels }
         registerPlayerRefreshFunction { it.clearEnchantCache() }
+        registerHolderPlaceholderProvider { (holder, _) ->
+            when (holder) {
+                is EcoEnchantLevel -> listOf(NamedValue("level", holder.level))
+                else -> emptyList()
+            }
+        }
     }
 
     override fun handleAfterLoad() {
