@@ -30,7 +30,7 @@ data class ItemInNumericSlot internal constructor(
     val slot: Int
 ) {
     override fun hashCode(): Int {
-        return HashedItem.of(item).hash + (slot shl 31)
+        return HashedItem.of(item).hash * (slot + 1)
     }
 }
 
