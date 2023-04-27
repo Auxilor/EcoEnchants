@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.target
 
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.fast.fast
+import com.willfp.eco.core.items.HashedItem
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchantLevel
 import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
@@ -27,7 +28,11 @@ data class ItemInSlot internal constructor(
 data class ItemInNumericSlot internal constructor(
     val item: ItemStack,
     val slot: Int
-)
+) {
+    override fun hashCode(): Int {
+        return HashedItem.of(item).hash + (slot shl 31)
+    }
+}
 
 private data class HeldEnchant(
     val enchant: EcoEnchant,
