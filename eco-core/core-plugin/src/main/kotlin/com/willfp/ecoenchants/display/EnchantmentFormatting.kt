@@ -4,6 +4,7 @@ import com.github.benmanes.caffeine.cache.Cache
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.eco.core.integrations.placeholder.PlaceholderManager
+import com.willfp.eco.core.placeholder.context.placeholderContext
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
@@ -96,7 +97,7 @@ fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> {
 
         var i = 1
         for (placeholder in placeholders) {
-            val translated = PlaceholderManager.translatePlaceholders(placeholder, null)
+            val translated = PlaceholderManager.translatePlaceholders(placeholder)
             mockPlaceholderMap[i] = translated
 
             val length = ChatColor.stripColor(translated)!!.length
