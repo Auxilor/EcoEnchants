@@ -77,7 +77,7 @@ display:
   descriptions:
     enabled: true # If enchantment descriptions should be shown in lore
     threshold: 5 # Above this amount, enchantment descriptions will not be shown
-    word-wrap: 36 # Number of characters to have on each line
+    word-wrap: 27 # Number of characters to have on each line
     format: "&8"
 
   require-enchantable: true # If EcoEnchants should not display on non-enchantable items.
