@@ -3,14 +3,15 @@ package com.willfp.ecoenchants.display
 import com.github.benmanes.caffeine.cache.Cache
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.config.updating.ConfigUpdater
-import com.willfp.eco.core.integrations.placeholder.PlaceholderManager
-import com.willfp.eco.core.placeholder.context.placeholderContext
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
+import com.willfp.eco.util.formatEco
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchantLike
-import org.apache.commons.lang.WordUtils
-import org.bukkit.ChatColor
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.JoinConfiguration
+import net.kyori.adventure.text.TextComponent
+import java.util.stream.Collectors
 
 // This is an object to be able to invalidate the cache on reload
 object DisplayCache {
@@ -83,50 +84,13 @@ fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> {
         val descriptionFormat = plugin.configYml.getString("display.descriptions.format")
         val wrap = plugin.configYml.getInt("display.descriptions.word-wrap")
 
-        var description = this.getUnformattedDescription(level)
-
-        /*
-         Essentially, to work with word wrapping (and colored placeholders),
-         placeholders are translated first, then replaced with a unique mock
-         placeholder the length of the translated value, and then swapped back in
-         at the end.
-         */
-        val placeholders = PlaceholderManager.findPlaceholdersIn(description)
-        val mockPlaceholderMap = mutableMapOf<Int, String>()
-        val mockPlaceholderIDs = mutableMapOf<String, Int>()
-
-        var i = 1
-        for (placeholder in placeholders) {
-            val translated = PlaceholderManager.translatePlaceholders(placeholder)
-            mockPlaceholderMap[i] = translated
-
-            val length = ChatColor.stripColor(translated)!!.length
-            val toReplaceWith = "[${i.toString().repeat((length - 2).coerceAtLeast(1))}]"
-            mockPlaceholderIDs[toReplaceWith] = i
-            description = description.replace(placeholder, toReplaceWith)
-            i++
-        }
+        var description = descriptionFormat + this.getUnformattedDescription(level)
 
         // Replace reset tags with description format
         for (tag in resetTags) {
             description = description.replace(tag, tag + descriptionFormat)
         }
 
-        // Wrap the lines
-        val wrapped = WordUtils.wrap(description, wrap, "\n", false)
-            .lines()
-            .map {
-                // Swap back in placeholders
-                var string = it
-                for ((mock, id) in mockPlaceholderIDs) {
-                    string = string.replace(mock, mockPlaceholderMap[id] ?: "")
-                }
-
-                StringUtils.format(
-                    descriptionFormat + string
-                )
-            }
-
-        wrapped
+        StringUtils.lineWrap(description.formatEco(), wrap)
     }
 }
