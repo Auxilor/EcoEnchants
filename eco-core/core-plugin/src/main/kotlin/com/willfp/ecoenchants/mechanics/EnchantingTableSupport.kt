@@ -5,6 +5,7 @@ import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.util.NumberUtils
+import com.willfp.eco.util.randDouble
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchants
@@ -122,7 +123,12 @@ class EnchantingTableSupport(
             val maxLevel = enchantment.maxLevel
             val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")
 
-            val levelPart1 = cost / maxObtainableLevel.toDouble()
+            val levelPart1 = if (enchantment.type.highLevelBias > 0) {
+                randDouble(0.0, 1.0)
+            } else {
+                cost / maxObtainableLevel.toDouble()
+            }
+
             val levelPart2 = NumberUtils.bias(levelPart1, enchantment.type.highLevelBias)
             val levelPart3 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart2)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
