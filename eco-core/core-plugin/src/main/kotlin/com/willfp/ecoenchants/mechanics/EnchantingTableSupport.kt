@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
@@ -233,9 +232,7 @@ object ExtraItemSupport {
 
     internal val extraEnchantableItems = mutableListOf<TestableItem>()
 
-    @JvmStatic
-    @ConfigUpdater
-    fun reload(plugin: EcoEnchantsPlugin) {
+    internal fun reload(plugin: EcoEnchantsPlugin) {
         extraEnchantableItems.clear()
         extraEnchantableItems.addAll(plugin.targetsYml.getStrings("extra-enchantable-items").map {
             Items.lookup(it)

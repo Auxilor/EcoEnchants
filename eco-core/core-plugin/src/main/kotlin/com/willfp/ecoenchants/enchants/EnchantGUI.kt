@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchants
 
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.config.base.LangYml
-import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
@@ -22,7 +21,6 @@ import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEmpty
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.formatEco
-import com.willfp.eco.util.toNiceString
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.getFormattedName
@@ -39,9 +37,7 @@ object EnchantGUI {
     private lateinit var menu: Menu
     private val enchantInfoMenus = Caffeine.newBuilder().build<EcoEnchant, Menu>()
 
-    @JvmStatic
-    @ConfigUpdater
-    fun update(plugin: EcoEnchantsPlugin) {
+    internal fun reload(plugin: EcoEnchantsPlugin) {
         menu = menu(plugin.configYml.getInt("enchant-gui.rows")) {
             title = plugin.configYml.getFormattedString("enchant-gui.title")
 

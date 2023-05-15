@@ -8,10 +8,6 @@ import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.formatEco
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchantLike
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.JoinConfiguration
-import net.kyori.adventure.text.TextComponent
-import java.util.stream.Collectors
 
 // This is an object to be able to invalidate the cache on reload
 object DisplayCache {
@@ -21,9 +17,7 @@ object DisplayCache {
     val descriptionCache: Cache<DisplayableEnchant, List<String>> = Caffeine.newBuilder()
         .build()
 
-    @JvmStatic
-    @ConfigUpdater
-    fun onReload() {
+    internal fun reload() {
         nameCache.invalidateAll()
         descriptionCache.invalidateAll()
     }

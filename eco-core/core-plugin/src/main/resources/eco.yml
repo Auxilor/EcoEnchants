@@ -3,6 +3,7 @@ options:
   bstats-id: 7666
   color: "&a"
   proxy-package: "com.willfp.ecoenchants.proxy"
+  uses-reflective-reload: false
 
 environment:
   - name: libreforge version
