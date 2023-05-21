@@ -5,6 +5,7 @@ import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.util.NumberUtils
+import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.wrap
@@ -72,7 +73,7 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
             .push()
 
         sender.sendMessage(
-            plugin.langYml.getMessage("gave-random-book")
+            plugin.langYml.getMessage("gave-random-book", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
                 .replace("%player%", player.name)
                 .replace("%enchantment%", enchantment.wrap().getFormattedName(level))
         )

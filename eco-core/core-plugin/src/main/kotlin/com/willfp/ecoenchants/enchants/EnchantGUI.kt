@@ -21,14 +21,17 @@ import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEmpty
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.formatEco
+import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
+import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.apache.commons.lang.WordUtils
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import kotlin.math.ceil
@@ -216,65 +219,36 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
         slot(
             EnchantedBookBuilder()
                 .addStoredEnchantment(enchant, level)
-                .writeMetaKey(
-                    plugin.namespacedKeyFactory.create("force-describe"),
-                    PersistentDataType.INTEGER,
-                    1
-                )
+                .addItemFlag(ItemFlag.HIDE_ENCHANTS)
+                .setDisplayName(enchant.getFormattedName(level))
+                .addLoreLines(enchant.getFormattedDescription(level))
                 .addLoreLines {
-                    // This is horrific and I should refactor it.
-                    val wrappableMap = mutableMapOf<String, String>()
-
-                    fun String.toWrappable(): String {
-                        val unspaced = this.replace(" ", "{_}")
-                        val uncolored = ChatColor.stripColor(unspaced)!!
-
-                        wrappableMap[uncolored] = this
-                        return uncolored
-                    }
-
-                    fun String.replaceInWrappable(): String {
-                        var processed = this
-                        for ((wrappable, original) in wrappableMap) {
-                            processed = processed.replace(wrappable, original)
-                        }
-                        return processed
-                    }
-
                     plugin.configYml.getStrings("enchantinfo.item.lore")
                         .map {
                             it.replace("%max_level%", enchant.maxLevel.toString())
-                                .replace("%rarity%", enchant.enchantmentRarity.displayName.toWrappable())
+                                .replace("%rarity%", enchant.enchantmentRarity.displayName)
                                 .replace(
                                     "%targets%",
-                                    enchant.targets.joinToString(", ") { target -> target.displayName.toWrappable() }
+                                    enchant.targets.joinToString(", ") { target -> target.displayName }
                                 )
                                 .replace(
                                     "%conflicts%",
                                     if (enchant.conflictsWithEverything) {
-                                        plugin.langYml.getFormattedString("all-conflicts").toWrappable()
+                                        plugin.langYml.getFormattedString("all-conflicts")
                                     } else {
                                         enchant.conflicts.joinToString(", ") { conflict ->
-                                            conflict.wrap().getFormattedName(0).toWrappable()
-                                        }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts").toWrappable() }
+                                            conflict.wrap().getFormattedName(0)
+                                        }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
                                     }
                                 )
                                 .replace("%tradeable%", this.isTradeable.parseYesOrNo(plugin.langYml))
                                 .replace("%discoverable%", this.isDiscoverable.parseYesOrNo(plugin.langYml))
                                 .replace("%enchantable%", this.isEnchantable.parseYesOrNo(plugin.langYml))
                         }
-                        .flatMap {
-                            WordUtils.wrap(it, 45, "\n", false)
-                                .lines()
-                                .map { s -> s.replaceInWrappable() }
-                                .mapIndexed { index, s ->
-                                    if (index == 0) s
-                                    else StringUtils.format(
-                                        plugin.configYml.getString("enchantinfo.item.line-wrap-format") + s
-                                    )
-                                }
-                        }
                         .formatEco()
+                        .flatMap {
+                            it.lineWrap(32, true)
+                        }
                 }
                 .build()
         )
@@ -282,5 +256,5 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
 }
 
 fun Boolean.parseYesOrNo(langYml: LangYml): String {
-    return if (this)  langYml.getFormattedString("yes") else langYml.getFormattedString("no")
+    return if (this) langYml.getFormattedString("yes") else langYml.getFormattedString("no")
 }

@@ -96,7 +96,6 @@ enchantinfo:
     row: 2
     column: 5
     show-max-level: true # Whether the book should be the max level or level 1
-    line-wrap-format: "&a" # Color for line wrapping
     lore: # The description is automatically appended
       - ""
       - "&fMax Level: &a%max_level%"

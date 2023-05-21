@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.command.impl.PluginCommand
+import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.savedDisplayName
 import com.willfp.ecoenchants.enchants.wrap
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -46,7 +47,7 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
             meta.addEnchant(enchant, level, true)
 
             sender.sendMessage(
-                plugin.langYml.getMessage("added-enchant")
+                plugin.langYml.getMessage("added-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
                     .replace("%enchant%", enchant.wrap().displayName)
                     .replace("%player%", player.savedDisplayName)
             )
@@ -57,11 +58,13 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
             meta.removeEnchant(enchant)
 
             sender.sendMessage(
-                plugin.langYml.getMessage("removed-enchant")
+                plugin.langYml.getMessage("removed-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
                     .replace("%enchant%", enchant.wrap().displayName)
                     .replace("%player%", player.savedDisplayName)
             )
         }
+
+        item.itemMeta = meta
     }
 
     override fun tabComplete(sender: CommandSender, rawArgs: List<String>): List<String> {
