@@ -14,6 +14,9 @@ messages:
   gave-random-book: "&fGave &a%player%&f a random book (&r%enchantment%&f)!"
   no-enchantments-found: "&cNo enchantments found!"
   invalid-levels: "&cMinimum level can't be higher than maximum level!"
+  invalid-enchantment: "&cInvalid enchantment!"
+  added-enchant: "&fAdded &a%enchantment%&f to &a%player%&f's held item!"
+  removed-enchant: "&fRemoved &a%enchantment%&f from &a%player%&f's held item!"
 
 
 all: "All"

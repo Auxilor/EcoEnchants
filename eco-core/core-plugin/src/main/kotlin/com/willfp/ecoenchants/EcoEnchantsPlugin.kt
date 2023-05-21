@@ -4,6 +4,7 @@ import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
 import com.willfp.eco.core.integrations.IntegrationLoader
 import com.willfp.ecoenchants.commands.CommandEcoEnchants
+import com.willfp.ecoenchants.commands.CommandEnchant
 import com.willfp.ecoenchants.commands.CommandEnchantInfo
 import com.willfp.ecoenchants.config.RarityYml
 import com.willfp.ecoenchants.config.TargetsYml
@@ -99,7 +100,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun loadPluginCommands(): List<PluginCommand> {
         return listOf(
             CommandEcoEnchants(this),
-            CommandEnchantInfo(this)
+            CommandEnchantInfo(this),
+            CommandEnchant(this)
         )
     }
 
