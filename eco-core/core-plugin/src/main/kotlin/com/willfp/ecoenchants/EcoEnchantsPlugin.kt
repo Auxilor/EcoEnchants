@@ -32,11 +32,13 @@ import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevel
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
 import com.willfp.libreforge.EmptyProvidedHolder.holder
 import com.willfp.libreforge.NamedValue
+import com.willfp.libreforge.ProvidedHolder
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderPlaceholderProvider
 import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerPlayerRefreshFunction
+import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 
 class EcoEnchantsPlugin : LibreforgePlugin() {
@@ -60,14 +62,11 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleEnable() {
         registerHolderProvider { it.heldEnchantLevels }
         registerPlayerRefreshFunction { it.clearEnchantCache() }
-        registerHolderPlaceholderProvider { ph, player ->
-            when (val holder = ph.holder) {
-                is EcoEnchantLevel -> listOf(
-                    NamedValue("level", holder.level),
-                    NamedValue("active_level", player.getActiveEnchantLevel(holder.enchant))
-                )
-                else -> emptyList()
-            }
+        registerHolderPlaceholderProvider<EcoEnchantLevel> { it, player ->
+            listOf(
+                NamedValue("level", it.level),
+                NamedValue("active_level", player.getActiveEnchantLevel(it.enchant))
+            )
         }
     }
 
