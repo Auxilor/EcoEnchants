@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.enchants.impl
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
+import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevel
 import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -31,7 +32,7 @@ class EnchantmentRapid(
         fun handle(event: EntityShootBowEvent) {
             val player = event.entity as? Player ?: return
 
-            val level = player.getEnchantLevel(enchant)
+            val level = player.getActiveEnchantLevel(enchant)
 
             val multiplier = 1 - enchant.config.getDouble("percent-faster-per-level") * level / 100
 

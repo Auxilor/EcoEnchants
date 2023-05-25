@@ -28,7 +28,9 @@ import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.target.EnchantLookup.clearEnchantCache
+import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevel
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
+import com.willfp.libreforge.EmptyProvidedHolder.holder
 import com.willfp.libreforge.NamedValue
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
@@ -58,9 +60,12 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleEnable() {
         registerHolderProvider { it.heldEnchantLevels }
         registerPlayerRefreshFunction { it.clearEnchantCache() }
-        registerHolderPlaceholderProvider { (holder, _) ->
-            when (holder) {
-                is EcoEnchantLevel -> listOf(NamedValue("level", holder.level))
+        registerHolderPlaceholderProvider { ph, player ->
+            when (val holder = ph.holder) {
+                is EcoEnchantLevel -> listOf(
+                    NamedValue("level", holder.level),
+                    NamedValue("active_level", player.getActiveEnchantLevel(holder.enchant))
+                )
                 else -> emptyList()
             }
         }
