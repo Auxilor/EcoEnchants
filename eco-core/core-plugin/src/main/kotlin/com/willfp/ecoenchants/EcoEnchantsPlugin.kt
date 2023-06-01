@@ -65,7 +65,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         registerHolderPlaceholderProvider<EcoEnchantLevel> { it, player ->
             listOf(
                 NamedValue("level", it.level),
-                NamedValue("active_level", player.getActiveEnchantLevel(it.enchant))
+                //NamedValue("active_level", player.getActiveEnchantLevel(it.enchant))
             )
         }
     }
