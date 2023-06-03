@@ -8,6 +8,7 @@ import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.config.readConfig
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.placeholder.PlayerStaticPlaceholder
+import com.willfp.eco.core.placeholder.PlayerlessPlaceholder
 import com.willfp.eco.core.placeholder.context.PlaceholderContext
 import com.willfp.eco.core.placeholder.templates.SimpleInjectablePlaceholder
 import com.willfp.eco.util.StringUtils
@@ -130,6 +131,10 @@ abstract class EcoEnchant(
                 }
             }
         )
+
+        PlayerlessPlaceholder(plugin, "${id}_name") {
+            displayName
+        }.register()
 
         conditions = Conditions.compile(
             config.getSubsections("conditions"),
