@@ -133,7 +133,7 @@ abstract class EcoEnchant(
         )
 
         PlayerlessPlaceholder(plugin, "${id}_name") {
-            displayName
+            this.getFormattedName(0, false)
         }.register()
 
         conditions = Conditions.compile(
