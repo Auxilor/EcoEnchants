@@ -20,9 +20,12 @@ tasks {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
+        register<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            version = project.version.toString()
             artifactId = rootProject.name
+
+            artifact(rootProject.tasks.shadowJar.get().archiveFile)
         }
     }
 
