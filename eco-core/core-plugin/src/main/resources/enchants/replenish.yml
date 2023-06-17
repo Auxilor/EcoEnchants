@@ -15,3 +15,5 @@ enchantable: true
 conditions: [ ]
 
 consume-seeds: true # If seeds should be consumed in replanting
+
+prevent-not-fully-grown: false # If the enchantment should prevent replanting not fully grown crops
