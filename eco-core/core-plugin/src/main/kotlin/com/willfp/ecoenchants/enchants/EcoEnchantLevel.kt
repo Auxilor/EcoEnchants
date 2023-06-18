@@ -31,3 +31,12 @@ class EcoEnchantLevel(
         return Objects.hash(this.id)
     }
 }
+
+data class FoundEcoEnchantLevel(
+    val level: EcoEnchantLevel,
+    val activeLevel: Int
+): Holder {
+    override val effects = level.effects
+    override val conditions = level.conditions
+    override val id = level.id
+}

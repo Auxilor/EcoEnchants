@@ -5,6 +5,7 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.items.HashedItem
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchantLevel
+import com.willfp.ecoenchants.enchants.FoundEcoEnchantLevel
 import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import com.willfp.libreforge.ItemProvidedHolder
 import com.willfp.libreforge.ProvidedHolder
@@ -304,7 +305,14 @@ object EnchantLookup {
                 }
             }
 
-            return found
+            return found.map {
+                val level = it.holder as EcoEnchantLevel
+
+                ItemProvidedHolder(
+                    FoundEcoEnchantLevel(level, this.getActiveEnchantLevel(level.enchant)),
+                    it.provider
+                )
+            }
         }
 
     /**
