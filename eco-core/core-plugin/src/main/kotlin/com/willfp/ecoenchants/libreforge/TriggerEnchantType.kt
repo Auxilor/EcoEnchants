@@ -3,6 +3,8 @@ package com.willfp.ecoenchants.libreforge
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchants.EcoEnchant
+import com.willfp.ecoenchants.enchants.wrap
+import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.libreforge.triggers.Trigger
 import com.willfp.libreforge.triggers.TriggerData
 import com.willfp.libreforge.triggers.TriggerParameter
@@ -12,13 +14,15 @@ import org.bukkit.event.enchantment.EnchantItemEvent
 
 class TriggerEnchantType(
     private val plugin: EcoPlugin,
-    private val type: String
-) : Trigger("enchant_$type") {
+    private val type: EnchantmentType
+) : Trigger("enchant_${type.id}") {
     override val parameters = setOf(
         TriggerParameter.PLAYER,
         TriggerParameter.LOCATION,
         TriggerParameter.ITEM
     )
+
+    override var isEnabled = true
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun handleLevelling(event: EnchantItemEvent) {
@@ -27,8 +31,8 @@ class TriggerEnchantType(
         plugin.scheduler.runLater({
             if (
                 event.item.fast().getEnchants(true).keys
-                    .filterIsInstance<EcoEnchant>()
-                    .any { it.type.id.equals(type, ignoreCase = true) }
+                    .map { it.wrap() }
+                    .any { it.type == type }
             ) {
                 this.dispatch(
                     player,
@@ -36,7 +40,8 @@ class TriggerEnchantType(
                         player = player,
                         location = player.location,
                         item = event.item,
-                        value = event.expLevelCost.toDouble()
+                        value = event.expLevelCost.toDouble(),
+                        text = type.id
                     )
                 )
             }

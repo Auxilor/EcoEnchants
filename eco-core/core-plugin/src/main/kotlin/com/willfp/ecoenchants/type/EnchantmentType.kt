@@ -31,7 +31,7 @@ class EnchantmentType(
     }
 
     override fun onRegister() {
-        Triggers.register(TriggerEnchantType(plugin, this.id))
+        Triggers.register(TriggerEnchantType(plugin, this))
     }
 
     override fun getID(): String {
