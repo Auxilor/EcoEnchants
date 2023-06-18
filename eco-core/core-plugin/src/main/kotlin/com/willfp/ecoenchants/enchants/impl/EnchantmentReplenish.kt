@@ -80,6 +80,10 @@ class EnchantmentReplenish(
             }
 
             if (data.age != data.maximumAge) {
+                if (enchant.config.getBool("prevent-not-fully-grown")) {
+                    return
+                }
+
                 event.isDropItems = false
                 event.expToDrop = 0
             }
