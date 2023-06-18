@@ -80,7 +80,7 @@ class EnchantmentReplenish(
             }
 
             if (data.age != data.maximumAge) {
-                if (enchant.config.getBool("prevent-not-fully-grown")) {
+                if (enchant.config.getBool("only-fully-grown")) {
                     return
                 }
 
