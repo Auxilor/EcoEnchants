@@ -14,6 +14,7 @@ tradeable: true
 discoverable: true
 enchantable: true
 
-conditions: [ ]
+effects:
+  - id: telekinesis
 
-not-on-players: true
+conditions: [ ]
