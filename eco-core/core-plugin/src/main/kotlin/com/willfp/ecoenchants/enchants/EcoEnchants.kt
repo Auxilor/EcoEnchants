@@ -191,10 +191,8 @@ object EcoEnchants : ConfigCategory("enchant", "enchants") {
     private fun registerHardcodedEnchantments(
         plugin: EcoEnchantsPlugin
     ) {
-        EnchantmentTelekinesis(plugin)
         EnchantmentPermanenceCurse(plugin)
         EnchantmentRepairing(plugin)
-        EnchantmentRapid(plugin)
         EnchantmentReplenish(plugin)
         EnchantmentSoulbound(plugin)
     }
