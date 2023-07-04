@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableSet
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
-import com.willfp.ecoenchants.enchants.impl.EnchantmentRapid
 import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
 import com.willfp.ecoenchants.enchants.impl.EnchantmentReplenish
 import com.willfp.ecoenchants.enchants.impl.EnchantmentSoulbound
