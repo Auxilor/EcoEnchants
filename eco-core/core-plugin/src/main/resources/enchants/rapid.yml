@@ -13,6 +13,9 @@ tradeable: true
 discoverable: true
 enchantable: true
 
-conditions: [ ]
+effects:
+  - id: rapid_bows
+    args:
+      percent_faster: "15 * %level%"
 
-percent-faster-per-level: 15
+conditions: [ ]

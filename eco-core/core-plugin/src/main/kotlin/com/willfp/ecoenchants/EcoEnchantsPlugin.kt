@@ -65,7 +65,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         registerPlayerRefreshFunction { it.clearEnchantCache() }
         registerHolderPlaceholderProvider<FoundEcoEnchantLevel> { it, _ ->
             listOf(
-                NamedValue("level", it.level),
+                NamedValue("level", it.level.level),
                 NamedValue("active_level", it.activeLevel)
             )
         }
