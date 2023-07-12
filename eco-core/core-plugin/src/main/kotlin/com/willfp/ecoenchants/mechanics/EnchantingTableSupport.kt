@@ -9,6 +9,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.conflictsWithDeep
+import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -92,7 +93,12 @@ class EnchantingTableSupport(
                 continue
             }
 
-            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.tableChance * multiplier) {
+            val baseChance = enchantment.enchantmentRarity.tableChance * multiplier
+
+            val chanceEvent = EnchantingTableChanceGenerateEvent(player, item, enchantment, baseChance)
+            Bukkit.getPluginManager().callEvent(chanceEvent)
+
+            if (NumberUtils.randFloat(0.0, 1.0) > chanceEvent.chance) {
                 continue
             }
 
