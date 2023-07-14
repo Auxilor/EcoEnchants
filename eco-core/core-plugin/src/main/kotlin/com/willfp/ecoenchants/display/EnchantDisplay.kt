@@ -106,7 +106,7 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
                 enchantLore.add(Display.PREFIX + formattedName)
 
                 if (shouldDescribe) {
-                    enchantLore.addAll(enchant.getFormattedDescription(level).map { Display.PREFIX + it })
+                    enchantLore.addAll(enchant.getFormattedDescription(level, player).map { Display.PREFIX + it })
                 }
             }
         }
