@@ -91,3 +91,6 @@ fun EcoEnchantLike.getFormattedDescription(level: Int, player: Player? = null): 
         )), wrap)
     }
 }
+
+// Java backwards compatibility
+fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> = getFormattedDescription(level, null)

@@ -85,6 +85,11 @@ interface EcoEnchantLike {
 
         return description
     }
+
+    // Java backwards compatibility
+    fun getUnformattedDescription(level: Int): String {
+        return getUnformattedDescription(level, null)
+    }
 }
 
 private val ecoEnchantLikes = Caffeine.newBuilder()
