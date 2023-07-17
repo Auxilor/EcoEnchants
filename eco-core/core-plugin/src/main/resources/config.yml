@@ -166,3 +166,7 @@ enchant-gui:
 lore-conversion:
   enabled: false # If lore conversion should be enabled
   aggressive: false # Will convert all items in all inventories when opened, likely to use a lot of performance
+
+#Options for enable or disable placeholders of EcoEnchants
+internal-placeholders:
+  active-level: true # Enable or disable %active_level% placeholder. Can be disabled to save some cpu time, if you don't use this placeholder

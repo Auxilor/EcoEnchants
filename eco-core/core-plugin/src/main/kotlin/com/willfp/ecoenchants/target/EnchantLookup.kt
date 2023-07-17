@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.target
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.items.HashedItem
+import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchantLevel
 import com.willfp.ecoenchants.enchants.FoundEcoEnchantLevel
@@ -307,13 +308,17 @@ object EnchantLookup {
 
             // This is such a fucking disgusting way of implementing %active_level%,
             // and it's probably quite slow too.
-            return found.map {
-                val level = it.holder as EcoEnchantLevel
+            return if (EcoEnchantsPlugin.instance.configYml.getBool("internal-placeholders.active-level")) {
+                found.map {
+                    val level = it.holder as EcoEnchantLevel
 
-                ItemProvidedHolder(
-                    FoundEcoEnchantLevel(level, this.getActiveEnchantLevel(level.enchant)),
-                    it.provider
-                )
+                    ItemProvidedHolder(
+                        FoundEcoEnchantLevel(level, this.getActiveEnchantLevel(level.enchant)),
+                        it.provider
+                    )
+                }
+            } else {
+                found
             }
         }
 
