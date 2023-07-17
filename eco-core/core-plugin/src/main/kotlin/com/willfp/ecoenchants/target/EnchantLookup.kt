@@ -308,7 +308,7 @@ object EnchantLookup {
 
             // This is such a fucking disgusting way of implementing %active_level%,
             // and it's probably quite slow too.
-            return if (EcoEnchantsPlugin.instance.configYml.getBool("internal-placeholders.active-level")) {
+            return if (EcoEnchantsPlugin.instance.configYml.getBool("extra-placeholders.active-level")) {
                 found.map {
                     val level = it.holder as EcoEnchantLevel
 

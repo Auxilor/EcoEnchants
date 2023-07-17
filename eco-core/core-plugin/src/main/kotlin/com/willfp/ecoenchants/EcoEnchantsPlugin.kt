@@ -63,10 +63,17 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleEnable() {
         registerHolderProvider { it.heldEnchantLevels }
         registerPlayerRefreshFunction { it.clearEnchantCache() }
+
         registerHolderPlaceholderProvider<FoundEcoEnchantLevel> { it, _ ->
             listOf(
                 NamedValue("level", it.level.level),
                 NamedValue("active_level", it.activeLevel)
+            )
+        }
+
+        registerHolderPlaceholderProvider<EcoEnchantLevel> { it, _ ->
+            listOf(
+                NamedValue("level", it.level),
             )
         }
     }
