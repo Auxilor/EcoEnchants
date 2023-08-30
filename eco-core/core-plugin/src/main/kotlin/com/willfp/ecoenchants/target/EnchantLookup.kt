@@ -7,9 +7,9 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.EcoEnchantLevel
 import com.willfp.ecoenchants.enchants.FoundEcoEnchantLevel
-import com.willfp.ecoenchants.target.EnchantLookup.getEnchantLevel
 import com.willfp.libreforge.ItemProvidedHolder
-import com.willfp.libreforge.ProvidedHolder
+import com.willfp.libreforge.slot.SlotType
+import com.willfp.libreforge.slot.SlotTypes
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.concurrent.TimeUnit
@@ -19,11 +19,11 @@ typealias SlotProvider = (Player) -> Map<ItemInNumericSlot, ItemInSlot>
 
 data class ItemInSlot internal constructor(
     val item: ItemStack,
-    val slot: Collection<TargetSlot>
+    val slot: Collection<SlotType>
 ) {
     constructor(
         item: ItemStack,
-        slot: TargetSlot
+        slot: SlotType
     ) : this(item, listOf(slot))
 }
 
@@ -332,7 +332,7 @@ object EnchantLookup {
     }
 
     init {
-        fun createProvider(slot: TargetSlot): SlotProvider {
+        fun createProvider(slot: SlotType): SlotProvider {
             return { player: Player ->
                 val found = mutableMapOf<ItemInNumericSlot, ItemInSlot>()
 
@@ -347,7 +347,7 @@ object EnchantLookup {
             }
         }
 
-        for (slot in TargetSlot.values()) {
+        for (slot in SlotTypes.values()) {
             registerProvider(createProvider(slot))
         }
     }
