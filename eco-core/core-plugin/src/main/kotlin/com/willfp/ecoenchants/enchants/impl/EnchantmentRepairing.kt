@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevelInSlot
 import com.willfp.ecoenchants.target.EnchantLookup.hasEnchantActive
-import com.willfp.ecoenchants.target.TargetSlot
+import com.willfp.libreforge.slot.impl.SlotTypeHands
 import org.bukkit.Bukkit
 
 class EnchantmentRepairing(
@@ -35,7 +35,7 @@ class EnchantmentRepairing(
                         continue
                     }
 
-                    if (notWhileHolding && slot in TargetSlot.HANDS.getItemSlots(player)) {
+                    if (notWhileHolding && slot in SlotTypeHands.getItemSlots(player)) {
                         continue
                     }
 
