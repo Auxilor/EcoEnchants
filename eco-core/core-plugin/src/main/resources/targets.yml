@@ -176,7 +176,7 @@ targets:
 
   - id: shield
     display-name: "Shields"
-    slot: mainhands
+    slot: hands
     items:
       - "*shield"
 

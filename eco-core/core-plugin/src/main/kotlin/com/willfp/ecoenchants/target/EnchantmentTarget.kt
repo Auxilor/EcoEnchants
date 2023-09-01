@@ -11,6 +11,7 @@ import com.willfp.libreforge.slot.SlotTypes
 import com.willfp.libreforge.slot.impl.SlotTypeAny
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import java.lang.IllegalArgumentException
 import java.util.Objects
 
 interface EnchantmentTarget : Registrable {
@@ -39,7 +40,8 @@ class ConfiguredEnchantmentTarget(
     override val id = config.getString("id")
     override val displayName = config.getFormattedString("display-name")
 
-    override val slot = SlotTypes[config.getString("slot")]!!
+    override val slot = SlotTypes[config.getString("slot")] ?:
+    throw IllegalArgumentException("Invalid slot type: ${config.getString("slot")}, options are ${SlotTypes.values().map { it.id }}")
 
     override val items = config.getStrings("items")
         .map { Items.lookup(it) }
