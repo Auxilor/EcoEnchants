@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchants.impl
 
 import com.willfp.eco.core.EcoPlugin
+import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.data.keys.PersistentDataKey
 import com.willfp.eco.core.data.keys.PersistentDataKeyType
 import com.willfp.eco.core.data.profile
@@ -79,6 +80,12 @@ class EnchantmentSoulbound(
             }
 
             event.drops.removeAll(items)
+
+            // Use native paper method
+            if (Prerequisite.HAS_PAPER.isMet) {
+                event.itemsToKeep += items
+                return
+            }
 
             for (item in items) {
                 item.fast().persistentDataContainer.set(soulboundKey, PersistentDataType.INTEGER, 1)
