@@ -72,7 +72,7 @@ display:
     enabled: true # If enchantments should be collapsed in lore
     threshold: 9 # Above this amount, enchantments will be collapsed
     per-line: 2 # The amount of enchantments to put in each line
-    delimiter: ", " # The delimiter between enchantments
+    delimiter: ",&r " # The delimiter between enchantments
 
   descriptions:
     enabled: true # If enchantment descriptions should be shown in lore
