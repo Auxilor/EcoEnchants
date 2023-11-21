@@ -52,15 +52,15 @@ fun EcoEnchantLike.getFormattedName(
             val levelOnly = plugin.configYml.getBool("display.above-max-level.level-only")
 
             if (levelOnly) {
-                StringUtils.format("$notMetFormat$typeFormat$name $format$number")
+                StringUtils.format("$typeFormat$notMetFormat$name $format$number")
             } else {
-                StringUtils.format("$notMetFormat$format$name $number")
+                StringUtils.format("$format$notMetFormat$name $number")
             }
         } else {
             if (dontShowNumber) {
-                StringUtils.format("$notMetFormat$typeFormat$name")
+                StringUtils.format("$typeFormat$notMetFormat$name")
             } else {
-                StringUtils.format("$notMetFormat$typeFormat$name $number")
+                StringUtils.format("$typeFormat$notMetFormat$name $number")
             }
         }
     }
