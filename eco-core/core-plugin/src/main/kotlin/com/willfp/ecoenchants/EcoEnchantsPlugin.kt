@@ -29,16 +29,13 @@ import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.target.EnchantLookup.clearEnchantCache
-import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevel
 import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
-import com.willfp.libreforge.EmptyProvidedHolder.holder
 import com.willfp.libreforge.NamedValue
-import com.willfp.libreforge.ProvidedHolder
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderPlaceholderProvider
-import com.willfp.libreforge.registerHolderProvider
-import com.willfp.libreforge.registerPlayerRefreshFunction
+import com.willfp.libreforge.registerSpecificHolderProvider
+import com.willfp.libreforge.registerSpecificRefreshFunction
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 
@@ -61,12 +58,24 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleEnable() {
-        registerHolderProvider { it.heldEnchantLevels }
-        registerPlayerRefreshFunction { it.clearEnchantCache() }
+        registerSpecificHolderProvider<Player> {
+            it.heldEnchantLevels
+        }
+
+        registerSpecificRefreshFunction<Player> {
+            it.clearEnchantCache()
+        }
+
         registerHolderPlaceholderProvider<FoundEcoEnchantLevel> { it, _ ->
             listOf(
                 NamedValue("level", it.level.level),
                 NamedValue("active_level", it.activeLevel)
+            )
+        }
+
+        registerHolderPlaceholderProvider<EcoEnchantLevel> { it, _ ->
+            listOf(
+                NamedValue("level", it.level),
             )
         }
     }

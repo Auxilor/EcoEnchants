@@ -41,6 +41,6 @@ effects:
       cooldown: 60
       send_cooldown_message: true
     triggers:
-      - alt_click
+      - click_block
 
 conditions: []

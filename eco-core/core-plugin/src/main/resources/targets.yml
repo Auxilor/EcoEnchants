@@ -10,18 +10,19 @@ extra-enchantable-items:
   - "*player_head"
 
 # A target consists of items and a slot.
-# The slot is either hands, hand, offhand, armor, or any.
 
-# hands: Enchant will activate in both hands
-# hand: Enchant will activate only in main hand
-# offhand: Enchant will activate only in off hand
-# armor: Enchant will activate only on armor
-# any: Enchant will activate whenever it's in your inventory
+# The options for slot are mainhand, offhand, hands, helmet, chestplate,
+# leggings, boots, armor, any, a number from 0-40 (to specify an exact slot),
+# or a list of slots like "9, 10, 11, mainhand"
+
+# The slot defines when the enchantment will activate, for example if you have
+# a target with slot "mainhand", the enchantment will activate whenever the item is
+# in your mainhand.
 
 targets:
   - id: pickaxe
     display-name: "Pickaxes"
-    slot: hand
+    slot: mainhand
     items:
       - "*wooden_pickaxe"
       - "*stone_pickaxe"
@@ -32,7 +33,7 @@ targets:
 
   - id: axe
     display-name: "Axes"
-    slot: hand
+    slot: mainhand
     items:
       - "*wooden_axe"
       - "*stone_axe"
@@ -43,7 +44,7 @@ targets:
 
   - id: hoe
     display-name: "Hoes"
-    slot: hand
+    slot: mainhand
     items:
       - "*wooden_hoe"
       - "*stone_hoe"
@@ -54,7 +55,7 @@ targets:
 
   - id: shovel
     display-name: "Shovels"
-    slot: hand
+    slot: mainhand
     items:
       - "*wooden_shovel"
       - "*stone_shovel"
@@ -65,7 +66,7 @@ targets:
 
   - id: sword
     display-name: "Swords"
-    slot: hand
+    slot: mainhand
     items:
       - "*wooden_sword"
       - "*stone_sword"
@@ -151,25 +152,25 @@ targets:
 
   - id: trident
     display-name: "Tridents"
-    slot: hand
+    slot: mainhand
     items:
       - "*trident"
 
   - id: bow
     display-name: "Bows"
-    slot: hand
+    slot: mainhand
     items:
       - "*bow"
 
   - id: crossbow
     display-name: "Crossbows"
-    slot: hand
+    slot: mainhand
     items:
       - "*crossbow"
 
   - id: shears
     display-name: "Shears"
-    slot: hand
+    slot: mainhand
     items:
       - "*shears"
 
@@ -181,19 +182,19 @@ targets:
 
   - id: fishing_rod
     display-name: "Fishing Rods"
-    slot: hand
+    slot: mainhand
     items:
       - "*fishing_rod"
 
   - id: flint_and_steel
     display-name: "Flint and Steels"
-    slot: hand
+    slot: mainhand
     items:
       - "*flint_and_steel"
 
   - id: carrot_on_a_stick
     display-name: "Carrots on Sticks"
-    slot: hand
+    slot: mainhand
     items:
       - "*carrot_on_a_stick"
 

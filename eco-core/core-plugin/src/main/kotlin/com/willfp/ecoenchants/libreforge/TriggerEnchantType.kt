@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.libreforge
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
-import com.willfp.ecoenchants.enchants.EcoEnchant
 import com.willfp.ecoenchants.enchants.wrap
 import com.willfp.ecoenchants.type.EnchantmentType
+import com.willfp.libreforge.toDispatcher
 import com.willfp.libreforge.triggers.Trigger
 import com.willfp.libreforge.triggers.TriggerData
 import com.willfp.libreforge.triggers.TriggerParameter
@@ -35,7 +35,7 @@ class TriggerEnchantType(
                     .any { it.type == type }
             ) {
                 this.dispatch(
-                    player,
+                    player.toDispatcher(),
                     TriggerData(
                         player = player,
                         location = player.location,
