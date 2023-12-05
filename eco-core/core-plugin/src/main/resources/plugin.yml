@@ -8,6 +8,7 @@ load: STARTUP
 depend:
   - eco
 softdepend:
+  - libreforge
   - CMI
   - EssentialsX
 
