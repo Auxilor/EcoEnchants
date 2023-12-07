@@ -16,8 +16,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * The enchantment.
      */
-    override val enchantment: Enchantment
-        get() = this as Enchantment
+    override var enchantment: Enchantment
 
     /**
      * If this enchantment conflicts with all other enchantments.
@@ -79,7 +78,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
         }
 
         if (other is EcoEnchant) {
-            return other.conflictsWithDirectly(this as Enchantment)
+            return other.conflictsWithDirectly(this.enchantment)
         }
 
         return false

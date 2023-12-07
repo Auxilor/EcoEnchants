@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.proxy.v1_20_R3
 
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.DelegatedCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.ModifiedVanillaCraftEnchantment
@@ -41,7 +42,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             if (enchant == null) {
                 ModifiedVanillaCraftEnchantment(key, registry)
             } else {
-                DelegatedCraftEnchantment(enchant, registry)
+                enchant as Enchantment
             }
         }
     }
@@ -54,13 +55,11 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         // Unfreeze registry
         frozenField.set(BuiltInRegistries.ENCHANTMENT, false)
 
-        Registry.register(
-            BuiltInRegistries.ENCHANTMENT, enchant.id, VanillaEcoEnchantsEnchantment(
-                enchant.id
-            )
-        )
+        val nms = VanillaEcoEnchantsEnchantment(enchant.id)
 
-        return org.bukkit.Registry.ENCHANTMENT.get(enchant.enchantmentKey)!!
+        Registry.register(BuiltInRegistries.ENCHANTMENT, enchant.id, nms)
+
+        return DelegatedCraftEnchantment(enchant, nms)
     }
 
     override fun unregister(enchant: EcoEnchant) {

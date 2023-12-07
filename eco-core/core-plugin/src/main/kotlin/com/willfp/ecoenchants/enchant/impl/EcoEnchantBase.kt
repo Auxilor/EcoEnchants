@@ -24,6 +24,8 @@ abstract class EcoEnchantBase(
 
     final override val config by lazy { _config ?: loadConfig()!! }
 
+    override lateinit var enchantment: Enchantment
+
     private val levels = mutableMapOf<Int, EcoEnchantLevel>()
 
     private val conflictIds = config.getStrings("conflicts").toSet()

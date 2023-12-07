@@ -77,7 +77,11 @@ interface EcoEnchantLike {
             return true
         }
 
-        return enchantment.canEnchantItem(item)
+        return if (this is EcoEnchant) {
+            this.targets.any { it.matches(item) }
+        } else {
+            enchantment.canEnchantItem(item)
+        }
     }
 
     /**

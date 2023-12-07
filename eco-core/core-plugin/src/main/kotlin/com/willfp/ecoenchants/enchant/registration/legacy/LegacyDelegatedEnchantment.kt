@@ -16,6 +16,10 @@ import org.bukkit.inventory.ItemStack
 class LegacyDelegatedEnchantment(
     private val enchant: EcoEnchant
 ) : Enchantment(enchant.enchantmentKey), EcoEnchant by enchant {
+    init {
+        enchant.enchantment = this
+    }
+
     override fun translationKey(): String {
         return "ecoenchants:enchantment.$id"
     }

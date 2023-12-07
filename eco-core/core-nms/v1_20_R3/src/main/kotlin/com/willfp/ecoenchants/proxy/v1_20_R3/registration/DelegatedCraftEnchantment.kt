@@ -17,6 +17,10 @@ class DelegatedCraftEnchantment(
     private val enchant: EcoEnchant,
     nmsEnchantment: Enchantment
 ) : CraftEnchantment(enchant.enchantmentKey, nmsEnchantment), EcoEnchant by enchant {
+    init {
+        enchant.enchantment = this
+    }
+
     override fun canEnchantItem(item: ItemStack): Boolean {
         return enchant.canEnchantItem(item)
     }
