@@ -20,7 +20,7 @@ effects:
     triggers:
       - take_damage
     filters:
-      damageCause:
+      damage_cause:
         - poison
         - magic
 
