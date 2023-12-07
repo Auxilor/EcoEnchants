@@ -2,7 +2,8 @@ package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchants
+import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
@@ -41,7 +42,7 @@ class CommandEnchantInfo(plugin: EcoEnchantsPlugin) : PluginCommand(
     override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {
         val completions = mutableListOf<String>()
 
-        val names = EcoEnchants.values().mapNotNull { ChatColor.stripColor(it.displayName) }
+        val names = EcoEnchants.values().mapNotNull { ChatColor.stripColor(it.getFormattedName(0)) }
 
         if (args.isEmpty()) {
             // Currently, this case is not ever reached

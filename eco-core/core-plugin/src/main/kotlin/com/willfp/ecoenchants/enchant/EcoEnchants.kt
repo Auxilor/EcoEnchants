@@ -1,7 +1,9 @@
 package com.willfp.ecoenchants.enchant
 
+import com.google.common.collect.HashBiMap
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.impl.LibreforgeEcoEnchant
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
@@ -13,15 +15,19 @@ import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.RegistrableCategory
+import org.bukkit.ChatColor
 
 @Suppress("UNUSED")
 object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
+    private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
+
     override fun clear(plugin: LibreforgePlugin) {
         plugin as EcoEnchantsPlugin
 
         for (enchant in registry.values()) {
             plugin.enchantmentRegisterer.unregister(enchant)
             EnchantRegistrations.removeEnchant(enchant)
+            BY_NAME.remove(enchant.getFormattedName(0))
         }
 
         registry.clear()
@@ -61,6 +67,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         val enchantment = plugin.enchantmentRegisterer.register(enchant)
         // Register delegated versions
         registry.register(enchantment as EcoEnchant)
+        BY_NAME[ChatColor.stripColor(enchant.getFormattedName(0))] = enchantment as EcoEnchant
         EnchantRegistrations.registerEnchantments()
     }
 
@@ -79,5 +86,11 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
                 doRegister(plugin, enchantment)
             }
         }
+    }
+
+    fun getByName(name: String?): EcoEnchant? {
+        return if (name == null) {
+            null
+        } else BY_NAME[name]
     }
 }

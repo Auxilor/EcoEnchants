@@ -18,6 +18,7 @@ import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import com.willfp.ecoenchants.enchant.FoundEcoEnchantLevel
+import com.willfp.ecoenchants.enchant.LoreConversion
 import com.willfp.ecoenchants.enchant.legacyRegisterVanillaEnchantmentData
 import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
 import com.willfp.ecoenchants.enchant.registration.legacy.LegacyEnchantmentRegisterer
@@ -117,7 +118,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             EnchantingTableSupport(this),
             LootSupport(this),
             AnvilSupport(this),
-            //LoreConversion(this),
+            LoreConversion(this),
             GrindstoneSupport(this)
         )
     }
