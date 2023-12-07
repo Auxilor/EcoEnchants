@@ -44,6 +44,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     override fun afterReload(plugin: LibreforgePlugin) {
         plugin as EcoEnchantsPlugin
 
+        sendPrompts(plugin)
         registerHardcodedEnchantments(plugin)
     }
 
@@ -54,13 +55,17 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
             return
         }
 
-        val enchant = LibreforgeEcoEnchant(
-            id,
-            config,
-            plugin
-        )
+        try {
+            val enchant = LibreforgeEcoEnchant(
+                id,
+                config,
+                plugin
+            )
 
-        doRegister(plugin, enchant)
+            doRegister(plugin, enchant)
+        } catch (e: MissingDependencyException) {
+            addPluginPrompt(plugin, e.plugins)
+        }
     }
 
     private fun doRegister(plugin: EcoEnchantsPlugin, enchant: EcoEnchant) {
