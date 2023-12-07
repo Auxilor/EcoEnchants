@@ -46,7 +46,7 @@ interface EcoEnchantLike {
     /**
      * The enchantment rarity.
      */
-    val rarity: EnchantmentRarity
+    val enchantmentRarity: EnchantmentRarity
 
     /**
      * Get if this enchantment can be applied to [item].

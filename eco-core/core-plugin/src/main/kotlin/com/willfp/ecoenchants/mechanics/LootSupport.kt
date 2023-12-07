@@ -45,7 +45,7 @@ class LootSupport(
         val enchantments = EcoEnchants.values().shuffled()
 
         for (enchantment in enchantments) {
-            if (!enchantment.isDiscoverable) {
+            if (!enchantment.isObtainableThroughDiscovery) {
                 continue
             }
 
@@ -53,7 +53,7 @@ class LootSupport(
                 continue
             }
 
-            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.rarity.lootChance * multiplier) {
+            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.lootChance * multiplier) {
                 continue
             }
 
@@ -72,7 +72,7 @@ class LootSupport(
                 continue
             }
 
-            val maxLevel = enchantment.maxLevel
+            val maxLevel = enchantment.maximumLevel
 
             val levelPart1 = NumberUtils.bias(NumberUtils.randFloat(0.7, 1.0), enchantment.type.highLevelBias)
             val levelPart2 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart1)

@@ -27,11 +27,11 @@ abstract class EcoEnchantBase(
 
     private val conflictIds = config.getStrings("conflicts").toSet()
 
-    override val key = NamespacedKey.minecraft(id)
+    override val enchantmentKey = NamespacedKey.minecraft(id)
 
     override val rawDisplayName = config.getString("display-name")
 
-    override val maxLevel = config.getInt("max-level")
+    override val maximumLevel = config.getInt("max-level")
 
     override val conflictsWithEverything: Boolean
         get() = conflictIds.containsIgnoreCase("all")
@@ -49,7 +49,7 @@ abstract class EcoEnchantBase(
         .let { EnchantmentTypes[it] }
         ?: EnchantmentTypes.values().first()
 
-    override val rarity: EnchantmentRarity = config.getString("rarity")
+    override val enchantmentRarity: EnchantmentRarity = config.getString("rarity")
         .let { EnchantmentRarities[it] }
         ?: EnchantmentRarities.values().first()
 
@@ -58,11 +58,11 @@ abstract class EcoEnchantBase(
         context.with("conditions")
     )
 
-    override val isEnchantable = config.getBool("enchantable")
+    override val isObtainableThroughEnchanting = config.getBool("enchantable")
 
-    override val isTradeable = config.getBool("tradeable")
+    override val isObtainableThroughTrading = config.getBool("tradeable")
 
-    override val isDiscoverable = config.getBool("discoverable")
+    override val isObtainableThroughDiscovery = config.getBool("discoverable")
 
     /**
      * Load the config for this enchant.

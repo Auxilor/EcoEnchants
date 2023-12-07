@@ -81,7 +81,7 @@ class EnchantingTableSupport(
         val enchantments = EcoEnchants.values().shuffled()
 
         for (enchantment in enchantments) {
-            if (!enchantment.isEnchantable) {
+            if (!enchantment.isObtainableThroughEnchanting) {
                 continue
             }
 
@@ -93,7 +93,7 @@ class EnchantingTableSupport(
                 continue
             }
 
-            val baseChance = enchantment.rarity.tableChance * multiplier
+            val baseChance = enchantment.enchantmentRarity.tableChance * multiplier
 
             val chanceEvent = EnchantingTableChanceGenerateEvent(player, item, enchantment.enchantment, baseChance)
             Bukkit.getPluginManager().callEvent(chanceEvent)
@@ -102,7 +102,7 @@ class EnchantingTableSupport(
                 continue
             }
 
-            if (enchantment.rarity.minimumLevel > cost) {
+            if (enchantment.enchantmentRarity.minimumLevel > cost) {
                 continue
             }
 
@@ -125,7 +125,7 @@ class EnchantingTableSupport(
                 continue
             }
 
-            val maxLevel = enchantment.maxLevel
+            val maxLevel = enchantment.maximumLevel
             val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")
 
             val levelPart1 = if (enchantment.type.highLevelBias > 0) {

@@ -207,7 +207,7 @@ private val cachedEnchantmentSlots = Caffeine.newBuilder()
 private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Player): Slot {
     return cachedEnchantmentSlots.get(this) {
         val level = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) {
-            it.maxLevel
+            it.maximumLevel
         } else {
             1
         }
@@ -222,7 +222,7 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Pla
                     plugin.configYml.getStrings("enchantinfo.item.lore")
                         .map {
                             it.replace("%max_level%", enchantment.maxLevel.toString())
-                                .replace("%rarity%", this.rarity.displayName)
+                                .replace("%rarity%", this.enchantmentRarity.displayName)
                                 .replace(
                                     "%targets%",
                                     this.targets.joinToString(", ") { target -> target.displayName }
@@ -237,9 +237,9 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Pla
                                         }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
                                     }
                                 )
-                                .replace("%tradeable%", this.isTradeable.parseYesOrNo(plugin.langYml))
-                                .replace("%discoverable%", this.isDiscoverable.parseYesOrNo(plugin.langYml))
-                                .replace("%enchantable%", this.isEnchantable.parseYesOrNo(plugin.langYml))
+                                .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo(plugin.langYml))
+                                .replace("%discoverable%", this.isObtainableThroughDiscovery.parseYesOrNo(plugin.langYml))
+                                .replace("%enchantable%", this.isObtainableThroughEnchanting.parseYesOrNo(plugin.langYml))
                         }
                         .formatEco()
                         .flatMap {

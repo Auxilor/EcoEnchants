@@ -19,7 +19,7 @@ class VanillaEcoEnchantLike(
         EnchantmentTypes[plugin.vanillaEnchantsYml.getString("${enchantment.key.key}.type")]
             ?: EnchantmentTypes.values().first()
 
-    override val rarity: EnchantmentRarity =
+    override val enchantmentRarity: EnchantmentRarity =
         EnchantmentRarities[plugin.vanillaEnchantsYml.getString("${enchantment.key.key}.rarity")]
             ?: EnchantmentRarities.values().first()
 

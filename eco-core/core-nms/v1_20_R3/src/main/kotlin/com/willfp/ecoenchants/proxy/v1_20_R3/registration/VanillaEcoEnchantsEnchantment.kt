@@ -49,7 +49,7 @@ class VanillaEcoEnchantsEnchantment(
     }
 
     override fun getMaxLevel(): Int {
-        return enchant?.maxLevel ?: 1
+        return enchant?.maximumLevel ?: 1
     }
 
     override fun isCurse(): Boolean {

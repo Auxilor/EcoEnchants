@@ -25,7 +25,7 @@ object LegacyEnchantmentRegisterer : EnchantmentRegisterer {
         Enchantment::class.java.getDeclaredField("byKey")
             .apply {
                 isAccessible = true
-                (get(null) as MutableMap<NamespacedKey, Enchantment>).apply { remove(enchant.key) }
+                (get(null) as MutableMap<NamespacedKey, Enchantment>).apply { remove(enchant.enchantmentKey) }
             }
 
         Enchantment::class.java.getDeclaredField("byName")

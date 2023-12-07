@@ -11,7 +11,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * The key.
      */
-    val key: NamespacedKey
+    val enchantmentKey: NamespacedKey
 
     /**
      * The enchantment.
@@ -22,7 +22,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * The max enchantment level.
      */
-    val maxLevel: Int
+    val maximumLevel: Int
 
     /**
      * If this enchantment conflicts with all other enchantments.
@@ -53,17 +53,17 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * If the enchantment is enchantable.
      */
-    val isEnchantable: Boolean
+    val isObtainableThroughEnchanting: Boolean
 
     /**
      * If the enchantment is tradeable.
      */
-    val isTradeable: Boolean
+    val isObtainableThroughTrading: Boolean
 
     /**
      * If the enchantment is discoverable.
      */
-    val isDiscoverable: Boolean
+    val isObtainableThroughDiscovery: Boolean
 
     /**
      * Get a certain [level].

@@ -16,7 +16,7 @@ import java.util.Objects
 class DelegatedCraftEnchantment(
     private val enchant: EcoEnchant,
     nmsEnchantment: Enchantment
-) : CraftEnchantment(enchant.key, nmsEnchantment), EcoEnchant by enchant {
+) : CraftEnchantment(enchant.enchantmentKey, nmsEnchantment), EcoEnchant by enchant {
     override fun canEnchantItem(item: ItemStack): Boolean {
         return enchant.canEnchantItem(item)
     }
@@ -34,26 +34,22 @@ class DelegatedCraftEnchantment(
         replaceWith = ReplaceWith("this.displayName(level)")
     )
     override fun getName(): String = this.id.uppercase()
+    override fun getMaxLevel(): Int = enchant.maximumLevel
 
-    override fun getMaxLevel(): Int {
-        return maxLevel
-    }
-
-    override fun getStartLevel(): Int {
-        return 1
-    }
+    override fun getStartLevel(): Int = 1
 
     @Deprecated(
         message = "getItemTargets is an incompatible Spigot API",
         replaceWith = ReplaceWith("this.targets")
     )
+    @Suppress("DEPRECATION")
     override fun getItemTarget(): EnchantmentTarget = EnchantmentTarget.ALL
 
     @Deprecated(
         message = "Treasure enchantments do not exist in EcoEnchants",
         replaceWith = ReplaceWith("this.isEnchantable")
     )
-    override fun isTreasure(): Boolean = !isEnchantable
+    override fun isTreasure(): Boolean = !enchant.isObtainableThroughEnchanting
 
     @Deprecated(
         message = "Use EnchantmentType instead",
@@ -68,11 +64,11 @@ class DelegatedCraftEnchantment(
     }
 
     override fun isTradeable(): Boolean {
-        return isTradeable
+        return enchant.isObtainableThroughTrading
     }
 
     override fun isDiscoverable(): Boolean {
-        return isDiscoverable
+        return enchant.isObtainableThroughDiscovery
     }
 
     override fun getMinModifiedCost(level: Int): Int {

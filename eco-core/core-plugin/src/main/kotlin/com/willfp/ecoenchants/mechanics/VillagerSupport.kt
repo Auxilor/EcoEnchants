@@ -46,7 +46,7 @@ class VillagerSupport(
         val enchantments = EcoEnchants.values().shuffled()
 
         for (enchantment in enchantments) {
-            if (!enchantment.isTradeable) {
+            if (!enchantment.isObtainableThroughTrading) {
                 continue
             }
 
@@ -54,7 +54,7 @@ class VillagerSupport(
                 continue
             }
 
-            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.rarity.villagerChance * multiplier) {
+            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.villagerChance * multiplier) {
                 continue
             }
 
@@ -73,7 +73,7 @@ class VillagerSupport(
                 continue
             }
 
-            val maxLevel = enchantment.maxLevel
+            val maxLevel = enchantment.maximumLevel
 
             val levelPart1 = event.recipe.ingredients[0].amount / 64.0
             val levelPart2 = NumberUtils.bias(levelPart1, enchantment.type.highLevelBias)

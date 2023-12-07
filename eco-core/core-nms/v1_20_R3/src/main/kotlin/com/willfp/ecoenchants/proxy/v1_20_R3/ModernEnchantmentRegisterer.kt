@@ -13,7 +13,6 @@ import net.minecraft.core.registries.Registries
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_20_R3.CraftRegistry
 import org.bukkit.craftbukkit.v1_20_R3.CraftServer
-import org.bukkit.craftbukkit.v1_20_R3.enchantments.CraftEnchantment
 import org.bukkit.craftbukkit.v1_20_R3.util.CraftNamespacedKey
 import org.bukkit.enchantments.Enchantment
 
@@ -48,8 +47,8 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     }
 
     override fun register(enchant: EcoEnchant): Enchantment {
-        if (BuiltInRegistries.ENCHANTMENT.containsKey(CraftNamespacedKey.toMinecraft(enchant.key))) {
-            return org.bukkit.Registry.ENCHANTMENT.get(enchant.key)!!
+        if (BuiltInRegistries.ENCHANTMENT.containsKey(CraftNamespacedKey.toMinecraft(enchant.enchantmentKey))) {
+            return org.bukkit.Registry.ENCHANTMENT.get(enchant.enchantmentKey)!!
         }
 
         // Unfreeze registry
@@ -61,7 +60,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             )
         )
 
-        return org.bukkit.Registry.ENCHANTMENT.get(enchant.key)!!
+        return org.bukkit.Registry.ENCHANTMENT.get(enchant.enchantmentKey)!!
     }
 
     override fun unregister(enchant: EcoEnchant) {
