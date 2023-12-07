@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.enchant.registration.legacy
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchant
-import com.willfp.ecoenchants.enchants.wrap
+import com.willfp.ecoenchants.enchant.wrap
 import io.papermc.paper.enchantments.EnchantmentRarity
 import net.kyori.adventure.text.Component
 import org.bukkit.enchantments.Enchantment

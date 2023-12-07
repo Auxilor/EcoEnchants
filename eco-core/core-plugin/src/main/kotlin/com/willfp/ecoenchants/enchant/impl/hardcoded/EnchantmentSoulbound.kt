@@ -9,7 +9,8 @@ import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.items.Items
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchant
+import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
+import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevelInSlot
 import com.willfp.ecoenchants.target.EnchantLookup.hasEnchantActive
 import org.bukkit.entity.Player
@@ -24,13 +25,18 @@ import org.bukkit.persistence.PersistentDataType
 
 class EnchantmentSoulbound(
     plugin: EcoEnchantsPlugin
-) : EcoEnchant(
+) : HardcodedEcoEnchant(
     "soulbound",
-    plugin,
-    force = false
+    plugin
 ) {
-    override fun onInit() {
-        this.registerListener(SoulboundHandler(plugin, this))
+    private val handler = SoulboundHandler(plugin, this)
+
+    override fun onRegister() {
+        plugin.eventManager.registerListener(handler)
+    }
+
+    override fun onRemove() {
+        plugin.eventManager.unregisterListener(handler)
     }
 
     private class SoulboundHandler(
@@ -92,7 +98,7 @@ class EnchantmentSoulbound(
 
                 if (enchant.config.getBool("single-use")) {
                     val meta = item.itemMeta
-                    meta.removeEnchant(enchant)
+                    meta.removeEnchant(enchant.enchantment)
                     item.itemMeta = meta
                 }
             }
@@ -139,7 +145,7 @@ class EnchantmentSoulbound(
         )
         fun preventDroppingSoulboundItems(event: PlayerDeathEvent) {
             event.drops.removeIf { it.fast().persistentDataContainer.has(soulboundKey, PersistentDataType.INTEGER)
-                    && it.itemMeta.hasEnchant(enchant)
+                    && it.itemMeta.hasEnchant(enchant.enchantment)
             }
         }
     }

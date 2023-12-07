@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.DelegatedCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_20_R3.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.VanillaEcoEnchantsEnchantment
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
@@ -29,8 +30,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         .get(Bukkit.getServer())
             as HashMap<Class<*>, org.bukkit.Registry<*>>
 
-    // Replace bukkit enchantment registry
-    init {
+    override fun replaceRegistry() {
         val server = Bukkit.getServer() as CraftServer
 
         registries[Enchantment::class.java] = CraftRegistry(
@@ -40,7 +40,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             val enchant = EcoEnchants.getByID(key.key)
 
             if (enchant == null) {
-                CraftEnchantment(key, registry)
+                ModifiedVanillaCraftEnchantment(key, registry)
             } else {
                 DelegatedCraftEnchantment(enchant, registry)
             }

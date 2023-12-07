@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.enchant.impl.hardcoded
 
 import com.willfp.eco.util.DurabilityUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchant
+import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevelInSlot
 import com.willfp.ecoenchants.target.EnchantLookup.hasEnchantActive
 import com.willfp.libreforge.slot.impl.SlotTypeHands
@@ -10,12 +10,11 @@ import org.bukkit.Bukkit
 
 class EnchantmentRepairing(
     plugin: EcoEnchantsPlugin
-) : EcoEnchant(
+) : HardcodedEcoEnchant(
     "repairing",
-    plugin,
-    force = false
+    plugin
 ) {
-    override fun onInit() {
+    override fun onRegister() {
         val frequency = config.getInt("frequency").toLong()
 
         plugin.scheduler.runTimer(frequency, frequency) {

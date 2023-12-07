@@ -13,13 +13,11 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.DisplayCache
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.display.EnchantSorter
+import com.willfp.ecoenchants.enchant.EcoEnchantLevel
+import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.EnchantGUI
+import com.willfp.ecoenchants.enchant.FoundEcoEnchantLevel
 import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
-import com.willfp.ecoenchants.enchants.EcoEnchantLevel
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.EnchantGUI
-import com.willfp.ecoenchants.enchants.FoundEcoEnchantLevel
-import com.willfp.ecoenchants.enchants.LoreConversion
-import com.willfp.ecoenchants.enchants.registerVanillaEnchants
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
@@ -40,6 +38,9 @@ import com.willfp.libreforge.registerSpecificRefreshFunction
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 
+internal lateinit var plugin: EcoEnchantsPlugin
+    private set
+
 class EcoEnchantsPlugin : LibreforgePlugin() {
     val targetsYml = TargetsYml(this)
     val rarityYml = RarityYml(this)
@@ -51,7 +52,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     val enchantmentRegisterer: EnchantmentRegisterer = TODO()
 
     init {
-        instance = this
+        plugin = this
     }
 
     override fun loadConfigCategories(): List<ConfigCategory> {
@@ -88,8 +89,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleReload() {
-        registerVanillaEnchants(this)
-
         DisplayCache.reload()
         EnchantSorter.reload(this)
         ExtraItemSupport.reload(this)
@@ -102,7 +101,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             EnchantingTableSupport(this),
             LootSupport(this),
             AnvilSupport(this),
-            LoreConversion(this),
+            //LoreConversion(this),
             GrindstoneSupport(this)
         )
     }
@@ -126,12 +125,5 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         return if (configYml.getBool("display.enabled")) {
             EnchantDisplay(this)
         } else null
-    }
-
-    companion object {
-        /** Instance of EcoEnchants. */
-        @JvmStatic
-        lateinit var instance: EcoEnchantsPlugin
-            private set
     }
 }

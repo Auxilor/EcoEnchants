@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.proxy.v1_20_R3.registration
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchant
-import com.willfp.ecoenchants.enchants.wrap
 import io.papermc.paper.enchantments.EnchantmentRarity
 import net.kyori.adventure.text.Component
 import net.minecraft.world.item.enchantment.Enchantment
@@ -65,7 +64,7 @@ class DelegatedCraftEnchantment(
     }
 
     override fun displayName(level: Int): Component {
-        return StringUtils.toComponent(this.wrap().getFormattedName(level))
+        return StringUtils.toComponent(enchant.getFormattedName(level))
     }
 
     override fun isTradeable(): Boolean {

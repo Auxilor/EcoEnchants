@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.proxy.v1_20_R2
 
-import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy
-import com.willfp.ecoenchants.vanilla.VanillaEnchantmentData
+import com.willfp.ecoenchants.enchant.EcoCraftEnchantmentManagerProxy
+import com.willfp.ecoenchants.enchant.VanillaEnchantmentData
 import net.minecraft.core.registries.BuiltInRegistries
 import org.bukkit.enchantments.Enchantment
 

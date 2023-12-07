@@ -2,7 +2,8 @@ package com.willfp.ecoenchants.enchant.impl.hardcoded
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchant
+import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantLookup.hasEnchantActive
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -17,13 +18,18 @@ import org.bukkit.inventory.ItemStack
 
 class EnchantmentReplenish(
     plugin: EcoEnchantsPlugin
-) : EcoEnchant(
+) : HardcodedEcoEnchant(
     "replenish",
-    plugin,
-    force = false
+    plugin
 ) {
-    override fun onInit() {
-        this.registerListener(ReplenishHandler(this, plugin))
+    private var handler = ReplenishHandler(this, plugin)
+
+    override fun onRegister() {
+        plugin.eventManager.registerListener(handler)
+    }
+
+    override fun onRemove() {
+        plugin.eventManager.unregisterListener(handler)
     }
 
     private class ReplenishHandler(

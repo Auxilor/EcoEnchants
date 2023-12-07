@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.commands
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.EnchantGUI
+import com.willfp.ecoenchants.enchant.EnchantGUI
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

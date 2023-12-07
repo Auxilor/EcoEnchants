@@ -3,9 +3,9 @@ package com.willfp.ecoenchants.mechanics
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchant
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.conflictsWithDeep
+import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.conflictsWithDeep
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -54,11 +54,11 @@ class VillagerSupport(
                 continue
             }
 
-            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.villagerChance * multiplier) {
+            if (NumberUtils.randFloat(0.0, 1.0) > enchantment.rarity.villagerChance * multiplier) {
                 continue
             }
 
-            if (enchants.any { (it, _) -> enchantment.conflictsWithDeep(it) }) {
+            if (enchants.any { (it, _) -> enchantment.enchantment.conflictsWithDeep(it) }) {
                 continue
             }
 
@@ -85,10 +85,10 @@ class VillagerSupport(
             if (result.type == Material.ENCHANTED_BOOK) {
                 // Only allow one enchantment
                 enchants.clear()
-                enchants[enchantment] = level
+                enchants[enchantment.enchantment] = level
                 break
             } else {
-                enchants[enchantment] = level
+                enchants[enchantment.enchantment] = level
             }
         }
 

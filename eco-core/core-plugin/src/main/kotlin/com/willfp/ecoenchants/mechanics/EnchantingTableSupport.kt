@@ -6,9 +6,9 @@ import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.randDouble
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchant
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.conflictsWithDeep
+import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.conflictsWithDeep
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -93,16 +93,16 @@ class EnchantingTableSupport(
                 continue
             }
 
-            val baseChance = enchantment.enchantmentRarity.tableChance * multiplier
+            val baseChance = enchantment.rarity.tableChance * multiplier
 
-            val chanceEvent = EnchantingTableChanceGenerateEvent(player, item, enchantment, baseChance)
+            val chanceEvent = EnchantingTableChanceGenerateEvent(player, item, enchantment.enchantment, baseChance)
             Bukkit.getPluginManager().callEvent(chanceEvent)
 
             if (NumberUtils.randFloat(0.0, 1.0) > chanceEvent.chance) {
                 continue
             }
 
-            if (enchantment.enchantmentRarity.minimumLevel > cost) {
+            if (enchantment.rarity.minimumLevel > cost) {
                 continue
             }
 
@@ -114,7 +114,7 @@ class EnchantingTableSupport(
                 break
             }
 
-            if (toAdd.any { (it, _) -> enchantment.conflictsWithDeep(it) }) {
+            if (toAdd.any { (it, _) -> enchantment.enchantment.conflictsWithDeep(it) }) {
                 continue
             }
 
@@ -140,7 +140,7 @@ class EnchantingTableSupport(
 
             multiplier /= this.plugin.configYml.getDouble("enchanting-table.reduction")
 
-            toAdd[enchantment] = level
+            toAdd[enchantment.enchantment] = level
         }
 
         toAdd.forEach(event.enchantsToAdd::putIfAbsent)

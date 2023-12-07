@@ -12,11 +12,15 @@ abstract class HardcodedEcoEnchant(
     id: String,
     plugin: EcoEnchantsPlugin
 ) : EcoEnchantBase(id, plugin) {
-    final override fun loadConfig(): Config {
-        return File(plugin.dataFolder, "enchants")
+    private val file: File?
+        get() = File(plugin.dataFolder, "enchants")
             .walk()
             .firstOrNull { file -> file.nameWithoutExtension == id }
-            .readConfig(ConfigType.YAML)
+
+    val isPresent = file != null
+
+    final override fun loadConfig(): Config {
+        return file.readConfig(ConfigType.YAML)
     }
 
     override fun createLevel(level: Int): EcoEnchantLevel {

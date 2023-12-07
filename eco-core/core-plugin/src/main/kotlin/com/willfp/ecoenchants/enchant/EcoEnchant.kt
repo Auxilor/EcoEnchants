@@ -25,6 +25,16 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     val maxLevel: Int
 
     /**
+     * If this enchantment conflicts with all other enchantments.
+     */
+    val conflictsWithEverything: Boolean
+
+    /**
+     * The conflicts.
+     */
+    val conflicts: Set<Enchantment>
+
+    /**
      * The enchantment targets.
      */
     val targets: Set<EnchantmentTarget>

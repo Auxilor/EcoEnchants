@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.proxy.v1_18_R2
 
-import com.willfp.ecoenchants.proxy.proxies.EcoCraftEnchantmentManagerProxy
-import com.willfp.ecoenchants.vanilla.VanillaEnchantmentData
-import org.bukkit.NamespacedKey
+import com.willfp.ecoenchants.enchant.EcoCraftEnchantmentManagerProxy
+import com.willfp.ecoenchants.enchant.VanillaEnchantmentData
 import org.bukkit.enchantments.Enchantment
 
 class EcoCraftEnchantmentManager : EcoCraftEnchantmentManagerProxy {

@@ -4,9 +4,8 @@ import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.wrap
-import com.willfp.ecoenchants.proxy.proxies.OpenInventoryProxy
+import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.Tag
@@ -34,6 +33,10 @@ data class AnvilResult(
 fun Int.infiniteIfNegative() = if (this < 1) Int.MAX_VALUE else this
 
 private val FAIL = AnvilResult(null, null)
+
+interface OpenInventoryProxy {
+    fun getOpenInventory(player: Player): Any
+}
 
 @Suppress("DEPRECATION")
 class AnvilSupport(
@@ -155,7 +158,7 @@ class AnvilSupport(
         val permanenceCurse = EcoEnchants.getByID("permanence_curse")
 
         if (permanenceCurse != null) {
-            if (left.fast().getEnchants(true).containsKey(permanenceCurse)) {
+            if (left.fast().getEnchants(true).containsKey(permanenceCurse.enchantment)) {
                 return FAIL
             }
         }

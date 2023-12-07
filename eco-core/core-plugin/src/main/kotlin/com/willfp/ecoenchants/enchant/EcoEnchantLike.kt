@@ -8,8 +8,7 @@ import com.willfp.eco.core.placeholder.StaticPlaceholder
 import com.willfp.eco.core.placeholder.context.placeholderContext
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.DescriptionPlaceholder
-import com.willfp.ecoenchants.enchants.wrap
+import com.willfp.ecoenchants.display.DescriptionPlaceholder
 import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType

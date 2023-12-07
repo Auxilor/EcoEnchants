@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchants
+package com.willfp.ecoenchants.enchant
 
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.config.base.LangYml
@@ -73,7 +73,7 @@ object EnchantGUI {
             onRender { player, menu ->
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
                 if (atCaptive.isEmpty || atCaptive == null || atCaptive.type == Material.BOOK) {
-                    menu.setState(player, "enchants", EcoEnchants.values().sortForDisplay())
+                    menu.setState(player, "enchants", EcoEnchants.values().map { it.enchantment }.sortForDisplay())
                 } else {
                     menu.setState(
                         player,
@@ -207,32 +207,32 @@ private val cachedEnchantmentSlots = Caffeine.newBuilder()
 private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Player): Slot {
     return cachedEnchantmentSlots.get(this) {
         val level = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) {
-            enchant.maxLevel
+            it.maxLevel
         } else {
             1
         }
 
         slot(
             EnchantedBookBuilder()
-                .addStoredEnchantment(enchant, level)
+                .addStoredEnchantment(enchantment, level)
                 .addItemFlag(ItemFlag.HIDE_ENCHANTS)
-                .setDisplayName(enchant.getFormattedName(level))
-                .addLoreLines(enchant.getFormattedDescription(level, player))
+                .setDisplayName(this.getFormattedName(level))
+                .addLoreLines(this.getFormattedDescription(level, player))
                 .addLoreLines {
                     plugin.configYml.getStrings("enchantinfo.item.lore")
                         .map {
-                            it.replace("%max_level%", enchant.maxLevel.toString())
-                                .replace("%rarity%", enchant.enchantmentRarity.displayName)
+                            it.replace("%max_level%", enchantment.maxLevel.toString())
+                                .replace("%rarity%", this.rarity.displayName)
                                 .replace(
                                     "%targets%",
-                                    enchant.targets.joinToString(", ") { target -> target.displayName }
+                                    this.targets.joinToString(", ") { target -> target.displayName }
                                 )
                                 .replace(
                                     "%conflicts%",
-                                    if (enchant.conflictsWithEverything) {
+                                    if (this.conflictsWithEverything) {
                                         plugin.langYml.getFormattedString("all-conflicts")
                                     } else {
-                                        enchant.conflicts.joinToString(", ") { conflict ->
+                                        this.conflicts.joinToString(", ") { conflict ->
                                             conflict.wrap().getFormattedName(0)
                                         }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
                                     }

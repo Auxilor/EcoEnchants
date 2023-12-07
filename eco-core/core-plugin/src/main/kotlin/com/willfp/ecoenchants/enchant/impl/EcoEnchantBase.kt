@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchant.impl
 
 import com.willfp.eco.core.config.interfaces.Config
+import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
@@ -31,6 +32,14 @@ abstract class EcoEnchantBase(
     override val rawDisplayName = config.getString("display-name")
 
     override val maxLevel = config.getInt("max-level")
+
+    override val conflictsWithEverything: Boolean
+        get() = conflictIds.containsIgnoreCase("all")
+                || conflictIds.containsIgnoreCase("everything")
+
+    override val conflicts = config.getStrings("conflicts")
+        .mapNotNull { Enchantment.getByKey(NamespacedKey.minecraft(it)) }
+        .toSet()
 
     override val targets = config.getStrings("targets")
         .mapNotNull { EnchantmentTargets[it] }

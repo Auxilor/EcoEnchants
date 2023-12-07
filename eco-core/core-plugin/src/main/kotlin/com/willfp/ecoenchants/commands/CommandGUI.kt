@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.command.impl.Subcommand
-import com.willfp.ecoenchants.enchants.EnchantGUI
+import com.willfp.ecoenchants.enchant.EnchantGUI
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 

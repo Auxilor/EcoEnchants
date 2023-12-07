@@ -6,12 +6,11 @@ import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.core.registry.Registrable
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.plugin
 import com.willfp.libreforge.slot.SlotType
 import com.willfp.libreforge.slot.SlotTypes
 import com.willfp.libreforge.slot.impl.SlotTypeAny
-import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import java.lang.IllegalArgumentException
 import java.util.Objects
 
 interface EnchantmentTarget : Registrable {
@@ -62,7 +61,7 @@ class ConfiguredEnchantmentTarget(
 
 internal object AllEnchantmentTarget : EnchantmentTarget {
     override val id = "all"
-    override val displayName = EcoEnchantsPlugin.instance.langYml.getFormattedString("all")
+    override val displayName = plugin.langYml.getFormattedString("all")
     override val slot = SlotTypeAny
     override var items = emptyList<TestableItem>()
         private set

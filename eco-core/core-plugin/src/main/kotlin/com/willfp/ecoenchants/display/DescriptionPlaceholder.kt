@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchants
+package com.willfp.ecoenchants.display
 
 class DescriptionPlaceholder(
     val id: String,

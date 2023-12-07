@@ -7,8 +7,8 @@ import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.wrap
+import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
@@ -51,7 +51,7 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
         val enchantment = EcoEnchants.values()
             .filter {
                 when (filter) {
-                    is EnchantmentRarity -> it.enchantmentRarity == filter
+                    is EnchantmentRarity -> it.rarity == filter
                     is EnchantmentType -> it.type == filter
                     else -> true
                 } && it.maxLevel >= minLevel
@@ -64,7 +64,7 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
         val level = NumberUtils.randInt(minLevel, maxLevel.coerceAtMost(enchantment.maxLevel))
 
         val item = EnchantedBookBuilder()
-            .addStoredEnchantment(enchantment, level)
+            .addStoredEnchantment(enchantment.enchantment, level)
             .build()
 
         DropQueue(player)
@@ -75,7 +75,7 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
         sender.sendMessage(
             plugin.langYml.getMessage("gave-random-book", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
                 .replace("%player%", player.name)
-                .replace("%enchantment%", enchantment.wrap().getFormattedName(level))
+                .replace("%enchantment%", enchantment.getFormattedName(level))
         )
     }
 

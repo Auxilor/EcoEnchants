@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.impl.VanillaEcoEnchantLike
+import com.willfp.ecoenchants.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 
@@ -14,7 +14,7 @@ fun Enchantment.wrap(): EcoEnchantLike {
     }
 
     return ecoEnchantLikes.getOrPut(this.key) {
-        VanillaEcoEnchantLike(this, EcoEnchantsPlugin.instance)
+        VanillaEcoEnchantLike(this, plugin)
     }
 }
 

@@ -7,7 +7,6 @@ import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentReplenish
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentSoulbound
-import com.willfp.ecoenchants.enchants.sendPrompts
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.target.EnchantmentTargets
@@ -39,42 +38,46 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     override fun afterReload(plugin: LibreforgePlugin) {
         plugin as EcoEnchantsPlugin
 
-        sendPrompts(plugin)
         registerHardcodedEnchantments(plugin)
     }
 
     override fun acceptConfig(plugin: LibreforgePlugin, id: String, config: Config) {
         plugin as EcoEnchantsPlugin
 
-        val enchant = createEnchantment(plugin, id, config) ?: return
+        if (!config.has("effects")) {
+            return
+        }
 
-        registry.register(enchant)
+        val enchant = LibreforgeEcoEnchant(
+            id,
+            config,
+            plugin
+        )
+
+        doRegister(plugin, enchant)
+    }
+
+    private fun doRegister(plugin: EcoEnchantsPlugin, enchant: EcoEnchant) {
         plugin.enchantmentRegisterer.register(enchant)
+        // Register delegated versions
+        registry.register(enchant.enchantment as EcoEnchant)
         EnchantRegistrations.registerEnchantments()
     }
 
-    private fun createEnchantment(plugin: LibreforgePlugin, id: String, config: Config): EcoEnchant? {
-        plugin as EcoEnchantsPlugin
-
-        if (config.has("effects")) {
-            // Libreforge
-            return LibreforgeEcoEnchant(
-                id,
-                config,
-                plugin
-            )
-        } else {
-            TODO()
-        }
-    }
-
-    /** Register the hardcoded enchantments. */
     private fun registerHardcodedEnchantments(
         plugin: EcoEnchantsPlugin
     ) {
-        EnchantmentPermanenceCurse(plugin)
-        EnchantmentRepairing(plugin)
-        EnchantmentReplenish(plugin)
-        EnchantmentSoulbound(plugin)
+        val hardcodedEnchantments = listOf(
+            EnchantmentPermanenceCurse(plugin),
+            EnchantmentRepairing(plugin),
+            EnchantmentReplenish(plugin),
+            EnchantmentSoulbound(plugin)
+        )
+
+        for (enchantment in hardcodedEnchantments) {
+            if (enchantment.isPresent) {
+                doRegister(plugin, enchantment)
+            }
+        }
     }
 }
