@@ -4,9 +4,10 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.items.HashedItem
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchant
-import com.willfp.ecoenchants.enchants.EcoEnchantLevel
-import com.willfp.ecoenchants.enchants.FoundEcoEnchantLevel
+import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.EcoEnchantLevel
+import com.willfp.ecoenchants.enchant.FoundEcoEnchantLevel
+import com.willfp.ecoenchants.plugin
 import com.willfp.libreforge.ItemProvidedHolder
 import com.willfp.libreforge.slot.SlotType
 import com.willfp.libreforge.slot.SlotTypes
@@ -302,7 +303,7 @@ object EnchantLookup {
 
             // This is such a fucking disgusting way of implementing %active_level%,
             // and it's probably quite slow too.
-            return if (EcoEnchantsPlugin.instance.configYml.getBool("extra-placeholders.active-level")) {
+            return if (plugin.configYml.getBool("extra-placeholders.active-level")) {
                 found.map {
                     val level = it.holder as EcoEnchantLevel
 

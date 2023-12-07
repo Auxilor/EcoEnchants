@@ -1,22 +1,20 @@
 package com.willfp.ecoenchants.target
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.google.common.collect.ImmutableSet
 import com.willfp.eco.core.items.HashedItem
 import com.willfp.eco.core.registry.Registry
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.EcoEnchant
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.wrap
+import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.plugin
 import org.bukkit.Material
-import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemStack
 import java.util.concurrent.TimeUnit
 
-object EnchantmentTargets: Registry<EnchantmentTarget>() {
+object EnchantmentTargets : Registry<EnchantmentTarget>() {
     init {
         register(AllEnchantmentTarget)
-        update(EcoEnchantsPlugin.instance)
+        update(plugin)
     }
 
     private fun getForItem(item: ItemStack): List<EnchantmentTarget> {

@@ -4,10 +4,8 @@ import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.savedDisplayName
-import com.willfp.ecoenchants.enchants.wrap
-import com.willfp.ecoenchants.rarity.EnchantmentRarities
-import com.willfp.ecoenchants.type.EnchantmentTypes
-import org.bukkit.Bukkit
+import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
@@ -48,7 +46,7 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
 
             sender.sendMessage(
                 plugin.langYml.getMessage("added-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
-                    .replace("%enchant%", enchant.wrap().displayName)
+                    .replace("%enchant%", enchant.wrap().getFormattedName(0))
                     .replace("%player%", player.savedDisplayName)
             )
         } else {
@@ -59,7 +57,7 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
 
             sender.sendMessage(
                 plugin.langYml.getMessage("removed-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
-                    .replace("%enchant%", enchant.wrap().displayName)
+                    .replace("%enchant%", enchant.wrap().getFormattedName(0))
                     .replace("%player%", player.savedDisplayName)
             )
         }

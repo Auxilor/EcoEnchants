@@ -2,32 +2,15 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
-import com.willfp.eco.util.StringUtils
-import com.willfp.ecoenchants.enchants.EcoEnchants
-import com.willfp.ecoenchants.enchants.wrap
-import org.bukkit.ChatColor
-import org.bukkit.Material
+import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.enchantments.Enchantment
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.ExperienceOrb
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.inventory.InventoryType
-import org.bukkit.event.inventory.PrepareAnvilEvent
 import org.bukkit.inventory.GrindstoneInventory
-import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.Damageable
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import java.util.*
-import javax.swing.text.html.HTML.Tag.P
-import kotlin.math.abs
 import kotlin.math.max
-import kotlin.math.min
-import kotlin.math.pow
-import kotlin.math.roundToInt
 
 @Suppress("DEPRECATION")
 class GrindstoneSupport(

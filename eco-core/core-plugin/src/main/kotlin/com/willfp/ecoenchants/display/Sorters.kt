@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.display
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.wrap
+import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
@@ -41,13 +41,13 @@ fun List<EnchantmentSorter>.getSafely(index: Int) =
 
 object AlphabeticSorter : EnchantmentSorter {
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().displayName) }
+        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().getFormattedName(0)) }
     }
 }
 
 object LengthSorter : EnchantmentSorter {
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().displayName)!!.length }
+        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().getFormattedName(0))!!.length }
     }
 }
 

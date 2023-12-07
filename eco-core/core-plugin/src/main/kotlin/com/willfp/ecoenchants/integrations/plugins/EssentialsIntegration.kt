@@ -1,14 +1,13 @@
 package com.willfp.ecoenchants.integrations.plugins
 
 import com.earth2me.essentials.Enchantments
-import com.willfp.ecoenchants.enchants.EcoEnchant
-import com.willfp.ecoenchants.enchants.EcoEnchants
+import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.integrations.EnchantRegistrationIntegration
-import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 
 @Suppress("UNCHECKED_CAST")
-class EssentialsIntegration: EnchantRegistrationIntegration {
+class EssentialsIntegration : EnchantRegistrationIntegration {
     override fun registerEnchants() {
         for (enchantment in EcoEnchants.values()) {
             // why aren't you using the api you PRd in
@@ -18,8 +17,8 @@ class EssentialsIntegration: EnchantRegistrationIntegration {
                     .apply {
                         isAccessible = true
                         (get(null) as MutableMap<String, Enchantment>).apply {
-                            put(enchantment.id, enchantment)
-                            put(enchantment.id.replace("_",""), enchantment)
+                            put(enchantment.id, enchantment.enchantment)
+                            put(enchantment.id.replace("_", ""), enchantment.enchantment)
                         }
                     }
             }
@@ -33,7 +32,7 @@ class EssentialsIntegration: EnchantRegistrationIntegration {
                     isAccessible = true
                     (get(null) as MutableMap<String, Enchantment>).apply {
                         remove(enchantment.id)
-                        remove(enchantment.id.replace("_",""))
+                        remove(enchantment.id.replace("_", ""))
                     }
                 }
         }

@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.libreforge
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
-import com.willfp.ecoenchants.enchants.wrap
+import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.libreforge.toDispatcher
 import com.willfp.libreforge.triggers.Trigger
