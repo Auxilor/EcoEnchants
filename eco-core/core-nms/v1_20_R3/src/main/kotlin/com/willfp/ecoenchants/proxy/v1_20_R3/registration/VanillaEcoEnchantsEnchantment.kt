@@ -18,7 +18,7 @@ class VanillaEcoEnchantsEnchantment(
 ) : Enchantment(
     Rarity.VERY_RARE,
     EnchantmentCategory.VANISHABLE,
-    EquipmentSlot.values()
+    emptyArray()
 ) {
     private val enchant: EcoEnchant?
         get() = EcoEnchants[id]
