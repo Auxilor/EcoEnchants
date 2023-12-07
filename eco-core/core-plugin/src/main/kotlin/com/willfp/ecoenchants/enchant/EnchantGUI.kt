@@ -78,7 +78,7 @@ object EnchantGUI {
                     menu.setState(
                         player,
                         "enchants",
-                        atCaptive.applicableEnchantments.sortForDisplay()
+                        atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
                             .subtract(atCaptive.fast().enchants.keys)
                             .toList()
                     )
