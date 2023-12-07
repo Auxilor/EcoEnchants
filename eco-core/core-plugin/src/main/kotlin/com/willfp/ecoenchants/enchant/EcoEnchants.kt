@@ -58,9 +58,9 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     }
 
     private fun doRegister(plugin: EcoEnchantsPlugin, enchant: EcoEnchant) {
-        plugin.enchantmentRegisterer.register(enchant)
+        val enchantment = plugin.enchantmentRegisterer.register(enchant)
         // Register delegated versions
-        registry.register(enchant.enchantment as EcoEnchant)
+        registry.register(enchantment as EcoEnchant)
         EnchantRegistrations.registerEnchantments()
     }
 

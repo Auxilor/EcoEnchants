@@ -1,5 +1,6 @@
 package com.willfp.ecoenchants
 
+import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
 import com.willfp.eco.core.integrations.IntegrationLoader
@@ -17,7 +18,10 @@ import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import com.willfp.ecoenchants.enchant.FoundEcoEnchantLevel
+import com.willfp.ecoenchants.enchant.legacyRegisterVanillaEnchantmentData
 import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
+import com.willfp.ecoenchants.enchant.registration.legacy.LegacyEnchantmentRegisterer
+import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
@@ -49,10 +53,18 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     var isLoaded = false
         private set
 
-    val enchantmentRegisterer: EnchantmentRegisterer = TODO()
+    val enchantmentRegisterer: EnchantmentRegisterer = if (Prerequisite.HAS_1_20_3.isMet) {
+        this.getProxy(ModernEnchantmentRegistererProxy::class.java)
+    } else {
+        LegacyEnchantmentRegisterer
+    }
 
     init {
         plugin = this
+
+        if (Prerequisite.HAS_1_20_3.isMet) {
+            this.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        }
     }
 
     override fun loadConfigCategories(): List<ConfigCategory> {
@@ -89,6 +101,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleReload() {
+        if (!Prerequisite.HAS_1_20_3.isMet) {
+            legacyRegisterVanillaEnchantmentData(this)
+        }
+
         DisplayCache.reload()
         EnchantSorter.reload(this)
         ExtraItemSupport.reload(this)

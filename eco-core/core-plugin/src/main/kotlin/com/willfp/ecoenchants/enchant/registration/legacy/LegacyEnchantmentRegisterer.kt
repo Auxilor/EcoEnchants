@@ -7,14 +7,18 @@ import org.bukkit.enchantments.Enchantment
 
 @Suppress("UNCHECKED_CAST")
 object LegacyEnchantmentRegisterer : EnchantmentRegisterer {
-    override fun register(enchant: EcoEnchant) {
+    override fun register(enchant: EcoEnchant): Enchantment {
         Enchantment::class.java.getDeclaredField("acceptingNew")
             .apply {
                 isAccessible = true
                 set(null, true)
             }
 
-        Enchantment.registerEnchantment(LegacyDelegatedEnchantment(enchant))
+        val enchantment = LegacyDelegatedEnchantment(enchant)
+
+        Enchantment.registerEnchantment(enchantment)
+
+        return enchantment
     }
 
     override fun unregister(enchant: EcoEnchant) {

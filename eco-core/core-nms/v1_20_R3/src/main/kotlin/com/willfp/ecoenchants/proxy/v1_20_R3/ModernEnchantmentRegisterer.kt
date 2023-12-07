@@ -47,9 +47,9 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         }
     }
 
-    override fun register(enchant: EcoEnchant) {
+    override fun register(enchant: EcoEnchant): Enchantment {
         if (BuiltInRegistries.ENCHANTMENT.containsKey(CraftNamespacedKey.toMinecraft(enchant.key))) {
-            return
+            return org.bukkit.Registry.ENCHANTMENT.get(enchant.key)!!
         }
 
         // Unfreeze registry
@@ -60,6 +60,8 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
                 enchant.id
             )
         )
+
+        return org.bukkit.Registry.ENCHANTMENT.get(enchant.key)!!
     }
 
     override fun unregister(enchant: EcoEnchant) {

@@ -20,12 +20,12 @@ class VanillaEcoEnchantsEnchantment(
     EnchantmentCategory.VANISHABLE,
     EquipmentSlot.values()
 ) {
-    private val enchant: EcoEnchant
-        get() = EcoEnchants[id] ?: throw IllegalStateException("Enchantment $id not found")
+    private val enchant: EcoEnchant?
+        get() = EcoEnchants[id]
 
     override fun canEnchant(stack: ItemStack): Boolean {
         val item = CraftItemStack.asCraftMirror(stack)
-        return enchant.canEnchantItem(item)
+        return enchant?.canEnchantItem(item) ?: false
     }
 
     override fun doPostAttack(user: LivingEntity, target: Entity, level: Int) {
@@ -49,7 +49,7 @@ class VanillaEcoEnchantsEnchantment(
     }
 
     override fun getMaxLevel(): Int {
-        return enchant.maxLevel
+        return enchant?.maxLevel ?: 1
     }
 
     override fun isCurse(): Boolean {
@@ -71,7 +71,11 @@ class VanillaEcoEnchantsEnchantment(
     override fun checkCompatibility(other: Enchantment): Boolean {
         val bukkit = CraftEnchantment.minecraftToBukkit(other)
 
-        return !enchant.conflictsWith(bukkit)
+        if (enchant != null) {
+            return !enchant!!.conflictsWith(bukkit)
+        }
+
+        return false
     }
 
     override fun getSlotItems(entity: LivingEntity): MutableMap<EquipmentSlot, ItemStack> {
