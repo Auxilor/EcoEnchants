@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.enchant.MissingDependencyException
 import com.willfp.libreforge.BlankHolder.conditions
 import com.willfp.libreforge.BlankHolder.effects
 import com.willfp.libreforge.SilentViolationContext
+import com.willfp.libreforge.effects.EffectList
 import com.willfp.libreforge.effects.Effects
 import org.bukkit.Bukkit
 
@@ -16,10 +17,7 @@ class LibreforgeEcoEnchant(
     _config: Config,
     plugin: EcoEnchantsPlugin
 ) : EcoEnchantBase(id, plugin, _config) {
-    private val effects = Effects.compile(
-        config.getSubsections("effects"),
-        if (plugin.isLoaded) context.with("effects") else SilentViolationContext
-    )
+    private val effects: EffectList
 
     override fun createLevel(level: Int): EcoEnchantLevel {
         return EcoEnchantLevel(this, level, effects, conditions, plugin)
@@ -37,5 +35,11 @@ class LibreforgeEcoEnchant(
         if (missingPlugins.isNotEmpty()) {
             throw MissingDependencyException(missingPlugins)
         }
+
+        // Compile here so MissingDependencyException is thrown before effects are compiled
+        effects = Effects.compile(
+            config.getSubsections("effects"),
+            if (plugin.isLoaded) context.with("effects") else SilentViolationContext
+        )
     }
 }
