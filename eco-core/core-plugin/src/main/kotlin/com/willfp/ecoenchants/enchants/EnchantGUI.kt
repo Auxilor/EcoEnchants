@@ -19,7 +19,6 @@ import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEmpty
-import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.EcoEnchantsPlugin
@@ -27,13 +26,10 @@ import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
-import org.apache.commons.lang.WordUtils
-import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
-import org.bukkit.persistence.PersistentDataType
 import kotlin.math.ceil
 
 object EnchantGUI {
@@ -158,7 +154,7 @@ object EnchantGUI {
                 setSlot(
                     plugin.configYml.getInt("enchantinfo.item.row"),
                     plugin.configYml.getInt("enchantinfo.item.column"),
-                    enchant.getInformationSlot(plugin)
+                    enchant.getInformationSlot(plugin, player)
                 )
 
                 setMask(
@@ -196,7 +192,7 @@ private class EnchantmentScrollPane(
 
         val enchant = enchants.getOrNull(index + size * (page - 1)) ?: return defaultSlot
 
-        return enchant.getInformationSlot(plugin)
+        return enchant.getInformationSlot(plugin, player)
     }
 
     override fun getRows() = plugin.configYml.getInt("enchant-gui.enchant-area.height")
@@ -208,7 +204,7 @@ private class EnchantmentScrollPane(
 private val cachedEnchantmentSlots = Caffeine.newBuilder()
     .build<EcoEnchant, Slot>()
 
-private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
+private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Player): Slot {
     return cachedEnchantmentSlots.get(this) {
         val level = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) {
             enchant.maxLevel
@@ -221,7 +217,7 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin): Slot {
                 .addStoredEnchantment(enchant, level)
                 .addItemFlag(ItemFlag.HIDE_ENCHANTS)
                 .setDisplayName(enchant.getFormattedName(level))
-                .addLoreLines(enchant.getFormattedDescription(level))
+                .addLoreLines(enchant.getFormattedDescription(level, player))
                 .addLoreLines {
                     plugin.configYml.getStrings("enchantinfo.item.lore")
                         .map {
