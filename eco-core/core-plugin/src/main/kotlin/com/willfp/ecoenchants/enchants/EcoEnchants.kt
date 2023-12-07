@@ -1,90 +1,22 @@
 package com.willfp.ecoenchants.enchants
 
-import com.google.common.collect.HashBiMap
-import com.google.common.collect.ImmutableSet
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
-import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
-import com.willfp.ecoenchants.enchants.impl.EnchantmentReplenish
-import com.willfp.ecoenchants.enchants.impl.EnchantmentSoulbound
+import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
+import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
+import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentReplenish
+import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentSoulbound
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.loader.LibreforgePlugin
-import com.willfp.libreforge.loader.configs.ConfigCategory
-import org.bukkit.ChatColor
+import com.willfp.libreforge.loader.configs.RegistrableCategory
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 
 @Suppress("UNUSED")
-object EcoEnchants : ConfigCategory("enchant", "enchants") {
-    private val BY_KEY = HashBiMap.create<String, EcoEnchant>()
-    private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
-
-    override val shouldPreload = true
-
-    /**
-     * Get all registered [EcoEnchant]s.
-     *
-     * @return A list of all [EcoEnchant]s.
-     */
-    @JvmStatic
-    fun values(): Set<EcoEnchant> {
-        return ImmutableSet.copyOf(BY_KEY.values)
-    }
-
-    /**
-     * Get [String]s for all registered [EcoEnchant]s.
-     *
-     * @return A list of all [EcoEnchant]s.
-     */
-    @JvmStatic
-    fun keySet(): Set<String> {
-        return ImmutableSet.copyOf(BY_KEY.keys)
-    }
-
-    /**
-     * Get [EcoEnchant] matching id.
-     *
-     * @param id The id to search for.
-     * @return The matching [EcoEnchant], or null if not found.
-     */
-    @JvmStatic
-    fun getByID(id: String?): EcoEnchant? {
-        return if (id == null) {
-            null
-        } else BY_KEY[id]
-    }
-
-    /**
-     * Get [EcoEnchant] matching key.
-     *
-     * @param key The key to search for.
-     * @return The matching [EcoEnchant], or null if not found.
-     */
-    @JvmStatic
-    fun getByKey(key: NamespacedKey?): EcoEnchant? {
-        return if (key == null) {
-            null
-        } else getByID(key.key)
-    }
-
-    /**
-     * Get [EcoEnchant] matching name.
-     *
-     * @param name The name to search for.
-     * @return The matching [EcoEnchant], or null if not found.
-     */
-    @JvmStatic
-    fun getByName(name: String?): EcoEnchant? {
-        return if (name == null) {
-            null
-        } else BY_NAME[name]
-    }
-
-
+object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     override fun clear(plugin: LibreforgePlugin) {
         for (enchant in values()) {
             removeEnchant(enchant)
@@ -135,8 +67,7 @@ object EcoEnchants : ConfigCategory("enchant", "enchants") {
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
     fun removeEnchant(enchant: Enchantment) {
         if (enchant is EcoEnchant) {
-            BY_KEY.remove(enchant.id)
-            BY_NAME.remove(ChatColor.stripColor(enchant.displayName))
+            registry.remove(enchant.id)
             EnchantRegistrations.removeEnchant(enchant)
         }
 
@@ -163,9 +94,6 @@ object EcoEnchants : ConfigCategory("enchant", "enchants") {
      */
     internal fun addNewEnchant(enchant: EcoEnchant) {
         register(enchant)
-
-        BY_KEY[enchant.id] = enchant
-        BY_NAME[ChatColor.stripColor(enchant.displayName)] = enchant
     }
 
     /**

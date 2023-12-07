@@ -9,6 +9,7 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.placeholder.PlayerlessPlaceholder
 import com.willfp.eco.core.placeholder.context.PlaceholderContext
 import com.willfp.eco.core.placeholder.templates.SimpleInjectablePlaceholder
+import com.willfp.eco.core.registry.KRegistrable
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
@@ -41,10 +42,10 @@ import java.util.Objects
 
 @Suppress("DEPRECATION")
 abstract class EcoEnchant(
-    val id: String,
+    override val id: String,
     configProvider: (EcoEnchant) -> Config,
     protected val plugin: EcoEnchantsPlugin
-) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike {
+) : Enchantment(NamespacedKey.minecraft(id)), EcoEnchantLike, KRegistrable {
     final override val config by lazy { configProvider(this) }
     override val enchant by lazy { this }
 

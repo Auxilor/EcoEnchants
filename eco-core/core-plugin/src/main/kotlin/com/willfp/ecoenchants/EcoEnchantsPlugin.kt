@@ -13,6 +13,7 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.DisplayCache
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.display.EnchantSorter
+import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
 import com.willfp.ecoenchants.enchants.EcoEnchantLevel
 import com.willfp.ecoenchants.enchants.EcoEnchants
 import com.willfp.ecoenchants.enchants.EnchantGUI
@@ -46,6 +47,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     val vanillaEnchantsYml = VanillaEnchantsYml(this)
     var isLoaded = false
         private set
+
+    val enchantmentRegisterer: EnchantmentRegisterer = TODO()
 
     init {
         instance = this

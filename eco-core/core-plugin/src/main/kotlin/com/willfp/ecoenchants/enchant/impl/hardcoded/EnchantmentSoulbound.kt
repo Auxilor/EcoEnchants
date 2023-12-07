@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.enchants.impl
+package com.willfp.ecoenchants.enchant.impl.hardcoded
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.Prerequisite

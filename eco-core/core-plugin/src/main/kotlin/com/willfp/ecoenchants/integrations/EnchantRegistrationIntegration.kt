@@ -1,8 +1,7 @@
 package com.willfp.ecoenchants.integrations
 
 import com.willfp.eco.core.integrations.Integration
-import com.willfp.ecoenchants.enchants.EcoEnchant
-import org.jetbrains.annotations.NotNull
+import com.willfp.ecoenchants.enchant.EcoEnchant
 
 
 interface EnchantRegistrationIntegration : Integration {
