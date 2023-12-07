@@ -24,6 +24,11 @@ interface EcoEnchantLike {
     val config: Config
 
     /**
+     * The max enchantment level.
+     */
+    val maximumLevel: Int
+
+    /**
      * The plugin.
      */
     val plugin: EcoEnchantsPlugin

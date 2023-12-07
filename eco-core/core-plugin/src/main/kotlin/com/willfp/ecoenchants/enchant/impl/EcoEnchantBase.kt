@@ -18,10 +18,11 @@ import org.bukkit.enchantments.Enchantment
 abstract class EcoEnchantBase(
     final override val id: String,
     final override val plugin: EcoEnchantsPlugin,
+    _config: Config? = null
 ) : EcoEnchant {
     protected val context = ViolationContext(plugin, "enchantment $id")
 
-    final override val config by lazy { loadConfig() }
+    final override val config by lazy { _config ?: loadConfig()!! }
 
     private val levels = mutableMapOf<Int, EcoEnchantLevel>()
 
@@ -67,7 +68,7 @@ abstract class EcoEnchantBase(
     /**
      * Load the config for this enchant.
      */
-    protected abstract fun loadConfig(): Config
+    protected open fun loadConfig(): Config? = null
 
     override fun getLevel(level: Int): EcoEnchantLevel {
         return levels.getOrPut(level) {

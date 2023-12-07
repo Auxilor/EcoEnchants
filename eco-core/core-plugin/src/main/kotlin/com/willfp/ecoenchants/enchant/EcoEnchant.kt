@@ -20,11 +20,6 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
         get() = this as Enchantment
 
     /**
-     * The max enchantment level.
-     */
-    val maximumLevel: Int
-
-    /**
      * If this enchantment conflicts with all other enchantments.
      */
     val conflictsWithEverything: Boolean

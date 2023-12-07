@@ -15,6 +15,9 @@ class VanillaEcoEnchantLike(
 ) : EcoEnchantLike {
     override val config = plugin.vanillaEnchantsYml.getSubsection(enchantment.key.key)
 
+    override val maximumLevel
+        get() = enchantment.maxLevel
+
     override val type: EnchantmentType =
         EnchantmentTypes[plugin.vanillaEnchantsYml.getString("${enchantment.key.key}.type")]
             ?: EnchantmentTypes.values().first()

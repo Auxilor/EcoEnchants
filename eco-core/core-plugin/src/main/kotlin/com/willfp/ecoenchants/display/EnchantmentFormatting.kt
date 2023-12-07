@@ -42,11 +42,11 @@ fun EcoEnchantLike.getFormattedName(
         val typeFormat = this.type.format
         val name = this.rawDisplayName
         val number = if (numerals) NumberUtils.toNumeral(level) else level.toString()
-        val dontShowNumber = (level == 1 && this.enchantment.maxLevel == 1) || level < 1
+        val dontShowNumber = (level == 1 && this.maximumLevel == 1) || level < 1
 
         val notMetFormat = if (showNotMet) plugin.configYml.getString("display.not-met.format") else ""
 
-        if (plugin.configYml.getBool("display.above-max-level.enabled") && level > this.enchantment.maxLevel) {
+        if (plugin.configYml.getBool("display.above-max-level.enabled") && level > this.maximumLevel) {
             val format = plugin.configYml.getString("display.above-max-level.format")
             val levelOnly = plugin.configYml.getBool("display.above-max-level.level-only")
 
