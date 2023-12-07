@@ -8,6 +8,7 @@ import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.formatEco
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.EcoEnchantLike
+import org.bukkit.entity.Player
 
 // This is an object to be able to invalidate the cache on reload
 object DisplayCache {
@@ -72,14 +73,14 @@ private val resetTags = arrayOf(
     "§r"
 )
 
-fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> {
+fun EcoEnchantLike.getFormattedDescription(level: Int, player: Player? = null): List<String> {
     val plugin = EcoEnchantsPlugin.instance
 
     return DisplayCache.descriptionCache.get(DisplayableEnchant(this, level)) {
         val descriptionFormat = plugin.configYml.getString("display.descriptions.format")
         val wrap = plugin.configYml.getInt("display.descriptions.word-wrap")
 
-        var description = descriptionFormat + this.getUnformattedDescription(level)
+        var description = descriptionFormat + this.getUnformattedDescription(level, player)
 
         // Replace reset tags with description format
         for (tag in resetTags) {
@@ -91,3 +92,6 @@ fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> {
         )), wrap)
     }
 }
+
+// Java backwards compatibility
+fun EcoEnchantLike.getFormattedDescription(level: Int): List<String> = getFormattedDescription(level, null)

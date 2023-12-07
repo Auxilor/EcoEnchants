@@ -6,6 +6,7 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.placeholder.InjectablePlaceholder
 import com.willfp.eco.core.placeholder.PlaceholderInjectable
 import com.willfp.eco.core.placeholder.StaticPlaceholder
+import com.willfp.eco.core.placeholder.context.placeholderContext
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.mechanics.infiniteIfNegative
@@ -18,6 +19,7 @@ import com.willfp.ecoenchants.vanilla.VanillaEnchantmentData
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
@@ -33,7 +35,7 @@ interface EcoEnchantLike {
     fun canEnchantItem(item: ItemStack): Boolean
 
     // Method body goes here
-    fun getUnformattedDescription(level: Int): String {
+    fun getUnformattedDescription(level: Int, player: Player? = null): String {
         // Fetch custom placeholders other than %placeholder%
         val uncompiledPlaceholders = config.getSubsection("placeholders").getKeys(false).associateWith {
             config.getString("placeholders.$it")
@@ -42,30 +44,34 @@ interface EcoEnchantLike {
         // Add %placeholder% placeholder in
         uncompiledPlaceholders["placeholder"] = config.getString("placeholder")
 
+
+
         // Evaluate each placeholder
         val placeholders = uncompiledPlaceholders.map { (id, expr) ->
             DescriptionPlaceholder(
                 id,
                 NumberUtils.evaluateExpression(
                     expr,
-                    null,
-                    object : PlaceholderInjectable {
-                        override fun getPlaceholderInjections(): List<InjectablePlaceholder> {
-                            return listOf(
-                                StaticPlaceholder(
-                                    "level",
-                                ) { level.toString() }
-                            )
-                        }
+                    placeholderContext(
+                        player = player,
+                        injectable = object : PlaceholderInjectable {
+                            override fun getPlaceholderInjections(): List<InjectablePlaceholder> {
+                                return listOf(
+                                    StaticPlaceholder(
+                                        "level",
+                                    ) { level.toString() }
+                                )
+                            }
 
-                        override fun addInjectablePlaceholder(p0: MutableIterable<InjectablePlaceholder>) {
-                            // Do nothing
-                        }
+                            override fun addInjectablePlaceholder(p0: MutableIterable<InjectablePlaceholder>) {
+                                // Do nothing
+                            }
 
-                        override fun clearInjectedPlaceholders() {
-                            // Do nothing
+                            override fun clearInjectedPlaceholders() {
+                                // Do nothing
+                            }
                         }
-                    }
+                    )
                 )
             )
         }
@@ -78,6 +84,11 @@ interface EcoEnchantLike {
         }
 
         return description
+    }
+
+    // Java backwards compatibility
+    fun getUnformattedDescription(level: Int): String {
+        return getUnformattedDescription(level, null)
     }
 }
 
