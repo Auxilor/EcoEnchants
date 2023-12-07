@@ -16,9 +16,16 @@ base {
 }
 
 dependencies {
-    project(":eco-core").dependencyProject.subprojects {
-        implementation(this)
-    }
+    implementation(project(":eco-core:core-plugin"))
+    implementation(project(":eco-core:core-nms:v1_17_R1"))
+    implementation(project(":eco-core:core-nms:v1_18_R1"))
+    implementation(project(":eco-core:core-nms:v1_18_R2"))
+    implementation(project(":eco-core:core-nms:v1_19_R1"))
+    implementation(project(":eco-core:core-nms:v1_19_R2"))
+    implementation(project(":eco-core:core-nms:v1_19_R3"))
+    implementation(project(":eco-core:core-nms:v1_20_R1"))
+    implementation(project(":eco-core:core-nms:v1_20_R2"))
+    implementation(project(":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
 }
 
 allprojects {
