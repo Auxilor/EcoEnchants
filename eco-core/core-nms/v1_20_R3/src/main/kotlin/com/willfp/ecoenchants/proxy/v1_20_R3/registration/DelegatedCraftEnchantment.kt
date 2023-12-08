@@ -111,4 +111,8 @@ class DelegatedCraftEnchantment(
     override fun hashCode(): Int {
         return Objects.hash(this.key)
     }
+
+    override fun toString(): String {
+        return "DelegatedCraftEnchantment(key=$key)"
+    }
 }

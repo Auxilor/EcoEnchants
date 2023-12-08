@@ -12,6 +12,7 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 import org.bukkit.craftbukkit.v1_20_R3.enchantments.CraftEnchantment
 import org.bukkit.craftbukkit.v1_20_R3.inventory.CraftItemStack
+import java.util.Objects
 
 class VanillaEcoEnchantsEnchantment(
     private val id: String
@@ -80,5 +81,17 @@ class VanillaEcoEnchantsEnchantment(
 
     override fun getSlotItems(entity: LivingEntity): MutableMap<EquipmentSlot, ItemStack> {
         return mutableMapOf()
+    }
+
+    override fun toString(): String {
+        return "VanillaEcoEnchantsEnchantment(id='$id')"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is VanillaEcoEnchantsEnchantment && other.id == this.id
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(id)
     }
 }
