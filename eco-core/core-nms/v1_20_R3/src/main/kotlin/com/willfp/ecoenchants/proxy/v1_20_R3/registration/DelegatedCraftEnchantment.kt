@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.proxy.v1_20_R3.registration
 
-import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.toComponent
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchant
