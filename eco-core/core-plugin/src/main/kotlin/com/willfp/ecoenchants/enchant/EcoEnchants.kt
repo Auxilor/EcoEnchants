@@ -5,6 +5,7 @@ import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.impl.LibreforgeEcoEnchant
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
@@ -75,7 +76,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         }
     }
 
-    private fun doRegister(plugin: EcoEnchantsPlugin, enchant: EcoEnchant) {
+    private fun doRegister(plugin: EcoEnchantsPlugin, enchant: EcoEnchantBase) {
         val enchantment = plugin.enchantmentRegisterer.register(enchant)
         // Register delegated versions
         registry.register(enchantment as EcoEnchant)
