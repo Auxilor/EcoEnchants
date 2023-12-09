@@ -14,6 +14,7 @@ import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.Conditions
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import org.jetbrains.annotations.ApiStatus.Internal
 
 abstract class EcoEnchantBase(
     final override val id: String,
@@ -25,6 +26,7 @@ abstract class EcoEnchantBase(
     final override val config by lazy { _config ?: loadConfig()!! }
 
     override lateinit var enchantment: Enchantment
+        @Internal set
 
     private val levels = mutableMapOf<Int, EcoEnchantLevel>()
 
