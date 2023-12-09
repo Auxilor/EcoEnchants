@@ -6,7 +6,7 @@ import com.willfp.eco.core.registry.Registrable
 import com.willfp.ecoenchants.libreforge.TriggerEnchantType
 import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.libreforge.triggers.Triggers
-import java.util.*
+import java.util.Objects
 
 class EnchantmentType(
     private val plugin: EcoPlugin,

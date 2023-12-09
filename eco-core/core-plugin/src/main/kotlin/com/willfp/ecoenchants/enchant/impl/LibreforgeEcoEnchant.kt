@@ -5,8 +5,6 @@ import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.MissingDependencyException
-import com.willfp.libreforge.BlankHolder.conditions
-import com.willfp.libreforge.BlankHolder.effects
 import com.willfp.libreforge.SilentViolationContext
 import com.willfp.libreforge.effects.EffectList
 import com.willfp.libreforge.effects.Effects

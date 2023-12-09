@@ -5,7 +5,6 @@ import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.core.registry.Registrable
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.plugin
 import com.willfp.libreforge.slot.SlotType
 import com.willfp.libreforge.slot.SlotTypes

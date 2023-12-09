@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.proxy.v1_20_R3
 
-import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
