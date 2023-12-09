@@ -29,7 +29,7 @@ anvil:
   cost-exponent: 0.95 # The exponent for each enchant level to prevent constant "Too Expensive!" problems
   enchant-limit: -1 # The limit for the amount of enchantments on an item (-1 to disable)
   use-rework-penalty: true # If the rework penalty should be applied
-  max-repair-cost: 256 # Override the maximum repair cost (vanilla default is 40) (-1 to make it infinite)
+  max-repair-cost: 40 # Override the maximum repair cost (-1 to make it infinite). "Too Expensive" message cannot be removed, but this is purely visual.
 
 # Options for how enchantments are displayed on items
 display:
