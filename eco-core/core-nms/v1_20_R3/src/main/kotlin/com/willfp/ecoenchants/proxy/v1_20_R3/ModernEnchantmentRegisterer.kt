@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegis
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.VanillaEcoEnchantsEnchantment
+import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
@@ -16,11 +17,17 @@ import org.bukkit.craftbukkit.v1_20_R3.CraftRegistry
 import org.bukkit.craftbukkit.v1_20_R3.CraftServer
 import org.bukkit.craftbukkit.v1_20_R3.util.CraftNamespacedKey
 import org.bukkit.enchantments.Enchantment
+import java.util.IdentityHashMap
 
 class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     private val frozenField = MappedRegistry::class.java
         .declaredFields
         .filter { it.type.isPrimitive }[0]
+        .apply { isAccessible = true }
+
+    private val unregisteredIntrusiveHoldersField = MappedRegistry::class.java
+        .declaredFields
+        .last { it.type == Map::class.java }
         .apply { isAccessible = true }
 
     @Suppress("UNCHECKED_CAST")
@@ -65,13 +72,18 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         }
 
         // Unfreeze registry
-        frozenField.set(BuiltInRegistries.ENCHANTMENT, false)
+        unfreeze(BuiltInRegistries.ENCHANTMENT)
 
         val nms = VanillaEcoEnchantsEnchantment(enchant.id)
 
         Registry.register(BuiltInRegistries.ENCHANTMENT, enchant.id, nms)
 
         return EcoEnchantsCraftEnchantment(enchant, nms)
+    }
+
+    private fun <T> unfreeze(registry: Registry<T>) {
+        frozenField.set(registry, false)
+        unregisteredIntrusiveHoldersField.set(registry, IdentityHashMap<T, Holder.Reference<T>>())
     }
 
     override fun unregister(enchant: EcoEnchant) {
