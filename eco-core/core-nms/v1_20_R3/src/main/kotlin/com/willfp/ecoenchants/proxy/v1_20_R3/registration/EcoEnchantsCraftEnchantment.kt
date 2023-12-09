@@ -13,7 +13,7 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import java.util.Objects
 
-class DelegatedCraftEnchantment(
+class EcoEnchantsCraftEnchantment(
     private val enchant: EcoEnchant,
     nmsEnchantment: Enchantment
 ) : CraftEnchantment(enchant.enchantmentKey, nmsEnchantment), EcoEnchant by enchant {
@@ -104,7 +104,7 @@ class DelegatedCraftEnchantment(
     override fun getActiveSlots() = emptySet<EquipmentSlot>()
 
     override fun equals(other: Any?): Boolean {
-        return other is DelegatedCraftEnchantment &&
+        return other is EcoEnchantsCraftEnchantment &&
                 other.key == this.key
     }
 
@@ -113,6 +113,6 @@ class DelegatedCraftEnchantment(
     }
 
     override fun toString(): String {
-        return "DelegatedCraftEnchantment(key=$key)"
+        return "EcoEnchantsCraftEnchantment(key=$key)"
     }
 }

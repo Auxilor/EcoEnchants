@@ -20,27 +20,4 @@ class EcoCraftEnchantment(
 
         return data.conflicts?.contains(other.key) ?: super.conflictsWith(other)
     }
-
-    @Suppress("UNCHECKED_CAST")
-    fun register() {
-        org.bukkit.enchantments.Enchantment::class.java.getDeclaredField("byKey")
-            .apply {
-                isAccessible = true
-                (get(null) as MutableMap<NamespacedKey, org.bukkit.enchantments.Enchantment>).apply { remove(key) }
-            }
-
-        org.bukkit.enchantments.Enchantment::class.java.getDeclaredField("byName")
-            .apply {
-                isAccessible = true
-                (get(null) as MutableMap<String, org.bukkit.enchantments.Enchantment>).apply { remove(name) }
-            }
-
-        org.bukkit.enchantments.Enchantment::class.java.getDeclaredField("acceptingNew")
-            .apply {
-                isAccessible = true
-                set(null, true)
-            }
-
-        org.bukkit.enchantments.Enchantment.registerEnchantment(this)
-    }
 }

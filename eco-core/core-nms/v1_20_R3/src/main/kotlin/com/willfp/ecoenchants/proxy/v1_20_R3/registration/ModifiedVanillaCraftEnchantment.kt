@@ -10,4 +10,9 @@ class ModifiedVanillaCraftEnchantment(
     target: Enchantment
 ) : CraftEnchantment(key, target) {
     override fun getMaxLevel(): Int = this.vanillaEnchantmentData?.maxLevel ?: super.getMaxLevel()
+
+    override fun conflictsWith(other: org.bukkit.enchantments.Enchantment): Boolean {
+        return this.vanillaEnchantmentData?.conflicts?.contains(other.key) ?: super.conflictsWith(other)
+                || other.conflictsWith(this)
+    }
 }

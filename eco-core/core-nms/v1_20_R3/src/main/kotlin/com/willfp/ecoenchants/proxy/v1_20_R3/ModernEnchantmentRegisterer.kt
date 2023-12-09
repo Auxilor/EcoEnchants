@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.proxy.v1_20_R3
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
-import com.willfp.ecoenchants.proxy.v1_20_R3.registration.DelegatedCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_20_R3.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.VanillaEcoEnchantsEnchantment
 import net.minecraft.core.MappedRegistry
@@ -71,7 +71,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
 
         Registry.register(BuiltInRegistries.ENCHANTMENT, enchant.id, nms)
 
-        return DelegatedCraftEnchantment(enchant, nms)
+        return EcoEnchantsCraftEnchantment(enchant, nms)
     }
 
     override fun unregister(enchant: EcoEnchant) {
