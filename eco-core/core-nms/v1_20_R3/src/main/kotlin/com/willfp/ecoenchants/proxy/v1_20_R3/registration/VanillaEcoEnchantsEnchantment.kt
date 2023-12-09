@@ -27,6 +27,30 @@ class VanillaEcoEnchantsEnchantment(
         get() = EcoEnchants[id]
 
     override fun canEnchant(stack: ItemStack): Boolean {
+        /*
+
+        This is the mother of all jank solutions.
+
+        Because I want the EcoEnchants anvil code to handle all custom enchantment logic,
+        I need to prevent the NMS anvil code from processing the EcoEnchants enchantments.
+
+        However, there's no API method that I can use to do this - **however**,
+        this method is called once in the NMS anvil code, and if it returns false then
+        the anvil will not allow this enchantment to be applied to the item.
+
+        So, I can check if the calling method is the anvil merge method, and if it is,
+        I can return false.
+
+         */
+
+        val caller = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).callerClass
+
+        if (caller.name == AnvilMenu::class.java.name) {
+            return false
+        }
+
+        // End disgusting bodge
+
         val item = CraftItemStack.asCraftMirror(stack)
         return enchant?.canEnchantItem(item) ?: false
     }
