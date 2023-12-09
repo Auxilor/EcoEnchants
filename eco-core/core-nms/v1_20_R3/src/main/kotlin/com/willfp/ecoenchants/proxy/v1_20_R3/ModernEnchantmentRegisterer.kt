@@ -77,7 +77,11 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
 
         // Unfreeze NMS registry
         frozenField.set(BuiltInRegistries.ENCHANTMENT, false)
-        unregisteredIntrusiveHoldersField.set(BuiltInRegistries.ENCHANTMENT, IdentityHashMap<Enchantment, Holder.Reference<Enchantment>>())
+        unregisteredIntrusiveHoldersField.set(
+            BuiltInRegistries.ENCHANTMENT,
+            IdentityHashMap<net.minecraft.world.item.enchantment.Enchantment,
+                    Holder.Reference<net.minecraft.world.item.enchantment.Enchantment>>()
+        )
     }
 
     override fun register(enchant: EcoEnchantBase): Enchantment {
