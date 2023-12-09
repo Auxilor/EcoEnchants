@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.proxy.v1_20_R3
 
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.ModifiedVanillaCraftEnchantment
@@ -79,7 +80,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         unregisteredIntrusiveHoldersField.set(BuiltInRegistries.ENCHANTMENT, IdentityHashMap<Enchantment, Holder.Reference<Enchantment>>())
     }
 
-    override fun register(enchant: EcoEnchant): Enchantment {
+    override fun register(enchant: EcoEnchantBase): Enchantment {
         if (BuiltInRegistries.ENCHANTMENT.containsKey(CraftNamespacedKey.toMinecraft(enchant.enchantmentKey))) {
             val nms = BuiltInRegistries.ENCHANTMENT[CraftNamespacedKey.toMinecraft(enchant.enchantmentKey)]
 
@@ -96,7 +97,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     }
 
 
-    override fun unregister(enchant: EcoEnchant) {
+    override fun unregister(enchant: EcoEnchantBase) {
         /*
 
         You can't unregister from a minecraft registry, so we simply leave the stale reference there.

@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.proxy.v1_20_R3.registration
 import com.willfp.eco.util.toComponent
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import io.papermc.paper.enchantments.EnchantmentRarity
 import net.kyori.adventure.text.Component
 import net.minecraft.world.item.enchantment.Enchantment
@@ -14,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.Objects
 
 class EcoEnchantsCraftEnchantment(
-    private val enchant: EcoEnchant,
+    private val enchant: EcoEnchantBase,
     nmsEnchantment: Enchantment
 ) : CraftEnchantment(enchant.enchantmentKey, nmsEnchantment), EcoEnchant by enchant {
     init {

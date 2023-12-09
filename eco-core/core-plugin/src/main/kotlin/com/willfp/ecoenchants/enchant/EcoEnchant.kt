@@ -14,11 +14,6 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     val enchantmentKey: NamespacedKey
 
     /**
-     * The enchantment.
-     */
-    override var enchantment: Enchantment
-
-    /**
      * If this enchantment conflicts with all other enchantments.
      */
     val conflictsWithEverything: Boolean

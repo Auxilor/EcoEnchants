@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchant.registration.legacy
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.wrap
 import io.papermc.paper.enchantments.EnchantmentRarity
 import net.kyori.adventure.text.Component
@@ -14,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 
 @Suppress("DEPRECATION")
 class LegacyDelegatedEnchantment(
-    private val enchant: EcoEnchant
+    private val enchant: EcoEnchantBase
 ) : Enchantment(enchant.enchantmentKey), EcoEnchant by enchant {
     init {
         enchant.enchantment = this

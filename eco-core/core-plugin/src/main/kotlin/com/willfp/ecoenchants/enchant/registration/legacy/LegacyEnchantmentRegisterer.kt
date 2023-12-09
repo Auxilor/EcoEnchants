@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchant.registration.legacy
 
-import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
@@ -36,7 +36,7 @@ object LegacyEnchantmentRegisterer : EnchantmentRegisterer {
         Enchantment.registerEnchantment(enchantment)
     }
 
-    override fun register(enchant: EcoEnchant): Enchantment {
+    override fun register(enchant: EcoEnchantBase): Enchantment {
         val enchantment = LegacyDelegatedEnchantment(enchant)
 
         Enchantment.registerEnchantment(enchantment)
@@ -44,7 +44,7 @@ object LegacyEnchantmentRegisterer : EnchantmentRegisterer {
         return enchantment
     }
 
-    override fun unregister(enchant: EcoEnchant) {
+    override fun unregister(enchant: EcoEnchantBase) {
         Enchantment::class.java.getDeclaredField("byKey")
             .apply {
                 isAccessible = true
