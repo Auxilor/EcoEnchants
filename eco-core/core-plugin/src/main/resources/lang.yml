@@ -4,7 +4,7 @@ messages:
   not-player: "&cThis command must be run by a player"
   invalid-command: "&cUnknown subcommand!"
   reloaded: "Reloaded!"
-  reloaded-1203: "Reloaded! If you have removed enchantments, you must restart your server for the changes to take effect."
+  reloaded-1203: "Reloaded! You might need to restart your server if you have removed enchantments."
   invalid-player: "&cInvalid Player!"
   requires-player: "&cRequires a Player!"
   enabled-descriptions: "&fYou have successfully &aenabled &fenchantment descriptions!"

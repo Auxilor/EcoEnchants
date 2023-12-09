@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.proxy.v1_20_R3
 
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
-import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.DelegatedCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.ModifiedVanillaCraftEnchantment
@@ -11,6 +10,7 @@ import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
+import net.minecraft.world.item.enchantment.Enchantments
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_20_R3.CraftRegistry
 import org.bukkit.craftbukkit.v1_20_R3.CraftServer
@@ -30,19 +30,31 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         .get(Bukkit.getServer())
             as HashMap<Class<*>, org.bukkit.Registry<*>>
 
+    private val vanillaEnchantments = Enchantments::class.java
+        .declaredFields
+        .filter { it.type == net.minecraft.world.item.enchantment.Enchantment::class.java }
+        .map { it.get(null) as net.minecraft.world.item.enchantment.Enchantment }
+        .mapNotNull { BuiltInRegistries.ENCHANTMENT.getKey(it) }
+        .map { CraftNamespacedKey.fromMinecraft(it) }
+        .toSet()
+
     override fun replaceRegistry() {
         val server = Bukkit.getServer() as CraftServer
 
+        @Suppress("UNCHECKED_CAST")
         registries[Enchantment::class.java] = CraftRegistry(
-            Enchantment::class.java,
+            Enchantment::class.java as Class<in Enchantment?>,
             server.handle.server.registryAccess().registryOrThrow(Registries.ENCHANTMENT)
         ) { key, registry ->
-            val enchant = EcoEnchants.getByID(key.key)
+            val isVanilla = vanillaEnchantments.contains(key)
+            val eco = EcoEnchants.getByID(key.key)
 
-            if (enchant == null) {
+            if (isVanilla) {
                 ModifiedVanillaCraftEnchantment(key, registry)
+            } else if (eco != null) {
+                eco as Enchantment
             } else {
-                enchant as Enchantment
+                null
             }
         }
     }

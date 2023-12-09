@@ -106,6 +106,11 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             legacyRegisterVanillaEnchantmentData(this)
         }
 
+        // Replace registry on reload to manage some enchantment removal logic
+        if (Prerequisite.HAS_1_20_3.isMet) {
+            this.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        }
+
         DisplayCache.reload()
         EnchantSorter.reload(this)
         ExtraItemSupport.reload(this)
