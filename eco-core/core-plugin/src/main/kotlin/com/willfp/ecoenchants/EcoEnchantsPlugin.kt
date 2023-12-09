@@ -64,7 +64,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         plugin = this
 
         if (Prerequisite.HAS_1_20_3.isMet) {
-            this.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+            plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
         }
     }
 
@@ -104,11 +104,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleReload() {
         if (!Prerequisite.HAS_1_20_3.isMet) {
             legacyRegisterVanillaEnchantmentData(this)
-        }
-
-        // Replace registry on reload to manage some enchantment removal logic
-        if (Prerequisite.HAS_1_20_3.isMet) {
-            this.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
         }
 
         DisplayCache.reload()

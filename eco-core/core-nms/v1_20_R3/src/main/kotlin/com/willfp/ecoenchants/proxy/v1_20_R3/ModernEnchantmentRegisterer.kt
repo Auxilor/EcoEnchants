@@ -6,6 +6,7 @@ import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegis
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_20_R3.registration.VanillaEcoEnchantsEnchantment
+import com.willfp.ecoenchants.setStaticFinal
 import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
@@ -49,7 +50,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         val server = Bukkit.getServer() as CraftServer
 
         @Suppress("UNCHECKED_CAST")
-        registries[Enchantment::class.java] = CraftRegistry(
+        val registry = CraftRegistry(
             Enchantment::class.java as Class<in Enchantment?>,
             server.handle.server.registryAccess().registryOrThrow(Registries.ENCHANTMENT)
         ) { key, registry ->
@@ -64,33 +65,42 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
                 null
             }
         }
+
+        // Register to server
+        registries[Enchantment::class.java] = registry
+
+        // Register to API
+        org.bukkit.Registry::class.java
+            .getDeclaredField("ENCHANTMENT")
+            .setStaticFinal(registry)
+
+        // Unfreeze NMS registry
+        frozenField.set(BuiltInRegistries.ENCHANTMENT, false)
+        unregisteredIntrusiveHoldersField.set(BuiltInRegistries.ENCHANTMENT, IdentityHashMap<Enchantment, Holder.Reference<Enchantment>>())
     }
 
     override fun register(enchant: EcoEnchant): Enchantment {
         if (BuiltInRegistries.ENCHANTMENT.containsKey(CraftNamespacedKey.toMinecraft(enchant.enchantmentKey))) {
-            return org.bukkit.Registry.ENCHANTMENT.get(enchant.enchantmentKey)!!
+            val nms = BuiltInRegistries.ENCHANTMENT[CraftNamespacedKey.toMinecraft(enchant.enchantmentKey)]
+
+            if (nms != null) {
+                return EcoEnchantsCraftEnchantment(enchant, nms)
+            } else {
+                throw IllegalStateException("Enchantment ${enchant.id} wasn't registered")
+            }
         }
 
-        // Unfreeze registry
-        unfreeze(BuiltInRegistries.ENCHANTMENT)
+        Registry.register(BuiltInRegistries.ENCHANTMENT, enchant.id, VanillaEcoEnchantsEnchantment(enchant.id))
 
-        val nms = VanillaEcoEnchantsEnchantment(enchant.id)
-
-        Registry.register(BuiltInRegistries.ENCHANTMENT, enchant.id, nms)
-
-        return EcoEnchantsCraftEnchantment(enchant, nms)
+        return register(enchant)
     }
 
-    private fun <T> unfreeze(registry: Registry<T>) {
-        frozenField.set(registry, false)
-        unregisteredIntrusiveHoldersField.set(registry, IdentityHashMap<T, Holder.Reference<T>>())
-    }
 
     override fun unregister(enchant: EcoEnchant) {
         /*
 
         You can't unregister from a minecraft registry, so we simply leave the stale reference there.
-        This shouldn't cause many issues in production because unregistered enchantments can't be accessed.
+        This shouldn't cause many issues in production as the bukkit registry is replaced on each reload.
 
          */
     }
