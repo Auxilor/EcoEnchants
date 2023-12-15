@@ -1,7 +1,12 @@
 package com.willfp.ecoenchants.proxy.v1_20_R3.registration
 
+import com.willfp.eco.core.Prerequisite
+import com.willfp.eco.util.toComponent
+import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import io.papermc.paper.adventure.PaperAdventure
+import net.minecraft.network.chat.Component
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EquipmentSlot
@@ -106,6 +111,15 @@ class VanillaEcoEnchantsEnchantment(
 
     override fun getSlotItems(entity: LivingEntity): MutableMap<EquipmentSlot, ItemStack> {
         return mutableMapOf()
+    }
+
+    override fun getFullname(level: Int): Component {
+        val enchant = this.enchant
+        return if (Prerequisite.HAS_PAPER.isMet && enchant != null) {
+            PaperAdventure.asVanilla(enchant.getFormattedName(level).toComponent())
+        } else {
+            super.getFullname(level)
+        }
     }
 
     override fun toString(): String {
