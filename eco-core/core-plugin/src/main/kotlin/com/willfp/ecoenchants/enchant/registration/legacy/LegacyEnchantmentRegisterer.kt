@@ -36,6 +36,13 @@ object LegacyEnchantmentRegisterer : EnchantmentRegisterer {
     }
 
     override fun register(enchant: EcoEnchantBase): Enchantment {
+        // Allow registering new enchantments
+        Enchantment::class.java.getDeclaredField("acceptingNew")
+            .apply {
+                isAccessible = true
+                set(null, true)
+            }
+
         val enchantment = LegacyDelegatedEnchantment(enchant)
 
         Enchantment.registerEnchantment(enchantment)
