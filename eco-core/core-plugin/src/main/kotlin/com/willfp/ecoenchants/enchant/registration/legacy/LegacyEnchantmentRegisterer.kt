@@ -8,19 +8,17 @@ import org.bukkit.enchantments.Enchantment
 
 @Suppress("UNCHECKED_CAST")
 object LegacyEnchantmentRegisterer : EnchantmentRegisterer {
-    init {
+    /**
+     * Register an enchantment to bukkit (for replacing vanilla CraftEnchantments)
+     */
+    fun registerToBukkit(enchantment: Enchantment) {
         // Allow registering new enchantments
         Enchantment::class.java.getDeclaredField("acceptingNew")
             .apply {
                 isAccessible = true
                 set(null, true)
             }
-    }
 
-    /**
-     * Register an enchantment to bukkit (for replacing vanilla CraftEnchantments)
-     */
-    fun registerToBukkit(enchantment: Enchantment) {
         Enchantment::class.java.getDeclaredField("byKey")
             .apply {
                 isAccessible = true
