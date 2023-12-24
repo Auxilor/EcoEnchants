@@ -95,7 +95,8 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         )
 
         for (enchantment in hardcodedEnchantments) {
-            if (enchantment.isPresent) {
+            // Only register if not already registered (so hardcode can be overridden)
+            if (enchantment.isPresent && registry[enchantment.id] == null) {
                 doRegister(plugin, enchantment)
             }
         }

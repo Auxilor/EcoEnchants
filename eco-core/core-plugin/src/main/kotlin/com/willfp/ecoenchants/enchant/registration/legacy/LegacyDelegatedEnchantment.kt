@@ -21,6 +21,14 @@ class LegacyDelegatedEnchantment(
         enchant.enchantment = this
     }
 
+    override fun onRegister() {
+        enchant.onRegister()
+    }
+
+    override fun onRemove() {
+        enchant.onRemove()
+    }
+
     override fun translationKey(): String {
         return "ecoenchants:enchantment.$id"
     }
@@ -89,4 +97,12 @@ class LegacyDelegatedEnchantment(
         replaceWith = ReplaceWith("this.slots")
     )
     override fun getActiveSlots() = emptySet<EquipmentSlot>()
+
+    override fun equals(other: Any?): Boolean {
+        return other is EcoEnchant && this.enchantmentKey == other.enchantmentKey
+    }
+
+    override fun hashCode(): Int {
+        return this.enchantmentKey.hashCode()
+    }
 }

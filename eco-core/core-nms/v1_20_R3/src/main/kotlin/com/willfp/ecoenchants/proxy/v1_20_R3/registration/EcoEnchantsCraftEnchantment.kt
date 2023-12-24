@@ -22,6 +22,14 @@ class EcoEnchantsCraftEnchantment(
         enchant.enchantment = this
     }
 
+    override fun onRegister() {
+        enchant.onRegister()
+    }
+
+    override fun onRemove() {
+        enchant.onRemove()
+    }
+
     override fun canEnchantItem(item: ItemStack): Boolean {
         return enchant.canEnchantItem(item)
     }
@@ -105,12 +113,11 @@ class EcoEnchantsCraftEnchantment(
     override fun getActiveSlots() = emptySet<EquipmentSlot>()
 
     override fun equals(other: Any?): Boolean {
-        return other is EcoEnchantsCraftEnchantment &&
-                other.key == this.key
+        return other is EcoEnchant && this.enchantmentKey == other.enchantmentKey
     }
 
     override fun hashCode(): Int {
-        return Objects.hash(this.key)
+        return this.enchantmentKey.hashCode()
     }
 
     override fun toString(): String {

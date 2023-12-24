@@ -126,4 +126,12 @@ abstract class EcoEnchantBase(
     override fun conflictsWithDirectly(other: Enchantment): Boolean {
         return other.key.key in conflictIds
     }
+
+    final override fun equals(other: Any?): Boolean {
+        return other is EcoEnchant && this.enchantmentKey == other.enchantmentKey
+    }
+
+    final override fun hashCode(): Int {
+        return this.enchantmentKey.hashCode()
+    }
 }
