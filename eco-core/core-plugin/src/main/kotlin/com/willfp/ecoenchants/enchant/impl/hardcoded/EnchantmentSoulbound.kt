@@ -11,8 +11,7 @@ import com.willfp.eco.core.items.Items
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
-import com.willfp.ecoenchants.target.EnchantLookup.getActiveEnchantLevelInSlot
-import com.willfp.ecoenchants.target.EnchantLookup.hasEnchantActive
+import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -20,7 +19,6 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerRespawnEvent
-import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 class EnchantmentSoulbound(
@@ -61,25 +59,7 @@ class EnchantmentSoulbound(
             }
 
             val player = event.entity
-            val items = mutableListOf<ItemStack>()
-
-            if (!player.hasEnchantActive(enchant)) {
-                return
-            }
-
-            for ((slot, item) in player.inventory.withIndex()) {
-                if (item == null) {
-                    continue
-                }
-
-                val level = player.getActiveEnchantLevelInSlot(enchant, slot)
-
-                if (level == 0) {
-                    continue
-                }
-
-                items.add(item)
-            }
+            val items = player.getItemsWithEnchantActive(enchant).keys
 
             if (items.isEmpty()) {
                 return

@@ -32,15 +32,15 @@ import com.willfp.ecoenchants.mechanics.ExtraItemSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
-import com.willfp.ecoenchants.target.EnchantLookup.clearEnchantCache
-import com.willfp.ecoenchants.target.EnchantLookup.heldEnchantLevels
+import com.willfp.ecoenchants.target.EnchantFinder
+import com.willfp.ecoenchants.target.EnchantFinder.clearEnchantmentCache
 import com.willfp.libreforge.NamedValue
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderPlaceholderProvider
-import com.willfp.libreforge.registerSpecificHolderProvider
+import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerSpecificRefreshFunction
-import org.bukkit.entity.Player
+import org.bukkit.entity.LivingEntity
 import org.bukkit.event.Listener
 
 internal lateinit var plugin: EcoEnchantsPlugin
@@ -75,12 +75,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleEnable() {
-        registerSpecificHolderProvider<Player> {
-            it.heldEnchantLevels
-        }
+        registerHolderProvider(EnchantFinder.toHolderProvider())
 
-        registerSpecificRefreshFunction<Player> {
-            it.clearEnchantCache()
+        registerSpecificRefreshFunction<LivingEntity> {
+            it.clearEnchantmentCache()
         }
 
         registerHolderPlaceholderProvider<FoundEcoEnchantLevel> { it, _ ->
