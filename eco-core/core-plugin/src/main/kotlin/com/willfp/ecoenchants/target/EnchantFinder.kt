@@ -14,7 +14,6 @@ import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
-    private val provider = this.toHolderProvider()
     private val levelCache = Caffeine.newBuilder()
         .expireAfterWrite(1, TimeUnit.SECONDS)
         .build<UUID, List<ProvidedLevel>>()
