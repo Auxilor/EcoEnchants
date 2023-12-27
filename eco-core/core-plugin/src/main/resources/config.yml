@@ -167,9 +167,3 @@ enchant-gui:
 lore-conversion:
   enabled: false # If lore conversion should be enabled
   aggressive: false # Will convert all items in all inventories when opened, likely to use a lot of performance
-
-# Extra placeholders for enchantment configs
-extra-placeholders:
-  # Enable or disable %active_level% placeholder.
-  # It's disabled by default to save CPU time, enable if you want to use it.
-  active-level: false

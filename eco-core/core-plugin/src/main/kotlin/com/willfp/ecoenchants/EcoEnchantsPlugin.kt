@@ -17,7 +17,6 @@ import com.willfp.ecoenchants.display.EnchantSorter
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
-import com.willfp.ecoenchants.enchant.FoundEcoEnchantLevel
 import com.willfp.ecoenchants.enchant.LoreConversion
 import com.willfp.ecoenchants.enchant.legacyRegisterVanillaEnchantmentData
 import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
@@ -79,13 +78,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
         registerSpecificRefreshFunction<LivingEntity> {
             it.clearEnchantmentCache()
-        }
-
-        registerHolderPlaceholderProvider<FoundEcoEnchantLevel> { it, _ ->
-            listOf(
-                NamedValue("level", it.level.level),
-                NamedValue("active_level", it.activeLevel)
-            )
         }
 
         registerHolderPlaceholderProvider<EcoEnchantLevel> { it, _ ->
