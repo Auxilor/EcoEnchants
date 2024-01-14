@@ -24,6 +24,8 @@ import org.bukkit.ChatColor
 object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
 
+    override val shouldPreload = true
+
     override fun clear(plugin: LibreforgePlugin) {
         plugin as EcoEnchantsPlugin
 
@@ -54,6 +56,26 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
 
         sendPrompts(plugin)
         registerHardcodedEnchantments(plugin)
+    }
+
+    override fun acceptPreloadConfig(plugin: LibreforgePlugin, id: String, config: Config) {
+        plugin as EcoEnchantsPlugin
+
+        if (!config.has("effects")) {
+            return
+        }
+
+        try {
+            val enchant = LibreforgeEcoEnchant(
+                id,
+                config,
+                plugin
+            )
+
+            doRegister(plugin, enchant)
+        } catch (e: MissingDependencyException) {
+            // Ignore missing dependencies for preloaded enchants
+        }
     }
 
     override fun acceptConfig(plugin: LibreforgePlugin, id: String, config: Config) {
