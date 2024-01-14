@@ -23,7 +23,10 @@ class EcoEnchantsCraftEnchantment(
     }
 
     override fun onRegister() {
-        enchant.onRegister()
+        // Fix for hardcoded enchantments
+        if (plugin.isLoaded) {
+            enchant.onRegister()
+        }
     }
 
     override fun onRemove() {

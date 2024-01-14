@@ -1,10 +1,7 @@
 package com.willfp.ecoenchants.enchant.impl
 
 import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.placeholder.PlayerlessPlaceholder
-import com.willfp.eco.core.placeholder.context.PlaceholderContext
-import com.willfp.eco.core.placeholder.templates.SimpleInjectablePlaceholder
 import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
@@ -15,6 +12,7 @@ import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.libreforge.SilentViolationContext
 import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.Conditions
 import org.bukkit.Bukkit
@@ -68,7 +66,7 @@ abstract class EcoEnchantBase(
 
     override val conditions = Conditions.compile(
         config.getSubsections("conditions"),
-        context.with("conditions")
+        if (plugin.isLoaded) context.with("conditions") else SilentViolationContext
     )
 
     override val isObtainableThroughEnchanting = config.getBool("enchantable")
