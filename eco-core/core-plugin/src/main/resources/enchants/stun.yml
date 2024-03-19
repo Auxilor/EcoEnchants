@@ -1,5 +1,5 @@
 display-name: "Stun"
-description: "Gives a &a%placeholder%%&r chance to stun attacked mobs for &a1&r second"
+description: "Gives a &a%placeholder%%&r chance to stun attacked mobs for &a2&r seconds"
 placeholder: "2.5 + 2.5 * %level%"
 type: normal
 
@@ -20,6 +20,7 @@ effects:
   - id: strip_ai
     args:
       duration: 40
+      chance: "2.5 + 2.5 * %level%"
     triggers:
       - melee_attack
       - bow_attack
