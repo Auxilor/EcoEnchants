@@ -34,7 +34,7 @@ object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
     }
 
     override fun isValidInSlot(holder: EcoEnchantLevel, slot: SlotType): Boolean {
-        return slot in holder.enchant.targets.map { it.slot }
+        return holder.enchant.targets.map { it.slot }.any { it.isOrContains(slot) }
     }
 
     internal fun LivingEntity.clearEnchantmentCache() = levelCache.invalidate(this.uniqueId)
