@@ -4,6 +4,7 @@ import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
 import com.willfp.eco.core.integrations.IntegrationLoader
+import com.willfp.eco.core.packet.PacketListener
 import com.willfp.ecoenchants.commands.CommandEcoEnchants
 import com.willfp.ecoenchants.commands.CommandEnchant
 import com.willfp.ecoenchants.commands.CommandEnchantInfo
@@ -65,6 +66,13 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         if (Prerequisite.HAS_1_20_3.isMet) {
             plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
         }
+
+        if (Prerequisite.HAS_1_20_5.isMet) {
+            if (!this.configYml.getBool("enable-1-20-6")) {
+                throw IllegalStateException("EcoEnchants should not be ran in production on 1.20.6. " +
+                        "If this is a development environment, please set 'enable-1-20-6' to true in config.yml. ")
+            }
+        }
     }
 
     override fun loadConfigCategories(): List<ConfigCategory> {
@@ -84,6 +92,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             listOf(
                 NamedValue("level", it.level),
             )
+        }
+
+        if (Prerequisite.HAS_1_20_5.isMet) {
+            getProxy(CodecReplacerProxy::class.java).replaceItemCodec()
         }
     }
 

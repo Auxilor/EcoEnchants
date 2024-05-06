@@ -3,7 +3,7 @@ plugins {
     `java-library`
     `maven-publish`
     kotlin("jvm") version "1.9.20"
-    id("com.github.johnrengelman.shadow") version "8.0.0"
+    id("io.github.goooler.shadow") version "8.1.7"
     id("com.willfp.libreforge-gradle-plugin") version "1.0.0"
 }
 
@@ -26,13 +26,14 @@ dependencies {
     implementation(project(":eco-core:core-nms:v1_20_R1"))
     implementation(project(":eco-core:core-nms:v1_20_R2"))
     implementation(project(":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_20_6", configuration = "reobf"))
 }
 
 allprojects {
     apply(plugin = "java")
     apply(plugin = "kotlin")
     apply(plugin = "maven-publish")
-    apply(plugin = "com.github.johnrengelman.shadow")
+    apply(plugin = "io.github.goooler.shadow")
 
     repositories {
         mavenLocal()
@@ -47,15 +48,10 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("com.willfp:eco:6.67.1")
+        compileOnly("com.willfp:eco:6.70.0")
         compileOnly("org.jetbrains:annotations:23.0.0")
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.1.5")
-    }
-
-    java {
-        withSourcesJar()
-        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
     }
 
     tasks {
@@ -67,6 +63,12 @@ allprojects {
             kotlinOptions {
                 jvmTarget = "17"
             }
+        }
+
+        java {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+            withSourcesJar()
         }
 
         compileJava {
@@ -90,4 +92,11 @@ allprojects {
             dependsOn(shadowJar)
         }
     }
+}
+
+// Root is Java 21 to support 1.20.6+, rest use Java 17
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
 }

@@ -18,6 +18,7 @@ import com.willfp.eco.core.gui.slot.Slot
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.core.items.builder.ItemStackBuilder
+import com.willfp.eco.core.items.isEcoEmpty
 import com.willfp.eco.core.items.isEmpty
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
@@ -72,7 +73,7 @@ object EnchantGUI {
 
             onRender { player, menu ->
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
-                if (atCaptive.isEmpty || atCaptive == null || atCaptive.type == Material.BOOK) {
+                if (atCaptive.isEcoEmpty || atCaptive == null || atCaptive.type == Material.BOOK) {
                     menu.setState(player, "enchants", EcoEnchants.values().map { it.enchantment }.sortForDisplay())
                 } else {
                     menu.setState(

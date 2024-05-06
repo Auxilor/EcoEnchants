@@ -122,7 +122,7 @@ abstract class EcoEnchantBase(
     protected abstract fun createLevel(level: Int): EcoEnchantLevel
 
     override fun conflictsWithDirectly(other: Enchantment): Boolean {
-        return other.key.key in conflictIds
+        return other.key.key in conflictIds || this.conflictsWithEverything
     }
 
     final override fun equals(other: Any?): Boolean {
