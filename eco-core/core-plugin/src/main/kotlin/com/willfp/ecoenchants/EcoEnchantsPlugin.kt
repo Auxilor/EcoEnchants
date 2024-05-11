@@ -40,6 +40,7 @@ import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderPlaceholderProvider
 import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerSpecificRefreshFunction
+import org.bukkit.Bukkit
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.Listener
 
@@ -65,13 +66,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
         if (Prerequisite.HAS_1_20_3.isMet) {
             plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
-        }
-
-        if (Prerequisite.HAS_1_20_5.isMet) {
-            if (!this.configYml.getBool("enable-1-20-6")) {
-                throw IllegalStateException("EcoEnchants should not be ran in production on 1.20.6. " +
-                        "If this is a development environment, please set 'enable-1-20-6' to true in config.yml. ")
-            }
         }
     }
 
@@ -101,6 +95,16 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
     override fun handleAfterLoad() {
         isLoaded = true
+
+        // Run in afterLoad to prevent items from having their enchantments deleted
+        if (Prerequisite.HAS_1_20_5.isMet) {
+            if (!this.configYml.getBool("enable-1-20-6")) {
+                Bukkit.getPluginManager().disablePlugin(this)
+
+                throw IllegalStateException("EcoEnchants should not be ran in production on 1.20.6. " +
+                        "If this is a development environment, please set 'enable-1-20-6' to true in config.yml. ")
+            }
+        }
     }
 
     override fun handleReload() {
