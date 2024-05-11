@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION", "KotlinRedundantDiagnosticSuppress")
+
 package com.willfp.ecoenchants
 
 import sun.misc.Unsafe
