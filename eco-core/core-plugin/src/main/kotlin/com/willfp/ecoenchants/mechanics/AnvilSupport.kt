@@ -223,7 +223,7 @@ class AnvilSupport(
          *      Can't combine items to bypass max level
          *      Can't apply over-level enchantment to left item
          */
-        if(plugin.configYml.getBool("anvil.allow-apply-over-level-enchantment")){
+        if(!plugin.configYml.getBool("anvil.allow-apply-over-level-enchantment")){
             for((enchant, level) in rightEnchants){
                 if(outEnchants.containsKey(enchant)){
                     //  If both item have same enchantments
