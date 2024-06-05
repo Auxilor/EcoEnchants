@@ -215,19 +215,75 @@ class AnvilSupport(
 
         val outEnchants = leftEnchants.toMutableMap()
 
-        for ((enchant, level) in rightEnchants) {
-            if (outEnchants.containsKey(enchant)) {
-                val currentLevel = outEnchants[enchant]!!
-                outEnchants[enchant] = if (level == currentLevel) {
-                    min(enchant.maxLevel, level + 1)
-                } else {
-                    max(level, currentLevel)
+
+        /**
+         *      Edited by TiaTheFairy
+         *      Refer to config.yml  anvil  allow-apply-over-level-enchantment
+         *
+         *      Can't combine items to bypass max level
+         *      Can't apply over-level enchantment to left item
+         */
+        if(plugin.configYml.getBool("anvil.allow-apply-over-level-enchantment")){
+            for((enchant, level) in rightEnchants){
+                if(outEnchants.containsKey(enchant)){
+                    //  If both item have same enchantments
+                    //  Decide level up or use one of them
+
+                    val currentLevel = outEnchants[enchant]!!
+
+                    outEnchants[enchant] = if(level == currentLevel){
+                        //  If both have same level,
+                        //  level up by one if not reach max level
+                        //  or return the max level
+                        min(enchant.maxLevel, level + 1)
+                    }
+                    else{
+                        if(level > currentLevel){
+                            //  If right item has higher level
+                            //  level up to right if not reach max level
+                            //  or return the max level
+                            min(enchant.maxLevel, level)
+                        }
+                        else{
+                            //  If left item has higher level
+                            //  does not change the left item level
+                            currentLevel
+                        }
+                    }
                 }
-            } else {
-                // Running .wrap() to use EcoEnchantLike canEnchantItem logic
-                if (enchant.wrap().canEnchantItem(left)) {
-                    if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
-                        outEnchants[enchant] = level
+                else{
+                    //  If right item has new enchantment
+                    //  Apply it on left item, or level down it first
+
+                    if(enchant.wrap().canEnchantItem(left)){
+                        if(outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+                            outEnchants[enchant] = min(enchant.maxLevel, level)
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            /**
+             *      EcoEnchant's combining rule
+             *      Can't combine items to bypass max level
+             *      But can apply over-level enchantment to left-item
+             */
+
+            for ((enchant, level) in rightEnchants) {
+                if (outEnchants.containsKey(enchant)) {
+                    val currentLevel = outEnchants[enchant]!!
+                    outEnchants[enchant] = if (level == currentLevel) {
+                        min(enchant.maxLevel, level + 1)
+                    } else {
+                        max(level, currentLevel)
+                    }
+                } else {
+                    // Running .wrap() to use EcoEnchantLike canEnchantItem logic
+                    if (enchant.wrap().canEnchantItem(left)) {
+                        if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+                            outEnchants[enchant] = level
+                        }
                     }
                 }
             }

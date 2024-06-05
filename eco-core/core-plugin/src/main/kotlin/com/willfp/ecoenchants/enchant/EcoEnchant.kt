@@ -67,7 +67,25 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * Get if this enchantment conflicts with [other].
      */
+
+    /**
+     *      Edited by TiaTheFairy
+     *      Check if the enchantment is conflicting with everything
+     *      eg. One For All
+     */
     fun conflictsWith(other: Enchantment): Boolean {
+        /**
+         *      Check if the enchantment is conflicting with everything
+         *            eg. One For All
+         */
+        if(this.conflictsWithEverything){
+            return true
+        }
+        /**
+         *
+         */
+
+
         if (this.conflictsWithDirectly(other)) {
             return true
         }
