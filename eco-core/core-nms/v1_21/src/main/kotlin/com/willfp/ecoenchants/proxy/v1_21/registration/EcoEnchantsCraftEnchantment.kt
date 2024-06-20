@@ -37,6 +37,10 @@ class EcoEnchantsCraftEnchantment(
         return enchant.conflictsWith(other)
     }
 
+    @Deprecated(
+        message = "getName is a paper Spigot API",
+        replaceWith = ReplaceWith("this.displayName(level)")
+    )
     override fun translationKey(): String {
         return "ecoenchants:enchantment.$id"
     }

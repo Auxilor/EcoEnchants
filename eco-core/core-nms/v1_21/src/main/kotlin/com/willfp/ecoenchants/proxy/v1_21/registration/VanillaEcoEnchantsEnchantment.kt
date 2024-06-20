@@ -9,7 +9,7 @@ fun vanillaEcoEnchantsEnchantment(enchant: EcoEnchant): Enchantment {
     val enchantment = Enchantment.enchantment(
         Enchantment.definition(
             HolderSet.empty(),
-            0, // Weight is 0, so we can use our own rarity system
+            1, // 1.21 hardcodes a minimum weight of 1
             enchant.maximumLevel,
             Enchantment.constantCost(1),
             Enchantment.constantCost(1),

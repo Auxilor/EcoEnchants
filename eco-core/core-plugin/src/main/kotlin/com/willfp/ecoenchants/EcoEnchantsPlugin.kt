@@ -96,6 +96,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleAfterLoad() {
         isLoaded = true
 
+        if (Prerequisite.HAS_1_21.isMet) {
+            plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        }
+
         // Run in afterLoad to prevent items from having their enchantments deleted
         if (Prerequisite.HAS_1_20_5.isMet && !Prerequisite.HAS_1_21.isMet) {
             if (!this.configYml.getBool("enable-1-20-6")) {

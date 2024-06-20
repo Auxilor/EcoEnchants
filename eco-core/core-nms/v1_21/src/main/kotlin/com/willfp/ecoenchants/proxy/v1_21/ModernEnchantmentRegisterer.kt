@@ -7,9 +7,15 @@ import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegis
 import com.willfp.ecoenchants.proxy.v1_21.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21.registration.vanillaEcoEnchantsEnchantment
+import com.willfp.ecoenchants.setStaticFinal
+import io.papermc.paper.registry.PaperRegistryAccess
+import io.papermc.paper.registry.RegistryAccess
+import io.papermc.paper.registry.RegistryKey
+import io.papermc.paper.registry.WritableCraftRegistry
 import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
+import net.minecraft.core.RegistrySynchronization
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -20,11 +26,16 @@ import org.bukkit.craftbukkit.CraftRegistry
 import org.bukkit.craftbukkit.CraftServer
 import org.bukkit.craftbukkit.util.CraftNamespacedKey
 import org.bukkit.enchantments.Enchantment
+import java.util.HashMap
 import java.util.IdentityHashMap
 import java.util.function.BiFunction
 
-val enchantmentRegistry =
+private val enchantmentRegistry =
     (Bukkit.getServer() as CraftServer).server.registryAccess().registryOrThrow(Registries.ENCHANTMENT)
+
+@Suppress("DEPRECATION")
+private val bukkitRegistry =
+    org.bukkit.Registry.ENCHANTMENT
 
 class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     private val frozenField = MappedRegistry::class.java
@@ -37,12 +48,23 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         .last { it.type == Map::class.java }
         .apply { isAccessible = true }
 
-    private val minecraftToBukkit = CraftRegistry::class.java
+    private val minecraftToBukkit = bukkitRegistry::class.java
         .getDeclaredField("minecraftToBukkit")
         .apply { isAccessible = true }
 
+    // Paper has two minecraftToBukkit fields, one in CraftRegistry and one in WritableCraftRegistry
+    private val minecraftToBukkitAlt = CraftRegistry::class.java
+        .getDeclaredField("minecraftToBukkit")
+        .apply { isAccessible = true }
+
+    private val cache = CraftRegistry::class.java
+        .getDeclaredField("cache")
+        .apply { isAccessible = true }
+
+    @Suppress("UNCHECKED_CAST")
     private val vanillaEnchantments = Enchantments::class.java
         .declaredFields
+        .asSequence()
         .filter { it.type == ResourceKey::class.java }
         .map { it.get(null) as ResourceKey<net.minecraft.world.item.enchantment.Enchantment> }
         .map { it.location() }
@@ -65,8 +87,11 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             }
 
         // Update bukkit registry
-        @Suppress("DEPRECATION")
-        minecraftToBukkit.set(org.bukkit.Registry.ENCHANTMENT, newRegistryMTB)
+        minecraftToBukkit.set(bukkitRegistry, newRegistryMTB)
+        minecraftToBukkitAlt.set(bukkitRegistry, newRegistryMTB)
+
+        // Clear the enchantment cache
+        cache.set(bukkitRegistry, mutableMapOf<NamespacedKey, Enchantment>())
 
         // Unfreeze NMS registry
         frozenField.set(enchantmentRegistry, false)
@@ -78,6 +103,9 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     }
 
     override fun register(enchant: EcoEnchantBase): Enchantment {
+        // Clear the enchantment cache
+        cache.set(bukkitRegistry, mutableMapOf<NamespacedKey, Enchantment>())
+
         if (enchantmentRegistry.containsKey(CraftNamespacedKey.toMinecraft(enchant.enchantmentKey))) {
             val nms = enchantmentRegistry[CraftNamespacedKey.toMinecraft(enchant.enchantmentKey)]
 
@@ -88,10 +116,14 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             }
         }
 
+        val vanillaEnchantment = vanillaEcoEnchantsEnchantment(enchant)
+
+        enchantmentRegistry.createIntrusiveHolder(vanillaEnchantment)
+
         Registry.register(
             enchantmentRegistry,
             ResourceLocation.withDefaultNamespace(enchant.id),
-            vanillaEcoEnchantsEnchantment(enchant)
+            vanillaEnchantment
         )
 
         return register(enchant)
