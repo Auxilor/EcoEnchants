@@ -5,6 +5,7 @@ messages:
   invalid-command: "&cUnknown subcommand!"
   reloaded: "Reloaded!"
   reloaded-1203: "Reloaded! You might need to restart your server if you have removed enchantments."
+  reloaded-121: "Reloaded! Relog if you added enchantments or you will get kicked. Removing enchantments may require a server restart."
   invalid-player: "&cInvalid Player!"
   requires-player: "&cRequires a Player!"
   enabled-descriptions: "&fYou have successfully &aenabled &fenchantment descriptions!"
