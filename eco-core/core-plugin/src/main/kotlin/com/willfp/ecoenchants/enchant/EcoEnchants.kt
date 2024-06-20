@@ -19,6 +19,8 @@ import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.RegistrableCategory
 import org.bukkit.ChatColor
+import org.bukkit.NamespacedKey
+import org.bukkit.enchantments.Enchantment
 
 @Suppress("UNUSED")
 object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
