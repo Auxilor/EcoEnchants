@@ -13,20 +13,26 @@ class VanillaEcoEnchantLike(
     override val enchantment: Enchantment,
     override val plugin: EcoEnchantsPlugin
 ) : EcoEnchantLike {
-    override val config = plugin.vanillaEnchantsYml.getSubsection(enchantment.key.key)
+    private val section = if (enchantment.key.key == "sweeping_edge") {
+        "sweeping"
+    } else {
+        enchantment.key.key
+    }
+
+    override val config = plugin.vanillaEnchantsYml.getSubsection(section)
 
     override val maximumLevel
         get() = enchantment.maxLevel
 
     override val type: EnchantmentType =
-        EnchantmentTypes[plugin.vanillaEnchantsYml.getString("${enchantment.key.key}.type")]
+        EnchantmentTypes[plugin.vanillaEnchantsYml.getString("${section}.type")]
             ?: EnchantmentTypes.values().first()
 
     override val enchantmentRarity: EnchantmentRarity =
-        EnchantmentRarities[plugin.vanillaEnchantsYml.getString("${enchantment.key.key}.rarity")]
+        EnchantmentRarities[plugin.vanillaEnchantsYml.getString("${section}.rarity")]
             ?: EnchantmentRarities.values().first()
 
-    override val rawDisplayName = plugin.vanillaEnchantsYml.getString("${enchantment.key.key}.name")
+    override val rawDisplayName = plugin.vanillaEnchantsYml.getString("${section}.name")
 
     override fun equals(other: Any?): Boolean {
         if (other !is VanillaEcoEnchantLike) {
