@@ -74,6 +74,7 @@ class EnchantmentReplenish(
                         Material.POTATOES -> Material.POTATO
                         Material.CARROTS -> Material.CARROT
                         Material.BEETROOTS -> Material.BEETROOT_SEEDS
+                        Material.COCOA -> Material.COCOA_BEANS
                         else -> type
                     }
                 )
