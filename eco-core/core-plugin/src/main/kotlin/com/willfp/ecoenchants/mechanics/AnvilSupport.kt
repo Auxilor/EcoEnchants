@@ -39,10 +39,6 @@ interface OpenInventoryProxy {
     fun getOpenInventory(player: Player): Any
 }
 
-interface AnvilRepairCostProxy {
-    fun setMaxRepairCost(inventory: AnvilInventory, cost: Int)
-}
-
 @Suppress("DEPRECATION")
 class AnvilSupport(
     private val plugin: EcoPlugin

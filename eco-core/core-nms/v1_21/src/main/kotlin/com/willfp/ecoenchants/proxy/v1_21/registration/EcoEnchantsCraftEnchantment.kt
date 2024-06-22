@@ -38,7 +38,7 @@ class EcoEnchantsCraftEnchantment(
     }
 
     @Deprecated(
-        message = "getName is a paper Spigot API",
+        message = "EcoEnchants enchantments are not translatable",
         replaceWith = ReplaceWith("this.displayName(level)")
     )
     override fun translationKey(): String {
