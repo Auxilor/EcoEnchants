@@ -26,7 +26,6 @@ dependencies {
     implementation(project(":eco-core:core-nms:v1_20_R1"))
     implementation(project(":eco-core:core-nms:v1_20_R2"))
     implementation(project(":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_20_6", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21", configuration = "reobf"))
 }
 

@@ -167,11 +167,3 @@ enchant-gui:
 lore-conversion:
   enabled: false # If lore conversion should be enabled
   aggressive: false # Will convert all items in all inventories when opened, likely to use a lot of performance
-
-# DO NOT USE IN PRODUCTION!
-# EcoEnchants should not be run on 1.20.6 in production environments. This is for testing purposes only.
-# This will allow the plugin to run on 1.20.6, but it is not recommended.
-# Enabling this option may cause irreversible damage to your server and may corrupt all items.
-# If you want to use EcoEnchants on 1.20, please only run 1.20.4.
-# 1.21 will work as expected when it releases.
-enable-1-20-6: false

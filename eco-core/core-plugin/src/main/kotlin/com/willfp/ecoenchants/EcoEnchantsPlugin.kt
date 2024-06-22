@@ -87,10 +87,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
                 NamedValue("level", it.level),
             )
         }
-
-        if (Prerequisite.HAS_1_20_5.isMet && !Prerequisite.HAS_1_21.isMet) {
-            getProxy(CodecReplacerProxy::class.java).replaceItemCodec()
-        }
     }
 
     override fun handleAfterLoad() {
@@ -102,12 +98,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
         // Run in afterLoad to prevent items from having their enchantments deleted
         if (Prerequisite.HAS_1_20_5.isMet && !Prerequisite.HAS_1_21.isMet) {
-            if (!this.configYml.getBool("enable-1-20-6")) {
                 Bukkit.getPluginManager().disablePlugin(this)
 
-                throw IllegalStateException("EcoEnchants should not be ran in production on 1.20.6. " +
-                        "If this is a development environment, please set 'enable-1-20-6' to true in config.yml. ")
-            }
+                throw IllegalStateException("EcoEnchants does not support 1.20.6. Please update your server " +
+                        "or downgrade to 1.20.4.")
         }
     }
 
