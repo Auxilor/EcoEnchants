@@ -130,7 +130,16 @@ looting:
   type: normal
   rarity: rare
 
+# Pre-1.21
 sweeping:
+  name: "Sweeping Edge"
+  description: "Increases sweeping attack damage by &a%placeholder%%"
+  placeholder: "%level% / (%level% + 1)"
+  type: normal
+  rarity: rare
+
+# 1.21+
+sweeping_edge:
   name: "Sweeping Edge"
   description: "Increases sweeping attack damage by &a%placeholder%%"
   placeholder: "%level% / (%level% + 1)"

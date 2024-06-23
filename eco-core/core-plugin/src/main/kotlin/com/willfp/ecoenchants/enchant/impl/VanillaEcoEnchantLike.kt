@@ -13,11 +13,7 @@ class VanillaEcoEnchantLike(
     override val enchantment: Enchantment,
     override val plugin: EcoEnchantsPlugin
 ) : EcoEnchantLike {
-    private val section = if (enchantment.key.key == "sweeping_edge") {
-        "sweeping"
-    } else {
-        enchantment.key.key
-    }
+    private val section = enchantment.key.key
 
     override val config = plugin.vanillaEnchantsYml.getSubsection(section)
 

@@ -7,13 +7,7 @@ import org.bukkit.enchantments.Enchantment
 
 val Enchantment.vanillaEnchantmentData: VanillaEnchantmentData?
     get() {
-        val configKey = if (key.key == "sweeping_edge") {
-            "sweeping"
-        } else {
-            key.key
-        }
-
-        val vanilla = plugin.vanillaEnchantsYml.getSubsectionOrNull(configKey) ?: return null
+        val vanilla = plugin.vanillaEnchantsYml.getSubsectionOrNull(key.key) ?: return null
 
         return VanillaEnchantmentData(
             vanilla.getIntOrNull("max-level"),
@@ -37,18 +31,12 @@ private val enchantmentOptions = arrayOf(
 
 fun legacyRegisterVanillaEnchantmentData(plugin: EcoEnchantsPlugin) {
     for (vanilla in plugin.vanillaEnchantsYml.getKeys(false)) {
-        val key = if (vanilla == "sweeping_edge") {
-            "sweeping"
-        } else {
-            vanilla
-        }
-
-        if (enchantmentOptions.any { plugin.vanillaEnchantsYml.has("$key.$it") }) {
+        if (enchantmentOptions.any { plugin.vanillaEnchantsYml.has("$vanilla.$it") }) {
             plugin.getProxy(EcoCraftEnchantmentManagerProxy::class.java).registerNewCraftEnchantment(
                 Enchantment.getByKey(NamespacedKey.minecraft(vanilla))!!,
                 VanillaEnchantmentData(
-                    plugin.vanillaEnchantsYml.getIntOrNull("$key.max-level"),
-                    plugin.vanillaEnchantsYml.getStringsOrNull("$key.conflicts")
+                    plugin.vanillaEnchantsYml.getIntOrNull("$vanilla.max-level"),
+                    plugin.vanillaEnchantsYml.getStringsOrNull("$vanilla.conflicts")
                         ?.map { NamespacedKey.minecraft(it) }
                 )
             )
