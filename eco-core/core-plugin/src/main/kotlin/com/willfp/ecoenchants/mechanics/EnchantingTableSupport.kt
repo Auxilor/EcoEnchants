@@ -134,8 +134,8 @@ class EnchantingTableSupport(
                 cost / maxObtainableLevel.toDouble()
             }
 
-            val levelPart2 = NumberUtils.bias(levelPart1, enchantment.type.highLevelBias)
-            val levelPart3 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart2)
+            val levelPart2 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart1)
+            val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
             multiplier /= this.plugin.configYml.getDouble("enchanting-table.reduction")
