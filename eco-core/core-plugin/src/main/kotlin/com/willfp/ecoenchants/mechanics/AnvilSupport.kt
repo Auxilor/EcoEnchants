@@ -194,7 +194,9 @@ class AnvilSupport(
                 if (toDeduct <= 0) {
                     return FAIL
                 } else {
-                    leftMeta.damage -= toDeduct * perUnit
+                    val newDamage = leftMeta.damage - toDeduct * perUnit
+                    leftMeta.damage = newDamage.coerceAtLeast(0) // Prevent negative damage
+
                     right.amount -= toDeduct
                 }
             } else {
