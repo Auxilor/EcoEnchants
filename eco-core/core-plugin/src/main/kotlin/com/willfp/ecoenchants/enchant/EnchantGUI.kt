@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchant
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.config.base.LangYml
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
@@ -24,6 +25,7 @@ import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
+import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
@@ -206,7 +208,7 @@ private val cachedEnchantmentSlots = Caffeine.newBuilder()
     .build<EcoEnchant, Slot>()
 
 private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Player): Slot {
-    return cachedEnchantmentSlots.get(this) {
+    return cachedEnchantmentSlots.get(this) { it ->
         val level = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) {
             it.maximumLevel
         } else {
@@ -248,6 +250,11 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Pla
                         }
                 }
                 .build()
+                .fast()
+                .apply {
+                    plugin.getProxy(HideStoredEnchantsProxy::class.java).hideStoredEnchants(this)
+                }
+                .unwrap()
         )
     }
 }
