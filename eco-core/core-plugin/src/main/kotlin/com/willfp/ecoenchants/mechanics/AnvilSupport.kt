@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
+import com.willfp.eco.core.items.toSNBT
 import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.enchant.EcoEnchants
@@ -39,7 +40,6 @@ interface OpenInventoryProxy {
     fun getOpenInventory(player: Player): Any
 }
 
-@Suppress("DEPRECATION")
 class AnvilSupport(
     private val plugin: EcoPlugin
 ) : Listener {
@@ -237,7 +237,7 @@ class AnvilSupport(
             val rightDurability = maxDamage - rightMeta.damage
             val damage = maxDamage - max(maxDamage, leftDurability + rightDurability)
 
-            leftMeta.damage = damage
+            leftMeta.damage = damage.coerceAtLeast(0) // Prevent negative damage
         }
 
         if (leftMeta is EnchantmentStorageMeta) {
