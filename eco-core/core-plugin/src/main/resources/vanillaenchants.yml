@@ -286,7 +286,7 @@ swift_sneak:
 
 density:
   name: "Density"
-  description: "Deals &a%placeholder%&r bonus damage"
+  description: "Deals &a%placeholder%&r bonus damage per block fallen"
   placeholder: "0.5 * %level%"
   type: normal
   rarity: common
