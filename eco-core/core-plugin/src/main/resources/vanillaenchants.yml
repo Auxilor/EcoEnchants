@@ -283,3 +283,24 @@ swift_sneak:
   placeholder: "min(%level% * 15, 100)"
   type: normal
   rarity: epic
+
+density:
+  name: "Density"
+  description: "Deals &a%placeholder%&r bonus damage"
+  placeholder: "0.5 * %level%"
+  type: normal
+  rarity: common
+
+breach:
+  name: "Breach"
+  description: "Reduces effectiveness of the target's armor by &a%placeholder%%"
+  placeholder: "15 * %level%"
+  type: normal
+  rarity: rare
+
+wind_burst:
+  name: "Wind Burst"
+  description: "Multiplies upwards knockback on smash attacks by &a%placeholder%"
+  placeholder: "1.15 + 0.35 * %level%"
+  type: normal
+  rarity: legendary
