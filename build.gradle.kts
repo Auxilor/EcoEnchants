@@ -64,7 +64,7 @@ allprojects {
 
         compileKotlin {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "21"
             }
         }
 
@@ -90,7 +90,7 @@ allprojects {
         }
 
         withType<JavaCompile>().configureEach {
-            options.release = 17
+            options.release = 21
         }
     }
 
@@ -100,11 +100,4 @@ allprojects {
             languageVersion = JavaLanguageVersion.of(21)
         }
     }
-}
-
-// Root is Java 21 to support 1.20.6+, rest use Java 17
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-    withSourcesJar()
 }
