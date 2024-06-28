@@ -61,26 +61,16 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         .getDeclaredField("cache")
         .apply { isAccessible = true }
 
-    @Suppress("UNCHECKED_CAST")
-    private val vanillaEnchantments = Enchantments::class.java
-        .declaredFields
-        .asSequence()
-        .filter { it.type == ResourceKey::class.java }
-        .map { it.get(null) as ResourceKey<net.minecraft.world.item.enchantment.Enchantment> }
-        .map { it.location() }
-        .map { CraftNamespacedKey.fromMinecraft(it) }
-        .toSet()
-
     override fun replaceRegistry() {
         val newRegistryMTB =
             BiFunction<NamespacedKey, net.minecraft.world.item.enchantment.Enchantment, Enchantment> { key, registry ->
-                val isVanilla = vanillaEnchantments.contains(key)
                 val eco = EcoEnchants.getByID(key.key)
+                val registered = enchantmentRegistry.containsKey(CraftNamespacedKey.toMinecraft(key))
 
-                if (isVanilla) {
-                    ModifiedVanillaCraftEnchantment(key, registry)
-                } else if (eco != null) {
+                if (eco != null) {
                     eco as Enchantment
+                } else if (registered) {
+                    ModifiedVanillaCraftEnchantment(key, registry)
                 } else {
                     null
                 }
