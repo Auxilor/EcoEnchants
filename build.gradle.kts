@@ -64,7 +64,7 @@ allprojects {
 
         compileKotlin {
             kotlinOptions {
-                jvmTarget = "21"
+                jvmTarget = "17"
             }
         }
 
@@ -90,7 +90,7 @@ allprojects {
         }
 
         withType<JavaCompile>().configureEach {
-            options.release = 21
+            options.release = 17
         }
     }
 
