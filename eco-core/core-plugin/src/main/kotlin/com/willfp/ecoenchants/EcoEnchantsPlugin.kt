@@ -142,9 +142,13 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         )
     }
 
-    override fun createDisplayModule(): DisplayModule? {
-        return if (configYml.getBool("display.enabled")) {
+    override fun loadDisplayModules(): List<DisplayModule> {
+        if (!this.configYml.getBool("display.enabled")) {
+            return emptyList()
+        }
+
+        return listOf(
             EnchantDisplay(this)
-        } else null
+        )
     }
 }
