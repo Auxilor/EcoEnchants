@@ -55,7 +55,6 @@ class AnvilSupport(
             ProxyConstants.NMS_VERSION.substring(1) +
             "\$AnvilContainer"
 
-    @EventHandler(priority = EventPriority.HIGH)
     fun onAnvilPrepare(event: PrepareAnvilEvent) {
         val player = event.viewers.getOrNull(0) as? Player ?: return
 
