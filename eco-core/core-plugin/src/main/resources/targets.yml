@@ -203,3 +203,9 @@ targets:
     slot: armor
     items:
       - "*elytra"
+
+  - id: mace
+    display-name: "Mace"
+    slot: mainhand
+    items:
+      - "*mace"
