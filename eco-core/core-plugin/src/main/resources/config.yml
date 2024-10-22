@@ -31,6 +31,14 @@ anvil:
   use-rework-penalty: true # If the rework penalty should be applied
   max-repair-cost: 40 # Override the maximum repair cost (-1 to make it infinite). "Too Expensive" message cannot be removed, but this is purely visual.
 
+  # Added by TiaTheFairy.
+  # Players always can't combine books/items to bypass the enchantments max level, but by setting this config to
+  # false, player can apply books/items with over-level enchantments on it to the left item on anvil
+  # true, player can not apply books/items with over-level enchantments on it to the left item on anvil
+  # You should turn this on if you want player apply over-level enchanted book in other plugins or
+  # players can get special event gears with over-level enchantments on them.
+  allow-apply-over-level-enchantment: true
+
 # Options for how enchantments are displayed on items
 display:
   # If you disable display, enchantments will not show up on items. Only disable if you are handling display elsewhere.
