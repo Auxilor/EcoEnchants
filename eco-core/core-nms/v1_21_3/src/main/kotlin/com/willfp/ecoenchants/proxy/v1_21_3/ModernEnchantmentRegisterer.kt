@@ -7,31 +7,22 @@ import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegis
 import com.willfp.ecoenchants.proxy.v1_21_3.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_3.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_3.registration.vanillaEcoEnchantsEnchantment
-import com.willfp.ecoenchants.setStaticFinal
-import io.papermc.paper.registry.PaperRegistryAccess
-import io.papermc.paper.registry.RegistryAccess
-import io.papermc.paper.registry.RegistryKey
-import io.papermc.paper.registry.WritableCraftRegistry
 import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
-import net.minecraft.core.RegistrySynchronization
 import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.enchantment.Enchantments
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.craftbukkit.CraftRegistry
 import org.bukkit.craftbukkit.CraftServer
 import org.bukkit.craftbukkit.util.CraftNamespacedKey
 import org.bukkit.enchantments.Enchantment
-import java.util.HashMap
 import java.util.IdentityHashMap
 import java.util.function.BiFunction
 
 private val enchantmentRegistry =
-    (Bukkit.getServer() as CraftServer).server.registryAccess().get(Registries.ENCHANTMENT).get().value()
+    (Bukkit.getServer() as CraftServer).server.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
 
 @Suppress("DEPRECATION")
 private val bukkitRegistry =
