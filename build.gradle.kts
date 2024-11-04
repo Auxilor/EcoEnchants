@@ -3,7 +3,7 @@ plugins {
     `java-library`
     `maven-publish`
     kotlin("jvm") version "1.9.20"
-    id("io.github.goooler.shadow") version "8.1.7"
+    id("com.gradleup.shadow") version "8.3.5"
     id("com.willfp.libreforge-gradle-plugin") version "1.0.0"
 }
 
@@ -27,13 +27,14 @@ dependencies {
     implementation(project(":eco-core:core-nms:v1_20_R2"))
     implementation(project(":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_3", configuration = "reobf"))
 }
 
 allprojects {
     apply(plugin = "java")
     apply(plugin = "kotlin")
     apply(plugin = "maven-publish")
-    apply(plugin = "io.github.goooler.shadow")
+    apply(plugin = "com.gradleup.shadow")
 
     repositories {
         mavenLocal()
