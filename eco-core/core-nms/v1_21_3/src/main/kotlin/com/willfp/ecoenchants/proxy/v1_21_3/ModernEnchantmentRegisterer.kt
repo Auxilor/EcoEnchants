@@ -18,6 +18,7 @@ import org.bukkit.craftbukkit.CraftRegistry
 import org.bukkit.craftbukkit.CraftServer
 import org.bukkit.craftbukkit.util.CraftNamespacedKey
 import org.bukkit.enchantments.Enchantment
+import java.lang.reflect.Modifier
 import java.util.IdentityHashMap
 import java.util.function.BiFunction
 
@@ -32,6 +33,11 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     private val frozenField = MappedRegistry::class.java
         .declaredFields
         .filter { it.type.isPrimitive }[0]
+        .apply { isAccessible = true }
+
+    private val allTags = MappedRegistry::class.java
+        .declaredFields
+        .filter { it.type.name.contains("TagSet") }[0]
         .apply { isAccessible = true }
 
     private val unregisteredIntrusiveHoldersField = MappedRegistry::class.java
@@ -81,6 +87,21 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             IdentityHashMap<net.minecraft.world.item.enchantment.Enchantment,
                     Holder.Reference<net.minecraft.world.item.enchantment.Enchantment>>()
         )
+
+        /*
+        Creating an unbound tag set requires using reflection because the inner class is
+        package-private, so we just find the method manually.
+         */
+
+        val unboundTagSet = MappedRegistry::class.java
+            .declaredClasses[0]
+            .declaredMethods
+            .filter { Modifier.isStatic(it.modifiers) }
+            .filter { it.parameterCount == 0 }[0]
+            .apply { isAccessible = true }
+            .invoke(null)
+
+        allTags.set(enchantmentRegistry, unboundTagSet)
     }
 
     override fun register(enchant: EcoEnchantBase): Enchantment {
