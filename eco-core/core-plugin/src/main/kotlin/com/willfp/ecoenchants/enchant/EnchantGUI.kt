@@ -40,6 +40,9 @@ object EnchantGUI {
     private val enchantInfoMenus = Caffeine.newBuilder().build<EcoEnchant, Menu>()
 
     internal fun reload(plugin: EcoEnchantsPlugin) {
+        cachedEnchantmentSlots.invalidateAll()
+        enchantInfoMenus.invalidateAll()
+
         menu = menu(plugin.configYml.getInt("enchant-gui.rows")) {
             title = plugin.configYml.getFormattedString("enchant-gui.title")
 
