@@ -1,12 +1,12 @@
-package com.willfp.ecoenchants.proxy.v1_21_3
+package com.willfp.ecoenchants.proxy.v1_21_4
 
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
-import com.willfp.ecoenchants.proxy.v1_21_3.registration.EcoEnchantsCraftEnchantment
-import com.willfp.ecoenchants.proxy.v1_21_3.registration.ModifiedVanillaCraftEnchantment
-import com.willfp.ecoenchants.proxy.v1_21_3.registration.vanillaEcoEnchantsEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_4.registration.EcoEnchantsCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_4.registration.ModifiedVanillaCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_4.registration.vanillaEcoEnchantsEnchantment
 import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry

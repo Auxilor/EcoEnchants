@@ -1,8 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     java
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "2.1.0"
     id("com.gradleup.shadow") version "8.3.5"
     id("com.willfp.libreforge-gradle-plugin") version "1.0.0"
 }
@@ -28,6 +30,7 @@ dependencies {
     implementation(project(":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_3", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_4", configuration = "reobf"))
 }
 
 allprojects {
@@ -54,7 +57,7 @@ allprojects {
     dependencies {
         compileOnly("com.willfp:eco:6.74.3")
         compileOnly("org.jetbrains:annotations:23.0.0")
-        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
+        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.1.5")
     }
 
@@ -64,8 +67,8 @@ allprojects {
         }
 
         compileKotlin {
-            kotlinOptions {
-                jvmTarget = "17"
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_17)
             }
         }
 

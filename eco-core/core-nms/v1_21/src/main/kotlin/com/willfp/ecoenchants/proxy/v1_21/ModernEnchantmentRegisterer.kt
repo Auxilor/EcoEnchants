@@ -63,7 +63,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
 
     override fun replaceRegistry() {
         val newRegistryMTB =
-            BiFunction<NamespacedKey, net.minecraft.world.item.enchantment.Enchantment, Enchantment> { key, registry ->
+            BiFunction<NamespacedKey, net.minecraft.world.item.enchantment.Enchantment, Enchantment?> { key, registry ->
                 val eco = EcoEnchants.getByID(key.key)
                 val registered = enchantmentRegistry.containsKey(CraftNamespacedKey.toMinecraft(key))
 
