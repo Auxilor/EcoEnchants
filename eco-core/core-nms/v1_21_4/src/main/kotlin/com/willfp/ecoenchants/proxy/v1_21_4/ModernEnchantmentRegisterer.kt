@@ -7,6 +7,8 @@ import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegis
 import com.willfp.ecoenchants.proxy.v1_21_4.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_4.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_4.registration.vanillaEcoEnchantsEnchantment
+import io.papermc.paper.registry.WritableCraftRegistry
+import io.papermc.paper.registry.entry.RegistryTypeMapper
 import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
@@ -45,12 +47,8 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         .last { it.type == Map::class.java }
         .apply { isAccessible = true }
 
-    private val minecraftToBukkit = bukkitRegistry::class.java
-        .getDeclaredField("minecraftToBukkit")
-        .apply { isAccessible = true }
-
-    // Paper has two minecraftToBukkit fields, one in CraftRegistry and one in WritableCraftRegistry
-    private val minecraftToBukkitAlt = CraftRegistry::class.java
+    // 1.21.4+ only has minecraftToBukkit in CraftRegistry, removing the duplicate in WritableCraftRegistry
+    private val minecraftToBukkit = CraftRegistry::class.java
         .getDeclaredField("minecraftToBukkit")
         .apply { isAccessible = true }
 
@@ -74,8 +72,10 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             }
 
         // Update bukkit registry
-        minecraftToBukkit.set(bukkitRegistry, newRegistryMTB)
-        minecraftToBukkitAlt.set(bukkitRegistry, newRegistryMTB)
+        // The nasty casting hack is because of some weird nullability changes, if I set the BiFunction to have a
+        // non-nullable bukkit enchantment type then it refuses to build, some sort of K2 compiler change.
+        @Suppress("UNCHECKED_CAST")
+        minecraftToBukkit.set(bukkitRegistry, RegistryTypeMapper(newRegistryMTB as BiFunction<NamespacedKey, net.minecraft.world.item.enchantment.Enchantment, Enchantment>))
 
         // Clear the enchantment cache
         cache.set(bukkitRegistry, mutableMapOf<NamespacedKey, Enchantment>())
