@@ -7,8 +7,8 @@ import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegis
 import com.willfp.ecoenchants.proxy.v1_21_4.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_4.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_4.registration.vanillaEcoEnchantsEnchantment
-import io.papermc.paper.registry.WritableCraftRegistry
 import io.papermc.paper.registry.entry.RegistryTypeMapper
+import io.papermc.paper.registry.legacy.DelayedRegistry
 import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
@@ -23,13 +23,15 @@ import org.bukkit.enchantments.Enchantment
 import java.lang.reflect.Modifier
 import java.util.IdentityHashMap
 import java.util.function.BiFunction
+import javax.annotation.Nullable
 
 private val enchantmentRegistry =
     (Bukkit.getServer() as CraftServer).server.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
 
 @Suppress("DEPRECATION")
-private val bukkitRegistry =
-    org.bukkit.Registry.ENCHANTMENT
+private val bukkitRegistry: org.bukkit.Registry<Enchantment>
+    get() =
+        (org.bukkit.Registry.ENCHANTMENT as DelayedRegistry<Enchantment, *>).delegate()
 
 class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     private val frozenField = MappedRegistry::class.java
@@ -44,7 +46,8 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
 
     private val unregisteredIntrusiveHoldersField = MappedRegistry::class.java
         .declaredFields
-        .last { it.type == Map::class.java }
+        .filter { it.type == Map::class.java }
+        .filter { it.isAnnotationPresent(Nullable::class.java) }[0]
         .apply { isAccessible = true }
 
     // 1.21.4+ only has minecraftToBukkit in CraftRegistry, removing the duplicate in WritableCraftRegistry
@@ -60,12 +63,14 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         val newRegistryMTB =
             BiFunction<NamespacedKey, net.minecraft.world.item.enchantment.Enchantment, Enchantment?> { key, registry ->
                 val eco = EcoEnchants.getByID(key.key)
-                val registered = enchantmentRegistry.containsKey(CraftNamespacedKey.toMinecraft(key))
+                val isRegistered = enchantmentRegistry.containsKey(CraftNamespacedKey.toMinecraft(key))
 
                 if (eco != null) {
                     eco as Enchantment
-                } else if (registered) {
-                    ModifiedVanillaCraftEnchantment(key, registry)
+                } else if (isRegistered) {
+                    val holder = enchantmentRegistry.get(CraftNamespacedKey.toMinecraft(key)).get()
+
+                    ModifiedVanillaCraftEnchantment(key, registry, holder)
                 } else {
                     null
                 }
@@ -75,7 +80,10 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         // The nasty casting hack is because of some weird nullability changes, if I set the BiFunction to have a
         // non-nullable bukkit enchantment type then it refuses to build, some sort of K2 compiler change.
         @Suppress("UNCHECKED_CAST")
-        minecraftToBukkit.set(bukkitRegistry, RegistryTypeMapper(newRegistryMTB as BiFunction<NamespacedKey, net.minecraft.world.item.enchantment.Enchantment, Enchantment>))
+        minecraftToBukkit.set(
+            bukkitRegistry,
+            RegistryTypeMapper(newRegistryMTB as BiFunction<NamespacedKey, net.minecraft.world.item.enchantment.Enchantment, Enchantment>)
+        )
 
         // Clear the enchantment cache
         cache.set(bukkitRegistry, mutableMapOf<NamespacedKey, Enchantment>())
@@ -112,7 +120,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             val nms = enchantmentRegistry[CraftNamespacedKey.toMinecraft(enchant.enchantmentKey)]
 
             if (nms.isPresent) {
-                return EcoEnchantsCraftEnchantment(enchant, nms.get().value())
+                return EcoEnchantsCraftEnchantment(enchant, nms.get())
             } else {
                 throw IllegalStateException("Enchantment ${enchant.id} wasn't registered")
             }
