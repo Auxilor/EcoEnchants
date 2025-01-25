@@ -27,18 +27,16 @@ effects:
                 - bow_attack
                 - melee_attack
                 - trident_attack
-            - id: bonus_health
-              args:
-                health: -6
           conditions: [ ]
           duration: "(15 + 5 * %level%) * 20"
-
+      - id: give_health
+        args:
+          amount: -6
       - id: play_sound
         args:
           sound: entity_ghast_scream
           pitch: 0.7
           volume: 1
-
     args:
       cooldown: 180
       send_cooldown_message: true
