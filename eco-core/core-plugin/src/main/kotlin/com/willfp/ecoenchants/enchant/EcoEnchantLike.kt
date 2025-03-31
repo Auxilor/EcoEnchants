@@ -87,7 +87,7 @@ interface EcoEnchantLike {
     /**
      * Get the raw description for the enchantment.
      */
-    fun getRawDescription(level: Int, player: Player?): String {
+    fun getRawDescription(level: Int, player: Player?): List<String> {
         // Fetch custom placeholders other than %placeholder%
         val uncompiledPlaceholders = config.getSubsection("placeholders").getKeys(false).associateWith {
             config.getString("placeholders.$it")
@@ -126,13 +126,21 @@ interface EcoEnchantLike {
             )
         }
 
-        // Apply placeholders to description
-        val rawDescription = config.getString("description")
-        var description = rawDescription
-        for (placeholder in placeholders) {
-            description = description.replace("%${placeholder.id}%", NumberUtils.format(placeholder.value))
+        // Handle both single-string and list format for description
+        val rawDescription: List<String> = when (val descriptionValue = config.get("description")) {
+            is String -> listOf(descriptionValue)
+            is List<*> -> descriptionValue.filterIsInstance<String>()
+            else -> emptyList()
         }
 
-        return description
+        // Apply placeholders to description
+        return rawDescription.map { line ->
+            var rawDescriptionFinal = line
+            for (placeholder in placeholders) {
+                rawDescriptionFinal = rawDescriptionFinal.replace("%${placeholder.id}%", NumberUtils.format(placeholder.value))
+            }
+            rawDescriptionFinal
+        }
     }
 }
+
