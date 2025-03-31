@@ -36,6 +36,11 @@ effects:
         volume: 1
 
     - id: break_block
+      filters:
+        not_blocks:
+          - obsidian
+          - barrier
+          - bedrock
 
     args:
       cooldown: 60
