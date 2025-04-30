@@ -264,7 +264,7 @@ class AnvilSupport(
 
         val enchantLevelDiff = abs(leftEnchants.values.sum() - outEnchants.values.sum())
         val xpCost =
-            plugin.configYml.getDouble("anvil.cost-exponent").pow(enchantLevelDiff) * enchantLevelDiff + unitRepairCost
+            enchantLevelDiff.toDouble().pow(plugin.configYml.getDouble("anvil.cost-exponent")) + unitRepairCost
 
         return AnvilResult(left, xpCost.roundToInt())
     }
