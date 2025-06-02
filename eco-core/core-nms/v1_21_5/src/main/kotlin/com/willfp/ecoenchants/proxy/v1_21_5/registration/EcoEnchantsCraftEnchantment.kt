@@ -7,9 +7,7 @@ import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import net.kyori.adventure.text.Component
 import net.minecraft.core.Holder
 import net.minecraft.world.item.enchantment.Enchantment
-import org.bukkit.NamespacedKey
 import org.bukkit.craftbukkit.enchantments.CraftEnchantment
-import org.bukkit.enchantments.EnchantmentTarget
 import org.bukkit.inventory.ItemStack
 
 class EcoEnchantsCraftEnchantment(
