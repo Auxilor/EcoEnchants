@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.proxy.v1_21_6.registration
+package com.willfp.ecoenchants.proxy.v1_21_7.registration
 
 import com.willfp.ecoenchants.enchant.vanillaEnchantmentData
 import net.minecraft.core.Holder

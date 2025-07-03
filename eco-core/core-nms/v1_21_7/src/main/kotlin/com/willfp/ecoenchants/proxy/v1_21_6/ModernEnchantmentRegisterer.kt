@@ -1,12 +1,12 @@
-package com.willfp.ecoenchants.proxy.v1_21_6
+package com.willfp.ecoenchants.proxy.v1_21_7
 
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
-import com.willfp.ecoenchants.proxy.v1_21_6.registration.EcoEnchantsCraftEnchantment
-import com.willfp.ecoenchants.proxy.v1_21_6.registration.ModifiedVanillaCraftEnchantment
-import com.willfp.ecoenchants.proxy.v1_21_6.registration.vanillaEcoEnchantsEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_7.registration.EcoEnchantsCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_7.registration.ModifiedVanillaCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_7.registration.vanillaEcoEnchantsEnchantment
 import io.papermc.paper.registry.entry.RegistryTypeMapper
 import io.papermc.paper.registry.legacy.DelayedRegistry
 import net.minecraft.core.Holder

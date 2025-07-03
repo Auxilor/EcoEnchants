@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.proxy.v1_21_6
+package com.willfp.ecoenchants.proxy.v1_21_7
 
 import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.fast.FastItemStack
