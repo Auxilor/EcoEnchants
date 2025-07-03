@@ -74,17 +74,20 @@ fun EcoEnchantLike.getFormattedDescription(level: Int, player: Player? = null): 
     return DisplayCache.descriptionCache.get(DisplayableEnchant(this, level)) {
         val descriptionFormat = plugin.configYml.getString("display.descriptions.format")
         val wrap = plugin.configYml.getInt("display.descriptions.word-wrap")
+        val rawDescriptions = this.getRawDescription(level, player)
 
-        var description = descriptionFormat + this.getRawDescription(level, player)
+        // Combine all transformations in one pass
+        rawDescriptions.flatMap { line ->
+            // Apply the description format and reset tags, then apply word wrapping
+            var formattedLine = descriptionFormat + line
+            resetTags.forEach { tag ->
+                formattedLine = formattedLine.replace(tag, tag + descriptionFormat)
+            }
 
-        // Replace reset tags with description format
-        for (tag in resetTags) {
-            description = description.replace(tag, tag + descriptionFormat)
+            // Apply word wrapping after all formatting
+            StringUtils.lineWrap(formattedLine.formatEco(placeholderContext(
+                injectable = this.config)), wrap)
         }
-
-        StringUtils.lineWrap(description.formatEco(placeholderContext(
-            injectable = this.config
-        )), wrap)
     }
 }
 
