@@ -262,11 +262,23 @@ class AnvilSupport(
 
         left.itemMeta = leftMeta
 
-        val enchantLevelDiff = abs(leftEnchants.values.sum() - outEnchants.values.sum())
-        val xpCost =
-            enchantLevelDiff.toDouble().pow(plugin.configYml.getDouble("anvil.cost-exponent")) + unitRepairCost
+        val rightLevels = rightEnchants.values.sum()
+        val enchantIncrease = (outEnchants.values.sum() - leftEnchants.values.sum()).coerceAtLeast(0)
 
-        return AnvilResult(left, xpCost.roundToInt())
+        val maxCost = plugin.configYml.getInt("anvil.max-combination-cost").let {
+            if (it < 0) Int.MAX_VALUE else it
+        }
+
+        val xpCost = (
+                (rightLevels + unitRepairCost).coerceAtLeast(1) *
+                        (1 + enchantIncrease.toDouble().pow(plugin.configYml.getDouble("anvil.cost-exponent"))) *
+                        if (plugin.configYml.getBool("anvil.use-rework-penalty")) {
+                            1 + (left.fast().repairCost * plugin.configYml.getDouble("anvil.work-penalty-multiplier"))
+                        } else 1.0
+                ).roundToInt()
+            .coerceAtMost(maxCost)
+
+        return AnvilResult(left, xpCost)
     }
 }
 

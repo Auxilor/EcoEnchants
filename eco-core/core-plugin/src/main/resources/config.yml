@@ -26,10 +26,12 @@ loot:
 
 # Options for merging items in an anvil
 anvil:
-  cost-exponent: 0.95 # The exponent for each enchant level to prevent constant "Too Expensive!" problems
   enchant-limit: -1 # The limit for the amount of enchantments on an item (-1 to disable)
   use-rework-penalty: true # If the rework penalty should be applied
+  work-penalty-multiplier: 0.15 # The multiplier for the work penalty, which is applied to the cost of the item being repaired or combined. The higher this number, the more expensive it will be to repair or combine items.
   max-repair-cost: 40 # Override the maximum repair cost (-1 to make it infinite). "Too Expensive" message cannot be removed, but this is purely visual.
+  cost-exponent: 1.0 # The exponent for each enchant level when calculating the cost of an enchantment in an anvil. The higher this number, the faster the cost will increase.
+  max-combination-cost: 40 # The maximum cost for combining items in an anvil (-1 to make it infinite). "Too Expensive" message cannot be removed, but this is purely visual.
 
 # Options for how enchantments are displayed on items
 display:
