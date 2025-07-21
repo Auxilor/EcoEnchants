@@ -1,4 +1,4 @@
-package com.willfp.ecoenchants.proxy.v1_21_7
+package com.willfp.ecoenchants.proxy.v1_21_8
 
 import com.willfp.ecoenchants.mechanics.OpenInventoryProxy
 import org.bukkit.craftbukkit.entity.CraftPlayer
