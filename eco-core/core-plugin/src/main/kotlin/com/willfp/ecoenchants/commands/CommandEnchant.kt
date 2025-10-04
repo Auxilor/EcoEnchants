@@ -28,6 +28,7 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
         player!! // Unbelievable jank
 
         val enchant = notifyNull(
+            @Suppress("DEPRECATION")
             args.getOrNull(0)?.lowercase()?.let { Enchantment.getByKey(NamespacedKey.minecraft(it)) },
             "invalid-enchantment"
         )
@@ -77,12 +78,14 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
         if (args.size == 1) {
             StringUtil.copyPartialMatches(
                 args[0],
+                @Suppress("DEPRECATION")
                 Enchantment.values().map { it.key.key },
                 completions
             )
         }
 
         if (args.size == 2) {
+            @Suppress("DEPRECATION")
             val enchant = Enchantment.getByKey(NamespacedKey.minecraft(args[0].lowercase()))
 
             val levels = if (enchant != null) {

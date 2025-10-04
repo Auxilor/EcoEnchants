@@ -1,7 +1,7 @@
 name: ${pluginName}
 version: ${version}
 main: com.willfp.ecoenchants.EcoEnchantsPlugin
-api-version: 1.17
+api-version: 1.21.4
 authors: [ Auxilor ]
 website: willfp.com
 load: STARTUP

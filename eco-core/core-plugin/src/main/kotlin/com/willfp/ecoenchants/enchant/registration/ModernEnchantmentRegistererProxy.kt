@@ -1,6 +1,4 @@
-package com.willfp.ecoenchants.enchant.registration.modern
-
-import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
+package com.willfp.ecoenchants.enchant.registration
 
 interface ModernEnchantmentRegistererProxy : EnchantmentRegisterer {
     /**

@@ -15,14 +15,4 @@ tasks {
     build {
         dependsOn(reobfJar)
     }
-
-    compileJava {
-        options.release = 21
-    }
-
-    compileKotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-        }
-    }
 }

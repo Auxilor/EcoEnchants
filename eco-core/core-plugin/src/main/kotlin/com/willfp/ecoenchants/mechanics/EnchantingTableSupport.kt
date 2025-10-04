@@ -70,6 +70,7 @@ class EnchantingTableSupport(
         }
 
         if (item.type == Material.BOOK) {
+            @Suppress("DEPRECATION")
             item.type = Material.ENCHANTED_BOOK
         }
 
@@ -146,7 +147,7 @@ class EnchantingTableSupport(
         toAdd.forEach(event.enchantsToAdd::putIfAbsent)
 
         if (toAdd.isEmpty() && isExtraEnchantable) {
-            toAdd[Enchantment.DURABILITY] =
+            toAdd[Enchantment.UNBREAKING] =
                 ExtraItemSupport.currentlyEnchantingExtraItem[player.uniqueId]!![event.whichButton()]
             ExtraItemSupport.currentlyEnchantingExtraItem.remove(player.uniqueId)
         }
@@ -216,9 +217,9 @@ class EnchantingTableSupport(
         }
 
         val offers = arrayOf(
-            EnchantmentOffer(Enchantment.DURABILITY, 1, bottomEnchantLevel),
-            EnchantmentOffer(Enchantment.DURABILITY, midUnbreakingLevel, midEnchantLevel),
-            EnchantmentOffer(Enchantment.DURABILITY, topUnbreakingLevel, topEnchantLevel)
+            EnchantmentOffer(Enchantment.UNBREAKING, 1, bottomEnchantLevel),
+            EnchantmentOffer(Enchantment.UNBREAKING, midUnbreakingLevel, midEnchantLevel),
+            EnchantmentOffer(Enchantment.UNBREAKING, topUnbreakingLevel, topEnchantLevel)
         )
 
         for (i in offers.indices) {

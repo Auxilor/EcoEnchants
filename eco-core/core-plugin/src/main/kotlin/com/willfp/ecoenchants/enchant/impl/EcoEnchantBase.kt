@@ -49,7 +49,10 @@ abstract class EcoEnchantBase(
                 || conflictIds.containsIgnoreCase("everything")
 
     override val conflicts = config.getStrings("conflicts")
-        .mapNotNull { Enchantment.getByKey(NamespacedKey.minecraft(it)) }
+        .mapNotNull {
+            @Suppress("DEPRECATION")
+            Enchantment.getByKey(NamespacedKey.minecraft(it))
+        }
         .toSet()
 
     override val targets = config.getStrings("targets")

@@ -3,7 +3,7 @@ package com.willfp.ecoenchants.proxy.v1_21_5
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
-import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
+import com.willfp.ecoenchants.enchant.registration.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.proxy.v1_21_5.registration.EcoEnchantsCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_5.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v1_21_5.registration.vanillaEcoEnchantsEnchantment
@@ -50,7 +50,6 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         .filter { it.isAnnotationPresent(Nullable::class.java) }[0]
         .apply { isAccessible = true }
 
-    // 1.21.4+ only has minecraftToBukkit in CraftRegistry, removing the duplicate in WritableCraftRegistry
     private val minecraftToBukkit = CraftRegistry::class.java
         .getDeclaredField("minecraftToBukkit")
         .apply { isAccessible = true }

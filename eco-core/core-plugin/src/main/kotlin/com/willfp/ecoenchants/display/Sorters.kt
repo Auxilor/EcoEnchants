@@ -6,7 +6,6 @@ import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
-import org.bukkit.ChatColor
 import org.bukkit.enchantments.Enchantment
 
 interface EnchantmentSorter {
@@ -41,13 +40,15 @@ fun List<EnchantmentSorter>.getSafely(index: Int) =
 
 object AlphabeticSorter : EnchantmentSorter {
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().getFormattedName(0)) }
+        @Suppress("DEPRECATION")
+        return enchantments.sortedBy { org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0)) }
     }
 }
 
 object LengthSorter : EnchantmentSorter {
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().getFormattedName(0))!!.length }
+        @Suppress("DEPRECATION")
+        return enchantments.sortedBy { org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0))!!.length }
     }
 }
 

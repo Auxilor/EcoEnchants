@@ -19,17 +19,6 @@ base {
 
 dependencies {
     implementation(project(":eco-core:core-plugin"))
-    implementation(project(":eco-core:core-nms:v1_17_R1"))
-    implementation(project(":eco-core:core-nms:v1_18_R1"))
-    implementation(project(":eco-core:core-nms:v1_18_R2"))
-    implementation(project(":eco-core:core-nms:v1_19_R1"))
-    implementation(project(":eco-core:core-nms:v1_19_R2"))
-    implementation(project(":eco-core:core-nms:v1_19_R3"))
-    implementation(project(":eco-core:core-nms:v1_20_R1"))
-    implementation(project(":eco-core:core-nms:v1_20_R2"))
-    implementation(project(":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21_3", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_4", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_5", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_7", configuration = "reobf"))
@@ -57,7 +46,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("com.willfp:eco:6.75.0")
+        compileOnly("com.willfp:eco:6.77.0")
         compileOnly("org.jetbrains:annotations:23.0.0")
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.1.5")
@@ -70,7 +59,7 @@ allprojects {
 
         compileKotlin {
             compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
+                jvmTarget.set(JvmTarget.JVM_21)
             }
         }
 
@@ -96,7 +85,7 @@ allprojects {
         }
 
         withType<JavaCompile>().configureEach {
-            options.release = 17
+            options.release = 21
         }
     }
 
