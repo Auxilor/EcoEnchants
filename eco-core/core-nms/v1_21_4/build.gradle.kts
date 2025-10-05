@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     id("io.papermc.paperweight.userdev")
 }
@@ -14,5 +12,9 @@ dependencies {
 tasks {
     build {
         dependsOn(reobfJar)
+    }
+
+    reobfJar {
+        mustRunAfter(shadowJar)
     }
 }

@@ -111,6 +111,10 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         allTags.set(enchantmentRegistry, unboundTagSet)
     }
 
+    override fun freezeRegistry() {
+        enchantmentRegistry.freeze()
+    }
+
     override fun register(enchant: EcoEnchantBase): Enchantment {
         // Clear the enchantment cache
         cache.set(bukkitRegistry, mutableMapOf<NamespacedKey, Enchantment>())

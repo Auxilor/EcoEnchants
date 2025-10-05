@@ -51,6 +51,8 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
 
         sendPrompts(plugin)
         registerHardcodedEnchantments(plugin)
+
+        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).freezeRegistry()
     }
 
     override fun acceptPreloadConfig(plugin: LibreforgePlugin, id: String, config: Config) {

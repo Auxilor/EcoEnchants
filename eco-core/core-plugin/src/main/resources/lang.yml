@@ -3,7 +3,7 @@ messages:
   no-permission: "&cYou don't have permission to do this!"
   not-player: "&cThis command must be run by a player"
   invalid-command: "&cUnknown subcommand!"
-  reloaded: "Reloaded! &cRelog if you added enchantments or you will get kicked. You may need to restart your server for some changes to take effect."
+  reload: "Reloaded! &cRelog if you added enchantments or you will get kicked. You may need to restart your server for some changes to take effect."
   invalid-player: "&cInvalid Player!"
   requires-player: "&cRequires a Player!"
   enabled-descriptions: "&fYou have successfully &aenabled &fenchantment descriptions!"
