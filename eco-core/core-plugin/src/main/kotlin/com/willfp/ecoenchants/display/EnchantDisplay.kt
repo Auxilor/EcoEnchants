@@ -128,7 +128,11 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
             hse.hideStoredEnchants(fast)
         }
 
-        fast.lore = enchantLore + lore + notMetLines
+        if(plugin.configYml.getBool("display.enchantments-below-lore")) {
+            fast.lore = lore + enchantLore + notMetLines
+        } else {
+            fast.lore = enchantLore + lore + notMetLines
+        }
     }
 
     override fun revert(itemStack: ItemStack) {

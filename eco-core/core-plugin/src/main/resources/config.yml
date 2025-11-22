@@ -36,6 +36,8 @@ display:
   # If you disable display, enchantments will not show up on items. Only disable if you are handling display elsewhere.
   # Changing this will require a server restart.
   enabled: true
+  # If enchantments should be displayed on the bottom of the item's lore
+  enchantments-below-lore: false
 
   numerals:
     enabled: true # If numerals should be used for the enchantment levels
