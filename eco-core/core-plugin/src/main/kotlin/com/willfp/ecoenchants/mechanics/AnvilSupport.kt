@@ -87,9 +87,6 @@ class AnvilSupport(
             val old = left?.clone()
             val right = event.inventory.getItem(1)?.clone()
 
-            event.result = null
-            event.inventory.setItem(2, null)
-
             val result = doMerge(
                 left,
                 right,
@@ -98,6 +95,13 @@ class AnvilSupport(
                 player
             )
 
+            if (result == FAIL) {
+                return@run
+            }
+
+            event.result = null
+            event.inventory.setItem(2, null)
+
             val price = result.xp ?: 0
             val outItem = result.result ?: ItemStack(Material.AIR)
 
@@ -105,10 +109,6 @@ class AnvilSupport(
             val oldCost = event.inventory.repairCost
 
             val oldLeft = event.inventory.getItem(0)
-
-            if (result == FAIL) {
-                return@run
-            }
 
             if (oldLeft == null || oldLeft.type != outItem.type) {
                 return@run
