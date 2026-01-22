@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
 import com.willfp.ecoenchants.target.EnchantFinder.hasEnchantActive
+import com.willfp.libreforge.slot.impl.SlotTypeArmor
 import com.willfp.libreforge.slot.impl.SlotTypeHands
 import org.bukkit.Bukkit
 
@@ -31,8 +32,9 @@ class EnchantmentRepairing(
 
                 for ((item, level) in player.getItemsWithEnchantActive(this)) {
                     val isHolding = item in SlotTypeHands.getItems(player)
+                    val isEquipped = item in SlotTypeArmor.getItems(player)
 
-                    if (notWhileHolding && isHolding) {
+                    if (notWhileHolding && (isHolding || isEquipped)) {
                         continue
                     }
 
