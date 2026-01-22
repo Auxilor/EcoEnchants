@@ -101,8 +101,7 @@ class AnvilSupport(
             val price = result.xp ?: 0
             val outItem = result.result ?: ItemStack(Material.AIR)
 
-            @Suppress("REMOVAL", "DEPRECATION")
-            val oldCost = event.inventory.repairCost
+            val oldCost = event.view.repairCost
 
             val oldLeft = event.inventory.getItem(0)
 
@@ -145,11 +144,12 @@ class AnvilSupport(
                 outItem.fast().repairCost = (repairCost + 1) * 2 - 1
             }
 
-            @Suppress("REMOVAL", "DEPRECATION")
-            event.inventory.maximumRepairCost = plugin.configYml.getInt("anvil.max-repair-cost").infiniteIfNegative()
+            val clampRepairCost = plugin.configYml.getBool("anvil.clamp-repair-cost")
+            val maxRepairCost = plugin.configYml.getInt("anvil.max-repair-cost")
 
-            @Suppress("REMOVAL", "DEPRECATION")
-            event.inventory.repairCost = cost
+            event.view.maximumRepairCost = maxRepairCost
+            event.view.repairCost = if (clampRepairCost) cost.coerceAtMost(maxRepairCost) else cost
+
             event.result = outItem
             event.inventory.setItem(2, outItem)
         }
