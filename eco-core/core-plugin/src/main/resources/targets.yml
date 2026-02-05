@@ -80,6 +80,18 @@ targets:
       - "*diamond_sword"
       - "*netherite_sword"
 
+  - id: spear
+    display-name: "Spear"
+    slot: mainhand
+    items:
+      - "*wooden_spear"
+      - "*stone_spear"
+      - "*iron_spear"
+      - "*golden_spear"
+      - "*copper_spear"
+      - "*diamond_spear"
+      - "*netherite_spear"
+
   - id: helmet
     display-name: "Helmets"
     slot: armor

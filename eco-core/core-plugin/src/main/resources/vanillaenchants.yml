@@ -304,3 +304,10 @@ wind_burst:
   placeholder: "1.15 + 0.35 * %level%"
   type: normal
   rarity: legendary
+
+lunge:
+  name: "Lunge"
+  description: "Launch forward &a%placeholder%&r blocks per second on jab attacks"
+  placeholder: "round(%level * 9.16)"
+  type: normal
+  rarity: uncommon
