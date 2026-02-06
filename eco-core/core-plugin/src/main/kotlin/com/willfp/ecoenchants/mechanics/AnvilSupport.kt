@@ -50,7 +50,7 @@ class AnvilSupport(
      */
     private val anvilGuiClass = "net.wesjd.anvilgui.version.Wrapper" +
             ProxyConstants.NMS_VERSION.substring(1) +
-            "\$AnvilContainer"
+            $$"$AnvilContainer"
 
     @EventHandler(priority = EventPriority.HIGHEST)
     fun onAnvilPrepare(event: PrepareAnvilEvent) {

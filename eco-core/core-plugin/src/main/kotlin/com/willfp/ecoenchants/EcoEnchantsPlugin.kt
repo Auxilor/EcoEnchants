@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants
 
-import com.willfp.eco.core.LifecyclePosition
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
 import com.willfp.eco.core.integrations.IntegrationLoader

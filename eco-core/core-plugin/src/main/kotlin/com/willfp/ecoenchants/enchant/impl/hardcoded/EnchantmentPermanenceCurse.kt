@@ -8,6 +8,4 @@ class EnchantmentPermanenceCurse(
 ) : HardcodedEcoEnchant(
     "permanence_curse",
     plugin
-) {
-
-}
+)

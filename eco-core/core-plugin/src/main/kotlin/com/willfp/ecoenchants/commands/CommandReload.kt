@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.EcoPlugin
-import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.command.impl.Subcommand
 import org.bukkit.command.CommandSender
 

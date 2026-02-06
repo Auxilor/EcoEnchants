@@ -6,12 +6,10 @@ import com.willfp.eco.core.display.DisplayPriority
 import com.willfp.eco.core.display.DisplayProperties
 import com.willfp.eco.core.fast.FastItemStack
 import com.willfp.eco.core.fast.fast
-import com.willfp.eco.core.items.builder.modify
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.commands.CommandToggleDescriptions.Companion.seesEnchantmentDescriptions
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.enchant.EcoEnchant
-import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import com.willfp.libreforge.ItemProvidedHolder
