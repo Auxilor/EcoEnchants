@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants.enchant.impl.hardcoded
 
-import com.willfp.eco.core.EcoPlugin
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantFinder.hasEnchantActive
@@ -16,13 +14,10 @@ import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 
-class EnchantmentReplenish(
-    plugin: EcoEnchantsPlugin
-) : HardcodedEcoEnchant(
-    "replenish",
-    plugin
+object EnchantmentReplenish : HardcodedEcoEnchant(
+    "replenish"
 ) {
-    private var handler = ReplenishHandler(this, plugin)
+    private var handler = ReplenishHandler(this)
 
     override fun onRegister() {
         plugin.eventManager.registerListener(handler)
@@ -33,8 +28,7 @@ class EnchantmentReplenish(
     }
 
     private class ReplenishHandler(
-        private val enchant: EcoEnchant,
-        private val plugin: EcoPlugin
+        private val enchant: EcoEnchant
     ) : Listener {
         @EventHandler(
             ignoreCancelled = true
@@ -102,6 +96,7 @@ class EnchantmentReplenish(
                 block.blockData = data
 
                 // Improves compatibility with other plugins.
+                @Suppress("UnstableApiUsage")
                 Bukkit.getPluginManager().callEvent(
                     BlockPlaceEvent(
                         block,

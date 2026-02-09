@@ -5,10 +5,10 @@ import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.randDouble
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.conflictsWithDeep
+import com.willfp.ecoenchants.plugin
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -25,10 +25,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.min
 
-
-class EnchantingTableSupport(
-    private val plugin: EcoEnchantsPlugin
-) : Listener {
+object EnchantingTableSupport : Listener {
     @EventHandler
     fun onLeave(event: PlayerQuitEvent) {
         ExtraItemSupport.currentlyEnchantingExtraItem.remove(event.player.uniqueId)
@@ -107,7 +104,7 @@ class EnchantingTableSupport(
                 continue
             }
 
-            if (toAdd.size >= this.plugin.configYml.getInt("enchanting-table.cap")) {
+            if (toAdd.size >= plugin.configYml.getInt("enchanting-table.cap")) {
                 break
             }
 
@@ -139,7 +136,7 @@ class EnchantingTableSupport(
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= this.plugin.configYml.getDouble("enchanting-table.reduction")
+            multiplier /= plugin.configYml.getDouble("enchanting-table.reduction")
 
             toAdd[enchantment.enchantment] = level
         }
@@ -239,7 +236,7 @@ object ExtraItemSupport {
 
     internal val extraEnchantableItems = mutableListOf<TestableItem>()
 
-    internal fun reload(plugin: EcoEnchantsPlugin) {
+    internal fun reload() {
         extraEnchantableItems.clear()
         extraEnchantableItems.addAll(plugin.targetsYml.getStrings("extra-enchantable-items").map {
             Items.lookup(it)

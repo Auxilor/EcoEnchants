@@ -2,9 +2,9 @@ package com.willfp.ecoenchants.enchant.impl
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.util.containsIgnoreCase
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.MissingDependencyException
+import com.willfp.ecoenchants.plugin
 import com.willfp.libreforge.SilentViolationContext
 import com.willfp.libreforge.effects.EffectList
 import com.willfp.libreforge.effects.Effects
@@ -12,13 +12,12 @@ import org.bukkit.Bukkit
 
 class LibreforgeEcoEnchant(
     id: String,
-    _config: Config,
-    plugin: EcoEnchantsPlugin
+    _config: Config
 ) : EcoEnchantBase(id, plugin, _config) {
     private val effects: EffectList
 
     override fun createLevel(level: Int): EcoEnchantLevel {
-        return EcoEnchantLevel(this, level, effects, conditions, plugin)
+        return EcoEnchantLevel(this, level, effects, conditions)
     }
 
     init {

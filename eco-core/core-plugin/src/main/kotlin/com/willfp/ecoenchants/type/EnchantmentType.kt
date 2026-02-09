@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.type
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.registry.Registrable
 import com.willfp.ecoenchants.libreforge.TriggerEnchantType
@@ -9,9 +8,8 @@ import com.willfp.libreforge.triggers.Triggers
 import java.util.Objects
 
 class EnchantmentType(
-    private val plugin: EcoPlugin,
     internal val config: Config
-): Registrable {
+) : Registrable {
     val id = config.getString("id")
     val format = config.getString("format")
     val limit = config.getInt("limit").infiniteIfNegative()
@@ -31,7 +29,7 @@ class EnchantmentType(
     }
 
     override fun onRegister() {
-        Triggers.register(TriggerEnchantType(plugin, this))
+        Triggers.register(TriggerEnchantType(this))
     }
 
     override fun getID(): String {

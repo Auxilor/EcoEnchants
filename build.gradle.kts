@@ -2,10 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     kotlin("jvm") version "2.3.0"
-    id("java-library")
-    id("com.gradleup.shadow") version "9.3.1"
-    id("maven-publish")
     id("java")
+    id("java-library")
+    id("maven-publish")
+    id("com.gradleup.shadow") version "9.3.1"
     id("com.willfp.libreforge-gradle-plugin") version "1.0.3"
 }
 

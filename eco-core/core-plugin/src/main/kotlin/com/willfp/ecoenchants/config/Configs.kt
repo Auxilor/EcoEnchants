@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.config
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.config.BaseConfig
 import com.willfp.eco.core.config.ConfigType
+import com.willfp.ecoenchants.plugin
 
-class TypesYml(plugin: EcoPlugin) : BaseConfig("types", plugin, true, ConfigType.YAML)
-class TargetsYml(plugin: EcoPlugin) : BaseConfig("targets", plugin, true, ConfigType.YAML)
-class RarityYml(plugin: EcoPlugin) : BaseConfig("rarity", plugin, true, ConfigType.YAML)
-class VanillaEnchantsYml(plugin: EcoPlugin) : BaseConfig("vanillaenchants", plugin, false, ConfigType.YAML)
+object TypesYml : BaseConfig("types", plugin, true, ConfigType.YAML)
+object TargetsYml : BaseConfig("targets", plugin, true, ConfigType.YAML)
+object RarityYml : BaseConfig("rarity", plugin, true, ConfigType.YAML)
+object VanillaEnchantsYml : BaseConfig("vanillaenchants", plugin, false, ConfigType.YAML)
