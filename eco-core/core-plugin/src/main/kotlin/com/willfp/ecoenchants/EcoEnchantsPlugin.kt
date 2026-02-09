@@ -43,10 +43,10 @@ internal lateinit var plugin: EcoEnchantsPlugin
     private set
 
 class EcoEnchantsPlugin : LibreforgePlugin() {
-    val targetsYml = TargetsYml
-    val rarityYml = RarityYml
-    val typesYml = TypesYml
-    val vanillaEnchantsYml = VanillaEnchantsYml
+    val targetsYml = TargetsYml(this)
+    val rarityYml = RarityYml(this)
+    val typesYml = TypesYml(this)
+    val vanillaEnchantsYml = VanillaEnchantsYml(this)
     var isLoaded = false
         private set
 
