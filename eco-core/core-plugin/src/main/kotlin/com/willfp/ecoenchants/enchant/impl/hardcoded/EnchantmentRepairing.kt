@@ -27,11 +27,13 @@ object EnchantmentRepairing : HardcodedEcoEnchant(
                 val repairPerLevel = config.getIntFromExpression("repair-per-level", player)
 
                 for ((item, level) in player.getItemsWithEnchantActive(this)) {
-                    val isHolding = item in SlotTypeHands.getItems(player)
-                    val isEquipped = item in SlotTypeArmor.getItems(player)
+                    if (notWhileHolding) {
+                        val isHolding = item in SlotTypeHands.getItems(player)
+                        val isEquipped = item in SlotTypeArmor.getItems(player)
 
-                    if (notWhileHolding && (isHolding || isEquipped)) {
-                        continue
+                        if (isHolding || isEquipped) {
+                            continue
+                        }
                     }
 
                     DurabilityUtils.repairItem(item, level * repairPerLevel)
