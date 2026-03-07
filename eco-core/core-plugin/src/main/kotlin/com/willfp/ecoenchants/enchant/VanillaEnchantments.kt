@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment

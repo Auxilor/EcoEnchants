@@ -4,7 +4,6 @@ import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.fast.FastItemStack
 import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import org.bukkit.inventory.ItemFlag
-import javax.print.attribute.PrintRequestAttribute
 
 class HideStoredEnchants: HideStoredEnchantsProxy {
     override fun hideStoredEnchants(fis: FastItemStack) {
