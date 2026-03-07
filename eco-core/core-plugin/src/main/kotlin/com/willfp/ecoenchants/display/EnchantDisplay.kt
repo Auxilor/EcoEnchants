@@ -19,9 +19,6 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
-import kotlin.collections.component1
-import kotlin.collections.component2
-import kotlin.collections.set
 
 // Works around HIDE_POTION_EFFECTS not existing in 1.20.5+
 interface HideStoredEnchantsProxy {
