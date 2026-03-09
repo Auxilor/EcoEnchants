@@ -150,6 +150,10 @@ class AnvilSupport(
             event.view.maximumRepairCost = maxRepairCost
             event.view.repairCost = if (clampRepairCost) cost.coerceAtMost(maxRepairCost) else cost
 
+            if (!clampRepairCost && maxRepairCost > 0 && cost >= maxRepairCost) {
+                return@run
+            }
+
             event.result = outItem
             event.inventory.setItem(2, outItem)
         }
