@@ -1,6 +1,8 @@
 package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.Subcommand
+import com.willfp.eco.util.StringUtils
+import com.willfp.eco.util.toNiceString
 import com.willfp.ecoenchants.plugin
 import org.bukkit.command.CommandSender
 
@@ -11,7 +13,9 @@ object CommandReload : Subcommand(
     false
 ) {
     override fun onExecute(sender: CommandSender, args: List<String>) {
-        plugin.reload()
-        sender.sendMessage(plugin.langYml.getMessage("reload"))
+        sender.sendMessage(
+            plugin.langYml.getMessage("reloaded", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
+                .replace("%time%", plugin.reloadWithTime().toNiceString())
+        )
     }
 }

@@ -6,7 +6,7 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("com.gradleup.shadow") version "9.3.1"
-    id("com.willfp.libreforge-gradle-plugin") version "1.0.3"
+    id("com.willfp.libreforge-gradle-plugin") version "2.0.0"
 }
 
 group = "com.willfp"
@@ -50,7 +50,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("com.willfp:eco:6.77.6")
+        compileOnly("com.willfp:eco:7.0.0")
         compileOnly("org.jetbrains:annotations:26.0.2")
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.3")
@@ -59,6 +59,10 @@ allprojects {
     tasks {
         shadowJar {
             relocate("com.willfp.libreforge.loader", "com.willfp.ecoenchants.libreforge.loader")
+            relocate("kotlin", "com.willfp.eco.libs.kotlin")
+            relocate("kotlin.jvm", "com.willfp.eco.libs.kotlin.jvm")
+            relocate("kotlin.coroutines", "com.willfp.eco.libs.kotlin.coroutines")
+            relocate("kotlin.reflect", "com.willfp.eco.libs.kotlin.reflect")
         }
 
         compileKotlin {
