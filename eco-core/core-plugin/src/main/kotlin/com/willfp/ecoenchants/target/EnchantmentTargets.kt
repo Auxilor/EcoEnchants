@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.target
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.items.HashedItem
 import com.willfp.eco.core.registry.Registry
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.plugin
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit
 object EnchantmentTargets : Registry<EnchantmentTarget>() {
     init {
         register(AllEnchantmentTarget)
-        update(plugin)
+        update()
     }
 
     private fun getForItem(item: ItemStack): List<EnchantmentTarget> {
@@ -34,7 +33,7 @@ object EnchantmentTargets : Registry<EnchantmentTarget>() {
         }
 
     @JvmStatic
-    fun update(plugin: EcoEnchantsPlugin) {
+    fun update() {
         for (target in values()) {
             if (target is AllEnchantmentTarget) {
                 continue

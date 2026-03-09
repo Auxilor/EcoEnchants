@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.wrap
+import com.willfp.ecoenchants.plugin
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.ExperienceOrb
 import org.bukkit.event.EventHandler
@@ -13,9 +13,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import kotlin.math.max
 
 @Suppress("DEPRECATION")
-class GrindstoneSupport(
-    private val plugin: EcoPlugin
-) : Listener {
+object GrindstoneSupport : Listener {
     @EventHandler
     fun preGrindstone(event: InventoryClickEvent) {
         val inventory = event.view.topInventory as? GrindstoneInventory ?: return

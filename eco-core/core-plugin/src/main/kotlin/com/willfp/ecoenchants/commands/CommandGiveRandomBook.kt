@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.commands
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
@@ -8,6 +7,7 @@ import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
@@ -15,8 +15,11 @@ import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 
-class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
-    plugin, "giverandombook", "ecoenchants.command.giverandombook", false
+object CommandGiveRandomBook : PluginCommand(
+    plugin,
+    "giverandombook",
+    "ecoenchants.command.giverandombook",
+    false
 ) {
     override fun onExecute(sender: CommandSender, args: List<String>) {
         val playerName = args.getOrNull(0)
@@ -89,6 +92,7 @@ class CommandGiveRandomBook(plugin: EcoPlugin) : PluginCommand(
                 val endLevel = startLevel + 10
                 (startLevel..endLevel).map { it.toString() }
             }
+
             else -> emptyList()
         }
     }

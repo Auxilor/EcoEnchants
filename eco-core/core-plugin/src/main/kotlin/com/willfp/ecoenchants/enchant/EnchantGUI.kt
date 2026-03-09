@@ -21,11 +21,11 @@ import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEcoEmpty
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -37,7 +37,7 @@ object EnchantGUI {
     private lateinit var menu: Menu
     private val enchantInfoMenus = Caffeine.newBuilder().build<EcoEnchant, Menu>()
 
-    internal fun reload(plugin: EcoEnchantsPlugin) {
+    internal fun reload() {
         cachedEnchantmentSlots.invalidateAll()
         enchantInfoMenus.invalidateAll()
 
@@ -93,7 +93,7 @@ object EnchantGUI {
                 }
             }
 
-            val pane = EnchantmentScrollPane(plugin)
+            val pane = EnchantmentScrollPane()
 
             addComponent(
                 plugin.configYml.getInt("enchant-gui.enchant-area.row"),
@@ -101,7 +101,7 @@ object EnchantGUI {
                 pane
             )
 
-            for (direction in PageChanger.Direction.values()) {
+            for (direction in PageChanger.Direction.entries) {
                 val directionName = direction.name.lowercase()
 
                 addComponent(
@@ -150,7 +150,7 @@ object EnchantGUI {
         menu.open(player)
     }
 
-    fun openInfoGUI(player: Player, enchant: EcoEnchant, plugin: EcoEnchantsPlugin) {
+    fun openInfoGUI(player: Player, enchant: EcoEnchant) {
         enchantInfoMenus.get(enchant) {
             menu(plugin.configYml.getInt("enchantinfo.rows")) {
                 title = enchant.getFormattedName(0)
@@ -158,7 +158,7 @@ object EnchantGUI {
                 setSlot(
                     plugin.configYml.getInt("enchantinfo.item.row"),
                     plugin.configYml.getInt("enchantinfo.item.column"),
-                    enchant.getInformationSlot(plugin, player)
+                    enchant.getInformationSlot(player)
                 )
 
                 setMask(
@@ -180,12 +180,10 @@ object EnchantGUI {
     }
 }
 
-private class EnchantmentScrollPane(
-    private val plugin: EcoEnchantsPlugin
-) : GUIComponent {
+private class EnchantmentScrollPane : GUIComponent {
     private val defaultSlot = slot(Items.lookup(plugin.configYml.getString("enchant-gui.empty-item")))
 
-    override fun getSlotAt(row: Int, column: Int, player: Player, menu: Menu): Slot? {
+    override fun getSlotAt(row: Int, column: Int, player: Player, menu: Menu): Slot {
         val index = column + ((row - 1) * columns) - 1
         val page = menu.getPage(player)
 
@@ -196,7 +194,7 @@ private class EnchantmentScrollPane(
 
         val enchant = enchants.getOrNull(index + size * (page - 1)) ?: return defaultSlot
 
-        return enchant.getInformationSlot(plugin, player)
+        return enchant.getInformationSlot(player)
     }
 
     override fun getRows() = plugin.configYml.getInt("enchant-gui.enchant-area.height")
@@ -208,7 +206,7 @@ private class EnchantmentScrollPane(
 private val cachedEnchantmentSlots = Caffeine.newBuilder()
     .build<EcoEnchant, Slot>()
 
-private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Player): Slot {
+private fun EcoEnchant.getInformationSlot(player: Player): Slot {
     return cachedEnchantmentSlots.get(this) { it ->
         val level = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) {
             it.maximumLevel
@@ -242,8 +240,14 @@ private fun EcoEnchant.getInformationSlot(plugin: EcoEnchantsPlugin, player: Pla
                                     }
                                 )
                                 .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo(plugin.langYml))
-                                .replace("%discoverable%", this.isObtainableThroughDiscovery.parseYesOrNo(plugin.langYml))
-                                .replace("%enchantable%", this.isObtainableThroughEnchanting.parseYesOrNo(plugin.langYml))
+                                .replace(
+                                    "%discoverable%",
+                                    this.isObtainableThroughDiscovery.parseYesOrNo(plugin.langYml)
+                                )
+                                .replace(
+                                    "%enchantable%",
+                                    this.isObtainableThroughEnchanting.parseYesOrNo(plugin.langYml)
+                                )
                         }
                         .formatEco()
                         .flatMap {

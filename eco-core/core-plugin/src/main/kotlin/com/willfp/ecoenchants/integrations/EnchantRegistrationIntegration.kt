@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.integrations
 import com.willfp.eco.core.integrations.Integration
 import com.willfp.ecoenchants.enchant.EcoEnchant
 
-
 interface EnchantRegistrationIntegration : Integration {
     fun registerEnchants()
 
