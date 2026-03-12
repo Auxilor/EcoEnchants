@@ -10,12 +10,11 @@ dependencies {
     compileOnly("net.essentialsx:EssentialsX:2.19.7") {
         exclude("*", "*")
     }
-    compileOnly("commons-lang:commons-lang:2.6")
 }
 
 tasks {
     build {
-        dependsOn("publishToMavenLocal")
+        dependsOn(publishToMavenLocal)
     }
 }
 

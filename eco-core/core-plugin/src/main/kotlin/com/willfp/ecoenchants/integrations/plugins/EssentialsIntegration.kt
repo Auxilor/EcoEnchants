@@ -7,7 +7,7 @@ import com.willfp.ecoenchants.integrations.EnchantRegistrationIntegration
 import org.bukkit.enchantments.Enchantment
 
 @Suppress("UNCHECKED_CAST")
-class EssentialsIntegration : EnchantRegistrationIntegration {
+object EssentialsIntegration : EnchantRegistrationIntegration {
     override fun registerEnchants() {
         for (enchantment in EcoEnchants.values()) {
             // why aren't you using the api you PRd in

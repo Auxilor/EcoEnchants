@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.plugin
 
 class MissingDependencyException(
     val plugins: Set<String>
@@ -22,7 +22,7 @@ fun addPluginPrompt(plugin: EcoEnchantsPlugin, plugins: Set<String>) {
     }
 }
 
-fun sendPrompts(plugin: EcoPlugin) {
+fun sendPrompts() {
     for ((pl, amount) in prompts) {
         plugin.logger.apply {
             warning("$amount enchantments were not loaded because they need $pl to be installed!")

@@ -2,10 +2,10 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.conflictsWithDeep
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -15,13 +15,10 @@ import org.bukkit.inventory.MerchantRecipe
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import kotlin.math.ceil
 
-
-class VillagerSupport(
-    private val plugin: EcoEnchantsPlugin
-) : Listener {
+object VillagerSupport : Listener {
     @EventHandler
     fun onTrade(event: VillagerAcquireTradeEvent) {
-        if (!this.plugin.configYml.getBool("villager.enabled")) {
+        if (!plugin.configYml.getBool("villager.enabled")) {
             return
         }
 
@@ -80,7 +77,7 @@ class VillagerSupport(
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= this.plugin.configYml.getDouble("villager.reduction")
+            multiplier /= plugin.configYml.getDouble("villager.reduction")
 
             if (result.type == Material.ENCHANTED_BOOK) {
                 // Only allow one enchantment

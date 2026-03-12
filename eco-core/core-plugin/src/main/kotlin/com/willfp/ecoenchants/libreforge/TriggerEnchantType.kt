@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.libreforge
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.wrap
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.libreforge.toDispatcher
 import com.willfp.libreforge.triggers.Trigger
@@ -13,7 +13,6 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.enchantment.EnchantItemEvent
 
 class TriggerEnchantType(
-    private val plugin: EcoPlugin,
     private val type: EnchantmentType
 ) : Trigger("enchant_${type.id}") {
     override val parameters = setOf(

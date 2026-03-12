@@ -4,7 +4,7 @@ placeholder: "ceil(((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100)"
 type: normal
 
 targets:
-  - shears
+  - hoe
 conflicts: [ ]
 rarity: common
 max-level: 4

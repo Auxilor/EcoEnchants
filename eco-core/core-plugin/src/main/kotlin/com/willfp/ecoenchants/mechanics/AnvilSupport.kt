@@ -7,6 +7,7 @@ import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
+import com.willfp.ecoenchants.plugin
 import org.bukkit.Material
 import org.bukkit.Tag
 import org.bukkit.entity.Player
@@ -38,9 +39,7 @@ interface OpenInventoryProxy {
     fun getOpenInventory(player: Player): Any
 }
 
-class AnvilSupport(
-    private val plugin: EcoPlugin
-) : Listener {
+object AnvilSupport : Listener {
     init {
         if (is_1_21_11() && repair[Tag.PLANKS.values]?.contains(Material.WOODEN_SPEAR) != true) {
 
@@ -75,6 +74,7 @@ class AnvilSupport(
         }
     }
 
+object AnvilSupport : Listener {
     /**
      * Map to prevent incrementing cost several times as inventory events are fired 3 times.
      */
@@ -85,8 +85,9 @@ class AnvilSupport(
      */
     private val anvilGuiClass = "net.wesjd.anvilgui.version.Wrapper" +
             ProxyConstants.NMS_VERSION.substring(1) +
-            "\$AnvilContainer"
+            $$"$AnvilContainer"
 
+    @Suppress("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGHEST)
     fun onAnvilPrepare(event: PrepareAnvilEvent) {
         val player = event.viewers.getOrNull(0) as? Player ?: return
@@ -103,7 +104,7 @@ class AnvilSupport(
             }
         }
 
-        if (this.plugin.getProxy(OpenInventoryProxy::class.java)
+        if (plugin.getProxy(OpenInventoryProxy::class.java)
                 .getOpenInventory(player)::class.java.toString() == anvilGuiClass
         ) {
             return
@@ -115,7 +116,7 @@ class AnvilSupport(
 
         antiRepeat.add(player.uniqueId)
 
-        this.plugin.scheduler.run {
+        plugin.scheduler.run {
             antiRepeat.remove(player.uniqueId)
 
             val left = event.inventory.getItem(0)?.clone()
