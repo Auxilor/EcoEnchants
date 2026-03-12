@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants.mechanics
 
+import com.willfp.eco.core.EcoPlugin
+import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
@@ -36,6 +38,41 @@ private val FAIL = AnvilResult(null, null)
 interface OpenInventoryProxy {
     fun getOpenInventory(player: Player): Any
 }
+
+object AnvilSupport : Listener {
+    init {
+        if (is_1_21_11() && repair[Tag.PLANKS.values]?.contains(Material.WOODEN_SPEAR) != true) {
+
+            repair[Tag.PLANKS.values] = repair[Tag.PLANKS.values]!! + listOf(
+                Material.WOODEN_SPEAR
+            )
+
+            repair[listOf(Material.COBBLESTONE, Material.COBBLED_DEEPSLATE, Material.BLACKSTONE)] =
+                repair[listOf(Material.COBBLESTONE, Material.COBBLED_DEEPSLATE, Material.BLACKSTONE)]!! + listOf(
+                    Material.STONE_SPEAR
+                )
+
+            repair[listOf(Material.COPPER_INGOT)] = repair[listOf(Material.LEATHER)]!! + listOf(
+                Material.COPPER_SPEAR
+            )
+
+            repair[listOf(Material.IRON_INGOT)] = repair[listOf(Material.IRON_INGOT)]!! + listOf(
+                Material.IRON_SPEAR
+            )
+
+            repair[listOf(Material.GOLD_INGOT)] = repair[listOf(Material.GOLD_INGOT)]!! + listOf(
+                Material.GOLDEN_SPEAR
+            )
+
+            repair[listOf(Material.DIAMOND)] = repair[listOf(Material.DIAMOND)]!! + listOf(
+                Material.DIAMOND_SPEAR
+            )
+
+            repair[listOf(Material.NETHERITE_INGOT)] = repair[listOf(Material.NETHERITE_INGOT)]!! + listOf(
+                Material.NETHERITE_SPEAR
+            )
+        }
+    }
 
 object AnvilSupport : Listener {
     /**
@@ -280,8 +317,17 @@ object AnvilSupport : Listener {
     }
 }
 
+private fun is_1_21_11(): Boolean {
+    return try {
+        Material.IRON_SPEAR
+        true
+    } catch (e: NoSuchFieldError) {
+        false
+    }
+}
 
-private val repair = mapOf<Collection<Material>, Collection<Material>>(
+
+private val repair = mutableMapOf<Collection<Material>, Collection<Material>>(
     Pair(
         Tag.PLANKS.values,
         listOf(
