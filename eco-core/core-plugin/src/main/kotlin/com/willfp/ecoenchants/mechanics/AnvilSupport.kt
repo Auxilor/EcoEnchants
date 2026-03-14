@@ -39,6 +39,127 @@ interface OpenInventoryProxy {
     fun getOpenInventory(player: Player): Any
 }
 
+private val repair = mutableMapOf<Collection<Material>, Collection<Material>>(
+    Pair(
+        Tag.PLANKS.values,
+        listOf(
+            Material.WOODEN_SWORD,
+            Material.WOODEN_PICKAXE,
+            Material.WOODEN_AXE,
+            Material.WOODEN_SHOVEL,
+            Material.WOODEN_HOE,
+            Material.SHIELD
+        )
+    ),
+    Pair(
+        listOf(Material.LEATHER),
+        listOf(
+            Material.LEATHER_HELMET,
+            Material.LEATHER_CHESTPLATE,
+            Material.LEATHER_LEGGINGS,
+            Material.LEATHER_BOOTS
+        )
+    ),
+    Pair(
+        listOf(
+            Material.COBBLESTONE,
+            Material.COBBLED_DEEPSLATE,
+            Material.BLACKSTONE
+        ),
+        listOf(
+            Material.STONE_SWORD,
+            Material.STONE_PICKAXE,
+            Material.STONE_AXE,
+            Material.STONE_SHOVEL,
+            Material.STONE_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.IRON_INGOT
+        ),
+        listOf(
+            Material.IRON_HELMET,
+            Material.IRON_CHESTPLATE,
+            Material.IRON_LEGGINGS,
+            Material.IRON_BOOTS,
+            Material.CHAINMAIL_HELMET,
+            Material.CHAINMAIL_CHESTPLATE,
+            Material.CHAINMAIL_LEGGINGS,
+            Material.CHAINMAIL_BOOTS,
+            Material.IRON_SWORD,
+            Material.IRON_PICKAXE,
+            Material.IRON_AXE,
+            Material.IRON_SHOVEL,
+            Material.IRON_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.GOLD_INGOT
+        ),
+        listOf(
+            Material.GOLDEN_HELMET,
+            Material.GOLDEN_CHESTPLATE,
+            Material.GOLDEN_LEGGINGS,
+            Material.GOLDEN_BOOTS,
+            Material.GOLDEN_SWORD,
+            Material.GOLDEN_PICKAXE,
+            Material.GOLDEN_AXE,
+            Material.GOLDEN_SHOVEL,
+            Material.GOLDEN_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.DIAMOND
+        ),
+        listOf(
+            Material.DIAMOND_HELMET,
+            Material.DIAMOND_CHESTPLATE,
+            Material.DIAMOND_LEGGINGS,
+            Material.DIAMOND_BOOTS,
+            Material.DIAMOND_SWORD,
+            Material.DIAMOND_PICKAXE,
+            Material.DIAMOND_AXE,
+            Material.DIAMOND_SHOVEL,
+            Material.DIAMOND_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.NETHERITE_INGOT
+        ),
+        listOf(
+            Material.NETHERITE_HELMET,
+            Material.NETHERITE_CHESTPLATE,
+            Material.NETHERITE_LEGGINGS,
+            Material.NETHERITE_BOOTS,
+            Material.NETHERITE_SWORD,
+            Material.NETHERITE_PICKAXE,
+            Material.NETHERITE_AXE,
+            Material.NETHERITE_SHOVEL,
+            Material.NETHERITE_HOE
+        )
+    ),
+    Pair(
+        listOf(
+            Material.TURTLE_SCUTE
+        ),
+        listOf(
+            Material.TURTLE_HELMET
+        )
+    ),
+    Pair(
+        listOf(
+            Material.PHANTOM_MEMBRANE
+        ),
+        listOf(
+            Material.ELYTRA
+        )
+    )
+)
+
 object AnvilSupport : Listener {
     init {
         if (is_1_21_11() && repair[Tag.PLANKS.values]?.contains(Material.WOODEN_SPEAR) != true) {
@@ -74,7 +195,6 @@ object AnvilSupport : Listener {
         }
     }
 
-object AnvilSupport : Listener {
     /**
      * Map to prevent incrementing cost several times as inventory events are fired 3 times.
      */
@@ -325,128 +445,6 @@ private fun is_1_21_11(): Boolean {
         false
     }
 }
-
-
-private val repair = mutableMapOf<Collection<Material>, Collection<Material>>(
-    Pair(
-        Tag.PLANKS.values,
-        listOf(
-            Material.WOODEN_SWORD,
-            Material.WOODEN_PICKAXE,
-            Material.WOODEN_AXE,
-            Material.WOODEN_SHOVEL,
-            Material.WOODEN_HOE,
-            Material.SHIELD
-        )
-    ),
-    Pair(
-        listOf(Material.LEATHER),
-        listOf(
-            Material.LEATHER_HELMET,
-            Material.LEATHER_CHESTPLATE,
-            Material.LEATHER_LEGGINGS,
-            Material.LEATHER_BOOTS
-        )
-    ),
-    Pair(
-        listOf(
-            Material.COBBLESTONE,
-            Material.COBBLED_DEEPSLATE,
-            Material.BLACKSTONE
-        ),
-        listOf(
-            Material.STONE_SWORD,
-            Material.STONE_PICKAXE,
-            Material.STONE_AXE,
-            Material.STONE_SHOVEL,
-            Material.STONE_HOE
-        )
-    ),
-    Pair(
-        listOf(
-            Material.IRON_INGOT
-        ),
-        listOf(
-            Material.IRON_HELMET,
-            Material.IRON_CHESTPLATE,
-            Material.IRON_LEGGINGS,
-            Material.IRON_BOOTS,
-            Material.CHAINMAIL_HELMET,
-            Material.CHAINMAIL_CHESTPLATE,
-            Material.CHAINMAIL_LEGGINGS,
-            Material.CHAINMAIL_BOOTS,
-            Material.IRON_SWORD,
-            Material.IRON_PICKAXE,
-            Material.IRON_AXE,
-            Material.IRON_SHOVEL,
-            Material.IRON_HOE
-        )
-    ),
-    Pair(
-        listOf(
-            Material.GOLD_INGOT
-        ),
-        listOf(
-            Material.GOLDEN_HELMET,
-            Material.GOLDEN_CHESTPLATE,
-            Material.GOLDEN_LEGGINGS,
-            Material.GOLDEN_BOOTS,
-            Material.GOLDEN_SWORD,
-            Material.GOLDEN_PICKAXE,
-            Material.GOLDEN_AXE,
-            Material.GOLDEN_SHOVEL,
-            Material.GOLDEN_HOE
-        )
-    ),
-    Pair(
-        listOf(
-            Material.DIAMOND
-        ),
-        listOf(
-            Material.DIAMOND_HELMET,
-            Material.DIAMOND_CHESTPLATE,
-            Material.DIAMOND_LEGGINGS,
-            Material.DIAMOND_BOOTS,
-            Material.DIAMOND_SWORD,
-            Material.DIAMOND_PICKAXE,
-            Material.DIAMOND_AXE,
-            Material.DIAMOND_SHOVEL,
-            Material.DIAMOND_HOE
-        )
-    ),
-    Pair(
-        listOf(
-            Material.NETHERITE_INGOT
-        ),
-        listOf(
-            Material.NETHERITE_HELMET,
-            Material.NETHERITE_CHESTPLATE,
-            Material.NETHERITE_LEGGINGS,
-            Material.NETHERITE_BOOTS,
-            Material.NETHERITE_SWORD,
-            Material.NETHERITE_PICKAXE,
-            Material.NETHERITE_AXE,
-            Material.NETHERITE_SHOVEL,
-            Material.NETHERITE_HOE
-        )
-    ),
-    Pair(
-        listOf(
-            Material.TURTLE_SCUTE
-        ),
-        listOf(
-            Material.TURTLE_HELMET
-        )
-    ),
-    Pair(
-        listOf(
-            Material.PHANTOM_MEMBRANE
-        ),
-        listOf(
-            Material.ELYTRA
-        )
-    )
-)
 
 fun Material.canUnitRepair(other: Material): Boolean {
     for ((units, repairable) in repair) {
