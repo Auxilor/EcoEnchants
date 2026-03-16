@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.EcoPlugin
-import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.proxy.ProxyConstants
 import com.willfp.eco.util.StringUtils
@@ -14,7 +12,11 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.PrepareAnvilEvent
+import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.inventory.AnvilInventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.Damageable
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
@@ -195,10 +197,9 @@ object AnvilSupport : Listener {
         }
     }
 
-    /**
-     * Map to prevent incrementing cost several times as inventory events are fired 3 times.
-     */
-    private val antiRepeat = mutableSetOf<UUID>()
+    private val latestPreviewGeneration = mutableMapOf<UUID, Int>()
+
+    private val renderedPreviewGeneration = mutableMapOf<UUID, Int>()
 
     /**
      * Class for AnvilGUI wrappers to ignore them.
@@ -207,10 +208,54 @@ object AnvilSupport : Listener {
             ProxyConstants.NMS_VERSION.substring(1) +
             $$"$AnvilContainer"
 
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    fun onAnvilResultClick(event: InventoryClickEvent) {
+        val player = event.whoClicked as? Player ?: return
+        val inventory = event.view.topInventory as? AnvilInventory ?: return
+
+        if (event.rawSlot != 2) {
+            return
+        }
+
+        if (plugin.getProxy(OpenInventoryProxy::class.java)
+                .getOpenInventory(player)::class.java.toString() == anvilGuiClass
+        ) {
+            return
+        }
+
+        val latestGeneration = latestPreviewGeneration[player.uniqueId] ?: return
+        val renderedGeneration = renderedPreviewGeneration[player.uniqueId]
+
+        if (latestGeneration == renderedGeneration) {
+            return
+        }
+
+        event.isCancelled = true
+        event.currentItem = null
+        inventory.setItem(2, null)
+    }
+
+    @EventHandler
+    fun onAnvilClose(event: InventoryCloseEvent) {
+        val player = event.player as? Player ?: return
+
+        latestPreviewGeneration.remove(player.uniqueId)
+        renderedPreviewGeneration.remove(player.uniqueId)
+    }
+
+    @EventHandler
+    fun onQuit(event: PlayerQuitEvent) {
+        latestPreviewGeneration.remove(event.player.uniqueId)
+        renderedPreviewGeneration.remove(event.player.uniqueId)
+    }
+
     @Suppress("UnstableApiUsage")
     @EventHandler(priority = EventPriority.HIGHEST)
     fun onAnvilPrepare(event: PrepareAnvilEvent) {
         val player = event.viewers.getOrNull(0) as? Player ?: return
+        val generation = (latestPreviewGeneration[player.uniqueId] ?: 0) + 1
+        latestPreviewGeneration[player.uniqueId] = generation
+        renderedPreviewGeneration.remove(player.uniqueId)
         val permanenceCurse = EcoEnchants.getByID("permanence_curse")
         val leftItem = event.inventory.getItem(0)
         val rightItem = event.inventory.getItem(1)
@@ -230,21 +275,19 @@ object AnvilSupport : Listener {
             return
         }
 
-        if (antiRepeat.contains(player.uniqueId)) {
-            return
-        }
+        val baseRepairCost = event.view.repairCost
 
-        antiRepeat.add(player.uniqueId)
+        event.result = null
+        event.inventory.setItem(2, null)
 
         plugin.scheduler.run {
-            antiRepeat.remove(player.uniqueId)
+            if (latestPreviewGeneration[player.uniqueId] != generation) {
+                return@run
+            }
 
             val left = event.inventory.getItem(0)?.clone()
             val old = left?.clone()
             val right = event.inventory.getItem(1)?.clone()
-
-            event.result = null
-            event.inventory.setItem(2, null)
 
             val result = doMerge(
                 left,
@@ -256,8 +299,6 @@ object AnvilSupport : Listener {
 
             val price = result.xp ?: 0
             val outItem = result.result ?: ItemStack(Material.AIR)
-
-            val oldCost = event.view.repairCost
 
             val oldLeft = event.inventory.getItem(0)
 
@@ -273,10 +314,10 @@ object AnvilSupport : Listener {
                 return@run
             }
 
-            var cost = oldCost + price
+            var cost = baseRepairCost + price
 
             // Unbelievably specific edge case
-            if (oldCost == -price) {
+            if (baseRepairCost == -price) {
                 cost = price
             }
 
@@ -303,6 +344,10 @@ object AnvilSupport : Listener {
             val clampRepairCost = plugin.configYml.getBool("anvil.clamp-repair-cost")
             val maxRepairCost = plugin.configYml.getInt("anvil.max-repair-cost")
 
+            if (latestPreviewGeneration[player.uniqueId] != generation) {
+                return@run
+            }
+
             event.view.maximumRepairCost = maxRepairCost
             event.view.repairCost = if (clampRepairCost) cost.coerceAtMost(maxRepairCost) else cost
 
@@ -310,8 +355,13 @@ object AnvilSupport : Listener {
                 return@run
             }
 
+            if (latestPreviewGeneration[player.uniqueId] != generation) {
+                return@run
+            }
+
             event.result = outItem
             event.inventory.setItem(2, outItem)
+            renderedPreviewGeneration[player.uniqueId] = generation
         }
     }
 
@@ -390,7 +440,7 @@ object AnvilSupport : Listener {
                 }
             } else {
                 // Running .wrap() to use EcoEnchantLike canEnchantItem logic
-                if (enchant.wrap().canEnchantItem(left)) {
+                if (enchant.wrap().canEnchantItem(left, outEnchants.keys)) {
                     if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                         outEnchants[enchant] = level
                     }
@@ -441,7 +491,7 @@ private fun is_1_21_11(): Boolean {
     return try {
         Material.IRON_SPEAR
         true
-    } catch (e: NoSuchFieldError) {
+    } catch (_: NoSuchFieldError) {
         false
     }
 }

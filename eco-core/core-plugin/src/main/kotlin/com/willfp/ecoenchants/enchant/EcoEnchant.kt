@@ -24,6 +24,11 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     val conflicts: Set<Enchantment>
 
     /**
+     * The required enchantments.
+     */
+    val required: Set<Enchantment>
+
+    /**
      * The enchantment targets.
      */
     val targets: Set<EnchantmentTarget>
@@ -77,5 +82,14 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
         }
 
         return false
+    }
+
+    /**
+     * Get if all required enchantments are in [other].
+     */
+    fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean {
+        return required.all { requiredEnchant ->
+            other.any { otherEnchant -> otherEnchant.key == requiredEnchant.key }
+        }
     }
 }
