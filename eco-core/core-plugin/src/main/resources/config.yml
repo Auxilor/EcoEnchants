@@ -106,6 +106,7 @@ enchantinfo:
       - "&fRarity: &a%rarity%"
       - "&fApplicable to: &a%targets%"
       - "&fConflicts with: &a%conflicts%"
+      - "&fRequires: &a%required%"
 
   # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
   custom-slots: [ ]

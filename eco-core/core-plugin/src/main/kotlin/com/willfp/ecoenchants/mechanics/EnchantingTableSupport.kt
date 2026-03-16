@@ -5,9 +5,7 @@ import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.randDouble
-import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
-import com.willfp.ecoenchants.enchant.conflictsWithDeep
 import com.willfp.ecoenchants.plugin
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -83,7 +81,7 @@ object EnchantingTableSupport : Listener {
                 continue
             }
 
-            if (!enchantment.canEnchantItem(item)) {
+            if (!enchantment.canEnchantItem(item, toAdd.keys)) {
                 continue
             }
 
@@ -112,16 +110,6 @@ object EnchantingTableSupport : Listener {
                 break
             }
 
-            if (toAdd.any { (it, _) -> enchantment.enchantment.conflictsWithDeep(it) }) {
-                continue
-            }
-
-            if (
-                toAdd.keys.filterIsInstance<EcoEnchant>()
-                    .count { it.type == enchantment.type } >= enchantment.type.limit
-            ) {
-                continue
-            }
 
             val maxLevel = enchantment.maximumLevel
             val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")

@@ -390,7 +390,7 @@ object AnvilSupport : Listener {
                 }
             } else {
                 // Running .wrap() to use EcoEnchantLike canEnchantItem logic
-                if (enchant.wrap().canEnchantItem(left)) {
+                if (enchant.wrap().canEnchantItem(left, outEnchants.keys)) {
                     if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                         outEnchants[enchant] = level
                     }

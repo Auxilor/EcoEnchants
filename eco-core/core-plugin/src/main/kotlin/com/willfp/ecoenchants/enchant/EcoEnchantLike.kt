@@ -56,20 +56,30 @@ interface EcoEnchantLike {
     /**
      * Get if this enchantment can be applied to [item].
      */
-    fun canEnchantItem(item: ItemStack): Boolean {
+    fun canEnchantItem(
+        item: ItemStack,
+        additionalEnchantments: Collection<Enchantment> = emptyList()
+    ): Boolean {
+        val enchants = (item.fast().getEnchants(true).keys + additionalEnchantments)
+            .distinctBy { it.key }
+
         if (
-            item.fast().getEnchants(true).keys
+            enchants
                 .map { it.wrap() }
                 .count { it.type == this.type } >= this.type.limit
         ) {
             return false
         }
 
-        if (item.fast().getEnchants(true).any { (enchant, _) -> enchant.conflictsWithDeep(this.enchantment) }) {
+        if (enchants.any { enchant -> enchant.conflictsWithDeep(this.enchantment) }) {
             return false
         }
 
-        if (item.fast().getEnchants(true).size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+        if (this is EcoEnchant && !this.hasRequiredEnchantments(enchants)) {
+            return false
+        }
+
+        if (enchants.size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
             return false
         }
 

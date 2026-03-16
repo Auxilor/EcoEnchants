@@ -2,9 +2,7 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
-import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
-import com.willfp.ecoenchants.enchant.conflictsWithDeep
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
@@ -47,7 +45,7 @@ object LootSupport : Listener {
                 continue
             }
 
-            if (!enchantment.canEnchantItem(item)) {
+            if (!enchantment.canEnchantItem(item, enchants.keys)) {
                 continue
             }
 
@@ -55,20 +53,10 @@ object LootSupport : Listener {
                 continue
             }
 
-            if (enchants.any { (it, _) -> enchantment.enchantment.conflictsWithDeep(it) }) {
-                continue
-            }
-
             if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
 
-            if (
-                enchants.keys.filterIsInstance<EcoEnchant>()
-                    .count { it.type == enchantment.type } >= enchantment.type.limit
-            ) {
-                continue
-            }
 
             val maxLevel = enchantment.maximumLevel
 

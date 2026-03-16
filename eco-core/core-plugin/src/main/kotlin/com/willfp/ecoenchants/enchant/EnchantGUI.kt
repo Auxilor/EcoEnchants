@@ -239,6 +239,12 @@ private fun EcoEnchant.getInformationSlot(player: Player): Slot {
                                         }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
                                     }
                                 )
+                                .replace(
+                                    "%required%",
+                                    this.required.joinToString(", ") { required ->
+                                        required.wrap().getFormattedName(0)
+                                    }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
+                                )
                                 .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo(plugin.langYml))
                                 .replace(
                                     "%discoverable%",
