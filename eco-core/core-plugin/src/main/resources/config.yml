@@ -155,6 +155,15 @@ enchant-gui:
       row: 6
       column: 4
 
+  # Optional close button for the enchant GUI
+  close-button:
+    enabled: true
+    item: barrier
+    name: "&cClose"
+    lore: [ ]
+    row: 6
+    column: 5
+
   # Options for the area where the enchantments are shown
   enchant-area:
     width: 7 # The width of the enchantment area

@@ -115,6 +115,21 @@ object EnchantGUI {
                 )
             }
 
+            if (plugin.configYml.getBool("enchant-gui.close-button.enabled")) {
+                setSlot(
+                    plugin.configYml.getInt("enchant-gui.close-button.row"),
+                    plugin.configYml.getInt("enchant-gui.close-button.column"),
+                    slot(
+                        ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.close-button.item")))
+                            .setDisplayName(plugin.configYml.getFormattedString("enchant-gui.close-button.name"))
+                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.close-button.lore"))
+                            .build()
+                    ) {
+                        onLeftClick { event, _ -> event.whoClicked.closeInventory() }
+                    }
+                )
+            }
+
             maxPages { player ->
                 val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: emptyList()
                 val total = enchants.size
