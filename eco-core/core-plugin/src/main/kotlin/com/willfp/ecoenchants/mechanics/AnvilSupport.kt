@@ -297,14 +297,17 @@ object AnvilSupport : Listener {
                 player
             )
 
+            if (result == FAIL) {
+                return@run
+            }
+
+            event.result = null
+            event.inventory.setItem(2, null)
+
             val price = result.xp ?: 0
             val outItem = result.result ?: ItemStack(Material.AIR)
 
             val oldLeft = event.inventory.getItem(0)
-
-            if (result == FAIL) {
-                return@run
-            }
 
             if (oldLeft == null || oldLeft.type != outItem.type) {
                 return@run
