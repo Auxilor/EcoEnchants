@@ -1,12 +1,11 @@
 package com.willfp.ecoenchants.display
 
-import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.wrap
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
-import org.bukkit.ChatColor
 import org.bukkit.enchantments.Enchantment
 
 interface EnchantmentSorter {
@@ -16,7 +15,7 @@ interface EnchantmentSorter {
 object EnchantSorter {
     private val sorters = mutableListOf<EnchantmentSorter>()
 
-    internal fun reload(plugin: EcoEnchantsPlugin) {
+    internal fun reload() {
         sorters.clear()
 
         if (plugin.configYml.getBool("display.sort.rarity")) {
@@ -41,20 +40,22 @@ fun List<EnchantmentSorter>.getSafely(index: Int) =
 
 object AlphabeticSorter : EnchantmentSorter {
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().getFormattedName(0)) }
+        @Suppress("DEPRECATION")
+        return enchantments.sortedBy { org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0)) }
     }
 }
 
 object LengthSorter : EnchantmentSorter {
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        return enchantments.sortedBy { ChatColor.stripColor(it.wrap().getFormattedName(0))!!.length }
+        @Suppress("DEPRECATION")
+        return enchantments.sortedBy { org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0))!!.length }
     }
 }
 
 object TypeSorter : EnchantmentSorter {
     private val types = mutableListOf<EnchantmentType>()
 
-    fun update(plugin: EcoEnchantsPlugin) {
+    fun update() {
         types.clear()
         types.addAll(plugin.configYml.getStrings("display.sort.type-order").mapNotNull {
             EnchantmentTypes[it]
@@ -81,7 +82,7 @@ object TypeSorter : EnchantmentSorter {
 object RaritySorter : EnchantmentSorter {
     private val rarities = mutableListOf<EnchantmentRarity>()
 
-    fun update(plugin: EcoEnchantsPlugin) {
+    fun update() {
         rarities.clear()
         rarities.addAll(plugin.configYml.getStrings("display.sort.rarity-order").mapNotNull {
             EnchantmentRarities[it]

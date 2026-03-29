@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    java
-    `java-library`
-    `maven-publish`
-    kotlin("jvm") version "2.1.0"
-    id("com.gradleup.shadow") version "8.3.5"
-    id("com.willfp.libreforge-gradle-plugin") version "1.0.0"
+    kotlin("jvm") version "2.3.0"
+    id("java")
+    id("java-library")
+    id("maven-publish")
+    id("com.gradleup.shadow") version "9.3.1"
+    id("com.willfp.libreforge-gradle-plugin") version "2.0.0"
 }
 
 group = "com.willfp"
@@ -19,18 +19,13 @@ base {
 
 dependencies {
     implementation(project(":eco-core:core-plugin"))
-    implementation(project(":eco-core:core-nms:v1_17_R1"))
-    implementation(project(":eco-core:core-nms:v1_18_R1"))
-    implementation(project(":eco-core:core-nms:v1_18_R2"))
-    implementation(project(":eco-core:core-nms:v1_19_R1"))
-    implementation(project(":eco-core:core-nms:v1_19_R2"))
-    implementation(project(":eco-core:core-nms:v1_19_R3"))
-    implementation(project(":eco-core:core-nms:v1_20_R1"))
-    implementation(project(":eco-core:core-nms:v1_20_R2"))
-    implementation(project(":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21_3", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_4", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_5", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_6", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_7", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_8", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_10", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_11", configuration = "reobf"))
 }
 
 allprojects {
@@ -55,20 +50,24 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("com.willfp:eco:6.75.0")
-        compileOnly("org.jetbrains:annotations:23.0.0")
-        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
-        compileOnly("com.github.ben-manes.caffeine:caffeine:3.1.5")
+        compileOnly("com.willfp:eco:7.0.0")
+        compileOnly("org.jetbrains:annotations:26.0.2")
+        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
+        compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.3")
     }
 
     tasks {
         shadowJar {
             relocate("com.willfp.libreforge.loader", "com.willfp.ecoenchants.libreforge.loader")
+            relocate("kotlin", "com.willfp.eco.libs.kotlin")
+            relocate("kotlin.jvm", "com.willfp.eco.libs.kotlin.jvm")
+            relocate("kotlin.coroutines", "com.willfp.eco.libs.kotlin.coroutines")
+            relocate("kotlin.reflect", "com.willfp.eco.libs.kotlin.reflect")
         }
 
         compileKotlin {
             compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
+                jvmTarget.set(JvmTarget.JVM_21)
             }
         }
 
@@ -83,7 +82,7 @@ allprojects {
             filesMatching(listOf("**plugin.yml", "**eco.yml")) {
                 expand(
                     "version" to project.version,
-                    "libreforgeVersion" to libreforgeVersion,
+                    "libreforgeVersion" to libreforgeVersion!!,
                     "pluginName" to rootProject.name
                 )
             }
@@ -94,7 +93,7 @@ allprojects {
         }
 
         withType<JavaCompile>().configureEach {
-            options.release = 17
+            options.release = 21
         }
     }
 

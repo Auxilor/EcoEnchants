@@ -2,10 +2,8 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
-import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
-import com.willfp.ecoenchants.enchant.conflictsWithDeep
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -15,13 +13,10 @@ import org.bukkit.inventory.MerchantRecipe
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import kotlin.math.ceil
 
-
-class VillagerSupport(
-    private val plugin: EcoEnchantsPlugin
-) : Listener {
+object VillagerSupport : Listener {
     @EventHandler
     fun onTrade(event: VillagerAcquireTradeEvent) {
-        if (!this.plugin.configYml.getBool("villager.enabled")) {
+        if (!plugin.configYml.getBool("villager.enabled")) {
             return
         }
 
@@ -50,7 +45,7 @@ class VillagerSupport(
                 continue
             }
 
-            if (!enchantment.canEnchantItem(result)) {
+            if (!enchantment.canEnchantItem(result, enchants.keys)) {
                 continue
             }
 
@@ -58,20 +53,10 @@ class VillagerSupport(
                 continue
             }
 
-            if (enchants.any { (it, _) -> enchantment.enchantment.conflictsWithDeep(it) }) {
-                continue
-            }
-
             if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
 
-            if (
-                enchants.keys.filterIsInstance<EcoEnchant>()
-                    .count { it.type == enchantment.type } >= enchantment.type.limit
-            ) {
-                continue
-            }
 
             val maxLevel = enchantment.maximumLevel
 
@@ -80,7 +65,7 @@ class VillagerSupport(
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= this.plugin.configYml.getDouble("villager.reduction")
+            multiplier /= plugin.configYml.getDouble("villager.reduction")
 
             if (result.type == Material.ENCHANTED_BOOK) {
                 // Only allow one enchantment

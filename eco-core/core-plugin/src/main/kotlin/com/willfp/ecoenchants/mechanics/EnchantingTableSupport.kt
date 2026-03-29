@@ -5,10 +5,8 @@ import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.randDouble
-import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
-import com.willfp.ecoenchants.enchant.conflictsWithDeep
+import com.willfp.ecoenchants.plugin
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -25,10 +23,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.min
 
-
-class EnchantingTableSupport(
-    private val plugin: EcoEnchantsPlugin
-) : Listener {
+object EnchantingTableSupport : Listener {
     @EventHandler
     fun onLeave(event: PlayerQuitEvent) {
         ExtraItemSupport.currentlyEnchantingExtraItem.remove(event.player.uniqueId)
@@ -70,6 +65,7 @@ class EnchantingTableSupport(
         }
 
         if (item.type == Material.BOOK) {
+            @Suppress("DEPRECATION")
             item.type = Material.ENCHANTED_BOOK
         }
 
@@ -85,7 +81,7 @@ class EnchantingTableSupport(
                 continue
             }
 
-            if (!enchantment.canEnchantItem(item)) {
+            if (!enchantment.canEnchantItem(item, toAdd.keys)) {
                 continue
             }
 
@@ -106,7 +102,7 @@ class EnchantingTableSupport(
                 continue
             }
 
-            if (toAdd.size >= this.plugin.configYml.getInt("enchanting-table.cap")) {
+            if (toAdd.size >= plugin.configYml.getInt("enchanting-table.cap")) {
                 break
             }
 
@@ -114,16 +110,6 @@ class EnchantingTableSupport(
                 break
             }
 
-            if (toAdd.any { (it, _) -> enchantment.enchantment.conflictsWithDeep(it) }) {
-                continue
-            }
-
-            if (
-                toAdd.keys.filterIsInstance<EcoEnchant>()
-                    .count { it.type == enchantment.type } >= enchantment.type.limit
-            ) {
-                continue
-            }
 
             val maxLevel = enchantment.maximumLevel
             val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")
@@ -138,7 +124,7 @@ class EnchantingTableSupport(
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= this.plugin.configYml.getDouble("enchanting-table.reduction")
+            multiplier /= plugin.configYml.getDouble("enchanting-table.reduction")
 
             toAdd[enchantment.enchantment] = level
         }
@@ -146,7 +132,7 @@ class EnchantingTableSupport(
         toAdd.forEach(event.enchantsToAdd::putIfAbsent)
 
         if (toAdd.isEmpty() && isExtraEnchantable) {
-            toAdd[Enchantment.DURABILITY] =
+            toAdd[Enchantment.UNBREAKING] =
                 ExtraItemSupport.currentlyEnchantingExtraItem[player.uniqueId]!![event.whichButton()]
             ExtraItemSupport.currentlyEnchantingExtraItem.remove(player.uniqueId)
         }
@@ -216,9 +202,9 @@ class EnchantingTableSupport(
         }
 
         val offers = arrayOf(
-            EnchantmentOffer(Enchantment.DURABILITY, 1, bottomEnchantLevel),
-            EnchantmentOffer(Enchantment.DURABILITY, midUnbreakingLevel, midEnchantLevel),
-            EnchantmentOffer(Enchantment.DURABILITY, topUnbreakingLevel, topEnchantLevel)
+            EnchantmentOffer(Enchantment.UNBREAKING, 1, bottomEnchantLevel),
+            EnchantmentOffer(Enchantment.UNBREAKING, midUnbreakingLevel, midEnchantLevel),
+            EnchantmentOffer(Enchantment.UNBREAKING, topUnbreakingLevel, topEnchantLevel)
         )
 
         for (i in offers.indices) {
@@ -238,7 +224,7 @@ object ExtraItemSupport {
 
     internal val extraEnchantableItems = mutableListOf<TestableItem>()
 
-    internal fun reload(plugin: EcoEnchantsPlugin) {
+    internal fun reload() {
         extraEnchantableItems.clear()
         extraEnchantableItems.addAll(plugin.targetsYml.getStrings("extra-enchantable-items").map {
             Items.lookup(it)

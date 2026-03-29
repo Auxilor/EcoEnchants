@@ -38,8 +38,11 @@ class ConfiguredEnchantmentTarget(
     override val id = config.getString("id")
     override val displayName = config.getFormattedString("display-name")
 
-    override val slot = SlotTypes[config.getString("slot")] ?:
-    throw IllegalArgumentException("Invalid slot type: ${config.getString("slot")}, options are ${SlotTypes.values().map { it.id }}")
+    override val slot = SlotTypes[config.getString("slot")] ?: throw IllegalArgumentException(
+        "Invalid slot type: ${config.getString("slot")}, options are ${
+            SlotTypes.values().map { it.id }
+        }"
+    )
 
     override val items = config.getStrings("items")
         .map { Items.lookup(it) }

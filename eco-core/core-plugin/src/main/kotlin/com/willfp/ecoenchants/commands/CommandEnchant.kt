@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.commands
 
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.savedDisplayName
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.wrap
+import com.willfp.ecoenchants.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
@@ -13,8 +13,11 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import org.bukkit.util.StringUtil
 
-class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
-    plugin, "enchant", "ecoenchants.command.enchant", false
+object CommandEnchant : PluginCommand(
+    plugin,
+    "enchant",
+    "ecoenchants.command.enchant",
+    false
 ) {
     override fun onExecute(sender: CommandSender, rawArgs: List<String>) {
         var args = rawArgs
@@ -28,6 +31,7 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
         player!! // Unbelievable jank
 
         val enchant = notifyNull(
+            @Suppress("DEPRECATION")
             args.getOrNull(0)?.lowercase()?.let { Enchantment.getByKey(NamespacedKey.minecraft(it)) },
             "invalid-enchantment"
         )
@@ -77,12 +81,14 @@ class CommandEnchant(plugin: EcoPlugin) : PluginCommand(
         if (args.size == 1) {
             StringUtil.copyPartialMatches(
                 args[0],
+                @Suppress("DEPRECATION")
                 Enchantment.values().map { it.key.key },
                 completions
             )
         }
 
         if (args.size == 2) {
+            @Suppress("DEPRECATION")
             val enchant = Enchantment.getByKey(NamespacedKey.minecraft(args[0].lowercase()))
 
             val levels = if (enchant != null) {

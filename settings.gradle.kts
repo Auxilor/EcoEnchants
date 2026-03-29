@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        maven("https://repo.papermc.io/repository/maven-public/")
         gradlePluginPortal()
         mavenLocal()
         maven("https://repo.auxilor.io/repository/maven-public/")
@@ -7,7 +8,7 @@ pluginManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 rootProject.name = "EcoEnchants"
@@ -16,15 +17,10 @@ rootProject.name = "EcoEnchants"
 include(":eco-core")
 include(":eco-core:core-plugin")
 include(":eco-core:core-nms")
-include(":eco-core:core-nms:v1_17_R1")
-include(":eco-core:core-nms:v1_18_R1")
-include(":eco-core:core-nms:v1_18_R2")
-include(":eco-core:core-nms:v1_19_R1")
-include(":eco-core:core-nms:v1_19_R2")
-include(":eco-core:core-nms:v1_19_R3")
-include(":eco-core:core-nms:v1_20_R1")
-include(":eco-core:core-nms:v1_20_R2")
-include(":eco-core:core-nms:v1_20_R3")
-include(":eco-core:core-nms:v1_21")
-include(":eco-core:core-nms:v1_21_3")
 include(":eco-core:core-nms:v1_21_4")
+include(":eco-core:core-nms:v1_21_5")
+include(":eco-core:core-nms:v1_21_6")
+include(":eco-core:core-nms:v1_21_7")
+include(":eco-core:core-nms:v1_21_8")
+include(":eco-core:core-nms:v1_21_10")
+include(":eco-core:core-nms:v1_21_11")

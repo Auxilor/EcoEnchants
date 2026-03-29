@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.EcoPlugin
+import com.willfp.ecoenchants.plugin
 import com.willfp.libreforge.Holder
 import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.effects.EffectList
@@ -10,8 +10,7 @@ class EcoEnchantLevel(
     val enchant: EcoEnchant,
     val level: Int,
     override val effects: EffectList,
-    override val conditions: ConditionList,
-    plugin: EcoPlugin
+    override val conditions: ConditionList
 ) : Holder {
     override val id = plugin.createNamespacedKey("${enchant.id}_$level")
 

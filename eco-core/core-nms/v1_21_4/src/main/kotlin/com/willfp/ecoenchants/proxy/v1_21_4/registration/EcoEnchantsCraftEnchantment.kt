@@ -7,9 +7,7 @@ import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import net.kyori.adventure.text.Component
 import net.minecraft.core.Holder
 import net.minecraft.world.item.enchantment.Enchantment
-import org.bukkit.NamespacedKey
 import org.bukkit.craftbukkit.enchantments.CraftEnchantment
-import org.bukkit.enchantments.EnchantmentTarget
 import org.bukkit.inventory.ItemStack
 
 class EcoEnchantsCraftEnchantment(
@@ -39,43 +37,10 @@ class EcoEnchantsCraftEnchantment(
         return enchant.conflictsWith(other)
     }
 
-    @Deprecated(
-        message = "EcoEnchants enchantments are not translatable",
-        replaceWith = ReplaceWith("this.displayName(level)")
-    )
-    override fun translationKey(): String {
-        return "ecoenchants:enchantment.$id"
-    }
-
-    @Deprecated(
-        message = "getName is a legacy Spigot API",
-        replaceWith = ReplaceWith("this.displayName(level)")
-    )
-    override fun getName(): String = this.id.uppercase()
     override fun getMaxLevel(): Int = enchant.maximumLevel
 
     override fun getStartLevel(): Int = 1
 
-    @Deprecated(
-        message = "getItemTargets is an incompatible Spigot API",
-        replaceWith = ReplaceWith("this.targets")
-    )
-    @Suppress("DEPRECATION")
-    override fun getItemTarget(): EnchantmentTarget = EnchantmentTarget.ALL
-
-    @Deprecated(
-        message = "Treasure enchantments do not exist in EcoEnchants",
-        replaceWith = ReplaceWith("this.isEnchantable")
-    )
-    override fun isTreasure(): Boolean = !enchant.isObtainableThroughEnchanting
-
-    @Deprecated(
-        message = "Use EnchantmentType instead",
-        replaceWith = ReplaceWith("type.id")
-    )
-    override fun isCursed(): Boolean {
-        return false
-    }
 
     override fun displayName(level: Int): Component {
         return enchant.getFormattedName(level).toComponent()

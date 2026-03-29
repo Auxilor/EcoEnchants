@@ -38,6 +38,8 @@ abstract class EcoEnchantBase(
 
     private val conflictIds = config.getStrings("conflicts").toSet()
 
+    private val requiredIds = config.getStrings("required").toSet()
+
     override val enchantmentKey = NamespacedKey.minecraft(id)
 
     override val rawDisplayName = config.getString("display-name")
@@ -49,7 +51,17 @@ abstract class EcoEnchantBase(
                 || conflictIds.containsIgnoreCase("everything")
 
     override val conflicts = config.getStrings("conflicts")
-        .mapNotNull { Enchantment.getByKey(NamespacedKey.minecraft(it)) }
+        .mapNotNull {
+            @Suppress("DEPRECATION")
+            Enchantment.getByKey(NamespacedKey.minecraft(it))
+        }
+        .toSet()
+
+    override val required = config.getStrings("required")
+        .mapNotNull {
+            @Suppress("DEPRECATION")
+            Enchantment.getByKey(NamespacedKey.minecraft(it))
+        }
         .toSet()
 
     override val targets = config.getStrings("targets")
@@ -123,6 +135,12 @@ abstract class EcoEnchantBase(
 
     override fun conflictsWithDirectly(other: Enchantment): Boolean {
         return other.key.key in conflictIds || this.conflictsWithEverything
+    }
+
+    override fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean {
+        return requiredIds.all { requiredId ->
+            other.any { enchantment -> enchantment.key.key.equals(requiredId, ignoreCase = true) }
+        }
     }
 
     final override fun equals(other: Any?): Boolean {

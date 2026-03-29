@@ -2,10 +2,8 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
-import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
-import com.willfp.ecoenchants.enchant.conflictsWithDeep
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -15,12 +13,10 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import kotlin.math.ceil
 
-class LootSupport(
-    private val plugin: EcoEnchantsPlugin
-) : Listener {
+object LootSupport : Listener {
     @EventHandler
     fun onGenerate(event: LootGenerateEvent) {
-        if (!this.plugin.configYml.getBool("loot.enabled")) {
+        if (!plugin.configYml.getBool("loot.enabled")) {
             return
         }
 
@@ -49,7 +45,7 @@ class LootSupport(
                 continue
             }
 
-            if (!enchantment.canEnchantItem(item)) {
+            if (!enchantment.canEnchantItem(item, enchants.keys)) {
                 continue
             }
 
@@ -57,20 +53,10 @@ class LootSupport(
                 continue
             }
 
-            if (enchants.any { (it, _) -> enchantment.enchantment.conflictsWithDeep(it) }) {
-                continue
-            }
-
             if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
 
-            if (
-                enchants.keys.filterIsInstance<EcoEnchant>()
-                    .count { it.type == enchantment.type } >= enchantment.type.limit
-            ) {
-                continue
-            }
 
             val maxLevel = enchantment.maximumLevel
 
@@ -78,7 +64,7 @@ class LootSupport(
             val levelPart2 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart1)
             val level = ceil(levelPart2 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= this.plugin.configYml.getDouble("villager.reduction")
+            multiplier /= plugin.configYml.getDouble("villager.reduction")
 
             enchants[enchantment.enchantment] = level
         }

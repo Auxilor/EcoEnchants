@@ -6,13 +6,11 @@ import com.willfp.eco.core.display.DisplayPriority
 import com.willfp.eco.core.display.DisplayProperties
 import com.willfp.eco.core.fast.FastItemStack
 import com.willfp.eco.core.fast.fast
-import com.willfp.eco.core.items.builder.modify
-import com.willfp.ecoenchants.EcoEnchantsPlugin
-import com.willfp.ecoenchants.commands.CommandToggleDescriptions.Companion.seesEnchantmentDescriptions
+import com.willfp.ecoenchants.commands.CommandToggleDescriptions.seesEnchantmentDescriptions
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.enchant.EcoEnchant
-import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
+import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import com.willfp.libreforge.ItemProvidedHolder
 import org.bukkit.Material
@@ -21,9 +19,6 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
-import kotlin.collections.component1
-import kotlin.collections.component2
-import kotlin.collections.set
 
 // Works around HIDE_POTION_EFFECTS not existing in 1.20.5+
 interface HideStoredEnchantsProxy {
@@ -33,7 +28,7 @@ interface HideStoredEnchantsProxy {
 }
 
 @Suppress("DEPRECATION")
-class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plugin, DisplayPriority.HIGH) {
+object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
     private val hideStateKey =
         plugin.namespacedKeyFactory.create("ecoenchantlore-skip") // Same for backwards compatibility
 
@@ -117,7 +112,8 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
                 enchantLore.add(Display.PREFIX + formattedName)
 
                 if (shouldDescribe) {
-                    enchantLore.addAll(enchant.getFormattedDescription(level, player)
+                    enchantLore.addAll(
+                        enchant.getFormattedDescription(level, player)
                         .filter { it.isNotEmpty() }.map { Display.PREFIX + it })
                 }
             }
@@ -128,7 +124,11 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
             hse.hideStoredEnchants(fast)
         }
 
-        fast.lore = enchantLore + lore + notMetLines
+        if (plugin.configYml.getBool("display.enchantments-below-lore")) {
+            fast.lore = lore + enchantLore + notMetLines
+        } else {
+            fast.lore = enchantLore + lore + notMetLines
+        }
     }
 
     override fun revert(itemStack: ItemStack) {

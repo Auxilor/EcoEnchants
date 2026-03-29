@@ -14,19 +14,21 @@ discoverable: true
 enchantable: true
 
 effects:
-  - id: spawn_potion_cloud
-    args:
-      effect: poison
-      level: 1
-      duration: 60
-    triggers:
-      - projectile_hit
+  - effects:
+    - id: spawn_potion_cloud
+      args:
+        effect: poison
+        level: 1
+        duration: 60
 
-  - id: play_sound
+    - id: play_sound
+      args:
+        sound: entity_splash_potion_break
+        pitch: 0.7
+        volume: 1
+
     args:
-      sound: entity_splash_potion_break
-      pitch: 0.7
-      volume: 1
+      chance: "5 * %level%"
     triggers:
       - projectile_hit
 
