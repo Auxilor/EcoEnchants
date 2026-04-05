@@ -26,6 +26,7 @@ dependencies {
     implementation(project(":eco-core:core-nms:v1_21_8", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_10", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_11", configuration = "reobf"))
+    implementation(project(":eco-core:core-nms:v26_1_1", configuration = "shadow"))
 }
 
 allprojects {
@@ -43,7 +44,6 @@ allprojects {
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://repo.codemc.org/repository/nms/")
         maven("https://repo.essentialsx.net/releases/")
-
         maven("https://jitpack.io") {
             content { includeGroupByRegex("com\\.github\\..*") }
         }
@@ -101,7 +101,7 @@ allprojects {
     java {
         withSourcesJar()
         toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
+            languageVersion = JavaLanguageVersion.of(25)
         }
     }
 }

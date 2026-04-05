@@ -18,3 +18,9 @@ tasks {
         mustRunAfter(shadowJar)
     }
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
