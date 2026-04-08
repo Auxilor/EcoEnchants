@@ -4,8 +4,8 @@ import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.registration.ModernEnchantmentRegistererProxy
-import com.willfp.ecoenchants.proxy.v1_21_4.registration.EcoEnchantsCraftEnchantment
-import com.willfp.ecoenchants.proxy.v1_21_4.registration.ModifiedVanillaCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_8.registration.EcoEnchantsCraftEnchantment
+import com.willfp.ecoenchants.proxy.v1_21_8.registration.ModifiedVanillaCraftEnchantment
 import com.willfp.ecoenchants.proxy.v26_1_1.registration.vanillaEcoEnchantsEnchantment
 import io.papermc.paper.registry.entry.RegistryTypeMapper
 import io.papermc.paper.registry.legacy.DelayedRegistry
