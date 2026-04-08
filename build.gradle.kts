@@ -19,10 +19,6 @@ base {
 
 dependencies {
     implementation(project(":eco-core:core-plugin"))
-    implementation(project(":eco-core:core-nms:v1_21_4", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21_5", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21_6", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21_7", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_8", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_10", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v1_21_11", configuration = "reobf"))
