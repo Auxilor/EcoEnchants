@@ -18,6 +18,7 @@ import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.RegistrableCategory
+import org.bukkit.ChatColor
 
 @Suppress("UNUSED")
 object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
@@ -31,7 +32,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         for (enchant in registry.values()) {
             plugin.enchantmentRegisterer.unregister(enchant)
             EnchantRegistrations.removeEnchant(enchant)
-            BY_NAME.remove(enchant.getFormattedName(0))
+            BY_NAME.remove(ChatColor.stripColor(enchant.getFormattedName(0)))
         }
 
         registry.clear()
@@ -95,7 +96,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         // Register delegated versions
         registry.register(enchantment as EcoEnchant)
         @Suppress("DEPRECATION")
-        BY_NAME[org.bukkit.ChatColor.stripColor(enchant.getFormattedName(0))] = enchantment as EcoEnchant
+        BY_NAME[ChatColor.stripColor(enchant.getFormattedName(0))] = enchantment as EcoEnchant
         EnchantRegistrations.registerEnchantments()
     }
 
