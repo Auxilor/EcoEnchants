@@ -213,9 +213,15 @@ object AnvilSupport : Listener {
     /**
      * Class for AnvilGUI wrappers to ignore them.
      */
-    private val anvilGuiClass = "net.wesjd.anvilgui.version.Wrapper" +
-            ProxyConstants.NMS_VERSION.substring(1) +
-            $$"$AnvilContainer"
+    private val anvilGuiClass: Class<*>? = try {
+        Class.forName(
+            "net.wesjd.anvilgui.version.Wrapper" +
+                    ProxyConstants.NMS_VERSION.substring(1) +
+                    $$"$AnvilContainer"
+        )
+    } catch (_: ClassNotFoundException) {
+        null
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onAnvilResultClick(event: InventoryClickEvent) {
@@ -227,7 +233,7 @@ object AnvilSupport : Listener {
         }
 
         if (plugin.getProxy(OpenInventoryProxy::class.java)
-                .getOpenInventory(player)::class.java.toString() == anvilGuiClass
+                .getOpenInventory(player)::class.java == anvilGuiClass
         ) {
             return
         }
@@ -279,7 +285,7 @@ object AnvilSupport : Listener {
         }
 
         if (plugin.getProxy(OpenInventoryProxy::class.java)
-                .getOpenInventory(player)::class.java.toString() == anvilGuiClass
+                .getOpenInventory(player)::class.java == anvilGuiClass
         ) {
             return
         }
