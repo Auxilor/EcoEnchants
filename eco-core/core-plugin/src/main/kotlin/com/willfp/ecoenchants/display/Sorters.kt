@@ -86,7 +86,7 @@ object RaritySorter : EnchantmentSorter {
         val sorted = children.getSafely(0).sort(enchantments, children.drop(1))
         val enchants = mutableListOf<Enchantment>()
         for (rarity in rarities) {
-            enchants.addAll(sorted.filter { it.wrap().rarity == rarity })
+            enchants.addAll(sorted.filter { it.wrap().enchantmentRarity == rarity })
         }
         return enchants
     }
