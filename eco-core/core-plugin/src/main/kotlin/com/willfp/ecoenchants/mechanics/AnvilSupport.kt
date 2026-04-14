@@ -175,7 +175,16 @@ object AnvilSupport : Listener {
                     Material.STONE_SPEAR
                 )
 
-            repair[listOf(Material.COPPER_INGOT)] = repair[listOf(Material.LEATHER)]!! + listOf(
+            repair[listOf(Material.COPPER_INGOT)] = listOf(
+                Material.COPPER_HELMET,
+                Material.COPPER_CHESTPLATE,
+                Material.COPPER_LEGGINGS,
+                Material.COPPER_BOOTS,
+                Material.COPPER_SWORD,
+                Material.COPPER_PICKAXE,
+                Material.COPPER_AXE,
+                Material.COPPER_SHOVEL,
+                Material.COPPER_HOE,
                 Material.COPPER_SPEAR
             )
 
