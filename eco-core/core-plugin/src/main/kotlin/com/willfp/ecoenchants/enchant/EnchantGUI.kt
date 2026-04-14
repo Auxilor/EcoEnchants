@@ -28,6 +28,7 @@ import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -36,10 +37,12 @@ import kotlin.math.ceil
 object EnchantGUI {
     private lateinit var menu: Menu
     private val enchantInfoMenus = Caffeine.newBuilder().build<EcoEnchant, Menu>()
+    private var allEnchantsSorted: List<Enchantment> = emptyList()
 
     internal fun reload() {
         cachedEnchantmentSlots.invalidateAll()
         enchantInfoMenus.invalidateAll()
+        allEnchantsSorted = EcoEnchants.values().map { it.enchantment }.sortForDisplay()
 
         menu = menu(plugin.configYml.getInt("enchant-gui.rows")) {
             title = plugin.configYml.getFormattedString("enchant-gui.title")
@@ -76,8 +79,8 @@ object EnchantGUI {
 
             onRender { player, menu ->
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
-                if (atCaptive.isEcoEmpty || atCaptive == null || atCaptive.type == Material.BOOK) {
-                    menu.setState(player, "enchants", EcoEnchants.values().map { it.enchantment }.sortForDisplay())
+                if (atCaptive == null || atCaptive.isEcoEmpty || atCaptive.type == Material.BOOK) {
+                    menu.setState(player, "enchants", allEnchantsSorted)
                 } else {
                     menu.setState(
                         player,
