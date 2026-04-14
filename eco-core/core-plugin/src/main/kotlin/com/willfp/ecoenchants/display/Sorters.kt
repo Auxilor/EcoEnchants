@@ -63,18 +63,11 @@ object TypeSorter : EnchantmentSorter {
     }
 
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
+        val sorted = children.getSafely(0).sort(enchantments, children.drop(1))
         val enchants = mutableListOf<Enchantment>()
-
         for (type in types) {
-            for (enchantment in children.getSafely(0).sort(enchantments, children.drop(1))) {
-                if (type != enchantment.wrap().type) {
-                    continue
-                }
-
-                enchants.add(enchantment)
-            }
+            enchants.addAll(sorted.filter { it.wrap().type == type })
         }
-
         return enchants
     }
 }
@@ -90,18 +83,11 @@ object RaritySorter : EnchantmentSorter {
     }
 
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
+        val sorted = children.getSafely(0).sort(enchantments, children.drop(1))
         val enchants = mutableListOf<Enchantment>()
-
         for (rarity in rarities) {
-            for (enchantment in children.getSafely(0).sort(enchantments, children.drop(1))) {
-                if (rarity != enchantment.wrap().enchantmentRarity) {
-                    continue
-                }
-
-                enchants.add(enchantment)
-            }
+            enchants.addAll(sorted.filter { it.wrap().rarity == rarity })
         }
-
         return enchants
     }
 }
