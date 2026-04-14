@@ -466,7 +466,7 @@ object AnvilSupport : Listener {
             val maxDamage = left.type.maxDurability.toInt()
             val leftDurability = maxDamage - leftMeta.damage
             val rightDurability = maxDamage - rightMeta.damage
-            val damage = maxDamage - max(maxDamage, leftDurability + rightDurability)
+            val damage = maxDamage - min(maxDamage, leftDurability + rightDurability)
 
             leftMeta.damage = damage.coerceAtLeast(0) // Prevent negative damage
         }
