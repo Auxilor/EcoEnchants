@@ -131,7 +131,7 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
         fun preventDroppingSoulboundItems(event: PlayerDeathEvent) {
             event.drops.removeIf {
                 it.fast().persistentDataContainer.has(soulboundKey, PersistentDataType.INTEGER)
-                        && it.itemMeta.hasEnchant(enchant.enchantment)
+                        && it.itemMeta?.hasEnchant(enchant.enchantment) == true
             }
         }
     }
