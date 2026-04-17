@@ -28,6 +28,7 @@ import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -40,10 +41,12 @@ object EnchantGUI {
     private lateinit var menu: Menu
     private var groupMenu: Menu? = null
     private val enchantInfoMenus = Caffeine.newBuilder().build<EcoEnchant, Menu>()
+    private var allEnchantsSorted: List<Enchantment> = emptyList()
 
     internal fun reload() {
         cachedEnchantmentSlots.invalidateAll()
         enchantInfoMenus.invalidateAll()
+        allEnchantsSorted = EcoEnchants.values().map { it.enchantment }.sortForDisplay()
 
         menu = menu(plugin.configYml.getInt("enchant-gui.rows")) {
             title = plugin.configYml.getFormattedString("enchant-gui.title")

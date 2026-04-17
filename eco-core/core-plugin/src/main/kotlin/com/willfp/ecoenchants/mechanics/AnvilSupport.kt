@@ -175,7 +175,16 @@ object AnvilSupport : Listener {
                     Material.STONE_SPEAR
                 )
 
-            repair[listOf(Material.COPPER_INGOT)] = repair[listOf(Material.LEATHER)]!! + listOf(
+            repair[listOf(Material.COPPER_INGOT)] = listOf(
+                Material.COPPER_HELMET,
+                Material.COPPER_CHESTPLATE,
+                Material.COPPER_LEGGINGS,
+                Material.COPPER_BOOTS,
+                Material.COPPER_SWORD,
+                Material.COPPER_PICKAXE,
+                Material.COPPER_AXE,
+                Material.COPPER_SHOVEL,
+                Material.COPPER_HOE,
                 Material.COPPER_SPEAR
             )
 
@@ -204,9 +213,15 @@ object AnvilSupport : Listener {
     /**
      * Class for AnvilGUI wrappers to ignore them.
      */
-    private val anvilGuiClass = "net.wesjd.anvilgui.version.Wrapper" +
-            ProxyConstants.NMS_VERSION.substring(1) +
-            $$"$AnvilContainer"
+    private val anvilGuiClass: Class<*>? = try {
+        Class.forName(
+            "net.wesjd.anvilgui.version.Wrapper" +
+                    ProxyConstants.NMS_VERSION.substring(1) +
+                    $$"$AnvilContainer"
+        )
+    } catch (_: ClassNotFoundException) {
+        null
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onAnvilResultClick(event: InventoryClickEvent) {
@@ -218,7 +233,7 @@ object AnvilSupport : Listener {
         }
 
         if (plugin.getProxy(OpenInventoryProxy::class.java)
-                .getOpenInventory(player)::class.java.toString() == anvilGuiClass
+                .getOpenInventory(player)::class.java == anvilGuiClass
         ) {
             return
         }
@@ -270,7 +285,7 @@ object AnvilSupport : Listener {
         }
 
         if (plugin.getProxy(OpenInventoryProxy::class.java)
-                .getOpenInventory(player)::class.java.toString() == anvilGuiClass
+                .getOpenInventory(player)::class.java == anvilGuiClass
         ) {
             return
         }
@@ -457,7 +472,7 @@ object AnvilSupport : Listener {
             val maxDamage = left.type.maxDurability.toInt()
             val leftDurability = maxDamage - leftMeta.damage
             val rightDurability = maxDamage - rightMeta.damage
-            val damage = maxDamage - max(maxDamage, leftDurability + rightDurability)
+            val damage = maxDamage - min(maxDamage, leftDurability + rightDurability)
 
             leftMeta.damage = damage.coerceAtLeast(0) // Prevent negative damage
         }

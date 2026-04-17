@@ -64,7 +64,7 @@ object LootSupport : Listener {
             val levelPart2 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart1)
             val level = ceil(levelPart2 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= plugin.configYml.getDouble("villager.reduction")
+            multiplier /= plugin.configYml.getDouble("loot.reduction")
 
             enchants[enchantment.enchantment] = level
         }

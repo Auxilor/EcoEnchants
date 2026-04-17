@@ -50,6 +50,7 @@ object LoreConversion : Listener {
         val meta = itemStack.itemMeta ?: return
 
         val toAdd = mutableMapOf<Enchantment, Int>()
+        val matchedLines = mutableListOf<String>()
 
         val lore = itemStack.fast().lore.toMutableList()
 
@@ -92,16 +93,17 @@ object LoreConversion : Listener {
             }
 
             toAdd[enchant.enchantment] = level
+            matchedLines.add(line)
         }
 
 
         if (meta is EnchantmentStorageMeta) {
-            lore.clear()
+            lore.removeAll(matchedLines)
             for ((enchant, level) in toAdd) {
                 meta.addStoredEnchant(enchant, level, true)
             }
         } else {
-            lore.clear()
+            lore.removeAll(matchedLines)
             for ((enchant, level) in toAdd) {
                 meta.addEnchant(enchant, level, true)
             }
