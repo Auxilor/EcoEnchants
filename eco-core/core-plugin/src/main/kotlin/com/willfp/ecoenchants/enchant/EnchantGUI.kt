@@ -32,10 +32,14 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import com.willfp.ecoenchants.rarity.EnchantmentRarities
+import com.willfp.ecoenchants.type.EnchantmentTypes
+import com.willfp.ecoenchants.target.EnchantmentTargets
 import kotlin.math.ceil
 
 object EnchantGUI {
     private lateinit var menu: Menu
+    private var groupMenu: Menu? = null
     private val enchantInfoMenus = Caffeine.newBuilder().build<EcoEnchant, Menu>()
     private var allEnchantsSorted: List<Enchantment> = emptyList()
 
@@ -79,19 +83,52 @@ object EnchantGUI {
 
             onRender { player, menu ->
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
-                if (atCaptive == null || atCaptive.isEcoEmpty || atCaptive.type == Material.BOOK) {
-                    menu.setState(player, "enchants", allEnchantsSorted)
+                val hasItem = !atCaptive.isEcoEmpty && atCaptive != null && atCaptive.type != Material.BOOK
+
+                val baseEnchants = if (!hasItem) {
+                    EcoEnchants.values().map { it.enchantment }.sortForDisplay()
                 } else {
-                    menu.setState(
-                        player,
-                        "enchants",
-                        atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
-                            .subtract(atCaptive.fast().enchants.keys)
-                            .toList()
-                    )
+                    atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
+                        .subtract(atCaptive.fast().enchants.keys)
+                        .toList()
                 }
 
-                if (menu.getPage(player) > menu.getMaxPage(player)) {
+                // Apply group filter if a groupId is set in menu state
+                val groupId = menu.getState<String>(player, "groupId")
+                val filteredEnchants = if (groupId != null) {
+                    val groupBy = plugin.configYml.getString("enchant-gui.group-by")
+                    baseEnchants.filter { enchantment ->
+                        val wrapped = enchantment.wrap()
+                        when (groupBy) {
+                            "type" -> wrapped.type.id == groupId
+                            "rarity" -> wrapped.enchantmentRarity.id == groupId
+                            "target" -> wrapped is EcoEnchant && wrapped.targets.any { it.id == groupId }
+                            else -> true
+                        }
+                    }
+                } else {
+                    baseEnchants
+                }
+
+                menu.setState(player, "enchants", filteredEnchants)
+
+                // Reset to page 1 when an item is placed or removed from the captive slot
+                val previousHasItem = menu.getState<Boolean>(player, "hasItem") ?: false
+                if (hasItem != previousHasItem) {
+                    menu.setState(player, Page.PAGE_KEY, 1)
+                }
+                menu.setState(player, "hasItem", hasItem)
+
+                // Safety net: also reset if the current page now exceeds the new max.
+                // Compute directly from filteredEnchants to avoid a stale getMaxPage() value
+                // (maxPages may be evaluated before onRender fires).
+                val perPage = plugin.configYml.getInt("enchant-gui.enchant-area.width") * plugin.configYml.getInt("enchant-gui.enchant-area.height")
+                val maxPage = if (filteredEnchants.isEmpty()) {
+                    0
+                } else {
+                    ceil(filteredEnchants.size.toDouble() / perPage).toInt()
+                }
+                if (menu.getPage(player) > maxPage) {
                     menu.setState(player, Page.PAGE_KEY, 1)
                 }
             }
@@ -133,6 +170,33 @@ object EnchantGUI {
                 )
             }
 
+            // Back button to return to the group selection menu
+            if (plugin.configYml.getBool("enchant-gui.grouped")
+                && plugin.configYml.getBool("enchant-gui.back-button.enabled")) {
+                setSlot(
+                    plugin.configYml.getInt("enchant-gui.back-button.row"),
+                    plugin.configYml.getInt("enchant-gui.back-button.column"),
+                    slot(
+                        ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.back-button.item")))
+                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.back-button.lore"))
+                            .build()
+                    ) {
+                        onLeftClick { event, _ ->
+                            val player = event.whoClicked as Player
+                            // Return captive items to the player before navigating back
+                            val captiveItems = menu.getCaptiveItems(player)
+                            if (captiveItems.isNotEmpty()) {
+                                DropQueue(player)
+                                    .addItems(captiveItems)
+                                    .forceTelekinesis()
+                                    .push()
+                            }
+                            groupMenu?.open(player)
+                        }
+                    }
+                )
+            }
+
             maxPages { player ->
                 val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: emptyList()
                 val total = enchants.size
@@ -162,10 +226,73 @@ object EnchantGUI {
                 )
             }
         }
+
+        // Build the group selection menu (only when grouped mode is enabled)
+        if (plugin.configYml.getBool("enchant-gui.grouped")) {
+            groupMenu = menu(plugin.configYml.getInt("group-gui.rows")) {
+                title = plugin.configYml.getFormattedString("group-gui.title")
+
+                setMask(
+                    FillerMask(
+                        MaskItems.fromItemNames(
+                            plugin.configYml.getStrings("group-gui.mask.items")
+                        ),
+                        *plugin.configYml.getStrings("group-gui.mask.pattern").toTypedArray()
+                    )
+                )
+
+                // Add a clickable slot for each configured group
+                for (config in plugin.configYml.getSubsections("group-gui.groups")) {
+                    val groupId = config.getString("id")
+
+                    // Validate the group ID exists in the registry matching the group-by axis
+                    val groupBy = plugin.configYml.getString("enchant-gui.group-by")
+                    val valid = when (groupBy) {
+                        "type" -> EnchantmentTypes[groupId] != null
+                        "rarity" -> EnchantmentRarities[groupId] != null
+                        "target" -> EnchantmentTargets[groupId] != null
+                        else -> false
+                    }
+
+                    if (!valid) {
+                        continue
+                    }
+
+                    setSlot(
+                        config.getInt("row"),
+                        config.getInt("column"),
+                        slot(
+                            ItemStackBuilder(Items.lookup(config.getString("item")))
+                                .addLoreLines(config.getStrings("lore"))
+                                .build()
+                        ) {
+                            onLeftClick { event, _ ->
+                                openGroupGUI(event.whoClicked as Player, groupId)
+                            }
+                        }
+                    )
+                }
+
+                // Custom decorator slots for the group menu
+                for (config in plugin.configYml.getSubsections("group-gui.custom-slots")) {
+                    setSlot(
+                        config.getInt("row"),
+                        config.getInt("column"),
+                        ConfigSlot(config)
+                    )
+                }
+            }
+        } else {
+            groupMenu = null
+        }
     }
 
     fun openGUI(player: Player) {
-        menu.open(player)
+        if (plugin.configYml.getBool("enchant-gui.grouped") && groupMenu != null) {
+            groupMenu!!.open(player)
+        } else {
+            menu.open(player)
+        }
     }
 
     fun openInfoGUI(player: Player, enchant: EcoEnchant) {
@@ -195,6 +322,12 @@ object EnchantGUI {
                 }
             }
         }.open(player)
+    }
+
+    private fun openGroupGUI(player: Player, groupId: String) {
+        menu.open(player)
+        menu.setState(player, "groupId", groupId)
+        menu.setState(player, Page.PAGE_KEY, 1)
     }
 }
 
