@@ -5,6 +5,8 @@ api-version: 1.21.4
 authors: [ Auxilor ]
 website: willfp.com
 load: STARTUP
+folia-supported: true
+
 depend:
   - eco
 softdepend:

@@ -295,9 +295,9 @@ object AnvilSupport : Listener {
         event.result = null
         event.inventory.setItem(2, null)
 
-        plugin.scheduler.run {
+        plugin.scheduler.runTask(player) {
             if (latestPreviewGeneration[player.uniqueId] != generation) {
-                return@run
+                return@runTask
             }
 
             val left = event.inventory.getItem(0)?.clone()
@@ -313,7 +313,7 @@ object AnvilSupport : Listener {
             )
 
             if (result == FAIL) {
-                return@run
+                return@runTask
             }
 
             event.result = null
@@ -325,11 +325,11 @@ object AnvilSupport : Listener {
             val oldLeft = event.inventory.getItem(0)
 
             if (oldLeft == null || oldLeft.type != outItem.type) {
-                return@run
+                return@runTask
             }
 
             if (left == old) {
-                return@run
+                return@runTask
             }
 
             var cost = baseRepairCost + price
@@ -341,7 +341,7 @@ object AnvilSupport : Listener {
 
             // Cost could be less than zero at times, so I include that here.
             if (cost <= 0) {
-                return@run
+                return@runTask
             }
 
             /*
@@ -351,7 +351,7 @@ object AnvilSupport : Listener {
             val outEnchants = outItem.fast().getEnchants(true)
 
             if (event.inventory.getItem(1) == null && leftEnchants != outEnchants) {
-                return@run
+                return@runTask
             }
 
             if (plugin.configYml.getBool("anvil.use-rework-penalty")) {
@@ -363,18 +363,18 @@ object AnvilSupport : Listener {
             val maxRepairCost = plugin.configYml.getInt("anvil.max-repair-cost")
 
             if (latestPreviewGeneration[player.uniqueId] != generation) {
-                return@run
+                return@runTask
             }
 
             event.view.maximumRepairCost = maxRepairCost
             event.view.repairCost = if (clampRepairCost) cost.coerceAtMost(maxRepairCost) else cost
 
             if (!clampRepairCost && maxRepairCost > 0 && cost >= maxRepairCost) {
-                return@run
+                return@runTask
             }
 
             if (latestPreviewGeneration[player.uniqueId] != generation) {
-                return@run
+                return@runTask
             }
 
             event.result = outItem

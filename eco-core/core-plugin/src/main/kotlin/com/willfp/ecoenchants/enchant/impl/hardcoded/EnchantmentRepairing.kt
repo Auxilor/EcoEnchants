@@ -14,7 +14,7 @@ object EnchantmentRepairing : HardcodedEcoEnchant(
     override fun onRegister() {
         val frequency = config.getInt("frequency").toLong()
 
-        plugin.scheduler.runTimer(frequency, frequency) {
+        plugin.scheduler.runTaskTimer(frequency, frequency) {
             handleRepairing()
         }
     }
