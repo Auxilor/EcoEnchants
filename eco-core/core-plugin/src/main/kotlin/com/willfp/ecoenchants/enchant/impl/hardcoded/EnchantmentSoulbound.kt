@@ -114,7 +114,7 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
 
             val items = itemStrings.map { Items.fromSNBT(it) }
 
-            plugin.scheduler.run {
+            plugin.scheduler.runTask(player) {
                 DropQueue(player)
                     .addItems(items)
                     .forceTelekinesis()
