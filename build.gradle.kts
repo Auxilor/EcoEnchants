@@ -49,7 +49,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("com.willfp:eco:7.4.0")
+        compileOnly("com.willfp:eco:7.4.2")
         compileOnly("org.jetbrains:annotations:26.0.2")
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.3")

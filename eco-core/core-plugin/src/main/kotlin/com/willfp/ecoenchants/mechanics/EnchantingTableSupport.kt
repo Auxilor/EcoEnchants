@@ -144,7 +144,7 @@ object EnchantingTableSupport : Listener {
         // I remember writing this back in 8.x.x and deleting it during the recode
         // It's here because books don't work with this event, for some reason
         if (item.type == Material.ENCHANTED_BOOK) {
-            plugin.scheduler.runTask(player) {
+            plugin.scheduler.run {
                 if (!event.isCancelled) {
                     val postEnchantItem = event.inventory.getItem(0)
                     val meta = postEnchantItem?.itemMeta as? EnchantmentStorageMeta
