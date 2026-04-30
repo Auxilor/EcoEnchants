@@ -132,9 +132,13 @@ object EnchantingTableSupport : Listener {
         toAdd.forEach(event.enchantsToAdd::putIfAbsent)
 
         if (toAdd.isEmpty() && isExtraEnchantable) {
-            toAdd[Enchantment.UNBREAKING] =
-                ExtraItemSupport.currentlyEnchantingExtraItem[player.uniqueId]!![event.whichButton()]
-            ExtraItemSupport.currentlyEnchantingExtraItem.remove(player.uniqueId)
+            val extraLevels = ExtraItemSupport.currentlyEnchantingExtraItem.remove(player.uniqueId)
+            if (extraLevels != null) {
+                toAdd[Enchantment.UNBREAKING] = extraLevels[event.whichButton()]
+            } else {
+                event.isCancelled = true
+                return
+            }
         }
 
         // I remember writing this back in 8.x.x and deleting it during the recode

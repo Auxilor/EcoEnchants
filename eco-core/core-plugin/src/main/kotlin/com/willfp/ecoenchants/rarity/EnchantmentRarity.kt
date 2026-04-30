@@ -36,6 +36,6 @@ class EnchantmentRarity(
     }
 
     override fun toString(): String {
-        return "EnchantmentType{$id}"
+        return "EnchantmentRarity{$id}"
     }
 }

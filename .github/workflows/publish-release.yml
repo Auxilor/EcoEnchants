@@ -6,28 +6,24 @@ on:
   push:
     tags:
       - '*'
-
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-
       - name: Checkout latest code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v2
+        uses: actions/checkout@v4
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 21
-
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
-
+          java-version: '25'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Publish package
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: publish
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+        run: ./gradlew publish

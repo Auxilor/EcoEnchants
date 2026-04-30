@@ -53,12 +53,15 @@ object CommandEnchantInfo : PluginCommand(
 
         StringUtil.copyPartialMatches(args.joinToString(" "), names, completions)
 
-        if (args.size > 1) { // Remove all previous words from the candidate of completions
-            val finishedArgs = args.toMutableList()
-            finishedArgs.drop(args.size - 1)
-            val prefix = finishedArgs.joinToString(" ")
+        if (args.size > 1) {
+            val prefix = args.dropLast(1).joinToString(" ") + " "
+            val trimmed = completions.mapNotNull { completion ->
+                if (completion.startsWith(prefix)) {
+                    completion.removePrefix(prefix)
+                } else null
+            }
             completions.clear()
-            completions.stream().map { it.removePrefix(prefix).trim() }
+            completions.addAll(trimmed)
         }
 
         completions.sort()

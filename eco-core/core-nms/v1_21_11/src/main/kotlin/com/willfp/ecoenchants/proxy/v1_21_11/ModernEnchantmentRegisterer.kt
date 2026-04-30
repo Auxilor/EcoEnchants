@@ -20,7 +20,6 @@ import org.bukkit.craftbukkit.CraftRegistry
 import org.bukkit.craftbukkit.CraftServer
 import org.bukkit.craftbukkit.util.CraftNamespacedKey
 import org.bukkit.enchantments.Enchantment
-import org.jspecify.annotations.Nullable
 import java.lang.reflect.Modifier
 import java.util.IdentityHashMap
 import java.util.function.BiFunction
@@ -35,19 +34,15 @@ private val bukkitRegistry: org.bukkit.Registry<Enchantment>
 
 class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     private val frozenField = MappedRegistry::class.java
-        .declaredFields
-        .filter { it.type.isPrimitive }[0]
+        .getDeclaredField("frozen")
         .apply { isAccessible = true }
 
     private val allTags = MappedRegistry::class.java
-        .declaredFields
-        .filter { it.type.name.contains("TagSet") }[0]
+        .getDeclaredField("allTags")
         .apply { isAccessible = true }
 
     private val unregisteredIntrusiveHoldersField = MappedRegistry::class.java
-        .declaredFields
-        .filter { it.type == Map::class.java }
-        .filter { it.annotatedType.isAnnotationPresent(Nullable::class.java) }[0]
+        .getDeclaredField("unregisteredIntrusiveHolders")
         .apply { isAccessible = true }
 
     private val minecraftToBukkit = CraftRegistry::class.java
@@ -139,7 +134,10 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
             vanillaEnchantment
         )
 
-        return register(enchant)
+        val holder = enchantmentRegistry[CraftNamespacedKey.toMinecraft(enchant.enchantmentKey)]
+            .orElseThrow { IllegalStateException("Enchantment ${enchant.id} wasn't registered") }
+
+        return EcoEnchantsCraftEnchantment(enchant, holder)
     }
 
     override fun unregister(enchant: EcoEnchant) {

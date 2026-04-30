@@ -88,7 +88,7 @@ object CommandGiveRandomBook : PluginCommand(
             2 -> (EnchantmentRarities.values().map { it.id } + EnchantmentTypes.values().map { it.id })
             3 -> (1..10).map { it.toString() }
             4 -> {
-                val startLevel = args[3].toIntOrNull() ?: 1
+                val startLevel = args[2].toIntOrNull() ?: 1
                 val endLevel = startLevel + 10
                 (startLevel..endLevel).map { it.toString() }
             }

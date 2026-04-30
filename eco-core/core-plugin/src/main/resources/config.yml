@@ -174,6 +174,71 @@ enchant-gui:
   # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
   custom-slots: [ ]
 
+  # If enabled, /enchant opens a group selection menu first, grouping enchantments
+  # by the group-by setting. If disabled, /enchant opens the flat enchantment list (current behavior).
+  grouped: false
+
+  # What to group enchantments by. Only used when grouped is true.
+  # Options: type (from types.yml), rarity (from rarity.yml), target (from targets.yml)
+  group-by: type
+
+  # Back button to return from a filtered sub-menu to the group selection menu.
+  # Only shown when grouped is true.
+  back-button:
+    enabled: true
+    item: arrow name:"&fBack to Groups"
+    lore: []
+    row: 6
+    column: 1
+
+# Options for the group selection GUI (only used when enchant-gui.grouped is true)
+group-gui:
+  rows: 3
+  title: "Enchantment Groups"
+
+  mask:
+    items:
+      - black_stained_glass_pane
+    pattern:
+      - "111111111"
+      - "100000001"
+      - "111111111"
+
+  # Each group must have a unique id matching an entry from the file corresponding
+  # to the group-by setting:
+  #   group-by: type   -> IDs from types.yml   (normal, spell, special, curse)
+  #   group-by: rarity -> IDs from rarity.yml  (common, uncommon, rare, epic, legendary, special, veryspecial)
+  #   group-by: target -> IDs from targets.yml (sword, pickaxe, helmet, bow, etc.)
+  # Groups with unrecognized IDs are silently ignored.
+  groups:
+    - id: normal
+      item: enchanted_book name:"&7Normal Enchantments"
+      lore:
+        - "&fClick to browse normal enchantments"
+      row: 2
+      column: 2
+    - id: spell
+      item: enchanted_book name:"<gradient:#0575E6:#1E3FBA>Spell Enchantments"
+      lore:
+        - "&fClick to browse spell enchantments"
+      row: 2
+      column: 4
+    - id: special
+      item: enchanted_book name:"<gradient:#FB57EC:#EF1DEC>Special Enchantments"
+      lore:
+        - "&fClick to browse special enchantments"
+      row: 2
+      column: 6
+    - id: curse
+      item: enchanted_book name:"&cCurse Enchantments"
+      lore:
+        - "&fClick to browse curse enchantments"
+      row: 2
+      column: 8
+
+  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  custom-slots: []
+
 # Options for converting lore-based enchants (from other plugins) with EcoEnchants enchantments
 # with the same names. If you're switching over from another plugin and don't want your players to
 # lose their enchantments, just switch this on.

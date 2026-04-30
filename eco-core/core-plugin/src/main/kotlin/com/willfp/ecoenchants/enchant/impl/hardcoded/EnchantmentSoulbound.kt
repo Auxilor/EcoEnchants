@@ -65,7 +65,7 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
             if (Prerequisite.HAS_PAPER.isMet) {
                 val modifiedItems = if (enchant.config.getBool("single-use")) {
                     items.map {
-                        val meta = it.itemMeta
+                        val meta = it.itemMeta ?: return@map it
                         meta.removeEnchant(enchant.enchantment)
                         it.itemMeta = meta
                         it
@@ -82,7 +82,7 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
                 item.fast().persistentDataContainer.set(soulboundKey, PersistentDataType.INTEGER, 1)
 
                 if (enchant.config.getBool("single-use")) {
-                    val meta = item.itemMeta
+                    val meta = item.itemMeta ?: continue
                     meta.removeEnchant(enchant.enchantment)
                     item.itemMeta = meta
                 }
@@ -131,7 +131,7 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
         fun preventDroppingSoulboundItems(event: PlayerDeathEvent) {
             event.drops.removeIf {
                 it.fast().persistentDataContainer.has(soulboundKey, PersistentDataType.INTEGER)
-                        && it.itemMeta.hasEnchant(enchant.enchantment)
+                        && it.itemMeta?.hasEnchant(enchant.enchantment) == true
             }
         }
     }

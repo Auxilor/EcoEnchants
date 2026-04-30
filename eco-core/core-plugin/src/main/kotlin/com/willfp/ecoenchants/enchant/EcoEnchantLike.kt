@@ -60,14 +60,9 @@ interface EcoEnchantLike {
         item: ItemStack,
         additionalEnchantments: Collection<Enchantment> = emptyList()
     ): Boolean {
-        val enchants = (item.fast().getEnchants(true).keys + additionalEnchantments)
-            .distinctBy { it.key }
+        val enchants = item.fast().getEnchants(true).keys + additionalEnchantments
 
-        if (
-            enchants
-                .map { it.wrap() }
-                .count { it.type == this.type } >= this.type.limit
-        ) {
+        if (enchants.count { it.wrap().type == this.type } >= this.type.limit) {
             return false
         }
 
