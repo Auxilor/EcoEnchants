@@ -182,6 +182,7 @@ object EnchantGUI {
                             .build()
                     ) {
                         onLeftClick { event, _ ->
+                            val groupGui = groupMenu ?: return@onLeftClick
                             val player = event.whoClicked as Player
                             // Return captive items to the player before navigating back
                             val captiveItems = menu.getCaptiveItems(player)
@@ -191,7 +192,7 @@ object EnchantGUI {
                                     .forceTelekinesis()
                                     .push()
                             }
-                            groupMenu?.open(player)
+                            groupGui.open(player)
                         }
                     }
                 )
