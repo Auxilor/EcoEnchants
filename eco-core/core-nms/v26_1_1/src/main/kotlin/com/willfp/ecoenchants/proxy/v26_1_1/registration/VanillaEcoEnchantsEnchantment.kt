@@ -1,8 +1,8 @@
-package com.willfp.ecoenchants.proxy.v1_21_4.registration
+package com.willfp.ecoenchants.proxy.v26_1_1.registration
 
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import net.minecraft.core.HolderSet
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.item.enchantment.Enchantment
 
 fun vanillaEcoEnchantsEnchantment(enchant: EcoEnchant): Enchantment {
@@ -17,5 +17,5 @@ fun vanillaEcoEnchantsEnchantment(enchant: EcoEnchant): Enchantment {
         )
     )
 
-    return enchantment.build(ResourceLocation.withDefaultNamespace(enchant.id))
+    return enchantment.build(Identifier.withDefaultNamespace(enchant.id))
 }

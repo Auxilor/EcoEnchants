@@ -6,7 +6,7 @@ group = "com.willfp"
 version = rootProject.version
 
 dependencies {
-    implementation(project(":eco-core:core-nms:v1_21_4", configuration = "shadow"))
+    implementation("net.kyori:adventure-text-serializer-ansi:4.18.0")
     paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 }
 
@@ -17,13 +17,6 @@ tasks {
 
     reobfJar {
         mustRunAfter(shadowJar)
-    }
-
-    shadowJar {
-        relocate(
-            "com.willfp.ecoenchants.proxy.v1_21_4",
-            "com.willfp.ecoenchants.proxy.v1_21_8",
-        )
     }
 }
 
