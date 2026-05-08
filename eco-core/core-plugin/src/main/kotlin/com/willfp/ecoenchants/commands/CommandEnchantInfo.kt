@@ -56,8 +56,8 @@ object CommandEnchantInfo : PluginCommand(
         if (args.size > 1) {
             val prefix = args.dropLast(1).joinToString(" ") + " "
             val trimmed = completions.mapNotNull { completion ->
-                if (completion.startsWith(prefix)) {
-                    completion.removePrefix(prefix)
+                if (completion.startsWith(prefix, ignoreCase = true)) {
+                    completion.substring(prefix.length)
                 } else null
             }
             completions.clear()
