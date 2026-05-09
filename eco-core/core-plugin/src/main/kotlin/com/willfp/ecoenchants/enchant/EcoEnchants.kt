@@ -32,7 +32,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         for (enchant in registry.values()) {
             plugin.enchantmentRegisterer.unregister(enchant)
             EnchantRegistrations.removeEnchant(enchant)
-            BY_NAME.remove(ChatColor.stripColor(enchant.getFormattedName(0)))
+            BY_NAME.remove(ChatColor.stripColor(enchant.getFormattedName(0))?.lowercase())
         }
 
         registry.clear()
@@ -96,7 +96,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         // Register delegated versions
         registry.register(enchantment as EcoEnchant)
         @Suppress("DEPRECATION")
-        BY_NAME[ChatColor.stripColor(enchant.getFormattedName(0))] = enchantment as EcoEnchant
+        BY_NAME[ChatColor.stripColor(enchant.getFormattedName(0))?.lowercase()] = enchantment as EcoEnchant
         EnchantRegistrations.registerEnchantments()
     }
 
@@ -119,6 +119,6 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     fun getByName(name: String?): EcoEnchant? {
         return if (name == null) {
             null
-        } else BY_NAME[name]
+        } else BY_NAME[name.lowercase()]
     }
 }
