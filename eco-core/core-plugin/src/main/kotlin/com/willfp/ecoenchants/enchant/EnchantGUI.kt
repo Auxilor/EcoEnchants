@@ -40,7 +40,7 @@ import kotlin.math.ceil
 object EnchantGUI {
     private lateinit var menu: Menu
     private var groupMenu: Menu? = null
-    private val enchantInfoMenus = Caffeine.newBuilder().build<EcoEnchant, Menu>()
+    private val enchantInfoMenus = Caffeine.newBuilder().build<Pair<EcoEnchant, Int>, Menu>()
     private var allEnchantsSorted: List<Enchantment> = emptyList()
 
     internal fun reload() {
@@ -296,15 +296,21 @@ object EnchantGUI {
         }
     }
 
-    fun openInfoGUI(player: Player, enchant: EcoEnchant) {
-        enchantInfoMenus.get(enchant) {
+    fun openInfoGUI(player: Player, enchant: EcoEnchant, level: Int = -1) {
+        val effectiveLevel = if (level == -1) {
+            if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
+        } else {
+            level.coerceIn(1, enchant.maximumLevel)
+        }
+
+        enchantInfoMenus.get(enchant to effectiveLevel) {
             menu(plugin.configYml.getInt("enchantinfo.rows")) {
-                title = enchant.getFormattedName(0)
+                title = enchant.getFormattedName(effectiveLevel)
 
                 setSlot(
                     plugin.configYml.getInt("enchantinfo.item.row"),
                     plugin.configYml.getInt("enchantinfo.item.column"),
-                    enchant.getInformationSlot(player)
+                    enchant.getInformationSlot(player, effectiveLevel)
                 )
 
                 setMask(
@@ -346,7 +352,8 @@ private class EnchantmentScrollPane : GUIComponent {
 
         val enchant = enchants.getOrNull(index + size * (page - 1)) ?: return defaultSlot
 
-        return enchant.getInformationSlot(player)
+        val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
+        return enchant.getInformationSlot(player, displayLevel)
     }
 
     override fun getRows() = plugin.configYml.getInt("enchant-gui.enchant-area.height")
@@ -356,16 +363,10 @@ private class EnchantmentScrollPane : GUIComponent {
 }
 
 private val cachedEnchantmentSlots = Caffeine.newBuilder()
-    .build<EcoEnchant, Slot>()
+    .build<Pair<EcoEnchant, Int>, Slot>()
 
-private fun EcoEnchant.getInformationSlot(player: Player): Slot {
-    return cachedEnchantmentSlots.get(this) { it ->
-        val level = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) {
-            it.maximumLevel
-        } else {
-            1
-        }
-
+private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
+    return cachedEnchantmentSlots.get(this to level) {
         slot(
             EnchantedBookBuilder()
                 .addStoredEnchantment(enchantment, level)
