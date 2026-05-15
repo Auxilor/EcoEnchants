@@ -23,11 +23,9 @@ object CommandEnchantInfo : PluginCommand(
             return
         }
 
-        val nameBuilder = StringBuilder()
-
-        args.forEach { arg -> nameBuilder.append(arg).append(" ") }
-        var searchName = nameBuilder.toString()
-        searchName = searchName.substring(0, searchName.length - 1)
+        val level = if (args.size > 1) args.last().toIntOrNull() else null
+        val nameArgs = if (level != null) args.dropLast(1) else args
+        val searchName = nameArgs.joinToString(" ")
 
         val enchantment = EcoEnchants.getByName(searchName)
 
@@ -37,7 +35,7 @@ object CommandEnchantInfo : PluginCommand(
             return
         }
 
-        EnchantGUI.openInfoGUI(sender, enchantment)
+        EnchantGUI.openInfoGUI(sender, enchantment, level ?: -1)
     }
 
     override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {
@@ -49,6 +47,17 @@ object CommandEnchantInfo : PluginCommand(
         if (args.isEmpty()) {
             // Currently, this case is not ever reached
             return names
+        }
+
+        // If all args except the last form a complete enchant name, suggest level numbers
+        if (args.size > 1) {
+            val namePrefix = args.dropLast(1).joinToString(" ")
+            val matched = EcoEnchants.getByName(namePrefix)
+            if (matched != null) {
+                val levels = (1..matched.maximumLevel).map { it.toString() }
+                StringUtil.copyPartialMatches(args.last(), levels, completions)
+                return completions
+            }
         }
 
         StringUtil.copyPartialMatches(args.joinToString(" "), names, completions)
