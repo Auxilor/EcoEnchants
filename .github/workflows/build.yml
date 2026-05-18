@@ -1,16 +1,9 @@
 name: Build
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
-    paths:
-      - '**/*.kt'
-      - '**/*.kts'
   push:
-    branches:
-      - master
-    paths:
-      - '**/*.kt'
-      - '**/*.kts'
+    tags-ignore:
+      - '*'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -31,4 +24,20 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Build
-        run: ./gradlew build --full-stacktrace
+        run: ./gradlew build libreforgeJar --full-stacktrace
+      - name: Find final libreforge jar
+        id: jar
+        run: |
+          jar_path="$(find bin -maxdepth 1 -type f -name '*.jar' -printf '%T@ %p\n' | sort -nr | head -n 1 | cut -d' ' -f2-)"
+          if [ -z "$jar_path" ]; then
+            echo "No final libreforge jar was generated in bin" >&2
+            exit 1
+          fi
+          echo "jar_path=$jar_path" >> "$GITHUB_OUTPUT"
+          echo "jar_name=$(basename "$jar_path")" >> "$GITHUB_OUTPUT"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.jar.outputs.jar_name }}
+          path: ${{ steps.jar.outputs.jar_path }}
+          if-no-files-found: error
