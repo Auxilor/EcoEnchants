@@ -1,0 +1,252 @@
+---
+title: "Plugin Config"
+sidebar_position: 7
+---
+
+## Default config.yml
+
+```yaml
+# Options for enchanting items in the enchanting table
+enchanting-table:
+  enabled: true # If custom enchantments should be available from enchanting tables
+  book-multiplier: 0.5 # Multiplier applied to the chance of getting an enchantment on a book (to balance enchant numbers)
+  maximum-obtainable-level: 30 # The max level for the enchanting table. EcoEnchants doesn't change the limit, but if you have a plugin that does, adjust this to match.
+  cap: 5 # The maximum amount of enchantments to get at any given time
+  reduction: 2.2 # The chance to get each subsequent enchantment is divided by this number, e.g. 2nd enchant is 2.2x less likely than 1st, 3rd is 2.2x less likely again, etc
+
+# Options for obtaining custom enchants from villagers
+villager:
+  enabled: true # If custom enchantments should be available from villagers
+  pass-through-chance: 25 # The chance to leave the book as-is with a vanilla/no enchantment applied.
+  book-multiplier: 0.14 # Multiplier applied to the chance of getting an enchantment on a book (to balance enchant numbers)
+  reduction: 5 # The chance to get each subsequent enchantment is divided by this number, e.g. 2nd enchant is 5x less likely than 1st, 3rd is 5x less likely again, etc
+
+# Options for obtaining custom enchants in natural loot
+loot:
+  enabled: true # If custom enchantments should be available from natural loot
+  book-multiplier: 0.5 # Multiplier applied to the chance of getting an enchantment on a book (to balance enchant numbers)
+  reduction: 7.5 # The chance to get each subsequent enchantment is divided by this number, e.g. 2nd enchant is 7.5x less likely than 1st, 3rd is 7.5x less likely again, etc
+
+# Options for merging items in an anvil
+anvil:
+  cost-exponent: 0.95 # The exponent for each enchant level to prevent constant "Too Expensive!" problems
+  enchant-limit: -1 # The limit for the amount of enchantments on an item (-1 to disable)
+  use-rework-penalty: true # If the rework penalty should be applied
+  max-repair-cost: 40 # Override the maximum repair cost (-1 to make it infinite). When clamp-repair-cost is false, exceeding this cost will block the enchantment.
+  clamp-repair-cost: true # If the repair cost should be clamped to the maximum repair cost
+
+# Options for how enchantments are displayed on items
+display:
+  # If you disable display, enchantments will not show up on items. Only disable if you are handling display elsewhere.
+  # Changing this will require a server restart.
+  enabled: true
+  # If enchantments should be displayed on the bottom of the item's lore
+  enchantments-below-lore: false
+
+  numerals:
+    enabled: true # If numerals should be used for the enchantment levels
+    threshold: 10 # Above this, numbers will be used instead of numerals
+
+  # Options for not met lines: https://plugins.auxilor.io/effects/configuring-a-condition#example-condition-config
+  not-met:
+    format: "<strikethrough>" # Enchantments with any not-met-lines active will have this format added to them
+
+  above-max-level:
+    enabled: true # If enchantments above their max level should have a custom format
+    format: "<gradient:#1D976C:#93F9B9>" # The format to apply
+    level-only: true # If only the level should be formatted
+
+  sort:
+    type: false # If enchantments should be sorted by time
+    type-order: # The order for types to be sorted in. Types not in this list will not be displayed if type sorting is enabled.
+      - normal
+      - special
+      - curse
+
+    length: false # If enchantments should be sorted by length
+
+    rarity: false # If enchantments should be sorted by rarity
+    rarity-order: # The order for rarities to be sorted in. Rarities not in this list will not be displayed if rarity sorting is enabled.
+      - common
+      - uncommon
+      - rare
+      - epic
+      - legendary
+      - special
+      - veryspecial
+
+  collapse:
+    enabled: true # If enchantments should be collapsed in lore
+    threshold: 9 # Above this amount, enchantments will be collapsed
+    per-line: 2 # The amount of enchantments to put in each line
+    delimiter: ",&r " # The delimiter between enchantments
+
+  descriptions:
+    enabled: true # If enchantment descriptions should be shown in lore
+    threshold: 5 # Above this amount, enchantment descriptions will not be shown
+    word-wrap: 27 # Number of characters to have on each line
+    format: "&8"
+
+  require-enchantable: true # If EcoEnchants should not display on non-enchantable items.
+
+# Options for the /enchantinfo GUI
+enchantinfo:
+  rows: 3 # How many rows for the GUI
+  mask: # The background material
+    items:
+      - black_stained_glass_pane
+    pattern: # 1 for the first item, 2 for the second item, etc
+      - "111111111"
+      - "111101111"
+      - "111111111"
+  item:
+    row: 2
+    column: 5
+    show-max-level: true # Whether the book should be the max level or level 1
+    lore: # The description is automatically appended
+      - ""
+      - "&fMax Level: &a%max_level%"
+      - "&fRarity: &a%rarity%"
+      - "&fApplicable to: &a%targets%"
+      - "&fConflicts with: &a%conflicts%"
+      - "&fRequires: &a%required%"
+
+  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  custom-slots: [ ]
+
+# Options for the enchant GUI.
+enchant-gui:
+  rows: 6 # How many rows to have in the GUI
+  title: "Enchant GUI" # The title of the GUI
+
+  mask: # The background material
+    items:
+      - black_stained_glass_pane
+    pattern: # 1 for the first item, 2 for the second item, etc
+      - "111101111"
+      - "111111111"
+      - "100000001"
+      - "100000001"
+      - "100000001"
+      - "111111111"
+
+  # Empty item to show when there is no enchanted book
+  empty-item: gray_stained_glass_pane name:""
+
+  # Options for the info item
+  info:
+    item: player_head name:"&aHow do I use this?" texture:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjcwNWZkOTRhMGM0MzE5MjdmYjRlNjM5YjBmY2ZiNDk3MTdlNDEyMjg1YTAyYjQzOWUwMTEyZGEyMmIyZTJlYyJ9fX0=
+    lore:
+      - "&fPlace an item in the slot at the top,"
+      - "&fand all the enchantments you can add"
+      - "&fto to this item will show up in the"
+      - "&farea below!"
+    row: 1
+    column: 9
+
+  item-row: 1 # The row for the slot to drop in the item
+  item-column: 5 # The column
+
+  # Options for the page change buttons
+  page-change:
+    forwards:
+      item: arrow name:"&fNext Page" # The item. Will not show if on the last page.
+      row: 6
+      column: 6
+    backwards:
+      item: arrow name:"&fPrevious Page" # The item. Will not show if on the first page.
+      row: 6
+      column: 4
+
+  # Optional close button for the enchant GUI
+  close-button:
+    enabled: true
+    item: barrier
+    name: "&cClose"
+    lore: [ ]
+    row: 6
+    column: 5
+
+  # Options for the area where the enchantments are shown
+  enchant-area:
+    width: 7 # The width of the enchantment area
+    height: 3 # The height of the enchantment area
+    row: 3 # The row of the top-left corner of the area
+    column: 2 # The column of the top-left corner of the area
+
+  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  custom-slots: [ ]
+
+  # If enabled, /enchant opens a group selection menu first, grouping enchantments
+  # by the group-by setting. If disabled, /enchant opens the flat enchantment list (current behavior).
+  grouped: false
+
+  # What to group enchantments by. Only used when grouped is true.
+  # Options: type (from types.yml), rarity (from rarity.yml), target (from targets.yml)
+  group-by: type
+
+  # Back button to return from a filtered sub-menu to the group selection menu.
+  # Only shown when grouped is true.
+  back-button:
+    enabled: true
+    item: arrow name:"&fBack to Groups"
+    lore: []
+    row: 6
+    column: 1
+
+# Options for the group selection GUI (only used when enchant-gui.grouped is true)
+group-gui:
+  rows: 3
+  title: "Enchantment Groups"
+
+  mask:
+    items:
+      - black_stained_glass_pane
+    pattern:
+      - "111111111"
+      - "100000001"
+      - "111111111"
+
+  # Each group must have a unique id matching an entry from the file corresponding
+  # to the group-by setting:
+  #   group-by: type   -> IDs from types.yml   (normal, spell, special, curse)
+  #   group-by: rarity -> IDs from rarity.yml  (common, uncommon, rare, epic, legendary, special, veryspecial)
+  #   group-by: target -> IDs from targets.yml (sword, pickaxe, helmet, bow, etc.)
+  # Groups with unrecognized IDs are silently ignored.
+  groups:
+    - id: normal
+      item: enchanted_book name:"&7Normal Enchantments"
+      lore:
+        - "&fClick to browse normal enchantments"
+      row: 2
+      column: 2
+    - id: spell
+      item: enchanted_book name:"<gradient:#0575E6:#1E3FBA>Spell Enchantments"
+      lore:
+        - "&fClick to browse spell enchantments"
+      row: 2
+      column: 4
+    - id: special
+      item: enchanted_book name:"<gradient:#FB57EC:#EF1DEC>Special Enchantments"
+      lore:
+        - "&fClick to browse special enchantments"
+      row: 2
+      column: 6
+    - id: curse
+      item: enchanted_book name:"&cCurse Enchantments"
+      lore:
+        - "&fClick to browse curse enchantments"
+      row: 2
+      column: 8
+
+  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  custom-slots: []
+
+# Options for converting lore-based enchants (from other plugins) with EcoEnchants enchantments
+# with the same names. If you're switching over from another plugin and don't want your players to
+# lose their enchantments, just switch this on.
+lore-conversion:
+  enabled: false # If lore conversion should be enabled
+  aggressive: false # Will convert all items in all inventories when opened, likely to use a lot of performance
+
+```
