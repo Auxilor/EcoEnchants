@@ -1,4 +1,4 @@
----
+﻿---
 title: How to make an Enchant
 sidebar_position: 2
 ---
@@ -76,7 +76,7 @@ enchantable: true # If the enchantment can be obtained from enchanting tables
 ```
 
 ### The Effects Section
-:::dangerEffects Section
+:::danger Effects Section
 
 The effects section is the core functionality of the enchantment. You can configure effects, conditions, filters, mutators and triggers in this section to run whilst the enchant is active.
 
