@@ -12,6 +12,7 @@ plugins {
 group = "com.willfp"
 version = findProperty("version")!!
 val libreforgeVersion = findProperty("libreforge-version")
+val ecoVersion = findProperty("eco-version")
 
 base {
     archivesName.set(project.name)
@@ -47,7 +48,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("com.willfp:eco:7.6.0")
+        compileOnly("com.willfp:eco:$ecoVersion")
         compileOnly("org.jetbrains:annotations:26.0.2")
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.3")
