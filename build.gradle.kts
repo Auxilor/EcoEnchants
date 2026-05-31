@@ -14,6 +14,12 @@ version = findProperty("version")!!
 val libreforgeVersion = findProperty("libreforge-version")
 val ecoVersion = findProperty("eco-version")
 
+val embeddedLibreforge by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+    isTransitive = false
+}
+
 base {
     archivesName.set(project.name)
 }
@@ -25,6 +31,16 @@ dependencies {
     implementation(project(":eco-core:core-nms:v1_21_11", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v26_1_1", configuration = "shadow"))
     implementation(project(":eco-core:core-nms:v26_1_2", configuration = "shadow"))
+
+    embeddedLibreforge("com.willfp:libreforge:${libreforgeVersion!!}:shadow@jar")
+}
+
+tasks {
+    shadowJar {
+        from(embeddedLibreforge) {
+            rename { "libreforge-$libreforgeVersion-shadow.jar" }
+        }
+    }
 }
 
 allprojects {
