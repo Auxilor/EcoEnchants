@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.enchant
 
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.config.base.LangYml
-import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.menu
@@ -31,18 +30,24 @@ import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerKickEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import kotlin.math.ceil
+import java.util.UUID
 
-object EnchantGUI {
+object EnchantGUI : Listener {
     private lateinit var menu: Menu
     private var groupMenu: Menu? = null
     private val enchantInfoMenus = Caffeine.newBuilder().build<Pair<EcoEnchant, Int>, Menu>()
     private var allEnchantsSorted: List<Enchantment> = emptyList()
+    private val returnedOnDisconnect = mutableSetOf<UUID>()
 
     internal fun reload() {
         cachedEnchantmentSlots.invalidateAll()
@@ -187,14 +192,7 @@ object EnchantGUI {
                         onLeftClick { event, _ ->
                             val groupGui = groupMenu ?: return@onLeftClick
                             val player = event.whoClicked as Player
-                            // Return captive items to the player before navigating back
-                            val captiveItems = menu.getCaptiveItems(player)
-                            if (captiveItems.isNotEmpty()) {
-                                DropQueue(player)
-                                    .addItems(captiveItems)
-                                    .forceTelekinesis()
-                                    .push()
-                            }
+                            returnCaptiveItems(player)
                             groupGui.open(player)
                         }
                     }
@@ -216,10 +214,11 @@ object EnchantGUI {
 
             onClose { event, menu ->
                 val player = event.player as Player
-                DropQueue(player)
-                    .addItems(menu.getCaptiveItems(player))
-                    .forceTelekinesis()
-                    .push()
+                if (returnedOnDisconnect.remove(player.uniqueId)) {
+                    return@onClose
+                }
+
+                returnCaptiveItems(player, menu)
             }
 
             for (config in plugin.configYml.getSubsections("enchant-gui.custom-slots")) {
@@ -338,6 +337,46 @@ object EnchantGUI {
         menu.open(player)
         menu.setState(player, "groupId", groupId)
         menu.setState(player, Page.PAGE_KEY, 1)
+    }
+
+    @EventHandler
+    fun handleQuit(event: PlayerQuitEvent) {
+        returnCaptiveItemsOnDisconnect(event.player)
+    }
+
+    @EventHandler
+    fun handleKick(event: PlayerKickEvent) {
+        returnCaptiveItemsOnDisconnect(event.player)
+    }
+
+    private fun returnCaptiveItemsOnDisconnect(player: Player) {
+        if (returnCaptiveItems(player)) {
+            returnedOnDisconnect.add(player.uniqueId)
+        }
+    }
+
+    private fun returnCaptiveItems(player: Player, sourceMenu: Menu? = null): Boolean {
+        if (!::menu.isInitialized) {
+            return false
+        }
+
+        val activeMenu = sourceMenu ?: menu
+        val captiveItems = activeMenu.getCaptiveItems(player)
+            .filterNot { it.isEcoEmpty || it.type == Material.AIR }
+
+        if (captiveItems.isEmpty()) {
+            activeMenu.clearState(player)
+            return false
+        }
+
+        val overflow = player.inventory.addItem(*captiveItems.map { it.clone() }.toTypedArray())
+
+        for (item in overflow.values) {
+            player.world.dropItemNaturally(player.location, item)
+        }
+
+        activeMenu.clearState(player)
+        return true
     }
 }
 

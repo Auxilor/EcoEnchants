@@ -7,6 +7,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
+import com.willfp.ecoenchants.enchant.getEnchantmentByID
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.target.EnchantmentTargets
@@ -17,7 +18,6 @@ import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.Conditions
 import com.willfp.libreforge.slot.SlotType
 import org.bukkit.Bukkit
-import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.permissions.Permission
 import org.bukkit.permissions.PermissionDefault
@@ -41,7 +41,7 @@ abstract class EcoEnchantBase(
 
     private val requiredIds = config.getStrings("required").toSet()
 
-    override val enchantmentKey = NamespacedKey.minecraft(id)
+    override val enchantmentKey = plugin.createNamespacedKey(id)
 
     override val rawDisplayName = config.getString("display-name")
 
@@ -53,15 +53,13 @@ abstract class EcoEnchantBase(
 
     override val conflicts = config.getStrings("conflicts")
         .mapNotNull {
-            @Suppress("DEPRECATION")
-            Enchantment.getByKey(NamespacedKey.minecraft(it))
+            getEnchantmentByID(it)
         }
         .toSet()
 
     override val required = config.getStrings("required")
         .mapNotNull {
-            @Suppress("DEPRECATION")
-            Enchantment.getByKey(NamespacedKey.minecraft(it))
+            getEnchantmentByID(it)
         }
         .toSet()
 

@@ -11,7 +11,6 @@ import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentReplenish
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentSoulbound
-import com.willfp.ecoenchants.enchant.registration.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -40,7 +39,9 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     }
 
     override fun beforeReload(plugin: LibreforgePlugin) {
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        plugin as EcoEnchantsPlugin
+
+        plugin.enchantmentRegisterer.replaceRegistry()
 
         EnchantmentRarities.update()
         EnchantmentTargets.update()
@@ -53,7 +54,9 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         registerHardcodedEnchantments()
         EnchantRegistrations.registerEnchantments()
 
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).freezeRegistry()
+        plugin as EcoEnchantsPlugin
+
+        plugin.enchantmentRegisterer.freezeRegistry()
     }
 
     override fun acceptPreloadConfig(plugin: LibreforgePlugin, id: String, config: Config) {

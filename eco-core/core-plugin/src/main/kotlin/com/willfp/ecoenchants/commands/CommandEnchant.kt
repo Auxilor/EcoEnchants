@@ -4,9 +4,9 @@ import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.savedDisplayName
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.getEnchantmentByID
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
-import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -45,8 +45,7 @@ object CommandEnchant : PluginCommand(
         player!! // Unbelievable jank
 
         val enchant = notifyNull(
-            @Suppress("DEPRECATION")
-            args.getOrNull(0)?.lowercase()?.let { Enchantment.getByKey(NamespacedKey.minecraft(it)) },
+            args.getOrNull(0)?.lowercase()?.let { getEnchantmentByID(it) },
             "invalid-enchantment"
         )
 
@@ -105,8 +104,7 @@ object CommandEnchant : PluginCommand(
         }
 
         if (args.size == 2) {
-            @Suppress("DEPRECATION")
-            val enchant = Enchantment.getByKey(NamespacedKey.minecraft(args[0].lowercase()))
+            val enchant = getEnchantmentByID(args[0].lowercase())
 
             val levels = if (enchant != null) {
                 levelCompletionsByEnchant[enchant.key.key] ?: defaultLevelCompletions
