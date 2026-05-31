@@ -69,11 +69,14 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
             pdc.set(hideStateKey, PersistentDataType.INTEGER, 0)
         }
 
-        val lore = fast.lore
-        val enchantLore = mutableListOf<String>()
-
         // Get enchants mapped to EcoEnchantLike
         val unsorted = fast.getEnchants(true)
+        if (unsorted.isEmpty()) {
+            return
+        }
+
+        val lore = fast.lore
+        val enchantLore = mutableListOf<String>()
         val enchants = unsorted.keys.sortForDisplay()
             .associateWith { unsorted[it]!! }
 
