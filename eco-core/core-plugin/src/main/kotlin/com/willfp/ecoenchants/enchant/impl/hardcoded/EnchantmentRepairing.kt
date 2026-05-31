@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchant.impl.hardcoded
 import com.willfp.eco.util.DurabilityUtils
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
-import com.willfp.libreforge.slot.impl.SlotTypeArmor
 import com.willfp.libreforge.slot.impl.SlotTypeHands
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -34,7 +33,7 @@ object EnchantmentRepairing : HardcodedEcoEnchant(
 
         val repairPerLevel = config.getIntFromExpression("repair-per-level", player)
         val excludedItems = if (notWhileHolding) {
-            SlotTypeHands.getItems(player).toSet() + SlotTypeArmor.getItems(player)
+            SlotTypeHands.getItems(player).toSet()
         } else {
             emptySet()
         }

@@ -45,6 +45,12 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
     private val originalHideStoredEnchantsKey =
         plugin.namespacedKeyFactory.create("ecoenchantlore-original-hide-stored-enchants")
 
+    private val addedHideEnchantsKey =
+        plugin.namespacedKeyFactory.create("ecoenchantlore-added-hide-enchants")
+
+    private val addedHideStoredEnchantsKey =
+        plugin.namespacedKeyFactory.create("ecoenchantlore-added-hide-stored-enchants")
+
     private val hse = plugin.getProxy(HideStoredEnchantsProxy::class.java)
 
     override fun display(
@@ -62,28 +68,43 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
 
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
-        val originallyHidEnchants = args.getOrNull(0) as? Boolean ?: fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
-        val originallyHidStoredEnchants = args.getOrNull(1) as? Boolean ?: hse.areStoredEnchantsHidden(fast)
-
-        pdc.set(originalHideEnchantsKey, PersistentDataType.INTEGER, originallyHidEnchants.toStoredInt())
-        pdc.set(originalHideStoredEnchantsKey, PersistentDataType.INTEGER, originallyHidStoredEnchants.toStoredInt())
-
-        // Args represent hide enchants
-        if (originallyHidEnchants || originallyHidStoredEnchants) {
-            fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
-            if (itemStack.type == Material.ENCHANTED_BOOK) {
-                hse.hideStoredEnchants(fast)
-            }
-            pdc.set(hideStateKey, PersistentDataType.INTEGER, 1)
-            return
-        } else {
-            pdc.set(hideStateKey, PersistentDataType.INTEGER, 0)
-        }
 
         // Get enchants mapped to EcoEnchantLike
         val unsorted = fast.getEnchants(true)
         if (unsorted.isEmpty()) {
             return
+        }
+
+        val originalHideState = fast.getOriginalHideState(args, itemStack.type == Material.ENCHANTED_BOOK)
+
+        pdc.set(originalHideEnchantsKey, PersistentDataType.INTEGER, originalHideState.hidesEnchants.toStoredInt())
+        pdc.set(
+            originalHideStoredEnchantsKey,
+            PersistentDataType.INTEGER,
+            originalHideState.hidesStoredEnchants.toStoredInt()
+        )
+
+        // Args represent hide enchants
+        if (originalHideState.hidesEnchants || originalHideState.hidesStoredEnchants) {
+            if (!originalHideState.hidesEnchants) {
+                fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+                pdc.set(addedHideEnchantsKey, PersistentDataType.INTEGER, 1)
+            } else {
+                pdc.set(addedHideEnchantsKey, PersistentDataType.INTEGER, 0)
+            }
+
+            if (itemStack.type == Material.ENCHANTED_BOOK) {
+                if (!originalHideState.hidesStoredEnchants) {
+                    hse.hideStoredEnchants(fast)
+                    pdc.set(addedHideStoredEnchantsKey, PersistentDataType.INTEGER, 1)
+                } else {
+                    pdc.set(addedHideStoredEnchantsKey, PersistentDataType.INTEGER, 0)
+                }
+            }
+            pdc.set(hideStateKey, PersistentDataType.INTEGER, 1)
+            return
+        } else {
+            pdc.set(hideStateKey, PersistentDataType.INTEGER, 0)
         }
 
         val lore = fast.lore
@@ -149,8 +170,10 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         }
 
         fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+        pdc.set(addedHideEnchantsKey, PersistentDataType.INTEGER, 1)
         if (itemStack.type == Material.ENCHANTED_BOOK) {
             hse.hideStoredEnchants(fast)
+            pdc.set(addedHideStoredEnchantsKey, PersistentDataType.INTEGER, 1)
         }
 
         if (enchantmentsBelowLore) {
@@ -172,17 +195,21 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
             ?: (pdc.hideState == 1)
         val originallyHidStoredEnchants = pdc.get(originalHideStoredEnchantsKey, PersistentDataType.INTEGER)?.toBool()
             ?: (pdc.hideState == 1)
+        val addedHideEnchants = pdc.get(addedHideEnchantsKey, PersistentDataType.INTEGER)?.toBool()
+            ?: (!originallyHidEnchants && pdc.hideState != -1)
+        val addedHideStoredEnchants = pdc.get(addedHideStoredEnchantsKey, PersistentDataType.INTEGER)?.toBool()
+            ?: (!originallyHidStoredEnchants && pdc.hideState != -1)
 
         if (originallyHidEnchants) {
             fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
-        } else {
+        } else if (addedHideEnchants) {
             fast.removeItemFlags(ItemFlag.HIDE_ENCHANTS)
         }
 
         if (itemStack.type == Material.ENCHANTED_BOOK) {
             if (originallyHidStoredEnchants) {
                 hse.hideStoredEnchants(fast)
-            } else {
+            } else if (addedHideStoredEnchants) {
                 hse.showStoredEnchants(fast)
             }
         }
@@ -190,13 +217,30 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         pdc.remove(hideStateKey)
         pdc.remove(originalHideEnchantsKey)
         pdc.remove(originalHideStoredEnchantsKey)
+        pdc.remove(addedHideEnchantsKey)
+        pdc.remove(addedHideStoredEnchantsKey)
     }
 
     override fun generateVarArgs(itemStack: ItemStack): Array<Any> {
         val fast = itemStack.fast()
+        val pdc = fast.persistentDataContainer
+
+        val originallyHidEnchants = pdc.get(originalHideEnchantsKey, PersistentDataType.INTEGER)?.toBool()
+        val originallyHidStoredEnchants = pdc.get(originalHideStoredEnchantsKey, PersistentDataType.INTEGER)?.toBool()
+
+        if (originallyHidEnchants != null || originallyHidStoredEnchants != null) {
+            return arrayOf(
+                originallyHidEnchants ?: false,
+                originallyHidStoredEnchants ?: false
+            )
+        }
 
         val hidesEnchants = fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
-        val hidesStoredEnchants = hse.areStoredEnchantsHidden(fast)
+        val hidesStoredEnchants = if (itemStack.type == Material.ENCHANTED_BOOK) {
+            hse.areStoredEnchantsHidden(fast)
+        } else {
+            false
+        }
 
         return when (fast.hideState) {
             1 -> arrayOf(true, hidesStoredEnchants)
@@ -217,6 +261,29 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
     private fun Boolean.toStoredInt(): Int = if (this) 1 else 0
 
     private fun Int.toBool(): Boolean = this == 1
+
+    private fun FastItemStack.getOriginalHideState(args: Array<out Any>, isEnchantedBook: Boolean): HideState {
+        val pdc = this.persistentDataContainer
+
+        val hidesEnchants = pdc.get(originalHideEnchantsKey, PersistentDataType.INTEGER)?.toBool()
+            ?: (args.getOrNull(0) as? Boolean)
+            ?: this.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
+
+        val hidesStoredEnchants = if (isEnchantedBook) {
+            pdc.get(originalHideStoredEnchantsKey, PersistentDataType.INTEGER)?.toBool()
+                ?: (args.getOrNull(1) as? Boolean)
+                ?: hse.areStoredEnchantsHidden(this)
+        } else {
+            false
+        }
+
+        return HideState(hidesEnchants, hidesStoredEnchants)
+    }
+
+    private data class HideState(
+        val hidesEnchants: Boolean,
+        val hidesStoredEnchants: Boolean
+    )
 }
 
 private data class NotMetDisplay(

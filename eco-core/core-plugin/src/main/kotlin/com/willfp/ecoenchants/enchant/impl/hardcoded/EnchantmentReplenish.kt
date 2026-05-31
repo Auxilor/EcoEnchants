@@ -27,6 +27,18 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
         Material.CHORUS_FLOWER,
         Material.SUGAR_CANE
     )
+    private val seedTypes = mapOf(
+        Material.WHEAT to Material.WHEAT_SEEDS,
+        Material.POTATOES to Material.POTATO,
+        Material.CARROTS to Material.CARROT,
+        Material.BEETROOTS to Material.BEETROOT_SEEDS,
+        Material.COCOA to Material.COCOA_BEANS,
+        Material.NETHER_WART to Material.NETHER_WART,
+        Material.TORCHFLOWER_CROP to Material.TORCHFLOWER_SEEDS,
+        Material.PITCHER_CROP to Material.PITCHER_POD,
+        Material.MELON_STEM to Material.MELON_SEEDS,
+        Material.PUMPKIN_STEM to Material.PUMPKIN_SEEDS
+    )
 
     override fun onRegister() {
         plugin.eventManager.registerListener(handler)
@@ -62,17 +74,18 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
                 return
             }
 
+            val wasFullyGrown = data.age == data.maximumAge
+            if (!wasFullyGrown && enchant.config.getBool("only-fully-grown")) {
+                return
+            }
+
             if (enchant.config.getBool("consume-seeds")) {
-                val item = ItemStack(
-                    when (type) {
-                        Material.WHEAT -> Material.WHEAT_SEEDS
-                        Material.POTATOES -> Material.POTATO
-                        Material.CARROTS -> Material.CARROT
-                        Material.BEETROOTS -> Material.BEETROOT_SEEDS
-                        Material.COCOA -> Material.COCOA_BEANS
-                        else -> type
-                    }
-                )
+                val seedType = seedTypes[type] ?: type
+                if (!seedType.isItem) {
+                    return
+                }
+
+                val item = ItemStack(seedType)
 
                 val hasSeeds = player.inventory.removeItem(item).isEmpty()
 
@@ -81,34 +94,39 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
                 }
             }
 
-            if (data.age != data.maximumAge) {
-                if (enchant.config.getBool("only-fully-grown")) {
-                    return
-                }
-
+            if (!wasFullyGrown) {
                 event.isDropItems = false
                 event.expToDrop = 0
             }
 
             data.age = 0
+            val itemInHand = player.inventory.itemInMainHand.clone()
 
             plugin.scheduler.run {
+                if (!block.type.isAir) {
+                    return@run
+                }
+
+                val replacedState = block.state
                 block.type = type
                 block.blockData = data
 
                 // Improves compatibility with other plugins.
                 @Suppress("UnstableApiUsage")
-                Bukkit.getPluginManager().callEvent(
-                    BlockPlaceEvent(
-                        block,
-                        block.state,
-                        block.getRelative(BlockFace.DOWN),
-                        player.inventory.itemInMainHand,
-                        player,
-                        true,
-                        EquipmentSlot.HAND
-                    )
+                val placeEvent = BlockPlaceEvent(
+                    block,
+                    replacedState,
+                    block.getRelative(BlockFace.DOWN),
+                    itemInHand,
+                    player,
+                    true,
+                    EquipmentSlot.HAND
                 )
+                Bukkit.getPluginManager().callEvent(placeEvent)
+
+                if (placeEvent.isCancelled || !placeEvent.canBuild()) {
+                    replacedState.update(true, false)
+                }
             }
         }
     }
