@@ -275,6 +275,14 @@ object AnvilSupport : Listener {
         val generation = (latestPreviewGeneration[player.uniqueId] ?: 0) + 1
         latestPreviewGeneration[player.uniqueId] = generation
         renderedPreviewGeneration.remove(player.uniqueId)
+
+        // Other plugins can block an anvil operation by clearing the prepared result.
+        // Respect that state before EcoEnchants replaces the preview asynchronously.
+        if (event.result == null) {
+            event.inventory.setItem(2, null)
+            return
+        }
+
         val permanenceCurse = EcoEnchants.getByID("permanence_curse")
         val leftItem = event.inventory.getItem(0)
         val rightItem = event.inventory.getItem(1)
