@@ -162,6 +162,8 @@ private val repair = mutableMapOf<Collection<Material>, Collection<Material>>(
     )
 )
 
+private var repairableByUnit = buildRepairableByUnit()
+
 object AnvilSupport : Listener {
     init {
         if (is_1_21_11() && repair[Tag.PLANKS.values]?.contains(Material.WOODEN_SPEAR) != true) {
@@ -204,6 +206,8 @@ object AnvilSupport : Listener {
                 Material.NETHERITE_SPEAR
             )
         }
+
+        repairableByUnit = buildRepairableByUnit()
     }
 
     private val latestPreviewGeneration = mutableMapOf<UUID, Int>()
@@ -518,11 +522,14 @@ private fun is_1_21_11(): Boolean {
 }
 
 fun Material.canUnitRepair(other: Material): Boolean {
-    for ((units, repairable) in repair) {
-        if (this in units) {
-            return other in repairable
-        }
-    }
+    return other in (repairableByUnit[this] ?: return false)
+}
 
-    return false
+private fun buildRepairableByUnit(): Map<Material, Set<Material>> {
+    return repair.entries
+        .flatMap { (units, repairable) ->
+            val repairableMaterials = repairable.toSet()
+            units.map { unit -> unit to repairableMaterials }
+        }
+        .toMap()
 }

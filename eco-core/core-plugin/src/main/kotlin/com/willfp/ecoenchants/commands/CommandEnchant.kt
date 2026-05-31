@@ -84,6 +84,10 @@ object CommandEnchant : PluginCommand(
     }
 
     override fun tabComplete(sender: CommandSender, rawArgs: List<String>): List<String> {
+        if (enchantmentCompletions.isEmpty()) {
+            reload()
+        }
+
         val completions = mutableListOf<String>()
 
         var args = rawArgs

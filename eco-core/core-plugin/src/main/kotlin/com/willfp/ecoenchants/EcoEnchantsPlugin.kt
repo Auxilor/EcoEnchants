@@ -92,6 +92,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleReload() {
         DisplayCache.reload()
         EnchantSorter.reload()
+        CommandEnchant.reload()
+        CommandEnchantInfo.reload()
         ExtraItemSupport.reload()
         EnchantmentSourceCache.reload()
         EnchantGUI.reload()

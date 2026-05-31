@@ -93,8 +93,7 @@ object GrindstoneSupport : Listener {
         // Force remove XP
         plugin.scheduler.runLater(1) {
             val loc = inventory.location ?: return@runLater
-            val orbs = loc.getNearbyEntities(3.0, 3.0, 3.0)
-                .filterIsInstance<ExperienceOrb>()
+            val orbs = loc.getNearbyEntitiesByType(ExperienceOrb::class.java, 3.0, 3.0, 3.0)
                 .filter { it.spawnReason == ExperienceOrb.SpawnReason.GRINDSTONE }
             for (orb in orbs) {
                 orb.remove()

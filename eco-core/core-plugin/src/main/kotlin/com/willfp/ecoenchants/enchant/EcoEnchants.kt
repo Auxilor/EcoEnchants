@@ -5,6 +5,7 @@ import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
+import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.enchant.impl.LibreforgeEcoEnchant
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
@@ -48,6 +49,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
 
     override fun afterReload(plugin: LibreforgePlugin) {
         sendPrompts()
+        HardcodedEcoEnchant.reload()
         registerHardcodedEnchantments()
         EnchantRegistrations.registerEnchantments()
 
