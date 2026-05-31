@@ -43,7 +43,7 @@ import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderPlaceholderProvider
 import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerSpecificRefreshFunction
-import org.bukkit.ChatColor
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.LivingEntity
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.Listener
@@ -221,13 +221,11 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             val scoreboard = server.scoreboardManager.mainScoreboard
 
             for (team in scoreboard.teams) {
-                val color = team.getColor()
-
-                if (color.isColor) {
+                if (team.hasColor()) {
                     continue
                 }
 
-                team.setColor(ChatColor.WHITE)
+                team.color(NamedTextColor.WHITE)
             }
         }.onFailure {
             logger.warning("Could not sanitize scoreboard team colors: ${it.message}")

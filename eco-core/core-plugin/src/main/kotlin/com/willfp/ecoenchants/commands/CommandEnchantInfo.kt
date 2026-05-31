@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.stripLegacyFormatting
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.util.StringUtil
@@ -19,10 +20,8 @@ object CommandEnchantInfo : PluginCommand(
     private var levelCompletionsByName = emptyMap<String, List<String>>()
 
     internal fun reload() {
-        @Suppress("DEPRECATION")
-        val namesWithEnchantments = EcoEnchants.values().mapNotNull { enchantment ->
-            org.bukkit.ChatColor.stripColor(enchantment.getFormattedName(0))
-                ?.let { it to enchantment }
+        val namesWithEnchantments = EcoEnchants.values().map { enchantment ->
+            enchantment.getFormattedName(0).stripLegacyFormatting() to enchantment
         }
 
         enchantmentCompletions = namesWithEnchantments.map { it.first }

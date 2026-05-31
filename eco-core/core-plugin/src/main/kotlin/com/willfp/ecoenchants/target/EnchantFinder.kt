@@ -43,7 +43,7 @@ object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
         get() = levelCache.get(this.uniqueId) {
             toHolderProvider().provide(this.toDispatcher())
                 .mapNotNull {
-                    val level = it.holder as? EcoEnchantLevel ?: return@mapNotNull null
+                    val level = it.holder
                     val item = it.provider as? ItemStack ?: return@mapNotNull null
 
                     ProvidedLevel(level, item, it)

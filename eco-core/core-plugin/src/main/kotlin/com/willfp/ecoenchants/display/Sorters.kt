@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
+import com.willfp.ecoenchants.stripLegacyFormatting
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.enchantments.Enchantment
@@ -56,8 +57,7 @@ object EnchantSorter {
             0
         }
 
-        @Suppress("DEPRECATION")
-        val name = org.bukkit.ChatColor.stripColor(wrapped.getFormattedName(0)) ?: ""
+        val name = wrapped.getFormattedName(0).stripLegacyFormatting()
 
         return DisplaySortEntry(
             enchantment = this,

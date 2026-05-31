@@ -6,6 +6,7 @@ import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.stripLegacyFormatting
 import org.bukkit.Material
 import org.bukkit.Tag
 import org.bukkit.entity.Player
@@ -408,8 +409,7 @@ object AnvilSupport : Listener {
         val formattedItemName = if (player.hasPermission("ecoenchants.anvil.color")) {
             StringUtils.format(itemName)
         } else {
-            @Suppress("DEPRECATION")
-            org.bukkit.ChatColor.stripColor(itemName)
+            itemName.stripLegacyFormatting()
         }.let { if (it.isNullOrEmpty()) left.fast().displayName else it }
 
         if (right == null || right.type == Material.AIR) {

@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchant
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.stripLegacyFormatting
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -60,8 +61,7 @@ object LoreConversion : Listener {
         val updatedLore = lore.toMutableList()
 
         for (line in lore) {
-            @Suppress("DEPRECATION")
-            val uncolored = org.bukkit.ChatColor.stripColor(line) ?: continue
+            val uncolored = line.stripLegacyFormatting()
 
             var enchant: EcoEnchant?
             var level: Int
