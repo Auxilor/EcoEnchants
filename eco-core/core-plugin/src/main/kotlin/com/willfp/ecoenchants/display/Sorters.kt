@@ -8,86 +8,99 @@ import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.enchantments.Enchantment
 
-interface EnchantmentSorter {
-    fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment>
-}
-
 object EnchantSorter {
-    private val sorters = mutableListOf<EnchantmentSorter>()
+    private var sortByRarity = false
+    private var sortByType = false
+    private var sortByLength = false
+    private var comparator: Comparator<DisplaySortEntry> = compareBy<DisplaySortEntry> { it.name }
 
     internal fun reload() {
-        sorters.clear()
+        sortByRarity = plugin.configYml.getBool("display.sort.rarity")
+        sortByType = plugin.configYml.getBool("display.sort.type")
+        sortByLength = plugin.configYml.getBool("display.sort.length")
 
-        if (plugin.configYml.getBool("display.sort.rarity")) {
-            sorters.add(RaritySorter)
+        val comparators = mutableListOf<Comparator<DisplaySortEntry>>()
+
+        if (sortByRarity) {
+            comparators += compareBy<DisplaySortEntry> { it.rarityOrder }
         }
 
-        if (plugin.configYml.getBool("display.sort.type")) {
-            sorters.add(TypeSorter)
+        if (sortByType) {
+            comparators += compareBy<DisplaySortEntry> { it.typeOrder }
         }
 
-        if (plugin.configYml.getBool("display.sort.length")) {
-            sorters.add(LengthSorter)
+        if (sortByLength) {
+            comparators += compareBy<DisplaySortEntry> { it.nameLength }
+        } else {
+            comparators += compareBy<DisplaySortEntry> { it.name }
         }
+
+        comparator = comparators.reduce { current, next -> current.then(next) }
     }
 
     fun Collection<Enchantment>.sortForDisplay(): List<Enchantment> =
-        sorters.getSafely(0).sort(this, sorters.drop(1))
-}
+        this.mapNotNull { it.toDisplaySortEntry() }
+            .sortedWith(comparator)
+            .map { it.enchantment }
 
-fun List<EnchantmentSorter>.getSafely(index: Int) =
-    this.getOrNull(index) ?: AlphabeticSorter
+    private fun Enchantment.toDisplaySortEntry(): DisplaySortEntry? {
+        val wrapped = this.wrap()
+        val rarityOrder = if (sortByRarity) {
+            RaritySorter.orderOf(wrapped.enchantmentRarity) ?: return null
+        } else {
+            0
+        }
+        val typeOrder = if (sortByType) {
+            TypeSorter.orderOf(wrapped.type) ?: return null
+        } else {
+            0
+        }
 
-object AlphabeticSorter : EnchantmentSorter {
-    override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
         @Suppress("DEPRECATION")
-        return enchantments.sortedBy { org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0)) }
+        val name = org.bukkit.ChatColor.stripColor(wrapped.getFormattedName(0)) ?: ""
+
+        return DisplaySortEntry(
+            enchantment = this,
+            rarityOrder = rarityOrder,
+            typeOrder = typeOrder,
+            nameLength = name.length,
+            name = name
+        )
     }
 }
 
-object LengthSorter : EnchantmentSorter {
-    override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        @Suppress("DEPRECATION")
-        return enchantments.sortedBy { org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0))?.length ?: 0 }
-    }
-}
+private data class DisplaySortEntry(
+    val enchantment: Enchantment,
+    val rarityOrder: Int,
+    val typeOrder: Int,
+    val nameLength: Int,
+    val name: String
+)
 
-object TypeSorter : EnchantmentSorter {
-    private val types = mutableListOf<EnchantmentType>()
+object TypeSorter {
+    private var typeOrder = emptyMap<EnchantmentType, Int>()
 
     fun update() {
-        types.clear()
-        types.addAll(plugin.configYml.getStrings("display.sort.type-order").mapNotNull {
-            EnchantmentTypes[it]
-        })
+        typeOrder = plugin.configYml.getStrings("display.sort.type-order")
+            .mapIndexedNotNull { index, id ->
+                EnchantmentTypes[id]?.let { it to index }
+            }
+            .toMap()
     }
 
-    override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        val sorted = children.getSafely(0).sort(enchantments, children.drop(1))
-        val enchants = mutableListOf<Enchantment>()
-        for (type in types) {
-            enchants.addAll(sorted.filter { it.wrap().type == type })
-        }
-        return enchants
-    }
+    internal fun orderOf(type: EnchantmentType): Int? = typeOrder[type]
 }
 
-object RaritySorter : EnchantmentSorter {
-    private val rarities = mutableListOf<EnchantmentRarity>()
+object RaritySorter {
+    private var rarityOrder = emptyMap<EnchantmentRarity, Int>()
 
     fun update() {
-        rarities.clear()
-        rarities.addAll(plugin.configYml.getStrings("display.sort.rarity-order").mapNotNull {
-            EnchantmentRarities[it]
-        })
+        rarityOrder = plugin.configYml.getStrings("display.sort.rarity-order")
+            .mapIndexedNotNull { index, id ->
+                EnchantmentRarities[id]?.let { it to index }
+            }
+            .toMap()
     }
 
-    override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
-        val sorted = children.getSafely(0).sort(enchantments, children.drop(1))
-        val enchants = mutableListOf<Enchantment>()
-        for (rarity in rarities) {
-            enchants.addAll(sorted.filter { it.wrap().enchantmentRarity == rarity })
-        }
-        return enchants
-    }
+    internal fun orderOf(rarity: EnchantmentRarity): Int? = rarityOrder[rarity]
 }

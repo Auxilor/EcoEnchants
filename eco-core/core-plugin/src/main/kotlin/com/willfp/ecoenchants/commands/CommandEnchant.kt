@@ -19,6 +19,20 @@ object CommandEnchant : PluginCommand(
     "ecoenchants.command.enchant",
     false
 ) {
+    private var enchantmentCompletions: List<String> = emptyList()
+    private var levelCompletionsByEnchant = emptyMap<String, List<String>>()
+    private val defaultLevelCompletions = (0..5).map { it.toString() }
+
+    internal fun reload() {
+        @Suppress("DEPRECATION")
+        val enchantments = Enchantment.values()
+
+        enchantmentCompletions = enchantments.map { it.key.key }
+        levelCompletionsByEnchant = enchantments.associate {
+            it.key.key to (0..it.maxLevel).map { level -> level.toString() }
+        }
+    }
+
     override fun onExecute(sender: CommandSender, rawArgs: List<String>) {
         var args = rawArgs
         var player = sender as? Player
@@ -81,8 +95,7 @@ object CommandEnchant : PluginCommand(
         if (args.size == 1) {
             StringUtil.copyPartialMatches(
                 args[0],
-                @Suppress("DEPRECATION")
-                Enchantment.values().map { it.key.key },
+                enchantmentCompletions,
                 completions
             )
         }
@@ -92,15 +105,14 @@ object CommandEnchant : PluginCommand(
             val enchant = Enchantment.getByKey(NamespacedKey.minecraft(args[0].lowercase()))
 
             val levels = if (enchant != null) {
-                val maxLevel = enchant.maxLevel
-                (0..maxLevel).toList()
+                levelCompletionsByEnchant[enchant.key.key] ?: defaultLevelCompletions
             } else {
-                (0..5).toList()
+                defaultLevelCompletions
             }
 
             StringUtil.copyPartialMatches(
                 args[1],
-                levels.map { it.toString() },
+                levels,
                 completions
             )
         }

@@ -15,6 +15,7 @@ import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.SilentViolationContext
 import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.Conditions
+import com.willfp.libreforge.slot.SlotType
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
@@ -67,6 +68,8 @@ abstract class EcoEnchantBase(
     override val targets = config.getStrings("targets")
         .mapNotNull { EnchantmentTargets[it] }
         .toSet()
+
+    override val slots: Set<SlotType> = targets.map { it.slot }.toSet()
 
     override val type: EnchantmentType = config.getString("type")
         .let { EnchantmentTypes[it] }

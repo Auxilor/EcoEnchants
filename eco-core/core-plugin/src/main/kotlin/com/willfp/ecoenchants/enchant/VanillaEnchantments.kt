@@ -5,8 +5,11 @@ import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 
 val Enchantment.vanillaEnchantmentData: VanillaEnchantmentData?
+    get() = key.vanillaEnchantmentData
+
+val NamespacedKey.vanillaEnchantmentData: VanillaEnchantmentData?
     get() {
-        val vanilla = plugin.vanillaEnchantsYml.getSubsectionOrNull(key.key) ?: return null
+        val vanilla = plugin.vanillaEnchantsYml.getSubsectionOrNull(key) ?: return null
 
         return VanillaEnchantmentData(
             vanilla.getIntOrNull("max-level"),

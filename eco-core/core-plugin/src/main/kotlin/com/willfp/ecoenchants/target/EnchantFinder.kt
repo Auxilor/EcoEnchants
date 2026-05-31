@@ -34,7 +34,7 @@ object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
     }
 
     override fun isValidInSlot(holder: EcoEnchantLevel, slot: SlotType): Boolean {
-        return holder.enchant.targets.map { it.slot }.any { it.isOrContains(slot) }
+        return holder.enchant.slots.any { it.isOrContains(slot) }
     }
 
     internal fun LivingEntity.clearEnchantmentCache() = levelCache.invalidate(this.uniqueId)
@@ -51,15 +51,20 @@ object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
         }
 
     fun LivingEntity.hasEnchantActive(enchant: EcoEnchant): Boolean {
-        return this.cachedLevels
-            .filter { it.level.enchant == enchant }
-            .any { it.level.conditions.areMet(this.toDispatcher(), it.holder) }
+        val dispatcher = this.toDispatcher()
+
+        return this.cachedLevels.any {
+            it.level.enchant == enchant && it.level.conditions.areMet(dispatcher, it.holder)
+        }
     }
 
     fun LivingEntity.getItemsWithEnchantActive(enchant: EcoEnchant): Map<ItemStack, Int> {
-        return this.cachedLevels
-            .filter { it.level.enchant == enchant }
-            .filter { it.level.conditions.areMet(this.toDispatcher(), it.holder) }
+        val dispatcher = this.toDispatcher()
+
+        return this.cachedLevels.asSequence()
+            .filter {
+                it.level.enchant == enchant && it.level.conditions.areMet(dispatcher, it.holder)
+            }
             .associate { it.item to it.level.level }
     }
 

@@ -3,7 +3,6 @@ package com.willfp.ecoenchants.enchant.impl.hardcoded
 import com.willfp.eco.util.DurabilityUtils
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
-import com.willfp.ecoenchants.target.EnchantFinder.hasEnchantActive
 import com.willfp.libreforge.slot.impl.SlotTypeArmor
 import com.willfp.libreforge.slot.impl.SlotTypeHands
 import org.bukkit.Bukkit
@@ -23,21 +22,24 @@ object EnchantmentRepairing : HardcodedEcoEnchant(
         val notWhileHolding = config.getBool("not-while-holding")
 
         for (player in Bukkit.getOnlinePlayers()) {
-            if (player.hasEnchantActive(this)) {
-                val repairPerLevel = config.getIntFromExpression("repair-per-level", player)
+            val activeItems = player.getItemsWithEnchantActive(this)
+            if (activeItems.isEmpty()) {
+                continue
+            }
 
-                for ((item, level) in player.getItemsWithEnchantActive(this)) {
-                    if (notWhileHolding) {
-                        val isHolding = item in SlotTypeHands.getItems(player)
-                        val isEquipped = item in SlotTypeArmor.getItems(player)
+            val repairPerLevel = config.getIntFromExpression("repair-per-level", player)
+            val excludedItems = if (notWhileHolding) {
+                SlotTypeHands.getItems(player).toSet() + SlotTypeArmor.getItems(player)
+            } else {
+                emptySet()
+            }
 
-                        if (isHolding || isEquipped) {
-                            continue
-                        }
-                    }
-
-                    DurabilityUtils.repairItem(item, level * repairPerLevel)
+            for ((item, level) in activeItems) {
+                if (item in excludedItems) {
+                    continue
                 }
+
+                DurabilityUtils.repairItem(item, level * repairPerLevel)
             }
         }
     }

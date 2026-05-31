@@ -6,13 +6,20 @@ import com.willfp.eco.core.display.DisplayPriority
 import com.willfp.eco.core.display.DisplayProperties
 import com.willfp.eco.core.fast.FastItemStack
 import com.willfp.eco.core.fast.fast
+import com.willfp.eco.util.formatEco
 import com.willfp.ecoenchants.commands.CommandToggleDescriptions.seesEnchantmentDescriptions
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
+import com.willfp.libreforge.Dispatcher
 import com.willfp.libreforge.ItemProvidedHolder
+import com.willfp.libreforge.ProvidedHolder
+import com.willfp.libreforge.applyHolder
+import com.willfp.libreforge.conditions.ConditionList
+import com.willfp.libreforge.toDispatcher
+import com.willfp.libreforge.toPlaceholderContext
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
@@ -40,7 +47,10 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         props: DisplayProperties,
         vararg args: Any
     ) {
-        if (!itemStack.isEnchantable && plugin.configYml.getBool("display.require-enchantable")) {
+        val config = plugin.configYml
+        val requireEnchantable = config.getBool("display.require-enchantable")
+
+        if (!itemStack.isEnchantable && requireEnchantable) {
             return
         }
 
@@ -67,12 +77,20 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         val enchants = unsorted.keys.sortForDisplay()
             .associateWith { unsorted[it]!! }
 
-        val shouldCollapse = plugin.configYml.getBool("display.collapse.enabled") &&
-                enchants.size > plugin.configYml.getInt("display.collapse.threshold")
+        val collapseEnabled = config.getBool("display.collapse.enabled")
+        val collapseThreshold = config.getInt("display.collapse.threshold")
+        val collapsePerLine = config.getInt("display.collapse.per-line")
+        val collapseDelimiter = config.getFormattedString("display.collapse.delimiter")
+        val descriptionsEnabled = config.getBool("display.descriptions.enabled")
+        val descriptionsThreshold = config.getInt("display.descriptions.threshold")
+        val enchantmentsBelowLore = config.getBool("display.enchantments-below-lore")
+        val playerDispatcher = player?.toDispatcher()
 
-        val shouldDescribe = (plugin.configYml.getBool("display.descriptions.enabled") &&
-                enchants.size <= plugin.configYml.getInt("display.descriptions.threshold")
-                && player?.seesEnchantmentDescriptions ?: true)
+        val shouldCollapse = collapseEnabled && enchants.size > collapseThreshold
+
+        val shouldDescribe = descriptionsEnabled &&
+                enchants.size <= descriptionsThreshold &&
+                (player?.seesEnchantmentDescriptions ?: true)
 
         val formattedNames = mutableMapOf<DisplayableEnchant, String>()
 
@@ -80,28 +98,25 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
 
         for ((enchant, level) in enchants) {
             var showNotMet = false
-            if (player != null && enchant is EcoEnchant) {
+            if (playerDispatcher != null && enchant is EcoEnchant) {
                 val enchantLevel = enchant.getLevel(level)
                 val holder = ItemProvidedHolder(enchantLevel, itemStack)
 
-                val enchantNotMetLines = holder.getNotMetLines(player).map { Display.PREFIX + it }
-                notMetLines.addAll(enchantNotMetLines)
-
-                if (enchantNotMetLines.isNotEmpty() || holder.isShowingAnyNotMet(player)) {
-                    showNotMet = true
-                }
+                val notMetDisplay = holder.getNotMetDisplay(playerDispatcher)
+                notMetLines.addAll(notMetDisplay.lines.map { Display.PREFIX + it })
+                showNotMet = notMetDisplay.showNameAsNotMet
             }
 
-            formattedNames[DisplayableEnchant(enchant.wrap(), level)] =
-                enchant.wrap().getFormattedName(level, showNotMet = showNotMet)
+            val wrapped = enchant.wrap()
+            formattedNames[DisplayableEnchant(wrapped, level)] =
+                wrapped.getFormattedName(level, showNotMet = showNotMet)
         }
 
         if (shouldCollapse) {
-            val perLine = plugin.configYml.getInt("display.collapse.per-line")
-            for (names in formattedNames.values.chunked(perLine)) {
+            for (names in formattedNames.values.chunked(collapsePerLine)) {
                 enchantLore.add(
                     Display.PREFIX + names.joinToString(
-                        plugin.configYml.getFormattedString("display.collapse.delimiter")
+                        collapseDelimiter
                     )
                 )
             }
@@ -124,7 +139,7 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
             hse.hideStoredEnchants(fast)
         }
 
-        if (plugin.configYml.getBool("display.enchantments-below-lore")) {
+        if (enchantmentsBelowLore) {
             fast.lore = lore + enchantLore + notMetLines
         } else {
             fast.lore = enchantLore + lore + notMetLines
@@ -168,4 +183,44 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
 
     private val PersistentDataContainer.hideState: Int
         get() = this.get(hideStateKey, PersistentDataType.INTEGER) ?: -1
+}
+
+private data class NotMetDisplay(
+    val lines: List<String>,
+    val showNameAsNotMet: Boolean
+)
+
+private fun ProvidedHolder.getNotMetDisplay(dispatcher: Dispatcher<*>): NotMetDisplay {
+    val lines = mutableListOf<String>()
+    var showNameAsNotMet = false
+
+    fun collect(conditionList: ConditionList) {
+        for (block in conditionList) {
+            if (!block.showNotMet) {
+                continue
+            }
+
+            if (block.isMet(dispatcher, this@getNotMetDisplay)) {
+                continue
+            }
+
+            showNameAsNotMet = true
+
+            if (block.notMetLines.isEmpty()) {
+                continue
+            }
+
+            val context = block.config.applyHolder(this@getNotMetDisplay, dispatcher).toPlaceholderContext()
+            lines += block.notMetLines.map {
+                it.formatEco(context)
+            }
+        }
+    }
+
+    collect(holder.conditions)
+    for (effect in holder.effects) {
+        collect(effect.conditions)
+    }
+
+    return NotMetDisplay(lines, showNameAsNotMet)
 }

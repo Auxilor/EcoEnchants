@@ -15,6 +15,7 @@ import com.willfp.eco.core.gui.slot.ConfigSlot
 import com.willfp.eco.core.gui.slot.FillerMask
 import com.willfp.eco.core.gui.slot.MaskItems
 import com.willfp.eco.core.gui.slot.Slot
+import com.willfp.eco.core.items.HashedItem
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.core.items.builder.ItemStackBuilder
@@ -45,6 +46,7 @@ object EnchantGUI {
 
     internal fun reload() {
         cachedEnchantmentSlots.invalidateAll()
+        applicableEnchantmentsSorted.invalidateAll()
         enchantInfoMenus.invalidateAll()
         allEnchantsSorted = EcoEnchants.values().map { it.enchantment }.sortForDisplay()
 
@@ -86,11 +88,12 @@ object EnchantGUI {
                 val hasItem = !atCaptive.isEcoEmpty && atCaptive != null && atCaptive.type != Material.BOOK
 
                 val baseEnchants = if (!hasItem) {
-                    EcoEnchants.values().map { it.enchantment }.sortForDisplay()
+                    allEnchantsSorted
                 } else {
-                    atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
-                        .subtract(atCaptive.fast().enchants.keys)
-                        .toList()
+                    val currentEnchants = atCaptive.fast().enchants.keys
+                    applicableEnchantmentsSorted.get(HashedItem.of(atCaptive)) {
+                        atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
+                    }.filterNot { it in currentEnchants }
                 }
 
                 // Apply group filter if a groupId is set in menu state
@@ -364,6 +367,9 @@ private class EnchantmentScrollPane : GUIComponent {
 
 private val cachedEnchantmentSlots = Caffeine.newBuilder()
     .build<Pair<EcoEnchant, Int>, Slot>()
+
+private val applicableEnchantmentsSorted = Caffeine.newBuilder()
+    .build<HashedItem, List<Enchantment>>()
 
 private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
     return cachedEnchantmentSlots.get(this to level) {
