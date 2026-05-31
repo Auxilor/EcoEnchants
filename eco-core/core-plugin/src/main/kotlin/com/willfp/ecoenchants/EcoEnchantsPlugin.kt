@@ -23,6 +23,7 @@ import com.willfp.ecoenchants.enchant.registration.ModernEnchantmentRegistererPr
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
+import com.willfp.ecoenchants.libreforge.EffectApplyRandomEnchant
 import com.willfp.ecoenchants.mechanics.AnvilSupport
 import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.ExtraItemSupport
@@ -35,6 +36,7 @@ import com.willfp.ecoenchants.target.EnchantFinder.clearEnchantmentCache
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.NamedValue
+import com.willfp.libreforge.effects.Effects
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderPlaceholderProvider
@@ -69,6 +71,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleEnable() {
+        Effects.register(EffectApplyRandomEnchant)
+
         registerHolderProvider(EnchantFinder.toHolderProvider())
 
         registerSpecificRefreshFunction<LivingEntity> {
