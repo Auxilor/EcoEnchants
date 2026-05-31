@@ -49,6 +49,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     override fun afterReload(plugin: LibreforgePlugin) {
         sendPrompts()
         registerHardcodedEnchantments()
+        EnchantRegistrations.registerEnchantments()
 
         plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).freezeRegistry()
     }
@@ -97,7 +98,6 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         registry.register(enchantment as EcoEnchant)
         @Suppress("DEPRECATION")
         BY_NAME[ChatColor.stripColor(enchant.getFormattedName(0))?.lowercase()] = enchantment as EcoEnchant
-        EnchantRegistrations.registerEnchantments()
     }
 
     private fun registerHardcodedEnchantments() {

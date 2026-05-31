@@ -13,11 +13,20 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
+import java.util.EnumSet
 
 object EnchantmentReplenish : HardcodedEcoEnchant(
     "replenish"
 ) {
     private var handler = ReplenishHandler(this)
+    private val ignoredCropTypes = EnumSet.of(
+        Material.GLOW_BERRIES,
+        Material.SWEET_BERRY_BUSH,
+        Material.CACTUS,
+        Material.BAMBOO,
+        Material.CHORUS_FLOWER,
+        Material.SUGAR_CANE
+    )
 
     override fun onRegister() {
         plugin.eventManager.registerListener(handler)
@@ -34,30 +43,22 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
             ignoreCancelled = true
         )
         fun handle(event: BlockBreakEvent) {
-            val player = event.player
-
-            if (!player.hasEnchantActive(enchant)) {
-                return
-            }
-
             val block = event.block
             val type = block.type
 
-            if (type in arrayOf(
-                    Material.GLOW_BERRIES,
-                    Material.SWEET_BERRY_BUSH,
-                    Material.CACTUS,
-                    Material.BAMBOO,
-                    Material.CHORUS_FLOWER,
-                    Material.SUGAR_CANE
-                )
-            ) {
+            if (type in ignoredCropTypes) {
                 return
             }
 
             val data = block.blockData
 
             if (data !is Ageable) {
+                return
+            }
+
+            val player = event.player
+
+            if (!player.hasEnchantActive(enchant)) {
                 return
             }
 

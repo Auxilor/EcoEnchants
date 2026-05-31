@@ -447,6 +447,7 @@ object AnvilSupport : Listener {
         val rightEnchants = right.fast().getEnchants(true)
 
         val outEnchants = leftEnchants.toMutableMap()
+        val enchantLimit = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
 
         for ((enchant, level) in rightEnchants) {
             if (outEnchants.containsKey(enchant)) {
@@ -457,11 +458,13 @@ object AnvilSupport : Listener {
                     max(level, currentLevel)
                 }
             } else {
+                if (outEnchants.size >= enchantLimit) {
+                    break
+                }
+
                 // Running .wrap() to use EcoEnchantLike canEnchantItem logic
-                if (enchant.wrap().canEnchantItem(left, outEnchants.keys)) {
-                    if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
-                        outEnchants[enchant] = level
-                    }
+                if (enchant.wrap().canEnchantItemConsidering(left, outEnchants.keys, enchantLimit)) {
+                    outEnchants[enchant] = level
                 }
             }
         }

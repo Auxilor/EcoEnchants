@@ -5,12 +5,22 @@ on:
     paths:
       - '**/*.kt'
       - '**/*.kts'
+      - '**/*.yml'
+      - 'gradle.properties'
+      - 'gradle/**'
+      - 'gradlew'
+      - '.github/workflows/build.yml'
   push:
     branches:
       - master
     paths:
       - '**/*.kt'
       - '**/*.kts'
+      - '**/*.yml'
+      - 'gradle.properties'
+      - 'gradle/**'
+      - 'gradlew'
+      - '.github/workflows/build.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -32,3 +42,13 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: Build
         run: ./gradlew build --full-stacktrace
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EcoEnchants-${{ github.sha }}
+          path: |
+            build/libs/*.jar
+            !build/libs/*-sources.jar
+            !build/libs/*-javadoc.jar
+          if-no-files-found: error
+          retention-days: 14

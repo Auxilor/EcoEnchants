@@ -15,7 +15,9 @@ object EnchantRegistrations {
     private val registered = mutableSetOf<EnchantRegistrationIntegration>()
 
     fun register(integration: EnchantRegistrationIntegration) {
-        registered.add(integration)
+        if (registered.add(integration)) {
+            runCatching { integration.registerEnchants() }
+        }
     }
 
     internal fun registerEnchantments() {

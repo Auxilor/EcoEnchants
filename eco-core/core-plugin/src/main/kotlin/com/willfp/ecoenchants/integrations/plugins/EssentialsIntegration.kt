@@ -8,33 +8,29 @@ import org.bukkit.enchantments.Enchantment
 
 @Suppress("UNCHECKED_CAST")
 object EssentialsIntegration : EnchantRegistrationIntegration {
+    private val enchantmentMaps by lazy {
+        arrayOf("ENCHANTMENTS", "ALIASENCHANTMENTS").map { field ->
+            Enchantments::class.java.getDeclaredField(field)
+                .apply { isAccessible = true }
+                .get(null) as MutableMap<String, Enchantment>
+        }
+    }
+
     override fun registerEnchants() {
         for (enchantment in EcoEnchants.values()) {
             // why aren't you using the api you PRd in
             // because essentials named mending to repairing etc
-            for (field in arrayOf("ENCHANTMENTS", "ALIASENCHANTMENTS")) {
-                Enchantments::class.java.getDeclaredField(field)
-                    .apply {
-                        isAccessible = true
-                        (get(null) as MutableMap<String, Enchantment>).apply {
-                            put(enchantment.id, enchantment.enchantment)
-                            put(enchantment.id.replace("_", ""), enchantment.enchantment)
-                        }
-                    }
+            for (map in enchantmentMaps) {
+                map[enchantment.id] = enchantment.enchantment
+                map[enchantment.id.replace("_", "")] = enchantment.enchantment
             }
         }
     }
 
     override fun removeEnchant(enchantment: EcoEnchant) {
-        for (field in arrayOf("ENCHANTMENTS", "ALIASENCHANTMENTS")) {
-            Enchantments::class.java.getDeclaredField(field)
-                .apply {
-                    isAccessible = true
-                    (get(null) as MutableMap<String, Enchantment>).apply {
-                        remove(enchantment.id)
-                        remove(enchantment.id.replace("_", ""))
-                    }
-                }
+        for (map in enchantmentMaps) {
+            map.remove(enchantment.id)
+            map.remove(enchantment.id.replace("_", ""))
         }
     }
 
