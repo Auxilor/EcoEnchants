@@ -28,6 +28,7 @@ import com.willfp.ecoenchants.mechanics.EnchantmentSourceCache
 import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.ExtraItemSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
+import com.willfp.ecoenchants.mechanics.HeldInteractionRefreshSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -106,7 +107,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             LootSupport,
             AnvilSupport,
             LoreConversion,
-            GrindstoneSupport
+            GrindstoneSupport,
+            HeldInteractionRefreshSupport
         )
     }
 
