@@ -3,6 +3,8 @@ title: "Commands and Permissions"
 sidebar_position: 5
 ---
 
+Every command and its permission node is listed below. Permissions follow the `ecoenchants.command.<name>` pattern and are granted to operators by default.
+
 | Command                                                          | Description                                                             | Permission                               |
 |------------------------------------------------------------------|-------------------------------------------------------------------------|------------------------------------------|
 | `/ecoenchants reload`                                            | Reload the plugin configs (adding new enchantments requires re-logging) | `ecoenchants.command.reload`             |
@@ -19,3 +21,10 @@ sidebar_position: 5
 | Permission                   | Description                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------|
 | `ecoenchants.fromtable.<id>` | Permission to allow an enchantment to be obtained from an enchanting table (given by default) |
+
+<hr/>
+
+## Where to go next
+
+- **Make an enchantment to use these on:** the [How to Make an Enchantment](how-to-make-a-custom-enchant) guide.
+- **Configure the plugin:** every option in the [Plugin Config](plugin-config).

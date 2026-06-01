@@ -3,6 +3,8 @@ title: "Advanced Configuration"
 sidebar_position: 3
 ---
 
+Once your enchantments are working, these settings let you fine-tune how the plugin feels: how anvil costs scale, and how enchantment levels are distributed when players obtain them.
+
 ## Cost Exponent
 
 Cost exponent is a feature of anvils, which can increase or decrease cost based on the original cost.
@@ -19,7 +21,7 @@ So, working with an exponent of `1.02` and an original cost of `25`:
 cost = 25^1.02 + 1
 ```
 
-This is then **rounded up** to the nearest whole number, so the cost in this example would become **28**. This formula ensures cost scaling stays fair, fun and consistent across all levels.
+This is then **rounded up** to the nearest whole number, so the cost in this example would become **28**. This formula ensures cost scaling stays fair, fun, and consistent across all levels.
 #### Configuration Tips
 
 Set the `cost-exponent` in your config to control difficulty:
@@ -49,3 +51,11 @@ The "band" for each level is calculated by dividing 1 by the amount of levels. T
 | 5     | 0.81 - 1   |
 
 Increasing the bias towards 1 will lead to an increased likeliness of low-level enchantments, and lowering the bias towards -1 will lead to an increased likeliness of high-level enchantments.
+
+<hr/>
+
+## Where to go next
+
+- **The systems being tuned:** revisit [The Gameplay](the-gameplay) for how rarity and types drive obtaining.
+- **Where these options live:** the [Plugin Config](plugin-config) reference.
+
