@@ -6,7 +6,7 @@ title: "EcoEnchants"
 
 EcoEnchants adds hundreds of custom enchantments to your server, and lets you make your own without any coding knowledge. It's built from the ground up to integrate fully with vanilla to provide a seamless and intuitive experience for your players. It supports the Enchanting Table, Villager Trading, Anvils, Grindstones, and even natural spawning around the world in structures like End Cities. It feels exactly like a part of the vanilla game.
 
-## What sets EcoEnchants apart from other custom enchantment plugins?
+## What sets EcoEnchants apart?
 
 There's a long list of reasons why, but chief among them is how the enchants are stored on the server and on items. Most other plugins don't have real enchantments, but instead just add lore lines onto the items. The reason why registering them with the server is so much better is that it supports **every plugin right out of the box**. Essentials and CMI immediately work with it, as do all my other plugins, and as does every other plugin that works with enchantments, whether or not the developers know it. This leads to an important general rule for EcoEnchants: **if you can do it with vanilla enchantments, you can do it with EcoEnchants enchantments.** Because the lore is completely separate from the enchantments, it means that you can change the name of any enchantment you want and it will instantly update on items without having to worry about breaking anything. It's fully translatable into any language of your choice.
 

@@ -12,6 +12,7 @@ EcoEnchants lets you build your own enchantments entirely from config, with no c
 3. Paste in an enchantment config (copy `_example.yml` as a starting point).
 4. Run `/ecoenchants reload`, then **re-log**. Adding *new* enchantments requires reconnecting; editing existing ones only needs a reload.
 5. Give it to yourself with `/enchant lifesteal 1` while holding a valid item.
+6. Run `/enchantinfo lifesteal` to confirm the name, description, and placeholders render correctly.
 
 :::tip
 `_example.yml` is included as a reference and is **never loaded**, so rename or copy it to make a real enchantment. You can also organise enchantments into subfolders inside `enchants/`, and they'll still load.
@@ -158,16 +159,6 @@ These placeholders are provided by EcoEnchants and can be used in the descriptio
 | Placeholder | Value |
 | --- | --- |
 | `%level%` | The current level of the enchantment. Use it to make enchantments scale as the level increases. |
-
-## Testing your enchantment
-
-After saving the file:
-
-1. `/ecoenchants reload` reloads configs. **Re-log** if the enchantment is brand new.
-2. `/enchant <id> <level>` applies it to your held item.
-3. `/enchantinfo <id> [level]` opens the info GUI to confirm the name, description, and placeholders render correctly.
-
-See [Commands and Permissions](commands-and-permissions) for the full command list.
 
 :::tip Troubleshooting
 - **Enchantment doesn't appear after reload?** It's new, so you must re-log, not just reload.

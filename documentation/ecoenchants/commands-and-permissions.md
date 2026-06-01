@@ -16,7 +16,7 @@ Every command and its permission node is listed below. Permissions follow the `e
 | `/ecoenchants export <id>`                                       | Export an enchant to [lrcdb](https://lrcdb.auxilor.io/)                 | `ecoenchants.command.export`             | 
 | `/ecoenchants toggledescriptions`                                | Let players toggle enchantment descriptions                             | `ecoenchants.command.toggledescriptions` |
 
-### Additional Permissions
+### Additional permissions
 
 | Permission                   | Description                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------|
