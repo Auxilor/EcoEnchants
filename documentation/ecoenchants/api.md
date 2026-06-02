@@ -3,22 +3,31 @@ title: "API"
 sidebar_position: 8
 ---
 
-## Source Code
+EcoEnchants is fully open-source, and you can build against it from your own plugin. This page shows how to add it as a dependency.
 
-The source code can be found [here](https://github.com/Auxilor/EcoEnchants):
+## Source code
 
-## API
+The full source is on [GitHub](https://github.com/Auxilor/EcoEnchants).
 
-Add this to your build.gradle.kts:
+## Adding the dependency
 
-```kts
-repositories {
-    maven("https://repo.auxilor.io/repository/maven-public/")
-}
+1. Add the Auxilor repository and the EcoEnchants dependency to your `build.gradle.kts`:
 
-dependencies {
-    compileOnly("com.willfp:EcoEnchants:<version>")
-}
-```
+   ```kotlin
+   repositories {
+       maven("https://repo.auxilor.io/repository/maven-public/")
+   }
+
+   dependencies {
+       compileOnly("com.willfp:EcoEnchants:<version>")
+   }
+   ```
 
 The latest version available on the repo can be found [here](https://github.com/Auxilor/EcoEnchants/tags)
+
+<hr/>
+
+## Where to go next
+
+- **The framework:** EcoEnchants is built on [eco](https://github.com/Auxilor/eco), where most shared APIs live.
+- **Make an enchantment from config:** the [How to Make an Enchantment](how-to-make-a-custom-enchant) guide.

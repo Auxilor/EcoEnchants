@@ -3,6 +3,14 @@ title: "Plugin Config"
 sidebar_position: 7
 ---
 
+The main plugin settings live in `EcoEnchants/config.yml`. It controls how enchantments are obtained (enchanting table, villagers, loot, anvils), how they're displayed on items, and the enchant GUIs. Every option below is annotated inline.
+
+After editing, run `/ecoenchants reload` to apply your changes.
+
+:::warning
+A few options note that they require a **server restart** rather than a reload, most importantly `display.enabled`. These are called out in the comments below.
+:::
+
 ## Default config.yml
 
 ```yaml
@@ -250,3 +258,11 @@ lore-conversion:
   aggressive: false # Will convert all items in all inventories when opened, likely to use a lot of performance
 
 ```
+
+<hr/>
+
+## Where to go next
+
+- **Balance the obtaining rates:** [Advanced Configuration](advanced-configuration) covers cost scaling and level bias.
+- **Understand what you're configuring:** [The Gameplay](the-gameplay) explains types, rarity, and targets.
+- **Commands to apply and test changes:** [Commands and Permissions](commands-and-permissions).
