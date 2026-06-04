@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.target
 
-import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.cache.EcoCache
 import com.willfp.eco.core.items.HashedItem
 import com.willfp.eco.core.registry.Registry
 import com.willfp.ecoenchants.enchant.EcoEnchant
@@ -8,7 +8,7 @@ import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.plugin
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
-import java.util.concurrent.TimeUnit
+import java.time.Duration
 
 object EnchantmentTargets : Registry<EnchantmentTarget>() {
     init {
@@ -49,10 +49,10 @@ object EnchantmentTargets : Registry<EnchantmentTarget>() {
     }
 }
 
-private val enchantableCache = Caffeine.newBuilder()
-    .expireAfterAccess(5, TimeUnit.SECONDS)
-    .build<HashedItem, Boolean>()
+private val enchantableCache = EcoCache.builder<HashedItem, Boolean>()
+    .expireAfterAccess(Duration.ofSeconds(5))
+    .build()
 
-private val canEnchantCache = Caffeine.newBuilder()
-    .expireAfterAccess(5, TimeUnit.SECONDS)
-    .build<HashedItem, List<EcoEnchant>>()
+private val canEnchantCache = EcoCache.builder<HashedItem, List<EcoEnchant>>()
+    .expireAfterAccess(Duration.ofSeconds(5))
+    .build()

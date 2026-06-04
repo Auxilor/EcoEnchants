@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.target
 
-import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.cache.EcoCache
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
@@ -11,12 +11,12 @@ import com.willfp.libreforge.toDispatcher
 import org.bukkit.entity.LivingEntity
 import org.bukkit.inventory.ItemStack
 import java.util.UUID
-import java.util.concurrent.TimeUnit
+import java.time.Duration
 
 object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
-    private val levelCache = Caffeine.newBuilder()
-        .expireAfterWrite(1, TimeUnit.SECONDS)
-        .build<UUID, List<ProvidedLevel>>()
+    private val levelCache = EcoCache.builder<UUID, List<ProvidedLevel>>()
+        .expireAfterWrite(Duration.ofSeconds(1))
+        .build()
 
     override fun find(item: ItemStack): List<EcoEnchantLevel> {
         val enchantMap = item.fast().enchants
