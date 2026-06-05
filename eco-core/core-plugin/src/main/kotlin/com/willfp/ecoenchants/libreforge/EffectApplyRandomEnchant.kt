@@ -18,7 +18,7 @@ object EffectApplyRandomEnchant : Effect<NoCompileData>("apply_random_enchant") 
 
     override fun onTrigger(config: Config, data: TriggerData, compileData: NoCompileData): Boolean {
         val player = data.player ?: return false
-        val item = data.item ?: player.inventory.itemInMainHand
+        val item = data.item ?: return false
 
         val types = config.getStrings("types").map { it.lowercase() }.toSet()
         val rarities = config.getStrings("rarities").map { it.lowercase() }.toSet()
@@ -33,7 +33,7 @@ object EffectApplyRandomEnchant : Effect<NoCompileData>("apply_random_enchant") 
             .filter { allowUnsafe || it.canEnchantItem(item) }
             .randomOrNull() ?: return false
 
-        val level = NumberUtils.randInt(1, enchant.maximumLevel)
+        val level = NumberUtils.randInt(1, maxOf(1, enchant.maximumLevel))
 
         val meta = item.itemMeta ?: return false
 
