@@ -125,7 +125,7 @@ enchantinfo:
 # Options for the enchant GUI.
 enchant-gui:
   rows: 6 # How many rows to have in the GUI
-  title: "Enchant GUI" # The title of the GUI
+  title: "Enchant GUI &7(%page%/%max_page%)" # The title of the GUI
 
   mask: # The background material
     items:
@@ -157,12 +157,20 @@ enchant-gui:
 
   # Options for the page change buttons
   page-change:
+    # The sound played when the page is changed
+    sound:
+      enabled: true
+      sound: ui.button.click
+      pitch: 1.0
+      volume: 1.0
     forwards:
       item: arrow name:"&fNext Page" # The item. Will not show if on the last page.
+      item-inactive: gray_dye name:"&7Next Page" # The item shown on the last page
       row: 6
       column: 6
     backwards:
       item: arrow name:"&fPrevious Page" # The item. Will not show if on the first page.
+      item-inactive: gray_dye name:"&7Previous Page" # The item shown on the first page
       row: 6
       column: 4
 
