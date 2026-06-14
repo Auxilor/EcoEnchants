@@ -15,10 +15,22 @@ import org.bukkit.event.enchantment.EnchantItemEvent
 class TriggerEnchantType(
     private val type: EnchantmentType
 ) : Trigger("enchant_${type.id}") {
+    override val description = "Fires when the player applies this enchantment type to an item in an enchanting table."
+
+    override val categories = setOf("inventory")
+
     override val parameters = setOf(
         TriggerParameter.PLAYER,
         TriggerParameter.LOCATION,
-        TriggerParameter.ITEM
+        TriggerParameter.ITEM,
+        TriggerParameter.VALUE,
+        TriggerParameter.TEXT
+    )
+
+    override val parameterDescriptions = mapOf(
+        TriggerParameter.ITEM to "The item that was enchanted",
+        TriggerParameter.VALUE to "The experience level cost of the enchantment",
+        TriggerParameter.TEXT to "The ID of the enchantment type that was applied"
     )
 
     override var isEnabled = true
