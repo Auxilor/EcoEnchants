@@ -1,5 +1,7 @@
 package com.willfp.ecoenchants
 
+import com.willfp.eco.core.anvil.AnvilHandlers
+import com.willfp.eco.core.anvil.AnvilSettings
 import com.willfp.eco.core.bstats.EcoMetricsChart
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
@@ -24,7 +26,7 @@ import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
 import com.willfp.ecoenchants.libreforge.EffectApplyRandomEnchant
-import com.willfp.ecoenchants.mechanics.AnvilSupport
+import com.willfp.ecoenchants.mechanics.EcoEnchantsAnvilHandler
 import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.ExtraItemSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
@@ -84,6 +86,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
                 NamedValue("level", it.level),
             )
         }
+
+        registerAnvilHandler()
     }
 
     override fun handleAfterLoad() {
@@ -97,6 +101,22 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         EnchantSorter.reload()
         ExtraItemSupport.reload()
         EnchantGUI.reload()
+
+        registerAnvilHandler()
+    }
+
+    private fun registerAnvilHandler() {
+        AnvilHandlers.register(
+            EcoEnchantsAnvilHandler(),
+            AnvilSettings(
+                costExponent = configYml.getDouble("anvil.cost-exponent"),
+                enchantLimit = configYml.getInt("anvil.enchant-limit"),
+                useReworkPenalty = configYml.getBool("anvil.use-rework-penalty"),
+                maxRepairCost = configYml.getInt("anvil.max-repair-cost"),
+                clampRepairCost = configYml.getBool("anvil.clamp-repair-cost"),
+                colorNameAllowed = { it.hasPermission("ecoenchants.anvil.color") }
+            )
+        )
     }
 
     override fun loadListeners(): List<Listener> {
@@ -104,7 +124,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             VillagerSupport,
             EnchantingTableSupport,
             LootSupport,
-            AnvilSupport,
             LoreConversion,
             GrindstoneSupport
         )
