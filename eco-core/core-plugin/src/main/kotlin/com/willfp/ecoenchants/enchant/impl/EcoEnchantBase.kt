@@ -5,6 +5,7 @@ import com.willfp.eco.core.placeholder.PlayerlessPlaceholder
 import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -85,7 +86,15 @@ abstract class EcoEnchantBase(
 
     override val isObtainableThroughTrading = config.getBool("tradeable")
 
-    override val isObtainableThroughDiscovery = config.getBool("discoverable")
+    private val discoverableBool = config.getBoolOrNull("discoverable")
+
+    private val discoverableSection = config.getSubsectionOrNull("discoverable")
+
+    override fun isObtainableThrough(type: DiscoveryType): Boolean {
+        val bool = discoverableBool
+        if (bool != null) return bool
+        return discoverableSection?.getBoolOrNull(type.configKey) ?: true
+    }
 
     init {
         // Placeholders

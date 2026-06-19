@@ -55,9 +55,15 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     val isObtainableThroughTrading: Boolean
 
     /**
-     * If the enchantment is discoverable.
+     * If the enchantment is discoverable via a given [type].
+     */
+    fun isObtainableThrough(type: DiscoveryType): Boolean
+
+    /**
+     * If the enchantment is discoverable via any method.
      */
     val isObtainableThroughDiscovery: Boolean
+        get() = DiscoveryType.entries.any { isObtainableThrough(it) }
 
     /**
      * Get a certain [level].
