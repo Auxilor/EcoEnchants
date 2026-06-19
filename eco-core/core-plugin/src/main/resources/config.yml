@@ -26,6 +26,7 @@ loot:
 
 # Options for merging items in an anvil
 anvil:
+  vanilla-costs: false # If true, uses only vanilla XP costs (ignores cost-exponent). Custom enchants still work.
   cost-exponent: 0.95 # The exponent for each enchant level to prevent constant "Too Expensive!" problems
   enchant-limit: -1 # The limit for the amount of enchantments on an item (-1 to disable)
   use-rework-penalty: true # If the rework penalty should be applied

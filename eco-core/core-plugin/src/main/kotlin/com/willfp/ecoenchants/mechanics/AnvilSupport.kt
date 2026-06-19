@@ -332,11 +332,13 @@ object AnvilSupport : Listener {
                 return@run
             }
 
-            var cost = baseRepairCost + price
-
-            // Unbelievably specific edge case
-            if (baseRepairCost == -price) {
-                cost = price
+            var cost = if (plugin.configYml.getBool("anvil.vanilla-costs")) {
+                baseRepairCost
+            } else {
+                var c = baseRepairCost + price
+                // Unbelievably specific edge case
+                if (baseRepairCost == -price) c = price
+                c
             }
 
             // Cost could be less than zero at times, so I include that here.
