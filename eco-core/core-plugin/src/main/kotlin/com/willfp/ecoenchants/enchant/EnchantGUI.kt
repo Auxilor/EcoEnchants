@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchant
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.willfp.eco.core.config.base.LangYml
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
@@ -25,6 +24,7 @@ import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.bukkit.Material
@@ -398,15 +398,13 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                         required.wrap().getFormattedName(0)
                                     }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
-                                .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo(plugin.langYml))
-                                .replace(
-                                    "%discoverable%",
-                                    this.isObtainableThroughDiscovery.parseYesOrNo(plugin.langYml)
-                                )
-                                .replace(
-                                    "%enchantable%",
-                                    this.isObtainableThroughEnchanting.parseYesOrNo(plugin.langYml)
-                                )
+                                .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo())
+                                .replace("%discoverable%", this.isObtainableThroughDiscovery.parseYesOrNo())
+                                .replace("%discoverable_chests%", this.isObtainableThrough(DiscoveryType.CHESTS).parseYesOrNo())
+                                .replace("%discoverable_fishing%", this.isObtainableThrough(DiscoveryType.FISHING).parseYesOrNo())
+                                .replace("%discoverable_mob_drops%", this.isObtainableThrough(DiscoveryType.MOB_DROPS).parseYesOrNo())
+                                .replace("%discoverable_raids%", this.isObtainableThrough(DiscoveryType.RAIDS).parseYesOrNo())
+                                .replace("%enchantable%", this.isObtainableThroughEnchanting.parseYesOrNo())
                         }
                         .formatEco()
                         .flatMap {
@@ -423,6 +421,5 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
     }
 }
 
-fun Boolean.parseYesOrNo(langYml: LangYml): String {
-    return if (this) langYml.getFormattedString("yes") else langYml.getFormattedString("no")
-}
+fun Boolean.parseYesOrNo(): String =
+    if (this) plugin.langYml.getFormattedString("yes") else plugin.langYml.getFormattedString("no")
