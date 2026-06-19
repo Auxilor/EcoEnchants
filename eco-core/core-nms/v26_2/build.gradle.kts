@@ -9,7 +9,7 @@ version = rootProject.version
 
 dependencies {
     implementation(project(":eco-core:core-nms:v26_1_2", configuration = "shadow"))
-    paperweight.paperDevBundle("26.2.0.build.+")
+    paperweight.paperDevBundle("26.2.build.+")
 }
 
 tasks {
