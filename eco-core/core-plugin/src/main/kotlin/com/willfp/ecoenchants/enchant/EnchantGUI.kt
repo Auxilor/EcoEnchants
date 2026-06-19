@@ -4,9 +4,9 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
+import com.willfp.eco.core.gui.addPageChanger
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
-import com.willfp.eco.core.gui.menu.MenuLayer
 import com.willfp.eco.core.gui.page.Page
 import com.willfp.eco.core.gui.page.PageChanger
 import com.willfp.eco.core.gui.slot
@@ -18,6 +18,7 @@ import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEcoEmpty
+import com.willfp.eco.core.sound.PlayableSound
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
@@ -141,17 +142,18 @@ object EnchantGUI {
                 pane
             )
 
+            val pageChangeSound = PlayableSound.create(
+                plugin.configYml.getSubsection("enchant-gui.page-change.sound")
+            )
+
             for (direction in PageChanger.Direction.entries) {
                 val directionName = direction.name.lowercase()
 
-                addComponent(
-                    MenuLayer.TOP,
-                    plugin.configYml.getInt("enchant-gui.page-change.$directionName.row"),
-                    plugin.configYml.getInt("enchant-gui.page-change.$directionName.column"),
-                    PageChanger(
-                        Items.lookup(plugin.configYml.getString("enchant-gui.page-change.$directionName.item")).item,
-                        direction
-                    )
+                addPageChanger(
+                    plugin.configYml,
+                    "enchant-gui.page-change.$directionName",
+                    direction,
+                    pageChangeSound
                 )
             }
 
