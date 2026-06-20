@@ -29,11 +29,12 @@ base {
 
 dependencies {
     implementation(project(":eco-core:core-plugin"))
-    implementation(project(":eco-core:core-nms:v1_21_8", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21_10", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v1_21_11", configuration = "reobf"))
-    implementation(project(":eco-core:core-nms:v26_1_1", configuration = "shadow"))
-    implementation(project(":eco-core:core-nms:v26_1_2", configuration = "shadow"))
+    implementation(project(":eco-core:core-nms:v1_21_8", "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_10", "reobf"))
+    implementation(project(":eco-core:core-nms:v1_21_11", "reobf"))
+    implementation(project(":eco-core:core-nms:v26_1_1", "shadow"))
+    implementation(project(":eco-core:core-nms:v26_1_2", "shadow"))
+    implementation(project(":eco-core:core-nms:v26_2", "shadow"))
 
     embeddedLibreforge("com.willfp:libreforge:${libreforgeVersion!!}:shadow@jar")
 }
@@ -44,7 +45,6 @@ tasks {
             rename { "libreforge-$libreforgeVersion-shadow.jar" }
         }
     }
-    implementation(project(":eco-core:core-nms:v26_2", configuration = "shadow"))
 }
 
 allprojects {

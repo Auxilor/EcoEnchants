@@ -6,7 +6,7 @@ group = "com.willfp"
 version = rootProject.version
 
 dependencies {
-    implementation(project(":eco-core:core-nms:v1_21_8", configuration = "shadow"))
+    implementation(project(":eco-core:core-nms:v1_21_8", "shadow"))
     paperweight.paperDevBundle("1.21.11-R0.1-SNAPSHOT")
 }
 
