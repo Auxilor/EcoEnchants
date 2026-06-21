@@ -6,16 +6,13 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("com.gradleup.shadow") version "9.3.1"
-    id("com.willfp.libreforge-gradle-plugin") version "2.1.0"
+    id("com.willfp.libreforge-gradle-plugin") version "2.0.0"
 }
 
 group = "com.willfp"
 version = findProperty("version")!!
-// useGradleVersions=true (set by release workflows) pins dependencies to the
-// versions in gradle.properties; otherwise dev builds track the latest master snapshot.
-val useGradleVersions = findProperty("useGradleVersions") == "true"
-val libreforgeVersion = if (useGradleVersions) findProperty("libreforge-version") else "dev-SNAPSHOT"
-val ecoVersion = if (useGradleVersions) findProperty("eco-version") else "dev-SNAPSHOT"
+val libreforgeVersion = findProperty("libreforge-version")
+val ecoVersion = findProperty("eco-version")
 
 base {
     archivesName.set(project.name)
@@ -38,13 +35,7 @@ allprojects {
     apply(plugin = "com.gradleup.shadow")
 
     repositories {
-        mavenLocal {
-            content {
-                excludeGroup("com.willfp")
-                excludeGroup("com.auxilor")
-                excludeGroup("com.exanthiax")
-            }
-        }
+        mavenLocal()
         mavenCentral()
 
         maven("https://repo.papermc.io/repository/maven-public/")
@@ -55,10 +46,6 @@ allprojects {
         maven("https://jitpack.io") {
             content { includeGroupByRegex("com\\.github\\..*") }
         }
-    }
-
-    configurations.all {
-        resolutionStrategy.cacheChangingModulesFor(0, "seconds")
     }
 
     dependencies {
