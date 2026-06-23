@@ -2,7 +2,6 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
-import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
@@ -38,25 +37,21 @@ object VillagerSupport : Listener {
             multiplier *= plugin.configYml.getDouble("villager.book-multiplier")
         }
 
-        val enchantments = EcoEnchants.values().shuffled()
+        val enchantLimit = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
+        val reduction = plugin.configYml.getDouble("villager.reduction")
 
-        for (enchantment in enchantments) {
-            if (!enchantment.isObtainableThroughTrading) {
-                continue
+        for (enchantment in EnchantmentSourceCache.trading.randomizedIteration()) {
+            if (enchants.size >= enchantLimit) {
+                break
             }
 
-            if (!enchantment.canEnchantItem(result, enchants.keys)) {
+            if (!enchantment.canEnchantItemConsidering(result, enchants.keys, enchantLimit)) {
                 continue
             }
 
             if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.villagerChance * multiplier) {
                 continue
             }
-
-            if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
-                break
-            }
-
 
             val maxLevel = enchantment.maximumLevel
 
@@ -65,7 +60,7 @@ object VillagerSupport : Listener {
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= plugin.configYml.getDouble("villager.reduction")
+            multiplier /= reduction
 
             if (result.type == Material.ENCHANTED_BOOK) {
                 // Only allow one enchantment

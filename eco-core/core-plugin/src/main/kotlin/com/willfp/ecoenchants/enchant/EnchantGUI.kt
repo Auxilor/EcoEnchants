@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchant
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.config.base.LangYml
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
@@ -14,6 +15,7 @@ import com.willfp.eco.core.gui.slot.ConfigSlot
 import com.willfp.eco.core.gui.slot.FillerMask
 import com.willfp.eco.core.gui.slot.MaskItems
 import com.willfp.eco.core.gui.slot.Slot
+import com.willfp.eco.core.items.HashedItem
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.core.items.builder.ItemStackBuilder
@@ -31,21 +33,28 @@ import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerKickEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import kotlin.math.ceil
+import java.util.UUID
 
-object EnchantGUI {
+object EnchantGUI : Listener {
     private lateinit var menu: Menu
     private var groupMenu: Menu? = null
     private val enchantInfoMenus = Caffeine.newBuilder().build<Pair<EcoEnchant, Int>, Menu>()
     private var allEnchantsSorted: List<Enchantment> = emptyList()
+    private val returnedOnDisconnect = mutableSetOf<UUID>()
 
     internal fun reload() {
         cachedEnchantmentSlots.invalidateAll()
+        applicableEnchantmentsSorted.invalidateAll()
         enchantInfoMenus.invalidateAll()
         allEnchantsSorted = EcoEnchants.values().map { it.enchantment }.sortForDisplay()
 
@@ -87,11 +96,12 @@ object EnchantGUI {
                 val hasItem = !atCaptive.isEcoEmpty && atCaptive != null && atCaptive.type != Material.BOOK
 
                 val baseEnchants = if (!hasItem) {
-                    EcoEnchants.values().map { it.enchantment }.sortForDisplay()
+                    allEnchantsSorted
                 } else {
-                    atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
-                        .subtract(atCaptive.fast().enchants.keys)
-                        .toList()
+                    val currentEnchants = atCaptive.fast().enchants.keys
+                    applicableEnchantmentsSorted.get(HashedItem.of(atCaptive)) {
+                        atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
+                    }.filterNot { it in currentEnchants }
                 }
 
                 // Apply group filter if a groupId is set in menu state
@@ -123,7 +133,8 @@ object EnchantGUI {
                 // Safety net: also reset if the current page now exceeds the new max.
                 // Compute directly from filteredEnchants to avoid a stale getMaxPage() value
                 // (maxPages may be evaluated before onRender fires).
-                val perPage = plugin.configYml.getInt("enchant-gui.enchant-area.width") * plugin.configYml.getInt("enchant-gui.enchant-area.height")
+                val perPage =
+                    plugin.configYml.getInt("enchant-gui.enchant-area.width") * plugin.configYml.getInt("enchant-gui.enchant-area.height")
                 val maxPage = if (filteredEnchants.isEmpty()) {
                     0
                 } else {
@@ -174,7 +185,8 @@ object EnchantGUI {
 
             // Back button to return to the group selection menu
             if (plugin.configYml.getBool("enchant-gui.grouped")
-                && plugin.configYml.getBool("enchant-gui.back-button.enabled")) {
+                && plugin.configYml.getBool("enchant-gui.back-button.enabled")
+            ) {
                 setSlot(
                     plugin.configYml.getInt("enchant-gui.back-button.row"),
                     plugin.configYml.getInt("enchant-gui.back-button.column"),
@@ -186,14 +198,7 @@ object EnchantGUI {
                         onLeftClick { event, _ ->
                             val groupGui = groupMenu ?: return@onLeftClick
                             val player = event.whoClicked as Player
-                            // Return captive items to the player before navigating back
-                            val captiveItems = menu.getCaptiveItems(player)
-                            if (captiveItems.isNotEmpty()) {
-                                DropQueue(player)
-                                    .addItems(captiveItems)
-                                    .forceTelekinesis()
-                                    .push()
-                            }
+                            returnCaptiveItems(player)
                             groupGui.open(player)
                         }
                     }
@@ -215,10 +220,11 @@ object EnchantGUI {
 
             onClose { event, menu ->
                 val player = event.player as Player
-                DropQueue(player)
-                    .addItems(menu.getCaptiveItems(player))
-                    .forceTelekinesis()
-                    .push()
+                if (returnedOnDisconnect.remove(player.uniqueId)) {
+                    return@onClose
+                }
+
+                returnCaptiveItems(player, menu)
             }
 
             for (config in plugin.configYml.getSubsections("enchant-gui.custom-slots")) {
@@ -338,6 +344,46 @@ object EnchantGUI {
         menu.setState(player, "groupId", groupId)
         menu.setState(player, Page.PAGE_KEY, 1)
     }
+
+    @EventHandler
+    fun handleQuit(event: PlayerQuitEvent) {
+        returnCaptiveItemsOnDisconnect(event.player)
+    }
+
+    @EventHandler
+    fun handleKick(event: PlayerKickEvent) {
+        returnCaptiveItemsOnDisconnect(event.player)
+    }
+
+    private fun returnCaptiveItemsOnDisconnect(player: Player) {
+        if (returnCaptiveItems(player)) {
+            returnedOnDisconnect.add(player.uniqueId)
+        }
+    }
+
+    private fun returnCaptiveItems(player: Player, sourceMenu: Menu? = null): Boolean {
+        if (!::menu.isInitialized) {
+            return false
+        }
+
+        val activeMenu = sourceMenu ?: menu
+        val captiveItems = activeMenu.getCaptiveItems(player)
+            .filterNot { it.isEcoEmpty || it.type == Material.AIR }
+
+        if (captiveItems.isEmpty()) {
+            activeMenu.clearState(player)
+            return false
+        }
+
+        val overflow = player.inventory.addItem(*captiveItems.map { it.clone() }.toTypedArray())
+
+        for (item in overflow.values) {
+            player.world.dropItemNaturally(player.location, item)
+        }
+
+        activeMenu.clearState(player)
+        return true
+    }
 }
 
 private class EnchantmentScrollPane : GUIComponent {
@@ -366,6 +412,9 @@ private class EnchantmentScrollPane : GUIComponent {
 
 private val cachedEnchantmentSlots = Caffeine.newBuilder()
     .build<Pair<EcoEnchant, Int>, Slot>()
+
+private val applicableEnchantmentsSorted = Caffeine.newBuilder()
+    .build<HashedItem, List<Enchantment>>()
 
 private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
     return cachedEnchantmentSlots.get(this to level) {
@@ -402,10 +451,22 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 )
                                 .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo())
                                 .replace("%discoverable%", this.isObtainableThroughDiscovery.parseYesOrNo())
-                                .replace("%discoverable_chests%", this.isObtainableThrough(DiscoveryType.CHESTS).parseYesOrNo())
-                                .replace("%discoverable_fishing%", this.isObtainableThrough(DiscoveryType.FISHING).parseYesOrNo())
-                                .replace("%discoverable_mob_drops%", this.isObtainableThrough(DiscoveryType.MOB_DROPS).parseYesOrNo())
-                                .replace("%discoverable_raids%", this.isObtainableThrough(DiscoveryType.RAIDS).parseYesOrNo())
+                                .replace(
+                                    "%discoverable_chests%",
+                                    this.isObtainableThrough(DiscoveryType.CHESTS).parseYesOrNo()
+                                )
+                                .replace(
+                                    "%discoverable_fishing%",
+                                    this.isObtainableThrough(DiscoveryType.FISHING).parseYesOrNo()
+                                )
+                                .replace(
+                                    "%discoverable_mob_drops%",
+                                    this.isObtainableThrough(DiscoveryType.MOB_DROPS).parseYesOrNo()
+                                )
+                                .replace(
+                                    "%discoverable_raids%",
+                                    this.isObtainableThrough(DiscoveryType.RAIDS).parseYesOrNo()
+                                )
                                 .replace("%enchantable%", this.isObtainableThroughEnchanting.parseYesOrNo())
                         }
                         .formatEco()

@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.enchant
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.stripLegacyFormatting
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -47,16 +48,20 @@ object LoreConversion : Listener {
             return
         }
 
-        val meta = itemStack.itemMeta ?: return
+        val fast = itemStack.fast()
+        val lore = fast.lore
+        if (lore.isEmpty()) {
+            return
+        }
 
+        val meta = itemStack.itemMeta ?: return
         val toAdd = mutableMapOf<Enchantment, Int>()
         val matchedLines = mutableListOf<String>()
 
-        val lore = itemStack.fast().lore.toMutableList()
+        val updatedLore = lore.toMutableList()
 
-        for (line in lore.toList()) {
-            @Suppress("DEPRECATION")
-            val uncolored = org.bukkit.ChatColor.stripColor(line) ?: continue
+        for (line in lore) {
+            val uncolored = line.stripLegacyFormatting()
 
             var enchant: EcoEnchant?
             var level: Int
@@ -97,19 +102,23 @@ object LoreConversion : Listener {
         }
 
 
+        if (toAdd.isEmpty()) {
+            return
+        }
+
         if (meta is EnchantmentStorageMeta) {
-            lore.removeAll(matchedLines)
+            updatedLore.removeAll(matchedLines)
             for ((enchant, level) in toAdd) {
                 meta.addStoredEnchant(enchant, level, true)
             }
         } else {
-            lore.removeAll(matchedLines)
+            updatedLore.removeAll(matchedLines)
             for ((enchant, level) in toAdd) {
                 meta.addEnchant(enchant, level, true)
             }
         }
 
         itemStack.itemMeta = meta
-        itemStack.fast().lore = lore
+        itemStack.fast().lore = updatedLore
     }
 }

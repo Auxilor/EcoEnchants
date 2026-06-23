@@ -4,9 +4,9 @@ import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.savedDisplayName
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.getEnchantmentByID
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
-import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -19,6 +19,20 @@ object CommandEnchant : PluginCommand(
     "ecoenchants.command.enchant",
     false
 ) {
+    private var enchantmentCompletions: List<String> = emptyList()
+    private var levelCompletionsByEnchant = emptyMap<String, List<String>>()
+    private val defaultLevelCompletions = (0..5).map { it.toString() }
+
+    internal fun reload() {
+        @Suppress("DEPRECATION")
+        val enchantments = Enchantment.values()
+
+        enchantmentCompletions = enchantments.map { it.key.key }
+        levelCompletionsByEnchant = enchantments.associate {
+            it.key.key to (0..it.maxLevel).map { level -> level.toString() }
+        }
+    }
+
     override fun onExecute(sender: CommandSender, rawArgs: List<String>) {
         var args = rawArgs
         var player = sender as? Player
@@ -31,8 +45,7 @@ object CommandEnchant : PluginCommand(
         player!! // Unbelievable jank
 
         val enchant = notifyNull(
-            @Suppress("DEPRECATION")
-            args.getOrNull(0)?.lowercase()?.let { Enchantment.getByKey(NamespacedKey.minecraft(it)) },
+            args.getOrNull(0)?.lowercase()?.let { getEnchantmentByID(it) },
             "invalid-enchantment"
         )
 
@@ -70,6 +83,10 @@ object CommandEnchant : PluginCommand(
     }
 
     override fun tabComplete(sender: CommandSender, rawArgs: List<String>): List<String> {
+        if (enchantmentCompletions.isEmpty()) {
+            reload()
+        }
+
         val completions = mutableListOf<String>()
 
         var args = rawArgs
@@ -81,26 +98,23 @@ object CommandEnchant : PluginCommand(
         if (args.size == 1) {
             StringUtil.copyPartialMatches(
                 args[0],
-                @Suppress("DEPRECATION")
-                Enchantment.values().map { it.key.key },
+                enchantmentCompletions,
                 completions
             )
         }
 
         if (args.size == 2) {
-            @Suppress("DEPRECATION")
-            val enchant = Enchantment.getByKey(NamespacedKey.minecraft(args[0].lowercase()))
+            val enchant = getEnchantmentByID(args[0].lowercase())
 
             val levels = if (enchant != null) {
-                val maxLevel = enchant.maxLevel
-                (0..maxLevel).toList()
+                levelCompletionsByEnchant[enchant.key.key] ?: defaultLevelCompletions
             } else {
-                (0..5).toList()
+                defaultLevelCompletions
             }
 
             StringUtil.copyPartialMatches(
                 args[1],
-                levels.map { it.toString() },
+                levels,
                 completions
             )
         }

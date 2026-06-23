@@ -60,7 +60,21 @@ interface EcoEnchantLike {
         item: ItemStack,
         additionalEnchantments: Collection<Enchantment> = emptyList()
     ): Boolean {
+        val enchantLimit = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
         val enchants = item.fast().getEnchants(true).keys + additionalEnchantments
+
+        return canEnchantItemConsidering(item, enchants, enchantLimit)
+    }
+
+    /**
+     * Get if this enchantment can be applied to [item], using a precomputed current enchantment set.
+     */
+    fun canEnchantItemConsidering(
+        item: ItemStack,
+        currentEnchantments: Collection<Enchantment>,
+        enchantLimit: Int = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
+    ): Boolean {
+        val enchants = currentEnchantments
 
         if (enchants.count { it.wrap().type == this.type } >= this.type.limit) {
             return false
@@ -74,7 +88,7 @@ interface EcoEnchantLike {
             return false
         }
 
-        if (enchants.size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+        if (enchants.size >= enchantLimit) {
             return false
         }
 

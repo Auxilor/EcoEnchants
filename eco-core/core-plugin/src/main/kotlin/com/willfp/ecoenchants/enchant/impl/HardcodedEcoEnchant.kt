@@ -12,17 +12,57 @@ abstract class HardcodedEcoEnchant(
     id: String,
 ) : EcoEnchantBase(id, plugin) {
     private val file: File?
-        get() = File(plugin.dataFolder, "enchants")
-            .walk()
-            .firstOrNull { file -> file.nameWithoutExtension == id }
+        get() = filesById[id]
 
-    val isPresent = file != null
+    val isPresent: Boolean
+        get() = file != null
 
     final override fun loadConfig(): Config {
-        return file.readConfig(ConfigType.YAML)
+        return requireNotNull(file) {
+            "Could not find hardcoded enchant config for $id"
+        }.readConfig(ConfigType.YAML)
     }
 
     override fun createLevel(level: Int): EcoEnchantLevel {
         return EcoEnchantLevel(this, level, emptyEffectList(), conditions)
+    }
+
+    companion object {
+        private val hardcodedDefaults = setOf(
+            "permanence_curse",
+            "repairing",
+            "replenish",
+            "soulbound"
+        )
+
+        private var filesById = emptyMap<String, File>()
+
+        internal fun reload() {
+            ensureDefaultConfigs()
+
+            val enchantsFolder = File(plugin.dataFolder, "enchants")
+            filesById = if (enchantsFolder.exists()) {
+                enchantsFolder.walk()
+                    .filter { it.isFile }
+                    .associateBy { it.nameWithoutExtension }
+            } else {
+                emptyMap()
+            }
+        }
+
+        private fun ensureDefaultConfigs() {
+            for (id in hardcodedDefaults) {
+                val path = "enchants/$id.yml"
+                val file = File(plugin.dataFolder, path)
+
+                if (file.exists()) {
+                    continue
+                }
+
+                runCatching {
+                    plugin.saveResource(path, false)
+                }
+            }
+        }
     }
 }

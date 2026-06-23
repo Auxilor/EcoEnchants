@@ -3,10 +3,10 @@ package com.willfp.ecoenchants.enchant.impl.hardcoded
 import com.willfp.eco.util.DurabilityUtils
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
-import com.willfp.ecoenchants.target.EnchantFinder.hasEnchantActive
-import com.willfp.libreforge.slot.impl.SlotTypeArmor
 import com.willfp.libreforge.slot.impl.SlotTypeHands
 import org.bukkit.Bukkit
+import org.bukkit.entity.Player
+import java.util.function.Consumer
 
 object EnchantmentRepairing : HardcodedEcoEnchant(
     "repairing"
@@ -15,30 +15,35 @@ object EnchantmentRepairing : HardcodedEcoEnchant(
         val frequency = config.getInt("frequency").toLong()
 
         plugin.scheduler.runTimer(frequency, frequency) {
-            handleRepairing()
+            for (player in Bukkit.getOnlinePlayers()) {
+                player.scheduler.run(plugin, Consumer {
+                    handleRepairing(player)
+                }, null)
+            }
         }
     }
 
-    private fun handleRepairing() {
+    private fun handleRepairing(player: Player) {
         val notWhileHolding = config.getBool("not-while-holding")
 
-        for (player in Bukkit.getOnlinePlayers()) {
-            if (player.hasEnchantActive(this)) {
-                val repairPerLevel = config.getIntFromExpression("repair-per-level", player)
+        val activeItems = player.getItemsWithEnchantActive(this)
+        if (activeItems.isEmpty()) {
+            return
+        }
 
-                for ((item, level) in player.getItemsWithEnchantActive(this)) {
-                    if (notWhileHolding) {
-                        val isHolding = item in SlotTypeHands.getItems(player)
-                        val isEquipped = item in SlotTypeArmor.getItems(player)
+        val repairPerLevel = config.getIntFromExpression("repair-per-level", player)
+        val excludedItems = if (notWhileHolding) {
+            SlotTypeHands.getItems(player).toSet()
+        } else {
+            emptySet()
+        }
 
-                        if (isHolding || isEquipped) {
-                            continue
-                        }
-                    }
-
-                    DurabilityUtils.repairItem(item, level * repairPerLevel)
-                }
+        for ((item, level) in activeItems) {
+            if (item in excludedItems) {
+                continue
             }
+
+            DurabilityUtils.repairItem(item, level * repairPerLevel)
         }
     }
 }

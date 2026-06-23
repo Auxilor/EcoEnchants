@@ -15,19 +15,22 @@ import com.willfp.ecoenchants.display.DisplayCache
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.display.EnchantSorter
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
+import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import com.willfp.ecoenchants.enchant.LoreConversion
-import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
 import com.willfp.ecoenchants.enchant.registration.ModernEnchantmentRegistererProxy
+import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
 import com.willfp.ecoenchants.libreforge.EffectApplyRandomEnchant
 import com.willfp.ecoenchants.mechanics.AnvilSupport
+import com.willfp.ecoenchants.mechanics.EnchantmentSourceCache
 import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.ExtraItemSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
+import com.willfp.ecoenchants.mechanics.HeldInteractionRefreshSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -42,7 +45,9 @@ import com.willfp.libreforge.loader.configs.ConfigCategory
 import com.willfp.libreforge.registerHolderPlaceholderProvider
 import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerSpecificRefreshFunction
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.entity.LivingEntity
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.Listener
 
 internal lateinit var plugin: EcoEnchantsPlugin
@@ -55,22 +60,41 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     val vanillaEnchantsYml = VanillaEnchantsYml(this)
     var isLoaded = false
         private set
+    private var proxyLoadFailure: Throwable? = null
 
-    val enchantmentRegisterer: EnchantmentRegisterer = this.getProxy(ModernEnchantmentRegistererProxy::class.java)
+    val enchantmentRegisterer: ModernEnchantmentRegistererProxy
 
     init {
         plugin = this
 
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        enchantmentRegisterer = runCatching {
+            this.getProxy(ModernEnchantmentRegistererProxy::class.java)
+        }.onFailure {
+            proxyLoadFailure = it
+            logProxyFailure("initialization", it)
+        }.getOrElse {
+            FailingModernEnchantmentRegistererProxy(it)
+        }
+
+        replaceRegistrySafely("initialization")
     }
 
     override fun loadConfigCategories(): List<ConfigCategory> {
+        if (proxyLoadFailure != null) {
+            return emptyList()
+        }
+
         return listOf(
             EcoEnchants
         )
     }
 
     override fun handleEnable() {
+        if (disableIfProxyFailed()) {
+            return
+        }
+
+        sanitizeScoreboardTeamColors()
         Effects.register(EffectApplyRandomEnchant)
 
         registerHolderProvider(EnchantFinder.toHolderProvider())
@@ -87,26 +111,43 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun handleAfterLoad() {
+        if (disableIfProxyFailed()) {
+            return
+        }
+
         isLoaded = true
 
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        replaceRegistrySafely("after-load")
     }
 
     override fun handleReload() {
+        if (disableIfProxyFailed()) {
+            return
+        }
+
         DisplayCache.reload()
         EnchantSorter.reload()
+        CommandEnchant.reload()
+        CommandEnchantInfo.reload()
         ExtraItemSupport.reload()
+        EnchantmentSourceCache.reload()
         EnchantGUI.reload()
     }
 
     override fun loadListeners(): List<Listener> {
+        if (proxyLoadFailure != null) {
+            return emptyList()
+        }
+
         return listOf(
             VillagerSupport,
             EnchantingTableSupport,
             LootSupport,
             AnvilSupport,
             LoreConversion,
-            GrindstoneSupport
+            GrindstoneSupport,
+            HeldInteractionRefreshSupport,
+            EnchantGUI
         )
     }
 
@@ -126,7 +167,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     }
 
     override fun loadDisplayModules(): List<DisplayModule> {
-        if (!this.configYml.getBool("display.enabled")) {
+        if (proxyLoadFailure != null || !this.configYml.getBool("display.enabled")) {
             return emptyList()
         }
 
@@ -144,4 +185,67 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             if (configYml.getBool("display.enabled")) "enabled" else "disabled"
         }
     )
+
+    private fun replaceRegistrySafely(stage: String) {
+        if (proxyLoadFailure != null) {
+            return
+        }
+
+        runCatching {
+            enchantmentRegisterer.replaceRegistry()
+        }.onFailure {
+            proxyLoadFailure = it
+            logProxyFailure(stage, it)
+        }
+    }
+
+    private fun disableIfProxyFailed(): Boolean {
+        val failure = proxyLoadFailure ?: return false
+
+        logProxyFailure("enable", failure)
+        server.pluginManager.disablePlugin(this)
+        return true
+    }
+
+    private fun logProxyFailure(stage: String, failure: Throwable) {
+        val serverVersion = runCatching {
+            "${server.name} ${server.bukkitVersion}"
+        }.getOrDefault("the current server version")
+
+        logger.severe(
+            "Could not initialize EcoEnchants NMS proxy during $stage on " +
+                    "$serverVersion. EcoEnchants will disable itself."
+        )
+        logger.severe("${failure::class.java.name}: ${failure.message}")
+    }
+
+    private fun sanitizeScoreboardTeamColors() {
+        runCatching {
+            val scoreboard = server.scoreboardManager.mainScoreboard
+
+            for (team in scoreboard.teams) {
+                if (team.hasColor()) {
+                    continue
+                }
+
+                team.color(NamedTextColor.WHITE)
+            }
+        }.onFailure {
+            logger.warning("Could not sanitize scoreboard team colors: ${it.message}")
+        }
+    }
+}
+
+private class FailingModernEnchantmentRegistererProxy(
+    private val failure: Throwable
+) : ModernEnchantmentRegistererProxy {
+    override fun replaceRegistry() = Unit
+
+    override fun freezeRegistry() = Unit
+
+    override fun register(enchant: EcoEnchantBase): Enchantment {
+        throw IllegalStateException("EcoEnchants NMS proxy is not available", failure)
+    }
+
+    override fun unregister(enchant: EcoEnchant) = Unit
 }

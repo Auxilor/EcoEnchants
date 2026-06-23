@@ -5,6 +5,7 @@ import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.stripLegacyFormatting
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.util.StringUtil
@@ -15,6 +16,20 @@ object CommandEnchantInfo : PluginCommand(
     "ecoenchants.command.enchantinfo",
     true
 ) {
+    private var enchantmentCompletions: List<String> = emptyList()
+    private var levelCompletionsByName = emptyMap<String, List<String>>()
+
+    internal fun reload() {
+        val namesWithEnchantments = EcoEnchants.values().map { enchantment ->
+            enchantment.getFormattedName(0).stripLegacyFormatting() to enchantment
+        }
+
+        enchantmentCompletions = namesWithEnchantments.map { it.first }
+        levelCompletionsByName = namesWithEnchantments.associate { (name, enchantment) ->
+            name.lowercase() to (1..enchantment.maximumLevel).map { it.toString() }
+        }
+    }
+
     override fun onExecute(sender: CommandSender, args: List<String>) {
         sender as Player
 
@@ -39,28 +54,28 @@ object CommandEnchantInfo : PluginCommand(
     }
 
     override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {
-        val completions = mutableListOf<String>()
+        if (enchantmentCompletions.isEmpty()) {
+            reload()
+        }
 
-        @Suppress("DEPRECATION")
-        val names = EcoEnchants.values().mapNotNull { org.bukkit.ChatColor.stripColor(it.getFormattedName(0)) }
+        val completions = mutableListOf<String>()
 
         if (args.isEmpty()) {
             // Currently, this case is not ever reached
-            return names
+            return enchantmentCompletions
         }
 
         // If all args except the last form a complete enchant name, suggest level numbers
         if (args.size > 1) {
             val namePrefix = args.dropLast(1).joinToString(" ")
-            val matched = EcoEnchants.getByName(namePrefix)
-            if (matched != null) {
-                val levels = (1..matched.maximumLevel).map { it.toString() }
+            val levels = levelCompletionsByName[namePrefix.lowercase()]
+            if (levels != null) {
                 StringUtil.copyPartialMatches(args.last(), levels, completions)
                 return completions
             }
         }
 
-        StringUtil.copyPartialMatches(args.joinToString(" "), names, completions)
+        StringUtil.copyPartialMatches(args.joinToString(" "), enchantmentCompletions, completions)
 
         if (args.size > 1) {
             val prefix = args.dropLast(1).joinToString(" ") + " "
