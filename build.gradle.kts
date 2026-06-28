@@ -6,16 +6,13 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("com.gradleup.shadow") version "9.3.1"
-    id("com.willfp.libreforge-gradle-plugin") version "2.1.0"
+    id("com.willfp.libreforge-gradle-plugin") version "2.0.0"
 }
 
 group = "com.willfp"
 version = findProperty("version")!!
-// useGradleVersions=true (set by release workflows) pins dependencies to the
-// versions in gradle.properties; otherwise dev builds track the latest master snapshot.
-val useGradleVersions = findProperty("useGradleVersions") == "true"
-val libreforgeVersion = if (useGradleVersions) findProperty("libreforge-version") else "dev-SNAPSHOT"
-val ecoVersion = if (useGradleVersions) findProperty("eco-version") else "dev-SNAPSHOT"
+val libreforgeVersion = findProperty("libreforge-version")
+val ecoVersion = findProperty("eco-version")
 
 base {
     archivesName.set(project.name)
@@ -28,6 +25,59 @@ dependencies {
     implementation(project(":eco-core:core-nms:v1_21_11", configuration = "reobf"))
     implementation(project(":eco-core:core-nms:v26_1_1", configuration = "shadow"))
     implementation(project(":eco-core:core-nms:v26_1_2", configuration = "shadow"))
+    implementation(project(":eco-core:core-nms:v26_2", configuration = "shadow"))
+}
+
+java {
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        // maven-private: only the shaded jar
+        create<MavenPublication>("private") {
+            artifactId = rootProject.name
+        }
+        // maven-releases + GitHub: full set (none, all, sources, javadoc)
+        create<MavenPublication>("release") {
+            artifactId = rootProject.name
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "Auxilor"
+            url = uri("https://repo.auxilor.io/repository/maven-private/")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+        maven {
+            name = "AuxilorReleases"
+            url = uri("https://repo.auxilor.io/repository/maven-releases/")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+}
+
+afterEvaluate {
+    publishing.publications.named<MavenPublication>("private") {
+        artifact(tasks.named("libreforgeJar"))
+    }
+}
+
+tasks.matching { it.name.startsWith("generatePomFileFor") }.configureEach {
+    mustRunAfter(tasks.named("clean"))
+}
+tasks.register("publishToAuxilor") {
+    dependsOn(
+        "publishPrivatePublicationToAuxilorRepository",
+        "publishReleasePublicationToAuxilorReleasesRepository",
+    )
 }
 
 allprojects {
@@ -37,13 +87,7 @@ allprojects {
     apply(plugin = "com.gradleup.shadow")
 
     repositories {
-        mavenLocal {
-            content {
-                excludeGroup("com.willfp")
-                excludeGroup("com.auxilor")
-                excludeGroup("com.exanthiax")
-            }
-        }
+        mavenLocal()
         mavenCentral()
 
         maven("https://repo.papermc.io/repository/maven-public/")
@@ -54,10 +98,6 @@ allprojects {
         maven("https://jitpack.io") {
             content { includeGroupByRegex("com\\.github\\..*") }
         }
-    }
-
-    configurations.all {
-        resolutionStrategy.cacheChangingModulesFor(0, "seconds")
     }
 
     dependencies {
