@@ -4,6 +4,7 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
