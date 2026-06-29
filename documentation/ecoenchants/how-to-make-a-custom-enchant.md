@@ -65,6 +65,7 @@ max-level: 4 # Highest obtainable level
 tradeable: true # Buyable from villagers
 discoverable: true # Generates in loot chests
 enchantable: true # Rolls from the enchanting table
+hide-from-enchantgui: false # If true, hides from the enchants GUI and /enchantinfo
 
 # === Effects: what the enchantment actually does ===
 effects:
@@ -112,16 +113,19 @@ max-level: 4 # Highest level players can reach; effects scale with %level% up to
 
 ### Obtaining
 
-These three flags control how players can get the enchantment naturally. Set any to `false` to disable that route, which is useful for admin-only or reward enchantments.
+These flags control how players can get the enchantment naturally and what they can see.
 
 ```yaml
 tradeable: true # Can be bought from villagers
 discoverable: true # Can generate in loot chests
 enchantable: true # Can roll from the enchanting table
+hide-from-enchantgui: false # If true, hides from the enchants GUI and /enchantinfo for players without ecoenchants.seehidden
 ```
 
 :::tip Admin-only enchantments
-Set all three to `false` so the enchantment can only be given via `/enchant` or `/ecoenchants giverandombook`. Combine with the `ecoenchants.fromtable.<id>` permission to gate enchanting-table access per enchantment.
+Set all three obtain flags to `false` so the enchantment can only be given via `/enchant` or `/ecoenchants giverandombook`. Combine with the `ecoenchants.fromtable.<id>` permission to gate enchanting-table access per enchantment.
+
+Set `hide-from-enchantgui: true` to hide a WIP or staff-only enchantment from players entirely. Players with the `ecoenchants.seehidden` permission (operators by default) can still see and look up hidden enchantments.
 :::
 
 ### Effects

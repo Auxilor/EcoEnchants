@@ -86,6 +86,8 @@ abstract class EcoEnchantBase(
 
     override val isObtainableThroughTrading = config.getBool("tradeable")
 
+    override val isHiddenFromGui = config.getBoolOrNull("hide-from-enchantgui") ?: false
+
     private val discoverableBool = config.getBoolOrNull("discoverable")
 
     private val discoverableSection = config.getSubsectionOrNull("discoverable")
