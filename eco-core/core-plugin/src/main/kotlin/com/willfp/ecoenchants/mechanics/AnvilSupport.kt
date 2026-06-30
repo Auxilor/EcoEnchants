@@ -342,9 +342,7 @@ object AnvilSupport : Listener {
             }
 
             // Cost could be less than zero at times, so I include that here.
-            if (cost <= 0) {
-                return@run
-            }
+            if (cost <= 0) cost = 1
 
             /*
             Transplanted anti-dupe bodge from pre-recode.
