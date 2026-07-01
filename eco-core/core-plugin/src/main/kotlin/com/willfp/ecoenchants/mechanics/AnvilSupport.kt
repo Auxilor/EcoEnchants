@@ -6,6 +6,7 @@ import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.stripLegacyFormatting
 import org.bukkit.Material
 import org.bukkit.Tag
 import org.bukkit.entity.Player
@@ -162,6 +163,8 @@ private val repair = mutableMapOf<Collection<Material>, Collection<Material>>(
     )
 )
 
+private var repairableByUnit = buildRepairableByUnit()
+
 object AnvilSupport : Listener {
     init {
         if (is_1_21_11() && repair[Tag.PLANKS.values]?.contains(Material.WOODEN_SPEAR) != true) {
@@ -204,6 +207,8 @@ object AnvilSupport : Listener {
                 Material.NETHERITE_SPEAR
             )
         }
+
+        repairableByUnit = buildRepairableByUnit()
     }
 
     private val latestPreviewGeneration = mutableMapOf<UUID, Int>()
@@ -271,6 +276,14 @@ object AnvilSupport : Listener {
         val generation = (latestPreviewGeneration[player.uniqueId] ?: 0) + 1
         latestPreviewGeneration[player.uniqueId] = generation
         renderedPreviewGeneration.remove(player.uniqueId)
+
+        // Other plugins can block an anvil operation by clearing the prepared result.
+        // Respect that state before EcoEnchants replaces the preview asynchronously.
+        if (event.result == null) {
+            event.inventory.setItem(2, null)
+            return
+        }
+
         val permanenceCurse = EcoEnchants.getByID("permanence_curse")
         val leftItem = event.inventory.getItem(0)
         val rightItem = event.inventory.getItem(1)
@@ -398,8 +411,7 @@ object AnvilSupport : Listener {
         val formattedItemName = if (player.hasPermission("ecoenchants.anvil.color")) {
             StringUtils.format(itemName)
         } else {
-            @Suppress("DEPRECATION")
-            org.bukkit.ChatColor.stripColor(itemName)
+            itemName.stripLegacyFormatting()
         }.let { if (it.isNullOrEmpty()) left.fast().displayName else it }
 
         if (right == null || right.type == Material.AIR) {
@@ -449,6 +461,7 @@ object AnvilSupport : Listener {
         val rightEnchants = right.fast().getEnchants(true)
 
         val outEnchants = leftEnchants.toMutableMap()
+        val enchantLimit = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
 
         for ((enchant, level) in rightEnchants) {
             if (outEnchants.containsKey(enchant)) {
@@ -459,11 +472,13 @@ object AnvilSupport : Listener {
                     max(level, currentLevel)
                 }
             } else {
+                if (outEnchants.size >= enchantLimit) {
+                    break
+                }
+
                 // Running .wrap() to use EcoEnchantLike canEnchantItem logic
-                if (enchant.wrap().canEnchantItem(left, outEnchants.keys)) {
-                    if (outEnchants.size < plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
-                        outEnchants[enchant] = level
-                    }
+                if (enchant.wrap().canEnchantItemConsidering(left, outEnchants.keys, enchantLimit)) {
+                    outEnchants[enchant] = level
                 }
             }
         }
@@ -517,11 +532,14 @@ private fun is_1_21_11(): Boolean {
 }
 
 fun Material.canUnitRepair(other: Material): Boolean {
-    for ((units, repairable) in repair) {
-        if (this in units) {
-            return other in repairable
-        }
-    }
+    return other in (repairableByUnit[this] ?: return false)
+}
 
-    return false
+private fun buildRepairableByUnit(): Map<Material, Set<Material>> {
+    return repair.entries
+        .flatMap { (units, repairable) ->
+            val repairableMaterials = repairable.toSet()
+            units.map { unit -> unit to repairableMaterials }
+        }
+        .toMap()
 }

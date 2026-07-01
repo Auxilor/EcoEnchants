@@ -5,20 +5,20 @@ import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
+import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.enchant.impl.LibreforgeEcoEnchant
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentReplenish
 import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentSoulbound
-import com.willfp.ecoenchants.enchant.registration.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
+import com.willfp.ecoenchants.stripLegacyFormatting
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.RegistrableCategory
-import org.bukkit.ChatColor
 
 @Suppress("UNUSED")
 object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
@@ -32,14 +32,16 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         for (enchant in registry.values()) {
             plugin.enchantmentRegisterer.unregister(enchant)
             EnchantRegistrations.removeEnchant(enchant)
-            BY_NAME.remove(ChatColor.stripColor(enchant.getFormattedName(0))?.lowercase())
+            BY_NAME.remove(enchant.getFormattedName(0).stripLegacyFormatting().lowercase())
         }
 
         registry.clear()
     }
 
     override fun beforeReload(plugin: LibreforgePlugin) {
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        plugin as EcoEnchantsPlugin
+
+        plugin.enchantmentRegisterer.replaceRegistry()
 
         EnchantmentRarities.update()
         EnchantmentTargets.update()
@@ -48,9 +50,13 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
 
     override fun afterReload(plugin: LibreforgePlugin) {
         sendPrompts()
+        HardcodedEcoEnchant.reload()
         registerHardcodedEnchantments()
+        EnchantRegistrations.registerEnchantments()
 
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).freezeRegistry()
+        plugin as EcoEnchantsPlugin
+
+        plugin.enchantmentRegisterer.freezeRegistry()
     }
 
     override fun acceptPreloadConfig(plugin: LibreforgePlugin, id: String, config: Config) {
@@ -95,9 +101,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         val enchantment = plugin.enchantmentRegisterer.register(enchant)
         // Register delegated versions
         registry.register(enchantment as EcoEnchant)
-        @Suppress("DEPRECATION")
-        BY_NAME[ChatColor.stripColor(enchant.getFormattedName(0))?.lowercase()] = enchantment as EcoEnchant
-        EnchantRegistrations.registerEnchantments()
+        BY_NAME[enchant.getFormattedName(0).stripLegacyFormatting().lowercase()] = enchantment as EcoEnchant
     }
 
     private fun registerHardcodedEnchantments() {

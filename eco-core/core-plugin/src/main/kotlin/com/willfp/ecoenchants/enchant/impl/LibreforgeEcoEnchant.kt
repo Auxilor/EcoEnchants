@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchant.impl
 
 import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.MissingDependencyException
 import com.willfp.ecoenchants.plugin
@@ -22,9 +21,11 @@ class LibreforgeEcoEnchant(
 
     init {
         val missingPlugins = mutableSetOf<String>()
+        val loadedPluginNames = Bukkit.getPluginManager().plugins
+            .mapTo(mutableSetOf()) { it.name.lowercase() }
 
         for (dependency in config.getStrings("dependencies")) {
-            if (!Bukkit.getPluginManager().plugins.map { it.name }.containsIgnoreCase(dependency)) {
+            if (dependency.lowercase() !in loadedPluginNames) {
                 missingPlugins += dependency
             }
         }

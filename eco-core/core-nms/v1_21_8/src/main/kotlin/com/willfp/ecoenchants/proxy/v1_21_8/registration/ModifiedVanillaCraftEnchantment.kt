@@ -11,15 +11,18 @@ class ModifiedVanillaCraftEnchantment(
     target: Enchantment,
     holder: Holder<Enchantment>
 ) : CraftEnchantment(holder) {
-    override fun getMaxLevel(): Int = this.vanillaEnchantmentData?.maxLevel ?: super.getMaxLevel()
+    private val vanillaData = key.vanillaEnchantmentData
+
+    override fun getMaxLevel(): Int = vanillaData?.maxLevel ?: super.getMaxLevel()
 
     override fun conflictsWith(other: org.bukkit.enchantments.Enchantment): Boolean {
         val otherConflicts = when (other) {
-            is ModifiedVanillaCraftEnchantment -> other.vanillaEnchantmentData?.conflicts?.contains(this.key) == true
+            is ModifiedVanillaCraftEnchantment -> other.vanillaData?.conflicts?.contains(this.key) == true
             else -> other.conflictsWith(this)
         }
 
-        return this.vanillaEnchantmentData?.conflicts?.contains(other.key) ?: super.conflictsWith(other)
-                || otherConflicts
+        val conflicts = vanillaData?.conflicts?.contains(other.key) ?: super.conflictsWith(other)
+
+        return conflicts || otherConflicts
     }
 }

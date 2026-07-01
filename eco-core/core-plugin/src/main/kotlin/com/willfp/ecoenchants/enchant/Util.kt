@@ -19,6 +19,18 @@ fun Enchantment.wrap(): EcoEnchantLike {
     }
 }
 
+@Suppress("DEPRECATION")
+fun getEnchantmentByID(id: String): Enchantment? {
+    val normalized = id.lowercase()
+
+    if (":" in normalized) {
+        return NamespacedKey.fromString(normalized)?.let { Enchantment.getByKey(it) }
+    }
+
+    return Enchantment.getByKey(plugin.createNamespacedKey(normalized))
+        ?: Enchantment.getByKey(NamespacedKey.minecraft(normalized))
+}
+
 fun Enchantment.conflictsWithDeep(other: Enchantment): Boolean {
     return this.conflictsWith(other) || other.conflictsWith(this)
 }

@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.mechanics
 
+import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.TestableItem
 import com.willfp.eco.core.recipe.parts.EmptyTestableItem
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.randDouble
-import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.plugin
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -74,14 +74,20 @@ object EnchantingTableSupport : Listener {
             multiplier *= plugin.configYml.getDouble("enchanting-table.book-multiplier")
         }
 
-        val enchantments = EcoEnchants.values().shuffled()
+        val currentEnchantments = item.fast().getEnchants(true).toMutableMap()
+        currentEnchantments.putAll(toAdd)
 
-        for (enchantment in enchantments) {
-            if (!enchantment.isObtainableThroughEnchanting) {
-                continue
+        val tableCap = plugin.configYml.getInt("enchanting-table.cap")
+        val enchantLimit = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
+        val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")
+        val reduction = plugin.configYml.getDouble("enchanting-table.reduction")
+
+        for (enchantment in EnchantmentSourceCache.enchanting.randomizedIteration()) {
+            if (toAdd.size >= tableCap || currentEnchantments.size >= enchantLimit) {
+                break
             }
 
-            if (!enchantment.canEnchantItem(item, toAdd.keys)) {
+            if (!enchantment.canEnchantItemConsidering(item, currentEnchantments.keys, enchantLimit)) {
                 continue
             }
 
@@ -102,17 +108,7 @@ object EnchantingTableSupport : Listener {
                 continue
             }
 
-            if (toAdd.size >= plugin.configYml.getInt("enchanting-table.cap")) {
-                break
-            }
-
-            if (toAdd.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
-                break
-            }
-
-
             val maxLevel = enchantment.maximumLevel
-            val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")
 
             val levelPart1 = if (enchantment.type.highLevelBias > 0) {
                 randDouble(0.0, 1.0)
@@ -124,9 +120,10 @@ object EnchantingTableSupport : Listener {
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= plugin.configYml.getDouble("enchanting-table.reduction")
+            multiplier /= reduction
 
             toAdd[enchantment.enchantment] = level
+            currentEnchantments[enchantment.enchantment] = level
         }
 
         toAdd.forEach(event.enchantsToAdd::putIfAbsent)

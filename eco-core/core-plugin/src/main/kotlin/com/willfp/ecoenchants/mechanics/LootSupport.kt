@@ -3,8 +3,6 @@ package com.willfp.ecoenchants.mechanics
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.DiscoveryType
-import com.willfp.ecoenchants.enchant.EcoEnchants
-import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
@@ -59,23 +57,24 @@ object LootSupport : Listener {
             multiplier *= plugin.configYml.getDouble("loot.book-multiplier")
         }
 
-        val enchantments = EcoEnchants.values().shuffled()
+        val enchantLimit = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
+        val reduction = plugin.configYml.getDouble("loot.reduction")
 
-        for (enchantment in enchantments) {
+        for (enchantment in EnchantmentSourceCache.discovery.randomizedIteration()) {
+            if (enchants.size >= enchantLimit) {
+                break
+            }
+
             if (!enchantment.isObtainableThrough(discoveryType)) {
                 continue
             }
 
-            if (!enchantment.canEnchantItem(item, enchants.keys)) {
+            if (!enchantment.canEnchantItemConsidering(item, enchants.keys, enchantLimit)) {
                 continue
             }
 
             if (NumberUtils.randFloat(0.0, 1.0) > enchantment.enchantmentRarity.lootChance * multiplier) {
                 continue
-            }
-
-            if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
-                break
             }
 
             val maxLevel = enchantment.maximumLevel
@@ -84,7 +83,7 @@ object LootSupport : Listener {
             val levelPart2 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart1)
             val level = ceil(levelPart2 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= plugin.configYml.getDouble("loot.reduction")
+            multiplier /= reduction
 
             enchants[enchantment.enchantment] = level
         }

@@ -13,7 +13,6 @@ import net.minecraft.core.Holder
 import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.Registries
-import net.minecraft.resources.Identifier
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.craftbukkit.CraftRegistry
@@ -130,7 +129,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
 
         Registry.register(
             enchantmentRegistry,
-            Identifier.withDefaultNamespace(enchant.id),
+            CraftNamespacedKey.toMinecraft(enchant.enchantmentKey),
             vanillaEnchantment
         )
 

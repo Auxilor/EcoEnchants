@@ -1,10 +1,12 @@
 package com.willfp.ecoenchants.target
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.items.HashedItem
 import com.willfp.eco.core.registry.Registry
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.ecoenchants.plugin
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -29,7 +31,10 @@ object EnchantmentTargets : Registry<EnchantmentTarget>() {
 
     val ItemStack.applicableEnchantments: List<EcoEnchant>
         get() = canEnchantCache.get(HashedItem.of(this)) {
-            EcoEnchants.values().filter { it.canEnchantItem(this) }
+            val currentEnchantments = this.fast().getEnchants(true).keys
+            val enchantLimit = plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()
+
+            EcoEnchants.values().filter { it.canEnchantItemConsidering(this, currentEnchantments, enchantLimit) }
         }
 
     @JvmStatic

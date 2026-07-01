@@ -2,8 +2,8 @@ package com.willfp.ecoenchants.proxy.v1_21_11.registration
 
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import net.minecraft.core.HolderSet
-import net.minecraft.resources.Identifier
 import net.minecraft.world.item.enchantment.Enchantment
+import org.bukkit.craftbukkit.util.CraftNamespacedKey
 
 fun vanillaEcoEnchantsEnchantment(enchant: EcoEnchant): Enchantment {
     val enchantment = Enchantment.enchantment(
@@ -17,5 +17,5 @@ fun vanillaEcoEnchantsEnchantment(enchant: EcoEnchant): Enchantment {
         )
     )
 
-    return enchantment.build(Identifier.withDefaultNamespace(enchant.id))
+    return enchantment.build(CraftNamespacedKey.toMinecraft(enchant.enchantmentKey))
 }

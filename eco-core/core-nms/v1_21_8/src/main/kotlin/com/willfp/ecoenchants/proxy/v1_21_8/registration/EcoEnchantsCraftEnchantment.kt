@@ -8,7 +8,6 @@ import net.kyori.adventure.text.Component
 import net.minecraft.core.Holder
 import net.minecraft.world.item.enchantment.Enchantment
 import org.bukkit.craftbukkit.enchantments.CraftEnchantment
-import org.bukkit.enchantments.EnchantmentTarget
 import org.bukkit.inventory.ItemStack
 
 class EcoEnchantsCraftEnchantment(
@@ -60,7 +59,8 @@ class EcoEnchantsCraftEnchantment(
         replaceWith = ReplaceWith("this.targets")
     )
     @Suppress("DEPRECATION")
-    override fun getItemTarget(): EnchantmentTarget = EnchantmentTarget.ALL
+    override fun getItemTarget(): org.bukkit.enchantments.EnchantmentTarget =
+        org.bukkit.enchantments.EnchantmentTarget.ALL
 
     @Deprecated(
         message = "Treasure enchantments do not exist in EcoEnchants",
