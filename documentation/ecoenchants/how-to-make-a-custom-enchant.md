@@ -22,7 +22,7 @@ EcoEnchants lets you build your own enchantments entirely from config, with no c
 
 The **file name (without `.yml`) is the enchantment's ID**. So `razor.yml` has the ID `razor`.
 
-That ID is what you use in commands (`/enchant razor 3`) and in the [Item Lookup System](https://plugins.auxilor.io/the-item-lookup-system).
+That ID is what you use in commands (`/enchant razor 3`) and in the [Item Lookup System](https://hub.auxilor.io/wiki/eco/the-item-lookup-system-the-item-lookup-system).
 
 :::warning ID rules
 IDs may only contain **lowercase letters, numbers, and underscores** (`a-z`, `0-9`, `_`). No spaces, capitals, or hyphens.
@@ -146,8 +146,8 @@ Each effect has an **`id`** (what it does), **`args`** (how strongly), and **`tr
 :::danger The Effects section is its own system
 Effects, triggers, conditions, filters, and mutators are a shared system across all Eco plugins, with hundreds of options. They are **not** documented here, so see the dedicated guides:
 
-- [Configuring an Effect](https://plugins.auxilor.io/effects/configuring-an-effect) is the full effect/trigger/condition reference.
-- [Configuring an Effect Chain](https://plugins.auxilor.io/effects/configuring-a-chain) lets you string multiple effects under one trigger for advanced enchantments.
+- [Configuring an Effect](https://hub.auxilor.io/wiki/libreforge/configuring-an-effect) is the full effect/trigger/condition reference.
+- [Configuring an Effect Chain](https://hub.auxilor.io/wiki/libreforge/configuring-a-chain) lets you string multiple effects under one trigger for advanced enchantments.
 
 Use `%level%` as a placeholder anywhere in this section to scale with enchantment level.
 :::
@@ -164,7 +164,7 @@ These placeholders are provided by EcoEnchants and can be used in the descriptio
 - **Enchantment doesn't appear after reload?** It's new, so you must re-log, not just reload.
 - **`%placeholder%` shows literally instead of a number?** Make sure the `placeholder` field is defined and the name matches exactly.
 - **Can't apply it to your item?** Check `targets`, as the item must belong to a listed target group.
-- **Effect does nothing?** Verify the effect `id` and `trigger` names against the [effects documentation](https://plugins.auxilor.io/effects/configuring-an-effect).
+- **Effect does nothing?** Verify the effect `id` and `trigger` names against the [effects documentation](https://hub.auxilor.io/wiki/libreforge/configuring-an-effect).
 :::
 
 <hr/>
@@ -173,4 +173,4 @@ These placeholders are provided by EcoEnchants and can be used in the descriptio
 
 - **Default configs:** study the [built-in enchantments](https://github.com/Auxilor/EcoEnchants/tree/master/eco-core/core-plugin/src/main/resources/enchants) for real, working examples.
 - **Community configs:** browse and import user-created enchantments from [lrcdb](https://lrcdb.auxilor.io/) (`/ecoenchants import <id>`).
-- **Effects reference:** the [Configuring an Effect](https://plugins.auxilor.io/effects/configuring-an-effect) guide for everything the effects section can do.
+- **Effects reference:** the [Configuring an Effect](https://hub.auxilor.io/wiki/libreforge/configuring-an-effect) guide for everything the effects section can do.
