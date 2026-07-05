@@ -20,8 +20,8 @@ messages:
 
 
 all: "All"
-yes: "&aYes"
-no: "&cNo"
+"yes": "&aYes"
+"no": "&cNo"
 no-conflicts: "No Conflicts"
 all-conflicts: "All Other Enchantments"
 no-required: "No Requirements"

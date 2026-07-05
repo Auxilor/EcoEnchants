@@ -1,13 +1,12 @@
 package com.willfp.ecoenchants.enchant
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.willfp.eco.core.config.base.LangYml
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
+import com.willfp.eco.core.gui.addPageChanger
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
-import com.willfp.eco.core.gui.menu.MenuLayer
 import com.willfp.eco.core.gui.page.Page
 import com.willfp.eco.core.gui.page.PageChanger
 import com.willfp.eco.core.gui.slot
@@ -19,12 +18,14 @@ import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEcoEmpty
+import com.willfp.eco.core.sound.PlayableSound
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import org.bukkit.Material
@@ -141,17 +142,18 @@ object EnchantGUI {
                 pane
             )
 
+            val pageChangeSound = PlayableSound.create(
+                plugin.configYml.getSubsection("enchant-gui.page-change.sound")
+            )
+
             for (direction in PageChanger.Direction.entries) {
                 val directionName = direction.name.lowercase()
 
-                addComponent(
-                    MenuLayer.TOP,
-                    plugin.configYml.getInt("enchant-gui.page-change.$directionName.row"),
-                    plugin.configYml.getInt("enchant-gui.page-change.$directionName.column"),
-                    PageChanger(
-                        Items.lookup(plugin.configYml.getString("enchant-gui.page-change.$directionName.item")).item,
-                        direction
-                    )
+                addPageChanger(
+                    plugin.configYml,
+                    "enchant-gui.page-change.$directionName",
+                    direction,
+                    pageChangeSound
                 )
             }
 
@@ -398,15 +400,13 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                         required.wrap().getFormattedName(0)
                                     }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
-                                .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo(plugin.langYml))
-                                .replace(
-                                    "%discoverable%",
-                                    this.isObtainableThroughDiscovery.parseYesOrNo(plugin.langYml)
-                                )
-                                .replace(
-                                    "%enchantable%",
-                                    this.isObtainableThroughEnchanting.parseYesOrNo(plugin.langYml)
-                                )
+                                .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo())
+                                .replace("%discoverable%", this.isObtainableThroughDiscovery.parseYesOrNo())
+                                .replace("%discoverable_chests%", this.isObtainableThrough(DiscoveryType.CHESTS).parseYesOrNo())
+                                .replace("%discoverable_fishing%", this.isObtainableThrough(DiscoveryType.FISHING).parseYesOrNo())
+                                .replace("%discoverable_mob_drops%", this.isObtainableThrough(DiscoveryType.MOB_DROPS).parseYesOrNo())
+                                .replace("%discoverable_raids%", this.isObtainableThrough(DiscoveryType.RAIDS).parseYesOrNo())
+                                .replace("%enchantable%", this.isObtainableThroughEnchanting.parseYesOrNo())
                         }
                         .formatEco()
                         .flatMap {
@@ -423,6 +423,5 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
     }
 }
 
-fun Boolean.parseYesOrNo(langYml: LangYml): String {
-    return if (this) langYml.getFormattedString("yes") else langYml.getFormattedString("no")
-}
+fun Boolean.parseYesOrNo(): String =
+    if (this) plugin.langYml.getFormattedString("yes") else plugin.langYml.getFormattedString("no")

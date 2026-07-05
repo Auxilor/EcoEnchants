@@ -40,3 +40,9 @@ jobs:
         with:
           files: ${{ steps.find_jar.outputs.jar_path }}
           fail_on_unmatched_files: true
+      - name: Publish package
+        env:
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+        run: ./gradlew publishToAuxilor
+
