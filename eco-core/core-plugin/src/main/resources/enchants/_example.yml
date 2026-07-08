@@ -32,7 +32,7 @@ discoverable: true # If the enchantment can be obtained through discovery (chest
 enchantable: true # If the enchantment can be obtained from enchanting tables
 
 # The effects of the enchantment (i.e. the functionality)
-# See here: https://plugins.auxilor.io/effects/configuring-an-effect
+# See here: https://hub.auxilor.io/wiki/libreforge/configuring-an-effect
 # Use %level% as a placeholder for the enchantment level
 effects:
   - id: damage_multiplier

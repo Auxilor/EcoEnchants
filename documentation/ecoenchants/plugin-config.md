@@ -56,7 +56,7 @@ display:
     enabled: true # If numerals should be used for the enchantment levels
     threshold: 10 # Above this, numbers will be used instead of numerals
 
-  # Options for not met lines: https://plugins.auxilor.io/effects/configuring-a-condition#example-condition-config
+  # Options for not met lines: https://hub.auxilor.io/wiki/libreforge/configuring-a-condition#example-condition-config
   not-met:
     format: "<strikethrough>" # Enchantments with any not-met-lines active will have this format added to them
 
@@ -120,7 +120,7 @@ enchantinfo:
       - "&fConflicts with: &a%conflicts%"
       - "&fRequires: &a%required%"
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages
   custom-slots: [ ]
 
 # Options for the enchant GUI.
@@ -191,7 +191,7 @@ enchant-gui:
     row: 3 # The row of the top-left corner of the area
     column: 2 # The column of the top-left corner of the area
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages
   custom-slots: [ ]
 
   # If enabled, /enchant opens a group selection menu first, grouping enchantments
@@ -256,7 +256,7 @@ group-gui:
       row: 2
       column: 8
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages
   custom-slots: []
 
 # Options for converting lore-based enchants (from other plugins) with EcoEnchants enchantments
