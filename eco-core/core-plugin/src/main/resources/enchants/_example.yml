@@ -30,6 +30,7 @@ discoverable: true # If the enchantment can be obtained through discovery (chest
 #   raids: true
 # Missing sub-keys default to true. If discoverable is false, all methods are disabled.
 enchantable: true # If the enchantment can be obtained from enchanting tables
+hide-from-enchantgui: false # If true, hides this enchantment from the /enchants GUI
 
 # The effects of the enchantment (i.e. the functionality)
 # See here: https://hub.auxilor.io/wiki/libreforge/configuring-an-effect

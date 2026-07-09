@@ -86,10 +86,11 @@ object EnchantGUI {
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
                 val hasItem = !atCaptive.isEcoEmpty && atCaptive != null && atCaptive.type != Material.BOOK
 
+                val canSeeHidden = player.hasPermission("ecoenchants.seehidden")
                 val baseEnchants = if (!hasItem) {
-                    EcoEnchants.values().map { it.enchantment }.sortForDisplay()
+                    EcoEnchants.values().filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
                 } else {
-                    atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
+                    atCaptive.applicableEnchantments.filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
                         .subtract(atCaptive.fast().enchants.keys)
                         .toList()
                 }

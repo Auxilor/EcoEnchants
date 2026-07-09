@@ -21,6 +21,7 @@ Every command and its permission node is listed below. Permissions follow the `e
 | Permission                   | Description                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------|
 | `ecoenchants.fromtable.<id>` | Permission to allow an enchantment to be obtained from an enchanting table (given by default) |
+| `ecoenchants.seehidden`      | Allows seeing enchantments marked `hide-from-enchantgui: true` in the GUI and `/enchantinfo` (given to operators by default) |
 
 <hr/>
 
