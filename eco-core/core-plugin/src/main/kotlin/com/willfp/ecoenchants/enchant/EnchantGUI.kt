@@ -18,7 +18,7 @@ import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.core.items.builder.ItemStackBuilder
 import com.willfp.eco.core.items.isEcoEmpty
-import com.willfp.eco.core.sound.PlayableSound
+import com.willfp.eco.core.sound.AbstractPlayableSound
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
@@ -143,7 +143,7 @@ object EnchantGUI {
                 pane
             )
 
-            val pageChangeSound = PlayableSound.create(
+            val pageChangeSound = AbstractPlayableSound.create(
                 plugin.configYml.getSubsection("enchant-gui.page-change.sound")
             )
 
