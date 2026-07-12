@@ -1,4 +1,4 @@
-name: Publish Packages
+name: Build and Upload Jar
 on:
   workflow_dispatch:
   release:
@@ -8,7 +8,7 @@ on:
       - '*'
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
 
@@ -24,10 +24,18 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
-      - name: Publish package
+      # Eklentiyi gölgelenmiş (shadow) jar olarak derler
+      - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: publish
-        env:
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+          arguments: shadowJar
+
+      # Derlenen .jar dosyasını Actions sayfasının altına "Artifact" olarak yükler
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EcoEnchants-1.21.4
+          path: |
+            build/libs/*-all.jar
+            eco-core/core-plugin/build/libs/*-all.jar
+          if-no-files-found: warn
