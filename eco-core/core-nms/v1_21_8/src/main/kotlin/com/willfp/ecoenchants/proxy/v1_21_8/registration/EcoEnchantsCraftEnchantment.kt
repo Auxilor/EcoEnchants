@@ -43,7 +43,7 @@ class EcoEnchantsCraftEnchantment(
         replaceWith = ReplaceWith("this.displayName(level)")
     )
     override fun translationKey(): String {
-        return "ecoenchants:enchantment.$id"
+        return enchant.nameTranslationKey?: "ecoenchants:enchantment.$id"
     }
 
     @Deprecated(
@@ -77,7 +77,7 @@ class EcoEnchantsCraftEnchantment(
     }
 
     override fun displayName(level: Int): Component {
-        return enchant.getFormattedName(level).toComponent()
+        return enchant.nameTranslationKey?.let{Component.translatable(it, enchant.getFormattedName(level))}?: enchant.getFormattedName(level).toComponent()
     }
 
     override fun isTradeable(): Boolean {

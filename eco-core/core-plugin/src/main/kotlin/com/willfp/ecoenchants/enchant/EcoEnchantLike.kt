@@ -44,6 +44,11 @@ interface EcoEnchantLike {
     val rawDisplayName: String
 
     /**
+     * The (optional) name translation key
+     */
+    val nameTranslationKey: String?
+
+    /**
      * The enchantment type.
      */
     val type: EnchantmentType
