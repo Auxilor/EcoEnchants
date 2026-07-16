@@ -5,6 +5,7 @@ import com.willfp.eco.core.anvil.AnvilSettings
 import com.willfp.eco.core.bstats.EcoMetricsChart
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
+import com.willfp.eco.core.dragdrop.DragAndDropHandlers
 import com.willfp.eco.core.integrations.IntegrationLoader
 import com.willfp.ecoenchants.commands.CommandEcoEnchants
 import com.willfp.ecoenchants.commands.CommandEnchant
@@ -16,6 +17,7 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.DisplayCache
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.display.EnchantSorter
+import com.willfp.ecoenchants.dragdrop.EcoEnchantBookDragAndDropHandler
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
@@ -88,6 +90,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         }
 
         registerAnvilHandler()
+
+        DragAndDropHandlers.register(EcoEnchantBookDragAndDropHandler)
     }
 
     override fun handleAfterLoad() {
@@ -103,6 +107,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         EnchantGUI.reload()
 
         registerAnvilHandler()
+    }
+
+    override fun handleDisable() {
+        DragAndDropHandlers.unregisterAll("ecoenchants")
     }
 
     private fun registerAnvilHandler() {

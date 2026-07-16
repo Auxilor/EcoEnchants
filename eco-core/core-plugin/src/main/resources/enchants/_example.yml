@@ -31,6 +31,14 @@ discoverable: true # If the enchantment can be obtained through discovery (chest
 # Missing sub-keys default to true. If discoverable is false, all methods are disabled.
 enchantable: true # If the enchantment can be obtained from enchanting tables
 
+drag-and-drop: # Lets players apply this enchantment by holding an enchanted book on their cursor and clicking an eligible item (optional, defaults to disabled)
+  enabled: false # If drag-and-drop application is enabled for this enchantment
+  price: # Same format as any other eco price - see the price lookup system docs
+    value: "100"
+    type: coins
+    display: "&a%value% coins"
+  price-level-multiplier: "%level%" # Optional expression; %level% is replaced with the book's stored level for this enchant before evaluation, then used as the price multiplier
+
 # The effects of the enchantment (i.e. the functionality)
 # See here: https://hub.auxilor.io/wiki/libreforge/configuring-an-effect
 # Use %level% as a placeholder for the enchantment level
