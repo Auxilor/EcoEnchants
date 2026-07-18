@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.display
 
-import com.github.benmanes.caffeine.cache.Cache
-import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.cache.EcoCache
 import com.willfp.eco.core.placeholder.context.placeholderContext
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
@@ -11,10 +10,10 @@ import org.bukkit.entity.Player
 
 // This is an object to be able to invalidate the cache on reload
 object DisplayCache {
-    val nameCache: Cache<DisplayableEnchant, String> = Caffeine.newBuilder()
+    val nameCache: EcoCache<DisplayableEnchant, String> = EcoCache.builder<DisplayableEnchant, String>()
         .build()
 
-    val descriptionCache: Cache<DisplayableEnchant, List<String>> = Caffeine.newBuilder()
+    val descriptionCache: EcoCache<DisplayableEnchant, List<String>> = EcoCache.builder<DisplayableEnchant, List<String>>()
         .build()
 
     internal fun reload() {
