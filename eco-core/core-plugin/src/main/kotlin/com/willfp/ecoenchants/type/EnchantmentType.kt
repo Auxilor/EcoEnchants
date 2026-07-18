@@ -2,8 +2,8 @@ package com.willfp.ecoenchants.type
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.registry.Registrable
+import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.libreforge.TriggerEnchantType
-import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.libreforge.triggers.Triggers
 import java.util.Objects
 
