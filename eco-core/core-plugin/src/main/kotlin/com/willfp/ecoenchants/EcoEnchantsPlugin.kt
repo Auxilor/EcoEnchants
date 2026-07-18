@@ -1,8 +1,11 @@
 package com.willfp.ecoenchants
 
+import com.willfp.eco.core.anvil.AnvilHandlers
+import com.willfp.eco.core.anvil.AnvilSettings
 import com.willfp.eco.core.bstats.EcoMetricsChart
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
+import com.willfp.eco.core.dragdrop.DragAndDropHandlers
 import com.willfp.eco.core.integrations.IntegrationLoader
 import com.willfp.ecoenchants.commands.CommandEcoEnchants
 import com.willfp.ecoenchants.commands.CommandEnchant
@@ -14,6 +17,7 @@ import com.willfp.ecoenchants.config.VanillaEnchantsYml
 import com.willfp.ecoenchants.display.DisplayCache
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.display.EnchantSorter
+import com.willfp.ecoenchants.dragdrop.EcoEnchantBookDragAndDropHandler
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
@@ -24,7 +28,7 @@ import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
 import com.willfp.ecoenchants.libreforge.EffectApplyRandomEnchant
-import com.willfp.ecoenchants.mechanics.AnvilSupport
+import com.willfp.ecoenchants.mechanics.EcoEnchantsAnvilHandler
 import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.ExtraItemSupport
 import com.willfp.ecoenchants.mechanics.GrindstoneSupport
@@ -84,6 +88,10 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
                 NamedValue("level", it.level),
             )
         }
+
+        registerAnvilHandler()
+
+        DragAndDropHandlers.register(EcoEnchantBookDragAndDropHandler)
     }
 
     override fun handleAfterLoad() {
@@ -97,6 +105,26 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         EnchantSorter.reload()
         ExtraItemSupport.reload()
         EnchantGUI.reload()
+
+        registerAnvilHandler()
+    }
+
+    override fun handleDisable() {
+        DragAndDropHandlers.unregisterAll("ecoenchants")
+    }
+
+    private fun registerAnvilHandler() {
+        AnvilHandlers.register(
+            EcoEnchantsAnvilHandler(),
+            AnvilSettings(
+                costExponent = configYml.getDouble("anvil.cost-exponent"),
+                enchantLimit = configYml.getInt("anvil.enchant-limit"),
+                useReworkPenalty = configYml.getBool("anvil.use-rework-penalty"),
+                maxRepairCost = configYml.getInt("anvil.max-repair-cost"),
+                clampRepairCost = configYml.getBool("anvil.clamp-repair-cost"),
+                colorNameAllowed = { it.hasPermission("ecoenchants.anvil.color") }
+            )
+        )
     }
 
     override fun loadListeners(): List<Listener> {
@@ -104,7 +132,6 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             VillagerSupport,
             EnchantingTableSupport,
             LootSupport,
-            AnvilSupport,
             LoreConversion,
             GrindstoneSupport
         )

@@ -25,6 +25,7 @@ import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.dragdrop.isDragAndDropEnabled
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
@@ -408,6 +409,7 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 .replace("%discoverable_mob_drops%", this.isObtainableThrough(DiscoveryType.MOB_DROPS).parseYesOrNo())
                                 .replace("%discoverable_raids%", this.isObtainableThrough(DiscoveryType.RAIDS).parseYesOrNo())
                                 .replace("%enchantable%", this.isObtainableThroughEnchanting.parseYesOrNo())
+                                .replace("%drag_and_drop%", this.isDragAndDropEnabled().parseYesOrNo())
                         }
                         .formatEco()
                         .flatMap {

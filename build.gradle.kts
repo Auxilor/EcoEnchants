@@ -105,9 +105,18 @@ allprojects {
         compileOnly("org.jetbrains:annotations:26.0.2")
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.3")
+
+        testImplementation("com.willfp:eco:$ecoVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.3")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:6.0.3")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
     }
 
     tasks {
+        test {
+            useJUnitPlatform()
+        }
+
         shadowJar {
             exclude("META-INF/**")
             relocate("com.willfp.libreforge.loader", "com.willfp.ecoenchants.libreforge.loader")
@@ -118,6 +127,12 @@ allprojects {
         }
 
         compileKotlin {
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_21)
+            }
+        }
+
+        compileTestKotlin {
             compilerOptions {
                 jvmTarget.set(JvmTarget.JVM_21)
             }

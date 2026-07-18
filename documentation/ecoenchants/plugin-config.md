@@ -119,6 +119,15 @@ enchantinfo:
       - "&fApplicable to: &a%targets%"
       - "&fConflicts with: &a%conflicts%"
       - "&fRequires: &a%required%"
+      - ""
+      - "&fTradeable: &a%tradeable%"
+      - "&fDiscoverable: &a%discoverable%"
+      - "&fDiscoverable (Chests): &a%discoverable_chests%"
+      - "&fDiscoverable (Fishing): &a%discoverable_fishing%"
+      - "&fDiscoverable (Mob Drops): &a%discoverable_mob_drops%"
+      - "&fDiscoverable (Raids): &a%discoverable_raids%"
+      - "&fEnchantable: &a%enchantable%"
+      - "&fDrag and Drop: &a%drag_and_drop%"
 
   # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages
   custom-slots: [ ]

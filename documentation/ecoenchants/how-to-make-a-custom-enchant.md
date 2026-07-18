@@ -64,8 +64,23 @@ max-level: 4 # Highest obtainable level
 # === Obtaining: how players can get it naturally ===
 tradeable: true # Buyable from villagers
 discoverable: true # Generates in loot chests
+# To toggle individual discovery methods instead, use a map:
+# discoverable:
+#   chests: true
+#   fishing: true
+#   mob-drops: true
+#   raids: true
 enchantable: true # Rolls from the enchanting table
 hide-from-enchantgui: false # If true, hides from the enchants GUI and /enchantinfo
+
+# === Drag and drop: applying via an enchanted book (optional) ===
+drag-and-drop:
+  enabled: false # Lets players apply this enchantment by holding an enchanted book on their cursor and clicking an eligible item
+  price: # Same format as any other eco price
+    value: "100"
+    type: coins
+    display: "&a%value% coins"
+  price-level-multiplier: "%level%" # Optional; %level% is the book's stored level, used as the price multiplier
 
 # === Effects: what the enchantment actually does ===
 effects:
@@ -128,6 +143,34 @@ Set all three obtain flags to `false` so the enchantment can only be given via `
 Set `hide-from-enchantgui: true` to hide a WIP or staff-only enchantment from players entirely. Players with the `ecoenchants.seehidden` permission (operators by default) can still see and look up hidden enchantments.
 :::
 
+`discoverable` can also be a map, to toggle individual discovery methods instead of all of them at once:
+
+```yaml
+discoverable:
+  chests: true # Loot chests
+  fishing: true # Fishing rewards
+  mob-drops: true # Mob drop tables
+  raids: true # Raid rewards
+```
+
+Missing sub-keys default to `true`. If `discoverable` is `false` (the plain boolean form), every method is disabled regardless of the map.
+
+### Drag and drop
+
+Optionally, players can apply the enchantment by holding an enchanted book on their cursor and clicking an eligible item in their own inventory, in exchange for a price:
+
+```yaml
+drag-and-drop:
+  enabled: false # Off by default
+  price: # Same format as any other eco price - see the price lookup system docs
+    value: "100"
+    type: coins
+    display: "&a%value% coins"
+  price-level-multiplier: "%level%" # Optional expression; %level% is the book's stored level, used as the price multiplier
+```
+
+If the item already has this enchantment, applying another book of the same level bumps it by one level (up to `max-level`); a higher-level book always takes the higher level. The price is charged once per application, using the multiplier evaluated against the book's level *before* any bump.
+
 ### Effects
 
 This is the heart of the enchantment, i.e. what it actually does.
@@ -163,6 +206,21 @@ These placeholders are provided by EcoEnchants and can be used in the descriptio
 | Placeholder | Value |
 | --- | --- |
 | `%level%` | The current level of the enchantment. Use it to make enchantments scale as the level increases. |
+
+### `/enchantinfo` placeholders
+
+These are separate from the placeholders above - they're only available in `enchantinfo.item.lore` in `config.yml`, not in an enchant's own `description`:
+
+| Placeholder | Value |
+| --- | --- |
+| `%tradeable%` | Whether the enchantment is obtainable from villagers |
+| `%discoverable%` | Whether the enchantment is obtainable through discovery (any method) |
+| `%discoverable_chests%` | Whether the enchantment can be found in loot chests |
+| `%discoverable_fishing%` | Whether the enchantment can be found through fishing |
+| `%discoverable_mob_drops%` | Whether the enchantment can be found from mob drops |
+| `%discoverable_raids%` | Whether the enchantment can be found from raids |
+| `%enchantable%` | Whether the enchantment is obtainable from the enchanting table |
+| `%drag_and_drop%` | Whether the enchantment can be applied by dragging an enchanted book onto an item |
 
 :::tip Troubleshooting
 - **Enchantment doesn't appear after reload?** It's new, so you must re-log, not just reload.
