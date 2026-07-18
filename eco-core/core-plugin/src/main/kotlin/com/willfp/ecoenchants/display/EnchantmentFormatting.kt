@@ -10,10 +10,10 @@ import org.bukkit.entity.Player
 
 // This is an object to be able to invalidate the cache on reload
 object DisplayCache {
-    val nameCache: EcoCache<DisplayableEnchant, String> = EcoCache.builder()
+    val nameCache: EcoCache<DisplayableEnchant, String> = EcoCache.builder<DisplayableEnchant, String>()
         .build()
 
-    val descriptionCache: EcoCache<DisplayableEnchant, List<String>> = EcoCache.builder()
+    val descriptionCache: EcoCache<DisplayableEnchant, List<String>> = EcoCache.builder<DisplayableEnchant, List<String>>()
         .build()
 
     internal fun reload() {

@@ -21,11 +21,19 @@ rarity: common # The rarity of the enchantment, see rarity.yml
 max-level: 4 # The max level of the enchantment
 
 tradeable: true # If the enchantment can be obtained from villagers
-discoverable: true # If the enchantment can generate naturally in chests
+discoverable: true # If the enchantment can be obtained through discovery (chests, fishing, mob drops, raids)
+# To toggle individual discovery methods, use a map instead of a boolean:
+# discoverable:
+#   chests: true
+#   fishing: true
+#   mob-drops: true
+#   raids: true
+# Missing sub-keys default to true. If discoverable is false, all methods are disabled.
 enchantable: true # If the enchantment can be obtained from enchanting tables
+hide-from-enchantgui: false # If true, hides this enchantment from the /enchants GUI
 
 # The effects of the enchantment (i.e. the functionality)
-# See here: https://plugins.auxilor.io/effects/configuring-an-effect
+# See here: https://hub.auxilor.io/wiki/libreforge/configuring-an-effect
 # Use %level% as a placeholder for the enchantment level
 effects:
   - id: damage_multiplier

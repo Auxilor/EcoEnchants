@@ -26,6 +26,7 @@ loot:
 
 # Options for merging items in an anvil
 anvil:
+  vanilla-costs: false # If true, uses only vanilla XP costs (ignores cost-exponent). Custom enchants still work.
   cost-exponent: 0.95 # The exponent for each enchant level to prevent constant "Too Expensive!" problems
   enchant-limit: -1 # The limit for the amount of enchantments on an item (-1 to disable)
   use-rework-penalty: true # If the rework penalty should be applied
@@ -44,7 +45,7 @@ display:
     enabled: true # If numerals should be used for the enchantment levels
     threshold: 10 # Above this, numbers will be used instead of numerals
 
-  # Options for not met lines: https://plugins.auxilor.io/effects/configuring-a-condition#example-condition-config
+  # Options for not met lines: https://hub.auxilor.io/wiki/libreforge/configuring-a-condition#example-condition-config
   not-met:
     format: "<strikethrough>" # Enchantments with any not-met-lines active will have this format added to them
 
@@ -108,13 +109,13 @@ enchantinfo:
       - "&fConflicts with: &a%conflicts%"
       - "&fRequires: &a%required%"
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages#custom-gui-slots
   custom-slots: [ ]
 
 # Options for the enchant GUI.
 enchant-gui:
   rows: 6 # How many rows to have in the GUI
-  title: "Enchant GUI" # The title of the GUI
+  title: "Enchant GUI &7(%page%/%max_page%)" # The title of the GUI
 
   mask: # The background material
     items:
@@ -146,12 +147,20 @@ enchant-gui:
 
   # Options for the page change buttons
   page-change:
+    # The sound played when the page is changed
+    sound:
+      enabled: true
+      sound: ui.button.click
+      pitch: 1.0
+      volume: 1.0
     forwards:
       item: arrow name:"&fNext Page" # The item. Will not show if on the last page.
+      item-inactive: gray_dye name:"&7Next Page" # The item shown on the last page
       row: 6
       column: 6
     backwards:
       item: arrow name:"&fPrevious Page" # The item. Will not show if on the first page.
+      item-inactive: gray_dye name:"&7Previous Page" # The item shown on the first page
       row: 6
       column: 4
 
@@ -171,7 +180,7 @@ enchant-gui:
     row: 3 # The row of the top-left corner of the area
     column: 2 # The column of the top-left corner of the area
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages#custom-gui-slots
   custom-slots: [ ]
 
   # If enabled, /enchant opens a group selection menu first, grouping enchantments
@@ -236,7 +245,7 @@ group-gui:
       row: 2
       column: 8
 
-  # Custom GUI slots; see here for a how-to: https://plugins.auxilor.io/all-plugins/custom-gui-slots
+  # Custom GUI slots; see here for a how-to: https://hub.auxilor.io/wiki/eco/pages#custom-gui-slots
   custom-slots: []
 
 # Options for converting lore-based enchants (from other plugins) with EcoEnchants enchantments

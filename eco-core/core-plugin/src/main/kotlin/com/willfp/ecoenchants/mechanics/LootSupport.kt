@@ -2,12 +2,17 @@ package com.willfp.ecoenchants.mechanics
 
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
+import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.mechanics.infiniteIfNegative
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
+import org.bukkit.entity.Entity
+import org.bukkit.entity.Item
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.world.LootGenerateEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
@@ -20,12 +25,28 @@ object LootSupport : Listener {
             return
         }
 
+        val discoveryType = event.discoveryType()
+
         for (itemStack in event.loot) {
-            modifyItem(itemStack)
+            modifyItem(itemStack, discoveryType)
         }
     }
 
-    private fun modifyItem(item: ItemStack) {
+    @EventHandler
+    fun onFish(event: PlayerFishEvent) {
+        if (!plugin.configYml.getBool("loot.enabled")) {
+            return
+        }
+
+        if (event.state != PlayerFishEvent.State.CAUGHT_FISH) {
+            return
+        }
+
+        val caught = event.caught as? Item ?: return
+        modifyItem(caught.itemStack, DiscoveryType.FISHING)
+    }
+
+    private fun modifyItem(item: ItemStack, discoveryType: DiscoveryType) {
         if (!item.isEnchantable) {
             return
         }
@@ -41,7 +62,7 @@ object LootSupport : Listener {
         val enchantments = EcoEnchants.values().shuffled()
 
         for (enchantment in enchantments) {
-            if (!enchantment.isObtainableThroughDiscovery) {
+            if (!enchantment.isObtainableThrough(discoveryType)) {
                 continue
             }
 
@@ -56,7 +77,6 @@ object LootSupport : Listener {
             if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
-
 
             val maxLevel = enchantment.maximumLevel
 
@@ -76,5 +96,14 @@ object LootSupport : Listener {
             enchants.forEach { (enchant, level) -> meta.addEnchant(enchant, level, true) }
         }
         item.itemMeta = meta
+    }
+}
+
+private fun LootGenerateEvent.discoveryType(): DiscoveryType {
+    val key = lootTable.key.key
+    return when {
+        "hero_of_the_village" in key -> DiscoveryType.RAIDS
+        inventoryHolder is Entity -> DiscoveryType.MOB_DROPS
+        else -> DiscoveryType.CHESTS
     }
 }
