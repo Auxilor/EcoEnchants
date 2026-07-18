@@ -23,6 +23,10 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
             val ecoEnchant = enchant.wrap()
             if (!ecoEnchant.isDragAndDropEnabled()) continue
             if (!ecoEnchant.canEnchantItem(current, eligible.keys)) continue
+
+            val existingLevel = getExistingLevel(current, enchant)
+            if (existingLevel != null && level < existingLevel) continue // not an upgrade, skip so book isn't consumed for no effect
+
             eligible[enchant] = level
         }
 
