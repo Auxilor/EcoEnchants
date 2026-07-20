@@ -30,6 +30,8 @@ class VanillaEcoEnchantLike(
 
     override val rawDisplayName = plugin.vanillaEnchantsYml.getString("${section}.name")
 
+    override val nameTranslationKey = if (plugin.vanillaEnchantsYml.has("${section}.name-translation-key")) plugin.vanillaEnchantsYml.getString("${section}.name-translation-key") else null
+
     override fun equals(other: Any?): Boolean {
         if (other !is VanillaEcoEnchantLike) {
             return false
