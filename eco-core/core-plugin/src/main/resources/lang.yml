@@ -25,3 +25,19 @@ all: "All"
 no-conflicts: "No Conflicts"
 all-conflicts: "All Other Enchantments"
 no-required: "No Requirements"
+
+discoverable:
+  "true": "&aYes"
+  "false": "&cNo"
+  chests:
+    "true": "&aYes"
+    "false": "&cNo"
+  fishing:
+    "true": "&aYes"
+    "false": "&cNo"
+  mob-drops:
+    "true": "&aYes"
+    "false": "&cNo"
+  raids:
+    "true": "&aYes"
+    "false": "&cNo"
