@@ -20,8 +20,8 @@ class EcoEnchantsAnvilHandler : AnvilHandler {
     override fun isBlocked(left: ItemStack?, right: ItemStack?): Boolean {
         val permanenceCurse = EcoEnchants.getByID("permanence_curse") ?: return false
         val enchantment = permanenceCurse.enchantment
-        val leftHas = left != null && left.fast().getEnchants(true).containsKey(enchantment)
-        val rightHas = right != null && right.fast().getEnchants(true).containsKey(enchantment)
-        return leftHas || rightHas
+        val targetHasCurse = left != null && left.fast().getEnchants(true).containsKey(enchantment)
+        val sacrificeHasCurse = right != null && right.fast().getEnchants(true).containsKey(enchantment)
+        return targetHasCurse || sacrificeHasCurse
     }
 }
