@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.enchant
 
-import com.github.benmanes.caffeine.cache.Caffeine
+import com.willfp.eco.core.cache.EcoCache
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
@@ -42,7 +42,7 @@ import kotlin.math.ceil
 object EnchantGUI {
     private lateinit var menu: Menu
     private var groupMenu: Menu? = null
-    private val enchantInfoMenus = Caffeine.newBuilder().build<Pair<EcoEnchant, Int>, Menu>()
+    private val enchantInfoMenus = EcoCache.builder<Pair<EcoEnchant, Int>, Menu>().build()
     private var allEnchantsSorted: List<Enchantment> = emptyList()
 
     internal fun reload() {
@@ -87,10 +87,11 @@ object EnchantGUI {
                 val atCaptive = menu.getCaptiveItem(player, captiveRow, captiveColumn)
                 val hasItem = !atCaptive.isEcoEmpty && atCaptive != null && atCaptive.type != Material.BOOK
 
+                val canSeeHidden = player.hasPermission("ecoenchants.seehidden")
                 val baseEnchants = if (!hasItem) {
-                    EcoEnchants.values().map { it.enchantment }.sortForDisplay()
+                    EcoEnchants.values().filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
                 } else {
-                    atCaptive.applicableEnchantments.map { it.enchantment }.sortForDisplay()
+                    atCaptive.applicableEnchantments.filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
                         .subtract(atCaptive.fast().enchants.keys)
                         .toList()
                 }
@@ -365,8 +366,8 @@ private class EnchantmentScrollPane : GUIComponent {
     val size = rows * columns
 }
 
-private val cachedEnchantmentSlots = Caffeine.newBuilder()
-    .build<Pair<EcoEnchant, Int>, Slot>()
+private val cachedEnchantmentSlots = EcoCache.builder<Pair<EcoEnchant, Int>, Slot>()
+    .build()
 
 private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
     return cachedEnchantmentSlots.get(this to level) {

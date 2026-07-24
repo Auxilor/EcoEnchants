@@ -29,7 +29,7 @@ object CommandEnchantInfo : PluginCommand(
 
         val enchantment = EcoEnchants.getByName(searchName)
 
-        if (enchantment == null) {
+        if (enchantment == null || (enchantment.isHiddenFromGui && !sender.hasPermission("ecoenchants.seehidden"))) {
             val message = plugin.langYml.getMessage("not-found").replace("%name%", searchName)
             sender.sendMessage(message)
             return
@@ -41,8 +41,9 @@ object CommandEnchantInfo : PluginCommand(
     override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {
         val completions = mutableListOf<String>()
 
+        val canSeeHidden = sender.hasPermission("ecoenchants.seehidden")
         @Suppress("DEPRECATION")
-        val names = EcoEnchants.values().mapNotNull { org.bukkit.ChatColor.stripColor(it.getFormattedName(0)) }
+        val names = EcoEnchants.values().filter { !it.isHiddenFromGui || canSeeHidden }.mapNotNull { org.bukkit.ChatColor.stripColor(it.getFormattedName(0)) }
 
         if (args.isEmpty()) {
             // Currently, this case is not ever reached
@@ -53,7 +54,7 @@ object CommandEnchantInfo : PluginCommand(
         if (args.size > 1) {
             val namePrefix = args.dropLast(1).joinToString(" ")
             val matched = EcoEnchants.getByName(namePrefix)
-            if (matched != null) {
+            if (matched != null && (!matched.isHiddenFromGui || canSeeHidden)) {
                 val levels = (1..matched.maximumLevel).map { it.toString() }
                 StringUtil.copyPartialMatches(args.last(), levels, completions)
                 return completions

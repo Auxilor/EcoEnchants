@@ -66,6 +66,11 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
         get() = DiscoveryType.entries.any { isObtainableThrough(it) }
 
     /**
+     * If the enchantment is hidden from the enchant GUI.
+     */
+    val isHiddenFromGui: Boolean
+
+    /**
      * Get a certain [level].
      */
     fun getLevel(level: Int): EcoEnchantLevel
