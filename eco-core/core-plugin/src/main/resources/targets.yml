@@ -24,6 +24,7 @@ targets:
     display-name: "Pickaxes"
     slot: mainhand
     items:
+      - "#items_pickaxes"
       - "*wooden_pickaxe"
       - "*stone_pickaxe"
       - "*iron_pickaxe"
@@ -36,6 +37,7 @@ targets:
     display-name: "Axes"
     slot: mainhand
     items:
+      - "#items_axes"
       - "*wooden_axe"
       - "*stone_axe"
       - "*iron_axe"
@@ -48,6 +50,7 @@ targets:
     display-name: "Hoes"
     slot: mainhand
     items:
+      - "#items_hoes"
       - "*wooden_hoe"
       - "*stone_hoe"
       - "*iron_hoe"
@@ -60,6 +63,7 @@ targets:
     display-name: "Shovels"
     slot: mainhand
     items:
+      - "#items_shovels"
       - "*wooden_shovel"
       - "*stone_shovel"
       - "*iron_shovel"
@@ -72,6 +76,7 @@ targets:
     display-name: "Swords"
     slot: mainhand
     items:
+      - "#items_swords"
       - "*wooden_sword"
       - "*stone_sword"
       - "*iron_sword"
@@ -84,6 +89,7 @@ targets:
     display-name: "Spear"
     slot: mainhand
     items:
+      - "#items_spears"
       - "*wooden_spear"
       - "*stone_spear"
       - "*iron_spear"
@@ -96,6 +102,7 @@ targets:
     display-name: "Helmets"
     slot: armor
     items:
+      - "#items_head_armor"
       - "*turtle_helmet"
       - "*leather_helmet"
       - "*chainmail_helmet"
@@ -109,6 +116,7 @@ targets:
     display-name: "Chestplates"
     slot: armor
     items:
+      - "#items_chest_armor"
       - "*leather_chestplate"
       - "*chainmail_chestplate"
       - "*iron_chestplate"
@@ -121,6 +129,7 @@ targets:
     display-name: "Leggings"
     slot: armor
     items:
+      - "#items_leg_armor"
       - "*leather_leggings"
       - "*chainmail_leggings"
       - "*iron_leggings"
@@ -133,6 +142,7 @@ targets:
     display-name: "Boots"
     slot: armor
     items:
+      - "#items_foot_armor"
       - "*leather_boots"
       - "*chainmail_boots"
       - "*iron_boots"
@@ -145,6 +155,10 @@ targets:
     display-name: "Armor"
     slot: armor
     items:
+      - "#items_head_armor"
+      - "#items_chest_armor"
+      - "#items_leg_armor"
+      - "#items_foot_armor"
       - "*leather_boots"
       - "*chainmail_boots"
       - "*iron_boots"
