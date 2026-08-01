@@ -402,14 +402,14 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                         required.wrap().getFormattedName(0)
                                     }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
-                                .replace("%tradeable%", this.isObtainableThroughTrading.parseYesOrNo())
+                                .replace("%tradeable%", this.isObtainableThroughTrading.parseLangOption("tradeable"))
                                 .replace("%discoverable%", this.isObtainableThroughDiscovery.parseDiscoverable())
                                 .replace("%discoverable_chests%", this.isObtainableThrough(DiscoveryType.CHESTS).parseDiscoverable(DiscoveryType.CHESTS))
                                 .replace("%discoverable_fishing%", this.isObtainableThrough(DiscoveryType.FISHING).parseDiscoverable(DiscoveryType.FISHING))
                                 .replace("%discoverable_mob_drops%", this.isObtainableThrough(DiscoveryType.MOB_DROPS).parseDiscoverable(DiscoveryType.MOB_DROPS))
                                 .replace("%discoverable_raids%", this.isObtainableThrough(DiscoveryType.RAIDS).parseDiscoverable(DiscoveryType.RAIDS))
-                                .replace("%enchantable%", this.isObtainableThroughEnchanting.parseYesOrNo())
-                                .replace("%drag_and_drop%", this.isDragAndDropEnabled().parseYesOrNo())
+                                .replace("%enchantable%", this.isObtainableThroughEnchanting.parseLangOption("enchantable"))
+                                .replace("%drag_and_drop%", this.isDragAndDropEnabled().parseLangOption("drag-and-drop"))
                         }
                         .formatEco()
                         .flatMap {
@@ -429,7 +429,10 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
 fun Boolean.parseYesOrNo(): String =
     if (this) plugin.langYml.getFormattedString("yes") else plugin.langYml.getFormattedString("no")
 
+fun Boolean.parseLangOption(path: String): String =
+    plugin.langYml.getFormattedString("$path.$this")
+
 fun Boolean.parseDiscoverable(type: DiscoveryType? = null): String {
     val path = if (type != null) "discoverable.${type.configKey}" else "discoverable"
-    return plugin.langYml.getFormattedString("$path.$this")
+    return this.parseLangOption(path)
 }
