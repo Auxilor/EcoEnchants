@@ -45,6 +45,8 @@ abstract class EcoEnchantBase(
 
     override val rawDisplayName = config.getString("display-name")
 
+    override val nameTranslationKey = if (config.has("name-translation-key")) config.getString("name-translation-key") else null
+
     override val maximumLevel = config.getInt("max-level")
 
     override val conflictsWithEverything: Boolean
