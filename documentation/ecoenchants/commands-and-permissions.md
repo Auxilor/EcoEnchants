@@ -1,6 +1,6 @@
 ---
 title: "Commands and Permissions"
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 Every command and its permission node is listed below. Permissions follow the `ecoenchants.command.<name>` pattern and are granted to operators by default.

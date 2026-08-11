@@ -1,6 +1,6 @@
 ---
 title: "Plugin Config"
-sidebar_position: 7
+sidebar_position: 5
 ---
 
 The main plugin settings live in `EcoEnchants/config.yml`. It controls how enchantments are obtained (enchanting table, villagers, loot, anvils), how they're displayed on items, and the enchant GUIs. Every option below is annotated inline.
