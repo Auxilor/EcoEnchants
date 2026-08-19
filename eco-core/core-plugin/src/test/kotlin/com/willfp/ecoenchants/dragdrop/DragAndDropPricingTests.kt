@@ -76,6 +76,7 @@ private fun fakeEnchant(
         override val plugin: EcoEnchantsPlugin get() = throw UnsupportedOperationException("not used in these tests")
         override val enchantment: Enchantment get() = throw UnsupportedOperationException("not used in these tests")
         override val rawDisplayName: String = "fake"
+        override val nameTranslationKey: String? = null
         override val type: EnchantmentType get() = throw UnsupportedOperationException("not used in these tests")
         override val enchantmentRarity: EnchantmentRarity get() = throw UnsupportedOperationException("not used in these tests")
     }
