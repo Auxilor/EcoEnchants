@@ -5,7 +5,9 @@ import com.willfp.eco.core.placeholder.context.placeholderContext
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.formatEco
+import com.willfp.eco.util.toComponent
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
+import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 
 // This is an object to be able to invalidate the cache on reload
@@ -61,6 +63,22 @@ fun EcoEnchantLike.getFormattedName(
             }
         }
     }
+}
+
+// Vanilla always builds the enchantment level numeral as an unstyled sibling appended to this
+// component, inheriting whatever color sits on its root. The legacy serializer used by
+// toComponent() wraps colored text in an empty root with the actual color on a child, so vanilla's
+// numeral inherits nothing and renders grey. Hoisting the color onto the root fixes that.
+fun EcoEnchantLike.getFormattedNameComponent(level: Int, showNotMet: Boolean = false): Component {
+    val name = this.getFormattedName(level, showNotMet).toComponent()
+
+    if (name.color() != null) {
+        return name
+    }
+
+    val childColor = name.children().firstOrNull()?.color() ?: return name
+
+    return name.color(childColor)
 }
 
 private val resetTags = arrayOf(

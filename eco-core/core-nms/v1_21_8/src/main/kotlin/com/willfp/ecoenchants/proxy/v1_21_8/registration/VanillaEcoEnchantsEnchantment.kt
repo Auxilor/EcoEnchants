@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.proxy.v1_21_8.registration
 
-import com.willfp.eco.util.toComponent
-import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.display.getFormattedNameComponent
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import io.papermc.paper.adventure.PaperAdventure
 import net.minecraft.core.HolderSet
@@ -20,7 +19,7 @@ fun vanillaEcoEnchantsEnchantment(enchant: EcoEnchant): Enchantment {
     )
 
     val description = enchant.nameTranslationKey?.let { Component.translatable(it) }
-        ?: PaperAdventure.asVanilla(enchant.getFormattedName(0).toComponent())
+        ?: PaperAdventure.asVanilla(enchant.getFormattedNameComponent(0))
 
     return Enchantment(description, definition, HolderSet.empty(), DataComponentMap.EMPTY)
 }
