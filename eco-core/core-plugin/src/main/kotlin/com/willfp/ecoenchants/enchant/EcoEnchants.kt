@@ -36,7 +36,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         }
 
         registry.clear()
-        clearEcoEnchantLikeCache()
+        ecoEnchantLikes.clear()
     }
 
     override fun beforeReload(plugin: LibreforgePlugin) {
