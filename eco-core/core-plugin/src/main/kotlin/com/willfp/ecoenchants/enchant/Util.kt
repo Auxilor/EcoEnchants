@@ -19,6 +19,10 @@ fun Enchantment.wrap(): EcoEnchantLike {
     }
 }
 
+internal fun clearEcoEnchantLikeCache() {
+    ecoEnchantLikes.clear()
+}
+
 fun Enchantment.conflictsWithDeep(other: Enchantment): Boolean {
     return this.conflictsWith(other) || other.conflictsWith(this)
 }
