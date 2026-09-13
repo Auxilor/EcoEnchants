@@ -96,6 +96,9 @@ object LoreConversion : Listener {
             matchedLines.add(line)
         }
 
+        if (toAdd.isEmpty()) {
+            return
+        }
 
         if (meta is EnchantmentStorageMeta) {
             lore.removeAll(matchedLines)
