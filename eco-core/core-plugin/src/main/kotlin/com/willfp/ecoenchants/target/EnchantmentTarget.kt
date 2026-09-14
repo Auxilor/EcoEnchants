@@ -44,8 +44,12 @@ class ConfiguredEnchantmentTarget(
         }"
     )
 
-    override val items = config.getStrings("items")
-        .map { Items.lookup(it) }
+    private val lookups = config.getStrings("items")
+        .associateWith { Items.lookup(it) }
+
+    val invalidItems = lookups.filterValues { it is EmptyTestableItem }.keys.toList()
+
+    override val items = lookups.values
         .filterNot { it is EmptyTestableItem }
 
     override fun equals(other: Any?): Boolean {
