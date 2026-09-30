@@ -27,6 +27,7 @@ dependencies {
     implementation(project(":eco-core:core-nms:v26_1_1", configuration = "shadow"))
     implementation(project(":eco-core:core-nms:v26_1_2", configuration = "shadow"))
     implementation(project(":eco-core:core-nms:v26_2", configuration = "shadow"))
+    implementation(project(":eco-core:core-nms:v26_3", configuration = "shadow"))
 }
 
 publishing {
