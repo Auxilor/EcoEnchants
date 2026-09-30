@@ -5,7 +5,7 @@ import com.willfp.ecoenchants.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 
-private val ecoEnchantLikes = mutableMapOf<NamespacedKey, EcoEnchantLike>()
+internal val ecoEnchantLikes = mutableMapOf<NamespacedKey, EcoEnchantLike>()
 
 fun Enchantment.wrap(): EcoEnchantLike {
     if (this is EcoEnchant) {
