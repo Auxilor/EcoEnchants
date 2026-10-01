@@ -14,6 +14,7 @@ import net.minecraft.core.MappedRegistry
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
+import com.willfp.eco.core.Prerequisite
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.craftbukkit.CraftRegistry
@@ -21,6 +22,7 @@ import org.bukkit.craftbukkit.CraftServer
 import org.bukkit.craftbukkit.util.CraftNamespacedKey
 import org.bukkit.enchantments.Enchantment
 import java.lang.reflect.Modifier
+import java.util.Collections
 import java.util.IdentityHashMap
 import java.util.function.BiFunction
 
@@ -32,6 +34,11 @@ private val enchantmentRegistry =
 private val bukkitRegistry: org.bukkit.Registry<Enchantment>
     get() =
         (org.bukkit.Registry.ENCHANTMENT as DelayedRegistry<Enchantment, *>).delegate()
+
+// CraftRegistry fills this cache lazily from Registry#get, which on Folia runs on many region
+// threads at once. It stores nulls for unknown keys, so it can't be a ConcurrentHashMap.
+private fun newRegistryCache(): MutableMap<NamespacedKey, Enchantment> =
+    if (Prerequisite.HAS_FOLIA.isMet) Collections.synchronizedMap(HashMap()) else mutableMapOf()
 
 class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
     private val frozenField = MappedRegistry::class.java
@@ -81,7 +88,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
         )
 
         // Clear the enchantment cache
-        cache.set(bukkitRegistry, mutableMapOf<NamespacedKey, Enchantment>())
+        cache.set(bukkitRegistry, newRegistryCache())
 
         // Unfreeze NMS registry
         frozenField.set(enchantmentRegistry, false)
@@ -113,7 +120,7 @@ class ModernEnchantmentRegisterer : ModernEnchantmentRegistererProxy {
 
     override fun register(enchant: EcoEnchantBase): Enchantment {
         // Clear the enchantment cache
-        cache.set(bukkitRegistry, mutableMapOf<NamespacedKey, Enchantment>())
+        cache.set(bukkitRegistry, newRegistryCache())
 
         if (enchantmentRegistry.containsKey(CraftNamespacedKey.toMinecraft(enchant.enchantmentKey))) {
             val nms = enchantmentRegistry[CraftNamespacedKey.toMinecraft(enchant.enchantmentKey)]
