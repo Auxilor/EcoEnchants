@@ -6,6 +6,7 @@ import com.willfp.eco.util.savedDisplayName
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.runOwned
 import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
@@ -38,35 +39,38 @@ object CommandEnchant : PluginCommand(
 
         val level = args.getOrNull(1)?.toIntOrNull() ?: 1
 
-        val item = player.inventory.itemInMainHand
+        // The console runs off the player's region on Folia.
+        player.runOwned {
+            val item = player.inventory.itemInMainHand
 
-        val meta = item.itemMeta
+            val meta = item.itemMeta
 
-        if (level > 0) {
-            if (meta is EnchantmentStorageMeta) {
-                meta.addStoredEnchant(enchant, level, true)
+            if (level > 0) {
+                if (meta is EnchantmentStorageMeta) {
+                    meta.addStoredEnchant(enchant, level, true)
+                }
+                meta.addEnchant(enchant, level, true)
+
+                sender.sendMessage(
+                    plugin.langYml.getMessage("added-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
+                        .replace("%enchant%", enchant.wrap().getFormattedName(0))
+                        .replace("%player%", player.savedDisplayName)
+                )
+            } else {
+                if (meta is EnchantmentStorageMeta) {
+                    meta.removeStoredEnchant(enchant)
+                }
+                meta.removeEnchant(enchant)
+
+                sender.sendMessage(
+                    plugin.langYml.getMessage("removed-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
+                        .replace("%enchant%", enchant.wrap().getFormattedName(0))
+                        .replace("%player%", player.savedDisplayName)
+                )
             }
-            meta.addEnchant(enchant, level, true)
 
-            sender.sendMessage(
-                plugin.langYml.getMessage("added-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
-                    .replace("%enchant%", enchant.wrap().getFormattedName(0))
-                    .replace("%player%", player.savedDisplayName)
-            )
-        } else {
-            if (meta is EnchantmentStorageMeta) {
-                meta.removeStoredEnchant(enchant)
-            }
-            meta.removeEnchant(enchant)
-
-            sender.sendMessage(
-                plugin.langYml.getMessage("removed-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
-                    .replace("%enchant%", enchant.wrap().getFormattedName(0))
-                    .replace("%player%", player.savedDisplayName)
-            )
+            item.itemMeta = meta
         }
-
-        item.itemMeta = meta
     }
 
     override fun tabComplete(sender: CommandSender, rawArgs: List<String>): List<String> {

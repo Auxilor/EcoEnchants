@@ -22,6 +22,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.permissions.Permission
 import org.bukkit.permissions.PermissionDefault
 import org.jetbrains.annotations.ApiStatus.Internal
+import java.util.concurrent.ConcurrentHashMap
 
 abstract class EcoEnchantBase(
     final override val id: String,
@@ -35,7 +36,7 @@ abstract class EcoEnchantBase(
     override lateinit var enchantment: Enchantment
         @Internal set
 
-    private val levels = mutableMapOf<Int, EcoEnchantLevel>()
+    private val levels = ConcurrentHashMap<Int, EcoEnchantLevel>()
 
     private val conflictIds = config.getStrings("conflicts").toSet()
 
@@ -139,8 +140,8 @@ abstract class EcoEnchantBase(
     protected open fun loadConfig(): Config? = null
 
     override fun getLevel(level: Int): EcoEnchantLevel {
-        return levels.getOrPut(level) {
-            createLevel(level)
+        return levels.computeIfAbsent(level) {
+            createLevel(it)
         }
     }
 

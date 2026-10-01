@@ -91,7 +91,7 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
 
             data.age = 0
 
-            plugin.scheduler.run {
+            plugin.scheduler.at(block.location).run {
                 block.type = type
                 block.blockData = data
 

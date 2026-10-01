@@ -65,6 +65,7 @@ internal object AllEnchantmentTarget : EnchantmentTarget {
     override val id = "all"
     override val displayName = plugin.langYml.getFormattedString("all")
     override val slot = SlotTypeAny
+    @Volatile
     override var items = emptyList<TestableItem>()
         private set
 

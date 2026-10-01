@@ -13,10 +13,12 @@ interface EnchantmentSorter {
 }
 
 object EnchantSorter {
-    private val sorters = mutableListOf<EnchantmentSorter>()
+    // Replaced rather than mutated: display runs on many threads at once.
+    @Volatile
+    private var sorters = emptyList<EnchantmentSorter>()
 
     internal fun reload() {
-        sorters.clear()
+        val sorters = mutableListOf<EnchantmentSorter>()
 
         if (plugin.configYml.getBool("display.sort.rarity")) {
             sorters.add(RaritySorter)
@@ -29,10 +31,14 @@ object EnchantSorter {
         if (plugin.configYml.getBool("display.sort.length")) {
             sorters.add(LengthSorter)
         }
+
+        this.sorters = sorters
     }
 
-    fun Collection<Enchantment>.sortForDisplay(): List<Enchantment> =
-        sorters.getSafely(0).sort(this, sorters.drop(1))
+    fun Collection<Enchantment>.sortForDisplay(): List<Enchantment> {
+        val sorters = sorters
+        return sorters.getSafely(0).sort(this, sorters.drop(1))
+    }
 }
 
 fun List<EnchantmentSorter>.getSafely(index: Int) =
@@ -53,13 +59,13 @@ object LengthSorter : EnchantmentSorter {
 }
 
 object TypeSorter : EnchantmentSorter {
-    private val types = mutableListOf<EnchantmentType>()
+    @Volatile
+    private var types = emptyList<EnchantmentType>()
 
     fun update() {
-        types.clear()
-        types.addAll(plugin.configYml.getStrings("display.sort.type-order").mapNotNull {
+        types = plugin.configYml.getStrings("display.sort.type-order").mapNotNull {
             EnchantmentTypes[it]
-        })
+        }
     }
 
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
@@ -73,13 +79,13 @@ object TypeSorter : EnchantmentSorter {
 }
 
 object RaritySorter : EnchantmentSorter {
-    private val rarities = mutableListOf<EnchantmentRarity>()
+    @Volatile
+    private var rarities = emptyList<EnchantmentRarity>()
 
     fun update() {
-        rarities.clear()
-        rarities.addAll(plugin.configYml.getStrings("display.sort.rarity-order").mapNotNull {
+        rarities = plugin.configYml.getStrings("display.sort.rarity-order").mapNotNull {
             EnchantmentRarities[it]
-        })
+        }
     }
 
     override fun sort(enchantments: Collection<Enchantment>, children: List<EnchantmentSorter>): List<Enchantment> {
