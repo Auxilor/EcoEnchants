@@ -51,7 +51,6 @@ object CommandEnchant : PluginCommand(
                 }
                 meta.addEnchant(enchant, level, true)
 
-            )
                 sender.sendMessage(
                     plugin.langYml.getMessage("added-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
                         .replace("%enchant%", enchant.wrap().getFormattedName(0))
