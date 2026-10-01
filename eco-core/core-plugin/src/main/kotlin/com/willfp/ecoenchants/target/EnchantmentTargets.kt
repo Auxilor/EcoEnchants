@@ -13,7 +13,7 @@ import java.time.Duration
 object EnchantmentTargets : Registry<EnchantmentTarget>() {
     init {
         register(AllEnchantmentTarget)
-        load(warnInvalid = false)
+        update()
     }
 
     private fun getForItem(item: ItemStack): List<EnchantmentTarget> {
@@ -34,10 +34,6 @@ object EnchantmentTargets : Registry<EnchantmentTarget>() {
 
     @JvmStatic
     fun update() {
-        load(warnInvalid = true)
-    }
-
-    private fun load(warnInvalid: Boolean) {
         for (target in values()) {
             if (target is AllEnchantmentTarget) {
                 continue
@@ -49,7 +45,7 @@ object EnchantmentTargets : Registry<EnchantmentTarget>() {
             val target = ConfiguredEnchantmentTarget(config)
             register(target)
 
-            if (warnInvalid) {
+            if (plugin.isLoaded) {
                 for (invalid in target.invalidItems) {
                     plugin.logger.warning("Invalid item \"$invalid\" in target \"${target.id}\" in targets.yml, it will be ignored")
                 }
