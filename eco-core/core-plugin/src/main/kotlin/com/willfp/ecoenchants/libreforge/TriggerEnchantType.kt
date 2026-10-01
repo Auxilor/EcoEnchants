@@ -39,7 +39,7 @@ class TriggerEnchantType(
     fun handleLevelling(event: EnchantItemEvent) {
         val player = event.enchanter
 
-        plugin.scheduler.runLater({
+        plugin.scheduler.on(player).runLater({
             if (
                 event.item.fast().getEnchants(true).keys
                     .map { it.wrap() }

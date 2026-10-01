@@ -40,9 +40,13 @@ import com.willfp.ecoenchants.target.EnchantmentTargets
 import kotlin.math.ceil
 
 object EnchantGUI {
+    // Rebuilt on reload while players on other threads may be opening them.
+    @Volatile
     private lateinit var menu: Menu
+    @Volatile
     private var groupMenu: Menu? = null
     private val enchantInfoMenus = EcoCache.builder<Pair<EcoEnchant, Int>, Menu>().build()
+    @Volatile
     private var allEnchantsSorted: List<Enchantment> = emptyList()
 
     internal fun reload() {
@@ -293,8 +297,10 @@ object EnchantGUI {
     }
 
     fun openGUI(player: Player) {
+        val groupMenu = groupMenu
+
         if (plugin.configYml.getBool("enchant-gui.grouped") && groupMenu != null) {
-            groupMenu!!.open(player)
+            groupMenu.open(player)
         } else {
             menu.open(player)
         }

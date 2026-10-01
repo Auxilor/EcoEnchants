@@ -8,6 +8,7 @@ import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.runOwned
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
@@ -69,10 +70,13 @@ object CommandGiveRandomBook : PluginCommand(
             .addStoredEnchantment(enchantment.enchantment, level)
             .build()
 
-        DropQueue(player)
-            .addItem(item)
-            .forceTelekinesis()
-            .push()
+        // The console runs off the player's region on Folia.
+        player.runOwned {
+            DropQueue(player)
+                .addItem(item)
+                .forceTelekinesis()
+                .push()
+        }
 
         sender.sendMessage(
             plugin.langYml.getMessage("gave-random-book", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)

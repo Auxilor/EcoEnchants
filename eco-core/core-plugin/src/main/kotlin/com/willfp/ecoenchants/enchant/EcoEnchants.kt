@@ -1,6 +1,7 @@
 package com.willfp.ecoenchants.enchant
 
 import com.google.common.collect.HashBiMap
+import com.google.common.collect.Maps
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
@@ -22,7 +23,7 @@ import org.bukkit.ChatColor
 
 @Suppress("UNUSED")
 object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
-    private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
+    private val BY_NAME = Maps.synchronizedBiMap(HashBiMap.create<String, EcoEnchant>())
 
     override val shouldPreload = true
 
@@ -36,6 +37,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         }
 
         registry.clear()
+        ecoEnchantLikes.clear()
     }
 
     override fun beforeReload(plugin: LibreforgePlugin) {

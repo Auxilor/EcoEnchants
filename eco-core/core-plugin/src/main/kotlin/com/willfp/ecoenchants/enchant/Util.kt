@@ -4,8 +4,9 @@ import com.willfp.ecoenchants.enchant.impl.VanillaEcoEnchantLike
 import com.willfp.ecoenchants.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import java.util.concurrent.ConcurrentHashMap
 
-private val ecoEnchantLikes = mutableMapOf<NamespacedKey, EcoEnchantLike>()
+internal val ecoEnchantLikes = ConcurrentHashMap<NamespacedKey, EcoEnchantLike>()
 
 fun Enchantment.wrap(): EcoEnchantLike {
     if (this is EcoEnchant) {
@@ -14,7 +15,7 @@ fun Enchantment.wrap(): EcoEnchantLike {
 
     EcoEnchants.getByID(this.key.key)?.let { return it }
 
-    return ecoEnchantLikes.getOrPut(this.key) {
+    return ecoEnchantLikes.computeIfAbsent(this.key) {
         VanillaEcoEnchantLike(this, plugin)
     }
 }
