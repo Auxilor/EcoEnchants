@@ -42,7 +42,14 @@ object EnchantmentTargets : Registry<EnchantmentTarget>() {
         }
 
         for (config in plugin.targetsYml.getSubsections("targets")) {
-            register(ConfiguredEnchantmentTarget(config))
+            val target = ConfiguredEnchantmentTarget(config)
+            register(target)
+
+            if (plugin.isLoaded) {
+                for (invalid in target.invalidItems) {
+                    plugin.logger.warning("Invalid item \"$invalid\" in target \"${target.id}\" in targets.yml, it will be ignored")
+                }
+            }
         }
 
         AllEnchantmentTarget.updateItems()
