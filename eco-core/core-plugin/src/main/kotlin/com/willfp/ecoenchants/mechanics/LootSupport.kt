@@ -21,7 +21,7 @@ import kotlin.math.ceil
 object LootSupport : Listener {
     @EventHandler
     fun onGenerate(event: LootGenerateEvent) {
-        if (!plugin.configYml.getBool("loot.enabled")) {
+        if (!plugin.configYml.getBool("loot.enabled") || plugin.isDisabledIn(event.world)) {
             return
         }
 
@@ -34,7 +34,7 @@ object LootSupport : Listener {
 
     @EventHandler
     fun onFish(event: PlayerFishEvent) {
-        if (!plugin.configYml.getBool("loot.enabled")) {
+        if (!plugin.configYml.getBool("loot.enabled") || plugin.isDisabledIn(event.player.world)) {
             return
         }
 
