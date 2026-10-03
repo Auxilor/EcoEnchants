@@ -14,6 +14,9 @@ A few options note that they require a **server restart** rather than a reload, 
 ## Default config.yml
 
 ```yaml
+# Worlds that EcoEnchants should be disabled in
+disabled-in-worlds: []
+
 # Options for enchanting items in the enchanting table
 enchanting-table:
   enabled: true # If custom enchantments should be available from enchanting tables
