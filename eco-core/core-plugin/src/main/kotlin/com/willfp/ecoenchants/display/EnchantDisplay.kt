@@ -74,6 +74,9 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
                 enchants.size <= plugin.configYml.getInt("display.descriptions.threshold")
                 && player?.seesEnchantmentDescriptions ?: true)
 
+        val shouldShowTargets = itemStack.type == Material.ENCHANTED_BOOK &&
+                plugin.configYml.getBool("display.book-targets.enabled")
+
         val formattedNames = mutableMapOf<DisplayableEnchant, String>()
 
         val notMetLines = mutableListOf<String>()
@@ -115,6 +118,13 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
                     enchantLore.addAll(
                         enchant.getFormattedDescription(level, player)
                         .filter { it.isNotEmpty() }.map { Display.PREFIX + it })
+                }
+
+                if (shouldShowTargets && enchant.targets.isNotEmpty()) {
+                    enchantLore.add(
+                        Display.PREFIX + plugin.configYml.getFormattedString("display.book-targets.format")
+                            .replace("%targets%", enchant.targets.joinToString(", ") { it.displayName })
+                    )
                 }
             }
         }
