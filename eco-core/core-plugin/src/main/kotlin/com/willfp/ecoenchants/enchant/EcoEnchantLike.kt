@@ -10,6 +10,7 @@ import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.DescriptionPlaceholder
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
+import com.willfp.ecoenchants.target.EnchantmentTarget
 import com.willfp.ecoenchants.type.EnchantmentType
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -56,6 +57,11 @@ interface EcoEnchantLike {
      * The enchantment rarity.
      */
     val enchantmentRarity: EnchantmentRarity
+
+    /**
+     * The enchantment targets.
+     */
+    val targets: Set<EnchantmentTarget>
 
     /**
      * Get if this enchantment can be applied to [item].
