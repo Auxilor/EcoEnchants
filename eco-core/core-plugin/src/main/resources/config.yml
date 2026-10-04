@@ -3,6 +3,9 @@
 # by Auxilor
 #
 
+# Worlds that EcoEnchants should be disabled in
+disabled-in-worlds: []
+
 # Options for enchanting items in the enchanting table
 enchanting-table:
   enabled: true # If custom enchantments should be available from enchanting tables

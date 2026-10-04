@@ -17,7 +17,7 @@ import kotlin.math.ceil
 object VillagerSupport : Listener {
     @EventHandler
     fun onTrade(event: VillagerAcquireTradeEvent) {
-        if (!plugin.configYml.getBool("villager.enabled")) {
+        if (!plugin.configYml.getBool("villager.enabled") || plugin.isDisabledIn(event.entity.world)) {
             return
         }
 

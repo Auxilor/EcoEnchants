@@ -38,7 +38,7 @@ object EnchantingTableSupport : Listener {
         val cost = event.expLevelCost
         val toAdd = event.enchantsToAdd
 
-        if (!plugin.configYml.getBool("enchanting-table.enabled")) {
+        if (!plugin.configYml.getBool("enchanting-table.enabled") || plugin.isDisabledIn(player.world)) {
             return
         }
 
@@ -161,7 +161,7 @@ object EnchantingTableSupport : Listener {
 
     @EventHandler
     fun handleExtraItem(event: PrepareItemEnchantEvent) {
-        if (!plugin.configYml.getBool("enchanting-table.enabled")) {
+        if (!plugin.configYml.getBool("enchanting-table.enabled") || plugin.isDisabledIn(event.enchanter.world)) {
             return
         }
 
