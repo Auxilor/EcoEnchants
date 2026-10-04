@@ -6,6 +6,7 @@ import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
+import com.willfp.ecoenchants.target.EnchantmentTarget
 import com.willfp.ecoenchants.type.EnchantmentType
 import org.bukkit.enchantments.Enchantment
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -79,6 +80,7 @@ private fun fakeEnchant(
         override val nameTranslationKey: String? = null
         override val type: EnchantmentType get() = throw UnsupportedOperationException("not used in these tests")
         override val enchantmentRarity: EnchantmentRarity get() = throw UnsupportedOperationException("not used in these tests")
+        override val targets: Set<EnchantmentTarget> = emptySet()
     }
 }
 

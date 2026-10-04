@@ -4,6 +4,7 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
+import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.enchantments.Enchantment
@@ -27,6 +28,10 @@ class VanillaEcoEnchantLike(
     override val enchantmentRarity: EnchantmentRarity =
         EnchantmentRarities[plugin.vanillaEnchantsYml.getString("${section}.rarity")]
             ?: EnchantmentRarities.values().first()
+
+    override val targets = plugin.vanillaEnchantsYml.getStrings("${section}.targets")
+        .mapNotNull { EnchantmentTargets[it] }
+        .toSet()
 
     override val rawDisplayName = plugin.vanillaEnchantsYml.getString("${section}.name")
 

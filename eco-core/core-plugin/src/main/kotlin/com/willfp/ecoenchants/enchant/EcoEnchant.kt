@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchant
 
 import com.willfp.eco.core.registry.KRegistrable
-import com.willfp.ecoenchants.target.EnchantmentTarget
 import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.slot.SlotType
 import org.bukkit.NamespacedKey
@@ -27,11 +26,6 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
      * The required enchantments.
      */
     val required: Set<Enchantment>
-
-    /**
-     * The enchantment targets.
-     */
-    val targets: Set<EnchantmentTarget>
 
     /**
      * The enchantment slots.

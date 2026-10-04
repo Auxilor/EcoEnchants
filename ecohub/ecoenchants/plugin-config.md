@@ -95,6 +95,10 @@ display:
     word-wrap: 27 # Number of characters to have on each line
     format: "&8"
 
+  book-targets:
+    enabled: false # If enchanted books should show what each enchantment can be applied to
+    format: "&7Applies to: &e%targets%" # The line added under each enchantment on a book
+
   require-enchantable: true # If EcoEnchants should not display on non-enchantable items.
 
 # Options for the /enchantinfo GUI
