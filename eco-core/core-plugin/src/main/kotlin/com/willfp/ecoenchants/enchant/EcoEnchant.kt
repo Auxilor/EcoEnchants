@@ -1,16 +1,22 @@
 package com.willfp.ecoenchants.enchant
 
+import com.willfp.eco.core.enchant.CustomEnchantment
 import com.willfp.eco.core.registry.KRegistrable
+import com.willfp.eco.util.toComponent
+import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.display.getFormattedNameComponent
 import com.willfp.libreforge.conditions.ConditionList
 import com.willfp.libreforge.slot.SlotType
+import net.kyori.adventure.text.Component
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.inventory.ItemStack
 
-interface EcoEnchant : KRegistrable, EcoEnchantLike {
+interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     /**
      * The key.
      */
-    val enchantmentKey: NamespacedKey
+    override val enchantmentKey: NamespacedKey
 
     /**
      * If this enchantment conflicts with all other enchantments.
@@ -41,12 +47,12 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * If the enchantment is enchantable.
      */
-    val isObtainableThroughEnchanting: Boolean
+    override val isObtainableThroughEnchanting: Boolean
 
     /**
      * If the enchantment is tradeable.
      */
-    val isObtainableThroughTrading: Boolean
+    override val isObtainableThroughTrading: Boolean
 
     /**
      * If the enchantment is discoverable via a given [type].
@@ -56,7 +62,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * If the enchantment is discoverable via any method.
      */
-    val isObtainableThroughDiscovery: Boolean
+    override val isObtainableThroughDiscovery: Boolean
         get() = DiscoveryType.entries.any { isObtainableThrough(it) }
 
     /**
@@ -77,16 +83,31 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike {
     /**
      * Get if this enchantment conflicts with [other].
      */
-    fun conflictsWith(other: Enchantment): Boolean {
+    override fun conflictsWith(other: Enchantment): Boolean {
         if (this.conflictsWithDirectly(other)) {
             return true
         }
 
-        if (other is EcoEnchant) {
-            return other.conflictsWithDirectly(this.enchantment)
+        other.ecoEnchant?.let {
+            return it.conflictsWithDirectly(this.enchantment)
         }
 
         return false
+    }
+
+    override val registryDescription: Component
+        get() = nameTranslationKey?.let { Component.translatable(it) } ?: getFormattedNameComponent(0)
+
+    override val translationKey: String
+        get() = nameTranslationKey ?: "ecoenchants:enchantment.$id"
+
+    override fun displayName(level: Int): Component {
+        return nameTranslationKey?.let { Component.translatable(it, getFormattedName(level)) }
+            ?: getFormattedName(level).toComponent()
+    }
+
+    override fun canEnchantItem(item: ItemStack): Boolean {
+        return canEnchantItem(item, emptyList())
     }
 
     /**

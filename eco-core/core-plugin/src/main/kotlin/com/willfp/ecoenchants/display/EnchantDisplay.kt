@@ -8,7 +8,7 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.toComponent
 import com.willfp.ecoenchants.commands.CommandToggleDescriptions.seesEnchantmentDescriptions
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
-import com.willfp.ecoenchants.enchant.EcoEnchant
+import com.willfp.ecoenchants.enchant.ecoEnchant
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
@@ -20,19 +20,10 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 
-// Works around HIDE_POTION_EFFECTS not existing in 1.20.5+
-interface HideStoredEnchantsProxy {
-    fun hideStoredEnchants(fis: FastItemStack)
-    fun showStoredEnchants(fis: FastItemStack)
-    fun areStoredEnchantsHidden(fis: FastItemStack): Boolean
-}
-
 @Suppress("DEPRECATION")
 object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
     private val hideStateKey =
         plugin.namespacedKeyFactory.create("ecoenchantlore-skip") // Same for backwards compatibility
-
-    private val hse = plugin.getProxy(HideStoredEnchantsProxy::class.java)
 
     override fun display(context: DisplayContext) {
         val itemStack = context.itemStack
@@ -49,7 +40,7 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         if (context.varArgs[0] == true) {
             fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
             if (itemStack.type == Material.ENCHANTED_BOOK) {
-                hse.hideStoredEnchants(fast)
+                fast.hideStoredEnchants()
             }
             pdc.set(hideStateKey, PersistentDataType.INTEGER, 1)
             return
@@ -80,8 +71,9 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
 
         for ((enchant, level) in enchants) {
             var showNotMet = false
-            if (player != null && enchant is EcoEnchant) {
-                val enchantLevel = enchant.getLevel(level)
+            val ecoEnchant = enchant.ecoEnchant
+            if (player != null && ecoEnchant != null) {
+                val enchantLevel = ecoEnchant.getLevel(level)
                 val holder = ItemProvidedHolder(enchantLevel, itemStack)
 
                 val enchantNotMetLines = holder.getNotMetLineComponents(player)
@@ -131,7 +123,7 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
 
         fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
         if (itemStack.type == Material.ENCHANTED_BOOK) {
-            hse.hideStoredEnchants(fast)
+            fast.hideStoredEnchants()
         }
 
         if (plugin.configYml.getBool("display.enchantments-below-lore")) {
@@ -155,7 +147,7 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
             fast.removeItemFlags(ItemFlag.HIDE_ENCHANTS)
 
             if (itemStack.type == Material.ENCHANTED_BOOK) {
-                hse.showStoredEnchants(fast)
+                fast.showStoredEnchants()
             }
         }
 
@@ -170,7 +162,7 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
             0 -> arrayOf(false)
             else -> arrayOf(
                 fast.hasItemFlag(ItemFlag.HIDE_ENCHANTS)
-                        || hse.areStoredEnchantsHidden(fast)
+                        || fast.areStoredEnchantsHidden
             )
         }
     }

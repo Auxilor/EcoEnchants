@@ -6,6 +6,7 @@ import com.willfp.eco.core.bstats.EcoMetricsChart
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.eco.core.display.DisplayModule
 import com.willfp.eco.core.dragdrop.DragAndDropHandlers
+import com.willfp.eco.core.enchant.CustomEnchantments
 import com.willfp.eco.core.integrations.IntegrationLoader
 import com.willfp.ecoenchants.commands.CommandEcoEnchants
 import com.willfp.ecoenchants.commands.CommandEnchant
@@ -23,8 +24,7 @@ import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import com.willfp.ecoenchants.enchant.LoreConversion
-import com.willfp.ecoenchants.enchant.registration.EnchantmentRegisterer
-import com.willfp.ecoenchants.enchant.registration.ModernEnchantmentRegistererProxy
+import com.willfp.ecoenchants.enchant.VanillaEnchantmentOverridesYml
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
@@ -61,12 +61,11 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     var isLoaded = false
         private set
 
-    val enchantmentRegisterer: EnchantmentRegisterer = this.getProxy(ModernEnchantmentRegistererProxy::class.java)
-
     init {
         plugin = this
 
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        CustomEnchantments.setVanillaOverrides(VanillaEnchantmentOverridesYml)
+        CustomEnchantments.unfreezeRegistry()
     }
 
     override fun loadConfigCategories(): List<ConfigCategory> {
@@ -104,7 +103,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleAfterLoad() {
         isLoaded = true
 
-        plugin.getProxy(ModernEnchantmentRegistererProxy::class.java).replaceRegistry()
+        CustomEnchantments.unfreezeRegistry()
     }
 
     override fun handleReload() {

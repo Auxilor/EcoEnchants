@@ -25,6 +25,10 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
     private val handler = SoulboundHandler(this)
 
     override fun onRegister() {
+        if (!plugin.isLoaded) {
+            return
+        }
+
         plugin.eventManager.registerListener(handler)
     }
 
