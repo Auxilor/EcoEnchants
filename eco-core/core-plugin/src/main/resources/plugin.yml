@@ -2,7 +2,7 @@ name: ${pluginName}
 version: ${version}
 main: com.willfp.ecoenchants.EcoEnchantsPlugin
 api-version: 1.21.8
-authors: [ Auxilor ]
+authors: [ Auxilor, Exanthiax, Callum ]
 website: willfp.com
 load: STARTUP
 folia-supported: true
