@@ -25,6 +25,7 @@ import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.display.hideStoredEnchants
+import com.willfp.ecoenchants.dragdrop.dragAndDropPriceDisplay
 import com.willfp.ecoenchants.dragdrop.isDragAndDropEnabled
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.plugin
@@ -416,6 +417,14 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 .replace("%discoverable_raids%", this.isObtainableThrough(DiscoveryType.RAIDS).parseDiscoverable(DiscoveryType.RAIDS))
                                 .replace("%enchantable%", this.isObtainableThroughEnchanting.parseLangOption("enchantable"))
                                 .replace("%drag_and_drop%", this.isDragAndDropEnabled().parseLangOption("drag-and-drop"))
+                                .replace(
+                                    "%drag_and_drop_price%",
+                                    if (this.isDragAndDropEnabled()) {
+                                        this.dragAndDropPriceDisplay(player, level)
+                                    } else {
+                                        false.parseLangOption("drag-and-drop")
+                                    }
+                                )
                         }
                         .formatEco()
                         .flatMap {
