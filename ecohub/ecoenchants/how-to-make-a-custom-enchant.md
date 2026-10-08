@@ -167,6 +167,8 @@ drag-and-drop:
 
 If the item already has this enchantment, applying another book of the same level bumps it by one level (up to `max-level`); a higher-level book always takes the higher level. The price is charged once per application, using the multiplier evaluated against the book's level *before* any bump.
 
+To show players the cost, set `display.book-drag-and-drop-price.enabled` to `true` in `config.yml`. Enchanted books then show the price under each enchantment that allows drag and drop. In `/enchantinfo`, use the `%drag_and_drop_price%` placeholder.
+
 ### Effects
 
 This is the heart of the enchantment, i.e. what it actually does.
@@ -217,6 +219,7 @@ These are separate from the placeholders above - they're only available in `ench
 | `%discoverable_raids%` | Whether the enchantment can be found from raids |
 | `%enchantable%` | Whether the enchantment is obtainable from the enchanting table |
 | `%drag_and_drop%` | Whether the enchantment can be applied by dragging an enchanted book onto an item |
+| `%drag_and_drop_price%` | The drag and drop price at the shown level, or the "No" option from `lang.yml` if drag and drop is disabled |
 
 :::tip Troubleshooting
 - **Enchantment doesn't appear after reload?** It's new, so you must re-log, not just reload.
