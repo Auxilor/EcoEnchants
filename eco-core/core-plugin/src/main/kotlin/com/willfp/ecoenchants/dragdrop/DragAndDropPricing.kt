@@ -4,6 +4,7 @@ import com.willfp.eco.core.placeholder.context.placeholderContext
 import com.willfp.eco.core.price.ConfiguredPrice
 import com.willfp.eco.util.evaluateExpressionOrNull
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
+import org.bukkit.entity.Player
 
 fun EcoEnchantLike.isDragAndDropEnabled(): Boolean {
     return config.getBool("drag-and-drop.enabled")
@@ -20,4 +21,8 @@ fun EcoEnchantLike.dragAndDropPriceMultiplier(level: Int): Double {
         expression.replace("%level%", level.toString()),
         placeholderContext()
     ) ?: 1.0
+}
+
+fun EcoEnchantLike.dragAndDropPriceDisplay(player: Player, level: Int): String {
+    return dragAndDropPrice().getDisplay(player, dragAndDropPriceMultiplier(level))
 }

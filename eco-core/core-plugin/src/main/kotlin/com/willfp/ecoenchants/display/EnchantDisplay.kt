@@ -8,6 +8,8 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.toComponent
 import com.willfp.ecoenchants.commands.CommandToggleDescriptions.seesEnchantmentDescriptions
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
+import com.willfp.ecoenchants.dragdrop.dragAndDropPriceDisplay
+import com.willfp.ecoenchants.dragdrop.isDragAndDropEnabled
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
@@ -74,6 +76,9 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         val shouldShowTargets = itemStack.type == Material.ENCHANTED_BOOK &&
                 plugin.configYml.getBool("display.book-targets.enabled")
 
+        val shouldShowDragAndDropPrice = itemStack.type == Material.ENCHANTED_BOOK &&
+                plugin.configYml.getBool("display.book-drag-and-drop-price.enabled")
+
         val formattedNames = mutableMapOf<DisplayableEnchant, String>()
 
         val notMetLines = mutableListOf<Component>()
@@ -123,6 +128,14 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
                     enchantLore.add(
                         plugin.configYml.getFormattedString("display.book-targets.format")
                             .replace("%targets%", enchant.targets.joinToString(", ") { it.displayName })
+                            .toComponent()
+                    )
+                }
+
+                if (shouldShowDragAndDropPrice && player != null && enchant.isDragAndDropEnabled()) {
+                    enchantLore.add(
+                        plugin.configYml.getFormattedString("display.book-drag-and-drop-price.format")
+                            .replace("%price%", enchant.dragAndDropPriceDisplay(player, level))
                             .toComponent()
                     )
                 }
