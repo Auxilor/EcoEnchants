@@ -34,20 +34,16 @@ object EnchantmentTargets : Registry<EnchantmentTarget>() {
 
     @JvmStatic
     fun update() {
-        val configs = plugin.targetsYml.getSubsections("targets")
-        val configuredIds = configs.map { it.getString("id") }.toSet()
-
         for (target in values()) {
-            if (target is AllEnchantmentTarget || target.id in configuredIds) {
+            if (target is AllEnchantmentTarget) {
                 continue
             }
             remove(target)
         }
 
-        for (config in configs) {
-            val target = (this[config.getString("id")] as? ConfiguredEnchantmentTarget)
-                ?.also { it.reload(config) }
-                ?: ConfiguredEnchantmentTarget(config).also { register(it) }
+        for (config in plugin.targetsYml.getSubsections("targets")) {
+            val target = ConfiguredEnchantmentTarget(config)
+            register(target)
 
             if (plugin.isLoaded) {
                 for (invalid in target.invalidItems) {
