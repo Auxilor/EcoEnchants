@@ -20,6 +20,10 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
     private var handler = ReplenishHandler(this)
 
     override fun onRegister() {
+        if (!plugin.isLoaded) {
+            return
+        }
+
         plugin.eventManager.registerListener(handler)
     }
 

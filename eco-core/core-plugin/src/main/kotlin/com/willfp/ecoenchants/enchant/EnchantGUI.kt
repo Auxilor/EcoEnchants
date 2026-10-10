@@ -22,9 +22,9 @@ import com.willfp.eco.core.sound.PlayableSound
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
-import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.display.hideStoredEnchants
 import com.willfp.ecoenchants.dragdrop.dragAndDropPriceDisplay
 import com.willfp.ecoenchants.dragdrop.isDragAndDropEnabled
 import com.willfp.ecoenchants.enchant.DiscoveryType
@@ -118,7 +118,7 @@ object EnchantGUI {
                     baseEnchants
                 }
 
-                menu.setState(player, "enchants", filteredEnchants)
+                menu.setState(player, "enchants", filteredEnchants.mapNotNull { it.ecoEnchant })
 
                 // Reset to page 1 when an item is placed or removed from the captive slot
                 val previousHasItem = menu.getState<Boolean>(player, "hasItem") ?: false
@@ -433,9 +433,7 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                 }
                 .build()
                 .fast()
-                .apply {
-                    plugin.getProxy(HideStoredEnchantsProxy::class.java).hideStoredEnchants(this)
-                }
+                .apply { hideStoredEnchants() }
                 .unwrap()
         )
     }
