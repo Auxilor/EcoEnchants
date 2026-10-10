@@ -2,7 +2,7 @@ package com.willfp.ecoenchants.libreforge
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.util.NumberUtils
-import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.libreforge.ArgType
 import com.willfp.libreforge.NoCompileData
 import com.willfp.libreforge.arguments
@@ -10,6 +10,7 @@ import com.willfp.libreforge.effects.Effect
 import com.willfp.libreforge.triggers.TriggerData
 import com.willfp.libreforge.triggers.TriggerParameter
 import org.bukkit.Material
+import org.bukkit.Registry
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 
 object EffectApplyRandomEnchant : Effect<NoCompileData>("apply_random_enchant") {
@@ -66,10 +67,10 @@ object EffectApplyRandomEnchant : Effect<NoCompileData>("apply_random_enchant") 
 
         val allowUnsafe = config.getBool("allow_unsafe")
 
-        val enchant = EcoEnchants.values()
+        val enchant = Registry.ENCHANTMENT.map { it.wrap() }
             .filter { types.isEmpty() || it.type.id.lowercase() in types }
             .filter { rarities.isEmpty() || it.enchantmentRarity.id.lowercase() in rarities }
-            .filter { enchants.isEmpty() || it.id.lowercase() in enchants }
+            .filter { enchants.isEmpty() || it.enchantment.key.key in enchants }
             .filter { allowUnsafe || it.canEnchantItem(item) }
             .randomOrNull() ?: return false
 
