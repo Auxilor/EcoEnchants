@@ -14,6 +14,7 @@ class EnchantmentType(
     val format = config.getString("format")
     val limit = config.getInt("limit").infiniteIfNegative()
     val highLevelBias = config.getDouble("high-level-bias").coerceAtMost(0.999)
+    val maxLootLevel = config.getInt("max-loot-level").infiniteIfNegative()
     val noGrindstone = config.getBool("no-grindstone")
 
     override fun equals(other: Any?): Boolean {

@@ -22,9 +22,10 @@ import com.willfp.eco.core.sound.PlayableSound
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.lineWrap
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
-import com.willfp.ecoenchants.display.HideStoredEnchantsProxy
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.display.hideStoredEnchants
+import com.willfp.ecoenchants.dragdrop.dragAndDropPriceDisplay
 import com.willfp.ecoenchants.dragdrop.isDragAndDropEnabled
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.plugin
@@ -117,7 +118,7 @@ object EnchantGUI {
                     baseEnchants
                 }
 
-                menu.setState(player, "enchants", filteredEnchants)
+                menu.setState(player, "enchants", filteredEnchants.mapNotNull { it.ecoEnchant })
 
                 // Reset to page 1 when an item is placed or removed from the captive slot
                 val previousHasItem = menu.getState<Boolean>(player, "hasItem") ?: false
@@ -408,14 +409,22 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                         required.wrap().getFormattedName(0)
                                     }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
-                                .replace("%tradeable%", this.isObtainableThroughTrading.parseLangOption("tradeable"))
-                                .replace("%discoverable%", this.isObtainableThroughDiscovery.parseDiscoverable())
-                                .replace("%discoverable_chests%", this.isObtainableThrough(DiscoveryType.CHESTS).parseDiscoverable(DiscoveryType.CHESTS))
-                                .replace("%discoverable_fishing%", this.isObtainableThrough(DiscoveryType.FISHING).parseDiscoverable(DiscoveryType.FISHING))
-                                .replace("%discoverable_mob_drops%", this.isObtainableThrough(DiscoveryType.MOB_DROPS).parseDiscoverable(DiscoveryType.MOB_DROPS))
-                                .replace("%discoverable_raids%", this.isObtainableThrough(DiscoveryType.RAIDS).parseDiscoverable(DiscoveryType.RAIDS))
-                                .replace("%enchantable%", this.isObtainableThroughEnchanting.parseLangOption("enchantable"))
+                                .replace("%tradeable%", (plugin.configYml.getBool("villager.enabled") && this.isObtainableThroughTrading).parseLangOption("tradeable"))
+                                .replace("%discoverable%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThroughDiscovery).parseDiscoverable())
+                                .replace("%discoverable_chests%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.CHESTS)).parseDiscoverable(DiscoveryType.CHESTS))
+                                .replace("%discoverable_fishing%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.FISHING)).parseDiscoverable(DiscoveryType.FISHING))
+                                .replace("%discoverable_mob_drops%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.MOB_DROPS)).parseDiscoverable(DiscoveryType.MOB_DROPS))
+                                .replace("%discoverable_raids%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.RAIDS)).parseDiscoverable(DiscoveryType.RAIDS))
+                                .replace("%enchantable%", (plugin.configYml.getBool("enchanting-table.enabled") && this.isObtainableThroughEnchanting).parseLangOption("enchantable"))
                                 .replace("%drag_and_drop%", this.isDragAndDropEnabled().parseLangOption("drag-and-drop"))
+                                .replace(
+                                    "%drag_and_drop_price%",
+                                    if (this.isDragAndDropEnabled()) {
+                                        this.dragAndDropPriceDisplay(player, level)
+                                    } else {
+                                        false.parseLangOption("drag-and-drop")
+                                    }
+                                )
                         }
                         .formatEco()
                         .flatMap {
@@ -424,9 +433,7 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                 }
                 .build()
                 .fast()
-                .apply {
-                    plugin.getProxy(HideStoredEnchantsProxy::class.java).hideStoredEnchants(this)
-                }
+                .apply { hideStoredEnchants() }
                 .unwrap()
         )
     }

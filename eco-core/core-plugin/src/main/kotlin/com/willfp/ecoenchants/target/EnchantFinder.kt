@@ -4,6 +4,7 @@ import com.willfp.eco.core.cache.EcoCache
 import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
+import com.willfp.ecoenchants.enchant.ecoEnchant
 import com.willfp.ecoenchants.plugin
 import com.willfp.libreforge.ProvidedHolder
 import com.willfp.libreforge.holders
@@ -25,11 +26,7 @@ object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
         val enchants = mutableListOf<EcoEnchantLevel>()
 
         for ((enchant, level) in enchantMap) {
-            if (enchant !is EcoEnchant) {
-                continue
-            }
-
-            enchants += enchant.getLevel(level)
+            enchants += enchant.ecoEnchant?.getLevel(level) ?: continue
         }
 
         return enchants

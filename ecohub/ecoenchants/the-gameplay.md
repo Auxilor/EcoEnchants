@@ -31,10 +31,10 @@ Levels are calculated based on their cost. If you get an enchantment from 1 xp l
 
 Loot chests will generally contain higher level enchantments. This is also designed to be like vanilla, where enchantments in, for example, an end city will have a relatively high level.
 
-Some enchantment types (special by default) are set up with a bias to make it extremely rare for them to generate or be obtained above level 1 or 2. Like everything else, you can change this.
+Some enchantment types (special by default) are set up with a bias to make it extremely rare to get them above level 1 or 2 from enchanting tables and villagers. Loot is affected less, so they still turn up at higher levels in chests, just less often, unless the type sets a `max-loot-level`. Like everything else, you can change this.
 
 :::tip
-The level bias is controlled per type. See [Advanced Configuration](advanced-configuration) for how the bias curve works and how to tune it.
+The level bias is controlled per type. See [Advanced Configuration](advanced-configuration) for how the bias curve works, how to tune it, and how to cap loot levels.
 :::
 
 ## Targets

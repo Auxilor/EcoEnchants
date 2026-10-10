@@ -78,7 +78,7 @@ object LootSupport : Listener {
                 break
             }
 
-            val maxLevel = enchantment.maximumLevel
+            val maxLevel = enchantment.maximumLevel.coerceAtMost(enchantment.type.maxLootLevel)
 
             val levelPart1 = NumberUtils.bias(NumberUtils.randFloat(0.7, 1.0), enchantment.type.highLevelBias)
             val levelPart2 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart1)
