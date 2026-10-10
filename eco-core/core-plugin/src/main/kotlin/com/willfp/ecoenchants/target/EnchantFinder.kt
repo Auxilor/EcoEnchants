@@ -5,7 +5,9 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.ecoEnchant
+import com.willfp.ecoenchants.plugin
 import com.willfp.libreforge.ProvidedHolder
+import com.willfp.libreforge.holders
 import com.willfp.libreforge.slot.ItemHolderFinder
 import com.willfp.libreforge.slot.SlotType
 import com.willfp.libreforge.toDispatcher
@@ -38,7 +40,16 @@ object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
 
     private val LivingEntity.cachedLevels: List<ProvidedLevel>
         get() = levelCache.get(this.uniqueId) {
-            toHolderProvider().provide(this.toDispatcher())
+            val dispatcher = this.toDispatcher()
+
+            // libreforge's stored holders are empty where EcoEnchants is disabled, so scan there.
+            val holders = if (plugin.isDisabledFor(dispatcher)) {
+                toHolderProvider().provide(dispatcher)
+            } else {
+                dispatcher.holders
+            }
+
+            holders
                 .mapNotNull {
                     val level = it.holder as? EcoEnchantLevel ?: return@mapNotNull null
                     val item = it.provider as? ItemStack ?: return@mapNotNull null

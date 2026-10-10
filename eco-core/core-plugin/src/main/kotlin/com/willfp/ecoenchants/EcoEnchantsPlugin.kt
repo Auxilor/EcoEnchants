@@ -36,15 +36,15 @@ import com.willfp.ecoenchants.mechanics.GrindstoneSupport
 import com.willfp.ecoenchants.mechanics.LootSupport
 import com.willfp.ecoenchants.mechanics.VillagerSupport
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
-import com.willfp.ecoenchants.target.EnchantFinder
 import com.willfp.ecoenchants.target.EnchantFinder.clearEnchantmentCache
+import com.willfp.ecoenchants.target.EnchantHolderProvider
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.NamedValue
 import com.willfp.libreforge.effects.Effects
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
-import com.willfp.libreforge.registerGenericHolderProvider
+import com.willfp.libreforge.registerHolderProvider
 import com.willfp.libreforge.registerHolderPlaceholderProvider
 import com.willfp.libreforge.registerSpecificRefreshFunction
 import org.bukkit.entity.LivingEntity
@@ -77,11 +77,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleEnable() {
         Effects.register(EffectApplyRandomEnchant)
 
-        EnchantFinder.toHolderProvider().let { provider ->
-            registerGenericHolderProvider {
-                if (isDisabledFor(it)) emptyList() else provider.provide(it)
-            }
-        }
+        registerHolderProvider(EnchantHolderProvider)
 
         registerSpecificRefreshFunction<LivingEntity> {
             it.clearEnchantmentCache()
