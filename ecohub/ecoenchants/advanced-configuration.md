@@ -54,6 +54,17 @@ Increasing the bias towards 1 will lead to an increased likeliness of low-level 
 
 Loot works differently. Instead of a number between 0 and 1, loot starts from a high number between 0.7 and 1, biases it, and then picks the level randomly around the result. This means the bias lowers loot levels but never rules them out: even with a bias of 1, a 5-level enchantment found in loot is only level 1 about a third of the time.
 
+To cap loot levels for a type, set `max-loot-level` on the type in `types.yml`. Loot levels for that type then fall between 1 and the cap, with the same spread as an enchantment that only has that many levels. For example, `max-loot-level: 1` means enchantments of that type are only ever level 1 from loot. Leave it at `-1` for no cap.
+
+```yaml
+  - id: special
+    format: "<gradient:#FB57EC:#EF1DEC>"
+    limit: 1
+    high-level-bias: 0.7
+    max-loot-level: 2 # Special enchants from loot are level 1 or 2.
+    no-grindstone: false
+```
+
 <hr/>
 
 ## Where to go next
