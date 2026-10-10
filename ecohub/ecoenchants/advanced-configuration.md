@@ -52,6 +52,8 @@ The "band" for each level is calculated by dividing 1 by the amount of levels. T
 
 Increasing the bias towards 1 will lead to an increased likeliness of low-level enchantments, and lowering the bias towards -1 will lead to an increased likeliness of high-level enchantments.
 
+Loot works differently. Instead of a number between 0 and 1, loot starts from a high number between 0.7 and 1, biases it, and then picks the level randomly around the result. This means the bias lowers loot levels but never rules them out: even with a bias of 1, a 5-level enchantment found in loot is only level 1 about a third of the time.
+
 <hr/>
 
 ## Where to go next

@@ -6,7 +6,7 @@ types:
   - id: normal # The ID of the type
     format: "&7" # The format of enchantments of this type in display
     limit: -1 # The maximum amount of enchants of this type on an item (-1 to disable)
-    high-level-bias: 0 # The bias against getting high levels of enchants with this type. Between 0-1, 0 is no bias, 1 is only level 1.
+    high-level-bias: 0 # The bias against getting high levels of enchants with this type. Between 0-1, 0 is no bias, 1 is only level 1 from enchanting tables and villagers (loot still gives higher levels, just less often).
     no-grindstone: false # If enchants of this type should not be removable in the grindstone
 
   - id: curse
