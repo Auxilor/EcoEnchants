@@ -35,6 +35,8 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
             return
         }
 
+        BookItemDisplay.apply(itemStack)
+
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 
@@ -152,6 +154,8 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         if (!itemStack.isEnchantable && plugin.configYml.getBool("display.require-enchantable")) {
             return
         }
+
+        BookItemDisplay.revert(itemStack)
 
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
