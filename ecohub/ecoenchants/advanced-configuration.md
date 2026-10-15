@@ -65,6 +65,18 @@ To cap loot levels for a type, set `max-loot-level` on the type in `types.yml`. 
     no-grindstone: false
 ```
 
+## Book Items
+
+Enchanted books can look different per enchantment type or rarity. Add `book-item` to a type in `types.yml` or a rarity in `rarity.yml`, set to an [item lookup](https://hub.auxilor.io/wiki/eco/the-item-lookup-system-the-item-lookup-system). Books then show that item's model, custom model data, glint and tooltip style.
+
+```yaml
+  - id: legendary
+    display-name: "Legendary"
+    book-item: "enchanted_book item_model:myserver:legendary_book" # Legendary books use a custom model.
+```
+
+The book is chosen by the first enchantment in display order. If its type and its rarity both set `book-item`, `display.book-item.priority` in `config.yml` decides which is used: `type` (the default) or `rarity`. The change is visual only: the item is still a normal enchanted book, so anvils and combining work as usual. Books that already have their own model, custom model data, glint or tooltip style are not changed.
+
 <hr/>
 
 ## Where to go next

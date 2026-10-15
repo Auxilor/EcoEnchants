@@ -4,6 +4,8 @@
 # Remember, enchantments are more likely to be high-level the closer they are to maximum-obtainable-level
 # Villager chance is the chance of a villager having this trade as a percentage. Vanilla default for all enchantments is 2.7%, however you can choose this per-rarity.
 # Loot chance is the chance of an item in a loot chest having this enchantment as a percentage
+# Book item is optional: books show this item's model, custom model data, glint and tooltip style, for example
+# book-item: "enchanted_book custom_model_data:1001"
 
 rarities:
   - id: common

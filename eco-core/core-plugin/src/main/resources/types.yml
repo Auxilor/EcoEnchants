@@ -9,6 +9,7 @@ types:
     high-level-bias: 0 # The bias against getting high levels of enchants with this type. Between 0-1, 0 is no bias, 1 is only level 1 from enchanting tables and villagers (loot still gives higher levels, just less often).
     max-loot-level: -1 # The highest level enchants of this type can get from loot: chests, fishing, mob drops and raids (-1 to disable)
     no-grindstone: false # If enchants of this type should not be removable in the grindstone
+    # book-item: "enchanted_book item_model:minecraft:book" # Optional. Books show this item's model, custom model data, glint and tooltip style. See display.book-item.priority in config.yml.
 
   - id: curse
     format: "&c"

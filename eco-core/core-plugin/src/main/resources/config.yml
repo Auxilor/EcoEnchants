@@ -98,6 +98,9 @@ display:
     enabled: false # If enchanted books should show the drag and drop cost under each enchantment that allows it
     format: "&7Drag and drop cost: &e%price%" # The line added under each enchantment on a book
 
+  book-item:
+    priority: type # If both the type and the rarity set book-item, which one is used: type or rarity
+
   require-enchantable: true # If EcoEnchants should not display on non-enchantable items.
 
 # Options for the /enchantinfo GUI

@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.type
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.registry.Registrable
+import com.willfp.ecoenchants.display.getBookItem
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.libreforge.TriggerEnchantType
 import com.willfp.libreforge.triggers.Triggers
@@ -16,6 +17,7 @@ class EnchantmentType(
     val highLevelBias = config.getDouble("high-level-bias").coerceAtMost(0.999)
     val maxLootLevel = config.getInt("max-loot-level").infiniteIfNegative()
     val noGrindstone = config.getBool("no-grindstone")
+    val bookItem = config.getBookItem()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {

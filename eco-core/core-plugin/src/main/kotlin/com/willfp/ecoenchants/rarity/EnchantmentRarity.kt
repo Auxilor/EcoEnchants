@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.rarity
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.registry.Registrable
+import com.willfp.ecoenchants.display.getBookItem
 import java.util.*
 
 @Suppress("DEPRECATION")
@@ -14,6 +15,7 @@ class EnchantmentRarity(
     val minimumLevel = config.getInt("minimum-level")
     val villagerChance = config.getDouble("villager-chance")
     val lootChance = config.getDouble("loot-chance")
+    val bookItem = config.getBookItem()
 
     override fun getID(): String {
         return id
