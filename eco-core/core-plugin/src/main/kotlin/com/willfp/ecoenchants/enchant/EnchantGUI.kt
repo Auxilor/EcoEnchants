@@ -10,10 +10,9 @@ import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
 import com.willfp.eco.core.gui.page.Page
 import com.willfp.eco.core.gui.page.PageChanger
+import com.willfp.eco.core.gui.setMask
 import com.willfp.eco.core.gui.slot
 import com.willfp.eco.core.gui.slot.ConfigSlot
-import com.willfp.eco.core.gui.slot.FillerMask
-import com.willfp.eco.core.gui.slot.MaskItems
 import com.willfp.eco.core.gui.slot.Slot
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
@@ -61,14 +60,7 @@ object EnchantGUI {
 
             allowChangingHeldItem()
 
-            setMask(
-                FillerMask(
-                    MaskItems.fromItemNames(
-                        plugin.configYml.getStrings("enchant-gui.mask.items")
-                    ),
-                    *plugin.configYml.getStrings("enchant-gui.mask.pattern").toTypedArray()
-                )
-            )
+            setMask(plugin.configYml, "enchant-gui")
 
             for (location in plugin.configYml.getSlotLocations("enchant-gui.info")) {
                 setSlot(
@@ -247,14 +239,7 @@ object EnchantGUI {
             groupMenu = menu(plugin.configYml.getInt("group-gui.rows")) {
                 title = plugin.configYml.getFormattedString("group-gui.title")
 
-                setMask(
-                    FillerMask(
-                        MaskItems.fromItemNames(
-                            plugin.configYml.getStrings("group-gui.mask.items")
-                        ),
-                        *plugin.configYml.getStrings("group-gui.mask.pattern").toTypedArray()
-                    )
-                )
+                setMask(plugin.configYml, "group-gui")
 
                 // Add a clickable slot for each configured group
                 for (config in plugin.configYml.getSubsections("group-gui.groups")) {
@@ -327,12 +312,7 @@ object EnchantGUI {
                     setSlot(location.row, location.column, enchant.getInformationSlot(player, effectiveLevel))
                 }
 
-                setMask(
-                    FillerMask(
-                        MaskItems.fromItemNames(plugin.configYml.getStrings("enchantinfo.mask.items")),
-                        *plugin.configYml.getStrings("enchantinfo.mask.pattern").toTypedArray()
-                    )
-                )
+                setMask(plugin.configYml, "enchantinfo")
 
                 for (config in plugin.configYml.getSubsections("enchantinfo.custom-slots")) {
                     for (location in config.getSlotLocations()) {
