@@ -4,6 +4,7 @@ import com.willfp.eco.core.cache.EcoCache
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
+import com.willfp.eco.core.gui.addCustomSlots
 import com.willfp.eco.core.gui.addPageChanger
 import com.willfp.eco.core.gui.getSlotLocations
 import com.willfp.eco.core.gui.menu
@@ -12,7 +13,6 @@ import com.willfp.eco.core.gui.page.Page
 import com.willfp.eco.core.gui.page.PageChanger
 import com.willfp.eco.core.gui.setMask
 import com.willfp.eco.core.gui.slot
-import com.willfp.eco.core.gui.slot.ConfigSlot
 import com.willfp.eco.core.gui.slot.Slot
 import com.willfp.eco.core.items.Items
 import com.willfp.eco.core.items.builder.EnchantedBookBuilder
@@ -227,11 +227,7 @@ object EnchantGUI {
                     .push()
             }
 
-            for (config in plugin.configYml.getSubsections("enchant-gui.custom-slots")) {
-                for (location in config.getSlotLocations()) {
-                    setSlot(location.row, location.column, ConfigSlot(config))
-                }
-            }
+            addCustomSlots(plugin.configYml, "enchant-gui")
         }
 
         // Build the group selection menu (only when grouped mode is enabled)
@@ -276,11 +272,7 @@ object EnchantGUI {
                 }
 
                 // Custom decorator slots for the group menu
-                for (config in plugin.configYml.getSubsections("group-gui.custom-slots")) {
-                    for (location in config.getSlotLocations()) {
-                        setSlot(location.row, location.column, ConfigSlot(config))
-                    }
-                }
+                addCustomSlots(plugin.configYml, "group-gui")
             }
         } else {
             groupMenu = null
@@ -314,11 +306,7 @@ object EnchantGUI {
 
                 setMask(plugin.configYml, "enchantinfo")
 
-                for (config in plugin.configYml.getSubsections("enchantinfo.custom-slots")) {
-                    for (location in config.getSlotLocations()) {
-                        setSlot(location.row, location.column, ConfigSlot(config))
-                    }
-                }
+                addCustomSlots(plugin.configYml, "enchantinfo")
             }
         }.open(player)
     }
