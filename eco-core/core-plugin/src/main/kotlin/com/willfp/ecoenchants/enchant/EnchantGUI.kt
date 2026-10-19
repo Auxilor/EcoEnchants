@@ -3,11 +3,13 @@ package com.willfp.ecoenchants.enchant
 import com.willfp.eco.core.cache.EcoCache
 import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
-import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.addCustomSlots
 import com.willfp.eco.core.gui.addPageChanger
 import com.willfp.eco.core.gui.component.ConfigButton
+import com.willfp.eco.core.gui.component.PagedAreaComponent
 import com.willfp.eco.core.gui.component.addComponent
+import com.willfp.eco.core.gui.component.addPagedArea
+import com.willfp.eco.core.gui.getSlotArea
 import com.willfp.eco.core.gui.getSlotLocations
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
@@ -138,13 +140,7 @@ object EnchantGUI {
                 }
             }
 
-            val pane = EnchantmentScrollPane()
-
-            addComponent(
-                plugin.configYml.getInt("enchant-gui.enchant-area.row"),
-                plugin.configYml.getInt("enchant-gui.enchant-area.column"),
-                pane
-            )
+            addPagedArea(EnchantmentScrollPane())
 
             val pageChangeSound = PlayableSound.create(
                 plugin.configYml.getSubsection("enchant-gui.page-change.sound")
@@ -197,19 +193,6 @@ object EnchantGUI {
                         groupGui.open(player)
                     }
                 )
-            }
-
-            maxPages { player ->
-                val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: emptyList()
-                val total = enchants.size
-                val perPage = pane.size
-
-                val pages = if (total == 0) {
-                    0
-                } else {
-                    ceil(total.toDouble() / perPage).toInt()
-                }
-                pages
             }
 
             onClose { event, menu ->
@@ -311,28 +294,20 @@ object EnchantGUI {
     }
 }
 
-private class EnchantmentScrollPane : GUIComponent {
+private class EnchantmentScrollPane : PagedAreaComponent<EcoEnchant>(
+    plugin.configYml.getSlotArea("enchant-gui.enchant-area")
+) {
     private val defaultSlot = slot(Items.lookup(plugin.configYml.getString("enchant-gui.empty-item")))
 
-    override fun getSlotAt(row: Int, column: Int, player: Player, menu: Menu): Slot {
-        val index = column + ((row - 1) * columns) - 1
-        val page = menu.getPage(player)
+    override fun getEntries(player: Player, menu: Menu): List<EcoEnchant> =
+        menu.getState<List<EcoEnchant>>(player, "enchants") ?: emptyList()
 
-        val enchants = menu.getState<List<EcoEnchant>>(player, "enchants") ?: return defaultSlot
-        if (enchants.isEmpty()) {
-            return defaultSlot
-        }
-
-        val enchant = enchants.getOrNull(index + size * (page - 1)) ?: return defaultSlot
-
-        val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
-        return enchant.getInformationSlot(player, displayLevel)
+    override fun getEntrySlot(player: Player, menu: Menu, entry: EcoEnchant): Slot {
+        val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) entry.maximumLevel else 1
+        return entry.getInformationSlot(player, displayLevel)
     }
 
-    override fun getRows() = plugin.configYml.getInt("enchant-gui.enchant-area.height")
-    override fun getColumns() = plugin.configYml.getInt("enchant-gui.enchant-area.width")
-
-    val size = rows * columns
+    override fun getEmptySlot(player: Player, menu: Menu): Slot = defaultSlot
 }
 
 private val cachedEnchantmentSlots = EcoCache.builder<Pair<EcoEnchant, Int>, Slot>()
