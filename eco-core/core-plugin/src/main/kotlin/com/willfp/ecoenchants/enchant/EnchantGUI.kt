@@ -6,6 +6,8 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.addCustomSlots
 import com.willfp.eco.core.gui.addPageChanger
+import com.willfp.eco.core.gui.component.ConfigButton
+import com.willfp.eco.core.gui.component.addComponent
 import com.willfp.eco.core.gui.getSlotLocations
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
@@ -177,33 +179,24 @@ object EnchantGUI {
             }
 
             // Back button to return to the group selection menu
-            if (plugin.configYml.getBool("enchant-gui.grouped")
-                && plugin.configYml.getBool("enchant-gui.back-button.enabled")) {
-                for (location in plugin.configYml.getSlotLocations("enchant-gui.back-button")) {
-                    setSlot(
-                        location.row,
-                        location.column,
-                        slot(
-                            ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.back-button.item")))
-                                .addLoreLines(plugin.configYml.getStrings("enchant-gui.back-button.lore"))
-                                .build()
-                        ) {
-                            onLeftClick { event, _ ->
-                                val groupGui = groupMenu ?: return@onLeftClick
-                                val player = event.whoClicked as Player
-                                // Return captive items to the player before navigating back
-                                val captiveItems = menu.getCaptiveItems(player)
-                                if (captiveItems.isNotEmpty()) {
-                                    DropQueue(player)
-                                        .addItems(captiveItems)
-                                        .forceTelekinesis()
-                                        .push()
-                                }
-                                groupGui.open(player)
-                            }
+            if (plugin.configYml.getBool("enchant-gui.grouped")) {
+                addComponent(
+                    ConfigButton(
+                        plugin.configYml.getSubsection("enchant-gui.back-button"),
+                        enabledByDefault = false
+                    ) { player, _, _, _ ->
+                        val groupGui = groupMenu ?: return@ConfigButton
+                        // Return captive items to the player before navigating back
+                        val captiveItems = menu.getCaptiveItems(player)
+                        if (captiveItems.isNotEmpty()) {
+                            DropQueue(player)
+                                .addItems(captiveItems)
+                                .forceTelekinesis()
+                                .push()
                         }
-                    )
-                }
+                        groupGui.open(player)
+                    }
+                )
             }
 
             maxPages { player ->
