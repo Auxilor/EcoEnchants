@@ -184,10 +184,12 @@ enchant-gui:
       item: arrow name:"&fNext Page" # The item. Will not show if on the last page.
       row: 6
       column: 6
+      locations: [ ] # Optional list of row/column slots; if set, the button shows in each of them instead of row/column
     backwards:
       item: arrow name:"&fPrevious Page" # The item. Will not show if on the first page.
       row: 6
       column: 4
+      locations: [ ] # Optional list of row/column slots; if set, the button shows in each of them instead of row/column
 
   # Optional close button for the enchant GUI
   close-button:
