@@ -9,6 +9,7 @@ import com.willfp.eco.core.gui.component.ConfigButton
 import com.willfp.eco.core.gui.component.PagedAreaComponent
 import com.willfp.eco.core.gui.component.addComponent
 import com.willfp.eco.core.gui.component.addPagedArea
+import com.willfp.eco.core.gui.component.closeButton
 import com.willfp.eco.core.gui.getSlotArea
 import com.willfp.eco.core.gui.getSlotLocations
 import com.willfp.eco.core.gui.menu
@@ -33,16 +34,16 @@ import com.willfp.ecoenchants.dragdrop.dragAndDropPriceDisplay
 import com.willfp.ecoenchants.dragdrop.isDragAndDropEnabled
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.plugin
+import com.willfp.ecoenchants.rarity.EnchantmentRarities
+import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
+import com.willfp.ecoenchants.type.EnchantmentTypes
+import kotlin.math.ceil
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
-import com.willfp.ecoenchants.rarity.EnchantmentRarities
-import com.willfp.ecoenchants.type.EnchantmentTypes
-import com.willfp.ecoenchants.target.EnchantmentTargets
-import kotlin.math.ceil
 
 object EnchantGUI {
     // Rebuilt on reload while players on other threads may be opening them.
@@ -157,22 +158,12 @@ object EnchantGUI {
                 )
             }
 
-            if (plugin.configYml.getBool("enchant-gui.close-button.enabled")) {
-                for (location in plugin.configYml.getSlotLocations("enchant-gui.close-button")) {
-                    setSlot(
-                        location.row,
-                        location.column,
-                        slot(
-                            ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.close-button.item")))
-                                .setDisplayName(plugin.configYml.getFormattedString("enchant-gui.close-button.name"))
-                                .addLoreLines(plugin.configYml.getStrings("enchant-gui.close-button.lore"))
-                                .build()
-                        ) {
-                            onLeftClick { event, _ -> event.whoClicked.closeInventory() }
-                        }
-                    )
-                }
-            }
+            addComponent(
+                closeButton(
+                    plugin.configYml.getSubsection("enchant-gui.close-button"),
+                    enabledByDefault = false
+                )
+            )
 
             // Back button to return to the group selection menu
             if (plugin.configYml.getBool("enchant-gui.grouped")) {
