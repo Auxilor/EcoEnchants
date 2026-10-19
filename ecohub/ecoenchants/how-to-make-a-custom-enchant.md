@@ -197,6 +197,18 @@ Effects, triggers, conditions, filters, and mutators are a shared system across 
 Use `%level%` as a placeholder anywhere in this section to scale with enchantment level.
 :::
 
+:::tip Single-use enchantments
+To make an enchantment work once and then disappear, add the `remove_this_enchant` effect with the trigger that should use it up. This one keeps the inventory on one death, then removes itself from the item:
+
+```yaml
+effects:
+  - id: keep_inventory
+  - id: remove_this_enchant
+    triggers:
+      - death
+```
+:::
+
 ## Internal placeholders
 
 These placeholders are provided by EcoEnchants and can be used in the description, `placeholder`/`placeholders`, effect args, and conditions:
