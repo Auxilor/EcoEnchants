@@ -29,6 +29,7 @@ import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
 import com.willfp.ecoenchants.libreforge.EffectApplyRandomEnchant
+import com.willfp.ecoenchants.libreforge.EffectRemoveThisEnchant
 import com.willfp.ecoenchants.mechanics.EcoEnchantsAnvilHandler
 import com.willfp.ecoenchants.mechanics.EnchantingTableSupport
 import com.willfp.ecoenchants.mechanics.ExtraItemSupport
@@ -76,6 +77,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
 
     override fun handleEnable() {
         Effects.register(EffectApplyRandomEnchant)
+        Effects.register(EffectRemoveThisEnchant)
 
         registerHolderProvider(EnchantHolderProvider)
 
