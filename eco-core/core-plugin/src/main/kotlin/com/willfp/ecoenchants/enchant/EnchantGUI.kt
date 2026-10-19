@@ -5,6 +5,7 @@ import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.GUIComponent
 import com.willfp.eco.core.gui.addPageChanger
+import com.willfp.eco.core.gui.getSlotLocations
 import com.willfp.eco.core.gui.menu
 import com.willfp.eco.core.gui.menu.Menu
 import com.willfp.eco.core.gui.page.Page
@@ -69,15 +70,17 @@ object EnchantGUI {
                 )
             )
 
-            setSlot(
-                plugin.configYml.getInt("enchant-gui.info.row"),
-                plugin.configYml.getInt("enchant-gui.info.column"),
-                slot(
-                    ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.info.item")))
-                        .addLoreLines(plugin.configYml.getStrings("enchant-gui.info.lore"))
-                        .build()
+            for (location in plugin.configYml.getSlotLocations("enchant-gui.info")) {
+                setSlot(
+                    location.row,
+                    location.column,
+                    slot(
+                        ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.info.item")))
+                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.info.lore"))
+                            .build()
+                    )
                 )
-            )
+            }
 
             val captiveRow = plugin.configYml.getInt("enchant-gui.item-row")
             val captiveColumn = plugin.configYml.getInt("enchant-gui.item-column")
@@ -165,46 +168,50 @@ object EnchantGUI {
             }
 
             if (plugin.configYml.getBool("enchant-gui.close-button.enabled")) {
-                setSlot(
-                    plugin.configYml.getInt("enchant-gui.close-button.row"),
-                    plugin.configYml.getInt("enchant-gui.close-button.column"),
-                    slot(
-                        ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.close-button.item")))
-                            .setDisplayName(plugin.configYml.getFormattedString("enchant-gui.close-button.name"))
-                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.close-button.lore"))
-                            .build()
-                    ) {
-                        onLeftClick { event, _ -> event.whoClicked.closeInventory() }
-                    }
-                )
+                for (location in plugin.configYml.getSlotLocations("enchant-gui.close-button")) {
+                    setSlot(
+                        location.row,
+                        location.column,
+                        slot(
+                            ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.close-button.item")))
+                                .setDisplayName(plugin.configYml.getFormattedString("enchant-gui.close-button.name"))
+                                .addLoreLines(plugin.configYml.getStrings("enchant-gui.close-button.lore"))
+                                .build()
+                        ) {
+                            onLeftClick { event, _ -> event.whoClicked.closeInventory() }
+                        }
+                    )
+                }
             }
 
             // Back button to return to the group selection menu
             if (plugin.configYml.getBool("enchant-gui.grouped")
                 && plugin.configYml.getBool("enchant-gui.back-button.enabled")) {
-                setSlot(
-                    plugin.configYml.getInt("enchant-gui.back-button.row"),
-                    plugin.configYml.getInt("enchant-gui.back-button.column"),
-                    slot(
-                        ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.back-button.item")))
-                            .addLoreLines(plugin.configYml.getStrings("enchant-gui.back-button.lore"))
-                            .build()
-                    ) {
-                        onLeftClick { event, _ ->
-                            val groupGui = groupMenu ?: return@onLeftClick
-                            val player = event.whoClicked as Player
-                            // Return captive items to the player before navigating back
-                            val captiveItems = menu.getCaptiveItems(player)
-                            if (captiveItems.isNotEmpty()) {
-                                DropQueue(player)
-                                    .addItems(captiveItems)
-                                    .forceTelekinesis()
-                                    .push()
+                for (location in plugin.configYml.getSlotLocations("enchant-gui.back-button")) {
+                    setSlot(
+                        location.row,
+                        location.column,
+                        slot(
+                            ItemStackBuilder(Items.lookup(plugin.configYml.getString("enchant-gui.back-button.item")))
+                                .addLoreLines(plugin.configYml.getStrings("enchant-gui.back-button.lore"))
+                                .build()
+                        ) {
+                            onLeftClick { event, _ ->
+                                val groupGui = groupMenu ?: return@onLeftClick
+                                val player = event.whoClicked as Player
+                                // Return captive items to the player before navigating back
+                                val captiveItems = menu.getCaptiveItems(player)
+                                if (captiveItems.isNotEmpty()) {
+                                    DropQueue(player)
+                                        .addItems(captiveItems)
+                                        .forceTelekinesis()
+                                        .push()
+                                }
+                                groupGui.open(player)
                             }
-                            groupGui.open(player)
                         }
-                    }
-                )
+                    )
+                }
             }
 
             maxPages { player ->
@@ -229,11 +236,9 @@ object EnchantGUI {
             }
 
             for (config in plugin.configYml.getSubsections("enchant-gui.custom-slots")) {
-                setSlot(
-                    config.getInt("row"),
-                    config.getInt("column"),
-                    ConfigSlot(config)
-                )
+                for (location in config.getSlotLocations()) {
+                    setSlot(location.row, location.column, ConfigSlot(config))
+                }
             }
         }
 
@@ -268,28 +273,28 @@ object EnchantGUI {
                         continue
                     }
 
-                    setSlot(
-                        config.getInt("row"),
-                        config.getInt("column"),
-                        slot(
-                            ItemStackBuilder(Items.lookup(config.getString("item")))
-                                .addLoreLines(config.getStrings("lore"))
-                                .build()
-                        ) {
-                            onLeftClick { event, _ ->
-                                openGroupGUI(event.whoClicked as Player, groupId)
+                    for (location in config.getSlotLocations()) {
+                        setSlot(
+                            location.row,
+                            location.column,
+                            slot(
+                                ItemStackBuilder(Items.lookup(config.getString("item")))
+                                    .addLoreLines(config.getStrings("lore"))
+                                    .build()
+                            ) {
+                                onLeftClick { event, _ ->
+                                    openGroupGUI(event.whoClicked as Player, groupId)
+                                }
                             }
-                        }
-                    )
+                        )
+                    }
                 }
 
                 // Custom decorator slots for the group menu
                 for (config in plugin.configYml.getSubsections("group-gui.custom-slots")) {
-                    setSlot(
-                        config.getInt("row"),
-                        config.getInt("column"),
-                        ConfigSlot(config)
-                    )
+                    for (location in config.getSlotLocations()) {
+                        setSlot(location.row, location.column, ConfigSlot(config))
+                    }
                 }
             }
         } else {
@@ -318,11 +323,9 @@ object EnchantGUI {
             menu(plugin.configYml.getInt("enchantinfo.rows")) {
                 title = enchant.getFormattedName(effectiveLevel)
 
-                setSlot(
-                    plugin.configYml.getInt("enchantinfo.item.row"),
-                    plugin.configYml.getInt("enchantinfo.item.column"),
-                    enchant.getInformationSlot(player, effectiveLevel)
-                )
+                for (location in plugin.configYml.getSlotLocations("enchantinfo.item")) {
+                    setSlot(location.row, location.column, enchant.getInformationSlot(player, effectiveLevel))
+                }
 
                 setMask(
                     FillerMask(
@@ -332,11 +335,9 @@ object EnchantGUI {
                 )
 
                 for (config in plugin.configYml.getSubsections("enchantinfo.custom-slots")) {
-                    setSlot(
-                        config.getInt("row"),
-                        config.getInt("column"),
-                        ConfigSlot(config)
-                    )
+                    for (location in config.getSlotLocations()) {
+                        setSlot(location.row, location.column, ConfigSlot(config))
+                    }
                 }
             }
         }.open(player)
