@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "findings": [
+    {
+      "code": "U002",
+      "path": "eco-core/core-plugin/src/main/kotlin/com/willfp/ecoenchants/ReflectionUtil.kt",
+      "message": "Unused function `setStaticFinal`"
+    },
+    {
+      "code": "U002",
+      "path": "eco-core/core-plugin/src/main/kotlin/com/willfp/ecoenchants/display/EnchantmentFormatting.kt",
+      "message": "Unused function `getFormattedDescription`"
+    },
+    {
+      "code": "U002",
+      "path": "eco-core/core-plugin/src/main/kotlin/com/willfp/ecoenchants/enchant/EnchantGUI.kt",
+      "message": "Unused function `parseYesOrNo`"
+    }
+  ]
+}
