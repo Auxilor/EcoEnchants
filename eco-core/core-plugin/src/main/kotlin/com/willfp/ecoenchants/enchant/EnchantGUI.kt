@@ -172,16 +172,17 @@ object EnchantGUI {
                         plugin.configYml.getSubsection("enchant-gui.back-button"),
                         enabledByDefault = false
                     ) { player, _, _, _ ->
-                        val groupGui = groupMenu ?: return@ConfigButton
-                        // Return captive items to the player before navigating back
-                        val captiveItems = menu.getCaptiveItems(player)
-                        if (captiveItems.isNotEmpty()) {
-                            DropQueue(player)
-                                .addItems(captiveItems)
-                                .forceTelekinesis()
-                                .push()
+                        groupMenu?.let { groupGui ->
+                            // Return captive items to the player before navigating back
+                            val captiveItems = menu.getCaptiveItems(player)
+                            if (captiveItems.isNotEmpty()) {
+                                DropQueue(player)
+                                    .addItems(captiveItems)
+                                    .forceTelekinesis()
+                                    .push()
+                            }
+                            groupGui.open(player)
                         }
-                        groupGui.open(player)
                     }
                 )
             }
@@ -291,7 +292,7 @@ private class EnchantmentScrollPane : PagedAreaComponent<EcoEnchant>(
     private val defaultSlot = slot(Items.lookup(plugin.configYml.getString("enchant-gui.empty-item")))
 
     override fun getEntries(player: Player, menu: Menu): List<EcoEnchant> =
-        menu.getState<List<EcoEnchant>>(player, "enchants") ?: emptyList()
+        menu.getState<List<EcoEnchant>>(player, "enchants").orEmpty()
 
     override fun getEntrySlot(player: Player, menu: Menu, entry: EcoEnchant): Slot {
         val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) entry.maximumLevel else 1
