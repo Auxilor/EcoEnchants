@@ -1,0 +1,259 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>AbstractClassCanBeConcreteClass:HardcodedEcoEnchant.kt:HardcodedEcoEnchant$HardcodedEcoEnchant</ID>
+    <ID>AlsoCouldBeApply:EnchantmentTargets.kt:EnchantmentTargets$also</ID>
+    <ID>ArrayPrimitive:EnchantingTableSupport.kt:EnchantingTableSupport$arrayOf( event.offers[0]?.enchantmentLevel ?: 0, event.offers[1]?.enchantmentLevel ?: 0, event.offers[2]?.enchantmentLevel ?: 0 )</ID>
+    <ID>BracesOnIfStatements:CommandEnchantInfo.kt:CommandEnchantInfo$else</ID>
+    <ID>BracesOnIfStatements:CommandGiveRandomBook.kt:CommandGiveRandomBook$else</ID>
+    <ID>BracesOnIfStatements:EcoEnchants.kt:EcoEnchants$else</ID>
+    <ID>BracesOnWhenStatements:CommandGiveRandomBook.kt:CommandGiveRandomBook$when</ID>
+    <ID>CanBeNonNullable:LoreConversion.kt:LoreConversion$itemStack: ItemStack?</ID>
+    <ID>CascadingCallWrapping:CommandGiveRandomBook.kt:CommandGiveRandomBook$EcoEnchants.values() .filter { when (filter) { is EnchantmentRarity -&gt; it.enchantmentRarity == filter is EnchantmentType -&gt; it.type == filter else -&gt; true } &amp;&amp; it.maximumLevel &gt;= minLevel } .randomOrNull() ?: run { sender.sendMessage(plugin.langYml.getMessage("no-enchantments-found")) return }</ID>
+    <ID>CascadingCallWrapping:EffectApplyRandomEnchant.kt:EffectApplyRandomEnchant$Registry.ENCHANTMENT.map { it.wrap() } .filter { types.isEmpty() || it.type.id.lowercase() in types } .filter { rarities.isEmpty() || it.enchantmentRarity.id.lowercase() in rarities } .filter { enchants.isEmpty() || it.enchantment.key.key in enchants } .filter { allowUnsafe || it.canEnchantItem(item) } .randomOrNull() ?: return false</ID>
+    <ID>CognitiveComplexMethod:EnchantDisplay.kt:EnchantDisplay$override fun display</ID>
+    <ID>CognitiveComplexMethod:EnchantGUI.kt:EnchantGUI$internal fun reload</ID>
+    <ID>CognitiveComplexMethod:EnchantGUI.kt:private fun EcoEnchant.getInformationSlot: Slot</ID>
+    <ID>CognitiveComplexMethod:EnchantingTableSupport.kt:EnchantingTableSupport$@EventHandler fun onEnchant</ID>
+    <ID>CognitiveComplexMethod:EnchantmentFormatting.kt:@JvmOverloads fun EcoEnchantLike.getFormattedName: String</ID>
+    <ID>CognitiveComplexMethod:GrindstoneSupport.kt:GrindstoneSupport$@EventHandler fun preGrindstone</ID>
+    <ID>CognitiveComplexMethod:LoreConversion.kt:LoreConversion$private fun convertLore</ID>
+    <ID>CognitiveComplexMethod:VillagerSupport.kt:VillagerSupport$@EventHandler fun onTrade</ID>
+    <ID>ComplexCondition:BookItemDisplay.kt:BookItemDisplay$meta.hasItemModel() || meta.hasCustomModelDataComponent() || meta.hasEnchantmentGlintOverride() || meta.hasTooltipStyle()</ID>
+    <ID>ComplexInterface:EcoEnchant.kt:EcoEnchant : KRegistrableEcoEnchantLikeCustomEnchantment</ID>
+    <ID>ComplexInterface:EcoEnchantLike.kt:EcoEnchantLike</ID>
+    <ID>ConstructorParameterNaming:EcoEnchantBase.kt:EcoEnchantBase$_config: Config? = null</ID>
+    <ID>ConstructorParameterNaming:LibreforgeEcoEnchant.kt:LibreforgeEcoEnchant$_config: Config</ID>
+    <ID>CouldBeSequence:EffectApplyRandomEnchant.kt:EffectApplyRandomEnchant$map { it.wrap() }</ID>
+    <ID>CyclomaticComplexMethod:BookItemDisplay.kt:BookItemDisplay$fun apply</ID>
+    <ID>CyclomaticComplexMethod:EnchantDisplay.kt:EnchantDisplay$override fun display</ID>
+    <ID>CyclomaticComplexMethod:EnchantGUI.kt:EnchantGUI$internal fun reload</ID>
+    <ID>CyclomaticComplexMethod:EnchantingTableSupport.kt:EnchantingTableSupport$@EventHandler fun onEnchant</ID>
+    <ID>CyclomaticComplexMethod:EnchantmentReplenish.kt:EnchantmentReplenish.ReplenishHandler$@EventHandler( ignoreCancelled = true ) fun handle</ID>
+    <ID>CyclomaticComplexMethod:GrindstoneSupport.kt:GrindstoneSupport$@EventHandler fun preGrindstone</ID>
+    <ID>CyclomaticComplexMethod:LootSupport.kt:LootSupport$private fun modifyItem</ID>
+    <ID>CyclomaticComplexMethod:LoreConversion.kt:LoreConversion$private fun convertLore</ID>
+    <ID>CyclomaticComplexMethod:VillagerSupport.kt:VillagerSupport$@EventHandler fun onTrade</ID>
+    <ID>ElseCaseInsteadOfExhaustiveWhen:EnchantmentReplenish.kt:EnchantmentReplenish.ReplenishHandler$when (type) { Material.WHEAT -&gt; Material.WHEAT_SEEDS Material.POTATOES -&gt; Material.POTATO Material.CARROTS -&gt; Material.CARROT Material.BEETROOTS -&gt; Material.BEETROOT_SEEDS Material.COCOA -&gt; Material.COCOA_BEANS else -&gt; type }</ID>
+    <ID>EqualsWithHashCodeExist:EnchantmentTarget.kt:AllEnchantmentTarget : EnchantmentTarget</ID>
+    <ID>ExplicitItLambdaMultipleParameters:EcoEnchantsPlugin.kt:EcoEnchantsPlugin${ it, _ -&gt; listOf( NamedValue("level", it.level), ) }</ID>
+    <ID>ExpressionBodySyntax:DragAndDropPricing.kt:return ConfiguredPrice.createOrFree(config.getSubsection("drag-and-drop.price"))</ID>
+    <ID>ExpressionBodySyntax:DragAndDropPricing.kt:return config.getBool("drag-and-drop.enabled")</ID>
+    <ID>ExpressionBodySyntax:DragAndDropPricing.kt:return dragAndDropPrice().getDisplay(player, dragAndDropPriceMultiplier(level))</ID>
+    <ID>ExpressionBodySyntax:DragAndDropPricingTests.kt:FakeConfig$return null</ID>
+    <ID>ExpressionBodySyntax:DragAndDropPricingTests.kt:FakeConfig$return values[path] as? String</ID>
+    <ID>ExpressionBodySyntax:EcoEnchant.kt:EcoEnchant$return canEnchantItem(item, emptyList())</ID>
+    <ID>ExpressionBodySyntax:EcoEnchantBase.kt:EcoEnchantBase$return other is EcoEnchant &amp;&amp; this.enchantmentKey == other.enchantmentKey</ID>
+    <ID>ExpressionBodySyntax:EcoEnchantBase.kt:EcoEnchantBase$return other.key.key in conflictIds || this.conflictsWithEverything</ID>
+    <ID>ExpressionBodySyntax:EcoEnchantBase.kt:EcoEnchantBase$return this.enchantmentKey.hashCode()</ID>
+    <ID>ExpressionBodySyntax:EcoEnchantBookDragAndDropHandler.kt:EcoEnchantBookDragAndDropHandler$return eligibleEnchants(cursor, current).isNotEmpty()</ID>
+    <ID>ExpressionBodySyntax:EcoEnchantLevel.kt:EcoEnchantLevel$return Objects.hash(this.id)</ID>
+    <ID>ExpressionBodySyntax:EcoEnchantLevel.kt:EcoEnchantLevel$return id.toString()</ID>
+    <ID>ExpressionBodySyntax:EnchantFinder.kt:EnchantFinder$return holder.enchant.targets.map { it.slot }.any { it.isOrContains(slot) }</ID>
+    <ID>ExpressionBodySyntax:EnchantmentRarity.kt:EnchantmentRarity$return "EnchantmentRarity{$id}"</ID>
+    <ID>ExpressionBodySyntax:EnchantmentRarity.kt:EnchantmentRarity$return Objects.hash(id)</ID>
+    <ID>ExpressionBodySyntax:EnchantmentRarity.kt:EnchantmentRarity$return id</ID>
+    <ID>ExpressionBodySyntax:EnchantmentTarget.kt:AllEnchantmentTarget$return other is AllEnchantmentTarget</ID>
+    <ID>ExpressionBodySyntax:EnchantmentTarget.kt:ConfiguredEnchantmentTarget$return Objects.hash(this.id)</ID>
+    <ID>ExpressionBodySyntax:EnchantmentTarget.kt:EnchantmentTarget$return this.id</ID>
+    <ID>ExpressionBodySyntax:EnchantmentType.kt:EnchantmentType$return "EnchantmentType{$id}"</ID>
+    <ID>ExpressionBodySyntax:EnchantmentType.kt:EnchantmentType$return Objects.hash(id)</ID>
+    <ID>ExpressionBodySyntax:EnchantmentType.kt:EnchantmentType$return this.id</ID>
+    <ID>ExpressionBodySyntax:HardcodedEcoEnchant.kt:HardcodedEcoEnchant$return EcoEnchantLevel(this, level, emptyEffectList(), conditions)</ID>
+    <ID>ExpressionBodySyntax:HardcodedEcoEnchant.kt:HardcodedEcoEnchant$return file.readConfig(ConfigType.YAML)</ID>
+    <ID>ExpressionBodySyntax:LibreforgeEcoEnchant.kt:LibreforgeEcoEnchant$return EcoEnchantLevel(this, level, effects, conditions)</ID>
+    <ID>ExpressionBodySyntax:Util.kt:return this.conflictsWith(other) || other.conflictsWith(this)</ID>
+    <ID>ExpressionBodySyntax:VanillaEcoEnchantLike.kt:VanillaEcoEnchantLike$return Objects.hash(this.enchantment)</ID>
+    <ID>F001:EnchantRegistrationIntegration.kt:EnchantRegistrations$mutableSetOf&lt;EnchantRegistrationIntegration&gt;()</ID>
+    <ID>F001:MissingDependencyException.kt:mutableMapOf&lt;String, Int&gt;()</ID>
+    <ID>FunctionNameMaxLength:DragAndDropPricingTests.kt:DragAndDropPricingTests$@Test fun disabledByDefaultWhenKeyMissing</ID>
+    <ID>FunctionNameMaxLength:DragAndDropPricingTests.kt:DragAndDropPricingTests$@Test fun multiplierDefaultsToOneWhenKeyMissing</ID>
+    <ID>IC001:CommandEnchant.kt:CommandEnchant$// Unbelievable jank</ID>
+    <ID>IC001:EcoEnchantBookDragAndDropHandler.kt:EcoEnchantBookDragAndDropHandler$// not an upgrade, skip so book isn't consumed for no effect</ID>
+    <ID>IC001:EnchantDisplay.kt:EnchantDisplay$// Same for backwards compatibility</ID>
+    <ID>IC002:CommandEnchant.kt:CommandEnchant$// The console runs off the player's region on Folia.</ID>
+    <ID>IC002:CommandEnchantInfo.kt:CommandEnchantInfo$// Currently, this case is not ever reached</ID>
+    <ID>IC002:CommandEnchantInfo.kt:CommandEnchantInfo$// If all args except the last form a complete enchant name, suggest level numbers</ID>
+    <ID>IC002:CommandGiveRandomBook.kt:CommandGiveRandomBook$// OfTeN wrote this - it's cursed, and I am *not* going to try refactor this.</ID>
+    <ID>IC002:CommandGiveRandomBook.kt:CommandGiveRandomBook$// The console runs off the player's region on Folia.</ID>
+    <ID>IC002:CommandReload.kt:CommandReload$// On Folia, players run commands on their own region; reloading rebuilds shared</ID>
+    <ID>IC002:EcoEnchantBase.kt:EcoEnchantBase$// Placeholders</ID>
+    <ID>IC002:EcoEnchantBase.kt:EcoEnchantBase$// Setup permissions</ID>
+    <ID>IC002:EcoEnchantLike.kt:EcoEnchantLike$// Add %placeholder% placeholder in</ID>
+    <ID>IC002:EcoEnchantLike.kt:EcoEnchantLike$// Apply placeholders to description</ID>
+    <ID>IC002:EcoEnchantLike.kt:EcoEnchantLike$// Evaluate each placeholder</ID>
+    <ID>IC002:EcoEnchantLike.kt:EcoEnchantLike$// Fetch custom placeholders other than %placeholder%</ID>
+    <ID>IC002:EcoEnchantLike.kt:EcoEnchantLike$// Handle both single-string and list format for description</ID>
+    <ID>IC002:EcoEnchantLike.kt:EcoEnchantLike.&lt;no name provided&gt;$// Do nothing</ID>
+    <ID>IC002:EcoEnchants.kt:EcoEnchants$// Ignore missing dependencies for preloaded enchants</ID>
+    <ID>IC002:EcoEnchants.kt:EcoEnchants$// Only register if not already registered (so hardcode can be overridden)</ID>
+    <ID>IC002:EnchantDisplay.kt:EnchantDisplay$// Args represent hide enchants</ID>
+    <ID>IC002:EnchantDisplay.kt:EnchantDisplay$// Get enchants mapped to EcoEnchantLike</ID>
+    <ID>IC002:EnchantFinder.kt:EnchantFinder$// libreforge's stored holders are empty where EcoEnchants is disabled, so scan there.</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Add a clickable slot for each configured group</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Apply group filter if a groupId is set in menu state</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Back button to return to the group selection menu</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Build the group selection menu (only when grouped mode is enabled)</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Custom decorator slots for the group menu</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Reset to page 1 when an item is placed or removed from the captive slot</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Return captive items to the player before navigating back</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Safety net: also reset if the current page now exceeds the new max.</ID>
+    <ID>IC002:EnchantGUI.kt:EnchantGUI$// Validate the group ID exists in the registry matching the group-by axis</ID>
+    <ID>IC002:EnchantingTableSupport.kt:EnchantingTableSupport$/* I have no clue how this code works, it's transplanted from old EcoEnchants, and I know it works perfectly, it's effectively 1:1 with vanilla if memory serves, so I'm not going to rewrite it. */</ID>
+    <ID>IC002:EnchantingTableSupport.kt:EnchantingTableSupport$// I remember writing this back in 8.x.x and deleting it during the recode</ID>
+    <ID>IC002:EnchantmentFormatting.kt:// Apply the description format and reset tags, then apply word wrapping</ID>
+    <ID>IC002:EnchantmentFormatting.kt:// Apply word wrapping after all formatting</ID>
+    <ID>IC002:EnchantmentFormatting.kt:// Combine all transformations in one pass</ID>
+    <ID>IC002:EnchantmentRepairing.kt:EnchantmentRepairing$// Each player's inventory belongs to their own region on Folia.</ID>
+    <ID>IC002:EnchantmentReplenish.kt:EnchantmentReplenish.ReplenishHandler$// Improves compatibility with other plugins.</ID>
+    <ID>IC002:EnchantmentSoulbound.kt:EnchantmentSoulbound.SoulboundHandler$// Use native paper method</ID>
+    <ID>IC002:EssentialsIntegration.kt:EssentialsIntegration$// why aren't you using the api you PRd in</ID>
+    <ID>IC002:GrindstoneSupport.kt:GrindstoneSupport$// Force remove XP</ID>
+    <ID>IC002:GrindstoneSupport.kt:GrindstoneSupport$// Run everything later to await event completion</ID>
+    <ID>IC002:LibreforgeEcoEnchant.kt:LibreforgeEcoEnchant$// Compile here so MissingDependencyException is thrown before effects are compiled</ID>
+    <ID>IC002:LoreConversion.kt:LoreConversion$// Nothing to convert - writing the meta/lore back would still rewrite the item.</ID>
+    <ID>IC002:VillagerSupport.kt:VillagerSupport$// Book trades are intentionally limited to exactly one enchantment, so any</ID>
+    <ID>IC002:VillagerSupport.kt:VillagerSupport$// Cleared so the book ends up with only the enchantments rolled above, keeping</ID>
+    <ID>IM002:CommandEnchantInfo.kt:CommandEnchantInfo$org.bukkit.ChatColor.stripColor(it.getFormattedName(0))</ID>
+    <ID>IM002:LoreConversion.kt:LoreConversion$org.bukkit.ChatColor.stripColor(line)</ID>
+    <ID>IM002:Sorters.kt:AlphabeticSorter$org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0))</ID>
+    <ID>IM002:Sorters.kt:LengthSorter$org.bukkit.ChatColor.stripColor(it.wrap().getFormattedName(0))</ID>
+    <ID>IgnoredReturnValue:EcoEnchants.kt:EcoEnchants$remove(ChatColor.stripColor(enchant.getFormattedName(0))?.lowercase())</ID>
+    <ID>LabeledExpression:EnchantFinder.kt:EnchantFinder$@mapNotNull</ID>
+    <ID>LabeledExpression:EnchantGUI.kt:EnchantGUI$@onLeftClick</ID>
+    <ID>LabeledExpression:EnchantmentSoulbound.kt:EnchantmentSoulbound.SoulboundHandler$@map</ID>
+    <ID>LabeledExpression:GrindstoneSupport.kt:GrindstoneSupport$@run</ID>
+    <ID>LongMethod:EnchantDisplay.kt:EnchantDisplay$override fun display</ID>
+    <ID>LongMethod:EnchantGUI.kt:EnchantGUI$internal fun reload</ID>
+    <ID>LongMethod:EnchantGUI.kt:private fun EcoEnchant.getInformationSlot: Slot</ID>
+    <ID>LongMethod:EnchantingTableSupport.kt:EnchantingTableSupport$@EventHandler fun onEnchant</ID>
+    <ID>LongMethod:EnchantmentReplenish.kt:EnchantmentReplenish.ReplenishHandler$@EventHandler( ignoreCancelled = true ) fun handle</ID>
+    <ID>LongMethod:LoreConversion.kt:LoreConversion$private fun convertLore</ID>
+    <ID>LongMethod:VillagerSupport.kt:VillagerSupport$@EventHandler fun onTrade</ID>
+    <ID>LoopWithTooManyJumpStatements:EcoEnchantBookDragAndDropHandler.kt:EcoEnchantBookDragAndDropHandler$for</ID>
+    <ID>LoopWithTooManyJumpStatements:EnchantingTableSupport.kt:EnchantingTableSupport$for</ID>
+    <ID>LoopWithTooManyJumpStatements:LootSupport.kt:LootSupport$for</ID>
+    <ID>LoopWithTooManyJumpStatements:LoreConversion.kt:LoreConversion$for</ID>
+    <ID>LoopWithTooManyJumpStatements:VillagerSupport.kt:VillagerSupport$for</ID>
+    <ID>MagicNumber:CommandGiveRandomBook.kt:CommandGiveRandomBook$10</ID>
+    <ID>MagicNumber:CommandGiveRandomBook.kt:CommandGiveRandomBook$3</ID>
+    <ID>MagicNumber:CommandGiveRandomBook.kt:CommandGiveRandomBook$4</ID>
+    <ID>MagicNumber:EnchantGUI.kt:32</ID>
+    <ID>MagicNumber:EnchantingTableSupport.kt:EnchantingTableSupport$10</ID>
+    <ID>MagicNumber:EnchantingTableSupport.kt:EnchantingTableSupport$15</ID>
+    <ID>MagicNumber:EnchantingTableSupport.kt:EnchantingTableSupport$20</ID>
+    <ID>MagicNumber:VillagerSupport.kt:VillagerSupport$100.0</ID>
+    <ID>MaxChainedCallsOnSameLine:BookItemDisplay.kt:BookItemDisplay$meta.storedEnchants.keys.sortForDisplay().firstOrNull()?.wrap()</ID>
+    <ID>MaxLineLength:BookItemDisplay.kt:BookItemDisplay$val</ID>
+    <ID>MaxLineLength:CommandEnchantInfo.kt:CommandEnchantInfo$val</ID>
+    <ID>MaxLineLength:DragAndDropPricingTests.kt:&lt;no name provided&gt;$override val enchantmentRarity: EnchantmentRarity get() = throw UnsupportedOperationException("not used in these tests")</ID>
+    <ID>MaxLineLength:EcoEnchantBase.kt:EcoEnchantBase$override val nameTranslationKey = if (config.has("name-translation-key")) config.getString("name-translation-key") else null</ID>
+    <ID>MaxLineLength:EcoEnchantBookDragAndDropHandler.kt:EcoEnchantBookDragAndDropHandler$if (existingLevel != null &amp;&amp; level &lt; existingLevel) continue</ID>
+    <ID>MaxLineLength:EcoEnchantLike.kt:EcoEnchantLike$rawDescriptionFinal = rawDescriptionFinal.replace("%${placeholder.id}%", NumberUtils.format(placeholder.value))</ID>
+    <ID>MaxLineLength:EnchantGUI.kt:.</ID>
+    <ID>MaxLineLength:EnchantGUI.kt:EnchantGUI$EcoEnchants.values().filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()</ID>
+    <ID>MaxLineLength:EnchantGUI.kt:EnchantGUI$atCaptive.applicableEnchantments.filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()</ID>
+    <ID>MaxLineLength:EnchantGUI.kt:EnchantGUI$val perPage = plugin.configYml.getInt("enchant-gui.enchant-area.width") * plugin.configYml.getInt("enchant-gui.enchant-area.height")</ID>
+    <ID>MaxLineLength:EnchantmentFormatting.kt:DisplayCache$val</ID>
+    <ID>MaxLineLength:EnchantmentTargets.kt:EnchantmentTargets$plugin.logger.warning("Invalid item \"$invalid\" in target \"${target.id}\" in targets.yml, it will be ignored")</ID>
+    <ID>MaxLineLength:MissingDependencyException.kt:warning("Either download $pl or delete the folder at /plugins/EcoEnchants/enchants/${pl.lowercase()} to remove this message")</ID>
+    <ID>MaxLineLength:VanillaEcoEnchantLike.kt:VanillaEcoEnchantLike$override val nameTranslationKey = if (plugin.vanillaEnchantsYml.has("${section}.name-translation-key")) plugin.vanillaEnchantsYml.getString("${section}.name-translation-key") else null</ID>
+    <ID>MultilineLambdaItParameter:CommandGiveRandomBook.kt:CommandGiveRandomBook${ when (filter) { is EnchantmentRarity -&gt; it.enchantmentRarity == filter is EnchantmentType -&gt; it.type == filter else -&gt; true } &amp;&amp; it.maximumLevel &gt;= minLevel }</ID>
+    <ID>MultilineLambdaItParameter:EcoEnchantBase.kt:EcoEnchantBase${ @Suppress("DEPRECATION") Enchantment.getByKey(NamespacedKey.minecraft(it)) }</ID>
+    <ID>MultilineLambdaItParameter:EcoEnchantsPlugin.kt:EcoEnchantsPlugin${ it, _ -&gt; listOf( NamedValue("level", it.level), ) }</ID>
+    <ID>MultilineLambdaItParameter:EnchantFinder.kt:EnchantFinder${ val level = it.holder as? EcoEnchantLevel ?: return@mapNotNull null val item = it.provider as? ItemStack ?: return@mapNotNull null ProvidedLevel(level, item, it) }</ID>
+    <ID>MultilineLambdaItParameter:EnchantGUI.kt:{ it.replace("%max_level%", enchantment.maxLevel.toString()) .replace("%rarity%", this.enchantmentRarity.displayName) .replace( "%targets%", this.targets.joinToString(", ") { target -&gt; target.displayName } ) .replace( "%conflicts%", if (this.conflictsWithEverything) { plugin.langYml.getFormattedString("all-conflicts") } else { this.conflicts.joinToString(", ") { conflict -&gt; conflict.wrap().getFormattedName(0) }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") } } ) .replace( "%required%", this.required.joinToString(", ") { required -&gt; required.wrap().getFormattedName(0) }.ifEmpty { plugin.langYml.getFormattedString("no-required") } ) .replace("%tradeable%", (plugin.configYml.getBool("villager.enabled") &amp;&amp; this.isObtainableThroughTrading).parseLangOption("tradeable")) .replace("%discoverable%", (plugin.configYml.getBool("loot.enabled") &amp;&amp; this.isObtainableThroughDiscovery).parseDiscoverable()) .replace("%discoverable_chests%", (plugin.configYml.getBool("loot.enabled") &amp;&amp; this.isObtainableThrough(DiscoveryType.CHESTS)).parseDiscoverable(DiscoveryType.CHESTS)) .replace("%discoverable_fishing%", (plugin.configYml.getBool("loot.enabled") &amp;&amp; this.isObtainableThrough(DiscoveryType.FISHING)).parseDiscoverable(DiscoveryType.FISHING)) .replace("%discoverable_mob_drops%", (plugin.configYml.getBool("loot.enabled") &amp;&amp; this.isObtainableThrough(DiscoveryType.MOB_DROPS)).parseDiscoverable(DiscoveryType.MOB_DROPS)) .replace("%discoverable_raids%", (plugin.configYml.getBool("loot.enabled") &amp;&amp; this.isObtainableThrough(DiscoveryType.RAIDS)).parseDiscoverable(DiscoveryType.RAIDS)) .replace("%enchantable%", (plugin.configYml.getBool("enchanting-table.enabled") &amp;&amp; this.isObtainableThroughEnchanting).parseLangOption("enchantable")) .replace("%drag_and_drop%", this.isDragAndDropEnabled().parseLangOption("drag-and-drop")) .replace( "%drag_and_drop_price%", if (this.isDragAndDropEnabled()) { this.dragAndDropPriceDisplay(player, level) } else { false.parseLangOption("drag-and-drop") } ) }</ID>
+    <ID>MultilineLambdaItParameter:EnchantmentSoulbound.kt:EnchantmentSoulbound.SoulboundHandler${ it.fast().persistentDataContainer.has(soulboundKey, PersistentDataType.INTEGER) &amp;&amp; it.itemMeta?.hasEnchant(enchant.enchantment) == true }</ID>
+    <ID>MultilineLambdaItParameter:EnchantmentSoulbound.kt:EnchantmentSoulbound.SoulboundHandler${ val meta = it.itemMeta ?: return@map it meta.removeEnchant(enchant.enchantment) it.itemMeta = meta it }</ID>
+    <ID>NestedScopeFunctions:EssentialsIntegration.kt:EssentialsIntegration$apply { put(enchantment.id, enchantment.enchantment) put(enchantment.id.replace("_", ""), enchantment.enchantment) }</ID>
+    <ID>NestedScopeFunctions:EssentialsIntegration.kt:EssentialsIntegration$apply { remove(enchantment.id) remove(enchantment.id.replace("_", "")) }</ID>
+    <ID>NewLineAtEndOfFile:EnchantmentTarget.kt:com.willfp.ecoenchants.target.EnchantmentTarget.kt</ID>
+    <ID>NewLineAtEndOfFile:EnchantmentTargets.kt:com.willfp.ecoenchants.target.EnchantmentTargets.kt</ID>
+    <ID>NewLineAtEndOfFile:LoreConversion.kt:com.willfp.ecoenchants.enchant.LoreConversion.kt</ID>
+    <ID>NewLineAtEndOfFile:MissingDependencyException.kt:com.willfp.ecoenchants.enchant.MissingDependencyException.kt</ID>
+    <ID>NoNameShadowing:EnchantFinder.kt:EnchantFinder${ val level = it.holder as? EcoEnchantLevel ?: return@mapNotNull null val item = it.provider as? ItemStack ?: return@mapNotNull null ProvidedLevel(level, item, it) }</ID>
+    <ID>NoNameShadowing:EnchantmentTargets.kt:EnchantmentTargets${ it.canEnchantItem(this) }</ID>
+    <ID>NullableBooleanCheck:EcoEnchantBase.kt:EcoEnchantBase$config.getBoolOrNull("hide-from-enchantgui") ?: false</ID>
+    <ID>NullableBooleanCheck:EcoEnchantBase.kt:EcoEnchantBase$discoverableSection?.getBoolOrNull(type.configKey) ?: true</ID>
+    <ID>NullableBooleanCheck:EnchantDisplay.kt:EnchantDisplay$player?.seesEnchantmentDescriptions ?: true</ID>
+    <ID>NullableBooleanCheck:EnchantGUI.kt:EnchantGUI$menu.getState&lt;Boolean&gt;(player, "hasItem") ?: false</ID>
+    <ID>OutdatedDocumentation:EnchantmentTypes.kt:EnchantmentTypes$fun update</ID>
+    <ID>PF011:EnchantmentRepairing.kt:EnchantmentRepairing$item in SlotTypeArmor.getItems(player)</ID>
+    <ID>PF011:EnchantmentRepairing.kt:EnchantmentRepairing$item in SlotTypeHands.getItems(player)</ID>
+    <ID>PF012:EssentialsIntegration.kt:EssentialsIntegration$values()</ID>
+    <ID>PropertyUsedBeforeDeclaration:CommandToggleDescriptions.kt:CommandToggleDescriptions$descriptionsKey</ID>
+    <ID>PropertyUsedBeforeDeclaration:EnchantDisplay.kt:EnchantDisplay$hideState</ID>
+    <ID>PropertyUsedBeforeDeclaration:EnchantGUI.kt:EnchantmentScrollPane$size</ID>
+    <ID>RedundantHigherOrderMapUsage:EnchantmentSoulbound.kt:EnchantmentSoulbound.SoulboundHandler$map</ID>
+    <ID>ReplaceSafeCallChainWithRun:CommandEnchant.kt:CommandEnchant$args.getOrNull(0)?.lowercase()?.let { Enchantment.getByKey(NamespacedKey.minecraft(it)) }</ID>
+    <ID>ReplaceSafeCallChainWithRun:GrindstoneSupport.kt:GrindstoneSupport$inventory.getItem(0)?.fast()?.getEnchants(true)</ID>
+    <ID>ReplaceSafeCallChainWithRun:GrindstoneSupport.kt:GrindstoneSupport$inventory.getItem(1)?.fast()?.getEnchants(true)</ID>
+    <ID>ReturnCount:BookItemDisplay.kt:BookItemDisplay$fun apply</ID>
+    <ID>ReturnCount:BookItemDisplay.kt:BookItemDisplay$fun revert</ID>
+    <ID>ReturnCount:CommandEnchantInfo.kt:CommandEnchantInfo$override fun tabComplete: List&lt;String&gt;</ID>
+    <ID>ReturnCount:CommandGiveRandomBook.kt:CommandGiveRandomBook$override fun onExecute</ID>
+    <ID>ReturnCount:EcoEnchant.kt:EcoEnchant$override fun conflictsWith: Boolean</ID>
+    <ID>ReturnCount:EcoEnchantBookDragAndDropHandler.kt:EcoEnchantBookDragAndDropHandler$override fun apply: DragAndDropResult</ID>
+    <ID>ReturnCount:EcoEnchantBookDragAndDropHandler.kt:EcoEnchantBookDragAndDropHandler$private fun eligibleEnchants: Map&lt;Enchantment, Int&gt;</ID>
+    <ID>ReturnCount:EcoEnchantLike.kt:EcoEnchantLike$fun canEnchantItem: Boolean</ID>
+    <ID>ReturnCount:EffectApplyRandomEnchant.kt:EffectApplyRandomEnchant$override fun onTrigger: Boolean</ID>
+    <ID>ReturnCount:EffectRemoveThisEnchant.kt:EffectRemoveThisEnchant$override fun onTrigger: Boolean</ID>
+    <ID>ReturnCount:EnchantGUI.kt:EnchantmentScrollPane$override fun getSlotAt: Slot</ID>
+    <ID>ReturnCount:EnchantingTableSupport.kt:EnchantingTableSupport$@EventHandler fun onEnchant</ID>
+    <ID>ReturnCount:EnchantmentFormatting.kt:fun EcoEnchantLike.getFormattedNameComponent: Component</ID>
+    <ID>ReturnCount:EnchantmentReplenish.kt:EnchantmentReplenish.ReplenishHandler$@EventHandler( ignoreCancelled = true ) fun handle</ID>
+    <ID>ReturnCount:EnchantmentSoulbound.kt:EnchantmentSoulbound.SoulboundHandler$@EventHandler( priority = EventPriority.HIGHEST, ignoreCancelled = true ) fun handle</ID>
+    <ID>ReturnCount:GrindstoneSupport.kt:GrindstoneSupport$@EventHandler fun postGrindstone</ID>
+    <ID>ReturnCount:LootSupport.kt:LootSupport$@EventHandler fun onFish</ID>
+    <ID>ReturnCount:LoreConversion.kt:LoreConversion$@EventHandler fun aggressiveLoreConverter</ID>
+    <ID>ReturnCount:LoreConversion.kt:LoreConversion$private fun convertLore</ID>
+    <ID>ReturnCount:Util.kt:fun Enchantment.wrap: EcoEnchantLike</ID>
+    <ID>ReturnCount:VillagerSupport.kt:VillagerSupport$@EventHandler fun onTrade</ID>
+    <ID>SpreadOperator:EnchantGUI.kt:EnchantGUI$( MaskItems.fromItemNames( plugin.configYml.getStrings("enchant-gui.mask.items") ), *plugin.configYml.getStrings("enchant-gui.mask.pattern").toTypedArray() )</ID>
+    <ID>SpreadOperator:EnchantGUI.kt:EnchantGUI$( MaskItems.fromItemNames( plugin.configYml.getStrings("group-gui.mask.items") ), *plugin.configYml.getStrings("group-gui.mask.pattern").toTypedArray() )</ID>
+    <ID>SpreadOperator:EnchantGUI.kt:EnchantGUI$( MaskItems.fromItemNames(plugin.configYml.getStrings("enchantinfo.mask.items")), *plugin.configYml.getStrings("enchantinfo.mask.pattern").toTypedArray() )</ID>
+    <ID>SwallowedException:EcoEnchants.kt:EcoEnchants$e: MissingDependencyException</ID>
+    <ID>SwallowedException:LoreConversion.kt:LoreConversion$e: IllegalArgumentException</ID>
+    <ID>ThrowsCount:DragAndDropPricingTests.kt:private fun fakeEnchant: EcoEnchantLike</ID>
+    <ID>UnnamedParameterUse:CommandEnchant.kt:CommandEnchant$replace</ID>
+    <ID>UnnamedParameterUse:CommandEnchant.kt:CommandEnchant$subList</ID>
+    <ID>UnnamedParameterUse:CommandEnchantInfo.kt:CommandEnchantInfo$replace</ID>
+    <ID>UnnamedParameterUse:CommandGiveRandomBook.kt:CommandGiveRandomBook$replace</ID>
+    <ID>UnnamedParameterUse:CommandReload.kt:CommandReload$replace</ID>
+    <ID>UnnamedParameterUse:DragAndDropPricing.kt:replace</ID>
+    <ID>UnnamedParameterUse:EcoEnchantBookDragAndDropHandler.kt:EcoEnchantBookDragAndDropHandler$mergeDragAndDropLevel</ID>
+    <ID>UnnamedParameterUse:EcoEnchantLike.kt:EcoEnchantLike$replace</ID>
+    <ID>UnnamedParameterUse:EffectApplyRandomEnchant.kt:EffectApplyRandomEnchant$maxOf</ID>
+    <ID>UnnamedParameterUse:EnchantDisplay.kt:EnchantDisplay$replace</ID>
+    <ID>UnnamedParameterUse:EnchantGUI.kt:EnchantGUI$coerceIn</ID>
+    <ID>UnnamedParameterUse:EnchantGUI.kt:replace</ID>
+    <ID>UnnamedParameterUse:EnchantLevelMerge.kt:maxOf</ID>
+    <ID>UnnamedParameterUse:EnchantLevelMerge.kt:minOf</ID>
+    <ID>UnnamedParameterUse:EnchantLevelMergeTests.kt:EnchantLevelMergeTests$mergeDragAndDropLevel</ID>
+    <ID>UnnamedParameterUse:EnchantingTableSupport.kt:EnchantingTableSupport$min</ID>
+    <ID>UnnamedParameterUse:EnchantingTableSupport.kt:EnchantingTableSupport$randDouble</ID>
+    <ID>UnnamedParameterUse:EnchantmentFormatting.kt:replace</ID>
+    <ID>UnnamedParameterUse:EssentialsIntegration.kt:EssentialsIntegration$replace</ID>
+    <ID>UnnamedParameterUse:GrindstoneSupport.kt:GrindstoneSupport$max</ID>
+    <ID>UnnecessaryParentheses:CommandEnchantInfo.kt:CommandEnchantInfo$(enchantment.isHiddenFromGui &amp;&amp; !sender.hasPermission("ecoenchants.seehidden"))</ID>
+    <ID>UnnecessaryParentheses:CommandGiveRandomBook.kt:CommandGiveRandomBook$(EnchantmentRarities.values().map { it.id } + EnchantmentTypes.values().map { it.id })</ID>
+    <ID>UnnecessaryParentheses:EnchantGUI.kt:EnchantmentScrollPane$((row - 1) * columns)</ID>
+    <ID>UnnecessaryParentheses:EnchantmentFormatting.kt:(level == 1 &amp;&amp; this.maximumLevel == 1)</ID>
+    <ID>UnsafeCallOnNullableType:CommandEnchant.kt:CommandEnchant$player!!</ID>
+    <ID>UnsafeCallOnNullableType:EcoEnchantBase.kt:EcoEnchantBase$Bukkit.getPluginManager().getPermission("ecoenchants.fromtable.*")!!</ID>
+    <ID>UnsafeCallOnNullableType:EcoEnchantBase.kt:EcoEnchantBase$loadConfig()!!</ID>
+    <ID>UnsafeCallOnNullableType:EnchantDisplay.kt:EnchantDisplay$unsorted[it]!!</ID>
+    <ID>UnusedImport:EnchantGUI.kt:import com.willfp.ecoenchants.enchant.DiscoveryType</ID>
+    <ID>UnusedPrivateProperty:VanillaEnchantments.kt:private val enchantmentOptions = arrayOf( "max-level", "conflicts" )</ID>
+    <ID>UnusedVariable:EffectApplyRandomEnchant.kt:EffectApplyRandomEnchant$val player = data.player ?: return false</ID>
+    <ID>UnusedVariable:EnchantmentTypes.kt:EnchantmentTypes$type</ID>
+    <ID>UseLet:CommandGiveRandomBook.kt:CommandGiveRandomBook$if (filterName != null) { EnchantmentTypes[filterName] ?: EnchantmentRarities[filterName] } else null</ID>
+    <ID>UseLet:EcoEnchants.kt:EcoEnchants$if (name == null) { null } else BY_NAME[name.lowercase()]</ID>
+    <ID>UseOrEmpty:EnchantGUI.kt:EnchantGUI$menu.getState&lt;List&lt;EcoEnchant&gt;&gt;(player, "enchants") ?: emptyList()</ID>
+    <ID>UseOrEmpty:GrindstoneSupport.kt:GrindstoneSupport$inventory.getItem(0)?.fast()?.getEnchants(true) ?: emptyMap()</ID>
+    <ID>UseOrEmpty:GrindstoneSupport.kt:GrindstoneSupport$inventory.getItem(1)?.fast()?.getEnchants(true) ?: emptyMap()</ID>
+    <ID>VarCouldBeVal:EnchantmentReplenish.kt:EnchantmentReplenish$private var handler = ReplenishHandler(this)</ID>
+    <ID>WildcardImport:EnchantmentRarity.kt:import java.util.*</ID>
+  </CurrentIssues>
+</SmellBaseline>
