@@ -108,7 +108,7 @@ object EnchantingTableSupport : Listener {
                 break
             }
 
-            if (toAdd.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+            if (toAdd.size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
 

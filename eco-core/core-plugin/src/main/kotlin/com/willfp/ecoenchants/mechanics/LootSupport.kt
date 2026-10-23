@@ -74,7 +74,7 @@ object LootSupport : Listener {
                 continue
             }
 
-            if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+            if (enchants.size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
 
