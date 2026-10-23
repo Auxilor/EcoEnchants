@@ -65,6 +65,12 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
                 return
             }
 
+            val fullyGrown = data.age == data.maximumAge
+
+            if (!fullyGrown && enchant.config.getBool("only-fully-grown")) {
+                return
+            }
+
             if (enchant.config.getBool("consume-seeds")) {
                 val item = ItemStack(
                     when (type) {
@@ -84,11 +90,7 @@ object EnchantmentReplenish : HardcodedEcoEnchant(
                 }
             }
 
-            if (data.age != data.maximumAge) {
-                if (enchant.config.getBool("only-fully-grown")) {
-                    return
-                }
-
+            if (!fullyGrown) {
                 event.isDropItems = false
                 event.expToDrop = 0
             }
