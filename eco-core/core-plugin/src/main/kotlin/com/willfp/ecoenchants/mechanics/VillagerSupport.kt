@@ -66,7 +66,7 @@ object VillagerSupport : Listener {
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= plugin.configYml.getDouble("villager.reduction")
+            multiplier /= plugin.configYml.getDouble("villager.reduction").takeIf { it > 0 } ?: 1.0
 
             if (result.type == Material.ENCHANTED_BOOK) {
                 // Book trades are intentionally limited to exactly one enchantment, so any
