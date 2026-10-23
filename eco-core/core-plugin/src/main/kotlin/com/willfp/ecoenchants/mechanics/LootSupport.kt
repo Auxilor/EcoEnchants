@@ -74,7 +74,7 @@ object LootSupport : Listener {
                 continue
             }
 
-            if (enchants.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+            if (enchants.size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
 
@@ -84,7 +84,7 @@ object LootSupport : Listener {
             val levelPart2 = NumberUtils.triangularDistribution(0.0, 1.0, levelPart1)
             val level = ceil(levelPart2 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= plugin.configYml.getDouble("loot.reduction")
+            multiplier /= plugin.configYml.getDouble("loot.reduction").takeIf { it > 0 } ?: 1.0
 
             enchants[enchantment.enchantment] = level
         }

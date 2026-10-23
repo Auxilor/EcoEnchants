@@ -108,7 +108,7 @@ object EnchantingTableSupport : Listener {
                 break
             }
 
-            if (toAdd.size > plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
+            if (toAdd.size >= plugin.configYml.getInt("anvil.enchant-limit").infiniteIfNegative()) {
                 break
             }
 
@@ -126,7 +126,7 @@ object EnchantingTableSupport : Listener {
             val levelPart3 = NumberUtils.bias(levelPart2, enchantment.type.highLevelBias)
             val level = ceil(levelPart3 * maxLevel).coerceIn(1.0..maxLevel.toDouble()).toInt()
 
-            multiplier /= plugin.configYml.getDouble("enchanting-table.reduction")
+            multiplier /= plugin.configYml.getDouble("enchanting-table.reduction").takeIf { it > 0 } ?: 1.0
 
             toAdd[enchantment.enchantment] = level
         }
