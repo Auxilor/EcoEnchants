@@ -118,23 +118,20 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     /**
      * Get if all required enchantments are in [other], ignoring levels.
      */
-    fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean {
-        return requirements.all { requirement ->
+    fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean =
+        requirements.all { requirement ->
             other.any { otherEnchant -> requirement.matches(otherEnchant) }
         }
-    }
 
     /**
      * Get if all required enchantments are in [other] at the required levels.
      */
-    fun hasRequiredEnchantments(other: Map<Enchantment, Int>): Boolean {
-        return requirements.all { it.isMetBy(other) }
-    }
+    fun hasRequiredEnchantments(other: Map<Enchantment, Int>): Boolean =
+        requirements.all { it.isMetBy(other) }
 
     /**
      * Get if [other] is removed from the item when this enchantment is applied.
      */
-    fun removesOnApply(other: Enchantment): Boolean {
-        return requirements.any { it.remove && it.matches(other) }
-    }
+    fun removesOnApply(other: Enchantment): Boolean =
+        requirements.any { it.remove && it.matches(other) }
 }

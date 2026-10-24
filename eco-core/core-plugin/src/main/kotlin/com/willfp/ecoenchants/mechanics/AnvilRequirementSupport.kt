@@ -15,11 +15,13 @@ import org.bukkit.inventory.AnvilInventory
  * as the anvil merge itself is handled by eco.
  */
 object AnvilRequirementSupport : Listener {
+    /**
+     * eco renders the result a tick after the event, so this runs on the next tick, right after it.
+     */
     @EventHandler(priority = EventPriority.MONITOR)
     fun onAnvilPrepare(event: PrepareAnvilEvent) {
         val inventory = event.inventory
 
-        // eco renders the result a tick later, this runs right after it
         plugin.scheduler.run {
             removeReplacedFromResult(inventory)
         }
@@ -37,10 +39,10 @@ object AnvilRequirementSupport : Listener {
     }
 
     private fun removeReplacedFromResult(inventory: AnvilInventory) {
-        val left = inventory.getItem(0) ?: return
-        val result = inventory.getItem(2) ?: return
+        val left = inventory.getItem(0)
+        val result = inventory.getItem(2)
 
-        if (result.type.isAir) {
+        if (left == null || result == null || result.type.isAir) {
             return
         }
 

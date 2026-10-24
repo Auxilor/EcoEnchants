@@ -26,18 +26,18 @@ data class EnchantmentRequirement(
     /**
      * Get if [enchantment] is the required enchantment.
      */
-    fun matches(enchantment: Enchantment): Boolean {
-        return enchantment.key.key.equals(id, ignoreCase = true)
-    }
+    fun matches(enchantment: Enchantment): Boolean =
+        enchantment.key.key.equals(id, ignoreCase = true)
 
     /**
      * Get if [enchants] contain the required enchantment at the required level.
      */
-    fun isMetBy(enchants: Map<Enchantment, Int>): Boolean {
-        return enchants.any { (enchantment, level) -> matches(enchantment) && level >= this.level }
-    }
+    fun isMetBy(enchants: Map<Enchantment, Int>): Boolean =
+        enchants.any { (enchantment, level) -> matches(enchantment) && level >= this.level }
 
     companion object {
+        private const val REMOVE_FLAG = "remove"
+
         private val whitespace = Regex("\\s+")
 
         /**
@@ -48,25 +48,12 @@ data class EnchantmentRequirement(
             val idAndLevel = parts.first().split(":", limit = 2)
 
             val id = idAndLevel[0].lowercase()
-            if (id.isEmpty()) {
-                return null
-            }
+            val level = idAndLevel.getOrNull(1)?.toIntOrNull() ?: if (idAndLevel.size == 1) 1 else 0
+            val flags = parts.drop(1).map { it.lowercase() }
 
-            val level = idAndLevel.getOrNull(1)?.let { it.toIntOrNull() ?: return null } ?: 1
-            if (level < 1) {
-                return null
-            }
+            val isValid = id.isNotEmpty() && level >= 1 && flags.all { it == REMOVE_FLAG }
 
-            var remove = false
-            for (flag in parts.drop(1)) {
-                if (flag.equals("remove", ignoreCase = true)) {
-                    remove = true
-                } else {
-                    return null
-                }
-            }
-
-            return EnchantmentRequirement(id, level, remove)
+            return if (isValid) EnchantmentRequirement(id, level, REMOVE_FLAG in flags) else null
         }
     }
 }
@@ -88,19 +75,11 @@ fun ItemStack.removeEnchantsReplacedBy(added: Collection<Enchantment>): Boolean 
     val replacing = added.mapNotNull { it.ecoEnchant }
         .filter { enchant -> enchant.requirements.any { it.remove } }
 
-    if (replacing.isEmpty()) {
-        return false
-    }
-
-    val meta = itemMeta ?: return false
+    val meta = itemMeta?.takeIf { replacing.isNotEmpty() } ?: return false
     val present = if (meta is EnchantmentStorageMeta) meta.storedEnchants.keys else meta.enchants.keys
 
     val toRemove = present.filter { enchantment ->
         enchantment !in added && replacing.any { it.removesOnApply(enchantment) }
-    }
-
-    if (toRemove.isEmpty()) {
-        return false
     }
 
     for (enchantment in toRemove) {
@@ -111,6 +90,9 @@ fun ItemStack.removeEnchantsReplacedBy(added: Collection<Enchantment>): Boolean 
         }
     }
 
-    itemMeta = meta
-    return true
+    if (toRemove.isNotEmpty()) {
+        itemMeta = meta
+    }
+
+    return toRemove.isNotEmpty()
 }

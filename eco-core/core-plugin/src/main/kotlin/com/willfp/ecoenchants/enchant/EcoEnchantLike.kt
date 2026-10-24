@@ -65,17 +65,21 @@ interface EcoEnchantLike {
 
     /**
      * Get if this enchantment can be applied to [item].
+     *
+     * Levels of [additionalEnchantments] aren't known, so they count as level 1
+     * unless the item already has them at a higher level.
      */
     fun canEnchantItem(
         item: ItemStack,
         additionalEnchantments: Collection<Enchantment> = emptyList()
-    ): Boolean {
-        // Levels aren't known here, so additional enchantments count as level 1 unless the item has them higher
-        return canEnchantItem(item, additionalEnchantments.associateWith { 1 })
-    }
+    ): Boolean = canEnchantItem(item, additionalEnchantments.associateWith { 1 })
 
     /**
      * Get if this enchantment can be applied to [item], with [additionalEnchantments] mapped to their levels.
+     *
+     * Requirements are only checked when the enchantment isn't on the item yet, as enchantments
+     * it replaces are gone afterwards. Enchantments this one replaces don't count towards
+     * conflicts or limits, since they won't stay on the item.
      */
     fun canEnchantItem(
         item: ItemStack,
@@ -87,12 +91,12 @@ interface EcoEnchantLike {
             enchantsWithLevels.merge(enchant, level, ::maxOf)
         }
 
-        // Requirements are checked when the enchantment is first applied, as replaced enchantments are gone after
-        if (this is EcoEnchant && this.enchantment !in itemEnchants && !this.hasRequiredEnchantments(enchantsWithLevels)) {
+        if (this is EcoEnchant && this.enchantment !in itemEnchants &&
+            !this.hasRequiredEnchantments(enchantsWithLevels)
+        ) {
             return false
         }
 
-        // Enchantments replaced by this one won't stay on the item, so they don't count against it
         val enchants = enchantsWithLevels.keys.filterNot { this is EcoEnchant && this.removesOnApply(it) }
 
         if (enchants.count { it.wrap().type == this.type } >= this.type.limit) {

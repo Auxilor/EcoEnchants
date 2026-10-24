@@ -62,9 +62,11 @@ abstract class EcoEnchantBase(
 
     override val requirements = config.getStrings("required")
         .mapNotNull { entry ->
-            EnchantmentRequirement.parse(entry).also {
-                if (it == null) {
-                    plugin.logger.warning("Invalid requirement '$entry' in enchantment $id, expected id[:level] [remove]")
+            EnchantmentRequirement.parse(entry).also { requirement ->
+                if (requirement == null) {
+                    plugin.logger.warning(
+                        "Invalid requirement '$entry' in enchantment $id, expected id[:level] [remove]"
+                    )
                 }
             }
         }

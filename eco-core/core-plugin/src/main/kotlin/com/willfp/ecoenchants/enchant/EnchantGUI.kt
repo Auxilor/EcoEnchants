@@ -386,8 +386,8 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                 .addLoreLines(this.getFormattedDescription(level, player))
                 .addLoreLines {
                     plugin.configYml.getStrings("enchantinfo.item.lore")
-                        .map {
-                            it.replace("%max_level%", enchantment.maxLevel.toString())
+                        .map { line ->
+                            line.replace("%max_level%", enchantment.maxLevel.toString())
                                 .replace("%rarity%", this.enchantmentRarity.displayName)
                                 .replace(
                                     "%targets%",
@@ -406,8 +406,10 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 .replace(
                                     "%required%",
                                     this.requirements.mapNotNull { requirement ->
-                                        requirement.enchantment?.wrap()
-                                            ?.getFormattedName(if (requirement.level > 1) requirement.level else 0)
+                                        requirement.enchantment?.let { required ->
+                                            required.wrap()
+                                                .getFormattedName(if (requirement.level > 1) requirement.level else 0)
+                                        }
                                     }.joinToString(", ")
                                         .ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
