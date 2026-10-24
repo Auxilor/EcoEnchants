@@ -405,9 +405,11 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 )
                                 .replace(
                                     "%required%",
-                                    this.required.joinToString(", ") { required ->
-                                        required.wrap().getFormattedName(0)
-                                    }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
+                                    this.requirements.mapNotNull { requirement ->
+                                        requirement.enchantment?.wrap()
+                                            ?.getFormattedName(if (requirement.level > 1) requirement.level else 0)
+                                    }.joinToString(", ")
+                                        .ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
                                 .replace("%tradeable%", (plugin.configYml.getBool("villager.enabled") && this.isObtainableThroughTrading).parseLangOption("tradeable"))
                                 .replace("%discoverable%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThroughDiscovery).parseDiscoverable())

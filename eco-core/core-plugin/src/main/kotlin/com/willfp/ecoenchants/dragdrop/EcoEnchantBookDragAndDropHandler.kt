@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.dragdrop
 import com.willfp.eco.core.dragdrop.DragAndDropHandler
 import com.willfp.eco.core.dragdrop.DragAndDropResult
 import com.willfp.eco.core.price.ConfiguredPrice
+import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
 import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -22,7 +23,7 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
         for ((enchant, level) in storedEnchants) {
             val ecoEnchant = enchant.wrap()
             if (!ecoEnchant.isDragAndDropEnabled()) continue
-            if (!ecoEnchant.canEnchantItem(current, eligible.keys)) continue
+            if (!ecoEnchant.canEnchantItem(current, eligible)) continue
 
             val existingLevel = getExistingLevel(current, enchant)
             if (existingLevel != null && level < existingLevel) continue // not an upgrade, skip so book isn't consumed for no effect
@@ -54,6 +55,8 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
         }
         if (!canAffordAll) return DragAndDropResult.DENIED
 
+        val added = mutableListOf<Enchantment>()
+
         for ((enchant, level, priceAndMultiplier) in prices) {
             val (price, multiplier) = priceAndMultiplier
             price.pay(player, multiplier)
@@ -62,11 +65,14 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
             val newLevel = if (existingLevel != null) {
                 mergeDragAndDropLevel(existingLevel, level, enchant.maxLevel)
             } else {
+                added += enchant
                 level
             }
 
             applyEnchant(current, enchant, newLevel)
         }
+
+        current.removeEnchantsReplacedBy(added)
 
         return DragAndDropResult.APPLIED
     }

@@ -70,17 +70,36 @@ interface EcoEnchantLike {
         item: ItemStack,
         additionalEnchantments: Collection<Enchantment> = emptyList()
     ): Boolean {
-        val enchants = item.fast().getEnchants(true).keys + additionalEnchantments
+        // Levels aren't known here, so additional enchantments count as level 1 unless the item has them higher
+        return canEnchantItem(item, additionalEnchantments.associateWith { 1 })
+    }
+
+    /**
+     * Get if this enchantment can be applied to [item], with [additionalEnchantments] mapped to their levels.
+     */
+    fun canEnchantItem(
+        item: ItemStack,
+        additionalEnchantments: Map<Enchantment, Int>
+    ): Boolean {
+        val itemEnchants = item.fast().getEnchants(true)
+        val enchantsWithLevels = itemEnchants.toMutableMap()
+        for ((enchant, level) in additionalEnchantments) {
+            enchantsWithLevels.merge(enchant, level, ::maxOf)
+        }
+
+        // Requirements are checked when the enchantment is first applied, as replaced enchantments are gone after
+        if (this is EcoEnchant && this.enchantment !in itemEnchants && !this.hasRequiredEnchantments(enchantsWithLevels)) {
+            return false
+        }
+
+        // Enchantments replaced by this one won't stay on the item, so they don't count against it
+        val enchants = enchantsWithLevels.keys.filterNot { this is EcoEnchant && this.removesOnApply(it) }
 
         if (enchants.count { it.wrap().type == this.type } >= this.type.limit) {
             return false
         }
 
         if (enchants.any { enchant -> enchant.conflictsWithDeep(this.enchantment) }) {
-            return false
-        }
-
-        if (this is EcoEnchant && !this.hasRequiredEnchantments(enchants)) {
             return false
         }
 

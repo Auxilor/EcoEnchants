@@ -2,6 +2,7 @@ package com.willfp.ecoenchants.libreforge
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.util.NumberUtils
+import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.libreforge.ArgType
 import com.willfp.libreforge.NoCompileData
@@ -78,13 +79,22 @@ object EffectApplyRandomEnchant : Effect<NoCompileData>("apply_random_enchant") 
 
         val meta = item.itemMeta ?: return false
 
-        if (item.type == Material.ENCHANTED_BOOK && meta is EnchantmentStorageMeta) {
-            meta.addStoredEnchant(enchant.enchantment, level, true)
+        val isNew = if (item.type == Material.ENCHANTED_BOOK && meta is EnchantmentStorageMeta) {
+            !meta.hasStoredEnchant(enchant.enchantment).also {
+                meta.addStoredEnchant(enchant.enchantment, level, true)
+            }
         } else {
-            meta.addEnchant(enchant.enchantment, level, true)
+            !meta.hasEnchant(enchant.enchantment).also {
+                meta.addEnchant(enchant.enchantment, level, true)
+            }
         }
 
         item.itemMeta = meta
+
+        if (isNew) {
+            item.removeEnchantsReplacedBy(listOf(enchant.enchantment))
+        }
+
         return true
     }
 }

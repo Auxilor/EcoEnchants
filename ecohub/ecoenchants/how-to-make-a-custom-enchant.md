@@ -56,7 +56,7 @@ targets: # Item groups it can apply to, from targets.yml
   - sword
 conflicts: # Enchantments it can't coexist with (optional)
   - sharpness
-required: # Enchantments that must be present first (optional)
+required: # Enchantments that must be present first (optional), as id[:level] [remove]
   - unbreaking
 rarity: common # Rarity, from rarity.yml
 max-level: 4 # Highest obtainable level
@@ -124,6 +124,17 @@ required: # Optional; IDs that must already be on the item before this can apply
 rarity: common # Rarity from rarity.yml; affects coloring and how likely it rolls randomly
 max-level: 4 # Highest level players can reach; effects scale with %level% up to here
 ```
+
+Each `required` entry is written as `id[:level] [remove]`. The level is the minimum level the item needs (1 if left out), and `remove` takes that enchantment off the item when this one is applied, which is useful for enchantments that upgrade or replace another:
+
+```yaml
+required:
+  - ambush # Ambush, any level
+  - unbreaking:3 # Unbreaking III or higher
+  - sharpness:2 remove # Sharpness II or higher, removed from the item when this enchantment is applied
+```
+
+An enchantment marked with `remove` can also be listed under `conflicts`, so it can't be added back afterwards; it won't block applying this enchantment.
 
 ### Obtaining
 

@@ -16,7 +16,8 @@ targets: # The items that the enchantment can be applied to, see targets.yml
 conflicts: # The enchantments that conflict with this
   - sharpness
 required: # The enchantments that must already be present to apply this enchantment
-  - unbreaking
+  - unbreaking # Format: id[:minimum level] [remove], e.g. unbreaking:3 or sharpness:2 remove
+  # Adding "remove" removes that enchantment from the item when this one is applied
 rarity: common # The rarity of the enchantment, see rarity.yml
 max-level: 4 # The max level of the enchantment
 

@@ -5,9 +5,12 @@ import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
+import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
+import com.willfp.ecoenchants.enchant.removeReplacedBy
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Item
 import org.bukkit.event.EventHandler
@@ -52,6 +55,7 @@ object LootSupport : Listener {
         }
 
         val enchants = item.fast().getEnchants(true)
+        val added = mutableListOf<Enchantment>()
 
         var multiplier = 0.01
 
@@ -66,7 +70,7 @@ object LootSupport : Listener {
                 continue
             }
 
-            if (!enchantment.canEnchantItem(item, enchants.keys)) {
+            if (!enchantment.canEnchantItem(item, enchants)) {
                 continue
             }
 
@@ -87,6 +91,8 @@ object LootSupport : Listener {
             multiplier /= plugin.configYml.getDouble("loot.reduction")
 
             enchants[enchantment.enchantment] = level
+            enchants.removeReplacedBy(enchantment.enchantment)
+            added += enchantment.enchantment
         }
 
         val meta = item.itemMeta
@@ -96,6 +102,7 @@ object LootSupport : Listener {
             enchants.forEach { (enchant, level) -> meta.addEnchant(enchant, level, true) }
         }
         item.itemMeta = meta
+        item.removeEnchantsReplacedBy(added)
     }
 }
 
