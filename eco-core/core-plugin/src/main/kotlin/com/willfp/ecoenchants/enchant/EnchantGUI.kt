@@ -405,11 +405,12 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 )
                                 .replace(
                                     "%required%",
-                                    this.requirements.mapNotNull { requirement ->
-                                        val required = requirement.enchantment ?: return@mapNotNull null
-                                        required.wrap()
-                                            .getFormattedName(if (requirement.level > 1) requirement.level else 0)
-                                    }.joinToString(", ")
+                                    this.requirements
+                                        .mapNotNull { requirement -> requirement.enchantment?.to(requirement.level) }
+                                        .joinToString(", ") { (required, requiredLevel) ->
+                                            required.wrap()
+                                                .getFormattedName(if (requiredLevel > 1) requiredLevel else 0)
+                                        }
                                         .ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
                                 .replace("%tradeable%", (plugin.configYml.getBool("villager.enabled") && this.isObtainableThroughTrading).parseLangOption("tradeable"))
