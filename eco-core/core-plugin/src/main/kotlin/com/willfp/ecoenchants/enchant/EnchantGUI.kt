@@ -406,10 +406,9 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 .replace(
                                     "%required%",
                                     this.requirements.mapNotNull { requirement ->
-                                        requirement.enchantment?.let { required ->
-                                            required.wrap()
-                                                .getFormattedName(if (requirement.level > 1) requirement.level else 0)
-                                        }
+                                        val required = requirement.enchantment ?: return@mapNotNull null
+                                        required.wrap()
+                                            .getFormattedName(if (requirement.level > 1) requirement.level else 0)
                                     }.joinToString(", ")
                                         .ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
