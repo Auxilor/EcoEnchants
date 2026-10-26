@@ -57,7 +57,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     /**
      * If the enchantment is discoverable via a given [type].
      */
-    fun isObtainableThrough(type: DiscoveryType): Boolean
+    override fun isObtainableThrough(type: DiscoveryType): Boolean
 
     /**
      * If the enchantment is discoverable via any method.
@@ -68,7 +68,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     /**
      * If the enchantment is hidden from the enchant GUI.
      */
-    val isHiddenFromGui: Boolean
+    override val isHiddenFromGui: Boolean
 
     /**
      * Get a certain [level].
