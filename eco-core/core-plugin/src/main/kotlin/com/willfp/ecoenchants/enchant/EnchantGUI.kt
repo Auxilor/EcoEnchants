@@ -40,6 +40,7 @@ import com.willfp.ecoenchants.target.EnchantmentTargets.applicableEnchantments
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import kotlin.math.ceil
 import org.bukkit.Material
+import org.bukkit.Registry
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
@@ -51,11 +52,12 @@ object EnchantGUI {
     private lateinit var menu: Menu
     @Volatile
     private var groupMenu: Menu? = null
-    private val enchantInfoMenus = EcoCache.builder<Pair<EcoEnchant, Int>, Menu>().build()
+    private val enchantInfoMenus = EcoCache.builder<Pair<EcoEnchantLike, Int>, Menu>().build()
     @Volatile
     private var allEnchantsSorted: List<Enchantment> = emptyList()
 
     internal fun reload() {
+        GuiEnchantments.reload()
         cachedEnchantmentSlots.invalidateAll()
         enchantInfoMenus.invalidateAll()
         allEnchantsSorted = EcoEnchants.values().map { it.enchantment }.sortForDisplay()
@@ -94,9 +96,17 @@ object EnchantGUI {
 
                 val canSeeHidden = player.hasPermission("ecoenchants.seehidden")
                 val baseEnchants = if (!hasItem) {
-                    EcoEnchants.values().filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
+                    GuiEnchantments.values()
+                        .filter { !it.isHiddenFromGui || canSeeHidden }
+                        .map { it.enchantment }
+                        .sortForDisplay()
                 } else {
-                    atCaptive.applicableEnchantments.filter { !it.isHiddenFromGui || canSeeHidden }.map { it.enchantment }.sortForDisplay()
+                    GuiEnchantments.values()
+                        .filter { enchant ->
+                            (!enchant.isHiddenFromGui || canSeeHidden) && enchant.isApplicableTo(atCaptive)
+                        }
+                        .map { it.enchantment }
+                        .sortForDisplay()
                         .subtract(atCaptive.fast().enchants.keys)
                         .toList()
                 }
@@ -110,7 +120,7 @@ object EnchantGUI {
                         when (groupBy) {
                             "type" -> wrapped.type.id == groupId
                             "rarity" -> wrapped.enchantmentRarity.id == groupId
-                            "target" -> wrapped is EcoEnchant && wrapped.targets.any { it.id == groupId }
+                            "target" -> wrapped.targets.any { it.id == groupId }
                             else -> true
                         }
                     }
@@ -118,7 +128,7 @@ object EnchantGUI {
                     baseEnchants
                 }
 
-                menu.setState(player, "enchants", filteredEnchants.mapNotNull { it.ecoEnchant })
+                menu.setState(player, "enchants", filteredEnchants.map { it.wrap() })
 
                 // Reset to page 1 when an item is placed or removed from the captive slot
                 val previousHasItem = menu.getState<Boolean>(player, "hasItem") ?: false
@@ -257,7 +267,7 @@ object EnchantGUI {
         }
     }
 
-    fun openInfoGUI(player: Player, enchant: EcoEnchant, level: Int = -1) {
+    fun openInfoGUI(player: Player, enchant: EcoEnchantLike, level: Int = -1) {
         val effectiveLevel = if (level == -1) {
             if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
         } else {
@@ -286,15 +296,15 @@ object EnchantGUI {
     }
 }
 
-private class EnchantmentScrollPane : PagedAreaComponent<EcoEnchant>(
+private class EnchantmentScrollPane : PagedAreaComponent<EcoEnchantLike>(
     plugin.configYml.getSlotArea("enchant-gui.enchant-area")
 ) {
     private val defaultSlot = slot(Items.lookup(plugin.configYml.getString("enchant-gui.empty-item")))
 
-    override fun getEntries(player: Player, menu: Menu): List<EcoEnchant> =
-        menu.getState<List<EcoEnchant>>(player, "enchants").orEmpty()
+    override fun getEntries(player: Player, menu: Menu): List<EcoEnchantLike> =
+        menu.getState<List<EcoEnchantLike>>(player, "enchants").orEmpty()
 
-    override fun getEntrySlot(player: Player, menu: Menu, entry: EcoEnchant): Slot {
+    override fun getEntrySlot(player: Player, menu: Menu, entry: EcoEnchantLike): Slot {
         val displayLevel = if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) entry.maximumLevel else 1
         return entry.getInformationSlot(player, displayLevel)
     }
@@ -302,10 +312,10 @@ private class EnchantmentScrollPane : PagedAreaComponent<EcoEnchant>(
     override fun getEmptySlot(player: Player, menu: Menu): Slot = defaultSlot
 }
 
-private val cachedEnchantmentSlots = EcoCache.builder<Pair<EcoEnchant, Int>, Slot>()
+private val cachedEnchantmentSlots = EcoCache.builder<Pair<EcoEnchantLike, Int>, Slot>()
     .build()
 
-private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
+private fun EcoEnchantLike.getInformationSlot(player: Player, level: Int): Slot {
     return cachedEnchantmentSlots.get(this to level) {
         slot(
             EnchantedBookBuilder()
@@ -315,45 +325,24 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                 .addLoreLines(this.getFormattedDescription(level, player))
                 .addLoreLines {
                     plugin.configYml.getStrings("enchantinfo.item.lore")
-                        .map {
-                            it.replace("%max_level%", enchantment.maxLevel.toString())
+                        .map { line ->
+                            line.replace("%max_level%", enchantment.maxLevel.toString())
                                 .replace("%rarity%", this.enchantmentRarity.displayName)
                                 .replace(
                                     "%targets%",
                                     this.targets.joinToString(", ") { target -> target.displayName }
                                 )
-                                .replace(
-                                    "%conflicts%",
-                                    if (this.conflictsWithEverything) {
-                                        plugin.langYml.getFormattedString("all-conflicts")
-                                    } else {
-                                        this.conflicts.joinToString(", ") { conflict ->
-                                            conflict.wrap().getFormattedName(0)
-                                        }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
-                                    }
-                                )
-                                .replace(
-                                    "%required%",
-                                    this.required.joinToString(", ") { required ->
-                                        required.wrap().getFormattedName(0)
-                                    }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
-                                )
-                                .replace("%tradeable%", (plugin.configYml.getBool("villager.enabled") && this.isObtainableThroughTrading).parseLangOption("tradeable"))
-                                .replace("%discoverable%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThroughDiscovery).parseDiscoverable())
-                                .replace("%discoverable_chests%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.CHESTS)).parseDiscoverable(DiscoveryType.CHESTS))
-                                .replace("%discoverable_fishing%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.FISHING)).parseDiscoverable(DiscoveryType.FISHING))
-                                .replace("%discoverable_mob_drops%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.MOB_DROPS)).parseDiscoverable(DiscoveryType.MOB_DROPS))
-                                .replace("%discoverable_raids%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThrough(DiscoveryType.RAIDS)).parseDiscoverable(DiscoveryType.RAIDS))
-                                .replace("%enchantable%", (plugin.configYml.getBool("enchanting-table.enabled") && this.isObtainableThroughEnchanting).parseLangOption("enchantable"))
+                                .replace("%conflicts%", this.conflictsDisplay())
+                                .replace("%required%", this.requiredDisplay())
+                                .replace("%tradeable%", (isObtainableWhenEnabled("villager.enabled") && this.isObtainableThroughTrading).parseLangOption("tradeable"))
+                                .replace("%discoverable%", (isObtainableWhenEnabled("loot.enabled") && this.isObtainableThroughDiscovery).parseDiscoverable())
+                                .replace("%discoverable_chests%", (isObtainableWhenEnabled("loot.enabled") && this.isObtainableThrough(DiscoveryType.CHESTS)).parseDiscoverable(DiscoveryType.CHESTS))
+                                .replace("%discoverable_fishing%", (isObtainableWhenEnabled("loot.enabled") && this.isObtainableThrough(DiscoveryType.FISHING)).parseDiscoverable(DiscoveryType.FISHING))
+                                .replace("%discoverable_mob_drops%", (isObtainableWhenEnabled("loot.enabled") && this.isObtainableThrough(DiscoveryType.MOB_DROPS)).parseDiscoverable(DiscoveryType.MOB_DROPS))
+                                .replace("%discoverable_raids%", (isObtainableWhenEnabled("loot.enabled") && this.isObtainableThrough(DiscoveryType.RAIDS)).parseDiscoverable(DiscoveryType.RAIDS))
+                                .replace("%enchantable%", (isObtainableWhenEnabled("enchanting-table.enabled") && this.isObtainableThroughEnchanting).parseLangOption("enchantable"))
                                 .replace("%drag_and_drop%", this.isDragAndDropEnabled().parseLangOption("drag-and-drop"))
-                                .replace(
-                                    "%drag_and_drop_price%",
-                                    if (this.isDragAndDropEnabled()) {
-                                        this.dragAndDropPriceDisplay(player, level)
-                                    } else {
-                                        false.parseLangOption("drag-and-drop")
-                                    }
-                                )
+                                .replace("%drag_and_drop_price%", this.dragAndDropPriceOrDisabled(player, level))
                         }
                         .formatEco()
                         .flatMap {
@@ -367,6 +356,45 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
         )
     }
 }
+
+private fun EcoEnchantLike.isApplicableTo(item: ItemStack): Boolean =
+    if (this is EcoEnchant) this in item.applicableEnchantments else this.canEnchantItem(item)
+
+private fun EcoEnchantLike.conflictsDisplay(): String =
+    if (this is EcoEnchant && this.conflictsWithEverything) {
+        plugin.langYml.getFormattedString("all-conflicts")
+    } else {
+        this.displayedConflicts.joinToString(", ") { conflict ->
+            conflict.wrap().getFormattedName(0)
+        }.ifEmpty { plugin.langYml.getFormattedString("no-conflicts") }
+    }
+
+private fun EcoEnchantLike.requiredDisplay(): String =
+    (this as? EcoEnchant)?.required.orEmpty().joinToString(", ") { required ->
+        required.wrap().getFormattedName(0)
+    }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
+
+private fun EcoEnchantLike.dragAndDropPriceOrDisabled(player: Player, level: Int): String =
+    if (this.isDragAndDropEnabled()) {
+        this.dragAndDropPriceDisplay(player, level)
+    } else {
+        false.parseLangOption("drag-and-drop")
+    }
+
+private val EcoEnchantLike.displayedConflicts: Collection<Enchantment>
+    get() = if (this is EcoEnchant) {
+        conflicts
+    } else {
+        @Suppress("DEPRECATION")
+        Registry.ENCHANTMENT.filter { other ->
+            other != enchantment &&
+                (other.ecoEnchant != null || plugin.vanillaEnchantsYml.has(other.key.key)) &&
+                (enchantment.conflictsWithDeep(other) || other.ecoEnchant?.conflictsWithEverything == true)
+        }
+    }
+
+private fun EcoEnchantLike.isObtainableWhenEnabled(path: String): Boolean =
+    this !is EcoEnchant || plugin.configYml.getBool(path)
 
 fun Boolean.parseYesOrNo(): String =
     if (this) plugin.langYml.getFormattedString("yes") else plugin.langYml.getFormattedString("no")

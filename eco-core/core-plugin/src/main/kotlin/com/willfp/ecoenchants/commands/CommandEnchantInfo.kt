@@ -2,9 +2,10 @@ package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.PluginCommand
 import com.willfp.ecoenchants.display.getFormattedName
-import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
+import com.willfp.ecoenchants.enchant.GuiEnchantments
 import com.willfp.ecoenchants.plugin
+import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.util.StringUtil
@@ -27,7 +28,7 @@ object CommandEnchantInfo : PluginCommand(
         val nameArgs = if (level != null) args.dropLast(1) else args
         val searchName = nameArgs.joinToString(" ")
 
-        val enchantment = EcoEnchants.getByName(searchName)
+        val enchantment = GuiEnchantments.getByName(searchName)
 
         if (enchantment == null || (enchantment.isHiddenFromGui && !sender.hasPermission("ecoenchants.seehidden"))) {
             val message = plugin.langYml.getMessage("not-found").replace("%name%", searchName)
@@ -43,7 +44,7 @@ object CommandEnchantInfo : PluginCommand(
 
         val canSeeHidden = sender.hasPermission("ecoenchants.seehidden")
         @Suppress("DEPRECATION")
-        val names = EcoEnchants.values().filter { !it.isHiddenFromGui || canSeeHidden }.mapNotNull { org.bukkit.ChatColor.stripColor(it.getFormattedName(0)) }
+        val names = GuiEnchantments.values().filter { !it.isHiddenFromGui || canSeeHidden }.mapNotNull { ChatColor.stripColor(it.getFormattedName(0)) }
 
         if (args.isEmpty()) {
             // Currently, this case is not ever reached
@@ -53,7 +54,7 @@ object CommandEnchantInfo : PluginCommand(
         // If all args except the last form a complete enchant name, suggest level numbers
         if (args.size > 1) {
             val namePrefix = args.dropLast(1).joinToString(" ")
-            val matched = EcoEnchants.getByName(namePrefix)
+            val matched = GuiEnchantments.getByName(namePrefix)
             if (matched != null && (!matched.isHiddenFromGui || canSeeHidden)) {
                 val levels = (1..matched.maximumLevel).map { it.toString() }
                 StringUtil.copyPartialMatches(args.last(), levels, completions)
