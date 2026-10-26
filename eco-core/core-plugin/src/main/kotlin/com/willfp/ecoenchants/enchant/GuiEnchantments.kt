@@ -1,8 +1,10 @@
 package com.willfp.ecoenchants.enchant
 
+import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.plugin
 import org.bukkit.ChatColor
+import org.bukkit.NamespacedKey
 import org.bukkit.Registry
 
 object GuiEnchantments {
@@ -21,7 +23,7 @@ object GuiEnchantments {
             .filter { enchantment ->
                 enchantment.ecoEnchant == null &&
                     EcoEnchants.getByID(enchantment.key.key) == null &&
-                    plugin.vanillaEnchantsYml.has(enchantment.key.key)
+                    isListedVanilla(enchantment.key, plugin.vanillaEnchantsYml)
             }
             .map { it.wrap() }
 
@@ -37,6 +39,9 @@ object GuiEnchantments {
     fun getByName(name: String): EcoEnchantLike? =
         resolveByName(name, EcoEnchants::getByName, vanillaByName, showVanilla)
 }
+
+internal fun isListedVanilla(key: NamespacedKey, vanillaEnchantsYml: Config): Boolean =
+    key.namespace == NamespacedKey.MINECRAFT && vanillaEnchantsYml.has(key.key)
 
 internal fun <T> resolveByName(
     name: String,

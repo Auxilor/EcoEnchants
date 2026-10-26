@@ -267,6 +267,9 @@ object EnchantGUI {
         }
     }
 
+    fun openInfoGUI(player: Player, enchant: EcoEnchant, level: Int = -1) =
+        openInfoGUI(player, enchant as EcoEnchantLike, level)
+
     fun openInfoGUI(player: Player, enchant: EcoEnchantLike, level: Int = -1) {
         val effectiveLevel = if (level == -1) {
             if (plugin.configYml.getBool("enchantinfo.item.show-max-level")) enchant.maximumLevel else 1
@@ -388,7 +391,7 @@ private val EcoEnchantLike.displayedConflicts: Collection<Enchantment>
         @Suppress("DEPRECATION")
         Registry.ENCHANTMENT.filter { other ->
             other != enchantment &&
-                (other.ecoEnchant != null || plugin.vanillaEnchantsYml.has(other.key.key)) &&
+                (other.ecoEnchant != null || isListedVanilla(other.key, plugin.vanillaEnchantsYml)) &&
                 (enchantment.conflictsWithDeep(other) || other.ecoEnchant?.conflictsWithEverything == true)
         }
     }
