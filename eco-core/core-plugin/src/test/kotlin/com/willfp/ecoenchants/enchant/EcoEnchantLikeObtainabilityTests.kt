@@ -20,7 +20,8 @@ private fun fakeEnchant(values: Map<String, Any?> = emptyMap()): EcoEnchantLike 
         override val rawDisplayName: String = "fake"
         override val nameTranslationKey: String? = null
         override val type: EnchantmentType get() = throw UnsupportedOperationException("not used in these tests")
-        override val enchantmentRarity: EnchantmentRarity get() = throw UnsupportedOperationException("not used in these tests")
+        override val enchantmentRarity: EnchantmentRarity
+            get() = throw UnsupportedOperationException("not used in these tests")
         override val targets: Set<EnchantmentTarget> = emptySet()
     }
 
@@ -36,7 +37,7 @@ internal class EcoEnchantLikeObtainabilityTests {
     }
 
     @Test
-    fun booleanDiscoverableAppliesToAll() {
+    fun discoverableBooleanForAll() {
         val enchant = fakeEnchant(mapOf("discoverable" to true))
         DiscoveryType.entries.forEach { assertTrue(enchant.isObtainableThrough(it)) }
     }

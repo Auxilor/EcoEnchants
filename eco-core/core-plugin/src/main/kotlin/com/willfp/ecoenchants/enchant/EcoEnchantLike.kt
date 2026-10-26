@@ -67,27 +67,26 @@ interface EcoEnchantLike {
      * If the enchantment is hidden from the enchant GUI.
      */
     val isHiddenFromGui: Boolean
-        get() = config.getBoolOrNull("hide-from-enchantgui") ?: false
+        get() = config.getBoolOrNull("hide-from-enchantgui") == true
 
     /**
      * If the enchantment is enchantable.
      */
     val isObtainableThroughEnchanting: Boolean
-        get() = config.getBoolOrNull("enchantable") ?: false
+        get() = config.getBoolOrNull("enchantable") == true
 
     /**
      * If the enchantment is tradeable.
      */
     val isObtainableThroughTrading: Boolean
-        get() = config.getBoolOrNull("tradeable") ?: false
+        get() = config.getBoolOrNull("tradeable") == true
 
     /**
      * If the enchantment is discoverable via a given [type].
      */
     fun isObtainableThrough(type: DiscoveryType): Boolean =
         config.getBoolOrNull("discoverable")
-            ?: config.getSubsectionOrNull("discoverable")?.getBoolOrNull(type.configKey)
-            ?: false
+            ?: config.getSubsectionOrNull("discoverable")?.getBoolOrNull(type.configKey) == true
 
     /**
      * If the enchantment is discoverable via any method.

@@ -13,16 +13,22 @@ object GuiEnchantments {
     private var vanillaByName: Map<String, EcoEnchantLike> = emptyMap()
 
     private val showVanilla: Boolean
-        get() = plugin.configYml.getBoolOrNull("enchant-gui.show-vanilla") ?: true
+        get() = plugin.configYml.getBoolOrNull("enchant-gui.show-vanilla") != false
 
     internal fun reload() {
         @Suppress("DEPRECATION")
         vanillaEnchants = Registry.ENCHANTMENT
-            .filter { it.ecoEnchant == null && EcoEnchants.getByID(it.key.key) == null && plugin.vanillaEnchantsYml.has(it.key.key) }
+            .filter { enchantment ->
+                enchantment.ecoEnchant == null &&
+                    EcoEnchants.getByID(enchantment.key.key) == null &&
+                    plugin.vanillaEnchantsYml.has(enchantment.key.key)
+            }
             .map { it.wrap() }
 
         @Suppress("DEPRECATION")
-        vanillaByName = vanillaEnchants.associateBy { ChatColor.stripColor(it.getFormattedName(0))?.lowercase().orEmpty() }
+        vanillaByName = vanillaEnchants.associateBy {
+            ChatColor.stripColor(it.getFormattedName(0))?.lowercase().orEmpty()
+        }
     }
 
     fun values(): List<EcoEnchantLike> =
@@ -32,5 +38,10 @@ object GuiEnchantments {
         resolveByName(name, EcoEnchants::getByName, vanillaByName, showVanilla)
 }
 
-internal fun <T> resolveByName(name: String, custom: (String) -> T?, vanilla: Map<String, T>, showVanilla: Boolean): T? =
+internal fun <T> resolveByName(
+    name: String,
+    custom: (String) -> T?,
+    vanilla: Map<String, T>,
+    showVanilla: Boolean
+): T? =
     custom(name) ?: if (showVanilla) vanilla[name.lowercase()] else null

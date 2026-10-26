@@ -32,13 +32,11 @@ internal class FakeConfig(private val values: Map<String, Any?> = emptyMap()) : 
 
     override fun getBoolsOrNull(path: String): List<Boolean>? = null
 
-    override fun getStringOrNull(path: String, format: Boolean, option: StringUtils.FormatOption): String? {
-        return values[path] as? String
-    }
+    override fun getStringOrNull(path: String, format: Boolean, option: StringUtils.FormatOption): String? =
+        values[path] as? String
 
-    override fun getStringsOrNull(path: String, format: Boolean, option: StringUtils.FormatOption): List<String>? {
-        return null
-    }
+    override fun getStringsOrNull(path: String, format: Boolean, option: StringUtils.FormatOption): List<String>? =
+        null
 
     override fun getDoubleOrNull(path: String): Double? = values[path] as? Double
 
