@@ -171,6 +171,8 @@ object EnchantingTableSupport : Listener {
             return
         }
 
+        event.isCancelled = false
+
         val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")
 
         /*
