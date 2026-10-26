@@ -267,8 +267,9 @@ object EnchantGUI {
         }
     }
 
-    fun openInfoGUI(player: Player, enchant: EcoEnchant, level: Int = -1) =
+    fun openInfoGUI(player: Player, enchant: EcoEnchant, level: Int = -1) {
         openInfoGUI(player, enchant as EcoEnchantLike, level)
+    }
 
     fun openInfoGUI(player: Player, enchant: EcoEnchantLike, level: Int = -1) {
         val effectiveLevel = if (level == -1) {
