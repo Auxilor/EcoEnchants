@@ -4,6 +4,11 @@
 # Targets are only used for display, such as the book-targets line in config.yml.
 # They do not change which items a vanilla enchantment can be applied to.
 
+# tradeable, discoverable and enchantable are only used for display, in /enchantinfo and the enchant GUI.
+# They do not change how vanilla enchantments are obtained.
+
+# Set hide-from-enchantgui: true on an enchantment to hide it from the enchant GUI and /enchantinfo.
+
 protection:
   name: "Protection"
   description: "Reduces incoming damage by &a%placeholder%%"
@@ -12,6 +17,13 @@ protection:
   targets:
     - armor
   rarity: common
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   #max-level: 6 # Custom max level to override for the enchantment. Raise it, but lowering it may cause bugs.
   #conflicts: [] # Custom conflicts to override for the enchantment. Add or remove conflicts as you please.
   drag-and-drop:
@@ -27,6 +39,13 @@ fire_protection:
   targets:
     - armor
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -38,6 +57,13 @@ feather_falling:
   targets:
     - boots
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -51,6 +77,13 @@ blast_protection:
   targets:
     - armor
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -62,6 +95,13 @@ projectile_protection:
   targets:
     - armor
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -75,6 +115,13 @@ respiration:
   targets:
     - helmet
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -85,6 +132,13 @@ aqua_affinity:
   targets:
     - helmet
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -96,6 +150,13 @@ thorns:
   targets:
     - armor
   rarity: epic
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -107,6 +168,13 @@ depth_strider:
   targets:
     - boots
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -118,6 +186,13 @@ frost_walker:
   targets:
     - boots
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: false
+    raids: false
+  enchantable: false
   drag-and-drop:
     enabled: false
 
@@ -129,6 +204,13 @@ binding_curse:
     - armor
     - elytra
   rarity: epic
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: false
+    raids: false
+  enchantable: false
   drag-and-drop:
     enabled: false
 
@@ -142,6 +224,13 @@ sharpness:
     - axe
     - spear
   rarity: common
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -156,6 +245,13 @@ smite:
     - spear
     - mace
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -172,6 +268,13 @@ bane_of_arthropods:
     - spear
     - mace
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -184,6 +287,13 @@ knockback:
     - sword
     - spear
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -197,6 +307,13 @@ fire_aspect:
     - spear
     - mace
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -211,6 +328,13 @@ looting:
     - sword
     - spear
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -235,6 +359,13 @@ sweeping_edge:
   targets:
     - sword
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -250,6 +381,13 @@ efficiency:
     - hoe
     - shears
   rarity: common
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -263,6 +401,13 @@ silk_touch:
     - shovel
     - hoe
   rarity: epic
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -290,6 +435,13 @@ unbreaking:
     - flint_and_steel
     - carrot_on_a_stick
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -304,6 +456,13 @@ fortune:
     - shovel
     - hoe
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -315,6 +474,13 @@ power:
   targets:
     - bow
   rarity: common
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -326,6 +492,13 @@ punch:
   targets:
     - bow
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -336,6 +509,13 @@ flame:
   targets:
     - bow
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -346,6 +526,13 @@ infinity:
   targets:
     - bow
   rarity: epic
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -357,6 +544,13 @@ luck_of_the_sea:
   targets:
     - fishing_rod
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -368,6 +562,13 @@ lure:
   targets:
     - fishing_rod
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -378,6 +579,13 @@ loyalty:
   targets:
     - trident
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -389,6 +597,13 @@ impaling:
   targets:
     - trident
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -399,6 +614,13 @@ riptide:
   targets:
     - trident
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -409,6 +631,13 @@ channeling:
   targets:
     - trident
   rarity: epic
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -419,6 +648,13 @@ multishot:
   targets:
     - crossbow
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -430,6 +666,13 @@ quick_charge:
   targets:
     - crossbow
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -441,6 +684,13 @@ piercing:
   targets:
     - crossbow
   rarity: common
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -467,6 +717,13 @@ mending:
     - flint_and_steel
     - carrot_on_a_stick
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: false
+    raids: false
+  enchantable: false
   drag-and-drop:
     enabled: false
 
@@ -493,6 +750,13 @@ vanishing_curse:
     - flint_and_steel
     - carrot_on_a_stick
   rarity: epic
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: false
+    raids: false
+  enchantable: false
   drag-and-drop:
     enabled: false
 
@@ -504,6 +768,13 @@ soul_speed:
   targets:
     - boots
   rarity: epic
+  tradeable: false
+  discoverable:
+    chests: true
+    fishing: false
+    mob-drops: true
+    raids: false
+  enchantable: false
   drag-and-drop:
     enabled: false
 
@@ -515,6 +786,13 @@ swift_sneak:
   targets:
     - leggings
   rarity: epic
+  tradeable: false
+  discoverable:
+    chests: true
+    fishing: false
+    mob-drops: false
+    raids: false
+  enchantable: false
   drag-and-drop:
     enabled: false
 
@@ -526,6 +804,13 @@ density:
   targets:
     - mace
   rarity: common
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -537,6 +822,13 @@ breach:
   targets:
     - mace
   rarity: rare
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
 
@@ -548,6 +840,13 @@ wind_burst:
   targets:
     - mace
   rarity: legendary
+  tradeable: false
+  discoverable:
+    chests: true
+    fishing: false
+    mob-drops: false
+    raids: false
+  enchantable: false
   drag-and-drop:
     enabled: false
 
@@ -559,5 +858,12 @@ lunge:
   targets:
     - spear
   rarity: uncommon
+  tradeable: true
+  discoverable:
+    chests: true
+    fishing: true
+    mob-drops: true
+    raids: false
+  enchantable: true
   drag-and-drop:
     enabled: false
