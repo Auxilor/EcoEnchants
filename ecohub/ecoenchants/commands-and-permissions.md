@@ -12,6 +12,7 @@ Every command and its permission node is listed below. Permissions follow the `e
 | `/enchantinfo <enchant> [level]`                                 | Open the enchant info GUI for the specified enchantment at an optional level | `ecoenchants.command.enchantinfo`   |
 | `/ecoenchants gui`                                               | Open the enchantment GUI                                                | `ecoenchants.command.gui`                |
 | `/ecoenchants giverandombook <player> [type/rarity] [min] [max]` | Give a player a random enchanted book                                   | `ecoenchants.command.giverandombook`     |
+| `/ecoenchants givebook <player> <enchant:level,...> [amount]` | Give a player an enchanted book with the listed enchantments (vanilla or custom, level defaults to 1) | `ecoenchants.command.givebook` |
 | `/ecoenchants import <id>`                                       | Import an enchant from [lrcdb](https://lrcdb.auxilor.io/)               | `ecoenchants.command.import`             |
 | `/ecoenchants export <id>`                                       | Export an enchant to [lrcdb](https://lrcdb.auxilor.io/)                 | `ecoenchants.command.export`             | 
 | `/ecoenchants toggledescriptions`                                | Let players toggle enchantment descriptions                             | `ecoenchants.command.toggledescriptions` |
