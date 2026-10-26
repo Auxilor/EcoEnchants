@@ -150,6 +150,7 @@ enchantinfo:
 enchant-gui:
   rows: 6 # How many rows to have in the GUI
   title: "Enchant GUI" # The title of the GUI
+  show-vanilla: true # If vanilla enchantments are shown in the GUI and in /enchantinfo
 
   mask: # The background material
     items:
