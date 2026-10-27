@@ -8,6 +8,7 @@ import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
+import com.willfp.ecoenchants.enchant.EnchantmentRequirement
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.target.EnchantmentTargets
@@ -40,8 +41,6 @@ abstract class EcoEnchantBase(
 
     private val conflictIds = config.getStrings("conflicts").toSet()
 
-    private val requiredIds = config.getStrings("required").toSet()
-
     override val enchantmentKey = NamespacedKey.minecraft(id)
 
     override val rawDisplayName = config.getString("display-name")
@@ -61,11 +60,19 @@ abstract class EcoEnchantBase(
         }
         .toSet()
 
-    override val required = config.getStrings("required")
-        .mapNotNull {
-            @Suppress("DEPRECATION")
-            Enchantment.getByKey(NamespacedKey.minecraft(it))
+    override val requirements = config.getStrings("required")
+        .mapNotNull { entry ->
+            EnchantmentRequirement.parse(entry).also { requirement ->
+                if (requirement == null) {
+                    plugin.logger.warning(
+                        "Invalid requirement '$entry' in enchantment $id, expected id[:level] [remove]"
+                    )
+                }
+            }
         }
+
+    override val required = requirements
+        .mapNotNull { it.enchantment }
         .toSet()
 
     override val targets = config.getStrings("targets")
@@ -149,12 +156,6 @@ abstract class EcoEnchantBase(
 
     override fun conflictsWithDirectly(other: Enchantment): Boolean {
         return other.key.key in conflictIds || this.conflictsWithEverything
-    }
-
-    override fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean {
-        return requiredIds.all { requiredId ->
-            other.any { enchantment -> enchantment.key.key.equals(requiredId, ignoreCase = true) }
-        }
     }
 
     final override fun equals(other: Any?): Boolean {

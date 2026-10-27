@@ -315,8 +315,8 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                 .addLoreLines(this.getFormattedDescription(level, player))
                 .addLoreLines {
                     plugin.configYml.getStrings("enchantinfo.item.lore")
-                        .map {
-                            it.replace("%max_level%", enchantment.maxLevel.toString())
+                        .map { line ->
+                            line.replace("%max_level%", enchantment.maxLevel.toString())
                                 .replace("%rarity%", this.enchantmentRarity.displayName)
                                 .replace(
                                     "%targets%",
@@ -334,9 +334,13 @@ private fun EcoEnchant.getInformationSlot(player: Player, level: Int): Slot {
                                 )
                                 .replace(
                                     "%required%",
-                                    this.required.joinToString(", ") { required ->
-                                        required.wrap().getFormattedName(0)
-                                    }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
+                                    this.requirements
+                                        .mapNotNull { requirement -> requirement.enchantment?.to(requirement.level) }
+                                        .joinToString(", ") { (required, requiredLevel) ->
+                                            required.wrap()
+                                                .getFormattedName(if (requiredLevel > 1) requiredLevel else 0)
+                                        }
+                                        .ifEmpty { plugin.langYml.getFormattedString("no-required") }
                                 )
                                 .replace("%tradeable%", (plugin.configYml.getBool("villager.enabled") && this.isObtainableThroughTrading).parseLangOption("tradeable"))
                                 .replace("%discoverable%", (plugin.configYml.getBool("loot.enabled") && this.isObtainableThroughDiscovery).parseDiscoverable())
