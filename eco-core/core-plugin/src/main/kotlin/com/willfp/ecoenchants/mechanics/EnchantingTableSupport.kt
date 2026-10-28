@@ -17,6 +17,8 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.enchantment.EnchantItemEvent
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import java.util.UUID
@@ -29,6 +31,13 @@ object EnchantingTableSupport : Listener {
     @EventHandler
     fun onLeave(event: PlayerQuitEvent) {
         ExtraItemSupport.currentlyEnchantingExtraItem.remove(event.player.uniqueId)
+    }
+
+    @EventHandler
+    fun onClose(event: InventoryCloseEvent) {
+        if (event.inventory.type == InventoryType.ENCHANTING) {
+            ExtraItemSupport.currentlyEnchantingExtraItem.remove(event.player.uniqueId)
+        }
     }
 
     @EventHandler
@@ -131,8 +140,6 @@ object EnchantingTableSupport : Listener {
             toAdd[enchantment.enchantment] = level
         }
 
-        toAdd.forEach(event.enchantsToAdd::putIfAbsent)
-
         if (toAdd.isEmpty() && isExtraEnchantable) {
             val extraLevels = ExtraItemSupport.currentlyEnchantingExtraItem.remove(player.uniqueId)
             if (extraLevels != null) {
@@ -148,14 +155,21 @@ object EnchantingTableSupport : Listener {
         if (item.type == Material.ENCHANTED_BOOK) {
             plugin.scheduler.on(player).run {
                 if (!event.isCancelled) {
-                    val postEnchantItem = event.inventory.getItem(0)
-                    val meta = postEnchantItem?.itemMeta as? EnchantmentStorageMeta
-                    for ((enchant, level) in event.enchantsToAdd) {
-                        meta?.addStoredEnchant(enchant, level, true)
-                    }
-                    postEnchantItem?.itemMeta = meta
+                    applyStoredEnchants(event)
                 }
             }
+        }
+    }
+
+    private fun applyStoredEnchants(event: EnchantItemEvent) {
+        val postEnchantItem = event.inventory.getItem(0) ?: return
+        val meta = postEnchantItem.itemMeta as? EnchantmentStorageMeta ?: return
+
+        if (event.enchantsToAdd.keys.containsAll(meta.storedEnchants.keys + meta.enchants.keys)) {
+            for ((enchant, level) in event.enchantsToAdd) {
+                meta.addStoredEnchant(enchant, level, true)
+            }
+            postEnchantItem.itemMeta = meta
         }
     }
 
@@ -170,6 +184,8 @@ object EnchantingTableSupport : Listener {
         if (!ExtraItemSupport.extraEnchantableItems.any { it.matches(item) }) {
             return
         }
+
+        event.isCancelled = false
 
         val maxObtainableLevel = plugin.configYml.getInt("enchanting-table.maximum-obtainable-level")
 
@@ -188,8 +204,9 @@ object EnchantingTableSupport : Listener {
 
         val bottomEnchantLevel =
             (ceil((baseLevel / 3).coerceAtLeast(1.0)).toInt() * levelScale).coerceAtMost(maxObtainableLevel)
-        val midEnchantLevel = ((baseLevel * 2 / 3).toInt() + 1) * levelScale
-        val topEnchantLevel = baseLevel.coerceAtLeast(bonus * 2.0).toInt() * levelScale
+        val midEnchantLevel = (((baseLevel * 2 / 3).toInt() + 1) * levelScale).coerceAtMost(maxObtainableLevel)
+        val topEnchantLevel =
+            (baseLevel.coerceAtLeast(bonus * 2.0).toInt() * levelScale).coerceAtMost(maxObtainableLevel)
 
         var midUnbreakingLevel = NumberUtils.randInt(1, 3)
         if (midUnbreakingLevel < 2) {
