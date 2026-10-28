@@ -57,13 +57,19 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
             }
 
             val player = event.entity
-            val items = player.getItemsWithEnchantActive(enchant).keys
+            val items = player.getItemsWithEnchantActive(enchant).map { it.first }
 
             if (items.isEmpty()) {
                 return
             }
 
-            event.drops.removeAll(items)
+            for (item in items) {
+                val index = event.drops.indexOf(item)
+
+                if (index >= 0) {
+                    event.drops.removeAt(index)
+                }
+            }
 
             // Use native paper method
             if (Prerequisite.HAS_PAPER.isMet) {
@@ -99,7 +105,9 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
             ignoreCancelled = true
         )
         fun onJoin(event: PlayerJoinEvent) {
-            giveItems(event.player)
+            if (!event.player.isDead) {
+                giveItems(event.player)
+            }
         }
 
         @EventHandler(
@@ -110,22 +118,22 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
         }
 
         private fun giveItems(player: Player) {
-            val itemStrings = player.profile.read(savedSoulboundItems)
+            val saved = player.profile.read(savedSoulboundItems)
 
-            if (itemStrings.isEmpty()) {
+            if (saved.isEmpty()) {
                 return
             }
 
-            val items = itemStrings.map { Items.fromSNBT(it) }
+            player.profile.write(savedSoulboundItems, emptyList())
 
-            plugin.scheduler.on(player).run {
+            plugin.scheduler.on(player).onRetired {
+                player.profile.write(savedSoulboundItems, player.profile.read(savedSoulboundItems) + saved)
+            }.run {
                 DropQueue(player)
-                    .addItems(items)
+                    .addItems(saved.map { Items.fromSNBT(it) })
                     .forceTelekinesis()
                     .push()
             }
-
-            player.profile.write(savedSoulboundItems, emptyList())
         }
 
         @EventHandler(

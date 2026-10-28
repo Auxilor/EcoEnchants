@@ -64,11 +64,13 @@ object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
             .any { it.level.conditions.areMet(this.toDispatcher(), it.holder) }
     }
 
-    fun LivingEntity.getItemsWithEnchantActive(enchant: EcoEnchant): Map<ItemStack, Int> {
+    /**
+     * Every item with [enchant] active and its level. Identical items each get their own entry.
+     */
+    fun LivingEntity.getItemsWithEnchantActive(enchant: EcoEnchant): List<Pair<ItemStack, Int>> {
         return this.cachedLevels
-            .filter { it.level.enchant == enchant }
-            .filter { it.level.conditions.areMet(this.toDispatcher(), it.holder) }
-            .associate { it.item to it.level.level }
+            .filter { it.level.enchant == enchant && it.level.conditions.areMet(this.toDispatcher(), it.holder) }
+            .map { it.item to it.level.level }
     }
 
     private data class ProvidedLevel(
