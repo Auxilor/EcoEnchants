@@ -118,21 +118,21 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
         }
 
         private fun giveItems(player: Player) {
-            if (player.profile.read(savedSoulboundItems).isEmpty()) {
+            val saved = player.profile.read(savedSoulboundItems)
+
+            if (saved.isEmpty()) {
                 return
             }
 
-            plugin.scheduler.on(player).run {
-                val items = player.profile.read(savedSoulboundItems).map { Items.fromSNBT(it) }
+            player.profile.write(savedSoulboundItems, emptyList())
 
-                if (items.isNotEmpty()) {
-                    player.profile.write(savedSoulboundItems, emptyList())
-
-                    DropQueue(player)
-                        .addItems(items)
-                        .forceTelekinesis()
-                        .push()
-                }
+            plugin.scheduler.on(player).onRetired {
+                player.profile.write(savedSoulboundItems, player.profile.read(savedSoulboundItems) + saved)
+            }.run {
+                DropQueue(player)
+                    .addItems(saved.map { Items.fromSNBT(it) })
+                    .forceTelekinesis()
+                    .push()
             }
         }
 

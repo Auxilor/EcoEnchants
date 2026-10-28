@@ -56,9 +56,14 @@ object EnchantmentRepairing : HardcodedEcoEnchant(
 
     private fun repairNotHeldOrWorn(player: Player, items: List<Pair<ItemStack, Int>>, repairPerLevel: Int) {
         val pending = items.map { (item, level) -> PendingRepair(item.clone(), item, level) }.toMutableList()
-        val heldOrWorn = (SlotTypeHands.getItems(player) + SlotTypeArmor.getItems(player))
-            .map { it.clone() }
-            .toMutableList()
+
+        for (heldOrWorn in SlotTypeHands.getItems(player) + SlotTypeArmor.getItems(player)) {
+            val match = pending.indexOfFirst { it.snapshot == heldOrWorn }
+
+            if (match >= 0) {
+                pending.removeAt(match)
+            }
+        }
 
         for (index in 0 until STORAGE_SLOTS) {
             val item = player.inventory.getItem(index)
@@ -70,13 +75,7 @@ object EnchantmentRepairing : HardcodedEcoEnchant(
         }
 
         for (repair in pending) {
-            val held = heldOrWorn.indexOfFirst { it == repair.snapshot }
-
-            if (held >= 0) {
-                heldOrWorn.removeAt(held)
-            } else {
-                DurabilityUtils.repairItem(repair.item, repair.level * repairPerLevel)
-            }
+            DurabilityUtils.repairItem(repair.item, repair.level * repairPerLevel)
         }
     }
 
