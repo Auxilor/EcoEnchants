@@ -57,13 +57,19 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
             }
 
             val player = event.entity
-            val items = player.getItemsWithEnchantActive(enchant).keys
+            val items = player.getItemsWithEnchantActive(enchant).map { it.first }
 
             if (items.isEmpty()) {
                 return
             }
 
-            event.drops.removeAll(items)
+            for (item in items) {
+                val index = event.drops.indexOf(item)
+
+                if (index >= 0) {
+                    event.drops.removeAt(index)
+                }
+            }
 
             // Use native paper method
             if (Prerequisite.HAS_PAPER.isMet) {
@@ -99,7 +105,9 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
             ignoreCancelled = true
         )
         fun onJoin(event: PlayerJoinEvent) {
-            giveItems(event.player)
+            if (!event.player.isDead) {
+                giveItems(event.player)
+            }
         }
 
         @EventHandler(
@@ -110,22 +118,22 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
         }
 
         private fun giveItems(player: Player) {
-            val itemStrings = player.profile.read(savedSoulboundItems)
-
-            if (itemStrings.isEmpty()) {
+            if (player.profile.read(savedSoulboundItems).isEmpty()) {
                 return
             }
 
-            val items = itemStrings.map { Items.fromSNBT(it) }
-
             plugin.scheduler.on(player).run {
-                DropQueue(player)
-                    .addItems(items)
-                    .forceTelekinesis()
-                    .push()
-            }
+                val items = player.profile.read(savedSoulboundItems).map { Items.fromSNBT(it) }
 
-            player.profile.write(savedSoulboundItems, emptyList())
+                if (items.isNotEmpty()) {
+                    player.profile.write(savedSoulboundItems, emptyList())
+
+                    DropQueue(player)
+                        .addItems(items)
+                        .forceTelekinesis()
+                        .push()
+                }
+            }
         }
 
         @EventHandler(
