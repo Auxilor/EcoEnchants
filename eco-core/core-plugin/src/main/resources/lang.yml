@@ -15,6 +15,9 @@ messages:
   no-enchantments-found: "&cNo enchantments found!"
   invalid-levels: "&cMinimum level can't be higher than maximum level!"
   invalid-enchantment: "&cInvalid enchantment!"
+  invalid-level: "&cInvalid level!"
+  invalid-amount: "&cInvalid amount!"
+  gave-book: "&fGave &a%player%&f %amount%x book (&r%enchantments%&f)!"
   added-enchant: "&fAdded &a%enchant%&f to &a%player%&f's held item!"
   removed-enchant: "&fRemoved &a%enchant%&f from &a%player%&f's held item!"
 
