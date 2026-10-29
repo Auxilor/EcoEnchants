@@ -17,6 +17,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerRespawnEvent
+import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
 object EnchantmentSoulbound : HardcodedEcoEnchant(
@@ -48,7 +49,7 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
         private val soulboundKey = plugin.namespacedKeyFactory.create("soulbound")
 
         @EventHandler(
-            priority = EventPriority.HIGHEST,
+            priority = EventPriority.HIGH,
             ignoreCancelled = true
         )
         fun handle(event: PlayerDeathEvent) {
@@ -73,21 +74,28 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
 
             // Use native paper method
             if (Prerequisite.HAS_PAPER.isMet) {
-                val modifiedItems = if (enchant.config.getBool("single-use")) {
-                    items.map {
-                        val meta = it.itemMeta ?: return@map it
-                        meta.removeEnchant(enchant.enchantment)
-                        it.itemMeta = meta
-                        it
-                    }
-                } else {
-                    items
-                }
+                keepOnPaper(event, items)
+            } else {
+                saveForRespawn(player, items)
+            }
+        }
 
-                event.itemsToKeep += modifiedItems
-                return
+        private fun keepOnPaper(event: PlayerDeathEvent, items: List<ItemStack>) {
+            val modifiedItems = if (enchant.config.getBool("single-use")) {
+                items.map {
+                    val meta = it.itemMeta ?: return@map it
+                    meta.removeEnchant(enchant.enchantment)
+                    it.itemMeta = meta
+                    it
+                }
+            } else {
+                items
             }
 
+            event.itemsToKeep += modifiedItems
+        }
+
+        private fun saveForRespawn(player: Player, items: List<ItemStack>) {
             for (item in items) {
                 item.fast().persistentDataContainer.set(soulboundKey, PersistentDataType.INTEGER, 1)
 
@@ -137,7 +145,7 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
         }
 
         @EventHandler(
-            priority = EventPriority.HIGHEST,
+            priority = EventPriority.HIGH,
             ignoreCancelled = true
         )
         fun preventDroppingSoulboundItems(event: PlayerDeathEvent) {
