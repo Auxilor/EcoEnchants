@@ -1,8 +1,10 @@
 package com.willfp.ecoenchants.config
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import org.bukkit.configuration.InvalidConfigurationException
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
+import java.util.logging.Level
 
 object HardcodedEnchantMigration {
     private val migrations: Map<String, Migration> = mapOf(
@@ -58,13 +60,20 @@ object HardcodedEnchantMigration {
     }
 
     private fun migrate(plugin: EcoEnchantsPlugin, file: File) {
-        val config = YamlConfiguration.loadConfiguration(file)
+        val config = YamlConfiguration()
 
-        if (config.contains("effects")) {
+        try {
+            config.load(file)
+        } catch (e: InvalidConfigurationException) {
+            plugin.logger.log(Level.WARNING, "Could not migrate ${file.name}, it is not valid YAML", e)
             return
         }
 
-        val migration = migrations[file.nameWithoutExtension] ?: return
+        val migration = migrations[file.nameWithoutExtension]
+
+        if (migration == null || config.contains("effects")) {
+            return
+        }
 
         config["effects"] = migration.effects(config)
 
