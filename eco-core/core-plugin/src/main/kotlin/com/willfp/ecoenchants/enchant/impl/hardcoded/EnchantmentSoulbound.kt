@@ -58,18 +58,12 @@ object EnchantmentSoulbound : HardcodedEcoEnchant(
             }
 
             val player = event.entity
-            val items = player.getItemsWithEnchantActive(enchant).map { it.first }
+            val items = player.getItemsWithEnchantActive(enchant)
+                .map { it.first }
+                .filter { event.drops.remove(it) }
 
             if (items.isEmpty()) {
                 return
-            }
-
-            for (item in items) {
-                val index = event.drops.indexOf(item)
-
-                if (index >= 0) {
-                    event.drops.removeAt(index)
-                }
             }
 
             // Use native paper method
