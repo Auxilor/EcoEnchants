@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.config
 
 import com.willfp.ecoenchants.EcoEnchantsPlugin
-import org.bukkit.configuration.InvalidConfigurationException
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.util.logging.Level
@@ -60,18 +59,13 @@ object HardcodedEnchantMigration {
     }
 
     private fun migrate(plugin: EcoEnchantsPlugin, file: File) {
-        val config = YamlConfiguration()
-
-        try {
-            config.load(file)
-        } catch (e: InvalidConfigurationException) {
-            plugin.logger.log(Level.WARNING, "Could not migrate ${file.name}, it is not valid YAML", e)
-            return
-        }
+        val config = runCatching { YamlConfiguration().apply { load(file) } }
+            .onFailure { plugin.logger.log(Level.WARNING, "Could not migrate ${file.name}, it could not be read", it) }
+            .getOrNull()
 
         val migration = migrations[file.nameWithoutExtension]
 
-        if (migration == null || config.contains("effects")) {
+        if (config == null || migration == null || config.contains("effects")) {
             return
         }
 
@@ -81,8 +75,9 @@ object HardcodedEnchantMigration {
             config[key] = null
         }
 
-        config.save(file)
-        plugin.logger.info("Migrated ${file.name} to effects")
+        runCatching { config.save(file) }
+            .onSuccess { plugin.logger.info("Migrated ${file.name} to effects") }
+            .onFailure { plugin.logger.log(Level.WARNING, "Could not save migrated ${file.name}", it) }
     }
 
     private class Migration(
