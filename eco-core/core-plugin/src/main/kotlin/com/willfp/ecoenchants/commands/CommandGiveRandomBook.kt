@@ -6,7 +6,9 @@ import com.willfp.eco.core.items.builder.EnchantedBookBuilder
 import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
+import com.willfp.ecoenchants.enchant.EcoEnchantLike
 import com.willfp.ecoenchants.enchant.EcoEnchants
+import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.runOwned
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -14,6 +16,7 @@ import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.Bukkit
+import org.bukkit.Registry
 import org.bukkit.command.CommandSender
 
 object CommandGiveRandomBook : PluginCommand(
@@ -22,6 +25,8 @@ object CommandGiveRandomBook : PluginCommand(
     "ecoenchants.command.giverandombook",
     false
 ) {
+    private const val INCLUDE_VANILLA_INDEX = 4
+
     override fun onExecute(sender: CommandSender, args: List<String>) {
         val playerName = args.getOrNull(0)
 
@@ -51,7 +56,7 @@ object CommandGiveRandomBook : PluginCommand(
             return
         }
 
-        val enchantment = EcoEnchants.values()
+        val enchantment = getEnchantmentPool(args)
             .filter {
                 when (filter) {
                     is EnchantmentRarity -> it.enchantmentRarity == filter
@@ -59,10 +64,11 @@ object CommandGiveRandomBook : PluginCommand(
                     else -> true
                 } && it.maximumLevel >= minLevel
             }
-            .randomOrNull() ?: run {
-            sender.sendMessage(plugin.langYml.getMessage("no-enchantments-found"))
-            return
-        }
+            .randomOrNull()
+            ?: run {
+                sender.sendMessage(plugin.langYml.getMessage("no-enchantments-found"))
+                return
+            }
 
         val level = NumberUtils.randInt(minLevel, maxLevel.coerceAtMost(enchantment.maximumLevel))
 
@@ -85,17 +91,26 @@ object CommandGiveRandomBook : PluginCommand(
         )
     }
 
+    private fun getEnchantmentPool(args: List<String>): Collection<EcoEnchantLike> =
+        if (args.getOrNull(INCLUDE_VANILLA_INDEX)?.toBoolean() == true) {
+            Registry.ENCHANTMENT.map { it.wrap() }
+        } else {
+            EcoEnchants.values()
+        }
+
     override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {
         // OfTeN wrote this - it's cursed, and I am *not* going to try refactor this.
         return when (args.size) {
             1 -> Bukkit.getOnlinePlayers().map { it.name }
-            2 -> (EnchantmentRarities.values().map { it.id } + EnchantmentTypes.values().map { it.id })
+            2 -> listOf("all") + EnchantmentRarities.values().map { it.id } + EnchantmentTypes.values().map { it.id }
             3 -> (1..10).map { it.toString() }
             4 -> {
                 val startLevel = args[2].toIntOrNull() ?: 1
                 val endLevel = startLevel + 10
                 (startLevel..endLevel).map { it.toString() }
             }
+
+            INCLUDE_VANILLA_INDEX + 1 -> listOf("true", "false")
 
             else -> emptyList()
         }

@@ -124,6 +124,7 @@ enchantinfo:
   item:
     row: 2
     column: 5
+    locations: [ ] # Optional list of row/column slots; if set, the button shows in each of them instead of row/column
     show-max-level: true # Whether the book should be the max level or level 1
     lore: # The description is automatically appended
       - ""
@@ -149,6 +150,7 @@ enchantinfo:
 enchant-gui:
   rows: 6 # How many rows to have in the GUI
   title: "Enchant GUI" # The title of the GUI
+  show-vanilla: true # If vanilla enchantments are shown in the GUI and in /enchantinfo
 
   mask: # The background material
     items:
@@ -174,6 +176,7 @@ enchant-gui:
       - "&farea below!"
     row: 1
     column: 9
+    locations: [ ] # Optional list of row/column slots; if set, the button shows in each of them instead of row/column
 
   item-row: 1 # The row for the slot to drop in the item
   item-column: 5 # The column
@@ -199,6 +202,7 @@ enchant-gui:
     lore: [ ]
     row: 6
     column: 5
+    locations: [ ] # Optional list of row/column slots; if set, the button shows in each of them instead of row/column
 
   # Options for the area where the enchantments are shown
   enchant-area:
@@ -226,6 +230,7 @@ enchant-gui:
     lore: []
     row: 6
     column: 1
+    locations: [ ] # Optional list of row/column slots; if set, the button shows in each of them instead of row/column
 
 # Options for the group selection GUI (only used when enchant-gui.grouped is true)
 group-gui:

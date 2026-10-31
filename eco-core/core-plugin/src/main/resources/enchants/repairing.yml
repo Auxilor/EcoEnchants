@@ -16,8 +16,18 @@ tradeable: true
 discoverable: true
 enchantable: true
 
-conditions: [ ]
+effects:
+  - id: repair_item
+    args:
+      damage: "%level%"
+    triggers:
+      - static_30
+    conditions:
+      - id: provider_in_slot # Don't repair items while they are held or worn
+        args:
+          slots:
+            - hands
+            - armor
+          inverse: true
 
-repair-per-level: 1 # The amount of durability to add on each item
-frequency: 30 # How often to repair the item (in ticks, doesn't support %level%)
-not-while-holding: true # If items shouldn't be repaired while they are being held
+conditions: [ ]

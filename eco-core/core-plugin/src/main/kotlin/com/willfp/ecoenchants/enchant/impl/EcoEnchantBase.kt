@@ -53,12 +53,14 @@ abstract class EcoEnchantBase(
         get() = conflictIds.containsIgnoreCase("all")
                 || conflictIds.containsIgnoreCase("everything")
 
-    override val conflicts = config.getStrings("conflicts")
-        .mapNotNull {
-            @Suppress("DEPRECATION")
-            Enchantment.getByKey(NamespacedKey.minecraft(it))
-        }
-        .toSet()
+    override val conflicts by lazy {
+        config.getStrings("conflicts")
+            .mapNotNull {
+                @Suppress("DEPRECATION")
+                Enchantment.getByKey(NamespacedKey.minecraft(it))
+            }
+            .toSet()
+    }
 
     override val requirements = config.getStrings("required")
         .map { entry ->
@@ -70,9 +72,11 @@ abstract class EcoEnchantBase(
             }
         }
 
-    override val required = requirements
-        .mapNotNull { it.enchantment }
-        .toSet()
+    override val required by lazy {
+        requirements
+            .mapNotNull { it.enchantment }
+            .toSet()
+    }
 
     override val targets = config.getStrings("targets")
         .mapNotNull { EnchantmentTargets[it] }

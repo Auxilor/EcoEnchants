@@ -5,13 +5,10 @@ import com.google.common.collect.Maps
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.enchant.CustomEnchantments
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import com.willfp.ecoenchants.config.HardcodedEnchantMigration
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.impl.LibreforgeEcoEnchant
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentReplenish
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentSoulbound
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -39,6 +36,8 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
     }
 
     override fun beforeReload(plugin: LibreforgePlugin) {
+        HardcodedEnchantMigration.migrate(plugin as EcoEnchantsPlugin)
+
         CustomEnchantments.unfreezeRegistry()
 
         EnchantmentRarities.update()
@@ -48,7 +47,6 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
 
     override fun afterReload(plugin: LibreforgePlugin) {
         sendPrompts()
-        registerHardcodedEnchantments()
 
         CustomEnchantments.freezeRegistry()
     }
@@ -97,22 +95,6 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         @Suppress("DEPRECATION")
         BY_NAME[ChatColor.stripColor(enchant.getFormattedName(0))?.lowercase()] = enchant
         EnchantRegistrations.registerEnchantments()
-    }
-
-    private fun registerHardcodedEnchantments() {
-        val hardcodedEnchantments = listOf(
-            EnchantmentPermanenceCurse,
-            EnchantmentRepairing,
-            EnchantmentReplenish,
-            EnchantmentSoulbound
-        )
-
-        for (enchantment in hardcodedEnchantments) {
-            // Only register if not already registered (so hardcode can be overridden)
-            if (enchantment.isPresent && registry[enchantment.id] == null) {
-                doRegister(enchantment)
-            }
-        }
     }
 
     fun getByName(name: String?): EcoEnchant? {

@@ -12,8 +12,10 @@ tradeable: true
 discoverable: true
 enchantable: true
 
+effects:
+  - id: replant_crops
+    args:
+      consume_seeds: true # If seeds should be consumed in replanting
+      only_fully_grown: false # If only fully grown crops should be replanted
+
 conditions: [ ]
-
-consume-seeds: true # If seeds should be consumed in replanting
-
-only-fully-grown: false # If only fully grown crops should be replanted
