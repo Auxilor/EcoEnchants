@@ -4,9 +4,11 @@ import com.willfp.eco.core.fast.fast
 import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
+import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.VillagerAcquireTradeEvent
@@ -28,6 +30,7 @@ object VillagerSupport : Listener {
         }
 
         val enchants = result.fast().getEnchants(true)
+        val added = mutableListOf<Enchantment>()
 
         if (NumberUtils.randFloat(0.0, 100.0) < plugin.configYml.getDouble("villager.pass-through-chance")) {
             return
@@ -46,7 +49,7 @@ object VillagerSupport : Listener {
                 continue
             }
 
-            if (!enchantment.canEnchantItem(result, enchants.keys)) {
+            if (!enchantment.canEnchantItem(result, enchants)) {
                 continue
             }
 
@@ -76,6 +79,7 @@ object VillagerSupport : Listener {
                 break
             } else {
                 enchants[enchantment.enchantment] = level
+                added += enchantment.enchantment
             }
         }
 
@@ -96,6 +100,7 @@ object VillagerSupport : Listener {
                 meta.addEnchant(enchant, level, true)
             }
         }
+        meta.removeEnchantsReplacedBy(added)
         result.itemMeta = meta
 
         val recipe = MerchantRecipe(

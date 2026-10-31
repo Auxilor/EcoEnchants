@@ -374,9 +374,12 @@ private fun EcoEnchantLike.conflictsDisplay(): String =
     }
 
 private fun EcoEnchantLike.requiredDisplay(): String =
-    (this as? EcoEnchant)?.required.orEmpty().joinToString(", ") { required ->
-        required.wrap().getFormattedName(0)
-    }.ifEmpty { plugin.langYml.getFormattedString("no-required") }
+    (this as? EcoEnchant)?.requirements.orEmpty()
+        .mapNotNull { requirement -> requirement.enchantment?.to(requirement.level) }
+        .joinToString(", ") { (required, requiredLevel) ->
+            required.wrap().getFormattedName(if (requiredLevel > 1) requiredLevel else 0)
+        }
+        .ifEmpty { plugin.langYml.getFormattedString("no-required") }
 
 private fun EcoEnchantLike.dragAndDropPriceOrDisabled(player: Player, level: Int): String =
     if (this.isDragAndDropEnabled()) {

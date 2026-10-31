@@ -96,22 +96,52 @@ interface EcoEnchantLike {
 
     /**
      * Get if this enchantment can be applied to [item].
+     *
+     * Levels of [additionalEnchantments] aren't known, so they count as level 1
+     * unless the item already has them at a higher level.
+     *
+     * This only delegates to the overload taking levels, so override that one instead:
+     * overriding this has no effect on callers that pass levels.
      */
     fun canEnchantItem(
         item: ItemStack,
         additionalEnchantments: Collection<Enchantment> = emptyList()
+    ): Boolean = canEnchantItem(
+        item,
+        if (additionalEnchantments.isEmpty()) emptyMap() else additionalEnchantments.associateWith { 1 }
+    )
+
+    /**
+     * Get if this enchantment can be applied to [item], with [additionalEnchantments] mapped to their levels.
+     *
+     * Requirements are only checked when the enchantment isn't on the item yet, as enchantments
+     * it replaces are gone afterwards. Enchantments this one replaces don't count towards
+     * conflicts or limits, since they won't stay on the item, and it can't replace an enchantment
+     * that another one on the item still needs. Enchantments replaced by [additionalEnchantments]
+     * don't count towards anything, as they are going to be removed.
+     */
+    fun canEnchantItem(
+        item: ItemStack,
+        additionalEnchantments: Map<Enchantment, Int>
     ): Boolean {
-        val enchants = item.fast().getEnchants(true).keys + additionalEnchantments
+        val itemEnchants = item.fast().getEnchants(true)
+        val enchantsWithLevels = combineEnchants(itemEnchants, additionalEnchantments)
+
+        if (this is EcoEnchant && this.enchantment !in itemEnchants && !this.canBeAddedTo(enchantsWithLevels)) {
+            return false
+        }
+
+        val enchants = if (this is EcoEnchant && this.requirements.any { it.remove }) {
+            enchantsWithLevels.keys.filterNot { this.removesOnApply(it) }
+        } else {
+            enchantsWithLevels.keys
+        }
 
         if (enchants.count { it.wrap().type == this.type } >= this.type.limit) {
             return false
         }
 
         if (enchants.any { enchant -> enchant.conflictsWithDeep(this.enchantment) }) {
-            return false
-        }
-
-        if (this is EcoEnchant && !this.hasRequiredEnchantments(enchants)) {
             return false
         }
 
@@ -188,5 +218,29 @@ interface EcoEnchantLike {
             rawDescriptionFinal
         }
     }
+}
+
+private fun EcoEnchant.canBeAddedTo(enchants: Map<Enchantment, Int>): Boolean =
+    hasRequiredEnchantments(enchants) && !breaksRequirementsOf(enchants.keys)
+
+private fun combineEnchants(
+    itemEnchants: Map<Enchantment, Int>,
+    additionalEnchantments: Map<Enchantment, Int>
+): Map<Enchantment, Int> {
+    if (additionalEnchantments.isEmpty()) {
+        return itemEnchants
+    }
+
+    val combined = itemEnchants.toMutableMap()
+
+    for ((enchant, level) in additionalEnchantments) {
+        combined.merge(enchant, level, ::maxOf)
+    }
+
+    for (enchant in additionalEnchantments.keys) {
+        combined.removeReplacedBy(enchant)
+    }
+
+    return combined
 }
 

@@ -7,6 +7,7 @@ import com.willfp.eco.util.NumberUtils
 import com.willfp.eco.util.randDouble
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
+import com.willfp.ecoenchants.enchant.removeReplacedBy
 import com.willfp.ecoenchants.plugin
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -92,7 +93,7 @@ object EnchantingTableSupport : Listener {
                 continue
             }
 
-            if (!enchantment.canEnchantItem(item, toAdd.keys)) {
+            if (!enchantment.canEnchantItem(item, toAdd)) {
                 continue
             }
 
@@ -138,6 +139,9 @@ object EnchantingTableSupport : Listener {
             multiplier /= plugin.configYml.getDouble("enchanting-table.reduction").takeIf { it > 0 } ?: 1.0
 
             toAdd[enchantment.enchantment] = level
+            if (item.type != Material.ENCHANTED_BOOK) {
+                toAdd.removeReplacedBy(enchantment.enchantment)
+            }
         }
 
         if (toAdd.isEmpty() && isExtraEnchantable) {

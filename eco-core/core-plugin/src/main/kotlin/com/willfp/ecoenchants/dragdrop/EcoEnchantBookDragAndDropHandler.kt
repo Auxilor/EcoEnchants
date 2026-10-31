@@ -3,6 +3,7 @@ package com.willfp.ecoenchants.dragdrop
 import com.willfp.eco.core.dragdrop.DragAndDropHandler
 import com.willfp.eco.core.dragdrop.DragAndDropResult
 import com.willfp.eco.core.price.ConfiguredPrice
+import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
 import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -14,23 +15,30 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
 
     private fun eligibleEnchants(cursor: ItemStack, current: ItemStack): Map<Enchantment, Int> {
         val meta = cursor.itemMeta as? EnchantmentStorageMeta ?: return emptyMap()
-        val storedEnchants = meta.storedEnchants
-        if (storedEnchants.isEmpty()) return emptyMap()
-
+        val pending = meta.storedEnchants.toMutableMap()
         val eligible = mutableMapOf<Enchantment, Int>()
 
-        for ((enchant, level) in storedEnchants) {
-            val ecoEnchant = enchant.wrap()
-            if (!ecoEnchant.isDragAndDropEnabled()) continue
-            if (!ecoEnchant.canEnchantItem(current, eligible.keys)) continue
-
-            val existingLevel = getExistingLevel(current, enchant)
-            if (existingLevel != null && level < existingLevel) continue // not an upgrade, skip so book isn't consumed for no effect
-
-            eligible[enchant] = level
+        generateSequence {
+            pending.keys.firstOrNull { enchant -> isEligible(enchant, pending.getValue(enchant), current, eligible) }
+        }.forEach { enchant ->
+            eligible[enchant] = pending.getValue(enchant)
+            pending -= enchant
         }
 
         return eligible
+    }
+
+    private fun isEligible(
+        enchant: Enchantment,
+        level: Int,
+        current: ItemStack,
+        eligible: Map<Enchantment, Int>
+    ): Boolean {
+        val ecoEnchant = enchant.wrap()
+        val existingLevel = getExistingLevel(current, enchant)
+        val isUpgrade = existingLevel == null || level >= existingLevel
+
+        return ecoEnchant.isDragAndDropEnabled() && ecoEnchant.canEnchantItem(current, eligible) && isUpgrade
     }
 
     override fun matches(cursor: ItemStack, current: ItemStack): Boolean {
@@ -54,6 +62,8 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
         }
         if (!canAffordAll) return DragAndDropResult.DENIED
 
+        val added = mutableListOf<Enchantment>()
+
         for ((enchant, level, priceAndMultiplier) in prices) {
             val (price, multiplier) = priceAndMultiplier
             price.pay(player, multiplier)
@@ -62,11 +72,14 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
             val newLevel = if (existingLevel != null) {
                 mergeDragAndDropLevel(existingLevel, level, enchant.maxLevel)
             } else {
+                added += enchant
                 level
             }
 
             applyEnchant(current, enchant, newLevel)
         }
+
+        current.removeEnchantsReplacedBy(added)
 
         return DragAndDropResult.APPLIED
     }

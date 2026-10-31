@@ -34,6 +34,14 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     val required: Set<Enchantment>
 
     /**
+     * The requirements, with minimum levels and whether they are removed on apply.
+     *
+     * Defaults to [required] at level 1.
+     */
+    val requirements: List<EnchantmentRequirement>
+        get() = required.map { EnchantmentRequirement(it.key.key) }
+
+    /**
      * The enchantment slots.
      */
     val slots: Set<SlotType>
@@ -111,11 +119,23 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     }
 
     /**
-     * Get if all required enchantments are in [other].
+     * Get if all required enchantments are in [other], ignoring levels.
      */
-    fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean {
-        return required.all { requiredEnchant ->
-            other.any { otherEnchant -> otherEnchant.key == requiredEnchant.key }
+    @Deprecated("Ignores required levels, and overrides of this are no longer called. Pass a map with levels instead.")
+    fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean =
+        requirements.all { requirement ->
+            other.any { otherEnchant -> requirement.matches(otherEnchant) }
         }
-    }
+
+    /**
+     * Get if all required enchantments are in [other] at the required levels.
+     */
+    fun hasRequiredEnchantments(other: Map<Enchantment, Int>): Boolean =
+        requirements.all { it.isMetBy(other) }
+
+    /**
+     * Get if [other] is removed from the item when this enchantment is applied.
+     */
+    fun removesOnApply(other: Enchantment): Boolean =
+        requirements.any { it.remove && it.matches(other) }
 }
