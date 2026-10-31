@@ -12,6 +12,11 @@ tradeable: true
 discoverable: true
 enchantable: true
 
-conditions: [ ]
+effects:
+  - id: keep_item
+# To remove soulbound from the item after death, add:
+#  - id: remove_this_enchant
+#    triggers:
+#      - death
 
-single-use: false # If soulbound should be removed from the items after death
+conditions: [ ]

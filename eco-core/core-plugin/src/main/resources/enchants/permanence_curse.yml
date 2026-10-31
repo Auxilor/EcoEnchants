@@ -12,4 +12,6 @@ tradeable: true
 discoverable: true
 enchantable: false
 
+effects: [ ]
+
 conditions: [ ]
