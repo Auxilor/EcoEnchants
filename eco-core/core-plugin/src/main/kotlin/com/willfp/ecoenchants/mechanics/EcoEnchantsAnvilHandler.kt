@@ -6,14 +6,31 @@ import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemStack
+import java.util.concurrent.ConcurrentHashMap
 
+/**
+ * eco only passes [canCombine] the level of the enchant being added, so the levels of allowed
+ * enchants are kept here. An enchant is only in `existing` once it has been allowed in that merge,
+ * so this always holds the right level for enchants the target doesn't have.
+ */
 class EcoEnchantsAnvilHandler : AnvilHandler {
+    private val allowedLevels = ThreadLocal.withInitial { ConcurrentHashMap<Enchantment, Int>() }
+
     override fun canCombine(
         enchant: Enchantment,
         level: Int,
         target: ItemStack,
         existing: Set<Enchantment>
-    ): Boolean = enchant.wrap().canEnchantItem(target, existing)
+    ): Boolean {
+        val levels = allowedLevels.get()
+        val canCombine = enchant.wrap().canEnchantItem(target, existing.associateWith { levels[it] ?: 1 })
+
+        if (canCombine) {
+            levels[enchant] = level
+        }
+
+        return canCombine
+    }
 
     override fun maxLevel(enchant: Enchantment): Int = enchant.maxLevel
 

@@ -35,8 +35,11 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
 
     /**
      * The requirements, with minimum levels and whether they are removed on apply.
+     *
+     * Defaults to [required] at level 1.
      */
     val requirements: List<EnchantmentRequirement>
+        get() = required.map { EnchantmentRequirement(it.key.key) }
 
     /**
      * The enchantment slots.
@@ -118,6 +121,7 @@ interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     /**
      * Get if all required enchantments are in [other], ignoring levels.
      */
+    @Deprecated("Ignores required levels, and overrides of this are no longer called. Pass a map with levels instead.")
     fun hasRequiredEnchantments(other: Collection<Enchantment>): Boolean =
         requirements.all { requirement ->
             other.any { otherEnchant -> requirement.matches(otherEnchant) }

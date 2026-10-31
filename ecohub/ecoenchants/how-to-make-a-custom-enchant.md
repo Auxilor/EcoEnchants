@@ -136,6 +136,15 @@ required:
 
 An enchantment marked with `remove` can also be listed under `conflicts`, so it can't be added back afterwards; it won't block applying this enchantment.
 
+A few rules apply wherever the enchantment comes from:
+
+- **Levels from books:** a required enchantment on the same book counts at its level on the book. In an anvil, an enchantment already on the item counts at the level it has before the merge.
+- **Added at once:** a required enchantment can come from the same book or roll. If it's marked `remove`, it's still removed, so the item doesn't end up with both.
+- **Book order:** with drag and drop, the order of enchantments on a book doesn't matter. An anvil goes through the book once, so the required enchantment has to come first.
+- **Books keep everything:** `remove` only applies to items. Enchanted books never lose an enchantment, so merging books can't delete one. It's removed when the book is applied to an item.
+- **Needed by another enchantment:** an enchantment can't be applied if it would remove something another enchantment on the item still requires.
+- **Invalid entries:** an entry that can't be read logs a warning, and the enchantment can't be applied until it's fixed.
+
 ### Obtaining
 
 These three flags control how players can get the enchantment naturally. Set any to `false` to disable that route, which is useful for admin-only or reward enchantments.

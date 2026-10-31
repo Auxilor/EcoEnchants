@@ -89,11 +89,11 @@ object EffectApplyRandomEnchant : Effect<NoCompileData>("apply_random_enchant") 
             }
         }
 
-        item.itemMeta = meta
-
         if (isNew) {
-            item.removeEnchantsReplacedBy(listOf(enchant.enchantment))
+            meta.removeEnchantsReplacedBy(listOf(enchant.enchantment))
         }
+
+        item.itemMeta = meta
 
         return true
     }

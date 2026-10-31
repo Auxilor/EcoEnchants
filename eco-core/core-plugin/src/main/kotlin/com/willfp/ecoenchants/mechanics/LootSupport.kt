@@ -6,7 +6,6 @@ import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
-import com.willfp.ecoenchants.enchant.removeReplacedBy
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
@@ -91,7 +90,6 @@ object LootSupport : Listener {
             multiplier /= plugin.configYml.getDouble("loot.reduction")
 
             enchants[enchantment.enchantment] = level
-            enchants.removeReplacedBy(enchantment.enchantment)
             added += enchantment.enchantment
         }
 
@@ -101,8 +99,8 @@ object LootSupport : Listener {
         } else {
             enchants.forEach { (enchant, level) -> meta.addEnchant(enchant, level, true) }
         }
+        meta.removeEnchantsReplacedBy(added)
         item.itemMeta = meta
-        item.removeEnchantsReplacedBy(added)
     }
 }
 

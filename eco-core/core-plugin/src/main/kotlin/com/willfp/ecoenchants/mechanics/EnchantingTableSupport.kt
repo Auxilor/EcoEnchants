@@ -130,7 +130,9 @@ object EnchantingTableSupport : Listener {
             multiplier /= plugin.configYml.getDouble("enchanting-table.reduction")
 
             toAdd[enchantment.enchantment] = level
-            toAdd.removeReplacedBy(enchantment.enchantment)
+            if (item.type != Material.ENCHANTED_BOOK) {
+                toAdd.removeReplacedBy(enchantment.enchantment)
+            }
         }
 
         toAdd.forEach(event.enchantsToAdd::putIfAbsent)

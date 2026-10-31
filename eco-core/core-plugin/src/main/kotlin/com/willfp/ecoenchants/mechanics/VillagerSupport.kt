@@ -5,7 +5,6 @@ import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
-import com.willfp.ecoenchants.enchant.removeReplacedBy
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.target.EnchantmentTargets.isEnchantable
 import org.bukkit.Material
@@ -80,7 +79,6 @@ object VillagerSupport : Listener {
                 break
             } else {
                 enchants[enchantment.enchantment] = level
-                enchants.removeReplacedBy(enchantment.enchantment)
                 added += enchantment.enchantment
             }
         }
@@ -102,8 +100,8 @@ object VillagerSupport : Listener {
                 meta.addEnchant(enchant, level, true)
             }
         }
+        meta.removeEnchantsReplacedBy(added)
         result.itemMeta = meta
-        result.removeEnchantsReplacedBy(added)
 
         val recipe = MerchantRecipe(
             result,

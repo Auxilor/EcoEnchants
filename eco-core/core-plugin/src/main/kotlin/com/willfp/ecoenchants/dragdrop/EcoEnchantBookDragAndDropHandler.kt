@@ -15,23 +15,30 @@ object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
 
     private fun eligibleEnchants(cursor: ItemStack, current: ItemStack): Map<Enchantment, Int> {
         val meta = cursor.itemMeta as? EnchantmentStorageMeta ?: return emptyMap()
-        val storedEnchants = meta.storedEnchants
-        if (storedEnchants.isEmpty()) return emptyMap()
-
+        val pending = meta.storedEnchants.toMutableMap()
         val eligible = mutableMapOf<Enchantment, Int>()
 
-        for ((enchant, level) in storedEnchants) {
-            val ecoEnchant = enchant.wrap()
-            if (!ecoEnchant.isDragAndDropEnabled()) continue
-            if (!ecoEnchant.canEnchantItem(current, eligible)) continue
-
-            val existingLevel = getExistingLevel(current, enchant)
-            if (existingLevel != null && level < existingLevel) continue // not an upgrade, skip so book isn't consumed for no effect
-
-            eligible[enchant] = level
+        generateSequence {
+            pending.keys.firstOrNull { enchant -> isEligible(enchant, pending.getValue(enchant), current, eligible) }
+        }.forEach { enchant ->
+            eligible[enchant] = pending.getValue(enchant)
+            pending -= enchant
         }
 
         return eligible
+    }
+
+    private fun isEligible(
+        enchant: Enchantment,
+        level: Int,
+        current: ItemStack,
+        eligible: Map<Enchantment, Int>
+    ): Boolean {
+        val ecoEnchant = enchant.wrap()
+        val existingLevel = getExistingLevel(current, enchant)
+        val isUpgrade = existingLevel == null || level >= existingLevel
+
+        return ecoEnchant.isDragAndDropEnabled() && ecoEnchant.canEnchantItem(current, eligible) && isUpgrade
     }
 
     override fun matches(cursor: ItemStack, current: ItemStack): Boolean {
