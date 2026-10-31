@@ -23,7 +23,11 @@ class EcoEnchantsAnvilHandler : AnvilHandler {
         existing: Set<Enchantment>
     ): Boolean {
         val levels = allowedLevels.get()
-        val canCombine = enchant.wrap().canEnchantItem(target, existing.associateWith { levels[it] ?: 1 })
+        val targetLevels = target.fast().getEnchants(true)
+        val canCombine = enchant.wrap().canEnchantItem(
+            target,
+            existing.associateWith { targetLevels[it] ?: levels[it] ?: 1 }
+        )
 
         if (canCombine) {
             levels[enchant] = level
