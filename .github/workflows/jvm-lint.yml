@@ -53,7 +53,7 @@ jobs:
       TOOLS_DIR: ${{ github.workspace }}/.jvm-lint-tools
     steps:
       - name: Checkout latest code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.ref || github.ref }}
       - name: Resolve ref
