@@ -349,8 +349,9 @@ private fun EcoEnchantLike.getInformationSlot(player: Player, level: Int): Slot 
                                 .replace("%drag_and_drop_price%", this.dragAndDropPriceOrDisabled(player, level))
                         }
                         .formatEco()
-                        .flatMap {
-                            it.lineWrap(32, true)
+                        .let { lines ->
+                            val wrap = plugin.configYml.getIntOrNull("enchantinfo.item.word-wrap") ?: 32
+                            if (wrap > 0) lines.lineWrap(wrap, true) else lines
                         }
                 }
                 .build()
