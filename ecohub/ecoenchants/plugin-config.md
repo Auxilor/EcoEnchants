@@ -126,6 +126,7 @@ enchantinfo:
     column: 5
     locations: [ ] # Optional list of row/column slots; if set, the button shows in each of them instead of row/column
     show-max-level: true # Whether the book should be the max level or level 1
+    word-wrap: 32 # Number of characters on each lore line before it wraps; 0 turns wrapping off
     lore: # The description is automatically appended
       - ""
       - "&fMax Level: &a%max_level%"
