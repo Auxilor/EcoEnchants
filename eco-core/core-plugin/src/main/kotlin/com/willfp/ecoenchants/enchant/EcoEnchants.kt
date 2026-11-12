@@ -24,7 +24,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
 
     override val shouldPreload = true
 
-    override fun clear(plugin: LibreforgePlugin) {
+    override fun clear(plugin: EcoPlugin) {
         for (enchant in registry.values()) {
             CustomEnchantments.unregister(enchant)
             EnchantRegistrations.removeEnchant(enchant)
@@ -35,7 +35,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         ecoEnchantLikes.clear()
     }
 
-    override fun beforeReload(plugin: LibreforgePlugin) {
+    override fun beforeReload(plugin: EcoPlugin) {
         HardcodedEnchantMigration.migrate(plugin as EcoEnchantsPlugin)
 
         CustomEnchantments.unfreezeRegistry()
@@ -45,13 +45,13 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         EnchantmentTypes.update()
     }
 
-    override fun afterReload(plugin: LibreforgePlugin) {
+    override fun afterReload(plugin: EcoPlugin) {
         sendPrompts()
 
         CustomEnchantments.freezeRegistry()
     }
 
-    override fun acceptPreloadConfig(plugin: LibreforgePlugin, id: String, config: Config) {
+    override fun acceptPreloadConfig(plugin: EcoPlugin, id: String, config: Config) {
         plugin as EcoEnchantsPlugin
 
         if (!config.has("effects")) {
@@ -70,7 +70,7 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
         }
     }
 
-    override fun acceptConfig(plugin: LibreforgePlugin, id: String, config: Config) {
+    override fun acceptConfig(plugin: EcoPlugin, id: String, config: Config) {
         plugin as EcoEnchantsPlugin
 
         if (!config.has("effects")) {

@@ -29,7 +29,7 @@ object VillagerSupport : Listener {
             return
         }
 
-        val enchants = result.fast().getEnchants(true)
+        val enchants = result.fast().getEnchants(true).toMutableMap()
         val added = mutableListOf<Enchantment>()
 
         if (NumberUtils.randFloat(0.0, 100.0) < plugin.configYml.getDouble("villager.pass-through-chance")) {

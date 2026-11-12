@@ -28,8 +28,8 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         plugin.namespacedKeyFactory.create("ecoenchantlore-skip") // Same for backwards compatibility
 
     override fun display(context: DisplayContext) {
-        val itemStack = context.itemStack
-        val player = context.player
+        val itemStack = context.getItemStack()
+        val player = context.getPlayer()
 
         if (!itemStack.isEnchantable && plugin.configYml.getBool("display.require-enchantable")) {
             return
@@ -41,7 +41,7 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         val pdc = fast.persistentDataContainer
 
         // Args represent hide enchants
-        if (context.varArgs[0] == true) {
+        if (context.getVarArgs()[0] == true) {
             fast.addItemFlags(ItemFlag.HIDE_ENCHANTS)
             if (itemStack.type == Material.ENCHANTED_BOOK) {
                 fast.hideStoredEnchants()
@@ -142,10 +142,10 @@ object EnchantDisplay : DisplayModule(plugin, DisplayPriority.HIGH) {
         }
 
         if (plugin.configYml.getBool("display.enchantments-below-lore")) {
-            context.lore.append(enchantLore + notMetLines)
+            context.getLore().append(enchantLore + notMetLines)
         } else {
-            context.lore.prepend(enchantLore)
-            context.lore.append(notMetLines)
+            context.getLore().prepend(enchantLore)
+            context.getLore().append(notMetLines)
         }
     }
 

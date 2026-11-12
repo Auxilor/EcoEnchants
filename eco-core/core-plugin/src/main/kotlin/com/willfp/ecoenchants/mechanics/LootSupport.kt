@@ -53,7 +53,7 @@ object LootSupport : Listener {
             return
         }
 
-        val enchants = item.fast().getEnchants(true)
+        val enchants = item.fast().getEnchants(true).toMutableMap()
         val added = mutableListOf<Enchantment>()
 
         var multiplier = 0.01

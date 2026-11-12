@@ -52,7 +52,7 @@ object LoreConversion : Listener {
         val toAdd = mutableMapOf<Enchantment, Int>()
         val matchedLines = mutableListOf<String>()
 
-        val lore = itemStack.fast().lore.toMutableList()
+        val lore = itemStack.fast().getLore().toMutableList()
 
         for (line in lore.toList()) {
             @Suppress("DEPRECATION")
@@ -114,6 +114,6 @@ object LoreConversion : Listener {
         }
 
         itemStack.itemMeta = meta
-        itemStack.fast().lore = lore
+        itemStack.fast().setLore(lore)
     }
 }

@@ -9,7 +9,7 @@ import wiki.ecohub.rules.holder.slot.SlotType
 
 object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
     override fun find(item: ItemStack): List<EcoEnchantLevel> {
-        val enchantMap = item.fast().enchants
+        val enchantMap = item.fast().getEnchants()
         val enchants = mutableListOf<EcoEnchantLevel>()
 
         for ((enchant, level) in enchantMap) {

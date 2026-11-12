@@ -189,7 +189,7 @@ interface EcoEnchantLike {
                                 )
                             }
 
-                            override fun addInjectablePlaceholder(p0: MutableIterable<InjectablePlaceholder>) {
+                            override fun addInjectablePlaceholder(placeholders: Iterable<InjectablePlaceholder>) {
                                 // Do nothing
                             }
 
