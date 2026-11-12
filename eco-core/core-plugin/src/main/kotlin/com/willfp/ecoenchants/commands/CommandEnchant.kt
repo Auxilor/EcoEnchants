@@ -1,43 +1,33 @@
 package com.willfp.ecoenchants.commands
 
-import com.willfp.eco.core.command.impl.PluginCommand
-import com.willfp.eco.util.savedDisplayName
+import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.wrap
-import com.willfp.ecoenchants.plugin
-import com.willfp.ecoenchants.runOwned
+import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
-import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import org.bukkit.util.StringUtil
+import wiki.ecohub.core.command.command
+import wiki.ecohub.game.entity.player.PlayerUtils
+import wiki.ecohub.game.entity.runOwned
 import wiki.ecohub.ui.text.StringUtils
 
-object CommandEnchant : PluginCommand(
-    plugin,
-    "enchant",
-    "ecoenchants.command.enchant",
-    false
-) {
-    override fun onExecute(sender: CommandSender, rawArgs: List<String>) {
-        var args = rawArgs
-        var player = sender as? Player
+internal fun EcoEnchantsPlugin.enchantCommand() = command(name = "enchant", permission = "ecoenchants.command.enchant") {
+    executes {
+        val player = sender as? Player
+            ?: argument(0, missingKey = "invalid-player", invalidKey = "invalid-player") { Bukkit.getPlayer(it) }
+        val enchantArgs = if (sender is Player) args else args.drop(1)
 
-        if (sender !is Player) {
-            player = notifyPlayerRequired(args.getOrNull(0), "invalid-player")
-            args = rawArgs.subList(1, rawArgs.size)
-        }
+        val enchant = enchantArgs.getOrNull(0)?.lowercase()
+            ?.let {
+                @Suppress("DEPRECATION")
+                Enchantment.getByKey(NamespacedKey.minecraft(it))
+            }
+            ?: fail("invalid-enchantment")
 
-        player!! // Unbelievable jank
-
-        val enchant = notifyNull(
-            @Suppress("DEPRECATION")
-            args.getOrNull(0)?.lowercase()?.let { Enchantment.getByKey(NamespacedKey.minecraft(it)) },
-            "invalid-enchantment"
-        )
-
-        val level = args.getOrNull(1)?.toIntOrNull() ?: 1
+        val level = enchantArgs.getOrNull(1)?.toIntOrNull() ?: 1
 
         // The console runs off the player's region on Folia.
         player.runOwned {
@@ -54,7 +44,7 @@ object CommandEnchant : PluginCommand(
                 sender.sendMessage(
                     plugin.langYml.getMessage("added-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
                         .replace("%enchant%", enchant.wrap().getFormattedName(0))
-                        .replace("%player%", player.savedDisplayName)
+                        .replace("%player%", PlayerUtils.getSavedDisplayName(player))
                 )
             } else {
                 if (meta is EnchantmentStorageMeta) {
@@ -65,7 +55,7 @@ object CommandEnchant : PluginCommand(
                 sender.sendMessage(
                     plugin.langYml.getMessage("removed-enchant", StringUtils.FormatOption.WITHOUT_PLACEHOLDERS)
                         .replace("%enchant%", enchant.wrap().getFormattedName(0))
-                        .replace("%player%", player.savedDisplayName)
+                        .replace("%player%", PlayerUtils.getSavedDisplayName(player))
                 )
             }
 
@@ -73,27 +63,23 @@ object CommandEnchant : PluginCommand(
         }
     }
 
-    override fun tabComplete(sender: CommandSender, rawArgs: List<String>): List<String> {
+    completes {
         val completions = mutableListOf<String>()
 
-        var args = rawArgs
+        val enchantArgs = if (sender is Player) args else args.drop(1)
 
-        if (sender !is Player) {
-            args = rawArgs.subList(1, rawArgs.size)
-        }
-
-        if (args.size == 1) {
+        if (enchantArgs.size == 1) {
             StringUtil.copyPartialMatches(
-                args[0],
+                enchantArgs[0],
                 @Suppress("DEPRECATION")
                 Enchantment.values().map { it.key.key },
                 completions
             )
         }
 
-        if (args.size == 2) {
+        if (enchantArgs.size == 2) {
             @Suppress("DEPRECATION")
-            val enchant = Enchantment.getByKey(NamespacedKey.minecraft(args[0].lowercase()))
+            val enchant = Enchantment.getByKey(NamespacedKey.minecraft(enchantArgs[0].lowercase()))
 
             val levels = if (enchant != null) {
                 val maxLevel = enchant.maxLevel
@@ -103,12 +89,12 @@ object CommandEnchant : PluginCommand(
             }
 
             StringUtil.copyPartialMatches(
-                args[1],
+                enchantArgs[1],
                 levels.map { it.toString() },
                 completions
             )
         }
 
-        return completions
+        completions
     }
 }

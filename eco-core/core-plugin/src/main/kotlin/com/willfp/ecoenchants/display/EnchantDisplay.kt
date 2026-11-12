@@ -1,6 +1,6 @@
 package com.willfp.ecoenchants.display
 
-import com.willfp.ecoenchants.commands.CommandToggleDescriptions.seesEnchantmentDescriptions
+import com.willfp.ecoenchants.commands.seesEnchantmentDescriptions
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.dragdrop.dragAndDropPriceDisplay
 import com.willfp.ecoenchants.dragdrop.isDragAndDropEnabled
