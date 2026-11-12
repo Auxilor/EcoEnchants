@@ -9,7 +9,6 @@ folia-supported: true
 depend:
   - eco
 softdepend:
-  - libreforge
   - CMI
   - EssentialsX
 
