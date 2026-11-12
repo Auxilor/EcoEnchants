@@ -1,8 +1,5 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.gui.addCustomSlots
-import com.willfp.eco.core.gui.addPageChanger
-import com.willfp.eco.core.gui.component.addPagedArea
 import com.willfp.ecoenchants.display.EnchantSorter.sortForDisplay
 import com.willfp.ecoenchants.display.getFormattedDescription
 import com.willfp.ecoenchants.display.getFormattedName
@@ -29,9 +26,12 @@ import wiki.ecohub.game.item.builder.ItemStackBuilder
 import wiki.ecohub.game.item.fast
 import wiki.ecohub.game.item.isEcoEmpty
 import wiki.ecohub.game.sound.PlayableSound
+import wiki.ecohub.modules.menus.addCustomSlots
+import wiki.ecohub.modules.menus.addPageChanger
 import wiki.ecohub.modules.menus.component.ConfigButton
 import wiki.ecohub.modules.menus.component.PagedAreaComponent
 import wiki.ecohub.modules.menus.component.addComponent
+import wiki.ecohub.modules.menus.component.addPagedArea
 import wiki.ecohub.modules.menus.component.closeButton
 import wiki.ecohub.modules.menus.getSlotLocations
 import wiki.ecohub.modules.menus.menu
@@ -63,7 +63,7 @@ object EnchantGUI {
         allEnchantsSorted = EcoEnchants.values().map { it.enchantment }.sortForDisplay()
 
         menu = menu(plugin.configYml.getInt("enchant-gui.rows")) {
-            title = plugin.configYml.getFormattedString("enchant-gui.title")
+            setTitle(plugin.configYml.getFormattedString("enchant-gui.title"))
 
             allowChangingHeldItem()
 
@@ -107,7 +107,7 @@ object EnchantGUI {
                         }
                         .map { it.enchantment }
                         .sortForDisplay()
-                        .subtract(atCaptive.fast().enchants.keys)
+                        .subtract(atCaptive.fast().getEnchants().keys)
                         .toList()
                 }
 
@@ -211,7 +211,7 @@ object EnchantGUI {
         // Build the group selection menu (only when grouped mode is enabled)
         if (plugin.configYml.getBool("enchant-gui.grouped")) {
             groupMenu = menu(plugin.configYml.getInt("group-gui.rows")) {
-                title = plugin.configYml.getFormattedString("group-gui.title")
+                setTitle(plugin.configYml.getFormattedString("group-gui.title"))
 
                 setMask(plugin.configYml, "group-gui")
 
@@ -280,7 +280,7 @@ object EnchantGUI {
 
         enchantInfoMenus.get(enchant to effectiveLevel) {
             menu(plugin.configYml.getInt("enchantinfo.rows")) {
-                title = enchant.getFormattedName(effectiveLevel)
+                setTitle(enchant.getFormattedName(effectiveLevel))
 
                 for (location in plugin.configYml.getSlotLocations("enchantinfo.item")) {
                     setSlot(location.row, location.column, enchant.getInformationSlot(player, effectiveLevel))
