@@ -1,4 +1,5 @@
 ﻿import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import wiki.ecohub.gradle.modules.EcoModulesExtension
 
 plugins {
     kotlin("jvm") version "2.3.0"
@@ -6,12 +7,12 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("com.gradleup.shadow") version "9.3.1"
+    id("wiki.ecohub.eco-modules") version "1.0.0"
 }
 
 group = "com.willfp"
 version = findProperty("version")!!
 val ecoApiVersion = findProperty("eco-api-version")
-val ecoVersion = findProperty("eco-version")
 
 base {
     archivesName.set(project.name)
@@ -85,6 +86,11 @@ allprojects {
     apply(plugin = "kotlin")
     apply(plugin = "maven-publish")
     apply(plugin = "com.gradleup.shadow")
+    apply(plugin = "wiki.ecohub.eco-modules")
+
+    configure<EcoModulesExtension> {
+        use("menus", "recipe", "effects-system")
+    }
 
     repositories {
         mavenLocal()
@@ -101,12 +107,10 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("wiki.ecohub:eco:$ecoVersion")
         compileOnly("org.jetbrains:annotations:26.0.2")
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
         compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.3")
 
-        testImplementation("wiki.ecohub:eco:$ecoVersion")
         testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.3")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:6.0.3")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
