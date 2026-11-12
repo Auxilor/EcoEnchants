@@ -1,9 +1,6 @@
 package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.PluginCommand
-import com.willfp.eco.core.drops.DropQueue
-import com.willfp.eco.core.items.builder.EnchantedBookBuilder
-import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
@@ -13,6 +10,9 @@ import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.util.StringUtil
+import wiki.ecohub.game.drop.DropQueue
+import wiki.ecohub.game.item.builder.EnchantedBookBuilder
+import wiki.ecohub.ui.text.StringUtils
 
 private const val DEFAULT_TAB_COMPLETE_MAX_LEVEL = 5
 

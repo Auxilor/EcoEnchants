@@ -1,13 +1,13 @@
 package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.Subcommand
-import com.willfp.eco.core.data.keys.PersistentDataKey
-import com.willfp.eco.core.data.keys.PersistentDataKeyType
-import com.willfp.eco.core.data.profile
-import com.willfp.eco.util.NamespacedKeyUtils
 import com.willfp.ecoenchants.plugin
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import wiki.ecohub.core.platform.NamespacedKeyUtils
+import wiki.ecohub.data.PersistentDataKey
+import wiki.ecohub.data.PersistentDataKeyType
+import wiki.ecohub.game.entity.player.profile
 
 object CommandToggleDescriptions : Subcommand(
     plugin,

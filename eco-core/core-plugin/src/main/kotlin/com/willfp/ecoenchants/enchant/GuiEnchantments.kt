@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.plugin
 import org.bukkit.ChatColor
 import org.bukkit.NamespacedKey
 import org.bukkit.Registry
+import wiki.ecohub.config.Config
 
 object GuiEnchantments {
     @Volatile

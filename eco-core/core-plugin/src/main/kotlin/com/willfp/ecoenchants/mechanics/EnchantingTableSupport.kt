@@ -1,10 +1,5 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.items.Items
-import com.willfp.eco.core.items.TestableItem
-import com.willfp.eco.core.recipe.parts.EmptyTestableItem
-import com.willfp.eco.util.NumberUtils
-import com.willfp.eco.util.randDouble
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.enchant.removeReplacedBy
@@ -22,6 +17,11 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.game.item.Items
+import wiki.ecohub.game.item.lookup.EmptyTestableItem
+import wiki.ecohub.game.item.lookup.TestableItem
+import wiki.ecohub.math.NumberUtils
+import wiki.ecohub.math.randDouble
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.ceil

@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.dragdrop
 
-import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.FakeConfig
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
@@ -12,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import wiki.ecohub.config.Config
 
 private fun fakeEnchant(
     priceLevelMultiplier: String? = null,

@@ -1,23 +1,23 @@
 package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.PluginCommand
-import com.willfp.eco.core.drops.DropQueue
-import com.willfp.eco.core.items.builder.EnchantedBookBuilder
-import com.willfp.eco.util.NumberUtils
-import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
-import com.willfp.ecoenchants.runOwned
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
+import com.willfp.ecoenchants.runOwned
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.Bukkit
 import org.bukkit.Registry
 import org.bukkit.command.CommandSender
+import wiki.ecohub.game.drop.DropQueue
+import wiki.ecohub.game.item.builder.EnchantedBookBuilder
+import wiki.ecohub.math.NumberUtils
+import wiki.ecohub.ui.text.StringUtils
 
 object CommandGiveRandomBook : PluginCommand(
     plugin,

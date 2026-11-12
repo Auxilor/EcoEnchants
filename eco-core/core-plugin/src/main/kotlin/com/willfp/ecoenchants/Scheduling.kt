@@ -1,7 +1,7 @@
 package com.willfp.ecoenchants
 
-import com.willfp.eco.core.Eco
 import org.bukkit.entity.Entity
+import wiki.ecohub.core.Eco
 
 /**
  * Run [block] on the region owning this entity: now if the current thread already owns it,

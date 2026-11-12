@@ -1,12 +1,6 @@
 package com.willfp.ecoenchants
 
-import com.willfp.eco.core.anvil.AnvilHandlers
-import com.willfp.eco.core.anvil.AnvilSettings
-import com.willfp.eco.core.bstats.EcoMetricsChart
 import com.willfp.eco.core.command.impl.PluginCommand
-import com.willfp.eco.core.display.DisplayModule
-import com.willfp.eco.core.dragdrop.DragAndDropHandlers
-import com.willfp.eco.core.enchant.CustomEnchantments
 import com.willfp.eco.core.integrations.IntegrationLoader
 import com.willfp.ecoenchants.commands.CommandEcoEnchants
 import com.willfp.ecoenchants.commands.CommandEnchant
@@ -41,13 +35,19 @@ import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.target.EnchantHolderProvider
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
-import com.willfp.libreforge.NamedValue
-import com.willfp.libreforge.effects.Effects
-import com.willfp.libreforge.loader.LibreforgePlugin
-import com.willfp.libreforge.loader.configs.ConfigCategory
-import com.willfp.libreforge.registerHolderProvider
-import com.willfp.libreforge.registerHolderPlaceholderProvider
 import org.bukkit.event.Listener
+import wiki.ecohub.config.category.NativeConfigCategory
+import wiki.ecohub.core.plugin.EcoPlugin
+import wiki.ecohub.core.stdlib.NamedValue
+import wiki.ecohub.game.item.enchant.CustomEnchantments
+import wiki.ecohub.modules.menus.drag.DragAndDropHandlers
+import wiki.ecohub.modules.recipe.anvil.AnvilHandlers
+import wiki.ecohub.modules.recipe.anvil.AnvilSettings
+import wiki.ecohub.provider.metrics.EcoMetricsChart
+import wiki.ecohub.rules.effect.Effects
+import wiki.ecohub.rules.holder.registerHolderPlaceholderProvider
+import wiki.ecohub.rules.holder.registerHolderProvider
+import wiki.ecohub.ui.display.DisplayModule
 
 internal lateinit var plugin: EcoEnchantsPlugin
     private set

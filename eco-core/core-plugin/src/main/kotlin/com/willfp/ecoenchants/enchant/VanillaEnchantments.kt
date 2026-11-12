@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.enchant.VanillaEnchantmentOverrides
 import com.willfp.ecoenchants.plugin
 import org.bukkit.NamespacedKey
+import wiki.ecohub.game.item.enchant.VanillaEnchantmentOverrides
 
 private fun getVanillaEnchantmentData(key: NamespacedKey): VanillaEnchantmentData? {
     val vanilla = plugin.vanillaEnchantsYml.getSubsectionOrNull(key.key) ?: return null

@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.type
 
-import com.willfp.eco.core.registry.Registry
 import com.willfp.ecoenchants.display.TypeSorter
 import com.willfp.ecoenchants.plugin
+import wiki.ecohub.core.registry.Registry
 
 @Suppress("UNUSED")
 object EnchantmentTypes : Registry<EnchantmentType>() {

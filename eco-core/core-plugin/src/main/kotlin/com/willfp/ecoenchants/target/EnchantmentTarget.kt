@@ -1,15 +1,15 @@
 package com.willfp.ecoenchants.target
 
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.items.Items
-import com.willfp.eco.core.items.TestableItem
-import com.willfp.eco.core.recipe.parts.EmptyTestableItem
-import com.willfp.eco.core.registry.Registrable
 import com.willfp.ecoenchants.plugin
-import com.willfp.libreforge.slot.SlotType
-import com.willfp.libreforge.slot.SlotTypes
-import com.willfp.libreforge.slot.impl.SlotTypeAny
 import org.bukkit.inventory.ItemStack
+import wiki.ecohub.config.Config
+import wiki.ecohub.core.registry.Registrable
+import wiki.ecohub.game.item.Items
+import wiki.ecohub.game.item.lookup.EmptyTestableItem
+import wiki.ecohub.game.item.lookup.TestableItem
+import wiki.ecohub.rules.holder.slot.SlotType
+import wiki.ecohub.rules.holder.slot.SlotTypeAny
+import wiki.ecohub.rules.holder.slot.SlotTypes
 import java.util.Objects
 
 interface EnchantmentTarget : Registrable {

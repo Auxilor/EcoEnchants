@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.target
 
-import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.ecoEnchant
-import com.willfp.libreforge.slot.ItemHolderFinder
-import com.willfp.libreforge.slot.SlotType
 import org.bukkit.inventory.ItemStack
+import wiki.ecohub.game.item.fast
+import wiki.ecohub.rules.holder.slot.ItemHolderFinder
+import wiki.ecohub.rules.holder.slot.SlotType
 
 object EnchantFinder : ItemHolderFinder<EcoEnchantLevel>() {
     override fun find(item: ItemStack): List<EcoEnchantLevel> {

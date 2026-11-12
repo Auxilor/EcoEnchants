@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.config
 
-import com.willfp.eco.core.config.BaseConfig
-import com.willfp.eco.core.config.ConfigType
 import com.willfp.ecoenchants.EcoEnchantsPlugin
+import wiki.ecohub.config.ConfigType
+import wiki.ecohub.config.file.BaseConfig
 
 class TypesYml(plugin: EcoEnchantsPlugin) : BaseConfig("types", plugin, true, ConfigType.YAML)
 class TargetsYml(plugin: EcoEnchantsPlugin) : BaseConfig("targets", plugin, true, ConfigType.YAML)

@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.commands
 
 import com.willfp.eco.core.command.impl.PluginCommand
-import com.willfp.eco.util.StringUtils
 import com.willfp.eco.util.savedDisplayName
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.wrap
@@ -13,6 +12,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
 import org.bukkit.util.StringUtil
+import wiki.ecohub.ui.text.StringUtils
 
 object CommandEnchant : PluginCommand(
     plugin,

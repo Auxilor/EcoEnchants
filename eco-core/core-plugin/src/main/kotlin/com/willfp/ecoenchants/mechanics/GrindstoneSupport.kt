@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
 import org.bukkit.enchantments.Enchantment
@@ -10,6 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.GrindstoneInventory
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.game.item.fast
 import kotlin.math.max
 
 @Suppress("DEPRECATION")
