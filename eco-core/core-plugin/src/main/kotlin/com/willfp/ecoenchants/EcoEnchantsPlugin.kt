@@ -1,10 +1,8 @@
 package com.willfp.ecoenchants
 
-import com.willfp.eco.core.command.impl.PluginCommand
-import com.willfp.eco.core.integrations.IntegrationLoader
-import com.willfp.ecoenchants.commands.CommandEcoEnchants
-import com.willfp.ecoenchants.commands.CommandEnchant
-import com.willfp.ecoenchants.commands.CommandEnchantInfo
+import com.willfp.ecoenchants.commands.ecoEnchantsCommand
+import com.willfp.ecoenchants.commands.enchantCommand
+import com.willfp.ecoenchants.commands.enchantInfoCommand
 import com.willfp.ecoenchants.config.RarityYml
 import com.willfp.ecoenchants.config.TargetsYml
 import com.willfp.ecoenchants.config.TypesYml
@@ -19,7 +17,6 @@ import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.EnchantGUI
 import com.willfp.ecoenchants.enchant.LoreConversion
 import com.willfp.ecoenchants.enchant.VanillaEnchantmentOverridesYml
-import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
 import com.willfp.ecoenchants.libreforge.EffectApplyRandomEnchant
@@ -37,12 +34,14 @@ import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.event.Listener
 import wiki.ecohub.config.category.NativeConfigCategory
+import wiki.ecohub.core.command.EcoCommand
 import wiki.ecohub.core.plugin.EcoPlugin
 import wiki.ecohub.core.stdlib.NamedValue
 import wiki.ecohub.game.item.enchant.CustomEnchantments
 import wiki.ecohub.modules.menus.drag.DragAndDropHandlers
 import wiki.ecohub.modules.recipe.anvil.AnvilHandlers
 import wiki.ecohub.modules.recipe.anvil.AnvilSettings
+import wiki.ecohub.provider.ExternalProviderLoader
 import wiki.ecohub.provider.metrics.EcoMetricsChart
 import wiki.ecohub.rules.effect.Effects
 import wiki.ecohub.rules.holder.registerHolderPlaceholderProvider
@@ -52,7 +51,7 @@ import wiki.ecohub.ui.display.DisplayModule
 internal lateinit var plugin: EcoEnchantsPlugin
     private set
 
-class EcoEnchantsPlugin : LibreforgePlugin() {
+class EcoEnchantsPlugin : EcoPlugin() {
     val targetsYml = TargetsYml(this)
     val rarityYml = RarityYml(this)
     val typesYml = TypesYml(this)
@@ -67,7 +66,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         CustomEnchantments.unfreezeRegistry()
     }
 
-    override fun loadConfigCategories(): List<ConfigCategory> {
+    override fun loadConfigCategories(): List<NativeConfigCategory> {
         return listOf(
             EcoEnchants
         )
@@ -136,18 +135,18 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
         )
     }
 
-    override fun loadIntegrationLoaders(): List<IntegrationLoader> {
+    override fun getExternalProviderLoaders(): List<ExternalProviderLoader> {
         return listOf(
-            IntegrationLoader("Essentials") { EnchantRegistrations.register(EssentialsIntegration) },
-            IntegrationLoader("CMI") { EnchantRegistrations.register(CMIIntegration) }
+            ExternalProviderLoader("Essentials") { EssentialsIntegration },
+            ExternalProviderLoader("CMI") { CMIIntegration }
         )
     }
 
-    override fun loadPluginCommands(): List<PluginCommand> {
+    override fun loadPluginCommands(): List<EcoCommand> {
         return listOf(
-            CommandEcoEnchants,
-            CommandEnchantInfo,
-            CommandEnchant
+            ecoEnchantsCommand(),
+            enchantInfoCommand(),
+            enchantCommand()
         )
     }
 
