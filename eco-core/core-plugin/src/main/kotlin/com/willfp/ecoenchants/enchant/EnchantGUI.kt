@@ -1,7 +1,6 @@
 package com.willfp.ecoenchants.enchant
 
 import com.willfp.eco.core.cache.EcoCache
-import com.willfp.eco.core.drops.DropQueue
 import com.willfp.eco.core.fast.fast
 import com.willfp.eco.core.gui.addCustomSlots
 import com.willfp.eco.core.gui.addPageChanger
@@ -45,6 +44,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.util.Vector
 
 object EnchantGUI {
     // Rebuilt on reload while players on other threads may be opening them.
@@ -184,13 +184,7 @@ object EnchantGUI {
                     ) { player, _, _, _ ->
                         groupMenu?.let { groupGui ->
                             // Return captive items to the player before navigating back
-                            val captiveItems = menu.getCaptiveItems(player)
-                            if (captiveItems.isNotEmpty()) {
-                                DropQueue(player)
-                                    .addItems(captiveItems)
-                                    .forceTelekinesis()
-                                    .push()
-                            }
+                            returnCaptiveItems(player, menu.getCaptiveItems(player))
                             groupGui.open(player)
                         }
                     }
@@ -199,10 +193,7 @@ object EnchantGUI {
 
             onClose { event, menu ->
                 val player = event.player as Player
-                DropQueue(player)
-                    .addItems(menu.getCaptiveItems(player))
-                    .forceTelekinesis()
-                    .push()
+                returnCaptiveItems(player, menu.getCaptiveItems(player))
             }
 
             addCustomSlots(plugin.configYml, "enchant-gui")
@@ -297,6 +288,14 @@ object EnchantGUI {
         menu.open(player)
         menu.setState(player, "groupId", groupId)
         menu.setState(player, Page.PAGE_KEY, 1)
+    }
+}
+
+private fun returnCaptiveItems(player: Player, items: List<ItemStack>) {
+    for (item in items.filterNot { it.isEcoEmpty }) {
+        for (leftover in player.inventory.addItem(item).values) {
+            player.world.dropItem(player.location, leftover).velocity = Vector()
+        }
     }
 }
 
