@@ -9,6 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.GrindstoneInventory
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.core.plugin.startup.Prerequisite
 import wiki.ecohub.game.item.fast
 import kotlin.math.max
 
@@ -84,22 +85,28 @@ object GrindstoneSupport : Listener {
             return
         }
 
-        val item = inventory.result ?: return
+        val item = inventory.getItem(2) ?: return
 
         if (item.fast().getEnchants(true).isEmpty()) {
             return
         }
 
         val loc = inventory.location ?: return
+        val world = loc.world ?: return
 
         // Force remove XP
         plugin.scheduler.at(loc).runLater(1) {
-            val orbs = loc.clone().add(0.5, 0.5, 0.5).getNearbyEntities(0.5, 0.5, 0.5)
-                .filterIsInstance<ExperienceOrb>()
-                .filter { it.spawnReason == ExperienceOrb.SpawnReason.GRINDSTONE && it.ticksLived <= 2 }
+            val center = loc.clone().add(0.5, 0.5, 0.5)
+            val orbs = world.getNearbyEntities(center, 0.5, 0.5, 0.5) { entity ->
+                entity is ExperienceOrb && entity.ticksLived <= 2 && entity.isFromGrindstone()
+            }
             for (orb in orbs) {
                 orb.remove()
             }
         }
     }
 }
+
+// Spigot does not record why an orb spawned, so only the age filter applies there.
+private fun ExperienceOrb.isFromGrindstone(): Boolean =
+    !Prerequisite.HAS_PAPER.isMet || spawnReason == ExperienceOrb.SpawnReason.GRINDSTONE
