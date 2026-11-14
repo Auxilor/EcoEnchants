@@ -46,7 +46,7 @@ object CommandGiveBook : PluginCommand(
         player.runOwned {
             DropQueue(player)
                 .addItems(List(amount) { item.clone() })
-                .forceTelekinesis()
+                .giveDirectly()
                 .push()
         }
 
