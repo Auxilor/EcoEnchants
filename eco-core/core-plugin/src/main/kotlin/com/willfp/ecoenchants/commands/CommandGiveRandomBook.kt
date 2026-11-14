@@ -80,7 +80,7 @@ object CommandGiveRandomBook : PluginCommand(
         player.runOwned {
             DropQueue(player)
                 .addItem(item)
-                .forceTelekinesis()
+                .giveDirectly()
                 .push()
         }
 
