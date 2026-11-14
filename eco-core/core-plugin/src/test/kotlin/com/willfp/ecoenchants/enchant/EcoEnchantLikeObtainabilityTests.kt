@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.FakeConfig
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
@@ -10,6 +9,7 @@ import org.bukkit.enchantments.Enchantment
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import wiki.ecohub.config.Config
 
 private fun fakeEnchant(values: Map<String, Any?> = emptyMap()): EcoEnchantLike =
     object : EcoEnchantLike {

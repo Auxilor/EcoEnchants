@@ -1,16 +1,16 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.enchant.CustomEnchantment
-import com.willfp.eco.core.registry.KRegistrable
-import com.willfp.eco.util.toComponent
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.display.getFormattedNameComponent
-import com.willfp.libreforge.conditions.ConditionList
-import com.willfp.libreforge.slot.SlotType
 import net.kyori.adventure.text.Component
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemStack
+import wiki.ecohub.core.registry.KRegistrable
+import wiki.ecohub.game.item.enchant.CustomEnchantment
+import wiki.ecohub.rules.condition.ConditionList
+import wiki.ecohub.rules.holder.slot.SlotType
+import wiki.ecohub.ui.text.toComponent
 
 interface EcoEnchant : KRegistrable, EcoEnchantLike, CustomEnchantment {
     /**

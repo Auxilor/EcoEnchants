@@ -1,13 +1,13 @@
 package com.willfp.ecoenchants.libreforge
 
-import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
-import com.willfp.libreforge.NoCompileData
-import com.willfp.libreforge.effects.Effect
-import com.willfp.libreforge.getProvider
-import com.willfp.libreforge.triggers.TriggerData
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.config.Config
+import wiki.ecohub.core.registry.NoCompileData
+import wiki.ecohub.rules.effect.Effect
+import wiki.ecohub.rules.holder.getProvider
+import wiki.ecohub.rules.trigger.TriggerData
 
 object EffectRemoveThisEnchant : Effect<NoCompileData>("remove_this_enchant") {
     override val description = "Removes the enchantment running this effect from its item."

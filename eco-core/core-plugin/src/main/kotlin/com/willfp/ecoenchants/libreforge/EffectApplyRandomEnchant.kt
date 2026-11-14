@@ -1,18 +1,18 @@
 package com.willfp.ecoenchants.libreforge
 
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
 import com.willfp.ecoenchants.enchant.wrap
-import com.willfp.libreforge.ArgType
-import com.willfp.libreforge.NoCompileData
-import com.willfp.libreforge.arguments
-import com.willfp.libreforge.effects.Effect
-import com.willfp.libreforge.triggers.TriggerData
-import com.willfp.libreforge.triggers.TriggerParameter
 import org.bukkit.Material
 import org.bukkit.Registry
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.config.ArgType
+import wiki.ecohub.config.Config
+import wiki.ecohub.config.arguments
+import wiki.ecohub.core.registry.NoCompileData
+import wiki.ecohub.math.NumberUtils
+import wiki.ecohub.rules.effect.Effect
+import wiki.ecohub.rules.trigger.TriggerData
+import wiki.ecohub.rules.trigger.TriggerParameter
 
 object EffectApplyRandomEnchant : Effect<NoCompileData>("apply_random_enchant") {
     override val description = "Applies a random enchantment to the triggering item, " +

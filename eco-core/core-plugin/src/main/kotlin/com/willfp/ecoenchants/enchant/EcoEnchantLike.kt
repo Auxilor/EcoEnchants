@@ -1,12 +1,5 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.fast.fast
-import com.willfp.eco.core.placeholder.InjectablePlaceholder
-import com.willfp.eco.core.placeholder.PlaceholderInjectable
-import com.willfp.eco.core.placeholder.StaticPlaceholder
-import com.willfp.eco.core.placeholder.context.placeholderContext
-import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.DescriptionPlaceholder
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
@@ -16,6 +9,13 @@ import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import wiki.ecohub.config.Config
+import wiki.ecohub.game.item.fast
+import wiki.ecohub.math.NumberUtils
+import wiki.ecohub.ui.placeholder.InjectablePlaceholder
+import wiki.ecohub.ui.placeholder.PlaceholderInjectable
+import wiki.ecohub.ui.placeholder.placeholderContext
+import wiki.ecohub.ui.placeholder.type.StaticPlaceholder
 
 interface EcoEnchantLike {
     /**
@@ -189,7 +189,7 @@ interface EcoEnchantLike {
                                 )
                             }
 
-                            override fun addInjectablePlaceholder(p0: MutableIterable<InjectablePlaceholder>) {
+                            override fun addInjectablePlaceholder(placeholders: Iterable<InjectablePlaceholder>) {
                                 // Do nothing
                             }
 

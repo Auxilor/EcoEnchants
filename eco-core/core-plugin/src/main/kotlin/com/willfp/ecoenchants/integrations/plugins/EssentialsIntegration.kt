@@ -37,6 +37,4 @@ object EssentialsIntegration : EnchantRegistrationIntegration {
                 }
         }
     }
-
-    override fun getPluginName() = "Essentials"
 }

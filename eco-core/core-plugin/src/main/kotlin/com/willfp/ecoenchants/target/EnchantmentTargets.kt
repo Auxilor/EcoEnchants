@@ -1,13 +1,13 @@
 package com.willfp.ecoenchants.target
 
-import com.willfp.eco.core.cache.EcoCache
-import com.willfp.eco.core.items.HashedItem
-import com.willfp.eco.core.registry.Registry
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.plugin
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import wiki.ecohub.core.registry.Registry
+import wiki.ecohub.data.cache.EcoCache
+import wiki.ecohub.game.item.HashedItem
 import java.time.Duration
 
 object EnchantmentTargets : Registry<EnchantmentTarget>() {

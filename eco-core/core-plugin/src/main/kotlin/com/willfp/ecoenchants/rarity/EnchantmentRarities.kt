@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.rarity
 
-import com.willfp.eco.core.registry.Registry
 import com.willfp.ecoenchants.display.RaritySorter
 import com.willfp.ecoenchants.plugin
+import wiki.ecohub.core.registry.Registry
 
 @Suppress("UNUSED")
 object EnchantmentRarities : Registry<EnchantmentRarity>() {

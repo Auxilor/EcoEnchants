@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.fast.fast
-import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.DiscoveryType
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
@@ -18,6 +16,8 @@ import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.world.LootGenerateEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.game.item.fast
+import wiki.ecohub.math.NumberUtils
 import kotlin.math.ceil
 
 object LootSupport : Listener {
@@ -53,7 +53,7 @@ object LootSupport : Listener {
             return
         }
 
-        val enchants = item.fast().getEnchants(true)
+        val enchants = item.fast().getEnchants(true).toMutableMap()
         val added = mutableListOf<Enchantment>()
 
         var multiplier = 0.01

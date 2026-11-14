@@ -1,9 +1,9 @@
 package com.willfp.ecoenchants.enchant
 
 import com.willfp.ecoenchants.plugin
-import com.willfp.libreforge.Holder
-import com.willfp.libreforge.conditions.ConditionList
-import com.willfp.libreforge.effects.EffectList
+import wiki.ecohub.rules.condition.ConditionList
+import wiki.ecohub.rules.effect.EffectList
+import wiki.ecohub.rules.holder.Holder
 import java.util.Objects
 
 class EcoEnchantLevel(

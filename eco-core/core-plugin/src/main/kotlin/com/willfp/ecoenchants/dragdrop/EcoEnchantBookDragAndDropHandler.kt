@@ -1,14 +1,14 @@
 package com.willfp.ecoenchants.dragdrop
 
-import com.willfp.eco.core.dragdrop.DragAndDropHandler
-import com.willfp.eco.core.dragdrop.DragAndDropResult
-import com.willfp.eco.core.price.ConfiguredPrice
 import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
 import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.core.price.ConfiguredPrice
+import wiki.ecohub.modules.menus.drag.DragAndDropHandler
+import wiki.ecohub.modules.menus.drag.DragAndDropResult
 
 object EcoEnchantBookDragAndDropHandler : DragAndDropHandler {
     override val id = "ecoenchants:book"
