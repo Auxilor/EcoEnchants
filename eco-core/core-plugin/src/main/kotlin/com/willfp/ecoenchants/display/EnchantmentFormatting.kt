@@ -1,14 +1,14 @@
 package com.willfp.ecoenchants.display
 
-import com.willfp.eco.core.cache.EcoCache
-import com.willfp.eco.core.placeholder.context.placeholderContext
-import com.willfp.eco.util.NumberUtils
-import com.willfp.eco.util.StringUtils
-import com.willfp.eco.util.formatEco
-import com.willfp.eco.util.toComponent
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
+import wiki.ecohub.data.cache.EcoCache
+import wiki.ecohub.math.NumberUtils
+import wiki.ecohub.ui.placeholder.placeholderContext
+import wiki.ecohub.ui.text.StringUtils
+import wiki.ecohub.ui.text.formatEco
+import wiki.ecohub.ui.text.toComponent
 
 // This is an object to be able to invalidate the cache on reload
 object DisplayCache {

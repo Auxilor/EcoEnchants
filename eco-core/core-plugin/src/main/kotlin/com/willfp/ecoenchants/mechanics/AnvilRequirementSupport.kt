@@ -1,6 +1,5 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
 import com.willfp.ecoenchants.plugin
@@ -9,6 +8,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.PrepareAnvilEvent
 import org.bukkit.inventory.AnvilInventory
+import wiki.ecohub.game.item.fast
 
 /**
  * Removes enchantments replaced by newly applied enchantments from anvil results,

@@ -1,10 +1,15 @@
 package com.willfp.ecoenchants.integrations
 
-import com.willfp.eco.core.integrations.Integration
 import com.willfp.ecoenchants.enchant.EcoEnchant
+import wiki.ecohub.core.plugin.BaseEcoPlugin
+import wiki.ecohub.provider.ExternalProvider
 
-interface EnchantRegistrationIntegration : Integration {
+interface EnchantRegistrationIntegration : ExternalProvider {
     fun registerEnchants()
+
+    override fun onLoad(plugin: BaseEcoPlugin) {
+        EnchantRegistrations.register(this)
+    }
 
     fun removeEnchant(enchantment: EcoEnchant) {
 

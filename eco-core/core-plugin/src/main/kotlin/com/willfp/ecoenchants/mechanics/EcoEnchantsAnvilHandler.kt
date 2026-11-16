@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.anvil.AnvilHandler
-import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemStack
+import wiki.ecohub.game.item.fast
+import wiki.ecohub.modules.recipe.anvil.AnvilHandler
 import java.util.concurrent.ConcurrentHashMap
 
 /**

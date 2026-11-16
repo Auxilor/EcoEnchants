@@ -1,8 +1,5 @@
 package com.willfp.ecoenchants.enchant.impl
 
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.placeholder.PlayerlessPlaceholder
-import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.DiscoveryType
@@ -14,15 +11,18 @@ import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentType
 import com.willfp.ecoenchants.type.EnchantmentTypes
-import com.willfp.libreforge.SilentViolationContext
-import com.willfp.libreforge.ViolationContext
-import com.willfp.libreforge.conditions.Conditions
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.permissions.Permission
 import org.bukkit.permissions.PermissionDefault
 import org.jetbrains.annotations.ApiStatus.Internal
+import wiki.ecohub.config.Config
+import wiki.ecohub.config.SilentViolationContext
+import wiki.ecohub.config.ViolationContext
+import wiki.ecohub.rules.condition.Conditions
+import wiki.ecohub.ui.placeholder.type.PlayerlessPlaceholder
+import wiki.ecohub.ui.text.containsIgnoreCase
 import java.util.concurrent.ConcurrentHashMap
 
 abstract class EcoEnchantBase(

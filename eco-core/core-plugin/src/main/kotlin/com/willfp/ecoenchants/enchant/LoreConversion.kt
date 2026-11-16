@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.fast.fast
-import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.plugin
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.EventHandler
@@ -11,6 +9,8 @@ import org.bukkit.event.player.PlayerItemHeldEvent
 import org.bukkit.inventory.BlockInventoryHolder
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.game.item.fast
+import wiki.ecohub.math.NumberUtils
 
 object LoreConversion : Listener {
     @EventHandler
@@ -52,7 +52,7 @@ object LoreConversion : Listener {
         val toAdd = mutableMapOf<Enchantment, Int>()
         val matchedLines = mutableListOf<String>()
 
-        val lore = itemStack.fast().lore.toMutableList()
+        val lore = itemStack.fast().getLore().toMutableList()
 
         for (line in lore.toList()) {
             @Suppress("DEPRECATION")
@@ -114,6 +114,6 @@ object LoreConversion : Listener {
         }
 
         itemStack.itemMeta = meta
-        itemStack.fast().lore = lore
+        itemStack.fast().setLore(lore)
     }
 }

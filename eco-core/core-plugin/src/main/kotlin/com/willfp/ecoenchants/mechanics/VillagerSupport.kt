@@ -1,7 +1,5 @@
 package com.willfp.ecoenchants.mechanics
 
-import com.willfp.eco.core.fast.fast
-import com.willfp.eco.util.NumberUtils
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.enchant.removeEnchantsReplacedBy
@@ -14,6 +12,8 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.VillagerAcquireTradeEvent
 import org.bukkit.inventory.MerchantRecipe
 import org.bukkit.inventory.meta.EnchantmentStorageMeta
+import wiki.ecohub.game.item.fast
+import wiki.ecohub.math.NumberUtils
 import kotlin.math.ceil
 
 object VillagerSupport : Listener {
@@ -29,7 +29,7 @@ object VillagerSupport : Listener {
             return
         }
 
-        val enchants = result.fast().getEnchants(true)
+        val enchants = result.fast().getEnchants(true).toMutableMap()
         val added = mutableListOf<Enchantment>()
 
         if (NumberUtils.randFloat(0.0, 100.0) < plugin.configYml.getDouble("villager.pass-through-chance")) {
