@@ -39,7 +39,7 @@ internal fun CommandBuilder<CommandSender>.giveBookCommand() = subcommand(name =
         player.runOwned {
             DropQueue(player)
                 .addItems(List(amount) { item.clone() })
-                .forceTelekinesis()
+                .giveDirectly()
                 .push()
         }
 

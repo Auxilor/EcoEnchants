@@ -188,7 +188,7 @@ object EnchantGUI {
                             if (captiveItems.isNotEmpty()) {
                                 DropQueue(player)
                                     .addItems(captiveItems)
-                                    .forceTelekinesis()
+                                    .giveDirectly()
                                     .push()
                             }
                             groupGui.open(player)
@@ -201,7 +201,7 @@ object EnchantGUI {
                 val player = event.player as Player
                 DropQueue(player)
                     .addItems(menu.getCaptiveItems(player))
-                    .forceTelekinesis()
+                    .giveDirectly()
                     .push()
             }
 

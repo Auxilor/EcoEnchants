@@ -74,7 +74,7 @@ internal fun CommandBuilder<CommandSender>.giveRandomBookCommand() = subcommand(
         player.runOwned {
             DropQueue(player)
                 .addItem(item)
-                .forceTelekinesis()
+                .giveDirectly()
                 .push()
         }
 
