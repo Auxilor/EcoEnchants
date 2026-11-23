@@ -1,16 +1,9 @@
 package com.willfp.ecoenchants.commands
 
-import com.willfp.eco.core.command.impl.PluginCommand
-import com.willfp.eco.core.drops.DropQueue
-import com.willfp.eco.core.items.builder.EnchantedBookBuilder
-import com.willfp.eco.util.NumberUtils
-import com.willfp.eco.util.StringUtils
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
 import com.willfp.ecoenchants.enchant.EcoEnchants
 import com.willfp.ecoenchants.enchant.wrap
-import com.willfp.ecoenchants.plugin
-import com.willfp.ecoenchants.runOwned
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.rarity.EnchantmentRarity
 import com.willfp.ecoenchants.type.EnchantmentType
@@ -18,28 +11,29 @@ import com.willfp.ecoenchants.type.EnchantmentTypes
 import org.bukkit.Bukkit
 import org.bukkit.Registry
 import org.bukkit.command.CommandSender
+import wiki.ecohub.core.command.CommandBuilder
+import wiki.ecohub.game.drop.DropQueue
+import wiki.ecohub.game.entity.runOwned
+import wiki.ecohub.game.item.builder.EnchantedBookBuilder
+import wiki.ecohub.math.NumberUtils
+import wiki.ecohub.ui.text.StringUtils
 
-object CommandGiveRandomBook : PluginCommand(
-    plugin,
-    "giverandombook",
-    "ecoenchants.command.giverandombook",
-    false
-) {
-    private const val INCLUDE_VANILLA_INDEX = 4
+private const val INCLUDE_VANILLA_INDEX = 4
 
-    override fun onExecute(sender: CommandSender, args: List<String>) {
+internal fun CommandBuilder<CommandSender>.giveRandomBookCommand() = subcommand(name = "giverandombook", permission = "ecoenchants.command.giverandombook") {
+    executes {
         val playerName = args.getOrNull(0)
 
         if (playerName == null) {
             sender.sendMessage(plugin.langYml.getMessage("requires-player"))
-            return
+            return@executes
         }
 
         val player = Bukkit.getPlayer(playerName)
 
         if (player == null) {
             sender.sendMessage(plugin.langYml.getMessage("invalid-player"))
-            return
+            return@executes
         }
 
         val filterName = args.getOrNull(1)
@@ -53,7 +47,7 @@ object CommandGiveRandomBook : PluginCommand(
 
         if (minLevel > maxLevel) {
             sender.sendMessage(plugin.langYml.getMessage("invalid-levels"))
-            return
+            return@executes
         }
 
         val enchantment = getEnchantmentPool(args)
@@ -67,7 +61,7 @@ object CommandGiveRandomBook : PluginCommand(
             .randomOrNull()
             ?: run {
                 sender.sendMessage(plugin.langYml.getMessage("no-enchantments-found"))
-                return
+                return@executes
             }
 
         val level = NumberUtils.randInt(minLevel, maxLevel.coerceAtMost(enchantment.maximumLevel))
@@ -91,16 +85,9 @@ object CommandGiveRandomBook : PluginCommand(
         )
     }
 
-    private fun getEnchantmentPool(args: List<String>): Collection<EcoEnchantLike> =
-        if (args.getOrNull(INCLUDE_VANILLA_INDEX)?.toBoolean() == true) {
-            Registry.ENCHANTMENT.map { it.wrap() }
-        } else {
-            EcoEnchants.values()
-        }
-
-    override fun tabComplete(sender: CommandSender, args: List<String>): List<String> {
+    completes {
         // OfTeN wrote this - it's cursed, and I am *not* going to try refactor this.
-        return when (args.size) {
+        when (args.size) {
             1 -> Bukkit.getOnlinePlayers().map { it.name }
             2 -> listOf("all") + EnchantmentRarities.values().map { it.id } + EnchantmentTypes.values().map { it.id }
             3 -> (1..10).map { it.toString() }
@@ -116,3 +103,10 @@ object CommandGiveRandomBook : PluginCommand(
         }
     }
 }
+
+private fun getEnchantmentPool(args: List<String>): Collection<EcoEnchantLike> =
+    if (args.getOrNull(INCLUDE_VANILLA_INDEX)?.toBoolean() == true) {
+        Registry.ENCHANTMENT.map { it.wrap() }
+    } else {
+        EcoEnchants.values()
+    }

@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.rarity
 
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.registry.Registrable
 import com.willfp.ecoenchants.display.getBookItem
+import wiki.ecohub.config.Config
+import wiki.ecohub.core.registry.Registrable
 import java.util.*
 
 @Suppress("DEPRECATION")

@@ -4,7 +4,3 @@ options:
   color: "&a"
   proxy-package: "com.willfp.ecoenchants.proxy"
   eco-api-version: ${ecoApiVersion}
-
-environment:
-  - name: libreforge version
-    value: ${libreforgeVersion}

@@ -1,16 +1,16 @@
 package com.willfp.ecoenchants.libreforge
 
-import com.willfp.eco.core.fast.fast
 import com.willfp.ecoenchants.enchant.wrap
 import com.willfp.ecoenchants.plugin
 import com.willfp.ecoenchants.type.EnchantmentType
-import com.willfp.libreforge.toDispatcher
-import com.willfp.libreforge.triggers.Trigger
-import com.willfp.libreforge.triggers.TriggerData
-import com.willfp.libreforge.triggers.TriggerParameter
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.enchantment.EnchantItemEvent
+import wiki.ecohub.game.entity.toDispatcher
+import wiki.ecohub.game.item.fast
+import wiki.ecohub.rules.trigger.Trigger
+import wiki.ecohub.rules.trigger.TriggerData
+import wiki.ecohub.rules.trigger.TriggerParameter
 
 class TriggerEnchantType(
     private val type: EnchantmentType

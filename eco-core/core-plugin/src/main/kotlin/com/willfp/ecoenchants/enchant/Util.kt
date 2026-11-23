@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.enchant
 
-import com.willfp.eco.core.enchant.customEnchantment
 import com.willfp.ecoenchants.enchant.impl.VanillaEcoEnchantLike
 import com.willfp.ecoenchants.plugin
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import wiki.ecohub.game.item.enchant.customEnchantment
 import java.util.concurrent.ConcurrentHashMap
 
 internal val ecoEnchantLikes = ConcurrentHashMap<NamespacedKey, EcoEnchantLike>()

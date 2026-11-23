@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.target
 
 import com.willfp.ecoenchants.plugin
-import com.willfp.libreforge.Dispatcher
-import com.willfp.libreforge.HolderChange
-import com.willfp.libreforge.ProvideContext
-import com.willfp.libreforge.ProvidedHolder
-import com.willfp.libreforge.ScopedHolderProvider
+import wiki.ecohub.rules.holder.Dispatcher
+import wiki.ecohub.rules.holder.HolderChange
+import wiki.ecohub.rules.holder.ProvideContext
+import wiki.ecohub.rules.holder.ProvidedHolder
+import wiki.ecohub.rules.holder.ScopedHolderProvider
 
 /**
  * Provides enchantment holders, except in worlds EcoEnchants is disabled in.

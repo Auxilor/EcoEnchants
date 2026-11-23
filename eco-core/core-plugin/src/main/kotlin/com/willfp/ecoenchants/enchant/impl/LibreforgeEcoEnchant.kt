@@ -1,14 +1,14 @@
 package com.willfp.ecoenchants.enchant.impl
 
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.util.containsIgnoreCase
 import com.willfp.ecoenchants.enchant.EcoEnchantLevel
 import com.willfp.ecoenchants.enchant.MissingDependencyException
 import com.willfp.ecoenchants.plugin
-import com.willfp.libreforge.SilentViolationContext
-import com.willfp.libreforge.effects.EffectList
-import com.willfp.libreforge.effects.Effects
 import org.bukkit.Bukkit
+import wiki.ecohub.config.Config
+import wiki.ecohub.config.SilentViolationContext
+import wiki.ecohub.rules.effect.EffectList
+import wiki.ecohub.rules.effect.Effects
+import wiki.ecohub.ui.text.containsIgnoreCase
 
 class LibreforgeEcoEnchant(
     id: String,

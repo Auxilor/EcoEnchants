@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants
 
-import com.willfp.eco.core.config.ConfigType
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.util.StringUtils
+import wiki.ecohub.config.Config
+import wiki.ecohub.config.ConfigType
+import wiki.ecohub.ui.text.StringUtils
 
 internal class FakeConfig(private val values: Map<String, Any?> = emptyMap()) : Config {
     override fun toPlaintext(): String = ""

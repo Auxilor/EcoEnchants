@@ -1,10 +1,10 @@
 package com.willfp.ecoenchants.dragdrop
 
-import com.willfp.eco.core.placeholder.context.placeholderContext
-import com.willfp.eco.core.price.ConfiguredPrice
-import com.willfp.eco.util.evaluateExpressionOrNull
 import com.willfp.ecoenchants.enchant.EcoEnchantLike
 import org.bukkit.entity.Player
+import wiki.ecohub.core.price.ConfiguredPrice
+import wiki.ecohub.math.evaluateExpressionOrNull
+import wiki.ecohub.ui.placeholder.placeholderContext
 
 fun EcoEnchantLike.isDragAndDropEnabled(): Boolean {
     return config.getBool("drag-and-drop.enabled")

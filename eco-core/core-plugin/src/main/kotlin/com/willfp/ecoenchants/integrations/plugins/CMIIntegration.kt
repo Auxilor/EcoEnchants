@@ -8,6 +8,4 @@ object CMIIntegration: EnchantRegistrationIntegration {
         CMIEnchantment.initialize()
         CMIEnchantment.saveEnchants()
     }
-
-    override fun getPluginName() = "CMI"
 }

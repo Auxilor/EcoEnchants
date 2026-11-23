@@ -1,8 +1,8 @@
 package com.willfp.ecoenchants.display
 
-import com.willfp.eco.core.placeholder.PlayerPlaceholder
-import com.willfp.ecoenchants.commands.CommandToggleDescriptions.seesEnchantmentDescriptions
+import com.willfp.ecoenchants.commands.seesEnchantmentDescriptions
 import com.willfp.ecoenchants.plugin
+import wiki.ecohub.ui.placeholder.type.PlayerPlaceholder
 
 object DescriptionEnabledPlaceholder {
     fun register() {

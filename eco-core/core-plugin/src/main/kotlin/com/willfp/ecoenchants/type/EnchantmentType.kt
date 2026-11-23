@@ -1,11 +1,11 @@
 package com.willfp.ecoenchants.type
 
-import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.registry.Registrable
 import com.willfp.ecoenchants.display.getBookItem
 import com.willfp.ecoenchants.enchant.infiniteIfNegative
 import com.willfp.ecoenchants.libreforge.TriggerEnchantType
-import com.willfp.libreforge.triggers.Triggers
+import wiki.ecohub.config.Config
+import wiki.ecohub.core.registry.Registrable
+import wiki.ecohub.rules.trigger.Triggers
 import java.util.Objects
 
 class EnchantmentType(
