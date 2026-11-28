@@ -28,6 +28,7 @@ import com.willfp.ecoenchants.enchant.VanillaEnchantmentOverridesYml
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.integrations.plugins.CMIIntegration
 import com.willfp.ecoenchants.integrations.plugins.EssentialsIntegration
+import com.willfp.ecoenchants.libreforge.ConditionHasEnchantType
 import com.willfp.ecoenchants.libreforge.EffectApplyRandomEnchant
 import com.willfp.ecoenchants.libreforge.EffectRemoveThisEnchant
 import com.willfp.ecoenchants.mechanics.AnvilRequirementSupport
@@ -42,6 +43,7 @@ import com.willfp.ecoenchants.target.EnchantHolderProvider
 import com.willfp.ecoenchants.target.EnchantmentTargets
 import com.willfp.ecoenchants.type.EnchantmentTypes
 import com.willfp.libreforge.NamedValue
+import com.willfp.libreforge.conditions.Conditions
 import com.willfp.libreforge.effects.Effects
 import com.willfp.libreforge.loader.LibreforgePlugin
 import com.willfp.libreforge.loader.configs.ConfigCategory
@@ -76,6 +78,7 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
     override fun handleEnable() {
         Effects.register(EffectApplyRandomEnchant)
         Effects.register(EffectRemoveThisEnchant)
+        Conditions.register(ConditionHasEnchantType)
 
         registerHolderProvider(EnchantHolderProvider)
 
